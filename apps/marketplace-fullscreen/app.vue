@@ -1,5 +1,5 @@
 <template lang="pug">
-div(bg="mc-orange")
+#app(bg="mc-orange" font="foundry")
   HList()
     div hello {{ data }}
 

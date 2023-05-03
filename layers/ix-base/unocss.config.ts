@@ -1,4 +1,5 @@
-import { defineConfig } from 'unocss'
+//@ts-ignore
+import { definePreset } from 'unocss'
 
 import presetAttributify from "@unocss/preset-attributify";
 import extractorPug from "@unocss/extractor-pug";
@@ -9,7 +10,7 @@ import { presetScrollbar } from 'unocss-preset-scrollbar'
 import transformerVariantGroup from '@unocss/transformer-variant-group'
 import { stateOnMatcher, stateMatcher } from './variants.uno';
 
-export default defineConfig({
+export default definePreset({
   presets: [
     //@ts-ignore
     presetUno({ attributifyPseudo: true }),
@@ -19,8 +20,8 @@ export default defineConfig({
     }),
     presetScrollbar({}),
   ],
+  //@ts-ignore
   transformers: [
-    //@ts-ignore
     transformerVariantGroup(),
   ],
   extractors: [

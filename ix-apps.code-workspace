@@ -1,0 +1,17 @@
+{
+	"folders": [
+		{
+			"name": "marketplace-fullscreen",
+			"path": "apps/marketplace-fullscreen"
+		},
+		{
+			"name": "ix-base",
+			"path": "layers/ix-base"
+		},
+		{
+			"name": "ix-apps",
+			"path": "."
+		}
+	],
+	"settings": {}
+}

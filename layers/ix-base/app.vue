@@ -1,5 +1,5 @@
 <template lang="pug">
-div(bg="mc-orange") IX UI
+div(bg="mc-orange" font="foundry") IX UI
 </template>
 
 <script setup lang="ts">
