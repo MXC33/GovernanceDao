@@ -2,7 +2,7 @@
 export default defineNuxtConfig({
   extends: ['../../layers/ix-base'],
   css: [
-    'assets/styles/fonts.css'
+    '@/assets/styles/fonts.css'
   ],
   typescript: {
     includeWorkspace: true

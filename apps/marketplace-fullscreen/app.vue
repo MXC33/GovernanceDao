@@ -1,7 +1,8 @@
 <template lang="pug">
 #app(bg="mc-orange" font="foundry")
   HList()
-    div hello {{ data }}
+    div(text="3xl" uppercase="~") My assets
+    div test
 
 </template>
 
