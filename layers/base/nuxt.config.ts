@@ -7,12 +7,12 @@ export default defineNuxtConfig({
     includeWorkspace: true
   },
   css: [
-    'assets/styles/fonts.css',
-    'assets/styles/colors.css',
-    'assets/styles/corners.css',
-    'assets/styles/cuts.css',
-    'assets/styles/transitions.css',
-    'assets/styles/corporations.css',
+    resolve('./assets/styles/fonts.css'),
+    resolve('./assets/styles/colors.css'),
+    resolve('./assets/styles/corners.css'),
+    resolve('./assets/styles/cuts.css'),
+    resolve('./assets/styles/transitions.css'),
+    resolve('./assets/styles/corporations.css'),
     '@unocss/reset/tailwind.css',
   ],
   modules: [

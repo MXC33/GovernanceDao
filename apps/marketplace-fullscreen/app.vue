@@ -1,6 +1,6 @@
 <template lang="pug">
-div
-  VList()
+div(bg="mc-orange")
+  HList()
     div hello {{ data }}
 
 </template>
