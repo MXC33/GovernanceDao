@@ -4,11 +4,5 @@
     "plugins": [
       "@volar/vue-language-plugin-pug"
     ]
-  },
-  "include": [
-    "./nuxt.d.ts",
-    "**/*",
-    "../../**/*",
-    "env.d.ts"
-  ]
+  }
 }
