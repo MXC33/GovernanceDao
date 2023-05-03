@@ -25,6 +25,7 @@
     "nuxt": "^3.0.0",
     "typescript": "^4.9.3",
     "unocss": "^0.51.8",
-    "unocss-preset-scrollbar": "^0.2.1"
+    "unocss-preset-scrollbar": "^0.2.1",
+    "vite-plugin-pug": "^0.3.2"
   }
 }
