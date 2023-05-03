@@ -1,0 +1,18 @@
+{
+  "name": "@ix-apps/marketplace",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "build": "nuxt build",
+    "dev": "nuxt dev",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
+    "postinstall": "nuxt prepare"
+  },
+  "devDependencies": {
+    "@ix-apps/base": "*",
+    "@types/node": "^18",
+    "nuxt": "^3.4.3",
+    "vite-plugin-pug": "^0.3.2"
+  }
+}
