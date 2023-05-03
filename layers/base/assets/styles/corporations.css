@@ -1,0 +1,129 @@
+.corporation {
+  --corporation-accent-color-rgb: 255, 255, 255;
+  --corporation-bg-color-rgb: 12, 12, 12;
+  --corporation-text-color: #f9f9f9;
+  --corporation-over-accent-color: #0c0c0c;
+  --corporation-header-color-rgb: var(--corporation-accent-color-rgb);
+  --corporation-header-text-color: var(--corporation-over-accent-color);
+  --corporation-accent-color: rgb(var(--corporation-accent-color-rgb));
+  --corporation-accent-color-10: rgba(var(--corporation-accent-color-rgb), 0.1);
+  --corporation-accent-color-20: rgba(var(--corporation-accent-color-rgb), 0.2);
+  --corporation-accent-color-40: rgba(var(--corporation-accent-color-rgb), 0.4);
+  --corporation-accent-color-60: rgba(var(--corporation-accent-color-rgb), 0.6);
+
+  --corporation-inactive-color-rgb: 249, 249, 249;
+  --corporation-inactive-color-20: rgba(var(--corporation-inactive-color-rgb), 0.2);
+  --corporation-inactive-color-40: rgba(var(--corporation-inactive-color-rgb), 0.4);
+  --corporation-inactive-color-60: rgba(var(--corporation-inactive-color-rgb), 0.6);
+  --corporation-inactive-color-80: rgba(var(--corporation-inactive-color-rgb), 0.8);
+  --corporation-inactive-color: rgba(var(--corporation-inactive-color-rgb), 1.0);
+
+  --corporation-bg-color: rgb(var(--corporation-bg-color-rgb));
+  --corporation-bg-color-10: rgba(var(--corporation-bg-color-rgb), 0.1);
+  --corporation-bg-color-20: rgba(var(--corporation-bg-color-rgb), 0.2);
+  --corporation-bg-color-40: rgba(var(--corporation-bg-color-rgb), 0.4);
+  --corporation-bg-color-60: rgba(var(--corporation-bg-color-rgb), 0.6);
+  --corporation-bg-color-80: rgba(var(--corporation-bg-color-rgb), 0.8);
+
+  --corporation-over-head-color-rgb: 255, 255, 255;
+  --corporation-over-head-color-20: rgba(var(--corporation-over-head-color-rgb), 0.1);
+  --corporation-over-head-color-20: rgba(var(--corporation-over-head-color-rgb), 0.2);
+  --corporation-over-head-color-20: rgba(var(--corporation-over-head-color-rgb), 0.4);
+  --corporation-over-head-color-20: rgba(var(--corporation-over-head-color-rgb), 0.6);
+  --corporation-over-head-color-20: rgba(var(--corporation-over-head-color-rgb), 0.8);
+  --corporation-over-head-color: rgba(var(--corporation-over-head-color-rgb), 1);
+
+  --mc-accent-light: var(--mc-accent);
+
+}
+
+.corporation-arcade {
+  --corporation-bg-color-rgb: 12, 12, 12;
+  --corporation-accent-color-rgb: 189, 255, 0;
+  --corporation-text-color: rgba(255, 255, 255, 0.8);
+  --corporation-inactive-color-rgb: 255, 255, 255;
+}
+
+.corporation-new-lands {
+  --corporation-accent-color-rgb: 255, 230, 10;
+  --corporation-text-color: rgba(255, 255, 255, 0.8);
+  --corporation-check-color: rgba(0, 0, 0, 0.8);
+  --corporation-inactive-color-rgb: 255, 255, 255;
+  --corporation-over-head-color-rgb: 0, 0, 0;
+}
+
+.corporation-eternalab {
+  --corporation-bg-color-rgb: 231, 231, 231;
+  --corporation-accent-color-rgb: 0, 160, 240;
+  --corporation-text-color: rgba(0, 0, 0, 0.8);
+  --corporation-over-accent-color: #fff;
+  --corporation-check-color: rgba(255, 255, 255, 0.8);
+  --corporation-inactive-color-rgb: 168, 168, 168;
+  --corporation-over-head-color-rgb: 255, 255, 255;
+}
+
+.corporation-lucky-cat {
+  --corporation-accent-color-rgb: 255, 30, 110;
+  --corporation-inactive-color-rgb: 255, 255, 255;
+  --corporation-over-head-color-rgb: 0, 0, 0;
+}
+
+.corporation-y-space {
+  --corporation-bg-color-rgb: 12, 12, 12;
+  --corporation-accent-color-rgb: 95, 190, 135;
+  --corporation-text-color: rgba(255, 255, 255, 0.8);
+  --corporation-check-color: rgba(255, 255, 255, 0.8);
+  --corporation-inactive-color-rgb: 249, 249, 249;
+  --corporation-over-head-color-rgb: 0, 0, 0;
+}
+
+.corporation-astro-cap {
+  --corporation-bg-color-rgb: 184, 187, 194;
+  --corporation-accent-color-rgb: 0, 47, 167;
+  --corporation-text-color: rgba(0, 0, 0, 0.8);
+  --corporation-over-accent-color: #fff;
+  --corporation-over-head-color-rgb: 255, 255, 255;
+}
+
+.corporation-gws {
+  --corporation-bg-color-rgb: 60, 60, 60;
+  --corporation-header-color-rgb: 90, 90, 90;
+  --corporation-accent-color-rgb: 249, 249, 249;
+  --corporation-header-text-color: var(--corporation-accent-color);
+  --corporation-text-color: rgba(255, 255, 255, 0.85);
+  --corporation-inactive-color-rgb: 255, 255, 255;
+  --corporation-over-head-color-rgb: 0, 0, 0;
+}
+
+.corporation-haveblue {
+  /* Final colors? */
+  --corporation-bg-color-rgb: 240, 240, 240;
+  --corporation-accent-color-rgb: 12, 12, 12;
+  --corporation-text-color: rgba(0, 0, 0, 0.8);
+  --corporation-over-accent-color: #f9f9f9;
+  --corporation-inactive-color-rgb: 99, 99, 99;
+  --corporation-over-head-color-rgb: 255, 255, 255;
+  --mc-accent-light: #fff;
+}
+
+
+.corporation {
+  --mc-accent-rgb: var(--corporation-accent-color-rgb);
+  --mc-accent: rgb(var(--corporation-accent-color-rgb));
+  --mc-accent-10: rgba(var(--mc-accent-rgb), 0.1);
+  --mc-accent-20: rgba(var(--mc-accent-rgb), 0.2);
+  --mc-accent-40: rgba(var(--mc-accent-rgb), 0.4);
+  --mc-accent-60: rgba(var(--mc-accent-rgb), 0.6);
+  --mc-accent-80: rgba(var(--mc-accent-rgb), 0.8);
+
+  --corporation-bg-color-50: rgba(var(--corporation-bg-color-rgb), 0.5);
+
+  --corporation-header-color: rgb(var(--corporation-header-color-rgb));
+
+  --mc-secondary-rgb: var(--corporation-accent-color-rgb);
+  --mc-secondary: rgb(var(--corporation-accent-color-rgb));
+  --mc-secondary_10: rgba(var(--mc-secondary-rgb), 0.1);
+  --mc-secondary_20: rgba(var(--mc-secondary-rgb), 0.2);
+  --mc-secondary_40: rgba(var(--mc-secondary-rgb), 0.4);
+  --mc-secondary_60: rgba(var(--mc-secondary-rgb), 0.6);
+}

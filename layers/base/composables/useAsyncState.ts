@@ -8,7 +8,7 @@ interface AsyncStateReturnType<T> {
   execute: () => Promise<void>,
   refresh: () => Promise<void>,
   pending: Ref<boolean>,
-  data: Ref<T>
+  data: Ref<T | null>
 }
 export function useAsyncState<T, O>(key: string, fetchData: () => Promise<T>, options: AsyncStateOptions<T, O>): AsyncStateReturnType<O>
 
@@ -30,7 +30,7 @@ export function useAsyncState<T extends O, O>(key: string, fetchData: () => Prom
   const execute = async () => {
     if (pending.value || data.value !== null)
       return
-    
+
     await fetchNewData()
     return
   }

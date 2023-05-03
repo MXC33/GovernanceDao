@@ -6,8 +6,8 @@
   "private": true,
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "yarn workspace @ix-apps/marketplace run dev",
-    "dev:layer": "pnpm --filter my-nuxt-layer dev"
+    "dev": "yarn workspace @ix/marketplace run dev",
+    "dev:layer": "yarn workspace @ix/base dev"
   },
   "keywords": [],
   "author": "",
