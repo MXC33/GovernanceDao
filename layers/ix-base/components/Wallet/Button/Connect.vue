@@ -5,13 +5,13 @@ button(sound="lg" bg="mc-orange_10" btn="~ accent on-active:mint lg" color="whit
 </template>
 
 <script setup lang="ts">
-import MetamaskLogo from '~/assets/images/wallet/metamask.svg?component'
-import WombatLogo from '~/assets/images/wallet/wombat.svg?component'
-import BitKeepLogo from '~/assets/images/wallet/bitkeep.svg?component'
-import CoinBaseLogo from '~/assets/images/wallet/coinbase.svg?component'
-
-import WalletConnectLogo from '~/assets/images/ui/wallet/walletconnect.svg?component'
 import type { WalletConnector } from '~~/composables/useWalletConnectors';
+
+const MetamaskLogo = await import('../../../assets/images/wallet/bitkeep.svg')
+const WombatLogo = await import('../../../assets/images/wallet/wombat.svg')
+const BitKeepLogo = await import('../../../assets/images/wallet/bitkeep.svg')
+const CoinBaseLogo = await import('../../../assets/images/wallet/coinbase.svg')
+const WalletConnectLogo = await import('../../../assets/images/wallet/walletconnect.svg')
 
 const { connector } = defineProps<{
   connector: WalletConnector

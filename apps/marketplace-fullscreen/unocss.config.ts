@@ -7,5 +7,11 @@ export default defineConfig({
     fontFamily: {
       foundry: ['Foundry Gridnik', 'sans-serif'],
     },
+
+    colors: {
+      ix: {
+        primary: '#FF6647'
+      },
+    }
   }
 })

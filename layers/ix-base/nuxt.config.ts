@@ -24,26 +24,30 @@ export default defineNuxtConfig({
   ],
   modules: [
     'nuxt-graphql-client',
+    '@nuxtjs/i18n',
     '@unocss/nuxt',
     '@vueuse/nuxt',
   ],
+  i18n: {
+
+  },
   unocss: {
     configFile: resolve('./unocss.config.ts'),
   },
 
-  // runtimeConfig: {
-  //   public: {
-  //     'graphql-client': {
-  //       clients: {
-  //         default: {
-  //           schema: './schema.graphql',
+  runtimeConfig: {
+    public: {
+      'graphql-client': {
+        clients: {
+          default: {
+            schema: resolve('./schema.graphql'),
 
-  //           host: process.env.GQL_HOST || (process.env.CHAIN_NET === 'test' ? GQL_DEV_ENDPOINT : GQL_PROD_ENDPOINT),
-  //         }
-  //       }
-  //     },
-  //   }
-  // },
+            host: process.env.GQL_HOST || (process.env.CHAIN_NET === 'test' ? GQL_DEV_ENDPOINT : GQL_PROD_ENDPOINT),
+          }
+        }
+      },
+    }
+  },
   vite: {
     plugins: [
       svgLoader({

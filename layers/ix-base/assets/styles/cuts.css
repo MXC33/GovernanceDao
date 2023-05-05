@@ -29,7 +29,7 @@
   clip-path: polygon(var(--path));
   position: relative;
 }
-
+/* 
 [cut] {
   --cut-top-right-bottom-left: 0 0, calc(100% - var(--cut-depth)) 0, 100% var(--cut-depth), 100% 100%, var(--cut-depth) 100%, 0 calc(100% - var(--cut-depth));
 
@@ -88,7 +88,7 @@
 
   --cut-bottom-left: 0 0, 100% 0, 100% 100%, var(--cut-depth-xs) 100%, 0 calc(100% - var(--cut-depth-xs));
 
-}
+} */
 
 
 .is-paint-supported [cut]:before {

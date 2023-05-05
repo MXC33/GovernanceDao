@@ -1,8 +1,8 @@
 <template lang="pug">
-VList(bg="mc-orange_10" b="2 mc-orange_40" p="6" space-y="5" max-w="150" w="full" cut="bottom-right b-mc-orange_60 lg")
+VList(bg="ix-primary" b="2 ix-primary opacity-40" p="6" space-y="5" max-w="150" w="full" cut="bottom-right b-ix-primary b-opacity-60 lg")
   h2(text="2xl white" font="druk" @click="debugWalletClick") {{ $t('wallet.title') }}
 
-  div(text="white left")
+  VList(text="white left")
     WalletStatus(v-if="isWalletConnected")
     div(v-else space-y="3") 
       div {{ $t('wallet.welcomeMessage') }}
