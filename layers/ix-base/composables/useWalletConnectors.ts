@@ -1,6 +1,9 @@
+
 import type { ExternalProvider } from "@ethersproject/providers";
 //@ts-ignore
 import { EthereumProvider } from "@walletconnect/ethereum-provider";
+
+
 
 type InjectedProviderFlags = {
   isBraveWallet?: true
@@ -47,8 +50,14 @@ const getInfuraRPC = () => {
 }
 
 const createCoinbaseProvider = async () => {
-  const app = useNuxtApp()
-  const coinbaseWallet = app.$coinbaseWallet
+  const { CoinbaseWalletSDK } = await import('@coinbase/wallet-sdk')
+
+  const coinbaseWallet = new CoinbaseWalletSDK({
+    appName: 'Mission Control',
+    appLogoUrl: 'https://missioncontrol.planetix.com/IX-icon.png',
+    darkMode: true
+  })
+
   console.log("PROVIDER", coinbaseWallet)
 
   const provider = coinbaseWallet.makeWeb3Provider(getInfuraRPC(), 137)

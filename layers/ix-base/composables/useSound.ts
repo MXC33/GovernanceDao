@@ -1,5 +1,5 @@
 
-import { useSound } from '@vueuse/sound'
+import { MaybeRef, get } from '@vueuse/core'
 
 const hover1 = await import('../public/sounds/hover-1.wav')
 const hover2 = await import('../public/sounds/hover-2.wav')
@@ -7,7 +7,9 @@ const click1 = await import('../public/sounds/click-primary-1.wav')
 const click2 = await import('../public/sounds/click-primary-2.wav')
 const click3 = await import('../public/sounds/click-primary-3.wav')
 const clickClose1 = await import('../public/sounds/click-back-1.wav')
-
+interface Module {
+  default?: string
+}
 export const useSoundSettings = () => {
   const isSoundEnabled = useCookieState('sound-on', () => true)
   const soundVolume = computed(() => isSoundEnabled.value ? 0.25 : 0)
@@ -19,8 +21,28 @@ export const useSoundSettings = () => {
 }
 
 export type SoundSize = 'sm' | 'md' | 'lg' | 'sm-x' | 'md-x' | 'none'
-
+interface Options {
+  volume?: MaybeRef<number>
+}
 export const usePlaySound = () => {
+
+  const useSound = (path: Module, options: Options = {}) => {
+
+    const {
+      volume = ref(1)
+    } = options
+
+    const audio = new Audio(path?.default)
+
+    watch(() => get(volume), (newVolume) =>
+      audio.volume = newVolume
+      , { immediate: true })
+    const play = audio.play.bind(audio)
+
+    return {
+      play
+    }
+  }
 
   const { soundVolume } = useSoundSettings()
   const { play: playHoverSmall } = useSound(hover1, { volume: soundVolume })
