@@ -1,0 +1,117 @@
+query GlobalWasteSystemOrderInfo($credentials: CredentialsInput!) {
+  globalWasteSystemOrderInfo(credentials: $credentials) {
+      ... Order
+  }
+}
+
+query EternaLabsOrderInfo($credentials: CredentialsInput!) {
+  eternalLabsOrderInfo(credentials: $credentials) {
+      ... Order
+  }
+}
+
+
+query NewLandsOrderInfo($credentials: CredentialsInput!) {
+  newlandsOrderInfo(credentials: $credentials) {
+      ... Order
+  }
+}
+
+query FacilityUpgradeOrderInfo($credentials: CredentialsInput!) {
+  facilityUpgradeOrderInfo(credentials: $credentials) {
+      ... Order
+  }
+}
+
+query FacilityUpgradeCooldown($credentials: CredentialsInput!) {
+  cooldownFacilityUpgrade(credentials: $credentials)
+}
+
+
+
+query GlobalWasteSystemOrderCosts {
+  globalWasteSystemOrderCosts {
+      ... OrderData
+  }
+}
+
+query EternaLabsOrderCosts {
+  eternalLabsOrderCosts {
+      ... OrderData
+  }
+}
+
+query NewLandsOrderCosts {
+  newlandsOrderCosts {
+      ... OrderData
+  }
+}
+
+query FacilityUpgradeOrderCosts {
+  facilityUpgradeOrderCosts {
+      ... OrderData
+  }
+}
+
+
+fragment Order on Order{
+    orderId
+    orderAmount
+    creationTime
+    amountOfSpeedups
+    defaultOrderTime
+    speedUpTime
+    totalOrderTime
+    orderTokenId
+    type
+  }
+
+
+
+
+fragment OrderData on OrderData {
+  defaultOrderTime
+  variableCosts {
+    ...OrderCost
+  }
+  fixedCosts {
+    ...OrderCost
+  }
+  maxOrder
+  ixtSpeedupCost
+  astroSpeedupCost
+  ixtCooldownSpeedupCost
+  cooldownSpeedupTime
+  tax {
+    ...Tax
+  }
+  weight {
+    ...ProbabilityWeights
+  }
+}
+
+fragment Token on TokenWithBalance {
+  tokenId
+  tier
+  type
+  balance
+}
+
+fragment Tax on Tax {
+  value
+  basisPoints
+}
+
+fragment OrderCost on OrderCost {
+  tier
+  type
+  min
+  max
+  multiplier
+}
+
+fragment ProbabilityWeights on ProbabilityWeights {
+  type
+  tier
+  value
+}

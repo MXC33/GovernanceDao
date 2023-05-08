@@ -1,6 +1,6 @@
 import { differenceInMilliseconds } from 'date-fns';
 import { intervalToDuration } from "date-fns"
-// import { TokenIdentifierExtended } from "./useNFTs"
+// import { TokenIdentifierExtended } from "./useTokens"
 
 export const IPFSURL = "https://nftstorage.link/ipfs/"
 export const IPFSURLVideo = "https://nftstorage.link/ipfs/"
@@ -87,27 +87,6 @@ export const groupBy = (xs: any[], key: string) =>
   }, {});
 
 
-// export const categorizeNFTs = <T extends TokenIdentifierExtended>(list: T[]) => {
-
-//   if (!list)
-//     return []
-
-//   interface CategorizedNFT {
-//     items: T[],
-//     name: string
-//   }
-
-//   const map: Record<string, CategorizedNFT> = {}
-//   list.forEach((nft) => {
-//     const { type: name } = nft
-//     if (!map[name])
-//       return map[name] = { name, items: [nft] }
-//     else
-//       map[name].items.push(nft)
-//   })
-//   return Object.values(map)
-// }
-
 export const usePlural = (n: number, currentString: string = "") => {
   const loweredString = currentString.toLowerCase()
   const skipPluralize = ['waste', 'energy']
@@ -119,3 +98,7 @@ export const usePlural = (n: number, currentString: string = "") => {
 }
 
 export const useWait = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
+
+
+export const reverseKey = <T extends string | number, K extends string>(record: Record<T, K>, findKey: string) =>
+  (Object.keys(record) as Array<T>).find(key => record[key] === findKey);

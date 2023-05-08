@@ -1,0 +1,23 @@
+query StakedMCNFT($credentials: CredentialsInput!) {
+  stakedMCNFTs(credentials: $credentials) {
+    ...StakedMCNFTInfo
+  }
+}
+
+query StakedGenesisNFT($credentials: CredentialsInput!) {
+  stakedGenesisNFTs(credentials: $credentials) {
+    ...StakedMCNFTInfo
+  }
+}
+
+query StakedGenesisNFTEth($credentials: CredentialsInput!) {
+  stakedGenesisNFTsEth(credentials: $credentials) {
+    ...StakedMCNFTInfo
+  }
+}
+
+fragment StakedMCNFTInfo on StakedMCNFTInfo {
+  tokenId
+  amount
+  lockedAt
+}

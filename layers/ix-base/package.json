@@ -26,6 +26,7 @@
     "@vueuse/nuxt": "^10.1.2",
     "@vueuse/sound": "^2.0.1",
     "@walletconnect/ethereum-provider": "^2.7.2",
+    "case-it": "^1.0.1",
     "date-fns": "^2.30.0",
     "eslint": "^8.28.0",
     "ethers": "5",

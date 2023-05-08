@@ -1,0 +1,24 @@
+{
+  "name": "@ix/ui-planetix",
+  "type": "module",
+  "version": "0.0.1",
+  "main": "./nuxt.config.ts",
+  "scripts": {
+    "dev": "nuxi dev --port 3333",
+    "story": "nuxi dev --port 3333",
+    "build": "nuxt build",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
+    "lint": "eslint ."
+  },
+  "devDependencies": {
+    "@unocss/extractor-pug": "^0.51.8",
+    "@unocss/nuxt": "^0.51.8",
+    "@vueuse/nuxt": "^10.1.2",
+    "nuxt": "^3.0.0",
+    "unocss": "^0.51.8",
+    "unocss-preset-scrollbar": "^0.2.1",
+    "vite-plugin-pug": "^0.3.2",
+    "vite-svg-loader": "^4.0.0"
+  }
+}

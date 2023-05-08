@@ -1,0 +1,487 @@
+{
+  "general": {
+    "accelerate": "Tăng tốc",
+    "accelerateTask": "Tăng tốc nhiệm vụ",
+    "back": "Quay lại",
+    "cancel": "Hủy",
+    "close": "Đóng",
+    "claim": "Nhận",
+    "confirm": "Xác nhận",
+    "continue": "Tiếp tục",
+    "disconnect": "Ngắt kết nối",
+    "errorConnecting": "LỖI KẾT NỐI:",
+    "goToInventory": "Đến kho",
+    "enter": "Nhập",
+    "incoming": "Đã nhận được tin nhắn",
+    "open": "Mở",
+    "loading": "Đang tải",
+    "nrgProd": "Sản lượng năng lượng mỗi",
+    "total": "tổng cộng",
+    "visit": "Đến công ty",
+    "recommended": "Khuyến nghị",
+    "visitor": "Vui lòng nhập mật khẩu",
+    "amount": {
+      "max": "Tối đa",
+      "min": "Tối thiểu"
+    },
+    "transactions": {
+      "mintTransfer": "Đào và chuyển khoản",
+      "confirm": "Xác nhận giao dịch trong ví đã kết nối của bạn",
+      "descriptions": {
+        "processing": "Quá trình xử lý giao dịch sẽ mất một thời gian ngắn. Nếu bạn muốn hủy thao tác này, vui lòng từ chối giao dịch trong ứng dụng ví của bạn."
+      }
+    },
+    "collected": {
+      "waste": "Chất thải",
+      "collectedWaste": "Chất thải đã thu gom",
+      "left": "Còn lại",
+      "youMust": "Bạn phải dọn sạch toàn bộ CHẤT THẢI trên Ô ĐẤT để nhận."
+    },
+    "avatars": {
+      "proxy": "Proxy of Change",
+      "seina": "Seina",
+      "jeremiah": "Jeremiah",
+      "evePryde": "Eve-Pryde",
+      "buck": "Buck"
+    },
+    "noItemsFound": {
+      "no": "Không",
+      "itemsFound": "Vật phẩm được tìm thấy",
+      "noFull": "Không tìm thấy vật phẩm"
+    },
+    "navigation": {
+      "terminal": "Trạm",
+      "inventory": "Kho",
+      "missionCtrl": "Kiểm soát sứ mệnh",
+      "netEmpire": "Netempire",
+      "taskMng": "Trình quản lý nhiệm vụ",
+      "manager": "Trình quản lý",
+      "build": "xây dựng",
+      "starterPack": "Gói khởi động",
+      "payments": "Thanh toán"
+    },
+    "timeCost": {
+      "hours": "Giờ",
+      "cost": "Chi phí"
+    },
+    "build": {
+      "overview": "Tổng quan",
+      "build": "Xây dựng"
+    },
+    "search": {
+      "example": "Ví dụ: SE LE#329801"
+    }
+  },
+  "treasureChest": {
+    "itemsInTotal": "Tổng số vật phẩm",
+    "anyQuestions": "Nếu bạn có bất kỳ câu hỏi nào, hãy liên hệ với chúng tôi tại",
+    "discord": "discord"
+  },
+  "inventory": {
+    "title": "Kho",
+    "tabs": {
+      "land": "Mảnh đất",
+      "tech": "Công nghệ",
+      "industry": "Công nghiệp",
+      "resources": "Tài nguyên",
+      "cargo": "Thùng",
+      "collectables": "Bộ sưu tập",
+      "postmaster": "Trưởng bưu cục"
+    },
+    "treasureChest": {
+      "pixDisclaimer": "PIX trong gói này sẽ không hiển thị trong kho của bạn cho đến khi được máy chủ xử lý. Sự kiện này diễn ra vào các ngày thứ Hai."
+    },
+    "info": {
+      "landTierReq": "Bậc của mảnh đất là bắt buộc",
+      "energyOutCycle": "Chu kỳ sản lượng năng lượng",
+      "mcFeatures": "Tính năng kiểm soát sứ mệnh",
+      "facilityComp": "Khả năng tương thích của cơ sở",
+      "prodMulti": "Hệ số nhân sản xuất",
+      "properties": "Đặc tính",
+      "noItemSelected": "Chưa chọn vật phẩm",
+      "status": "Trạng thái",
+      "active": "Hoạt động",
+      "landmarkInspector": "Thanh tra điểm mốc",
+      "postmaster": {
+        "title": "Trưởng bưu cục",
+        "inventoryStructures": "Kho để cấu trúc"
+      },
+      "soSorry": {
+        "sorry": "Rất tiếc, chưa có bất kỳ",
+        "sorryNoItem": "vật phẩm nào"
+      }
+    }
+  },
+  "build": {
+    "selectPix": {
+      "title": "Xác định Pix",
+      "subTitle": "ADS:A2\\90"
+    },
+    "confirm": {
+      "place": {
+        "facility": "Thưa đặc vụ, cơ sở của bạn sẽ được xây dựng ngay lập tức. Đây có phải là nơi bạn muốn xây dựng không?",
+        "drone": "Thưa đặc vụ, bạn có muốn chúng tôi hướng dẫn máy bay không người lái của bạn đi tìm kiếm và bảo trì ô đất này không?",
+        "pix": "Thưa đặc vụ, bạn có chắc chắn muốn xây dựng PIX của mình trên ô đất cụ thể này không? ",
+        "territory": "Thưa đặc vụ, đây là một ô đất phù hợp cho lãnh thổ của bạn. Bạn có muốn tiếp tục không?"
+      },
+      "reset": {
+        "pix": "Thưa đặc vụ, hãy cẩn trọng. Quá trình sản xuất hiện tại của bạn sẽ bị chấm dứt khi đặt lại ô đất. Bạn có muốn tiếp tục không?",
+        "territory": "Thưa đặc vụ, hãy cẩn trọng. Quá trình sản xuất hiện tại của bạn sẽ bị chấm dứt khi đặt lại ô đất. Bạn có muốn tiếp tục không?",
+        "drone": "Thưa đặc vụ, việc đặt lại máy bay không người lái sẽ chấm dứt quá trình sản xuất hiện tại của bạn. Bạn có muốn tiếp tục không?",
+        "facility": "Thưa đặc vụ, việc loại bỏ cơ sở sẽ chấm dứt quá trình sản xuất năng lượng hiện tại của bạn.  Bạn có thật sự muốn tiếp tục không?"
+      },
+      "claim": {
+        "waste": "Thưa đặc vụ, bạn đã thu gom chất thải thành công.",
+        "energy": "Thưa đặc vụ, bạn đã thu thập năng lượng thành công. Một người đại diện xin chào mừng nỗ lực của bạn."
+      },
+      "claimed": {
+        "waste": "Thưa đặc vụ, chất thải của bạn hiện đã được nhận và đào. Người đại diện khuyên bạn nên giao dịch với Eternalab hoặc Hệ thống chất thải toàn cầu.",
+        "energy": "Thưa đặc vụ, lòng trung thành của bạn đã được tưởng thưởng dưới dạng năng lượng có thể nhận và đào. Một tài nguyên cần thiết để nâng cấp công nghệ."
+      }
+    },
+    "unstaked": {
+      "pix": "Thưa đặc vụ, ô đất của bạn hiện đang trống. Hãy nhanh chóng xây dựng lại, nếu không A.M.E sẽ không hài lòng với tiến độ của bạn.",
+      "territory": "Thưa đặc vụ, ô đất của bạn hiện đang trống. Hãy nhanh chóng xây dựng lại, nếu không A.M.E sẽ không hài lòng với tiến độ của bạn.",
+      "drone": "Thưa đặc vụ, mọi hoạt động của máy bay không người lái trên ô đất của bạn hiện đã được chấm dứt. Đế chế của bạn đang suy yếu.",
+      "facility": "Thưa đặc vụ, cơ sở của bạn hiện đã được xóa. Bạn có thể xây dựng lại khi cần thiết."
+    },
+    "staked": {
+      "pix": "Thưa đặc vụ, bạn đã xây dựng thành công PIX của mình. Những nỗ lực của bạn sẽ tiếp tục được khôi phục và A.M.E sẽ rất hài lòng.",
+      "territory": "Lãnh thổ của bạn hiện đã được xây dựng và sản lượng thu gom chất thải của bạn sẽ gia tăng. Thưa đặc vụ, đế chế của bạn đang mở rộng.",
+      "facility": "Thưa đặc vụ. Cơ sở của bạn hiện đang hoạt động. Rất tự hào với tiến độ của bạn.",
+      "drone": "Đặc vụ thân mến. Máy bay không người lái hiện đang bảo trì mảnh đất của bạn. Khi có nó, sản lượng thu gom chất thải của bạn sẽ gia tăng."
+    }
+  },
+  "corporations": {
+    "overview": {
+      "inactiveMenu": "đang diễn ra. Thời gian còn lại:",
+      "accelerate": "tăng tốc các đơn hàng của bạn"
+    },
+    "order": {
+      "mcSpeedup": "Tăng tốc nhiệm vụ bằng Astro Credit. <strong>{outputType}</strong> tốn <strong>{cost} AC</strong> mỗi giờ.",
+      "mcSpeedupCost": "{cost} Astro Credit",
+      "cart": {
+        "input": {
+          "title": "Vật liệu cần thiết",
+          "ownedMaterialTitle": "Vật liệu đã có",
+          "amount": "Số lượng"
+        },
+        "output": {
+          "probability": {
+            "title": "Sản lượng ước tính"
+          },
+          "fixed": {
+            "title": "Sản lượng"
+          }
+        },
+        "itemType": {
+          "tier": {
+            "itemTitle": "Bậc"
+          },
+          "items": {
+            "itemTitle": "Vật phẩm"
+          }
+        },
+        "outputType": {
+          "chance": {
+            "itemTitle": "Cơ hội"
+          },
+          "amount": {
+            "itemTitle": "Số lượng"
+          }
+        }
+      }
+    },
+    "lucky-cat": {
+      "mcIntro": "Thử vận may với Mèo thần tài.",
+      "overview": {
+        "header": "Chào mừng đến với Mèo thần tài",
+        "intro": "Xin cảm ơn, hãy ghé thăm Mèo thần tài! Vận xấu cũng có thể mang lại sự giàu sang. Các dịch vụ 24/7 của chúng tôi đảm bảo bạn sẽ luôn được phù hộ.",
+        "buttons": {
+          "raffle": {
+            "title": "Xổ số may mắn",
+            "description": "Giải phóng hay thảm họa. Giàu sang hay rỗng túi. Tất cả đều dựa vào may mắn, meo."
+          },
+          "shop": {
+            "title": "Cửa hàng may mắn",
+            "description": "Tăng vận may khi mua ít đồ. Bùa chú và tăng cường đều mang lại duyên nghiệp tốt. Đây là trí khôn của chúng ta!"
+          }
+        }
+      },
+      "raffles": {
+        "myTicket": "vé của tôi",
+        "futureTicket": "xổ số sắp tới",
+        "pastTicket": "xổ số trước đây",
+        "currentTicket": "xổ số đang diễn ra #",
+        "liveRaffle": "xổ số đang diễn ra",
+        "invalid": "Rất tiếc, bạn phải tham gia trong khoảng thời gian",
+        "noFutureTickets": "Nhiều chương trình xổ số khác sắp diễn ra",
+        "usedAll": "Bạn đã sử dụng hết vé rồi! Mua ngay sẽ gặp may, meo.",
+        "noActive": "Không có xổ số đang diễn ra",
+        "loadMore": "Tải thêm",
+        "landmark": "Điểm mốc",
+        "totalEntries": "Tổng số lượt tham gia",
+        "winners": "Người chiến thắng",
+        "date": "Ngày",
+        "loadingRaffle": "Đang tải xổ số",
+        "viewMore": "Xem thêm",
+        "stars": "Sao",
+        "getMore": "Nhận thêm vé xổ số",
+        "raffleDetails": "Chi tiết xổ số",
+        "raffleAttributes": "Thuộc tính",
+        "tickets": "Vé"
+      },
+      "viewPast": {
+        "winnersOf": "người chiến thắng trong xổ số đang diễn ra #",
+        "winners": "người chiến thắng",
+        "enteredWith": "Đã tham gia với",
+        "sharesWon": "Cổ phần trúng thưởng"
+      },
+      "checkout": {
+        "title": "Xổ số mèo thần tài",
+        "message": "May mắn chính là yêu thương bản thân mình! Muốn thử thách tình yêu của mình"
+      },
+      "claim": {
+        "message": "Ý nghĩa của may mắn là hãy tận hưởng cuộc sống và bạn sẽ được tưởng thưởng {landmarkName}. Xin chúc mừng!"
+      }
+    },
+    "new-lands": {
+      "mcIntro": "Xây dựng các cơ sở tại Newlands.",
+      "overview": {
+        "productionTime": "thời gian sản xuất",
+        "header": "Chào mừng đến với Newlands LLC",
+        "intro": "Ôi người bạn cũ! Tôi là một kiến trúc sư giỏi và vui tính tại Newlands, rất hào hứng được chia sẻ những thiết kế ấn tượng của chúng tôi với bạn. Chúng tôi đảm nhiệm triển khai một số công trình, tất cả đều mang lại kết quả mà bạn thật sự có thể tin cậy!",
+        "buttons": {
+          "craft": {
+            "title": "xây dựng cơ sở",
+            "description": "Vùng đất gì mà chẳng có công trình xây dựng nào? Quá kém! Hãy xây dựng một vài công trình và nhận thưởng."
+          },
+          "shop": {
+            "title": "nâng cấp công trình",
+            "description": "Nâng cấp sẽ mang lại nhiều lợi ích lắm đấy! Sản lượng hằng ngày của bạn sẽ được gia tăng."
+          }
+        }
+      },
+      "craft": {
+        "previewOutcome": "Cơ sở",
+        "inProgress": "Thời gian xây dựng công trình còn lại",
+        "cartInfo": "xây dựng",
+        "description": "Chúng tôi sản xuất mọi thứ rất nhanh. Mất {hour} <strong>8 GIỜ</strong> để hoàn thành một công trình, và bạn có thể giám sát quá trình thi công trong <strong>TRÌNH QUẢN LÝ NHIỆM VỤ</strong>. Quá xuất sắc, đúng không nào? <br/><br/> Và đây là cách nó vận hành. <br/><br/>Các cơ sở khác nhau của chúng tôi chỉ có thể được xây dựng trên một lãnh thổ hoặc pix tương ứng. Chúng tôi có càng nhiều vật liệu thì càng có nhiều khả năng mang lại cho bạn một điều gì đó thật sự tuyệt vời! Chẳng hạn như Khu vườn rạng ngời hoặc Lõi kết hợp!<br/><br/>Khi cơ sở đã sẵn sàng và được xây dựng đúng vị trí. Quá trình sản xuất năng lượng sẽ bắt đầu và bạn có thể tích lũy năng lượng để nhận IXT hoặc công nghệ mới.<br/><br/>Bạn cũng có thể bán cơ sở của mình trên sàn giao dịch NetEmpire hoặc cải thiện cơ sở để đạt sản lượng tốt hơn! Bất ngờ chưa!",
+        "descriptionMobile": "Chúng tôi sản xuất mọi thứ rất nhanh. Mất <strong>8 GIỜ</strong> để hoàn thành một công trình, và bạn có thể giám sát quá trình thi công trong <strong>TRÌNH QUẢN LÝ NHIỆM VỤ</strong>. <br/><br/> Các cơ sở khác nhau của chúng tôi chỉ có thể được xây dựng trên một lãnh thổ hoặc pix tương ứng. Chúng tôi có càng nhiều vật liệu thì càng có nhiều khả năng mang lại cho bạn một điều gì đó thật sự tuyệt vời!"
+      },
+      "summaryTime": "Thiết kế đã sẵn sàng. Khung thời gian ",
+      "complete": "Tuyệt vời! Cơ sở của bạn sẽ được xây dựng tại công trường của NewLands, và sau <strong>8 GIỜ</strong>, chúng tôi sẽ gửi nó vào kho của bạn. Bạn sẽ phải sửng sốt khi nhìn thấy nó đấy! <br/><br/> Nếu bạn đang vội, tôi biết một số cách có thể đẩy nhanh quá trình. Nhanh hơn <strong>50%</strong> chỉ với <strong>100 ASTRO CREDIT</strong>. Ổn không? Cho tôi biết nhé, đặc vụ! Bíp bíp!"
+    },
+    "eternalab": {
+      "mcIntro": "Tinh chế chất thải thành tài nguyên có giá trị tại Eternalab.",
+      "overview": {
+        "header": "Hãy trải nghiệm Eternalab",
+        "intro": "Nghệ thuật sáng tạo là một quá trình đẹp đẽ. Tại Eternalab, chúng ta sẽ tự hoàn thiện thế gian này. Vì những điều tốt đẹp hơn và khởi đầu hanh thông. Bạn khao khát điều gì?",
+        "buttons": {
+          "craft": {
+            "title": "Bán chất thải",
+            "description": "Chất thải, chính là dấu vết của quá khứ. Sự hỗn loạn ngày càng gia tăng. Sự chuyển đổi của chúng tôi sẽ giải tỏa khát vọng của bạn."
+          }
+        }
+      },
+      "craft": {
+        "previewOutcome": "Bán chất thải",
+        "inProgress": "Đang tiến hành bán chất thải",
+        "cartInfo": "tinh chế",
+        "description": "Giá trị của một đối tượng không chỉ nằm ở đặc tính của đối tượng đó, giá trị ở đây chính là đặc tính của đối tượng trong mối liên hệ với một đối tượng khác. Và giá trị của chất thải là gì? Đó chính là kỷ niệm, sự kết hợp của các MetaMaterial, tại vùng đất nơi chất thải được thu gom. <br/><br/> Khi thu gom chất thải ở một bậc khu đất cụ thể, nhiều khả năng bạn sẽ nhận được các Bio-M0d ở cùng bậc. <br/><br/> Bio-M0d là sự tích lũy giá trị của chất thải. Đó là logic của sự hỗn loạn. Nhưng các thí nghiệm của chúng tôi không phải là khoa học chính xác. Cấu trúc thời gian của thế giới quá phức tạp.<br/><br/>Và do đó, lượng chất thải đã thu gom có thể mang lại cho bạn Bio-M0d Huyền thoại hoặc Bản thiết kế, nhưng cũng có thể chẳng mang lại gì cả. Đôi khi, chất thải chỉ là chất thải thôi.",
+        "descriptionMobile": "Bio-M0d là sự tích lũy các giá trị. Sự kết hợp của các MetaMaterial, tại vùng đất nơi chất thải được thu gom.<br/><br/>Khi thu gom chất thải ở một bậc cụ thể, nhiều khả năng bạn sẽ nhận được Bio-M0d của bậc đó. Đó là logic trong khoa học của chúng tôi."
+      },
+      "summaryTime": "Thí nghiệm đã sẵn sàng. Khung thời gian ",
+      "complete": "Đúng vậy, để vượt qua thời gian và nhìn thế giới trực tiếp. Sự hỗn loạn của hành tinh này, <strong>CHẤT THẢI</strong> của bạn, hy vọng sẽ được tinh chế thành <strong>BIO-M0D</strong> sau <strong>8 GIỜ</strong>. <br/><br/>Các thí nghiệm của chúng tôi tại Eternalab đều bí mật, nhưng bạn có thể theo dõi tiến trình trong <strong>TRÌNH QUẢN LÝ NHIỆM VỤ.</strong>"
+    },
+    "gws": {
+      "mcIntro": "Bán chất thải lấy Astro Credit tại Hệ thống chất thải toàn cầu.",
+      "overview": {
+        "header": "Đây là Hệ thống chất thải toàn cầu",
+        "intro": "Chất thải. Đó là điều chúng tôi làm. Chỉ đào chứ không uống. Hội đồng nói rằng tôi đã biến phân thành vàng. Thật mỉa mai. Kệ họ.",
+        "buttons": {
+          "craft": {
+            "title": "bán chất thải",
+            "description": "Hãy bán cho chúng tôi chất thải và bạn sẽ nhận lại Astro Credit. Vậy thôi."
+          }
+        }
+      },
+      "craft": {
+        "previewOutcome": "Bán chất thải",
+        "cartInfo": "bán",
+        "inProgress": "Đang tiến hành bán chất thải",
+        "description": "Và hội đồng muốn tôi phải thật kỹ lưỡng. Được thôi. Chết tiệt.<br></br>Lượng <strong>CHẤT THẢI</strong> từ các lãnh thổ và pix của bạn rất có giá trị. Nhưng chất thải cần phải được tinh chế để đạt giá trị thích hợp.<br><br> Chúng tôi sẽ giúp bạn xử lý và trả công bằng <strong>ASTRO CREDIT</strong>. Được chứ? Nếu không thích, đi mà đàm phán với bọn EternaLab thô lỗ hoặc làm gì tùy bạn.",
+        "descriptionMobile": "Lượng CHẤT THẢI từ các lãnh thổ và pix của bạn rất có giá trị. Nhưng chất thải cần phải được tinh chế để đạt giá trị thích hợp. <br><br>Chúng tôi sẽ giúp bạn xử lý và trả công bằng ASTRO CREDIT. Được chứ? Nếu không thích, đi mà đàm phán với bọn EternaLab thô lỗ. Chết tiệt."
+      },
+      "summaryTime": "Chất thải đã thu gom. Khung thời gian ",
+      "complete": "Bắt đầu nào. Hội đồng nói mua 100 chất thải với giá 100 astro credit. Còn tôi thì mua 100 chất thải với giá 95 astro credit. Buck cần ít tiền để xử lý rắc rối, hiểu ý tôi chứ. Bây giờ thì để yên cho tôi uống rượu ngô."
+    },
+    "net-empire": {
+      "mcIntro": "Giao dịch đất và tài sản tại NetEmpire."
+    },
+    "y-space": {
+      "mcIntro": "Mua, sửa chữa và tùy chỉnh công nghệ tại Y_."
+    }
+  },
+  "minting": {
+    "descriptions": {
+      "openingAssets": "Mở và khai thác các thành phần của tài sản này cần một ít thời gian. Bạn có thể rời khỏi màn hình này và tiếp tục sứ mệnh của mình. Phần thưởng sẽ sớm được gửi vào kho của bạn."
+    },
+    "extractingAssets": "ĐANG KHAI THÁC TÀI SẢN...",
+    "extractingChest": "Mở và khai thác các thành phần của tài sản này cần một ít thời gian. Bạn có thể rời khỏi màn hình này và tiếp tục sứ mệnh của mình. Phần thưởng sẽ sớm được gửi vào kho của bạn."
+  },
+  "wallet": {
+    "title": "Kết nối ví",
+    "welcomeMessage": "Kết nối với một trong những nhà cung cấp ví có sẵn của chúng tôi",
+    "signing": {
+      "title": "XÁC NHẬN GIAO DỊCH TRONG VÍ ĐÃ KẾT NỐI CỦA BẠN",
+      "description": "Quá trình xử lý giao dịch sẽ mất một thời gian ngắn. Nếu bạn muốn hủy thao tác này, vui lòng từ chối giao dịch trong ứng dụng ví của bạn."
+    },
+    "minting": {
+      "title": "ĐANG GHI LÊN CHUỖI",
+      "description": "Chờ một chút. Giao dịch của bạn sẽ sớm được xác thực."
+    },
+    "approving": {
+      "title": "ĐANG PHÊ DUYỆT",
+      "description": "Phê duyệt tài sản của bạn để tiến hành tích lũy. Nếu bạn muốn hủy thao tác này, vui lòng từ chối giao dịch trong ứng dụng ví của bạn."
+    },
+    "minting-pix": {
+      "title": "ĐANG ĐÀO PIX",
+      "description": "Đang đào pix của bạn để nhận."
+    },
+    "playerProfile": {
+      "notLoggedIn": "Chưa đăng nhập vào hồ sơ người chơi",
+      "playerConnecting": "Hồ sơ người chơi (đang kết nối)",
+      "loggedInAs": "Đã đăng nhập với tư cách là"
+    },
+    "payments": {
+      "chooseMethod": "Chọn phương thức thanh toán",
+      "matic": "matic",
+      "usdt": "usdt",
+      "ixt": "ixt"
+    }
+  },
+  "taskManager": {
+    "claim": "Nhận",
+    "noTasks": "Không có nhiệm vụ đang hoạt động",
+    "noOrders": "Không có đơn hàng đang hoạt động",
+    "harvesting": "Đã thu thập",
+    "eta": "còn lại",
+    "loadingItems": "Đang tải vật phẩm nhiệm vụ...",
+    "order": {
+      "eternalab": {
+        "title": "TINH THẾ CHẤT THẢI",
+        "progress": "CÓ THỂ NHẬN ĐƯỢC: BIOMOD"
+      },
+      "gws": {
+        "title": "TINH THẾ CHẤT THẢI",
+        "progress": "NHẬN ĐƯỢC: {amount} ASTRO CREDIT"
+      },
+      "new-lands": {
+        "title": "XÂY DỰNG CƠ SỞ",
+        "progress": "NHẬN ĐƯỢC: 1 CƠ SỞ"
+      }
+    },
+    "orderClaim": {
+      "description": "Xin chào GM, đơn hàng tiềm năng của bạn đã được hoàn thành và chúng tôi đang xử lý phần thưởng như đã nói. Kết quả của bạn sẽ được trình bày rõ ở bên dưới sau giây lát. Vui lòng chờ đợi.",
+      "nothing": "Không có gì cả",
+      "buttons": {
+        "goTo": "Đến kho",
+        "prospectTask": "Nhiệm vụ tiềm năng"
+      },
+      "success": {
+        "eternalab": "Ôi, nó đã khiến chúng ta mất hàng trăm năm. Nhưng chẳng mấy chốc chúng ta sẽ vượt ra khỏi thế giới tự nhiên. Đây là món quà đền đáp dành cho bạn.",
+        "gws": "Được rồi. Đây là số tiền Astro Credit của bạn.",
+        "new-lands": "Này bạn cũ! Cơ sở của bạn rất xuất sắc và hiện đang được chuyển đến khu đất của bạn. Tôi khuyên bạn nên xây dựng trên một ô đất và bắt đầu khai thác năng lượng.",
+        "y-drone": "Thưa đặc vụ, chất thải đã được bảo vệ. Sắp triển khai lại máy bay không người lái."
+      },
+      "failure": {
+        "eternalab": {
+          "title": "Thử nghiệm thất bại",
+          "description": "Thật lãng phí. Một sự hỗn loạn kỳ lạ. Chẳng... mang lại gì cả. Giờ thì chúng ta thấy được tại sao thế giới lại đi ngủ ở trạng thái cân bằng nhiệt.",
+          "buttonTry": "Quay lại phòng thí nghiệm"
+        }
+      }
+    }
+  },
+  "notifications": {
+    "beginnerOffer": {
+      "title": "Ưu đãi người chơi mới",
+      "description": "Tỉnh giấc đúng lúc lắm, thưa đặc vụ. Trong 48 giờ, bạn có thể mua khu đất trên Planet IX với giá ưu đãi. Đây là một lựa chọn tốt để bắt đầu sứ mệnh của bạn.",
+      "expressM": "<br/>Gói vừa</br> hỏa tốc - 111 pix",
+      "expressS": "<br/>Gói nhỏ</br> hỏa tốc - 11 pix",
+      "price": {
+        "medium": {
+          "normal": "$65",
+          "sale": "32,5"
+        },
+        "small": {
+          "normal": "$10",
+          "sale": "$5"
+        }
+      },
+      "buttons": {
+        "confirm": "Mua",
+        "cancel": "Hủy"
+      },
+      "proxyChange": {
+        "incoming": "Đã nhận được tin nhắn",
+        "title": "Proxy of Change",
+        "message": "Đặc vụ thân mến. Bạn đã có đủ PIX để xây dựng trên tất cả các ô đất. Cuối cùng, chất thải cũng sẽ biến mất."
+      }
+    }
+  },
+  "game": {
+    "greetingTitle": "Xin chào GM,",
+    "header": {
+      "place": "Xây dựng",
+      "onEmpty": "Trên ô trống"
+    },
+    "terminal": {
+      "entry": {
+        "cSoon": "Sắp ra mắt"
+      },
+      "descriptions": {
+        "inInventory": "Trong Kho, đặc vụ có thể giám sát toàn bộ tài sản của họ.",
+        "explore": "Khám phá hành tinh và giao dịch trên sàn giao dịch NetEmpire.",
+        "inMissionCtrl": "Trong Kiểm soát sứ mệnh, đặc vụ có thể sử dụng tài sản của mình."
+      }
+    },
+    "helper": {
+      "loadingUser": "Vui lòng chờ. Đang tải người dùng của bạn...",
+      "loadingAssets": "ĐANG TẢI TÀI SẢN...",
+      "fetchingUser": "Đang tìm nạp người dùng",
+      "fetchingYourItems": "Đang tìm nạp vật phẩm của bạn",
+      "timeDays": {
+        "days": "NGÀY",
+        "hours": "GIỜ",
+        "minutes": "PHÚT"
+      }
+    }
+  },
+  "layouts": {
+    "headers": {
+      "accountBalance": "Số dư tài khoản:",
+      "ixt": "IXT:",
+      "terminal": "TRẠM",
+      "dashboard": "IX Foundation",
+      "inventory": "Kho",
+      "missionControl": "Kiểm soát sứ mệnh",
+      "game": "Trò chơi",
+      "planetIX": "Planet IX",
+      "automatedTrans": "Thông báo tự động"
+    }
+  },
+  "cosmetics": {
+    "chooseCosmetics": "Chọn Mỹ phẩm",
+    "chooseNFT": "Chọn NFT",
+    "userInfo": {
+      "aoc": "Agent of Change",
+      "memberSince": "Thành viên từ",
+      "status": "Trạng thái",
+      "social": "Mạng xã hội",
+      "pm": "Thông điệp cá nhân",
+      "showcase": "Trưng bày"
+    }
+  }
+}

@@ -1,3 +1,4 @@
+import { CredentialsInput } from '#gql'
 import type { APIUser, APIAuthResponse } from './useLogin'
 
 export const useUser = () => {
@@ -13,5 +14,21 @@ export const useUser = () => {
     removeUser,
     authUser,
     hasUser
+  }
+}
+
+
+export const useGraphqlCredentials = (): CredentialsInput | null => {
+  const { walletAdress } = useWallet()
+  const { user } = useUser()
+  const userId = user.value?.id
+
+  if (!walletAdress.value) {
+    return null
+  }
+
+  return {
+    playerId: userId,
+    walletAddress: walletAdress.value
   }
 }

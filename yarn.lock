@@ -4166,6 +4166,11 @@ capital-case@^1.0.4:
     tslib "^2.0.3"
     upper-case-first "^2.0.2"
 
+case-it@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/case-it/-/case-it-1.0.1.tgz#bf161e9cb5c557302f854d130a42c04fe85a8f24"
+  integrity sha512-hxjXhD5fWVfBv2DglhN22wqtGTdImfpRyUB3FGofZL9LgHhyFwr+7Zbtqxj53W9DPzzDTfBuDB4XkeaGFGUijA==
+
 chalk@^2.0.0:
   version "2.4.2"
   resolved "https://registry.yarnpkg.com/chalk/-/chalk-2.4.2.tgz#cd42541677a54333cf541a49108c1432b44c9424"

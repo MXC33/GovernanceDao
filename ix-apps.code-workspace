@@ -5,6 +5,10 @@
 			"path": "apps/marketplace-fullscreen"
 		},
 		{
+			"name": "ix-ui-planetix",
+			"path": "layers/ix-ui-planetix"
+		},
+		{
 			"name": "ix-base",
 			"path": "layers/ix-base"
 		},

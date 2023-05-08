@@ -1,8 +1,9 @@
 import { defineConfig } from 'unocss'
-import layer from '../../layers/ix-base/unocss.config';
+import baseLayer from '../../layers/ix-base/unocss.config';
+import ixUILayer from '../../layers/ix-ui-planetix/unocss.config';
 
 export default defineConfig({
-  presets: [layer],
+  presets: [baseLayer, ixUILayer],
   theme: {
     fontFamily: {
       foundry: ['Foundry Gridnik', 'sans-serif'],

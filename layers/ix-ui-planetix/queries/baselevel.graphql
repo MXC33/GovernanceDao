@@ -1,0 +1,14 @@
+query PlayerBaseLevel($credentials: CredentialsInput!) {
+  playerBaseLevel(credentials: $credentials)
+}
+
+query BaseLevelCapacities($level: Int!) {
+  baseLevelCapacities(level: $level) {
+    ...CorporationCapacity
+  }
+}
+
+fragment CorporationCapacity on CorporationCapacity {
+  name
+  capacity
+}
