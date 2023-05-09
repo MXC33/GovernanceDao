@@ -1,5 +1,5 @@
 <template lang="pug">
-#app.antialiased(font="foundry" bg="ix-black" text="sm lg:md" ref="app" pos="absolute" inset="0" min-h="0" overscroll="none" overflow="hidden" flex="~ col grow")
+#app.antialiased(font="foundry" bg="ix-black" color="white" text="sm lg:md" ref="app" overscroll="none" flex="~ col grow")
   NuxtLayout()
     NuxtLoadingIndicator(color="rgb(255, 102, 71)")
 
@@ -11,3 +11,10 @@
 const { data, execute } = useAsyncDataState('ix-api', async () => 'test')
 await execute()
 </script>
+
+<style>
+body,
+html {
+  background: #000;
+}
+</style>

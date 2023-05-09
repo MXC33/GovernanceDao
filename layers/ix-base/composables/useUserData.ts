@@ -1,8 +1,9 @@
-import { CredentialsInput } from '#gql';
+import { CredentialsInput, NftFragment } from '#gql';
 import { ethers } from 'ethers';
-import { kebabCaseIt } from 'case-it'; import { NFTType, TokenIdentifier } from './useTokens';
+import { kebabCaseIt } from 'case-it'; import { TokenIdentifier } from './useTokens';
 import { useGraphqlCredentials } from './useUser';
 import { useAsyncDataState } from './useAsyncState';
+import { TokenType } from './tokenMaps';
 ;
 const TOKENS_KEY = 'user-nft-tokens'
 const IXT_KEY = 'user-ixt-balance'
@@ -21,29 +22,38 @@ const useGqlWithCredentials = async <T>(fn: (ctx: GqlCredentialsCtx) => Promise<
   return fn({ credentials })
 }
 
+type NftQueryData<PropertyName extends string> = {
+  [P in PropertyName]?: (NftFragment | null)[] | null | undefined
+}
+
+const filterAndCastItems = <P extends string, Q extends NftQueryData<P>>(data: Q | never[], path: P) =>
+  ((data as Q)[path] ?? []).map(parseNftFragment).filter(hasItem) as TokenIdentifier[]
+
+const useAsyncNFTFragments = <P extends string, Q extends NftQueryData<P>>(query: (ctx: GqlCredentialsCtx) => Promise<Q>, path: P, id: string) =>
+  useAsyncDataState(id, async () => {
+    const data = await useGqlWithCredentials(query)
+    if (!data)
+      return []
+    return data
+  }, { transform: (data) => filterAndCastItems(data, path) })
 
 const useLandmarkData = () =>
-  useAsyncDataState('landmarks-data', () =>
-    useGqlWithCredentials(GqlLandmarks)
-    , {
-      transform: (data) => (data?.landmarks ?? []).filter(hasItem)
-    })
+  useAsyncNFTFragments(GqlLandmarks, 'landmarks', 'landmarks-data')
 
 export const useTokenData = () =>
-  useAsyncDataState(TOKENS_KEY, () =>
-    useGqlWithCredentials(GqlTokens)
-    , {
-      transform: (data) =>
-        (data?.missionControlTokens ?? []).filter(item => hasItem(item))
-    })
+  useAsyncNFTFragments(GqlTokens, 'missionControlTokens', TOKENS_KEY)
 
 export const useRoverData = () =>
-  useAsyncDataState('rover-data', () =>
-    useGqlWithCredentials(GqlRovers)
-    , {
-      transform: (data) =>
-        (data?.rover ?? []).filter(item => hasItem(item))
-    })
+  useAsyncNFTFragments(GqlRovers, 'rover', 'rover-data')
+
+export const useEthNFTData = () =>
+  useAsyncNFTFragments(GqlEthNFTs, 'ethNFTs', 'eth-nft-data')
+
+export const useAvatarNFTData = () =>
+  useAsyncNFTFragments(GqlAvatarNFT, 'avatarNFT', 'avatar-nft-data')
+
+export const useBadgeNFTData = () =>
+  useAsyncNFTFragments(GqlBadgeNFT, 'badgeNFT', 'badge-nft-data')
 
 
 export const useCurrencyData = () => {
@@ -56,7 +66,7 @@ export const useCurrencyData = () => {
 
         const { currencies } = data
 
-        const balanceOf = (type: NFTType) =>
+        const balanceOf = (type: TokenType) =>
           currencies.find((item) => item?.type && kebabCaseIt(item?.type.toLowerCase()) == type)?.balance ?? 0
 
         return {
@@ -67,7 +77,7 @@ export const useCurrencyData = () => {
       }
     })
 
-  const createCurrencyNft = (type: NFTType, balance?: number): TokenIdentifier => ({
+  const createCurrencyNft = (type: TokenType, balance?: number): TokenIdentifier => ({
     type,
     //@ts-ignore
     name: type,
@@ -100,7 +110,10 @@ export const useAsyncGasPrice = () =>
 
     const { provider } = useWallet()
     try {
-      const gasPriceWei = await provider.value.getGasPrice()
+      const gasPriceWei = await provider.value?.getGasPrice()
+      if (!gasPriceWei)
+        return null
+
       const gasPriceGwei = ethers.utils.formatUnits(gasPriceWei, 'gwei').substring(0, 7)
       let gasPriceIndicator;
 
@@ -121,33 +134,10 @@ export const useAsyncGasPrice = () =>
   })
 
 
-export const useEthNFTData = () =>
-  useAsyncDataState('eth-nft-data', () =>
-    useGqlWithCredentials(GqlEthNFTs), {
-    transform: (data) =>
-      (data?.ethNFTs ?? []).filter(hasItem) ?? []
-  })
-
-export const useAvatarNFTData = () =>
-  useAsyncDataState('avatar-nft-data', () =>
-    useGqlWithCredentials(GqlAvatarNFT), {
-    transform: (data) =>
-      (data?.avatarNFT ?? []).filter(hasItem) ?? []
-  })
-
-export const useBadgeNFTData = () =>
-  useAsyncDataState('badge-nft-data', () =>
-    useGqlWithCredentials(GqlBadgeNFT), {
-    transform: (data) =>
-      (data?.badgeNFT ?? []).filter(hasItem) ?? []
-  })
-
-
-export const usePlayerBaseLevelData = () => {
-  return useAsyncDataState('player-base-level-data', async () =>
+export const usePlayerBaseLevelData = () =>
+  useAsyncDataState('player-base-level-data', async () =>
     useGqlWithCredentials(GqlPlayerBaseLevel)
     , { transform: (data) => data?.playerBaseLevel ?? 0 })
-}
 
 export const useUserData = () => {
   const { execute: fetchPlayerBaseLevel, data: playerBaseLevel } = usePlayerBaseLevelData()
@@ -178,16 +168,24 @@ export const useUserData = () => {
 
   const { execute: fetchAOCBadges, pending: fetchingBadges, data: aocbadges, refresh: refreshAOCBadges } = useBadgeNFTData()
 
+  const allTokens = computed(() => {
+    return [
+      ...landmarks.value ?? [],
+      ...nfts.value ?? [],
+      ...rovers.value ?? [],
+      ...avatars.value ?? []
+    ]
+  })
 
 
-  // const fetchCommonData = () =>
-  //   Promise.all([fetchTokens(), fetchLandData(), fetchCurrencies(), fetchRovers()])
+  const fetchCommonData = () =>
+    Promise.all([fetchTokens(), fetchCurrencies(), fetchRovers()]) // fetchLandData()
 
   // const fetchGameAssets = () =>
   //   Promise.all([initialFetchAllTiles(), fetchCommonData(), fetchStakedMCNFT(), fetchPlayerBaseLevel(), fetchStakedGenesis(), fetchStakedGenesisEth()].flat())
 
-  // const fetchUserInventory = () =>
-  //   Promise.all([fetchLandmarks(), fetchGravityGrade(), fetchCommonData(), fetchEthNFTs(), fetchAvatars(), fetchAOCBadges()].flat())
+  const fetchUserInventory = () =>
+    Promise.all([fetchLandmarks(), fetchCommonData(), fetchEthNFTs(), fetchAvatars(), fetchAOCBadges()].flat()) // fetchGravityGrade()
 
   // const refreshUserInventory = () =>
   //   Promise.all([refreshLandmarks(), refreshGravityGrade(), refreshLandData(), refreshTokens(), refreshEthNFTs(), refreshRover(), refreshAvatars(), refreshAOCBadges()])
@@ -195,25 +193,22 @@ export const useUserData = () => {
   // const refreshPacks = () =>
   //   Promise.all([refreshGravityGrade(), refreshTokens()])
 
-  // const spoofWaste = ref([{ type: 'waste' as NFTType, balance: 100 }])
+  // const spoofWaste = ref([{ type: 'waste' as TokenType, balance: 100 }])
 
   const balanceOfToken = useTokenBalance([
     ethNFTs,
     nfts,
-    // packs,
-    ixtToken,
-    // landData,
-    astroGoldLiteToken,
-    astroGoldToken,
     rovers,
     avatars,
     aocbadges
-  ], 'balance')
+  ])
 
   const ixtBalance = computed(() => ixtToken.value.balance ?? 0)
   const astroGoldBalance = computed(() => astroGoldToken.value.balance ?? 0)
   const astroGoldLiteBalance = computed(() => astroGoldLiteToken.value.balance ?? 0)
   const mcLevel = computed(() => playerBaseLevel.value ?? 0)
+
+
 
   const userResources = computed(() => {
     const astroCredits = balanceOfToken({ type: 'astro-credit' })
@@ -243,6 +238,8 @@ export const useUserData = () => {
     rovers,
     avatars,
     aocbadges,
+    allTokens,
+    fetchUserInventory,
     balanceOfToken
   }
 }

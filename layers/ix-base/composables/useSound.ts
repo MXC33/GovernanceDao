@@ -44,7 +44,6 @@ const useSound = (path: Module, options: Options = {}) => {
 
     const audio = new Audio(path?.default)
     soundModule.value = audio
-    console.log("Set up audio", audio, id)
 
     watch([() => get(volume), soundModule], ([newVolume, audioEngine]) => {
       if (!soundModule.value)
@@ -60,7 +59,6 @@ const useSound = (path: Module, options: Options = {}) => {
     setupAudioModule()
 
   const play = () => {
-    console.log("Play!!", soundModule.value, id)
     soundModule.value?.play.bind(soundModule.value)
   }
 

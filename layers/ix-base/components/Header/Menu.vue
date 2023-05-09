@@ -9,12 +9,12 @@ div(pos="fixed right-0 top-0 bottom-0" overflow-y="auto" bg="black" p="5" w="80 
       span(color="white opacity-50") {{$t(`layouts.headers.ixt`)}} 
       span(color="mc-mint") {{ Math.round(ixtBalance * 100) / 100 }}
 
-  LayoutHeaderButton(@click="gotoMCPage('/terminal')") {{$t(`layouts.headers.terminal`)}}
-  LayoutHeaderButton(@click="gotoMCPage('/')") {{$t(`layouts.headers.inventory`)}}
-  LayoutHeaderButton(@click="gotoMCPage('/mission-control')") {{$t(`layouts.headers.missionControl`)}}
-  LayoutHeaderButton(@click="gotoIXPage('game')") {{$t(`layouts.headers.game`)}}
-  LayoutHeaderButton(@click="gotoIXPage('ix-foundation')") {{$t(`layouts.headers.dashboard`)}}
-  LayoutHeaderButton(@click="gotoIXPage('index')") {{$t(`layouts.headers.planetIX`)}}
+  HeaderButton(@click="gotoMCPage('/terminal')") {{$t(`layouts.headers.terminal`)}}
+  HeaderButton(@click="gotoMCPage('/')") {{$t(`layouts.headers.inventory`)}}
+  HeaderButton(@click="gotoMCPage('/mission-control')") {{$t(`layouts.headers.missionControl`)}}
+  HeaderButton(@click="gotoIXPage('game')") {{$t(`layouts.headers.game`)}}
+  HeaderButton(@click="gotoIXPage('ix-foundation')") {{$t(`layouts.headers.dashboard`)}}
+  HeaderButton(@click="gotoIXPage('index')") {{$t(`layouts.headers.planetIX`)}}
 
   div(b="t-1 white opacity-50" py="4")
     ButtonSound(btn="~ white on-enabled:secondary" sound="md" @click="toggleSound" :enabled="isSoundEnabled") Sound {{ isSoundEnabled ? 'enabled' : 'disabled'}}
@@ -37,6 +37,4 @@ const gotoMCPage = (page: string) => {
 }
 </script>
 
-<style>
-
-</style>
+<style></style>

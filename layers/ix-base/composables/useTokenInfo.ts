@@ -1,7 +1,7 @@
 import { gravityGradeAddress, assetsAddress, landmarkAddress, roverAddress, avatarNFTAddress, badgeNFTAddress, pixAdress } from "./Contract/WalletAddresses"
 import { GravityGradeNFTType, GravityGradeNFTTypes } from "./TokenTypes/GravityGrade"
 import { LandTypes, LandType } from "./TokenTypes/Land"
-import { MCNFTTypes, TokenIdentifier, getNFTTokenId, useTokens } from "./useTokens"
+import { TokenIdentifier, getNFTTokenId, useTokens } from "./useTokens"
 
 const getContractForToken = (token: TokenIdentifier): string | undefined => {
   if (!token)
@@ -73,7 +73,7 @@ export const useTokenInfo = (token: TokenIdentifier) => {
   }
   const key = `token-info-data-${getTokenKey(token)}-${tokenId},`
 
-  return useAsyncState(key, async () => {
+  return useAsyncDataState(key, async () => {
     try {
       return fetchTokenInfo()
     } catch (error) {

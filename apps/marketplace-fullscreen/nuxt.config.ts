@@ -1,7 +1,6 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   extends: [
-    '../../layers/ix-ui-planetix',
     '../../layers/ix-base'
   ],
   css: [

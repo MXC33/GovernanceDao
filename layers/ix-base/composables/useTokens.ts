@@ -4,73 +4,32 @@ import { kebabCaseIt, spaceCaseIt } from 'case-it'
 import { FacilityId, FacilityLevelMap, FacilityNameMap, FacilityTier, FacilityTierMap } from './TokenTypes/Facility'
 import { reverseKey } from './useHelpers'
 import { BadgeId, BadgeTierMap } from './TokenTypes/Badge'
-import { BioModId, BioModTierMap } from './TokenTypes/Biomod'
+import { BioModTierMap } from './TokenTypes/Biomod'
 import { ContractTierMap } from './TokenTypes/Contract'
-import { DroneId, DroneTierMap } from './TokenTypes/Drone'
+import { DroneTierMap } from './TokenTypes/Drone'
 import { GenesisCorporationMap } from './TokenTypes/Genesis'
 import { GravityGradeNFTType, GravityGradeNFTTypes, getGravityGradeTokenID } from './TokenTypes/GravityGrade'
 import { LandType, LandTypeMap } from './TokenTypes/Land'
-import { LandMarkId } from './TokenTypes/Landmark'
-import { MetaShareId, MetashareCorporationMap } from './TokenTypes/Metashare'
-import { TicketId, TicketTierMap } from './TokenTypes/Ticket'
+import { MetashareCorporationMap } from './TokenTypes/Metashare'
+import { TicketTierMap } from './TokenTypes/Ticket'
 import { TierId, getTierColor } from './TokenTypes/Tier'
 import { useTokenInfo } from './useTokenInfo'
 import { Currency } from './globalTypes'
+import { NftFragment } from '#gql'
+import { TokenId, TokenType } from './tokenMaps'
 
-export const M3taModId = 0
-export const WasteId = 7
-export const AstroId = 8
-export const BluePrintId = 9
-export const LootCrateId = 15
-export const EnergyId = 24
-export const AvatarCardPackId = 32
-export const AOCBadgePackId = 51
-
-export const AvatarIds = [...Array(316).keys()]
-export const AOCBadgeIds = [...Array(69420).keys()]
-
-export type NothingId = 99
-
-// NFT General
-
-export type TokenId = NothingId | BadgeId | DroneId | MetaShareId | BioModId | typeof WasteId | typeof AstroId | typeof BluePrintId | TicketId | FacilityId | typeof LootCrateId | typeof EnergyId | LandMarkId | typeof AvatarCardPackId | typeof AOCBadgePackId | typeof M3taModId
-
-export type LootCrateType = 'loot-crate' | 'avatar-card-pack' | 'aoc-badge-pack'
-
-export type NFTType = 'badge' | 'drone' | 'metashare' | 'biomod' | 'waste' | 'astro-credit' | 'blueprint' | 'raffle-ticket' | 'facility' | 'ixt' | LootCrateType | 'energy' | LandType | GravityGradeNFTType | 'landmark' | 'nothing' | 'genesis' | 'astro-gold' | 'astro-gold-lite' | 'tile-contract' | 'astro-gold-ixt' | 'rover' | 'm3ta-mod' | 'avatar' | 'aoc-badge'
-
-export const MCNFTTypes: NFTType[] = [
-  'm3ta-mod',
-  'badge',
-  'drone',
-  'waste',
-  'astro-credit',
-  'blueprint',
-  'biomod',
-  'loot-crate',
-  'raffle-ticket',
-  'facility',
-  'energy',
-  'metashare',
-  'avatar-card-pack',
-  'tile-contract',
-  'aoc-badge-pack',
-]
-
-
-export const LandmarkList: NFTType[] = ['landmark']
 
 // These are decorated and mapped stuff that we don't get from the graphql
 export interface TokenIdentifier {
-  type: NFTType,
+  type: TokenType,
   tier?: TierId,
   balance?: number
   tokenId?: string | number
   currency?: Currency
 }
 
-export type TokenIdentifierWithAmount<K extends string> = TokenIdentifier & {
-  [key in K]?: number
+export type TokenIdentifierWithAmount = TokenIdentifier & {
+  amount?: number
 }
 
 export interface ItemWithAttributes {
@@ -89,22 +48,25 @@ export const getTokenAttribute = (token: ItemWithAttributes, traitType: string) 
   return attribute?.value?.toLowerCase() ?? null
 }
 
-export const useTokenBalance = <T extends string>(list: Ref<TokenIdentifierWithAmount<T>[] | TokenIdentifierWithAmount<T>>[], path: T) => {
+export const useTokenBalance = (list: (Ref<TokenIdentifierWithAmount[] | TokenIdentifier[] | null>)[]) => {
   const { isSameToken } = useTokens()
 
   const balanceOfToken = (token: TokenIdentifier, decimalCount: number = 2) => {
     const nftList = list.flatMap((tokenList) => tokenList.value)
 
     const nft = nftList.find(item =>
-      isSameToken(token, item)
+      item && isSameToken(token, item)
     )
 
     if (!nft)
       return 0
 
-    const balance = nft[path] ?? 0
+    const balance =
+      (nft as TokenIdentifier)?.balance ??
+      (nft as TokenIdentifierWithAmount)?.amount ??
+      0
 
-    const higherDecimalCount: NFTType[] = ['astro-gold', 'astro-gold-lite']
+    const higherDecimalCount: TokenType[] = ['astro-gold', 'astro-gold-lite']
 
     if (higherDecimalCount.includes(nft.type))
       return roundToDecimals(balance, decimalCount = 6)
@@ -118,17 +80,21 @@ export const useTokenBalance = <T extends string>(list: Ref<TokenIdentifierWithA
 
 export const useTokens = () => {
 
-  // const createMCNFT = (tokenId: TokenId, balance: number = 1): TokenIdentifier => {
-  //   const type = getNFTType(tokenId)
-  //   const tier = getNFTTier(tokenId)
+  const createMCNFT = (tokenId: TokenId, balance: number = 1): TokenIdentifier | null => {
+    const type = getTokenType(tokenId)
+    const tier = getTokenTier(tokenId)
 
-  //   return {
-  //     tokenId: String(tokenId),
-  //     type,
-  //     tier,
-  //     balance,
-  //   }
-  // }
+    if (!type)
+      return null
+
+    return {
+      tokenId: String(tokenId),
+      type,
+      tier: tier ?? undefined,
+      balance,
+    }
+  }
+
 
   const getTokenLevel = (token: TokenIdentifier) => {
     if (token.tokenId == undefined || null)
@@ -143,7 +109,7 @@ export const useTokens = () => {
   const getTokenName = (token: TokenIdentifier, useTokenDataName: boolean = true) => {
     const { data } = useTokenInfo(token)
 
-    const reversedTypes: NFTType[] = ['cargo-drop', 'coinbase', 'arcade', 'starter-pack']
+    const reversedTypes: TokenType[] = ['cargo-drop', 'coinbase', 'arcade', 'starter-pack']
 
     const { tier, type } = token
 

@@ -5,9 +5,9 @@ ButtonSound(sound="lg" btn="~ primary on-active:active lg" color="white" p="x-3 
 </template>
 
 <script setup lang="ts">
-import type { WalletConnector } from '~~/composables/useWalletConnectors';
+import type { WalletConnector } from '~/composables/Contract/useWalletConnectors'
 
-const MetamaskLogo = await import('../../../assets/images/wallet/bitkeep.svg')
+const MetamaskLogo = await import('../../../assets/images/wallet/metamask.svg')
 const WombatLogo = await import('../../../assets/images/wallet/wombat.svg')
 const BitKeepLogo = await import('../../../assets/images/wallet/bitkeep.svg')
 const CoinBaseLogo = await import('../../../assets/images/wallet/coinbase.svg')

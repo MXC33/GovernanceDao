@@ -4,7 +4,7 @@ VList(bg="ix-primary opacity-20" b="2 ix-primary opacity-40" p="6" space-y="5" m
 
   VList(text="white left")
     WalletStatus(v-if="isWalletConnected")
-    div(v-else space-y="3") 
+    VList(v-else space-y="3") 
       div {{ $t('wallet.welcomeMessage') }}
       div(v-if="!!walletError" color="mc-orange") 
         span(font="bold") {{$t(`general.errorConnecting`)}}
@@ -22,7 +22,8 @@ VList(bg="ix-primary opacity-20" b="2 ix-primary opacity-40" p="6" space-y="5" m
 </template>
 
 <script setup lang="ts">
-import type { WalletConnector } from '~~/composables/useWalletConnectors';
+import type { WalletConnector } from '~/composables/Contract/useWalletConnectors'
+
 const { getAvailableConnectors } = useConnectors()
 
 const connectors = ref<WalletConnector[]>([])

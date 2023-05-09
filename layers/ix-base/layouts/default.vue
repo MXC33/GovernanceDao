@@ -1,6 +1,6 @@
 <template lang="pug">
 main(w="full" h="full" flex="~ col grow" min-h="0")
-  LayoutHeader()
+  Header()
 
   //- Used for teleports
   div(id="overlays" select="none")
