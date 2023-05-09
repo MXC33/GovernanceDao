@@ -1,7 +1,8 @@
 <template lang="pug">
-VList(flex-grow="1" min-h="0" pos="relative")
-  div(grid="~ cols-4")
-    ListItem(:token="token" v-for="token in allTokens")
+VList(flex-grow="1" min-h="0" pos="relative" p="6" space-y="6")
+  h1(text="3xl" font="bold") MY ASSETS
+  div(grid="~ cols-4" divide-x="0.5")
+    ListItem(:token="token" v-for="token in allTokens" b="gray-400")
 
 </template>
 

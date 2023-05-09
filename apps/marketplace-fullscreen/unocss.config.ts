@@ -1,15 +1,16 @@
 import { defineConfig } from 'unocss'
 import baseLayer from '../../layers/ix-base/unocss.config';
-import ixUILayer from '../../layers/ix-ui-planetix/unocss.config';
 
 export default defineConfig({
-  presets: [baseLayer, ixUILayer],
+  presets: [baseLayer],
   theme: {
     fontFamily: {
       foundry: ['Foundry Gridnik', 'sans-serif'],
     },
 
     colors: {
+      //@ts-ignore
+      ...baseLayer.theme.colors,
       ix: {
         primary: '#FF6647'
       },
