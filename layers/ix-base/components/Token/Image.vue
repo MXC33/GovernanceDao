@@ -3,7 +3,7 @@ img(:src="imageSource" w="full" h="full" object="contain center")
 </template>
 
 <script lang="ts" setup>
-import type { TokenIdentifier } from '~/composables/useTokens'
+import type { TokenIdentifier } from '~/composables/Token/useTokens'
 
 const props = defineProps<{
   token: TokenIdentifier,

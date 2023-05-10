@@ -9,7 +9,7 @@ HList(items="center" justify="center" uppercase="~" w="full" space-x="2" px="2")
 </template>
 
 <script setup lang="ts">
-import type { TokenIdentifier } from '~/composables/useTokens';
+import type { TokenIdentifier } from '~/composables/Token/useTokens';
 
 const props = defineProps<{
   token: TokenIdentifier,

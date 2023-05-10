@@ -1,39 +1,39 @@
 <template lang="pug">
-VList(justify="center" items="center" aspect="2/3" bg="black opacity-40")
-  div(aspect="square" w="full")
-    div(pos="relative" w="full" h="full")
-      TokenVideo(:token="token" v-if="displayVideo" w="full" h="full" :is-large="true" pos="absolute" inset="0" object="cover center" bg="black" :key="getTokenKey(token)")
-      TokenImage(:token="token" v-else w="full" h="full"  pos="absolute" inset="0" :is-large="true" p="4 lg:8" :key="getTokenKey(token) + 'image'")
+VList(justify="center" items="center" aspect="2/3" bg="black opacity-40" ref="mediaElement" cursor="pointer" group)
+  VList(aspect="square" w="full" pos="relative" overflow="hidden")
+    slot(name="media")
+      TokenLazyVideo(:token="token" :key="getTokenKey(token)" :is-hovered="isHovered")
 
-  VList(w="full" flex-grow="1" font="bold" items="start" bg="gray-900" :invalid="isInvalid" p="6")
-    slot(v-if="$slots.default")
-    TokenName(:token="token" text="xl ellipsis" font="bold")
-    div(text="lg") 0.12ETH
+    HList(pos="absolute" inset="0" p="3" pointer-events="none" opacity="0 group-hover:100" transition="all")
+      slot(name="icon-left")
+
+      div(flex-grow="1")
+
+      ListButtonSelect(pointer-events="auto")
+
+  VList(w="full" flex-grow="1" items="start" bg="gray-900" :invalid="isInvalid" p="6" pos="relative")
+    header(font="bold" w="full")
+      slot(name="title")
+        TokenName(:token="token" text="xl ellipsis")
+
+      div(text="lg" ) 
+        slot(name="subtitle") 0.12Eth
+
+    div(flex-grow="1")
+
+    div(text="md gray-200")
+      slot(name="detail") Last sale: 0,0869 ETH 
 
 </template>
 
 <script lang="ts" setup>
-import type { TokenIdentifier } from '~/../../layers/ix-base/composables/useTokens'
+import type { TokenIdentifier } from '~/../../layers/ix-base/composables/Token/useTokens'
 
 const { getTokenKey } = useTokens()
-const displayVideo = computed(() => {
-  switch (props.token.type) {
-    case 'pix':
-    case 'astro-gold':
-    case 'astro-gold-lite':
-    case 'tile-contract':
-    case 'raffle-ticket':
-    case 'nothing':
-    case 'rover':
-    case 'avatar':
-    case 'gg':
-      return false
-    default:
-      return true
-  }
-})
+const mediaElement = ref()
+const isHovered = useElementHover(mediaElement)
 
-const props = defineProps<{
+defineProps<{
   token: TokenIdentifier,
   quantity?: number,
   isInvalid?: boolean,

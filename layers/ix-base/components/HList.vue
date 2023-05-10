@@ -1,4 +1,4 @@
 <template lang="pug">
-div(flex="~ row" bg="mc-orange")
+div(flex="~ row")
   slot
 </template>

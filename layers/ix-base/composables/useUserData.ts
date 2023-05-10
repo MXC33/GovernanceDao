@@ -1,9 +1,8 @@
 import { CredentialsInput, NftFragment } from '#gql';
 import { ethers } from 'ethers';
-import { kebabCaseIt } from 'case-it'; import { TokenIdentifier } from './useTokens';
-import { useGraphqlCredentials } from './useUser';
-import { useAsyncDataState } from './useAsyncState';
-import { TokenType } from './tokenMaps';
+import { kebabCaseIt } from 'case-it';
+import { TokenType } from './Token/tokenMaps';
+import { TokenIdentifier } from './Token/useTokens';
 ;
 const TOKENS_KEY = 'user-nft-tokens'
 const IXT_KEY = 'user-ixt-balance'

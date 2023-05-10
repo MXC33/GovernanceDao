@@ -74,11 +74,13 @@ export default definePreset({
       'inset-0': 'left-0 top-0 right-0 bottom-0',
       'offscreen': 'pos-absolute pos-left--999 opacity-0 h-0',
       'modal': 'bg-mc-orange blur-10',
+      'pos-absolute-center': 'pos-absolute pos-left-50% pos-top-50% translate-x--50% translate-y--50%'
     },
 
     {
-
-      'btn': 'transition-all transition-duration-100 flex flex-col justify-center px-4 lg:px-12 py-4 leading-none tracking-widest font-bold uppercase',
+      'btn': 'transition-all transition-duration-100 flex flex-col text-center justify-center items-center px-4 lg:px-12 py-4 leading-none tracking-widest font-bold uppercase',
+      'btn-accent': 'btn-primary',
+      'btn-primary': 'bg-ix-primary color-white font-regular'
     },
 
     {

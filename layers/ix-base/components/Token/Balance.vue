@@ -5,7 +5,7 @@ HList(space-x="1")
 </template>
 
 <script lang="ts" setup>
-import type { TokenIdentifier } from '~~/composables/useTokens';
+import type { TokenIdentifier } from '~~/composables/Token/useTokens';
 const { balanceOfToken } = useUserData()
 
 const props = defineProps<{

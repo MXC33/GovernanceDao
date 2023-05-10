@@ -3,7 +3,7 @@ Icon(:filter="outline ? 'url(#white-outline)' : ''")
 </template>
 
 <script lang="ts" setup>
-import type { TokenIdentifier } from '~/composables/useTokens';
+import type { TokenIdentifier } from '~/composables/Token/useTokens';
 const { getTokenKey } = useTokens()
 
 const svgPath = computed(() => getTokenKey(props.token))

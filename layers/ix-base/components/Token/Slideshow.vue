@@ -6,7 +6,7 @@ Carousel(:items-to-show="tokens.length == 1 ? 0 : 1" :autoplay="2000" :wrap-arou
     </template>
       
 <script lang="ts" setup>
-import type { TokenIdentifier } from '~/composables/useTokens';
+import type { TokenIdentifier } from '~/composables/Token/useTokens';
 import { Carousel, Slide } from 'vue3-carousel'
 const { getTokenKey } = useTokens()
 

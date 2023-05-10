@@ -12,7 +12,7 @@ FoldList(from="col" b="1 on-active:mc-mint white opacity-20" cursor="pointer" ju
 </template>
 
 <script lang="ts" setup>
-import type { TokenIdentifier } from '~/composables/useTokens';
+import type { TokenIdentifier } from '~/composables/Token/useTokens';
 
 const displayVideo = computed(() => {
   switch (props.token.type) {

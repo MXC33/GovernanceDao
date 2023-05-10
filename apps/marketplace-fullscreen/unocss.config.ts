@@ -12,8 +12,18 @@ export default defineConfig({
       //@ts-ignore
       ...baseLayer.theme.colors,
       ix: {
-        primary: '#FF6647'
+        primary: '#CB0010',
       },
-    }
+      corp: {
+        ne: '#CB0010'
+      }
+    },
+    shortcuts: [
+      //@ts-ignore
+      ...baseLayer.shortcuts,
+      {
+        'pos-absolute-center': 'pos-absolute left-50% top-50%'
+      }
+    ]
   }
 })

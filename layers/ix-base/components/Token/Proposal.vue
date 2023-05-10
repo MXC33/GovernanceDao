@@ -7,7 +7,7 @@ TokenPicker(:token="token" :is-active="isActive" :is-invalid="notAvailable")
 </template>
 
 <script setup lang="ts">
-import type { TokenIdentifier } from '~/composables/useTokens';
+import type { TokenIdentifier } from '~/composables/Token/useTokens';
 
 defineProps<{
   token: TokenIdentifier,

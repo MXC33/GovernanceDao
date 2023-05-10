@@ -1,3 +1,5 @@
+
+
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   extends: [
@@ -9,6 +11,10 @@ export default defineNuxtConfig({
   typescript: {
     includeWorkspace: true
   },
+
+  modules: [
+    'v-lazy-show/nuxt'
+  ],
 
   i18n: {
     precompile: { strictMessage: false },

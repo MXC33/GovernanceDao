@@ -1,4 +1,4 @@
-import type { AdjustableToken } from './useAdjustableNumber'
+import { AdjustableToken } from "./Utils/useAdjustableNumber"
 
 export const Corporations = ['eternalab', 'gws', 'lucky-cat', 'mc', 'new-lands', 'y-space', 'net-empire', 'gravity-grade', 'astro-cap', 'haveblue', 'arcade'] as const
 

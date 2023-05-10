@@ -1,3 +1,0 @@
-query RelayerFee($credentials: CredentialsInput!) {
-  relayerFee(credentials: $credentials)
-}

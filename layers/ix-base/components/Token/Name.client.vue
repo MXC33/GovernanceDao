@@ -1,5 +1,6 @@
 <template lang="pug">
-div(uppercase="~") {{ name }} 
+div(uppercase="~" text="ellipsis" w="[calc(100%)]" whitespace="nowrap" v-if="!noOverflow") {{ name }} 
+div(uppercase="~" v-else) {{ name }} 
 </template>
 
 <script lang="ts" setup>
@@ -8,14 +9,22 @@ const { getTokenName } = useTokens()
 
 const props = defineProps<{
   token: TokenIdentifier,
-  isShort?: boolean
+  isShort?: boolean,
+  noOverflow?: boolean,
+  noChainName?: boolean
 }>()
+
+const { execute: fetchTokenData, pending } = useTokenInfo(props.token)
+await fetchTokenData()
 
 const name = computed(() => {
   if (smallName.value)
     return smallName.value
 
-  return getTokenName(props.token)
+  const name = getTokenName(props.token, !props.noChainName)
+
+  console.log("Computed name", name)
+  return name
 })
 
 const smallName = computed(() => {
@@ -23,7 +32,7 @@ const smallName = computed(() => {
     return null
 
   switch (props.token.type) {
-    case 'astro-credit': return 'ACRED'
+    case 'astro-credit': return 'ASTRO'
     case 'astro-gold': return 'AGOLD'
     case 'astro-gold-lite': return 'ALITE'
     case 'metashare': return 'METASHARE'
