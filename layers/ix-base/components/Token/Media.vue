@@ -9,6 +9,7 @@ TokenVideo(v-else :token="token" :is-large="isLarge" h="full" inset="0" :key="co
 import type { TokenIdentifier } from '~/composables/Token/useTokens'
 
 const { getTokenKey } = useTokens()
+const { tokenHasVideo } = useTokenMedia()
 
 const props = defineProps<{
   token: TokenIdentifier,
@@ -17,9 +18,7 @@ const props = defineProps<{
   image?: boolean
 }>()
 
+const displayStillImage = computed(() => props.icon || props.image || !tokenHasVideo(props.token))
 
 const componentKey = computed(() => props.token && getTokenKey(props.token))
-
-
-
 </script>

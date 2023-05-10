@@ -2,7 +2,7 @@ import type { Ref } from 'vue'
 
 import { kebabCaseIt, spaceCaseIt } from 'case-it'
 import { FacilityId, FacilityLevelMap, FacilityNameMap, FacilityTier, FacilityTierMap } from './Types/Facility'
-import { BadgeId, BadgeTierMap } from './Types/Badge'
+import { BadgeTierMap } from './Types/Badge'
 import { BioModTierMap } from './Types/Biomod'
 import { ContractTierMap } from './Types/Contract'
 import { DroneTierMap } from './Types/Drone'
@@ -14,7 +14,6 @@ import { TicketTierMap } from './Types/Ticket'
 import { TierId, getTierColor } from './Types/Tier'
 import { useTokenInfo } from './useTokenInfo'
 import { Currency } from './Types/Currency'
-import { NftFragment } from '#gql'
 import { TokenId, TokenType } from './tokenMaps'
 
 
@@ -26,8 +25,6 @@ export interface TokenIdentifier {
   tokenId?: string | number
   currency?: Currency
 }
-
-
 
 export type TokenIdentifierWithAmount = TokenIdentifier & {
   amount?: number
