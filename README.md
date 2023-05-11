@@ -17,7 +17,7 @@ This folder contains general composables, components and queries that can be use
 Apps are extending the base and are built on top on ix-base. If you find yourself building something that can be useful for the whole ecosystem, be sure to move it to ix-base.
 
 
-## Usave
+## Usage
 
 Clone the repo. `cd` into the root of the project. `yarn install` installs the packages for all sub-repos.
 
