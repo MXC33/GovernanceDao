@@ -1,0 +1,3 @@
+query BurnedAvatar($credentials: CredentialsInput!, $corporation: String!) {
+  burnedAvatars(credentials: $credentials, corporation: $corporation)
+}

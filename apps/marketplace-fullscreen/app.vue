@@ -1,8 +1,9 @@
 <template lang="pug">
-#app(bg="mc-orange" font="foundry")
-  HList()
-    div(text="3xl" uppercase="~") My assets
-    div test
+#app.antialiased(font="foundry" bg="ix-black" text="sm lg:md" ref="app" pos="absolute" inset="0" min-h="0" overscroll="none" overflow="hidden" flex="~ col grow")
+  NuxtLayout
+    NuxtLoadingIndicator(color="rgb(255, 102, 71)")
+
+    NuxtPage()
 
 </template>
 

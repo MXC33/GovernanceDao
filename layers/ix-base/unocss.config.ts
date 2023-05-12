@@ -8,6 +8,7 @@ import { extractorSplit } from "@unocss/core";
 import { presetScrollbar } from 'unocss-preset-scrollbar'
 import transformerVariantGroup from '@unocss/transformer-variant-group'
 import { stateOnMatcher, stateMatcher } from './variants.uno';
+import { cutRules } from './cuts.uno'
 
 export default definePreset({
   presets: [
@@ -34,7 +35,8 @@ export default definePreset({
   theme: {
     colors: {
       ix: {
-        primary: '#FF6647'
+        primary: '#D70011',
+        black: '#0C0C0C'
       },
       gray: {
         50: '#d9d9d9',
@@ -84,4 +86,7 @@ export default definePreset({
     [/^cut-b-(.*)$/, ([, c]) => `before:bg-${c}`],
     [/^size-(.*)$/, ([, c]) => `w-${c} h-${c}`],
   ],
+  rules: [
+    ...cutRules
+  ]
 })

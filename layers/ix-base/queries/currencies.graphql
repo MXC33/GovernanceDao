@@ -1,0 +1,10 @@
+query Currencies($credentials: CredentialsInput!) {
+  currencies(credentials: $credentials) {
+    ...PayToken
+  }
+}
+
+fragment PayToken on PayType {
+  type
+  balance
+}

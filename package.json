@@ -6,7 +6,7 @@
   "private": true,
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "yarn workspace @ix/marketplace run dev",
+    "dev": "yarn workspace @ix/marketplace dev",
     "dev:layer": "yarn workspace @ix/base dev"
   },
   "keywords": [],
