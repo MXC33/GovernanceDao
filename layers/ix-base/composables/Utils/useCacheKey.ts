@@ -1,8 +1,8 @@
 export const useCacheKey = () => {
-  const config = useRuntimeConfig().public
+  // const config = useRuntimeConfig().public
 
   const addCacheKey = (url: string) =>
-    `${url}?v=${config.cacheKey}`
+    `${url}?v=${1}`
 
   return {
     addCacheKey

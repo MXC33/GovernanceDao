@@ -27,7 +27,8 @@ VList(justify="center" items="center" aspect="2/3" bg="black opacity-40" ref="me
 </template>
 
 <script lang="ts" setup>
-import type { TokenIdentifier } from '~/../../layers/ix-base/composables/Token/useTokens'
+import type { TokenIdentifier } from '~/../../layers/ix-base/composables/Token/useTokens';
+
 
 const { getTokenKey } = useTokens()
 const mediaElement = ref()

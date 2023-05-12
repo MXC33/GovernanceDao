@@ -14,6 +14,7 @@ import { useElementVisibility } from '@vueuse/core'
 
 const isLoaded = ref(false)
 const videoElement = ref()
+const config = useRuntimeConfig().public
 
 const { addCacheKey } = useCacheKey()
 const props = defineProps<{
@@ -61,7 +62,6 @@ const videoPath = computed(() => {
 })
 
 const videoURL = computed(() => {
-  const config = useRuntimeConfig().public
   if (externalURL.value)
     return externalURL.value
 

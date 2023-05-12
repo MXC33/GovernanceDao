@@ -83,7 +83,6 @@ export const useTokenInfo = (token: TokenIdentifier) => {
   }, {
     transform: (data) => {
       const tokenData = (data?.tokenInfo ?? [])[0]
-      console.log("Got token data", tokenData?.name)
       if (!tokenData)
         return null
 

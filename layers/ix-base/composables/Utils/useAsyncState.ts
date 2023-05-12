@@ -32,8 +32,6 @@ export function useAsyncDataState<T extends O, O>(key: string, fetchData: () => 
     if (pending.value || data.value !== null)
       return
 
-    console.log("Fetching new data")
-
     await fetchNewData()
     return
   }

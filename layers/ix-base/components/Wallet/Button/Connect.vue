@@ -13,7 +13,7 @@ const BitKeepLogo = await import('../../../assets/images/wallet/bitkeep.svg')
 const CoinBaseLogo = await import('../../../assets/images/wallet/coinbase.svg')
 const WalletConnectLogo = await import('../../../assets/images/wallet/walletconnect.svg')
 
-const { connector } = defineProps<{
+const props = defineProps<{
   connector: WalletConnector
 }>()
 
@@ -39,7 +39,7 @@ const logo = computed(() => {
   }
 })
 
-const name = computed(() => getConnectorName(connector))
+const name = computed(() => getConnectorName(props.connector))
 
 const { loginUser } = useLogin()
 
@@ -47,18 +47,18 @@ const onClickConnect = () => {
   if (!isConnectorAvailable.value)
     return
 
-  loginUser(connector)
+  loginUser(props.connector)
 }
 
 const { getConnectorName, currentConnector } = useConnectors()
 
 const { walletState } = useWallet()
 
-const isConnectorAvailable = computed(() => getConnectorName(connector) != null)
+const isConnectorAvailable = computed(() => getConnectorName(props.connector) != null)
 const isActive = (connector: WalletConnector) => currentConnector.value == connector
 
 const connectorName = computed(() => {
-  if (isActive(connector) && walletState.value != 'disconnected')
+  if (isActive(props.connector) && walletState.value != 'disconnected')
     return `${name.value} (${walletState.value})`
   else
     return name.value

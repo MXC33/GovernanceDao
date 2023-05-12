@@ -1,7 +1,7 @@
 <template lang="pug">
 div(pos="fixed right-0 top-0 bottom-0" overflow-y="auto" bg="black" p="5" w="80 md:120" max-w="80%" z="200" color="white" space-y="5" b="l-1 white opacity-20")
 
-  UserHeaderProfile(w="full" h="20" bg="transparent" ring="0" @click="$router.push('/connect')")
+  //- UserHeaderProfile(w="full" h="20" bg="transparent" ring="0" @click="$router.push('/connect')")
 
   div(space-y="3")
     div(color="white opacity-50") {{$t(`layouts.headers.accountBalance`)}}
@@ -25,7 +25,7 @@ div(pos="fixed right-0 top-0 bottom-0" overflow-y="auto" bg="black" p="5" w="80 
 <script lang="ts" setup>
 
 const { ixtBalance } = useUserData()
-const menuOpen = useSiteMenuOpen()
+const menuOpen = ref(false)
 const router = useRouter()
 const { gotoIXPage } = useIXLinks()
 const { isSoundEnabled } = useSoundSettings()

@@ -1,12 +1,12 @@
 
 import { MaybeRef, get } from '@vueuse/core'
 
-const hover1 = await import('../public/sounds/hover-1.wav')
-const hover2 = await import('../public/sounds/hover-2.wav')
-const click1 = await import('../public/sounds/click-primary-1.wav')
-const click2 = await import('../public/sounds/click-primary-2.wav')
-const click3 = await import('../public/sounds/click-primary-3.wav')
-const clickClose1 = await import('../public/sounds/click-back-1.wav')
+const hover1 = await import('../assets/sounds/hover-1.wav')
+const hover2 = await import('../assets/sounds/hover-2.wav')
+const click1 = await import('../assets/sounds/click-primary-1.wav')
+const click2 = await import('../assets/sounds/click-primary-2.wav')
+const click3 = await import('../assets/sounds/click-primary-3.wav')
+const clickClose1 = await import('../assets/sounds/click-back-1.wav')
 
 interface Module {
   default?: string
@@ -49,8 +49,6 @@ const useSound = (path: Module, options: Options = {}) => {
       if (!soundModule.value)
         return
 
-      console.log("vol", newVolume)
-
       soundModule.value.volume = 1
     }, { immediate: true })
   }
@@ -59,6 +57,7 @@ const useSound = (path: Module, options: Options = {}) => {
     setupAudioModule()
 
   const play = () => {
+    console.log("Play", soundModule.value)
     soundModule.value?.play.bind(soundModule.value)
   }
 

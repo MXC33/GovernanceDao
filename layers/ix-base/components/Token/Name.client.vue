@@ -22,8 +22,6 @@ const name = computed(() => {
     return smallName.value
 
   const name = getTokenName(props.token, !props.noChainName)
-
-  console.log("Computed name", name)
   return name
 })
 

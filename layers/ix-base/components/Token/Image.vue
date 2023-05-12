@@ -1,9 +1,12 @@
 <template lang="pug">
-img(:src="imageSource" w="full" h="full" object="contain center")
+TokenImageCore(:src="imageSource" w="full" h="full" object="contain center" v-if="imageURLValid")
 </template>
 
 <script lang="ts" setup>
 import type { TokenIdentifier } from '~/composables/Token/useTokens'
+// const config = useRuntimeConfig().public
+
+const { addCacheKey } = useCacheKey()
 
 const props = defineProps<{
   token: TokenIdentifier,
@@ -11,9 +14,10 @@ const props = defineProps<{
   isVector?: boolean,
 }>()
 
-const { addCacheKey } = useCacheKey()
-
 const { execute: fetchTokenInfodata, data } = useTokenInfo(props.token)
+
+const imageURLValid = ref(false)
+
 try {
   await fetchTokenInfodata()
 } catch (err) {
@@ -31,13 +35,23 @@ const imagePath = computed(() => {
 })
 
 const imageSource = computed(() => {
-  const config = useRuntimeConfig().public
-
   if (externalURL.value)
     return externalURL.value
 
-
-  return config.s3 + addCacheKey(imagePath.value)
+  return addCacheKey(imagePath.value)
 })
+
+watch(imageSource, (src) => {
+  imageURLValid.value = false
+  const image = new Image();
+  image.onload = () => {
+    console.log("Got image")
+    imageURLValid.value = true
+  }
+  image.onerror = () => {
+    console.log("No image")
+  }
+  image.src = src
+}, { immediate: true })
 
 </script>

@@ -45,6 +45,7 @@ export default defineNuxtConfig({
 
   runtimeConfig: {
     public: {
+      s3: (process.env.PUBLIC_ASSETS ?? '/s3'),
       'graphql-client': {
         clients: {
           default: {

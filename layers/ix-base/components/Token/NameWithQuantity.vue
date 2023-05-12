@@ -17,5 +17,5 @@ const props = defineProps<{
 }>()
 
 const isNothing = computed(() => props.token.type == 'nothing')
-const pluralize = usePlural(props.quantity, props.token.type)
+const pluralize = usePlural(props.quantity ?? 0, props.token.type)
 </script>
