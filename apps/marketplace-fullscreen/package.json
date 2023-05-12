@@ -11,6 +11,7 @@
   "devDependencies": {
     "@types/node": "^18",
     "nuxt": "^3.4.3",
+    "v-lazy-show": "^0.2.3",
     "vite-plugin-pug": "^0.3.2"
   }
 }
