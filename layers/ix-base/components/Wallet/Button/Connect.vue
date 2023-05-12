@@ -1,13 +1,13 @@
 <template lang="pug">
-ButtonSound(sound="lg" bg="mc-orange_10" btn="~ accent on-active:mint lg" color="white" p="x-3 y-3" @click="onClickConnect" w="full" text="white left" flex="~ row" space-x="4" tracking="0" justify="start" opacity="on-available:100 50" normal-case="~" pointer-events="on-available:auto none" :active="isActive(connector)" :available="isConnectorAvailable" cut="bottom-right") 
+ButtonSound(sound="lg" btn="~ primary on-active:active lg" color="white" p="x-3 y-3" @click="onClickConnect" w="full" text="white left" flex="~ row" space-x="4" tracking="0" justify="start" opacity="on-available:100 50" normal-case="~" pointer-events="on-available:auto none" :active="isActive(connector)" :available="isConnectorAvailable" cut="bottom-right") 
   component(:is="logo" w="10")
   span {{ connectorName ?? 'No injected wallet found' }}
 </template>
 
 <script setup lang="ts">
-import type { WalletConnector } from '~~/composables/useWalletConnectors';
+import type { WalletConnector } from '~/composables/Contract/useWalletConnectors'
 
-const MetamaskLogo = await import('../../../assets/images/wallet/bitkeep.svg')
+const MetamaskLogo = await import('../../../assets/images/wallet/metamask.svg')
 const WombatLogo = await import('../../../assets/images/wallet/wombat.svg')
 const BitKeepLogo = await import('../../../assets/images/wallet/bitkeep.svg')
 const CoinBaseLogo = await import('../../../assets/images/wallet/coinbase.svg')

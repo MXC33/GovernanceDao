@@ -31,6 +31,14 @@ export default defineNuxtConfig({
   i18n: {
 
   },
+
+  imports: {
+    dirs: [
+      'composables/**'
+    ]
+  },
+
+
   unocss: {
     configFile: resolve('./unocss.config.ts'),
   },

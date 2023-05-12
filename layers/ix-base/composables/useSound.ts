@@ -7,6 +7,7 @@ const click1 = await import('../public/sounds/click-primary-1.wav')
 const click2 = await import('../public/sounds/click-primary-2.wav')
 const click3 = await import('../public/sounds/click-primary-3.wav')
 const clickClose1 = await import('../public/sounds/click-back-1.wav')
+
 interface Module {
   default?: string
 }
@@ -24,26 +25,49 @@ export type SoundSize = 'sm' | 'md' | 'lg' | 'sm-x' | 'md-x' | 'none'
 interface Options {
   volume?: MaybeRef<number>
 }
-export const usePlaySound = () => {
 
-  const useSound = (path: Module, options: Options = {}) => {
 
-    const {
-      volume = ref(1)
-    } = options
+const useSound = (path: Module, options: Options = {}) => {
+  const urlParts = path?.default?.split('/') ?? []
+  const fileName = urlParts[Math.max(0, urlParts.length - 1)]
+  const id = `use-sound-${fileName.split(".")[0]}`
+  const soundModule = useState<HTMLAudioElement | null>(id, () => null)
+
+
+  const {
+    volume = ref(1)
+  } = options
+
+  const setupAudioModule = () => {
+    if (soundModule.value)
+      return
 
     const audio = new Audio(path?.default)
+    soundModule.value = audio
 
-    watch(() => get(volume), (newVolume) =>
-      audio.volume = newVolume
-      , { immediate: true })
-    const play = audio.play.bind(audio)
+    watch([() => get(volume), soundModule], ([newVolume, audioEngine]) => {
+      if (!soundModule.value)
+        return
 
-    return {
-      play
-    }
+      console.log("vol", newVolume)
+
+      soundModule.value.volume = 1
+    }, { immediate: true })
   }
 
+  if (process.client)
+    setupAudioModule()
+
+  const play = () => {
+    soundModule.value?.play.bind(soundModule.value)
+  }
+
+  return {
+    play
+  }
+}
+
+export const usePlaySound = () => {
   const { soundVolume } = useSoundSettings()
   const { play: playHoverSmall } = useSound(hover1, { volume: soundVolume })
   const { play: playHoverLarge } = useSound(hover2, { volume: soundVolume })

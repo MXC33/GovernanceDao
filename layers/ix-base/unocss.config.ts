@@ -47,7 +47,8 @@ export default definePreset({
         500: '#474747',
         600: '#333333',
         700: '#242424',
-        800: '#1A1A1A'
+        800: '#1A1A1A',
+        900: '#141414'
       },
 
       'tier': {
@@ -73,9 +74,15 @@ export default definePreset({
       'inset-0': 'left-0 top-0 right-0 bottom-0',
       'offscreen': 'pos-absolute pos-left--999 opacity-0 h-0',
       'modal': 'bg-mc-orange blur-10',
+      'pos-absolute-center': 'pos-absolute pos-left-50% pos-top-50% translate-x--50% translate-y--50%'
     },
 
-    // [scrollable="primary | all | mobile | desktop"]
+    {
+      'btn': 'transition-all transition-duration-100 flex flex-col text-center justify-center items-center px-4 lg:px-12 py-4 leading-none tracking-widest font-bold uppercase',
+      'btn-accent': 'btn-primary',
+      'btn-primary': 'bg-ix-primary color-white font-regular'
+    },
+
     {
       'scrollbar-primary': 'scrollbar scrollbar-track-color-transparent scrollbar-thumb-color-color-primary scrollbar-h-4px scrollbar-w-4px',
       'scrollable-all': 'overflow-y-auto scrollbar scrollbar-primary min-h-0',

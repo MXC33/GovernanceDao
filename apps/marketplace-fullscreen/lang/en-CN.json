@@ -1,0 +1,783 @@
+{
+  "general": {
+    "accelerate": "加速",
+    "accelerateTask": "加速任务",
+    "back": "返回",
+    "cancel": "取消",
+    "close": "关闭",
+    "claim": "领取",
+    "confirm": "确认",
+    "continue": "继续",
+    "disconnect": "断开连接",
+    "errorConnecting": "连接错误：",
+    "exit": "退出",
+    "goToInventory": "前往库存",
+    "enter": "输入",
+    "incoming": "收到的信息",
+    "open": "打开",
+    "loading": "正在加载",
+    "nrgProd": "单位能量输出",
+    "total": "合计",
+    "visit": "前往访问",
+    "recommended": "建议",
+    "visitor": "请输入密码",
+    "amount": {
+      "max": "最大",
+      "min": "最小"
+    },
+    "transactions": {
+      "mintTransfer": "铸币与转账",
+      "confirm": "在已连接的钱包中确认交易",
+      "descriptions": {
+        "processing": "处理该交易需耐心等待一段时间。如果您想取消该操作，请在您的钱包应用程序中拒绝交易。"
+      }
+    },
+    "collected": {
+      "waste": "废物",
+      "collectedWaste": "已收集的废物",
+      "left": "剩余",
+      "youMust": "您需要清理该配置上的所有废物后，才能统一领取资源到您的道具库里。"
+    },
+    "avatars": {
+      "proxy": "变更代理",
+      "seina": "Seina",
+      "jeremiah": "Jeremiah",
+      "evePryde": "Eve-Pryde",
+      "buck": "Buck"
+    },
+    "noItemsFound": {
+      "no": "否",
+      "itemsFound": "发现物品",
+      "noFull": "未发现任何物品"
+    },
+    "navigation": {
+      "terminal": "终端",
+      "inventory": "库存",
+      "missionCtrl": "任务控制",
+      "netEmpire": "Netempire",
+      "taskMng": "任务管理器",
+      "manager": "管理员",
+      "build": "构建",
+      "starterPack": "新手包",
+      "payments": "付款"
+    },
+    "timeCost": {
+      "hours": "小时",
+      "cost": "费用"
+    },
+    "build": {
+      "overview": "概述",
+      "build": "构建"
+    },
+    "search": {
+      "example": "搜索地块ID：SE LE#329801"
+    }
+  },
+  "treasureChest": {
+    "itemsInTotal": "物品总数",
+    "anyQuestions": "如果有任何问题，请随时联系我们",
+    "discord": "Discord"
+  },
+  "inventory": {
+    "title": "库存",
+    "tabs": {
+      "land": "土地",
+      "tech": "技术",
+      "industry": "行业",
+      "resources": "资源",
+      "cargo": "货物",
+      "collectables": "藏品",
+      "postmaster": "邮件管理员"
+    },
+    "treasureChest": {
+      "pixDisclaimer": "在服务器处理 PIX 之前，这个卡包中的 PIX 不会显示在库存中。处理将在周一进行。本活动在周一进行。"
+    },
+    "info": {
+      "landTierReq": "需要的土地层数",
+      "energyOutCycle": "能量输出周期",
+      "mcFeatures": "任务控制功能",
+      "facilityComp": "设施兼容性",
+      "prodMulti": "生产倍率",
+      "properties": "财产",
+      "noItemSelected": "未选择物品",
+      "status": "状态",
+      "active": "活跃",
+      "landmarkInspector": "地标检查员",
+      "postmaster": {
+        "title": "邮件管理员",
+        "inventoryStructures": "结构物库存"
+      },
+      "soSorry": {
+        "sorry": "抱歉，您目前暂时还未拥有任何",
+        "sorryNoItem": "道具"
+      }
+    }
+  },
+  "build": {
+    "selectPix": {
+      "title": "定义 Pix",
+      "subTitle": "ADS:A2\\90"
+    },
+    "confirm": {
+      "place": {
+        "facility": "请立即安置您的设施，代理人。是否想将其安置在此处？",
+        "drone": "代理人，我们要不要指示您的无人机搜索并维护这块地？",
+        "pix": "代理人，您确定要把您的 PIX 安置在此地块上吗？ ",
+        "territory": "代理人，发现一块适合您领土的地块。还想继续吗？"
+      },
+      "reset": {
+        "pix": "请注意！当前地块配置所生产的所有资源将会因重置配置而终止，您确定继续操作吗？",
+        "territory": "请注意！当前地块配置所生产的资源将会因重置配置而终止，您确定继续操作吗？",
+        "drone": "请注意！移除无人机将改变当前配置而生产的废物数量，您确定继续操作吗？",
+        "facility": "请注意！移除无人机将改变当前配置而生产的能源数量，您确定继续操作吗？"
+      },
+      "claim": {
+        "waste": "祝贺您，您已经成功收集到废物。",
+        "energy": "您已经成功地收集到能源。我们向您付出的努力致敬！"
+      },
+      "claimed": {
+        "waste": "您的废物现已被认领并开始铸造。代理建议将其在 Eternalab 或全球废物系统 (Global Waste Systems) 中进行交易。",
+        "energy": "您的忠诚得到了回报，能源现已被认领并开始铸造！这是技术升级的重要资源。"
+      }
+    },
+    "unstaked": {
+      "pix": "您的地块配置现已被清空！请尽快重建，否则 A.M.E 会对您的进度感到不满。",
+      "territory": "您的地块配置现已被清空！请尽快重建，否则 A.M.E 会对您的进度感到不满。",
+      "drone": "该地块上部署的无人机现已被移除。请注意，您的帝国实力正在减弱！",
+      "facility": "该地块上配置的facility现已被移除。请在必要时重建！"
+    },
+    "staked": {
+      "pix": "恭喜！您已成功配置PIX。您的努力将有助于重建，A.M.E 一定会感到高兴的！",
+      "territory": "恭喜！您的领地现已配置妥当，它将为您收集到更多的废物。祝贺您，您的帝国正在逐步扩张！",
+      "facility": "恭喜！您的facility现已投入使用。很荣幸见证您的进步。",
+      "drone": "向您致以我们最诚挚的问候！您的无人机现在正在维护您的土地。借助无人机的配置，您将收集到更多的废物！"
+    }
+  },
+  "corporations": {
+    "overview": {
+      "inactiveMenu": "正在进行中。剩余时间：",
+      "accelerate": "加速您的订单"
+    },
+    "order": {
+      "mcSpeedup": "利用 Astro 积分加速此的任务。<strong>{outputType}</strong>花费<strong>{cost} AC</strong>一小时的时间。",
+      "mcSpeedupCost": "{cost} Astro 积分",
+      "cart": {
+        "input": {
+          "title": "所需材料",
+          "ownedMaterialTitle": "已有材料",
+          "amount": "数量"
+        },
+        "output": {
+          "probability": {
+            "title": "输出概率"
+          },
+          "fixed": {
+            "title": "产量"
+          }
+        },
+        "itemType": {
+          "tier": {
+            "itemTitle": "道具名称"
+          },
+          "items": {
+            "itemTitle": "物品"
+          }
+        },
+        "outputType": {
+          "chance": {
+            "itemTitle": "获得道具概率"
+          },
+          "amount": {
+            "itemTitle": "数量"
+          }
+        }
+      }
+    },
+    "lucky-cat": {
+      "mcIntro": "来 Lucky Cat 碰碰运气。",
+      "overview": {
+        "header": "欢迎来到 Lucky Cat",
+        "intro": "感谢您访问 Lucky Cat！塞翁失马，焉知非福。我们为您提供 24/7 全天候的服务，保证让您满意。",
+        "buttons": {
+          "raffle": {
+            "title": "幸运抽奖",
+            "description": "生存或是毁灭；一夜暴富或是倾家荡产；这全凭运气！祝您好运，喵！"
+          },
+          "shop": {
+            "title": "幸运商店",
+            "description": "买些商品增加您的运气。魅力和加速可以带来巨大的业力。这就是我们的智慧！"
+          }
+        }
+      },
+      "raffles": {
+        "myTicket": "我的抽奖券",
+        "futureTicket": "即将进行的抽奖活动",
+        "pastTicket": "过往抽奖活动",
+        "currentTicket": "现场抽奖 #",
+        "liveRaffle": "现场抽奖",
+        "invalid": "对不起，您必须在以下时间段内进入",
+        "noFutureTickets": "更多抽奖活动，敬请期待",
+        "usedAll": "您已用完了所有的抽奖券！请继续购买，获得更多抽奖机会！喵！",
+        "noActive": "很抱歉，目前暂时还没有正在进行的抽奖活动，敬请期待！",
+        "loadMore": "加载更多",
+        "landmark": "地标",
+        "totalEntries": "参加总人数",
+        "winners": "获奖者",
+        "date": "日期",
+        "loadingRaffle": "正在加载抽奖活动",
+        "viewMore": "查看更多",
+        "stars": "评分",
+        "getMore": "获取更多抽奖券",
+        "raffleDetails": "抽奖详情",
+        "raffleAttributes": "属性",
+        "tickets": "抽奖券"
+      },
+      "viewPast": {
+        "winnersOf": "现场抽奖的获奖者 #",
+        "winners": "获奖者",
+        "enteredWith": "参加时使用",
+        "sharesWon": "赢得的份额"
+      },
+      "checkout": {
+        "title": "Lucky Cat 抽奖活动",
+        "message": "想要获得好运，就要先爱自己！想用您的爱来测试一下吗？"
+      },
+      "claim": {
+        "message": "活着就是所谓的好运，您的冒险让您得到了{landmarkName}的奖励。恭喜您获得奖品!"
+      }
+    },
+    "new-lands": {
+      "mcIntro": "在 Newlands 建造设施。",
+      "overview": {
+        "productionTime": "生产准备时间",
+        "header": "欢迎来到 Newlands LLC",
+        "intro": "嘿，朋友！我是 Newlands 优秀的建筑师，很高兴能有机会与您分享我们精心打造的设计。我们可以提供几种建筑风格，相信您一定会满意最终的效果！",
+        "buttons": {
+          "craft": {
+            "title": "建造设施",
+            "description": "土地上怎能没有建筑，嗯？那就太糟糕了！所以，让我们建造一些建筑，获取回报吧！"
+          },
+          "shop": {
+            "title": "升级设施",
+            "description": "我说的吧，可以升级简直太棒了！它可以提高您的日常生产。"
+          }
+        }
+      },
+      "craft": {
+        "previewOutcome": "输出道具预览",
+        "inProgress": "设施施工的剩余时间",
+        "cartInfo": "建造",
+        "description": "我们生产东西的速度超级快。完成一栋建筑需要{hour} <strong>8 个小时</strong>，您也可以在您的<strong>任务管理器</strong>中查看施工过程。听上去很棒，是不是？<br/><br/> 这是它的运作方式。<br/><br/>我们的各类设施只能安置在相应的领土或 PIX 上。我们拥有的材料越多，就越有可能生产出真正让人称赞的东西。比如 Radiant Gardens 或 Fusion Core！<br/><br/>当设施准备就绪且安置妥当，就可以开始生产能量，您可以将能量作为赌注换取 IXT 或新技术。<br/><br/>您也可以在 NetEmpire 市场上出售您的设施，或者将其改造为为生产力更强的设施！咚咚咚!",
+        "descriptionMobile": "我们生产东西的速度超级快。完成一栋建筑需要<strong> 8 个小时</strong>，您也可以在您的<strong>任务管理器</strong>中查看施工过程。<br/><br/> 我们的各类设施只能安置在相应的领土或 PIX 上。我们拥有的材料越多，就越有可能生产出真正让人称赞的东西。"
+      },
+      "summaryTime": "生产计划就绪，预计所需时间",
+      "complete": "太棒了! 您的设施将在 NewLands 施工地上组装，<strong>8 小时</strong>后我们将把它转移至您的库存。相信您看到它的时候一定会大吃一惊！<br/><br/> 但如果您很着急，我认识一些小伙子，他们可以帮您加快这个过程。只要<strong> 100 个 ASTRO 积分</strong>，就可以将时间缩短<strong>50%</strong>。是不是一笔不错的交易！如果您需要，请随时告诉我。啪啪啪！"
+    },
+    "eternalab": {
+      "mcIntro": "在 Eternalab，废物可以被精炼成有价值的资源。",
+      "overview": {
+        "header": "享受 Eternalab 带来的神奇转变",
+        "intro": "创造的过程极其美丽！在 Eternalab，我们让这个世界变得更加完美。这可以带来更多价值，也是奇妙旅程的开始。您的愿望是什么？",
+        "buttons": {
+          "craft": {
+            "title": "出售废物",
+            "description": "废物仅是过去的痕迹，日益增加的熵造就全新的可能！我们为您提供这一转变，助您一切如愿."
+          }
+        }
+      },
+      "craft": {
+        "previewOutcome": "出售废物",
+        "inProgress": "废物变卖进行中",
+        "cartInfo": "精炼",
+        "description": "嘿，一个物体的价值不在于它单独的属性，而是它与另一个物体之间的关联。那么废物的价值是什么呢？是收集废物的土地记忆，是元材料 (MetaMaterials) 的组合。<br/><br/> 通过收集某一特定层级的废物，您获得同层级 Bio-M0d 的可能性更高。<br/><br/> Bio-M0d 是废物价值的累积。这就是熵的逻辑。但我们的实验并不是极度精确的科学。这个世界的时间结构太复杂了。<br/><br/>因此，您收集的废物可能会给您带来 Blueprint 或 Legendary Bio-M0d 的奖励，也可能会让您一无所获。有时不得不承认废物就只是废物。",
+        "descriptionMobile": "Bio-M0d 是一种价值的累积。是元材料 (MetaMaterials) 的组合，是收集废物的土地的组合。<br/><br/>通过收集某一特定层级的废物，您获得同层级 Bio-M0d 的可能性更高。这就是我们的科学逻辑。"
+      },
+      "summaryTime": "实验准备就绪。时间框架 ",
+      "complete": "超越时间的束缚，亲眼见证这个世界的变化。您的<strong>废物</strong>可以转化成这个星球的熵，在 <strong>8</strong> 小时内有望被精炼成 <strong>BIO-M0DS</strong>。<br/><br/>我们在 Eternalab 的实验是保密的，但您可以在您的<strong>任务管理器中查看进展。</strong>"
+    },
+    "gws": {
+      "mcIntro": "在全球废物系统 (Global Waste Systems) 中出售废物，换取 Astro 积分。",
+      "overview": {
+        "header": "这是全球废物系统 (Global Waste Systems)",
+        "intro": "处理废物就是我们神圣的工作！我们辛勤劳动，不知疲倦。董事会夸奖我，是我把垃圾变成了黄金。那简直太棒了！其他事情就让它去吧.",
+        "buttons": {
+          "craft": {
+            "title": "出售废物",
+            "description": "把您的废物给我们，您将收到 Astro 积分作为回报。就是这么简单！"
+          }
+        }
+      },
+      "craft": {
+        "previewOutcome": "出售废物",
+        "cartInfo": "出售",
+        "inProgress": "废物变卖进行中",
+        "description": "董事会需要我说的具体些。好吧。这都什么事！<br></br>您的领土和 PIX 上的<strong>废物</strong>具有自身价值。但是废物只有经过精炼后才能体现其真正的价值。<br><br>我们能替您解决这个问题，并为您奉上<strong>ASTRO 积分</strong>作为废物的价值回馈。明白了吗？如果您不喜欢这样的回馈，也可以去 EternaLab 或其他平台进行交易.",
+        "descriptionMobile": "您的领土和 PIX 上的废物具有自身价值。但是废物只有经过精炼后才能体现其真正的价值。<br><br>我们能替您解决这个问题，并为您奉上 ASTRO 积分作为废物的价值回馈。明白了吗？如果您不喜欢这样的回馈，也可以去 EternaLab 或其他平台进行交易. 就是这回事！"
+      },
+      "summaryTime": "已收集的废物。时间框架 ",
+      "complete": "我们继续说。董事会说，100 个废物可以兑换 100 个 astro 积分。但要我说，100 个废物只能兑换 95 个 astro 积分。Buck 还需要留存一些零用钱，应付所有的麻烦。现在让我去喝点波旁酒！"
+    },
+    "net-empire": {
+      "mcIntro": "在 NetEmpire 交易土地和资产。"
+    },
+    "y-space": {
+      "mcIntro": "在 Y_ 购买、修理和定制技术。"
+    }
+  },
+  "minting": {
+    "descriptions": {
+      "openingAssets": "打开并铸造包含的道具可能需要一些时间。无需担心，您可以离开此页面，继续您的其他任务，奖励将会尽快发放到您的道具库中。"
+    },
+    "extractingAssets": "正在打开道具中......",
+    "extractingChest": "打开并铸造包含的道具可能需要一些时间。无需担心，您可以离开此页面，继续您的其他任务，奖励将会尽快发放到您的道具库中。"
+  },
+  "wallet": {
+    "title": "连接您的钱包",
+    "welcomeMessage": "与我们提供的钱包开始连接",
+    "signing": {
+      "title": "请在已连接的钱包弹窗中确认交易",
+      "description": "处理该交易需耐心等待一段时间。如果您想取消该操作，请在您钱包里的弹窗拒绝交易。"
+    },
+    "minting": {
+      "title": "交易正在验证中",
+      "description": "请稍等。您的交易将很快获得验证。"
+    },
+    "approving": {
+      "title": "交易正在获取验证中",
+      "description": "正在将您的道具配置在地块上。如果您想取消该操作，请在您钱包里的弹窗拒绝交易。"
+    },
+    "minting-pix": {
+      "title": "铸造您的 PIX",
+      "description": "将您的 PIX 铸造到区块链上。"
+    },
+    "playerProfile": {
+      "notLoggedIn": "玩家资料未登录",
+      "playerConnecting": "玩家资料（连接）",
+      "loggedInAs": "用户已登陆"
+    },
+    "payments": {
+      "chooseMethod": "请选择支付方式",
+      "matic": "matic",
+      "usdt": "usdt",
+      "ixt": "ixt"
+    }
+  },
+  "taskManager": {
+    "claim": "领取资源",
+    "noTasks": "没有进行中的任务",
+    "noOrders": "没有进行中的订单",
+    "harvesting": "已收集",
+    "eta": "剩余",
+    "loadingItems": "正在加载任务项......",
+    "order": {
+      "eternalab": {
+        "title": "转化废物",
+        "progress": "可能的结果：BIOMOD"
+      },
+      "gws": {
+        "title": "转化废物",
+        "progress": "结果：{amount} ASTRO 积分"
+      },
+      "new-lands": {
+        "title": "建筑设施",
+        "progress": "结果：1 座设施"
+      }
+    },
+    "orderClaim": {
+      "description": "早上好，先生！您的勘探订单已完成，我们正在处理您的奖励。稍后，您可在下方查看奖励结果。请耐心等待！",
+      "nothing": "无",
+      "buttons": {
+        "goTo": "前往库存",
+        "prospectTask": "勘探任务"
+      },
+      "success": {
+        "eternalab": "我们花了几百年的时间。但不久我们就能看到自然界以外的世界了。这是给您的补偿。",
+        "gws": "那好吧。这是给您的 Astro 积分。",
+        "new-lands": "嘿，朋友！您的设施非常漂亮，现已运到您的土地上了。我建议您把它放在一块地块上，用它生产一些优质的能源。",
+        "y-drone": "报告代理人，废物已处理完毕。即将重新部署无人机。"
+      },
+      "failure": {
+        "eternalab": {
+          "title": "实验失败",
+          "description": "废物。如此奇怪的熵。它的结果是......没有结果。现在我们知道为什么世界会在热平衡的状态下进入休眠状态",
+          "buttonTry": "回到实验室"
+        }
+      }
+    }
+  },
+  "notifications": {
+    "beginnerOffer": {
+      "title": "新手包介绍",
+      "description": "如果您想开始在地块上进行配置，您可在 48 小时内以优惠的价格购买 Planet IX 上的土地。这是开启任务的最佳方案！",
+      "expressM": "快速新手<br/>中号包</br>111 pix",
+      "expressS": "快速新手<br/>小号包</br>11 pix",
+      "price": {
+        "medium": {
+          "normal": "65 美元",
+          "sale": "32.5"
+        },
+        "small": {
+          "normal": "10 美元",
+          "sale": "5 美元"
+        }
+      },
+      "buttons": {
+        "confirm": "购买",
+        "cancel": "取消"
+      },
+      "proxyChange": {
+        "incoming": "收到的信息",
+        "title": "变更代理",
+        "message": "代理人，向您致以我们最诚挚的问候！您已经获得了足够的 PIX，现在可以开始在您的地块上进行配置。每隔一段时间，pix上将会生产出废物，记得定期回来收集您的废物。"
+      }
+    }
+  },
+  "offers": {
+    "buttons": {
+      "confirm": "购买",
+      "cancel": "取消"
+    },
+    "starterPack": {
+      "title": "新手包促销",
+      "description": "Good awakening, agent. For 48 hours you may purchase land on Planet IX at a discounted price. It's a fine way to start your mission.",
+      "packTitle": "Express",
+      "name": {
+        "gg37small": "Small Pack",
+        "gg37medium": "Medium pack"
+      },
+      "pix": {
+        "gg37small": "11 pix",
+        "gg37medium": "111 pix"
+      },
+      "price": {
+        "gg37medium": {
+          "normal": "$65",
+          "sale": "32.5"
+        },
+        "gg37small": {
+          "normal": "$10",
+          "sale": "$5"
+        }
+      }
+    }
+  },
+  "game": {
+    "greetingTitle": "早上好！",
+    "header": {
+      "place": "配置",
+      "onEmpty": "在此块空地上"
+    },
+    "terminal": {
+      "entry": {
+        "cSoon": "即将推出"
+      },
+      "descriptions": {
+        "inInventory": "在库存中，代理人可以查看他们所有的资产。",
+        "explore": "在NetEmpire市场上探索这个星球和交易。",
+        "inMissionCtrl": "在任务控制中，代理人可以运作他们的资产。"
+      }
+    },
+    "helper": {
+      "loadingUser": "请稍等。正在加载您的用户信息......",
+      "loadingAssets": "正在加载中......",
+      "fetchingUser": "正在获取用户",
+      "fetchingYourItems": "正在获取您的道具信息",
+      "timeDays": {
+        "days": "天",
+        "hours": "小时",
+        "minutes": "分钟"
+      }
+    }
+  },
+  "layouts": {
+    "headers": {
+      "accountBalance": "帐户余额：",
+      "ixt": "IXT：",
+      "terminal": "终端",
+      "inventory": "库存",
+      "dashboard": "IX Foundation",
+      "missionControl": "任务控制",
+      "game": "游戏",
+      "planetIX": "Planet IX",
+      "automatedTrans": "自动传输"
+    }
+  },
+  "cosmetics": {
+    "chooseCosmetics": "选择化妆品",
+    "chooseNFT": "选择 NFT",
+    "userInfo": {
+      "aoc": "变更代理",
+      "memberSince": "会员自",
+      "status": "状态",
+      "social": "社会",
+      "pm": "个人留言",
+      "showcase": "展示"
+    }
+  },
+      "Tips":[
+        {
+              "title": "游戏手册",
+              "subtitle": "AOC目录第723号",
+              "description": "如果您在太空中感到迷失，一定要查看Planet IX的游戏手册。",
+              "image":""
+          },
+
+          {
+              "title": "传奇资产",
+              "subtitle": "AOC目录第954号",
+              "description": "大多数资产的级别和稀有程度各不相同，其中传奇资产最有价值。",
+              "image":"/nft/images/biomod/icon-legendary.png"
+          },
+
+          {
+              "title": "季节",
+              "subtitle": "AOC目录第341号",
+              "description": "随着越来越多的废弃物在Planet IX上被收集和处理，地球的气候将稳定下来，新的任务将出现。",
+              "image":"/nft/images/waste/image.png"
+          },
+          {
+              "title": "变革推动者",
+              "subtitle": "AOC目录第629号",
+              "description": "作为变革推动者，您的任务是复兴Planet IX",
+              "image":"/nft/images/aoc-badge-pack/transparent.png"
+          },
+          {
+              "title": "NETEMPIRE市场",
+              "subtitle": "AOC目录第683号",
+              "description": "通过在市场中发售您的PIX和其他资产，可以让潜在买家更容易地找到并购买它们。",
+              "image":"/tips/icons/netempire-marketplace.png"
+          },
+
+
+          {
+              "title": "地球纪年后",
+              "subtitle": "AOC目录第583号",
+              "description": "地球纪年于A.C.2089年结束。同年成为1 A.E.年。",
+              "image":""
+          },
+          {
+              "title": "Tile Contracts",
+              "subtitle": "AOC目录第298号",
+              "description": "所有Tile Contracts都具有独特的品质，为收获车辆和设施带来了额外的好处。",
+              "image":"/nft/images/contract/icon-chronos.png"
+          },
+
+          {
+              "title": "领土",
+              "subtitle": "AOC目录第271号",
+              "description": "您可以将相邻的PIX组合起来创建领土。因此，您应该通过买卖正确的PIX来专注于地图的小部分。",
+              "image":"/nft/images/zone/image-common.png"
+          },
+          {
+              "title": "档案",
+              "subtitle": "AOC目录第577号",
+              "description": "当变革推动者在A.E.450年回归时，部分人类在大毁灭中幸存下来，散布在太阳系的行星和卫星之间。",
+              "image":"/nft/images/aoc-badge-pack/transparent.png"
+          },
+          {
+              "title": "IX 基金会",
+              "subtitle": "AOC目录第478号",
+              "description": "在IX 基金会上投资地标、领土和Metashares是确保IXT资金持续流动的好方法。",
+              "image":"/nft/images/ixt/token.png"
+          },
+          {
+              "title": "档案",
+              "subtitle": "AOC目录第123号",
+              "description": "A.M.E的发明者名叫Ame Valdis，她的妹妹Agnes Valdis记录了她们成长和死亡的数据日志。其中一些记录仍然隐藏在Planet IX上。",
+              "image":""
+          },
+          {
+              "title": "漫游者",
+              "subtitle": "AOC目录第137号",
+              "description": "漫游者只需要每十天清空一次。",
+              "image":"/nft/images/rover/transparent.png"
+          },
+          {
+              "title": "漫游者",
+              "subtitle": "AOC目录第739号",
+              "description": "漫游者可能会发现M3ta-M0ds。",
+              "image":"/nft/images/biomod/image-dark.png"
+          },
+          {
+              "title": "漫游者 & 无人机",
+              "subtitle": "AOC目录第157号",
+              "description": "漫游者和无人机可以在Mission Control中放置在同一块Land Tile上。如果它们属于同一级别，无人机的性能将额外提高20%。",
+              "image":"/nft/images/drone/image-piercer.png"
+          },
+          {
+              "title": "无人机",
+              "subtitle": "AOC目录第866号",
+              "description": "漫游者有时可能需要维修，而无人机是众所周知的永不会坏掉的。",
+              "image":"/nft/images/drone/image-genesis.png"
+          },
+          {
+              "title": "PIX",
+              "subtitle": "AOC目录第324号",
+              "description": "Planet IX是地球的数字化再现，所有土地被划分为17亿个PIX，每个PIX都是一个独特的NFT。",
+              "image":"/nft/images/pix/image-legendary.png"
+          },
+          {
+              "title": "能源",
+              "subtitle": "AOC目录第429号",
+              "description": "将设施投资于领土而非PIX将带来更高的能源收益。",
+              "image":"/nft/images/energy/energy-image.png"
+          },
+          {
+              "title": "地标",
+              "subtitle": "AOC目录第726号",
+              "description": "根据其在Planet IX宇宙中的战略重要性，每个地标都被分配了稀有等级和星级。",
+              "image":"/nft/images/landmark/landmark-image.png"
+          },
+          {
+              "title": "地标",
+              "subtitle": "AOC目录第727号",
+              "description": "每个地标都有一个佣金区域，拥有并持有地标股份的人将根据该区域内进行的每笔交易的价值获得5%的佣金。",
+              "image":"/nft/images/landmark/landmark-image.png"
+          },
+          {
+              "title": "Metashares",
+              "subtitle": "AOC目录第1328号",
+              "description": "Metashares所有者将持续获得$IXT的奖励。从企业金库中分配的金额取决于企业的月收入。",
+              "image":"/nft/images/metashare/image-gws.png"
+          },
+          {
+              "title": "抽奖",
+              "subtitle": "AOC目录第196号",
+              "description": "如果您有额外的抽奖券，请务必访问Lucky Cat并参加即将到来的抽奖活动。",
+              "image":"/tips/icons/raffles.png"
+          },
+
+          {
+              "title": "M3TA-m0ds",
+              "subtitle": "AOC目录第659号",
+              "description": "M3ta-M0ds可用于升级设施。",
+              "image":"/nft/images/biomod/image-dark.png"
+          },
+          {
+              "title": "Tile Contracts",
+              "subtitle": "AOC目录第213号",
+              "description": "Tile Contracts可以在Newlands LLC购买。一旦您申请并下注Tile Contract，Mission Control将提供额外的Land Tile。",
+              "image":"/nft/images/contract/image-artemis.png"
+          },
+          {
+              "title": "AStro gold",
+              "subtitle": "AOC目录第258号",
+              "description": "激活额外的Land Tile每月需要花费1 Astro Gold或1 Astro Gold-Lite。",
+              "image":"/nft/images/astro-gold/astro-gold.png"
+          },
+          {
+              "title": "tile contracts",
+              "subtitle": "AOC目录第586号",
+              "description": "您可以在Mission Control中激活和停用Land Tile。",
+              "image":"/nft/images/contract/image-artemis.png"
+          },
+          {
+              "title": "web3钱包",
+              "subtitle": "AOC目录第330号",
+              "description": "如果载入画面似乎卡住了，请尝试使用Web3钱包中的加速功能。",
+              "image":""
+          },
+          {
+              "title": "档案",
+              "subtitle": "AOC目录第986号",
+              "description": "Chasse Galerie是大毁灭后最后一艘到达Planet IX表面的太空船。该船的大部分数据日志至今下落不明。",
+              "image":""
+          },
+          {
+              "title": "变革代理人",
+              "subtitle": "AOC目录第569号",
+              "description": "变革代理人既不是人类，也不是机器人；他们是由A.M.E.创造的未知生命形式",
+              "image":"/nft/images/aoc-badge-pack/transparent.png"
+          },
+          {
+              "title": "档案",
+              "subtitle": "AOC目录第410号",
+              "description": "变革代理人既不是人类，也不是机器人；他们是由A.M.E.创造的未知生命形式",
+              "image":""
+          },
+          {
+              "title": "档案",
+              "subtitle": "AOC目录第1792号",
+              "description": "大毁灭结束后，内行星和外卫星之间的贸易对人类的生存至关重要。由于没有管理商业的监管机构，企业成为了太阳系的国家实体。",
+              "image":""
+          },
+          {
+              "title": "大毁灭",
+              "subtitle": "AOC目录第5123号",
+              "description": "大毁灭的最后阶段是NeoVirus，一种专门为实现特定目标而设计的计算机病毒，即彻底消灭文明。",
+              "image":""
+          },
+          {
+              "title": "pix & Land Tile",
+              "subtitle": "AOC目录第102号",
+              "description": "Planet IX上的数字化土地被称为PIX，可以在Mission Control的Land Tile上下注。",
+              "image":"/nft/images/pix/image-uncommon.png"
+          },
+          {
+              "title": "领土",
+              "subtitle": "AOC目录第850号",
+              "description": "通过连接10个或更多相邻的异常值PIX，在NetEmpire市场中创建异常值区域。",
+              "image":"/nft/images/area/image-outlier.png"
+          },
+          {
+              "title": "领土",
+              "subtitle": "AOC目录第851号",
+              "description": "大多数资产的级别和稀有程度各不相同，其中传奇资产最有价值。",
+              "image":"/nft/images/area/image-common.png"
+          },
+          {
+              "title": "领土",
+              "subtitle": "AOC目录第852号",
+              "description": "通过连接30个或更多相邻的异常值PIX，在NetEmpire市场中创建异常值区域。",
+              "image":"/nft/images/area/image-uncommon.png"
+          },
+          {
+              "title": "领土",
+              "subtitle": "AOC目录第853号",
+              "description": "通过连接40个或更多相邻的稀有PIX，在NetEmpire市场中创建稀有区域。",
+              "image":"/nft/images/area/image-rare.png"
+          },
+          {
+              "title": "领土",
+              "subtitle": "AOC目录第854号",
+              "description": "通过连接50个或更多相邻的传奇PIX，在NetEmpire市场中创建传奇区域。",
+              "image":"/nft/images/area/image-legendary.png"
+          },
+          {
+              "title": "设施",
+              "subtitle": "AOC目录第1023号",
+              "description": "您可以升级Newlands LLC的设施。当您升级时，它们会变得更好。",
+              "image":"/nft/images/facility/image-legendary.png"
+          },
+          {
+              "title": "无人机",
+              "subtitle": "AOC目录第423号",
+              "description": "无人机在48小时内收集废弃物。",
+              "image":"/nft/images/drone/image-night.png"
+          },
+          {
+              "title": "NEWLANDS GENESIS",
+              "subtitle": "AOC目录第419号",
+              "description": "通过下注Newlands Genesis，您将免费获得额外的Land Tile。",
+              "image":"/tips/icons/newland.png"
+          },
+          {
+              "title": "y_ GENESIS",
+              "subtitle": "AOC目录第421号",
+              "description": "在Y_ Genesis上下注可以免费维修漫游者。",
+              "image":"/tips/icons/genesis.png"
+          },
+          {
+              "title": "eternalab GENESIS",
+              "subtitle": "AOC目录第425号",
+              "description": "在Eternalab Genesis中下注提高了废弃物精炼实验成功的可能性。",
+              "image":"/tips/icons/eternalab.png"
+          },
+          {
+              "title": "空投",
+              "subtitle": "AOC目录第843号",
+              "description": "如果您携带AOC金牌，您将被添加到未来空投的白名单中。",
+              "image":"/tips/icons/airdrops.png"
+          }
+    ]
+}

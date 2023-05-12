@@ -1,17 +1,29 @@
 import { defineConfig } from 'unocss'
-import layer from '../../layers/ix-base/unocss.config';
+import baseLayer from '../../layers/ix-base/unocss.config';
 
 export default defineConfig({
-  presets: [layer],
+  presets: [baseLayer],
   theme: {
     fontFamily: {
       foundry: ['Foundry Gridnik', 'sans-serif'],
     },
 
     colors: {
+      //@ts-ignore
+      ...baseLayer.theme.colors,
       ix: {
-        primary: '#FF6647'
+        primary: '#CB0010',
       },
-    }
+      corp: {
+        ne: '#CB0010'
+      }
+    },
+    shortcuts: [
+      //@ts-ignore
+      ...baseLayer.shortcuts,
+      {
+        'pos-absolute-center': 'pos-absolute left-50% top-50%'
+      }
+    ]
   }
 })

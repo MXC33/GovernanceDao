@@ -1,4 +1,4 @@
-import type { WalletConnector } from "./useWalletConnectors";
+import { WalletConnector } from "./Contract/useWalletConnectors";
 
 export interface APIUser {
   id: number;
@@ -26,6 +26,8 @@ export const useLogin = () => {
   const { addSigningToken, connectWallet, logoutWallet, walletSigningToken, isWalletConnected, failedConnection } = useWallet()
   const { setConnector } = useConnectors()
   const authUserData = useAuthUserData()
+
+
   const loginStatus = useState<LoginStatus>('user-status', () => 'logged-in')
   const loginFailType = useState<LoginFailState | null>('fail-state', () => null)
 

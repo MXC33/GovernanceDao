@@ -1,10 +1,10 @@
 <template lang="pug">
-VList(bg="ix-primary" b="2 ix-primary opacity-40" p="6" space-y="5" max-w="150" w="full" cut="bottom-right b-ix-primary b-opacity-60 lg")
+VList(bg="ix-primary opacity-20" b="2 ix-primary opacity-40" p="6" space-y="5" max-w="150" w="full" cut="bottom-right b-ix-primary b-opacity-60 lg")
   h2(text="2xl white" font="druk" @click="debugWalletClick") {{ $t('wallet.title') }}
 
   VList(text="white left")
     WalletStatus(v-if="isWalletConnected")
-    div(v-else space-y="3") 
+    VList(v-else space-y="3") 
       div {{ $t('wallet.welcomeMessage') }}
       div(v-if="!!walletError" color="mc-orange") 
         span(font="bold") {{$t(`general.errorConnecting`)}}
@@ -22,7 +22,8 @@ VList(bg="ix-primary" b="2 ix-primary opacity-40" p="6" space-y="5" max-w="150" 
 </template>
 
 <script setup lang="ts">
-import type { WalletConnector } from '~~/composables/useWalletConnectors';
+import type { WalletConnector } from '~/composables/Contract/useWalletConnectors'
+
 const { getAvailableConnectors } = useConnectors()
 
 const connectors = ref<WalletConnector[]>([])

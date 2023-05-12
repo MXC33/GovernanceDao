@@ -17,4 +17,5 @@ export const useCookieState = <T extends any>(cookieName: string, init?: () => T
   }, { deep: true })
 
   return cookie
+
 }
