@@ -13,9 +13,17 @@
   "author": "",
   "license": "ISC",
   "packageManager": "yarn@1.22.19",
-  "workspaces": [
-    "apps/*",
-    "layers/*",
-    "packages/*"
-  ]
+  "workspaces": {
+    "packages": [
+      "apps/*",
+      "layers/*",
+      "packages/*"
+    ],
+    "nohoist": [
+      "**/nuxt",
+      "**/nuxt/**",
+      "**/vite",
+      "**/vite/**"
+    ]
+  }
 }
