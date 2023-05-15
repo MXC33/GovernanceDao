@@ -14,7 +14,7 @@ VList(justify="center" items="center" aspect="2/3" bg="black opacity-40" ref="me
   VList(w="full" flex-grow="1" items="start" bg="gray-900" :invalid="isInvalid" p="6" pos="relative")
     header(font="bold" w="full")
       slot(name="title")
-        TokenName(:token="token" text="xl ellipsis")
+        TokenName(:token="token" text="xl ellipsis" capitalize="~")
 
       div(text="lg" ) 
         slot(name="subtitle") 0.12Eth
