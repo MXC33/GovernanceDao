@@ -13,11 +13,8 @@
   "author": "",
   "license": "ISC",
   "packageManager": "yarn@1.22.19",
-  "workspaces": {
-    "packages": [
-      "apps/*",
-      "layers/*",
-      "packages/*"
-    ]
-  }
+  "workspaces": [
+    "packages/*",
+    "apps/*"
+  ]
 }
