@@ -1,5 +1,5 @@
 <template lang="pug">
-HList(px="6" py="7" space-x="2")
+HList(py="7" space-x="2")
   AttributeItem(v-for="data in testData")
     template(#header) {{ data.header }}
     template(#icon v-if="data.isToken")
