@@ -32,8 +32,6 @@ const useSound = (file: Module, options: Options = {}) => {
 
   const urlParts = path?.split("/") ?? []
 
-  console.log("url", path, urlParts)
-
   const fileName = urlParts[Math.max(0, urlParts.length - 1)]
   const id = `use-sound-${fileName.split(".")[0]}`
   const soundModule = useState<HTMLAudioElement | null>(id, () => null)
