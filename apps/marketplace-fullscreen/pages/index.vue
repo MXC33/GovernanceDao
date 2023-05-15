@@ -1,4 +1,6 @@
 <template lang="pug">
+Attribute
+
 VList(flex-grow="1" min-h="0" pos="relative" p="6" space-y="6")
   h1(text="3xl" font="bold") MY ASSETS
 
