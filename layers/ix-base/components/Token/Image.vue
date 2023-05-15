@@ -48,7 +48,6 @@ watch(imageSource, (src) => {
   imageURLValid.value = false
   const image = new Image();
   image.onload = () => {
-    console.log("Got image")
     imageURLValid.value = true
   }
   image.onerror = () => {
