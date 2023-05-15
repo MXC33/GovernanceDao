@@ -1,12 +1,12 @@
 
 import { MaybeRef, get } from '@vueuse/core'
 
-const hover1 = await import('../assets/sounds/hover-1.wav')
-const hover2 = await import('../assets/sounds/hover-2.wav')
-const click1 = await import('../assets/sounds/click-primary-1.wav')
-const click2 = await import('../assets/sounds/click-primary-2.wav')
-const click3 = await import('../assets/sounds/click-primary-3.wav')
-const clickClose1 = await import('../assets/sounds/click-back-1.wav')
+import hover1 from "../assets/sounds/hover-1.wav"
+import hover2 from "../assets/sounds/hover-2.wav"
+import click1 from "../assets/sounds/click-primary-1.wav"
+import click2 from "../assets/sounds/click-primary-2.wav"
+import click3 from "../assets/sounds/click-primary-3.wav"
+import clickClose1 from "../assets/sounds/click-back-1.wav"
 
 interface Module {
   default?: string
@@ -28,9 +28,10 @@ interface Options {
 
 
 const useSound = (path: Module, options: Options = {}) => {
-  const urlParts = path?.default?.split('/') ?? []
-  const fileName = urlParts[Math.max(0, urlParts.length - 1)]
-  const id = `use-sound-${fileName.split(".")[0]}`
+  const urlParts = path
+  // const fileName = urlParts[Math.max(0, urlParts.length - 1)]
+  // const id = `use-sound-${fileName.split(".")[0]}`
+  const id = "file"
   const soundModule = useState<HTMLAudioElement | null>(id, () => null)
 
 

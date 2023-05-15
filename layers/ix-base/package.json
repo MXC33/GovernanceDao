@@ -39,5 +39,6 @@
     "vite-plugin-pug": "^0.3.2",
     "vite-svg-loader": "^4.0.0",
     "web3-token": "^1.0.6"
-  }
+  },
+  "packageManager": "yarn@1.22.19"
 }
