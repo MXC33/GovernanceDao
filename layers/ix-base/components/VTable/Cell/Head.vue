@@ -1,13 +1,14 @@
 
 <template lang="pug">
-th()
-  div.head-cell.sortable(v-if="props.sortable" :class="props.active ? 'active' : ''", @click="emit('sort')" p="3")
+th(p="3")
+  button(v-if="item.sortable" @click="onClickSort" flex="~ row" items="start" opacity="50 hover:75 on-active:100" :active="isActive" transition="all")
+    HList()
+      slot
+      Transition(name="fade" mode="out-in")
+        UpArrowIcon.icon(v-if="direction == 'desc'")
+        DownArrowIcon.icon(v-else)
 
-    slot
-      UpArrowIcon.icon(v-if="props.asc")
-      DownArrowIcon.icon(v-else)
-
-  .head-cell(v-else)
+  HList(v-else items="start")
     slot
       
 </template>
@@ -15,46 +16,29 @@ th()
 <script setup lang="ts">
 import UpArrowIcon from '../icons/UpArrowIcon.vue';
 import DownArrowIcon from '../icons/DownArrowIcon.vue';
+import type { TableColumn } from '~/composables/useTable';
+
+const { toggleDirection, selectField, sortSettings } = useCollectionSettings()
 
 const props = defineProps<{
-  sortable?: boolean,
-  active?: boolean,
-  asc?: boolean,
+  item: TableColumn
 }>()
 
-const emit = defineEmits(['sort']);
+const isActive = computed(() => sortSettings.value.field == props.item.value)
+
+const direction = computed(() => {
+  if (isActive.value)
+    return sortSettings.value.direction
+
+  return 'asc'
+})
+
+const onClickSort = () => {
+  if (isActive.value)
+    return toggleDirection()
+
+  return selectField(props.item.value)
+}
 </script>
 
-<style scoped>
-th {
-  padding: 0px;
-}
-
-.head-cell {
-  font-weight: bold;
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  gap: 10px;
-  cursor: default;
-}
-
-.sortable {
-  cursor: pointer;
-}
-
-.sortable .icon {
-  visibility: hidden;
-}
-
-.sortable:hover .icon,
-.active .icon {
-  visibility: visible;
-}
-
-.sortable:hover,
-.active {
-  color: var(--table-header-active-text-color);
-  background-color: var(--table-header-active-bg-color);
-}
-</style>
+<style scoped></style>

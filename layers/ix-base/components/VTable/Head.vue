@@ -1,12 +1,7 @@
 <template lang="pug">
-thead()
+thead(bg="gray-800" b="b-1 gray-600")
   tr()
     slot()
 </template>
 
-<style scoped>
-thead {
-  background-color: var(--table-header-bg-color);
-  border-bottom: 1px solid var(--table-border-color);
-}
-</style>
+<style scoped></style>
