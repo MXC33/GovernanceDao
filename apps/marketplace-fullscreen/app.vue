@@ -8,6 +8,8 @@
 </template>
 
 <script setup lang="ts">
+import 'vue3-easy-data-table/dist/style.css';
+
 const { data, execute } = useAsyncDataState('ix-api', async () => 'test')
 await execute()
 </script>

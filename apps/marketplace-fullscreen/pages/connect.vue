@@ -5,8 +5,6 @@ VList(flex-grow="1" pos="relative" min-h="0" justify="center" p="3" items="cente
 
 
 <script lang="ts" setup>
-import type { RouteRecordName } from 'vue-router';
-
 const { isLoggedInAndConnected } = useLogin()
 const router = useRouter()
 const route = useRoute()
@@ -28,7 +26,7 @@ watch(isLoggedInAndConnected, (connected) => {
     return
 
   if (origin) {
-    return router.push({ name: origin as RouteRecordName })
+    return router.push({ name: origin })
   } else if (isDirty.value) {
     return router.push('/')
   }

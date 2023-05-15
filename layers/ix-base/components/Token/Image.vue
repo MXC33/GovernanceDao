@@ -42,6 +42,9 @@ const imageSource = computed(() => {
 })
 
 watch(imageSource, (src) => {
+  if (!process.client)
+    return
+
   imageURLValid.value = false
   const image = new Image();
   image.onload = () => {
