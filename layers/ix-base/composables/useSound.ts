@@ -27,12 +27,15 @@ interface Options {
 }
 
 
-const useSound = (path: Module, options: Options = {}) => {
-  const urlParts = path
-  console.log("url", path)
-  // const fileName = urlParts[Math.max(0, urlParts.length - 1)]
-  // const id = `use-sound-${fileName.split(".")[0]}`
-  const id = "file"
+const useSound = (file: Module, options: Options = {}) => {
+  const path = String(file)
+
+  const urlParts = path?.split("/") ?? []
+
+  console.log("url", path, urlParts)
+
+  const fileName = urlParts[Math.max(0, urlParts.length - 1)]
+  const id = `use-sound-${fileName.split(".")[0]}`
   const soundModule = useState<HTMLAudioElement | null>(id, () => null)
 
 
@@ -44,7 +47,7 @@ const useSound = (path: Module, options: Options = {}) => {
     if (soundModule.value)
       return
 
-    const audio = new Audio(path?.default)
+    const audio = new Audio(path)
     soundModule.value = audio
 
     watch([() => get(volume), soundModule], ([newVolume, audioEngine]) => {
