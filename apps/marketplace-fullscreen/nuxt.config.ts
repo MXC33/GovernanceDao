@@ -48,4 +48,14 @@ export default defineNuxtConfig({
     langDir: 'lang/',
     defaultLocale: 'en',
   },
+
+  vite: {
+    server: {
+      hmr: {
+        protocol: 'wss',
+        clientPort: 441,
+        port: 441,
+      },
+    },
+  }
 })

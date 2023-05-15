@@ -11,13 +11,20 @@ const sizeMap: Record<string, string> = {
 }
 
 export const frameRules: Rule[] = [
-  [/^frame$/, ([], { rawSelector }) => {
+  [/^frame(?:-(.+))?$/, ([, d], { rawSelector }) => {
     const selector = e(rawSelector)
     const px = sizeMap['md']
     const pixSize = h.bracket.global.px(px)
 
-    const topCut = 'calc(0%+var(--cut-depth))'
-    const bottomCut = 'calc(100%-var(--cut-depth))'
+    const pseudoBase = `
+      height: var(--un-frame-gap);
+      content: '';
+      display: block;
+      position: absolute;
+      pointer-events: none;
+      z-index: 1;
+      left: 0;
+      right: 0;`
 
     return `
     ${selector} {
@@ -27,17 +34,19 @@ export const frameRules: Rule[] = [
       position: relative;
     }
 
-    ${selector}:after {
-      content: '';
-      position: absolute;
+    ${selector}:before {
+      ${pseudoBase}
+      border: 1px solid var(--un-frame-color);
+      border-bottom: 0;
       top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: linear-gradient(0deg, --un-frame-color 0%, --un-frame-color ${topCut}, transparent ${topCut}) no-repeat, linear-gradient(0deg, transparent ${bottomCut}, --un-frame-color ${bottomCut}, --un-frame-color 100%) no-repeat;
-      padding: --u-frame-width;
     }
-    `
+
+    ${selector}:after {
+      ${pseudoBase}
+      border: 1px solid var(--un-frame-color);
+      border-top: 0;
+      bottom: 0;
+    }`
   }],
 
   [/^frame-(.+)$/, colorResolver('--un-frame-color', 'frame-color'), { autocomplete: 'frame-$colors' }],
