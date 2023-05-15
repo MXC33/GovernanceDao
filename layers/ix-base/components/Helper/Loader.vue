@@ -3,7 +3,7 @@ SpinIcon.loading-spinner(w="6" aspect="square")
 </template>   
 
 <script lang="ts" setup>
-const SpinIcon = await import('../../assets/images/icons/spinner.svg')
+import SpinIcon from '~/assets/images/icons/spinner.svg'
 </script>
 <style>
 .loading-spinner {
