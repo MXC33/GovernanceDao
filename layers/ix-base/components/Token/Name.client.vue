@@ -1,6 +1,6 @@
 <template lang="pug">
-div(uppercase="~" text="ellipsis" w="[calc(100%)]" whitespace="nowrap" v-if="!noOverflow") {{ name }} 
-div(uppercase="~" v-else) {{ name }} 
+div(text="ellipsis" w="[calc(100%)]" whitespace="nowrap" v-if="!noOverflow") {{ name }} 
+div(v-else) {{ name }} 
 </template>
 
 <script lang="ts" setup>

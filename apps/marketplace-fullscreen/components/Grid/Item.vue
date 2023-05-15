@@ -9,7 +9,7 @@ VList(justify="center" items="center" aspect="2/3" bg="black opacity-40" ref="me
 
       div(flex-grow="1")
 
-      ListButtonSelect(pointer-events="auto")
+      GridButtonSelect(pointer-events="auto")
 
   VList(w="full" flex-grow="1" items="start" bg="gray-900" :invalid="isInvalid" p="6" pos="relative")
     header(font="bold" w="full")
