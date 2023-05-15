@@ -1,6 +1,6 @@
 <template lang="pug">
-VList.graidentCollection(flex-grow="1" space-y="12")
-  HList(px="6" py="4" justify="between" items="center")
+VList.graidentCollection(flex-grow="1" space-y="12" px="8")
+  HList(py="4" justify="between" items="center")
     div(w="45")
       NETEMPIRE
     slot(name="functions")
@@ -10,19 +10,21 @@ VList.graidentCollection(flex-grow="1" space-y="12")
         div(w="10" h="10" color="white" b="1 white") •
 
 
-  VList(px="6" space-y="8")
+  VList(space-y="8")
 
     img(src="~/assets/testfiles/test-collection-bg.png" w="60")
 
-    span(color="gray-50" font="bold" text="3xl")
-      slot(name="header")
+    HList(items="center" space-x="2")
+      span(color="gray-50" font="bold" text="3xl")
+        slot(name="header")
+      CERTIFIED(w="6")
     HList(w="full")
       slot(name="attributes")
 </template>
 
 <script lang="ts" setup>
 import NETEMPIRE from '~/assets/icons/logo/netempire.svg'
-import IMGTEST from '~/assets/testfiles/test-collection-bg.png'
+import CERTIFIED from '~/assets/icons/certified.svg'
 
 </script>
 

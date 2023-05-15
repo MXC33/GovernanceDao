@@ -1,8 +1,8 @@
 <template lang="pug">
-//- CollectionHeaderWrapper
-//-   template(#header) Planet IX - Assets
-//-   template(#attributes)
-//-     Attribute
+CollectionHeaderWrapper
+  template(#header) Planet IX - Assets
+  template(#attributes)
+    Attribute
 
 VList(flex-grow="1" min-h="0" pos="relative" p="6" space-y="6")
   h1(text="3xl" font="bold") MY ASSETS
