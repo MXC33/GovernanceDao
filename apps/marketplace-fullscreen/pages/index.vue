@@ -13,9 +13,9 @@ VList(flex-grow="1" min-h="0" pos="relative" p="6" space-y="6")
 
   VTable(:columns="columns" :rows="rows" initial-sort="tier" v-else)
     template(#item-asset="{row}")
-      HList(items="center" space-x="2")
+      HList(items="center" space-x="2" font="bold")
         TokenImage(:token="row" w="12")
-        TokenName(:token="row")
+        TokenName(:token="row" capitalize="~")
 
 </template>
 
@@ -39,7 +39,7 @@ type Column = {
 
 
 const columns: Column[] = [
-  { label: "Asset", value: "asset", sortable: true },
+  { label: "Asset", value: "asset" },
   { label: "Type", value: "type", sortable: true },
   { label: "Tier", value: "tier", sortable: true },
 ]
@@ -51,13 +51,7 @@ interface DataListItem {
 }
 
 const rows = computed<DataListItem[]>(() =>
-  allTokens.value.map((token) => {
-    return {
-      ...token
-      // avatar: data.value?.image
-    } as DataListItem
-  })
-
+  allTokens.value.map((token) => token as DataListItem)
 )
 
 </script>

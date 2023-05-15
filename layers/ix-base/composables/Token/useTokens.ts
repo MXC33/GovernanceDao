@@ -127,7 +127,7 @@ export const useTokens = () => {
     })()
     if (!fullName)
       console.log("Missing name", token)
-    return spaceCaseIt(fullName ?? "").toUpperCase()
+    return spaceCaseIt(fullName ?? "")
   }
 
   const getTokenKey = (token: TokenIdentifier, separator: string = '-', withId?: boolean) => {

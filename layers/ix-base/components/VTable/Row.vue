@@ -1,10 +1,4 @@
-<template>
-    <tr>
-        <slot />
-    </tr>
+<template lang="pug">
+tr(bg="odd:gray-800" b="gray-600")
+  slot
 </template>
-<style scoped>
-tr:not(:last-child){
-    border-bottom: 1px solid var(--table-border-color);
-}
-</style>
