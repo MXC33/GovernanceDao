@@ -18,26 +18,26 @@ import UpArrowIcon from '../icons/UpArrowIcon.vue';
 import DownArrowIcon from '../icons/DownArrowIcon.vue';
 import type { TableColumn } from '~/composables/useTable';
 
-const { toggleDirection, selectField, sortSettings } = useCollectionSettings()
+const { toggleSortDirection, selectSortField, sort } = useCollectionSettings()
 
 const props = defineProps<{
   item: TableColumn
 }>()
 
-const isActive = computed(() => sortSettings.value.field == props.item.value)
+const isActive = computed(() => sort.value.field == props.item.value)
 
 const direction = computed(() => {
   if (isActive.value)
-    return sortSettings.value.direction
+    return sort.value.direction
 
   return 'asc'
 })
 
 const onClickSort = () => {
   if (isActive.value)
-    return toggleDirection()
+    return toggleSortDirection()
 
-  return selectField(props.item.value)
+  return selectSortField(props.item.value)
 }
 </script>
 

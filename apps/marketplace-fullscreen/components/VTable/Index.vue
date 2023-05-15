@@ -15,13 +15,13 @@ div()
 </template>
 
 <script setup lang="ts">
-import type { ColumnKey, TableColumn, TableRow } from '~/composables/useTable';
-
+import type { CollectionItem, SortField } from '~/composables/useCollection';
+import type { TableColumn } from '~/composables/useTable';
 
 const props = defineProps<{
   columns: TableColumn[],
-  rows: TableRow[],
-  initialSort: ColumnKey,
+  rows: CollectionItem[],
+  initialSort: SortField,
   loading?: boolean,
   error?: string,
 }>()

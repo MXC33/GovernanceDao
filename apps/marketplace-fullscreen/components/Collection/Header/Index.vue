@@ -1,5 +1,5 @@
 <template lang="pug">
-VList()
+VList(space-y="3")
   h3(font="bold" uppercase="~") Collection
 
   HList()

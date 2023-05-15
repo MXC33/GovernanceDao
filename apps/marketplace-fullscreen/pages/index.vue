@@ -11,51 +11,40 @@ VList(flex-grow="1" min-h="0" pos="relative" p="6" space-y="6")
   HList(space-x="3" h="full")
     VList()
 
-  div(grid="~ cols-2 md:cols-3 lg:cols-4 2xl:cols-5" divide-x="0.5" v-if="!viewingList")
-    ListItem(:token="token" v-for="token in allTokens" b="gray-400")
+  Transition(name="fade" mode="out-in")
+    div(grid="~ cols-2 md:cols-3 lg:cols-4 2xl:cols-5" divide-x="0.5" v-if="displayType == 'grid'")
+      GridItem(:token="token" v-for="token in allTokens" b="gray-400")
 
-  VTable(:columns="columns" :rows="rows" initial-sort="tier" v-else)
-    template(#item-asset="{row}")
-      HList(items="center" space-x="2" font="bold")
-        TokenImage(:token="row" w="12")
-        TokenName(:token="row" capitalize="~")
+    VTable(:columns="columns" :rows="rows" initial-sort="tier" v-else)
+      template(#item-asset="{row}")
+        HList(items="center" space-x="2" font="bold")
+          TokenImage(:token="row" w="12")
+          TokenName(:token="row" capitalize="~")
 
 </template>
 
 
 <script lang="ts" setup>
-const viewingList = ref(false)
-const { allTokens, fetchUserInventory } = useUserData()
-await fetchUserInventory()
+import type { CollectionItem } from '~/composables/useCollection';
+import type { TableColumn } from '~/composables/useTable';
 
-const getViewString = () => {
-  return viewingList.value ? "Grid View" : "List View"
-}
+const { allTokens, fetchUserInventory } = useUserData()
+const { displayType } = useCollectionSettings()
+await fetchUserInventory()
 
 definePageMeta({
   middleware: 'auth'
 })
 
-type Column = {
-  label: string,
-  value: keyof DataListItem,
-  sortable?: boolean
-}
-
-const columns: Column[] = [
+const columns: TableColumn[] = [
   { label: "Asset", value: "asset" },
   { label: "Type", value: "type", sortable: true },
   { label: "Tier", value: "tier", sortable: true },
 ]
 
-interface DataListItem {
-  asset: string,
-  type?: string,
-  tier?: string
-}
 
-const rows = computed<DataListItem[]>(() =>
-  allTokens.value.map((token) => token as DataListItem)
+const rows = computed<CollectionItem[]>(() =>
+  allTokens.value.map((token) => token as CollectionItem)
 )
 
 </script>
