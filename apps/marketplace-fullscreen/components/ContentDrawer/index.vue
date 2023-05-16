@@ -4,12 +4,12 @@ VList()
     HList(uppercase="~" items="center" justify="between" px="8" font="bold" cursor="pointer" @click.stop="dropDrawer")
       span(color="white" text="md")
         slot(name="header")
-      ChevronIcon(w="5" translate-y="-0.35" fill="white" transition="opacity" :selected="!drawerState" rotate="on-selected:-180deg")
+      ChevronIcon(w="5" translate-y="-0.35" fill="white" transition="opacity" :selected="drawerState" rotate="on-selected:-180deg")
 
 
   //- div(b="t-1 gray-600" w="full")
   transition(name="fade-slow")
-    HList(uppercase="~" v-if="!drawerState")
+    HList(uppercase="~" v-if="drawerState")
       slot()
 
   div(b="b-1 gray-600" bg="black")
@@ -27,4 +27,7 @@ defineProps<{
 const drawerState = ref(false)
 const dropDrawer = () => { drawerState.value = !drawerState.value }
 
+// onMounted(() => {
+//   drawerState.value = false
+// })
 </script>
