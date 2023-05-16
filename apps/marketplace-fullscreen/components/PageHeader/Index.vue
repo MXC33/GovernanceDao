@@ -1,8 +1,8 @@
 <template lang="pug">
-VList(flex-grow="1" px="8" pos="relative")
+VList(flex-grow="1" px="6" pos="relative")
   .gradient-bg(pos="fixed left-0 right-0 top-16" h="50vh" :style="gradientStyle")
 transition(name="fade-slow")
-  HList(py="4" justify="between" items="center" pos="sticky top-16" z="2" :bg="bgBarOnScroll" px="8" transition="all")
+  HList(py="4" justify="between" items="center" pos="sticky top-16" z="2" :bg="bgBarOnScroll" px="6" transition="all")
     NetEmpireLogo(w="45")
 
     slot(name="functions")
