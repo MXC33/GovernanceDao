@@ -1,16 +1,19 @@
 
 <template lang="pug">
-div()
-  table(bg="gray-900" w="full")
-    VTableHead()
-      VTableCellHead(v-for="item in columns" :item="item") {{ item.label }}
 
-    tbody(divide-y="1")
-      VTableRow(v-for="row in sortedRows")
-        VTableCell(v-for="item in columns", :key="item.value")
-          slot(:name="`item-${item.value}`" :row="row" :column="item" v-if="$slots[`item-${item.value}`]")
+table(bg="gray-900" w="full")
+  colgroup
+    col(v-for="column in columns" :style="getColumnStyle(column)")
 
-          span(v-else) {{row[item.value]}}
+  VTableHead()
+    VTableCellHead(v-for="item in columns" :item="item") {{ item.label }}
+
+  tbody(divide-y="1")
+    VTableRow(v-for="(row, index) in sortedRows" :key="index")
+      VTableCell(v-for="item in columns", :key="item.value")
+        slot(:name="`item-${item.value}`" :row="row" :column="item" v-if="$slots[`item-${item.value}`]")
+
+        span() {{row[item.value]}}
 
 </template>
 
@@ -26,8 +29,20 @@ const props = defineProps<{
   error?: string,
 }>()
 
-const { sortedRows } = useTableData(props.rows)
+const getColumnStyle = (item: TableColumn) => {
+  if (!item.width)
+    return {}
 
+  return {
+    'width': `${item.width}px`,
+    'min-width': `${item.width}px`,
+  }
+}
+
+const { sortedRows } = useTableData(props.rows)
+watch(sortedRows, (da) => {
+  console.log("Newsort", da)
+}, { immediate: true, deep: true })
 </script>
 
 <style scoped>
