@@ -2,7 +2,7 @@
 VList(flex-grow="1" px="8" pos="relative")
   .gradient-bg(pos="fixed left-0 right-0 top-16" h="50vh" :style="gradientStyle")
 transition(name="fade-slow")
-  HList(py="4" justify="between" items="center" pos="sticky top-16" z="99" :bg="bgBarOnScroll" px="8" transition="all")
+  HList(py="4" justify="between" items="center" pos="sticky top-16" z="2" :bg="bgBarOnScroll" px="8" transition="all")
     NetEmpireLogo(w="45")
 
     slot(name="functions")
@@ -41,7 +41,7 @@ const bgBarOnScroll = computed(() => {
 
 <style>
 .gradient-bg {
-  background: rgb(0, 0, 0);
-  background: linear-gradient(0deg, rgba(0, 0, 0, 0.5) 50%, rgba(203, 0, 16, 0.5) 100%);
+  background: rgb(12, 12, 12);
+  background: linear-gradient(0deg, rgba(12, 12, 12, 0.5) 50%, rgba(203, 0, 16, 0.5) 100%);
 }
 </style>
