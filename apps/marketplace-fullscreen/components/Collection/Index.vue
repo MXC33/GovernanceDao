@@ -10,7 +10,7 @@ VList(flex-grow="1" min-h="0" pos="relative" p="6" space-y="6")
   CollectionFilter()
 
   Transition(name="fade" mode="out-in")
-    div(grid="~ cols-2 md:cols-3 lg:cols-4 2xl:cols-5" divide-x="0.5" v-if="displayType == 'grid'")
+    CollectionGrid(v-if="displayType == 'grid'")
       CollectionGridItem(:token="token" v-for="token in items" b="gray-400")
 
     CollectionTable(:columns="columns" :rows="items" initial-sort="tier" v-else)
