@@ -1,8 +1,8 @@
 <template lang="pug">
 VList(flex-grow="1" px="8" pos="relative")
   .gradient-bg(pos="fixed left-0 right-0 top-16" h="50vh" :style="gradientStyle")
-
-  HList(py="4" justify="between" items="center" pos="relative")
+transition(name="fade-slow")
+  HList(py="4" justify="between" items="center" pos="sticky top-16" z="99" :bg="bgNetScroll" :scroll="bgNetScroll" px="8" transition="all")
     NetEmpireLogo(w="45")
 
     slot(name="functions")
@@ -30,6 +30,14 @@ const { y } = useWindowScroll()
 const gradientStyle = computed(() => ({
   opacity: 100 - (y.value / 500) * 100 + '%'
 }))
+
+const bgNetScroll = computed(() => {
+  if (y.value >= 10)
+    return 'black'
+  return null
+})
+
+console.log(y.value, "value")
 
 </script>
 
