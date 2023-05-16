@@ -1,10 +1,7 @@
 <template lang="pug">
-VList(space-y="3")
-  h3(font="bold" uppercase="~") Collection
-
-  HList(space-x="3")
-    CollectionHeaderSearchBar()
-    CollectionHeaderToggleDisplay()
+HList(py="3" pos="sticky top-16" bg="gray-800")
+  CollectionHeaderSearchBar()
+  CollectionHeaderToggleDisplay()
 
 </template>
 
