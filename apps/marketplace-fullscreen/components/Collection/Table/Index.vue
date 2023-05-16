@@ -5,12 +5,12 @@ table(bg="gray-900" w="full")
   colgroup
     col(v-for="column in columns" :style="getColumnStyle(column)")
 
-  VTableHead()
-    VTableCellHead(v-for="item in columns" :item="item") {{ item.label }}
+  CollectionTableHead()
+    CollectionTableCellHead(v-for="item in columns" :item="item") {{ item.label }}
 
   tbody(divide-y="1")
-    VTableRow(v-for="(row, index) in sortedRows" :key="index")
-      VTableCell(v-for="item in columns", :key="item.value")
+    CollectionTableRow(v-for="(row, index) in sortedRows" :key="index")
+      CollectionTableCell(v-for="item in columns", :key="item.value")
         slot(:name="`item-${item.value}`" :row="row" :column="item" v-if="$slots[`item-${item.value}`]")
 
         span() {{row[item.value]}}
