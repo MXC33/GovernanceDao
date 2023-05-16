@@ -16,7 +16,11 @@ VList.graidentCollection(flex-grow="1" space-y="12" px="8")
         ButtonSquareIcon()
           CartIcon(w="6")
 
+  VList(w="full" bg="yellow")
+    ContentDrawer
+      template(#header) TEST
 
+    ContentDrawerWrapper
 
   VList(space-y="8")
 
@@ -42,6 +46,6 @@ import ChevronIcon from '~/assets/icons/chevron-down.svg'
 <style>
 .graidentCollection {
   background: rgb(0, 0, 0);
-  background: linear-gradient(0deg, rgba(0, 0, 0, 1) 50%, rgba(203, 0, 16, 1) 100%);
+  background: linear-gradient(0deg, rgba(0, 0, 0, 1) 50%, rgba(203, 0, 16, 0.5) 100%);
 }
 </style>

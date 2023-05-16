@@ -1,5 +1,5 @@
 <template lang="pug">
-CollectionHeaderWrapper
+CollectionHeaderWrapper()
   template(#header) Planet IX - Assets
   template(#attributes)
     Attribute
