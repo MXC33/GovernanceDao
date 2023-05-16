@@ -2,7 +2,7 @@
 VList(space-y="3")
   h3(font="bold" uppercase="~") Collection
 
-  HList()
+  HList(space-x="3")
     CollectionHeaderSearchBar()
     CollectionHeaderToggleDisplay()
 
