@@ -42,6 +42,6 @@ const bgBarOnScroll = computed(() => {
 <style>
 .gradient-bg {
   background: rgb(0, 0, 0);
-  background: linear-gradient(0deg, rgba(0, 0, 0, 1) 50%, rgba(203, 0, 16, 0.5) 100%);
+  background: linear-gradient(0deg, rgba(0, 0, 0, 0.5) 50%, rgba(203, 0, 16, 0.5) 100%);
 }
 </style>

@@ -1,0 +1,14 @@
+<template lang="pug">
+HList(uppercase="~" font="bold" text="white" frame="~" flex-shrink="0" w="12")
+  CollectionFilterToggleFilterButton()
+    FilterIcon(w="3")
+
+</template>
+  
+
+<script lang="ts" setup>
+import FilterIcon from '~/assets/icons/filter.svg'
+
+const { displayType, toggleDisplayType } = useCollectionSettings()
+
+</script>
