@@ -1,7 +1,7 @@
 <template lang="pug">
 
 div(frame="~")
-  div.iconholder
+  div.iconholder(style="width: 20px")
     slot(name="icon")
   h2 {{title}}
   slot
