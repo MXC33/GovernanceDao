@@ -29,14 +29,6 @@ defineProps<{
 const adjustedState = ref<boolean[]>([])
 const adjustedStates = ref<boolean[]>([])
 
-
-
-onMounted(() => {
-  adjustedState.value
-})
-
-
-
 const testListRadio = [
   {
     value: 'cars'
