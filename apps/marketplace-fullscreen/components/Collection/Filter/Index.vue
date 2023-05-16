@@ -1,8 +1,9 @@
 <template lang="pug">
-HList(py="3" pos="sticky top-34" space-x="3" bg="gray-800" z="2" px="2")
-  CollectionFilterSearchBar()
-  CollectionFilterToggleDisplay()
-
+HList(w="full" pos="sticky top-34" z="2" bg="black")
+  HList(w="full" py="3" space-x="3" bg="gray-800" px="2")
+    CollectionFilterSearchBar()
+    CollectionFilterToggleDisplay()
+    
 </template>
 
 <script lang="ts">
