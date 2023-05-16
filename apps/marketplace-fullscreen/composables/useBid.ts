@@ -1,29 +1,40 @@
 
+export const usePixFloorPriceData = () =>
+  useAsyncDataState('pix-floor-price', () => 
+    $fetch('/web3/floor-prices/0')
+  )
+
+
+export const useAreasFloorPriceData = () =>
+  useAsyncDataState('area-floor-price', () => 
+    $fetch('/web3/floor-prices/1')
+  )
+
+export const useSectorsFloorPriceData = () =>
+  useAsyncDataState('zone-floor-price', () => 
+    $fetch('/web3/floor-prices/2')
+  )
+
+
+export const useZonesFloorPriceData = () =>
+  useAsyncDataState('zone-floor-price', () => 
+    $fetch('/web3/floor-prices/3')
+  )
+
+
+export const useDomainsFloorPriceData = () =>
+  useAsyncDataState('domain-floor-price', () => 
+    $fetch('/web3/floor-prices/4')
+  )
+
+
+export const useBundleSaleData = (sale_id: number | string) =>
+  useAsyncDataState('bundle-sale-' + sale_id, () =>
+    $fetch('/map/bundle/pix/' + sale_id)
+  )
+
+
 export const useBids = () => {
-
-
-  const getPixFloorPrices = () =>
-    useAsyncDataState('pix-floor-price', async () => await $fetch('/web3/floor-prices/0'))
-
-
-  const getAreasFloorPrices = () =>
-    useAsyncDataState('area-floor-price', async () => await $fetch('/web3/floor-prices/1'))
-
-  const getSectorsFloorPrices = () =>
-    useAsyncDataState('zone-floor-price', async () => await $fetch('/web3/floor-prices/2'))
-
-
-  const getZonesFloorPrices = () =>
-    useAsyncDataState('zone-floor-price', async () => await $fetch('/web3/floor-prices/3'))
-
-
-  const getDomainsFloorPrices = () =>
-    useAsyncDataState('domain-floor-price', async () => await $fetch('/web3/floor-prices/4'))
-
-
-  const getBundleSales = (sale_id: number | string) =>
-    useAsyncDataState('bundle-sale', async () => await $fetch('/map/bundle/pix/' + sale_id))
-
 
   const getSaleExtraInfo = async (index: string, referenceId: number, saleId?: number, saleBundleLength?: number, type?: number) => await $fetch('/web3/asset/info', {
     method: 'POST',
