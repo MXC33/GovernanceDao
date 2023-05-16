@@ -56,7 +56,7 @@ export const frameRules: Rule[] = [
     const pixSize = h.bracket.global.px(px)
 
     return {
-      '--cut-depth': pixSize
+      '--un-frame-gap': pixSize
     }
   }]
 ]
