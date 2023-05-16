@@ -57,12 +57,13 @@ export default defineNuxtConfig({
       },
     }
   },
+  nitro: {
+    preset: 'vercel',
+  },
   vite: {
     server: {
       hmr: {
-        protocol: 'wss',
-        clientPort: 8081,
-        port: 8081
+        port: 444,
       },
     },
     plugins: [
