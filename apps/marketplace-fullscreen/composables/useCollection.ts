@@ -1,4 +1,4 @@
-import { TokenIdentifier } from "~/../../layers/ix-base/composables/Token/useTokens"
+import { TokenIdentifier } from "@ix/base/composables/Token/useTokens"
 
 export interface CollectionItem extends TokenIdentifier {
   asset?: string
