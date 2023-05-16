@@ -5,9 +5,14 @@ VList.graidentCollection(flex-grow="1" space-y="12" px="8")
       NETEMPIRE
     slot(name="functions")
       HList(space-x="4" w="full" justify="end" items="center")
-        HList(w="25%" color="white" font="bold" items="center" h="10" px="2") Explore Collections
-        div(w="10" h="10" color="white" b="1 white") •
-        div(w="10" h="10" color="white" b="1 white") •
+        HList(w="25%" color="white" frame="~ white" font="bold" justify="between" items="center" h="10" px="3")
+          span() Explore Collections
+          CHEVROND(w="5" translate-y="-0.3" fill="white")
+        ButtonSquareIcon
+          USER(w="6")
+        ButtonSquareIcon
+          CART(w="6")
+
 
 
   VList(space-y="8")
@@ -25,6 +30,9 @@ VList.graidentCollection(flex-grow="1" space-y="12" px="8")
 <script lang="ts" setup>
 import NETEMPIRE from '~/assets/icons/logo/netempire.svg'
 import CERTIFIED from '~/assets/icons/certified.svg'
+import USER from '~/assets/icons/user.svg'
+import CART from '~/assets/icons/cart.svg'
+import CHEVROND from '~/assets/icons/chevron-down.svg'
 
 </script>
 

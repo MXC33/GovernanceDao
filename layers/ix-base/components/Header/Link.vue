@@ -4,7 +4,7 @@ ButtonSound(sound="md")
     transition(name="fade-scale")
       //- IconSelectionCorner(pos="absolute" inset="0" :is-orange="true" v-if="isSelected")
 
-    span(text="sm")
+    div(text="sm")
       slot
 
 </template>

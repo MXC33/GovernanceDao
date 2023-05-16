@@ -10,11 +10,10 @@ VList(pos="sticky top-0" z="99")
       HeaderLink(to="/" display="lt-md:none") staking
       HeaderLink(to="/" display="lt-md:none") community
 
-    HList(font="bold" space-x="8" px="8")
+    HList(font="bold" space-x="6" px="6")
       HeaderLink(to="/" display="lt-md:none") help
-      HList(items="center" space-x="1.85")
-        GLOBE(w="5.25" translate-y="-1%")
-        span() EN
+      HeaderLink(to="/" display="lt-md:none")
+        HelperLanguage(language="EN")
     
     HList(items="center" h="10" b="1 $mc-mint" color="$mc-mint" font="bold" bg="$mc-mint-20" px="8") 2,234,128 IXT
 
@@ -49,7 +48,6 @@ import IconSoundOff from '~/assets/images/sound/sound-off.svg'
 import Hamburger from '~/assets/images/header/hamburger.svg'
 import PlanetIX from '~/assets/images/header/planetix.svg'
 import PlanetIXNew from '~/assets/images/header/planetix-new.svg'
-import GLOBE from '~/assets/images/header/language-globe.svg'
 
 
 
