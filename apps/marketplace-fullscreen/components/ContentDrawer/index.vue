@@ -20,15 +20,11 @@ VList()
 <script lang="ts" setup>
 import ChevronIcon from '~/assets/icons/chevron-down.svg'
 
-const props = defineProps<{
+defineProps<{
   isSelected?: boolean
 }>()
 
 const drawerState = ref(false)
-
-const dropDrawer = () => {
-  drawerState.value = !drawerState.value
-
-}
+const dropDrawer = () => { drawerState.value = !drawerState.value }
 
 </script>
