@@ -6,8 +6,8 @@
   "private": true,
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "yarn workspace @ix/marketplace dev",
-    "dev:layer": "yarn workspace @ix/base dev"
+    "dev": "turbo dev",
+    "kill": "npx kill-port 3000 3333 444 445"
   },
   "keywords": [],
   "author": "",

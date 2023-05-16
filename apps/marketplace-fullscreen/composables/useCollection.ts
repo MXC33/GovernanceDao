@@ -1,7 +1,8 @@
 import { TokenIdentifier } from "@ix/base/composables/Token/useTokens"
 
 export interface CollectionItem extends TokenIdentifier {
-  asset?: string
+  asset?: string,
+  id: string
 }
 export type SortField = string & keyof CollectionItem
 export type CollectionDisplayType = 'list' | 'grid'
