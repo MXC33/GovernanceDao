@@ -61,8 +61,8 @@ export default defineNuxtConfig({
     server: {
       hmr: {
         protocol: 'wss',
-        clientPort: 443,
-        port: 444
+        clientPort: 8081,
+        port: 8081
       },
     },
     plugins: [

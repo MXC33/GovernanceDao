@@ -2,7 +2,7 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   extends: [
-    '../../layers/ix-base'
+    '@ix/base'
   ],
   css: [
     '@/assets/styles/fonts.css'
@@ -48,14 +48,14 @@ export default defineNuxtConfig({
     langDir: 'lang/',
     defaultLocale: 'en',
   },
-
+  nitro: {
+    preset: 'vercel',
+  },
   vite: {
     server: {
       hmr: {
-        protocol: 'wss',
-        clientPort: 441,
-        port: 441,
+        port: (Number(process.env.PORT) + 1000) || undefined,
       },
     },
-  }
+  },
 })
