@@ -1,5 +1,5 @@
 <template lang="pug">
-Collection(:items="rows")
+Collection(:items="rows" v-if="rows")
   template(#name) My Assets
   template(#attributes) 
     AttributeList()
