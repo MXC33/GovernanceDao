@@ -1,4 +1,5 @@
-import { BASE_API_ENDPOINT_URL } from "../post-endpoints/useBidEndpoints"
+import { BASE_API_ENDPOINT_URL } from "../api"
+
 
 export const usePixFloorPriceData = () =>
   useAsyncDataState('pix-floor-price', () =>
