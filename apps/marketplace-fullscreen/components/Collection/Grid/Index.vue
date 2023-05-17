@@ -1,0 +1,8 @@
+<template lang="pug"> 
+div(grid="~ cols-2 md:cols-3 lg:cols-4 2xl:cols-5" divide-x="0.5")
+  slot
+
+</template>
+
+<script lang="ts" setup>
+</script>
