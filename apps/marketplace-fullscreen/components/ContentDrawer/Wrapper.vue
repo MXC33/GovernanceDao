@@ -1,6 +1,6 @@
 <template lang="pug">
 VList(min-w="94")
-  //- should be slotted in future
+  //- should be slotted in future, testing atm
   ContentDrawer()
     template(#header) Test Radio
     template(#default)
