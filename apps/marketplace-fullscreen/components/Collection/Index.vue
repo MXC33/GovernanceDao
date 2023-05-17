@@ -7,7 +7,7 @@ VList(flex-grow="1" min-h="0" pos="relative" p="6" space-y="6")
     template(#attributes)
       slot(name="attributes")
 
-  CollectionFilter()
+  CollectionFilter(:items="items")
 
   Transition(name="fade" mode="out-in")
     CollectionGrid(v-if="displayType == 'grid'")
