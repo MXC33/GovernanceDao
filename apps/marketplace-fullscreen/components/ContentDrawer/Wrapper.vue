@@ -5,6 +5,7 @@ VList(min-w="94")
     template(#default)
       VList(w="full")
         InputRadio(v-model="filterState[index]" v-for="list, index in testListRadio")
+          template(#default) {{ list.title }}
           template(#value) {{ list.value }}
 
   //- div(b="b-1 gray-600" pt="3" bg="black")
@@ -15,6 +16,7 @@ VList(min-w="94")
     template(#default)
       VList(w="full")
         InputCheckbox(v-model="filterStates[index]" v-for="list, index in testListCheckbox")
+          template(#default) {{ list.title }}
           template(#value) {{ list.value }}
 
 </template>
@@ -31,32 +33,40 @@ const filterStates = ref<boolean[]>([])
 
 const testListRadio = [
   {
-    value: 'cars'
+    title: 'cars',
+    value: 123
   },
   {
-    value: 'trohpy'
+    title: 'trohpy',
+    value: 123
   },
   {
-    value: 'galang'
+    title: 'galang',
+    value: 123
   },
   {
-    value: 'food'
+    title: 'food',
+    value: 123
   },
 ]
 
 const testListCheckbox = [
   {
-    value: 'cars'
+    title: 'cars',
+    value: 123
   },
   {
-    value: 'trohpy'
+    title: 'trohpy',
+    value: 123
   },
   {
-    value: 'galang'
+    title: 'galang',
+    value: 123
   },
   {
-    value: 'food'
-  },
+    title: 'food',
+    value: 123
+},
 ]
 
 </script>

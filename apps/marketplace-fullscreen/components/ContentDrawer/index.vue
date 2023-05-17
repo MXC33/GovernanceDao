@@ -8,12 +8,11 @@ VList()
 
 
   //- div(b="t-1 gray-600" w="full")
-  transition(name="fade-slow")
+  transition(name="slide-top")
     HList(uppercase="~" v-if="drawerState")
       slot()
 
   div(b="b-1 gray-600" bg="black")
-  
 
 </template>
 
@@ -27,7 +26,4 @@ defineProps<{
 const drawerState = ref(false)
 const dropDrawer = () => { drawerState.value = !drawerState.value }
 
-// onMounted(() => {
-//   drawerState.value = false
-// })
 </script>
