@@ -7,11 +7,10 @@ VList(flex-grow="1" min-h="0" pos="relative" p="6" space-y="6")
     template(#attributes)
       slot(name="attributes")
 
-  CollectionFilter(:items="items")
+  CollectionFilter(:items="items" @toggle-filter="toggleFilterDrawer")
 
-  
   HList()
-    ContentDrawerWrapper(pos="sticky left-0")
+    ContentDrawerWrapper(pos="sticky left-0" v-if="showFilters")
     Transition(name="fade" mode="out-in")
       
       CollectionGrid(v-if="displayType == 'grid'")
