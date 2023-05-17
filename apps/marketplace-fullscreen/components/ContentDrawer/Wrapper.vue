@@ -5,7 +5,7 @@ VList(min-w="94")
     template(#header) Test Radio
     template(#default)
       VList(w="full")
-        InputRadio(v-model="filterState[index]" v-for="list, index in testListRadio")
+        InputRadio(v-model="filterRadio[index]" v-for="list, index in testListRadio")
           template(#default) {{ list.title }}
           template(#value) {{ list.value }}
 
@@ -13,7 +13,7 @@ VList(min-w="94")
     template(#header) Test Checkmark
     template(#default)
       VList(w="full")
-        InputCheckbox(v-model="filterStates[index]" v-for="list, index in testListCheckbox")
+        InputCheckbox(v-model="filterCheckbox[index]" v-for="list, index in testListCheckbox")
           template(#default) {{ list.title }}
           template(#value) {{ list.value }}
 
@@ -26,8 +26,8 @@ defineProps<{
   drawerType?: string
 }>()
 
-const filterState = ref<boolean[]>([])
-const filterStates = ref<boolean[]>([])
+const filterRadio = ref<boolean[]>([])
+const filterCheckbox = ref<boolean[]>([])
 
 const testListRadio = [
   {
