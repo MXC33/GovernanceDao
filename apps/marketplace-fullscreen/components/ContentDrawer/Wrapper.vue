@@ -1,5 +1,6 @@
 <template lang="pug">
 VList(min-w="94")
+  //- should be slotted in future, testing atm
   ContentDrawer()
     template(#header) Test Radio
     template(#default)
@@ -7,9 +8,6 @@ VList(min-w="94")
         InputRadio(v-model="filterState[index]" v-for="list, index in testListRadio")
           template(#default) {{ list.title }}
           template(#value) {{ list.value }}
-
-  //- div(b="b-1 gray-600" pt="3" bg="black")
-  //- Border only for last in list
 
   ContentDrawer()
     template(#header) Test Checkmark
