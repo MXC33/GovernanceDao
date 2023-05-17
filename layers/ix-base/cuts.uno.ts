@@ -112,7 +112,6 @@ export const cutRules: Rule<Theme>[] = [
 
   [/^cut-b-(.+)$/, (arr, { theme, rawSelector }: RuleContext<Theme>) => {
     const [mode, body] = arr
-    console.log("ssss", arr, body)
 
     const selector = e(rawSelector)
     if (!body)
