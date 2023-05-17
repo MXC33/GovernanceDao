@@ -1,6 +1,6 @@
 <template lang="pug">
 VList()
-  VList(h="12" max-w="94" bg="black" justify="center")
+  VList(h="12" max-w="94" bg="ix-black" justify="center")
     HList(uppercase="~" items="center" justify="between" px="8" font="bold" cursor="pointer" @click.stop="dropDrawer")
       span(color="white" text="md")
         slot(name="header")
