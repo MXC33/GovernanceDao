@@ -16,80 +16,12 @@
 }
 
 .is-paint-supported [cut] {
-  --cut-depth-xs: 4px;
-  --cut-depth-sm: 8px;
-  --cut-depth: 12px;
-  --cut-depth-lg: 24px;
-  --cut-dent-depth-a: 24px;
-  --cut-dent-depth-b: 21px;
-  --dent-depth: 4px;
   --border: 1px;
   --corner-radius: 0 20 0 0;
   --stroke-weight: 1;
-  clip-path: polygon(var(--path));
+  clip-path: polygon(var(--cut-path));
   position: relative;
 }
-/* 
-[cut] {
-  --cut-top-right-bottom-left: 0 0, calc(100% - var(--cut-depth)) 0, 100% var(--cut-depth), 100% 100%, var(--cut-depth) 100%, 0 calc(100% - var(--cut-depth));
-
-  --cut-top-left-bottom-right: 0 var(--cut-depth), var(--cut-depth) 0, 100% 0, 100% calc(100% - var(--cut-depth)), calc(100% - var(--cut-depth)) 100%, 0 100%;
-
-  --cut-top-left: 0 var(--cut-depth), var(--cut-depth) 0, 100% 0, 100% 100%, 0 100%;
-
-  --cut-top-right: 0 0, calc(100% - var(--cut-depth)) 0, 100% var(--cut-depth), 100% 100%, 0 100%;
-
-  --cut-bottom-right: 0 0, 100% 0, 100% calc(100% - var(--cut-depth)), calc(100% - var(--cut-depth)) 100%, 0 100%;
-
-  --cut-bottom-left: 0 0, 100% 0, 100% 100%, var(--cut-depth) 100%, 0 calc(100% - var(--cut-depth));
-
-  --cut-dent-top-right: 0 0, calc(100% - var(--cut-dent-depth-a)) 0%, calc(100% - var(--cut-dent-depth-b)) var(--dent-depth), 100% var(--dent-depth), 100% 100%, 0 100%;
-}
-
-[cut~="lg"] {
-  --cut-top-right-bottom-left: 0 0, calc(100% - var(--cut-depth-lg)) 0, 100% var(--cut-depth-lg), 100% 100%, var(--cut-depth-lg) 100%, 0 calc(100% - var(--cut-depth-lg));
-
-  --cut-top-left-bottom-right: 0 var(--cut-depth-lg), var(--cut-depth-lg) 0, 100% 0, 100% calc(100% - var(--cut-depth-lg)), calc(100% - var(--cut-depth-lg)) 100%, 0 100%;
-
-  --cut-top-left: 0 var(--cut-depth-lg), var(--cut-depth-lg) 0, 100% 0, 100% 100%, 0 100%;
-
-  --cut-top-right: 0 0, calc(100% - var(--cut-depth-lg)) 0, 100% var(--cut-depth-lg), 100% 100%, 0 100%;
-
-  --cut-bottom-right: 0 0, 100% 0, 100% calc(100% - var(--cut-depth-lg)), calc(100% - var(--cut-depth-lg)) 100%, 0 100%;
-
-  --cut-bottom-left: 0 0, 100% 0, 100% 100%, var(--cut-depth-lg) 100%, 0 calc(100% - var(--cut-depth-lg));
-}
-
-[cut~="sm"] {
-  --cut-top-right-bottom-left: 0 0, calc(100% - var(--cut-depth-sm)) 0, 100% var(--cut-depth-sm), 100% 100%, var(--cut-depth-sm) 100%, 0 calc(100% - var(--cut-depth-sm));
-
-  --cut-top-left-bottom-right: 0 var(--cut-depth-sm), var(--cut-depth-sm) 0, 100% 0, 100% calc(100% - var(--cut-depth-sm)), calc(100% - var(--cut-depth-sm)) 100%, 0 100%;
-
-  --cut-top-left: 0 var(--cut-depth-sm), var(--cut-depth-sm) 0, 100% 0, 100% 100%, 0 100%;
-
-  --cut-top-right: 0 0, calc(100% - var(--cut-depth-sm)) 0, 100% var(--cut-depth-sm), 100% 100%, 0 100%;
-
-  --cut-bottom-right: 0 0, 100% 0, 100% calc(100% - var(--cut-depth-sm)), calc(100% - var(--cut-depth-sm)) 100%, 0 100%;
-
-  --cut-bottom-left: 0 0, 100% 0, 100% 100%, var(--cut-depth-sm) 100%, 0 calc(100% - var(--cut-depth-sm));
-
-}
-
-[cut~="xs"] {
-  --cut-top-right-bottom-left: 0 0, calc(100% - var(--cut-depth-xs)) 0, 100% var(--cut-depth-xs), 100% 100%, var(--cut-depth-xs) 100%, 0 calc(100% - var(--cut-depth-xs));
-
-  --cut-top-left-bottom-right: 0 var(--cut-depth-xs), var(--cut-depth-xs) 0, 100% 0, 100% calc(100% - var(--cut-depth-xs)), calc(100% - var(--cut-depth-xs)) 100%, 0 100%;
-
-  --cut-top-left: 0 var(--cut-depth-xs), var(--cut-depth-xs) 0, 100% 0, 100% 100%, 0 100%;
-
-  --cut-top-right: 0 0, calc(100% - var(--cut-depth-xs)) 0, 100% var(--cut-depth-xs), 100% 100%, 0 100%;
-
-  --cut-bottom-right: 0 0, 100% 0, 100% calc(100% - var(--cut-depth-xs)), calc(100% - var(--cut-depth-xs)) 100%, 0 100%;
-
-  --cut-bottom-left: 0 0, 100% 0, 100% 100%, var(--cut-depth-xs) 100%, 0 calc(100% - var(--cut-depth-xs));
-
-} */
-
 
 .is-paint-supported [cut]:before {
   content: "";
@@ -98,67 +30,6 @@
   mask: paint(cut-corners);
   pointer-events: none;
   transition: background 150ms;
-}
-
-
-[cut~="top-left"] {
-  --path: var(--cut-top-left);
-}
-
-[cut~="top-right"] {
-  --path: var(--cut-top-right);
-}
-
-[cut~="dent-top-right"] {
-  --path: var(--cut-dent-top-right);
-}
-
-[cut~="bottom-left"] {
-  --path: var(--cut-bottom-left);
-}
-
-[cut~="bottom-right"] {
-  --path: var(--cut-bottom-right);
-}
-
-[cut~="top-left-bottom-right"] {
-  --path: var(--cut-top-left-bottom-right);
-}
-
-[cut~="top-right-bottom-left"] {
-  --path: var(--cut-top-right-bottom-left);
-}
-
-
-@media (min-width: 768px) {
-  [cut~="md:top-left"] {
-    --path: var(--cut-top-left);
-  }
-
-  [cut~="md:top-right"] {
-    --path: var(--cut-top-right);
-  }
-
-  [cut~="md:dent-top-right"] {
-    --path: var(--cut-dent-top-right);
-  }
-
-  [cut~="md:bottom-left"] {
-    --path: var(--cut-bottom-left);
-  }
-
-  [cut~="md:bottom-right"] {
-    --path: var(--cut-bottom-right);
-  }
-
-  [cut~="md:top-left-bottom-right"] {
-    --path: var(--cut-top-left-bottom-right);
-  }
-
-  [cut~="md:top-right-bottom-left"] {
-    --path: var(--cut-top-right-bottom-left);
-  }
-
 }
 
 .is-paint-supported [cut][card~="accent"],
