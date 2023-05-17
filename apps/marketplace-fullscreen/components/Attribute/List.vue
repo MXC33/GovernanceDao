@@ -1,9 +1,9 @@
 <template lang="pug">
-HList(py="7" space-x="2")
+HList(py="0 md:7" space-x="md:2" flex-wrap="none lt-md:~")
   AttributeItem(v-for="data in testData")
     template(#header) {{ data.header }}
     template(#icon v-if="data.isToken")
-      IXT(w="6" h="6")
+      IXT(w="3 md:6" h="3 md:6")
     template(#default) {{ data.value }}
 </template>
 
