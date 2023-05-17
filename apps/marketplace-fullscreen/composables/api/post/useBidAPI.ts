@@ -1,38 +1,4 @@
 
-export const usePixFloorPriceData = () =>
-  useAsyncDataState('pix-floor-price', () =>
-    $fetch('/web3/floor-prices/0')
-  )
-
-
-export const useAreasFloorPriceData = () =>
-  useAsyncDataState('area-floor-price', () =>
-    $fetch('/web3/floor-prices/1')
-  )
-
-export const useSectorsFloorPriceData = () =>
-  useAsyncDataState('zone-floor-price', () =>
-    $fetch('/web3/floor-prices/2')
-  )
-
-
-export const useZonesFloorPriceData = () =>
-  useAsyncDataState('zone-floor-price', () =>
-    $fetch('/web3/floor-prices/3')
-  )
-
-
-export const useDomainsFloorPriceData = () =>
-  useAsyncDataState('domain-floor-price', () =>
-    $fetch('/web3/floor-prices/4')
-  )
-
-
-export const useBundleSaleData = (sale_id: number | string) =>
-  useAsyncDataState('bundle-sale-' + sale_id, () =>
-    $fetch('/map/bundle/pix/' + sale_id)
-  )
-
 
 export const BASE_API_ENDPOINT_URL = 'https://api.planetix.com'
 
