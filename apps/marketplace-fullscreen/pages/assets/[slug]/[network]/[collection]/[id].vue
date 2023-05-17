@@ -6,7 +6,7 @@ div(flex-grow="1" space-y="12" px="8")
       CollectionItemMedia
       template(v-if="!isMobile")
         CollectionItemCollapsable(class="basis-1 md:basis-2/3" :title="'Description desktop'")
-          p ajhsdjkash askjdhas kdjaskh asjkhdka fisky
+          p ajhsdjkash askjdhas kdjaskh asjkhdka
           template(#icon)
             Plus
         CollectionItemCollapsable(class="basis-1 md:basis-2/3" :title="'treits desktop'")
@@ -40,8 +40,19 @@ div(flex-grow="1" space-y="12" px="8")
 
 <script lang="ts" setup>
 import Plus from '~/assets/icons/plus.svg'
-
+import {useNFT} from "~/composables/states/useNFT";
 const isMobile = false
+
+const route = useRoute()
+
+const useNft = useNFT().getNFT({
+  slug: route.params.slug.toString(),
+  network: route.params.network.toString(),
+  collection: route.params.collection.toString(),
+  token_id: +route.params.id || 0,
+  user_id: 16
+})
+console.log('fisky ', useNft)
 
 const { allTokens, fetchUserInventory } = useUserData()
 const { displayType } = useCollectionSettings()
