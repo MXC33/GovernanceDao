@@ -1,5 +1,5 @@
 <template lang="pug">
-VList(b="l-1 gray-400" uppercase="~" px="3")
+VList(b="l-1 gray-400" uppercase="~" px="3" my="lt-md:1" justify="lt-md:center")
   span(color="gray-200" text="sm md:lg")
     slot(name="header")
 

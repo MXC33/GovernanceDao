@@ -7,18 +7,21 @@ VList(flex-grow="1" min-h="0" pos="relative" p="6" space-y="6")
     template(#attributes)
       slot(name="attributes")
 
-  CollectionFilter()
+  CollectionFilter(:items="items" @toggle-filter="toggleFilterDrawer")
 
-  Transition(name="fade" mode="out-in")
-    CollectionGrid(v-if="displayType == 'grid'")
-      CollectionGridItem(:token="token" v-for="token in items" b="gray-400")
+  HList()
+    ContentDrawerWrapper(pos="sticky left-0" v-if="showFilters")
+    Transition(name="fade" mode="out-in")
+      
+      CollectionGrid(v-if="displayType == 'grid'")
+        CollectionGridItem(:token="token" v-for="token in items" b="gray-400")
 
-    CollectionTable(:columns="columns" :rows="items" initial-sort="tier" v-else)
-      template(#item-asset="{row}")
-        HList(items="center" space-x="2" font="bold")
-          div(w="12" h="12")
-            TokenImage(:token="row" w="12" h="12" :key="row.id")
-          TokenName(:token="row" capitalize="~")
+      CollectionTable(:columns="columns" :rows="items" initial-sort="tier" v-else)
+        template(#item-asset="{row}")
+          HList(items="center" space-x="2" font="bold")
+            div(w="12" h="12")
+              TokenImage(:token="row" w="12" h="12" :key="row.id")
+            TokenName(:token="row" capitalize="~")
 
 </template>
 
@@ -32,6 +35,12 @@ const columns: TableColumn[] = [
   { label: "Type", value: "type", sortable: true },
   { label: "Tier", value: "tier", sortable: true },
 ]
+
+const showFilters = ref(false)
+
+const toggleFilterDrawer = () => {
+  showFilters.value = !showFilters.value
+}
 
 defineProps<{
   items: CollectionItem[]
