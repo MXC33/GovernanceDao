@@ -1,6 +1,8 @@
 <template lang="pug">
 HList(uppercase="~" font="bold" text="white" frame="~" flex-shrink="0" w="12" h="12" items="center" justify="center")
-  FilterIcon(p="4" @click="emit('toggleFilter')")
+  CollectionFilterToggleFilterButton()
+    FilterIcon(w="5")
+
 </template>
   
 
@@ -8,5 +10,5 @@ HList(uppercase="~" font="bold" text="white" frame="~" flex-shrink="0" w="12" h=
 import FilterIcon from '~/assets/icons/filter.svg'
 
 const { displayType, toggleDisplayType } = useCollectionSettings()
-const emit = defineEmits(['toggleFilter']);
+
 </script>
