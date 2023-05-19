@@ -11,11 +11,12 @@ VList(ref="containerElement" w="full" h="full" pos="absolute" inset="0" )
 import type { AnyToken } from '~/composables/Token/useTokens';
 
 const { getTokenKey } = useTokens()
+const { tokenHasVideo } = useTokenMedia()
 
 const containerElement = ref()
 const isElementHovered = useElementHover(containerElement)
 
-const displayVideo = computed(() => hoverActive.value && props.token.video)
+const displayVideo = computed(() => hoverActive.value && tokenHasVideo(props.token))
 
 const hoverActive = computed(() => isElementHovered.value || props.isHovered)
 const props = defineProps<{

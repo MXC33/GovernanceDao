@@ -31,14 +31,12 @@ import type { TableColumn } from '~/composables/useTable'
 const { displayType } = useCollectionSettings()
 
 const columns: TableColumn[] = [
-  { label: "Asset", value: "name", width: 100 },
-  { label: "Type", value: "type", sortable: true },
+  { label: "Asset", value: "name" },
+  { label: "Higher bid price", value: "higher_bid_price", sortable: true },
   { label: "Sale Price", value: "sale_price", sortable: true },
 ]
 
 const { y } = useWindowScroll()
-
-const items = computed(() => props.data.nfts)
 
 const valueTop = computed(() => {
   const yValue = y.value + 100
