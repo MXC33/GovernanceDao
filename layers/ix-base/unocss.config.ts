@@ -90,10 +90,8 @@ export default definePreset({
       'scrollable-desktop': 'md-overflow-y-auto md-scrollbar md-scrollbar-primary md-min-h-0'
     },
 
-    [/^cut-b-(.*)$/, ([, c]) => `before:bg-${c}`],
-    [/^size-(.*)$/, ([, c]) => `w-${c} h-${c}`],
+    [/^size-(.*)$/, ([, c]) => `w-${c} h-${c}`]
   ],
-
   rules: [
     ...cutRules,
     ...frameRules

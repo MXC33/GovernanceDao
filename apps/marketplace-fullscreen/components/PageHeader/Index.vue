@@ -1,8 +1,9 @@
 <template lang="pug">
-VList.graidentCollection(flex-grow="1" space-y="12" px="8")
-  HList(py="4" justify="between" items="center")
-    div(w="45")
-      NetEmpireLogo()
+VList(flex-grow="1" px="6" pos="relative")
+  .gradient-bg(pos="fixed left-0 right-0 top-16" h="50vh" :style="gradientStyle")
+transition(name="fade-slow")
+  HList(py="4" justify="between" items="center" pos="sticky top-16" z="2" :bg="bgBarOnScroll" px="8" transition="all")
+    NetEmpireLogo(w="45")
 
     slot(name="functions")
       HList(space-x="4" w="full" justify="end" items="center")
@@ -16,32 +17,31 @@ VList.graidentCollection(flex-grow="1" space-y="12" px="8")
         ButtonSquareIcon()
           CartIcon(w="6")
 
-
-
-  VList(space-y="8")
-
-    img(src="~/assets/testfiles/test-collection-bg.png" w="60")
-
-    HList(items="center" space-x="2")
-      span(color="gray-50" font="bold" text="3xl")
-        slot(name="header")
-      CertifiedIcon(w="6")
-    HList(w="full")
-      slot(name="attributes")
 </template>
 
 <script lang="ts" setup>
 import NetEmpireLogo from '~/assets/icons/logo/netempire.svg'
-import CertifiedIcon from '~/assets/icons/certified.svg'
 import UserIcon from '~/assets/icons/user.svg'
 import CartIcon from '~/assets/icons/cart.svg'
 import ChevronIcon from '~/assets/icons/chevron-down.svg'
 
+const { y } = useWindowScroll()
+
+const gradientStyle = computed(() => ({
+  opacity: 100 - (y.value / 500) * 100 + '%'
+}))
+
+const bgBarOnScroll = computed(() => {
+  if (y.value >= 10)
+    return 'ix-black'
+  return null
+})
+
 </script>
 
 <style>
-.graidentCollection {
-  background: rgb(0, 0, 0);
-  background: linear-gradient(0deg, rgba(0, 0, 0, 1) 50%, rgba(203, 0, 16, 1) 100%);
+.gradient-bg {
+  background: rgb(12, 12, 12);
+  background: linear-gradient(0deg, rgba(12, 12, 12, 0.5) 50%, rgba(203, 0, 16, 0.5) 100%);
 }
 </style>

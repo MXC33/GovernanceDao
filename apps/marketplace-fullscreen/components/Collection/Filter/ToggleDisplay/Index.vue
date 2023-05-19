@@ -1,13 +1,12 @@
 <template lang="pug">
 HList(uppercase="~" font="bold" text="white" frame="~" flex-shrink="0" w="24")
-  CollectionHeaderToggleDisplayButton(:active="displayType == 'grid'" @click="displayType = 'grid'")
+  CollectionFilterToggleDisplayButton(:active="displayType == 'grid'" @click="displayType = 'grid'")
     GridIcon(w="6")
 
-  CollectionHeaderToggleDisplayButton(:active="displayType == 'list'" @click="displayType = 'list'")
+  CollectionFilterToggleDisplayButton(:active="displayType == 'list'" @click="displayType = 'list'")
     ListIcon(w="6") 
 
 </template>
-  
 
 <script lang="ts" setup>
 import GridIcon from '~/assets/icons/grid.svg'

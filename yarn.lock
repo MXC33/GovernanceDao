@@ -2801,10 +2801,10 @@
   dependencies:
     "@unocss/core" "0.51.13"
 
-"@unocss/extractor-pug@^0.51.8":
-  version "0.51.13"
-  resolved "https://registry.yarnpkg.com/@unocss/extractor-pug/-/extractor-pug-0.51.13.tgz#bad9555ceedd48efcb2a783e71a9cd3abb64913f"
-  integrity sha512-x93v68RFBOSNNRtN49foY4PoHNiZg1Chjjv8H4uboKpK0xffTN7UK/k6OFYstZG83CDfXzz+cptsuefkGs55jw==
+"@unocss/extractor-pug@0.51.3":
+  version "0.51.3"
+  resolved "https://registry.yarnpkg.com/@unocss/extractor-pug/-/extractor-pug-0.51.3.tgz#b91543455fadd23a1f52176853c41be655c6b901"
+  integrity sha512-8wXjRTklQV25UU2WxKZ87iWEkN7blWnyVpXWL/QoSAsDK/ygA/NEpDO+5gK4RxFzrtXWqPzbdfqqhGP2xjXJxA==
 
 "@unocss/inspector@0.51.13":
   version "0.51.13"
@@ -2814,7 +2814,7 @@
     gzip-size "^6.0.0"
     sirv "^2.0.3"
 
-"@unocss/nuxt@^0.51.8":
+"@unocss/nuxt@^0.51.13":
   version "0.51.13"
   resolved "https://registry.yarnpkg.com/@unocss/nuxt/-/nuxt-0.51.13.tgz#51330ae28b00ad0a0f7e4aa22f9171ff98f72771"
   integrity sha512-wfZr87+PebzswK71Yl5E17Wol1SqAlUCZxABoNEFYyCap2RreXh60+lMpjeQ+up0WSNzIruisDCcUHmsKNIPjw==
@@ -5783,6 +5783,11 @@ function-bind@^1.1.1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/function-bind/-/function-bind-1.1.1.tgz#a56899d3ea3c9bab874bb9773b7c5ede92f4895d"
   integrity sha512-yIovAzMX49sF8Yl58fSCWJ5svSLuaibPxXQJFLmBObTuCr0Mf1KiPopGM9NiFjiYBCbfaa2Fh6breQ6ANVTI0A==
+
+fuzzyjs@^5.0.1:
+  version "5.0.1"
+  resolved "https://registry.yarnpkg.com/fuzzyjs/-/fuzzyjs-5.0.1.tgz#1cd87f2adfe265f580572a133c3b32eca7f6d554"
+  integrity sha512-/BixxKEZ0sIQkIogNBhuwX7EC1gznFoR9jhrEU0cb89HUTH+tb2u9s86Rj//xGzpQg04A1aD9KDyGE+ldxgLFQ==
 
 gauge@^3.0.0:
   version "3.0.2"
@@ -9707,7 +9712,7 @@ unocss-preset-scrollbar@^0.2.1:
   dependencies:
     "@unocss/preset-mini" "^0.31.13"
 
-unocss@0.51.13, unocss@^0.51.8:
+unocss@0.51.13, unocss@^0.51.1:
   version "0.51.13"
   resolved "https://registry.yarnpkg.com/unocss/-/unocss-0.51.13.tgz#f41c0d186559f2375f319334f4811ed21b427b23"
   integrity sha512-EAhuQ97D7E+EsTdlCL+xoWEsvz46Se9ZAtHhJ+1W+DzMky9qrDLRyR8Caf2TPbz8dw/z0qYhoPr6/aJARG4r0g==

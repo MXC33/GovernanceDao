@@ -1,11 +1,11 @@
 <template lang="pug">
-VList(pos="sticky top-0" z="99")
-  HList(items="center" w="full" bg="gray-800" px="7.5" h="16" b="b-1 mc-orange_40 opacity-30")
+VList(pos="sticky top-0" z="99" w="full")
+  HList(items="center"  bg="gray-800" px="7.5" h="16")
     NuxtLink(to="https://www.planetix.com")
       PlanetIXNew(w="42.25")
 
     HList(space-x="8" px="8" items="center" font="bold" text="lg" flex-grow="1")
-      HeaderLink(to="/terminal" display="lt-md:none") buy ixt
+      HeaderLink(to="/" display="lt-md:none") buy ixt
       HeaderLink(to="/" display="lt-md:none") play now
       HeaderLink(to="/" display="lt-md:none") staking
       HeaderLink(to="/" display="lt-md:none") community
@@ -14,8 +14,8 @@ VList(pos="sticky top-0" z="99")
       HeaderLink(to="/" display="lt-md:none") help
       HeaderLink(to="/" display="lt-md:none")
         HelperLanguage(language="EN")
-    
-    HList(items="center" h="10" b="1 $mc-mint" color="$mc-mint" font="bold" bg="$mc-mint-20" px="8") 2,234,128 IXT
+
+    HList(items="center" h="10" b="1 $mc-mint" color="$mc-mint" font="bold" bg="$mc-mint-20" px="8" display="lt-md:none") 2,234,128 IXT
 
       //- HeaderLink(to="/mission-control" display="lt-md:none") 
       //-   span(display="lt-lg:none") {{ $t(`general.navigation.missionCtrl`)}}
@@ -24,23 +24,33 @@ VList(pos="sticky top-0" z="99")
       //- HeaderLink(to="#" @click="gotoIXPage('game')" display="lt-md:none") {{ $t(`general.navigation.netEmpire`)}}
       //- GameHeaderResourcesIxt(type="ixt" display="lt-md:none" @click="openLifiWidget")
       //- UserHeaderProfileAvatar(text="xs" cursor="default" h="6" w="6" v-if="user")
-    //- HList(justify="end" w="full" flex-grow="1")
-    //-   ButtonSound(sound="sm" opacity="50 on-enabled:100 hover:60" filter="grayscale on-enabled:none" transition="hover" @click="toggleSound" :enabled="isSoundEnabled")
-    //-     IconSoundOn(w="6" v-if="isSoundEnabled")
-    //-     IconSoundOff(w="6" v-else)
+      //- HList(justify="end" w="full" flex-grow="1")
+      //-   ButtonSound(sound="sm" opacity="50 on-enabled:100 hover:60" filter="grayscale on-enabled:none" transition="hover" @click="toggleSound" :enabled="isSoundEnabled")
+      //-     IconSoundOn(w="6" v-if="isSoundEnabled")
+      //-     IconSoundOff(w="6" v-else)
 
 
-      ButtonSound(sound="sm" @click="toggleMenu" ml="!4")
-        Hamburger(w="8" h="8" cursor="pointer" opacity="hover:50" transition="all")
+    ButtonSound(sound="sm" @click="toggleMenu" ml="!4" display="md:none")
+      Hamburger(w="8" h="8" cursor="pointer" opacity="hover:50" transition="all")
+      transition(name="slide-top")
+        div(v-if="menuOpen" pos="fixed top-0 bottom-0 left-0 right-0" bg="black-800 opacity-20" backdrop="~ blur-md" z="100" cursor="pointer")
 
-    transition(name="fade")
-      div(v-if="menuOpen" pos="fixed top-0 bottom-0 left-0 right-0" bg="black-800 opacity-20" backdrop="~ blur-md" @click="menuOpen = false" z="100" cursor="pointer")
+          VList(flex-grow="1" font="bold")
+            HList(items="center" justify="between" bg="gray-800" py="2" px="4" h="16")
+              HList(items="center" b="1 $mc-mint" color="$mc-mint" text="sm" bg="$mc-mint-20" px="4" py="1") 2,234,128 IXT
+              HList(space-x="6")
+                HeaderLink(to="/") help
+                HeaderLink(to="/")
+                  HelperLanguage(language="EN")
 
-    //- transition(name="slide-right")
-    //-   LayoutHeaderMenu(v-if="menuOpen")
+            VList(bg="black" w="full" h="100%" py="6" font="bold" text="lg" uppercase="~" px="6")
+              VList(justify="start" items="start" space-y="12" py="4")
+                HeaderLink(to="/") + buy ixt
+                HeaderLink(to="/") + play now
+                HeaderLink(to="/") + staking
+                HeaderLink(to="/") + community
 
 </template>
-
 
 <script lang="ts" setup>
 import IconSoundOn from '~/assets/images/sound/sound-on.svg'
@@ -61,7 +71,7 @@ const toggleSound = () => {
 }
 
 const toggleMenu = () => {
-  // menuOpen.value = !menuOpen.value
+  menuOpen.value = !menuOpen.value
 }
 
 </script>
