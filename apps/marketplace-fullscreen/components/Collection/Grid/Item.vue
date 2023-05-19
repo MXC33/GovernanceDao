@@ -26,7 +26,7 @@ VList(justify="center" items="center" aspect="2/3" bg="black opacity-40" ref="me
 </template>
 
 <script lang="ts" setup>
-import type { IXToken } from '~/composables/useCollection'
+import type { IXToken } from '@ix/base/composables/Token/useIXToken';
 
 
 const mediaElement = ref()

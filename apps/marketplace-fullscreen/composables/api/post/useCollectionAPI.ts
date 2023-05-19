@@ -19,9 +19,9 @@ export const useCollectionData = (slug: string, network = 'polygon') => {
     fetchIXAPI('collections/' + slug + '/nfts', 'POST') as Promise<CollectionResponse>, {
     transform: (item) => {
       console.log('item', item)
-      return  item.data as CollectionData
+      return item.data as CollectionData
     }
-      // item.data.nfts.map((item) => (item as IXToken))
+    // item.data.nfts.map((item) => (item as IXToken))
   })
 }
 
@@ -30,5 +30,5 @@ export const useCollectionsData = (network = 'polygon') =>
     fetchIXAPI('collections') as Promise<CollectionsResponse>, {
     transform: (item) =>
       item.data as Collections
-      }
+  }
   )

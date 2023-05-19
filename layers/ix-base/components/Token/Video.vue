@@ -9,18 +9,17 @@ VList(w="full" h="full")
 </template>
 
 <script lang="ts" setup>
-import type { TokenIdentifier } from '@ix/base/composables/Token/useTokens';
 import { useElementVisibility } from '@vueuse/core'
-import type {IXToken} from "~/composables/useCollection";
+import type { AnyToken } from '~/composables/Token/useTokens';
 
 const isLoaded = ref(false)
 const videoElement = ref()
-const config = useRuntimeConfig().public
+const { getTokenVideoURL } = useTokenMedia()
 
-const { addCacheKey } = useCacheKey()
 const props = defineProps<{
-  token: IXToken,
+  token: AnyToken,
 }>()
+const videoURL = await getTokenVideoURL(props.token)
 
 const visible = useElementVisibility(videoElement)
 
@@ -47,12 +46,6 @@ watch(visible, (isVisible) => {
     return stopVideo()
 
   return playVideo()
-})
-
-
-const videoURL = computed(() => {
-  if (props.token.video)
-    return props.token.video
 })
 
 </script>

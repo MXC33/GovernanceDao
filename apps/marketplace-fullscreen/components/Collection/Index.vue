@@ -4,26 +4,19 @@ VList(flex-grow="1" min-h="0" pos="relative" p="8" space-y="6")
     template(#header) {{ data.name }}
 
     template(#attributes)
-      ATtributeList()
+      AttributeList()
 
-  CollectionFilter(:items="items" @toggle-filter="toggleFilterDrawer" pos="relative")
+  CollectionFilter(:items="data.filters" v-if="data"  @toggle-filter="toggleFilterDrawer" pos="relative")
 
   HList(pos="sticky")
     Transition(name="slide-left")
       ContentDrawerWrapper(v-if="showFilters" pos="sticky top-58" h="100" inset="0")
 
-    Transition(name="fade" mode="out-in")
-
-      CollectionGrid(v-if="displayType == 'grid'")
-        CollectionGridItem(:token="token" v-for="token in items" b="gray-400")
-
-  CollectionFilter(:items="data.filters" v-if="data" )
-
   Transition(name="fade" mode="out-in" v-if="data")
     CollectionGrid(v-if="displayType == 'grid'")
       CollectionGridItem(:token="token" v-for="token in data.nfts" b="gray-400")
 
-    CollectionTable(:columns="columns" :rows="data.nfts" v-else initial-sort="tier" )
+    CollectionTable(:columns="columns" :rows="data.nfts" v-else initial-sort="name")
       template(#item-asset="{row}")
         HList(items="center" space-x="2" font="bold")
           div(w="12" h="12")
@@ -38,12 +31,14 @@ import type { TableColumn } from '~/composables/useTable'
 const { displayType } = useCollectionSettings()
 
 const columns: TableColumn[] = [
-  { label: "Asset", value: "asset", width: 100 },
+  { label: "Asset", value: "name", width: 100 },
   { label: "Type", value: "type", sortable: true },
-  { label: "Tier", value: "tier", sortable: true },
+  { label: "Sale Price", value: "sale_price", sortable: true },
 ]
 
 const { y } = useWindowScroll()
+
+const items = computed(() => props.data.nfts)
 
 const valueTop = computed(() => {
   const yValue = y.value + 100
@@ -60,7 +55,7 @@ const toggleFilterDrawer = () => {
   showFilters.value = !showFilters.value
 }
 
-defineProps<{
+const props = defineProps<{
   data: CollectionData
 }>()
 

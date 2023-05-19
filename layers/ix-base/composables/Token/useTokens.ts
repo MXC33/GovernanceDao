@@ -15,7 +15,10 @@ import { TierId, getTierColor } from './Types/Tier'
 import { useTokenInfo } from './useTokenInfo'
 import { Currency } from './Types/Currency'
 import { TokenId, TokenType } from './tokenMaps'
+import { IXToken } from './useIXToken'
 
+
+export type AnyToken = IXToken | TokenIdentifier
 
 // These are decorated and mapped stuff that we don't get from the graphql
 export interface TokenIdentifier {
@@ -75,24 +78,10 @@ export const useTokenBalance = (list: (Ref<TokenIdentifierWithAmount[] | TokenId
   return balanceOfToken
 }
 
+export const isIXToken = (token: AnyToken): token is IXToken => (token as IXToken)?.token_id != null
+
 
 export const useTokens = () => {
-
-  const createMCNFT = (tokenId: TokenId, balance: number = 1): TokenIdentifier | null => {
-    const type = getTokenType(tokenId)
-    const tier = getTokenTier(tokenId)
-
-    if (!type)
-      return null
-
-    return {
-      tokenId: String(tokenId),
-      type,
-      tier: tier ?? undefined,
-      balance,
-    }
-  }
-
 
   const getTokenLevel = (token: TokenIdentifier) => {
     if (token.tokenId == undefined || null)
@@ -104,7 +93,11 @@ export const useTokens = () => {
       return FacilityLevelMap[tokenId as FacilityId]
   }
 
-  const getTokenName = (token: TokenIdentifier, useTokenDataName: boolean = true) => {
+  const getTokenName = (token: AnyToken, useTokenDataName: boolean = true) => {
+    if (isIXToken(token)) {
+      return token.name
+    }
+
     const { data } = useTokenInfo(token)
 
     const reversedTypes: TokenType[] = ['cargo-drop', 'coinbase', 'arcade', 'starter-pack']
@@ -130,7 +123,10 @@ export const useTokens = () => {
     return spaceCaseIt(fullName ?? "")
   }
 
-  const getTokenKey = (token: TokenIdentifier, separator: string = '-', withId?: boolean) => {
+  const getTokenKey = (token: AnyToken, separator: string = '-', withId?: boolean) => {
+    if (isIXToken(token)) {
+      return token.token_id + token.collection
+    }
     const type = kebabCaseIt(String(token.type))
     const id = (withId && token.tokenId) ? separator + token.tokenId : ''
 
@@ -140,18 +136,24 @@ export const useTokens = () => {
       return type + id
   }
 
-  const isSameToken = (itemA?: TokenIdentifier, itemB?: TokenIdentifier) => {
+  const getTokenId = (token: AnyToken) => {
+    if (isIXToken(token))
+      return token.token_id
+    return token.tokenId
+  }
+
+  const isSameToken = (itemA?: AnyToken, itemB?: AnyToken) => {
     if (!itemA || !itemB)
       return false
 
     const isSameType = itemA.type == itemB.type
 
-    const hasTokenId = (item: TokenIdentifier) => item.tokenId && item.tokenId != ""
+    const hasTokenId = (item: AnyToken) => getTokenId(item) != ""
 
     if (isSameType && hasTokenId(itemA) && hasTokenId(itemB))
-      return itemA.tokenId == itemB.tokenId
+      return getTokenId(itemA) == getTokenId(itemB)
 
-    if (itemA.tier)
+    if (!isIXToken(itemA) && !isIXToken(itemB) && itemA.tier)
       return itemA.tier == itemB.tier && isSameType
     else
       return isSameType
