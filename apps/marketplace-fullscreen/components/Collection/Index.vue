@@ -36,24 +36,13 @@ const columns: TableColumn[] = [
   { label: "Sale Price", value: "sale_price", sortable: true },
 ]
 
-const { y } = useWindowScroll()
-
-const valueTop = computed(() => {
-  const yValue = y.value + 100
-
-  return yValue.toString()
-})
-
-console.log(valueTop.value)
-// `sticky top-${valueTop}`
-
 const showFilters = ref(false)
 
 const toggleFilterDrawer = () => {
   showFilters.value = !showFilters.value
 }
 
-const props = defineProps<{
+defineProps<{
   data: CollectionData
 }>()
 
