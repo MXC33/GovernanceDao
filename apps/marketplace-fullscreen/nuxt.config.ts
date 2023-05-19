@@ -15,6 +15,13 @@ export default defineNuxtConfig({
     'v-lazy-show/nuxt'
   ],
 
+  imports: {
+    dirs: [
+      'composables/**'
+    ]
+  },
+
+
   i18n: {
     precompile: { strictMessage: false },
     locales: [
@@ -54,7 +61,7 @@ export default defineNuxtConfig({
   vite: {
     server: {
       hmr: {
-        port: 445,
+        port: 3001,
       },
     },
   },

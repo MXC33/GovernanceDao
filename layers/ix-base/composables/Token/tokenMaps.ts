@@ -239,3 +239,4 @@ export const parseNftFragment = (nft: NftFragment | null): TokenIdentifier | nul
     tier: tier ?? undefined
   }
 }
+

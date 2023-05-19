@@ -2,7 +2,7 @@
 VList(justify="center" items="center" aspect="2/3" bg="black opacity-40" ref="mediaElement" cursor="pointer" group)
   VList(aspect="square" w="full" pos="relative" overflow="hidden")
     slot(name="media")
-      TokenLazyVideo(:token="token" :key="getTokenKey(token)" :is-hovered="isHovered")
+      TokenLazyVideo(:token="token" :key="token.collection + token.token_id" :is-hovered="isHovered")
 
     HList(pos="absolute" inset="0" p="3" pointer-events="none" opacity="0 group-hover:100" transition="all")
       slot(name="icon-left")
@@ -22,23 +22,20 @@ VList(justify="center" items="center" aspect="2/3" bg="black opacity-40" ref="me
     div(flex-grow="1")
 
     div(text="md gray-200")
-      slot(name="detail") Last sale: 0,0869 ETH 
-
+      slot(name="detail") Last sale: 0,0869 ETH
 </template>
 
 <script lang="ts" setup>
-import type { TokenIdentifier } from '@ix/base/composables/Token/useTokens';
+import type { IXToken } from '~/composables/useCollection'
 
 
-const { getTokenKey } = useTokens()
 const mediaElement = ref()
 const isHovered = useElementHover(mediaElement)
 
 defineProps<{
-  token: TokenIdentifier,
+  token: IXToken,
   quantity?: number,
   isInvalid?: boolean,
   isActive?: boolean,
 }>()
-
 </script>

@@ -11,6 +11,9 @@ transition(name="fade-slow")
           span() Explore Collections
           ChevronIcon(w="5" translate-y="-0.3" fill="white")
 
+        HList(w="25%" color="white" frame="~ white" font="bold" justify="between" items="center" h="10" px="3")
+          NuxtLink(:to="'/assets/polygon/'+item.slug" v-for="item of collections" ) {{ item.name }}
+
         ButtonSquareIcon()
           UserIcon(w="6")
 
@@ -24,6 +27,7 @@ import NetEmpireLogo from '~/assets/icons/logo/netempire.svg'
 import UserIcon from '~/assets/icons/user.svg'
 import CartIcon from '~/assets/icons/cart.svg'
 import ChevronIcon from '~/assets/icons/chevron-down.svg'
+import type {CollectionData} from '~/composables/useCollection';
 
 const { y } = useWindowScroll()
 
@@ -36,6 +40,15 @@ const bgBarOnScroll = computed(() => {
     return 'ix-black'
   return null
 })
+
+const { data: collectionsList, execute: fetchAllCollections } = useCollectionsData()
+
+onMounted(async () => {
+    await fetchAllCollections()
+})
+
+const collections = computed<CollectionData>(() => (collectionsList.value as CollectionData))
+console.log('collections', collections.value)
 
 </script>
 
