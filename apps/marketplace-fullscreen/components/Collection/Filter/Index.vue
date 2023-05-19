@@ -5,6 +5,14 @@ HList(w="full" pos="sticky top-34" z="2")
 
     CollectionFilterToggleFilter(@click="$emit('toggle-filter')")
 
+    Search(:options="items" :search-paths="['type', 'tier']" w="full")
+      template(#item="{item}")
+        HList(items="center" space-x="3")
+          div(w="12")
+            TokenImage(:token="item"  :key="'img' + getTokenKey(item)")
+
+    CollectionFilterToggleFilter(@click="$emit('toggle-filter')")
+
     //- Search(:options="items" :search-paths="['type', 'tier']" w="full")
     //-   template(#item="{item}")
     //-     HList(items="center" space-x="3")

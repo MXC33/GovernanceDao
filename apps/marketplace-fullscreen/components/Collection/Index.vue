@@ -1,16 +1,23 @@
 <template lang="pug">
 VList(flex-grow="1" min-h="0" pos="relative" p="8" space-y="6")
-  CollectionHeader(:collection="data" v-if="data" )
-    template(#header) {{ data.name }}
+  CollectionHeader() 
+    template(#header) 
+      slot(name="name")
 
     template(#attributes)
-      AttributeList()
+      slot(name="attributes" mode="out-in")
 
-  CollectionFilter(:items="data.filters" v-if="data"  @toggle-filter="toggleFilterDrawer" pos="relative")
+
+  CollectionFilter(:items="items" @toggle-filter="toggleFilterDrawer" pos="relative")
 
   HList(pos="sticky")
     Transition(name="slide-left")
       ContentDrawerWrapper(v-if="showFilters" pos="sticky top-58" h="100" inset="0")
+
+    Transition(name="fade" mode="out-in")
+      
+      CollectionGrid(v-if="displayType == 'grid'")
+        CollectionGridItem(:token="token" v-for="token in items" b="gray-400")
 
   Transition(name="fade" mode="out-in" v-if="data")
     CollectionGrid(v-if="displayType == 'grid'")
