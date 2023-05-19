@@ -1528,7 +1528,7 @@
       "image": "/tips/images/aoc-bronze.png"
     }
   ],
-  "marketplacefullscreen": {
+  "marketplaceFullscreen": {
     "buyIxt": "Buy IXT",
     "playNow": "Play Now",
     "staking": "Staking",
@@ -1536,7 +1536,8 @@
     "transfer": {
       "title": "Transfer Asset",
       "quantity": "Quantity",
-      "own": "You own 26 of the item",
+      "own1": "You own ",
+      "own2": "of the item",
       "walletAdress": "Wallet Adress",
       "placeholderText": "Put Adress Here",
       "confirm": "Confrim Adress"
