@@ -61,7 +61,7 @@ export default defineNuxtConfig({
   vite: {
     server: {
       hmr: {
-        port: 445,
+        port: 3001,
       },
     },
   },
