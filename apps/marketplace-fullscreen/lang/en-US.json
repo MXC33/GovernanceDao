@@ -1527,5 +1527,19 @@
       "description": "If you carry the AOC Gold Badge, you will be added to the whitelist for future airdrops.",
       "image": "/tips/images/aoc-bronze.png"
     }
-  ]
+  ],
+  "marketplacefullscreen": {
+    "buyIxt": "Buy IXT",
+    "playNow": "Play Now",
+    "staking": "Staking",
+    "community": "Community",
+    "transfer": {
+      "title": "Transfer Asset",
+      "quantity": "Quantity",
+      "own": "You own 26 of the item",
+      "walletAdress": "Wallet Adress",
+      "placeholderText": "Put Adress Here",
+      "confirm": "Confrim Adress"
+    }
+  }
 }
