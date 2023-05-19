@@ -173,6 +173,7 @@ export const useTokens = () => {
     getTokenKey,
     getTokenName,
     getTierColor,
+    getTokenId,
     // createMCNFT,
     isSameToken,
     isSameCurrency,
