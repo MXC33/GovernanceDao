@@ -9,8 +9,9 @@ VList(w="full" h="full")
 </template>
 
 <script lang="ts" setup>
-import type { TokenIdentifier } from '~/composables/Token/useTokens';
+import type { TokenIdentifier } from '@ix/base/composables/Token/useTokens';
 import { useElementVisibility } from '@vueuse/core'
+import type {IXToken} from "~/composables/useCollection";
 
 const isLoaded = ref(false)
 const videoElement = ref()
@@ -18,7 +19,7 @@ const config = useRuntimeConfig().public
 
 const { addCacheKey } = useCacheKey()
 const props = defineProps<{
-  token: TokenIdentifier,
+  token: IXToken,
 }>()
 
 const visible = useElementVisibility(videoElement)
@@ -49,23 +50,9 @@ watch(visible, (isVisible) => {
 })
 
 
-const { execute: fetchTokenInfodata, data } = useTokenInfo(props.token)
-
-await fetchTokenInfodata()
-
-const externalURL = computed(() => data.value?.video)
-
-const videoPath = computed(() => {
-  const { tier, type } = props.token
-  const tierId = tier ? `${tier}` : `${type}`
-  return `/nft/video/${type}/${tierId}.mp4`
-})
-
 const videoURL = computed(() => {
-  if (externalURL.value)
-    return externalURL.value
-
-  return config.s3 + addCacheKey(videoPath.value)
+  if (props.token.video)
+    return props.token.video
 })
 
 </script>
