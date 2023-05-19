@@ -1,6 +1,6 @@
 <template lang="pug">
-div(pos="sticky top-50%" bg="black" rounded="5" m="100" z="100" b="~ red")
-  VList(p="10" items="center")
+div(pos="sticky top-50%" bg="black opacity-80%" rounded="5" m="35%" z="100" b="~ red" backdrop="blur")
+  VList(p="10" items="center" capitalized="~")
     slot()
 
 </template>
