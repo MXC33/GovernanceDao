@@ -39,17 +39,6 @@ const columns: TableColumn[] = [
   { label: "Tier", value: "tier", sortable: true },
 ]
 
-const { y } = useWindowScroll()
-
-const valueTop = computed(() => {
-  const yValue = y.value + 100
-
-  return yValue.toString()
-})
-
-console.log(valueTop.value)
-// `sticky top-${valueTop}`
-
 const showFilters = ref(false)
 
 const toggleFilterDrawer = () => {
