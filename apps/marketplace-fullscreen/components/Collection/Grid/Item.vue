@@ -37,5 +37,7 @@ defineProps<{
   quantity?: number,
   isInvalid?: boolean,
   isActive?: boolean,
+  page?: string,
 }>()
+
 </script>
