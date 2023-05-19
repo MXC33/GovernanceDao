@@ -19,6 +19,19 @@ transition(name="fade-slow")
 
         ButtonSquareIcon()
           CartIcon(w="6")
+div()
+  div(frame="~ gray-300" )
+    div(font="foundry bold" color="white" text="base" h="10" px="3" flex="~" justify="between" items="center"  bg="gray-800 hover:gray-700" cursor="pointer" @click="dropDownShown = !dropDownShown" )
+      div() {{ collection }} asd
+      ChevronIcon(w="4" fill="white" v-if="!dropDownShown")
+      ChevronIconUp(w="4" fill="white" v-else)
+  div(frame="~ gray-300" text="base" mt="2" v-if="dropDownShown" )
+    NuxtLink(:to="'/assets/polygon/'+item.slug" font="foundry bold" color="white" h="12" px="3" flex="~" justify="between" items="center" b="b-1 gray-600" bg="gray-800 hover:gray-700" v-for="item of collections")
+      div( flex="~" items="center")
+        div(w="8" h="8" mr="3")
+          img(src="~/assets/testfiles/test-collection-bg.png" )
+        div() {{ item.name }}
+      div( color="gray-200" font="normal") 50 items
 
 </template>
 
@@ -27,9 +40,21 @@ import NetEmpireLogo from '~/assets/icons/logo/netempire.svg'
 import UserIcon from '~/assets/icons/user.svg'
 import CartIcon from '~/assets/icons/cart.svg'
 import ChevronIcon from '~/assets/icons/chevron-down.svg'
+import ChevronIconUp from '~/assets/icons/chevron-up.svg'
 import type {CollectionData} from '~/composables/useCollection';
+import {ref} from "vue";
 
 const { y } = useWindowScroll()
+
+const route = useRoute()
+let { collection } = route.params
+watch(route, (val) => {
+  nextTick(() =>{
+    collection = val.params.collection
+  })
+})
+
+console.log('collection', collection)
 
 const gradientStyle = computed(() => ({
   opacity: 100 - (y.value / 500) * 100 + '%'
@@ -40,11 +65,13 @@ const bgBarOnScroll = computed(() => {
     return 'black'
   return null
 })
+const dropDownShown = ref(false);
 
 const { data: collectionsList, execute: fetchAllCollections } = useCollectionsData()
 
 onMounted(async () => {
     await fetchAllCollections()
+  console.log('collections', collections.value)
 })
 
 const collections = computed<CollectionData>(() => (collectionsList.value as CollectionData))
