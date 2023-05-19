@@ -1,5 +1,5 @@
 <template lang="pug">
-VList(min-w="94")
+VList(min-w="100% md:90")
   //- should be slotted in future, testing atm
   ContentDrawer()
     template(#header) Test Radio

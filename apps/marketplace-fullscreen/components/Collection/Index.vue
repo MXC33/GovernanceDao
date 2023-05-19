@@ -1,16 +1,19 @@
 <template lang="pug">
-VList(flex-grow="1" min-h="0" pos="relative" p="6" space-y="6")
+VList(flex-grow="1" min-h="0" pos="relative" p="8" space-y="6")
   CollectionHeader() 
     template(#header) 
       slot(name="name")
 
     template(#attributes)
-      slot(name="attributes")
+      slot(name="attributes" mode="out-in")
 
-  CollectionFilter(:items="items" @toggle-filter="toggleFilterDrawer")
 
-  HList()
-    ContentDrawerWrapper(pos="sticky left-0" v-if="showFilters")
+  CollectionFilter(:items="items" @toggle-filter="toggleFilterDrawer" pos="relative")
+
+  HList(pos="sticky")
+    Transition(name="slide-left")
+      ContentDrawerWrapper(v-if="showFilters" pos="sticky top-58" h="100" inset="0")
+
     Transition(name="fade" mode="out-in")
       
       CollectionGrid(v-if="displayType == 'grid'")
@@ -35,6 +38,17 @@ const columns: TableColumn[] = [
   { label: "Type", value: "type", sortable: true },
   { label: "Tier", value: "tier", sortable: true },
 ]
+
+const { y } = useWindowScroll()
+
+const valueTop = computed(() => {
+  const yValue = y.value + 100
+
+  return yValue.toString()
+})
+
+console.log(valueTop.value)
+// `sticky top-${valueTop}`
 
 const showFilters = ref(false)
 
