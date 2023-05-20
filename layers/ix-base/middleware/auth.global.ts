@@ -2,8 +2,6 @@ const isUserAuthenticated = async () => {
   const { walletSigningToken } = useWallet()
   const { loginIX } = useIXAPI()
 
-  console.log("Token", walletSigningToken.value)
-
   if (!walletSigningToken.value)
     return false
 
