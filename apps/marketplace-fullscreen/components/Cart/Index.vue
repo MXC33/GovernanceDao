@@ -12,7 +12,8 @@ Transition(name="slide-right")
       HList()
         h4(font="bold" text="md") {{ cartItems.length }} items
 
-    CartItem(v-model="cartItems[index]" v-for="(item, index) in cartItems")
+    template(v-for="(item, index) in cartItems" :key="index")
+      CartItem(v-model="cartItems[index]")
     
   </template>
   

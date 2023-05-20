@@ -3,7 +3,7 @@ HList(:b="borderOnScroll" pos="sticky top-34" z="3" ml="-8" mr="-8")
 HList(w="full" pos="sticky top-34" z="2")
   HList(w="full" py="3" space-x="3" bg="ix-black")
 
-    CollectionFilterToggleFilter(@click="$emit('toggle-filter')")
+    CollectionFilterToggleFilter(@click="$emit('toggleFilter')")
 
     Search(:options="items" :search-paths="['name']" w="full")
       template(#item="{item}")
@@ -24,6 +24,10 @@ const { getTokenKey } = useTokens()
 defineProps<{
   items: IXToken[],
   filters: any[]
+}>()
+
+defineEmits<{
+  toggleFilter: []
 }>()
 
 const { y } = useWindowScroll()

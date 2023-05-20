@@ -1,52 +1,35 @@
 <template lang="pug">
-VList(bg="gray-800" v-for="item in cartItems")
+VList(bg="gray-800" v-if="item")
   header(p="x-6 y-3" font="bold")
     TokenName(:token="item.token")
 
   HList()
     TokenImage(:token="item.token" w="30" h="30")
     VList(w="full")
-      HList()
+      HList(flex-grow="1" pr="3" items="center")
         VList(flex-grow="1" color="gray-200" space-y="1")
           div Planet IX – Assets
           div Available items: 38
 
         button()
-          TrashIcon()
-      Adjustable(v-model="number" h="10")
+          TrashIcon(w="6")
+
+      Adjustable(v-model="item" h="10")
     
   </template>
   
   
 <script lang="ts" setup>
-import type { AdjustableNumber } from '@ix/base/composables/Utils/useAdjustableNumber'
-
-import TrashIcon from '~/assets/icons/trash.svg'
-
 import type { CartItem } from '~/composables/useCart'
+import TrashIcon from '~/assets/icons/trash.svg'
 
 const cartElement = ref()
 
 onClickOutside(cartElement, () => viewingCart.value = false)
 
-const { viewingCart, cartItems } = useCart()
+const { viewingCart } = useCart()
 
-const props = defineProps<{
-  modelValue: CartItem
-}>()
-const emit = defineEmits(['update:modelValue'])
-
-const data = useVModel(props, 'modelValue', emit)
-
-const number = ref<AdjustableNumber>({
-  min: 1,
-  value: props.modelValue.amount,
-  max: 100
-})
-
-watch(number, (newVal) => {
-  data.value.amount = newVal.value
-})
+const item = defineModel<CartItem>()
 
 </script>
   

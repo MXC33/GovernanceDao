@@ -1,8 +1,8 @@
 import { IXToken } from "@ix/base/composables/Token/useIXToken"
+import { AdjustableNumber } from "@ix/base/composables/Utils/useAdjustableNumber"
 
-export interface CartItem {
+export interface CartItem extends AdjustableNumber {
   token: IXToken,
-  amount: number
 }
 
 export const useCart = () => {
@@ -13,7 +13,7 @@ export const useCart = () => {
   const addToCart = (token: IXToken) => {
     cartItems.value.push({
       token,
-      amount: 1
+      value: 1
     })
 
     viewingCart.value = true
