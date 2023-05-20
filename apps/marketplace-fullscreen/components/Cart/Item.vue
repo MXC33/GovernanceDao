@@ -5,15 +5,25 @@ VList(bg="gray-800" v-for="item in cartItems")
 
   HList()
     TokenImage(:token="item.token" w="30" h="30")
+    VList(w="full")
+      HList()
+        VList(flex-grow="1" color="gray-200" space-y="1")
+          div Planet IX – Assets
+          div Available items: 38
 
-    Adjustable(v-model="number")
+        button()
+          TrashIcon()
+      Adjustable(v-model="number" h="10")
     
   </template>
   
   
 <script lang="ts" setup>
-import type { AdjustableNumber } from '~/../../layers/ix-base/composables/Utils/useAdjustableNumber';
-import type { CartItem } from '~/composables/useCart';
+import type { AdjustableNumber } from '@ix/base/composables/Utils/useAdjustableNumber'
+
+import TrashIcon from '~/assets/icons/trash.svg'
+
+import type { CartItem } from '~/composables/useCart'
 
 const cartElement = ref()
 
