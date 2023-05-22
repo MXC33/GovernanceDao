@@ -1,30 +1,30 @@
 <template lang="pug">
 VList(p="5" capitalized="~" space-y="5" b="~" rounded="2")
-  //-items="center"
-  VList(p="3") 
-    div(text="2xl white" v-html="$t(`marketplaceFullscreen.transfer.title`)")
+    //-items="center"
+    VList(p="3") 
+        div(text="2xl white" v-html="$t(`marketplaceFullscreen.transfer.title`)")
+        HList(space-x="3")
+            HList()
+                TokenImage(:token="token" inset="0" w="15" h="15" object="contain center" :key="getTokenKey(token)")
+                VList()
+                    div(text="white") Title 
+                    div(text="white") Planet IX  
+            div(flex="grow")
+            div(text="white" v-html="$t(`marketplaceFullscreen.transfer.own`)")
+
+    div(text="white") Quantity
+    Adjustable(v-model="Image" h="10")
+
+    //-VList(items="center" space-y="3")
+    div(text="white") Wallet Adress
+    Input(text="2xl white center" bg="black" placeholder="e.g Dx0000" border="")
+    div()
+        div(text="white" v-html="$t(`marketplaceFullscreen.transfer.warningText`)")
     HList(space-x="3")
-      HList()
-        TokenImage(:token="token" inset="0" w="15" h="15" object="contain center" :key="getTokenKey(token)")
-        VList()
-          div(text="white") Title 
-          div(text="white") Planet IX  
-      div(flex="grow")
-      div(text="white" v-html="$t(`marketplaceFullscreen.transfer.own`)")
+        FormCheckbox(v-model="isChecked") 
+        div(text="white" v-html="$t(`marketplaceFullscreen.transfer.verifyText`)")
 
-  div(text="white") Quantity
-  Adjustable(v-model="Image" h="10")
-
-  //-VList(items="center" space-y="3")
-  div(text="white") Wallet Adress
-  Input(text="2xl white center" bg="black" placeholder="e.g Dx0000" border="")
-  div()
-      div(text="white" v-html="$t(`marketplaceFullscreen.transfer.warningText`)")
-  HList(space-x="3")
-    FormCheckbox(v-model="isChecked") 
-    div(text="white" v-html="$t(`marketplaceFullscreen.transfer.verifyText`)")
-
-  button(m="auto" text="2xl white" bg="gray" p="2" v-if="isChecked") Transfer Item 
+    button(m="auto" text="~" bg="gray-600" b="~" p="2" v-if="isChecked" @click="itemTransfer") Transfer Item 
 </template>
 
 <script lang="ts" setup>
@@ -36,6 +36,10 @@ const { getTokenKey } = useTokens()
 import type { IXToken } from '@ix/base/composables/Token/useIXToken';
 import type { AnyToken } from '@ix/base/composables/Token/useTokens';
 const props = defineProps<{
-  token: AnyToken,
+    token: AnyToken,
 }>()
+
+const itemTransfer = () => {
+    console.log('transfering Item proccess starting')
+}
 </script>
