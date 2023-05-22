@@ -4,7 +4,7 @@ export interface Filters {
   trait_type: string
   value: string[]
 }
-export interface Collections {
+export interface Collection {
   name: string
   slug: string
   contract: string

@@ -1,0 +1,27 @@
+<template lang="pug">
+VList(pos="relative")
+  HList(font="bold" frame="~ gray-300" color="white" h="10" px="3" justify="between" items="center" cursor="pointer" space-x="3" @click="isOpen = !isOpen" )
+    div(capitalize="~" select="none")
+      slot(name="selectedName")
+
+    Transition(name="fade" mode="out-in")
+      ChevronIcon(w="4" fill="white" v-if="!isOpen")
+      ChevronIconUp(w="4" fill="white" v-else)
+
+  Transition(name="fade")
+    div(frame="~ gray-300" mt="2" v-if="isOpen" pos="!absolute top-full right-0" min-w="80" font="bold")
+      template( v-for="item in items")
+        HList(h="12" px="3" justify="between" items="center" b="b-1 gray-600" bg="gray-800 hover:gray-700")
+          slot(name="item" :item="item")
+
+</template>
+
+<script lang="ts" setup generic="T extends object">
+import ChevronIcon from '~/assets/icons/chevron-down.svg'
+import ChevronIconUp from '~/assets/icons/chevron-up.svg'
+
+const isOpen = ref(false)
+defineProps<{
+  items: T[]
+}>()
+</script>
