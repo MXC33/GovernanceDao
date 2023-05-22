@@ -56,6 +56,9 @@ export const useSearch = <Item extends Record<string, any>, Key extends string &
   }
 
   const groupList = (items: Readonly<Item[]>): GroupedItem[] => {
+    if (!items)
+      return items
+
     const groupedList: Record<string, Item[]> = groupBy(items, 'category')
 
     return Object.keys(groupedList).map((key) => ({

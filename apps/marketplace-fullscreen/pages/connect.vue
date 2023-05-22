@@ -6,12 +6,14 @@ VList(flex-grow="1" pos="relative" min-h="0" justify="center" p="3" items="cente
 
 <script lang="ts" setup>
 const { isLoggedInAndConnected } = useLogin()
-const router = useRouter()
-const route = useRoute()
-
-const { origin } = route.query
-
+const redirect = useLoginRedirect()
 const isDirty = ref(false)
+
+console.log("LOGIN", redirect.value)
+
+definePageMeta({
+  middleware: ''
+})
 
 watch(isLoggedInAndConnected, (connected) => {
   if (!process.client)
@@ -25,10 +27,10 @@ watch(isLoggedInAndConnected, (connected) => {
   if (origin == 'static')
     return
 
-  if (origin) {
-    return router.push({ name: origin })
+  if (redirect.value) {
+    return navigateTo(redirect.value)
   } else if (isDirty.value) {
-    return router.push('/')
+    return navigateTo('/')
   }
 
   isDirty.value = true
