@@ -20,8 +20,8 @@ VList(flex-grow="1" min-h="0" pos="relative" p="8" space-y="6")
         template(#item-name="{row}")
           HList(items="center" space-x="2" font="bold")
             div(w="12" h="12")
-              TokenImage(:token="row" w="12" h="12")
-            TokenName(:token="row" capitalize="~")
+              TokenImage(:token="row" w="12" h="12" :key="getTokenKey(row)")
+            TokenName(:token="row" capitalize="~" :key="getTokenKey(row)")
 
 </template>
 
@@ -29,7 +29,7 @@ VList(flex-grow="1" min-h="0" pos="relative" p="8" space-y="6")
 import type { CollectionData } from '~/composables/useCollection';
 import type { TableColumn } from '~/composables/useTable'
 const { displayType } = useCollectionSettings()
-
+const { getTokenKey } = useTokens()
 const columns: TableColumn[] = [
   { label: "Asset", value: "name" },
   { label: "Higher bid price", value: "higher_bid_price", sortable: true },
