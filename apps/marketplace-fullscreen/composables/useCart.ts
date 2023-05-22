@@ -9,6 +9,13 @@ export const useCart = () => {
   const cartItems = useState<CartItem[]>('cart-items', () => [])
   const viewingCart = useState('cart-visible', () => false)
 
+  const removeFromCart = (token: IXToken) => {
+
+    const index = cartItems.value.findIndex((item) => item.token.token_id == token.token_id)
+    console.log("remove", index, token.token_id, cartItems.value.map((item) => item.token.token_id))
+
+    cartItems.value.splice(index, 1)
+  }
 
   const addToCart = (token: IXToken) => {
     cartItems.value.push({
@@ -19,9 +26,15 @@ export const useCart = () => {
     viewingCart.value = true
   }
 
+  const clearCart = () => {
+    cartItems.value = []
+  }
+
   return {
     cartItems,
     viewingCart,
+    clearCart,
+    removeFromCart,
     addToCart
   }
 }

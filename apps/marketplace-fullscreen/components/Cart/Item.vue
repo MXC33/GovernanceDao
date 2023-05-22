@@ -6,15 +6,16 @@ VList(bg="gray-800" v-if="item")
   HList()
     TokenImage(:token="item.token" w="30" h="30")
     VList(w="full")
-      HList(flex-grow="1" pr="3" items="center")
+      HList(flex-grow="1" px="3" items="center")
         VList(flex-grow="1" color="gray-200" space-y="1")
           div Planet IX – Assets
           div Available items: 38
+          div(flex-grow="1")
 
-        button()
+        button(@click="removeFromCart(item.token)")
           TrashIcon(w="6")
 
-      Adjustable(v-model="item" h="10")
+      Adjustable(v-model="item" h="3")
     
   </template>
   
@@ -27,7 +28,7 @@ const cartElement = ref()
 
 onClickOutside(cartElement, () => viewingCart.value = false)
 
-const { viewingCart } = useCart()
+const { viewingCart, removeFromCart } = useCart()
 
 const item = defineModel<CartItem>()
 
