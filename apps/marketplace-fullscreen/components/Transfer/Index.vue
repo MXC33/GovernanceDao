@@ -1,15 +1,16 @@
 <template lang="pug">
-VList(p="5" capitalized="~" space-y="5")
-  VList(items="center" p="3")
-      div(text="2xl white" v-html="$t(`marketplaceFullscreen.transfer.title`)")
-      HList(space-x="3")
-          Image(w="10" h="10" b="~")
-          TokenImage(:token="token" pos="absolute" inset="0" object="contain center" :key="getTokenKey(token)")
-          VList()
-              div(text="white") Title 
-              div(text="white") Planet IX  
-          div(flex="grow")
-          div(text="white" v-html="$t(`marketplaceFullscreen.transfer.own`)")
+VList(p="5" capitalized="~" space-y="5" b="~")
+  //-items="center"
+  VList(p="3") 
+    div(text="2xl white" v-html="$t(`marketplaceFullscreen.transfer.title`)")
+    HList(space-x="3")
+      HList()
+        TokenImage(:token="token" inset="0" w="15" h="15" object="contain center" :key="getTokenKey(token)")
+        VList()
+          div(text="white") Title 
+          div(text="white") Planet IX  
+      div(flex="grow")
+      div(text="white" v-html="$t(`marketplaceFullscreen.transfer.own`)")
 
   div(text="white") Quantity
   Adjustable(v-model="Image" h="10")
@@ -28,12 +29,13 @@ VList(p="5" capitalized="~" space-y="5")
 
 <script lang="ts" setup>
 import Image from "~/assets/icons/plus.svg"
-import type { IXToken } from '@ix/base/composables/Token/useIXToken';
-
-const { getTokenKey } = useTokens()
 
 const isChecked = ref(false)
+
+const { getTokenKey } = useTokens()
+import type { IXToken } from '@ix/base/composables/Token/useIXToken';
+import type { AnyToken } from '@ix/base/composables/Token/useTokens';
 const props = defineProps<{
-  token: IXToken,
+  token: AnyToken,
 }>()
 </script>
