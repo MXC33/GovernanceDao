@@ -6,8 +6,6 @@ VList()
         slot(name="header")
       ChevronIcon(w="5" translate-y="-0.35" fill="white" transition="opacity" :selected="drawerState" rotate="on-selected:-180deg")
 
-
-  //- div(b="t-1 gray-600" w="full")
   transition(name="slide-top")
     HList(uppercase="~" v-if="drawerState")
       slot()

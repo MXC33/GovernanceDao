@@ -5,13 +5,13 @@ VList(flex-grow="1" min-h="0" pos="relative" p="8" space-y="6")
       slot(name="name")
 
     template(#attributes)
-      slot(name="attributes" mode="out-in")
+      AttributeList(:data="data" v-if="data" )
 
-  CollectionFilter(:items="data.nfts" :filters="data.filters" v-if="data"  @toggle-filter="toggleFilterDrawer")
+  CollectionFilter(@toggle-filter="toggleFilterDrawer" :items="data.nfts" :filters="data.filters")
 
   HList(pos="sticky")
     Transition(name="slide-left")
-      ContentDrawerWrapper(v-if="showFilters" pos="sticky top-58" h="100" inset="0")
+      ContentDrawerWrapper(v-if="showFilters && data" pos="sticky top-58" h="100" inset="0" :items="data.filters")
 
     Transition(name="fade" mode="out-in" v-if="data")
       CollectionGrid(v-if="displayType == 'grid'" w="full")
@@ -21,8 +21,8 @@ VList(flex-grow="1" min-h="0" pos="relative" p="8" space-y="6")
         template(#item-name="{row}")
           HList(items="center" space-x="2" font="bold")
             div(w="12" h="12")
-              TokenImage(:token="row" w="12" h="12")
-            TokenName(:token="row" capitalize="~")
+              TokenImage(:token="row" w="12" h="12" :key="getTokenKey(row)")
+            TokenName(:token="row" capitalize="~" :key="getTokenKey(row)")
 
 </template>
 
@@ -30,7 +30,7 @@ VList(flex-grow="1" min-h="0" pos="relative" p="8" space-y="6")
 import type { CollectionData } from '~/composables/useCollection';
 import type { TableColumn } from '~/composables/useTable'
 const { displayType } = useCollectionSettings()
-
+const { getTokenKey } = useTokens()
 const columns: TableColumn[] = [
   { label: "Asset", value: "name" },
   { label: "Higher bid price", value: "higher_bid_price", sortable: true },
