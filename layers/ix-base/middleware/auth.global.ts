@@ -8,7 +8,7 @@ const isUserAuthenticated = async () => {
 
   try {
 
-    await Promise.all([loginIX(walletSigningToken.value), GqlAuthed()])
+    await loginIX(walletSigningToken.value)
     return true
   } catch (error) {
     return false
