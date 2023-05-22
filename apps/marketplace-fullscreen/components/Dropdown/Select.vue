@@ -11,7 +11,7 @@ VList(pos="relative" ref="element")
   Transition(name="fade")
     div(frame="~ gray-300" mt="2" v-if="isOpen" pos="!absolute top-full right-0" min-w="80" font="bold")
       template( v-for="item in items")
-        HList(h="12" px="3" justify="between" items="center" b="b-1 gray-600" bg="gray-800 hover:gray-700")
+        HList(h="12" px="3" justify="between" items="center" b="b-1 gray-600" bg="gray-800 hover:gray-700" @click="isOpen = false")
           slot(name="item" :item="item")
 
 </template>
@@ -24,7 +24,6 @@ const isOpen = ref(false)
 const element = ref()
 
 onClickOutside(element, () => isOpen.value = false)
-
 
 defineProps<{
   items: T[]
