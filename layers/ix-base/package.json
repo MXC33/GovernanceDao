@@ -13,7 +13,8 @@
     "story:dev": "histoire dev",
     "story:build": "histoire build",
     "story:preview": "histoire preview",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "postinstall": "yarn run prepare"
   },
   "devDependencies": {
     "@coinbase/wallet-sdk": "^3.6.6",
