@@ -11,4 +11,7 @@ main(w="full" h="full" flex="~ col grow" min-h="0")
 </template>
 
 <script lang="ts" setup>
+const { setRefreshToken } = useLogin()
+const { user } = useUser()
+onMounted(() => !user.value || setRefreshToken(0))
 </script>
