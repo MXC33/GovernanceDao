@@ -3,7 +3,7 @@ div(v-if="amountSelected != 0" w="full" p="3" pos="sticky bottom-0" z="2" bg="ix
   HList(space-x="3" items="center")
     HList(font="bold" text="md" space-x="3")
       div(text="white" capitalize="~" ) {{amountSelected}} Items selected 
-      button(text="red" capitalize="~" ) clear all
+      button(text="red" capitalize="~" @click="clearCart") clear all
 
     //- To Create space between the text on the left side an the buttons on the right 
     div(flex="grow")
@@ -13,7 +13,7 @@ div(v-if="amountSelected != 0" w="full" p="3" pos="sticky bottom-0" z="2" bg="ix
 </template>
 
 <script lang="ts" setup>
-defineProps({
-  amountSelected: Number
-})
+
+const {cartItems, clearCart} = useCart()
+const amountSelected = computed(() => cartItems.value.length)
 </script>
