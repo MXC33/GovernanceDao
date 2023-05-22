@@ -2,69 +2,48 @@
 VList(min-w="100% md:90")
   //- should be slotted in future, testing atm
   ContentDrawer()
-    template(#header) Test Radio
+    template(#header) Owner
     template(#default)
       VList(w="full")
-        InputRadio(v-model="filterRadio[index]" v-for="list, index in testListRadio")
+        InputRadio(v-model="filterRadio['owner']" v-for="list, index in listRadio")
           template(#default) {{ list.title }}
           template(#value) {{ list.value }}
 
-  ContentDrawer()
-    template(#header) Test Checkmark
+  ContentDrawer(v-for="item in items" )
+    template(#header) {{item.trait_type}}
     template(#default)
       VList(w="full")
-        InputCheckbox(v-model="filterCheckbox[index]" v-for="list, index in testListCheckbox")
-          template(#default) {{ list.title }}
-          template(#value) {{ list.value }}
-
+        InputCheckbox(v-model="filterCheckbox[list+index]" v-for="list, index in item.value")
+          template(#default) {{ list }}
+          template(#value) 1
 </template>
 
 <script lang="ts" setup>
 
+import type {Filters} from "~/composables/useCollection";
+
 defineProps<{
-  drawerValue?: string
-  drawerType?: string
+    items: Filters[]
 }>()
 
 const filterRadio = ref<boolean[]>([])
 const filterCheckbox = ref<boolean[]>([])
 
-const testListRadio = [
-  {
-    title: 'cars',
-    value: 123
-  },
-  {
-    title: 'trohpy',
-    value: 123
-  },
-  {
-    title: 'galang',
-    value: 123
-  },
-  {
-    title: 'food',
-    value: 123
-  },
-]
+watch(filterRadio, (newValue, oldValue) => {
+    console.log(`filterRadio changed from ${oldValue} to ${newValue}`)
+})
+watch(filterCheckbox, (newValue, oldValue) => {
+    console.log(`filterCheckbox changed from ${oldValue} to ${newValue}`)
+})
 
-const testListCheckbox = [
+const listRadio = [
   {
-    title: 'cars',
-    value: 123
+    title: 'All',
+    value: 0
   },
   {
-    title: 'trohpy',
-    value: 123
-  },
-  {
-    title: 'galang',
-    value: 123
-  },
-  {
-    title: 'food',
-    value: 123
-},
+    title: 'Me',
+    value: 0
+  }
 ]
-
 </script>

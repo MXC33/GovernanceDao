@@ -1,6 +1,6 @@
 <template lang="pug">
 VList(@keydown.down.stop.prevent="stepDown" @keydown.up.stop.prevent="stepUp" @keypress.enter.stop.prevent="selectFocused" @keypress="onKeyDown" pos="relative" frame="~" ref="element")
-  HList(w="full" px="3")
+  HList(w="full" px="3" h="full")
     SearchIcon(w="4")
 
     input(type="text" v-model="searchTerm" :placeholder="placeholder ?? 'Search'" ref="searchElement" bg="ix-black" @click.stop="isOpen = true" outline="none" p="3" w="full")
