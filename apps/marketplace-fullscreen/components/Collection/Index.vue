@@ -15,7 +15,7 @@ VList(flex-grow="1" min-h="0" pos="relative" p="8" space-y="6")
 
     Transition(name="fade" mode="out-in" v-if="data")
       CollectionGrid(v-if="displayType == 'grid'" w="full")
-        CollectionGridItem(:token="token" v-for="token in data.nfts" b="gray-400")
+        CollectionGridItem.collection-grid-item(:token="token" v-for="token in data.nfts" b="gray-400")
 
       CollectionTable(:columns="columns" :rows="data.nfts" v-else initial-sort="name")
         template(#item-name="{row}")
@@ -47,5 +47,10 @@ const { data } = defineProps<{
   data: CollectionData,
 }>()
 
-
 </script>
+
+<style>
+.collection-grid-item:nth-child(5n + 6) {
+  border: 0px;
+}
+</style>
