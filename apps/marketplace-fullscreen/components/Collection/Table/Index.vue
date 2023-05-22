@@ -11,9 +11,8 @@ table(bg="gray-900" w="full")
   tbody(divide-y="1")
     CollectionTableRow(v-for="(row, index) in sortedRows" :key="index")
       CollectionTableCell(v-for="item in columns", :key="item.value")
-        slot(:name="`item-${item.value}`" :row="row" :column="item" v-if="$slots[`item-${item.value}`]")
-
-        span() {{row[item.value]}}
+        slot(:name="`item-${item.value}`" :row="row" :column="item")
+          span() {{row[item.value]}}
 
 </template>
 

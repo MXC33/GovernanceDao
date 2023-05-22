@@ -17,12 +17,12 @@ VList(justify="center" items="center" aspect="2/3" bg="black opacity-40" ref="me
         TokenName(:token="token" text="xl ellipsis" capitalize="~")
 
       div(text="lg" ) 
-        slot(name="subtitle") 0.12Eth
+        slot(name="subtitle") {{ token?.sale_price }} IXT
 
     div(flex-grow="1")
 
     div(text="md gray-200")
-      slot(name="detail") Last sale: 0,0869 ETH
+      slot(name="detail") Best offer: {{ token?.higher_bid_price }} IXT
 
     Transition(name="slide-bottom")
       button(btn="~ primary" pos="absolute bottom-0 left-0 right-0" v-if="isHovered" @click="onClickCart") Add to cart

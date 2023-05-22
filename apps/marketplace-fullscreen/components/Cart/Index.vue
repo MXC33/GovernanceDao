@@ -12,7 +12,7 @@ Transition(name="slide-right")
       HList()
         h4(font="bold" text="md") {{ cartItems.length }} items
 
-    template(v-for="(item, index) in cartItems" :key="index")
+    template(v-for="(item, index) in cartItems" :key="getTokenKey(item.token)")
       CartItem(v-model="cartItems[index]")
     
   </template>
@@ -20,9 +20,9 @@ Transition(name="slide-right")
   
 <script lang="ts" setup>
 const cartElement = ref()
+const { getTokenKey } = useTokens()
 
 onClickOutside(cartElement, () => viewingCart.value = false)
-
 const { viewingCart, cartItems } = useCart()
 
 </script>
