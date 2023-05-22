@@ -3,9 +3,9 @@ HList(:b="borderOnScroll" pos="sticky top-34" z="3" ml="-8" mr="-8")
 HList(w="full" pos="sticky top-34" z="2")
   HList(w="full" py="3" space-x="3" bg="ix-black")
 
-    CollectionFilterToggleFilter(@click="$emit('toggle-filter')")
+    CollectionFilterToggleFilter(@click="$emit('toggleFilter')")
 
-    Search(:options="items" :search-paths="['type', 'tier']" w="full")
+    Search(:options="items" :search-paths="['name']" w="full")
       template(#item="{item}")
         HList(items="center" space-x="3")
           div(w="12")
@@ -18,10 +18,16 @@ HList(w="full" pos="sticky top-34" z="2")
 </template>
 
 <script lang="ts" setup>
-import type { CollectionItem } from '~/composables/useCollection';
+import type { IXToken } from '@ix/base/composables/Token/useIXToken';
+
 const { getTokenKey } = useTokens()
 defineProps<{
-  items: CollectionItem[]
+  items: IXToken[],
+  filters: any[]
+}>()
+
+defineEmits<{
+  toggleFilter: []
 }>()
 
 const { y } = useWindowScroll()

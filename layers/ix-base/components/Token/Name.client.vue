@@ -4,29 +4,26 @@ div(v-else) {{ name }}
 </template>
 
 <script lang="ts" setup>
-import type { TokenIdentifier } from '~/composables/Token/useTokens';
-const { getTokenName } = useTokens()
+import type { AnyToken } from '~/composables/Token/useTokens';
 
 const props = defineProps<{
-  token: TokenIdentifier,
+  token: AnyToken,
   isShort?: boolean,
   noOverflow?: boolean,
   noChainName?: boolean
 }>()
 
-const { execute: fetchTokenData, pending } = useTokenInfo(props.token)
-await fetchTokenData()
+const fullName = await useTokenName(props.token, props.noChainName)
 
 const name = computed(() => {
   if (smallName.value)
     return smallName.value
 
-  const name = getTokenName(props.token, !props.noChainName)
-  return name
+  return fullName
 })
 
 const smallName = computed(() => {
-  if (!props.isShort)
+  if (!props.isShort || isIXToken(props.token))
     return null
 
   switch (props.token.type) {

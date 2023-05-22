@@ -8,17 +8,14 @@ Collection(:items="rows" v-if="rows")
 
 
 <script lang="ts" setup>
-import type { CollectionItem } from '~/composables/useCollection';
+import type { IXToken } from '@ix/base/composables/Token/useIXToken';
+
 
 const { allTokens, fetchUserInventory } = useUserData()
 await fetchUserInventory()
 const { getTokenKey } = useTokens()
 
-definePageMeta({
-  middleware: 'auth'
-})
-
-const rows = computed<CollectionItem[]>(() =>
+const rows = computed<IXToken[]>(() =>
   allTokens.value.map((token) => ({
     ...token,
     id: getTokenKey(token, '-', true)

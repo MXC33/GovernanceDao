@@ -1,7 +1,7 @@
 <template lang="pug">
 VList(w="full" h="full")
 
-  video(:src="videoURL" w="full" h="full" autoplay loop playsinline muted @play="isLoaded = true" opacity="0 on-loaded:100" transition="all duration-500" :loaded="isLoaded" ref="videoElement")
+  video(:src="videoURL" w="full" h="full" autoplay loop playsinline muted @play="isLoaded = true" opacity="0 on-loaded:100" transition="all duration-500" :loaded="isLoaded" ref="videoElement" object="cover center")
 
   Transition(name="fade")
     HelperLoader(pos="absolute bottom-3 left-3" v-if="!isLoaded" w="3")
@@ -9,17 +9,17 @@ VList(w="full" h="full")
 </template>
 
 <script lang="ts" setup>
-import type { TokenIdentifier } from '~/composables/Token/useTokens';
 import { useElementVisibility } from '@vueuse/core'
+import type { AnyToken } from '~/composables/Token/useTokens';
 
 const isLoaded = ref(false)
 const videoElement = ref()
-const config = useRuntimeConfig().public
+const { getTokenVideoURL } = useTokenMedia()
 
-const { addCacheKey } = useCacheKey()
 const props = defineProps<{
-  token: TokenIdentifier,
+  token: AnyToken,
 }>()
+const videoURL = await getTokenVideoURL(props.token)
 
 const visible = useElementVisibility(videoElement)
 
@@ -46,26 +46,6 @@ watch(visible, (isVisible) => {
     return stopVideo()
 
   return playVideo()
-})
-
-
-const { execute: fetchTokenInfodata, data } = useTokenInfo(props.token)
-
-await fetchTokenInfodata()
-
-const externalURL = computed(() => data.value?.video)
-
-const videoPath = computed(() => {
-  const { tier, type } = props.token
-  const tierId = tier ? `${tier}` : `${type}`
-  return `/nft/video/${type}/${tierId}.mp4`
-})
-
-const videoURL = computed(() => {
-  if (externalURL.value)
-    return externalURL.value
-
-  return config.s3 + addCacheKey(videoPath.value)
 })
 
 </script>

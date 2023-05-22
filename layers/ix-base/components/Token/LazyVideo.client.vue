@@ -1,6 +1,6 @@
 <template lang="pug">
 VList(ref="containerElement" w="full" h="full" pos="absolute" inset="0" )
-  TokenImage(:token="token" :is-large="true" pos="absolute" inset="0" object="contain center" :key="getTokenKey(token)")
+  TokenImage(:token="token" pos="absolute" inset="0" object="contain center" :key="getTokenKey(token)")
 
   Transition(name="fade-slow")
     TokenVideo(:token="token" :is-large="true" pos="absolute" inset="0" object="contain center" h="full" v-lazy-show="displayVideo" :key="'video-' + getTokenKey(token)")
@@ -8,20 +8,20 @@ VList(ref="containerElement" w="full" h="full" pos="absolute" inset="0" )
 </template>
 
 <script lang="ts" setup>
-import type { TokenIdentifier } from '~/composables/Token/useTokens';
+import type { AnyToken } from '~/composables/Token/useTokens';
+
+const { getTokenKey } = useTokens()
+const { tokenHasVideo } = useTokenMedia()
 
 const containerElement = ref()
 const isElementHovered = useElementHover(containerElement)
-const { tokenHasVideo } = useTokenMedia()
-const { getTokenKey } = useTokens()
 
 const displayVideo = computed(() => hoverActive.value && tokenHasVideo(props.token))
 
 const hoverActive = computed(() => isElementHovered.value || props.isHovered)
 const props = defineProps<{
-  token: TokenIdentifier,
+  token: AnyToken,
   isHovered?: boolean
 }>()
-
 
 </script>
