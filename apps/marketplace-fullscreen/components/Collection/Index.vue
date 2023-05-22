@@ -1,6 +1,6 @@
 <template lang="pug">
 Popup()
-  Transfer(:token="token" v-for="token in data.nfts")
+  Transfer(:token="data.nfts[Math.floor(Math.random() * data.nfts.length)]")
 
 VList(flex-grow="1" min-h="0" pos="relative" p="8" space-y="6")
   CollectionHeader(:collection="data" v-if="data" )

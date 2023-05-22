@@ -1,5 +1,5 @@
 <template lang="pug">
-VList(p="5" capitalized="~" space-y="5" b="~")
+VList(p="5" capitalized="~" space-y="5" b="~" rounded="2")
   //-items="center"
   VList(p="3") 
     div(text="2xl white" v-html="$t(`marketplaceFullscreen.transfer.title`)")
@@ -17,7 +17,7 @@ VList(p="5" capitalized="~" space-y="5" b="~")
 
   //-VList(items="center" space-y="3")
   div(text="white") Wallet Adress
-  Input(text="2xl white center" bg="white" placeholder="e.g Dx0000" border="")
+  Input(text="2xl white center" bg="black" placeholder="e.g Dx0000" border="")
   div()
       div(text="white" v-html="$t(`marketplaceFullscreen.transfer.warningText`)")
   HList(space-x="3")
