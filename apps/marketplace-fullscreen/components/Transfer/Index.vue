@@ -21,7 +21,7 @@ HList(space-x="3")
   FormCheckbox(v-model="isChecked") 
   div(text="black" v-html="$t(`marketplaceFullscreen.transfer.verifyText`)")
 
-button(m="auto" text="2xl black" bg="gray" p="2") Transfer Item 
+button(m="auto" text="2xl black" bg="gray" p="2" v-if="isChecked") Transfer Item 
 </template>
 
 <script lang="ts" setup>
