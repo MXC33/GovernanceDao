@@ -2,7 +2,7 @@
 VList(justify="center" items="center" aspect="2/3" bg="black opacity-40" ref="mediaElement" cursor="pointer" group)
   VList(aspect="square" w="full" pos="relative" overflow="hidden")
     slot(name="media")
-      TokenLazyVideo(:token="token" :key="getTokenKey(token)" :is-hovered="isHovered")
+      TokenLazyVideo(:token="token" :key="token.collection + token.token_id" :is-hovered="isHovered")
 
     HList(pos="absolute" inset="0" p="3" pointer-events="none" opacity="0 group-hover:100" transition="all")
       slot(name="icon-left")
@@ -17,28 +17,33 @@ VList(justify="center" items="center" aspect="2/3" bg="black opacity-40" ref="me
         TokenName(:token="token" text="xl ellipsis" capitalize="~")
 
       div(text="lg" ) 
-        slot(name="subtitle") 0.12Eth
+        slot(name="subtitle") {{ token?.sale_price }} IXT
 
     div(flex-grow="1")
 
     div(text="md gray-200")
-      slot(name="detail") Last sale: 0,0869 ETH 
+      slot(name="detail") Best offer: {{ token?.higher_bid_price }} IXT
 
+    Transition(name="slide-bottom")
+      button(btn="~ primary" pos="absolute bottom-0 left-0 right-0" v-if="isHovered" @click="onClickCart") Add to cart
+      
 </template>
 
 <script lang="ts" setup>
-import type { TokenIdentifier } from '@ix/base/composables/Token/useTokens';
+import type { IXToken } from '@ix/base/composables/Token/useIXToken';
 
-
-const { getTokenKey } = useTokens()
 const mediaElement = ref()
 const isHovered = useElementHover(mediaElement)
+const { addToCart } = useCart()
 
-defineProps<{
-  token: TokenIdentifier,
+const onClickCart = () => {
+  addToCart(props.token)
+}
+
+const props = defineProps<{
+  token: IXToken,
   quantity?: number,
   isInvalid?: boolean,
   isActive?: boolean,
 }>()
-
 </script>

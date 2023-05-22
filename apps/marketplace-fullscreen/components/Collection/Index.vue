@@ -1,52 +1,50 @@
 <template lang="pug">
-VList(flex-grow="1" min-h="0" pos="relative" p="6" space-y="6")
-  CollectionHeader() 
-    template(#header) 
-      slot(name="name")
+VList(flex-grow="1" min-h="0" pos="relative" p="8" space-y="6")
+  CollectionHeader(:collection="data" v-if="data" )
+    template(#header) {{ data.name }}
 
     template(#attributes)
-      slot(name="attributes")
+      AttributeList()
 
-  CollectionFilter(@toggleFilter="toggleFilterBar")
+  CollectionFilter(:items="data.nfts" :filters="data.filters" v-if="data"  @toggle-filter="toggleFilterDrawer")
 
-  Transition(name="fade" mode="out-in")
-    HList
-      CollectionFilterMeny(v-if="showFilter")
-      //-v-if="showFilter"
-      CollectionGrid(v-if="displayType == 'grid'")
-        CollectionGridItem(:token="token" v-for="token in items" b="gray-400")
+  HList(pos="sticky")
+    Transition(name="slide-left")
+      ContentDrawerWrapper(v-if="showFilters" pos="sticky top-58" h="100" inset="0")
 
-      CollectionTable(:columns="columns" :rows="items" initial-sort="tier" v-else)
-        template(#item-asset="{row}")
+    Transition(name="fade" mode="out-in" v-if="data")
+      CollectionGrid(v-if="displayType == 'grid'" w="full")
+        CollectionGridItem(:token="token" v-for="token in data.nfts" b="gray-400")
+
+      CollectionTable(:columns="columns" :rows="data.nfts" v-else initial-sort="name")
+        template(#item-name="{row}")
           HList(items="center" space-x="2" font="bold")
             div(w="12" h="12")
-              TokenImage(:token="row" w="12" h="12" :key="row.id")
-            TokenName(:token="row" capitalize="~")
-
-  CollectionSelectBar( :amountSelected="items.length")
+              TokenImage(:token="row" w="12" h="12" :key="getTokenKey(row)")
+            TokenName(:token="row" capitalize="~" :key="getTokenKey(row)")
 
 </template>
 
 <script lang="ts" setup>
-//CollectionFilterMeny(:showFilterMeny="showFilterMeny")
-import type { CollectionItem } from '~/composables/useCollection';
+import type { CollectionData } from '~/composables/useCollection';
 import type { TableColumn } from '~/composables/useTable'
 const { displayType } = useCollectionSettings()
-
+const { getTokenKey } = useTokens()
 const columns: TableColumn[] = [
-  { label: "Asset", value: "asset", width: 100 },
-  { label: "Type", value: "type", sortable: true },
-  { label: "Tier", value: "tier", sortable: true },
+  { label: "Asset", value: "name" },
+  { label: "Higher bid price", value: "higher_bid_price", sortable: true },
+  { label: "Sale Price", value: "sale_price", sortable: true },
 ]
 
-defineProps<{
-  items: CollectionItem[]
+const showFilters = ref(false)
+
+const toggleFilterDrawer = () => {
+  showFilters.value = !showFilters.value
+}
+
+const { data } = defineProps<{
+  data: CollectionData,
 }>()
 
-const showFilter = ref(false);
 
-const toggleFilterBar = () => {
-  showFilter.value = !showFilter.value
-  console.log("toggleFilterBar " + showFilter.value);
-}
 </script>

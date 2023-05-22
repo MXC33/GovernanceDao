@@ -19,6 +19,8 @@ type LoginFailState = 'no-user'
 
 export const useAuthUserData = () => useCookieState<APIAuthResponse | null>('auth-data', () => null)
 
+export const useLoginRedirect = () => useState<string | null>('login-redirect', () => null)
+
 
 export const useLogin = () => {
   const { loginIX } = useIXAPI()

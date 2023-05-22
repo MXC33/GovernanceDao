@@ -7,7 +7,6 @@ HList(uppercase="~" font="bold" text="white" frame="~" flex-shrink="0" w="24")
     ListIcon(w="6") 
 
 </template>
-  
 
 <script lang="ts" setup>
 import GridIcon from '~/assets/icons/grid.svg'

@@ -11,19 +11,19 @@ table(bg="gray-900" w="full")
   tbody(divide-y="1")
     CollectionTableRow(v-for="(row, index) in sortedRows" :key="index")
       CollectionTableCell(v-for="item in columns", :key="item.value")
-        slot(:name="`item-${item.value}`" :row="row" :column="item" v-if="$slots[`item-${item.value}`]")
-
-        span() {{row[item.value]}}
+        slot(:name="`item-${item.value}`" :row="row" :column="item")
+          span() {{row[item.value]}}
 
 </template>
 
 <script setup lang="ts">
-import type { CollectionItem, SortField } from '~/composables/useCollection';
+import type { IXToken } from '@ix/base/composables/Token/useIXToken';
+import type { SortField } from '~/composables/useCollection';
 import type { TableColumn } from '~/composables/useTable';
 
 const props = defineProps<{
   columns: TableColumn[],
-  rows: CollectionItem[],
+  rows: IXToken[],
   initialSort: SortField,
   loading?: boolean,
   error?: string,
@@ -40,6 +40,7 @@ const getColumnStyle = (item: TableColumn) => {
 }
 
 const { sortedRows } = useTableData(props.rows)
+
 watch(sortedRows, (da) => {
   console.log("Newsort", da)
 }, { immediate: true, deep: true })

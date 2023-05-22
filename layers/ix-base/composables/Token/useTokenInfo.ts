@@ -1,7 +1,7 @@
 import { gravityGradeAddress, assetsAddress, landmarkAddress, roverAddress, avatarNFTAddress, badgeNFTAddress, pixAdress } from "../Contract/WalletAddresses"
 import { GravityGradeNFTType, GravityGradeNFTTypes } from "./Types/GravityGrade"
 import { LandTypes, LandType } from "./Types/Land"
-import { TokenIdentifier, getNFTTokenId, useTokens } from "./useTokens"
+import { AnyToken, TokenIdentifier, getNFTTokenId, useTokens } from "./useTokens"
 
 const getContractForToken = (token: TokenIdentifier): string | undefined => {
   if (!token)

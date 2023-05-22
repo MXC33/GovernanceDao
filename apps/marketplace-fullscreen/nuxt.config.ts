@@ -15,6 +15,13 @@ export default defineNuxtConfig({
     'v-lazy-show/nuxt'
   ],
 
+  imports: {
+    dirs: [
+      'composables/**'
+    ]
+  },
+
+
   i18n: {
     precompile: { strictMessage: false },
     locales: [
@@ -52,6 +59,12 @@ export default defineNuxtConfig({
     preset: 'vercel',
   },
   vite: {
+    vue: {
+      script: {
+        defineModel: true,
+        propsDestructure: true
+      }
+    },
     server: {
       hmr: {
         port: 8001,
