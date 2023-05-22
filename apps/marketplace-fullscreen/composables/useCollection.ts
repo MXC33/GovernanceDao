@@ -1,6 +1,10 @@
 import { IXToken } from "@ix/base/composables/Token/useIXToken"
 
-export interface Collections {
+export interface Filters {
+  trait_type: string
+  value: string[]
+}
+export interface Collection {
   name: string
   slug: string
   contract: string
@@ -13,6 +17,8 @@ export interface CollectionData {
   name: string
   currency: string
   total_volume: number
+  floor_price?: number
+  owners?: number
   sale_price: any
   higher_bid_price: any
   listed: number
@@ -25,7 +31,7 @@ export interface CollectionData {
   parent: any
   nfts: IXToken[]
   page_key: string
-  filters: any[]
+  filters: Filters[]
 }
 
 export type SortField = string & keyof IXToken

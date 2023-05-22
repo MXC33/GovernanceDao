@@ -60,9 +60,6 @@ export default defineNuxtConfig({
       },
     }
   },
-  nitro: {
-    preset: 'vercel',
-  },
   vite: {
     server: {
       hmr: {

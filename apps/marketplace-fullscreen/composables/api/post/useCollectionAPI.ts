@@ -1,4 +1,4 @@
-import { IXToken, CollectionData, Collections } from "../../useCollection"
+import { CollectionData, Collection } from "../../useCollection"
 
 interface CollectionResponse {
   success: boolean
@@ -10,7 +10,7 @@ interface CollectionsResponse {
   success: boolean
   status: number
   message: string
-  data: Collections
+  data: Collection[]
 }
 
 
@@ -28,6 +28,6 @@ export const useCollectionsData = (network = 'polygon') =>
   useAsyncDataState('collections', () =>
     fetchIXAPI('collections') as Promise<CollectionsResponse>, {
     transform: (item) =>
-      item.data as Collections
+      item.data as Collection[]
   }
   )

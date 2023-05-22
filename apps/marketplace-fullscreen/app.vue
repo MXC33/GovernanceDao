@@ -10,8 +10,11 @@
 <script setup lang="ts">
 import 'vue3-easy-data-table/dist/style.css';
 
-const { data, execute } = useAsyncDataState('ix-api', async () => 'test')
-await execute()
+// const { data, execute } = useAsyncDataState('ix-api', async () => 'test')
+// await execute()
+const { y } = useWindowScroll()
+const globalY = useGlobalWindowScroll()
+watch(y, (pos) => globalY.value = pos)
 
 onMounted(async () => {
 

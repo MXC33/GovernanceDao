@@ -7,13 +7,13 @@ VList(flex-grow="1" min-h="0" pos="relative" p="8" space-y="6")
     template(#header) {{ data.name }}
 
     template(#attributes)
-      AttributeList()
-  
+      AttributeList(:data="data" v-if="data" )
+
   CollectionFilter(:items="data.nfts" :filters="data.filters" v-if="data"  @toggle-filter="toggleFilterDrawer")
 
   HList(pos="sticky")
     Transition(name="slide-left")
-      ContentDrawerWrapper(v-if="showFilters" pos="sticky top-58" h="100" inset="0")
+      ContentDrawerWrapper(v-if="showFilters && data" pos="sticky top-58" h="100" inset="0" :items="data.filters")
 
     Transition(name="fade" mode="out-in" v-if="data")
       CollectionGrid(v-if="displayType == 'grid'" w="full")
@@ -25,7 +25,7 @@ VList(flex-grow="1" min-h="0" pos="relative" p="8" space-y="6")
             div(w="12" h="12")
               TokenImage(:token="row" w="12" h="12" :key="getTokenKey(row)")
             TokenName(:token="row" capitalize="~" :key="getTokenKey(row)")
-            
+
   Transition(name="slide-bottom")
     CollectionSelectBar(v-if="cartItems.length > 0")
 </template>
@@ -35,7 +35,7 @@ import type { CollectionData } from '~/composables/useCollection';
 import type { TableColumn } from '~/composables/useTable'
 const { displayType } = useCollectionSettings()
 const { getTokenKey } = useTokens()
-const {cartItems} = useCart()
+const { cartItems } = useCart()
 const columns: TableColumn[] = [
   { label: "Asset", value: "name" },
   { label: "Higher bid price", value: "higher_bid_price", sortable: true },
