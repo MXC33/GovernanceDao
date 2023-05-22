@@ -17,6 +17,8 @@ export interface CollectionData {
   name: string
   currency: string
   total_volume: number
+  floor_price?: number
+  owners?: number
   sale_price: any
   higher_bid_price: any
   listed: number
