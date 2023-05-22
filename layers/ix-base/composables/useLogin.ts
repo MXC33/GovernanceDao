@@ -1,4 +1,5 @@
 import { WalletConnector } from "./Contract/useWalletConnectors";
+import {BASE_API_ENDPOINT_URL, useIXHeaders} from "@ix/marketplace/composables/api/api";
 
 export interface APIUser {
   id: number;
@@ -18,17 +19,21 @@ type LoginStatus = 'logged-in' | 'logged-out' | 'connecting' | 'checking'
 type LoginFailState = 'no-user'
 
 export const useAuthUserData = () => useCookieState<APIAuthResponse | null>('auth-data', () => null)
+export const useAuthTokenExpirationTime = () => useCookieState<number | null>('auth-token-expiration', () => 0)
 
 export const useLoginRedirect = () => useState<string | null>('login-redirect', () => null)
 
 
 export const useLogin = () => {
   const { loginIX } = useIXAPI()
-  const { user } = useUser()
+  const { user, removeUser } = useUser()
   const { addSigningToken, connectWallet, logoutWallet, walletSigningToken, isWalletConnected, failedConnection } = useWallet()
   const { setConnector } = useConnectors()
   const authUserData = useAuthUserData()
+  const authTokenExpirationTime = useAuthTokenExpirationTime()
 
+  const timeGap = 5 * 60 * 1000
+  let tryingToRefresh = 0
 
   const loginStatus = useState<LoginStatus>('user-status', () => 'logged-in')
   const loginFailType = useState<LoginFailState | null>('fail-state', () => null)
@@ -52,6 +57,8 @@ export const useLogin = () => {
     try {
       const authUser = await loginIX(walletSigningToken.value) as APIAuthResponse
       authUserData.value = authUser
+      authTokenExpirationTime.value = new Date(new Date().getTime()+(1000 * 60 * 60 * 24)).getTime() // 1 day
+      setRefreshToken(authTokenExpirationTime.value - Date.now() - timeGap)
     } catch (error) {
       console.log("No user")
       return null
@@ -100,11 +107,47 @@ export const useLogin = () => {
     loginFailType.value = 'no-user'
   }
 
+  const setRefreshToken = (time: number) => {
+
+    const headers = useIXHeaders()
+    const authTokenExpirationTimeout = setTimeout(async () => {
+      clearTimeout(authTokenExpirationTimeout)
+
+      try {
+        const {data, status}: {data: { access_token: string }, status: number} = await $fetch(BASE_API_ENDPOINT_URL + '/auth/refresh', {
+          method: 'POST',
+          headers: {
+            ...headers.value
+          }
+        })
+
+        if (authUserData && authUserData.value) {
+          authTokenExpirationTime.value = new Date(new Date().getTime()+(1000 * 60 * 60 * 24)).getTime() // 1 day
+          authUserData.value.access_token = data.access_token
+          setRefreshToken(authTokenExpirationTime.value - Date.now() - timeGap)
+          console.log('token updated')
+        }
+
+      } catch (error) {
+        if (error.response && error.response.status !== 401 && tryingToRefresh <= 3) {
+          setRefreshToken(0)
+          tryingToRefresh ++
+        } else {
+          logoutWallet()
+          removeUser()
+          return await navigateTo(`/connect`)
+        }
+      }
+    }, time)
+
+  }
+
   return {
     loginUser,
     loginFailType,
     loginStatus,
     isLoggedInAndConnected,
-    authUserData
+    authUserData,
+    setRefreshToken
   }
 }
