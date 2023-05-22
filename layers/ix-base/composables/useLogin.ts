@@ -32,6 +32,7 @@ export const useLogin = () => {
   const authUserData = useAuthUserData()
   const authTokenExpirationTime = useAuthTokenExpirationTime()
 
+  let authTokenExpirationTimeout: ReturnType<typeof setTimeout>
   const timeGap = 5 * 60 * 1000
   let tryingToRefresh = 0
 
@@ -110,7 +111,7 @@ export const useLogin = () => {
   const setRefreshToken = (time: number) => {
 
     const headers = useIXHeaders()
-    const authTokenExpirationTimeout = setTimeout(async () => {
+    authTokenExpirationTimeout = setTimeout(async () => {
       clearTimeout(authTokenExpirationTimeout)
 
       try {
