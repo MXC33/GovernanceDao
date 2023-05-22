@@ -1,4 +1,5 @@
 const isUserAuthenticated = async () => {
+
   const { walletSigningToken } = useWallet()
   const { loginIX } = useIXAPI()
 
@@ -7,7 +8,7 @@ const isUserAuthenticated = async () => {
 
   try {
 
-    await Promise.all([loginIX(walletSigningToken.value), GqlAuthed()])
+    await loginIX(walletSigningToken.value)
     return true
   } catch (error) {
     return false
@@ -15,6 +16,8 @@ const isUserAuthenticated = async () => {
 }
 
 export default defineNuxtRouteMiddleware(async (to, from) => {
+  await useNuxtApp().callHook('page:start')
+
   if (to.path == '/connect')
     return true
 
