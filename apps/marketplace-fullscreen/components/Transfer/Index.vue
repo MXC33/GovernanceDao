@@ -13,17 +13,18 @@ div(text="black") Quantity
 Adjustable(v-model="Image" h="10")
 
 //-VList(items="center" space-y="3")
-div(text="2xl black") Wallet Adress
+div(text="black") Wallet Adress
 Input(text="2xl black center" bg="white" placeholder="e.g Dx0000" border="")
 div()
     div(text="black" v-html="$t(`marketplaceFullscreen.transfer.warningText`)")
-HList()
-    button(m="auto" text="2xl black" bg="gray") 
-    div(text="black" v-html="$t(`marketplaceFullscreen.transfer.verifyText`)")
+HList(space-x="3")
+  FormCheckbox(v-model="isChecked") 
+  div(text="black" v-html="$t(`marketplaceFullscreen.transfer.verifyText`)")
 
 button(m="auto" text="2xl black" bg="gray" p="2") Transfer Item 
 </template>
 
 <script lang="ts" setup>
 import Image from "~/assets/icons/plus.svg"
+const isChecked = ref(false)
 </script>

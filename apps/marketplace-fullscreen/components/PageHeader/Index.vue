@@ -50,6 +50,7 @@ onMounted(async () => {
 })
 
 const collections = computed<CollectionData>(() => (collectionsList.value as CollectionData))
+console.log('collections', collections.value)
 
 </script>
 
