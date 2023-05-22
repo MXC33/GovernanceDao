@@ -1,20 +1,3 @@
-const isUserAuthenticated = async () => {
-
-  const { walletSigningToken } = useWallet()
-  const { loginIX } = useIXAPI()
-
-  if (!walletSigningToken.value)
-    return false
-
-  try {
-
-    await loginIX(walletSigningToken.value)
-    return true
-  } catch (error) {
-    return false
-  }
-}
-
 export default defineNuxtRouteMiddleware(async (to, from) => {
   await useNuxtApp().callHook('page:start')
 
@@ -23,12 +6,12 @@ export default defineNuxtRouteMiddleware(async (to, from) => {
 
   const { isWalletConnected, logoutWallet } = useWallet()
   const redirect = useLoginRedirect()
-  const { user } = useUser()
+  const { user, removeUser } = useUser()
 
-  const isUserAuthed = await isUserAuthenticated()
 
-  if (!isWalletConnected.value || !user.value || !isUserAuthed) {
+  if (!isWalletConnected.value || !user.value) {
     logoutWallet()
+    removeUser()
     redirect.value = to.path
     return navigateTo('/connect', { replace: false });
   }
