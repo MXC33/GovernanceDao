@@ -17,7 +17,7 @@ VList(p="5" capitalized="~" space-y="5" b="~" rounded="2")
 
     //-VList(items="center" space-y="3")
     div(text="white") Wallet Adress
-    Input(text="2xl white center" bg="black" placeholder="e.g Dx0000" border="")
+    Input(text="2xl white center" bg="black" placeholder="e.g Dx0000" border="" v-model="Wallet")
     div()
         div(text="white" v-html="$t(`marketplaceFullscreen.transfer.warningText`)")
     HList(space-x="3")
@@ -29,12 +29,14 @@ VList(p="5" capitalized="~" space-y="5" b="~" rounded="2")
 
 <script lang="ts" setup>
 import Image from "~/assets/icons/plus.svg"
-
-const isChecked = ref(false)
-
-const { getTokenKey } = useTokens()
 import type { IXToken } from '@ix/base/composables/Token/useIXToken';
 import type { AnyToken } from '@ix/base/composables/Token/useTokens';
+
+const { getTokenKey } = useTokens()
+
+const Wallet = ref("")
+const isChecked = ref(false)
+
 const props = defineProps<{
     token: AnyToken,
 }>()
