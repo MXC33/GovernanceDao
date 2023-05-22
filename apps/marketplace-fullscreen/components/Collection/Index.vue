@@ -7,6 +7,9 @@ VList(flex-grow="1" min-h="0" pos="relative" p="8" space-y="6")
       AttributeList(:data="data" v-if="data" )
 
   CollectionFilter(@toggle-filter="toggleFilterDrawer" :items="data.nfts" :filters="data.filters")
+      AttributeList()
+
+  CollectionFilter(:items="data.nfts" :filters="data.filters" v-if="data"  @toggle-filter="toggleFilterDrawer")
 
   HList(pos="sticky")
     Transition(name="slide-left")
@@ -23,6 +26,8 @@ VList(flex-grow="1" min-h="0" pos="relative" p="8" space-y="6")
               TokenImage(:token="row" w="12" h="12" :key="getTokenKey(row)")
             TokenName(:token="row" capitalize="~" :key="getTokenKey(row)")
 
+  Transition(name="slide-bottom")
+    CollectionSelectBar(v-if="cartItems.length > 0")
 </template>
 
 <script lang="ts" setup>
@@ -30,6 +35,7 @@ import type { CollectionData } from '~/composables/useCollection';
 import type { TableColumn } from '~/composables/useTable'
 const { displayType } = useCollectionSettings()
 const { getTokenKey } = useTokens()
+const {cartItems} = useCart()
 const columns: TableColumn[] = [
   { label: "Asset", value: "name" },
   { label: "Higher bid price", value: "higher_bid_price", sortable: true },

@@ -26,9 +26,14 @@ export const useCart = () => {
     viewingCart.value = true
   }
 
+  const clearCart = () => {
+    cartItems.value = []
+  }
+
   return {
     cartItems,
     viewingCart,
+    clearCart,
     removeFromCart,
     addToCart
   }
