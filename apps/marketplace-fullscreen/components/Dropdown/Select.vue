@@ -1,5 +1,5 @@
 <template lang="pug">
-VList(pos="relative")
+VList(pos="relative" ref="element")
   HList(font="bold" frame="~ gray-300" color="white" h="10" px="3" justify="between" items="center" cursor="pointer" space-x="3" @click="isOpen = !isOpen" )
     div(capitalize="~" select="none")
       slot(name="selectedName")
@@ -21,6 +21,11 @@ import ChevronIcon from '~/assets/icons/chevron-down.svg'
 import ChevronIconUp from '~/assets/icons/chevron-up.svg'
 
 const isOpen = ref(false)
+const element = ref()
+
+onClickOutside(element, () => isOpen.value = false)
+
+
 defineProps<{
   items: T[]
 }>()
