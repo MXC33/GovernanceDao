@@ -1,5 +1,5 @@
 <template lang="pug">
-div(font="bold" text="xl" uppercase="~") thou shall be single asset
+div(font="bold" text="xl" uppercase="~")
 </template>
 
 <script lang="ts" setup>
