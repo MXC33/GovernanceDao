@@ -11,9 +11,6 @@ VList(items="center" justify="center" bg="gray-900" flex-grow="1" pos="relative"
 </template>
 
 <script lang="ts" setup>
-definePageMeta({
-  middleware: 'auth'
-})
 
 const toggler = ref(false)
 const showFilters = () => {

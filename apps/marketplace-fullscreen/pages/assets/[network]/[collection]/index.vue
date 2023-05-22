@@ -5,9 +5,6 @@ Collection(:data="collectionData" v-if="collectionData")
 
 
 <script lang="ts" setup>
-definePageMeta({
-  middleware: 'auth'
-})
 
 const route = useRoute()
 const { collection } = route.params

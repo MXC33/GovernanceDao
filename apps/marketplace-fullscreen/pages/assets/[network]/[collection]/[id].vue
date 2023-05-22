@@ -69,20 +69,15 @@ Collection(:items="rows")
 
 
 <script lang="ts" setup>
+import type { IXToken } from '@ix/base/composables/Token/useIXToken';
 import Plus from '~/assets/icons/plus.svg'
-import { CollectionItem } from '~/composables/useCollection';
 
 
 const { allTokens, fetchUserInventory } = useUserData()
 await fetchUserInventory()
 
-definePageMeta({
-  middleware: 'auth'
-})
-
-
-const rows = computed<CollectionItem[]>(() =>
-  allTokens.value.map((token) => token as CollectionItem)
+const rows = computed<IXToken[]>(() =>
+  allTokens.value.map((token) => token as IXToken)
 )
 
 

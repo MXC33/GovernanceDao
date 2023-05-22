@@ -23,16 +23,24 @@ VList(justify="center" items="center" aspect="2/3" bg="black opacity-40" ref="me
 
     div(text="md gray-200")
       slot(name="detail") Last sale: 0,0869 ETH
+
+    Transition(name="slide-bottom")
+      button(btn="~ primary" pos="absolute bottom-0 left-0 right-0" v-if="isHovered" @click="onClickCart") Add to cart
+      
 </template>
 
 <script lang="ts" setup>
 import type { IXToken } from '@ix/base/composables/Token/useIXToken';
 
-
 const mediaElement = ref()
 const isHovered = useElementHover(mediaElement)
+const { addToCart } = useCart()
 
-defineProps<{
+const onClickCart = () => {
+  addToCart(props.token)
+}
+
+const props = defineProps<{
   token: IXToken,
   quantity?: number,
   isInvalid?: boolean,
