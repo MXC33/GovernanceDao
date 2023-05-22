@@ -24,4 +24,8 @@ const emit = defineEmits(["update:modelValue"])
 const isSelected = useVModel(props, 'modelValue', emit)
 const toggle = () => isSelected.value = !isSelected.value
 
+watch(isSelected, (newValue, oldValue) => {
+    emit('update:modelValue', newValue)
+    console.log(`isSelected changed from ${oldValue} to ${newValue}`)
+})
 </script>

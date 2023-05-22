@@ -4,13 +4,13 @@ VList(flex-grow="1" min-h="0" pos="relative" p="8" space-y="6")
     template(#header) {{ data.name }}
 
     template(#attributes)
-      AttributeList()
+      AttributeList(:data="data" v-if="data" )
 
-  CollectionFilter(:items="data.filters" v-if="data"  @toggle-filter="toggleFilterDrawer" pos="relative")
+  CollectionFilter( @toggle-filter="toggleFilterDrawer" pos="relative")
 
   HList(pos="sticky")
     Transition(name="slide-left")
-      ContentDrawerWrapper(v-if="showFilters" pos="sticky top-58" h="100" inset="0")
+      ContentDrawerWrapper(v-if="showFilters && data" pos="sticky top-58" h="100" inset="0" :items="data.filters")
 
   Transition(name="fade" mode="out-in" v-if="data")
     CollectionGrid(v-if="displayType == 'grid'")

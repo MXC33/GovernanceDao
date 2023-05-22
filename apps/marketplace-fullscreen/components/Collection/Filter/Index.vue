@@ -18,11 +18,7 @@ HList(w="full" pos="sticky top-34" z="2")
 </template>
 
 <script lang="ts" setup>
-import type { CollectionItem } from '~/composables/useCollection';
 const { getTokenKey } = useTokens()
-defineProps<{
-  items: CollectionItem[]
-}>()
 
 const { y } = useWindowScroll()
 
