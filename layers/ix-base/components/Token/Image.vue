@@ -11,7 +11,7 @@ const props = defineProps<{
   isVector?: boolean,
 }>()
 
-const imageSrc = await getTokenImageURL(props.token)
+const imageSrc = await getTokenImageURL(props.token, props.isLarge)
 const imageURLValid = ref(false)
 // const loadImage = () => {
 //   if (!process.client)

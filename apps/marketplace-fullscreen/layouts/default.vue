@@ -4,6 +4,8 @@ main(w="full" h="full" flex="~ col grow" min-h="0")
 
   PageHeader()
 
+  Cart()
+
   //- Used for teleports
   div(id="overlays" select="none")
 
@@ -11,4 +13,5 @@ main(w="full" h="full" flex="~ col grow" min-h="0")
 </template>
 
 <script lang="ts" setup>
+
 </script>

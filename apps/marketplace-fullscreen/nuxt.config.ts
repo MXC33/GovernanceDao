@@ -59,6 +59,12 @@ export default defineNuxtConfig({
     preset: 'vercel',
   },
   vite: {
+    vue: {
+      script: {
+        defineModel: true,
+        propsDestructure: true
+      }
+    },
     server: {
       hmr: {
         port: 8001,
