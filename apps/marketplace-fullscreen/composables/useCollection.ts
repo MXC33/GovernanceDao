@@ -1,10 +1,38 @@
-import { TokenIdentifier } from "@ix/base/composables/Token/useTokens"
+import { IXToken } from "@ix/base/composables/Token/useIXToken"
 
-export interface CollectionItem extends TokenIdentifier {
-  asset?: string,
-  id: string
+export interface Filters {
+  trait_type: string
+  value: string[]
 }
-export type SortField = string & keyof CollectionItem
+export interface Collections {
+  name: string
+  slug: string
+  contract: string
+  network: string
+  currency: string
+  order: string
+  volume: string
+}
+export interface CollectionData {
+  name: string
+  currency: string
+  total_volume: number
+  sale_price: any
+  higher_bid_price: any
+  listed: number
+  unique_owners: number
+  creators_fee: number
+  nfts_from: number
+  nft_type: any
+  network: string
+  collection: string
+  parent: any
+  nfts: IXToken[]
+  page_key: string
+  filters: Filters[]
+}
+
+export type SortField = string & keyof IXToken
 export type CollectionDisplayType = 'list' | 'grid'
 export type SortOrder = 'desc' | 'asc'
 

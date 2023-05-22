@@ -1,35 +1,16 @@
 <template lang="pug">
-Collection(:items="rows")
+Collection(:data="collectionData" v-if="collectionData")
 
 </template>
 
 
 <script lang="ts" setup>
-import type { CollectionItem } from '~/composables/useCollection';
-
-const { allTokens, fetchUserInventory } = useUserData()
-await fetchUserInventory()
-
-definePageMeta({
-  middleware: 'auth'
-})
 
 const route = useRoute()
-const { collection, network } = route.params
+const { collection } = route.params
 
-const { data: collections, execute: fetchAllCollections } = useCollectionsData()
+const { data: collectionData, execute: fetchCollection } = useCollectionData(String(collection))
 
-const { data: items, execute: fetchCollection } = useCollectionData(String(collection))
-
-onMounted(() => {
-  fetchAllCollections()
-  fetchCollection()
-})
-
-console.log("DATA", items.value, collections.value)
-
-const rows = computed<CollectionItem[]>(() =>
-  (items.value ?? []).map((item) => item.token as CollectionItem)
-)
+await fetchCollection()
 
 </script>

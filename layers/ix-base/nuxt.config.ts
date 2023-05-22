@@ -10,6 +10,9 @@ const GQL_PROD_ENDPOINT = `${API_PROD_ENDPOINT}/graphql`
 
 // https://v3.nuxtjs.org/api/configuration/nuxt.config
 export default defineNuxtConfig({
+  experimental: {
+    viewTransition: true
+  },
   typescript: {
     includeWorkspace: true
   },
@@ -65,6 +68,12 @@ export default defineNuxtConfig({
       hmr: {
         port: 444,
       },
+    },
+    vue: {
+      script: {
+        defineModel: true,
+        propsDestructure: true
+      }
     },
     plugins: [
       svgLoader({

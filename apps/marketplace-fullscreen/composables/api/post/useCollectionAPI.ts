@@ -1,4 +1,4 @@
-import { CollectionItemAndToken, CollectionItemData } from "../api"
+import { IXToken, CollectionData, Collections } from "../../useCollection"
 
 interface CollectionResponse {
   success: boolean
@@ -6,39 +6,28 @@ interface CollectionResponse {
   message: string
   data: CollectionData
 }
-
-interface CollectionData {
-  name: string
-  currency: string
-  total_volume: number
-  sale_price: any
-  higher_bid_price: any
-  listed: number
-  unique_owners: number
-  creators_fee: number
-  nfts_from: number
-  nft_type: any
-  network: string
-  collection: string
-  parent: any
-  nfts: CollectionItemData[]
-  page_key: string
-  filters: any[]
+interface CollectionsResponse {
+  success: boolean
+  status: number
+  message: string
+  data: Collections
 }
+
 
 export const useCollectionData = (slug: string, network = 'polygon') => {
   return useAsyncDataState('collection-' + slug, () =>
     fetchIXAPI('collections/' + slug + '/nfts', 'POST') as Promise<CollectionResponse>, {
-    transform: (item) =>
-      item.data.nfts.map((item) => ({
-        data: item,
-        token: parseCollectionToken(item)
-      } as CollectionItemAndToken))
-
+    transform: (item) => {
+      return item.data as CollectionData
+    }
+    // item.data.nfts.map((item) => (item as IXToken))
   })
 }
 
 export const useCollectionsData = (network = 'polygon') =>
   useAsyncDataState('collections', () =>
-    fetchIXAPI('collections')
+    fetchIXAPI('collections') as Promise<CollectionsResponse>, {
+    transform: (item) =>
+      item.data as Collections
+  }
   )

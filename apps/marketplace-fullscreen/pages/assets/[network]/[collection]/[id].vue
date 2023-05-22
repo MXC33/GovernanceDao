@@ -69,25 +69,15 @@ Collection(:items="rows")
 
 
 <script lang="ts" setup>
+import type { IXToken } from '@ix/base/composables/Token/useIXToken';
 import Plus from '~/assets/icons/plus.svg'
-import Bars from '~/assets/icons/bars.svg'
-import Layers from '~/assets/icons/layers.svg'
-import ListUl from '~/assets/icons/list-ul.svg'
-import { CollectionItem } from '~/composables/useCollection';
 
-const isMobile = false
 
 const { allTokens, fetchUserInventory } = useUserData()
-const { displayType } = useCollectionSettings()
 await fetchUserInventory()
 
-definePageMeta({
-  middleware: 'auth'
-})
-
-
-const rows = computed<CollectionItem[]>(() =>
-  allTokens.value.map((token) => token as CollectionItem)
+const rows = computed<IXToken[]>(() =>
+  allTokens.value.map((token) => token as IXToken)
 )
 
 

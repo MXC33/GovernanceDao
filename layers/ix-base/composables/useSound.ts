@@ -60,7 +60,6 @@ const useSound = (file: Module, options: Options = {}) => {
     setupAudioModule()
 
   const play = () => {
-    console.log("Play", soundModule.value)
     soundModule.value?.play.bind(soundModule.value)
   }
 
