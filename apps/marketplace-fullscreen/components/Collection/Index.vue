@@ -32,7 +32,7 @@ import type { CollectionData } from '~/composables/useCollection';
 import type { TableColumn } from '~/composables/useTable'
 const { displayType } = useCollectionSettings()
 const { getTokenKey } = useTokens()
-const {cartItems} = useCart()
+const { cartItems } = useCart()
 const columns: TableColumn[] = [
   { label: "Asset", value: "name" },
   { label: "Higher bid price", value: "higher_bid_price", sortable: true },
