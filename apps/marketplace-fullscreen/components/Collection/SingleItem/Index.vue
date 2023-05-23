@@ -26,11 +26,7 @@ div(grid="~ cols-8 gap-3" px="6")
       TradeModule(:owner-value="3")
         template(#header)
           Tab()
-            TabItem(v-for="tab in tabs") {{ tab }}
-
-      CollectionFilterRowSelect(v-model="isSelected")
-        template(#default) Label name 
-        template(#value) Value bane mane
+            TabItem(v-for="tab in tabs" v-model="isSelected") {{ tab }}
 
       ContentDrawer(:start-open="true")
         template(#header)
