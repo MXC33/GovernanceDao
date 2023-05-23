@@ -156,6 +156,9 @@ export const defineContract = <T extends ContractInterface<T>>(key: string, opti
   }
 
   const beforeContractInteraction = async () => {
+    console.log(provider.value)
+    console.log(contract.value)
+
     await ensureCorrectChain(options.ethereum)
     if (!contract.value && provider.value)
       await setupContract(provider.value)
@@ -171,49 +174,51 @@ export const defineContract = <T extends ContractInterface<T>>(key: string, opti
   // Default transaction methods
   const createTransaction = async (fn: (contract: T) => Promise<ethers.ContractTransaction> | undefined, txOptions?: TransactionOptions) => {
     try {
-      if (contract.value) {
-        setTransactionState('signing')
+      setTransactionState('signing')
 
-        await beforeContractInteraction()
+      await beforeContractInteraction()
 
-        if (txOptions?.approve)
-          await txOptions?.approve()
+      if (txOptions?.approve)
+        await txOptions?.approve()
 
-        setTransactionState('signing')
+      setTransactionState('signing')
 
-        if (!fn)
-          return transactionFailed("No transaction", txOptions)
+      if (!fn)
+        return transactionFailed("No transaction", txOptions)
 
-        const transaction = await fn(contract.value)
+      if (!contract.value)
+        return transactionFailed("No contract", txOptions)
 
-        setTransactionState('minting')
+      const transaction = await fn(contract.value)
 
-        if (txOptions?.successOnEventKey)
-          pendingTxEvent.value = txOptions
-        else
-          pendingTxEvent.value = null
-        const hash = transaction?.hash
+      setTransactionState('minting')
 
-        if (!hash)
-          return transactionFailed("No transaction hash", txOptions)
+      if (txOptions?.successOnEventKey)
+        pendingTxEvent.value = txOptions
+      else
+        pendingTxEvent.value = null
+      const hash = transaction?.hash
 
-        const resolvedTransaction = await onTransactionResolved(hash)
-        console.log("Resolved", resolvedTransaction)
+      if (!hash)
+        return transactionFailed("No transaction hash", txOptions)
 
-        //@ts-ignore
-        if (resolvedTransaction.status == 0)
-          throw new Error("Transaction failed. Try increasing the gas manually.")
+      const resolvedTransaction = await onTransactionResolved(hash)
+      console.log("Resolved", resolvedTransaction)
 
-        if (txOptions?.onTxApproved)
-          await txOptions?.onTxApproved()
+      //@ts-ignore
+      if (resolvedTransaction.status == 0)
+        throw new Error("Transaction failed. Try increasing the gas manually.")
 
-        if (!pendingTxEvent.value)
-          await transactionSuccess(txOptions)
-        else
-          setTransactionState('extracting')
+      if (txOptions?.onTxApproved)
+        await txOptions?.onTxApproved()
 
-        return true
-      }
+      if (!pendingTxEvent.value)
+        await transactionSuccess(txOptions)
+      else
+        setTransactionState('extracting')
+
+      return true
+
     } catch (error) {
       await transactionFailed(error, txOptions)
       return false
