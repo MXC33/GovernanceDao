@@ -99,6 +99,13 @@ export const usePlural = (n: number, currentString: string = "") => {
 
 export const useWait = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
 
+export const useIsKeyNumber = (evt: KeyboardEvent): void => {
+  const keysAllowed: string[] = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '.'];
+
+  if (!keysAllowed.includes(evt.key)) {
+    evt.preventDefault()
+  }
+}
 
 export const reverseKey = <T extends string | number, K extends string>(record: Record<T, K>, findKey: string) =>
   (Object.keys(record) as Array<T>).find(key => record[key] === findKey);
