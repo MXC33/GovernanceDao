@@ -12,8 +12,8 @@ VList()
       span(color="gray-200") Max price per listing
 
   div(grid="~ cols-2" text="base")
-    button(btn="~ secondary") Make offer
-    button(btn="~ primary") Buy 1 item
+    button(btn="~ secondary" font="bold") Make offer
+    button(btn="~ primary" font="bold") Buy 1 item
 
 </template>
 
