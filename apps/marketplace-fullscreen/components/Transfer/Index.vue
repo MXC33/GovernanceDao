@@ -20,8 +20,8 @@ Popup(text="white")
         Adjustable(v-model="quantity" h="10")
 
         //-VList(items="center" space-y="3")
-        div() Wallet Adress
-        input(text="2xl center" bg="black" placeholder="e.g Dx0000" border="" v-model="wallet" @input="onChange")
+        div(v-html="$t(`mpFullscreen.transfer.walletAdress`)")
+        input(text="2xl center" bg="black" placeholder="e.g 0x1a2..." border="" v-model="wallet" @input="onChange")
         div()
             div(v-html="$t(`mpFullscreen.transfer.warningText`)")
         Transition(name="slide-top")
