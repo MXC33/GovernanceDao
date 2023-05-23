@@ -1,45 +1,21 @@
 <template lang="pug">
 HList(py="0 md:7" space-x="md:2" flex-wrap="none lt-md:~")
-  template(v-for="attribute in supportedAttributes" )
+  template(v-for="attribute in attributes" )
 
-    AttributeItem(v-if="data[attribute.key] != undefined")
+    AttributeItem(v-if="attribute.value != undefined")
       template(#header) {{ $t(`collection.attributes.${attribute.key}`) }}
 
       template(#icon v-if="attribute.hasToken")
         IXT(w="3 md:6" h="3 md:6")
 
-      template(#default) {{ data[attribute.key] }}
+      template(#default) {{ attribute.value }}
 </template>
 
-<script lang="ts" setup>
+<script lang="ts" setup generic="K extends object">
 import IXT from '~/assets/icons/token/ixt.svg'
-import type { CollectionData } from "~/composables/useCollection";
+import type { Attribute } from '~/composables/useAttributes';
 
-const props = defineProps<{
-  data: CollectionData
+defineProps<{
+  attributes: Attribute<K>[],
 }>()
-
-
-
-interface AttributeProperty {
-  key: keyof CollectionData,
-  hasToken?: boolean
-}
-
-const supportedAttributes: AttributeProperty[] = [
-  {
-    key: 'total_volume',
-    hasToken: true
-  },
-  {
-    key: 'sale_price',
-    hasToken: true
-  },
-  { key: 'listed' },
-  { key: 'unique_owners' },
-  { key: 'owners' },
-  { key: 'floor_price' }
-]
-
-console.log("ATTR", props.data, supportedAttributes)
 </script>

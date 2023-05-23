@@ -12,6 +12,6 @@ HList(uppercase="~" font="bold" text="white" frame="~" flex-shrink="0" w="24")
 import GridIcon from '~/assets/icons/grid.svg'
 import ListIcon from '~/assets/icons/list.svg'
 
-const { displayType, toggleDisplayType } = useCollectionSettings()
+const { displayType } = useCollectionSettings()
 
 </script>

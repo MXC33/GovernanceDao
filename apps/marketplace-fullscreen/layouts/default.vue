@@ -9,7 +9,8 @@ main(w="full" h="full" flex="~ col grow" min-h="0")
   //- Used for teleports
   div(id="overlays" select="none")
 
-  slot
+  VList(pos="relative")
+    slot
 </template>
 
 <script lang="ts" setup>

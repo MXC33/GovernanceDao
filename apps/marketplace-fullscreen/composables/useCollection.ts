@@ -1,10 +1,29 @@
 import { IXToken } from "@ix/base/composables/Token/useIXToken"
+import { TableSort, TableSortField } from "./useTable"
 
-export interface Filter {
+interface FilterBase {
+  title: string
   trait_type: string
+  type: FilterType
+  selected: boolean
+}
+
+export interface APIFilter extends FilterBase {
   value: string[]
 }
-export interface Collection {
+
+export interface FilterValue {
+  name: string,
+  selected: boolean
+}
+
+export interface Filter extends FilterBase {
+  value: FilterValue[]
+}
+
+export type FilterType = 'radio' | 'checkbox'
+
+export interface Collections {
   name: string
   slug: string
   contract: string
@@ -13,6 +32,7 @@ export interface Collection {
   order: string
   volume: string
 }
+
 export interface CollectionData {
   name: string
   currency: string
@@ -32,38 +52,19 @@ export interface CollectionData {
   parent: any
   nfts: IXToken[]
   page_key: string
-  filters: Filter[]
+  filters: APIFilter[]
 }
 
-export type SortField = string & keyof IXToken
 export type CollectionDisplayType = 'list' | 'grid'
-export type SortOrder = 'desc' | 'asc'
-
-export interface CollectionSort {
-  field?: SortField,
-  direction: SortOrder
-}
 
 export const useCollectionSettings = () => {
-
   const activeFilters = useState('activeFilters', () => ({}))
   const collectionOwners = useState('collectionOwners', () => ("All"))
 
-  const sort = useState<CollectionSort>('table-sort', () => ({
-    field: 'type',
-    direction: 'asc'
-  }))
-
-  const toggleSortDirection = () => {
-    if (sort.value.direction == 'asc')
-      return sort.value.direction = 'desc'
-    else return sort.value.direction = 'asc'
-  }
-
-  const selectSortField = (field: SortField) => {
-    sort.value.direction = 'asc'
-    sort.value.field = field
-  }
+  // const sort = useState<TableSort<IXToken>>('colleciton-table-sort', () => ({
+  //   field: 'type',
+  //   direction: 'asc'
+  // }))
 
   const displayType = useState<CollectionDisplayType>('collection-display-type', () => 'grid')
 
@@ -75,10 +76,7 @@ export const useCollectionSettings = () => {
   }
 
   return {
-    sort,
     displayType,
-    toggleSortDirection,
-    selectSortField,
     toggleDisplayType,
     activeFilters,
     collectionOwners,

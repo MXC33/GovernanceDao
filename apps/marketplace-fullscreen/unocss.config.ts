@@ -1,6 +1,7 @@
 import { defineConfig } from 'unocss'
 import baseLayer from '@ix/base/unocss.config';
 
+
 export default defineConfig({
   presets: [baseLayer],
   theme: {
@@ -12,7 +13,7 @@ export default defineConfig({
       //@ts-ignore
       ...baseLayer.theme.colors,
       ix: {
-        primary: '#CB0010',
+        primary: '#FF0014',
       },
       corp: {
         ne: '#CB0010'

@@ -1,5 +1,5 @@
 <template lang="pug">
-VList(justify="center" items="center" aspect="2/3" bg="black opacity-40" ref="mediaElement" cursor="pointer" group)
+VList(justify="center" items="center" aspect="2/3" bg="black opacity-40" ref="mediaElement" cursor="pointer" @click="onClickItem" group)
   VList(aspect="square" w="full" pos="relative" overflow="hidden")
     slot(name="media")
       TokenLazyVideo(:token="token" :key="token.collection + token.token_id" :is-hovered="isHovered")
@@ -25,7 +25,7 @@ VList(justify="center" items="center" aspect="2/3" bg="black opacity-40" ref="me
       slot(name="detail") Best offer: {{ token?.higher_bid_price }} IXT
 
     Transition(name="slide-bottom")
-      button(btn="~ primary" pos="absolute bottom-0 left-0 right-0" v-if="isHovered" @click="onClickCart") Add to cart
+      button(btn="~ primary" pos="absolute bottom-0 left-0 right-0" v-if="isHovered" @click.stop="onClickCart") Add to cart
       
 </template>
 
@@ -33,6 +33,7 @@ VList(justify="center" items="center" aspect="2/3" bg="black opacity-40" ref="me
 import type { IXToken } from '@ix/base/composables/Token/useIXToken';
 
 const mediaElement = ref()
+const route = useRoute()
 const isHovered = useElementHover(mediaElement)
 const { addToCart } = useCart()
 
@@ -40,10 +41,20 @@ const onClickCart = () => {
   addToCart(props.token)
 }
 
+const onClickItem = () => {
+  const id = props.token.token_id
+  const adress = props.token.collection
+  console.log("Click", id)
+  if (id)
+    navigateTo(route.path + `/${adress}/${id}`)
+}
+
 const props = defineProps<{
   token: IXToken,
   quantity?: number,
   isInvalid?: boolean,
   isActive?: boolean,
+  page?: string,
 }>()
+
 </script>
