@@ -5,10 +5,10 @@ VList(p="5" capitalized="~" space-y="5" b="~" rounded="2")
         div(text="2xl white" v-html="$t(`marketplaceFullscreen.transfer.title`)")
         HList(space-x="3")
             HList()
-                TokenImage(:token="token" inset="0" w="15" h="15" object="contain center" :key="getTokenKey(token)")
+                TokenImage(:token="collectionData.nfts[9]" inset="0" w="15" h="15" object="contain center" :key="getTokenKey(collectionData.nfts[0])")
                 VList()
-                    div(text="white") Title 
-                    div(text="white") Planet IX  
+                    div(text="white") {{getTokenName(collectionData.nfts[0])}} 
+                    div(text="white") Collection name  
             div(flex="grow")
             div(text="white" v-html="$t(`marketplaceFullscreen.transfer.own`)")
 
@@ -34,10 +34,10 @@ import type { AnyToken } from '@ix/base/composables/Token/useTokens';
 import type { CollectionData } from '~/composables/useCollection';
 
 const props = defineProps<{
-    token: CollectionData,
+    collectionData: CollectionData,
 }>()
 
-const { getTokenKey } = useTokens()
+const { getTokenKey, getTokenName } = useTokens()
 const { transferNFT } = useTransferNFT()
 
 const wallet = ref("")
@@ -48,10 +48,10 @@ const isChecked = ref(false)
 const itemTransfer = () => {
     console.log('transfering Item proccess starting')
     console.log(wallet.value)
-    console.log(props.token)
-    if (props.token.token_id == null)
+    console.log(props.collectionData)
+    if (props.collectionData.token_id == null)
         return console.log("ERROR, no token ID")
-    transferNFT(props.token.collection, wallet.value, props.token.token_id, 1)
+    transferNFT(props.collectionData.collection, wallet.value, props.collectionData.token_id, 1)
 
 }
 </script>
