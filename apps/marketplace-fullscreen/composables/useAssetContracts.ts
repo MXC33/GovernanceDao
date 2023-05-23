@@ -28,18 +28,18 @@ export const getAssetContract = <T extends ContractInterface<T> & AssetContract>
 
   const { walletAdress } = useWallet()
 
-  const definedContract = defineContract<T>('assetn-contract-' + adress, {
+  const { createTransaction, ...contractSpec } = defineContract<T>('assetn-contract-' + adress, {
     contractAddress: adress,
     notifications: {
       failMessage: 'Error transferring NFT'
     },
     createContract(provider) {
       return new ethers.Contract(adress, abi, provider.getSigner()) as unknown as T
-    },
+    }
   })
 
   const transferNFT = (to: string, tokenId: string, amount: string) =>
-    definedContract.createTransaction((contract) => {
+    createTransaction((contract) => {
       const adress = walletAdress.value
       if (!adress)
         return undefined
@@ -48,7 +48,7 @@ export const getAssetContract = <T extends ContractInterface<T> & AssetContract>
     })
 
   return {
-    ...definedContract,
+    ...contractSpec,
     transferNFT
   }
 }
