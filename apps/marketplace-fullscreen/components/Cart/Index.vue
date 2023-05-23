@@ -31,14 +31,13 @@ Transition(name="slide-right")
 <script lang="ts" setup>
 const cartElement = ref()
 const { getTokenKey } = useTokens()
-
 onClickOutside(cartElement, () => viewingCart.value = false)
 const { viewingCart, cartItems } = useCart()
 
 const totalPrice = computed(() =>
-  cartItems.value.map((item) =>
-    item.value * item.token?.sale_price
-  ).reduce((a, b) => a + b, 0)
+  roundToDecimals(cartItems.value.map((item) =>
+    item.value * (item.sale?.price ?? 0)
+  ).reduce((a, b) => a + b, 0), 2)
 )
 </script>
   
