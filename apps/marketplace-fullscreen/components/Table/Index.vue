@@ -29,8 +29,6 @@ const props = defineProps<{
 
 const { sortedRows, sort, selectSortField, toggleSortDirection } = useTable(props.rows, props.id)
 
-watch([sortedRows, sort], () => console.log("Update sort", sort.value, sortedRows.value), { deep: true })
-
 const getColumnStyle = (item: TableColumn<Row>) => {
   if (!item.width)
     return {}

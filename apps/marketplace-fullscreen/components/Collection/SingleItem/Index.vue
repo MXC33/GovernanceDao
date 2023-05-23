@@ -39,11 +39,14 @@ div(grid="~ cols-8 gap-3" px="6")
             span() Listings
         template(#default)
           Table(:columns="saleColumns" :rows="item.sales" id="single-item" :in-drawer="true")
+            template(#item-action="{row}")
+              button(@click="addSaleToCart(row)" bg="gray-500 hover:gray-400" transition="all" cut="bottom-right" p="x-6 y-3") Cart
 
       ContentDrawer(:start-open="true")
         template(#header) Offers
         template(#default)
           Table(:columns="offerColumns" :rows="item.bids" id="offers" :in-drawer="true")
+
 
 </template>
 
@@ -53,6 +56,7 @@ import type { Sale, SingleItemData, Bid } from '@ix/base/composables/Token/useIX
 import type { TableColumn } from '~/composables/useTable';
 
 const { getSingleAttributes } = useDefaulAttributes()
+const { addToCart } = useCart()
 const attributes = computed(() => getSingleAttributes(item))
 
 const saleColumns: TableColumn<Sale>[] = [
@@ -60,12 +64,17 @@ const saleColumns: TableColumn<Sale>[] = [
   { label: "Quanitity", value: "quantity", sortable: true },
   { label: "Expiration", value: "endtime", sortable: true },
   { label: "Seller", value: "player_id", sortable: true },
-  { label: "Action", value: "action", sortable: true },
+  { label: "Action", value: "action", width: 80 }
 ]
+
+const addSaleToCart = (sale: Sale) => {
+  addToCart(item, sale)
+}
 
 const offerColumns: TableColumn<Bid>[] = [
   { label: "Sale Price", value: "price", sortable: true },
   { label: "Quanitity", value: "quantity", sortable: true },
+
 ]
 const { item } = defineProps<{
   item: SingleItemData

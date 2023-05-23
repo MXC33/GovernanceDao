@@ -37,7 +37,7 @@ const { viewingCart, cartItems } = useCart()
 
 const totalPrice = computed(() =>
   cartItems.value.map((item) =>
-    item.value * item.token?.sale_price
+    item.value * (item.sale?.price ?? 0)
   ).reduce((a, b) => a + b, 0)
 )
 </script>

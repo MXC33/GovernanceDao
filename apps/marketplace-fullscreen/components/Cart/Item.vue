@@ -1,7 +1,9 @@
 <template lang="pug">
 VList(bg="gray-800" v-if="item")
-  header(p="x-6 y-3" font="bold")
+  header(p="x-6 y-3" font="bold" flex="~ row")
     TokenName(:token="item.token")
+
+    div(whitespace="nowrap") {{ item.sale?.price }} IXT
 
   HList()
     TokenImage(:token="item.token" w="30" h="30")
@@ -9,16 +11,15 @@ VList(bg="gray-800" v-if="item")
       HList(flex-grow="1" px="3" items="center")
         VList(flex-grow="1" color="gray-200" space-y="1")
           div Planet IX – Assets
-          div Available items: 38
+          div(v-if="item.sale") Available items: {{item.sale?.quantity}}
           div(flex-grow="1")
 
-        button(@click="removeFromCart(item.token)")
+        button(@click="removeFromCart(item)")
           TrashIcon(w="6")
 
       Adjustable(v-model="item" h="3")
     
-  </template>
-  
+</template>
   
 <script lang="ts" setup>
 import type { CartItem } from '~/composables/useCart'
