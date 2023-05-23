@@ -1,6 +1,6 @@
 
 <template lang="pug">
-th(p="3")
+th(p="3" bg="gray-900")
   button(v-if="column.sortable" @click="onClickSort" flex="~ row" items="start" opacity="50 hover:75 on-active:100" :active="isActive" transition="all")
     HList()
       slot
@@ -21,7 +21,7 @@ import type { TableColumn, TableRow, TableSort, TableSortField } from '~/composa
 
 const props = defineProps<{
   column: TableColumn<T>,
-  sortField?: TableSort<T>
+  sortField?: TableSort<T>,
 }>()
 
 const emit = defineEmits<{

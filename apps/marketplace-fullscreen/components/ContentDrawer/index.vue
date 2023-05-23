@@ -1,14 +1,14 @@
 <template lang="pug">
-VList()
-  VList(h="12" max-w="94" bg="ix-black" justify="center")
-    HList(uppercase="~" items="center" justify="between" p="r-8" font="bold" cursor="pointer" @click.stop="dropDrawer")
-      span(color="white" text="md")
-        slot(name="header")
-      ChevronIcon(w="5" translate-y="-0.35" fill="white" transition="opacity" :selected="drawerState" rotate="on-selected:-180deg")
+VList(max-h="80" overflow-y="auto")
+  VList(overflow-y="auto" h="full")
+    VList(h="12" bg="ix-black" justify="center" pos="sticky top-0" flex-shrink="0" z="1")
+      HList(uppercase="~" items="center" justify="between" px="6" font="bold" cursor="pointer" @click.stop="dropDrawer")
+        span(color="white" text="md")
+          slot(name="header")
+        ChevronIcon(w="5" translate-y="-0.35" fill="white" transition="opacity" :selected="isOpen" rotate="on-selected:-180deg")
 
-  transition(name="slide-top")
-    HList(uppercase="~" v-if="drawerState")
-      slot()
+    Transition(name="slide-top")
+      slot(v-if="isOpen")
 
 div(b="b-1 gray-600" bg="black" ml="-8")
 
@@ -17,11 +17,11 @@ div(b="b-1 gray-600" bg="black" ml="-8")
 <script lang="ts" setup>
 import ChevronIcon from '~/assets/icons/chevron-down.svg'
 
-defineProps<{
-  isSelected?: boolean
+const { startOpen } = defineProps<{
+  startOpen?: boolean
 }>()
 
-const drawerState = ref(false)
-const dropDrawer = () => { drawerState.value = !drawerState.value }
+const isOpen = ref(startOpen)
+const dropDrawer = () => { isOpen.value = !isOpen.value }
 
 </script>
