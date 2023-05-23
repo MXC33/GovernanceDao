@@ -1,7 +1,19 @@
 <template lang="pug">
-//-PopupWrapper()
-div(pos="sticky top-35%" bg="black opacity-80%" m="auto" z="100" b="~" rounded="2" backdrop="blur")
-  //-VList(p="5" capitalized="~" space-y="5")
-  slot()
-    //- w="100" h="100" top-50% left-50%
+div(pos="fixed" inset="0" bg="black opacity-80" z="300" @click="$emit('close')")
+
+div(pos="fixed top-50% left-50%" w="full" translate-x="-50%" translate-y="-50%" bg="ix-black" m="auto" z="310" rounded="2" b="1 white" max-w="120" color="white")
+  VList(p="x-3 y-3" text="center" b="b-1 white")
+    slot(name="header")
+
+  VList(p="3" flex-grow="1")
+    slot()
+
+  VList(b="t-1 white" p="3")
+    slot(name="footer")
+
 </template>
+
+
+<script setup lang="ts">
+defineEmits(["close"])
+</script>

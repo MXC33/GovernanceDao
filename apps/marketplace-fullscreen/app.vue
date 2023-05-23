@@ -5,6 +5,8 @@
 
     NuxtPage()
 
+    div#popups()
+
 </template>
 
 <script setup lang="ts">
