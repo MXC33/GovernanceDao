@@ -40,6 +40,7 @@ export interface SingleItemData extends IXToken {
   sale_endtime: number
   sold_timestamp: number
   sold_price: number
+  description?: string,
   higher_bid_price: number
   higher_bid_bidder_id: number
   higher_bid_message: string
