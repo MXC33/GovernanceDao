@@ -14,16 +14,20 @@ transition(name="fade")
 
 <script lang="ts" setup>
 
-// const props = defineProps<{
-//   modelValue: boolean
-//   isSelected?: boolean
-// }>()
+let isSelected = false
+const props = defineProps<{
+  modelValue: string
+  isSelected?: boolean
+}>()
+watch(props, (newValue, oldValue) => {
+  nextTick(() => {
+    isSelected = !props.isSelected
+  })
+})
 
-// const emit = defineEmits(["update:modelValue"])
-// const isSelected = useVModel(props, 'modelValue', emit)
-
-const modelValue = defineModel()
-const toggle = () => modelValue.value = !modelValue.value
+const emit = defineEmits(["update:modelValue"])
+const modelValue = useVModel(props, 'modelValue', emit)
+const toggle = () => modelValue.value = modelValue.value
 
 </script>
 

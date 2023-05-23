@@ -1,6 +1,6 @@
 import { IXToken } from "@ix/base/composables/Token/useIXToken"
 
-export interface Filters {
+export interface Filter {
   title: string
   trait_type: string
   value: string[]
@@ -36,7 +36,7 @@ export interface CollectionData {
   parent: any
   nfts: IXToken[]
   page_key: string
-  filters: Filters[]
+  filters: Filter[]
 }
 
 export type FilterType = 'radio' | 'checkbox'
@@ -50,6 +50,10 @@ export interface CollectionSort {
 }
 
 export const useCollectionSettings = () => {
+
+  const activeFilters = useState('activeFilters', () => ({}))
+  const collectionOwners = useState('collectionOwners', () => ("All"))
+
   const sort = useState<CollectionSort>('table-sort', () => ({
     field: 'type',
     direction: 'asc'
@@ -81,5 +85,7 @@ export const useCollectionSettings = () => {
     toggleSortDirection,
     selectSortField,
     toggleDisplayType,
+    activeFilters,
+    collectionOwners,
   }
 }
