@@ -13,19 +13,17 @@ transition(name="fade")
 </template>
 
 <script lang="ts" setup>
-import CheckmarkIcon from '~/assets/icons/checkmark.svg'
+import CheckmarkIcon from 'assets/icons/checkmark.svg'
 
 const props = defineProps<{
-  modelValue: boolean
-  isSelected?: boolean
+  value: string
 }>()
 
-const emit = defineEmits(["update:modelValue"])
-const isSelected = useVModel(props, 'modelValue', emit)
+const emit = defineEmits(["checked"])
+const isSelected = ref(false)
 const toggle = () => isSelected.value = !isSelected.value
 
 watch(isSelected, (newValue, oldValue) => {
-    emit('update:modelValue', newValue)
-    console.log(`isSelected changed from ${oldValue} to ${newValue}`)
+    emit('checked',  props.value)
 })
 </script>
