@@ -1,13 +1,27 @@
 import { IXToken } from "@ix/base/composables/Token/useIXToken"
 import { TableSort, TableSortField } from "./useTable"
 
-export interface Filter {
+interface FilterBase {
   title: string
   trait_type: string
-  value: string[]
   type: FilterType
   selected: boolean
 }
+
+export interface APIFilter extends FilterBase {
+  value: string[]
+}
+
+export interface FilterValue {
+  name: string,
+  selected: boolean
+}
+
+export interface Filter extends FilterBase {
+  value: FilterValue[]
+}
+
+export type FilterType = 'radio' | 'checkbox'
 
 export interface Collections {
   name: string
@@ -37,7 +51,7 @@ export interface CollectionData {
   parent: any
   nfts: IXToken[]
   page_key: string
-  filters: Filter[]
+  filters: APIFilter[]
 }
 
 export type CollectionDisplayType = 'list' | 'grid'

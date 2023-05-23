@@ -1,7 +1,7 @@
 
 <template lang="pug">
 th(p="3")
-  button(v-if="item.sortable" @click="onClickSort" flex="~ row" items="start" opacity="50 hover:75 on-active:100" :active="isActive" transition="all")
+  button(v-if="column.sortable" @click="onClickSort" flex="~ row" items="start" opacity="50 hover:75 on-active:100" :active="isActive" transition="all")
     HList()
       slot
       Transition(name="fade" mode="out-in")
@@ -16,29 +16,35 @@ th(p="3")
 <script setup lang="ts" generic="T extends TableRow">
 import UpArrowIcon from '../icons/UpArrowIcon.vue';
 import DownArrowIcon from '../icons/DownArrowIcon.vue';
-import type { TableColumn, TableRow } from '~/composables/useTable';
+import type { TableColumn, TableRow, TableSort, TableSortField } from '~/composables/useTable';
 
-const { toggleSortDirection, selectSortField, sort } = useCollectionSettings()
 
 const props = defineProps<{
-  item: TableColumn<T>
+  column: TableColumn<T>,
+  sortField: TableSort<T>
 }>()
 
-const isActive = computed(() => sort.value.field == props.item.value)
+const emit = defineEmits<{
+  toggleSort: [],
+  selectField: [item: TableColumn<T>]
+}>()
+
+const isActive = computed(() => props.sortField.field == props.column.value)
 
 const direction = computed(() => {
   if (isActive.value)
-    return sort.value.direction
+    return props.sortField.direction
 
   return 'asc'
 })
 
 const onClickSort = () => {
   if (isActive.value)
-    return toggleSortDirection()
+    return emit("toggleSort")
 
-  return selectSortField(props.item.value)
+  return emit("selectField", props.column)
 }
+
 </script>
 
 <style scoped></style>

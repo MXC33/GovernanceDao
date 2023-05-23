@@ -5,7 +5,7 @@ table(bg="gray-900" w="full")
     col(v-for="column in columns" :style="getColumnStyle(column)")
 
   TableHead()
-    TableCellHead(v-for="item in columns" :item="item") {{ item.label }}
+    TableCellHead(v-for="item in columns" :column="item" :sort-field="sort" @select-field="selectSortField", @toggle-filter="toggleSortDirection") {{ item.label }}
 
   tbody(divide-y="1")
     TableRow(v-for="(row, index) in sortedRows" :key="index")
@@ -16,7 +16,7 @@ table(bg="gray-900" w="full")
 </template>
 
 <script setup lang="ts" generic="Row extends TableRow">
-import type { TableColumn, TableRow, TableSortField } from '~/composables/useTable';
+import type { TableColumn, TableRow } from '~/composables/useTable';
 
 const props = defineProps<{
   columns: TableColumn<Row>[],
@@ -26,7 +26,7 @@ const props = defineProps<{
   error?: string,
 }>()
 
-const { sortedRows } = useTable(props.rows, props.id)
+const { sortedRows, sort, selectSortField, toggleSortDirection } = useTable(props.rows, props.id)
 
 const getColumnStyle = (item: TableColumn<Row>) => {
   if (!item.width)

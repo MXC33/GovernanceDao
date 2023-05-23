@@ -5,6 +5,7 @@ img(:src="imageSrc" w="full" h="full" object="contain center" v-if="imageSrc" )
 <script lang="ts" setup>
 import type { AnyToken } from '@ix/base/composables/Token/useTokens';
 const { getTokenImageURL } = useTokenMedia()
+
 const props = defineProps<{
   token: AnyToken,
   isLarge?: boolean,

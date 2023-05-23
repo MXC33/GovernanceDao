@@ -11,24 +11,25 @@ VList(flex-grow="1" min-h="0" pos="relative" p="8" space-y="6")
 
   HList(pos="sticky")
     Transition(name="slide-left")
-      CollectionFilterWrapper(v-if="showFilters && data" pos="sticky top-58" h="100" inset="0" :items="data.filters")
-        template(#default)
+      ContentDrawerWrapper(:items="data.filters" v-if="showFilters && data")
+      //- CollectionFilterWrapper(v-if="showFilters && data" pos="sticky top-58" h="100" inset="0" :items="data.filters")
+      //-   template(#default)
 
-          ContentDrawer()
-            template(#header) 
-              VList(w="full")
-                InputRadio()
-                  template(#default)
-                  template(#value) 
+      //-     ContentDrawer()
+      //-       template(#header) 
+      //-         VList(w="full")
+      //-           InputRadio()
+      //-             template(#default)
+      //-             template(#value) 
 
 
-          //- ContentDrawer()
-          //-   template(#header) 
-          //-   template(#default)
-          //-     VList(w="full")
-          //-       InputCheckbox()
-          //-         template(#default) 
-          //-         template(#value) 
+        //- ContentDrawer()
+        //-   template(#header) 
+        //-   template(#default)
+        //-     VList(w="full")
+        //-       InputCheckbox()
+        //-         template(#default) 
+        //-         template(#value) 
 
 
     Transition(name="fade" mode="out-in" v-if="data")
@@ -49,7 +50,8 @@ VList(flex-grow="1" min-h="0" pos="relative" p="8" space-y="6")
 <script lang="ts" setup>
 import type { CollectionData } from '~/composables/useCollection';
 import type { TableColumn } from '~/composables/useTable'
-import type { Filters } from '~/composables/useCollection'
+import type { APIFilter } from '~/composables/useCollection'
+import type { IXToken } from '@ix/base/composables/Token/useIXToken';
 
 const { displayType } = useCollectionSettings()
 const { getTokenKey } = useTokens()
@@ -58,7 +60,7 @@ const { cartItems } = useCart()
 const { getCollectionAttributes } = useDefaulAttributes()
 const attributes = computed(() => getCollectionAttributes(data))
 
-const columns: TableColumn[] = [
+const columns: TableColumn<IXToken>[] = [
   { label: "Asset", value: "name" },
   { label: "Higher bid price", value: "higher_bid_price", sortable: true },
   { label: "Sale Price", value: "sale_price", sortable: true },
@@ -72,7 +74,6 @@ const toggleFilterDrawer = () => {
 
 const { data } = defineProps<{
   data: CollectionData,
-  filters: Filters[]
 }>()
 
 // const filterRadio = ref<boolean[]>([])
