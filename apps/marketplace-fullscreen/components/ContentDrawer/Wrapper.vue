@@ -5,7 +5,7 @@ VList(min-w="100% md:90")
     template(#header) Owner
     template(#default)
       VList(w="full")
-        InputRadio(v-model="filterRadio['owner']" v-for="list, index in listRadio")
+        InputRadio(v-model="collectionOwners" :model-value="list.title" :is-selected="isSelected(list)" v-for="list in listRadio")
           template(#default) {{ list.title }}
           template(#value) {{ list.value }}
 
@@ -13,29 +13,51 @@ VList(min-w="100% md:90")
     template(#header) {{item.trait_type}}
     template(#default)
       VList(w="full")
-        InputCheckbox(v-model="filterCheckbox[list+index]" v-for="list, index in item.value")
-          template(#default) {{ list }}
-          template(#value) 1
+        InputCheckboxMultiple( :value="option" @checked="updateFilter(item.trait_type, $event)" v-for="option in item.value")
+          template(#default) {{ option }}
+          template(#value) 0
 </template>
 
 <script lang="ts" setup>
 
-import type {Filters} from "~/composables/useCollection";
+import type {Filter} from "~/composables/useCollection";
+import {onMounted} from "vue";
+import {useCollectionSettings} from "~/composables/useCollection";
 
-defineProps<{
-    items: Filters[]
+const props = defineProps<{
+    items: Filter[]
 }>()
 
-const filterRadio = ref<boolean[]>([])
-const filterCheckbox = ref<boolean[]>([])
+const { collectionOwners, activeFilters } = useCollectionSettings()
 
-watch(filterRadio, (newValue, oldValue) => {
-    console.log(`filterRadio changed from ${oldValue} to ${newValue}`)
-})
-watch(filterCheckbox, (newValue, oldValue) => {
-    console.log(`filterCheckbox changed from ${oldValue} to ${newValue}`)
-})
+const isSelected = (list) => {
+    console.log('collectionOwners.value == list.title',  collectionOwners.value, list.title, collectionOwners.value == list.title)
+    return collectionOwners.value == list.title
+}
+const updateFilter = (trait_type, value) => {
+      activeFilters.value[trait_type] = activeFilters.value[trait_type] || []
+      const index = activeFilters.value[trait_type].indexOf(value)
+      if (index === -1) {
+          activeFilters.value[trait_type].push(value)
+      } else {
+          activeFilters.value[trait_type].splice(index, 1)
+      }
+      if (activeFilters.value[trait_type].length === 0) {
+          delete activeFilters.value[trait_type]
+      }
+}
 
+watch(collectionOwners, (newValue, oldValue) => {
+    console.log(`collectionOwners changed `, collectionOwners.value)
+})
+watch(activeFilters, (newValue, oldValue) => {
+    console.log(`activeFilters changed  to `, activeFilters.value)
+},{
+    deep: true
+})
+onMounted(() => {
+    console.log('items', props.items)
+});
 const listRadio = [
   {
     title: 'All',
@@ -43,7 +65,7 @@ const listRadio = [
   },
   {
     title: 'Me',
-    value: 0
+    value: 1
   }
 ]
 </script>
