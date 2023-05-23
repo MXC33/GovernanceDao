@@ -5,7 +5,7 @@ VList(p="5" capitalized="~" space-y="5" b="~" rounded="2")
         div(text="2xl white" v-html="$t(`marketplaceFullscreen.transfer.title`)")
         HList(space-x="3")
             HList()
-                TokenImage(:token="collectionData.nfts[9]" inset="0" w="15" h="15" object="contain center" :key="getTokenKey(collectionData.nfts[0])")
+                TokenImage(:token="collectionData.nfts[0]" inset="0" w="15" h="15" object="contain center" :key="getTokenKey(collectionData.nfts[0])")
                 VList()
                     div(text="white") {{getTokenName(collectionData.nfts[0])}} 
                     div(text="white") Collection name  
@@ -49,9 +49,9 @@ const itemTransfer = () => {
     console.log('transfering Item proccess starting')
     console.log(wallet.value)
     console.log(props.collectionData)
-    if (props.collectionData.token_id == null)
+    if (props.collectionData.nfts[0].token_id == null)
         return console.log("ERROR, no token ID")
-    transferNFT(props.collectionData.collection, wallet.value, props.collectionData.token_id, 1)
+    transferNFT(props.collectionData.collection, wallet.value, props.collectionData.nfts[0].token_id, 1)
 
 }
 </script>
