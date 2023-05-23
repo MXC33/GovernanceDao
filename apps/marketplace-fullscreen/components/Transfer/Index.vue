@@ -10,7 +10,9 @@ VList(p="5" capitalized="~" space-y="5" b="~" rounded="2")
                     div(text="white") {{getTokenName(collectionData.nfts[0])}} 
                     div(text="white") Collection name  
             div(flex="grow")
-            div(text="white" v-html="$t(`marketplaceFullscreen.transfer.own`)")
+            VList(items="center")
+                div(text="white" v-html="$t(`marketplaceFullscreen.transfer.own`)") 
+                div(text="white") 7          
 
     div(text="white") Quantity
     Adjustable(v-model="Image" h="10")
