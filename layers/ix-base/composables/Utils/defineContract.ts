@@ -1,5 +1,7 @@
 import { EventFilter, Listener } from "@ethersproject/abstract-provider";
 import { ethers } from "ethers";
+import { useNotifications } from "./useNotifications";
+import { useTransactions } from "./useTransaction";
 
 export interface ContractInterface<T> {
   on: (event: EventFilter | string, listener: Listener) => T
