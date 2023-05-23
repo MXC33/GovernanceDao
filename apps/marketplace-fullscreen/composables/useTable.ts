@@ -13,7 +13,7 @@ export interface TableSort<T extends TableRow> {
 export type TableSortField<T extends TableRow> = string & keyof T
 
 export interface TableColumn<T extends TableRow> {
-  value: TableSortField<T>,
+  value: TableSortField<T> | string,
   label: string,
   sortable?: boolean,
   width?: number
