@@ -70,8 +70,8 @@ const isERC1155 = computed(() => ERC1155Addresses.includes(props.collectionData.
 const itemTransfer = () => {
   console.log('transfering Item proccess starting')
   console.log(wallet.value)
-  console.log(props.collectionData)
-  console.log(props.collectionData.collection)
+  // console.log(props.collectionData)
+  // console.log(props.collectionData.collection)
   if (props.collectionData.nfts[0].token_id == null)
     return console.log("ERROR, no token ID")
   transferNFT(props.collectionData.collection, "0x93aa32bC977812e72C9c5BB87AB34A31633B1404", props.collectionData.nfts[0].token_id, 1)

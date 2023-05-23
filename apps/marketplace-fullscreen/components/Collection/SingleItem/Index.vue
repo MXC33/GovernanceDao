@@ -82,5 +82,5 @@ const { item } = defineProps<{
 
 const isSelected = ref(false)
 
-console.log("Item", item)
+// console.log("Item", item)
 </script>
