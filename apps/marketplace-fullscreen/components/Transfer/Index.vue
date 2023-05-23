@@ -6,18 +6,18 @@ Popup(text="white")
             div(text="2xl" v-html="$t(`mpFullscreen.transfer.title`)")
             HList(space-x="3")
                 HList()
-                    TokenImage(:token="collectionData.nfts[0]" inset="0" w="15" h="15" object="contain center" :key="getTokenKey(collectionData.nfts[0])")
+                    TokenImage(:token="collectionData.nfts[4]" inset="0" w="15" h="15" object="contain center" :key="getTokenKey(collectionData.nfts[4])")
                     VList()
-                        div() {{getTokenName(collectionData.nfts[0])}} 
+                        div() {{getTokenName(collectionData.nfts[4])}} 
                         div() Collection name  
                 div(flex="grow")
                 VList(items="center")
                     div(v-html="$t(`mpFullscreen.transfer.own`)") 
                     div() {{hardCodedMax}}          
 
-        div(v-html="$t(`mpFullscreen.transfer.quantity`)") 
-        //-h="10"
-        Adjustable(v-model="quantity" h="10")
+        VList(v-if="isERC1155" space-y="3")
+            div(v-html="$t(`mpFullscreen.transfer.quantity`)") 
+            Adjustable(v-model="quantity" h="10")
 
         //-VList(items="center" space-y="3")
         div(v-html="$t(`mpFullscreen.transfer.walletAdress`)")
@@ -66,13 +66,16 @@ const onChange = () => {
     }
 }
 
+const isERC1155 = computed(() => ERC1155Addresses.includes(props.collectionData.collection.toLowerCase()))
+
 const itemTransfer = () => {
     console.log('transfering Item proccess starting')
     console.log(wallet.value)
     console.log(props.collectionData)
+    console.log(props.collectionData.collection)
     if (props.collectionData.nfts[0].token_id == null)
         return console.log("ERROR, no token ID")
-    transferNFT(props.collectionData.collection, wallet.value, props.collectionData.nfts[0].token_id, 1)
+    transferNFT(props.collectionData.collection, "0x93aa32bC977812e72C9c5BB87AB34A31633B1404", props.collectionData.nfts[0].token_id, 1)
 
 }
 </script>

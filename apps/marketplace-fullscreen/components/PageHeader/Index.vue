@@ -13,7 +13,7 @@ transition(name="fade-slow")
 
       CollectionSelect()
 
-      ButtonSquareIcon()
+      ButtonSquareIcon(@click="transfer")
         UserIcon(w="6")
 
       ButtonSquareIcon(@click="viewingCart = true")
@@ -43,6 +43,7 @@ import CartIcon from '~/assets/icons/cart.svg'
 
 const { viewingCart } = useCart()
 const y = useGlobalWindowScroll()
+const transferPop = transferPopup()
 
 const gradientStyle = computed(() => ({
   opacity: 100 - (y.value / 500) * 100 + '%'
@@ -52,6 +53,11 @@ const isScrolling = computed(() => {
   return y.value >= 10
 })
 
+const transfer = () => {
+  console.log("transfer")
+  transferPop.value = !transferPop.value
+  console.log(transferPop.value)
+}
 </script>
 
 <style>

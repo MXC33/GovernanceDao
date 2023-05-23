@@ -1,7 +1,7 @@
 <template lang="pug">
 
 //-z="99" pos="absolute top-0 left-0" 
-Transfer(:collectionData="data")
+Transfer(:collectionData="data" v-if="transferPop")
 
 VList(flex-grow="1" min-h="0" pos="relative" p="8" space-y="6")
   CollectionHeader(:collection="data" v-if="data" )
@@ -37,6 +37,8 @@ import type { TableColumn } from '~/composables/useTable'
 const { displayType } = useCollectionSettings()
 const { getTokenKey } = useTokens()
 const { cartItems } = useCart()
+const transferPop = transferPopup()
+
 const columns: TableColumn[] = [
   { label: "Asset", value: "name" },
   { label: "Higher bid price", value: "higher_bid_price", sortable: true },
