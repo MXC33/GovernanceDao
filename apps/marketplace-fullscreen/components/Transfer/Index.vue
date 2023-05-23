@@ -20,15 +20,16 @@ Popup()
 
         //-VList(items="center" space-y="3")
         div(text="white") Wallet Adress
-        input(text="2xl white center" bg="black" placeholder="e.g Dx0000" border="" v-model="wallet")
+        input(text="2xl white center" bg="black" placeholder="e.g Dx0000" border="" v-model="wallet" @input="onChange")
         div()
             div(text="white" v-html="$t(`marketplaceFullscreen.transfer.warningText`)")
-        HList(space-x="3")
-            FormCheckbox(v-model="isChecked") 
-            div(text="white" v-html="$t(`marketplaceFullscreen.transfer.verifyText`)")
+        Transition(name="slide-top")
+            HList(space-x="3" v-if="wallet")
+                FormCheckbox(v-model="isChecked") 
+                div(text="white" v-html="$t(`marketplaceFullscreen.transfer.verifyText`)")
 
         Transition(name="slide-top")
-            button(m="auto" text="~" bg="gray-600" b="~" p="2" w="full" v-if="isChecked" @click="itemTransfer") Transfer Item 
+            button(m="auto" text="~" bg="gray-600" b="~" p="2" w="full" v-if="isChecked && wallet" @click="itemTransfer") Transfer Item 
 </template>
 
 <script lang="ts" setup>
@@ -45,9 +46,15 @@ const { getTokenKey, getTokenName } = useTokens()
 const { transferNFT } = useTransferNFT()
 
 const wallet = ref("")
+const oldWalletAdress = ref("")
 const isChecked = ref(false)
 
-
+const onChange = () => {
+    if(wallet != oldWalletAdress){
+        isChecked.value = false;
+        oldWalletAdress.value = wallet.value;
+    }
+}
 
 const itemTransfer = () => {
     console.log('transfering Item proccess starting')
