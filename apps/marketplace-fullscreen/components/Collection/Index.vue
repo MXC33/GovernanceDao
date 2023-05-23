@@ -1,6 +1,6 @@
 <template lang="pug">
 Popup()
-  Transfer(:token="data.nfts[Math.floor(Math.random() * data.nfts.length)]")
+  Transfer(:token="data.nfts[randomIndex]")
 
 VList(flex-grow="1" min-h="0" pos="relative" p="8" space-y="6")
   CollectionHeader(:collection="data" v-if="data" )
@@ -52,5 +52,6 @@ const { data } = defineProps<{
   data: CollectionData,
 }>()
 
+const randomIndex = Math.floor(Math.random() * data.nfts.length)
 
 </script>
