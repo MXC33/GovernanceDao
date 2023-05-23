@@ -26,6 +26,7 @@ const emit = defineEmits<{
   selectField: [item: TableSortField<T>]
 }>()
 
+
 const isActive = computed(() => props.sortField?.field == props.column.value)
 
 const direction = computed(() => {

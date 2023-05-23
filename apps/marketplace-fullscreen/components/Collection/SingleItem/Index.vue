@@ -17,19 +17,32 @@ div(grid="~ cols-8 gap-3" px="6")
               template(#name) {{ trait.value }}
 
   div(grid="col-span-5")
-    VList()
+    VList(space-y="6")
       h3(text="3xl" font="bold") {{ item.name }}
 
       AttributeList(:attributes="attributes" v-if="item")
 
+      TradeModule(:owner-value="3")
+        template(#header)
+          Tab()
+            TabItem(v-for="tab in tabs") {{ tab }}
+
+      CollectionFilterRowSelect(v-model="isSelected")
+        template(#default) Label name 
+        template(#value) Value bane mane
+
       ContentDrawer(:start-open="true")
-        template(#header) Listings
+        template(#header)
+          HList(items="center" font="bold" space-x="2")
+            ListingIcon(w="4.5")
+            span() Listings
         template(#default)
           Table(:columns="columns" :rows="item.sales" id="single-item" :in-drawer="true")
 
 </template>
 
 <script lang="ts" setup>
+import ListingIcon from '~/assets/icons/listing.svg'
 import type { Sale, SingleItemData } from '@ix/base/composables/Token/useIXToken';
 import type { TableColumn } from '~/composables/useTable';
 
@@ -46,5 +59,10 @@ const columns: TableColumn<Sale>[] = [
 const { item } = defineProps<{
   item: SingleItemData
 }>()
+
+const isSelected = ref(false)
+
+type Tabs = 'sell' | 'buy'
+const tabs: Tabs[] = ['sell', 'buy']
 
 </script>
