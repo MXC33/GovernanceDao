@@ -55,9 +55,7 @@ export default defineNuxtConfig({
     langDir: 'lang/',
     defaultLocale: 'en',
   },
-  nitro: {
-    preset: 'vercel',
-  },
+
   vite: {
     vue: {
       script: {
