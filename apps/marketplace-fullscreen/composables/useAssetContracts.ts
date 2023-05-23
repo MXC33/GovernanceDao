@@ -2,75 +2,78 @@ import { BigNumberish, ethers, ContractTransaction } from 'ethers'
 import { ContractInterface, defineContract } from "~/../../layers/ix-base/composables/Utils/defineContract"
 
 import { roverAddress, assetsAddress, avatarNFTAddress, badgeNFTAddress } from '../../../layers/ix-base/composables/Contract/WalletAddresses'
-import AvatarNFTABI from '../../../layers/ix-base/composables/Contract/Abis/AvatarNFT.json'
-import BadgeNFTABI from '../../../layers/ix-base/composables/Contract/Abis/AvatarNFT.json'
-import PIXAssetABI from '../../../layers/ix-base/composables/Contract/Abis/AvatarNFT.json'
-import RoverNFTABI from '../../../layers/ix-base/composables/Contract/Abis/AvatarNFT.json'
+import ERC1155ABI from '../../../layers/ix-base/composables/Contract/Abis/ERC1155.json'
+import ERC721ABI from '../../../layers/ix-base/composables/Contract/Abis/ERC1155.json'
+
+
+import { ContractContext as ERC1155Contract } from '../../../layers/ix-base/composables/Contract/Abis/ERC1155'
+
+import { ContractContext as ERC721Contract } from '../../../layers/ix-base/composables/Contract/Abis/ERC721'
+
+
 import { ZERO_ADDRESS } from './useTransferNFT'
 
-interface AssetContract {
-  safeTransferFrom: (
-    from: string,
-    to: string,
-    id: BigNumberish,
-    amount: BigNumberish,
-    data: string,
-  ) => Promise<ContractTransaction>;
-}
 
-export const getAssetContract = <T extends ContractInterface<T> & AssetContract>(adress: string) => {
-  const abi = contractAddressToABI(adress)
+export const ERC1155Addresses = [assetsAddress.polygon?.toLowerCase(), avatarNFTAddress.polygon?.toLowerCase(), landmarkAddress.polygon?.toLowerCase()]
 
-  if (!abi) {
-    console.error("No ABI found")
-    return null
-  }
+export const ERC721Addresses = [roverAddress.polygon?.toLowerCase(), badgeNFTAddress.polygon?.toLowerCase()]
+
+
+export const get1155Contract = <T extends ContractInterface<T> & ERC1155Contract>(address: string) => {
+
 
   const { walletAdress } = useWallet()
 
-  const { createTransaction, ...contractSpec } = defineContract<T>('assetn-contract-' + adress, {
-    contractAddress: adress,
+  const { createTransaction, ...contractSpec } = defineContract<T>('erc1155-contract-' + address, {
+    contractAddress: address,
     notifications: {
       failMessage: 'Error transferring NFT'
     },
     createContract(provider) {
-      return new ethers.Contract(adress, abi, provider.getSigner()) as unknown as T
+      return new ethers.Contract(address, ERC1155ABI.abi, provider.getSigner()) as unknown as T
     }
   })
 
-  const transferNFT = (to: string, tokenId: number, amount: number) => {
-    console.log("BEFORE CREATE TRANSACT")
-    return createTransaction((contract) => {
-      console.log("wallet")
-
-      const adress = walletAdress.value
-
-      console.log("transferNFT")
-      if (!adress)
+  const transfer1155Token = (to: string, tokenId: number, amount: number) =>
+    createTransaction((contract) => {
+      const address = walletAdress.value
+      if (!address)
         return undefined
 
-      return contract.safeTransferFrom(adress, to, tokenId, amount, ZERO_ADDRESS)
+      return contract.safeTransferFrom(address, to, tokenId, amount, ZERO_ADDRESS)
     })
-  }
 
   return {
     ...contractSpec,
-    transferNFT
+    transfer1155Token
   }
 }
 
+export const get721Contract = <T extends ContractInterface<T> & ERC721Contract>(address: string) => {
 
+  const { walletAdress } = useWallet()
 
+  const { createTransaction, ...contractSpec } = defineContract<T>('erc721-contract-' + address, {
+    contractAddress: address,
+    notifications: {
+      failMessage: 'Error transferring NFT'
+    },
+    createContract(provider) {
+      return new ethers.Contract(address, ERC721ABI.abi, provider.getSigner()) as unknown as T
+    }
+  })
 
-export const contractAddressToABI = (contractAddress: string) => {
-  switch (contractAddress.toLowerCase()) {
-    case roverAddress.polygon:
-      return RoverNFTABI.abi
-    case avatarNFTAddress.polygon:
-      return AvatarNFTABI.abi
-    case badgeNFTAddress.polygon:
-      return BadgeNFTABI.abi
-    case assetsAddress.polygon?.toLowerCase():
-      return PIXAssetABI.abi
+  const transfer721Token = (to: string, tokenId: number) =>
+    createTransaction((contract) => {
+      const address = walletAdress.value
+      if (!address)
+        return undefined
+
+      return contract.safeTransferFrom(address, to, tokenId, ZERO_ADDRESS)
+    })
+
+  return {
+    ...contractSpec,
+    transfer721Token
   }
 }

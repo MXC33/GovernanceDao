@@ -48,6 +48,7 @@ export default defineNuxtConfig({
 
   runtimeConfig: {
     public: {
+      CHAIN_NET: process.env.CHAIN_NET,
       s3: (process.env.PUBLIC_ASSETS ?? '/s3'),
       'graphql-client': {
         clients: {

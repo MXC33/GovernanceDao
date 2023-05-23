@@ -14,7 +14,8 @@
     "story:build": "histoire build",
     "story:preview": "histoire preview",
     "lint": "eslint .",
-    "postinstall": "yarn run prepare"
+    "postinstall": "yarn run prepare",
+    "abis": "node create-abis.js"
   },
   "devDependencies": {
     "@coinbase/wallet-sdk": "^3.6.6",
@@ -32,6 +33,7 @@
     "case-it": "^1.0.1",
     "date-fns": "^2.30.0",
     "eslint": "^8.28.0",
+    "ethereum-abi-types-generator": "^1.3.2",
     "ethers": "5",
     "histoire": "^0.16.1",
     "nuxt": "^3.5.1",
