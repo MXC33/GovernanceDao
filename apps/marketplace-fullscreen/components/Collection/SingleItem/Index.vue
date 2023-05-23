@@ -40,7 +40,7 @@ div(grid="~ cols-8 gap-3" px="6")
 
       ContentDrawer(:start-open="true")
         template(#titleicon)
-          TitleWithIcon(icon="offer")
+          TitleWithIcon(icon="offer") offers
         template(#default)
           Table(:columns="offerColumns" :rows="item.bids" id="offers" :in-drawer="true")
 
