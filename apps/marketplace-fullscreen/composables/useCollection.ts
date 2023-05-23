@@ -57,7 +57,7 @@ export interface CollectionData {
 
 export type CollectionDisplayType = 'list' | 'grid'
 
-export const useettings = () => {
+export const useCollectionSettings = () => {
   const activeFilters = useState('activeFilters', () => ({}))
   const collectionOwners = useState('collectionOwners', () => ("All"))
 
