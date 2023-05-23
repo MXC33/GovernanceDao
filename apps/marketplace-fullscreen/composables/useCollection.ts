@@ -1,10 +1,14 @@
 import { IXToken } from "@ix/base/composables/Token/useIXToken"
 
 export interface Filters {
+  title: string
   trait_type: string
   value: string[]
+  type: FilterType
+  selected: boolean
 }
-export interface Collection {
+
+export interface Collections {
   name: string
   slug: string
   contract: string
@@ -13,6 +17,7 @@ export interface Collection {
   order: string
   volume: string
 }
+
 export interface CollectionData {
   name: string
   currency: string
@@ -34,6 +39,7 @@ export interface CollectionData {
   filters: Filters[]
 }
 
+export type FilterType = 'radio' | 'checkbox'
 export type SortField = string & keyof IXToken
 export type CollectionDisplayType = 'list' | 'grid'
 export type SortOrder = 'desc' | 'asc'
