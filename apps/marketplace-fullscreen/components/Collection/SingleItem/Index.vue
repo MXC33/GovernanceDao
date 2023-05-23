@@ -25,8 +25,7 @@ div(grid="~ cols-8 gap-3" px="6")
 
       TradeModule(:owner-value="3")
         template(#header)
-          Tab()
-            TabItem(v-for="tab in tabs" v-model="isSelected") {{ tab }}
+          TabItem(v-for="tab in tabs" :id="tab" v-model="activeTab") {{ tab }}
 
       ContentDrawer(:start-open="true")
         template(#header)
@@ -51,6 +50,7 @@ div(grid="~ cols-8 gap-3" px="6")
 import ListingIcon from '~/assets/icons/listing.svg'
 import type { Sale, SingleItemData, Bid } from '@ix/base/composables/Token/useIXToken';
 import type { TableColumn } from '~/composables/useTable';
+const { tabs, activeTab } = useTabList(['sell', 'buy'])
 
 const { getSingleAttributes } = useDefaulAttributes()
 const { addToCart } = useCart()
@@ -78,9 +78,6 @@ const { item } = defineProps<{
 }>()
 
 const isSelected = ref(false)
-
-type Tabs = 'sell' | 'buy'
-const tabs: Tabs[] = ['sell', 'buy']
 
 console.log("Item", item)
 </script>
