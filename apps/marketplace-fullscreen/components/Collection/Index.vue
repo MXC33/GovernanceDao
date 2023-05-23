@@ -9,9 +9,9 @@ VList(flex-grow="1" min-h="0" pos="relative" p="8" space-y="6")
 
   CollectionFilter(:items="data.nfts" :filters="data.filters" v-if="data"  @toggle-filter="toggleFilterDrawer")
 
-  HList(pos="sticky")
+  HList(space-x="3")
     Transition(name="slide-left")
-      CollectionFilterSlideout(:items="data.filters" v-if="showFilters && data")
+      CollectionFilterSlideout(:items="data.filters" v-if="showFilters && data" pos="sticky top-22")
 
     Transition(name="fade" mode="out-in" v-if="data")
       CollectionGrid(v-if="displayType == 'grid'" w="full")
