@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "nuxi dev --port 3333 .playground",
     "story": "nuxi dev --port 3333 .playground",
-    "build": "yarn run prepare && nuxt build .playground",
+    "build": "yarn run prepare .playground && nuxt build .playground",
     "generate": "nuxt generate .playground",
     "preview": "nuxt preview .playground",
     "prepare": "nuxi prepare && nuxi prepare .playground",
