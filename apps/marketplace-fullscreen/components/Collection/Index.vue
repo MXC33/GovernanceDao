@@ -6,9 +6,6 @@ VList(flex-grow="1" min-h="0" pos="relative" p="8" space-y="6")
     template(#attributes)
       AttributeList(:data="data" v-if="data" )
 
-  CollectionFilter(@toggle-filter="toggleFilterDrawer" :items="data.nfts" :filters="data.filters")
-      AttributeList()
-
   CollectionFilter(:items="data.nfts" :filters="data.filters" v-if="data"  @toggle-filter="toggleFilterDrawer")
 
   HList(pos="sticky")
