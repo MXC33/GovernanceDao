@@ -14,10 +14,9 @@ Popup(text="white")
                 VList(items="center")
                     div(v-html="$t(`mpFullscreen.transfer.own`)") 
                     div() {{hardCodedMax}}          
-
-        div(v-html="$t(`mpFullscreen.transfer.quantity`)") 
-        //-h="10"
-        Adjustable(v-model="quantity" h="10")
+        VList(space-y="3")
+            div(v-html="$t(`mpFullscreen.transfer.quantity`)") 
+            Adjustable(v-model="quantity" h="10")
 
         //-VList(items="center" space-y="3")
         div(v-html="$t(`mpFullscreen.transfer.walletAdress`)")
