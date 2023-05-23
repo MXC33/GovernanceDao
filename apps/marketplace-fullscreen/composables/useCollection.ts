@@ -23,7 +23,7 @@ export interface Filter extends FilterBase {
 
 export type FilterType = 'radio' | 'checkbox'
 
-export interface Collections {
+export interface Collection {
   name: string
   slug: string
   contract: string
@@ -38,7 +38,8 @@ export interface CollectionData {
   currency: string
   total_volume: number
   floor_price?: number
-  owners?: number
+  owners?: number,
+  token_id?: number,
   sale_price: any
   higher_bid_price: any
   listed: number
