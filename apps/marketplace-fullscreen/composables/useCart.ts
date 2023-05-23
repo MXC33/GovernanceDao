@@ -12,7 +12,6 @@ export const useCart = () => {
   const removeFromCart = (token: IXToken) => {
 
     const index = cartItems.value.findIndex((item) => item.token.token_id == token.token_id)
-    console.log("remove", index, token.token_id, cartItems.value.map((item) => item.token.token_id))
 
     cartItems.value.splice(index, 1)
   }

@@ -1,22 +1,23 @@
 <template lang="pug">
 VList(flex-grow="1" min-h="0" pos="relative" p="8" space-y="6")
-  CollectionHeader(:collection="data" v-if="data" )
-    template(#header) {{ data.name }}
+  CollectionHeader() 
+    template(#header) 
+      slot(name="name")
 
     template(#attributes)
-      AttributeList(:data="data" v-if="data" )
+      AttributeList(:attributes="attributes" v-if="data")
 
   CollectionFilter(:items="data.nfts" :filters="data.filters" v-if="data"  @toggle-filter="toggleFilterDrawer")
 
   HList(pos="sticky")
     Transition(name="slide-left")
-      ContentDrawerWrapper(v-if="showFilters && data" pos="sticky top-58" h="100" inset="0" :items="data.filters")
+      CollectionFilterSlideout(:items="data.filters" v-if="showFilters && data")
 
     Transition(name="fade" mode="out-in" v-if="data")
       CollectionGrid(v-if="displayType == 'grid'" w="full")
-        CollectionGridItem(:token="token" v-for="token in data.nfts" b="gray-400")
+        CollectionGridItem.collection-grid-item(:token="token" v-for="token in data.nfts" b="gray-400")
 
-      CollectionTable(:columns="columns" :rows="data.nfts" v-else initial-sort="name")
+      Table(:columns="columns" :rows="data.nfts" v-else id="collection")
         template(#item-name="{row}")
           HList(items="center" space-x="2" font="bold")
             div(w="12" h="12")
@@ -30,10 +31,16 @@ VList(flex-grow="1" min-h="0" pos="relative" p="8" space-y="6")
 <script lang="ts" setup>
 import type { CollectionData } from '~/composables/useCollection';
 import type { TableColumn } from '~/composables/useTable'
+import type { IXToken } from '@ix/base/composables/Token/useIXToken';
+
 const { displayType } = useCollectionSettings()
 const { getTokenKey } = useTokens()
 const { cartItems } = useCart()
-const columns: TableColumn[] = [
+
+const { getCollectionAttributes } = useDefaulAttributes()
+const attributes = computed(() => getCollectionAttributes(data))
+
+const columns: TableColumn<IXToken>[] = [
   { label: "Asset", value: "name" },
   { label: "Higher bid price", value: "higher_bid_price", sortable: true },
   { label: "Sale Price", value: "sale_price", sortable: true },
@@ -49,5 +56,10 @@ const { data } = defineProps<{
   data: CollectionData,
 }>()
 
-
 </script>
+
+<style>
+.collection-grid-item:nth-child(5n + 6) {
+  border: 0px;
+}
+</style>
