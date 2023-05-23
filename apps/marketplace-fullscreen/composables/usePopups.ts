@@ -1,2 +1,2 @@
-export const transferPopup = () => useState<boolean | null>('asdas-popup', () => false)
+export const transferPopup = () => useState<boolean | null>('transfer-popup', () => false)
 

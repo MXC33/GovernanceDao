@@ -10,6 +10,7 @@ Popup(text="white")
           VList()
             div() {{getTokenName(collectionData.nfts[4])}} 
             div() "{Collection name}"  
+
         div(flex="grow")
         VList(items="center")
           div(v-html="$t(`mpFullscreen.transfer.own`)") 
@@ -21,9 +22,12 @@ Popup(text="white")
 
     //-VList(items="center" space-y="3")
     div(v-html="$t(`mpFullscreen.transfer.walletAdress`)")
+
     input(text="2xl center" bg="black" placeholder="e.g 0x1a2..." border="" v-model="wallet" @input="onChange")
+
     div()
       div(v-html="$t(`mpFullscreen.transfer.warningText`)")
+
     Transition(name="slide-top")
       HList(space-x="3" v-if="wallet")
         FormCheckbox(v-model="isChecked") 
@@ -31,17 +35,12 @@ Popup(text="white")
 
     Transition(name="slide-top")
       button(m="auto" text="~" bg="gray-600" b="~" p="2" w="full" v-if="isChecked && wallet" @click="itemTransfer" v-html="$t(`mpFullscreen.transfer.transferItem`)")
+
 </template>
 
 <script lang="ts" setup>
 import type { TransferItem } from '~/composables/useTransfer'
-import Image from "~/assets/icons/plus.svg"
-import type { IXToken } from '@ix/base/composables/Token/useIXToken';
-import type { AnyToken } from '@ix/base/composables/Token/useTokens';
 import type { CollectionData } from '~/composables/useCollection';
-//import type { CartItem } from '~/composables/useCart'
-
-//const item = defineModel<CartItem>()
 
 const item = defineModel<TransferItem>()
 const props = defineProps<{
