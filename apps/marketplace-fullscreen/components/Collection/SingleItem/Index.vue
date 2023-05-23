@@ -32,7 +32,6 @@ div(grid="~ cols-8 gap-3" px="6")
       ContentDrawer(:start-open="true")
         template(#titleicon)
           TitleWithIcon(icon="listing") listing
-
         template(#default)
           Table(:columns="saleColumns" :rows="item.sales" id="single-item" :in-drawer="true")
             template(#item-action="{row}")
