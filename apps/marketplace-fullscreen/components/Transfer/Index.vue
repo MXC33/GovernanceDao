@@ -9,7 +9,7 @@ Popup(text="white")
                     TokenImage(:token="collectionData.nfts[4]" inset="0" w="15" h="15" object="contain center" :key="getTokenKey(collectionData.nfts[4])")
                     VList()
                         div() {{getTokenName(collectionData.nfts[4])}} 
-                        div() Collection name  
+                        div() "{Collection name}"  
                 div(flex="grow")
                 VList(items="center")
                     div(v-html="$t(`mpFullscreen.transfer.own`)") 
