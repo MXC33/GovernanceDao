@@ -37,6 +37,7 @@ div(grid="~ cols-8 gap-3" px="6")
           HList(items="center" font="bold" space-x="2")
             ListingIcon(w="4.5")
             span() Listings
+
         template(#default)
           Table(:columns="saleColumns" :rows="item.sales" id="single-item" :in-drawer="true")
             template(#item-action="{row}")

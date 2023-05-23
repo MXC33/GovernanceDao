@@ -24,6 +24,8 @@ export const useCart = () => {
     cartItems.value.push({
       token,
       sale,
+      min: 1,
+      max: sale?.quantity,
       value: 1
     })
 
