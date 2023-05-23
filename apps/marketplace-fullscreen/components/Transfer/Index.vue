@@ -1,32 +1,32 @@
 <template lang="pug">
-Popup()
-    VList(p="5" capitalized="~" space-y="5" b="~" rounded="2")
-        //-items="center"
-        VList(p="3") 
-            div(text="2xl white" v-html="$t(`marketplaceFullscreen.transfer.title`)")
-            HList(space-x="3")
-                HList()
-                    TokenImage(:token="collectionData.nfts[0]" inset="0" w="15" h="15" object="contain center" :key="getTokenKey(collectionData.nfts[0])")
-                    VList()
-                        div(text="white") {{getTokenName(collectionData.nfts[0])}} 
-                        div(text="white") Collection name  
-                div(flex="grow")
-                div(text="white" v-html="$t(`marketplaceFullscreen.transfer.own`)")
-
-        div(text="white") Quantity
-        Adjustable(v-model="Image" h="10")
-
-        //-VList(items="center" space-y="3")
-        div(text="white") Wallet Adress
-        input(text="2xl white center" bg="black" placeholder="e.g Dx0000" border="" v-model="wallet")
-        div()
-            div(text="white" v-html="$t(`marketplaceFullscreen.transfer.warningText`)")
+VList(p="5" capitalized="~" space-y="5" b="~" rounded="2")
+    //-items="center"
+    VList(p="3") 
+        div(text="2xl white" v-html="$t(`marketplaceFullscreen.transfer.title`)")
         HList(space-x="3")
-            FormCheckbox(v-model="isChecked") 
-            div(text="white" v-html="$t(`marketplaceFullscreen.transfer.verifyText`)")
+            HList()
+                TokenImage(:token="collectionData.nfts[0]" inset="0" w="15" h="15" object="contain center" :key="getTokenKey(collectionData.nfts[0])")
+                VList()
+                    div(text="white") {{getTokenName(collectionData.nfts[0])}} 
+                    div(text="white") Collection name  
+            div(flex="grow")
+            VList(items="center")
+                div(text="white" v-html="$t(`marketplaceFullscreen.transfer.own`)") 
+                div(text="white") 7          
 
-        Transition(name="slide-top")
-            button(m="auto" text="~" bg="gray-600" b="~" p="2" w="full" v-if="isChecked" @click="itemTransfer") Transfer Item 
+    div(text="white") Quantity
+    Adjustable(v-model="Image" h="10")
+
+    //-VList(items="center" space-y="3")
+    div(text="white") Wallet Adress
+    input(text="2xl white center" bg="black" placeholder="e.g Dx0000" border="" v-model="wallet")
+    div()
+        div(text="white" v-html="$t(`marketplaceFullscreen.transfer.warningText`)")
+    HList(space-x="3")
+        FormCheckbox(v-model="isChecked") 
+        div(text="white" v-html="$t(`marketplaceFullscreen.transfer.verifyText`)")
+
+    button(m="auto" text="~" bg="gray-600" b="~" p="2" w="full" v-if="isChecked" @click="itemTransfer") Transfer Item 
 </template>
 
 <script lang="ts" setup>
