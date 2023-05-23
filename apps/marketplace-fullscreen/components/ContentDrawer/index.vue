@@ -1,6 +1,6 @@
 <template lang="pug">
-VList(max-h="80" overflow-y="auto")
-  VList(overflow-y="auto" h="full")
+VList(max-h="80" overflow-y="auto" frame="~")
+  VList(overflow-y="auto" h="full" pos="relative")
     VList(h="12" bg="ix-black" justify="center" pos="sticky top-0" flex-shrink="0" z="1")
       HList(uppercase="~" items="center" justify="between" px="6" font="bold" cursor="pointer" @click.stop="dropDrawer")
         span(color="white" text="md")
@@ -8,7 +8,8 @@ VList(max-h="80" overflow-y="auto")
         ChevronIcon(w="5" translate-y="-0.35" fill="white" transition="opacity" :selected="isOpen" rotate="on-selected:-180deg")
 
     Transition(name="slide-top")
-      slot(v-if="isOpen")
+      div(v-if="isOpen")
+        slot
 
 div(b="b-1 gray-600" bg="black" ml="-8")
 
