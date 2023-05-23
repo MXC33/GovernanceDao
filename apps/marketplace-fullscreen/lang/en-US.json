@@ -1537,11 +1537,10 @@
       "title": "Transfer Asset",
       "quantity": "Quantity",
       "own": "You own",
-      "own2": "of the item",
       "walletAdress": "Wallet Adress",
       "placeholderText": "Put Adress Here",
-      "warningText": "Make sure the adress is correct! <br/><br/>There is no way to reverse this transaction",
-      "verifyText": "I Verify that this is the correct adress",
+      "warningText": "Make sure the adress is correct!<br/>There is no way to reverse this transaction",
+      "verifyText": "I Verify that I am aware and that <br/>the wallet adress is correct.",
       "confirm": "Confrim Adress"
     }
   }

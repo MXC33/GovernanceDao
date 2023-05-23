@@ -7,17 +7,19 @@ VList(p="5" capitalized="~" space-y="5" b="~" rounded="2")
             HList()
                 TokenImage(:token="token" inset="0" w="15" h="15" object="contain center" :key="getTokenKey(token)")
                 VList()
-                    div(text="white") Title 
-                    div(text="white") Planet IX  
+                    div(text="white") {{getTokenName(token)}}
+                    div(text="gray-200") Get Token 
+                    div(text="gray-200") Collection Name     
             div(flex="grow")
-            div(text="white" v-html="$t(`marketplaceFullscreen.transfer.own`)")
+            div(text="white" v-html="$t(`marketplaceFullscreen.transfer.own`)") 
 
     div(text="white") Quantity
     Adjustable(v-model="Image" h="10")
 
     //-VList(items="center" space-y="3")
     div(text="white") Wallet Adress
-    Input(text="2xl white center" bg="black" placeholder="e.g Dx0000" border="" v-model="Wallet")
+    //- fix valuet adress save
+    Input(text="2xl white center" bg="black" placeholder="e.g Dx0000" border="" @v-model="Wallet")
     div()
         div(text="white" v-html="$t(`marketplaceFullscreen.transfer.warningText`)")
     HList(space-x="3")
@@ -32,7 +34,7 @@ import Image from "~/assets/icons/plus.svg"
 import type { IXToken } from '@ix/base/composables/Token/useIXToken';
 import type { AnyToken } from '@ix/base/composables/Token/useTokens';
 
-const { getTokenKey } = useTokens()
+const { getTokenKey, getTokenName } = useTokens()
 
 const Wallet = ref("")
 const isChecked = ref(false)
@@ -42,6 +44,7 @@ const props = defineProps<{
 }>()
 
 const itemTransfer = () => {
-    console.log('transfering Item proccess starting')
+    console.log(Wallet)
+    //console.log('transfering Item proccess starting' + Wallet.value.toString())
 }
 </script>
