@@ -1,4 +1,5 @@
 import { IXToken } from "@ix/base/composables/Token/useIXToken"
+import { TableSort, TableSortField } from "./useTable"
 
 export interface Filters {
   trait_type: string
@@ -34,17 +35,10 @@ export interface CollectionData {
   filters: Filters[]
 }
 
-export type SortField = string & keyof IXToken
 export type CollectionDisplayType = 'list' | 'grid'
-export type SortOrder = 'desc' | 'asc'
-
-export interface CollectionSort {
-  field?: SortField,
-  direction: SortOrder
-}
 
 export const useCollectionSettings = () => {
-  const sort = useState<CollectionSort>('table-sort', () => ({
+  const sort = useState<TableSort<IXToken>>('colleciton-table-sort', () => ({
     field: 'type',
     direction: 'asc'
   }))
@@ -55,7 +49,7 @@ export const useCollectionSettings = () => {
     else return sort.value.direction = 'asc'
   }
 
-  const selectSortField = (field: SortField) => {
+  const selectSortField = (field: TableSortField<IXToken>) => {
     sort.value.direction = 'asc'
     sort.value.field = field
   }

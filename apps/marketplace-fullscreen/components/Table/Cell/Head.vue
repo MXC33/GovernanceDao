@@ -13,15 +13,15 @@ th(p="3")
       
 </template>
 
-<script setup lang="ts">
+<script setup lang="ts" generic="T extends TableRow">
 import UpArrowIcon from '../icons/UpArrowIcon.vue';
 import DownArrowIcon from '../icons/DownArrowIcon.vue';
-import type { TableColumn } from '~/composables/useTable';
+import type { TableColumn, TableRow } from '~/composables/useTable';
 
 const { toggleSortDirection, selectSortField, sort } = useCollectionSettings()
 
 const props = defineProps<{
-  item: TableColumn
+  item: TableColumn<T>
 }>()
 
 const isActive = computed(() => sort.value.field == props.item.value)

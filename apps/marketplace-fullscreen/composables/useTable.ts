@@ -1,16 +1,40 @@
 import { MaybeRef } from 'vue'
 import { get } from '@vueuse/core'
-import { SortField } from './useCollection'
 
-export interface TableColumn {
-  value: SortField,
+export type SortOrder = 'desc' | 'asc'
+
+export interface TableRow extends Record<string, any> { }
+
+export interface TableSort<T extends TableRow> {
+  field?: string & keyof T,
+  direction: SortOrder
+}
+
+export type TableSortField<T extends TableRow> = string & keyof T
+
+export interface TableColumn<T extends TableRow> {
+  value: TableSortField<T>,
   label: string,
   sortable?: boolean,
   width?: number
 }
 
-export const useTableData = <T extends Record<string, any>>(rows: MaybeRef<T[]>) => {
-  const { sort } = useCollectionSettings()
+export const useTable = <T extends TableRow>(rows: MaybeRef<T[]>, id: string) => {
+  const sort = useState<TableSort<T>>(`table-${id}`, () => ({
+    field: 'type',
+    direction: 'asc'
+  }))
+
+  const toggleSortDirection = () => {
+    if (sort.value.direction == 'asc')
+      return sort.value.direction = 'desc'
+    else return sort.value.direction = 'asc'
+  }
+
+  const selectSortField = (field: TableSortField<T>) => {
+    sort.value.direction = 'asc'
+    sort.value.field = field
+  }
 
   const sortedRows = computed(() => {
     const data = get(rows)
@@ -33,6 +57,8 @@ export const useTableData = <T extends Record<string, any>>(rows: MaybeRef<T[]>)
 
 
   return {
+    toggleSortDirection,
+    selectSortField,
     sortedRows
   }
 }

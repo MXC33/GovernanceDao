@@ -15,19 +15,20 @@ table(bg="gray-900" w="full")
 
 </template>
 
-<script setup lang="ts" generic="Row extends Record<string, any>">
-import type { SortField } from '~/composables/useCollection';
-import type { TableColumn } from '~/composables/useTable';
+<script setup lang="ts" generic="Row extends TableRow">
+import type { TableColumn, TableRow, TableSortField } from '~/composables/useTable';
 
 const props = defineProps<{
-  columns: TableColumn[],
+  columns: TableColumn<Row>[],
   rows: Row[],
-  initialSort: SortField,
+  id: string,
   loading?: boolean,
   error?: string,
 }>()
 
-const getColumnStyle = (item: TableColumn) => {
+const { sortedRows } = useTable(props.rows, props.id)
+
+const getColumnStyle = (item: TableColumn<Row>) => {
   if (!item.width)
     return {}
 
@@ -37,7 +38,6 @@ const getColumnStyle = (item: TableColumn) => {
   }
 }
 
-const { sortedRows } = useTableData(props.rows)
 
 watch(sortedRows, (da) => {
   console.log("Newsort", da)

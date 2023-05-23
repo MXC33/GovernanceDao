@@ -11,18 +11,20 @@ div(grid="~ cols-8 gap-3" px="6")
     ContentDrawer()
       template(#header) Listings
       template(#default)
-        VList()
-          div(v-for="sale in item.sales")
-            h3 {{ sale.price }}
-
+        Table(:columns="columns" :rows="item.sales" id="single-item")
 
 </template>
 
 <script lang="ts" setup>
 import type { SingleItemData } from '@ix/base/composables/Token/useIXToken';
+import type { TableColumn } from '~/composables/useTable';
 
 const { getSingleAttributes } = useDefaulAttributes()
 const attributes = computed(() => getSingleAttributes(item))
+
+const columns: TableColumn<SingleItemData['sales'][number]>[] = [
+  { label: "Sale Price", value: "price", sortable: true },
+]
 
 const { item } = defineProps<{
   item: SingleItemData
