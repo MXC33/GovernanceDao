@@ -3,7 +3,7 @@ VList(flex-grow="1" px="6" pos="relative")
   .gradient-bg(pos="fixed left-0 right-0 top-16" h="50vh" :style="gradientStyle" v-if="!onSingleItem")
 
 transition(name="fade-slow")
-  HList(py="4" justify="between" items="center" pos="sticky top-16" z="2" bg="on-locked:ix-black" px="8" transition="all" :locked="isScrolling")
+  HList(py="4" justify="between" items="center" pos="sticky top-16" z="3" bg="on-locked:ix-black" px="8" transition="all" :locked="isScrolling")
     NetEmpireLogo(w="45")
 
     HList(space-x="4" w="full" justify="end" items="center")

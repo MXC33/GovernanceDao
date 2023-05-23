@@ -1,8 +1,20 @@
 <template lang="pug">
 div(grid="~ cols-8 gap-3" px="6")
   div(grid="col-span-3")
-    VList()
-      TokenImage(:token="item" w="full" frame="~")
+    VList(space-y="6")
+      TokenVideo(:token="item" w="full" frame="~" :is-large="true")
+
+      ContentDrawer(:start-open="true")
+        template(#header) Description
+        template(#default) {{ item.attributes }}
+
+      ContentDrawer(:start-open="true")
+        template(#header) Description
+        template(#default) 
+          div(grid="~ cols-3 gap-3" pb="3")
+            AttributeTrait(v-for="trait in item.attributes")
+              template(#category) {{ trait.trait_type }}
+              template(#name) {{ trait.value }}
 
   div(grid="col-span-5")
     VList()
