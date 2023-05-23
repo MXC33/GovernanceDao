@@ -171,7 +171,9 @@ export const defineContract = <T extends ContractInterface<T>>(key: string, opti
   // Default transaction methods
   const createTransaction = async (fn: (contract: T) => Promise<ethers.ContractTransaction> | undefined, txOptions?: TransactionOptions) => {
     try {
-      if (contract.value) {
+      console.log("contract is", contract.value)
+      if (contract) {
+        console.log("has contract value")
         setTransactionState('signing')
 
         await beforeContractInteraction()

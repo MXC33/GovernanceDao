@@ -2,14 +2,17 @@ import { getAssetContract } from "./useAssetContracts";
 export const ZERO_ADDRESS = "0x0000000000000000000000000000000000000000" as const
 
 
-export const useTransferNFT = (contractAdress: string) => {
-  const contract = getAssetContract(contractAdress)
+export const useTransferNFT = () => {
 
-  const transferNFT = (to: string, tokenId: string, amount: string) => {
+  const transferNFT = (contractAdress: string, to: string, tokenId: number, amount: number) => {
+    const contract = getAssetContract(contractAdress)
+
     if (!contract)
-      return
+      return console.error("No Contract found")
 
-    contract.transferNFT(to, tokenId, amount)
+    console.log("I AM HERE")
+    console.log("contract", contract)
+    return contract.transferNFT(to, tokenId, amount)
   }
 
   return {

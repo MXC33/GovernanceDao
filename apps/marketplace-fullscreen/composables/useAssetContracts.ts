@@ -38,14 +38,20 @@ export const getAssetContract = <T extends ContractInterface<T> & AssetContract>
     }
   })
 
-  const transferNFT = (to: string, tokenId: string, amount: string) =>
-    createTransaction((contract) => {
+  const transferNFT = (to: string, tokenId: number, amount: number) => {
+    console.log("BEFORE CREATE TRANSACT")
+    return createTransaction((contract) => {
+      console.log("wallet")
+
       const adress = walletAdress.value
+
+      console.log("transferNFT")
       if (!adress)
         return undefined
 
       return contract.safeTransferFrom(adress, to, tokenId, amount, ZERO_ADDRESS)
     })
+  }
 
   return {
     ...contractSpec,
@@ -57,14 +63,14 @@ export const getAssetContract = <T extends ContractInterface<T> & AssetContract>
 
 
 export const contractAddressToABI = (contractAddress: string) => {
-  switch (contractAddress) {
+  switch (contractAddress.toLowerCase()) {
     case roverAddress.polygon:
       return RoverNFTABI.abi
     case avatarNFTAddress.polygon:
       return AvatarNFTABI.abi
     case badgeNFTAddress.polygon:
       return BadgeNFTABI.abi
-    case assetsAddress.polygon:
+    case assetsAddress.polygon?.toLowerCase():
       return PIXAssetABI.abi
   }
 }

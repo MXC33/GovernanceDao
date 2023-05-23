@@ -17,7 +17,7 @@ VList(p="5" capitalized="~" space-y="5" b="~" rounded="2")
 
     //-VList(items="center" space-y="3")
     div(text="white") Wallet Adress
-    Input(text="2xl white center" bg="black" placeholder="e.g Dx0000" border="" v-model="Wallet")
+    input(text="2xl white center" bg="black" placeholder="e.g Dx0000" border="" v-model="wallet")
     div()
         div(text="white" v-html="$t(`marketplaceFullscreen.transfer.warningText`)")
     HList(space-x="3")
@@ -31,17 +31,27 @@ VList(p="5" capitalized="~" space-y="5" b="~" rounded="2")
 import Image from "~/assets/icons/plus.svg"
 import type { IXToken } from '@ix/base/composables/Token/useIXToken';
 import type { AnyToken } from '@ix/base/composables/Token/useTokens';
-
-const { getTokenKey } = useTokens()
-
-const Wallet = ref("")
-const isChecked = ref(false)
+import type { CollectionData } from '~/composables/useCollection';
 
 const props = defineProps<{
-    token: AnyToken,
+    token: CollectionData,
 }>()
+
+const { getTokenKey } = useTokens()
+const { transferNFT } = useTransferNFT()
+
+const wallet = ref("")
+const isChecked = ref(false)
+
+
 
 const itemTransfer = () => {
     console.log('transfering Item proccess starting')
+    console.log(wallet.value)
+    console.log(props.token)
+    if (props.token.token_id == null)
+        return console.log("ERROR, no token ID")
+    transferNFT(props.token.collection, wallet.value, props.token.token_id, 1)
+
 }
 </script>
