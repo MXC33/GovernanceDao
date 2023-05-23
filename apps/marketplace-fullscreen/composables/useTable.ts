@@ -32,8 +32,10 @@ export const useTable = <T extends TableRow>(rows: MaybeRef<T[]>, id: string) =>
   }
 
   const selectSortField = (field: TableSortField<T>) => {
-    sort.value.direction = 'asc'
-    sort.value.field = field
+    sort.value = {
+      direction: 'asc',
+      field: field
+    }
   }
 
   const sortedRows = computed(() => {
@@ -57,6 +59,7 @@ export const useTable = <T extends TableRow>(rows: MaybeRef<T[]>, id: string) =>
 
 
   return {
+    sort,
     toggleSortDirection,
     selectSortField,
     sortedRows

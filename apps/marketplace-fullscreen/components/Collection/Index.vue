@@ -36,7 +36,7 @@ VList(flex-grow="1" min-h="0" pos="relative" p="8" space-y="6")
       CollectionGrid(v-if="displayType == 'grid'" w="full")
         CollectionGridItem.collection-grid-item(:token="token" v-for="token in data.nfts" b="gray-400")
 
-      Table(:columns="columns" :rows="data.nfts" v-else initial-sort="name")
+      Table(:columns="columns" :rows="data.nfts" v-else id="collection")
         template(#item-name="{row}")
           HList(items="center" space-x="2" font="bold")
             div(w="12" h="12")
@@ -50,7 +50,6 @@ VList(flex-grow="1" min-h="0" pos="relative" p="8" space-y="6")
 <script lang="ts" setup>
 import type { CollectionData } from '~/composables/useCollection';
 import type { TableColumn } from '~/composables/useTable'
-import type { APIFilter } from '~/composables/useCollection'
 import type { IXToken } from '@ix/base/composables/Token/useIXToken';
 
 const { displayType } = useCollectionSettings()

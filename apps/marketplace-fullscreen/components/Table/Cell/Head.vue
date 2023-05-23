@@ -21,19 +21,19 @@ import type { TableColumn, TableRow, TableSort, TableSortField } from '~/composa
 
 const props = defineProps<{
   column: TableColumn<T>,
-  sortField: TableSort<T>
+  sortField?: TableSort<T>
 }>()
 
 const emit = defineEmits<{
   toggleSort: [],
-  selectField: [item: TableColumn<T>]
+  selectField: [item: TableSortField<T>]
 }>()
 
-const isActive = computed(() => props.sortField.field == props.column.value)
+const isActive = computed(() => props.sortField?.field == props.column.value)
 
 const direction = computed(() => {
   if (isActive.value)
-    return props.sortField.direction
+    return props.sortField?.direction
 
   return 'asc'
 })
@@ -42,7 +42,7 @@ const onClickSort = () => {
   if (isActive.value)
     return emit("toggleSort")
 
-  return emit("selectField", props.column)
+  return emit("selectField", props.column.value)
 }
 
 </script>

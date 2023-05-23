@@ -5,7 +5,7 @@ table(bg="gray-900" w="full")
     col(v-for="column in columns" :style="getColumnStyle(column)")
 
   TableHead()
-    TableCellHead(v-for="item in columns" :column="item" :sort-field="sort" @select-field="selectSortField", @toggle-filter="toggleSortDirection") {{ item.label }}
+    TableCellHead(v-for="item in columns" :column="item" :sort-field="sort" @select-field="selectSortField", @toggle-sort="toggleSortDirection") {{ item.label }}
 
   tbody(divide-y="1")
     TableRow(v-for="(row, index) in sortedRows" :key="index")
@@ -38,10 +38,6 @@ const getColumnStyle = (item: TableColumn<Row>) => {
   }
 }
 
-
-watch(sortedRows, (da) => {
-  console.log("Newsort", da)
-}, { immediate: true, deep: true })
 </script>
 
 <style scoped>
