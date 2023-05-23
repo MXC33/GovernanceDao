@@ -6,7 +6,7 @@ VList(bg="ix-primary opacity-20" b="2 ix-primary opacity-40" p="6" space-y="5" m
     WalletStatus(v-if="isWalletConnected")
     VList(v-else space-y="3") 
       div {{ $t('wallet.welcomeMessage') }}
-      div(v-if="!!walletError" color="mc-orange") 
+      HList(v-if="!!walletError" color="mc-orange" space-x="1") 
         span(font="bold") {{$t(`general.errorConnecting`)}}
         span {{ walletError }}
 
@@ -16,7 +16,7 @@ VList(bg="ix-primary opacity-20" b="2 ix-primary opacity-40" p="6" space-y="5" m
   div(flex="~ col" space-y="3" v-else)
     WalletButtonConnect(v-for="connector in connectors" :connector="connector")
 
-  ButtonSound(sound="lg" btn="~ white lg" cut="bottom-right" v-if="walletState == 'connecting' || walletState == 'signing'" @click="logoutWallet") {{$t(`general.cancel`)}}
+  ButtonSound(sound="lg" btn="~ secondary lg" cut="bottom-right" v-if="walletState == 'connecting' || walletState == 'signing'" @click="logoutWallet") {{$t(`general.cancel`)}}
 
 
 </template>

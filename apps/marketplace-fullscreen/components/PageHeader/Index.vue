@@ -30,7 +30,7 @@ const route = useRoute()
 
 
 const onSingleItem = computed(() =>
-  route.matched.some((match) => match.path.includes("tokenId"))
+  route.matched.some((match) => match.path.includes("tokenId") || match.path.includes("connect"))
 )
 
 const gradientStyle = computed(() => ({
