@@ -1,6 +1,6 @@
 
 <template lang="pug">
-th(p="3")
+th(p="3" pos="sticky top-0")
   button(v-if="column.sortable" @click="onClickSort" flex="~ row" items="start" opacity="50 hover:75 on-active:100" :active="isActive" transition="all")
     HList()
       slot
