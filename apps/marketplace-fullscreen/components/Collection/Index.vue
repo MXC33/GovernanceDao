@@ -11,7 +11,25 @@ VList(flex-grow="1" min-h="0" pos="relative" p="8" space-y="6")
 
   HList(pos="sticky")
     Transition(name="slide-left")
-      ContentDrawerWrapper(v-if="showFilters && data" pos="sticky top-58" h="100" inset="0" :items="data.filters")
+      CollectionFilterWrapper(v-if="showFilters && data" pos="sticky top-58" h="100" inset="0" :items="data.filters")
+        template(#default)
+
+          ContentDrawer()
+            template(#header) 
+              VList(w="full")
+                InputRadio()
+                  template(#default)
+                  template(#value) 
+
+
+          //- ContentDrawer()
+          //-   template(#header) 
+          //-   template(#default)
+          //-     VList(w="full")
+          //-       InputCheckbox()
+          //-         template(#default) 
+          //-         template(#value) 
+
 
     Transition(name="fade" mode="out-in" v-if="data")
       CollectionGrid(v-if="displayType == 'grid'" w="full")
@@ -31,6 +49,7 @@ VList(flex-grow="1" min-h="0" pos="relative" p="8" space-y="6")
 <script lang="ts" setup>
 import type { CollectionData } from '~/composables/useCollection';
 import type { TableColumn } from '~/composables/useTable'
+import type { Filters } from '~/composables/useCollection'
 
 const { displayType } = useCollectionSettings()
 const { getTokenKey } = useTokens()
@@ -53,7 +72,19 @@ const toggleFilterDrawer = () => {
 
 const { data } = defineProps<{
   data: CollectionData,
+  filters: Filters[]
 }>()
+
+// const filterRadio = ref<boolean[]>([])
+// const filterCheckbox = ref<boolean[]>([])
+
+// watch(filterRadio, (newValue, oldValue) => {
+//   console.log(`filterRadio changed from ${oldValue} to ${newValue}`)
+// })
+// watch(filterCheckbox, (newValue, oldValue) => {
+//   console.log(`filterCheckbox changed from ${oldValue} to ${newValue}`)
+// })
+
 
 </script>
 

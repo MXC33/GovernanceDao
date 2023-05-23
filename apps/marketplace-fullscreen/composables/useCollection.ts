@@ -1,11 +1,15 @@
 import { IXToken } from "@ix/base/composables/Token/useIXToken"
 import { TableSort, TableSortField } from "./useTable"
 
-export interface Filters {
+export interface Filter {
+  title: string
   trait_type: string
   value: string[]
+  type: FilterType
+  selected: boolean
 }
-export interface Collection {
+
+export interface Collections {
   name: string
   slug: string
   contract: string
@@ -14,6 +18,7 @@ export interface Collection {
   order: string
   volume: string
 }
+
 export interface CollectionData {
   name: string
   currency: string
@@ -32,27 +37,19 @@ export interface CollectionData {
   parent: any
   nfts: IXToken[]
   page_key: string
-  filters: Filters[]
+  filters: Filter[]
 }
 
 export type CollectionDisplayType = 'list' | 'grid'
 
 export const useCollectionSettings = () => {
-  const sort = useState<TableSort<IXToken>>('colleciton-table-sort', () => ({
-    field: 'type',
-    direction: 'asc'
-  }))
+  const activeFilters = useState('activeFilters', () => ({}))
+  const collectionOwners = useState('collectionOwners', () => ("All"))
 
-  const toggleSortDirection = () => {
-    if (sort.value.direction == 'asc')
-      return sort.value.direction = 'desc'
-    else return sort.value.direction = 'asc'
-  }
-
-  const selectSortField = (field: TableSortField<IXToken>) => {
-    sort.value.direction = 'asc'
-    sort.value.field = field
-  }
+  // const sort = useState<TableSort<IXToken>>('colleciton-table-sort', () => ({
+  //   field: 'type',
+  //   direction: 'asc'
+  // }))
 
   const displayType = useState<CollectionDisplayType>('collection-display-type', () => 'grid')
 
@@ -64,10 +61,9 @@ export const useCollectionSettings = () => {
   }
 
   return {
-    sort,
     displayType,
-    toggleSortDirection,
-    selectSortField,
     toggleDisplayType,
+    activeFilters,
+    collectionOwners,
   }
 }
