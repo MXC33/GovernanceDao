@@ -3,7 +3,7 @@ Popup()
     VList(p="5" capitalized="~" space-y="5" b="~" rounded="2")
         //-items="center"
         VList(p="3") 
-            div(text="2xl white" v-html="$t(`marketplaceFullscreen.transfer.title`)")
+            div(text="2xl white" v-html="$t(`mpFullscreen.transfer.title`)")
             HList(space-x="3")
                 HList()
                     TokenImage(:token="collectionData.nfts[0]" inset="0" w="15" h="15" object="contain center" :key="getTokenKey(collectionData.nfts[0])")
@@ -12,24 +12,24 @@ Popup()
                         div(text="white") Collection name  
                 div(flex="grow")
                 VList(items="center")
-                    div(text="white" v-html="$t(`marketplaceFullscreen.transfer.own`)") 
+                    div(text="white" v-html="$t(`mpFullscreen.transfer.own`)") 
                     div(text="white") 7          
 
-        div(text="white") Quantity
+        div(text="white" v-html="$t(`mpFullscreen.transfer.quantity`)")
         Adjustable(v-model="Image" h="10")
 
         //-VList(items="center" space-y="3")
         div(text="white") Wallet Adress
         input(text="2xl white center" bg="black" placeholder="e.g Dx0000" border="" v-model="wallet" @input="onChange")
         div()
-            div(text="white" v-html="$t(`marketplaceFullscreen.transfer.warningText`)")
+            div(text="white" v-html="$t(`mpFullscreen.transfer.warningText`)")
         Transition(name="slide-top")
             HList(space-x="3" v-if="wallet")
                 FormCheckbox(v-model="isChecked") 
-                div(text="white" v-html="$t(`marketplaceFullscreen.transfer.verifyText`)")
+                div(text="white" v-html="$t(`mpFullscreen.transfer.verifyText`)")
 
         Transition(name="slide-top")
-            button(m="auto" text="~" bg="gray-600" b="~" p="2" w="full" v-if="isChecked && wallet" @click="itemTransfer") Transfer Item 
+            button(m="auto" text="~" bg="gray-600" b="~" p="2" w="full" v-if="isChecked && wallet" @click="itemTransfer" v-html="$t(`mpFullscreen.transfer.transferItem`)")
 </template>
 
 <script lang="ts" setup>
@@ -50,7 +50,7 @@ const oldWalletAdress = ref("")
 const isChecked = ref(false)
 
 const onChange = () => {
-    if(wallet != oldWalletAdress){
+    if (wallet != oldWalletAdress) {
         isChecked.value = false;
         oldWalletAdress.value = wallet.value;
     }

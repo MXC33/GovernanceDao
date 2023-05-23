@@ -80,7 +80,9 @@
   "collection": {
     "attributes": {
       "total_volume": "Total Volume",
+      "floorPrice": "Floor Price",
       "listed": "Listed",
+      "owners": "Owners",
       "unique_owners": "Unique Owners",
       "sale_price": "Best Offer"
     }
@@ -131,283 +133,32 @@
       "automatedTrans": "Automated Transmissions"
     }
   },
-  "cosmetics": {
-    "chooseCosmetics": "Choose Cosmetics",
-    "chooseNFT": "Choose NFT",
-    "userInfo": {
-      "aoc": "Agent of Change",
-      "memberSince": "Member Since",
-      "status": "Status",
-      "social": "Social",
-      "pm": "Personal Message",
-      "showcase": "Showcase"
-    }
-  },
-  "tips": [
-    {
-      "title": "GAMEBOOK",
-      "subtitle": "AOC Catalogue No. 723",
-      "description": "If you feel lost in space, make sure to read Planet IX’s Gamebook.",
-      "image": ""
+  "mpFullscreen": {
+    "headers": {
+      "buyIxt": "Buy IXT",
+      "playNow": "Play Now",
+      "staking": "Staking",
+      "community": "Community",
+      "help": "Help"
     },
-    {
-      "title": "LEGENDARY ASSETS",
-      "subtitle": "AOC Catalogue No. 954",
-      "description": "Most assets vary in tier and rarity, with Legendary assets being the most valuable.",
-      "image": "/tips/images/biomod-legendary.png"
+    "myAssets": {
+      "myItems": "My items",
+      "favorites": "Favorites",
+      "incomingBids": "Incoming Bids",
+      "outgoingBids": "Outgoing Bids",
+      "activeListings": "Active Listings",
+      "activity": "Activity"
     },
-    {
-      "title": "SEASONS",
-      "subtitle": "AOC Catalogue No. 341",
-      "description": "As more Waste is gathered and processed on Planet IX, the planet’s climate will stabilize and new missions will emerge.",
-      "image": "/tips/images/currency-waste.png"
+    "filterType": {
+      "sales": "Sales",
+      "listings": "Listings",
+      "offers": "Offers",
+      "transfers": "Transfers",
+      "minted": "Minted",
+      "activity": "Activity",
+      "lowToHigh": "Low to High",
+      "highToLow": "High to Low"
     },
-    {
-      "title": "AGENT OF CHANGE",
-      "subtitle": "AOC Catalogue No. 629",
-      "description": "As an Agent of Change, your mission is to resurrect Planet IX.",
-      "image": "/tips/images/aoc-white.png"
-    },
-    {
-      "title": "NETEMPIRE MARKETPLACE",
-      "subtitle": "AOC Catalogue No. 683",
-      "description": "By listing your PIX and other assets in the Marketplace, you can make it easier for potential buyers to find and purchase them.",
-      "image": "/tips/images/pix-outlier.png"
-    },
-    {
-      "title": "AFTER EARTH",
-      "subtitle": "AOC Catalogue No. 583",
-      "description": "The Earth ended in the year 2089 A.C. This same year became 1 A.E.",
-      "image": ""
-    },
-    {
-      "title": "TILE CONTRACTS",
-      "subtitle": "AOC Catalogue No. 298",
-      "description": "All Tile Contracts have unique qualities, with most giving additional benefits to harvesting vehicles and facilities.",
-      "image": "/tips/images/contract-chronos.png"
-    },
-    {
-      "title": "territoRIES",
-      "subtitle": "AOC Catalogue No. 271",
-      "description": "You can combine adjacent PIX to create territories. Therefore, you should focus on small parts of the map by selling and buying the right ones.",
-      "image": "/tips/images/zone-common.png"
-    },
-    {
-      "title": "ARCHIVES",
-      "subtitle": "AOC Catalogue No. 577",
-      "description": "When the Agents of Change returned in the year 450 A.E., remnants of humanity had survived the Ending, scattered among planets and moons in the solar system.",
-      "image": "/tips/images/aoc-white.png"
-    },
-    {
-      "title": "IX FOUNDATION",
-      "subtitle": "AOC Catalogue No. 478",
-      "description": "Staking Landmarks, Territories and MetaShares ON IX Foundation is a great way to secure a continuous flow of $IXT.",
-      "image": "/tips/images/currency-ixt.png"
-    },
-    {
-      "title": "ARCHIVES",
-      "subtitle": "AOC Catalogue No. 123",
-      "description": "The inventor of A.M.E was named Ame Valdis, and her sister, Agnes Valdis, recorded data logs of their upbringing and demise. Some of the records are still hidden on Planet IX.",
-      "image": ""
-    },
-    {
-      "title": "rovers",
-      "subtitle": "AOC Catalogue No. 137",
-      "description": "Rovers only need to be emptied once every ten days.",
-      "image": "/tips/images/rover-piercer.png"
-    },
-    {
-      "title": "rovers",
-      "subtitle": "AOC Catalogue No. 739",
-      "description": "Rovers may discover M3ta-M0ds.",
-      "image": "/tips/images/biomod-metamod.png"
-    },
-    {
-      "title": "ROVERS & DRONES",
-      "subtitle": "AOC Catalogue No. 157",
-      "description": "Rovers and Drones can be placed on the same Land Tile in Mission Control. If they are of the same tier, the Drone’s performance will increase by an additional 20%.",
-      "image": "/tips/images/drone-piercer.png"
-    },
-    {
-      "title": "DRONES",
-      "subtitle": "AOC Catalogue No. 866",
-      "description": "Rovers may require repairs at times, while Drones are known to neverbreak down.",
-      "image": "/tips/images/drone-genesis.png"
-    },
-    {
-      "title": "PIX",
-      "subtitle": "AOC Catalogue No. 324",
-      "description": "Planet IX is a digital rendition of Earth, where all land is divided into 1.7 billion PIX, each being a unique NFT.",
-      "image": "/tips/images/pix-legendary.png"
-    },
-    {
-      "title": "ENERGY",
-      "subtitle": "AOC Catalogue No. 429",
-      "description": "Staking a Facility on a Territoryinstead of a PIX will result in higher Energy yield.",
-      "image": "/tips/images/currency-energy.png"
-    },
-    {
-      "title": "LANDMARKS",
-      "subtitle": "AOC Catalogue No. 726",
-      "description": "Each landmark is assigned a rarity tier and star rating based on its strategic importance in the Planet IX universe.",
-      "image": "/tips/images/landmark.png"
-    },
-    {
-      "title": "LANDMARKS",
-      "subtitle": "AOC Catalogue No. 727",
-      "description": "Every Landmark has an area of commission, and those who own and stake the Landmark receive a 5% commission on the value of every trade conducted within this area.",
-      "image": "/tips/images/landmark.png"
-    },
-    {
-      "title": "metashares",
-      "subtitle": "AOC Catalogue No. 1328",
-      "description": "MetaShare owners are continuously rewarded with $IXT. The amount distributed from the corporation’s treasury depends on the corporation's monthly revenue.",
-      "image": "/tips/images/metashare-gws.png"
-    },
-    {
-      "title": "RAFFLES",
-      "subtitle": "AOC Catalogue No. 196",
-      "description": "If you have any extra Raffle Tickets, be sure to visit Lucky Cat and participate in the upcoming Raffle.",
-      "image": "/tips/images/raffle-ticket-regular.png"
-    },
-    {
-      "title": "M3TA-m0ds",
-      "subtitle": "AOC Catalogue No. 659",
-      "description": "M3ta-M0ds can be utilized to upgrade Facilities.",
-      "image": "/tips/images/biomod-metamod.png"
-    },
-    {
-      "title": "tile contracts",
-      "subtitle": "AOC Catalogue No. 213",
-      "description": "Tile Contracts can be bought at Newlands LLC. Once you have claimed and staked a Tile Contract, extra Land Tiles will be available in Mission Control.",
-      "image": "/tips/images/contract-artemis.png"
-    },
-    {
-      "title": "AStro gold",
-      "subtitle": "AOC Catalogue No. 258",
-      "description": "Activating an additional Land Tile incurs a monthly cost of 1 Astro Gold or 1 Astro Gold Lite.",
-      "image": "/tips/images/currency-astro-gold.png"
-    },
-    {
-      "title": "tile contracts",
-      "subtitle": "AOC Catalogue No. 586",
-      "description": "You can activate and deactivate Land Tiles in Mission Control.",
-      "image": "/tips/images/contract-artemis.png"
-    },
-    {
-      "title": "web3 wallet",
-      "subtitle": "AOC Catalogue No. 330",
-      "description": "If this Loading Screen seems stuck, try using the Speed Up-function in your Web3 wallet.",
-      "image": ""
-    },
-    {
-      "title": "ARCHIVES",
-      "subtitle": "AOC Catalogue No. 986",
-      "description": "The Chasse-Galerie was the last space vessel to reach the surface of Planet IX after the Ending. The majority of the ship’s data logs arestill missing.",
-      "image": ""
-    },
-    {
-      "title": "PROXY OF CHANGE",
-      "subtitle": "AOC Catalogue No. 569",
-      "description": "Proxies of Change are neither humans nor robots; they are an unknown life-form created by A.M.E.",
-      "image": "/tips/images/aoc-white.png"
-    },
-    {
-      "title": "ARCHIVES",
-      "subtitle": "AOC Catalogue No. 410",
-      "description": "Proxies of Change are neither humans nor robots; they are an unknown life-form created by A.M.E.",
-      "image": ""
-    },
-    {
-      "title": "ARCHIVES",
-      "subtitle": "AOC Catalogue No. 1792",
-      "description": "AFTER the Ending, trade between inner planets and outer satellites was crucial for humanity’s survival. With no regulatory body governing commerce, corporations became the solar system’s statelike entities.",
-      "image": ""
-    },
-    {
-      "title": "THE ENDING",
-      "subtitle": "AOC Catalogue No. 5123",
-      "description": "The final stage of the Ending was the NeoVirus,a COMPUTER virus specifically designed to achieve one objective - the complete annihilationof civilisation.",
-      "image": ""
-    },
-    {
-      "title": "pix & LAND TILES",
-      "subtitle": "AOC Catalogue No. 102",
-      "description": "The digital plots of land on Planet IX are called PIX, which can be staked on Land Tiles in Mission Control.",
-      "image": "/tips/images/pix-uncommon.png"
-    },
-    {
-      "title": "territoRIES",
-      "subtitle": "AOC Catalogue No. 850",
-      "description": "Outlier Areas are created in the NetEmpire Marketplace by connecting 10 or more adjacent outlier PIX.",
-      "image": "/tips/images/area-outlier.png"
-    },
-    {
-      "title": "territoRIES",
-      "subtitle": "AOC Catalogue No. 851",
-      "description": "Most assets vary in tier and rarity, with Legendary assets being the most valuable.",
-      "image": "/tips/images/area-common.png"
-    },
-    {
-      "title": "territoRIES",
-      "subtitle": "AOC Catalogue No. 852",
-      "description": "Uncommon Areas are created in the NetEmpire Marketplace by connecting 30 or more adjacent uncommon PIX.",
-      "image": "/tips/images/area-uncommon.png"
-    },
-    {
-      "title": "territoRIES",
-      "subtitle": "AOC Catalogue No. 853",
-      "description": "Rare Areas are created in the NetEmpire Marketplace by connecting 40 or more adjacent rare PIX.",
-      "image": "/tips/images/area-rare.png"
-    },
-    {
-      "title": "territoRIES",
-      "subtitle": "AOC Catalogue No. 854",
-      "description": "Legendary Areas are created in the NetEmpire Marketplace by connecting 50 or more adjacent legendary PIX.",
-      "image": "/tips/images/area-legendary.png"
-    },
-    {
-      "title": "FACILITIES",
-      "subtitle": "AOC Catalogue No. 1023",
-      "description": "You can upgrade Facilities at Newlands LLC. When you do, they become twice as good.",
-      "image": "/tips/images/facility-legendary.png"
-    },
-    {
-      "title": "drones",
-      "subtitle": "AOC Catalogue No. 423",
-      "description": "Drones collect Waste over a 48-hour period.",
-      "image": "/tips/images/drone-night.png"
-    },
-    {
-      "title": "NEWLANDS GENESIS",
-      "subtitle": "AOC Catalogue No. 419",
-      "description": "By staking the Newlands Genesis, you'll gain free access to extra Land Tiles.",
-      "image": "/tips/images/genesis-new-lands.png"
-    },
-    {
-      "title": "y_ GENESIS",
-      "subtitle": "AOC Catalogue No. 421",
-      "description": "Staking the Y_ Genesis grants you free repairs for Rovers.",
-      "image": "/tips/images/genesis-y-space.png"
-    },
-    {
-      "title": "eternalab GENESIS",
-      "subtitle": "AOC Catalogue No. 425",
-      "description": "Staking the Eternalab Genesis boosts the likelihood of successful outcomes in Waste Refining Experiments.",
-      "image": "/tips/images/genesis-eternalab.png"
-    },
-    {
-      "title": "AIRDROPS",
-      "subtitle": "AOC Catalogue No. 843",
-      "description": "If you carry the AOC Gold Badge, you will be added to the whitelist for future airdrops.",
-      "image": "/tips/images/aoc-bronze.png"
-    }
-  ],
-  "marketplaceFullscreen": {
-    "buyIxt": "Buy IXT",
-    "playNow": "Play Now",
-    "staking": "Staking",
-    "community": "Community",
     "transfer": {
       "title": "Transfer Asset",
       "quantity": "Quantity",
@@ -416,7 +167,8 @@
       "placeholderText": "Put Adress Here",
       "warningText": "Make sure the adress is correct!<br/>There is no way to reverse this transaction",
       "verifyText": "I Verify that I am aware and that <br/>the wallet adress is correct.",
-      "confirm": "Confrim Adress"
+      "confirm": "Confrim Adress",
+      "transferItem": "Transfer Item"
     }
   }
 }
