@@ -1,6 +1,6 @@
 <template lang="pug">
 HList(items="center" fill="white" w="full" space-x="2" color="white")
-  Icon(w="6")
+  Icon(w="4")
   span(font="bold" uppercase="~" text="md")
     slot()
 </template>
@@ -12,7 +12,7 @@ const props = defineProps<{
   icon?: Icon
 }>()
 
-const Icon = await import(`~/assets/icons/${props.icon}.svg`).catch(() => '')
+const Icon = await import(`~/assets/icons/${props.icon}.svg`)
 
 
 </script>
