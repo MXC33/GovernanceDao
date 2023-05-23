@@ -22,7 +22,7 @@ export const frameRules: Rule[] = [
       display: block;
       position: absolute;
       pointer-events: none;
-      z-index: 1;
+      z-index: 2;
       left: 0;
       right: 0;`
 
@@ -95,6 +95,7 @@ const getCut = (position: Position, size: Size = 'md') => {
 
   return {
     ...depth,
+    '--cut-opacity': 1,
     '--cut-path': path,
     "--cut-top-right-bottom-left": '0 0, calc(100% - var(--cut-depth)) 0, 100% var(--cut-depth), 100% 100%, var(--cut-depth) 100%, 0 calc(100% - var(--cut-depth));',
     '--cut-top-left-bottom-right': '0 var(--cut-depth), var(--cut-depth) 0, 100% 0, 100% calc(100% - var(--cut-depth)), calc(100% - var(--cut-depth)) 100%, 0 100%;',
@@ -110,6 +111,11 @@ export const cutRules: Rule<Theme>[] = [
   ...Positions.map(p => [`cut-${p}`, getCut(p)] as Rule<Theme>),
   ...Sizes.map(s => [`cut-${s}`, getCutDepth(s)] as Rule<Theme>),
 
+  [/^cut-opacity-(.+)$/, ([, op]) => {
+    return {
+      '--cut-opacity': Number(op) / 100,
+    }
+  }],
   [/^cut-b-(.+)$/, (arr, { theme, rawSelector }: RuleContext<Theme>) => {
     const [mode, body] = arr
 
@@ -126,15 +132,18 @@ export const cutRules: Rule<Theme>[] = [
     if (!cssColor)
       return
 
-    const colorString = colorToString(cssColor, alpha)
+    const colorString = colorToString(cssColor, 'var(--cut-opacity)')
 
     return `
       ${selector} {
         border: 1px solid ${colorString};
       }
+      
+      .is-paint-supported ${selector} {
+        border: 0;
+      }
 
       .is-paint-supported ${selector}:before {
-        border: 0;
         background: ${colorString};
       }
     `

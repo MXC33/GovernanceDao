@@ -1,7 +1,6 @@
 <template lang="pug">
 VList(w="full" h="full")
-
-  video(:src="videoURL" w="full" h="full" autoplay loop playsinline muted @play="isLoaded = true" opacity="0 on-loaded:100" transition="all duration-500" :loaded="isLoaded" ref="videoElement" object="cover center")
+  video(:src="videoURL" w="full" h="full" autoplay loop playsinline muted @play="onPlay" @canplay="onPlay" opacity="0 on-loaded:100" transition="all duration-500" :loaded="isLoaded" ref="videoElement" object="cover center")
 
   Transition(name="fade")
     HelperLoader(pos="absolute bottom-3 left-3" v-if="!isLoaded" w="3")
@@ -15,6 +14,10 @@ import type { AnyToken } from '~/composables/Token/useTokens';
 const isLoaded = ref(false)
 const videoElement = ref()
 const { getTokenVideoURL } = useTokenMedia()
+
+const onPlay = () => {
+  isLoaded.value = true
+}
 
 const props = defineProps<{
   token: AnyToken,
@@ -46,6 +49,6 @@ watch(visible, (isVisible) => {
     return stopVideo()
 
   return playVideo()
-})
+}, { immediate: true })
 
 </script>
