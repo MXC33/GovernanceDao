@@ -13,7 +13,7 @@ div(grid="~ cols-8 gap-3" px="6")
       ContentDrawer(:start-open="true")
         template(#header) Listings
         template(#default)
-          Table(:columns="columns" :rows="item.sales" id="single-item")
+          Table(:columns="columns" :rows="item.sales" id="single-item" :in-drawer="true")
 
 </template>
 

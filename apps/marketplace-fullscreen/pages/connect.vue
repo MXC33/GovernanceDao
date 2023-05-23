@@ -9,7 +9,6 @@ const { isLoggedInAndConnected } = useLogin()
 const redirect = useLoginRedirect()
 const isDirty = ref(false)
 
-console.log("LOGIN", redirect.value)
 
 definePageMeta({
   middleware: ''

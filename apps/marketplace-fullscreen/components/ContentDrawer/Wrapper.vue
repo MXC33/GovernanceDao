@@ -39,8 +39,6 @@ const createFilters = () => {
       selected: false
     }))
   }))
-
-  console.log("New filters", activeFilters.value, props.items)
 }
 
 watch(() => props.items, () => {

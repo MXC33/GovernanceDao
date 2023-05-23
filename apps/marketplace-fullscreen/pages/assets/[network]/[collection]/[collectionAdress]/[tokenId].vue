@@ -17,7 +17,4 @@ const { data: singleItem, execute: fetchToken } = await useAssetAPI({
 
 await fetchToken()
 
-console.log("Got token", singleItem.value)
-
-
 </script>

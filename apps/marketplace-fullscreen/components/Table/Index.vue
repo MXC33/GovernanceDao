@@ -1,11 +1,11 @@
 
 <template lang="pug">
-table(bg="gray-900" w="full")
+table(bg="gray-900" w="full" pos="sticky top-0")
   colgroup
     col(v-for="column in columns" :style="getColumnStyle(column)")
 
   TableHead()
-    TableCellHead(v-for="item in columns" :column="item" :sort-field="sort" @select-field="selectSortField", @toggle-sort="toggleSortDirection") {{ item.label }}
+    TableCellHead(v-for="item in columns" :column="item" :sort-field="sort" @select-field="selectSortField", @toggle-sort="toggleSortDirection" pos="sticky top-0 on-drawer:top-12" :drawer="inDrawer") {{ item.label }}
 
   tbody(divide-y="1")
     TableRow(v-for="(row, index) in sortedRows" :key="index")
@@ -22,6 +22,7 @@ const props = defineProps<{
   columns: TableColumn<Row>[],
   rows: Row[],
   id: string,
+  inDrawer?: boolean,
   loading?: boolean,
   error?: string,
 }>()
