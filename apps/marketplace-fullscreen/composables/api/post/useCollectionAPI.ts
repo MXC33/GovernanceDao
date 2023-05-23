@@ -20,7 +20,6 @@ export const useCollectionData = (slug: string, network = 'polygon') => {
     transform: (item) => {
       return item.data as CollectionData
     }
-    // item.data.nfts.map((item) => (item as IXToken))
   })
 }
 

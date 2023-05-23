@@ -23,7 +23,7 @@ export interface Filter extends FilterBase {
 
 export type FilterType = 'radio' | 'checkbox'
 
-export interface Collections {
+export interface Collection {
   name: string
   slug: string
   contract: string
@@ -56,7 +56,7 @@ export interface CollectionData {
 
 export type CollectionDisplayType = 'list' | 'grid'
 
-export const useCollectionSettings = () => {
+export const useettings = () => {
   const activeFilters = useState('activeFilters', () => ({}))
   const collectionOwners = useState('collectionOwners', () => ("All"))
 
