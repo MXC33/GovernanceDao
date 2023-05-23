@@ -4,10 +4,10 @@ VList(items="center" justify="center" bg="gray-900" flex-grow="1" pos="relative"
   VList(items="start")
     CollectionFilterToggleFilter(@click="showFilters")
   //- Above generic wrapper - testing components under
-  InputRow(v-model="isSelected" @click="toggle")
-    template(#default)
-      InputCheckbox(v-model="isSelected")
-        template(#default) test
+  //- InputRow(v-model="isSelected" @click="toggle")
+  //-   template(#default)
+  //-     InputCheckbox(v-model="isSelected")
+  //-       template(#default) test
 
 </template>
 
