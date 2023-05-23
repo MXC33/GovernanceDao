@@ -2,7 +2,7 @@
 div(grid="~ cols-8 gap-3" px="6")
   div(grid="col-span-3")
     VList(space-y="6")
-      TokenVideo(:token="item" w="full" frame="~" :is-large="true")
+      TokenMedia(:token="item" w="full" frame="~" :is-large="true")
 
       ContentDrawer(:start-open="true")
         template(#header) Description
