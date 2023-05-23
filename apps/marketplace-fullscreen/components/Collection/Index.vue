@@ -11,26 +11,7 @@ VList(flex-grow="1" min-h="0" pos="relative" p="8" space-y="6")
 
   HList(pos="sticky")
     Transition(name="slide-left")
-      ContentDrawerWrapper(:items="data.filters" v-if="showFilters && data")
-      //- CollectionFilterWrapper(v-if="showFilters && data" pos="sticky top-58" h="100" inset="0" :items="data.filters")
-      //-   template(#default)
-
-      //-     ContentDrawer()
-      //-       template(#header) 
-      //-         VList(w="full")
-      //-           InputRadio()
-      //-             template(#default)
-      //-             template(#value) 
-
-
-        //- ContentDrawer()
-        //-   template(#header) 
-        //-   template(#default)
-        //-     VList(w="full")
-        //-       InputCheckbox()
-        //-         template(#default) 
-        //-         template(#value) 
-
+      CollectionFilterSlideout(:items="data.filters" v-if="showFilters && data")
 
     Transition(name="fade" mode="out-in" v-if="data")
       CollectionGrid(v-if="displayType == 'grid'" w="full")
@@ -74,17 +55,6 @@ const toggleFilterDrawer = () => {
 const { data } = defineProps<{
   data: CollectionData,
 }>()
-
-// const filterRadio = ref<boolean[]>([])
-// const filterCheckbox = ref<boolean[]>([])
-
-// watch(filterRadio, (newValue, oldValue) => {
-//   console.log(`filterRadio changed from ${oldValue} to ${newValue}`)
-// })
-// watch(filterCheckbox, (newValue, oldValue) => {
-//   console.log(`filterCheckbox changed from ${oldValue} to ${newValue}`)
-// })
-
 
 </script>
 
