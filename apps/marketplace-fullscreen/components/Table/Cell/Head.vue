@@ -5,8 +5,7 @@ th(p="3" bg="gray-900")
     HList()
       slot
       Transition(name="fade" mode="out-in")
-        UpArrowIcon.icon(v-if="direction == 'desc'")
-        DownArrowIcon.icon(v-else)
+        ArrowIcon(rotate="on-up:-180deg" :up="direction == 'desc'" transition="all")
 
   HList(v-else items="start")
     slot
@@ -14,10 +13,8 @@ th(p="3" bg="gray-900")
 </template>
 
 <script setup lang="ts" generic="T extends TableRow">
-import UpArrowIcon from '../icons/UpArrowIcon.vue';
-import DownArrowIcon from '../icons/DownArrowIcon.vue';
-import type { TableColumn, TableRow, TableSort, TableSortField } from '~/composables/useTable';
-
+import ArrowIcon from '../icons/UpArrowIcon.vue'
+import type { TableColumn, TableRow, TableSort, TableSortField } from '~/composables/useTable'
 
 const props = defineProps<{
   column: TableColumn<T>,

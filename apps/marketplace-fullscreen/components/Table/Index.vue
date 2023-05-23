@@ -5,7 +5,7 @@ table(bg="gray-900" w="full" pos="sticky top-0")
     col(v-for="column in columns" :style="getColumnStyle(column)")
 
   TableHead()
-    TableCellHead(v-for="item in columns" :column="item" :sort-field="sort" @select-field="selectSortField", @toggle-sort="toggleSortDirection" pos="sticky top-0 on-drawer:top-12" :drawer="inDrawer") {{ item.label }}
+    TableCellHead(v-for="item in columns" :column="item" :sort-field="sort" @select-field="selectSortField", @toggle-sort="toggleSortDirection" pos="sticky top-50 on-drawer:top-12" :drawer="inDrawer") {{ item.label }}
 
   tbody(divide-y="1")
     TableRow(v-for="(row, index) in sortedRows" :key="index")
@@ -28,6 +28,8 @@ const props = defineProps<{
 }>()
 
 const { sortedRows, sort, selectSortField, toggleSortDirection } = useTable(props.rows, props.id)
+
+watch([sortedRows, sort], () => console.log("Update sort", sort.value, sortedRows.value), { deep: true })
 
 const getColumnStyle = (item: TableColumn<Row>) => {
   if (!item.width)
