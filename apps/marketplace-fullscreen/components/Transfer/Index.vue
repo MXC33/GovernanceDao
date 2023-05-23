@@ -3,11 +3,7 @@ Popup(text="white")
     VList(p="5" capitalized="~" space-y="5" b="~" rounded="2")
         //-items="center"
         VList(p="3") 
-<<<<<<< Updated upstream
-            div(text="2xl white" v-html="$t(`mpFullscreen.transfer.title`)")
-=======
-            div(text="2xl" v-html="$t(`marketplaceFullscreen.transfer.title`)")
->>>>>>> Stashed changes
+            div(text="2xl" v-html="$t(`mpFullscreen.transfer.title`)")
             HList(space-x="3")
                 HList()
                     TokenImage(:token="collectionData.nfts[0]" inset="0" w="15" h="15" object="contain center" :key="getTokenKey(collectionData.nfts[0])")
@@ -16,38 +12,22 @@ Popup(text="white")
                         div() Collection name  
                 div(flex="grow")
                 VList(items="center")
-<<<<<<< Updated upstream
-                    div(text="white" v-html="$t(`mpFullscreen.transfer.own`)") 
-                    div(text="white") 7          
-
-        div(text="white" v-html="$t(`mpFullscreen.transfer.quantity`)")
-        Adjustable(v-model="Image" h="10")
-=======
-                    div(v-html="$t(`marketplaceFullscreen.transfer.own`)") 
+                    div(v-html="$t(`mpFullscreen.transfer.own`)") 
                     div() {{hardCodedMax}}          
 
-        div() Quantity
+        div(v-html="$t(`mpFullscreen.transfer.quantity`)") 
         //-h="10"
-        Adjustable(v-model="item" )
->>>>>>> Stashed changes
+        Adjustable(v-model="quantity" h="10")
 
         //-VList(items="center" space-y="3")
         div() Wallet Adress
         input(text="2xl center" bg="black" placeholder="e.g Dx0000" border="" v-model="wallet" @input="onChange")
         div()
-<<<<<<< Updated upstream
-            div(text="white" v-html="$t(`mpFullscreen.transfer.warningText`)")
+            div(v-html="$t(`mpFullscreen.transfer.warningText`)")
         Transition(name="slide-top")
             HList(space-x="3" v-if="wallet")
                 FormCheckbox(v-model="isChecked") 
-                div(text="white" v-html="$t(`mpFullscreen.transfer.verifyText`)")
-=======
-            div(v-html="$t(`marketplaceFullscreen.transfer.warningText`)")
-        Transition(name="slide-top")
-            HList(space-x="3" v-if="wallet")
-                FormCheckbox(v-model="isChecked") 
-                div(v-html="$t(`marketplaceFullscreen.transfer.verifyText`)")
->>>>>>> Stashed changes
+                div(v-html="$t(`mpFullscreen.transfer.verifyText`)")
 
         Transition(name="slide-top")
             button(m="auto" text="~" bg="gray-600" b="~" p="2" w="full" v-if="isChecked && wallet" @click="itemTransfer" v-html="$t(`mpFullscreen.transfer.transferItem`)")
@@ -76,6 +56,8 @@ const oldWalletAdress = ref("")
 const isChecked = ref(false)
 
 const hardCodedMax = 10
+const quantity = ref(0)
+
 
 const onChange = () => {
     if (wallet != oldWalletAdress) {
