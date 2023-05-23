@@ -1,29 +1,27 @@
 
 <template lang="pug">
-
 table(bg="gray-900" w="full")
   colgroup
     col(v-for="column in columns" :style="getColumnStyle(column)")
 
-  CollectionTableHead()
-    CollectionTableCellHead(v-for="item in columns" :item="item") {{ item.label }}
+  TableHead()
+    TableCellHead(v-for="item in columns" :item="item") {{ item.label }}
 
   tbody(divide-y="1")
-    CollectionTableRow(v-for="(row, index) in sortedRows" :key="index")
-      CollectionTableCell(v-for="item in columns", :key="item.value")
+    TableRow(v-for="(row, index) in sortedRows" :key="index")
+      TableCell(v-for="item in columns", :key="item.value")
         slot(:name="`item-${item.value}`" :row="row" :column="item")
           span() {{row[item.value]}}
 
 </template>
 
-<script setup lang="ts">
-import type { IXToken } from '@ix/base/composables/Token/useIXToken';
+<script setup lang="ts" generic="Row extends Record<string, any>">
 import type { SortField } from '~/composables/useCollection';
 import type { TableColumn } from '~/composables/useTable';
 
 const props = defineProps<{
   columns: TableColumn[],
-  rows: IXToken[],
+  rows: Row[],
   initialSort: SortField,
   loading?: boolean,
   error?: string,

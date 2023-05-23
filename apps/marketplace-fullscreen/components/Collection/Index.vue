@@ -17,7 +17,7 @@ VList(flex-grow="1" min-h="0" pos="relative" p="8" space-y="6")
       CollectionGrid(v-if="displayType == 'grid'" w="full")
         CollectionGridItem.collection-grid-item(:token="token" v-for="token in data.nfts" b="gray-400")
 
-      CollectionTable(:columns="columns" :rows="data.nfts" v-else initial-sort="name")
+      Table(:columns="columns" :rows="data.nfts" v-else initial-sort="name")
         template(#item-name="{row}")
           HList(items="center" space-x="2" font="bold")
             div(w="12" h="12")
