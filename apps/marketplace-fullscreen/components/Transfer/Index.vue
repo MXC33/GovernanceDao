@@ -1,36 +1,36 @@
 <template lang="pug">
 Popup(text="white")
-    VList(p="5" capitalized="~" space-y="5" b="~" rounded="2")
-        //-items="center"
-        VList(p="3") 
-            div(text="2xl" v-html="$t(`mpFullscreen.transfer.title`)")
-            HList(space-x="3")
-                HList()
-                    TokenImage(:token="collectionData.nfts[4]" inset="0" w="15" h="15" object="contain center" :key="getTokenKey(collectionData.nfts[4])")
-                    VList()
-                        div() {{getTokenName(collectionData.nfts[4])}} 
-                        div() "{Collection name}"  
-                div(flex="grow")
-                VList(items="center")
-                    div(v-html="$t(`mpFullscreen.transfer.own`)") 
-                    div() {{hardCodedMax}}          
+  VList(p="5" capitalized="~" space-y="5" b="~" rounded="2")
+    //-items="center"
+    VList(p="3") 
+      div(text="2xl" v-html="$t(`mpFullscreen.transfer.title`)")
+      HList(space-x="3")
+        HList()
+          TokenImage(:token="collectionData.nfts[4]" inset="0" w="15" h="15" object="contain center" :key="getTokenKey(collectionData.nfts[4])")
+          VList()
+            div() {{getTokenName(collectionData.nfts[4])}} 
+            div() "{Collection name}"  
+        div(flex="grow")
+        VList(items="center")
+          div(v-html="$t(`mpFullscreen.transfer.own`)") 
+          div() {{hardCodedMax}}          
 
-        VList(v-if="isERC1155" space-y="3")
-            div(v-html="$t(`mpFullscreen.transfer.quantity`)") 
-            Adjustable(v-model="quantity" h="10")
+    VList(v-if="isERC1155" space-y="3")
+      div(v-html="$t(`mpFullscreen.transfer.quantity`)") 
+      Adjustable(v-model="quantity" h="10")
 
-        //-VList(items="center" space-y="3")
-        div(v-html="$t(`mpFullscreen.transfer.walletAdress`)")
-        input(text="2xl center" bg="black" placeholder="e.g 0x1a2..." border="" v-model="wallet" @input="onChange")
-        div()
-            div(v-html="$t(`mpFullscreen.transfer.warningText`)")
-        Transition(name="slide-top")
-            HList(space-x="3" v-if="wallet")
-                FormCheckbox(v-model="isChecked") 
-                div(v-html="$t(`mpFullscreen.transfer.verifyText`)")
+    //-VList(items="center" space-y="3")
+    div(v-html="$t(`mpFullscreen.transfer.walletAdress`)")
+    input(text="2xl center" bg="black" placeholder="e.g 0x1a2..." border="" v-model="wallet" @input="onChange")
+    div()
+      div(v-html="$t(`mpFullscreen.transfer.warningText`)")
+    Transition(name="slide-top")
+      HList(space-x="3" v-if="wallet")
+        FormCheckbox(v-model="isChecked") 
+        div(v-html="$t(`mpFullscreen.transfer.verifyText`)")
 
-        Transition(name="slide-top")
-            button(m="auto" text="~" bg="gray-600" b="~" p="2" w="full" v-if="isChecked && wallet" @click="itemTransfer" v-html="$t(`mpFullscreen.transfer.transferItem`)")
+    Transition(name="slide-top")
+      button(m="auto" text="~" bg="gray-600" b="~" p="2" w="full" v-if="isChecked && wallet" @click="itemTransfer" v-html="$t(`mpFullscreen.transfer.transferItem`)")
 </template>
 
 <script lang="ts" setup>
@@ -45,7 +45,7 @@ import type { CollectionData } from '~/composables/useCollection';
 
 const item = defineModel<TransferItem>()
 const props = defineProps<{
-    collectionData: CollectionData,
+  collectionData: CollectionData,
 }>()
 
 const { getTokenKey, getTokenName } = useTokens()
@@ -60,22 +60,22 @@ const quantity = ref(0)
 
 
 const onChange = () => {
-    if (wallet != oldWalletAdress) {
-        isChecked.value = false;
-        oldWalletAdress.value = wallet.value;
-    }
+  if (wallet != oldWalletAdress) {
+    isChecked.value = false;
+    oldWalletAdress.value = wallet.value;
+  }
 }
 
 const isERC1155 = computed(() => ERC1155Addresses.includes(props.collectionData.collection.toLowerCase()))
 
 const itemTransfer = () => {
-    console.log('transfering Item proccess starting')
-    console.log(wallet.value)
-    console.log(props.collectionData)
-    console.log(props.collectionData.collection)
-    if (props.collectionData.nfts[0].token_id == null)
-        return console.log("ERROR, no token ID")
-    transferNFT(props.collectionData.collection, "0x93aa32bC977812e72C9c5BB87AB34A31633B1404", props.collectionData.nfts[0].token_id, 1)
+  console.log('transfering Item proccess starting')
+  console.log(wallet.value)
+  console.log(props.collectionData)
+  console.log(props.collectionData.collection)
+  if (props.collectionData.nfts[0].token_id == null)
+    return console.log("ERROR, no token ID")
+  transferNFT(props.collectionData.collection, "0x93aa32bC977812e72C9c5BB87AB34A31633B1404", props.collectionData.nfts[0].token_id, 1)
 
 }
 </script>
