@@ -6,17 +6,14 @@ div(grid="~ cols-8 gap-3" px="6")
 
       ContentDrawer(:start-open="true" v-if="item.description")
         template(#titleicon)
-          TitleWithIcon(icon="description")
-            template(#default) description
-
+          TitleWithIcon(icon="description") description
 
         template(#default) 
           div(p="3 t-0") {{ item.description }}
 
       ContentDrawer(:start-open="true")
         template(#titleicon)
-          TitleWithIcon(icon="traits")
-            template(#default) traits
+          TitleWithIcon(icon="traits") traits
 
         template(#default) 
           div(grid="~ cols-3 gap-3" pb="3")
@@ -36,8 +33,8 @@ div(grid="~ cols-8 gap-3" px="6")
 
       ContentDrawer(:start-open="true")
         template(#titleicon)
-          TitleWithIcon(icon="listing")
-            template(#default) listing
+          TitleWithIcon(icon="listing") listing
+
         template(#default)
           Table(:columns="saleColumns" :rows="item.sales" id="single-item" :in-drawer="true")
             template(#item-action="{row}")
@@ -47,7 +44,6 @@ div(grid="~ cols-8 gap-3" px="6")
       ContentDrawer(:start-open="true")
         template(#titleicon)
           TitleWithIcon(icon="offer")
-            template(#default) offer
         template(#default)
           Table(:columns="offerColumns" :rows="item.bids" id="offers" :in-drawer="true")
 
