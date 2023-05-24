@@ -1,5 +1,5 @@
 <template lang="pug">
-Collection(:data="collectionData" v-if="collectionData")
+Collection(:data="data")
 button(@click="loadMore") LoadMore
 </template>
 
@@ -11,53 +11,43 @@ import type {CollectionData, CollectionPayload } from '~/composables/useCollecti
 
 const route = useRoute()
 const { collection } = route.params
-let data = ref<CollectionData>()
-// const body = ref<CollectionPayload>()
 const body = ref<CollectionPayload>({
     page_key: 0,
     order: 0,
     filter: {
         owned: false,
-        type:3,
+        type:0,
         search: "",
         attributes: []
     }
 })
-const loadMore = async () => {
-  body.value.page_key = Number(collectionData.value?.page_key)
-    const { data: newCollectionData, execute: fetchCollection, refresh: refresh } = useCollectionData(String(collection), body.value )
-    console.log('body.value.page_key', body.value.page_key)
-    await fetchCollection()
-    data.value = [...data.value, ...newCollectionData.value]
-  // refresh()
+const loadMore = () =>{
+    body.value.page_key = Number(data.value?.page_key)
+    refresh()
 }
+const { data: data, execute: fetchCollection, refresh: refresh } = useCollectionData(String(collection), body.value )
 
-const { data: collectionData, execute: fetchCollection, refresh: refresh } = useCollectionData(String(collection), body.value )
+
 
 const { activeFilters } = useCollectionSettings()
 
 const createFilters = () => {
-    console.log('collectionData.value', collectionData.value)
-    if(collectionData.value)
-      activeFilters.value = collectionData.value.filters.map((filter) => ({
+    if(data.value)
+      activeFilters.value = data.value.filters.map((filter) => ({
           ...filter,
           value: filter.value.map((name) => ({
               name,
               selected: false
           }))
       }))
-
-    console.log("New filters", activeFilters.value)
 }
 
-watch(() => collectionData, (value, oldValue, onCleanup) => {
-    console.log('watch oldValue', oldValue)
-    if(!oldValue.value)
+watch(() => data, (value) => {
+    if(activeFilters.value.length < 1)
       createFilters()
 }, { deep: true })
 
 watch(() => activeFilters, () => {
-    console.log(' activeFilters.value',  activeFilters.value)
     body.value.page_key = 0
     body.value.filter.attributes = []
     activeFilters.value.forEach((name) => {
@@ -69,27 +59,15 @@ watch(() => activeFilters, () => {
               })
         })
     })
-    // fetchCollection()
+    if(data.value)
+      data.value.nfts = []
     refresh()
-    console.log('fetchCollection()', body.value)
 }, { immediate: true, deep: true })
 //
 onBeforeUnmount(() => {
     activeFilters.value = []
 })
-onMounted(async () => {
-    await fetchCollection()
-    // await loadMore()
-    nextTick(()=>{
-      createFilters()
-    })
-    console.log('collectionData', collectionData.value)
+onMounted(() => {
+    fetchCollection()
 })
-try {
-
-}
-catch (e) {
-    console.log('e', e)
-}
-
 </script>
