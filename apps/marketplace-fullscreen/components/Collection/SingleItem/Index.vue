@@ -5,12 +5,14 @@ div(grid="~ cols-8 gap-3" px="6")
       TokenMedia(:token="item" w="full" frame="~" :is-large="true")
 
       ContentDrawer(:start-open="true" v-if="item.description")
-        template(#header) Description
+        template(#titleicon)
+          TitleWithIcon(icon="description") description
         template(#default) 
           div(p="3 t-0") {{ item.description }}
 
       ContentDrawer(:start-open="true")
-        template(#header) Description
+        template(#titleicon)
+          TitleWithIcon(icon="traits") traits
         template(#default) 
           div(grid="~ cols-3 gap-3" pb="3")
             AttributeTrait(v-for="trait in item.attributes")
@@ -25,23 +27,37 @@ div(grid="~ cols-8 gap-3" px="6")
 
       Listing(:item="item")
 
-      ContentDrawer(:start-open="true")
-        template(#header) Listings
-        template(#default)
-          Table(:columns="saleColumns" :rows="item.sales" id="single-item" :in-drawer="true")
+      TradeModule(:owner-value="3")
+        template(#header)
+          TabItem(v-for="tab in tabs" :id="tab" v-model="activeTab") {{ tab }}
 
       ContentDrawer(:start-open="true")
-        template(#header) Offers
+        template(#titleicon)
+          TitleWithIcon(icon="listing") listing
+        template(#default)
+          Table(:columns="saleColumns" :rows="item.sales" id="single-item" :in-drawer="true")
+            template(#item-action="{row}")
+              button(@click="addSaleToCart(row)" bg="gray-500 hover:gray-400" transition="all" cut="bottom-right sm" p="x-6 y-3")
+                CartIcon(w="6")
+
+      ContentDrawer(:start-open="true")
+        template(#titleicon)
+          TitleWithIcon(icon="offer") offers
         template(#default)
           Table(:columns="offerColumns" :rows="item.bids" id="offers" :in-drawer="true")
+
 
 </template>
 
 <script lang="ts" setup>
+import CartIcon from '~/assets/icons/cart.svg'
 import type { Sale, SingleItemData, Bid } from '@ix/base/composables/Token/useIXToken';
 import type { TableColumn } from '~/composables/useTable';
 
+const { tabs, activeTab } = useTabList(['sell', 'buy'])
+
 const { getSingleAttributes } = useDefaulAttributes()
+const { addToCart } = useCart()
 const attributes = computed(() => getSingleAttributes(item))
 
 const saleColumns: TableColumn<Sale>[] = [
@@ -49,16 +65,23 @@ const saleColumns: TableColumn<Sale>[] = [
   { label: "Quanitity", value: "quantity", sortable: true },
   { label: "Expiration", value: "endtime", sortable: true },
   { label: "Seller", value: "player_id", sortable: true },
-  { label: "Action", value: "action", sortable: true },
+  { label: "Action", value: "action", width: 80 }
 ]
+
+const addSaleToCart = (sale: Sale) => {
+  addToCart(item, sale)
+}
 
 const offerColumns: TableColumn<Bid>[] = [
   { label: "Sale Price", value: "price", sortable: true },
   { label: "Quanitity", value: "quantity", sortable: true },
+
 ]
 const { item } = defineProps<{
   item: SingleItemData
 }>()
 
-console.log("Item", item)
+const isSelected = ref(false)
+
+// console.log("Item", item)
 </script>
