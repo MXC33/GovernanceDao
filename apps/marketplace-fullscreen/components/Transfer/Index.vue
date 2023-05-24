@@ -17,7 +17,7 @@ Popup(@close="$emit('close')")
   template(#footer)
     VList(space-y="6")
       Transition(name="slide-top")
-        HList(space-x="3" v-if="wallet")
+        HList(space-x="3" v-if="wallet && isWalletValid")
           FormCheckbox(v-model="isChecked") 
           div(v-html="$t(`mpFullscreen.transfer.verifyText`)")
 
@@ -54,7 +54,8 @@ const onChange = () => {
     oldWalletAdress.value = wallet.value;
   }
 }
-
+//&& wallet.value.substring(0, 2) == '0x'
+const isWalletValid = computed(() => wallet.value.length > 25 && wallet.value.substring(0, 2) == '0x')
 const isERC1155 = computed(() => ERC1155Addresses.includes(props.token.collection.toLowerCase()))
 
 const itemTransfer = () => {
@@ -67,8 +68,8 @@ const itemTransfer = () => {
     return console.log("ERROR, no token ID")
 
   if (isERC1155.value)
-    return transferERC1155NFT(collection, "0x33aB691A742EbfB9ED291F8B989F9A792677E989", token_id, 1)
+    return transferERC1155NFT(collection, wallet.value, token_id, 1)
 
-  return transferERC721NFT(collection, "0x33aB691A742EbfB9ED291F8B989F9A792677E989", token_id)
+  return transferERC721NFT(collection, wallet.value, token_id)
 }
 </script>
