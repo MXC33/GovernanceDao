@@ -3,7 +3,7 @@ div(grid="~ cols-8 gap-3" px="6")
   div(grid="col-span-3")
     VList(space-y="6")
       VList(frame="~")
-        TokenMedia(:token="item" w="full" :is-large="true")
+        TokenMedia(:token="item" w="full" :is-large="true" pos="relative")
         HelperMediaBar
 
       ContentDrawer(:start-open="true" v-if="item.description" bg="gray-900" px="6")
