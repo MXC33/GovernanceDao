@@ -16,15 +16,17 @@ import TransferIcon from '~/assets/icons/transfer.svg'
 import LinkIcon from '~/assets/icons/link.svg'
 import PolygonIcon from '~/assets/icons/polygon.svg'
 
-const copyCurrentUrlToClipboard = () => {
+const copyCurrentUrlToClipboard = async () => {
   const currentUrl = window.location.href;
-  navigator.clipboard.writeText(currentUrl)
-    .then(() => {
-      console.log('URL copied to clipboard:', currentUrl);
-    })
-    .catch((error) => {
-      console.error('Failed to copy URL to clipboard:', error);
-    });
+
+  try {
+
+    await navigator.clipboard.writeText(currentUrl)
+    console.log('URL copied to clipboard:', currentUrl)
+
+  } catch (error) {
+    console.error('Failed to copy URL to clipboard:', error)
+  }
 }
 
 </script>

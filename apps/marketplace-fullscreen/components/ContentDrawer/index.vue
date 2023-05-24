@@ -1,7 +1,7 @@
 <template lang="pug">
-VList(max-h="80" frame="~")
+VList(max-h="85" frame="~")
   VList(overflow-y="auto" h="full" pos="relative")
-    HList(h="12" :px="px" bg="ix-black" items="center" justify="between" pos="sticky top-0" flex-shrink="0" z="1" @click.stop="dropDrawer" uppercase="~" cursor="pointer")
+    HList(h="12" px="6 on-small:3" bg="ix-black" items="center" justify="between" pos="sticky top-0" flex-shrink="0" z="1" @click.stop="dropDrawer" uppercase="~" cursor="pointer" :small="isSmall")
       span(color="white" text="md" font="bold" v-if="$slots.header")
         slot(name="header")
 
@@ -22,7 +22,7 @@ import { Collapse } from 'vue-collapsed'
 
 const { startOpen } = defineProps<{
   startOpen?: boolean
-  px?: string
+  isSmall?: boolean
 }>()
 
 const isOpen = ref(startOpen)
