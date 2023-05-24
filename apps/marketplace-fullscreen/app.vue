@@ -7,6 +7,10 @@
 
     div#popups()
 
+
+    Transition(name="fade-slow" mode="in-out")
+      HelperNotification(v-if="activePopup")
+
 </template>
 
 <script setup lang="ts">
@@ -18,6 +22,7 @@ const { y } = useWindowScroll()
 const globalY = useGlobalWindowScroll()
 watch(y, (pos) => globalY.value = pos)
 const { connectWallet, walletState } = useWallet()
+const { activePopup } = usePopups()
 
 onMounted(async () => {
 

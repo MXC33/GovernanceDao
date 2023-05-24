@@ -77,6 +77,9 @@
     "burn-assets": "Burn Assets",
     "purchase": "Purchase"
   },
+  "popupNotification": {
+    "copy-link": "Link copied to clipboard"
+  },
   "collection": {
     "attributes": {
       "total_volume": "Total Volume",
