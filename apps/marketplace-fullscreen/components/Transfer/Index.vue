@@ -1,40 +1,28 @@
 <template lang="pug">
-Popup(text="white")
-  VList(p="5" capitalized="~" space-y="5" b="~" rounded="2")
-    //-items="center"
-    VList(p="3") 
-      div(text="2xl" v-html="$t(`mpFullscreen.transfer.title`)")
-      HList(space-x="3")
-        HList()
-          TokenImage(:token="collectionData.nfts[4]" inset="0" w="15" h="15" object="contain center" :key="getTokenKey(collectionData.nfts[4])")
-          VList()
-            div() {{getTokenName(collectionData.nfts[4])}} 
-            div() "{Collection name}"  
-
-        div(flex="grow")
-        VList(items="center")
-          div(v-html="$t(`mpFullscreen.transfer.own`)") 
-          div() {{hardCodedMax}}          
-
-    VList(v-if="isERC1155" space-y="3")
-      div(v-html="$t(`mpFullscreen.transfer.quantity`)") 
-      Adjustable(v-model="quantity" h="10")
-
-    //-VList(items="center" space-y="3")
-    div(v-html="$t(`mpFullscreen.transfer.walletAdress`)")
-
-    input(text="2xl center" bg="black" placeholder="e.g 0x1a2..." border="" v-model="wallet" @input="onChange")
-
-    div()
+Popup(text="white" @close="$emit('close')")
+  template(#header)
+    div(text="2xl" v-html="$t(`mpFullscreen.transfer.title`)")
+  
+  template(#default)
+    VList(space-y="3")
+      //-Title Image Collection how many you have
+      TransferInfo(:collectionData="collectionData")
+      //-VList(items="center" space-y="3")
+      div(v-html="$t(`mpFullscreen.transfer.walletAdress`)")
+      
+      input(text="2xl center" bg="black" placeholder="e.g 0x1a2..." border="" v-model="wallet" @input="onChange")
+      
       div(v-html="$t(`mpFullscreen.transfer.warningText`)")
+  
+  template(#footer)
+    VList(space-y="6")
+      Transition(name="slide-top")
+        HList(space-x="3" v-if="wallet")
+          FormCheckbox(v-model="isChecked") 
+          div(v-html="$t(`mpFullscreen.transfer.verifyText`)")
 
-    Transition(name="slide-top")
-      HList(space-x="3" v-if="wallet")
-        FormCheckbox(v-model="isChecked") 
-        div(v-html="$t(`mpFullscreen.transfer.verifyText`)")
-
-    Transition(name="slide-top")
-      button(m="auto" text="~" bg="gray-600" b="~" p="2" w="full" v-if="isChecked && wallet" @click="itemTransfer" v-html="$t(`mpFullscreen.transfer.transferItem`)")
+      Transition(name="slide-top")
+        button(m="auto" text="~" bg="gray-600" b="~" p="2" w="full" v-if="isChecked && wallet" @click="itemTransfer" v-html="$t(`mpFullscreen.transfer.transferItem`)")
 
 </template>
 
@@ -50,6 +38,8 @@ const props = defineProps<{
 const { getTokenKey, getTokenName } = useTokens()
 const { transferNFT } = useTransferNFT()
 
+const NFT_Index = 0;
+defineEmits(['close'])
 const wallet = ref("")
 const oldWalletAdress = ref("")
 const isChecked = ref(false)
