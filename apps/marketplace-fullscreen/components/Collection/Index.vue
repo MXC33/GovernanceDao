@@ -1,8 +1,4 @@
 <template lang="pug">
-
-//-z="99" pos="absolute top-0 left-0" 
-Transfer(:collectionData="data" v-if="transferPop")
-
 VList(flex-grow="1" min-h="0" pos="relative" p="8" space-y="6")
   CollectionHeader() 
     template(#header) 
@@ -46,7 +42,7 @@ const attributes = computed(() => getCollectionAttributes(data))
 
 const transferPop = transferPopup()
 
-const rows = computed(() => data.nfts.map((row) => ({
+const rows = computed(() => (data?.nfts ?? []).map((row) => ({
   ...row,
   usd: ixtAsUSD(row.sale_price).value
 })))
@@ -68,7 +64,7 @@ const toggleFilterDrawer = () => {
 }
 
 const { data } = defineProps<{
-  data: CollectionData,
+  data?: CollectionData,
 }>()
 
 console.log("Data", rows.value)
