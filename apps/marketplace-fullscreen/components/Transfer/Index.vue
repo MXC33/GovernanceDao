@@ -6,7 +6,7 @@ Popup(@close="$emit('close')")
   template(#default)
     VList(space-y="3")
       //-Title Image Collection how many you have  
-      TransferInfo(v-model="transferToken" :showAdjustable="isERC1155")
+      TransferInfo(v-model="transferItem" :showAdjustable="isERC1155")
 
       div(v-html="$t(`mpFullscreen.transfer.walletAdress`)")
       
@@ -26,8 +26,8 @@ Popup(@close="$emit('close')")
 </template>
 
 <script lang="ts" setup>
-import type { CollectionData } from '~/composables/useCollection';
 import type { IXToken } from "@ix/base/composables/Token/useIXToken"
+import type { TransferItem } from '~/composables/useTransfer';
 
 defineEmits(['close'])
 
@@ -35,7 +35,12 @@ const props = defineProps<{
   token: IXToken,
 }>()
 
-const transferToken = ref<IXToken>(props.token)
+const transferItem = ref<TransferItem>({
+  token: props.token,
+  value: 1,
+  min: 1,
+  max: props.token.my_shares
+})
 
 const { transferERC1155NFT, transferERC721NFT } = useTransferNFT()
 
@@ -50,18 +55,16 @@ const onChange = () => {
   }
 }
 
-const isERC1155 = computed(() => ERC1155Addresses.includes(transferToken.value.collection.toLowerCase()))
+const isERC1155 = computed(() => ERC1155Addresses.includes(props.token.collection.toLowerCase()))
 
 const itemTransfer = () => {
   console.log('transfering Item proccess starting')
   console.log(wallet.value)
-  const {token_id, collection} = transferToken.value
+  const {token_id, collection} = transferItem.value.token
   // console.log(props.collectionData)
   // console.log(props.collectionData.collection)
   if (token_id == null)
     return console.log("ERROR, no token ID")
-
-  console.log(transferToken.value.attributes.values)
 
   if (isERC1155.value)
     return transferERC1155NFT(collection, "0x33aB691A742EbfB9ED291F8B989F9A792677E989", token_id, 1)

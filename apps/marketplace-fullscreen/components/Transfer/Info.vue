@@ -1,33 +1,31 @@
 <template lang="pug">
-VList(v-if="token") 
+VList(v-if="item") 
   HList(space-x="3")
     HList()
-      TokenImage(:token="token" inset="0" w="15" h="15" object="contain center" :key="getTokenKey(token)")
+      TokenImage(:token="item.token" inset="0" w="15" h="15" object="contain center" :key="getTokenKey(item.token)")
       VList()
-        div() {{getTokenName(token)}} 
+        div() {{getTokenName(item.token)}} 
         div() "{Collection name}"  
 
     div(flex="grow")
     VList(items="center")
       div(v-html="$t(`mpFullscreen.transfer.own`)") 
-      div() {{token}}          
+      div() {{item.token.my_shares}}          
 
   VList(v-if="showAdjustable" space-y="3")
     div(v-html="$t(`mpFullscreen.transfer.quantity`)") 
-    Adjustable(v-model="token" h="10")
+    Adjustable(v-model="item" h="10")
 </template>
 
 <script lang="ts" setup>
-import type { IXToken } from '@ix/base/composables/Token/useIXToken';
+import type { TransferItem } from '~/composables/useTransfer';
 
 const props = defineProps<{
   showAdjustable: boolean,
 }>()
 
-const token = defineModel<IXToken>()
+const item = defineModel<TransferItem>()
 
 const { getTokenKey, getTokenName } = useTokens()
-const hardCodedMax = 10
-const quantity = ref(0)
-const NFT_Index = 0;
+
 </script>
