@@ -25,7 +25,7 @@ div(grid="~ cols-8 gap-3" px="6")
 
       AttributeList(:attributes="attributes" v-if="item")
 
-      TradeModule(:owner-value="3")
+      TradeModule(:owner-value="3" :item="item")
         template(#header)
           TabItem(v-for="tab in tabs" :id="tab" v-model="activeTab") {{ tab }}
 
