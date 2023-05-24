@@ -15,6 +15,7 @@ export type TableSortField<T extends TableRow> = string & keyof T
 export interface TableColumn<T extends TableRow> {
   value: TableSortField<T> | string,
   label: string,
+  type?: 'text' | 'ixt' | 'usd'
   sortable?: boolean,
   width?: number
 }

@@ -5,8 +5,9 @@ HList()
 
 <script setup lang="ts">
 
-onMounted(async () => {
 
+
+onMounted(async () => {
   //@ts-ignore
   const isPaintSupported = !!CSS.paintWorklet
 

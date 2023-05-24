@@ -7,6 +7,10 @@
 
     div#popups()
 
+
+    Transition(name="fade-slow" mode="in-out")
+      HelperNotification(v-if="activePopup")
+
 </template>
 
 <script setup lang="ts">
@@ -18,12 +22,17 @@ const { y } = useWindowScroll()
 const globalY = useGlobalWindowScroll()
 watch(y, (pos) => globalY.value = pos)
 const { connectWallet, walletState } = useWallet()
+const { setupIXTPrice, ixtPrice } = useIXTPrice()
+const { activePopup } = usePopups()
 
 onMounted(async () => {
-
   const connected = await connectWallet()
   if (connected)
     walletState.value = 'connected'
+
+  await setupIXTPrice()
+
+  console.log("price", ixtPrice.value)
 
   //@ts-ignore
   const isPaintSupported = !!CSS.paintWorklet

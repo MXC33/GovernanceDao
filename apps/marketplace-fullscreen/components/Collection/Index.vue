@@ -1,7 +1,4 @@
 <template lang="pug">
-
-//-z="99" pos="absolute top-0 left-0" 
-
 VList(flex-grow="1" min-h="0" pos="relative" p="8" space-y="6")
   CollectionHeader() 
     template(#header) 
@@ -20,7 +17,7 @@ VList(flex-grow="1" min-h="0" pos="relative" p="8" space-y="6")
       CollectionGrid(v-if="displayType == 'grid'" w="full")
         CollectionGridItem.collection-grid-item(:token="token" v-for="token in data.nfts" b="gray-400")
 
-      Table(:columns="columns" :rows="data.nfts" v-else id="collection")
+      Table(:columns="columns" :rows="rows" v-else id="collection")
         template(#item-name="{row}")
           HList(items="center" space-x="2" font="bold")
             div(w="12" h="12")
@@ -34,21 +31,29 @@ VList(flex-grow="1" min-h="0" pos="relative" p="8" space-y="6")
 <script lang="ts" setup>
 import type { CollectionData } from '~/composables/useCollection';
 import type { TableColumn } from '~/composables/useTable'
-import type { IXToken } from '@ix/base/composables/Token/useIXToken';
 
 const { displayType } = useCollectionSettings()
 const { getTokenKey } = useTokens()
 const { cartItems } = useCart()
-
+const { ixtAsUSD } = useIXTPrice()
 
 const { getCollectionAttributes } = useDefaulAttributes()
 const attributes = computed(() => getCollectionAttributes(data))
 
-const columns: TableColumn<IXToken>[] = [
+const rows = computed(() => (data?.nfts ?? []).map((row) => ({
+  ...row,
+  usd: ixtAsUSD(row.sale_price).value
+})))
+
+type Row = typeof rows.value[number]
+
+const columns: TableColumn<Row>[] = [
   { label: "Asset", value: "name" },
-  { label: "Higher bid price", value: "higher_bid_price", sortable: true },
-  { label: "Sale Price", value: "sale_price", sortable: true },
+  { label: "Current price", value: "sale_price", type: 'ixt', sortable: true },
+  { label: "USD price", value: "usd", type: 'usd', sortable: true },
+  { label: "Best offer", value: "higher_bid_price", type: 'ixt', sortable: true },
 ]
+
 
 const showFilters = ref(false)
 
@@ -57,8 +62,14 @@ const toggleFilterDrawer = () => {
 }
 
 const { data } = defineProps<{
-  data: CollectionData,
+  data?: CollectionData,
 }>()
+
+console.log("Data", rows.value)
+
+watch(rows, () => {
+  console.log("New rows", rows.value)
+}, { deep: true })
 
 </script>
 

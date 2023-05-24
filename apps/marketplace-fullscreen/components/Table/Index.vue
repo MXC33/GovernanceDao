@@ -5,13 +5,15 @@ table(bg="gray-900" w="full")
     col(v-for="column in columns" :style="getColumnStyle(column)")
 
   TableHead()
-    TableCellHead(v-for="item in columns" :column="item" :sort-field="sort" @select-field="selectSortField", @toggle-sort="toggleSortDirection" pos="sticky top-50 on-drawer:top-0" :drawer="inDrawer") {{ item.label }}
+    TableCellHead(v-for="item in columns" :column="item" :sort-field="sort" @select-field="selectSortField", @toggle-sort="toggleSortDirection" pos="sticky top-50 on-drawer:top-12" :drawer="inDrawer") {{ item.label }}
 
   tbody(divide-y="1")
     TableRow(v-for="(row, index) in sortedRows" :key="index")
       TableCell(v-for="item in columns", :key="item.value")
         slot(:name="`item-${item.value}`" :row="row" :column="item")
-          span() {{row[item.value]}}
+          Currency(:value="row[item.value]" type="ixt" v-if="item.type == 'ixt'")
+          Currency(:value="row[item.value]" type="usd" v-else-if="item.type == 'usd'")
+          span(v-else) {{row[item.value]}}
 
 </template>
 
