@@ -5,6 +5,8 @@
 
     NuxtPage()
 
+    div#popups()
+
 </template>
 
 <script setup lang="ts">
@@ -15,8 +17,13 @@ import 'vue3-easy-data-table/dist/style.css';
 const { y } = useWindowScroll()
 const globalY = useGlobalWindowScroll()
 watch(y, (pos) => globalY.value = pos)
+const { connectWallet, walletState } = useWallet()
 
 onMounted(async () => {
+
+  const connected = await connectWallet()
+  if (connected)
+    walletState.value = 'connected'
 
   //@ts-ignore
   const isPaintSupported = !!CSS.paintWorklet
@@ -25,6 +32,7 @@ onMounted(async () => {
     //@ts-ignore
     CSS.paintWorklet.addModule('/paint/border.js');
   }
+
   document.body.classList.toggle('is-paint-supported', isPaintSupported)
   document.body.classList.toggle('is-not-paint-supported', !isPaintSupported)
 })

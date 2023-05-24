@@ -18,27 +18,19 @@ Transition(name="slide-right")
 
       div(flex-grow="1")
 
-    footer(pos="sticky bottom-0" bg="ix-black")
-      HList(items="center" text="xl" p="3") 
-        h3(text="gray-200" flex-grow="1") Total price
-        div(font="bold") {{ totalPrice }} IXT
+    CartCheckout()
 
-      button(btn="~ primary" w="full" font="bold") Complete purchase
-    
-  </template>
+</template>
   
   
 <script lang="ts" setup>
 const cartElement = ref()
 const { getTokenKey } = useTokens()
 
+
 onClickOutside(cartElement, () => viewingCart.value = false)
 const { viewingCart, cartItems } = useCart()
 
-const totalPrice = computed(() =>
-  cartItems.value.map((item) =>
-    item.value * item.token?.sale_price
-  ).reduce((a, b) => a + b, 0)
-)
+
 </script>
   

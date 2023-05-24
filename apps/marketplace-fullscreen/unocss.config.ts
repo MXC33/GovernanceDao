@@ -13,7 +13,7 @@ export default defineConfig({
       //@ts-ignore
       ...baseLayer.theme.colors,
       ix: {
-        primary: '#CB0010',
+        primary: '#FF0014',
       },
       corp: {
         ne: '#CB0010'

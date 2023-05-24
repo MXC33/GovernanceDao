@@ -3,13 +3,13 @@ VList(flex-grow="1" px="6" pos="relative")
   .gradient-bg(pos="fixed left-0 right-0 top-16" h="50vh" :style="gradientStyle" v-if="!onSingleItem")
 
 transition(name="fade-slow")
-  HList(py="4" justify="between" items="center" pos="sticky top-16" z="2" bg="on-locked:ix-black" px="8" transition="all" :locked="isScrolling")
+  HList(py="4" justify="between" items="center" pos="sticky top-16" z="3" bg="on-locked:ix-black" px="8" transition="all" :locked="isScrolling")
     NetEmpireLogo(w="45")
 
     HList(space-x="4" w="full" justify="end" items="center")
       CollectionSelect()
 
-      ButtonSquareIcon()
+      ButtonSquareIcon(@click="transfer")
         UserIcon(w="6")
 
       ButtonSquareIcon(@click="viewingCart = true")
@@ -24,12 +24,13 @@ import CartIcon from '~/assets/icons/cart.svg'
 
 const { viewingCart } = useCart()
 const y = useGlobalWindowScroll()
+const transferPop = transferPopup()
 
 const route = useRoute()
 
 
 const onSingleItem = computed(() =>
-  route.matched.some((match) => match.path.includes("tokenId"))
+  route.matched.some((match) => match.path.includes("tokenId") || match.path.includes("connect"))
 )
 
 const gradientStyle = computed(() => ({
@@ -40,6 +41,11 @@ const isScrolling = computed(() => {
   return y.value >= 10
 })
 
+const transfer = () => {
+  console.log("transfer")
+  transferPop.value = !transferPop.value
+  console.log(transferPop.value)
+}
 </script>
 
 <style>

@@ -1,6 +1,6 @@
 
 <template lang="pug">
-th(p="3" bg="gray-900")
+th(p="3" bg="gray-900" z="3")
   button(v-if="column.sortable" @click="onClickSort" flex="~ row" items="start" opacity="50 hover:75 on-active:100" :active="isActive" transition="all")
     HList()
       slot
@@ -25,6 +25,7 @@ const emit = defineEmits<{
   toggleSort: [],
   selectField: [item: TableSortField<T>]
 }>()
+
 
 const isActive = computed(() => props.sortField?.field == props.column.value)
 
