@@ -7,12 +7,12 @@ export const stateOnMatcher: VariantObject = {
   match(matcher, ctx) {
     //@ts-ignore
     const variant = variantGetParameter('on-', matcher, ctx.generator.config.separators)
-    
-    if(variant) {
+
+    if (variant) {
       const [match, rest] = variant
       return {
         matcher: rest,
-        selector: s => `${s}[${match}="true"]`,
+        selector: s => `${s}[${match}]:not([${match}="false"])`,
       }
     }
   },
@@ -24,7 +24,7 @@ export const stateMatcher: VariantObject = {
   match(matcher, ctx) {
     //@ts-ignore
     const variant = variantGetParameter('s-', matcher, ctx.generator.config.separators)
-    if(variant) {
+    if (variant) {
       const [match, rest] = variant
       return {
         matcher: rest,

@@ -10,7 +10,6 @@ import transformerVariantGroup from '@unocss/transformer-variant-group'
 import { stateOnMatcher, stateMatcher } from './variants.uno';
 import { cutRules, frameRules } from './cuts.uno'
 
-
 export default definePreset({
   presets: [
     //@ts-ignore
