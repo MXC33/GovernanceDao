@@ -1,7 +1,7 @@
 <template lang="pug">
 
 //-z="99" pos="absolute top-0 left-0" 
-Transfer(:collectionData="data" v-if="transferPop")
+//Transfer(:collectionData="data" v-if="transferPop")
 
 VList(flex-grow="1" min-h="0" pos="relative" p="8" space-y="6")
   CollectionHeader() 

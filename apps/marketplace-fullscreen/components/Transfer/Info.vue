@@ -1,31 +1,30 @@
 <template lang="pug">
-VList() 
+VList(v-if="token") 
   HList(space-x="3")
     HList()
-      TokenImage(:token="props.IXToken" inset="0" w="15" h="15" object="contain center" :key="getTokenKey(props.IXToken)")
+      TokenImage(:token="token" inset="0" w="15" h="15" object="contain center" :key="getTokenKey(token)")
       VList()
-        div() {{getTokenName(props.IXToken)}} 
+        div() {{getTokenName(token)}} 
         div() "{Collection name}"  
 
     div(flex="grow")
     VList(items="center")
       div(v-html="$t(`mpFullscreen.transfer.own`)") 
-      div() {{hardCodedMax}}          
+      div() {{token}}          
 
   VList(v-if="showAdjustable" space-y="3")
     div(v-html="$t(`mpFullscreen.transfer.quantity`)") 
-    Adjustable(v-model="props.IXToken" h="10")
+    Adjustable(v-model="token" h="10")
 </template>
 
 <script lang="ts" setup>
-import type { CollectionData } from '~/composables/useCollection';
-import type { AnyToken } from '@ix/base/composables/Token/useTokens';
 import type { IXToken } from '@ix/base/composables/Token/useIXToken';
 
 const props = defineProps<{
-  IXToken: AnyToken,
   showAdjustable: boolean,
 }>()
+
+const token = defineModel<IXToken>()
 
 const { getTokenKey, getTokenName } = useTokens()
 const hardCodedMax = 10

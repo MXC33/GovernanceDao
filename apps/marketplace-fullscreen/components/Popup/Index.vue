@@ -10,9 +10,7 @@ div(pos="fixed top-50% left-50%" w="full" translate-x="-50%" translate-y="-50%" 
 
   VList(b="t-1 white" p="6" v-if="$slots.footer")
     slot(name="footer")
-
 </template>
-
 
 <script setup lang="ts">
 defineEmits(["close"])
