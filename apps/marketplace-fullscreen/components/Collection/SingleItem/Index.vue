@@ -2,19 +2,21 @@
 div(grid="~ cols-8 gap-3" px="6")
   div(grid="col-span-3")
     VList(space-y="6")
-      TokenMedia(:token="item" w="full" frame="~" :is-large="true")
+      VList(frame="~")
+        TokenMedia(:token="item" w="full" :is-large="true")
+        HelperMediaBar
 
-      ContentDrawer(:start-open="true" v-if="item.description")
+      ContentDrawer(:start-open="true" v-if="item.description" bg="gray-900" px="6")
         template(#titleicon)
           TitleWithIcon(icon="description") description
         template(#default) 
-          div(p="3 t-0") {{ item.description }}
+          div(p="6") {{ item.description }}
 
-      ContentDrawer(:start-open="true")
+      ContentDrawer(:start-open="true" bg="gray-900" px="6")
         template(#titleicon)
           TitleWithIcon(icon="traits") traits
         template(#default) 
-          div(grid="~ cols-3 gap-3" pb="3")
+          div(grid="~ cols-3 gap-3" p="6")
             AttributeTrait(v-for="trait in item.attributes")
               template(#category) {{ trait.trait_type }}
               template(#name) {{ trait.value }}
@@ -29,7 +31,7 @@ div(grid="~ cols-8 gap-3" px="6")
         template(#header)
           TabItem(v-for="tab in tabs" :id="tab" v-model="activeTab") {{ tab }}
 
-      ContentDrawer(:start-open="true")
+      ContentDrawer(:start-open="true" px="6")
         template(#titleicon)
           TitleWithIcon(icon="listing") listing
         template(#default)
@@ -38,7 +40,7 @@ div(grid="~ cols-8 gap-3" px="6")
               button(@click="addSaleToCart(row)" bg="gray-500 hover:gray-400" transition="all" cut="bottom-right sm" p="x-6 y-3")
                 CartIcon(w="6")
 
-      ContentDrawer(:start-open="true")
+      ContentDrawer(:start-open="true" px="6")
         template(#titleicon)
           TitleWithIcon(icon="offer") offers
         template(#default)

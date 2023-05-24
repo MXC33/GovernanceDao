@@ -1,6 +1,6 @@
 <template lang="pug">
 VList(w="100" space-y="3")
-  ContentDrawer(v-for="(item, filterIndex) in activeFilters" )
+  ContentDrawer(v-for="(item, filterIndex) in activeFilters" px="3")
     template(#header) {{item.trait_type}}
     template(#default)
       VList(w="full" px="3")
