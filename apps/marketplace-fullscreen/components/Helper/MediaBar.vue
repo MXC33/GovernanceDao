@@ -15,8 +15,10 @@ import LikeIcon from '~/assets/icons/like.svg'
 import TransferIcon from '~/assets/icons/transfer.svg'
 import LinkIcon from '~/assets/icons/link.svg'
 import PolygonIcon from '~/assets/icons/polygon.svg'
+const { activePopup, setPopupTimeout } = usePopups()
 
 const copyCurrentUrlToClipboard = async () => {
+  activePopup.value = 'copy-link'
   const currentUrl = window.location.href;
 
   try {
@@ -27,6 +29,8 @@ const copyCurrentUrlToClipboard = async () => {
   } catch (error) {
     console.error('Failed to copy URL to clipboard:', error)
   }
+
+  setPopupTimeout()
 }
 
 </script>
