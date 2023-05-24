@@ -4,7 +4,7 @@ VList()
     span(color="gray-200") Total Price
 
     HList(items="end" space-x="3")
-      span(color="white" font="bold" text="4xl") 280 IXT
+      span(color="white" font="bold" text="4xl") {{ item.sale_price }} IXT
       span(color="gray-200" font="bold" text="lg") $280
 
   HList(px="6" py="3.5" b="t-1 b-1 gray-600" space-x="3" items="center")
@@ -18,9 +18,11 @@ VList()
 </template>
 
 <script lang="ts" setup>
+import type { SingleItemData } from '@ix/base/composables/Token/useIXToken';
+
 
 defineProps<{
-  ownerValue?: string | number
+  item: SingleItemData
 }>()
 
 const maxPrice = ref(false)

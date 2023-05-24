@@ -7,15 +7,18 @@ VList(w="full" bg="gray-900")
     span(color="white" px="6") You own: {{ ownerValue }}
 
   Transition(name="fade-slow" mode="out-in")
-    TradeModuleSell(v-if="activeTab == 'sell'")
-    TradeModuleBuy(v-else)
+    TradeModuleSell(v-if="activeTab == 'sell'" :item="item")
+    TradeModuleBuy(v-else :item="item")
 
 </template>
 
 <script lang="ts" setup>
+import type { SingleItemData } from '@ix/base/composables/Token/useIXToken';
+
 
 defineProps<{
-  ownerValue?: string | number
+  ownerValue?: string | number,
+  item: SingleItemData
 }>()
 
 const { tabs, activeTab } = useTabList(['sell', 'buy'])
