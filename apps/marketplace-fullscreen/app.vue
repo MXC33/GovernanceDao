@@ -17,13 +17,17 @@ import 'vue3-easy-data-table/dist/style.css';
 const { y } = useWindowScroll()
 const globalY = useGlobalWindowScroll()
 watch(y, (pos) => globalY.value = pos)
-const { connectWallet, walletState } = useWallet()
+const { connectWallet, walletState, provider } = useWallet()
+const { setupIXTPrice, ixtPrice } = useIXTPrice()
 
 onMounted(async () => {
-
   const connected = await connectWallet()
   if (connected)
     walletState.value = 'connected'
+
+  await setupIXTPrice()
+
+  console.log("price", ixtPrice.value)
 
   //@ts-ignore
   const isPaintSupported = !!CSS.paintWorklet
