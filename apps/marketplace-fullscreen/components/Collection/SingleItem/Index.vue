@@ -23,6 +23,8 @@ div(grid="~ cols-8 gap-3" px="6")
 
       AttributeList(:attributes="attributes" v-if="item")
 
+      Listing(:item="item")
+
       ContentDrawer(:start-open="true")
         template(#header) Listings
         template(#default)
