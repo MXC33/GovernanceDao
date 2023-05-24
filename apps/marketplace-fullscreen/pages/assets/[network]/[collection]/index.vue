@@ -1,5 +1,5 @@
 <template lang="pug">
-Collection(:data="data")
+Collection(:data="data" v-if="data" )
 button(@click="loadMore") LoadMore
 </template>
 
@@ -27,24 +27,22 @@ const loadMore = () =>{
 }
 const { data: data, execute: fetchCollection, refresh: refresh } = useCollectionData(String(collection), body.value )
 
-
-
 const { activeFilters } = useCollectionSettings()
 
 const createFilters = () => {
     if(data.value)
-      activeFilters.value = data.value.filters.map((filter) => ({
-          ...filter,
-          value: filter.value.map((name) => ({
-              name,
-              selected: false
-          }))
-      }))
+        activeFilters.value = data.value.filters.map((filter) => ({
+            ...filter,
+            value: filter.value.map((name) => ({
+                name,
+                selected: false
+            }))
+        }))
 }
 
 watch(() => data, (value) => {
     if(activeFilters.value.length < 1)
-      createFilters()
+        createFilters()
 }, { deep: true })
 
 watch(() => activeFilters, () => {
@@ -52,15 +50,15 @@ watch(() => activeFilters, () => {
     body.value.filter.attributes = []
     activeFilters.value.forEach((name) => {
         name.value.forEach((value) => {
-          if(value.selected)
-              body.value.filter.attributes.push({
-                  trait_type: name.trait_type,
-                  value: value.name
-              })
+            if(value.selected)
+                body.value.filter.attributes.push({
+                    trait_type: name.trait_type,
+                    value: value.name
+                })
         })
     })
     if(data.value)
-      data.value.nfts = []
+        data.value.nfts = []
     refresh()
 }, { immediate: true, deep: true })
 //

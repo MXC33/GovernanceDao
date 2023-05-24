@@ -1,5 +1,4 @@
 import { CollectionData, Collection } from "../../useCollection"
-import {useAsyncDataStatePagination} from "@ix/base/composables/Utils/useAsyncState";
 
 interface CollectionResponse {
   success: boolean
