@@ -23,6 +23,20 @@ export interface Filter extends FilterBase {
 
 export type FilterType = 'radio' | 'checkbox'
 
+interface FilterPayload {
+  value: string
+  trait_type: string
+}
+export interface CollectionPayload {
+  page_key: number,
+  order: number,
+  filter: {
+    owned: boolean,
+    type:number,
+    search: string,
+    attributes: FilterPayload[]
+  }
+}
 export interface Collection {
   name: string
   slug: string
@@ -58,7 +72,7 @@ export interface CollectionData {
 export type CollectionDisplayType = 'list' | 'grid'
 
 export const useCollectionSettings = () => {
-  const activeFilters = useState('activeFilters', () => ({}))
+  const activeFilters = useState<Filter[]>('activeFilters', () => ([]))
   const collectionOwners = useState('collectionOwners', () => ("All"))
 
   // const sort = useState<TableSort<IXToken>>('colleciton-table-sort', () => ({

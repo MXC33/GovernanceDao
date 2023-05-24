@@ -11,28 +11,12 @@ VList(w="100" space-y="3")
 
 <script lang="ts" setup>
 import type { APIFilter, Filter } from "~/composables/useCollection";
+import {useCollectionSettings} from "~/composables/useCollection";
 
 const props = defineProps<{
   items: APIFilter[]
 }>()
+const { activeFilters } = useCollectionSettings()
 
-const activeFilters = ref<Filter[]>([])
-
-const createFilters = () => {
-  activeFilters.value = props.items.map((filter) => ({
-    ...filter,
-    value: filter.value.map((name) => ({
-      name,
-      selected: false
-    }))
-  }))
-
-  console.log("New filters", activeFilters.value, props.items)
-}
-
-
-watch(() => props.items, () => {
-  createFilters()
-}, { immediate: true })
 
 </script>
