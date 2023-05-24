@@ -14,7 +14,7 @@ VList()
 
   VList(v-if="showAdjustable" space-y="3")
     div(v-html="$t(`mpFullscreen.transfer.quantity`)") 
-    Adjustable(v-model="quantity" h="10")
+    Adjustable(v-model="props.IXToken" h="10")
 </template>
 
 <script lang="ts" setup>
@@ -24,7 +24,7 @@ import type { IXToken } from '@ix/base/composables/Token/useIXToken';
 
 const props = defineProps<{
   IXToken: AnyToken,
-  showAdjustable: boolean
+  showAdjustable: boolean,
 }>()
 
 const { getTokenKey, getTokenName } = useTokens()
