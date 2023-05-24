@@ -7,7 +7,7 @@ Popup(text="white" @close="$emit('close')")
     VList(space-y="3")
       //-Title Image Collection how many you have  
       TransferInfo(:IXToken="collectionData.nfts[NFT_Index]" :showAdjustable="isERC1155")
-      //-VList(items="center" space-y="3")
+
       div(v-html="$t(`mpFullscreen.transfer.walletAdress`)")
       
       input(text="2xl center" bg="black" placeholder="e.g 0x1a2..." border="" v-model="wallet" @input="onChange")
@@ -30,23 +30,19 @@ Popup(text="white" @close="$emit('close')")
 import type { TransferItem } from '~/composables/useTransfer'
 import type { CollectionData } from '~/composables/useCollection';
 
+defineEmits(['close'])
+
 const item = defineModel<TransferItem>()
 const props = defineProps<{
   collectionData: CollectionData,
 }>()
 
-const { getTokenKey, getTokenName } = useTokens()
 const { transferERC1155NFT, transferERC721NFT } = useTransferNFT()
 
 const NFT_Index = 0;
-defineEmits(['close'])
 const wallet = ref("")
 const oldWalletAdress = ref("")
 const isChecked = ref(false)
-
-const hardCodedMax = 10
-const quantity = ref(0)
-
 
 const onChange = () => {
   if (wallet != oldWalletAdress) {
@@ -65,10 +61,11 @@ const itemTransfer = () => {
   if (props.collectionData.nfts[NFT_Index].token_id == null)
     return console.log("ERROR, no token ID")
 
+  console.log(props.collectionData.nfts[NFT_Index].attributes.values)
+
   if (isERC1155.value)
     return transferERC1155NFT(props.collectionData.collection, "0x33aB691A742EbfB9ED291F8B989F9A792677E989", props.collectionData.nfts[NFT_Index].token_id, 1)
-    
-  return transferERC721NFT(props.collectionData.collection, "0x33aB691A742EbfB9ED291F8B989F9A792677E989", props.collectionData.nfts[NFT_Index].token_id)
 
+  return transferERC721NFT(props.collectionData.collection, "0x33aB691A742EbfB9ED291F8B989F9A792677E989", props.collectionData.nfts[NFT_Index].token_id)
 }
 </script>
