@@ -69,10 +69,10 @@ export const useTokenMedia = () => {
     if (large)
       return image
 
-    if (icon)
+    if (icon && !icon.includes("https://ipfs.io"))
       return icon
 
-    else if (thumbnail)
+    else if (thumbnail )
       return thumbnail
 
     return image

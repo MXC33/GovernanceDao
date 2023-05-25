@@ -1,6 +1,20 @@
 import { IXToken } from "@ix/base/composables/Token/useIXToken"
 import { TableSort, TableSortField } from "./useTable"
 
+interface FilterPayload {
+  value: string
+  trait_type: string
+}
+export interface CollectionPayload {
+  page_key: number,
+  order: number,
+  filter: {
+    owned: boolean,
+    type:number,
+    search: string,
+    attributes: FilterPayload[]
+  }
+}
 interface FilterBase {
   title: string
   trait_type: string
@@ -58,7 +72,7 @@ export interface CollectionData {
 export type CollectionDisplayType = 'list' | 'grid'
 
 export const useCollectionSettings = () => {
-  const activeFilters = useState('activeFilters', () => ({}))
+  const activeFilters = useState<Filter[]>('activeFilters', () => ([]))
   const collectionOwners = useState('collectionOwners', () => ("All"))
 
   // const sort = useState<TableSort<IXToken>>('colleciton-table-sort', () => ({
