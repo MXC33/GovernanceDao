@@ -176,7 +176,7 @@
       "walletAdress": "Wallet Adress",
       "placeholderText": "Put Adress Here",
       "warningText": "Make sure the adress is correct!<br/>There is no way to reverse this transaction",
-      "verifyText": "I Verify that I am aware and that <br/>the wallet adress is correct.",
+      "verifyText": "I Verify that I am aware that the transaction is not<br/>reversible, and that the wallet address is correct.",
       "confirm": "Confrim Adress",
       "transferItem": "Transfer Item"
     }

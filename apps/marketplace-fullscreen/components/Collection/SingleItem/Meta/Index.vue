@@ -2,7 +2,7 @@
 VList(space-y="6")
   VList(frame="~")
     TokenMedia(:token="item" w="full" :is-large="true" pos="relative")
-    HelperMediaBar
+    HelperMediaBar(@transfer="onClickTransfer")
 
   ContentDrawer(:start-open="true" v-if="item.description" bg="gray-900")
     template(#titleicon)
@@ -26,10 +26,19 @@ VList(space-y="6")
     template(#default) 
       CollectionSingleItemMetaDetails(:item="item")
 
+Teleport(to="body")
+  Transfer(:token="item" v-if="transferVisible" @close="transferVisible = false")
+
 </template>
 
 <script lang="ts" setup>
 import type { SingleItemData } from '@ix/base/composables/Token/useIXToken';
+
+const transferVisible = useTransferVisible()
+
+const onClickTransfer = () => {
+  transferVisible.value = true
+}
 
 const { item } = defineProps<{
   item: SingleItemData

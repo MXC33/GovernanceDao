@@ -226,6 +226,19 @@ export const useWallet = () => {
     return message
   }
 
+  const signTypedData = async (domain: any, types : any, value : any) => {
+    const signer = provider.value?.getSigner()
+    if (!signer)
+      throw new Error("No signer")
+
+    const signature = await signer._signTypedData(domain, types, value);
+
+    if (!signature)
+      throw new Error("User rejected the request")
+
+    return signature
+  }
+
   const onWalletSigned = (token: string) => {
     walletSigningToken.value = token
     walletState.value = 'connected'

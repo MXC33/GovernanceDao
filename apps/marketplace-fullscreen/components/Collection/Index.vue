@@ -40,7 +40,7 @@ const { ixtAsUSD } = useIXTPrice()
 const { getCollectionAttributes } = useDefaulAttributes()
 const attributes = computed(() => getCollectionAttributes(data))
 
-const transferPop = transferPopup()
+// const transferPop = transferPopup()
 
 const rows = computed(() => (data?.nfts ?? []).map((row) => ({
   ...row,

@@ -16,6 +16,8 @@ ClientOnly
         PolygonIcon(w="4.5" cursor="pointer")
 
 
+
+
 </template>
 
 <script lang="ts" setup>
@@ -23,6 +25,9 @@ import LikeIcon from '~/assets/icons/like.svg'
 import TransferIcon from '~/assets/icons/transfer.svg'
 import LinkIcon from '~/assets/icons/link.svg'
 import PolygonIcon from '~/assets/icons/polygon.svg'
+import type { IXToken } from '@ix/base/composables/Token/useIXToken';
+
+defineEmits(["transfer"])
 
 type Classes = 'like' | 'transfer' | 'link' | 'chain'
 const props = defineProps<{

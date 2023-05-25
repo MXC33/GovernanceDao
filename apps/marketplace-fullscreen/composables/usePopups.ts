@@ -1,4 +1,4 @@
-export const transferPopup = () => useState<boolean | null>('transfer-popup', () => false)
+export const useTransferVisible = () => useState<boolean | null>('transfer-popup', () => false)
 
 
 export type Popups = 'copy-link' | 'add-to-cart' | 'add-favorite' | 'remove-favorite' | 'transfer'

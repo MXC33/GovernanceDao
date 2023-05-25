@@ -3,7 +3,7 @@ DropdownSelect(:items="collections" v-if="collections")
   template(#selectedName) Explore Collections
 
   template(#item="{item}")
-    NuxtLink(:to="'/assets/polygon/' + item.slug" flex="~ row" items="center" w="full")
+    NuxtLink(:to="'/assets/polygon/' + item.contract" flex="~ row" items="center" w="full")
       div(w="8" h="8" mr="3")
         img(src="~/assets/testfiles/test-collection-bg.png" )
 
