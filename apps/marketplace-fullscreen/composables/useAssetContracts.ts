@@ -149,14 +149,15 @@ export const getIXTokenContract = <T extends ContractInterface<T> & IXTokenContr
       if (!address)
         return undefined
 
-      return new Promise(async (resolve, reject) => {
+      /*return new Promise(async (resolve, reject) => {
         try {
           const allowance = await contract.allowance(address, spenderAddress)
           resolve(Number(ethers.utils.formatUnits(allowance)))
         } catch (e) {
           resolve(0)
         }
-      })
+      })*/
+      return contract.allowance(address, spenderAddress)
     })
 
   const approve = (amount: BigNumberish | string) =>
@@ -168,9 +169,24 @@ export const getIXTokenContract = <T extends ContractInterface<T> & IXTokenContr
       return contract.approve(spenderAddress, amount)
     })
 
+  const allowanceCheck = async (amount: number) => {
+    try {
+      const allowanceValue = Number(ethers.utils.formatUnits(await allowance()))
+
+      if (allowanceValue >= amount)
+        return true
+
+      return await approve(ethers.utils.parseUnits(amount.toString()))
+
+    } catch (e) {
+      return false
+    }
+  }
+
   return {
     ...contractSpec,
     allowance,
-    approve
+    approve,
+    allowanceCheck
   }
 }

@@ -22,12 +22,9 @@ await fetchToken()
 
 onMounted(async () => {
   const IXTokenContract = getIXTokenContract()
-  const allowace  = (await IXTokenContract.allowance())
+  const allowace  = await IXTokenContract.allowanceCheck(0.2)
   console.log('fisky allowace', allowace)
-  if (allowace === 0) {
-    const approve = await IXTokenContract.approve('1000000000000000000')
-    console.log('fisky approve', approve)
-  }
+
 })
 
 </script>
