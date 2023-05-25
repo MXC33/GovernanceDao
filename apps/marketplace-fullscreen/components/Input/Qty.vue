@@ -23,7 +23,6 @@ const decrease = () => quantity.value <= props.min ? props.min : quantity.value 
 const increase = () => quantity.value >= props.max ? props.max : quantity.value ++
 
 const onInput = (event: InputEvent) => {
-  console.log('fisky', event)
   if (quantity.value <= props.min)
     quantity.value = props.min
   else if (quantity.value >= props.max)

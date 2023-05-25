@@ -13,6 +13,15 @@ export const roundToDecimals = (num: number, decimalPlaces: number) => {
   return Number(number + "e" + -decimalPlaces);
 }
 
+export const roundUp = (num: number, precision: number) => {
+  precision = Math.pow(10, precision)
+  return Math.ceil(+num * precision) / precision
+}
+export const roundDown = (num: number, precision: number) => {
+  precision = Math.pow(10, precision)
+  return Math.floor(+num * precision) / precision
+}
+
 export const useHoursLeft = (start: number, end: number) =>
   (end - start) / (1000 * 60 * 60)
 

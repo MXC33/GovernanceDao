@@ -195,3 +195,8 @@ export const facilityUpgradeAdress: ContractAddress = {
   polygon: "0x58D91c5e85B280Dabd4D8b9708Ed590937B3410E",
   // polygon needs update
 }
+
+export const conduitAdress: ContractAddress = {
+  mumbai: "0x50964c7b9aD5eF312a756790b28a9FB48D6410c1", //to be updated
+  polygon: "0x50964c7b9aD5eF312a756790b28a9FB48D6410c1",
+}

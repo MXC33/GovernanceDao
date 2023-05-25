@@ -4,6 +4,13 @@ import { ethers } from "ethers";
 
 export type Net = 'polygon' | 'ethereum'
 export type Chain = 'goerli' | 'mumbai' | 'polygon' | 'ethereum'
+export type UpdateListJobBody = {
+  size: 0 | 5 | 6,
+  player_id: number,
+  network: string,
+  collection: string,
+  token_id: string
+}
 
 export const CHAIN_NET_ADDRESS: Record<Chain, number> = {
   ethereum: 1,
@@ -226,6 +233,19 @@ export const useWallet = () => {
     return message
   }
 
+  const signTypedData = async (domain: any, types : any, value : any) => {
+    const signer = provider.value?.getSigner()
+    if (!signer)
+      throw new Error("No signer")
+
+    const signature = await signer._signTypedData(domain, types, value);
+
+    if (!signature)
+      throw new Error("User rejected the request")
+
+    return signature
+  }
+
   const onWalletSigned = (token: string) => {
     walletSigningToken.value = token
     walletState.value = 'connected'
@@ -250,13 +270,45 @@ export const useWallet = () => {
     }
   }
 
-
   const contractSenderSameAsUser = (adress?: string) => {
     if (!walletAdress.value || !adress)
       return false
 
     return walletAdress.value.toUpperCase() == adress.toUpperCase()
 
+  }
+
+  const contractErrorParser = (error: any, body: UpdateListJobBody | boolean = false, endpointUrl: string | null = null ) => {
+    console.log('error', error)
+    const e = error.toString()
+    const message = e.substring(e.indexOf("{") , e.lastIndexOf("}")+ 1);
+    let res = error
+    try {
+      res = JSON.parse(message)
+    } catch (e) {}
+
+    if((res.message.includes("insufficient balance") || res.message.includes("execution reverted")) && body != false && endpointUrl){
+      $fetch(endpointUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(body)
+      }).then()
+    }
+
+    return res.message
+  }
+
+  const getCollectionType = function(collection: string) {
+    switch (collection.toLowerCase()) {
+      case '0xb2435253c71fca27be41206eb2793e44e1df6b6d':
+        return 0
+      case '0x24cff55d808fd10a1e730b86037760e57ecaf549':
+        return 5
+      default:
+        return 6
+    }
   }
 
   return {
@@ -278,5 +330,8 @@ export const useWallet = () => {
     walletAdress,
     walletState,
     walletSigningToken,
+    signTypedData,
+    contractErrorParser,
+    getCollectionType
   }
 }
