@@ -1,5 +1,5 @@
 <template lang="pug">
-Collection(:data="data" v-if="data" )
+MyAssets(:data="data" v-if="data" )
 </template>
   
   

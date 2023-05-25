@@ -1,12 +1,13 @@
 <template lang="pug">
 VList(flex-grow="1" min-h="0" pos="relative" p="8" space-y="6")
-  CollectionHeader() 
+  MyAssetsHeader() 
     template(#header) 
       slot(name="name")
 
     template(#attributes)
       AttributeList(:attributes="attributes" v-if="data")
 
+  MyAssetsMenu()
   HelperBorderScroll()
   CollectionFilter(:items="data.nfts" :filters="data.filters" v-if="data"  @toggle-filter="toggleFilterDrawer")
 
@@ -29,7 +30,7 @@ VList(flex-grow="1" min-h="0" pos="relative" p="8" space-y="6")
   Transition(name="slide-bottom")
     CollectionSelectBar(v-if="cartItems.length > 0")
 </template>
-
+  
 <script lang="ts" setup>
 import type { CollectionData } from '~/composables/useCollection';
 import type { TableColumn } from '~/composables/useTable'
@@ -42,7 +43,6 @@ const { ixtAsUSD } = useIXTPrice()
 const { getCollectionAttributes } = useDefaulAttributes()
 const attributes = computed(() => data ? getCollectionAttributes(data) : [])
 
-// const transferPop = transferPopup()
 
 const rows = computed(() => (data?.nfts ?? []).map((row) => ({
   ...row,
@@ -76,7 +76,7 @@ watch(rows, () => {
 }, { deep: true })
 
 </script>
-
+  
 <style>
 .collection-grid-item:nth-child(5n + 6) {
   border: 0px;
