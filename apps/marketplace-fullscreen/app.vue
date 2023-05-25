@@ -7,6 +7,7 @@
 
     div#popups()
 
+    div#infobox(:style="values" z="400" pos="absolute")
 
     Transition(name="fade-slow" mode="in-out")
       HelperNotification(v-if="activePopup")
@@ -44,6 +45,19 @@ onMounted(async () => {
 
   document.body.classList.toggle('is-paint-supported', isPaintSupported)
   document.body.classList.toggle('is-not-paint-supported', !isPaintSupported)
+})
+
+const { x: xpos, y: ypos } = useMouse()
+
+const values = computed(() => {
+
+  const xPos = xpos.value
+  const yPos = ypos.value
+
+  return {
+    top: `${yPos}px`,
+    left: `${xPos}px`
+  }
 })
 
 </script>
