@@ -10,7 +10,7 @@
     div#infobox(:style="values" z="400" pos="absolute")
 
     Transition(name="fade-slow" mode="in-out")
-      HelperNotification(v-if="activePopup")
+      HelperNotification(v-if="popupNotification")
 
 </template>
 
@@ -24,7 +24,7 @@ const globalY = useGlobalWindowScroll()
 watch(y, (pos) => globalY.value = pos)
 const { connectWallet, walletState } = useWallet()
 const { setupIXTPrice, ixtPrice } = useIXTPrice()
-const { activePopup } = usePopups()
+const { popupNotification } = usePopups()
 
 onMounted(async () => {
   const connected = await connectWallet()

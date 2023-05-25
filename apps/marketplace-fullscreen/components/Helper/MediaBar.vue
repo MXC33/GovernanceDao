@@ -35,7 +35,7 @@ const props = defineProps<{
 }>()
 
 
-const { activePopup, setPopupTimeout } = usePopups()
+const { popupNotification, setPopupTimeout } = usePopups()
 
 const mouseOver = computed(() => {
   switch (props.class) {
@@ -51,7 +51,7 @@ const mouseOver = computed(() => {
 })
 
 const copyCurrentUrlToClipboard = async () => {
-  activePopup.value = 'copy-link'
+  popupNotification.value = 'copy-link'
   const currentUrl = window.location.href;
 
   try {

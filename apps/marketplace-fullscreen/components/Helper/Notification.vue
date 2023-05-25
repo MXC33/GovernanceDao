@@ -11,10 +11,10 @@ const props = defineProps<{
   popup?: Popups
 }>()
 
-const { activePopup } = usePopups()
+const { popupNotification } = usePopups()
 const { t } = useI18n()
 
-const message = computed(() => t(`popupNotification.${activePopup.value}`))
+const message = computed(() => t(`popupNotification.${popupNotification.value}`))
 
 const clickOnMessage = () => {
   switch (props.popup) {
