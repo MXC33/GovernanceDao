@@ -114,7 +114,8 @@ export const getIXTokenContract = <T extends ContractInterface<T> & IXTokenContr
 
         return new Promise(async (resolve, reject) => {
           try {
-            resolve(await contract.balanceOf(address))
+            const allowance = await contract.allowance(address, spenderAddress)
+            resolve(Number(ethers.utils.formatUnits(allowance)))
           } catch (e) {
             console.log(e)
             resolve(0)
