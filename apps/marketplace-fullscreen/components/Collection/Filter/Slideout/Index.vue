@@ -4,11 +4,12 @@ VList(w="100" ml="-8" mr="-3" pos="sticky top-58")
 
     template(#header) {{item.trait_type}}
     template(#default)
-      VList(w="full")
-        CollectionFilterRowSelect(v-model="activeFilters[filterIndex].value[index].selected" v-for="(option, index) in item.value" px="8")
+      VList(w="full" b="b-1 gray-600")
+        CollectionFilterRowSelect.rowSelectLast(v-model="activeFilters[filterIndex].value[index].selected" v-for="(option, index) in item.value" px="8")
           template(#default) {{ option.name }}
-
-      div(mt="3")
+        div(h="4")
+      div(mt="4")
+      
 </template>
 
 <script lang="ts" setup>
@@ -23,3 +24,10 @@ const { activeFilters } = useCollectionSettings()
 
 
 </script>
+
+<style>
+/* .rowSelectLast:nth-last-child(n - 1) {
+  margin-bottom: 10px;
+  border: 1px solid red;
+} */
+</style>
