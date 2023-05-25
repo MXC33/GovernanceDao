@@ -1,9 +1,9 @@
 <template lang="pug">
 div()
   HList()
-    TrashIcon(w="15" h="15" gray)
+    TrashIcon(w="20" h="20" gray)
     VList(p ="3")
-      div() {{title}} 
+      div(text="white") {{title}} 
       div(text="gray") Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin libero diam
 
 </template>
