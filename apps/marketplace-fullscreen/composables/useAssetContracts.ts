@@ -30,10 +30,10 @@ export const ERC721Addresses = [roverAddress.polygon?.toLowerCase(), badgeNFTAdd
 
 export const get1155Contract = <T extends ContractInterface<T> & ERC1155Contract>(address: string) => {
 
-
+  const spenderAddress = conduitAdress.polygon as string
   const { walletAdress } = useWallet()
 
-  const { createTransaction, ...contractSpec } = defineContract<T>('erc1155-contract-' + address, {
+  const { createTransaction, withContract, ...contractSpec } = defineContract<T>('erc1155-contract-' + address, {
     contractAddress: address,
     notifications: {
       failMessage: 'Error transferring NFT'
@@ -42,6 +42,24 @@ export const get1155Contract = <T extends ContractInterface<T> & ERC1155Contract
       return new ethers.Contract(address, ERC1155ABI.abi, provider.getSigner()) as unknown as T
     }
   })
+
+  const isApproved = () =>
+    withContract((contract) => {
+      const address = walletAdress.value
+      if (!address)
+          return undefined
+
+      return contract.isApprovedForAll(address, spenderAddress)
+    })
+
+  const setApproval = (approved: boolean = true) =>
+    createTransaction((contract) => {
+      const address = walletAdress.value
+      if (!address)
+        return undefined
+
+      return contract.setApprovalForAll(spenderAddress, approved)
+    })
 
   const transfer1155Token = (to: string, tokenId: number, amount: number) =>
     createTransaction((contract) => {
@@ -54,15 +72,18 @@ export const get1155Contract = <T extends ContractInterface<T> & ERC1155Contract
 
   return {
     ...contractSpec,
+    isApproved,
+    setApproval,
     transfer1155Token
   }
 }
 
 export const get721Contract = <T extends ContractInterface<T> & ERC721Contract>(address: string) => {
 
+  const spenderAddress = conduitAdress.polygon as string
   const { walletAdress } = useWallet()
 
-  const { createTransaction, ...contractSpec } = defineContract<T>('erc721-contract-' + address, {
+  const { createTransaction, withContract, ...contractSpec } = defineContract<T>('erc721-contract-' + address, {
     contractAddress: address,
     notifications: {
       failMessage: 'Error transferring NFT'
@@ -71,6 +92,24 @@ export const get721Contract = <T extends ContractInterface<T> & ERC721Contract>(
       return new ethers.Contract(address, ERC721ABI.abi, provider.getSigner()) as unknown as T
     }
   })
+
+  const isApproved = () =>
+    withContract((contract) => {
+      const address = walletAdress.value
+      if (!address)
+          return undefined
+
+      return contract.isApprovedForAll(address, spenderAddress)
+    })
+
+  const setApproval = (approved: boolean = true) =>
+    createTransaction((contract) => {
+      const address = walletAdress.value
+      if (!address)
+          return undefined
+
+      return contract.setApprovalForAll(spenderAddress, approved)
+    })
 
   const transfer721Token = (to: string, tokenId: number) =>
     createTransaction((contract) => {
@@ -83,54 +122,51 @@ export const get721Contract = <T extends ContractInterface<T> & ERC721Contract>(
 
   return {
     ...contractSpec,
+    isApproved,
+    setApproval,
     transfer721Token
   }
 }
 
-export const getIXTokenContract = <T extends ContractInterface<T> & IXTokenContract>(spenderAddress: string) => {
+export const getIXTokenContract = <T extends ContractInterface<T> & IXTokenContract>() => {
 
+  const spenderAddress = conduitAdress.polygon as string
   const { walletAdress } = useWallet()
 
-  const { withContract, createTransaction, ...contractSpec } = defineContract<T>('IXToken-contract-' + spenderAddress, {
+  const { withContract, createTransaction, ...contractSpec } = defineContract<T>('IXToken-contract', {
     contractAddress: IXTAddress.polygon as string,
     notifications: {
       failMessage: 'Error allowance IXToken'
     },
     createContract(provider) {
-
-
       return new ethers.Contract(IXTAddress.polygon as string, IXToken.abi, provider.getSigner()) as unknown as T
     }
   })
 
   const allowance = () =>
-      withContract((contract) => {
-        const address = walletAdress.value
-        if (!address)
-          return undefined
+    withContract((contract) => {
+      const address = walletAdress.value
+      if (!address)
+        return undefined
 
-
-        console.log('contract', contract)
-
-        return new Promise(async (resolve, reject) => {
-          try {
-            const allowance = await contract.allowance(address, spenderAddress)
-            resolve(Number(ethers.utils.formatUnits(allowance)))
-          } catch (e) {
-            console.log(e)
-            resolve(0)
-          }
-        })
+      return new Promise(async (resolve, reject) => {
+        try {
+          const allowance = await contract.allowance(address, spenderAddress)
+          resolve(Number(ethers.utils.formatUnits(allowance)))
+        } catch (e) {
+          resolve(0)
+        }
       })
+    })
 
   const approve = (amount: BigNumberish | string) =>
-      createTransaction((contract) => {
-        const address = walletAdress.value
-        if (!address)
-          return undefined
+    createTransaction((contract) => {
+      const address = walletAdress.value
+      if (!address)
+        return undefined
 
-        return contract.approve(spenderAddress, amount)
-      })
+      return contract.approve(spenderAddress, amount)
+    })
 
   return {
     ...contractSpec,
