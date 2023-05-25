@@ -5,7 +5,7 @@ CollectionSingleItem(:item="singleItem" v-if="singleItem")
 
 
 <script lang="ts" setup>
-import {getIXTokenContract} from "~/composables/useAssetContracts";
+import {get1155Contract, getIXTokenContract} from "~/composables/useAssetContracts";
 import {IXTAddress} from "@ix/base/composables/Contract/WalletAddresses";
 
 const route = useRoute()
@@ -21,9 +21,8 @@ const { data: singleItem, execute: fetchToken } = await useAssetAPI({
 await fetchToken()
 
 onMounted(async () => {
-  const IXTokenContract = getIXTokenContract()
-  const allowace  = await IXTokenContract.allowanceCheck(0.2)
-  console.log('fisky allowace', allowace)
+  const IXTokenContract = get1155Contract(toRaw(singleItem.value)?.collection as string)
+  console.log('fisky approveNftCheck', await IXTokenContract.approveNftCheck())
 
 })
 

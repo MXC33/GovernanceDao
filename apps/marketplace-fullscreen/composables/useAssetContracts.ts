@@ -61,6 +61,18 @@ export const get1155Contract = <T extends ContractInterface<T> & ERC1155Contract
       return contract.setApprovalForAll(spenderAddress, approved)
     })
 
+  const approveNftCheck = async () => {
+    try {
+      if (await isApproved())
+        return true
+
+      return await setApproval(true)
+
+    } catch (e) {
+      return false
+    }
+  }
+
   const transfer1155Token = (to: string, tokenId: number, amount: number) =>
     createTransaction((contract) => {
       const address = walletAdress.value
@@ -74,6 +86,7 @@ export const get1155Contract = <T extends ContractInterface<T> & ERC1155Contract
     ...contractSpec,
     isApproved,
     setApproval,
+    approveNftCheck,
     transfer1155Token
   }
 }
@@ -111,6 +124,18 @@ export const get721Contract = <T extends ContractInterface<T> & ERC721Contract>(
       return contract.setApprovalForAll(spenderAddress, approved)
     })
 
+  const approveNftCheck = async () => {
+    try {
+      if (await isApproved())
+        return true
+
+      return await setApproval(true)
+
+    } catch (e) {
+      return false
+    }
+  }
+
   const transfer721Token = (to: string, tokenId: number) =>
     createTransaction((contract) => {
       const address = walletAdress.value
@@ -124,6 +149,7 @@ export const get721Contract = <T extends ContractInterface<T> & ERC721Contract>(
     ...contractSpec,
     isApproved,
     setApproval,
+    approveNftCheck,
     transfer721Token
   }
 }
