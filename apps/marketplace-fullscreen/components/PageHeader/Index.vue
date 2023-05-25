@@ -9,7 +9,7 @@ transition(name="fade-slow")
     HList(space-x="4" w="full" justify="end" items="center")
       CollectionSelect()
 
-      ButtonSquareIcon()
+      ButtonSquareIcon(@click="onClickAccount")
         UserIcon(w="6")
 
       ButtonSquareIcon(@click="viewingCart = true")
@@ -26,6 +26,10 @@ const { viewingCart } = useCart()
 const y = useGlobalWindowScroll()
 
 const route = useRoute()
+
+const onClickAccount = () => {
+  navigateTo('/account')
+}
 
 
 const onSingleItem = computed(() =>
