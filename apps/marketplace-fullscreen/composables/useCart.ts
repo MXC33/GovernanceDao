@@ -1,6 +1,9 @@
 import { IXToken, Sale } from "@ix/base/composables/Token/useIXToken"
 import { AdjustableNumber } from "@ix/base/composables/Utils/useAdjustableNumber"
-import {get1155Contract, getIXTokenContract} from "~/composables/useAssetContracts";
+import {get1155Contract, getIXTokenContract, getSeaportContract} from "~/composables/useAssetContracts";
+import {
+  conduitKey
+} from "@ix/base/composables/Contract/WalletAddresses";
 
 export interface CartItem extends AdjustableNumber {
   token: IXToken,
@@ -41,6 +44,7 @@ export const useCart = () => {
     //Todo Start loading overlay
     console.log('start Loading overlay')
     const { allowanceCheck } = getIXTokenContract()
+    const { fulfillAvailableAdvancedOrders } = getSeaportContract()
     await allowanceCheck(totalPrice)
 
     const pixMerkleParam = {
@@ -71,6 +75,7 @@ export const useCart = () => {
 
         delete message.body.counter
         message.body.totalOriginalConsiderationItems = message.body.consideration.length
+        console.log('message.signature', message.signature)
         BuyOrderComponents.push({
           parameters: message.body,
           numerator: item.sale.quantity,
@@ -102,8 +107,14 @@ export const useCart = () => {
       //   throw new Error("Something went wrong!");
       console.log('here', totalPrice)
     }
-    console.log('BuyOrderComponents, [], offers, considerations.map(item => item.value), conduitKey, zeroAddress, BuyOrderComponents.length',
-      BuyOrderComponents, [], offers, considerations.map(item => item.value), conduitKey, "0x0000000000000000000000000000000000000000", BuyOrderComponents.length)
+    try {
+    // @ts-ignore
+    await fulfillAvailableAdvancedOrders(BuyOrderComponents, [], offers, considerations.map(item => item.value), conduitKey.polygon, "0x0000000000000000000000000000000000000000", BuyOrderComponents.length)
+
+    }
+    catch (e) {
+      console.log(e)
+    }
   }
 
   return {
