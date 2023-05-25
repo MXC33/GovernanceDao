@@ -6,7 +6,7 @@ VList(space-y="3")
 
   Listing(:item="item")
 
-  TradeModule(:owner-value="3" :item="item")
+  TradeModule(:item="item")
     template(#header)
       TabItem(v-for="tab in tabs" :id="tab" v-model="activeTab") {{ tab }}
 

@@ -5,7 +5,7 @@ VList() {{ item?.name }}
 <script lang="ts" setup>
 import type { OptionValue } from '~/composables/useDrowdown';
 
-const props = defineProps<{
+defineProps<{
   item?: OptionValue
 }>()
 

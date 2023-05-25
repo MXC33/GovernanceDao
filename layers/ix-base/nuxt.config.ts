@@ -48,6 +48,7 @@ export default defineNuxtConfig({
 
   runtimeConfig: {
     public: {
+      MC_API: process.env.CHAIN_NET == 'test' ? API_DEV_ENDPOINT : API_PROD_ENDPOINT,
       CHAIN_NET: process.env.CHAIN_NET,
       s3: (process.env.PUBLIC_ASSETS ?? '/s3'),
       'graphql-client': {
