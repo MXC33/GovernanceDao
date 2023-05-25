@@ -1,6 +1,20 @@
 import { IXToken } from "@ix/base/composables/Token/useIXToken"
 import { TableSort, TableSortField } from "./useTable"
 
+interface FilterPayload {
+  value: string
+  trait_type: string
+}
+export interface CollectionPayload {
+  page_key: number,
+  order: number,
+  filter: {
+    owned: boolean,
+    type:number,
+    search: string,
+    attributes: FilterPayload[]
+  }
+}
 interface FilterBase {
   title: string
   trait_type: string
@@ -23,20 +37,6 @@ export interface Filter extends FilterBase {
 
 export type FilterType = 'radio' | 'checkbox'
 
-interface FilterPayload {
-  value: string
-  trait_type: string
-}
-export interface CollectionPayload {
-  page_key: number,
-  order: number,
-  filter: {
-    owned: boolean,
-    type:number,
-    search: string,
-    attributes: FilterPayload[]
-  }
-}
 export interface Collection {
   name: string
   slug: string

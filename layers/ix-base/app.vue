@@ -20,3 +20,9 @@ onMounted(async () => {
 
 
 </script>
+
+<style>
+:root {
+  --content-drawer-bg-color: var(--ix-black)
+}
+</style>

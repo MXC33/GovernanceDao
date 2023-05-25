@@ -1,7 +1,6 @@
 <template lang="pug">
 
 //-z="99" pos="absolute top-0 left-0" 
-Transfer(:collectionData="data" v-if="transferPop")
 
 VList(flex-grow="1" min-h="0" pos="relative" p="8" space-y="6")
   CollectionHeader() 
@@ -44,8 +43,6 @@ const { cartItems } = useCart()
 
 const { getCollectionAttributes } = useDefaulAttributes()
 const attributes = computed(() => getCollectionAttributes(data))
-
-const transferPop = transferPopup()
 
 const columns: TableColumn<IXToken>[] = [
   { label: "Asset", value: "name" },

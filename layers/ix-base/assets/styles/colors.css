@@ -24,8 +24,17 @@
   --mc-gray-700: #242424;
   --mc-gray-800: #1A1A1A;
   --mc-arcade-rgb: 189, 255, 0;
+  --ix-black-rgb: 12, 12, 12;
 
   --mc-accent-light: var(--mc-accent);
+
+  --ix-black: rgb(var(--ix-black-rgb));
+  --ix-black: rgba(var(--ix-black-rgb), 0.1);
+  --ix-black: rgba(var(--ix-black-rgb), 0.2);
+  --ix-black: rgba(var(--ix-black-rgb), 0.4);
+  --ix-black: rgba(var(--ix-black-rgb), 0.6);
+  --ix-black: rgba(var(--ix-black-rgb), 0.8);
+
 
   --mc-arcade: rgb(var(--mc-arcade-rgb));
   --mc-arcade_10: rgba(var(--mc-arcade-rgb), 0.1);
