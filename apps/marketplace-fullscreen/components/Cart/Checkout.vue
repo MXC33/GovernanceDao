@@ -1,6 +1,6 @@
 <template lang="pug">
 footer(pos="sticky bottom-0" bg="ix-black")
-  HList(items="center" text="xl" p="3") 
+  HList(items="center" text="xl" p="3")
     h3(text="gray-200" flex-grow="1") Total price
     div(font="bold") {{ totalPrice }} IXT
 
@@ -10,11 +10,10 @@ Teleport(to="body")
   CompletePlacedBids(@close="confirm" :items="boughtItems" v-if="isRevealed")
 
 </template>
-  
-  
+
+
 <script lang="ts" setup>
 import type { CartItem } from '~/composables/useCart';
-import {usePurchase} from "~/composables/usePurchase";
 
 const {
   isRevealed,
@@ -39,7 +38,7 @@ const checkout = async () => {
 
   console.log("cartItems.value", cartItems.value)
 
-  await checkoutItems(cartItems.value)
+  await checkoutItems(cartItems.value, totalPrice.value)
 
   viewingCart.value = false
   isLoading.value = false
@@ -53,4 +52,3 @@ const totalPrice = computed(() =>
   ).reduce((a, b) => a + b, 0), 2)
 )
 </script>
-  
