@@ -7,11 +7,11 @@ VList()
 
       HelperChevron(w="5" :up="isOpen")
 
-
     Transition(name="slide-top")
       Collapse(:when="isOpen" class="v-collapse"  overflow-y="auto")
         slot
 
+  div(b="b-1 gray-600" ml="-8" mr="-8")
 </template>
 
 <script lang="ts" setup>
