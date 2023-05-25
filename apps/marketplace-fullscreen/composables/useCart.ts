@@ -36,11 +36,20 @@ export const useCart = () => {
     cartItems.value = []
   }
 
+  const checkoutItems = async (carItems: CartItem[]) => {
+    /*
+        Todo
+        Start loading overlay
+     */
+    console.log('start Loading overlay')
+  }
+
   return {
     cartItems,
     viewingCart,
     clearCart,
     removeFromCart,
+    checkoutItems,
     addToCart
   }
 }

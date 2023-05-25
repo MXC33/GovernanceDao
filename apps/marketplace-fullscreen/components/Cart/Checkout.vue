@@ -4,7 +4,7 @@ footer(pos="sticky bottom-0" bg="ix-black")
     h3(text="gray-200" flex-grow="1") Total price
     div(font="bold") {{ totalPrice }} IXT
 
-  button(btn="~ primary" opacity="on-load:50" w="full" font="bold" @click="placeBids" :load="isLoading" transition="all") Complete purchase
+  button(btn="~ primary" opacity="on-load:50" w="full" font="bold" @click="checkout" :load="isLoading" transition="all") Complete purchase
 
 Teleport(to="body")
   CompletePlacedBids(@close="confirm" :items="boughtItems" v-if="isRevealed")
@@ -14,6 +14,7 @@ Teleport(to="body")
   
 <script lang="ts" setup>
 import type { CartItem } from '~/composables/useCart';
+import {usePurchase} from "~/composables/usePurchase";
 
 const {
   isRevealed,
@@ -21,7 +22,7 @@ const {
   confirm,
 } = useConfirmDialog()
 
-const { viewingCart, cartItems } = useCart()
+const { viewingCart, cartItems, checkoutItems } = useCart()
 const { placeBid } = useBids()
 
 const isLoading = ref(false)
@@ -33,16 +34,12 @@ const didPlaceBids = (items: CartItem[]) => {
   cartItems.value = []
 }
 
-const placeBids = async () => {
+const checkout = async () => {
   isLoading.value = true
-  const first = cartItems.value[0]
 
-  if (!first)
-    return isLoading.value = false
+  console.log("cartItems.value", cartItems.value)
 
-  console.log("Place", first)
-
-  // await placeBid(first)
+  await checkoutItems(cartItems.value)
 
   viewingCart.value = false
   isLoading.value = false
