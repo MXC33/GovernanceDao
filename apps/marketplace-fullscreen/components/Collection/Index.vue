@@ -10,8 +10,8 @@ VList(flex-grow="1" min-h="0" pos="relative" p="8" space-y="6")
   HelperBorderScroll()
   CollectionFilter(:items="data.nfts" :filters="data.filters" v-if="data"  @toggle-filter="toggleFilterDrawer")
 
-  HList(space-x="3" pos="sticky top-58")
-    HList(pos="relative")
+  HList(space-x="3" pos="relative")
+    VList(pos="sticky top-48")
       Transition(name="slide-left")
         CollectionFilterSlideout(:items="data.filters" v-if="showFilters && data")
 

@@ -1,4 +1,5 @@
 <template lang="pug">
+Transition(name="fade-slow" mode="in-out")
 div(ml="-8" mr="-8" pos="sticky top-33" z="5" b="on-scrolling:b-1 gray-400" :scrolling="isScrolling")
 </template>
 
@@ -6,6 +7,6 @@ div(ml="-8" mr="-8" pos="sticky top-33" z="5" b="on-scrolling:b-1 gray-400" :scr
 const { y } = useWindowScroll()
 
 const isScrolling = computed(() => {
-  return y.value >= 550
+  return y.value >= 518
 })
 </script>
