@@ -1,5 +1,5 @@
 <template lang="pug">
-VList(w="100" b="1 yellow" ml="-8" mr="-3" pos="sticky top-58")
+VList(w="100" ml="-8" mr="-3" pos="sticky top-58")
   CollectionFilterDrawer(v-for="(item, filterIndex) in activeFilters" :is-small="true" px="8")
 
     template(#header) {{item.trait_type}}
@@ -8,6 +8,7 @@ VList(w="100" b="1 yellow" ml="-8" mr="-3" pos="sticky top-58")
         CollectionFilterRowSelect(v-model="activeFilters[filterIndex].value[index].selected" v-for="(option, index) in item.value")
           template(#default) {{ option.name }}
 
+div(b="b-1 gray-600")
 </template>
 
 <script lang="ts" setup>

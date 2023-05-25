@@ -7,6 +7,7 @@ VList(flex-grow="1" min-h="0" pos="relative" p="8" space-y="6")
     template(#attributes)
       AttributeList(:attributes="attributes" v-if="data")
 
+  HelperBorderScroll()
   CollectionFilter(:items="data.nfts" :filters="data.filters" v-if="data"  @toggle-filter="toggleFilterDrawer")
 
   HList(space-x="3" pos="sticky top-58")
