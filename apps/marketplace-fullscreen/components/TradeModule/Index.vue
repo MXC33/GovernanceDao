@@ -4,7 +4,7 @@ VList(w="full" bg="gray-900")
     HList()
       TabItem(v-for="tab in tabs" :id="tab" v-model="activeTab") {{ tab }}
 
-    span(color="white" px="6") You own: {{ ownerValue }}
+    span(color="white" px="6") You own: {{ item.my_shares }}
 
   Transition(name="fade-slow" mode="out-in")
     TradeModuleSell(v-if="activeTab == 'sell'" :item="item")
@@ -17,7 +17,6 @@ import type { SingleItemData } from '@ix/base/composables/Token/useIXToken';
 
 
 defineProps<{
-  ownerValue?: string | number,
   item: SingleItemData
 }>()
 
