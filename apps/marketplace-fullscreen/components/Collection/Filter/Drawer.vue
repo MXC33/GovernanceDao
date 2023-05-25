@@ -1,5 +1,5 @@
 <template lang="pug">
-VList()
+VList(divide-y="0.5")
   VList(overflow-y="auto" h="full" pos="relative")
     HList(h="12" px="6 on-small:8" bg="ix-black" items="center" justify="between" pos="sticky top-0" flex-shrink="0" z="1" @click.stop="dropDrawer" uppercase="~" cursor="pointer" :small="isSmall")
       span(color="white" text="md" font="bold" v-if="$slots.header")

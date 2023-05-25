@@ -8,6 +8,7 @@ VList(w="100" ml="-8" mr="-3" pos="sticky top-58")
         CollectionFilterRowSelect(v-model="activeFilters[filterIndex].value[index].selected" v-for="(option, index) in item.value" px="8")
           template(#default) {{ option.name }}
 
+      div(mt="3")
 </template>
 
 <script lang="ts" setup>
