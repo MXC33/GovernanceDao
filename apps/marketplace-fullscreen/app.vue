@@ -9,22 +9,22 @@
 
     div#infobox(:style="values" z="400" pos="absolute")
 
-    Transition(name="fade-slow" mode="in-out")
-      HelperNotification(v-if="popupNotification")
+    //- Transition(name="fade-slow" mode="in-out")
+    HelperNotification(v-if="popupNotification")
 
 </template>
 
 <script setup lang="ts">
 import 'vue3-easy-data-table/dist/style.css';
 
-// const { data, execute } = useAsyncDataState('ix-api', async () => 'test')
-// await execute()
-const { y } = useWindowScroll()
 const globalY = useGlobalWindowScroll()
-watch(y, (pos) => globalY.value = pos)
+const { y } = useWindowScroll()
 const { connectWallet, walletState } = useWallet()
 const { setupIXTPrice, ixtPrice } = useIXTPrice()
 const { popupNotification } = usePopups()
+// const { data, execute } = useAsyncDataState('ix-api', async () => 'test')
+// await execute()
+watch(y, (pos) => globalY.value = pos)
 
 onMounted(async () => {
   const connected = await connectWallet()

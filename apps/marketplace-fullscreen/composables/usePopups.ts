@@ -1,6 +1,6 @@
 
 
-export type Popups = 'copy-link' | 'add-to-cart' | 'add-favorite' | 'remove-favorite' | 'transfer'
+export type Popups = 'copy-link' | 'add-to-cart' | 'remove-from-cart' | 'add-favorite' | 'remove-favorite' | 'transfer' | 'purchase-confirmed' | 'insufficient-funds' | 'transaction-error' | 'success'
 
 export const usePopups = () => {
   const popupNotification = useState<Popups | null>('active-popup', () => null)
@@ -10,7 +10,7 @@ export const usePopups = () => {
   const setPopupTimeout = () => {
     setTimeout(() => {
       popupNotification.value = null
-    }, 5000);
+    }, 50000);
   };
 
   return {
