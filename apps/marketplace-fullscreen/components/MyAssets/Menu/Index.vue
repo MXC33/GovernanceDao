@@ -1,7 +1,7 @@
 <template lang="pug">
-HList(w="full" space-x="10" text="md" uppercase="~" font="bold")
+HList(w="full" space-x="10")
   template(v-for="item in menuItems")
-    div() {{ item }} 
+    MyAssetsMenuItem(:item="item")
   
 </template>
     
