@@ -50,6 +50,7 @@ VList(pos="sticky top-0" z="99" w="full")
                 HeaderLink(to="/") + staking
                 HeaderLink(to="/") + community
 
+  PageHeaderDetails()
 </template>
 
 <script lang="ts" setup>

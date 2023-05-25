@@ -1,7 +1,10 @@
 <template lang="pug">
 Popup(@close="$emit('close')")
+  
   template(#header)
     div(text="2xl" v-html="$t(`mpFullscreen.transfer.title`)")
+    iframe(src="https://ix.foundation/lefi" w="full md:130" h="full md:115")
+    
   
   template(#default)
     VList(space-y="3")
@@ -72,4 +75,5 @@ const itemTransfer = () => {
 
   return transferERC721NFT(collection, wallet.value, token_id)
 }
+
 </script>
