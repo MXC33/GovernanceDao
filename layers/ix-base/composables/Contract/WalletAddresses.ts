@@ -200,3 +200,18 @@ export const conduitAdress: ContractAddress = {
   mumbai: "0x50964c7b9aD5eF312a756790b28a9FB48D6410c1", //to be updated
   polygon: "0x50964c7b9aD5eF312a756790b28a9FB48D6410c1",
 }
+
+export const conduitKey: ContractAddress = {
+  mumbai: "0x37d1b52953d46066c2df29b920aa6c796d3ba2fe000000000000000000000000",
+  polygon: "0x37d1b52953d46066c2df29b920aa6c796d3ba2fe000000000000000000000000"
+}
+
+export const feeTreasuryAdress: ContractAddress = {
+  mumbai: "0x0D1c1D4Da1A42AE728F786ECf0a2aCCdE512cb4C", //to be updated
+  polygon: "0x0D1c1D4Da1A42AE728F786ECf0a2aCCdE512cb4C",
+}
+
+export const seaportAdress: ContractAddress = {
+  mumbai: "0x78852a22b6178406683afea36d1e4bdd2ff9c08d", //to be updated
+  polygon: "0x78852a22b6178406683afea36d1e4bdd2ff9c08d",
+}

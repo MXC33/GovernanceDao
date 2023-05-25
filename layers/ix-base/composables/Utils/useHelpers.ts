@@ -116,6 +116,18 @@ export const useIsKeyNumber = (evt: KeyboardEvent): void => {
   }
 }
 
+export const makeRandomNumberKey = (length: number) => {
+  let result = '';
+  const characters = '0123456789';
+  const charactersLength = characters.length;
+  let counter = 0;
+  while (counter < length) {
+    result += characters.charAt(Math.floor(Math.random() * charactersLength));
+    counter += 1;
+  }
+  return result;
+}
+
 export const reverseKey = <T extends string | number, K extends string>(record: Record<T, K>, findKey: string) =>
   (Object.keys(record) as Array<T>).find(key => record[key] === findKey);
 

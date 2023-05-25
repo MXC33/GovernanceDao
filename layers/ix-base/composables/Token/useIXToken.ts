@@ -1,3 +1,5 @@
+import {CHAIN_NET_ADDRESS} from "~/composables/Contract/useWallet";
+import {seaportAdress} from "~/composables/Contract/WalletAddresses";
 
 export interface IXTokenAttribute {
   value: string
@@ -74,3 +76,58 @@ export interface Sale {
   timestamp: number
 }
 
+export const ItemType = {
+  NATIVE: 0,
+  ERC20: 1,
+  ERC721: 2,
+  ERC1155: 3,
+  ERC721_WITH_CRITERIA: 4,
+  ERC1155_WITH_CRITERIA: 5,
+  ERC721MM: 6
+}
+
+export const OrderType = {
+  FULL_OPEN: 0,
+  PARTIAL_OPEN: 1,
+  FULL_RESTRICTED: 2,
+  PARTIAL_RESTRICTED: 3
+}
+
+export const typedData = {
+  OrderComponents : [
+    {name: "offerer", type: "address"},
+    {name: "zone", type: "address"},
+    {name: "offer", type: "OfferItem[]"},
+    {name: "consideration", type: "ConsiderationItem[]"},
+    {name: "orderType", type: "uint8"},
+    {name: "startTime", type: "uint256"},
+    {name: "endTime", type: "uint256"},
+    {name: "zoneHash", type: "bytes32"},
+    {name: "salt", type: "uint256"},
+    {name: "conduitKey", type: "bytes32"},
+    {name: "counter", type: "uint256"}
+  ],
+  OfferItem : [
+    {name: "itemType", type: "uint8"},
+    {name: "token", type: "address"},
+    {name: "identifierOrCriteria", type: "uint256"},
+    {name: "startAmount", type: "uint256"},
+    {name: "endAmount", type: "uint256"},
+    {name: "pixHash", type: "bytes32"}
+  ],
+  ConsiderationItem:[
+    {name: "itemType", type: "uint8"},
+    {name: "token", type: "address"},
+    {name: "identifierOrCriteria", type: "uint256"},
+    {name: "startAmount", type: "uint256"},
+    {name: "endAmount", type: "uint256"},
+    {name: "recipient", type: "address"}
+  ]
+}
+
+export const signDomain = {
+  name: "PIXMarketplace",
+  version: '1.1',
+  chainId: CHAIN_NET_ADDRESS.polygon,
+  verifyingContract: seaportAdress.polygon
+}
