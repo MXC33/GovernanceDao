@@ -9,14 +9,11 @@ ClientOnly
         TransferIcon(w="4.5" cursor="pointer" @click="$emit('transfer')")
 
       HelperHover(tooltip-id="link")
-        LinkIcon(w="5" cursor="pointer" @click="copyCurrentUrlToClipboard" )
+        LinkIcon(w="5" cursor="pointer" @click="copyCurrentUrlToClipboard")
 
     HelperHover(tooltip-id="chain")
       HList()
         PolygonIcon(w="4.5" cursor="pointer")
-
-
-
 
 </template>
 
@@ -29,26 +26,7 @@ import type { IXToken } from '@ix/base/composables/Token/useIXToken';
 
 defineEmits(["transfer"])
 
-type Classes = 'like' | 'transfer' | 'link' | 'chain'
-const props = defineProps<{
-  class?: Classes
-}>()
-
-
 const { popupNotification, setPopupTimeout } = usePopups()
-
-const mouseOver = computed(() => {
-  switch (props.class) {
-    case 'like':
-      return 'Add Item to Favorites'
-    case 'transfer':
-      return 'Transfer Item to Another Wallet'
-    case 'link':
-      return 'Copy Link to Clipboard'
-    case 'chain':
-      return 'Chain: Polygon'
-  }
-})
 
 const copyCurrentUrlToClipboard = async () => {
   popupNotification.value = 'copy-link'

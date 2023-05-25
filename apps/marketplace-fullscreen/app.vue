@@ -9,8 +9,8 @@
 
     div#infobox(:style="values" z="400" pos="absolute")
 
-    //- Transition(name="fade-slow" mode="in-out")
-    HelperNotification(v-if="popupNotification")
+    Transition(name="fade-slow" mode="in-out")
+      HelperNotification(v-if="popupNotification")
 
 </template>
 

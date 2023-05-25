@@ -10,7 +10,7 @@ export const usePopups = () => {
   const setPopupTimeout = () => {
     setTimeout(() => {
       popupNotification.value = null
-    }, 50000);
+    }, 5000);
   };
 
   return {
