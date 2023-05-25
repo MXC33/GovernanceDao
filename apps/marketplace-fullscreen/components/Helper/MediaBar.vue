@@ -6,7 +6,7 @@ ClientOnly
         LikeIcon(w="4.5" cursor="pointer")
 
       HelperHover(tooltip-id="transfer")
-        TransferIcon(w="4.5" cursor="pointer")
+        TransferIcon(w="4.5" cursor="pointer" @click="$emit('transfer')")
 
       HelperHover(tooltip-id="link")
         LinkIcon(w="5" cursor="pointer" @click="copyCurrentUrlToClipboard" )
