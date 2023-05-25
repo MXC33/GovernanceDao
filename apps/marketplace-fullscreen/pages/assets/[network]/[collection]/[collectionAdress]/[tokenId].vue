@@ -21,7 +21,7 @@ const { data: singleItem, execute: fetchToken } = await useAssetAPI({
 await fetchToken()
 
 onMounted(async () => {
-  const IXTokenContract = getIXTokenContract('0x50964c7b9aD5eF312a756790b28a9FB48D6410c1')
+  const IXTokenContract = getIXTokenContract()
   const allowace  = (await IXTokenContract.allowance())
   console.log('fisky allowace', allowace)
   if (allowace === 0) {
