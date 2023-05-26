@@ -1,5 +1,6 @@
 import {CHAIN_NET_ADDRESS} from "~/composables/Contract/useWallet";
 import {seaportAdress} from "~/composables/Contract/WalletAddresses";
+import {ConsiderationItem} from "@ix/marketplace/composables/useAssetContracts";
 
 export interface IXTokenAttribute {
   value: string
@@ -125,6 +126,41 @@ export const typedData = {
   ]
 }
 
+export interface OfferItem {
+  ItemType : typeof ItemType;
+  token: string,
+  identifierOrCriteria: number,
+  startAmount: number,
+  endAmount: number
+}
+export interface OrderParameters {
+  offerer: string,
+  address: string,
+  offer: OfferItem[],
+  consideration: ConsiderationItem[],
+  orderType: typeof OrderType,
+  startTime: number,
+  endTime: number,
+  zoneHash: string,
+  salt: number,
+  conduitKey: string,
+  totalOriginalConsiderationItems: number
+}
+export interface AdvancedOrder {
+  parameters: OrderParameters,
+  numerator: number,
+  denominator: number,
+  signature: string,
+  extraData: string
+}
+export interface  Fulfillment {
+  offerComponents: FulfillmentComponent[],
+  considerationComponents: FulfillmentComponent[]
+}
+export interface  FulfillmentComponent {
+  orderIndex: number,
+  itemIndex: number
+}
 export const signDomain = {
   name: "PIXMarketplace",
   version: '1.1',

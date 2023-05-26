@@ -1,16 +1,28 @@
 import { BigNumberish, ethers, ContractTransaction } from 'ethers'
 import { ContractInterface, defineContract } from "@ix/base/composables/Utils/defineContract"
+import {
+  ItemType,
+  OrderType,
+  signDomain,
+  typedData,
+  OfferItem,
+  OrderParameters,
+  AdvancedOrder,
+  Fulfillment,
+  FulfillmentComponent
+} from "@ix/base/composables/Token/useIXToken"
 
 import {
   roverAddress,
   assetsAddress,
   avatarNFTAddress,
   badgeNFTAddress,
-  IXTAddress, conduitAdress
+  IXTAddress, conduitAdress, seaportAdress
 } from '@ix/base/composables/Contract/WalletAddresses'
 import ERC1155ABI from '@ix/base/composables/Contract/Abis/ERC1155.json'
 import ERC721ABI from '@ix/base/composables/Contract/Abis/ERC1155.json'
 import IXToken from '@ix/base/composables/Contract/Abis/IXToken.json'
+import Seaport from '@ix/base/composables/Contract/Abis/Seaport.json'
 
 
 import { ContractContext as ERC1155Contract } from '@ix/base/composables/Contract/Abis/ERC1155'
@@ -18,6 +30,8 @@ import { ContractContext as ERC1155Contract } from '@ix/base/composables/Contrac
 import { ContractContext as ERC721Contract } from '@ix/base/composables/Contract/Abis/ERC721'
 
 import { ContractContext as IXTokenContract } from '@ix/base/composables/Contract/Abis/IXToken'
+
+import { ContractContext as SeaportContract } from '@ix/base/composables/Contract/Abis/Seaport'
 
 
 import { ZERO_ADDRESS } from './useTransferNFT'
@@ -214,5 +228,49 @@ export const getIXTokenContract = <T extends ContractInterface<T> & IXTokenContr
     allowance,
     approve,
     allowanceCheck
+  }
+}
+
+export interface ConsiderationItem {
+
+}
+
+export const getSeaportContract = <T extends ContractInterface<T> & SeaportContract>() => {
+
+  const spenderAddress = conduitAdress.polygon as string
+  const { walletAdress } = useWallet()
+
+  const { withContract, createTransaction, ...contractSpec } = defineContract<T>('Seaport-contract', {
+    contractAddress: seaportAdress.polygon as string,
+    notifications: {
+      failMessage: 'Error Seaport'
+    },
+    createContract(provider) {
+      return new ethers.Contract(seaportAdress.polygon as string, Seaport.abi, provider.getSigner()) as unknown as T
+    }
+  })
+
+
+  const fulfillAvailableAdvancedOrders = (advancedOrders: AdvancedOrder[], criteriaResolvers: [], offerFulfillments: [], considerationFulfillments: [], fulfillerConduitKey: string, recipient: string, maximumFulfilled: number) =>
+    createTransaction((contract) => {
+    console.log('advancedOrders', advancedOrders)
+    console.log('criteriaResolvers', criteriaResolvers)
+    console.log('offerFulfillments', offerFulfillments)
+    console.log('considerationFulfillments', considerationFulfillments)
+    console.log('fulfillerConduitKey', fulfillerConduitKey)
+    console.log('recipient', recipient)
+    console.log('maximumFulfilled', maximumFulfilled)
+      const address = walletAdress.value
+      if (!address)
+        return undefined
+
+      return contract.fulfillAvailableAdvancedOrders(advancedOrders, criteriaResolvers, offerFulfillments, considerationFulfillments, fulfillerConduitKey, recipient, maximumFulfilled)
+    })
+
+
+
+  return {
+    ...contractSpec,
+    fulfillAvailableAdvancedOrders
   }
 }
