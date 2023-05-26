@@ -27,7 +27,8 @@ VList(space-y="6")
       CollectionSingleItemMetaDetails(:item="item")
 
 Teleport(to="body")
-  Transfer(:token="item" v-if="popupModal" @close="openCloseTransfer")
+  //- Transfer(:token="item" v-if="popupModal" @close="openCloseTransfer")
+  PopupNew(v-if="popupModal")
 
 </template>
 
