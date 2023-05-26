@@ -13,7 +13,7 @@ const body = ref<CollectionPayload>({
   order: 0,
   filter: {
     owned: true,
-    type: 0,
+    type: 1,
     search: "",
     attributes: []
   }
