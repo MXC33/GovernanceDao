@@ -9,7 +9,7 @@ import { useCollectionSettings } from "~/composables/useCollection";
 import type { CollectionData, CollectionPayload } from '~/composables/useCollection';
 
 const route = useRoute()
-const { collection } = route.params
+const { collectionAdress } = route.params
 const body = ref<CollectionPayload>({
   page_key: 0,
   order: 0,
