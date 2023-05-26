@@ -1,12 +1,13 @@
 <template lang="pug">
 VList(flex-grow="1" min-h="0" pos="relative" p="8" space-y="6")
-  CollectionHeader() 
+  MyAssetsHeader() 
     template(#header) 
       slot(name="name")
 
     template(#attributes)
       AttributeList(:attributes="attributes" v-if="data")
 
+  MyAssetsMenu()
   HelperBorderScroll()
   CollectionFilter(:items="data.nfts" :filters="data.filters" v-if="data"  @toggle-filter="toggleFilterDrawer")
 
@@ -16,8 +17,7 @@ VList(flex-grow="1" min-h="0" pos="relative" p="8" space-y="6")
         CollectionFilterSlideout(:items="data.filters" v-if="showFilters && data")
 
     Transition(name="fade" mode="out-in" v-if="data")
-
-      CollectionGrid(v-if="displayType == 'grid'" w="full" :is-open="!showFilters")
+      CollectionGrid(v-if="displayType == 'grid'" w="full")
         CollectionGridItem.collection-grid-item(:token="token" v-for="token in data.nfts" b="gray-400")
 
       Table(:columns="columns" :rows="rows" v-else id="collection")
@@ -30,7 +30,7 @@ VList(flex-grow="1" min-h="0" pos="relative" p="8" space-y="6")
   Transition(name="slide-bottom")
     CollectionSelectBar(v-if="cartItems.length > 0")
 </template>
-
+  
 <script lang="ts" setup>
 import type { CollectionData } from '~/composables/useCollection';
 import type { TableColumn } from '~/composables/useTable'
@@ -42,6 +42,7 @@ const { ixtAsUSD } = useIXTPrice()
 
 const { getCollectionAttributes } = useDefaulAttributes()
 const attributes = computed(() => data ? getCollectionAttributes(data) : [])
+
 
 const rows = computed(() => (data?.nfts ?? []).map((row) => ({
   ...row,
@@ -64,11 +65,6 @@ const toggleFilterDrawer = () => {
   showFilters.value = !showFilters.value
 }
 
-const isFilterActive = computed(() => {
-  if (showFilters.value = true)
-    return true
-})
-
 const { data } = defineProps<{
   data?: CollectionData,
 }>()
@@ -80,7 +76,7 @@ watch(rows, () => {
 }, { deep: true })
 
 </script>
-
+  
 <style>
 .collection-grid-item:nth-child(5n + 6) {
   border: 0px;
