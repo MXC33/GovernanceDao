@@ -1,8 +1,8 @@
 <template lang="pug">
 Transition(name="fade" appear)
-  VList(pos="fixed" inset="0" bg="black opacity-80" w="full" h="full" z="999"  items="center" justify="center" @click="$emit('close')")
+  VList(pos="fixed" inset="0" bg="black opacity-80" w="full" h="full" z="999"  items="center" justify="center" @click="closeActivePopup")
 
-    div(w="full" pos="relative" @click.stop bg="gray-900" m="auto" z="1000" max-w="120" color="white")
+    div(w="full" pos="relative" @click.stop="" bg="gray-900" m="auto" z="1000" max-w="120" color="white")
 
       HList(items="center" justify="between" px="6" py="3" b="b-1 gray-600" text="lg" font="bold" uppercase="~")
         HList(space-x="3" items="center")
@@ -12,7 +12,7 @@ Transition(name="fade" appear)
           h3
             slot(name="header")
 
-        CloseIcon(w="4" cursor="pointer" @click.stop="$emit('close')")
+        CloseIcon(w="4" cursor="pointer" @click.stop="closeActivePopup")
 
       VList(flex-grow="1" p="6" space-y="2")
         slot()
@@ -27,6 +27,7 @@ Transition(name="fade" appear)
 
 <script setup lang="ts">
 import CloseIcon from '~/assets/icons/close.svg'
+const { closeActivePopup } = usePopups()
 
 defineEmits(["close"])
 </script>

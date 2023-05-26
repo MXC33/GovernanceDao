@@ -5,31 +5,26 @@ footer(pos="sticky bottom-0" bg="ix-black")
     div(font="bold") {{ totalPrice }} IXT
 
   button(btn="~ primary" opacity="on-load:50" w="full" font="bold" @click="placeBids" :load="isLoading" transition="all") Complete purchase
-
-Teleport(to="body")
-  CompletePlacedBids(@close="confirm" :items="boughtItems" v-if="isRevealed")
-
 </template>
   
   
 <script lang="ts" setup>
 import type { CartItem } from '~/composables/useCart';
 
-const {
-  isRevealed,
-  reveal: displaySuccess,
-  confirm,
-} = useConfirmDialog()
-
+const { displayPopup } = usePopups()
 const { viewingCart, cartItems } = useCart()
 const { placeBid } = useBids()
-
 const isLoading = ref(false)
 const boughtItems = ref<CartItem[]>([])
 
 const didPlaceBids = (items: CartItem[]) => {
+  displayPopup({
+    type: 'bidding-successful',
+    items
+  })
+
   boughtItems.value = items
-  displaySuccess()
+  viewingCart.value = false
   cartItems.value = []
 }
 
@@ -44,7 +39,7 @@ const placeBids = async () => {
 
   // await placeBid(first)
 
-  viewingCart.value = false
+  // viewingCart.value = false
   isLoading.value = false
 
   didPlaceBids(cartItems.value)

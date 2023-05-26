@@ -143,7 +143,7 @@
       "automatedTrans": "Automated Transmissions"
     }
   },
-  "mpFullscreen": {
+  "marketplace": {
     "headers": {
       "buyIxt": "Buy IXT",
       "playNow": "Play Now",
@@ -171,6 +171,17 @@
     },
     "transfer": {
       "title": "Transfer Asset",
+      "quantity": "Quantity",
+      "own": "You own",
+      "walletAdress": "Wallet Adress",
+      "placeholderText": "Put Adress Here",
+      "warningText": "Make sure the adress is correct!<br/>There is no way to reverse this transaction",
+      "verifyText": "I Verify that I am aware that the transaction is not<br/>reversible, and that the wallet address is correct.",
+      "confirm": "Confrim Adress",
+      "transferItem": "Transfer Item"
+    },
+    "list": {
+      "title": "List Asset",
       "quantity": "Quantity",
       "own": "You own",
       "walletAdress": "Wallet Adress",
