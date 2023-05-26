@@ -2,7 +2,7 @@
 HList(w="full" space-x="10")
   TabItem(v-for="(tab, index) in tabs" :id="tab" v-model="activeTab")
     template(#default)
-      span(@click="onClick(tab)") {{ $t(`mpFullscreen.myAssets.${tab}`) }} 
+      span(@click="onClick(tab)") {{ $t(`marketplace.myAssets.${tab}`) }} 
     
   
 
