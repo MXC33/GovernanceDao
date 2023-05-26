@@ -27,15 +27,14 @@ const body = computed<CollectionPayload>(() => ({
   }
 }))
 
-const { data: data, execute: fetchCollection, refresh: refresh } = useCollectionData(String(contract), body)
+const { data: data, execute: fetchCollection, fetchAndMerge: fetchNewPage, refresh: refresh } = useCollectionData(String(contract), body)
 
 const loadMore = () => {
   activePage.value = Number(data.value?.page_key)
-  refresh()
+  fetchNewPage()
 }
 
 await fetchCollection()
-
 
 watch(activeFilters, () => {
   activePage.value = 0
@@ -50,7 +49,9 @@ watch(data, (value) => {
   if (activeFilters.value.length < 1)
     createFilters(value)
 
-}, { deep: true })
+  console.log("NEw data", value.nfts.length)
+
+}, { deep: true, immediate: true })
 
 onBeforeUnmount(() => {
   activeFilters.value = []

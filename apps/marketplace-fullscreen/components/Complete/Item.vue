@@ -10,7 +10,7 @@ VList(bg="gray-800" v-if="item")
     VList(w="full")
       HList(flex-grow="1" px="3" items="center")
         VList(flex-grow="1" color="gray-200" space-y="1")
-          div Planet IX – Assets
+          TokenCollection(:token="item.token")
           div(flex-grow="1")
     
 </template>

@@ -4,7 +4,7 @@ VList(space-y="3")
 
   AttributeList(:attributes="attributes" v-if="item")
 
-  Listing(:item="item")
+  //- Listing(:item="item")
 
   TradeModule(:item="item")
     template(#header)
