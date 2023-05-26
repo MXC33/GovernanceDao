@@ -2,13 +2,17 @@ import type { RouterOptions } from '@nuxt/schema'
 
 export default <RouterOptions>{
   scrollBehavior(to, from, savedPosition) {
-    if (savedPosition) {
-      return savedPosition
-    } else {
-      return {
-        top: 0,
-        behavior: 'smooth',
-      }
-    }
+    const nuxtApp = useNuxtApp()
+
+    return new Promise((resolve) => {
+      nuxtApp.hook('page:finish', () => {
+
+        if (savedPosition)
+          return resolve(savedPosition)
+        resolve({
+          top: 0,
+        })
+      })
+    })
   }
 }

@@ -3,26 +3,26 @@ Popup(@close="$emit('close')")
   template(#icon)
     TransferIcon()
 
-  template(#header) {{ $t(`mpFullscreen.transfer.title`) }}
+  template(#header) {{ $t(`marketplace.transfer.title`) }}
 
   template(#default)
     VList(space-y="3")
       //-Title Image Collection how many you have  
       TransferInfo(v-model="transferItem" :showAdjustable="isERC1155")
 
-      div(v-html="$t(`mpFullscreen.transfer.walletAdress`)")
+      div(v-html="$t(`marketplace.transfer.walletAdress`)")
 
       input(bg="transparent" b="0.5 gray-600" p="3" outline="0" placeholder="e.g 0x1a2..." v-model="wallet" @input="onChange")
 
-      div(v-html="$t(`mpFullscreen.transfer.warningText`)")
+      div(v-html="$t(`marketplace.transfer.warningText`)")
 
   template(#footer)
     HList(space-x="3" disable="on-invalid:active" :invalid="!isWalletValid")
       FormCheckbox(v-model="isChecked") 
-      div(v-html="$t(`mpFullscreen.transfer.verifyText`)")
+      div(v-html="$t(`marketplace.transfer.verifyText`)")
 
   template(#buttons)
-    button(btn="~ primary" disable="on-invalid:active" :invalid="!isChecked || !isWalletValid" @click="itemTransfer") {{  $t(`mpFullscreen.transfer.transferItem`) }}
+    button(btn="~ primary" disable="on-invalid:active" :invalid="!isChecked || !isWalletValid" @click="itemTransfer") {{  $t(`marketplace.transfer.transferItem`) }}
 
 </template>
 

@@ -69,10 +69,9 @@ const { data } = defineProps<{
   data?: CollectionData,
 }>()
 
-console.log("Data", rows.value)
 
 watch(rows, () => {
-  console.log("New rows", rows.value)
+  console.log("New rows")
 }, { deep: true })
 
 </script>

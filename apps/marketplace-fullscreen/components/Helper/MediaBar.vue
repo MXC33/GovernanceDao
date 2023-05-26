@@ -23,6 +23,7 @@ import TransferIcon from '~/assets/icons/transfer.svg'
 import LinkIcon from '~/assets/icons/link.svg'
 import PolygonIcon from '~/assets/icons/polygon.svg'
 import type { IXToken } from '@ix/base/composables/Token/useIXToken';
+import {usePopups} from "~/composables/usePopups";
 
 defineEmits(["transfer"])
 

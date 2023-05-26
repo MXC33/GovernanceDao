@@ -1,4 +1,4 @@
-import { CollectionData, Collection } from "../../useCollection"
+import { CollectionData, Collection, CollectionPayload } from "../../useCollection"
 
 interface CollectionResponse {
   success: boolean
@@ -14,9 +14,9 @@ interface CollectionsResponse {
 }
 
 
-export const useCollectionData = (slug: string, body: any, network = 'polygon') => {
-  return useAsyncDataStatePagination('collection-' + slug + body.page_key, () =>
-    fetchIXAPI('collections/' + network + '/' + slug, 'POST', body) as Promise<CollectionResponse>, {
+export const useCollectionData = (slug: string, body: ComputedRef<CollectionPayload>, network = 'polygon') => {
+  return useAsyncDataStatePagination('collection-' + slug + body.value.page_key, () =>
+    fetchIXAPI('collections/' + network + '/' + slug, 'POST', body.value) as Promise<CollectionResponse>, {
     transform: (item) => {
       return item.data as CollectionData
     }
@@ -28,8 +28,7 @@ export const useCollectionsData = (network = 'polygon') =>
     fetchIXAPI('collections/?online=true') as Promise<CollectionsResponse>, {
     transform: (item) =>
       item.data as Collection[]
-  }
-  )
+  })
 
 
 export const usePersonalAssetAPI = (body: any, network = 'polygon') => {
