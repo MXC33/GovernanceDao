@@ -8,7 +8,7 @@ PopupWrapper()
         span(font="bold" text="xl" uppercase="~") transfer item
 
       HList()
-        CloseIcon(w="4" cursor="pointer" @click.stop="closeModal")
+        CloseIcon(w="4" cursor="pointer" @click.stop="$emit('close')")
 
     VList(flex-grow="1" px="6" py="3" space-y="2")
       span(color="white" font="bold" text="sm" px="0.5") Transfer to 
@@ -27,11 +27,8 @@ PopupWrapper()
 import TransferIcon from '~/assets/icons/transfer.svg'
 import CloseIcon from '~/assets/icons/close.svg'
 
-const { popupModal } = usePopups()
-
-const closeModal = () => { popupModal.value = !popupModal.value }
+defineEmits(["close"])
 
 const isSelected = ref(false)
-
 
 </script>
