@@ -46,7 +46,7 @@ const onClickItem = () => {
   const address = props.token.collection
   console.log(id, address, 'id and adress')
   if (id)
-    navigateTo(route.path + `/${id}`)
+    navigateTo(route.path + `/${address}/${id}`)
 }
 
 const props = defineProps<{
