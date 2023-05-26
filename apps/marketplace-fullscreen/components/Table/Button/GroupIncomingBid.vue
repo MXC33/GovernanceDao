@@ -1,5 +1,5 @@
 <template lang="pug">
-HList(items="center" p-t="4" space-x="5")
-  ButtonSound(sound="sm" btn="~ primary" cut="bottom-right sm") Counter  
-  ButtonSound(sound="sm" btn="~ primary" cut="bottom-right") Accept
+HList(items="center" p-t="3" space-x="10")
+  ButtonSound(sound="sm" btn="~ secondary" cut="bottom-right lg") Counter  
+  ButtonSound(sound="sm" btn="~ primary" cut="bottom-right lg") Accept
 </template>
