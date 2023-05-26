@@ -13,7 +13,8 @@ VList()
 
   div(grid="~ cols-2" text="base")
     button(btn="~ secondary" font="bold") Make offer
-    button(btn="~ primary" font="bold") Sell 1 item
+    button(btn="~ primary" font="bold" @click="onClickSell") Sell 1 item
+
 
 </template>
 
@@ -22,7 +23,15 @@ import type { SingleItemData } from '@ix/base/composables/Token/useIXToken';
 
 const { ixtToUSD } = useIXTPrice()
 
-defineProps<{
+const { displayPopup } = usePopups()
+const onClickSell = () => {
+  displayPopup({
+    type: 'list-item',
+    item
+  })
+}
+
+const { item } = defineProps<{
   item: SingleItemData
 }>()
 
