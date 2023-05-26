@@ -7,4 +7,5 @@ HList(cut="top-right sm" bg="gray-600 hover:gray-500" items="center" space-x="4"
 
 <script lang="ts" setup>
 import CloseIcon from '~/assets/icons/close.svg'
+
 </script>

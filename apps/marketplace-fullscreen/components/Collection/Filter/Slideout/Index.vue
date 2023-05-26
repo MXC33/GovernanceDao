@@ -22,5 +22,4 @@ const props = defineProps<{
 
 const { activeFilters } = useCollectionSettings()
 
-
 </script>
