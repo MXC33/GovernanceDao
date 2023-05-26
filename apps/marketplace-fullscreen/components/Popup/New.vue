@@ -8,7 +8,7 @@ PopupWrapper()
         span(font="bold" text="xl" uppercase="~") transfer item
 
       HList()
-        CloseIcon(w="4" cursor="pointer" @click="closeModal")
+        CloseIcon(w="4" cursor="pointer" @click.stop="closeModal")
 
     VList(flex-grow="1" px="6" py="3" space-y="2")
       span(color="white" font="bold" text="sm" px="0.5") Transfer to 
