@@ -11,11 +11,10 @@ import {useListing} from "~/composables/useListing";
 import type {SingleItemData} from "@ix/base/composables/Token/useIXToken";
 
 const route = useRoute()
-const { collection, network, tokenId, collectionAdress } = route.params
+const { network, tokenId, contract } = route.params
 
 const { data: singleItem, execute: fetchToken } = await useAssetAPI({
-  slug: String(collection),
-  adress: String(collectionAdress),
+  contract: String(contract),
   network: String(network),
   tokenId: String(tokenId)
 })

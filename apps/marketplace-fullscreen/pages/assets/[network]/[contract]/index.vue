@@ -10,7 +10,7 @@ import { useCollectionSettings } from "~/composables/useCollection";
 import type { CollectionData, CollectionPayload } from '~/composables/useCollection';
 
 const route = useRoute()
-const { collectionAdress } = route.params
+const { contract } = route.params
 const body = ref<CollectionPayload>({
     page_key: 0,
     order: 0,
@@ -25,7 +25,7 @@ const loadMore = () => {
     body.value.page_key = Number(data.value?.page_key)
     refresh()
 }
-const { data: data, execute: fetchCollection, refresh: refresh } = useCollectionData(String(collectionAdress), body.value)
+const { data: data, execute: fetchCollection, refresh: refresh } = useCollectionData(String(contract), body.value)
 
 const { activeFilters } = useCollectionSettings()
 
