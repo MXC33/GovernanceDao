@@ -1,11 +1,14 @@
 
 <template lang="pug">
-th(p="3" bg="gray-900")
-  button(v-if="column.sortable" @click="onClickSort" flex="~ row" items="start" opacity="50 hover:75 on-active:100" :active="isActive" transition="all")
-    HList()
-      slot
+th(p="3 first:l-6 last:r-6" bg="gray-900" z="3" font="400" color="gray-200")
+  button(v-if="column.sortable" @click="onClickSort" flex="~ row" items="start" color="on-active:white" :active="isActive" transition="all")
+    HList(space-x="1")
+      div()
+        slot
+
       Transition(name="fade" mode="out-in")
-        ArrowIcon(rotate="on-up:-180deg" :up="direction == 'desc'" transition="all")
+        SortIcon(v-if="!isActive" w="4")
+        HelperChevron(:up="direction == 'desc'" w="4" :thick="true" v-else)
 
   HList(v-else items="start")
     slot
@@ -13,7 +16,7 @@ th(p="3" bg="gray-900")
 </template>
 
 <script setup lang="ts" generic="T extends TableRow">
-import ArrowIcon from '../icons/UpArrowIcon.vue'
+import SortIcon from '~/assets/icons/sort.svg'
 import type { TableColumn, TableRow, TableSort, TableSortField } from '~/composables/useTable'
 
 const props = defineProps<{
@@ -25,6 +28,7 @@ const emit = defineEmits<{
   toggleSort: [],
   selectField: [item: TableSortField<T>]
 }>()
+
 
 const isActive = computed(() => props.sortField?.field == props.column.value)
 

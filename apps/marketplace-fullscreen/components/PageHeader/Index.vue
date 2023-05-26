@@ -9,7 +9,7 @@ transition(name="fade-slow")
     HList(space-x="4" w="full" justify="end" items="center")
       CollectionSelect()
 
-      ButtonSquareIcon()
+      ButtonSquareIcon(@click="onClickAccount")
         UserIcon(w="6")
 
       ButtonSquareIcon(@click="viewingCart = true")
@@ -27,9 +27,13 @@ const y = useGlobalWindowScroll()
 
 const route = useRoute()
 
+const onClickAccount = () => {
+  navigateTo('/account')
+}
+
 
 const onSingleItem = computed(() =>
-  route.matched.some((match) => match.path.includes("tokenId"))
+  route.matched.some((match) => match.path.includes("tokenId") || match.path.includes("connect"))
 )
 
 const gradientStyle = computed(() => ({

@@ -10,7 +10,6 @@ import transformerVariantGroup from '@unocss/transformer-variant-group'
 import { stateOnMatcher, stateMatcher } from './variants.uno';
 import { cutRules, frameRules } from './cuts.uno'
 
-
 export default definePreset({
   presets: [
     //@ts-ignore
@@ -79,9 +78,10 @@ export default definePreset({
     },
 
     {
-      'btn': 'transition-all transition-duration-100 flex flex-col text-center justify-center items-center px-4 lg:px-12 py-4 leading-none tracking-widest font-bold uppercase',
+      'btn': 'transition-all transition-duration-100 flex flex-col text-center justify-center items-center px-4 lg:px-12 py-4 leading-none font-bold uppercase',
       'btn-accent': 'btn-primary',
-      'btn-primary': 'bg-ix-primary color-white font-400'
+      'btn-primary': 'bg-ix-primary color-white',
+      'btn-secondary': 'bg-gray-600 color-white',
     },
 
     {

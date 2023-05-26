@@ -77,10 +77,22 @@
     "burn-assets": "Burn Assets",
     "purchase": "Purchase"
   },
+  "popupNotification": {
+    "copy-link": "Link copied to clipboard"
+  },
+  "tooltips": {
+    "link": "Copy Link to Clipboard",
+    "like": "Add Item to Favorites",
+    "transfer": "Transfer Item to Another Wallet",
+    "removeLike": "Remove Item from Favorites",
+    "chain": "Chain: Polygon"
+  },
   "collection": {
     "attributes": {
       "total_volume": "Total Volume",
+      "floorPrice": "Floor Price",
       "listed": "Listed",
+      "owners": "Owners",
       "unique_owners": "Unique Owners",
       "sale_price": "Best Offer"
     }
@@ -129,6 +141,44 @@
       "game": "Game",
       "planetIX": "Planet IX",
       "automatedTrans": "Automated Transmissions"
+    }
+  },
+  "mpFullscreen": {
+    "headers": {
+      "buyIxt": "Buy IXT",
+      "playNow": "Play Now",
+      "staking": "Staking",
+      "community": "Community",
+      "help": "Help"
+    },
+    "myAssets": {
+      "myItems": "My items",
+      "favorites": "Favorites",
+      "incomingBids": "Incoming Bids",
+      "outgoingBids": "Outgoing Bids",
+      "activeListings": "Active Listings",
+      "activity": "Activity"
+    },
+    "filterType": {
+      "sales": "Sales",
+      "listings": "Listings",
+      "offers": "Offers",
+      "transfers": "Transfers",
+      "minted": "Minted",
+      "activity": "Activity",
+      "lowToHigh": "Low to High",
+      "highToLow": "High to Low"
+    },
+    "transfer": {
+      "title": "Transfer Asset",
+      "quantity": "Quantity",
+      "own": "You own",
+      "walletAdress": "Wallet Adress",
+      "placeholderText": "Put Adress Here",
+      "warningText": "Make sure the adress is correct!<br/>There is no way to reverse this transaction",
+      "verifyText": "I Verify that I am aware that the transaction is not<br/>reversible, and that the wallet address is correct.",
+      "confirm": "Confrim Adress",
+      "transferItem": "Transfer Item"
     }
   }
 }

@@ -1,5 +1,5 @@
 <template lang="pug">
-HList(w="full" pos="sticky top-34" z="2" b="on-scroll:(b-1 gray-400)" :scroll="isScrolling")
+HList(w="full" pos="sticky top-34" z="4")
   HList(w="full" py="3" space-x="3" bg="ix-black")
 
     CollectionFilterToggleFilter(@click="$emit('toggleFilter')")
@@ -29,11 +29,6 @@ defineEmits<{
   toggleFilter: []
 }>()
 
-const { y } = useWindowScroll()
-
-const isScrolling = computed(() => {
-  return y.value >= 550
-})
 </script>
 
 

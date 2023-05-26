@@ -5,8 +5,9 @@ HList()
 
 <script setup lang="ts">
 
-onMounted(async () => {
 
+
+onMounted(async () => {
   //@ts-ignore
   const isPaintSupported = !!CSS.paintWorklet
 
@@ -20,3 +21,9 @@ onMounted(async () => {
 
 
 </script>
+
+<style>
+:root {
+  --content-drawer-bg-color: var(--ix-black)
+}
+</style>

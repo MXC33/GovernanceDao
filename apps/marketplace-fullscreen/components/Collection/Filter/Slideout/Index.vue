@@ -1,38 +1,33 @@
 <template lang="pug">
-VList(w="100" space-y="3")
-  ContentDrawer(v-for="(item, filterIndex) in activeFilters" )
+VList(w="100" ml="-8" mr="-3" pos="sticky top-58")
+  CollectionFilterDrawer(v-for="(item, filterIndex) in activeFilters" :is-small="true")
+
     template(#header) {{item.trait_type}}
     template(#default)
-      VList(w="full" px="3")
-        InputCheckbox(v-model="activeFilters[filterIndex].value[index].selected" v-for="(option, index) in item.value")
+      VList(w="full" b="b-1 gray-600")
+        CollectionFilterRowSelect.rowSelectLast(v-model="activeFilters[filterIndex].value[index].selected" v-for="(option, index) in item.value" px="8")
           template(#default) {{ option.name }}
-
+        div(h="4")
+      div(mt="4")
+      
 </template>
 
 <script lang="ts" setup>
 import type { APIFilter, Filter } from "~/composables/useCollection";
+import { useCollectionSettings } from "~/composables/useCollection";
 
 const props = defineProps<{
   items: APIFilter[]
 }>()
 
-const activeFilters = ref<Filter[]>([])
+const { activeFilters } = useCollectionSettings()
 
-const createFilters = () => {
-  activeFilters.value = props.items.map((filter) => ({
-    ...filter,
-    value: filter.value.map((name) => ({
-      name,
-      selected: false
-    }))
-  }))
-
-  console.log("New filters", activeFilters.value, props.items)
-}
-
-
-watch(() => props.items, () => {
-  createFilters()
-}, { immediate: true })
 
 </script>
+
+<style>
+/* .rowSelectLast:nth-last-child(n - 1) {
+  margin-bottom: 10px;
+  border: 1px solid red;
+} */
+</style>

@@ -1,14 +1,14 @@
 import { BigNumberish, ethers, ContractTransaction } from 'ethers'
-import { ContractInterface, defineContract } from "~/../../layers/ix-base/composables/Utils/defineContract"
+import { ContractInterface, defineContract } from "@ix/base/composables/Utils/defineContract"
 
-import { roverAddress, assetsAddress, avatarNFTAddress, badgeNFTAddress } from '../../../layers/ix-base/composables/Contract/WalletAddresses'
-import ERC1155ABI from '../../../layers/ix-base/composables/Contract/Abis/ERC1155.json'
-import ERC721ABI from '../../../layers/ix-base/composables/Contract/Abis/ERC1155.json'
+import { roverAddress, assetsAddress, avatarNFTAddress, badgeNFTAddress } from '@ix/base/composables/Contract/WalletAddresses'
+import ERC1155ABI from '@ix/base/composables/Contract/Abis/ERC1155.json'
+import ERC721ABI from '@ix/base/composables/Contract/Abis/ERC1155.json'
 
 
-import { ContractContext as ERC1155Contract } from '../../../layers/ix-base/composables/Contract/Abis/ERC1155'
+import { ContractContext as ERC1155Contract } from '@ix/base/composables/Contract/Abis/ERC1155'
 
-import { ContractContext as ERC721Contract } from '../../../layers/ix-base/composables/Contract/Abis/ERC721'
+import { ContractContext as ERC721Contract } from '@ix/base/composables/Contract/Abis/ERC721'
 
 
 import { ZERO_ADDRESS } from './useTransferNFT'

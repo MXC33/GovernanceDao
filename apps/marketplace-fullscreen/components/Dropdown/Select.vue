@@ -5,8 +5,7 @@ VList(pos="relative" ref="element")
       slot(name="selectedName")
 
     Transition(name="fade" mode="out-in")
-      ChevronIcon(w="4" fill="white" v-if="!isOpen")
-      ChevronIconUp(w="4" fill="white" v-else)
+      HelperChevron(w="5" :up="isOpen")
 
   Transition(name="fade")
     div(frame="~ gray-300" mt="2" v-if="isOpen" pos="!absolute top-full right-0" min-w="80" font="bold")
@@ -17,8 +16,6 @@ VList(pos="relative" ref="element")
 </template>
 
 <script lang="ts" setup generic="T extends object">
-import ChevronIcon from '~/assets/icons/chevron-down.svg'
-import ChevronIconUp from '~/assets/icons/chevron-up.svg'
 
 const isOpen = ref(false)
 const element = ref()

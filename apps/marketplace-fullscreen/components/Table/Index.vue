@@ -1,6 +1,6 @@
 
 <template lang="pug">
-table(bg="gray-900" w="full" pos="sticky top-0")
+table(bg="gray-900" w="full")
   colgroup
     col(v-for="column in columns" :style="getColumnStyle(column)")
 
@@ -11,7 +11,9 @@ table(bg="gray-900" w="full" pos="sticky top-0")
     TableRow(v-for="(row, index) in sortedRows" :key="index")
       TableCell(v-for="item in columns", :key="item.value")
         slot(:name="`item-${item.value}`" :row="row" :column="item")
-          span() {{row[item.value]}}
+          Currency(:value="row[item.value]" type="ixt" v-if="item.type == 'ixt'")
+          Currency(:value="row[item.value]" type="usd" v-else-if="item.type == 'usd'")
+          span(v-else) {{row[item.value]}}
 
 </template>
 
@@ -28,8 +30,6 @@ const props = defineProps<{
 }>()
 
 const { sortedRows, sort, selectSortField, toggleSortDirection } = useTable(props.rows, props.id)
-
-watch([sortedRows, sort], () => console.log("Update sort", sort.value, sortedRows.value), { deep: true })
 
 const getColumnStyle = (item: TableColumn<Row>) => {
   if (!item.width)
