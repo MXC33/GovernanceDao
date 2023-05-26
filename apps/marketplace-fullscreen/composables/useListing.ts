@@ -19,6 +19,12 @@ export interface Duration {
   name: string
 }
 
+export interface ItemListingData {
+  price: number,
+  shares: number,
+  endTime: number
+}
+
 export const useListing = () => {
   const durationOptions: Duration[] = [
     {
@@ -38,6 +44,23 @@ export const useListing = () => {
       name: 'Custom'
     }
   ]
+
+  const createListingsBody = (saleMessage: string, item: SingleItemData, price: number, shares: number, endTime: number): ListingsBody => {
+    const listingAssets: ListingAssets = {
+      index: item._index,
+      collection: item.collection,
+      token_id: item.token_id,
+      network: item.network,
+      quantity: shares
+    }
+    return  {
+      sale_message: saleMessage as string,
+      sale_price: price,
+      sale_type: 1, //always 1,
+      sale_endtime: endTime,
+      assets: [listingAssets]
+    }
+  }
 
   const createListingMessage = async (item: SingleItemData, price: number, shares: number, endTime: number) => {
     /*
@@ -129,21 +152,10 @@ export const useListing = () => {
 
   const list = async (item: SingleItemData, price: number, shares: number, endTime: number) => {
     const saleMessage = await createListingMessage(item, price, shares, endTime)
+    if (!saleMessage)
+      return false
     try {
-      const listingAssets: ListingAssets = {
-        index: item._index,
-        collection: item.collection,
-        token_id: item.token_id,
-        network: item.network,
-        quantity: shares
-      }
-      const listingsBody: ListingsBody = {
-        sale_message: saleMessage as string,
-        sale_price: price,
-        sale_type: 1, //always 1,
-        sale_endtime: endTime,
-        assets: [listingAssets]
-      }
+      const listingsBody = createListingsBody(saleMessage as string, item, price, shares, endTime)
 
       const listEndpoints = useListEndpoints()
       await listEndpoints.listAssets([listingsBody])
@@ -170,9 +182,57 @@ export const useListing = () => {
     return true
   }
 
+  const bulkList = async (items: SingleItemData[], data: Map<number, ItemListingData>) => {
+    const listingsBody: ListingsBody[] = []
+
+    for (const item of items) {
+      const itemData = data.get(item.token_id)
+      if (!itemData) {
+        /*
+        Todo
+        itemData doesn't exists
+      */
+        alert('Something went wrong {itemData} doesn\'t exists')
+        return false
+      }
+
+      const saleMessage = await createListingMessage(item, itemData.price, itemData.shares, itemData.endTime)
+      if (!saleMessage)
+        return false
+
+      listingsBody.push(createListingsBody(saleMessage as string, item, itemData.price, itemData.shares, itemData.endTime))
+    }
+
+    try {
+      const listEndpoints = useListEndpoints()
+      await listEndpoints.listAssets(listingsBody)
+
+      /*
+        Todo
+        Success message
+      */
+      alert('Success message')
+
+    } catch (error: any) {
+      /*
+        Todo
+        API error
+      */
+      console.log(error.response)
+      if (error.response && error.response._data && error.response._data.message) {
+        alert(error.response._data.message)
+      } else {
+        alert('Something wrong happened!!')
+      }
+      return false
+    }
+    return true
+  }
+
   return {
     durationOptions,
     createListingMessage,
-    list
+    list,
+    bulkList
   }
 }

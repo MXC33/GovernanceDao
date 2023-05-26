@@ -23,6 +23,9 @@ const { connectWallet, walletState } = useWallet()
 const { setupIXTPrice, ixtPrice } = useIXTPrice()
 const { activeNotification } = useNotifications()
 
+const { setRefreshToken } = useLogin()
+const { user } = useUser()
+
 
 watch(y, (pos) => globalY.value = pos)
 
@@ -32,6 +35,9 @@ onMounted(async () => {
   const connected = await connectWallet()
   if (connected)
     walletState.value = 'connected'
+
+  if(user.value)
+    setRefreshToken(0)
 
   await setupIXTPrice()
 

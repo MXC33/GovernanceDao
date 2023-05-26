@@ -1,7 +1,12 @@
 <template lang="pug">
+// TEST BULK LISTINGS
+button(btn="~ primary" w="full" m="t-5" @click.prevent="listItems") Bulk List
+pre(v-if="testSaleItems" ) {{testSaleItems.length}}
+p(v-if="testSaleItemsData" ) {{testSaleItemsData}}
+// END TEST BULK LISTINGS
 VList(flex-grow="1" min-h="0" pos="relative" p="8" space-y="6")
-  MyAssetsHeader() 
-    template(#header) 
+  MyAssetsHeader()
+    template(#header)
       slot(name="name")
 
     template(#attributes)
@@ -30,10 +35,12 @@ VList(flex-grow="1" min-h="0" pos="relative" p="8" space-y="6")
   Transition(name="slide-bottom")
     CollectionSelectBar(v-if="cartItems.length > 0")
 </template>
-  
+
 <script lang="ts" setup>
 import type { CollectionData } from '~/composables/useCollection';
 import type { TableColumn } from '~/composables/useTable'
+import {useListing} from "~/composables/useListing";
+import type {SingleItemData} from "@ix/base/composables/Token/useIXToken";
 
 const { displayType } = useCollectionSettings()
 const { getTokenKey } = useTokens()
@@ -74,8 +81,39 @@ watch(rows, () => {
   console.log("New rows")
 }, { deep: true })
 
+
+/** TEST BULK LISTINGS **/
+const testSaleItems = computed(() => {
+  const testData = []
+  let i = 0
+  for (const nft of data?.nfts) {
+    testData.push(nft)
+    i++
+    if (i > 2) break
+  }
+  return testData
+})
+
+const testSaleItemsData = computed(() => {
+  const testData = new Map()
+  for (const item of testSaleItems.value) {
+    testData.set(item.token_id, {
+      price: 10,
+      shares: 1,
+      endTime: 1685535351
+    })
+  }
+  return testData
+})
+
+const listItems = async () => {
+  const listing = useListing()
+  const list = await listing.bulkList(testSaleItems.value as SingleItemData[], testSaleItemsData.value)
+  console.log('List result', list)
+}
+
 </script>
-  
+
 <style>
 .collection-grid-item:nth-child(5n + 6) {
   border: 0px;
