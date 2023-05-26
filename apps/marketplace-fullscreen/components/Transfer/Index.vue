@@ -1,33 +1,35 @@
 <template lang="pug">
 Popup(@close="$emit('close')")
-  template(#header)
-    div(text="2xl" v-html="$t(`mpFullscreen.transfer.title`)")
-  
+  template(#icon)
+    TransferIcon()
+
+  template(#header) {{ $t(`marketplace.transfer.title`) }}
+
   template(#default)
     VList(space-y="3")
       //-Title Image Collection how many you have  
       TransferInfo(v-model="transferItem" :showAdjustable="isERC1155")
 
-      div(v-html="$t(`mpFullscreen.transfer.walletAdress`)")
-      
-      input(text="2xl center" bg="black" placeholder="e.g 0x1a2..." border="" v-model="wallet" @input="onChange")
-      
-      div(v-html="$t(`mpFullscreen.transfer.warningText`)")
-  
-  template(#footer)
-    VList(space-y="6")
-      Transition(name="slide-top")
-        HList(space-x="3" v-if="wallet && isWalletValid")
-          FormCheckbox(v-model="isChecked") 
-          div(v-html="$t(`mpFullscreen.transfer.verifyText`)")
+      div(v-html="$t(`marketplace.transfer.walletAdress`)")
 
-      Transition(name="slide-top")
-        button(m="auto" text="~" bg="gray-600" b="~" p="2" w="full" v-if="isChecked && wallet" @click="itemTransfer" v-html="$t(`mpFullscreen.transfer.transferItem`)")
+      input(bg="transparent" b="0.5 gray-600" p="3" outline="0" placeholder="e.g 0x1a2..." v-model="wallet" @input="onChange")
+
+      div(v-html="$t(`marketplace.transfer.warningText`)")
+
+  template(#footer)
+    HList(space-x="3" disable="on-invalid:active" :invalid="!isWalletValid")
+      FormCheckbox(v-model="isChecked") 
+      div(v-html="$t(`marketplace.transfer.verifyText`)")
+
+  template(#buttons)
+    button(btn="~ primary" disable="on-invalid:active" :invalid="!isChecked || !isWalletValid" @click="itemTransfer") {{  $t(`marketplace.transfer.transferItem`) }}
+
 </template>
 
 <script lang="ts" setup>
 import type { IXToken } from "@ix/base/composables/Token/useIXToken"
 import type { TransferItem } from '~/composables/useTransfer';
+import TransferIcon from '~/assets/icons/transfer.svg'
 
 defineEmits(['close'])
 
@@ -61,7 +63,7 @@ const isERC1155 = computed(() => ERC1155Addresses.includes(props.token.collectio
 const itemTransfer = () => {
   console.log('transfering Item proccess starting')
   console.log(wallet.value)
-  const {token_id, collection} = transferItem.value.token
+  const { token_id, collection } = transferItem.value.token
   // console.log(props.collectionData)
   // console.log(props.collectionData.collection)
   if (token_id == null)

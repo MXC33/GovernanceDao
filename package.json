@@ -18,5 +18,8 @@
   "workspaces": [
     "layers/*",
     "apps/*"
-  ]
+  ],
+  "devDependencies": {
+    "turbo": "^1.9.8"
+  }
 }

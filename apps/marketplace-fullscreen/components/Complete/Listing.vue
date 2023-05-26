@@ -18,7 +18,6 @@ Popup()
 <script lang="ts" setup>
 import type { CartItem } from '~/composables/useCart';
 const { closeActivePopup } = usePopups()
-
 defineProps<{
   items: CartItem[]
 }>()
