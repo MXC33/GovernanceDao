@@ -10,7 +10,7 @@
     div#infobox(:style="values" z="400" pos="absolute")
 
     Transition(name="fade-slow" mode="in-out")
-      HelperNotification(v-if="activeNotification")
+      HelperNotification(v-if="activeNotification" :type="activeNotification")
 
 </template>
 
@@ -22,9 +22,11 @@ const { y } = useWindowScroll()
 const { connectWallet, walletState } = useWallet()
 const { setupIXTPrice, ixtPrice } = useIXTPrice()
 const { activeNotification } = useNotifications()
-// const { data, execute } = useAsyncDataState('ix-api', async () => 'test')
-// await execute()
+
+
 watch(y, (pos) => globalY.value = pos)
+
+
 
 onMounted(async () => {
   const connected = await connectWallet()
