@@ -10,6 +10,7 @@ import {
   seaportAdress
 } from "@ix/base/composables/Contract/WalletAddresses";
 import {makeRandomNumberKey} from "@ix/base/composables/Utils/useHelpers";
+import {ListingAssets, ListingsBody, useListEndpoints} from "~/composables/api/post/useListAPI";
 
 export type DurationValue = 0 | 1 | 2| 3
 
@@ -38,7 +39,7 @@ export const useListing = () => {
     }
   ]
 
-  const list = async (item: SingleItemData, price: number, shares: number, endTime: number) => {
+  const createListingMessage = async (item: SingleItemData, price: number, shares: number, endTime: number) => {
     /*
       Todo
       Start loading overlay
@@ -60,10 +61,11 @@ export const useListing = () => {
     const totalPrice = price * shares
     const ownerPrice = ethers.utils.parseUnits(
       roundUp(((95 / 100) * totalPrice), 8).toString()
-    )
+    ).toString()
+
     const treasuaryFee = ethers.utils.parseUnits(
       roundDown(((5 / 100) * totalPrice), 8).toString()
-    )
+    ).toString()
 
     const { walletAdress, signTypedData } = useWallet()
 
@@ -112,7 +114,7 @@ export const useListing = () => {
       zoneHash: "0x0000000000000000000000000000000000000000000000000000000000000000",
       // salt: Web3.utils.toWei("2444686030276173"),
       // salt: "94446860302761739304752683030156737591518664810215442929817355887698947444400",
-      salt: ethers.utils.parseUnits(makeRandomNumberKey(16).toString()),
+      salt: ethers.utils.parseUnits(makeRandomNumberKey(16).toString()).toString(),
       conduitKey: conduitKey.polygon,
       counter: 0,
     }
@@ -125,8 +127,52 @@ export const useListing = () => {
     })
   }
 
+  const list = async (item: SingleItemData, price: number, shares: number, endTime: number) => {
+    const saleMessage = await createListingMessage(item, price, shares, endTime)
+    try {
+      const listingAssets: ListingAssets = {
+        index: item._index,
+        collection: item.collection,
+        token_id: item.token_id,
+        network: item.network,
+        quantity: shares
+      }
+      const listingsBody: ListingsBody = {
+        sale_message: saleMessage as string,
+        sale_price: price,
+        sale_type: 1, //always 1,
+        sale_endtime: endTime,
+        assets: [listingAssets]
+      }
+
+      const listEndpoints = useListEndpoints()
+      await listEndpoints.listAssets([listingsBody])
+
+      /*
+        Todo
+        Success message
+      */
+      alert('Success message')
+
+    } catch (error: any) {
+      /*
+        Todo
+        API error
+      */
+      console.log(error.response)
+      if (error.response && error.response._data && error.response._data.message) {
+        alert(error.response._data.message)
+      } else {
+        alert('Something wrong happened!!')
+      }
+      return false
+    }
+    return true
+  }
+
   return {
     durationOptions,
+    createListingMessage,
     list
   }
 }

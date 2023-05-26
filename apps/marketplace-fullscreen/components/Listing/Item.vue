@@ -81,7 +81,8 @@ watch(props, (newProps) => {
 
 const listItem = async () => {
   const listing = useListing()
-  console.log('fisky Listing', await listing.list(toRaw(props.item as SingleItemData), price.value, qty.value, 1685019917))
+  const list = await listing.list(toRaw(props.item as SingleItemData), price.value, qty.value, 1685019917)
+  console.log('List result', list)
 }
 
 </script>
