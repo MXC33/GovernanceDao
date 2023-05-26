@@ -1,20 +1,21 @@
 <template lang="pug">
-MyAssets(:data="data" v-if="data" )
+Collection(:data="data" v-if="data" )
+button(@click="loadMore") LoadMore
 </template>
-  
-  
+
+
 <script lang="ts" setup>
 
 import { useCollectionSettings } from "~/composables/useCollection";
-import type { CollectionData, CollectionPayload } from '~/composables/useCollection';
+import type { CollectionPayload } from '~/composables/useCollection';
 
 const route = useRoute()
-const { collection } = route.params
+const { contract } = route.params
 const body = ref<CollectionPayload>({
   page_key: 0,
   order: 0,
   filter: {
-    owned: true,
+    owned: false,
     type: 0,
     search: "",
     attributes: []
@@ -24,7 +25,9 @@ const loadMore = () => {
   body.value.page_key = Number(data.value?.page_key)
   refresh()
 }
-const { data: data, execute: fetchCollection, refresh: refresh } = usePersonalAssetAPI(body.value)
+const { data: data, execute: fetchCollection, refresh: refresh } = useCollectionData(String(contract), body.value)
+
+await fetchCollection()
 
 const { activeFilters } = useCollectionSettings()
 
@@ -59,12 +62,9 @@ watch(() => activeFilters, () => {
   if (data.value)
     data.value.nfts = []
   refresh()
-}, { immediate: true, deep: true })
-//
+}, { deep: true })
+
 onBeforeUnmount(() => {
   activeFilters.value = []
-})
-onMounted(() => {
-  fetchCollection()
 })
 </script>

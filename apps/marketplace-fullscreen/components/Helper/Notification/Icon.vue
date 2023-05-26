@@ -11,7 +11,7 @@ ClientOnly
 <script lang="ts" setup>
 import SuccessIcon from '~/assets/icons/notification/success.svg'
 import FavoriteIcon from '~/assets/icons/notification/favorite.svg'
-import PurchaseIcon from '~/assets/icons/notification/purchasea.svg'
+import PurchaseIcon from '~/assets/icons/notification/purchase.svg'
 import InsufficientIcon from '~/assets/icons/notification/insufficient.svg'
 import ErrorIcon from '~/assets/icons/notification/error.svg'
 

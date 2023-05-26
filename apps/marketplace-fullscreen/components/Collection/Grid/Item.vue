@@ -43,10 +43,8 @@ const onClickCart = () => {
 
 const onClickItem = () => {
   const id = props.token.token_id
-  const address = props.token.collection
-  console.log(id, address, 'id and adress')
   if (id)
-    navigateTo(route.path + `/${address}/${id}`)
+    navigateTo(route.path + `/${id}`)
 }
 
 const props = defineProps<{

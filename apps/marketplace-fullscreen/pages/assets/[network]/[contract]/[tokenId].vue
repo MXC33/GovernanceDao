@@ -6,11 +6,10 @@ CollectionSingleItem(:item="singleItem" v-if="singleItem")
 
 <script lang="ts" setup>
 const route = useRoute()
-const { collection, network, tokenId, collectionAdress } = route.params
+const { network, tokenId, contract } = route.params
 
 const { data: singleItem, execute: fetchToken } = await useAssetAPI({
-  slug: String(collection),
-  adress: String(collectionAdress),
+  contract: String(contract),
   network: String(network),
   tokenId: String(tokenId)
 })
