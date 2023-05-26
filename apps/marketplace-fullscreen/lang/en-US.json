@@ -139,7 +139,22 @@
       "playNow": "Play Now",
       "staking": "Staking",
       "community": "Community",
-      "help": "Help"
+      "help": "Help",
+      "buyIxtDropDown": {
+        "StringTitles" : [
+          ["Swap", "Swap To IXT"], 
+          ["Brige","Polygon"], 
+          ["Supply", "IXT/USDT", "IXT/MATIC"], 
+          ["Capital", "Lend Capital"]
+        ],
+        "StringTitlesDetails": [
+          ["Swap any crypto or fiat to ixt"], 
+          ["Brige tokens to polygon blockchain"], 
+          ["Secure IXT/USDT liquidity, earn 7% APR", "Secure IXT/MATIC liquidity, earn 7% APR"], 
+          ["Lend 100x IXT with USDT as collateral"]
+        ]  
+      }
+
     },
     "myAssets": {
       "myItems": "My items",

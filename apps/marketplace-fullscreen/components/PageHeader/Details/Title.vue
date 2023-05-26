@@ -1,7 +1,7 @@
 <template lang="pug">
 div() 
   div(text="red" p="2") {{ title }} 
-  div(border="~bottom 1 red" w="90%")
+  div(border="~bottom 1 red" w="95%")
   slot()
 </template>
 
