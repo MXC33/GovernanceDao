@@ -1,6 +1,6 @@
 <template lang="pug">
 Transition(name="slide-top")
-  div(p="6" grid="~ cols-2 md:cols-3 lg:cols-4 2xl:cols-5" w="full" flex="~" text="2xl Orange" bg="black")
+  div(p="6" grid="~ cols-2 md:cols-3 lg:cols-4 2xl:cols-5" w="full" flex="~" text="14px" bg="black")
     HeaderDetailsTitle(items="center" 
     v-for="stringIndexX in stringTitles.length" 
     :title="stringTitles[stringIndexX - 1][0]")  
