@@ -77,6 +77,16 @@
     "burn-assets": "Burn Assets",
     "purchase": "Purchase"
   },
+  "popupNotification": {
+    "copy-link": "Link copied to clipboard"
+  },
+  "tooltips": {
+    "link": "Copy Link to Clipboard",
+    "like": "Add Item to Favorites",
+    "transfer": "Transfer Item to Another Wallet",
+    "removeLike": "Remove Item from Favorites",
+    "chain": "Chain: Polygon"
+  },
   "collection": {
     "attributes": {
       "total_volume": "Total Volume",
