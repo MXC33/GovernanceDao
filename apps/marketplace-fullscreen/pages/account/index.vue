@@ -1,6 +1,5 @@
 <template lang="pug">
-Collection(:data="data" v-if="data" )
-button(@click="loadMore") LoadMore
+MyAssets(:data="data" v-if="data" )
 </template>
   
   
