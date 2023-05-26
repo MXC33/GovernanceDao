@@ -1,5 +1,4 @@
 <template lang="pug">
-p(@click="clickList") click to list
 CollectionSingleItem(:item="singleItem" v-if="singleItem")
 </template>
 
@@ -22,17 +21,9 @@ const { data: singleItem, execute: fetchToken } = await useAssetAPI({
 
 await fetchToken()
 
-const clickList = async () => {
-  const listing = useListing()
-  console.log('fisky Listing', await listing.list(toRaw(singleItem.value as SingleItemData), 10, 2, 1685019917))
-}
-
 onMounted(async () => {
   /*const IXTokenContract = get1155Contract(toRaw(singleItem.value)?.collection as string)
   console.log('fisky approveNftCheck', await IXTokenContract.approveNftCheck())*/
-
-
-
 })
 
 </script>

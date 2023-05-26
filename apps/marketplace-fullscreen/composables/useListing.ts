@@ -117,9 +117,12 @@ export const useListing = () => {
       counter: 0,
     }
 
-    const signMessage = await signTypedData(signDomain, typedData, message)
+    const signature = await signTypedData(signDomain, typedData, message)
 
-    return signMessage
+    return JSON.stringify({
+      body: message,
+      signature: signature
+    })
   }
 
   return {

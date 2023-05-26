@@ -1,5 +1,5 @@
 <template lang="pug">
-DropdownSelect(:items="collections" v-if="collections")    
+DropdownSelect(:items="collections" v-if="collections")
   template(#selectedName) Explore Collections
 
   template(#item="{item}")
@@ -13,6 +13,8 @@ DropdownSelect(:items="collections" v-if="collections")
 </template>
 
 <script lang="ts" setup>
+import {useCollectionsData} from "~/composables/api/post/useCollectionAPI";
+
 const { data: collections, execute: fetchAllCollections } = useCollectionsData()
 
 await fetchAllCollections()

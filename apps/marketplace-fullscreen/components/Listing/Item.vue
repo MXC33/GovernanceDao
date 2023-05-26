@@ -26,14 +26,14 @@ div(m="t-10" p="5" bg="#141414" color="#F9F9F9" overflow="hidden" v-if="item.nam
       input(type="number" min=0 w="full" grow="1" v-model="price" color="#000" text="5" @keypress="useIsKeyNumber($event)")
       span IXT
     HList(w="full" justify="between")
-      p ${{price*quantity}} Total (${{price}} each)
-      p Total offer amount: {{price*quantity}} IXT Total (${{price*quantity}})
+      p ${{price*qty}} Total (${{price}} each)
+      p Total offer amount: {{price*qty}} IXT Total (${{price*qty}})
   div.columns-2(m="b-2")
     div
       h2 Quantity
       p {{item.my_shares}} available
     div
-      InputQty(:value="props.quantity" :min="1" :max="item.my_shares" v-model="quantity" )
+      InputQty(:min="1" :max="item.my_shares" v-model="qty" )
 
   div.columns-2(m="b-2")
     div
@@ -47,15 +47,15 @@ div(m="t-10" p="5" bg="#141414" color="#F9F9F9" overflow="hidden" v-if="item.nam
 
   HList(w="full" justify="between")
     p Total Price
-    p {{price*quantity}} IXT
+    p {{price*qty}} IXT
   HList(w="full" justify="between")
     p Marketplace fee
     p 2.5%
   HList(w="full" justify="between")
     h2 Total potential earnings
-    p {{price*quantity*(1-0.025)}} IXT
+    p {{price*qty*(1-0.025)}} IXT
 
-  button(btn="~ primary" w="full" m="t-5") List Items
+  button(btn="~ primary" w="full" m="t-5" @click.prevent="listItem") List Items
 
 </template>
 
@@ -71,15 +71,18 @@ const props = defineProps<{
 
 const emit = defineEmits(["closed"])
 
-const quantity = ref<number>(props.quantity || 0)
+const qty = ref<number>(props.quantity || 0)
 const price = ref<number>(0)
 const listing = useListing()
 
 watch(props, (newProps) => {
-  quantity.value = newProps.quantity
+  qty.value = newProps.quantity
 })
 
-
+const listItem = async () => {
+  const listing = useListing()
+  console.log('fisky Listing', await listing.list(toRaw(props.item as SingleItemData), price.value, qty.value, 1685019917))
+}
 
 </script>
 
