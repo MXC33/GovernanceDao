@@ -7,26 +7,17 @@ Transition(name="slide-top")
       PageHeaderDetailsDescription(
         v-for="stringIndexY in stringTitles[stringIndexX - 1].length - 1" 
         :title="stringTitles[stringIndexX - 1][stringIndexY]"
-        :description="stringTitlesDetails[stringIndexX - 1][stringIndexY - 1]") 
+        :description="descriptionArr[stringIndexX - 1][stringIndexY - 1]") 
 </template> 
 
 <script lang="ts" setup>
 // import data from '~/lang/en-US.json';
-
 // const stringTitles = data.mpFullscreen.headers.buyIxtDropDown.stringTitles
 // const stringTitlesDetails = data.mpFullscreen.headers.buyIxtDropDown.stringTitlesDetails
 
-const stringTitles = [
-  ["Swap", "Swap To IXT",], 
-  ["Brige","Polygon",], 
-  ["Supply", "IXT/USDT", "IXT/MATIC"], 
-  ["Capital", "Lend Capital",],
-]  
+const props = defineProps<{
+  stringTitles: string[][],
+  descriptionArr: string[][],
+}>()
 
-const stringTitlesDetails = [
-  ["Swap any crypto or fiat to ixt",], 
-  ["Brige tokens to polygon blockchain"], 
-  ["Secure IXT/USDT liquidity, earn 7% APR", "Secure IXT/MATIC liquidity, earn 7% APR"], 
-  ["Lend 100x IXT with USDT as collateral",]
-]  
 </script>

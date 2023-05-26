@@ -50,7 +50,7 @@ VList(pos="sticky top-0" z="99" w="full")
                 HeaderLink(to="/") + staking
                 HeaderLink(to="/") + community
 
-  PageHeaderDetails()
+  PageHeaderDetails(:stringTitles="stringTitles" :descriptionArr="stringTitlesDetails")
 </template>
 
 <script lang="ts" setup>
@@ -60,7 +60,19 @@ import Hamburger from '~/assets/images/header/hamburger.svg'
 import PlanetIX from '~/assets/images/header/planetix.svg'
 import PlanetIXNew from '~/assets/images/header/planetix-new.svg'
 
+const stringTitles = [
+  ["Swap", "Swap To IXT",], 
+  ["Brige","Polygon",], 
+  ["Supply", "IXT/USDT", "IXT/MATIC"], 
+  ["Capital", "Lend Capital",],
+]  
 
+const stringTitlesDetails = [
+  ["Swap any crypto or fiat to ixt",], 
+  ["Brige tokens to polygon blockchain"], 
+  ["Secure IXT/USDT liquidity, earn 7% APR", "Secure IXT/MATIC liquidity, earn 7% APR"], 
+  ["Lend 100x IXT with USDT as collateral",]
+]  
 
 const { gotoIXPage } = useIXLinks()
 const { user } = useUser()
