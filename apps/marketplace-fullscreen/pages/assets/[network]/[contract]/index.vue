@@ -7,65 +7,64 @@ button(@click="loadMore") LoadMore
 <script lang="ts" setup>
 
 import { useCollectionSettings } from "~/composables/useCollection";
-import type { CollectionData, CollectionPayload } from '~/composables/useCollection';
+import type { CollectionPayload } from '~/composables/useCollection';
 
 const route = useRoute()
 const { contract } = route.params
 const body = ref<CollectionPayload>({
-    page_key: 0,
-    order: 0,
-    filter: {
-        owned: false,
-        type: 0,
-        search: "",
-        attributes: []
-    }
+  page_key: 0,
+  order: 0,
+  filter: {
+    owned: false,
+    type: 0,
+    search: "",
+    attributes: []
+  }
 })
 const loadMore = () => {
-    body.value.page_key = Number(data.value?.page_key)
-    refresh()
+  body.value.page_key = Number(data.value?.page_key)
+  refresh()
 }
 const { data: data, execute: fetchCollection, refresh: refresh } = useCollectionData(String(contract), body.value)
+
+await fetchCollection()
 
 const { activeFilters } = useCollectionSettings()
 
 const createFilters = () => {
-    if (data.value)
-        activeFilters.value = data.value.filters.map((filter) => ({
-            ...filter,
-            value: filter.value.map((name) => ({
-                name,
-                selected: false
-            }))
-        }))
+  if (data.value)
+    activeFilters.value = data.value.filters.map((filter) => ({
+      ...filter,
+      value: filter.value.map((name) => ({
+        name,
+        selected: false
+      }))
+    }))
 }
 
 watch(() => data, (value) => {
-    if (activeFilters.value.length < 1)
-        createFilters()
+  if (activeFilters.value.length < 1)
+    createFilters()
 }, { deep: true })
 
 watch(() => activeFilters, () => {
-    body.value.page_key = 0
-    body.value.filter.attributes = []
-    activeFilters.value.forEach((name) => {
-        name.value.forEach((value) => {
-            if (value.selected)
-                body.value.filter.attributes.push({
-                    trait_type: name.trait_type,
-                    value: value.name
-                })
+  body.value.page_key = 0
+  body.value.filter.attributes = []
+  activeFilters.value.forEach((name) => {
+    name.value.forEach((value) => {
+      if (value.selected)
+        body.value.filter.attributes.push({
+          trait_type: name.trait_type,
+          value: value.name
         })
     })
-    if (data.value)
-        data.value.nfts = []
-    refresh()
-}, { immediate: true, deep: true })
-//
+  })
+  if (data.value)
+    data.value.nfts = []
+  refresh()
+}, { deep: true })
+
 onBeforeUnmount(() => {
-    activeFilters.value = []
-})
-onMounted(() => {
-    fetchCollection()
+  activeFilters.value = []
 })
 </script>
