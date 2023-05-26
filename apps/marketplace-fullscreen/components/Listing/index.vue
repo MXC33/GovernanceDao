@@ -1,12 +1,22 @@
 <template lang="pug">
 Popup()
   template(#icon)
-    TransferIcon()
+    ListingIcon()
 
   template(#header) {{ $t(`marketplace.list.title`) }}
 
   template(#default)
     VList()
+      VList()
+        HList(text="lg" font="bold" justify="between")
+          span() Your Balance
+          span() 123718 IXT
+        HList(justify="end" color="gray-200")
+          span(mb="4") $8.4
+
+      CollectionFilterDrawer(:is-small="true" :is-neutral="true" mx="-6" mb="4" b="t-1 gray-600")
+        template(#header) APPLY TO ALL
+
       ListingItem(v-for="(item, index) in listItems" v-model="listItems[index]")
 
     //- HList(w="full" justify="between" gap="4" v-if="item.sale_price")
@@ -63,7 +73,7 @@ Popup()
 
 <script lang="ts" setup>
 import type { SingleItemData } from "@ix/base/composables/Token/useIXToken"
-import TransferIcon from '~/assets/icons/transfer.svg'
+import ListingIcon from '~/assets/icons/listing.svg'
 
 defineEmits(['close'])
 

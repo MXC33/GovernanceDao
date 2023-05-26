@@ -181,7 +181,7 @@
       "transferItem": "Transfer Item"
     },
     "list": {
-      "title": "List Asset",
+      "title": "List Item",
       "quantity": "Quantity",
       "own": "You own",
       "walletAdress": "Wallet Adress",
