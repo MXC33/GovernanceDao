@@ -7,7 +7,7 @@ VList(space-y="8")
 
   HList(items="center" space-x="2")
     span(color="gray-50" font="bold" text="3xl")
-      slot(name="header")
+      div() My Assets
 
   HList(w="full")
     slot(name="attributes")
