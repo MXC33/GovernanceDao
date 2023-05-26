@@ -1,7 +1,7 @@
 <template lang="pug">
 VList()
   Transition(name="fade-slow" mode="in-out")
-    HList(w="full" bg="ix-black" pos="sticky top-52" z="4" px="3 on-open:0" pb="3" space-x="4" :open="isOpen")
+    HList(w="full" bg="ix-black" pos="sticky top-52" z="3" px="3 on-open:0" pb="3" space-x="4" :open="isOpen")
       CollectionFilterButton() NetEmpire
       CollectionFilterButtonClearAll()
 
