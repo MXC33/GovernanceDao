@@ -15,10 +15,17 @@ table(bg="gray-900" w="full")
           Currency(:value="row[item.value]" type="usd" v-else-if="item.type == 'usd'")
           span(v-else) {{row[item.value]}}
 
+      TableButtonGroupIncomingBid(v-if="hasButton == 'incoming'") 
+      TableButtonGroupOutgoingBid(v-if="hasButton == 'outgoing'")
+
+
+
 </template>
 
 <script setup lang="ts" generic="Row extends TableRow">
 import type { TableColumn, TableRow } from '~/composables/useTable';
+
+type ButtonTypes = 'incoming' | 'outgoing'
 
 const props = defineProps<{
   columns: TableColumn<Row>[],
@@ -27,6 +34,7 @@ const props = defineProps<{
   inDrawer?: boolean,
   loading?: boolean,
   error?: string,
+  hasButton?: ButtonTypes
 }>()
 
 const { sortedRows, sort, selectSortField, toggleSortDirection } = useTable(props.rows, props.id)

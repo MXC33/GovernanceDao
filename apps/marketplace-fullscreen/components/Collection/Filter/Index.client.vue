@@ -12,7 +12,7 @@ HList(w="full" pos="sticky top-34" z="4")
 
           TokenName(:token="item" capitalize="~" :key="'name' + getTokenKey(item)")
 
-    CollectionFilterToggleDisplay()
+    CollectionFilterToggleDisplay(v-if="!hideToggle")
     
 </template>
 
@@ -22,7 +22,8 @@ import type { IXToken } from '@ix/base/composables/Token/useIXToken';
 const { getTokenKey } = useTokens()
 defineProps<{
   items: IXToken[],
-  filters: any[]
+  filters: any[],
+  hideToggle?: boolean
 }>()
 
 defineEmits<{

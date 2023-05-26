@@ -1,5 +1,7 @@
 <template lang="pug">
-div(ml="-8" mr="-8" pos="sticky top-33" z="5" b="on-scrolling:b-1 gray-400" :scrolling="isScrolling")
+ClientOnly
+  Transition(name="fade-slow" mode="in-out")
+    div(ml="-8" mr="-8" pos="sticky top-33" z="99" b="on-scrolling:b-1 gray-400" :scrolling="isScrolling")
 </template>
 
 <script lang="ts" setup>

@@ -1,15 +1,13 @@
 <template lang="pug">
 VList(flex-grow="1" min-h="0" pos="relative" p="8" space-y="6")
-  MyAssetsHeader() 
-    template(#header) 
-      slot(name="name")
+  AccountHeader() 
 
     template(#attributes)
       AttributeList(:attributes="attributes" v-if="data")
 
-  MyAssetsMenu()
+  AccountMenu()
   HelperBorderScroll()
-  CollectionFilter(:items="data.nfts" :filters="data.filters" v-if="data"  @toggle-filter="toggleFilterDrawer")
+  CollectionFilter(:items="data.nfts" :filters="data.filters" v-if="data"  @toggle-filter="toggleFilterDrawer" :hide-toggle="true")
 
   HList(space-x="3" pos="relative")
     VList(pos="sticky top-48")
@@ -17,15 +15,14 @@ VList(flex-grow="1" min-h="0" pos="relative" p="8" space-y="6")
         CollectionFilterSlideout(:items="data.filters" v-if="showFilters && data")
 
     Transition(name="fade" mode="out-in" v-if="data")
-      CollectionGrid(v-if="displayType == 'grid'" w="full")
-        CollectionGridItem.collection-grid-item(:token="token" v-for="token in data.nfts" b="gray-400")
-
-      Table(:columns="columns" :rows="rows" v-else id="collection")
+      Table(:columns="columns" :rows="rows" id="collection" :has-button="'incoming'")
         template(#item-name="{row}")
           HList(items="center" space-x="2" font="bold")
             div(w="12" h="12")
               TokenImage(:token="row" w="12" h="12" :key="getTokenKey(row)")
             TokenName(:token="row" capitalize="~" :key="getTokenKey(row)")
+        template(#button)
+          div() Hello
 
   Transition(name="slide-bottom")
     CollectionSelectBar(v-if="cartItems.length > 0")
@@ -35,14 +32,13 @@ VList(flex-grow="1" min-h="0" pos="relative" p="8" space-y="6")
 import type { CollectionData } from '~/composables/useCollection';
 import type { TableColumn } from '~/composables/useTable'
 
-const { displayType } = useCollectionSettings()
+const { displayType, toggleDisplayType } = useCollectionSettings()
 const { getTokenKey } = useTokens()
 const { cartItems } = useCart()
 const { ixtAsUSD } = useIXTPrice()
 
 const { getCollectionAttributes } = useDefaulAttributes()
 const attributes = computed(() => data ? getCollectionAttributes(data) : [])
-
 
 const rows = computed(() => (data?.nfts ?? []).map((row) => ({
   ...row,
@@ -69,15 +65,10 @@ const { data } = defineProps<{
   data?: CollectionData,
 }>()
 
+console.log("Data", rows.value)
 
 watch(rows, () => {
-  console.log("New rows")
+  console.log("New rows", rows.value)
 }, { deep: true })
 
 </script>
-  
-<style>
-.collection-grid-item:nth-child(5n + 6) {
-  border: 0px;
-}
-</style>
