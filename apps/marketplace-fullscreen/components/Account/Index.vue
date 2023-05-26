@@ -16,7 +16,9 @@ VList(flex-grow="1" min-h="0" pos="relative" p="8" space-y="6")
 
     Transition(name="fade" mode="out-in" v-if="data")
       CollectionGrid(v-if="displayType == 'grid'" w="full" :is-open="showFilters")
-        CollectionGridItem.collection-grid-item(:token="token" v-for="token in data.nfts" b="gray-400")
+        CollectionGridItem.collection-grid-item(:token="token" v-for="token in data.nfts" b="gray-400" :page="'myAssets'")
+
+
 
       Table(:columns="columns" :rows="rows" v-else id="collection")
         template(#item-name="{row}")
