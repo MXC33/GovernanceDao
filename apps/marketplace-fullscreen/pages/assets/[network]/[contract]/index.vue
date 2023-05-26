@@ -6,31 +6,31 @@ button(@click="loadMore") LoadMore
 
 <script lang="ts" setup>
 
-import {useCollectionSettings} from "~/composables/useCollection";
-import type {CollectionData, CollectionPayload } from '~/composables/useCollection';
+import { useCollectionSettings } from "~/composables/useCollection";
+import type { CollectionData, CollectionPayload } from '~/composables/useCollection';
 
 const route = useRoute()
-const { collection } = route.params
+const { contract } = route.params
 const body = ref<CollectionPayload>({
     page_key: 0,
     order: 0,
     filter: {
         owned: false,
-        type:0,
+        type: 0,
         search: "",
         attributes: []
     }
 })
-const loadMore = () =>{
+const loadMore = () => {
     body.value.page_key = Number(data.value?.page_key)
     refresh()
 }
-const { data: data, execute: fetchCollection, refresh: refresh } = useCollectionData(String(collection), body.value )
+const { data: data, execute: fetchCollection, refresh: refresh } = useCollectionData(String(contract), body.value)
 
 const { activeFilters } = useCollectionSettings()
 
 const createFilters = () => {
-    if(data.value)
+    if (data.value)
         activeFilters.value = data.value.filters.map((filter) => ({
             ...filter,
             value: filter.value.map((name) => ({
@@ -41,7 +41,7 @@ const createFilters = () => {
 }
 
 watch(() => data, (value) => {
-    if(activeFilters.value.length < 1)
+    if (activeFilters.value.length < 1)
         createFilters()
 }, { deep: true })
 
@@ -50,14 +50,14 @@ watch(() => activeFilters, () => {
     body.value.filter.attributes = []
     activeFilters.value.forEach((name) => {
         name.value.forEach((value) => {
-            if(value.selected)
+            if (value.selected)
                 body.value.filter.attributes.push({
                     trait_type: name.trait_type,
                     value: value.name
                 })
         })
     })
-    if(data.value)
+    if (data.value)
         data.value.nfts = []
     refresh()
 }, { immediate: true, deep: true })
