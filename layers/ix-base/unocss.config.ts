@@ -74,7 +74,8 @@ export default definePreset({
       'inset-0': 'left-0 top-0 right-0 bottom-0',
       'offscreen': 'pos-absolute pos-left--999 opacity-0 h-0',
       'modal': 'bg-mc-orange blur-10',
-      'pos-absolute-center': 'pos-absolute pos-left-50% pos-top-50% translate-x--50% translate-y--50%'
+      'pos-absolute-center': 'pos-absolute pos-left-50% pos-top-50% translate-x--50% translate-y--50%',
+      'disable-active': 'pointer-events-none opacity-20 cursor-default'
     },
 
     {

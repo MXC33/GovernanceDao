@@ -13,10 +13,10 @@ export default defineConfig({
       //@ts-ignore
       ...baseLayer.theme.colors,
       ix: {
-        primary: '#FF0014',
+        primary: '#CB0010',
       },
       corp: {
-        ne: '#CB0010'
+        ne: '#FF0014'
       }
     },
     shortcuts: [

@@ -27,10 +27,9 @@ import {usePopups} from "~/composables/usePopups";
 
 defineEmits(["transfer"])
 
-const { popupNotification, setPopupTimeout } = usePopups()
+const { displayNotification } = useNotifications()
 
 const copyCurrentUrlToClipboard = async () => {
-  popupNotification.value = 'copy-link'
   const currentUrl = window.location.href;
 
   try {
@@ -38,7 +37,7 @@ const copyCurrentUrlToClipboard = async () => {
   } catch (error) {
     console.error('Failed to copy URL to clipboard:', error)
   }
-  setPopupTimeout()
+  displayNotification('copy-link')
 }
 
 </script>

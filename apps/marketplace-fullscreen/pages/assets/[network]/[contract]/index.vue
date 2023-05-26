@@ -6,66 +6,54 @@ button(@click="loadMore") LoadMore
 
 <script lang="ts" setup>
 
-import { useCollectionSettings } from "~/composables/useCollection";
-import type { CollectionData, CollectionPayload } from '~/composables/useCollection';
+import { type FilterPayload, useCollectionSettings } from "~/composables/useCollection";
+import type { CollectionPayload } from '~/composables/useCollection';
+
+const { activeFilters, createFilters, filtersAsPayload } = useCollectionSettings()
 
 const route = useRoute()
 const { contract } = route.params
-const body = ref<CollectionPayload>({
-    page_key: 0,
-    order: 0,
-    filter: {
-        owned: false,
-        type: 0,
-        search: "",
-        attributes: []
-    }
-})
+
+const activePage = ref(0)
+
+const body = computed<CollectionPayload>(() => ({
+  page_key: activePage.value,
+  order: 0,
+  filter: {
+    owned: false,
+    type: 0,
+    search: "",
+    attributes: filtersAsPayload.value
+  }
+}))
+
+const { data: data, execute: fetchCollection, refresh: refresh } = useCollectionData(String(contract), body)
+
 const loadMore = () => {
-    body.value.page_key = Number(data.value?.page_key)
-    refresh()
-}
-const { data: data, execute: fetchCollection, refresh: refresh } = useCollectionData(String(contract), body.value)
-
-const { activeFilters } = useCollectionSettings()
-
-const createFilters = () => {
-    if (data.value)
-        activeFilters.value = data.value.filters.map((filter) => ({
-            ...filter,
-            value: filter.value.map((name) => ({
-                name,
-                selected: false
-            }))
-        }))
+  activePage.value = Number(data.value?.page_key)
+  refresh()
 }
 
-watch(() => data, (value) => {
-    if (activeFilters.value.length < 1)
-        createFilters()
+await fetchCollection()
+
+
+watch(activeFilters, () => {
+  activePage.value = 0
+  refresh()
+  console.log("New filter")
 }, { deep: true })
 
-watch(() => activeFilters, () => {
-    body.value.page_key = 0
-    body.value.filter.attributes = []
-    activeFilters.value.forEach((name) => {
-        name.value.forEach((value) => {
-            if (value.selected)
-                body.value.filter.attributes.push({
-                    trait_type: name.trait_type,
-                    value: value.name
-                })
-        })
-    })
-    if (data.value)
-        data.value.nfts = []
-    refresh()
-}, { immediate: true, deep: true })
-//
+watch(data, (value) => {
+  if (!value)
+    return
+
+  if (activeFilters.value.length < 1)
+    createFilters(value)
+
+}, { deep: true })
+
 onBeforeUnmount(() => {
-    activeFilters.value = []
+  activeFilters.value = []
 })
-onMounted(() => {
-    fetchCollection()
-})
+
 </script>
