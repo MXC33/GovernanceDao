@@ -15,8 +15,8 @@ table(bg="gray-900" w="full")
           Currency(:value="row[item.value]" type="usd" v-else-if="item.type == 'usd'")
           span(v-else) {{row[item.value]}}
 
-      TableButtonGroupIncomingBid(v-if="hasButton == 'incoming'") 
-      TableButtonGroupOutgoingBid(v-if="hasButton == 'outgoing'")
+      TableButtonGroupIncomingBid(v-if="hasButton == 'incoming'" :row="row") 
+      TableButtonGroupOutgoingBid(v-if="hasButton == 'outgoing'" :row="row")
 
 
 
