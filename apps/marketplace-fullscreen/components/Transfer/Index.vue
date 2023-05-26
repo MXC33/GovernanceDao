@@ -68,7 +68,7 @@ const itemTransfer = () => {
     return console.log("ERROR, no token ID")
 
   if (isERC1155.value)
-    return transferERC1155NFT(collection, wallet.value, token_id, 1)
+    return transferERC1155NFT(collection, wallet.value, token_id, transferItem.value.value)
 
   return transferERC721NFT(collection, wallet.value, token_id)
 }

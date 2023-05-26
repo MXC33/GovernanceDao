@@ -20,11 +20,11 @@ VList(v-if="item")
 <script lang="ts" setup>
 import type { TransferItem } from '~/composables/useTransfer';
 
-const props = defineProps<{
+const props = defineProps<{//props can not be changed/mutated
   showAdjustable: boolean,
 }>()
 
-const item = defineModel<TransferItem>()
+const item = defineModel<TransferItem>()//v-Model in parent can be changed/mutated
 
 const { getTokenKey, getTokenName } = useTokens()
 
