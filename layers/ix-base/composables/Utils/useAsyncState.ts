@@ -1,7 +1,6 @@
-import { Ref } from "vue"
-import {CollectionData} from "@ix/marketplace/composables/useCollection";
 
 interface AsyncStateOptions<T, O> {
+  page?: MaybeRef<number>,
   transform?: (input: T) => O
 }
 
@@ -57,15 +56,13 @@ export function useAsyncDataStatePagination<T extends O, O>(key: string, fetchDa
     pending.value = true
     const response = await fetchData()
     const transformedResponse = transform(response) as CollectionData
-    console.log('response', response)
-    console.log('transform(response)', transform(response))
-    if(!data.value)
+
+    if (!data.value)
       data.value = transformedResponse
-    else{
+    else {
       data.value.page_key = transformedResponse.page_key
       data.value.nfts = data.value.nfts.concat(transformedResponse.nfts)
     }
-    console.log('data.value.nfts', data.value.nfts.length)
     pending.value = false
   }
 

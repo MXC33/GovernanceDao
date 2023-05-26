@@ -36,10 +36,6 @@ import type { SingleItemData } from '@ix/base/composables/Token/useIXToken';
 
 const transferVisible = ref(false)
 
-// const openCloseTransfer = () => {
-//   popupModal.value = !popupModal.value
-// }
-
 const { item } = defineProps<{
   item: SingleItemData
 }>()
