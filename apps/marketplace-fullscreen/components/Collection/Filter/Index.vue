@@ -13,7 +13,7 @@ HList(w="full" pos="sticky top-34" z="4")
           TokenName(:token="item" capitalize="~" :key="'name' + getTokenKey(item)")
 
     CollectionFilterToggleDisplay()
-    
+
 </template>
 
 <script lang="ts" setup>

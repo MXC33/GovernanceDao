@@ -16,7 +16,8 @@ VList(flex-grow="1" min-h="0" pos="relative" p="8" space-y="6")
         CollectionFilterSlideout(:items="data.filters" v-if="showFilters && data")
 
     Transition(name="fade" mode="out-in" v-if="data")
-      CollectionGrid(v-if="displayType == 'grid'" w="full")
+
+      CollectionGrid(v-if="displayType == 'grid'" w="full" :is-open="!showFilters")
         CollectionGridItem.collection-grid-item(:token="token" v-for="token in data.nfts" b="gray-400")
 
       Table(:columns="columns" :rows="rows" v-else id="collection")
@@ -64,6 +65,11 @@ const showFilters = ref(false)
 const toggleFilterDrawer = () => {
   showFilters.value = !showFilters.value
 }
+
+const isFilterActive = computed(() => {
+  if (showFilters.value = true)
+    return true
+})
 
 const { data } = defineProps<{
   data?: CollectionData,

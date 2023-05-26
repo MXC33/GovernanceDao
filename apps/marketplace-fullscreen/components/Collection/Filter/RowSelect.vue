@@ -1,10 +1,12 @@
 <template lang="pug">
-button(flex="~ " justify="between" items="center" font="bold" uppercase="~" h="12" bg="ix-black hover:gray-900 on-selected:gray-900" p="r-8" w="full" :selected="isSelected" @click.stop="toggle" group)
-  HList(space-x="4" w="full" justify="between")
-    InputCheckbox(v-model="isSelected")
-      slot()
+button(flex="~ " justify="between" items="center" h="12" bg="ix-black hover:gray-900 on-selected:gray-900" p="r-8" w="full" :selected="isSelected" @click.stop="toggle" group)
+  HList(space-x="4" w="full" justify="between" items="center")
+    HList(items="center")
+      InputCheckbox(v-model="isSelected")
+      span(translate-y="0.4")
+        slot()
 
-    span(color="gray-200" font="normal")
+    span(color="gray-200" font="base")
       slot(name="value")
 
 </template>
