@@ -9,11 +9,11 @@ VList(v-if="item")
 
     div(flex="grow")
     VList(items="center")
-      div(v-html="$t(`mpFullscreen.transfer.own`)") 
+      div(v-html="$t(`marketplace.transfer.own`)") 
       div() {{item.token.my_shares}}          
 
   VList(v-if="showAdjustable" space-y="3")
-    div(v-html="$t(`mpFullscreen.transfer.quantity`)") 
+    div(v-html="$t(`marketplace.transfer.quantity`)") 
     Adjustable(v-model="item" h="10")
 </template>
 

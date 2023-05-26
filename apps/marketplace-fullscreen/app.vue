@@ -5,12 +5,12 @@
 
     NuxtPage()
 
-    div#popups()
+    PopupList()
 
     div#infobox(:style="values" z="400" pos="absolute")
 
     Transition(name="fade-slow" mode="in-out")
-      HelperNotification(v-if="popupNotification")
+      HelperNotification(v-if="activeNotification" :type="activeNotification")
 
 </template>
 
@@ -21,10 +21,12 @@ const globalY = useGlobalWindowScroll()
 const { y } = useWindowScroll()
 const { connectWallet, walletState } = useWallet()
 const { setupIXTPrice, ixtPrice } = useIXTPrice()
-const { popupNotification } = usePopups()
-// const { data, execute } = useAsyncDataState('ix-api', async () => 'test')
-// await execute()
+const { activeNotification } = useNotifications()
+
+
 watch(y, (pos) => globalY.value = pos)
+
+
 
 onMounted(async () => {
   const connected = await connectWallet()
@@ -66,5 +68,6 @@ const values = computed(() => {
 body,
 html {
   background: #000;
+  --apply: font-foundry;
 }
 </style>
