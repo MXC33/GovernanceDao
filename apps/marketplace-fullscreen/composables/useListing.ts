@@ -152,28 +152,35 @@ export const useListingContract = () => {
     })
   }
 
+  const createListingsBody = (item: ListingItem, saleMessage: string, endTime: number): ListingsBody => {
+    const { shares, ixtPrice, durationInDays, token: { _index: index, collection, token_id, network } } = item
+
+    const listingAssets: ListingAssets = {
+      index,
+      collection,
+      token_id,
+      network,
+      quantity: shares.value
+    }
+
+    return  {
+      sale_message: saleMessage as string,
+      sale_price: Number(ixtPrice),
+      sale_type: 1, //always 1,
+      sale_endtime: endTime,
+      assets: [listingAssets]
+    }
+  }
+
   const listItem = async (item: ListingItem) => {
     const { shares, ixtPrice, durationInDays, token: { _index: index, collection, token_id, network } } = item
 
     const endTime = Math.floor(add(new Date(), { days: durationInDays }).getTime() / 1000)
     const saleMessage = await createListingMessage(item, endTime)
-
+    if (!saleMessage)
+      return false
     try {
-      const listingAssets: ListingAssets = {
-        index,
-        collection,
-        token_id,
-        network,
-        quantity: shares.value
-      }
-
-      const listingsBody: ListingsBody = {
-        sale_message: saleMessage as string,
-        sale_price: Number(ixtPrice),
-        sale_type: 1, //always 1,
-        sale_endtime: endTime,
-        assets: [listingAssets]
-      }
+      const listingsBody = createListingsBody(item, saleMessage, endTime)
 
       const listEndpoints = useListEndpoints()
       await listEndpoints.listAssets([listingsBody])
@@ -199,8 +206,48 @@ export const useListingContract = () => {
     }
     return true
   }
+  const listItems = async (items: ListingItem[]) => {
+    const listingsBody: ListingsBody[] = []
+
+    for (const item of items) {
+      const { shares, ixtPrice, durationInDays, token: { _index: index, collection, token_id, network } } = item
+
+      const endTime = Math.floor(add(new Date(), { days: durationInDays }).getTime() / 1000)
+      const saleMessage = await createListingMessage(item, endTime)
+      if (!saleMessage)
+        return false
+
+      listingsBody.push(createListingsBody(item, saleMessage, endTime))
+    }
+
+    try {
+      const listEndpoints = useListEndpoints()
+      await listEndpoints.listAssets(listingsBody)
+
+      /*
+        Todo
+        Success message
+      */
+      alert('Success message')
+
+    } catch (error: any) {
+      /*
+        Todo
+        API error
+      */
+      console.log(error.response)
+      if (error.response && error.response._data && error.response._data.message) {
+        alert(error.response._data.message)
+      } else {
+        alert('Something wrong happened!!')
+      }
+      return false
+    }
+    return true
+  }
 
   return {
-    listItem
+    listItem,
+    listItems
   }
 }
