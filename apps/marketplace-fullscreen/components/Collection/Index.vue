@@ -21,6 +21,8 @@ VList(flex-grow="1" min-h="0" pos="relative" p="8" space-y="6" )
 
       CollectionGrid(v-if="displayType == 'grid' && !hideGrid" w="full" :is-open="showFilters")
         CollectionGridItem.collection-grid-item(:token="token" v-for="token in data.nfts" b="gray-400")
+          template(#icon-left)
+            HList(items="center" h="10" color="white" font="bold" bg="gray-600" px="5" cut="bottom-right md") x{{formatMyShareAmount(token.my_shares)}}
 
       Table(:columns="renderColumns" :rows="rows" v-else id="collection")
         template(#item-name="{row}")
@@ -57,6 +59,12 @@ const defaultColumns: TableColumn<IXToken>[] = [
   { label: "USD price", value: "usd", type: 'usd', sortable: true },
   { label: "Best offer", value: "higher_bid_price", type: 'ixt', sortable: true },
 ]
+
+const formatMyShareAmount = (myShares: number) => {
+  if (myShares > 1000)
+    return String(myShares / 1000).substring(0, 4) + "K"
+  return myShares
+}
 
 const renderColumns = computed(() => columns ?? defaultColumns)
 
