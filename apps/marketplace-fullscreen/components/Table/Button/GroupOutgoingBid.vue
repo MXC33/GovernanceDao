@@ -1,7 +1,7 @@
 <template lang="pug">
 HList(items="center" p-t="3" space-x="10")
-  ButtonSound(sound="sm" btn="~ secondary" cut="bottom-right" @click="cancelBidOnClick") Cancel
-  ButtonSound(sound="sm" btn="~ primary" cut="bottom-right" @click="updateBidOnClick") Update
+  ButtonSound(sound="sm" btn="~ secondary" cut="bottom-right md" @click="cancelBidOnClick") Cancel
+  ButtonSound(sound="sm" btn="~ primary" cut="bottom-right md" @click="updateBidOnClick") Update
 </template>
 
 <script setup lang="ts">

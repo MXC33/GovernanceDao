@@ -1,15 +1,14 @@
 <template lang="pug">
-ClientOnly
-  Transition(name="fade-slow" mode="in-out")
-    HList(w="full" bg="ix-black" pos="sticky top-52" z="3" px="0 on-open:3" flex-wrap="~" pb="3" space-x="4" :open="isOpen" gap="0.5")
-      template(v-for="(value, index) in filterValue")
-        CollectionFilterButton(v-if="value.selected") {{ value.name }}
-        CollectionFilterButtonClearAll(v-if="value.selected")
+Transition(name="slide-left")
+  HList(w="full" bg="ix-black" pos="sticky top-52" z="3" px="0 on-open:3" flex-wrap="~" pb="3" space-x="4" :open="isOpen" gap="0.5")
+    template(v-for="(item, filterIndex) in activeFilters")
+      CollectionFilterButton(v-model="activeFilters[filterIndex].value[index].selected" v-for="(option, index) in item.value") {{ option.name }}
+
+    CollectionFilterButtonClearAll(@click="clearFilters" v-if="moreThanOneSelected")
 
 </template>
 
 <script lang="ts" setup>
-const isActive = ref<boolean>(false)
 
 defineProps<{
   isOpen: boolean
@@ -17,8 +16,21 @@ defineProps<{
 
 const { activeFilters } = useCollectionSettings()
 
-const filterValue = computed(() => activeFilters.value.flatMap(item => item.value))
+const numberOfSelected = computed(() => {
+  return activeFilters.value.reduce((count, filter) => {
+    return count + filter.value.filter(option => option.selected).length;
+  }, 0);
+});
 
+const moreThanOneSelected = computed(() => {
+  return numberOfSelected.value > 1;
+});
 
-
+const clearFilters = () => {
+  activeFilters.value.forEach(filter => {
+    filter.value.forEach(option => {
+      option.selected = false;
+    });
+  });
+};
 </script>

@@ -23,9 +23,9 @@ table(bg="gray-900" w="full")
 </template>
 
 <script setup lang="ts" generic="Row extends TableRow">
+import type { ButtonTypes } from '~/composables/useCollection';
 import type { TableColumn, TableRow } from '~/composables/useTable';
 
-type ButtonTypes = 'incoming' | 'outgoing'
 
 const props = defineProps<{
   columns: TableColumn<Row>[],
