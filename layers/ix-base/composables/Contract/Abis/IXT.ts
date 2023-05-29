@@ -8,10 +8,10 @@ import {
 import { EthersContractContextV5 } from 'ethereum-abi-types-generator';
 
 export type ContractContext = EthersContractContextV5<
-  PIXT,
-  PIXTMethodNames,
-  PIXTEventsContext,
-  PIXTEvents
+  IXT,
+  IXTMethodNames,
+  IXTEventsContext,
+  IXTEvents
 >;
 
 export declare type EventFilter = {
@@ -54,12 +54,12 @@ export interface ContractCallOverrides {
    */
   gasLimit?: number;
 }
-export type PIXTEvents = 'Approval' | 'Transfer';
-export interface PIXTEventsContext {
+export type IXTEvents = 'Approval' | 'Transfer';
+export interface IXTEventsContext {
   Approval(...parameters: any): EventFilter;
   Transfer(...parameters: any): EventFilter;
 }
-export type PIXTMethodNames =
+export type IXTMethodNames =
   | 'new'
   | 'allowance'
   | 'approve'
@@ -86,7 +86,7 @@ export interface TransferEventEmittedResponse {
   to: string;
   value: BigNumberish;
 }
-export interface PIXT {
+export interface IXT {
   /**
    * Payable: false
    * Constant: false
