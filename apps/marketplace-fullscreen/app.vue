@@ -32,6 +32,17 @@ watch(y, (pos) => globalY.value = pos)
 
 
 onMounted(async () => {
+  //@ts-ignore
+  const isPaintSupported = !!CSS.paintWorklet
+
+  if (isPaintSupported) {
+    //@ts-ignore
+    CSS.paintWorklet.addModule('/paint/border.js');
+  }
+
+  document.body.classList.toggle('is-paint-supported', isPaintSupported)
+  document.body.classList.toggle('is-not-paint-supported', !isPaintSupported)
+
   try {
     const connected = await connectWallet()
     if (connected)
@@ -48,16 +59,6 @@ onMounted(async () => {
     console.error("Error mounting app", err)
   }
 
-  //@ts-ignore
-  const isPaintSupported = !!CSS.paintWorklet
-
-  if (isPaintSupported) {
-    //@ts-ignore
-    CSS.paintWorklet.addModule('/paint/border.js');
-  }
-
-  document.body.classList.toggle('is-paint-supported', isPaintSupported)
-  document.body.classList.toggle('is-not-paint-supported', !isPaintSupported)
 })
 
 const { x: xpos, y: ypos } = useMouse()

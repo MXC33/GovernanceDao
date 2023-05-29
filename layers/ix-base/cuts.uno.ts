@@ -123,9 +123,6 @@ export const cutRules: Rule<Theme>[] = [
     if (!body)
       return
 
-    console.log("VARIANTS", variantHandlers)
-    console.log("VARIANT MATCH", variantMatch)
-
     const data = parseColor(body, theme)
     if (!data)
       return
