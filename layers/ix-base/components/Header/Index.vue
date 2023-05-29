@@ -64,7 +64,7 @@ import IconSoundOff from '~/assets/images/sound/sound-off.svg'
 import Hamburger from '~/assets/images/header/hamburger.svg'
 import PlanetIX from '~/assets/images/header/planetix.svg'
 import PlanetIXNew from '~/assets/images/header/planetix-new.svg'
-import type { CategoryHeaderObject, AllCategoryHeaderObject} from '~/composables/useSiteHeader'
+import type { CategoryHeaderObject, AllCategoryHeaderObject } from '~/composables/useSiteHeader'
 //const { OnClickSubHeader } = useSiteHeader()
 
 const menuTabs = ["buy ixt", "play now", "staking", "community"]
@@ -73,8 +73,8 @@ const showMenu = ref(false)
 
 const OpenMeny = (index: number) => {
   console.log("Open Menu", index);
-  
-  if(menuIndex.value == index)
+
+  if (menuIndex.value == index)
     return showMenu.value = !showMenu.value;
 
   menuIndex.value = index
@@ -83,7 +83,7 @@ const OpenMeny = (index: number) => {
 
 
 
-const buyIXTHeaders : CategoryHeaderObject[] = [
+const buyIXTHeaders: CategoryHeaderObject[] = [
   {
     title: "Buy IXT",
     subHeaders: [
@@ -141,43 +141,43 @@ const buyIXTHeaders : CategoryHeaderObject[] = [
   }
 ]
 
-const playNowHeaders : CategoryHeaderObject[] = [
+const playNowHeaders: CategoryHeaderObject[] = [
   {
     title: "The Game",
     subHeaders: [
       {
         title: "Terminal",
         description: "Your personal game lobby",
-        image: "",
+        image: "swap",
         useLink: false,
         link: ""
       },
       {
         title: "Marketplace",
         description: "Explore land & trade assets at NetEmpire.",
-        image: "",
+        image: "market",
         useLink: false,
         link: ""
       },
       {
         title: "IX Arean",
         description: "COMING SOON",
-        image: "",
+        image: "trophy",
         useLink: false,
         link: ""
-      },      {
+      }, {
         title: "Mission Control",
         description: "Farm, stake and earn.",
-        image: "",
+        image: "mc",
         useLink: false,
         link: ""
-      },      {
+      }, {
         title: "Gamebook",
         description: "Deepdive into the Planet IX ecosystem.",
-        image: "",
+        image: "gamebook",
         useLink: false,
         link: ""
-      },      
+      },
     ]
   },
   {
@@ -186,14 +186,14 @@ const playNowHeaders : CategoryHeaderObject[] = [
       {
         title: "AOC Badge",
         description: "Upgrade your AOC badge for greater utility.",
-        image: "",
+        image: "aoc",
         useLink: false,
         link: ""
       },
       {
         title: "Avatar",
         description: "Burn Avatars for in-game utility.",
-        image: "",
+        image: "avatar",
         useLink: false,
         link: ""
       },
@@ -212,35 +212,35 @@ const playNowHeaders : CategoryHeaderObject[] = [
       {
         title: "Game perfoamce",
         description: "Daily players, transaction volume and more.",
-        image: "",
+        image: "performance",
         useLink: false,
         link: ""
       },
       {
         title: "NFT perfoamce",
         description: "Dashboard reflecting our NFT assets performance.",
-        image: "",
+        image: "performance",
         useLink: false,
         link: ""
       },
       {
         title: "Vesting Schedule",
         description: "IX token vesting schedule.",
-        image: "",
+        image: "vesting",
         useLink: false,
         link: ""
       },
       {
         title: "IXT perfoamce",
         description: "IX Token holders, stakers and more.",
-        image: "",
+        image: "performance",
         useLink: false,
         link: ""
       },
       {
         title: "Smart Contracts",
         description: "Officials links to all Planet IX contracts.",
-        image: "",
+        image: "smartcontract",
         useLink: false,
         link: ""
       }
@@ -265,7 +265,7 @@ const showIFrame = ref(false)
 
 const onClicked = (x: number, y: number) => {
   //console.log(mainHeaders[x].subHeaders[y])
-  if(x == 0 && y == 1){
+  if (x == 0 && y == 1) {
     console.log("In if")
     showIFrame.value = true
   }
@@ -273,8 +273,8 @@ const onClicked = (x: number, y: number) => {
   //return goToPage(mainHeaders[x].subHeaders[y].title)
 }
 
-const goToPage = (title:string) => {
-  switch(title) {
+const goToPage = (title: string) => {
+  switch (title) {
     case 'Polygon':
       return window.location.href = 'https://dashboard.ix.foundation/'
   }
@@ -289,14 +289,14 @@ const toggleMenu = () => {
 
 // const stringTitlesDetails = [
 //   [
-//     ["Swap any crypto or fiat to ixt",], 
-//     ["Brige tokens to polygon blockchain"], 
-//     ["Secure IXT/USDT liquidity, earn 7% APR", "Secure IXT/MATIC liquidity, earn 7% APR"], 
+//     ["Swap any crypto or fiat to ixt",],
+//     ["Brige tokens to polygon blockchain"],
+//     ["Secure IXT/USDT liquidity, earn 7% APR", "Secure IXT/MATIC liquidity, earn 7% APR"],
 //     ["Lend 100x IXT with USDT as collateral",]
 //   ],
 //   [
-//     ["Your personal game lobby", "explore land & trande assets at NetEmpire","Coming soon", "Farm, stake and earn"], 
-//     ["Upgrade you AOC badge for greater utility", "Burn Avatars for in-game utility", "Claim arcade airdrops"], 
+//     ["Your personal game lobby", "explore land & trande assets at NetEmpire","Coming soon", "Farm, stake and earn"],
+//     ["Upgrade you AOC badge for greater utility", "Burn Avatars for in-game utility", "Claim arcade airdrops"],
 //     [ "Daily players, transaction volume and more.",
 //       "Dashboard reflecting our NFT assets performance.",
 //       "IX token vesting schedule.",
