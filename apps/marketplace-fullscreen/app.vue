@@ -1,5 +1,5 @@
 <template lang="pug">
-#app.antialiased(font="foundry" bg="ix-black" color="white" text="sm md:md" ref="app" overscroll="none" flex="~ col grow")
+#app.antialiased(font="foundry" bg="ix-black" color="white" text="lt-md:sm" ref="app" overscroll="none" flex="~ col grow")
   NuxtLayout()
     NuxtLoadingIndicator(color="rgb(255, 102, 71)")
 
@@ -23,19 +23,30 @@ const { connectWallet, walletState } = useWallet()
 const { setupIXTPrice, ixtPrice } = useIXTPrice()
 const { activeNotification } = useNotifications()
 
+const { setRefreshToken } = useLogin()
+const { user } = useUser()
+
 
 watch(y, (pos) => globalY.value = pos)
 
 
 
 onMounted(async () => {
-  const connected = await connectWallet()
-  if (connected)
-    walletState.value = 'connected'
+  try {
+    const connected = await connectWallet()
+    if (connected)
+      walletState.value = 'connected'
 
-  await setupIXTPrice()
+    if (user.value)
+      setRefreshToken(0)
 
-  console.log("price", ixtPrice.value)
+    await setupIXTPrice()
+
+    console.log("price", ixtPrice.value)
+
+  } catch (err) {
+    console.error("Error mounting app", err)
+  }
 
   //@ts-ignore
   const isPaintSupported = !!CSS.paintWorklet

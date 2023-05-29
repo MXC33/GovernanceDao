@@ -60,9 +60,9 @@ export default definePreset({
         'orange': '#FF6647',
       },
 
-      'condition': {
+      'semantic': {
         'finegreen': '#14C75C',
-        'yellow': '#F6BA1E',
+        'warning': '#F6BA1E',
         'red': '#E52424',
       },
     },
@@ -84,7 +84,7 @@ export default definePreset({
       'btn-accent': 'btn-primary btn-solid',
       'btn-primary': 'btn-solid bg-ix-primary color-white',
       'btn-secondary': 'btn-solid bg-gray-600 color-white',
-      'btn-form': 'font-400 p-3 b-0.5 b-gray-400',
+      'btn-form': 'font-400 p-3 cut-bottom-right cut-b-gray-400 hover:cut-b-gray-300',
     },
 
     {

@@ -1,5 +1,5 @@
 <template lang="pug">
-VList(space-y="3")
+VList(space-y="6")
   h3(text="3xl" font="bold") {{ item.name }}
 
   AttributeList(:attributes="attributes" v-if="item")

@@ -14,20 +14,3 @@
   inherits: true;
   initial-value: 0;
 }
-
-.is-paint-supported [cut] {
-  --border: 1px;
-  --corner-radius: 0 20 0 0;
-  --stroke-weight: 1;
-  clip-path: polygon(var(--cut-path));
-  position: relative;
-}
-
-.is-paint-supported [cut]:before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  mask: paint(cut-corners);
-  pointer-events: none;
-  transition: background 150ms;
-}

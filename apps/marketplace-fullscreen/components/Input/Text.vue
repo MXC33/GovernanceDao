@@ -1,6 +1,9 @@
 <template lang="pug">
-div(frame="~")
-  input(bg="transparent" p="3" outline="0" v-model="model" w="full" display="block")
+HList(frame="~" items="center")
+  input(bg="transparent" p="x-3 y-2" outline="0" v-model="model" w="full" display="block")
+
+  div(v-if="$slots.suffix" p="x-3" color="gray-200")
+    slot(name="suffix")
 </template>
 
 <script setup lang="ts">
