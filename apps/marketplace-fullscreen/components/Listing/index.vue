@@ -21,10 +21,6 @@ Popup()
             template(#header) Floor price
             template(#button) Set to Floor
 
-
-
-
-
       ListingItem(v-for="(item, index) in listItems" v-model="listItems[index]")
 
   template(#footer)
