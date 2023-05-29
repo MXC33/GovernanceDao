@@ -5,10 +5,12 @@ VList(space-y="2")
 
   div(grid="~ cols-4 gap-3")
     div(grid="col-span-3")
-      slot(name="value")
+      VList()
+        slot(name="value")
 
     div(font="bold")
-      slot(name="action")
+      VList()
+        slot(name="action")
     
 </template>
   

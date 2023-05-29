@@ -23,6 +23,7 @@ import type { SingleItemData } from '@ix/base/composables/Token/useIXToken';
 
 const { ixtToUSD } = useIXTPrice()
 
+
 const { displayPopup } = usePopups()
 const onClickSell = () => {
   displayPopup({
