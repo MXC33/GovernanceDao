@@ -60,9 +60,9 @@ export default definePreset({
         'orange': '#FF6647',
       },
 
-      'condition': {
+      'semantic': {
         'finegreen': '#14C75C',
-        'yellow': '#F6BA1E',
+        'warning': '#F6BA1E',
         'red': '#E52424',
       },
     },
