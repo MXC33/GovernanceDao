@@ -253,19 +253,12 @@ export const getSeaportContract = <T extends ContractInterface<T> & SeaportContr
 
   const fulfillAvailableAdvancedOrders = (advancedOrders: AdvancedOrder[], criteriaResolvers: [], offerFulfillments: [], considerationFulfillments: [], fulfillerConduitKey: string, recipient: string, maximumFulfilled: number) =>
     createTransaction((contract) => {
-    console.log('advancedOrders', advancedOrders)
-    console.log('criteriaResolvers', criteriaResolvers)
-    console.log('offerFulfillments', offerFulfillments)
-    console.log('considerationFulfillments', considerationFulfillments)
-    console.log('fulfillerConduitKey', fulfillerConduitKey)
-    console.log('recipient', recipient)
-    console.log('maximumFulfilled', maximumFulfilled)
       const address = walletAdress.value
       if (!address)
         return undefined
 
       return contract.fulfillAvailableAdvancedOrders(advancedOrders, criteriaResolvers, offerFulfillments, considerationFulfillments, fulfillerConduitKey, recipient, maximumFulfilled)
-    })
+    }, { failMessage : "Checkout failed"})
 
 
 

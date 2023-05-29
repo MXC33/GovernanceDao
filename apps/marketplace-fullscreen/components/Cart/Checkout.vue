@@ -33,13 +33,19 @@ const checkout = async () => {
 
   console.log("cartItems.value", cartItems.value)
 
-  await checkoutItems(cartItems.value, totalPrice.value)
+  const checkout = await checkoutItems(cartItems.value, totalPrice.value)
+  isLoading.value = false
+  if(checkout)
+    didPlaceBids(cartItems.value)
+  else{
+    viewingCart.value = false
+  }
+
 
   // viewingCart.value = false
-  isLoading.value = false
 
-  didPlaceBids(cartItems.value)
 }
+
 
 const totalPrice = computed(() =>
   roundToDecimals(cartItems.value.map((item) =>
