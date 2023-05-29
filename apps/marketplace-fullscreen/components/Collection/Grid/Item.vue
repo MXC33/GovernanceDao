@@ -50,9 +50,10 @@ const onClickListItems = () => {
 }
 
 const onClickItem = () => {
-  const id = props.token.token_id
-  if (id)
-    navigateTo(route.path + `/${id}`)
+  const { token_id, network, collection } = props.token
+
+  if (token_id)
+    navigateTo(`/assets/${network}/${collection}/${token_id}`)
 }
 
 const props = defineProps<{
