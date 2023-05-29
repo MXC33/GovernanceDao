@@ -8,9 +8,9 @@ button(@click="loadNextPage") LoadMore
 const route = useRoute()
 const { contract } = route.params
 
-const { myAssetsURL } = useCollectionsURL()
+const { getCollectionURL } = useCollectionsURL()
 
-const { data: data, execute: fetchCollection, loadNextPage } = useCollectionData(myAssetsURL('polygon'))
+const { data: data, execute: fetchCollection, loadNextPage } = useCollectionData(getCollectionURL(String(contract), 'polygon'))
 
 await fetchCollection()
 
