@@ -216,7 +216,7 @@ export const getIXTokenContract = <T extends ContractInterface<T> & IXTokenContr
         return undefined
 
       const balance = await contract.balanceOf(address)
-      return balance.toNumber()
+      return Number(ethers.utils.formatUnits(balance))
     })
 
   const allowanceCheck = async (amount: number) => {
