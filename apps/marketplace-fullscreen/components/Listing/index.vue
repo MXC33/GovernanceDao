@@ -10,12 +10,16 @@ Popup()
       VList()
         HList(text="lg" font="bold" justify="between")
           span() Your Balance
-          span() 123718 IXT
+          span() {{ isRounded }} IXT
         HList(justify="end" color="gray-200")
           span(mb="4") $
 
-      CollectionFilterDrawer(:is-small="true" :is-neutral="true" mx="-6" mb="4" b="t-1 gray-600")
+      ContentDrawer(frame="none" mx="-6" mb="4" b="t-1 b-1 gray-600" :is-neutral="true")
         template(#header) APPLY TO ALL
+        template(#default)
+          ListingApplyAll()
+            template(#header) Floor price
+            template(#button) Set to Floor
 
       ListingItem(v-for="(item, index) in listItems" v-model="listItems[index]")
 
