@@ -4,11 +4,11 @@ VList(space-y="2")
     slot(name="header")
 
   div(grid="~ cols-4 gap-3")
-    div(grid="col-span-3")
+    div(grid="col-span-3 on-full:col-span-4" :full="!$slots.action")
       VList()
         slot(name="value")
 
-    div(font="bold")
+    div(font="bold" v-if="$slots.action")
       VList()
         slot(name="action")
     
