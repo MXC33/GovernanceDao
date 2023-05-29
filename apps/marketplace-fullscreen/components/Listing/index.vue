@@ -10,7 +10,7 @@ Popup()
       VList()
         HList(text="lg" font="bold" justify="between")
           span() Your Balance
-          span() 123718 IXT
+          span() {{ isRounded }} IXT
         HList(justify="end" color="gray-200")
           span(mb="4") $8.4
 
@@ -55,6 +55,12 @@ const invalidPrice = computed(() => {
   if (!totalIXTPrice.value)
     return '--'
 })
+
+const { ixtBalanceOfUser } = getIXTokenContract()
+
+const balance = await ixtBalanceOfUser()
+const isRounded = roundToDecimals(balance, 2)
+
 
 const onClickList = async () => {
   const list = await listItem(listItems.value[0])
