@@ -89,8 +89,8 @@ const buyIXTHeaders : CategoryHeaderObject[] = [
     subHeaders: [
       {
         title: "Swap",
-        description: "Swap To IXT",
-        image: "",
+        description: "Swap any crypto or fiat to ixt",
+        image: "swap",
         useLink: false,
         link: ""
       }
@@ -102,7 +102,7 @@ const buyIXTHeaders : CategoryHeaderObject[] = [
       {
         title: "Polygon",
         description: "Bridge tokens to Polygon blockchain",
-        image: "",
+        image: "polygon",
         useLink: false,
         link: ""
       }
@@ -114,14 +114,14 @@ const buyIXTHeaders : CategoryHeaderObject[] = [
       {
         title: "IXT/USDT (Quickswap)",
         description: "Secure IXT/USDT liquidity, earn 7% APR.",
-        image: "",
+        image: "usdt",
         useLink: false,
         link: ""
       },
       {
         title: "IXT/MATIC (Sushiswap)",
         description: "Secure IXT/USDT liquidity, earn 4% APR.",
-        image: "",
+        image: "matic",
         useLink: false,
         link: ""
       }
@@ -133,7 +133,7 @@ const buyIXTHeaders : CategoryHeaderObject[] = [
       {
         title: "LEND CAPITAL",
         description: "Lend 100x IXT with USDT as collateral.",
-        image: "",
+        image: "lendCapital",
         useLink: false,
         link: ""
       }
@@ -147,33 +147,33 @@ const playNowHeaders : CategoryHeaderObject[] = [
     subHeaders: [
       {
         title: "Terminal",
-        description: "Swap To IXT",
+        description: "Your personal game lobby",
         image: "",
         useLink: false,
         link: ""
       },
       {
         title: "Marketplace",
-        description: "Swap To IXT",
+        description: "Explore land & trade assets at NetEmpire.",
         image: "",
         useLink: false,
         link: ""
       },
       {
         title: "IX Arean",
-        description: "Swap To IXT",
+        description: "COMING SOON",
         image: "",
         useLink: false,
         link: ""
       },      {
         title: "Mission Control",
-        description: "Swap To IXT",
+        description: "Farm, stake and earn.",
         image: "",
         useLink: false,
         link: ""
       },      {
         title: "Gamebook",
-        description: "Swap To IXT",
+        description: "Deepdive into the Planet IX ecosystem.",
         image: "",
         useLink: false,
         link: ""
@@ -185,21 +185,21 @@ const playNowHeaders : CategoryHeaderObject[] = [
     subHeaders: [
       {
         title: "AOC Badge",
-        description: "Bridge tokens to Polygon blockchain",
+        description: "Upgrade your AOC badge for greater utility.",
         image: "",
         useLink: false,
         link: ""
       },
       {
         title: "Avatar",
-        description: "Bridge tokens to Polygon blockchain",
+        description: "Burn Avatars for in-game utility.",
         image: "",
         useLink: false,
         link: ""
       },
       {
         title: "Arcade",
-        description: "Bridge tokens to Polygon blockchain",
+        description: "Claim Arcade airdrops.",
         image: "",
         useLink: false,
         link: ""
@@ -211,35 +211,35 @@ const playNowHeaders : CategoryHeaderObject[] = [
     subHeaders: [
       {
         title: "Game perfoamce",
-        description: "Secure IXT/USDT liquidity, earn 7% APR.",
+        description: "Daily players, transaction volume and more.",
         image: "",
         useLink: false,
         link: ""
       },
       {
         title: "NFT perfoamce",
-        description: "Secure IXT/USDT liquidity, earn 4% APR.",
+        description: "Dashboard reflecting our NFT assets performance.",
         image: "",
         useLink: false,
         link: ""
       },
       {
         title: "Vesting Schedule",
-        description: "Secure IXT/USDT liquidity, earn 4% APR.",
+        description: "IX token vesting schedule.",
         image: "",
         useLink: false,
         link: ""
       },
       {
         title: "IXT perfoamce",
-        description: "Secure IXT/USDT liquidity, earn 4% APR.",
+        description: "IX Token holders, stakers and more.",
         image: "",
         useLink: false,
         link: ""
       },
       {
         title: "Smart Contracts",
-        description: "Secure IXT/USDT liquidity, earn 4% APR.",
+        description: "Officials links to all Planet IX contracts.",
         image: "",
         useLink: false,
         link: ""
@@ -250,7 +250,7 @@ const playNowHeaders : CategoryHeaderObject[] = [
 
 const getArr = (index: number) => {
   const arr = [buyIXTHeaders, playNowHeaders]
-  return arr[index - 1]
+  return arr[Math.max(0, Math.min(index, arr.length)) - 1]
 }
 
 
@@ -287,59 +287,6 @@ const toggleMenu = () => {
   menuOpen.value = !menuOpen.value
 }
 
-
-// const stringTitles = [
-//   [
-//     /*[
-//       "Main Title", First is always the main title
-//       "sub titles",
-//       "sub titles",
-//       "sub titles",
-//     ]*/
-//     [
-//       "Swap", 
-//       "Swap To IXT",
-//     ], 
-//     [
-//       "Brige ",
-//       "Polygon",
-//     ], 
-//     [
-//       "Supply", 
-//       "IXT/USDT", 
-//       "IXT/MATIC"
-//     ], 
-//     [
-//       "Capital", 
-//       "Lend Capital",
-//     ],
-//   ],
-//   [
-//     [
-//       "The Game", //
-//       "Terminal", 
-//       "Marketplace", 
-//       "IX Arena", 
-//       "Mission Control", 
-//       "Gamebook",
-//     ], 
-//     [
-//       "Claim & Burn",
-//       "AOC Badge", 
-//       "Avatar", 
-//       "Arcade",
-//     ], 
-//     [
-//       "Analytics", 
-//       "Game Performance", 
-//       "NFT Performance", 
-//       "Vesting Schedule", 
-//       "IXT Perfoamce", 
-//       "Smart Contracts"
-//     ], 
-//   ],   
-// ]
-
 // const stringTitlesDetails = [
 //   [
 //     ["Swap any crypto or fiat to ixt",], 
@@ -348,7 +295,7 @@ const toggleMenu = () => {
 //     ["Lend 100x IXT with USDT as collateral",]
 //   ],
 //   [
-//     ["Youe personal game lobby", "explore land & trande assets at NetEmpire","Coming soon", "Farm, stake and earn"], 
+//     ["Your personal game lobby", "explore land & trande assets at NetEmpire","Coming soon", "Farm, stake and earn"], 
 //     ["Upgrade you AOC badge for greater utility", "Burn Avatars for in-game utility", "Claim arcade airdrops"], 
 //     [ "Daily players, transaction volume and more.",
 //       "Dashboard reflecting our NFT assets performance.",
