@@ -278,7 +278,7 @@ export const getSeaportContract = <T extends ContractInterface<T> & SeaportContr
         return undefined
 
       return contract.fulfillAvailableAdvancedOrders(advancedOrders, criteriaResolvers, offerFulfillments, considerationFulfillments, fulfillerConduitKey, recipient, maximumFulfilled)
-    })
+    }, { failMessage : "Checkout failed"})
 
 
 
