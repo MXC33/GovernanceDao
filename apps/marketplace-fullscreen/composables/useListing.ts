@@ -44,7 +44,7 @@ export const useListingItems = () => {
 
   const totalIXTPrice = computed(() =>
     listItems.value.reduce((prev, item) =>
-      prev + (item.ixtPrice * item.shares.value)
+      prev + (Number(item.ixtPrice) * item.shares.value)
       , 0)
   )
 
@@ -79,7 +79,9 @@ export const useListingContract = () => {
       return false
     }
 
-    const totalPrice = ixtPrice * shares
+    const totalPrice = Number(ixtPrice) * shares.value
+
+
 
     const ownerPrice = ethers.utils.parseUnits(
       roundUp(((95 / 100) * totalPrice), 8).toString()
@@ -109,8 +111,8 @@ export const useListingContract = () => {
         itemType: ItemType.ERC1155,
         token: collection,
         identifierOrCriteria: token_id,
-        startAmount: shares,
-        endAmount: shares,
+        startAmount: shares.value,
+        endAmount: shares.value,
         pixHash: "0x0000000000000000000000000000000000000000000000000000000000000000",
       }],
       consideration: [
@@ -153,7 +155,7 @@ export const useListingContract = () => {
   const listItem = async (item: ListingItem) => {
     const { shares, ixtPrice, durationInDays, token: { _index: index, collection, token_id, network } } = item
 
-    const endTime = add(new Date(), { days: durationInDays }).getMilliseconds()
+    const endTime = Math.floor(add(new Date(), { days: durationInDays }).getTime() / 1000)
     const saleMessage = await createListingMessage(item, endTime)
 
     try {
@@ -162,12 +164,12 @@ export const useListingContract = () => {
         collection,
         token_id,
         network,
-        quantity: shares
+        quantity: shares.value
       }
 
       const listingsBody: ListingsBody = {
         sale_message: saleMessage as string,
-        sale_price: ixtPrice,
+        sale_price: Number(ixtPrice),
         sale_type: 1, //always 1,
         sale_endtime: endTime,
         assets: [listingAssets]
