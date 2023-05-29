@@ -5,10 +5,11 @@ VList(pos="sticky top-0" z="99" w="full")
       PlanetIXNew(w="42.25")
 
     HList(space-x="8" px="8" items="center" font="bold" text="lg" flex-grow="1")
-      HeaderLink(to="/" display="lt-md:none") buy ixt
-      HeaderLink(to="/" display="lt-md:none") play now
-      HeaderLink(to="/" display="lt-md:none") staking
-      HeaderLink(to="/" display="lt-md:none") community
+      HeaderLink(v-for="index in menuTabs.length" to="/" @click="OpenMeny(index)") {{menuTabs[index - 1]}}
+      //- HeaderLink(to="/" display="lt-md:none") buy ixt
+      //- HeaderLink(to="/" display="lt-md:none") play now
+      //- HeaderLink(to="/" display="lt-md:none") staking
+      //- HeaderLink(to="/" display="lt-md:none") community
 
     HList(font="bold" space-x="6" px="6")
       HeaderLink(to="/" display="lt-md:none") help
@@ -45,12 +46,14 @@ VList(pos="sticky top-0" z="99" w="full")
 
             VList(bg="black" w="full" h="100%" py="6" font="bold" text="lg" uppercase="~" px="6")
               VList(justify="start" items="start" space-y="12" py="4")
-                HeaderLink(to="/") + buy ixt
-                HeaderLink(to="/") + play now
-                HeaderLink(to="/") + staking
-                HeaderLink(to="/") + community
+                //- HeaderLink(v-for="tab in menuTabs" to="/" ) + tab
+                //- HeaderLink(to="/") + buy ixt
+                //- HeaderLink(to="/") + play now
+                //- HeaderLink(to="/") + staking
+                //- HeaderLink(to="/") + community
 
-  HeaderDetails(  @clicked-On-DropDown-Item="onClicked" :categoryHeaderObject="mainHeaders")
+  transition(name="slide-top")
+    HeaderDetails(v-if="showMenu"  @clicked-On-DropDown-Item="onClicked" :categoryHeaderObject="getArr(menuIndex)")
   Popup(v-if="showIFrame")
     iframe(src="https://ix.foundation/lefi" w="full md:130" h="full md:115" )
 </template>
@@ -61,9 +64,25 @@ import IconSoundOff from '~/assets/images/sound/sound-off.svg'
 import Hamburger from '~/assets/images/header/hamburger.svg'
 import PlanetIX from '~/assets/images/header/planetix.svg'
 import PlanetIXNew from '~/assets/images/header/planetix-new.svg'
-import { CategoryHeaderObject } from '~/composables/useSiteHeader'
+import type { CategoryHeaderObject, AllCategoryHeaderObject} from '~/composables/useSiteHeader'
+//const { OnClickSubHeader } = useSiteHeader()
 
-const mainHeaders : CategoryHeaderObject[] = [
+const menuTabs = ["buy ixt", "play now", "staking", "community"]
+const menuIndex = ref()
+const showMenu = ref(false)
+
+const OpenMeny = (index: number) => {
+  console.log("Open Menu", index);
+  
+  if(menuIndex.value == index)
+    return showMenu.value = !showMenu.value;
+
+  menuIndex.value = index
+}
+
+
+
+const buyIXTHeaders : CategoryHeaderObject[] = [
   {
     title: "Buy IXT",
     subHeaders: [
@@ -71,6 +90,7 @@ const mainHeaders : CategoryHeaderObject[] = [
         title: "Swap",
         description: "Swap To IXT",
         image: "",
+        useLink: false,
         link: ""
       }
     ]
@@ -82,6 +102,7 @@ const mainHeaders : CategoryHeaderObject[] = [
         title: "Polygon",
         description: "Bridge tokens to Polygon blockchain",
         image: "",
+        useLink: false,
         link: ""
       }
     ]
@@ -93,12 +114,14 @@ const mainHeaders : CategoryHeaderObject[] = [
         title: "IXT/USDT (Quickswap)",
         description: "Secure IXT/USDT liquidity, earn 7% APR.",
         image: "",
+        useLink: false,
         link: ""
       },
       {
         title: "IXT/MATIC (Sushiswap)",
         description: "Secure IXT/USDT liquidity, earn 4% APR.",
         image: "",
+        useLink: false,
         link: ""
       }
     ]
@@ -110,74 +133,125 @@ const mainHeaders : CategoryHeaderObject[] = [
         title: "LEND CAPITAL",
         description: "Lend 100x IXT with USDT as collateral.",
         image: "",
+        useLink: false,
         link: ""
       }
     ]
   }
 ]
 
-
-
-
-// const subHeaders : HeaderObject[] = [
-//   {
-//     title: "Swap",
-//     description: "Swap To IXT",
-//     image: "",
-//     link: "Swap To IXT"
-//   },
-//   {
-//     title: "Swap",
-//     description: "Swap To IXT",
-//     image: "",
-//     link: "Swap To IXT"
-//   },
-//   {
-//     title: "Swap",
-//     description: "Swap To IXT",
-//     image: "",
-//     link: "Swap To IXT"
-//   },
-//   {
-//     title: "Swap",
-//     description: "Swap To IXT",
-//     image: "",
-//     link: "Swap To IXT"
-//   }
-// ]
-
-//const finalArr = [ t(mpFullscreen.titles), t(mpFullscreen.description), t(mpFullscreen.image), ]
-const stringTitles = [
-  /*[
-    "Main Title", First is always the main title
-    "sub titles",
-    "sub titles",
-    "sub titles",
-  ]*/
-  [
-    "Swap", 
-    "Swap To IXT",
-  ], 
-  [
-    "Brige ",
-    "Polygon",
-  ], 
-  [
-    "Supply", 
-    "IXT/USDT", 
-    "IXT/MATIC"
-  ], 
-  [
-    "Capital", 
-    "Lend Capital",
-  ],
+const playNowHeaders : CategoryHeaderObject[] = [
+  {
+    title: "The Game",
+    subHeaders: [
+      {
+        title: "Terminal",
+        description: "Swap To IXT",
+        image: "",
+        useLink: false,
+        link: ""
+      },
+      {
+        title: "Marketplace",
+        description: "Swap To IXT",
+        image: "",
+        useLink: false,
+        link: ""
+      },
+      {
+        title: "IX Arean",
+        description: "Swap To IXT",
+        image: "",
+        useLink: false,
+        link: ""
+      },      {
+        title: "Mission Control",
+        description: "Swap To IXT",
+        image: "",
+        useLink: false,
+        link: ""
+      },      {
+        title: "Gamebook",
+        description: "Swap To IXT",
+        image: "",
+        useLink: false,
+        link: ""
+      },      
+    ]
+  },
+  {
+    title: "Claim & Burn",
+    subHeaders: [
+      {
+        title: "AOC Badge",
+        description: "Bridge tokens to Polygon blockchain",
+        image: "",
+        useLink: false,
+        link: ""
+      },
+      {
+        title: "Avatar",
+        description: "Bridge tokens to Polygon blockchain",
+        image: "",
+        useLink: false,
+        link: ""
+      },
+      {
+        title: "Arcade",
+        description: "Bridge tokens to Polygon blockchain",
+        image: "",
+        useLink: false,
+        link: ""
+      }
+    ]
+  },
+  {
+    title: "Analytics",
+    subHeaders: [
+      {
+        title: "Game perfoamce",
+        description: "Secure IXT/USDT liquidity, earn 7% APR.",
+        image: "",
+        useLink: false,
+        link: ""
+      },
+      {
+        title: "NFT perfoamce",
+        description: "Secure IXT/USDT liquidity, earn 4% APR.",
+        image: "",
+        useLink: false,
+        link: ""
+      },
+      {
+        title: "Vesting Schedule",
+        description: "Secure IXT/USDT liquidity, earn 4% APR.",
+        image: "",
+        useLink: false,
+        link: ""
+      },
+      {
+        title: "IXT perfoamce",
+        description: "Secure IXT/USDT liquidity, earn 4% APR.",
+        image: "",
+        useLink: false,
+        link: ""
+      },
+      {
+        title: "Smart Contracts",
+        description: "Secure IXT/USDT liquidity, earn 4% APR.",
+        image: "",
+        useLink: false,
+        link: ""
+      }
+    ]
+  },
 ]
-const stringTitlesDetails = [
-  ["Swap any crypto or fiat to ixt",], 
-  ["Brige tokens to polygon blockchain"], 
-  ["Secure IXT/USDT liquidity, earn 7% APR", "Secure IXT/MATIC liquidity, earn 7% APR"], 
-  ["Lend 100x IXT with USDT as collateral",]
-]
+
+const getArr = (index: number) => {
+  const arr = [buyIXTHeaders, playNowHeaders]
+  return arr[index - 1]
+}
+
 
 const { gotoIXPage } = useIXLinks()
 const { user } = useUser()
@@ -189,12 +263,13 @@ const router = useRouter()
 const showIFrame = ref(false)
 
 const onClicked = (x: number, y: number) => {
-  console.log(stringTitles[x][y])
+  //console.log(mainHeaders[x].subHeaders[y])
   if(x == 0 && y == 1){
     console.log("In if")
     showIFrame.value = true
   }
-  return goToPage(stringTitles[x][y])
+  // return OnClickSubHeader(mainHeaders[x].subHeaders[y].title);//goToPage(mainHeaders[x].subHeaders[y].title)
+  //return goToPage(mainHeaders[x].subHeaders[y].title)
 }
 
 const goToPage = (title:string) => {

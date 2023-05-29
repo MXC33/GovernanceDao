@@ -9,10 +9,10 @@ div()
 
 <script lang="ts" setup>
 import TitleIcon from '~/assets/icons/trash.svg'
-import { SubHeaderObject } from '~/composables/useSiteHeader';
+import type { SubHeaderObject } from '~/composables/useSiteHeader';
 
 const props = defineProps<{
-  subHeaderObject: SubHeaderObject,
+  subHeaderObject: SubHeaderObject
 }>()
 
 </script>

@@ -1,6 +1,6 @@
 <template lang="pug">
 Transition(name="slide-top")
-  div(p="6" grid="~ cols-2 md:cols-3 lg:cols-4 2xl:cols-5" w="full" flex="~" text="14px" bg="black")
+  div(p="6" grid="~ cols-2 md:cols-3 lg:cols-4 2xl:cols-5" w="full" flex="~" text="14px" bg="gray-800")
     HeaderDetailsTitle(items="center" grow="~"
     v-for="x in categoryHeaderObject.length" 
     :title="categoryHeaderObject[x - 1].title")  
@@ -11,7 +11,7 @@ Transition(name="slide-top")
 </template> 
 
 <script lang="ts" setup>
-import { CategoryHeaderObject } from '~/composables/useSiteHeader';
+import type { CategoryHeaderObject } from '~/composables/useSiteHeader';
 
 const props = defineProps<{
   categoryHeaderObject: CategoryHeaderObject[],
