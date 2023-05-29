@@ -66,17 +66,11 @@ const toggleFilterDrawer = () => {
   showFilters.value = !showFilters.value
 }
 
-const isFilterActive = computed(() => {
-  if (showFilters.value = true)
-    return true
-})
-
 const { data, tableType } = defineProps<{
   data?: CollectionData,
   hideGrid?: boolean
   tableType?: ButtonTypes
 }>()
-
 
 watch(rows, () => {
   console.log("New rows", rows.value)
