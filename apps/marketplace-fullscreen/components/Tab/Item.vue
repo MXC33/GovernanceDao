@@ -1,6 +1,6 @@
 <template lang="pug">
 VList(pos="relative")
-  HList(font="bold" px="6" py="3" uppercase="~" w="53" cursor="pointer" @click.stop="toggle")
+  HList(font="bold" px="6" py="3" uppercase="~" w="53" cursor="pointer" @click="toggle")
     span(color="white")
       slot
 

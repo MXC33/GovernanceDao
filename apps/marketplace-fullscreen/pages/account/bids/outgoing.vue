@@ -1,5 +1,7 @@
 <template lang="pug">
-AccountBidsOutgoing(:data="data" v-if="data" )
+Collection(:data="data" v-if="data" :hide-grid="true" :has-button="true" :table-type="'incoming'")
+  template(#menu)
+    AccountMenu()
 </template>
     
     

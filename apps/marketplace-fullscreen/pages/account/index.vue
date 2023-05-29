@@ -1,5 +1,7 @@
 <template lang="pug">
-Account(:data="data" v-if="data" )
+Collection(:data="data" v-if="data" )
+  template(#menu)
+    AccountMenu()
 </template>
   
   
