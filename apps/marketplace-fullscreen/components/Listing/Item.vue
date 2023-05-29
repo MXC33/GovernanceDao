@@ -39,7 +39,7 @@ VList(bg="gray-800" v-if="item" frame="~" flex-shrink="0")
             template(#suffix) IXT
 
         template(#action)
-          div(btn="~" w="full" h="30" cursor="pointer" cut="bottom-right b-gray-400 hover:b-gray-200") Floor
+          div(btn="~ form" w="full") Floor
 
       ListingAdjustRow()
         template(#header) Quantity
