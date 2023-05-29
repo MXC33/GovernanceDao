@@ -12,7 +12,7 @@ Popup()
           span() Your Balance
           span() {{ isRounded }} IXT
         HList(justify="end" color="gray-200")
-          span(mb="4") $8.4
+          span(mb="4") $
 
       ContentDrawer(frame="none" mx="-6" mb="4" b="t-1 b-1 gray-600" :is-neutral="true")
         template(#header) APPLY TO ALL
@@ -56,10 +56,12 @@ const invalidPrice = computed(() => {
     return '--'
 })
 
+const { ixtToUSD, ixtAsUSD } = useIXTPrice()
 const { ixtBalanceOfUser } = getIXTokenContract()
 
 const balance = await ixtBalanceOfUser()
 const isRounded = roundToDecimals(balance, 2)
+const inDollar = ixtToUSD(isRounded)
 
 
 const onClickList = async () => {
