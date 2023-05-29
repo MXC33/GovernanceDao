@@ -1,25 +1,16 @@
 <template lang="pug">
 Collection(:data="data" v-if="data" )
-button(@click="loadMore") LoadMore
+button(@click="loadNextPage") LoadMore
 </template>
 
 
 <script lang="ts" setup>
-
-import { type FilterPayload, useCollectionSettings } from "~/composables/useCollection";
-import type { CollectionPayload } from '~/composables/useCollection';
-
-const { activePage, collectionBody, setupCollectionListeners } = useCollectionSettings()
-
 const route = useRoute()
 const { contract } = route.params
 
-const { data: data, execute: fetchCollection, fetchAndMerge: fetchNewPage, refresh: refresh } = useCollectionData(String(contract), collectionBody)
+const { myAssetsURL } = useCollectionsURL()
 
-const loadMore = () => {
-  activePage.value = Number(data.value?.page_key)
-  fetchNewPage()
-}
+const { data: data, execute: fetchCollection, loadNextPage } = useCollectionData(myAssetsURL('polygon'))
 
 await fetchCollection()
 
