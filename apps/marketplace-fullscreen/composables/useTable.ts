@@ -12,13 +12,29 @@ export interface TableSort<T extends TableRow> {
 
 export type TableSortField<T extends TableRow> = string & keyof T
 
-export interface TableColumn<T extends TableRow> {
+interface TableColumnBase {
+  type?: string,
+  width?: number
+}
+
+interface TableButton<T extends TableRow> {
+  type: 'primary' | 'secondary',
+  text: string,
+  onClick: (row: T) => void
+}
+
+export interface TableColumnText<T extends TableRow> extends TableColumnBase {
   value: TableSortField<T> | string,
   label: string,
   type?: 'text' | 'ixt' | 'usd'
   sortable?: boolean,
-  width?: number
 }
+export interface TableButtonColumn<T extends TableRow> extends TableColumnBase {
+  type: 'buttons'
+  buttons: TableButton<T>[]
+}
+
+export type TableColumn<T extends TableRow> = TableColumnText<T> | TableButtonColumn<T>
 
 export const useTable = <T extends TableRow>(rows: MaybeRef<T[]>, id: string) => {
   const sort = useState<TableSort<T>>(`table-${id}`, () => ({
