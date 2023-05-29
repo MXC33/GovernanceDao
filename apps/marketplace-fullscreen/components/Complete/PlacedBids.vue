@@ -1,5 +1,5 @@
 <template lang="pug">
-Popup(@close="$emit('close')")
+Popup()
   template(#header) Success!
 
   template(#default)
@@ -8,13 +8,16 @@ Popup(@close="$emit('close')")
 
   template(#footer)
     div Quantity {{ items.length }}
-    button(@click="$emit('close')") Continue exploring 
+
+  template(#buttons)
+    button(@click="closeActivePopup" btn="~ primary") Continue exploring 
 
 </template>
   
   
 <script lang="ts" setup>
 import type { CartItem } from '~/composables/useCart';
+const { closeActivePopup } = usePopups()
 
 defineProps<{
   items: CartItem[]

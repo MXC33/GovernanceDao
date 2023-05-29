@@ -1,7 +1,7 @@
 import { IXToken } from "@ix/base/composables/Token/useIXToken"
 import { TableSort, TableSortField } from "./useTable"
 
-interface FilterPayload {
+export interface FilterPayload {
   value: string
   trait_type: string
 }
@@ -10,7 +10,7 @@ export interface CollectionPayload {
   order: number,
   filter: {
     owned: boolean,
-    type:number,
+    type: number,
     search: string,
     attributes: FilterPayload[]
   }
@@ -19,7 +19,6 @@ interface FilterBase {
   title: string
   trait_type: string
   type: FilterType
-  selected: boolean
 }
 
 export interface APIFilter extends FilterBase {
@@ -89,8 +88,30 @@ export const useCollectionSettings = () => {
       return displayType.value = 'grid'
   }
 
+  const createFilters = (data: CollectionData) => {
+    activeFilters.value = data.filters.map((filter) => ({
+      ...filter,
+      value: filter.value.map((name) => ({
+        name,
+        selected: false
+      }))
+    }))
+  }
+
+  const filtersAsPayload = computed(() =>
+    activeFilters.value
+      .map(({ trait_type, value }) => ({
+        trait_type,
+        value: value.find((item) => item.selected)?.name
+      }))
+      .filter((filter): filter is FilterPayload => !!filter.value)
+  )
+
+
   return {
     displayType,
+    filtersAsPayload,
+    createFilters,
     toggleDisplayType,
     activeFilters,
     collectionOwners,

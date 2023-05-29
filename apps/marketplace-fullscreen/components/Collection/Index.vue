@@ -7,16 +7,17 @@ VList(flex-grow="1" min-h="0" pos="relative" p="8" space-y="6")
     template(#attributes)
       AttributeList(:attributes="attributes" v-if="data")
 
-  HelperBorderScroll()
+  HelperBorderScroll(pos="sticky top-33")
   CollectionFilter(:items="data.nfts" :filters="data.filters" v-if="data"  @toggle-filter="toggleFilterDrawer")
 
-  HList(space-x="3" pos="relative")
+  HList(space-x="0 on-open:3" pos="relative" :open="showFilters")
     VList(pos="sticky top-48")
       Transition(name="slide-left")
         CollectionFilterSlideout(:items="data.filters" v-if="showFilters && data")
 
     Transition(name="fade" mode="out-in" v-if="data")
-      CollectionGrid(v-if="displayType == 'grid'" w="full")
+
+      CollectionGrid(v-if="displayType == 'grid'" w="full" :is-open="showFilters")
         CollectionGridItem.collection-grid-item(:token="token" v-for="token in data.nfts" b="gray-400")
 
       Table(:columns="columns" :rows="rows" v-else id="collection")
@@ -63,11 +64,15 @@ const toggleFilterDrawer = () => {
   showFilters.value = !showFilters.value
 }
 
+const isFilterActive = computed(() => {
+  if (showFilters.value = true)
+    return true
+})
+
 const { data } = defineProps<{
   data?: CollectionData,
 }>()
 
-console.log("Data", rows.value)
 
 watch(rows, () => {
   console.log("New rows", rows.value)

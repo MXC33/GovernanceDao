@@ -1,15 +1,13 @@
 <template lang="pug">
-MyAssets(:data="data" v-if="data" )
+Account(:data="data" v-if="data" )
 </template>
   
   
 <script lang="ts" setup>
 
 import { useCollectionSettings } from "~/composables/useCollection";
-import type { CollectionData, CollectionPayload } from '~/composables/useCollection';
+import type { CollectionPayload } from '~/composables/useCollection';
 
-const route = useRoute()
-const { collection } = route.params
 const body = ref<CollectionPayload>({
   page_key: 0,
   order: 0,
@@ -20,10 +18,7 @@ const body = ref<CollectionPayload>({
     attributes: []
   }
 })
-const loadMore = () => {
-  body.value.page_key = Number(data.value?.page_key)
-  refresh()
-}
+
 const { data: data, execute: fetchCollection, refresh: refresh } = usePersonalAssetAPI(body.value)
 
 const { activeFilters } = useCollectionSettings()
@@ -60,7 +55,7 @@ watch(() => activeFilters, () => {
     data.value.nfts = []
   refresh()
 }, { immediate: true, deep: true })
-//
+
 onBeforeUnmount(() => {
   activeFilters.value = []
 })

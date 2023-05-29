@@ -13,6 +13,15 @@ export const roundToDecimals = (num: number, decimalPlaces: number) => {
   return Number(number + "e" + -decimalPlaces);
 }
 
+export const roundUp = (num: number, precision: number) => {
+  precision = Math.pow(10, precision)
+  return Math.ceil(+num * precision) / precision
+}
+export const roundDown = (num: number, precision: number) => {
+  precision = Math.pow(10, precision)
+  return Math.floor(+num * precision) / precision
+}
+
 export const useHoursLeft = (start: number, end: number) =>
   (end - start) / (1000 * 60 * 60)
 
@@ -99,6 +108,25 @@ export const usePlural = (n: number, currentString: string = "") => {
 
 export const useWait = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
 
+export const useIsKeyNumber = (evt: KeyboardEvent): void => {
+  const keysAllowed: string[] = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '.'];
+
+  if (!keysAllowed.includes(evt.key)) {
+    evt.preventDefault()
+  }
+}
+
+export const makeRandomNumberKey = (length: number) => {
+  let result = '';
+  const characters = '0123456789';
+  const charactersLength = characters.length;
+  let counter = 0;
+  while (counter < length) {
+    result += characters.charAt(Math.floor(Math.random() * charactersLength));
+    counter += 1;
+  }
+  return result;
+}
 
 export const reverseKey = <T extends string | number, K extends string>(record: Record<T, K>, findKey: string) =>
   (Object.keys(record) as Array<T>).find(key => record[key] === findKey);

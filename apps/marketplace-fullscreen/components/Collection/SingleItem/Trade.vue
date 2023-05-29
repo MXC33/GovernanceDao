@@ -4,6 +4,8 @@ VList(space-y="3")
 
   AttributeList(:attributes="attributes" v-if="item")
 
+  //- Listing(:item="item")
+
   TradeModule(:item="item")
     template(#header)
       TabItem(v-for="tab in tabs" :id="tab" v-model="activeTab") {{ tab }}

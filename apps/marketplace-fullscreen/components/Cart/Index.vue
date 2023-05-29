@@ -1,6 +1,6 @@
 <template lang="pug">
 Transition(name="fade")
-  div(pos="fixed" inset="0" z="199" v-if="viewingCart" bg="ix-black opacity-80" @click="viewingCart = false")
+  div(pos="fixed" inset="0" z="199" v-if="viewingCart" bg="ix-black opacity-80" @click.stop="viewingCart = false")
 
 Transition(name="slide-right")
   VList(pos="fixed right-0 top-0 bottom-0" overflow-y="auto" bg="ix-black" w="80 md:120" max-w="80%" z="200" color="white" ref="cartElement" v-if="viewingCart")
@@ -26,9 +26,6 @@ Transition(name="slide-right")
 <script lang="ts" setup>
 const cartElement = ref()
 const { getTokenKey } = useTokens()
-
-
-onClickOutside(cartElement, () => viewingCart.value = false)
 const { viewingCart, cartItems } = useCart()
 
 
