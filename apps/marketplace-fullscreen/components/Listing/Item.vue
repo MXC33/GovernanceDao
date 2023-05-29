@@ -1,32 +1,45 @@
 <template lang="pug">
 VList(bg="gray-800" v-if="item" frame="~" flex-shrink="0")
   HList(justify="start"  @click="isOpen = !isOpen" cursor="pointer")
-    TokenImage(:token="item.token" w="30" h="30")
+    VList(w="30" h="30" pos="relative" min-h="0")
+      TokenImage(:token="item.token" pos="absolute" inset="0" h="full" w="full")
 
     VList(w="full" p="6")
-      TokenName(:token="item.token")
-      div Price not set
-      div Time not set
+      HList(space-x="3" font="bold")
+        TokenName(:token="item.token" w="auto")
+        span x{{ item.shares.value }}
 
+      VList(text="sm")
+        div
+          span(v-if="!item.ixtPrice" color="semantic-warning") Price not set
+          span(v-else font="bold") {{ item.ixtPrice }} IXT 
+
+        div 
+          span(v-if="!item.durationInDays" color="semantic-warning") Time not set
+          span(v-else font="bold") {{ item.durationInDays }} Days 
 
   Collapse(:when="isOpen" class="v-collapse")
     VList(p="6" space-y="3" w="full")
-      ListingPriceRow()
-        template(#name) Floor Price
-        template(#value) 15 IXT
+      VList(space-y="1")
+        ListingPriceRow()
+          template(#name) Floor Price
+          template(#value) 
+            Currency(:value="item.token.sale_price")
 
-      ListingPriceRow()
-        template(#name) Best offer
-        template(#value) 15 IXT
+        ListingPriceRow()
+          template(#name) Best offer
+          template(#value) 
+            Currency(:value="item.token.higher_bid_price")
 
       ListingAdjustRow()
         template(#header) Price
 
         template(#value)
           InputText(v-model="item.ixtPrice")
+            template(#suffix) IXT
 
         template(#action)
-          button(btn="~ form" w="full") Floor
+          button(btn="~ form" w="full" @click="onClickFloor") Floor
 
       ListingAdjustRow()
         template(#header) Quantity
@@ -35,7 +48,7 @@ VList(bg="gray-800" v-if="item" frame="~" flex-shrink="0")
           Adjustable(v-model="item.shares" h="full")
 
         template(#action)
-          button(btn="~ form" w="full") Floor
+          button(btn="~ form" w="full" @click="onClickMax") Max
 
       HList()
 
@@ -47,5 +60,19 @@ import { Collapse } from 'vue-collapsed'
 
 const item = defineModel<ListingItem>()
 const isOpen = ref(false)
+
+const onClickMax = () => {
+  if (!item.value)
+    return
+
+  item.value.shares.value = item.value.token.my_shares
+}
+
+const onClickFloor = () => {
+  if (!item.value)
+    return
+
+  item.value.ixtPrice = item.value.token.sale_price
+}
 </script>
   

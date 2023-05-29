@@ -1,5 +1,5 @@
 <template lang="pug">
-VList(space-y="3")
+VList(space-y="6")
   h3(text="3xl" font="bold") {{ item.name }}
 
   AttributeList(:attributes="attributes" v-if="item")
@@ -13,6 +13,7 @@ VList(space-y="3")
   ContentDrawer(:start-open="true")
     template(#titleicon)
       TitleWithIcon(icon="listing") listings
+
     template(#default)
       Table(:columns="saleColumns" :rows="item.sales" id="single-item" :in-drawer="true")
         template(#item-action="{row}")
