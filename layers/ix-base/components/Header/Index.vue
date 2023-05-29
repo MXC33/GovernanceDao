@@ -53,7 +53,7 @@ VList(pos="sticky top-0" z="99" w="full")
                 //- HeaderLink(to="/") + community
 
   transition(name="slide-top")
-    HeaderDetails(v-if="showMenu"  @clicked-On-DropDown-Item="onClicked" :categoryHeaderObject="getArr(menuIndex)")
+    HeaderDetails(v-if="showMenu"  @clicked-On-DropDown-Item="onClicked" :categoryHeaderObject="getArr()")
   Popup(v-if="showIFrame")
     iframe(src="https://ix.foundation/lefi" w="full md:130" h="full md:115" )
 </template>
@@ -248,9 +248,10 @@ const playNowHeaders: CategoryHeaderObject[] = [
   },
 ]
 
-const getArr = (index: number) => {
+
+const getArr = () => {
   const arr = [buyIXTHeaders, playNowHeaders]
-  return arr[Math.max(0, Math.min(index, arr.length)) - 1]
+  return arr[Math.max(0, Math.min(menuIndex.value, arr.length)) - 1]
 }
 
 
@@ -287,22 +288,4 @@ const toggleMenu = () => {
   menuOpen.value = !menuOpen.value
 }
 
-// const stringTitlesDetails = [
-//   [
-//     ["Swap any crypto or fiat to ixt",],
-//     ["Brige tokens to polygon blockchain"],
-//     ["Secure IXT/USDT liquidity, earn 7% APR", "Secure IXT/MATIC liquidity, earn 7% APR"],
-//     ["Lend 100x IXT with USDT as collateral",]
-//   ],
-//   [
-//     ["Your personal game lobby", "explore land & trande assets at NetEmpire","Coming soon", "Farm, stake and earn"],
-//     ["Upgrade you AOC badge for greater utility", "Burn Avatars for in-game utility", "Claim arcade airdrops"],
-//     [ "Daily players, transaction volume and more.",
-//       "Dashboard reflecting our NFT assets performance.",
-//       "IX token vesting schedule.",
-//       "IX Token holders, stakers and more.",
-//       "Officials links to all Planet IX contracts."
-//     ]
-//   ],
-// ]  
 </script>
