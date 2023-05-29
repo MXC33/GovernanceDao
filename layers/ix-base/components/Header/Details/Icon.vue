@@ -6,9 +6,10 @@ Icon(w="10" h="10" p="1" color="white")
 import FallbackVue from '~/components/Fallback.vue';
 
 const props = defineProps<{
-  image: string
+  header: string,
+  category: string,
+  item: string
 }>()
 
-const Icon = await import(`../../../assets/images/icons/dropdown/${props.image}.svg`).catch(() => FallbackVue)
-
+const Icon = await import(`../../../assets/images/icons/dropdown/${props.header}/${props.category}/${props.item}.svg`).catch(() => FallbackVue)
 </script>

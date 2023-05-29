@@ -5,7 +5,7 @@ VList(pos="sticky top-0" z="99" w="full")
       PlanetIXNew(w="42.25")
 
     HList(space-x="8" px="8" items="center" font="bold" text="lg" flex-grow="1")
-      HeaderLink(v-for="index in menuTabs.length" to="/" @click="OpenMeny(index)") {{menuTabs[index - 1]}}
+      HeaderLink(v-for="(item, index) in siteTopHeaders" to="/" @click="OpenMeny(index)") {{ $t(`marketplace.headers.${item.type}.title`)}}
       //- HeaderLink(to="/" display="lt-md:none") buy ixt
       //- HeaderLink(to="/" display="lt-md:none") play now
       //- HeaderLink(to="/" display="lt-md:none") staking
@@ -53,7 +53,8 @@ VList(pos="sticky top-0" z="99" w="full")
                 //- HeaderLink(to="/") + community
 
   transition(name="slide-top")
-    HeaderDetails(v-if="showMenu"  @clicked-On-DropDown-Item="onClicked" :categoryHeaderObject="getArr()")
+    HeaderDetails(v-if="activeMenuIndex != null" @onClickItem="onClicked" :header="siteTopHeaders[activeMenuIndex]")
+
   Popup(v-if="showIFrame")
     iframe(src="https://ix.foundation/lefi" w="full md:130" h="full md:115" )
 </template>
@@ -64,196 +65,21 @@ import IconSoundOff from '~/assets/images/sound/sound-off.svg'
 import Hamburger from '~/assets/images/header/hamburger.svg'
 import PlanetIX from '~/assets/images/header/planetix.svg'
 import PlanetIXNew from '~/assets/images/header/planetix-new.svg'
-import type { CategoryHeaderObject, AllCategoryHeaderObject } from '~/composables/useSiteHeader'
-//const { OnClickSubHeader } = useSiteHeader()
+import  { buyIXTHeaderItems } from '~/composables/useSiteHeader'
+const { siteTopHeaders } = useSiteHeader()
 
 const menuTabs = ["buy ixt", "play now", "staking", "community"]
-const menuIndex = ref()
-const showMenu = ref(false)
+const activeMenuIndex = ref<number | null>(null)
+
 
 const OpenMeny = (index: number) => {
   console.log("Open Menu", index);
 
-  if (menuIndex.value == index)
-    return showMenu.value = !showMenu.value;
+  if (activeMenuIndex.value == index)
+    return activeMenuIndex.value = null
 
-  menuIndex.value = index
-  showMenu.value = true
+  activeMenuIndex.value = index
 }
-
-
-
-const buyIXTHeaders: CategoryHeaderObject[] = [
-  {
-    title: "Buy IXT",
-    subHeaders: [
-      {
-        title: "Swap",
-        description: "Swap any crypto or fiat to ixt",
-        image: "swap",
-        useLink: false,
-        link: ""
-      }
-    ]
-  },
-  {
-    title: "Bridge",
-    subHeaders: [
-      {
-        title: "Polygon",
-        description: "Bridge tokens to Polygon blockchain",
-        image: "polygon",
-        useLink: false,
-        link: ""
-      }
-    ]
-  },
-  {
-    title: "SUPPLY LIQUIDITY",
-    subHeaders: [
-      {
-        title: "IXT/USDT (Quickswap)",
-        description: "Secure IXT/USDT liquidity, earn 7% APR.",
-        image: "usdt",
-        useLink: false,
-        link: ""
-      },
-      {
-        title: "IXT/MATIC (Sushiswap)",
-        description: "Secure IXT/USDT liquidity, earn 4% APR.",
-        image: "matic",
-        useLink: false,
-        link: ""
-      }
-    ]
-  },
-  {
-    title: "LEND CAPITAL",
-    subHeaders: [
-      {
-        title: "LEND CAPITAL",
-        description: "Lend 100x IXT with USDT as collateral.",
-        image: "lendCapital",
-        useLink: false,
-        link: ""
-      }
-    ]
-  }
-]
-
-const playNowHeaders: CategoryHeaderObject[] = [
-  {
-    title: "The Game",
-    subHeaders: [
-      {
-        title: "Terminal",
-        description: "Your personal game lobby",
-        image: "swap",
-        useLink: false,
-        link: ""
-      },
-      {
-        title: "Marketplace",
-        description: "Explore land & trade assets at NetEmpire.",
-        image: "market",
-        useLink: false,
-        link: ""
-      },
-      {
-        title: "IX Arean",
-        description: "COMING SOON",
-        image: "trophy",
-        useLink: false,
-        link: ""
-      }, {
-        title: "Mission Control",
-        description: "Farm, stake and earn.",
-        image: "mc",
-        useLink: false,
-        link: ""
-      }, {
-        title: "Gamebook",
-        description: "Deepdive into the Planet IX ecosystem.",
-        image: "gamebook",
-        useLink: false,
-        link: ""
-      },
-    ]
-  },
-  {
-    title: "Claim & Burn",
-    subHeaders: [
-      {
-        title: "AOC Badge",
-        description: "Upgrade your AOC badge for greater utility.",
-        image: "aoc",
-        useLink: false,
-        link: ""
-      },
-      {
-        title: "Avatar",
-        description: "Burn Avatars for in-game utility.",
-        image: "avatar",
-        useLink: false,
-        link: ""
-      },
-      {
-        title: "Arcade",
-        description: "Claim Arcade airdrops.",
-        image: "",
-        useLink: false,
-        link: ""
-      }
-    ]
-  },
-  {
-    title: "Analytics",
-    subHeaders: [
-      {
-        title: "Game perfoamce",
-        description: "Daily players, transaction volume and more.",
-        image: "performance",
-        useLink: false,
-        link: ""
-      },
-      {
-        title: "NFT perfoamce",
-        description: "Dashboard reflecting our NFT assets performance.",
-        image: "performance",
-        useLink: false,
-        link: ""
-      },
-      {
-        title: "Vesting Schedule",
-        description: "IX token vesting schedule.",
-        image: "vesting",
-        useLink: false,
-        link: ""
-      },
-      {
-        title: "IXT perfoamce",
-        description: "IX Token holders, stakers and more.",
-        image: "performance",
-        useLink: false,
-        link: ""
-      },
-      {
-        title: "Smart Contracts",
-        description: "Officials links to all Planet IX contracts.",
-        image: "smartcontract",
-        useLink: false,
-        link: ""
-      }
-    ]
-  },
-]
-
-
-const getArr = () => {
-  const arr = [buyIXTHeaders, playNowHeaders]
-  return arr[Math.max(0, Math.min(menuIndex.value, arr.length)) - 1]
-}
-
 
 const { gotoIXPage } = useIXLinks()
 const { user } = useUser()
