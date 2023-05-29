@@ -6,22 +6,21 @@ Collection(:data="data" :columns="columns" v-if="data" :hide-grid="true")
     
     
 <script lang="ts" setup>
-
-import { useCollectionSettings } from "~/composables/useCollection";
-import type { CollectionPayload } from '~/composables/useCollection';
 import type { TableColumn } from "~/composables/useTable";
 import type { IXToken } from "@ix/base/composables/Token/useIXToken";
 
-const body = ref<CollectionPayload>({
-  page_key: 0,
-  order: 0,
+
+const { myAssetsURL } = useCollectionsURL()
+
+const { data: data, execute: fetchCollection, setupCollectionListeners } = useCollectionData(myAssetsURL('polygon'), {
   filter: {
     owned: true,
     type: 1,
-    search: "",
-    attributes: []
   }
 })
+
+await fetchCollection()
+setupCollectionListeners()
 
 const columns: TableColumn<IXToken>[] = [
   { label: "Asset", value: "name" },
@@ -43,25 +42,6 @@ const columns: TableColumn<IXToken>[] = [
 
 ]
 
-
-const { data: data, execute: fetchCollection, refresh: refresh } = usePersonalAssetAPI(body.value)
-const { counterBid, acceptBid } = useBidsAPI()
-
-const { activeFilters } = useCollectionSettings()
-
-const createFilters = () => {
-  if (data.value)
-    activeFilters.value = data.value.filters.map((filter) => ({
-      ...filter,
-      value: filter.value.map((name) => ({
-        name,
-        selected: false
-      }))
-    }))
-}
-
-
-
 const counterBidOnClick = (token: IXToken) => {
   console.log("Counter", token)
 }
@@ -69,20 +49,4 @@ const counterBidOnClick = (token: IXToken) => {
 const acceptBidOnClick = (token: IXToken) => {
   console.log("Accept", token)
 }
-
-
-
-watch(() => data, (value) => {
-  console.log("data", data.value)
-  if (activeFilters.value.length < 1)
-    createFilters()
-}, { deep: true })
-
-
-onBeforeUnmount(() => {
-  activeFilters.value = []
-})
-onMounted(() => {
-  fetchCollection()
-})
 </script>

@@ -12,7 +12,7 @@ Popup()
           span() Your Balance
           span() 123718 IXT
         HList(justify="end" color="gray-200")
-          span(mb="4") $8.4
+          span(mb="4") $
 
       CollectionFilterDrawer(:is-small="true" :is-neutral="true" mx="-6" mb="4" b="t-1 gray-600")
         template(#header) APPLY TO ALL
@@ -51,6 +51,14 @@ const invalidPrice = computed(() => {
   if (!totalIXTPrice.value)
     return '--'
 })
+
+const { ixtToUSD, ixtAsUSD } = useIXTPrice()
+const { ixtBalanceOfUser } = getIXTokenContract()
+
+const balance = await ixtBalanceOfUser()
+const isRounded = roundToDecimals(balance, 2)
+const inDollar = ixtToUSD(isRounded)
+
 
 const onClickList = async () => {
   const list = await listItem(listItems.value[0])
