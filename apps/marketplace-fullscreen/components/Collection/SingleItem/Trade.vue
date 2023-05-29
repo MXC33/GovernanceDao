@@ -13,6 +13,7 @@ VList(space-y="6")
   ContentDrawer(:start-open="true")
     template(#titleicon)
       TitleWithIcon(icon="listing") listings
+
     template(#default)
       Table(:columns="saleColumns" :rows="item.sales" id="single-item" :in-drawer="true")
         template(#item-action="{row}")
