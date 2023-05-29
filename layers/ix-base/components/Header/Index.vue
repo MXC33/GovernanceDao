@@ -50,7 +50,9 @@ VList(pos="sticky top-0" z="99" w="full")
                 HeaderLink(to="/") + staking
                 HeaderLink(to="/") + community
 
-  HeaderDetails(:stringTitles="stringTitles" :descriptionArr="stringTitlesDetails")
+  HeaderDetails(  @clicked-On-DropDown-Item="onClicked" :categoryHeaderObject="mainHeaders")
+  Popup(v-if="showIFrame")
+    iframe(src="https://ix.foundation/lefi" w="full md:130" h="full md:115" )
 </template>
 
 <script lang="ts" setup>
@@ -59,26 +61,148 @@ import IconSoundOff from '~/assets/images/sound/sound-off.svg'
 import Hamburger from '~/assets/images/header/hamburger.svg'
 import PlanetIX from '~/assets/images/header/planetix.svg'
 import PlanetIXNew from '~/assets/images/header/planetix-new.svg'
+import { CategoryHeaderObject } from '~/composables/useSiteHeader'
 
+const mainHeaders : CategoryHeaderObject[] = [
+  {
+    title: "Buy IXT",
+    subHeaders: [
+      {
+        title: "Swap",
+        description: "Swap To IXT",
+        image: "",
+        link: ""
+      }
+    ]
+  },
+  {
+    title: "Bridge",
+    subHeaders: [
+      {
+        title: "Polygon",
+        description: "Bridge tokens to Polygon blockchain",
+        image: "",
+        link: ""
+      }
+    ]
+  },
+  {
+    title: "SUPPLY LIQUIDITY",
+    subHeaders: [
+      {
+        title: "IXT/USDT (Quickswap)",
+        description: "Secure IXT/USDT liquidity, earn 7% APR.",
+        image: "",
+        link: ""
+      },
+      {
+        title: "IXT/MATIC (Sushiswap)",
+        description: "Secure IXT/USDT liquidity, earn 4% APR.",
+        image: "",
+        link: ""
+      }
+    ]
+  },
+  {
+    title: "LEND CAPITAL",
+    subHeaders: [
+      {
+        title: "LEND CAPITAL",
+        description: "Lend 100x IXT with USDT as collateral.",
+        image: "",
+        link: ""
+      }
+    ]
+  }
+]
+
+
+
+
+// const subHeaders : HeaderObject[] = [
+//   {
+//     title: "Swap",
+//     description: "Swap To IXT",
+//     image: "",
+//     link: "Swap To IXT"
+//   },
+//   {
+//     title: "Swap",
+//     description: "Swap To IXT",
+//     image: "",
+//     link: "Swap To IXT"
+//   },
+//   {
+//     title: "Swap",
+//     description: "Swap To IXT",
+//     image: "",
+//     link: "Swap To IXT"
+//   },
+//   {
+//     title: "Swap",
+//     description: "Swap To IXT",
+//     image: "",
+//     link: "Swap To IXT"
+//   }
+// ]
+
+//const finalArr = [ t(mpFullscreen.titles), t(mpFullscreen.description), t(mpFullscreen.image), ]
 const stringTitles = [
-  ["Swap", "Swap To IXT",], 
-  ["Brige","Polygon",], 
-  ["Supply", "IXT/USDT", "IXT/MATIC"], 
-  ["Capital", "Lend Capital",],
-]  
-
+  /*[
+    "Main Title", First is always the main title
+    "sub titles",
+    "sub titles",
+    "sub titles",
+  ]*/
+  [
+    "Swap", 
+    "Swap To IXT",
+  ], 
+  [
+    "Brige ",
+    "Polygon",
+  ], 
+  [
+    "Supply", 
+    "IXT/USDT", 
+    "IXT/MATIC"
+  ], 
+  [
+    "Capital", 
+    "Lend Capital",
+  ],
+]
 const stringTitlesDetails = [
   ["Swap any crypto or fiat to ixt",], 
   ["Brige tokens to polygon blockchain"], 
   ["Secure IXT/USDT liquidity, earn 7% APR", "Secure IXT/MATIC liquidity, earn 7% APR"], 
   ["Lend 100x IXT with USDT as collateral",]
-]  
+]
 
 const { gotoIXPage } = useIXLinks()
 const { user } = useUser()
 const menuOpen = ref(false)
 const { isSoundEnabled } = useSoundSettings()
+const router = useRouter()
 
+
+const showIFrame = ref(false)
+
+const onClicked = (x: number, y: number) => {
+  console.log(stringTitles[x][y])
+  if(x == 0 && y == 1){
+    console.log("In if")
+    showIFrame.value = true
+  }
+  return goToPage(stringTitles[x][y])
+}
+
+const goToPage = (title:string) => {
+  switch(title) {
+    case 'Polygon':
+      return window.location.href = 'https://dashboard.ix.foundation/'
+  }
+}
 const toggleSound = () => {
   isSoundEnabled.value = !isSoundEnabled.value
 }
@@ -87,4 +211,75 @@ const toggleMenu = () => {
   menuOpen.value = !menuOpen.value
 }
 
+
+// const stringTitles = [
+//   [
+//     /*[
+//       "Main Title", First is always the main title
+//       "sub titles",
+//       "sub titles",
+//       "sub titles",
+//     ]*/
+//     [
+//       "Swap", 
+//       "Swap To IXT",
+//     ], 
+//     [
+//       "Brige ",
+//       "Polygon",
+//     ], 
+//     [
+//       "Supply", 
+//       "IXT/USDT", 
+//       "IXT/MATIC"
+//     ], 
+//     [
+//       "Capital", 
+//       "Lend Capital",
+//     ],
+//   ],
+//   [
+//     [
+//       "The Game", //
+//       "Terminal", 
+//       "Marketplace", 
+//       "IX Arena", 
+//       "Mission Control", 
+//       "Gamebook",
+//     ], 
+//     [
+//       "Claim & Burn",
+//       "AOC Badge", 
+//       "Avatar", 
+//       "Arcade",
+//     ], 
+//     [
+//       "Analytics", 
+//       "Game Performance", 
+//       "NFT Performance", 
+//       "Vesting Schedule", 
+//       "IXT Perfoamce", 
+//       "Smart Contracts"
+//     ], 
+//   ],   
+// ]
+
+// const stringTitlesDetails = [
+//   [
+//     ["Swap any crypto or fiat to ixt",], 
+//     ["Brige tokens to polygon blockchain"], 
+//     ["Secure IXT/USDT liquidity, earn 7% APR", "Secure IXT/MATIC liquidity, earn 7% APR"], 
+//     ["Lend 100x IXT with USDT as collateral",]
+//   ],
+//   [
+//     ["Youe personal game lobby", "explore land & trande assets at NetEmpire","Coming soon", "Farm, stake and earn"], 
+//     ["Upgrade you AOC badge for greater utility", "Burn Avatars for in-game utility", "Claim arcade airdrops"], 
+//     [ "Daily players, transaction volume and more.",
+//       "Dashboard reflecting our NFT assets performance.",
+//       "IX token vesting schedule.",
+//       "IX Token holders, stakers and more.",
+//       "Officials links to all Planet IX contracts."
+//     ]
+//   ],
+// ]  
 </script>
