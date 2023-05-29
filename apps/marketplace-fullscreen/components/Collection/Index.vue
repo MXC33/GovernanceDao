@@ -10,7 +10,7 @@ VList(flex-grow="1" min-h="0" pos="relative" p="8" space-y="6" )
   slot(name="menu")
 
   HelperBorderScroll(pos="sticky top-33")
-  CollectionFilter(:items="data.nfts" :filters="data.filters" v-if="data"  @toggle-filter="toggleFilterDrawer" :hide-toggle="isBids")
+  CollectionFilter(:items="data.nfts" :filters="data.filters" :hide-toggle="hideGrid" v-if="data"  @toggle-filter="toggleFilterDrawer")
 
   HList(space-x="0 on-open:3" pos="relative" :open="showFilters")
     VList(pos="sticky top-48")
@@ -22,7 +22,7 @@ VList(flex-grow="1" min-h="0" pos="relative" p="8" space-y="6" )
       CollectionGrid(v-if="displayType == 'grid' && !hideGrid" w="full" :is-open="showFilters")
         CollectionGridItem.collection-grid-item(:token="token" v-for="token in data.nfts" b="gray-400")
 
-      Table(:columns="columns" :rows="rows" v-else id="collection" :has-button="tableType")
+      Table(:columns="renderColumns" :rows="rows" v-else id="collection")
         template(#item-name="{row}")
           HList(items="center" space-x="2" font="bold")
             div(w="12" h="12")
@@ -34,10 +34,11 @@ VList(flex-grow="1" min-h="0" pos="relative" p="8" space-y="6" )
 </template>
 
 <script lang="ts" setup>
-import type { ButtonTypes, CollectionData } from '~/composables/useCollection';
+import type { IXToken } from '@ix/base/composables/Token/useIXToken';
+import type { CollectionData } from '~/composables/useCollection';
 import type { TableColumn } from '~/composables/useTable'
 
-const { displayType } = useCollectionSettings()
+const { displayType, activeFilters } = useCollectionSettings()
 const { getTokenKey } = useTokens()
 const { cartItems } = useCart()
 const { ixtAsUSD } = useIXTPrice()
@@ -50,27 +51,35 @@ const rows = computed(() => (data?.nfts ?? []).map((row) => ({
   usd: ixtAsUSD(row.sale_price).value
 })))
 
-type Row = typeof rows.value[number]
-
-const columns: TableColumn<Row>[] = [
+const defaultColumns: TableColumn<IXToken>[] = [
   { label: "Asset", value: "name" },
   { label: "Current price", value: "sale_price", type: 'ixt', sortable: true },
   { label: "USD price", value: "usd", type: 'usd', sortable: true },
   { label: "Best offer", value: "higher_bid_price", type: 'ixt', sortable: true },
 ]
 
-const isBids = computed(() => tableType == 'incoming' || tableType == 'outgoing')
+const renderColumns = computed(() => columns ?? defaultColumns)
+
 const showFilters = ref(false)
 
 const toggleFilterDrawer = () => {
   showFilters.value = !showFilters.value
 }
 
-const { data, tableType } = defineProps<{
+const isFilterActive = computed(() => {
+  if (showFilters.value = true)
+    return true
+})
+
+const { data, columns } = defineProps<{
   data?: CollectionData,
+  columns?: TableColumn<IXToken>[],
   hideGrid?: boolean
-  tableType?: ButtonTypes
 }>()
+
+onBeforeUnmount(() => {
+  activeFilters.value = []
+})
 
 watch(rows, () => {
   console.log("New rows", rows.value)

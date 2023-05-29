@@ -95,6 +95,7 @@ const getCut = (position: Position, size: Size = 'md') => {
 
   return {
     ...depth,
+    'clip-path': 'polygon(var(--cut-path))',
     '--cut-opacity': 1,
     '--cut-path': path,
     "--cut-top-right-bottom-left": '0 0, calc(100% - var(--cut-depth)) 0, 100% var(--cut-depth), 100% 100%, var(--cut-depth) 100%, 0 calc(100% - var(--cut-depth));',
@@ -138,16 +139,16 @@ export const cutRules: Rule<Theme>[] = [
     const attributedSelector = defaultSelector.split("{")[0]
 
     return `
-      ${attributedSelector} {
-        --border: 1px;
-        --corner-radius: 0 20 0 0;
-        --stroke-weight: 1;
+      .is-not-paint-supported ${attributedSelector} {
         border: 1px solid ${colorString};
-        clip-path: polygon(var(--cut-path));
+      }
+    
+      .is-paint-supported ${attributedSelector} {
+        --cut-border: 1px;
         position: relative;
       }
 
-      ${attributedSelector}:before {
+      .is-paint-supported ${attributedSelector}:before {
         content: "";
         display: block;
         position: absolute;
@@ -156,10 +157,6 @@ export const cutRules: Rule<Theme>[] = [
         pointer-events: none;
         transition: background 150ms;
         background: ${colorString};
-      }
-
-      .is-paint-supported ${selector} {
-        border: 0;
       }
     `
   }],

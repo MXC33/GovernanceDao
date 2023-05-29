@@ -69,7 +69,6 @@ export interface CollectionData {
 }
 
 export type CollectionDisplayType = 'list' | 'grid'
-export type ButtonTypes = 'incoming' | 'outgoing'
 
 export const useCollectionSettings = () => {
   const activeFilters = useState<Filter[]>('activeFilters', () => ([]))
