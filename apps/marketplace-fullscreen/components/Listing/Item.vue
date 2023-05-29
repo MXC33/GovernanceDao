@@ -39,7 +39,7 @@ VList(bg="gray-800" v-if="item" frame="~" flex-shrink="0")
             template(#suffix) IXT
 
         template(#action)
-          div(btn="~ form" w="full") Floor
+          button(btn="~ form" w="full" @click="onClickFloor") Floor
 
       ListingAdjustRow()
         template(#header) Quantity
@@ -48,7 +48,7 @@ VList(bg="gray-800" v-if="item" frame="~" flex-shrink="0")
           Adjustable(v-model="item.shares" h="full")
 
         template(#action)
-          button(btn="~ form" w="full") Max
+          button(btn="~ form" w="full" @click="onClickMax") Max
 
       HList()
 
@@ -60,5 +60,19 @@ import { Collapse } from 'vue-collapsed'
 
 const item = defineModel<ListingItem>()
 const isOpen = ref(false)
+
+const onClickMax = () => {
+  if (!item.value)
+    return
+
+  item.value.shares.value = item.value.token.my_shares
+}
+
+const onClickFloor = () => {
+  if (!item.value)
+    return
+
+  item.value.ixtPrice = item.value.token.sale_price
+}
 </script>
   

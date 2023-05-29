@@ -36,7 +36,11 @@ export const useListingItems = () => {
   const createListItems = (items: IXToken[], shares: number) => {
     listItems.value = items.map((token) => ({
       token,
-      shares: { value: 1 },
+      shares: {
+        min: 1,
+        value: 1,
+        max: token.my_shares
+      },
       durationInDays: durationDayOptions[0],
       ixtPrice: 0
     }))
@@ -163,7 +167,7 @@ export const useListingContract = () => {
       quantity: shares.value
     }
 
-    return  {
+    return {
       sale_message: saleMessage as string,
       sale_price: Number(ixtPrice),
       sale_type: 1, //always 1,

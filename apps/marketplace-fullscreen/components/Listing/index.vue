@@ -27,7 +27,7 @@ Popup()
     VList()
       HList(w="full" justify="between")
         div(color="gray-200") Total Price
-        p {{invalidPrice ?? totalIXTPrice}} IXT
+        p {{invalidPrice ?? roundToDecimals(totalIXTPrice, 4)}} IXT
 
       HList(w="full" justify="between")
         div(color="gray-200") Marketplace fee
@@ -35,7 +35,7 @@ Popup()
 
       HList(w="full" justify="between" text="lg" font="bold")
         p() Total potential earnings
-        p {{invalidPrice ?? (totalIXTPrice * (1-0.025 ))}} IXT
+        p {{invalidPrice ?? roundToDecimals(totalIXTPrice * (1 - 0.025), 4)}} IXT
 
   template(#buttons)
     button(btn="~ primary" w="full" @click.prevent="onClickList") List Items

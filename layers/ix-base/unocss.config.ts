@@ -79,7 +79,7 @@ export default definePreset({
     },
 
     {
-      'btn': 'transition-all transition-duration-100 flex flex-col text-center justify-center items-center leading-none ',
+      'btn': 'transition-all transition-duration-100 flex flex-col text-center justify-center items-center leading-none cursor-pointer',
       'btn-solid': 'font-bold uppercase px-4 lg:px-12 py-4',
       'btn-accent': 'btn-primary btn-solid',
       'btn-primary': 'btn-solid bg-ix-primary color-white',
