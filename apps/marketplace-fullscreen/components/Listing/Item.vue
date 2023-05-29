@@ -1,92 +1,51 @@
 <template lang="pug">
-div(m="t-10" p="5" bg="#141414" color="#F9F9F9" overflow="hidden" v-if="item.name" )
-  HList(w="full" justify="between" m="b-4")
-    h2 List Item
-    button(text="6" @click.prevent="emit('closed')") x
-  HList(w="full" justify="between" gap="4")
-    img(:src="item.image" width=200)
-    div(grow="1")
-      h2 {{item.name}}
-      h2 {{item.parent.name}}
+VList(bg="gray-800" v-if="item" frame="~" flex-shrink="0")
+  HList(justify="start"  @click="isOpen = !isOpen" cursor="pointer")
+    TokenImage(:token="item.token" w="30" h="30")
 
-  hr(m="t-4 b-4" bg="#000" h="1px")
+    VList(w="full" p="6")
+      TokenName(:token="item.token")
+      div Price not set
+      div Time not set
 
-  HList(w="full" justify="between" gap="4" v-if="item.sale_price")
-    p Floor price
-    p {{item.sale_price}} IXT
-  HList(w="full" justify="between" gap="4" v-if="item.higher_bid_price")
-    p Best Offer
-    p {{item.higher_bid_price}} IXT
 
-  hr(m="t-4 b-4" bg="#000" h="1px")
+  Collapse(:when="isOpen" class="v-collapse")
+    VList(p="6" space-y="3" w="full")
+      ListingPriceRow()
+        template(#name) Floor Price
+        template(#value) 15 IXT
 
-  h2(m="b-2") Set a price for unit
-  div(m="b-2")
-    HList(w="full" justify="between")
-      input(type="number" min=0 w="full" grow="1" v-model="price" color="#000" text="5" @keypress="useIsKeyNumber($event)")
-      span IXT
-    HList(w="full" justify="between")
-      p ${{price*qty}} Total (${{price}} each)
-      p Total offer amount: {{price*qty}} IXT Total (${{price*qty}})
-  div.columns-2(m="b-2")
-    div
-      h2 Quantity
-      p {{item.my_shares}} available
-    div
-      InputQty(:min="1" :max="item.my_shares" v-model="qty" )
+      ListingPriceRow()
+        template(#name) Best offer
+        template(#value) 15 IXT
 
-  div.columns-2(m="b-2")
-    div
-      h2 Duration
-      p Ending May 13, 2023 at 9:53 AM
-    div
-      select(w="full" color="#000" text="5")
-        option(:value="option.value" v-for="(option, index) in listing.durationOptions" ) {{option.name}}
+      ListingAdjustRow()
+        template(#header) Price
 
-  hr(m="t-4 b-4" bg="#000" h="1px")
+        template(#value)
+          InputText(v-model="item.ixtPrice")
 
-  HList(w="full" justify="between")
-    p Total Price
-    p {{price*qty}} IXT
-  HList(w="full" justify="between")
-    p Marketplace fee
-    p 2.5%
-  HList(w="full" justify="between")
-    h2 Total potential earnings
-    p {{price*qty*(1-0.025)}} IXT
+        template(#action)
+          button(btn="~ form" w="full") Floor
 
-  button(btn="~ primary" w="full" m="t-5" @click.prevent="listItem") List Items
+      ListingAdjustRow()
+        template(#header) Quantity
+
+        template(#value)
+          Adjustable(v-model="item.shares" h="full")
+
+        template(#action)
+          button(btn="~ form" w="full") Floor
+
+      HList()
 
 </template>
-
+  
 <script lang="ts" setup>
-import {useIsKeyNumber} from "@ix/base/composables/Utils/useHelpers"
-import type {SingleItemData} from "@ix/base/composables/Token/useIXToken"
-import {useListing} from "~/composables/useListing";
+import type { ListingItem } from '~/composables/useListing'
+import { Collapse } from 'vue-collapsed'
 
-const props = defineProps<{
-  item: SingleItemData
-  quantity: number
-}>()
-
-const emit = defineEmits(["closed"])
-
-const qty = ref<number>(props.quantity || 0)
-const price = ref<number>(0)
-const listing = useListing()
-
-watch(props, (newProps) => {
-  qty.value = newProps.quantity
-})
-
-const listItem = async () => {
-  const listing = useListing()
-  const list = await listing.list(toRaw(props.item as SingleItemData), price.value, qty.value, 1685019917)
-  console.log('List result', list)
-}
-
+const item = defineModel<ListingItem>()
+const isOpen = ref(false)
 </script>
-
-<style scoped>
-
-</style>
+  

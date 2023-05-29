@@ -79,10 +79,12 @@ export default definePreset({
     },
 
     {
-      'btn': 'transition-all transition-duration-100 flex flex-col text-center justify-center items-center px-4 lg:px-12 py-4 leading-none font-bold uppercase',
-      'btn-accent': 'btn-primary',
-      'btn-primary': 'bg-ix-primary color-white',
-      'btn-secondary': 'bg-gray-600 color-white',
+      'btn': 'transition-all transition-duration-100 flex flex-col text-center justify-center items-center leading-none ',
+      'btn-solid': 'font-bold uppercase px-4 lg:px-12 py-4',
+      'btn-accent': 'btn-primary btn-solid',
+      'btn-primary': 'btn-solid bg-ix-primary color-white',
+      'btn-secondary': 'btn-solid bg-gray-600 color-white',
+      'btn-form': 'font-400 p-3 b-0.5 b-gray-400',
     },
 
     {

@@ -153,7 +153,7 @@
     },
     "myAssets": {
       "myItems": "My items",
-      "favorites": "Favorites",
+      "favourites": "Favourites",
       "incomingBids": "Incoming Bids",
       "outgoingBids": "Outgoing Bids",
       "activeListings": "Active Listings",
@@ -181,7 +181,7 @@
       "transferItem": "Transfer Item"
     },
     "list": {
-      "title": "List Asset",
+      "title": "List Item",
       "quantity": "Quantity",
       "own": "You own",
       "walletAdress": "Wallet Adress",

@@ -1,8 +1,8 @@
 <template lang="pug">
-Account(:data="data" v-if="data" )
+AccountBidsIncoming(:data="data" v-if="data" )
 </template>
-  
-  
+    
+    
 <script lang="ts" setup>
 
 import { useCollectionSettings } from "~/composables/useCollection";
@@ -13,7 +13,7 @@ const body = ref<CollectionPayload>({
   order: 0,
   filter: {
     owned: true,
-    type: 0,
+    type: 1,
     search: "",
     attributes: []
   }
@@ -39,22 +39,6 @@ watch(() => data, (value) => {
     createFilters()
 }, { deep: true })
 
-watch(() => activeFilters, () => {
-  body.value.page_key = 0
-  body.value.filter.attributes = []
-  activeFilters.value.forEach((name) => {
-    name.value.forEach((value) => {
-      if (value.selected)
-        body.value.filter.attributes.push({
-          trait_type: name.trait_type,
-          value: value.name
-        })
-    })
-  })
-  if (data.value)
-    data.value.nfts = []
-  refresh()
-}, { immediate: true, deep: true })
 
 onBeforeUnmount(() => {
   activeFilters.value = []

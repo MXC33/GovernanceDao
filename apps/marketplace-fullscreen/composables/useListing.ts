@@ -1,76 +1,74 @@
-import {ItemType, OrderType, signDomain, typedData} from "@ix/base/composables/Token/useIXToken"
-import type {SingleItemData} from "@ix/base/composables/Token/useIXToken"
-import {get1155Contract} from "~/composables/useAssetContracts";
-import {ethers} from "ethers";
-import {ZERO_ADDRESS} from "~/composables/useTransferNFT";
+import { IXToken, ItemType, OrderType, signDomain, typedData } from "@ix/base/composables/Token/useIXToken"
+import { add } from 'date-fns'
+import { get1155Contract } from "~/composables/useAssetContracts";
+import { ethers } from "ethers";
+import { ZERO_ADDRESS } from "~/composables/useTransferNFT";
 import {
   conduitKey,
   feeTreasuryAdress,
   IXTAddress,
   seaportAdress
 } from "@ix/base/composables/Contract/WalletAddresses";
-import {makeRandomNumberKey} from "@ix/base/composables/Utils/useHelpers";
-import {ListingAssets, ListingsBody, useListEndpoints} from "~/composables/api/post/useListAPI";
 
-export type DurationValue = 0 | 1 | 2| 3
+import { makeRandomNumberKey } from "@ix/base/composables/Utils/useHelpers";
+import { ListingAssets, ListingsBody, useListEndpoints } from "~/composables/api/post/useListAPI";
+import { AdjustableNumber } from "~/../../layers/ix-base/composables/Utils/useAdjustableNumber";
+
+export type DurationValue = 0 | 1 | 2 | 3
 
 export interface Duration {
   value: DurationValue,
   name: string
 }
 
-export interface ItemListingData {
-  price: number,
-  shares: number,
-  endTime: number
+export interface ListingItem {
+  token: IXToken,
+  shares: AdjustableNumber,
+  durationInDays: number,
+  ixtPrice: number
 }
 
-export const useListing = () => {
-  const durationOptions: Duration[] = [
-    {
-      value: 0,
-      name: '3 Days'
-    },
-    {
-      value: 1,
-      name: '1 Week'
-    },
-    {
-      value: 2,
-      name: '1 Week'
-    },
-    {
-      value: 3,
-      name: 'Custom'
-    }
-  ]
+export const useListingItems = () => {
+  const listItems = useState<ListingItem[]>('listing-items', () => [])
 
-  const createListingsBody = (saleMessage: string, item: SingleItemData, price: number, shares: number, endTime: number): ListingsBody => {
-    const listingAssets: ListingAssets = {
-      index: item._index,
-      collection: item.collection,
-      token_id: item.token_id,
-      network: item.network,
-      quantity: shares
-    }
-    return  {
-      sale_message: saleMessage as string,
-      sale_price: price,
-      sale_type: 1, //always 1,
-      sale_endtime: endTime,
-      assets: [listingAssets]
-    }
+  const durationDayOptions = [1, 7, 14]
+
+  const createListItems = (items: IXToken[], shares: number) => {
+    listItems.value = items.map((token) => ({
+      token,
+      shares: { value: 1 },
+      durationInDays: durationDayOptions[0],
+      ixtPrice: 0
+    }))
   }
 
-  const createListingMessage = async (item: SingleItemData, price: number, shares: number, endTime: number) => {
+  const totalIXTPrice = computed(() =>
+    listItems.value.reduce((prev, item) =>
+      prev + (item.ixtPrice * item.shares.value)
+      , 0)
+  )
+
+  return {
+    createListItems,
+    totalIXTPrice,
+    listItems
+  }
+}
+
+export const useListingContract = () => {
+
+  const createListingMessage = async (item: ListingItem, endTime: number) => {
+    //TODO update endtime
+
+    const { token: { collection, token_id }, ixtPrice, shares } = item
     /*
       Todo
       Start loading overlay
     */
     console.log('start Loading overlay')
 
-    const IXTokenContract = get1155Contract(item.collection as string)
-    const approveNftCheck = IXTokenContract.approveNftCheck()
+    const IXTokenContract = get1155Contract(collection as string)
+    const approveNftCheck = await IXTokenContract.approveNftCheck()
 
     if (!approveNftCheck) {
       /*
@@ -81,7 +79,8 @@ export const useListing = () => {
       return false
     }
 
-    const totalPrice = price * shares
+    const totalPrice = ixtPrice * shares
+
     const ownerPrice = ethers.utils.parseUnits(
       roundUp(((95 / 100) * totalPrice), 8).toString()
     ).toString()
@@ -93,6 +92,7 @@ export const useListing = () => {
     const { walletAdress, signTypedData } = useWallet()
 
     const address = walletAdress.value
+
     if (!address) {
       /*
         Todo
@@ -107,18 +107,18 @@ export const useListing = () => {
       zone: ZERO_ADDRESS,
       offer: [{
         itemType: ItemType.ERC1155,
-        token: item.collection,
-        identifierOrCriteria: item.token_id,
+        token: collection,
+        identifierOrCriteria: token_id,
         startAmount: shares,
         endAmount: shares,
         pixHash: "0x0000000000000000000000000000000000000000000000000000000000000000",
       }],
-      consideration:[
+      consideration: [
         {
           itemType: ItemType.ERC20,
           token: IXTAddress.polygon,
           identifierOrCriteria: 0,
-          startAmount: ownerPrice ,
+          startAmount: ownerPrice,
           endAmount: ownerPrice,
           recipient: address
         },
@@ -150,12 +150,28 @@ export const useListing = () => {
     })
   }
 
-  const list = async (item: SingleItemData, price: number, shares: number, endTime: number) => {
-    const saleMessage = await createListingMessage(item, price, shares, endTime)
-    if (!saleMessage)
-      return false
+  const listItem = async (item: ListingItem) => {
+    const { shares, ixtPrice, durationInDays, token: { _index: index, collection, token_id, network } } = item
+
+    const endTime = add(new Date(), { days: durationInDays }).getMilliseconds()
+    const saleMessage = await createListingMessage(item, endTime)
+
     try {
-      const listingsBody = createListingsBody(saleMessage as string, item, price, shares, endTime)
+      const listingAssets: ListingAssets = {
+        index,
+        collection,
+        token_id,
+        network,
+        quantity: shares
+      }
+
+      const listingsBody: ListingsBody = {
+        sale_message: saleMessage as string,
+        sale_price: ixtPrice,
+        sale_type: 1, //always 1,
+        sale_endtime: endTime,
+        assets: [listingAssets]
+      }
 
       const listEndpoints = useListEndpoints()
       await listEndpoints.listAssets([listingsBody])
@@ -182,57 +198,7 @@ export const useListing = () => {
     return true
   }
 
-  const bulkList = async (items: SingleItemData[], data: Map<number, ItemListingData>) => {
-    const listingsBody: ListingsBody[] = []
-
-    for (const item of items) {
-      const itemData = data.get(item.token_id)
-      if (!itemData) {
-        /*
-        Todo
-        itemData doesn't exists
-      */
-        alert('Something went wrong {itemData} doesn\'t exists')
-        return false
-      }
-
-      const saleMessage = await createListingMessage(item, itemData.price, itemData.shares, itemData.endTime)
-      if (!saleMessage)
-        return false
-
-      listingsBody.push(createListingsBody(saleMessage as string, item, itemData.price, itemData.shares, itemData.endTime))
-    }
-
-    try {
-      const listEndpoints = useListEndpoints()
-      await listEndpoints.listAssets(listingsBody)
-
-      /*
-        Todo
-        Success message
-      */
-      alert('Success message')
-
-    } catch (error: any) {
-      /*
-        Todo
-        API error
-      */
-      console.log(error.response)
-      if (error.response && error.response._data && error.response._data.message) {
-        alert(error.response._data.message)
-      } else {
-        alert('Something wrong happened!!')
-      }
-      return false
-    }
-    return true
-  }
-
   return {
-    durationOptions,
-    createListingMessage,
-    list,
-    bulkList
+    listItem
   }
 }

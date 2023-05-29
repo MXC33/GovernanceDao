@@ -15,10 +15,17 @@ interface CollectionsResponse {
 
 
 export const useCollectionData = (slug: string, body: ComputedRef<CollectionPayload>, network = 'polygon') => {
-  return useAsyncDataStatePagination('collection-' + slug + body.value.page_key, () =>
+  return useAsyncDataState('collection-' + slug + body.value.page_key, () =>
     fetchIXAPI('collections/' + network + '/' + slug, 'POST', body.value) as Promise<CollectionResponse>, {
     transform: (item) => {
+      console.log("Transformed the data", body.value)
       return item.data as CollectionData
+    },
+    mergePages: (oldData, newData) => {
+      return {
+        ...newData,
+        nfts: oldData.nfts.concat(newData.nfts)
+      }
     }
   })
 }
