@@ -39,7 +39,7 @@ VList(bg="gray-800" v-if="item" frame="~" flex-shrink="0")
             template(#suffix) IXT
 
         template(#action)
-          button(btn="~ form" w="full") Floor
+          div(btn="~" w="full" h="30" cursor="pointer" cut="bottom-right b-gray-400 hover:b-gray-200") Floor
 
       ListingAdjustRow()
         template(#header) Quantity
@@ -48,7 +48,7 @@ VList(bg="gray-800" v-if="item" frame="~" flex-shrink="0")
           Adjustable(v-model="item.shares" h="full")
 
         template(#action)
-          button(btn="~ form" w="full") Floor
+          button(btn="~ form" w="full") Max
 
       HList()
 

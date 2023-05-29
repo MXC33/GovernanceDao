@@ -29,13 +29,18 @@ watch(y, (pos) => globalY.value = pos)
 
 
 onMounted(async () => {
-  const connected = await connectWallet()
-  if (connected)
-    walletState.value = 'connected'
+  try {
+    const connected = await connectWallet()
+    if (connected)
+      walletState.value = 'connected'
 
-  await setupIXTPrice()
+    await setupIXTPrice()
 
-  console.log("price", ixtPrice.value)
+    console.log("price", ixtPrice.value)
+
+  } catch (err) {
+    console.error("Error mounting app", err)
+  }
 
   //@ts-ignore
   const isPaintSupported = !!CSS.paintWorklet

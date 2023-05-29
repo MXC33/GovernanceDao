@@ -116,35 +116,53 @@ export const cutRules: Rule<Theme>[] = [
       '--cut-opacity': Number(op) / 100,
     }
   }],
-  [/^cut-b-(.+)$/, (arr, { theme, rawSelector }: RuleContext<Theme>) => {
+  [/^cut-b-(.+)$/, (arr, { theme, constructCSS, variantMatch, variantHandlers, rawSelector }: RuleContext<Theme>) => {
     const [mode, body] = arr
 
     const selector = e(rawSelector)
     if (!body)
       return
 
+    console.log("VARIANTS", variantHandlers)
+    console.log("VARIANT MATCH", variantMatch)
+
     const data = parseColor(body, theme)
     if (!data)
       return
 
-    const { alpha, cssColor } = data
+    const { cssColor } = data
 
     if (!cssColor)
       return
 
     const colorString = colorToString(cssColor, 'var(--cut-opacity)')
 
+    const defaultSelector = constructCSS({})
+    const attributedSelector = defaultSelector.split("{")[0]
+
     return `
-      ${selector} {
+      ${attributedSelector} {
+        --border: 1px;
+        --corner-radius: 0 20 0 0;
+        --stroke-weight: 1;
         border: 1px solid ${colorString};
-      }
-      
-      .is-paint-supported ${selector} {
-        border: 0;
+        clip-path: polygon(var(--cut-path));
+        position: relative;
       }
 
-      .is-paint-supported ${selector}:before {
+      ${attributedSelector}:before {
+        content: "";
+        display: block;
+        position: absolute;
+        inset: 0;
+        mask: paint(cut-corners);
+        pointer-events: none;
+        transition: background 150ms;
         background: ${colorString};
+      }
+
+      .is-paint-supported ${selector} {
+        border: 0;
       }
     `
   }],
