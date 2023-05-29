@@ -61,7 +61,7 @@ export const get1155Contract = <T extends ContractInterface<T> & ERC1155Contract
     withContract((contract) => {
       const address = walletAdress.value
       if (!address)
-          return undefined
+        return undefined
 
       return contract.isApprovedForAll(address, spenderAddress)
     })
@@ -124,7 +124,7 @@ export const get721Contract = <T extends ContractInterface<T> & ERC721Contract>(
     withContract((contract) => {
       const address = walletAdress.value
       if (!address)
-          return undefined
+        return undefined
 
       return contract.isApprovedForAll(address, spenderAddress)
     })
@@ -133,7 +133,7 @@ export const get721Contract = <T extends ContractInterface<T> & ERC721Contract>(
     createTransaction((contract) => {
       const address = walletAdress.value
       if (!address)
-          return undefined
+        return undefined
 
       return contract.setApprovalForAll(spenderAddress, approved)
     })
@@ -209,6 +209,16 @@ export const getIXTokenContract = <T extends ContractInterface<T> & IXTokenContr
       return contract.approve(spenderAddress, amount)
     })
 
+  const ixtBalanceOfUser = () =>
+    withContract(async (contract) => {
+      const address = walletAdress.value
+      if (!address)
+        return undefined
+
+      const balance = await contract.balanceOf(address)
+      return balance.toNumber()
+    })
+
   const allowanceCheck = async (amount: number) => {
     try {
       const allowanceValue = Number(ethers.utils.formatUnits(await allowance()))
@@ -223,11 +233,14 @@ export const getIXTokenContract = <T extends ContractInterface<T> & IXTokenContr
     }
   }
 
+
+
   return {
     ...contractSpec,
     allowance,
     approve,
-    allowanceCheck
+    allowanceCheck,
+    ixtBalanceOfUser
   }
 }
 
@@ -253,13 +266,13 @@ export const getSeaportContract = <T extends ContractInterface<T> & SeaportContr
 
   const fulfillAvailableAdvancedOrders = (advancedOrders: AdvancedOrder[], criteriaResolvers: [], offerFulfillments: [], considerationFulfillments: [], fulfillerConduitKey: string, recipient: string, maximumFulfilled: number) =>
     createTransaction((contract) => {
-    console.log('advancedOrders', advancedOrders)
-    console.log('criteriaResolvers', criteriaResolvers)
-    console.log('offerFulfillments', offerFulfillments)
-    console.log('considerationFulfillments', considerationFulfillments)
-    console.log('fulfillerConduitKey', fulfillerConduitKey)
-    console.log('recipient', recipient)
-    console.log('maximumFulfilled', maximumFulfilled)
+      console.log('advancedOrders', advancedOrders)
+      console.log('criteriaResolvers', criteriaResolvers)
+      console.log('offerFulfillments', offerFulfillments)
+      console.log('considerationFulfillments', considerationFulfillments)
+      console.log('fulfillerConduitKey', fulfillerConduitKey)
+      console.log('recipient', recipient)
+      console.log('maximumFulfilled', maximumFulfilled)
       const address = walletAdress.value
       if (!address)
         return undefined
