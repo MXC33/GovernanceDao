@@ -1,5 +1,5 @@
 <template lang="pug">
-Collection(:data="data" v-if="data" :hide-grid="true" :has-button="true" :table-type="'incoming'")
+Collection(:data="data" v-if="data" :hide-grid="true" :has-button="true" :table-type="'outgoing'")
   template(#menu)
     AccountMenu()
 </template>
