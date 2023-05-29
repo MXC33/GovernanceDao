@@ -78,6 +78,7 @@ const OpenMeny = (index: number) => {
     return showMenu.value = !showMenu.value;
 
   menuIndex.value = index
+  showMenu.value = true
 }
 
 
