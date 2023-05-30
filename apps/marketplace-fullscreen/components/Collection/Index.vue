@@ -47,15 +47,10 @@ import PolygonIcon from '~/assets/icons/polygon_filled.svg'
 const { displayType, activeFilters } = useCollectionSettings()
 const { getTokenKey } = useTokens()
 const { cartItems } = useCart()
-const { ixtAsUSD } = useIXTPrice()
+const { ixtAsUSD, ixtPrice } = useIXTPrice()
 
 const { getCollectionAttributes } = useDefaulAttributes()
 const attributes = computed(() => data ? getCollectionAttributes(data) : [])
-
-const rows = computed(() => (data?.nfts ?? []).map((row) => ({
-  ...row,
-  usd: ixtAsUSD(row.sale_price).value
-})))
 
 const defaultColumns: TableColumn<IXToken>[] = [
   { label: "Asset", value: "name" },
@@ -90,6 +85,15 @@ const { data, columns } = defineProps<{
   columns?: TableColumn<IXToken>[],
   hideGrid?: boolean
 }>()
+
+const rows = ref<IXToken[]>([])
+
+watch([data, ixtPrice], () => {
+  rows.value = (data?.nfts ?? []).map((row) => ({
+    ...row,
+    usd: ixtAsUSD(row.sale_price).value
+  }))
+}, { immediate: true })
 
 onBeforeUnmount(() => {
   activeFilters.value = []

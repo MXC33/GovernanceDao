@@ -38,6 +38,8 @@ const props = defineProps<{
 
 const { sortedRows, sort, selectSortField, toggleSortDirection } = useTable(props.rows, props.id)
 
+console.log("TABLE", props)
+
 const getColumnStyle = (item: TableColumn<Row>) => {
   if (!item.width)
     return {}

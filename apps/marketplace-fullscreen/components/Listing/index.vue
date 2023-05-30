@@ -15,7 +15,7 @@ Popup()
         HList(justify="end" color="gray-200")
           span(mb="4") $
 
-      ContentDrawer(frame="none" mx="-6" mb="4" b="t-1 b-1 gray-600" :is-neutral="true")
+      ContentDrawer(frame="none" mb="4" b="t-1 b-1 gray-600" :is-neutral="true")
         template(#header) APPLY TO ALL
         template(#default)
           ListingApplyAll()
