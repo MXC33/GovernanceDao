@@ -8,13 +8,13 @@ export interface SubHeaderObject {
 
 export interface CategoryHeaderObject {
   title: string,
-  subHeaders : SubHeaderObject[]
+  subHeaders: SubHeaderObject[]
 }
 
 export interface AllCategoryHeaderObject {
-  categoryHeaderObject : CategoryHeaderObject[]
+  categoryHeaderObject: CategoryHeaderObject[]
 }
-  
+
 export interface HeaderCategory {
   type: string,
   items: string[]
@@ -55,7 +55,7 @@ export const playNowHeaderItems: HeaderCategory[] = [
   },
   {
     type: 'analytics',
-    items: ['game', 'nft', 'vesting' , 'ixt', 'smartcontracts'] 
+    items: ['game', 'nft', 'vesting', 'ixt', 'smartcontracts']
   },
 ]
 
@@ -70,7 +70,25 @@ export const stakingHeaderItems: HeaderCategory[] = [
   },
   {
     type: 'in-game-assets',
-    items: ['territory', 'energy', 'governance' , 'metashares', 'landmarks', 'ixt-cat-raff', 'lend-capital'] 
+    items: ['territory', 'energy', 'governance', 'metashares', 'landmarks', 'ixt-cat-raff', 'lend-capital']
+  },
+]
+
+export const communityHeaderItems: HeaderCategory[] = [
+  {
+    type: 'governance',
+    items: ['proposals', 'discussion']
+  },
+  {
+    type: 'news-social',
+    items: ['twitter', 'news', 'discord', 'chinese forum', 'telegram']
+  },
+]
+
+export const analyticsyHeaderItems: HeaderCategory[] = [
+  {
+    type: 'analytics',
+    items: ['game', 'nft', 'vesting', 'ixt', 'smartcontracts']
   },
 ]
 
@@ -89,17 +107,17 @@ const siteTopHeaders: HeaderItem[] = [
   },
   {
     type: 'community',
-    categories: buyIXTHeaderItems,
+    categories: communityHeaderItems,
   },
   {
     type: 'analytics',
-    categories: buyIXTHeaderItems,
+    categories: analyticsyHeaderItems,
   }
-] 
+]
 
 export const useSiteHeader = () => {
-  const OnClickSubHeader = (title:string) => {
-    switch(title) {
+  const OnClickSubHeader = (title: string) => {
+    switch (title) {
       case 'Swap':
         return window.location.href = 'https://dashboard.ix.foundation/'
       case 'Polygon':
