@@ -1,7 +1,8 @@
 <template lang="pug">
-Collection(:data="data" :columns="columns" :context="'incoming-bids'" v-if="data" :hide-grid="true")
+Collection(:data="data" :columns="columns" :context="'active-listings'" v-if="data" :hide-grid="true")
   template(#menu)
     AccountMenu()
+
 </template>
     
     
@@ -10,13 +11,12 @@ import type { TableColumn } from "~/composables/useTable";
 import type { IXToken } from "@ix/base/composables/Token/useIXToken";
 import { fromUnixTime } from "date-fns"
 
-
 const { myAssetsURL } = useCollectionsURL()
 
 const { data: data, execute: fetchCollection, setupCollectionListeners } = useCollectionData(myAssetsURL('polygon'), {
   filter: {
     owned: true,
-    type: 1,
+    type: 3,
   }
 })
 
@@ -26,54 +26,46 @@ setupCollectionListeners()
 const columns: TableColumn<IXToken>[] = [
   { label: "Asset", value: "name" },
   {
-    label: "Price", value: "bid", getValue(row) {
-      return row.bid.price.toString()
+    label: "Unit price", value: "bid", getValue(row) {
+      return row.sales[0].price.toString()
     }, type: 'ixt', sortable: true
   },
   { label: "USD price", value: "usd", type: 'usd', sortable: true },
   {
-    label: "Floor Difference", value: "bids", getValue(row) {
+    label: "Floor Difference", value: "bid", getValue(row) {
       if (row.lowest_sale?.price)
         return (row.higher_bid_price - row.lowest_sale.price).toString().substring(0, 5)
       return row.higher_bid_price.toString()
     }, type: 'text', sortable: true
   },
   {
-    label: "Quantity", value: "bid", getValue(row) {
-      return row.bid.quantity.toString()
-    }, type: 'text'
-  },
-  {
-    label: "From", value: "bidder_username", getValue(row) {
-      return row.bid.bidder_username
-    }, type: 'text'
-  },
-  {
-    label: "Expires", value: "due_date", getValue(row) {
-      return fromUnixTime(row.bid.due_date).toDateString()
+    label: "Expiration date", value: "endtime", getValue(row) {
+      return fromUnixTime(row.sales[0].endtime).toDateString()
     }, type: 'text', sortable: true
   },
   {
     type: 'buttons', buttons: [{
-      type: 'secondary', text: 'counter', onClick: (token) => {
-        counterBidOnClick(token)
+      type: 'secondary', text: 'cancel', onClick: (token) => {
+        cancelBidOnClick(token)
       },
     },
     {
-      type: 'primary', text: 'accept', onClick: (token) => {
-        acceptBidOnClick(token)
+      type: 'primary', text: 'update', onClick: (token) => {
+        updateBidOnClick(token)
       },
     }]
   },
 
 ]
 
-const counterBidOnClick = (token: IXToken) => {
-  console.log("Counter", token)
-  console.log(data.value?.nfts)
+const { removeBid, placeBid } = useBidsAPI()
+
+const cancelBidOnClick = (token: IXToken) => {
+  console.log("Cancel", token)
 }
 
-const acceptBidOnClick = (token: IXToken) => {
-  console.log("Accept", token)
+const updateBidOnClick = (token: IXToken) => {
+  console.log("Update", token)
 }
+
 </script>

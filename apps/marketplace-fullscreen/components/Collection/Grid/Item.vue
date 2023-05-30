@@ -27,9 +27,8 @@ VList(justify="center" items="center" aspect="2/3" bg="black opacity-40" ref="me
     div(text="md gray-200")
       slot(name="detail") Best offer: {{ token?.higher_bid_price }} IXT
 
-    Transition(name="slide-bottom" v-if="page=='myAssets'")
-      ButtonInteractive(btn="~ primary" pos="absolute bottom-0 left-0 right-0" v-if="isHovered" @click.stop="onClickListItems" text="List Item")
-
+    Transition(name="slide-bottom" v-if="context=='my-assets'")
+      button(btn="~ primary" pos="absolute bottom-0 left-0 right-0" v-if="isHovered" @click.stop="onClickListItems") List Item
     Transition(name="slide-bottom" v-else)
       button(btn="~ primary" pos="absolute bottom-0 left-0 right-0" v-if="isHovered" @click.stop="onClickCart") Add to cart
       
@@ -37,20 +36,33 @@ VList(justify="center" items="center" aspect="2/3" bg="black opacity-40" ref="me
 
 <script lang="ts" setup>
 import type { IXToken } from '@ix/base/composables/Token/useIXToken';
+import type { CollectionContext } from '~/composables/useCollection';
 
 const mediaElement = ref()
 const route = useRoute()
 const isHovered = useElementHover(mediaElement)
 const { addToCart } = useCart()
 
-const { listItem } = useListingContract()
+const { displayPopup } = usePopups()
+
+
+const props = defineProps<{
+  token: IXToken,
+  quantity?: number,
+  isInvalid?: boolean,
+  isActive?: boolean,
+  context?: CollectionContext
+}>()
 
 const onClickCart = () => {
   addToCart(props.token)
 }
 
 const onClickListItems = () => {
-  // listItem(props.token)
+  displayPopup({
+    type: 'list-item',
+    item: props.token
+  })
 }
 
 const onClickItem = () => {
@@ -60,12 +72,6 @@ const onClickItem = () => {
     navigateTo(`/assets/${network}/${collection}/${token_id}`)
 }
 
-const props = defineProps<{
-  token: IXToken,
-  quantity?: number,
-  isInvalid?: boolean,
-  isActive?: boolean,
-  page?: string,
-}>()
+
 
 </script>

@@ -1,7 +1,9 @@
 <template lang="pug">
-HList(w="full" space-x="10")
-  TabItem(v-for="tab in tabs" :id="tab" v-model="activeTab" @click="onClick(tab)") {{ $t(`marketplace.myAssets.${tab}`) }} 
+HList(w="full" space-x="12" pos="relative")
+  TabItem(v-for="tab in tabs" :id="tab" v-model="activeTab" @click="onClick(tab)" :primary="true" :is-small="true") {{ $t(`marketplace.myAssets.${tab}`) }}
 
+
+HList(b="b-1 gray-400" v-if="!isScrolling" pos="absolute top-127.8 left-0" z="1" font="bold" uppercase="~" text="xxl" w="full")
 </template>
     
 <script lang="ts" setup>
@@ -9,12 +11,19 @@ HList(w="full" space-x="10")
 const onClick = (tab: Tab) => {
   return navigateTo('/account/' + links(tab))
 }
+
+const { y } = useWindowScroll()
+
+const isScrolling = computed(() => {
+  return y.value >= 590
+})
+
 const { path } = useRoute()
 
 
 type Tab = 'myItems' | 'favourites' | 'incomingBids' | 'outgoingBids' | 'activeListings' | 'activity'
 
-const accountTabs: Tab[] = ['myItems', 'incomingBids', 'outgoingBids']
+const accountTabs: Tab[] = ['myItems', 'incomingBids', 'outgoingBids', 'activeListings']
 
 const { tabs, activeTab } = useTabList(accountTabs)
 
@@ -30,7 +39,7 @@ const links = (tab: Tab) => {
     case 'outgoingBids':
       return 'bids/outgoing'
     case 'activeListings':
-      return 'activelistings'
+      return 'active-listings'
     case 'activity':
       return 'activity'
   }
@@ -47,7 +56,7 @@ const routeToTab = computed(() => {
       return 'outgoingBids'
     case '/account/favourites':
       return 'favourites'
-    case '/account/activeListings':
+    case '/account/active-listings':
       return 'activeListings'
     case '/account/activity':
       return 'activity'

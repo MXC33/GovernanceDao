@@ -20,7 +20,7 @@ VList()
 </template>
 
 <script lang="ts" setup>
-import type { SingleItemData } from '@ix/base/composables/Token/useIXToken';
+import type { IXToken } from '@ix/base/composables/Token/useIXToken';
 
 const { ixtToUSD } = useIXTPrice()
 
@@ -34,7 +34,7 @@ const onClickSell = () => {
 }
 
 const { item } = defineProps<{
-  item: SingleItemData
+  item: IXToken
 }>()
 
 const maxPrice = ref(false)

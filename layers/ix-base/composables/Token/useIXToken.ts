@@ -36,6 +36,7 @@ export interface IXToken {
   my_shares: number
   bid: Bid
   lowest_sale: LowestSale
+  sales: Sale[]
 }
 
 export interface SingleItemData extends IXToken {

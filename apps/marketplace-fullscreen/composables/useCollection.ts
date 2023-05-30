@@ -36,6 +36,8 @@ export interface Filter extends FilterBase {
 
 export type FilterType = 'radio' | 'checkbox'
 
+export type CollectionContext = 'my-assets' | 'outgoing-bids' | 'incoming-bids' | 'active-listings'
+
 export interface Collection {
   name: string
   slug: string

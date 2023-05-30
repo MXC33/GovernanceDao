@@ -1,5 +1,5 @@
 <template lang="pug">
-Collection(:data="data" v-if="data")
+Collection(:data="data" v-if="data" :context="'my-assets'")
   template(#menu)
     AccountMenu()
 </template>

@@ -1,4 +1,4 @@
-import { SingleItemData } from "~/../../layers/ix-base/composables/Token/useIXToken";
+import { IXToken } from "~/../../layers/ix-base/composables/Token/useIXToken";
 import { CartItem } from "./useCart";
 import { ListingItem } from "./useListing";
 
@@ -18,12 +18,12 @@ export interface PopupOnBid extends PopupBase {
 
 export interface PopupTransfer extends PopupBase {
   type: 'transfer-item',
-  item: SingleItemData
+  item: IXToken
 }
 
 export interface PopupListItem extends PopupBase {
   type: 'list-item',
-  item: SingleItemData
+  item: IXToken
 }
 
 type Popup = PopupOnList | PopupOnBid | PopupTransfer | PopupListItem
