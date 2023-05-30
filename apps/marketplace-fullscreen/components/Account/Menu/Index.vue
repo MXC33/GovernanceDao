@@ -1,6 +1,6 @@
 <template lang="pug">
-HList(w="full" space-x="10")
-  TabItem(v-for="tab in tabs" :id="tab" v-model="activeTab" @click="onClick(tab)") {{ $t(`marketplace.myAssets.${tab}`) }} 
+HList(w="full" space-x="12")
+  TabItem(v-for="tab in tabs" :id="tab" v-model="activeTab" @click="onClick(tab)" :primary="true" :is-small="true") {{ $t(`marketplace.myAssets.${tab}`) }} 
 
 </template>
     
