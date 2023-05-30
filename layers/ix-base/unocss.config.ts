@@ -35,8 +35,11 @@ export default definePreset({
   theme: {
     colors: {
       ix: {
-        primary: '#D70011',
-        black: '#0C0C0C'
+        primary: '#CB0010',
+        black: '#0C0C0C',
+        old: '#D70011',
+        net: '#FF0014'
+
       },
       gray: {
         50: '#d9d9d9',
@@ -85,6 +88,8 @@ export default definePreset({
       'btn-primary': 'btn-solid bg-ix-primary color-white',
       'btn-secondary': 'btn-solid bg-gray-600 color-white',
       'btn-form': 'font-400 p-3 cut-bottom-right cut-b-gray-400 hover:cut-b-gray-300',
+      'btn-table': 'font-bold uppercase px-4 lg:px-6 py-3',
+      // 'btn-table-primary': 'btn-primary'
     },
 
     {
