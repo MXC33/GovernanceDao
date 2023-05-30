@@ -1,5 +1,5 @@
 <template lang="pug">
-HList(space-x="0.5" w="full" frame="~" items="center" px="4" justify="between")
+HList(space-x="0.5" w="full" frame="~" items="center" justify="between")
   HList(items="center")
     AdjustableButton(type="minus" @click="decreaseAmount" :is-adjustable="isDecreasable" :inline="inline")
 
