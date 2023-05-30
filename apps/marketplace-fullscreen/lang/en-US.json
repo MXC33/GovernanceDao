@@ -150,7 +150,6 @@
       "staking": "Staking",
       "community": "Community",
       "help": "Help",
-      
       "buy": {
         "title": "Buy IXT",
         "swap": {
@@ -220,7 +219,6 @@
             "description": "Deepdive into the Planet IX ecosystem.",
             "link": ""
           }
-
         },
         "claimburn": {
           "title": "Bridge",
@@ -233,13 +231,12 @@
             "title": "AVATAR",
             "description": "Burn Avatars for in-game utility.",
             "link": ""
-          },          
+          },
           "arcade": {
             "title": "ARCADE",
             "description": "Claim Arcade airdrops.",
             "link": ""
           }
-
         },
         "analytics": {
           "title": "ANALYTICS",
@@ -263,7 +260,7 @@
             "description": "IX Token holders, stakers and more.",
             "link": ""
           },
-          "smartcontracts": {
+          "smart-contracts": {
             "title": "SMART CONTRACTS ",
             "description": "Officials links to all Planet IX contracts.",
             "link": ""
@@ -296,13 +293,12 @@
             "title": "LP",
             "description": "Stake IXT paired with MATIC at 33% APY.",
             "link": ""
-          },          
+          },
           "supply-liquidity": {
             "title": "SUPPLY LIQUIDITY",
             "description": "Support and secure the IXT ecosystem.",
             "link": ""
           }
-
         },
         "in-game-assets": {
           "title": "IN-GAME ASSETS STAKING",
@@ -338,6 +334,81 @@
           },
           "lend-capital": {
             "title": "LEND CAPITAL",
+            "description": "Officials links to all Planet IX contracts.",
+            "link": ""
+          }
+        }
+      },
+      "community": {
+        "title": "Community",
+        "governance": {
+          "title": "GOVERNANCE",
+          "proposals": {
+            "title": "PROPOSALS",
+            "description": "Propose in-game changes and more.",
+            "link": ""
+          },
+          "discussion": {
+            "title": "DISCUSSIONS",
+            "description": "Discuss game updates, strategies and more.",
+            "link": ""
+          }
+        },
+        "news-social": {
+          "title": "NEWS & SOCIALS",
+          "twitter": {
+            "title": "TWITTER",
+            "description": "Announcements, game updates and sneak peeks.",
+            "link": ""
+          },
+          "news": {
+            "title": "NEWS",
+            "description": "Read up on the latest news from Planet IX.",
+            "link": ""
+          },
+          "discord": {
+            "title": "DISCORD",
+            "description": "Talk to our community, or chat with a game dev!",
+            "link": ""
+          },
+          "chinese-forum": {
+            "title": "CHINESE FORUM",
+            "description": "Chat, learn and grow with the Chinese community.",
+            "link": ""
+          },
+          "telegram": {
+            "title": "TELEGRAM",
+            "description": "Game updates and announcements.",
+            "link": ""
+          }
+        }
+      },
+      "analytics": {
+        "title": "Analytics",
+        "analytics": {
+          "title": "ANALYTICS",
+          "game": {
+            "title": "GAME PERFORMANCE",
+            "description": "Daily players, transaction volume and more.",
+            "link": ""
+          },
+          "nft": {
+            "title": "NFT PERFORMANCE",
+            "description": "Dashboard reflecting our NFT assets performance.",
+            "link": ""
+          },
+          "vesting": {
+            "title": "VESTING SCHEDULE",
+            "description": "IX token vesting schedule.",
+            "link": ""
+          },
+          "ixt": {
+            "title": "IXT PERFORMANCE",
+            "description": "IX Token holders, stakers and more.",
+            "link": ""
+          },
+          "smart-contracts": {
+            "title": "SMART CONTRACTS ",
             "description": "Officials links to all Planet IX contracts.",
             "link": ""
           }
