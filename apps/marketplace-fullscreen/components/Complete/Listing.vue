@@ -6,10 +6,16 @@ Popup()
   template(#header) LIST SUCCESSFUL!
 
   template(#default)
-    TokenSlideshow(:tokens="items")
+    VList(min-h="30")
+      TokenSlideshow(:tokens="mappedTokens")
+
+    VList()
+      HList(justify="between" v-for="item in items" font="bold" text="sm")
+        TokenName(:token="item.token")
+        div x{{ item.shares.value }}
 
   template(#footer)
-    div Quantity {{ items.length }}
+    ListingPrice(:items="items")
 
   template(#buttons)
     button(@click="closeActivePopup" btn="~ primary") Continue exploring 
@@ -21,10 +27,12 @@ Popup()
 import CheckboxIcon from '~/assets/icons/checkmark-green.svg'
 import type { ListingItem } from '~/composables/useListing';
 const { closeActivePopup } = usePopups()
-defineProps<{
+const { items } = defineProps<{
   items: ListingItem[]
 }>()
 
+const mappedTokens = computed(() => items.map((item) => item.token))
+console.log("Token", mappedTokens)
 defineEmits(["close"])
 </script>
   

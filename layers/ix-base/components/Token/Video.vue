@@ -1,6 +1,6 @@
 <template lang="pug">
 VList(w="full" h="full")
-  video(:src="videoURL" w="full" h="full" autoplay loop playsinline muted @play="onPlay" @canplay="onPlay" opacity="0 on-loaded:100" transition="all duration-500" :loaded="isLoaded" ref="videoElement" object="cover center")
+  video(:src="videoURL" w="full" h="full" autoplay loop playsinline muted @play="onPlay" @canplay="onPlay" opacity="0 on-loaded:100" transition="all duration-500" :loaded="isLoaded" ref="videoElement" object="cover center on-contain:contain" :contain="fill == 'contain'")
 
   Transition(name="fade")
     HelperLoader(pos="absolute bottom-3 left-3" v-if="!isLoaded" w="3")
@@ -21,7 +21,9 @@ const onPlay = () => {
 
 const props = defineProps<{
   token: AnyToken,
+  fill?: 'cover' | 'contain'
 }>()
+
 const videoURL = await getTokenVideoURL(props.token)
 
 const visible = useElementVisibility(videoElement)
