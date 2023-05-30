@@ -17,10 +17,10 @@ th(p="3 first:l-6 last:r-6" bg="gray-900" z="3" font="400" color="gray-200")
 
 <script setup lang="ts" generic="T extends TableRow">
 import SortIcon from '~/assets/icons/sort.svg'
-import type { TableColumn, TableRow, TableSort, TableSortField } from '~/composables/useTable'
+import type { TableColumnText, TableRow, TableSort, TableSortField } from '~/composables/useTable'
 
 const props = defineProps<{
-  column: TableColumn<T>,
+  column: TableColumnText<T>,
   sortField?: TableSort<T>,
 }>()
 

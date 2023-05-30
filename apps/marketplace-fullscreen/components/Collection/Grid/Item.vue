@@ -4,8 +4,11 @@ VList(justify="center" items="center" aspect="2/3" bg="black opacity-40" ref="me
     slot(name="media")
       TokenLazyVideo(:token="token" :key="token.collection + token.token_id" :is-hovered="isHovered")
 
-    HList(pos="absolute" inset="0" p="3" pointer-events="none" opacity="0 group-hover:100" transition="all")
+
+    HList(pos="absolute" inset="0" p="3")
       slot(name="icon-left")
+
+    HList(pos="absolute" inset="0" p="3" pointer-events="none" opacity="0 group-hover:100" transition="all")
 
       div(flex-grow="1")
 
@@ -50,9 +53,10 @@ const onClickListItems = () => {
 }
 
 const onClickItem = () => {
-  const id = props.token.token_id
-  if (id)
-    navigateTo(route.path + `/${id}`)
+  const { token_id, network, collection } = props.token
+
+  if (token_id)
+    navigateTo(`/assets/${network}/${collection}/${token_id}`)
 }
 
 const props = defineProps<{

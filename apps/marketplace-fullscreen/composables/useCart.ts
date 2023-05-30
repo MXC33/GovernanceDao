@@ -2,8 +2,20 @@ import { IXToken, Sale } from "@ix/base/composables/Token/useIXToken"
 import { AdjustableNumber } from "@ix/base/composables/Utils/useAdjustableNumber"
 import {get1155Contract, getIXTokenContract, getSeaportContract} from "~/composables/useAssetContracts";
 import {
+  ItemType,
+  OrderType,
+  signDomain,
+  typedData,
+  OfferItem,
+  OrderParameters,
+  AdvancedOrder,
+  Fulfillment,
+  FulfillmentComponent
+} from "@ix/base/composables/Token/useIXToken"
+import {
   conduitKey
 } from "@ix/base/composables/Contract/WalletAddresses";
+import {ethers} from "ethers";
 
 export interface CartItem extends AdjustableNumber {
   token: IXToken,
@@ -58,7 +70,7 @@ export const useCart = () => {
       merkleProof: ["0x0000000000000000000000000000000000000000000000000000000000000000"],
     }
 
-    let BuyOrderComponents = []
+    let BuyOrderComponents: AdvancedOrder[] = []
     let offers = []
     let considerations = []
     let i = 0
@@ -108,12 +120,12 @@ export const useCart = () => {
       console.log('here', totalPrice)
     }
     try {
-    // @ts-ignore
-    await fulfillAvailableAdvancedOrders(BuyOrderComponents, [], offers, considerations.map(item => item.value), conduitKey.polygon, "0x0000000000000000000000000000000000000000", BuyOrderComponents.length)
-
+      // @ts-ignore
+      return await fulfillAvailableAdvancedOrders(BuyOrderComponents, [], offers, considerations.map(item => item.value), conduitKey.polygon, "0x0000000000000000000000000000000000000000", BuyOrderComponents.length)
     }
-    catch (e) {
-      console.log(e)
+    catch (err: any) {
+      console.log("fulfillAvailableAdvancedOrders error");
+      return false
     }
   }
 

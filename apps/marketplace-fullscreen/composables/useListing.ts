@@ -36,7 +36,11 @@ export const useListingItems = () => {
   const createListItems = (items: IXToken[], shares: number) => {
     listItems.value = items.map((token) => ({
       token,
-      shares: { value: 1 },
+      shares: {
+        min: 1,
+        value: 1,
+        max: token.my_shares
+      },
       durationInDays: durationDayOptions[0],
       ixtPrice: 0
     }))
@@ -44,7 +48,7 @@ export const useListingItems = () => {
 
   const totalIXTPrice = computed(() =>
     listItems.value.reduce((prev, item) =>
-      prev + (item.ixtPrice * item.shares.value)
+      prev + (Number(item.ixtPrice) * item.shares.value)
       , 0)
   )
 
@@ -79,7 +83,9 @@ export const useListingContract = () => {
       return false
     }
 
-    const totalPrice = ixtPrice * shares
+    const totalPrice = Number(ixtPrice) * shares.value
+
+
 
     const ownerPrice = ethers.utils.parseUnits(
       roundUp(((95 / 100) * totalPrice), 8).toString()
@@ -109,8 +115,8 @@ export const useListingContract = () => {
         itemType: ItemType.ERC1155,
         token: collection,
         identifierOrCriteria: token_id,
-        startAmount: shares,
-        endAmount: shares,
+        startAmount: shares.value,
+        endAmount: shares.value,
         pixHash: "0x0000000000000000000000000000000000000000000000000000000000000000",
       }],
       consideration: [
@@ -150,28 +156,35 @@ export const useListingContract = () => {
     })
   }
 
+  const createListingsBody = (item: ListingItem, saleMessage: string, endTime: number): ListingsBody => {
+    const { shares, ixtPrice, durationInDays, token: { _index: index, collection, token_id, network } } = item
+
+    const listingAssets: ListingAssets = {
+      index,
+      collection,
+      token_id,
+      network,
+      quantity: shares.value
+    }
+
+    return {
+      sale_message: saleMessage as string,
+      sale_price: Number(ixtPrice),
+      sale_type: 1, //always 1,
+      sale_endtime: endTime,
+      assets: [listingAssets]
+    }
+  }
+
   const listItem = async (item: ListingItem) => {
     const { shares, ixtPrice, durationInDays, token: { _index: index, collection, token_id, network } } = item
 
-    const endTime = add(new Date(), { days: durationInDays }).getMilliseconds()
+    const endTime = Math.floor(add(new Date(), { days: durationInDays }).getTime() / 1000)
     const saleMessage = await createListingMessage(item, endTime)
-
+    if (!saleMessage)
+      return false
     try {
-      const listingAssets: ListingAssets = {
-        index,
-        collection,
-        token_id,
-        network,
-        quantity: shares
-      }
-
-      const listingsBody: ListingsBody = {
-        sale_message: saleMessage as string,
-        sale_price: ixtPrice,
-        sale_type: 1, //always 1,
-        sale_endtime: endTime,
-        assets: [listingAssets]
-      }
+      const listingsBody = createListingsBody(item, saleMessage, endTime)
 
       const listEndpoints = useListEndpoints()
       await listEndpoints.listAssets([listingsBody])
@@ -197,8 +210,48 @@ export const useListingContract = () => {
     }
     return true
   }
+  const listItems = async (items: ListingItem[]) => {
+    const listingsBody: ListingsBody[] = []
+
+    for (const item of items) {
+      const { shares, ixtPrice, durationInDays, token: { _index: index, collection, token_id, network } } = item
+
+      const endTime = Math.floor(add(new Date(), { days: durationInDays }).getTime() / 1000)
+      const saleMessage = await createListingMessage(item, endTime)
+      if (!saleMessage)
+        return false
+
+      listingsBody.push(createListingsBody(item, saleMessage, endTime))
+    }
+
+    try {
+      const listEndpoints = useListEndpoints()
+      await listEndpoints.listAssets(listingsBody)
+
+      /*
+        Todo
+        Success message
+      */
+      alert('Success message')
+
+    } catch (error: any) {
+      /*
+        Todo
+        API error
+      */
+      console.log(error.response)
+      if (error.response && error.response._data && error.response._data.message) {
+        alert(error.response._data.message)
+      } else {
+        alert('Something wrong happened!!')
+      }
+      return false
+    }
+    return true
+  }
 
   return {
-    listItem
+    listItem,
+    listItems
   }
 }

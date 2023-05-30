@@ -3,18 +3,18 @@ registerPaint('cut-corners', class {
   static get inputProperties() {
     return [
       '--cut-path',
-      '--border',
-      '--dash',
-      '--offset'
+      '--cut-border',
+      '--cut-dash',
+      '--cut-offset'
     ]
   }
 
   paint(ctx, size, properties) {
 
     const points = properties.get('--cut-path').toString().split(',');
-    const b = parseFloat(properties.get('--border').value);
-    const d = properties.get('--dash').toString().split(',');
-    const o = properties.get('--offset');
+    const b = parseFloat(properties.get('--cut-border').value);
+    const d = properties.get('--cut-dash').toString().split(',');
+    const o = properties.get('--cut-offset');
     const w = size.width;
     const h = size.height;
 

@@ -1,49 +1,53 @@
 <template lang="pug">
-AccountBidsOutgoing(:data="data" v-if="data" )
+Collection(:data="data" :columns="columns" v-if="data" :hide-grid="true")
+  template(#menu)
+    AccountMenu()
 </template>
     
     
 <script lang="ts" setup>
+import type { TableColumn } from "~/composables/useTable";
+import type { IXToken } from "@ix/base/composables/Token/useIXToken";
+const { myAssetsURL } = useCollectionsURL()
 
-import { useCollectionSettings } from "~/composables/useCollection";
-import type { CollectionPayload } from '~/composables/useCollection';
-
-const body = ref<CollectionPayload>({
-  page_key: 0,
-  order: 0,
+const { data: data, execute: fetchCollection, setupCollectionListeners } = useCollectionData(myAssetsURL('polygon'), {
   filter: {
     owned: true,
     type: 2,
-    search: "",
-    attributes: []
   }
 })
 
-const { data: data, execute: fetchCollection, refresh: refresh } = usePersonalAssetAPI(body.value)
+await fetchCollection()
+setupCollectionListeners()
 
-const { activeFilters } = useCollectionSettings()
+const columns: TableColumn<IXToken>[] = [
+  { label: "Asset", value: "name" },
+  { label: "Current price", value: "sale_price", type: 'ixt', sortable: true },
+  { label: "USD price", value: "usd", type: 'usd', sortable: true },
+  { label: "Best offer", value: "higher_bid_price", type: 'ixt', sortable: true },
+  {
+    type: 'buttons', buttons: [{
+      type: 'secondary', text: 'cancel', onClick: (test) => {
+        cancelBidOnClick(test)
+      },
+    },
+    {
+      type: 'primary', text: 'update', onClick: (test) => {
+        updateBidOnClick(test)
+      },
+    }]
+  },
 
-const createFilters = () => {
-  if (data.value)
-    activeFilters.value = data.value.filters.map((filter) => ({
-      ...filter,
-      value: filter.value.map((name) => ({
-        name,
-        selected: false
-      }))
-    }))
+]
+
+const { removeBid, placeBid } = useBidsAPI()
+
+const cancelBidOnClick = (token: IXToken) => {
+  console.log("Cancel", token)
 }
 
-watch(() => data, (value) => {
-  if (activeFilters.value.length < 1)
-    createFilters()
-}, { deep: true })
+const updateBidOnClick = (token: IXToken) => {
+  console.log("Update", token)
+}
 
-
-onBeforeUnmount(() => {
-  activeFilters.value = []
-})
-onMounted(() => {
-  fetchCollection()
-})
 </script>
