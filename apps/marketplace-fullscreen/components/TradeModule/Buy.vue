@@ -33,13 +33,13 @@ VList()
 
   div(grid="~ cols-2" text="base")
     button(btn="~ secondary" font="bold") Make offer
-    button(btn="~ primary" font="bold") Buy {{shares.value}} item
+    button(btn="~ primary" font="bold" @click="buy") Buy {{shares.value}} item
 
 </template>
 
 <script lang="ts" setup>
 import type { SingleItemData } from '@ix/base/composables/Token/useIXToken';
-import {useBuyItems} from "~/composables/useBuy";
+import {useBuyContract, useBuyItems} from "~/composables/useBuy";
 
 const { ixtToUSD } = useIXTPrice()
 const props = defineProps<{
@@ -57,6 +57,16 @@ const {
   aboveFloorPrice,
   showIncreaseMaxPrice
 } = useBuyItems(props.item)
+
+const { checkoutSales } = useBuyContract()
+
+const buy = async () => {
+  console.log('checkoutSales', await checkoutSales(
+    selectedSalesToBuy.value,
+    !isSubstituteListing ? totalPrice.value : totalMaxPrice.value,
+    shares.value.value
+  ))
+}
 
 </script>
 

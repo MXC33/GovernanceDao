@@ -1,6 +1,7 @@
-import {CartItem} from "~/composables/useCart";
-import {IXToken, Sale, SingleItemData} from "@ix/base/composables/Token/useIXToken";
+import {AdvancedOrder, IXToken, Sale, SingleItemData} from "@ix/base/composables/Token/useIXToken";
 import {AdjustableNumber} from "@ix/base/composables/Utils/useAdjustableNumber";
+import {getIXTokenContract, getSeaportContract} from "~/composables/useAssetContracts";
+import {conduitKey} from "@ix/base/composables/Contract/WalletAddresses";
 
 export interface BuyItem {
   token: IXToken,
@@ -114,5 +115,108 @@ export const useBuyItems = (item: SingleItemData) => {
     averagePricePerItem,
     aboveFloorPrice,
     showIncreaseMaxPrice
+  }
+}
+
+export const useBuyContract = () => {
+  const checkoutSales = async (buyItem: BuyItem, totalPrice: number, quantity: number) => {
+    //Todo Start loading overlay
+    console.log('start Loading overlay')
+
+    if (!buyItem.sales || !buyItem.sales.length) {
+      /*
+        Todo
+        There are no sales
+      */
+      alert('There are no sales')
+      return false
+    }
+
+    const { allowanceCheck } = getIXTokenContract()
+    const { fulfillAvailableAdvancedOrders } = getSeaportContract()
+
+    if (!await allowanceCheck(totalPrice)) {
+      /*
+        Todo
+        Approve didn't work
+      */
+      alert('Allowance didn\'t work')
+      return false
+    }
+
+    const pixMerkleParam = {
+      merklePixInfo: {
+        to: "0x0000000000000000000000000000000000000000",
+        pixId: 0,
+        category: 0,
+        size: 0,
+      },
+      merkleRoot: "0x0000000000000000000000000000000000000000000000000000000000000000",
+      merkleProof: ["0x0000000000000000000000000000000000000000000000000000000000000000"],
+    }
+
+    let BuyOrderComponents: AdvancedOrder[] = []
+    let offers = []
+    let considerations = []
+
+    for (const sale of buyItem.sales) {
+      if(sale){
+        let message: any = {}
+        try {
+          message = JSON.parse(sale.message)
+        } catch (e) {}
+
+        if (!message.body || !message.body.consideration) {
+          continue
+        }
+
+        delete message.body.counter
+        message.body.totalOriginalConsiderationItems = message.body.consideration.length
+
+        const iterable = sale.quantity < quantity ? sale.quantity : quantity
+        for (let k = 0; k < iterable; k++) {
+          BuyOrderComponents.push({
+            parameters: message.body,
+            numerator: 1,
+            denominator: message.body.offer[0].endAmount,
+            signature: message.signature,
+            extraData: "0x"
+          })
+        }
+      }
+    }
+    let i = 0
+    for (const BuyOrderComponent of BuyOrderComponents) {
+      offers.push([
+        { "orderIndex": i, "itemIndex": 0 }
+      ])
+
+      let j = 0;
+      for (const considerationItem of BuyOrderComponent.parameters.consideration) {
+        const foundIndex = considerations.findIndex(item => item.key === considerationItem.recipient)
+        if (foundIndex !== -1) {
+          considerations[foundIndex].value.push({ "orderIndex": i, "itemIndex": j })
+        } else {
+          considerations.push({
+            key: considerationItem.recipient,
+            value: [{ "orderIndex": i, "itemIndex": j }]
+          })
+        }
+        j++
+      }
+      i++
+    }
+    try {
+      // @ts-ignore
+      return await fulfillAvailableAdvancedOrders(BuyOrderComponents, [], offers, considerations.map(item => item.value), conduitKey.polygon, "0x0000000000000000000000000000000000000000", quantity)
+    }
+    catch (err: any) {
+      console.log("fulfillAvailableAdvancedOrders error");
+      return false
+    }
+  }
+
+  return {
+    checkoutSales
   }
 }
