@@ -25,7 +25,7 @@ VList()
     //-   span(color="gray-200") Max price per listing
 
 
-    VList(w="150" justify="end" space-y="3")
+    VList(justify="end" space-y="3")
       Adjustable(v-model="shares" h="full")
       span(color="yellow-200" v-if="showIncreaseMaxPrice" ) Try increasing your max price to buy more items
 
@@ -45,7 +45,7 @@ VList()
 
 <script lang="ts" setup>
 import type { SingleItemData } from '@ix/base/composables/Token/useIXToken';
-import {useBuyContract, useBuyItems} from "~/composables/useBuy";
+import { useBuyContract, useBuyItems } from "~/composables/useBuy";
 
 const { ixtToUSD } = useIXTPrice()
 const props = defineProps<{
