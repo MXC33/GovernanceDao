@@ -1,5 +1,5 @@
 <template lang="pug">
-ButtonSound(sound="sm" btn="~ secondary on-primary:primary" :primary="isPrimary" cut="bottom-right md"  w="10" h="6")
+ButtonSound(sound="sm" bg="gray-400 hover:gray-300 on-primary:(ix-primary hover:ix-net)" :primary="isPrimary" cut="bottom-right sm" px="6" py="3" uppercase="~" font="bold")
   slot
 </template>
 

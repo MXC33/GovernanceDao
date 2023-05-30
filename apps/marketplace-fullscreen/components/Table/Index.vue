@@ -16,7 +16,7 @@ table(bg="gray-900" w="full")
           Currency(:value="row[item.value]" type="usd" v-else-if="item.type == 'usd'")
           span(v-else) {{getValue(item, row)}}
 
-        HList(v-else space-x="3")
+        HList(v-else space-x="3" justify="end")
           TableButton(:row="row" :is-primary="button.type == 'primary'" @click="button.onClick(row)"  v-for="button in item.buttons" ) {{ button.text }}
 
 
