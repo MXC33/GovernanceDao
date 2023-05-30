@@ -84,7 +84,8 @@ export default definePreset({
       'btn-accent': 'btn-primary btn-solid',
       'btn-primary': 'btn-solid bg-ix-primary color-white',
       'btn-secondary': 'btn-solid bg-gray-600 color-white',
-      'btn-form': 'font-400 p-3 cut-bottom-right cut-b-gray-400 hover:cut-b-gray-300',
+      'btn-form': 'font-400 py-3 px-1 cut-bottom-right cut-b-gray-400 hover:cut-b-gray-300',
+      'btn-form-active': 'bg-gray-600'
     },
 
     {

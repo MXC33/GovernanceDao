@@ -28,7 +28,8 @@ VList(justify="center" items="center" aspect="2/3" bg="black opacity-40" ref="me
       slot(name="detail") Best offer: {{ token?.higher_bid_price }} IXT
 
     Transition(name="slide-bottom" v-if="page=='myAssets'")
-      button(btn="~ primary" pos="absolute bottom-0 left-0 right-0" v-if="isHovered" @click.stop="onClickListItems") List Item
+      ButtonInteractive(btn="~ primary" pos="absolute bottom-0 left-0 right-0" v-if="isHovered" @click.stop="onClickListItems" text="List Item")
+
     Transition(name="slide-bottom" v-else)
       button(btn="~ primary" pos="absolute bottom-0 left-0 right-0" v-if="isHovered" @click.stop="onClickCart") Add to cart
       
