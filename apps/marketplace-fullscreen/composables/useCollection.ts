@@ -1,4 +1,4 @@
-import { IXToken } from "@ix/base/composables/Token/useIXToken"
+import { Bid, IXToken } from "@ix/base/composables/Token/useIXToken"
 import { TableSort, TableSortField } from "./useTable"
 
 export interface FilterPayload {

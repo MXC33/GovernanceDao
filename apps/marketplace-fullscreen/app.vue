@@ -29,7 +29,7 @@ const { user } = useUser()
 
 watch(y, (pos) => globalY.value = pos)
 
-
+setupIXTPrice()
 
 onMounted(async () => {
   //@ts-ignore
@@ -50,8 +50,6 @@ onMounted(async () => {
 
     if (user.value)
       setRefreshToken(0)
-
-    await setupIXTPrice()
 
     console.log("price", ixtPrice.value)
 

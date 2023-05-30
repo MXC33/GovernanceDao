@@ -47,15 +47,10 @@ import PolygonIcon from '~/assets/icons/polygon_filled.svg'
 const { displayType, activeFilters } = useCollectionSettings()
 const { getTokenKey } = useTokens()
 const { cartItems } = useCart()
-const { ixtAsUSD } = useIXTPrice()
+const { ixtAsUSD, ixtPrice } = useIXTPrice()
 
 const { getCollectionAttributes } = useDefaulAttributes()
 const attributes = computed(() => data ? getCollectionAttributes(data) : [])
-
-const rows = computed(() => (data?.nfts ?? []).map((row) => ({
-  ...row,
-  usd: ixtAsUSD(row.sale_price).value
-})))
 
 const defaultColumns: TableColumn<IXToken>[] = [
   { label: "Asset", value: "name" },
@@ -85,11 +80,26 @@ const isFilterActive = computed(() => {
     return true
 })
 
-const { data, columns } = defineProps<{
+const { data, columns, hideGrid } = defineProps<{
   data?: CollectionData,
   columns?: TableColumn<IXToken>[],
   hideGrid?: boolean
 }>()
+
+const rows = ref<IXToken[]>([])
+
+const usdPriceOrigin = (data: IXToken) => {
+  if (hideGrid)
+    return ixtAsUSD(data.bid.price).value
+  return ixtAsUSD(data.sale_price).value
+}
+
+watch([data, ixtPrice], () => {
+  rows.value = (data?.nfts ?? []).map((row) => ({
+    ...row,
+    usd: usdPriceOrigin(row)
+  }))
+}, { immediate: true })
 
 onBeforeUnmount(() => {
   activeFilters.value = []

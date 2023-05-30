@@ -180,6 +180,13 @@ export const defineContract = <T extends ContractInterface<T> | object>(key: str
       return fn(contract.value)
   }
 
+  // For utility things that are not transactions
+  const viewAsyncState = <P>(id: string, fn: (contract: T) => Promise<P>) => useAsyncDataState(id, async () => {
+    await beforeContractInteraction()
+    if (contract.value)
+      return fn(contract.value)
+  })
+
   // Default transaction methods
   const createTransaction = async (fn: (contract: T) => Promise<ethers.ContractTransaction> | undefined, txOptions?: TransactionOptions) => {
     try {
@@ -237,6 +244,7 @@ export const defineContract = <T extends ContractInterface<T> | object>(key: str
   return {
     contract,
     contractAddress,
+    viewAsyncState,
     withContract,
     setupContract,
     createTransaction

@@ -1,5 +1,5 @@
 <template lang="pug">
-HList(uppercase="~" font="bold" text="white" frame="~" flex-shrink="0" w="12" h="12" items="center" justify="center" pos="relative")
+HList(uppercase="~" font="bold" text="white" frame="~ hover:gray-300" flex-shrink="0" w="12" h="12" items="center" justify="center" pos="relative")
   CollectionFilterToggleFilterButton()
     FilterIcon(w="5")
 

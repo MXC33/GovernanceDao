@@ -10,11 +10,11 @@ table(bg="gray-900" w="full")
 
   tbody(divide-y="1")
     TableRow(v-for="(row, index) in sortedRows" :key="index")
-      TableCell(v-for="item in columns")
+      TableCell(v-for="item in columns") 
         slot(:name="`item-${item.value}`" :row="row" :column="item" v-if="item.type != 'buttons'")
           Currency(:value="row[item.value]" type="ixt" v-if="item.type == 'ixt'")
           Currency(:value="row[item.value]" type="usd" v-else-if="item.type == 'usd'")
-          span(v-else) {{row[item.value]}}
+          span(v-else) {{getValue(item, row)}}
 
         HList(v-else space-x="3")
           TableButton(:row="row" :is-primary="button.type == 'primary'" @click="button.onClick(row)"  v-for="button in item.buttons" ) {{ button.text }}
@@ -36,7 +36,11 @@ const props = defineProps<{
   error?: string,
 }>()
 
+console.log(props.rows)
+
 const { sortedRows, sort, selectSortField, toggleSortDirection } = useTable(props.rows, props.id)
+
+console.log("TABLE", props)
 
 const getColumnStyle = (item: TableColumn<Row>) => {
   if (!item.width)
@@ -46,6 +50,14 @@ const getColumnStyle = (item: TableColumn<Row>) => {
     'width': `${item.width}px`,
     'min-width': `${item.width}px`,
   }
+}
+
+const getValue = (item: TableColumn<Row>, row: Row) => {
+  if (item.type == 'buttons')
+    return null
+  if (item.getValue)
+    return item.getValue(row)
+  return row[item.value]
 }
 
 </script>
