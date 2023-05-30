@@ -7,7 +7,7 @@ div(v-if="value") {{ pre }}{{ value }}{{ post }}
 const {
   type = 'ixt'
 } = defineProps<{
-  value?: number,
+  value?: string,
   type?: 'ixt' | 'usd'
 }>()
 

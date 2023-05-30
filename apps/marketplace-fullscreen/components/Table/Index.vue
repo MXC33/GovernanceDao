@@ -56,7 +56,7 @@ const getValue = (item: TableColumn<Row>, row: Row) => {
   if (item.type == 'buttons')
     return undefined
   if (item.getValue)
-    return Number(item.getValue(row))
+    return item.getValue(row)
   return row[item.value]
 }
 
