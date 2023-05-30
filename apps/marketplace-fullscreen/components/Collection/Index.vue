@@ -92,9 +92,10 @@ const rows = ref<IXToken[]>([])
 const usdPriceOrigin = (data: IXToken) => {
   if (context == 'my-assets' || 'outgoing-bids' || 'incoming-bids')
     return ixtAsUSD(data.bid?.price).value
-  if (context == 'active-listings')
+  else if (context == 'active-listings')
     return ixtAsUSD(data.sales[0].price).value
-  return ixtAsUSD(data?.sale_price).value
+  else
+    return ixtAsUSD(data?.sale_price).value
 }
 
 watch([data, ixtPrice], () => {

@@ -27,7 +27,7 @@ const columns: TableColumn<IXToken>[] = [
   {
     label: "Offer price", value: "bid", getValue(row) {
       return row.bid.price.toString()
-    }, type: 'text', sortable: true
+    }, type: 'ixt', sortable: true
   },
   { label: "USD price", value: "usd", type: 'usd', sortable: true },
   {
