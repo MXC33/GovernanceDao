@@ -25,19 +25,7 @@ Popup()
       ListingItem(v-for="(_, index) in listItems" v-model="listItems[index]")
 
   template(#footer)
-    VList()
-      HList(w="full" justify="between")
-        div(color="gray-200") Total Price
-        GlitchText(:text="totalPrice" suffix=" IXT")
-
-      HList(w="full" justify="between")
-        div(color="gray-200") Marketplace fee
-        p 2.5%
-
-      HList(w="full" justify="between" text="lg right" font="bold" items="end")
-        p() Total potential earnings
-        GlitchText(:text="totalPotentialEarning" suffix=" IXT")
-
+    ListingPrice(:items="listItems")
 
   template(#buttons)
     ButtonInteractive(btn="~ primary" w="full" @click.prevent="onClickList" text="List Items" :invalid="!!invalidPrice" :loading="isLoading")
@@ -50,19 +38,14 @@ import ListingIcon from '~/assets/icons/listing.svg'
 
 defineEmits(['close'])
 
-const { createListItems, listItems, totalIXTPrice } = useListingItems()
+const { createListItems, listItems, getTotalIXTPrice } = useListingItems()
 const { listItem } = useListingContract()
 
 const invalidPrice = computed(() => {
-  if (!totalIXTPrice.value)
+  if (!getTotalIXTPrice(listItems.value))
     return '--'
 })
 
-const totalPrice = computed(() => String(invalidPrice.value ?? roundToDecimals(totalIXTPrice.value, 4)))
-
-const totalPotentialEarning = computed(() =>
-  String(invalidPrice.value ?? roundToDecimals(totalIXTPrice.value * (1 - 0.025), 4))
-)
 
 // const { ixtToUSD, ixtAsUSD } = useIXTPrice()
 const { ixtBalance } = getIXTokenContract()

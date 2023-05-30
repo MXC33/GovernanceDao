@@ -1,7 +1,7 @@
 <template lang="pug">
 TokenImage(v-if="displayStillImage" :token="token" :is-large="(!icon && isLarge) || image" :key="componentKey")
 
-TokenVideo(v-else :token="token" :is-large="isLarge" h="full" inset="0" :key="componentKey + 'video'")
+TokenVideo(v-else :token="token" :is-large="isLarge" h="full" inset="0" :key="componentKey + 'video'" fill="contain")
 </template>
 
 <script lang="ts" setup>

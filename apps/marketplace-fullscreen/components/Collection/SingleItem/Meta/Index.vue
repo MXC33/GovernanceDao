@@ -1,7 +1,8 @@
 <template lang="pug">
 VList(space-y="6")
   VList(frame="~")
-    TokenMedia(:token="item" w="full" :is-large="true" pos="relative")
+    VList(aspect="square" w="full" min-h="0")
+      TokenMedia(:token="item" w="full" :is-large="true" pos="relative")
     HelperMediaBar(@transfer="onClickTransfer")
 
   ContentDrawer(:start-open="true" v-if="item.description" bg="gray-900")

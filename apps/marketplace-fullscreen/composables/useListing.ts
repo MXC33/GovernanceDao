@@ -67,15 +67,14 @@ export const useListingItems = () => {
     }))
   }
 
-  const totalIXTPrice = computed(() =>
-    listItems.value.reduce((prev, item) =>
+  const getTotalIXTPrice = (items: ListingItem[]) =>
+    items.reduce((prev, item) =>
       prev + (Number(item.ixtPrice) * item.shares.value)
       , 0)
-  )
 
   return {
     createListItems,
-    totalIXTPrice,
+    getTotalIXTPrice,
     listItems
   }
 }
@@ -198,7 +197,7 @@ export const useListingContract = () => {
   }
 
   const listItem = async (item: ListingItem) => {
-    const { shares, ixtPrice, durationInDays, token: { _index: index, collection, token_id, network } } = item
+    const { durationInDays } = item
 
     const endTime = Math.floor(add(new Date(), { days: durationInDays }).getTime() / 1000)
     const saleMessage = await createListingMessage(item, endTime)
@@ -210,32 +209,25 @@ export const useListingContract = () => {
       const listEndpoints = useListEndpoints()
       await listEndpoints.listAssets([listingsBody])
 
-      /*
-        Todo
-        Success message
-      */
-      alert('Success message')
+      return true
 
     } catch (error: any) {
-      /*
-        Todo
-        API error
-      */
+
       console.log(error.response)
       if (error.response && error.response._data && error.response._data.message) {
-        alert(error.response._data.message)
+        console.error(error.response._data.message)
       } else {
-        alert('Something wrong happened!!')
+        console.error('Something wrong happened!!')
       }
       return false
     }
-    return true
   }
+
   const listItems = async (items: ListingItem[]) => {
     const listingsBody: ListingsBody[] = []
 
     for (const item of items) {
-      const { shares, ixtPrice, durationInDays, token: { _index: index, collection, token_id, network } } = item
+      const { durationInDays } = item
 
       const endTime = Math.floor(add(new Date(), { days: durationInDays }).getTime() / 1000)
       const saleMessage = await createListingMessage(item, endTime)
