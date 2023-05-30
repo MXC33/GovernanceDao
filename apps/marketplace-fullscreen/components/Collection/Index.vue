@@ -9,7 +9,7 @@ VList(flex-grow="1" min-h="0" pos="relative" p="8" space-y="6")
 
   slot(name="menu")
 
-  HelperBorderScroll(pos="sticky top-33")
+  //- HelperBorderScroll(pos="sticky top-33")
   CollectionFilter(:items="data.nfts" :filters="data.filters" :hide-toggle="hideGrid" v-if="data"  @toggle-filter="toggleFilterDrawer")
 
   HList(space-x="0 on-open:3" pos="relative" :open="showFilters")
