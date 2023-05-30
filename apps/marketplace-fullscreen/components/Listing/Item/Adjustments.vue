@@ -28,18 +28,25 @@ VList(space-y="3" v-if="item")
 
     template(#value)
       div(grid="~ cols-4 gap-3")
-        button(btn="~ form" v-for="dayCount in days") {{ formattedDays(dayCount) }}
+        button(btn="~ form on-active:form-active" v-for="dayCount in days" capitalize="~" :active="item.durationInDays == dayCount" @click="selectDays(dayCount)") {{ formattedDays(dayCount) }}
+
 </template>
   
 <script lang="ts" setup>
 import type { ListingItem } from '~/composables/useListing'
-import { formatDuration } from 'date-fns'
 
 const item = defineModel<ListingItem>()
 
 const days = [1, 3, 7, 30, 91, 183]
 
-const formattedDays = (days: number) => formatDuration({ weeks: 0, days }, { format: ['months', 'weeks', 'days'] })
+const { formattedDays } = useListingDuration()
+
+const selectDays = (days: number) => {
+  if (!item.value)
+    return
+
+  item.value.durationInDays = days
+}
 
 const listPrice = computed(() => roundToDecimals((item.value?.ixtPrice ?? 0) * (item.value?.shares?.value ?? 0), 2))
 

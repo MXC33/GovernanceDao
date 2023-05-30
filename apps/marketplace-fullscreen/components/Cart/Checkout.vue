@@ -12,8 +12,7 @@ footer(pos="sticky bottom-0" bg="ix-black")
 import type { CartItem } from '~/composables/useCart';
 
 const { displayPopup } = usePopups()
-const { viewingCart, cartItems , checkoutItems} = useCart()
-const { placeBid } = useBids()
+const { viewingCart, cartItems, checkoutItems } = useCart()
 const isLoading = ref(false)
 const boughtItems = ref<CartItem[]>([])
 
@@ -35,9 +34,9 @@ const checkout = async () => {
 
   const checkout = await checkoutItems(cartItems.value, totalPrice.value)
   isLoading.value = false
-  if(checkout)
+  if (checkout)
     didPlaceBids(cartItems.value)
-  else{
+  else {
     viewingCart.value = false
   }
 

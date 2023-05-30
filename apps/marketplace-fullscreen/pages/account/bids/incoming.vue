@@ -1,5 +1,5 @@
 <template lang="pug">
-Collection(:data="data" :columns="columns" v-if="data" :hide-grid="true")
+Collection(:data="data" :columns="columns" :context="'incoming-bids'" v-if="data" :hide-grid="true")
   template(#menu)
     AccountMenu()
 </template>
@@ -28,7 +28,7 @@ const columns: TableColumn<IXToken>[] = [
   {
     label: "Price", value: "bid", getValue(row) {
       return row.bid.price.toString()
-    }, type: 'text', sortable: true
+    }, type: 'ixt', sortable: true
   },
   { label: "USD price", value: "usd", type: 'usd', sortable: true },
   {

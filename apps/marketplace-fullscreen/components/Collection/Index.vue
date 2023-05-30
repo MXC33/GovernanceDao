@@ -80,7 +80,7 @@ const isFilterActive = computed(() => {
     return true
 })
 
-const { data, columns, hideGrid } = defineProps<{
+const { data, columns, context } = defineProps<{
   data?: CollectionData,
   columns?: TableColumn<IXToken>[],
   hideGrid?: boolean,
@@ -90,9 +90,12 @@ const { data, columns, hideGrid } = defineProps<{
 const rows = ref<IXToken[]>([])
 
 const usdPriceOrigin = (data: IXToken) => {
-  if (hideGrid)
+  if (context == 'outgoing-bids' || context == 'incoming-bids')
     return ixtAsUSD(data.bid.price).value
-  return ixtAsUSD(data.sale_price).value
+  else if (context == 'active-listings')
+    return ixtAsUSD(data.sales[0].price).value
+  else
+    return ixtAsUSD(data.sale_price).value
 }
 
 watch([data, ixtPrice], () => {

@@ -1,5 +1,5 @@
 <template lang="pug">
-Collection(:data="data" :columns="columns" v-if="data" :hide-grid="true")
+Collection(:data="data" :columns="columns" :context="'active-listings'" v-if="data" :hide-grid="true")
   template(#menu)
     AccountMenu()
 
@@ -27,9 +27,10 @@ const columns: TableColumn<IXToken>[] = [
   { label: "Asset", value: "name" },
   {
     label: "Unit price", value: "bid", getValue(row) {
-      return row.bid.price.toString()
-    }, type: 'text', sortable: true
+      return row.sales[0].price.toString()
+    }, type: 'ixt', sortable: true
   },
+  { label: "USD price", value: "usd", type: 'usd', sortable: true },
   {
     label: "Floor Difference", value: "bid", getValue(row) {
       if (row.lowest_sale?.price)
@@ -38,8 +39,8 @@ const columns: TableColumn<IXToken>[] = [
     }, type: 'text', sortable: true
   },
   {
-    label: "Expiration date", value: "due_date", getValue(row) {
-      return fromUnixTime(row.bid.due_date).toDateString()
+    label: "Expiration date", value: "endtime", getValue(row) {
+      return fromUnixTime(row.sales[0].endtime).toDateString()
     }, type: 'text', sortable: true
   },
   {

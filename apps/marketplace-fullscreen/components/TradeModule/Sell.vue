@@ -14,7 +14,7 @@ VList()
 
   div(grid="~ cols-2" text="base")
     button(btn="~ secondary" font="bold") Accept offer
-    button(btn="~ primary" font="bold" @click="onClickSell") List Item
+    ButtonInteractive(btn="~ primary" font="bold" @click="onClickSell" text="List item")
 
 
 </template>
