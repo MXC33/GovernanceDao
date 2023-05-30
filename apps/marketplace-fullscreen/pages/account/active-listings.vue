@@ -2,6 +2,7 @@
 Collection(:data="data" :columns="columns" v-if="data" :hide-grid="true")
   template(#menu)
     AccountMenu()
+
 </template>
     
     

@@ -8,9 +8,11 @@ VList(pos="relative")
       div(color="white" text="xs" leading="1em" translate-y="5.4%" translate-x="-8%")
         slot(name="bids")
 
+
   Transition(name="fade-slow")
     div(w="full" b="b-3.43 white on-primary:!ix-primary" z="3" pos="absolute bottom-0" v-if="isActive" :primary="primary")
-  
+
+
 </template>
 
 <script lang="ts" setup>
