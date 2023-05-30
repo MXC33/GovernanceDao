@@ -48,16 +48,16 @@ export const buyIXTHeaderItems: CategoryHeader[] = [
 
 export const playNowHeaderItems: CategoryHeader[] = [
   {
-    type: 'THE GAME',
-    subHeaders: ['TERMINAL', 'MARKETPLACE', 'IX ARENA', 'MISSION CONTROL', 'GAMEBOOK']
+    type: 'game',
+    subHeaders: ['teminal', 'market', 'arena', 'mc', 'gamebook']
   },
   {
-    type: 'CLAIM & BURN',
-    subHeaders: ['AOC BADGE', 'AVATAR', 'ARCADE']
+    type: 'claimburn',
+    subHeaders: ['aocbadge', 'avatar', 'arcade']
   },
   {
-    type: 'ANALYTICS',
-    subHeaders: ['GAME PERFORMANCE', 'NFT PERFORMANCE', 'VESTING SCHEDULE' , 'IXT PERFORMANCE', 'SMART CONTRACTS'] 
+    type: 'analytics',
+    subHeaders: ['game', 'nft', 'vesting' , 'ixt', 'smartcontracts'] 
   },
 ]
 

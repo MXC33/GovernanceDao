@@ -193,40 +193,79 @@
       },
       "play": {
         "title": "Play Now",
-        "swap": {
-          "title": "Swap",
-          "swap": {
-            "title": "Swap",
-            "description": "Swap any crypto or fiat to ixt",
-            "link": ""
-          }
-        },
-        "bridge": {
-          "title": "Bridge",
-          "polygon": {
-            "title": "Polygon",
-            "description": "Bridge tokens to Polygon blockchain.",
-            "link": ""
-          }
-        },
-        "supply": {
-          "title": "Supply",
-          "usdt": {
-            "title": "IXT/USDT (Quickswap)",
-            "description": "Secure IXT/USDT liquidity, earn 7% APR.",
+        "game": {
+          "title": "The Game",
+          "teminal": {
+            "title": "Teminal",
+            "description": "Your personal game lobby.",
             "link": ""
           },
-          "matic": {
-            "title": "IXT/MATIC (Sushiswap)",
-            "description": "Secure IXT/USDT liquidity, earn 4% APR.",
+          "market": {
+            "title": "MARKETPLACE",
+            "description": "Explore land & trade assets at NetEmpire.",
+            "link": ""
+          },
+          "arena": {
+            "title": "IX Arena",
+            "description": "COMING SOON",
+            "link": ""
+          },
+          "mc": {
+            "title": "Mission Control",
+            "description": "Farm, stake and earn.",
+            "link": ""
+          },
+          "gamebook": {
+            "title": "Gamebook",
+            "description": "Deepdive into the Planet IX ecosystem.",
             "link": ""
           }
+
         },
-        "lend": {
-          "title": "Lend",
-          "capital": {
-            "title": "LEND CAPITAL",
-            "description": "Lend 100x IXT with USDT as collateral.",
+        "claimburn": {
+          "title": "Bridge",
+          "aocbadge": {
+            "title": "AOC BADGE",
+            "description": "Upgrade your AOC badge for greater utility.",
+            "link": ""
+          },
+          "avatar": {
+            "title": "AVATAR",
+            "description": "Burn Avatars for in-game utility.",
+            "link": ""
+          },          
+          "arcade": {
+            "title": "ARCADE",
+            "description": "Claim Arcade airdrops.",
+            "link": ""
+          }
+
+        },
+        "analytics": {
+          "title": "ANALYTICS",
+          "game": {
+            "title": "GAME PERFORMANCE",
+            "description": "Daily players, transaction volume and more.",
+            "link": ""
+          },
+          "nft": {
+            "title": "NFT PERFORMANCE",
+            "description": "Dashboard reflecting our NFT assets performance.",
+            "link": ""
+          },
+          "vesting": {
+            "title": "VESTING SCHEDULE",
+            "description": "IX token vesting schedule.",
+            "link": ""
+          },
+          "ixt": {
+            "title": "IXT PERFORMANCE",
+            "description": "IX Token holders, stakers and more.",
+            "link": ""
+          },
+          "smartcontracts": {
+            "title": "SMART CONTRACTS ",
+            "description": "Officials links to all Planet IX contracts.",
             "link": ""
           }
         }
