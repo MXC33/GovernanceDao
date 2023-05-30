@@ -133,7 +133,7 @@ export const useListingContract = () => {
       offerer: address,
       zone: ZERO_ADDRESS,
       offer: [{
-        itemType: ItemType.ERC1155,
+        itemType: item.token.nft_type === 0 ? ItemType.ERC1155 : ItemType.ERC721,
         token: collection,
         identifierOrCriteria: token_id,
         startAmount: shares.value,
