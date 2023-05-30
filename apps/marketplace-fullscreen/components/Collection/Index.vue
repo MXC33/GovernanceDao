@@ -80,7 +80,7 @@ const isFilterActive = computed(() => {
     return true
 })
 
-const { data, columns, context } = defineProps<{
+const { data, columns, context = 'collection' } = defineProps<{
   data?: CollectionData,
   columns?: TableColumn<IXToken>[],
   hideGrid?: boolean,
