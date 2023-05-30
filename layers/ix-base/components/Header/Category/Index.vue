@@ -3,8 +3,8 @@ div()
   div(text="ix-orange" p="2") {{ $t(`marketplace.headers.${parentType}.${category.type}.title`) }} 
   div(b="b-1 ix-orange" w="95%")
 
-  div(grid="~ cols-1 s-two:cols-2 s-three:cols-3" :state="gridState")
-    HeaderCategoryItem(:header="parentType" :category="category.type" :item="item" v-for="item in category.items" @click="$emit('onClickItem', item)") 
+  div(grid="~ cols-1 s-two:cols-2 s-three:cols-3" :state="gridState" )
+    HeaderCategoryItem(:header="parentType" :category="category.type" :item="item" v-for="item in category.items" @click="$emit('onClickItem', item)" items="center") 
 
 </template>
 

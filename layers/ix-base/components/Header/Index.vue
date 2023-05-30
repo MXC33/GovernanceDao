@@ -5,7 +5,7 @@ VList(pos="sticky top-0" z="99" w="full")
       PlanetIXNew(w="42.25")
 
     HList(space-x="8" px="8" items="center" font="bold" text="lg" flex-grow="1")
-      HeaderLink(v-for="(item, index) in siteTopHeaders" to="/" @click="OpenMeny(index)") {{ $t(`marketplace.headers.${item.type}.title`)}}
+      HeaderLink(v-for="(item, index) in siteTopHeaders" @click="OpenMeny(index)") {{ $t(`marketplace.headers.${item.type}.title`)}}
       //- HeaderLink(to="/" display="lt-md:none") buy ixt
       //- HeaderLink(to="/" display="lt-md:none") play now
       //- HeaderLink(to="/" display="lt-md:none") staking

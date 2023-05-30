@@ -12,7 +12,7 @@ ButtonSound(sound="md")
 
 
 <script lang="ts" setup>
-const props = defineProps<{ to: string }>()
+const props = defineProps<{ to?: string }>()
 
 const isSelected = ref(false)
 const route = useRoute()
