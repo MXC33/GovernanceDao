@@ -53,7 +53,7 @@ VList(pos="sticky top-0" z="99" w="full")
                 //- HeaderLink(to="/") + community
 
   transition(name="slide-top")
-    HeaderDetails(v-if="activeMenuIndex != null" @onClickItem="onClicked" :header="siteTopHeaders[activeMenuIndex]")
+    HeaderItem(v-if="activeMenuIndex != null" @onClickItem="onClicked" :header="siteTopHeaders[activeMenuIndex]")
 
   Popup(v-if="showIFrame")
     iframe(src="https://ix.foundation/lefi" w="full md:130" h="full md:115" )

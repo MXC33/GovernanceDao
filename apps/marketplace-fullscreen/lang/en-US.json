@@ -269,6 +269,79 @@
             "link": ""
           }
         }
+      },
+      "staking": {
+        "title": "Staking",
+        "overview": {
+          "title": "Overview",
+          "dashboard": {
+            "title": "Dashboard",
+            "description": "Overview of all your staking options.",
+            "link": ""
+          },
+          "earnings-overview": {
+            "title": "Earnings Overview",
+            "description": "Track your staking rewards.",
+            "link": ""
+          }
+        },
+        "staking": {
+          "title": "TOKEN STAKING",
+          "ixt": {
+            "title": "IXT",
+            "description": "Earn up to 29% APY.",
+            "link": ""
+          },
+          "lp": {
+            "title": "LP",
+            "description": "Stake IXT paired with MATIC at 33% APY.",
+            "link": ""
+          },          
+          "supply-liquidity": {
+            "title": "SUPPLY LIQUIDITY",
+            "description": "Support and secure the IXT ecosystem.",
+            "link": ""
+          }
+
+        },
+        "in-game-assets": {
+          "title": "IN-GAME ASSETS STAKING",
+          "territory": {
+            "title": "TERRITORY",
+            "description": "Daily players, transaction volume and more.",
+            "link": ""
+          },
+          "energy": {
+            "title": "ENERGY",
+            "description": "Dashboard reflecting our NFT assets performance.",
+            "link": ""
+          },
+          "governance": {
+            "title": "GOVERNANCE",
+            "description": "IX token vesting schedule.",
+            "link": ""
+          },
+          "metashares": {
+            "title": "METASHARES",
+            "description": "IX Token holders, stakers and more.",
+            "link": ""
+          },
+          "landmarks": {
+            "title": "LANDMARKS",
+            "description": "Officials links to all Planet IX contracts.",
+            "link": ""
+          },
+          "ixt-cat-raff": {
+            "title": "IXT CAT RAFF",
+            "description": "Officials links to all Planet IX contracts.",
+            "link": ""
+          },
+          "lend-capital": {
+            "title": "LEND CAPITAL",
+            "description": "Officials links to all Planet IX contracts.",
+            "link": ""
+          }
+        }
       }
     },
     "myAssets": {

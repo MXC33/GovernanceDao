@@ -15,68 +15,66 @@ export interface AllCategoryHeaderObject {
   categoryHeaderObject : CategoryHeaderObject[]
 }
   
-export interface CategoryHeader {
+export interface HeaderCategory {
   type: string,
-  subHeaders: string[]
+  items: string[]
 }
 
-export interface TopHeader {
+export interface HeaderItem {
   type: string,
-  categories: CategoryHeader[]
+  categories: HeaderCategory[]
 }
 
-
-
-export const buyIXTHeaderItems: CategoryHeader[] = [
+export const buyIXTHeaderItems: HeaderCategory[] = [
   {
     type: 'swap',
-    subHeaders: ['swap']
+    items: ['swap']
   },
   {
     type: 'bridge',
-    subHeaders: ['polygon']
+    items: ['polygon']
   },
   {
     type: 'supply',
-    subHeaders: ['usdt', 'matic']
+    items: ['usdt', 'matic']
   },
   {
     type: 'lend',
-    subHeaders: ['capital']
+    items: ['capital']
   }
 ]
 
-export const playNowHeaderItems: CategoryHeader[] = [
+export const playNowHeaderItems: HeaderCategory[] = [
   {
     type: 'game',
-    subHeaders: ['teminal', 'market', 'arena', 'mc', 'gamebook']
+    items: ['teminal', 'market', 'arena', 'mc', 'gamebook']
   },
   {
     type: 'claimburn',
-    subHeaders: ['aocbadge', 'avatar', 'arcade']
+    items: ['aocbadge', 'avatar', 'arcade']
   },
   {
     type: 'analytics',
-    subHeaders: ['game', 'nft', 'vesting' , 'ixt', 'smartcontracts'] 
+    items: ['game', 'nft', 'vesting' , 'ixt', 'smartcontracts'] 
   },
 ]
 
-export const stakingHeaderItems: CategoryHeader[] = [
+export const stakingHeaderItems: HeaderCategory[] = [
   {
-    type: 'OVERVIEW',
-    subHeaders: ['DASHBOARD', 'EARNINGS OVERVIEW']
+    type: 'overview',
+    items: ['dashboard', 'earnings-overview']
   },
   {
-    type: 'TOKEN STAKING',
-    subHeaders: ['IXT', 'LP', 'SUPPLY LIQUIDITY']
+    type: 'staking',
+    items: ['ixt', 'lp', 'supply-liquidity']
   },
   {
-    type: 'IN-GAME ASSETS STAKING',
-    subHeaders: ['TERRITORY', 'ENERGY', 'GOVERNANCE' , 'METASHARES', 'LANDMARKS', 'IXT CAT RAFF', 'LEND CAPITAL'] 
+    type: 'in-game-assets',
+    items: ['territory', 'energy', 'governance' , 'metashares', 'landmarks', 'ixt-cat-raff', 'lend-capital'] 
   },
 ]
 
-const siteTopHeaders: TopHeader[] = [
+const siteTopHeaders: HeaderItem[] = [
   {
     type: 'buy',
     categories: buyIXTHeaderItems,
