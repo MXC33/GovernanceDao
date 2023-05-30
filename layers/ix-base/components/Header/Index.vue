@@ -16,41 +16,10 @@ VList(pos="sticky top-0" z="99" w="full")
       HeaderLink(to="/" display="lt-md:none")
         HelperLanguage(language="EN")
 
-    HList(items="center" h="10" b="1 $mc-mint" color="$mc-mint" font="bold" bg="$mc-mint-20" px="8" display="lt-md:none") 2,234,128 IXT
-
-      //- HeaderLink(to="/mission-control" display="lt-md:none") 
-      //-   span(display="lt-lg:none") {{ $t(`general.navigation.missionCtrl`)}}
-      //-   span(display="lg:none") {{ $t(`general.mc`) }}
-
-      //- HeaderLink(to="#" @click="gotoIXPage('game')" display="lt-md:none") {{ $t(`general.navigation.netEmpire`)}}
-      //- GameHeaderResourcesIxt(type="ixt" display="lt-md:none" @click="openLifiWidget")
-      //- UserHeaderProfileAvatar(text="xs" cursor="default" h="6" w="6" v-if="user")
-      //- HList(justify="end" w="full" flex-grow="1")
-      //-   ButtonSound(sound="sm" opacity="50 on-enabled:100 hover:60" filter="grayscale on-enabled:none" transition="hover" @click="toggleSound" :enabled="isSoundEnabled")
-      //-     IconSoundOn(w="6" v-if="isSoundEnabled")
-      //-     IconSoundOff(w="6" v-else)
-
-
-    ButtonSound(sound="sm" @click="toggleMenu" ml="!4" display="md:none")
-      Hamburger(w="8" h="8" cursor="pointer" opacity="hover:50" transition="all")
-      transition(name="slide-top")
-        div(v-if="menuOpen" pos="fixed top-0 bottom-0 left-0 right-0" bg="black-800 opacity-20" backdrop="~ blur-md" z="100" cursor="pointer")
-
-          VList(flex-grow="1" font="bold")
-            HList(items="center" justify="between" bg="gray-800" py="2" px="4" h="16")
-              HList(items="center" b="1 $mc-mint" color="$mc-mint" text="sm" bg="$mc-mint-20" px="4" py="1") 2,234,128 IXT
-              HList(space-x="6")
-                HeaderLink(to="/") help
-                HeaderLink(to="/")
-                  HelperLanguage(language="EN")
-
-            VList(bg="black" w="full" h="100%" py="6" font="bold" text="lg" uppercase="~" px="6")
-              VList(justify="start" items="start" space-y="12" py="4")
-                //- HeaderLink(v-for="tab in menuTabs" to="/" ) + tab
-                //- HeaderLink(to="/") + buy ixt
-                //- HeaderLink(to="/") + play now
-                //- HeaderLink(to="/") + staking
-                //- HeaderLink(to="/") + community
+    VList(items="center" pos="relative")
+      HList(h="10" b="1 $mc-mint" color="$mc-mint" font="bold" bg="$mc-mint-20" px="8" display="lt-md:none" @click="toggleMenu" items="center" ) 2,234,128 IXT
+      VList(v-if="menuOpen" @click="toggleMenu" pos="absolute top-full left-0 right-0" b="1 gray-400" items="left") 
+        div(v-for="subHeader in settingArr" h="10" p="3" bg="black" px="8" text="sm:3" font="bold" b="b-1 gray-600") {{ subHeader }}  
 
   transition(name="slide-top")
     HeaderItem(v-if="activeMenuIndex != null" @onClickItem="onClicked" :header="siteTopHeaders[activeMenuIndex]")
@@ -65,7 +34,7 @@ import IconSoundOff from '~/assets/images/sound/sound-off.svg'
 import Hamburger from '~/assets/images/header/hamburger.svg'
 import PlanetIX from '~/assets/images/header/planetix.svg'
 import PlanetIXNew from '~/assets/images/header/planetix-new.svg'
-import  { buyIXTHeaderItems } from '~/composables/useSiteHeader'
+import { buyIXTHeaderItems } from '~/composables/useSiteHeader'
 const { siteTopHeaders } = useSiteHeader()
 
 const menuTabs = ["buy ixt", "play now", "staking", "community"]
@@ -80,6 +49,8 @@ const OpenMeny = (index: number) => {
 
   activeMenuIndex.value = index
 }
+
+const settingArr = ["Add funds", "0x000", "Account Settings", "Log Out"]
 
 const { gotoIXPage } = useIXLinks()
 const { user } = useUser()
@@ -112,6 +83,8 @@ const toggleSound = () => {
 
 const toggleMenu = () => {
   menuOpen.value = !menuOpen.value
+  console.log('testing this area!')
+  console.log(menuOpen.value)
 }
 
 </script>
