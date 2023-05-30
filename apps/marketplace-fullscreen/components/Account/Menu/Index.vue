@@ -3,7 +3,8 @@ HList(w="full" space-x="12" pos="relative")
   TabItem(v-for="tab in tabs" :id="tab" v-model="activeTab" @click="onClick(tab)" :primary="true" :is-small="true") {{ $t(`marketplace.myAssets.${tab}`) }}
 
 
-HList(b="b-1 gray-400" v-if="!isScrolling" pos="absolute top-127.8 left-0" z="1" font="bold" uppercase="~" text="xxl" w="full")
+HList(pos="absolute top-127.8 left-0" z="1" font="bold" uppercase="~" text="xxl" w="full" px="8")
+  HList(w="full" b="b-1 gray-400" v-if="!isScrolling")
 </template>
     
 <script lang="ts" setup>
