@@ -55,7 +55,7 @@ export const playNowHeaderItems: HeaderCategory[] = [
   },
   {
     type: 'analytics',
-    items: ['game', 'nft', 'vesting', 'ixt', 'smartcontracts']
+    items: ['game', 'nft', 'vesting', 'ixt', 'smart-contracts']
   },
 ]
 
@@ -81,14 +81,14 @@ export const communityHeaderItems: HeaderCategory[] = [
   },
   {
     type: 'news-social',
-    items: ['twitter', 'news', 'discord', 'chinese forum', 'telegram']
+    items: ['twitter', 'news', 'discord', 'chinese-forum', 'telegram']
   },
 ]
 
 export const analyticsyHeaderItems: HeaderCategory[] = [
   {
     type: 'analytics',
-    items: ['game', 'nft', 'vesting', 'ixt', 'smartcontracts']
+    items: ['game', 'nft', 'vesting', 'ixt', 'smart-contracts']
   },
 ]
 
