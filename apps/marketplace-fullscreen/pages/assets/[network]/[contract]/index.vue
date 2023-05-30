@@ -10,9 +10,10 @@ const { contract } = route.params
 
 const { getCollectionURL } = useCollectionsURL()
 
-const { data: data, execute: fetchCollection, loadNextPage } = useCollectionData(getCollectionURL(String(contract), 'polygon'))
+const { data: data, execute: fetchCollection, loadNextPage, setupCollectionListeners } = useCollectionData(getCollectionURL(String(contract), 'polygon'))
 
 await fetchCollection()
+setupCollectionListeners()
 
 
 </script>
