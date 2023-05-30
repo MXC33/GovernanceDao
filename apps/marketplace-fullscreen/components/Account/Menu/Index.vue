@@ -8,33 +8,28 @@ HList(pos="absolute top-127.8 left-0" z="1" font="bold" uppercase="~" text="xxl"
 </template>
     
 <script lang="ts" setup>
-
-const onClick = (tab: Tab) => {
-  return navigateTo('/account/' + links(tab))
-}
-
 const { y } = useWindowScroll()
 
 const isScrolling = computed(() => {
   return y.value >= 590
 })
 
-const { path } = useRoute()
+// const { path } = useRoute()
 
-
-type Tab = 'myItems' | 'favourites' | 'incomingBids' | 'outgoingBids' | 'activeListings' | 'activity'
+type Tab = 'myItems' | 'favorites' | 'incomingBids' | 'outgoingBids' | 'activeListings' | 'activity'
 
 const accountTabs: Tab[] = ['myItems', 'incomingBids', 'outgoingBids', 'activeListings']
 
-const { tabs, activeTab } = useTabList(accountTabs)
+// const { tabs, activeTab, isTabActive } = useTabList(accountTabs)
 
+const { tabs, activeTab } = useTabList(accountTabs.filter((tab) => tab == 'myItems' || 'incomingBids' || 'outgoingBids' || 'activeListings'))
 
 const links = (tab: Tab) => {
   switch (tab) {
     case 'myItems':
       return ''
-    case 'favourites':
-      return 'favourites'
+    case 'favorites':
+      return 'favorites'
     case 'incomingBids':
       return 'bids/incoming'
     case 'outgoingBids':
@@ -46,26 +41,29 @@ const links = (tab: Tab) => {
   }
 }
 
+const onClick = (tab: Tab) => {
+  return navigateTo('/account/' + links(tab))
+}
 
-const routeToTab = computed(() => {
-  switch (path) {
-    case '/account/':
-      return 'myItems'
-    case '/account/bids/incoming':
-      return 'incomingBids'
-    case '/account/bids/outgoing':
-      return 'outgoingBids'
-    case '/account/favourites':
-      return 'favourites'
-    case '/account/active-listings':
-      return 'activeListings'
-    case '/account/activity':
-      return 'activity'
-  }
-})
 
-activeTab.value = routeToTab.value
 
+
+// const routeToTab = computed(() => {
+//   switch (path) {
+//     case '/account/':
+//       return 'myItems'
+//     case '/account/bids/incoming':
+//       return 'incomingBids'
+//     case '/account/bids/outgoing':
+//       return 'outgoingBids'
+//     case '/account/favorites':
+//       return 'favorites'
+//     case '/account/active-listings':
+//       return 'activeListings'
+//     case '/account/activity':
+//       return 'activity'
+//   }
+// })
 
 </script>
     

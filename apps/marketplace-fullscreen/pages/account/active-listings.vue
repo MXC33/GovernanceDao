@@ -27,7 +27,7 @@ const columns: TableColumn<IXToken>[] = [
   { label: "Asset", value: "name" },
   {
     label: "Unit price", value: "bid", getValue(row) {
-      return row.sales[0].price.toString()
+      return row.sales[0].price
     }, type: 'ixt', sortable: true
   },
   { label: "USD price", value: "usd", type: 'usd', sortable: true },

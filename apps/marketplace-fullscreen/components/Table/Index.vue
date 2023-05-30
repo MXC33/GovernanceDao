@@ -12,8 +12,8 @@ table(bg="gray-900" w="full")
     TableRow(v-for="(row, index) in sortedRows" :key="index")
       TableCell(v-for="item in columns") 
         slot(:name="`item-${item.value}`" :row="row" :column="item" v-if="item.type != 'buttons'")
-          Currency(:value="getValue(item, row)" type="ixt" v-if="item.type == 'ixt'")
-          Currency(:value="getValue(item, row)" type="usd" v-else-if="item.type == 'usd'")
+          Currency(:value="Number(getValue(item, row))" type="ixt" v-if="item.type == 'ixt'")
+          Currency(:value="Number(getValue(item, row))" type="usd" v-else-if="item.type == 'usd'")
           span(v-else) {{getValue(item, row)}}
 
         HList(v-else space-x="3" justify="end")
