@@ -173,7 +173,7 @@
           "usdt": {
             "title": "IXT/USDT (Quickswap)",
             "description": "Secure IXT/USDT liquidity, earn 7% APR.",
-            "link": ""
+            "link": "https://quickswap.exchange/#/"
           },
           "matic": {
             "title": "IXT/MATIC (Sushiswap)",

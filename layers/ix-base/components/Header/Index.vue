@@ -34,12 +34,10 @@ import IconSoundOff from '~/assets/images/sound/sound-off.svg'
 import Hamburger from '~/assets/images/header/hamburger.svg'
 import PlanetIX from '~/assets/images/header/planetix.svg'
 import PlanetIXNew from '~/assets/images/header/planetix-new.svg'
-import { buyIXTHeaderItems } from '~/composables/useSiteHeader'
+import { buyIXTHeaderItems, type HeaderCategory } from '~/composables/useSiteHeader'
 const { siteTopHeaders } = useSiteHeader()
 
-const menuTabs = ["buy ixt", "play now", "staking", "community"]
 const activeMenuIndex = ref<number | null>(null)
-
 
 const OpenMeny = (index: number) => {
   console.log("Open Menu", index);
@@ -50,7 +48,7 @@ const OpenMeny = (index: number) => {
   activeMenuIndex.value = index
 }
 
-const settingArr = ["Add funds", "0x000", "Account Settings", "Log Out"]
+const settingArr = ["Add funds", "0x000000000", "Account Settings", "Log Out"]
 
 const { gotoIXPage } = useIXLinks()
 const { user } = useUser()
@@ -58,17 +56,24 @@ const menuOpen = ref(false)
 const { isSoundEnabled } = useSoundSettings()
 const router = useRouter()
 
-
 const showIFrame = ref(false)
 
-const onClicked = (x: number, y: number) => {
-  //console.log(mainHeaders[x].subHeaders[y])
-  if (x == 0 && y == 1) {
-    console.log("In if")
-    showIFrame.value = true
+const {t} = useI18n()
+
+const onClicked = (type: string, category: string, item: string) => {
+  //console.log("onClicked Header index", type, category, item)
+  const link = t(`marketplace.headers.${type}.${category}.${item}.link`)
+
+  if(link != ''){
+    return navigateTo(link, {external: true})
   }
-  // return OnClickSubHeader(mainHeaders[x].subHeaders[y].title);//goToPage(mainHeaders[x].subHeaders[y].title)
-  //return goToPage(mainHeaders[x].subHeaders[y].title)
+
+  console.log("No link")
+
+  switch (item) {
+    case 'swap':
+      return showIFrame.value = true
+  }
 }
 
 const goToPage = (title: string) => {
