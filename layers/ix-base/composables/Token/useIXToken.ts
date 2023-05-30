@@ -1,6 +1,6 @@
-import {CHAIN_NET_ADDRESS} from "~/composables/Contract/useWallet";
-import {seaportAdress} from "~/composables/Contract/WalletAddresses";
-import {ConsiderationItem} from "@ix/marketplace/composables/useAssetContracts";
+import { CHAIN_NET_ADDRESS } from "~/composables/Contract/useWallet";
+import { seaportAdress } from "~/composables/Contract/WalletAddresses";
+import { ConsiderationItem } from "@ix/marketplace/composables/useAssetContracts";
 
 export interface IXTokenAttribute {
   value: string
@@ -34,6 +34,9 @@ export interface IXToken {
   higher_bid_price: number
   parent: IXTokenParent
   my_shares: number
+  bid: Bid
+  lowest_sale: LowestSale
+  sales: Sale[]
 }
 
 export interface SingleItemData extends IXToken {
@@ -63,6 +66,18 @@ export interface Bid {
   price: number
   due_date: number
   message: string
+}
+
+export interface LowestSale {
+  endtime: number
+  message: string
+  player_id: number
+  player_username: string
+  player_wallet: string
+  price: number
+  quantity: number
+  sale_id: number
+  timestamp: number
 }
 
 export interface Sale {
@@ -95,39 +110,39 @@ export const OrderType = {
 }
 
 export const typedData = {
-  OrderComponents : [
-    {name: "offerer", type: "address"},
-    {name: "zone", type: "address"},
-    {name: "offer", type: "OfferItem[]"},
-    {name: "consideration", type: "ConsiderationItem[]"},
-    {name: "orderType", type: "uint8"},
-    {name: "startTime", type: "uint256"},
-    {name: "endTime", type: "uint256"},
-    {name: "zoneHash", type: "bytes32"},
-    {name: "salt", type: "uint256"},
-    {name: "conduitKey", type: "bytes32"},
-    {name: "counter", type: "uint256"}
+  OrderComponents: [
+    { name: "offerer", type: "address" },
+    { name: "zone", type: "address" },
+    { name: "offer", type: "OfferItem[]" },
+    { name: "consideration", type: "ConsiderationItem[]" },
+    { name: "orderType", type: "uint8" },
+    { name: "startTime", type: "uint256" },
+    { name: "endTime", type: "uint256" },
+    { name: "zoneHash", type: "bytes32" },
+    { name: "salt", type: "uint256" },
+    { name: "conduitKey", type: "bytes32" },
+    { name: "counter", type: "uint256" }
   ],
-  OfferItem : [
-    {name: "itemType", type: "uint8"},
-    {name: "token", type: "address"},
-    {name: "identifierOrCriteria", type: "uint256"},
-    {name: "startAmount", type: "uint256"},
-    {name: "endAmount", type: "uint256"},
-    {name: "pixHash", type: "bytes32"}
+  OfferItem: [
+    { name: "itemType", type: "uint8" },
+    { name: "token", type: "address" },
+    { name: "identifierOrCriteria", type: "uint256" },
+    { name: "startAmount", type: "uint256" },
+    { name: "endAmount", type: "uint256" },
+    { name: "pixHash", type: "bytes32" }
   ],
-  ConsiderationItem:[
-    {name: "itemType", type: "uint8"},
-    {name: "token", type: "address"},
-    {name: "identifierOrCriteria", type: "uint256"},
-    {name: "startAmount", type: "uint256"},
-    {name: "endAmount", type: "uint256"},
-    {name: "recipient", type: "address"}
+  ConsiderationItem: [
+    { name: "itemType", type: "uint8" },
+    { name: "token", type: "address" },
+    { name: "identifierOrCriteria", type: "uint256" },
+    { name: "startAmount", type: "uint256" },
+    { name: "endAmount", type: "uint256" },
+    { name: "recipient", type: "address" }
   ]
 }
 
 export interface OfferItem {
-  ItemType : typeof ItemType;
+  ItemType: typeof ItemType;
   token: string,
   identifierOrCriteria: number,
   startAmount: number,
@@ -153,11 +168,11 @@ export interface AdvancedOrder {
   signature: string,
   extraData: string
 }
-export interface  Fulfillment {
+export interface Fulfillment {
   offerComponents: FulfillmentComponent[],
   considerationComponents: FulfillmentComponent[]
 }
-export interface  FulfillmentComponent {
+export interface FulfillmentComponent {
   orderIndex: number,
   itemIndex: number
 }

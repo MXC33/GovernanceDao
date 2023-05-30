@@ -10,31 +10,37 @@ Popup()
       VList()
         HList(text="lg" font="bold" justify="between")
           span() Your Balance
-          span() 123718 IXT
+          span(v-if="ixt") {{ ixtBalanceRounded }} IXT
+          span(v-else) ... IXT
         HList(justify="end" color="gray-200")
-          span(mb="4") $8.4
+          span(mb="4") $
 
-      CollectionFilterDrawer(:is-small="true" :is-neutral="true" mx="-6" mb="4" b="t-1 gray-600")
+      ContentDrawer(frame="none" mb="4" b="t-1 b-1 gray-600" :is-neutral="true")
         template(#header) APPLY TO ALL
+        template(#default)
+          ListingApplyAll()
+            template(#header) Floor price
+            template(#button) Set to Floor
 
-      ListingItem(v-for="(item, index) in listItems" v-model="listItems[index]")
+      ListingItem(v-for="(_, index) in listItems" v-model="listItems[index]")
 
   template(#footer)
     VList()
       HList(w="full" justify="between")
         div(color="gray-200") Total Price
-        p {{invalidPrice ?? roundToDecimals(totalIXTPrice, 4)}} IXT
+        GlitchText(:text="totalPrice" suffix=" IXT")
 
       HList(w="full" justify="between")
         div(color="gray-200") Marketplace fee
         p 2.5%
 
-      HList(w="full" justify="between" text="lg" font="bold")
+      HList(w="full" justify="between" text="lg right" font="bold" items="end")
         p() Total potential earnings
-        p {{invalidPrice ?? roundToDecimals(totalIXTPrice * (1 - 0.025), 4)}} IXT
+        GlitchText(:text="totalPotentialEarning" suffix=" IXT")
+
 
   template(#buttons)
-    button(btn="~ primary" w="full" @click.prevent="onClickList") List Items
+    ButtonInteractive(btn="~ primary" w="full" @click.prevent="onClickList" text="List Items" :invalid="!!invalidPrice" :loading="isLoading")
 
 </template>
 
@@ -52,15 +58,37 @@ const invalidPrice = computed(() => {
     return '--'
 })
 
+const totalPrice = computed(() => String(invalidPrice.value ?? roundToDecimals(totalIXTPrice.value, 4)))
+
+const totalPotentialEarning = computed(() =>
+  String(invalidPrice.value ?? roundToDecimals(totalIXTPrice.value * (1 - 0.025), 4))
+)
+
+// const { ixtToUSD, ixtAsUSD } = useIXTPrice()
+const { ixtBalance } = getIXTokenContract()
+const { displayPopup } = usePopups()
+const { data: ixt, refresh: fetchIXT } = ixtBalance()
+fetchIXT()
+
+const ixtBalanceRounded = computed(() => roundToDecimals(ixt.value ?? 0, 2))
+
+const isLoading = ref(false)
 const onClickList = async () => {
+  isLoading.value = true
   const list = await listItem(listItems.value[0])
+  isLoading.value = false
   console.log('List result', list)
+
+  displayPopup({
+    type: 'listing-successful',
+    items: listItems.value
+  })
 }
 
-const props = defineProps<{
+const { items } = defineProps<{
   items: SingleItemData[],
 }>()
 
-createListItems(props.items, 1)
+createListItems(items, 1)
 
 </script>

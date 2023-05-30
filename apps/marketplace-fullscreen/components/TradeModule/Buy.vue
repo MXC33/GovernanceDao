@@ -19,6 +19,12 @@ VList()
           span(color="white" font="bold") {{averagePricePerItem}} IXT
           span(color="yellow-200") {{aboveFloorPrice}}% above floor price
 
+    //- SAVE BELOW FOR FUTURE NEED
+    //- HList(px="6" py="3.5" b="t-1 b-1 gray-600" space-x="3" items="center")
+    //- InputCheckbox(v-model="maxPrice")
+    //-   span(color="gray-200") Max price per listing
+
+
     VList(w="150" justify="end" space-y="3")
       Adjustable(v-model="shares" h="full")
       span(color="yellow-200" v-if="showIncreaseMaxPrice" ) Try increasing your max price to buy more items

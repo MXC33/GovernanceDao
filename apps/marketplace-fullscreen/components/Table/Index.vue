@@ -5,18 +5,19 @@ table(bg="gray-900" w="full")
     col(v-for="column in columns" :style="getColumnStyle(column)")
 
   TableHead()
-    TableCellHead(v-for="item in columns" :column="item" :sort-field="sort" @select-field="selectSortField", @toggle-sort="toggleSortDirection" pos="sticky top-50 on-drawer:top-0" :drawer="inDrawer") {{ item.label }}
+    template(v-for="item in columns" )
+      TableCellHead(:column="item" :sort-field="sort" @select-field="selectSortField", @toggle-sort="toggleSortDirection" pos="sticky top-50 on-drawer:top-0" :drawer="inDrawer" v-if="item.type != 'buttons'") {{ item.label }}
 
   tbody(divide-y="1")
     TableRow(v-for="(row, index) in sortedRows" :key="index")
-      TableCell(v-for="item in columns", :key="item.value")
-        slot(:name="`item-${item.value}`" :row="row" :column="item")
-          Currency(:value="row[item.value]" type="ixt" v-if="item.type == 'ixt'")
-          Currency(:value="row[item.value]" type="usd" v-else-if="item.type == 'usd'")
-          span(v-else) {{row[item.value]}}
+      TableCell(v-for="item in columns") 
+        slot(:name="`item-${item.value}`" :row="row" :column="item" v-if="item.type != 'buttons'")
+          Currency(:value="Number(getValue(item, row))" type="ixt" v-if="item.type == 'ixt'")
+          Currency(:value="Number(getValue(item, row))" type="usd" v-else-if="item.type == 'usd'")
+          span(v-else) {{getValue(item, row)}}
 
-      TableButtonGroupIncomingBid(v-if="hasButton == 'incoming'" :row="row") 
-      TableButtonGroupOutgoingBid(v-if="hasButton == 'outgoing'" :row="row")
+        HList(v-else space-x="3" justify="end")
+          TableButton(:row="row" :is-primary="button.type == 'primary'" @click="button.onClick(row)"  v-for="button in item.buttons" ) {{ button.text }}
 
 
 
@@ -25,7 +26,6 @@ table(bg="gray-900" w="full")
 <script setup lang="ts" generic="Row extends TableRow">
 import type { TableColumn, TableRow } from '~/composables/useTable';
 
-type ButtonTypes = 'incoming' | 'outgoing'
 
 const props = defineProps<{
   columns: TableColumn<Row>[],
@@ -34,10 +34,13 @@ const props = defineProps<{
   inDrawer?: boolean,
   loading?: boolean,
   error?: string,
-  hasButton?: ButtonTypes
 }>()
 
+console.log(props.rows)
+
 const { sortedRows, sort, selectSortField, toggleSortDirection } = useTable(props.rows, props.id)
+
+console.log("TABLE", props)
 
 const getColumnStyle = (item: TableColumn<Row>) => {
   if (!item.width)
@@ -47,6 +50,14 @@ const getColumnStyle = (item: TableColumn<Row>) => {
     'width': `${item.width}px`,
     'min-width': `${item.width}px`,
   }
+}
+
+const getValue = (item: TableColumn<Row>, row: Row) => {
+  if (item.type == 'buttons')
+    return undefined
+  if (item.getValue)
+    return item.getValue(row)
+  return row[item.value]
 }
 
 </script>
