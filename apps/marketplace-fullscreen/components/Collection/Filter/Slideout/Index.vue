@@ -13,10 +13,10 @@ VList(w="100" ml="-8" mr="-3" pos="sticky top-52" overflow-y="scroll" h="273")
 </template>
 
 <script lang="ts" setup>
-import type { APIFilter, Filter } from "~/composables/useCollection";
+import type { APIFilter } from "~/composables/useCollection";
 import { useCollectionSettings } from "~/composables/useCollection";
 
-const props = defineProps<{
+defineProps<{
   items: APIFilter[]
 }>()
 
