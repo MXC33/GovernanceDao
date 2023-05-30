@@ -90,12 +90,12 @@ const { data, columns, context } = defineProps<{
 const rows = ref<IXToken[]>([])
 
 const usdPriceOrigin = (data: IXToken) => {
-  if (context == 'my-assets' || 'outgoing-bids' || 'incoming-bids')
-    return ixtAsUSD(data.bid?.price).value
+  if (context == 'outgoing-bids' || context == 'incoming-bids')
+    return ixtAsUSD(data.bid.price).value
   else if (context == 'active-listings')
     return ixtAsUSD(data.sales[0].price).value
   else
-    return ixtAsUSD(data?.sale_price).value
+    return ixtAsUSD(data.sale_price).value
 }
 
 watch([data, ixtPrice], () => {
