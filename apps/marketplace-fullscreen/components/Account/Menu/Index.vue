@@ -1,7 +1,6 @@
 <template lang="pug">
 HList(w="full" space-x="12" pos="relative")
-  TabItem(v-for="tab in tabs" :id="tab" v-model="activeTab" @click="onClick(tab)" :primary="true" :is-small="true") {{ $t(`marketplace.myAssets.${tab}`) }}
-
+  AccountMenuTab(v-for="tab in accountTabs" :key="tab" :is-active="tab === activeTab" @click="onClick(tab)") {{ $t(`marketplace.myAssets.${tab}`) }}
 
 HList(pos="absolute top-127.8 left-0" z="1" font="bold" uppercase="~" text="xxl" w="full" px="8")
   HList(w="full" b="b-1 gray-400" v-if="!isScrolling")
@@ -14,30 +13,21 @@ const isScrolling = computed(() => {
   return y.value >= 590
 })
 
-// const { path } = useRoute()
+const { path } = useRoute()
 
-type Tab = 'myItems' | 'favorites' | 'incomingBids' | 'outgoingBids' | 'activeListings' | 'activity'
-
+type Tab = 'myItems' | 'incomingBids' | 'outgoingBids' | 'activeListings'
 const accountTabs: Tab[] = ['myItems', 'incomingBids', 'outgoingBids', 'activeListings']
-
-// const { tabs, activeTab, isTabActive } = useTabList(accountTabs)
-
-const { tabs, activeTab } = useTabList(accountTabs.filter((tab) => tab == 'myItems' || 'incomingBids' || 'outgoingBids' || 'activeListings'))
 
 const links = (tab: Tab) => {
   switch (tab) {
     case 'myItems':
       return ''
-    case 'favorites':
-      return 'favorites'
     case 'incomingBids':
       return 'bids/incoming'
     case 'outgoingBids':
       return 'bids/outgoing'
     case 'activeListings':
       return 'active-listings'
-    case 'activity':
-      return 'activity'
   }
 }
 
@@ -45,25 +35,15 @@ const onClick = (tab: Tab) => {
   return navigateTo('/account/' + links(tab))
 }
 
+const activeTab = computed(() => {
+  const currentPath = path.replace('/account/', '');
+  const foundTab = accountTabs.find(tab => links(tab) === currentPath);
+  return foundTab ? foundTab : 'myItems';
+});
 
-
-
-// const routeToTab = computed(() => {
-//   switch (path) {
-//     case '/account/':
-//       return 'myItems'
-//     case '/account/bids/incoming':
-//       return 'incomingBids'
-//     case '/account/bids/outgoing':
-//       return 'outgoingBids'
-//     case '/account/favorites':
-//       return 'favorites'
-//     case '/account/active-listings':
-//       return 'activeListings'
-//     case '/account/activity':
-//       return 'activity'
-//   }
-// })
+onMounted(() => {
+  activeTab.value
+})
 
 </script>
     
