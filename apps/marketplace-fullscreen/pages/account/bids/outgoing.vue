@@ -35,7 +35,7 @@ const columns: TableColumn<IXToken>[] = [
       if (row.lowest_sale?.price)
         return (row.higher_bid_price - row.bid.price).toString().substring(0, 5)
       return row.higher_bid_price.toString()
-    }, type: 'text', sortable: true
+    }, type: 'text'
   },
   {
     label: "Quantity", value: "bid", getValue(row) {
@@ -43,12 +43,12 @@ const columns: TableColumn<IXToken>[] = [
     }, type: 'text'
   },
   {
-    label: "Expiration", value: "bidder_username", getValue(row) {
+    label: "Expiration", value: "bid", getValue(row) {
       return fromUnixTime(row.bid.due_date).toDateString()
-    }, type: 'text'
+    }, type: 'text', sortable: true
   },
   {
-    label: "Offer made", value: "due_date", getValue(row) {
+    label: "Offer made", value: "bid", getValue(row) {
       return getStartDateFromMessage(row).toDateString()
     }, type: 'text', sortable: true
   },

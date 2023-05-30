@@ -1,5 +1,4 @@
-import { Bid, IXToken } from "@ix/base/composables/Token/useIXToken"
-import { TableSort, TableSortField } from "./useTable"
+import { IXToken } from "@ix/base/composables/Token/useIXToken"
 
 export interface FilterPayload {
   value: string
@@ -36,7 +35,7 @@ export interface Filter extends FilterBase {
 
 export type FilterType = 'radio' | 'checkbox'
 
-export type CollectionContext = 'my-assets' | 'outgoing-bids' | 'incoming-bids' | 'active-listings'
+export type CollectionContext = 'my-assets' | 'outgoing-bids' | 'incoming-bids' | 'active-listings' | 'collection'
 
 export interface Collection {
   name: string
@@ -75,11 +74,6 @@ export type CollectionDisplayType = 'list' | 'grid'
 export const useCollectionSettings = () => {
   const activeFilters = useState<Filter[]>('activeFilters', () => ([]))
   const collectionOwners = useState('collectionOwners', () => ("All"))
-
-  // const sort = useState<TableSort<IXToken>>('colleciton-table-sort', () => ({
-  //   field: 'type',
-  //   direction: 'asc'
-  // }))
 
   const displayType = useState<CollectionDisplayType>('collection-display-type', () => 'grid')
 
