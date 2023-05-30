@@ -8,7 +8,7 @@ Collection(:data="data" :columns="columns" v-if="data" :hide-grid="true")
 <script lang="ts" setup>
 import type { TableColumn } from "~/composables/useTable";
 import type { IXToken } from "@ix/base/composables/Token/useIXToken";
-import { formatDuration, fromUnixTime } from "date-fns"
+import { fromUnixTime } from "date-fns"
 
 
 const { myAssetsURL } = useCollectionsURL()
@@ -32,7 +32,7 @@ const columns: TableColumn<IXToken>[] = [
   },
   { label: "USD price", value: "usd", type: 'usd', sortable: true },
   {
-    label: "Floor Difference", value: "bid", getValue(row) {
+    label: "Floor Difference", value: "bids", getValue(row) {
       if (row.lowest_sale?.price)
         return (row.higher_bid_price - row.lowest_sale.price).toString().substring(0, 5)
       return row.higher_bid_price.toString()
@@ -67,9 +67,6 @@ const columns: TableColumn<IXToken>[] = [
   },
 
 ]
-
-const formattedDays = (days: number) => formatDuration({ days }, { format: ['months', 'weeks', 'days'] })
-
 
 const counterBidOnClick = (token: IXToken) => {
   console.log("Counter", token)

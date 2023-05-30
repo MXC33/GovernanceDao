@@ -25,11 +25,10 @@ setupCollectionListeners()
 const columns: TableColumn<IXToken>[] = [
   { label: "Asset", value: "name" },
   {
-    label: "Offer", value: "bid", getValue(row) {
+    label: "Unit price", value: "bid", getValue(row) {
       return row.bid.price.toString()
     }, type: 'text', sortable: true
   },
-  { label: "USD price", value: "usd", type: 'usd', sortable: true },
   {
     label: "Floor Difference", value: "bid", getValue(row) {
       if (row.lowest_sale?.price)
@@ -38,17 +37,7 @@ const columns: TableColumn<IXToken>[] = [
     }, type: 'text', sortable: true
   },
   {
-    label: "Quantity", value: "bid", getValue(row) {
-      return row.bid.quantity.toString()
-    }, type: 'text'
-  },
-  {
-    label: "Expiration", value: "bidder_username", getValue(row) {
-      return row.bid.bidder_username
-    }, type: 'text'
-  },
-  {
-    label: "Offer made", value: "due_date", getValue(row) {
+    label: "Expiration date", value: "due_date", getValue(row) {
       return fromUnixTime(row.bid.due_date).toDateString()
     }, type: 'text', sortable: true
   },

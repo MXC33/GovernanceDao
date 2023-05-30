@@ -80,7 +80,7 @@ const isFilterActive = computed(() => {
     return true
 })
 
-const { data, columns } = defineProps<{
+const { data, columns, hideGrid } = defineProps<{
   data?: CollectionData,
   columns?: TableColumn<IXToken>[],
   hideGrid?: boolean
@@ -88,10 +88,16 @@ const { data, columns } = defineProps<{
 
 const rows = ref<IXToken[]>([])
 
+const usdPriceOrigin = (data: IXToken) => {
+  if (hideGrid)
+    return ixtAsUSD(data.bid.price).value
+  return ixtAsUSD(data.sale_price).value
+}
+
 watch([data, ixtPrice], () => {
   rows.value = (data?.nfts ?? []).map((row) => ({
     ...row,
-    usd: ixtAsUSD(row.sale_price).value
+    usd: usdPriceOrigin(row)
   }))
 }, { immediate: true })
 
