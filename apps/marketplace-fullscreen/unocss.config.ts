@@ -11,7 +11,7 @@ export default defineConfig({
       //@ts-ignore
       ...baseLayer.theme.colors,
       ix: {
-        primary: '#CB0010',
+        primary: '#C3000F',
       },
       corp: {
         ne: '#FF0014'

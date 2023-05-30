@@ -2,7 +2,7 @@
 HList(w="full" space-x="12")
   TabItem(v-for="tab in tabs" :id="tab" v-model="activeTab" @click="onClick(tab)" :primary="true" :is-small="true") {{ $t(`marketplace.myAssets.${tab}`) }}
 
-div(b="b-1 gray-600" v-if="!isScrolling")
+div(b="b-1 gray-400" v-if="!isScrolling")
 
 </template>
     

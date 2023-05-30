@@ -35,11 +35,9 @@ export default definePreset({
   theme: {
     colors: {
       ix: {
-        primary: '#CB0010',
+        primary: '#C3000F',
         black: '#0C0C0C',
-        old: '#D70011',
-        net: '#FF0014'
-
+        ne: '#FF0014'
       },
       gray: {
         50: '#d9d9d9',

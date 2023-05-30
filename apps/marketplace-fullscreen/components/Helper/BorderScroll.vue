@@ -1,7 +1,7 @@
 <template lang="pug">
 ClientOnly
   Transition(mode="in-out")
-    div(ml="-8" mr="-8" pos="sticky top-33" z="99" b="on-scrolling:t-1 gray-400" :scrolling="isScrolling" v-if="isScrolling")
+    div(ml="-8" mr="-8" pos="sticky top-33" z="99" b="on-scrolling:t-1 gray-600" :scrolling="isScrolling" v-if="isScrolling")
 </template>
 
 <script lang="ts" setup>
