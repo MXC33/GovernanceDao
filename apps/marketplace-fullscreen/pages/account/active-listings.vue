@@ -15,7 +15,7 @@ const { myAssetsURL } = useCollectionsURL()
 const { data: data, execute: fetchCollection, setupCollectionListeners } = useCollectionData(myAssetsURL('polygon'), {
   filter: {
     owned: true,
-    type: 2,
+    type: 3,
   }
 })
 
