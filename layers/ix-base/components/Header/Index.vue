@@ -21,8 +21,8 @@ VList(pos="sticky top-0" z="99" w="full")
       VList(v-if="menuOpen" @click="toggleMenu" pos="absolute top-full left-0 right-0" b="1 gray-400" items="left") 
         div(v-for="subHeader in settingArr" h="10" p="3" bg="black" px="8" text="sm:3" font="bold" b="b-1 gray-600") {{ subHeader }}  
 
-  transition(name="slide-top")
-    HeaderItem(v-if="activeMenuIndex != null" @onClickItem="onClicked" :header="siteTopHeaders[activeMenuIndex]")
+  Transition(name="slide-top" mode="out-in")
+    HeaderItem(v-if="activeMenuIndex != null" :key="activeMenuIndex" @onClickItem="onClicked" :header="siteTopHeaders[activeMenuIndex]")
 
   Popup(v-if="showIFrame")
     iframe(src="https://ix.foundation/lefi" w="full md:130" h="full md:115" )
