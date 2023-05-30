@@ -20,7 +20,7 @@ VList(flex-grow="1" min-h="0" pos="relative" p="8" space-y="6")
     Transition(name="fade" mode="out-in" v-if="data")
 
       CollectionGrid(v-if="displayType == 'grid' && !hideGrid" w="full" :is-open="showFilters")
-        CollectionGridItem.collection-grid-item(:token="token" v-for="token in data.nfts" b="gray-400")
+        CollectionGridItem.collection-grid-item(:token="token" v-for="token in data.nfts" b="gray-400" :context="context")
           template(#icon-left)
             HList(items="center" h="10" color="white" font="bold" bg="gray-600" px="5" cut="bottom-right md" v-if="is1155(token.collection)") x{{formatMyShareAmount(token.my_shares)}}
             div(p="4" pos="absolute" v-else)
@@ -39,7 +39,7 @@ VList(flex-grow="1" min-h="0" pos="relative" p="8" space-y="6")
 
 <script lang="ts" setup>
 import type { IXToken } from '@ix/base/composables/Token/useIXToken';
-import type { CollectionData } from '~/composables/useCollection';
+import type { CollectionContext, CollectionData } from '~/composables/useCollection';
 import type { TableColumn } from '~/composables/useTable'
 import PolygonIcon from '~/assets/icons/polygon_filled.svg'
 
@@ -83,7 +83,8 @@ const isFilterActive = computed(() => {
 const { data, columns, hideGrid } = defineProps<{
   data?: CollectionData,
   columns?: TableColumn<IXToken>[],
-  hideGrid?: boolean
+  hideGrid?: boolean,
+  context?: CollectionContext
 }>()
 
 const rows = ref<IXToken[]>([])
