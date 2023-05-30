@@ -7,7 +7,7 @@ Teleport(to="#infobox")
     HList(items="center")
       div.info-box(font="bold" text="xs" bg="mc-gray" p="2" color="white" z="400")
         span(bg="gray-600" px="4" py="2" font="bold" text="sm")  {{ $t('tooltips.' + tooltipId) }}
-    div.triangle(pos="absolute top-8 left-8" z="999")
+    div.triangle(pos="absolute top-7.6 left-8" z="999")
 </template>
 
 <script lang="ts" setup>
