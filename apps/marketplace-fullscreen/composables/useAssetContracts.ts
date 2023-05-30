@@ -173,7 +173,7 @@ export const getIXTokenContract = <T extends ContractInterface<T> & IXTokenContr
   const spenderAddress = conduitAdress.polygon as string
   const { walletAdress } = useWallet()
 
-  const { withContract, createTransaction, ...contractSpec } = defineContract<T>('IXToken-contract', {
+  const { viewAsyncState, withContract, createTransaction, ...contractSpec } = defineContract<T>('IXToken-contract', {
     contractAddress: IXTAddress.polygon as string,
     notifications: {
       failMessage: 'Error allowance IXToken'
@@ -209,8 +209,8 @@ export const getIXTokenContract = <T extends ContractInterface<T> & IXTokenContr
       return contract.approve(spenderAddress, amount)
     })
 
-  const ixtBalanceOfUser = () =>
-    withContract(async (contract) => {
+  const ixtBalance = () =>
+    viewAsyncState('ixt-balance', async (contract) => {
       const address = walletAdress.value
       if (!address)
         return undefined
@@ -240,7 +240,7 @@ export const getIXTokenContract = <T extends ContractInterface<T> & IXTokenContr
     allowance,
     approve,
     allowanceCheck,
-    ixtBalanceOfUser
+    ixtBalance
   }
 }
 
