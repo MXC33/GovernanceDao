@@ -28,6 +28,27 @@ export interface ListingItem {
   ixtPrice: number
 }
 
+export const useListingDuration = () => {
+  const { t } = useI18n()
+
+  const formattedDays = (days: number) => {
+    const daysAsMonths = Math.floor(days / 30)
+    const daysAsWeek = Math.floor(days / 7)
+
+    if (days >= 30)
+      return `${daysAsMonths} ${t('general.month', daysAsMonths)}`
+
+    if (days >= 7)
+      return `${daysAsWeek} ${t('general.week', daysAsWeek)}`
+
+    return `${days} ${t('general.day', days)}`
+  }
+
+  return {
+    formattedDays
+  }
+}
+
 export const useListingItems = () => {
   const listItems = useState<ListingItem[]>('listing-items', () => [])
 

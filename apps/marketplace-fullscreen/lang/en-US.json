@@ -75,7 +75,10 @@
     "selected": "selected",
     "repair": "Repair",
     "burn-assets": "Burn Assets",
-    "purchase": "Purchase"
+    "purchase": "Purchase",
+    "day": "day | days",
+    "month": "month | months",
+    "week": "week | weeks"
   },
   "popupNotification": {
     "copy-link": "Link copied to clipboard"

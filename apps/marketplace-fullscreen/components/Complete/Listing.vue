@@ -1,10 +1,12 @@
 <template lang="pug">
 Popup()
-  template(#header) Success!
+  template(#icon)
+    CheckboxIcon(w="6" h="6")
+
+  template(#header) LIST SUCCESSFUL!
 
   template(#default)
-    VList(v-for="item in items")
-      CompleteItem(:item="item" )
+    TokenSlideshow(:tokens="items")
 
   template(#footer)
     div Quantity {{ items.length }}
@@ -16,10 +18,11 @@ Popup()
   
   
 <script lang="ts" setup>
-import type { CartItem } from '~/composables/useCart';
+import CheckboxIcon from '~/assets/icons/checkmark-green.svg'
+import type { ListingItem } from '~/composables/useListing';
 const { closeActivePopup } = usePopups()
 defineProps<{
-  items: CartItem[]
+  items: ListingItem[]
 }>()
 
 defineEmits(["close"])

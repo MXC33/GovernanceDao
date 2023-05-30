@@ -1,5 +1,6 @@
 import { IXToken } from "~/../../layers/ix-base/composables/Token/useIXToken";
 import { CartItem } from "./useCart";
+import { ListingItem } from "./useListing";
 
 export interface PopupBase {
   type: string
@@ -7,7 +8,7 @@ export interface PopupBase {
 
 export interface PopupOnList extends PopupBase {
   type: 'listing-successful',
-  items: CartItem[]
+  items: ListingItem[]
 }
 
 export interface PopupOnBid extends PopupBase {
