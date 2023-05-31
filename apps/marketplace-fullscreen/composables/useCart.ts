@@ -1,5 +1,21 @@
 import { IXToken, Sale } from "@ix/base/composables/Token/useIXToken"
 import { AdjustableNumber } from "@ix/base/composables/Utils/useAdjustableNumber"
+import {get1155Contract, getIXTokenContract, getSeaportContract} from "~/composables/useAssetContracts";
+import {
+  ItemType,
+  OrderType,
+  signDomain,
+  typedData,
+  OfferItem,
+  OrderParameters,
+  AdvancedOrder,
+  Fulfillment,
+  FulfillmentComponent
+} from "@ix/base/composables/Token/useIXToken"
+import {
+  conduitKey
+} from "@ix/base/composables/Contract/WalletAddresses";
+import {ethers} from "ethers";
 
 export interface CartItem extends AdjustableNumber {
   token: IXToken,
@@ -36,11 +52,89 @@ export const useCart = () => {
     cartItems.value = []
   }
 
+  const checkoutItems = async (carItems: CartItem[], totalPrice: number) => {
+    //Todo Start loading overlay
+    console.log('start Loading overlay')
+    const { allowanceCheck } = getIXTokenContract()
+    const { fulfillAvailableAdvancedOrders } = getSeaportContract()
+    await allowanceCheck(totalPrice)
+
+    const pixMerkleParam = {
+      merklePixInfo: {
+        to: "0x0000000000000000000000000000000000000000",
+        pixId: 0,
+        category: 0,
+        size: 0,
+      },
+      merkleRoot: "0x0000000000000000000000000000000000000000000000000000000000000000",
+      merkleProof: ["0x0000000000000000000000000000000000000000000000000000000000000000"],
+    }
+
+    let BuyOrderComponents: AdvancedOrder[] = []
+    let offers = []
+    let considerations = []
+    let i = 0
+    for (const item of carItems) {
+      if(item.sale){
+        let message: any = {}
+        try {
+            message = JSON.parse(item.sale.message)
+        } catch (e) {}
+
+        if (!message.body || !message.body.consideration) {
+          continue
+        }
+
+        delete message.body.counter
+        message.body.totalOriginalConsiderationItems = message.body.consideration.length
+        console.log('message.signature', message.signature)
+        BuyOrderComponents.push({
+          parameters: message.body,
+          numerator: item.sale.quantity,
+          denominator: message.body.offer[0].endAmount,
+          signature: message.signature,
+          extraData: "0x"
+        })
+
+        offers.push([
+          { "orderIndex": i, "itemIndex": 0 }
+        ])
+
+        let j = 0;
+        for (const considerationItem of message.body.consideration) {
+          const foundIndex = considerations.findIndex(item => item.key === considerationItem.recipient)
+          if (foundIndex !== -1) {
+            considerations[foundIndex].value.push({ "orderIndex": i, "itemIndex": j })
+          } else {
+            considerations.push({
+              key: considerationItem.recipient,
+              value: [{ "orderIndex": i, "itemIndex": j }]
+            })
+          }
+          j++
+        }
+        i++
+      }
+      // if(!await allowanceCheck(totalPrice))
+      //   throw new Error("Something went wrong!");
+      console.log('here', totalPrice)
+    }
+    try {
+      // @ts-ignore
+      return await fulfillAvailableAdvancedOrders(BuyOrderComponents, [], offers, considerations.map(item => item.value), conduitKey.polygon, "0x0000000000000000000000000000000000000000", BuyOrderComponents.length)
+    }
+    catch (err: any) {
+      console.log("fulfillAvailableAdvancedOrders error");
+      return false
+    }
+  }
+
   return {
     cartItems,
     viewingCart,
     clearCart,
     removeFromCart,
+    checkoutItems,
     addToCart
   }
 }

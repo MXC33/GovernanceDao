@@ -16,6 +16,10 @@ export default defineNuxtConfig({
   typescript: {
     includeWorkspace: true
   },
+
+  //@ts-ignore
+  transpile: ['vue3-carousel'],
+
   css: [
     resolve('./assets/styles/fonts.css'),
     resolve('./assets/styles/colors.css'),
@@ -23,6 +27,7 @@ export default defineNuxtConfig({
     resolve('./assets/styles/cuts.css'),
     resolve('./assets/styles/transitions.css'),
     resolve('./assets/styles/corporations.css'),
+    'vue3-carousel/dist/carousel.css',
     '@unocss/reset/tailwind.css',
   ],
   modules: [
@@ -65,7 +70,7 @@ export default defineNuxtConfig({
   vite: {
     server: {
       hmr: {
-        port: 8001,
+        port: 8002,
       },
     },
     vue: {

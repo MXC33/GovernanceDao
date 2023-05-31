@@ -8,7 +8,7 @@ export const useIXTPrice = () => {
 
   const { data: ixtPrice, refresh: refreshIXTPrice, execute: fetchPrice } = useAsyncDataState('ixt-price', () =>
     $fetch(config.MC_API + '/ixt-price', { mode: 'cors' }) as Promise<PriceResponse>, {
-    transform: (data) => data.price
+    transform: (data) => Number(data)
   })
 
   const setupIXTPrice = () => {

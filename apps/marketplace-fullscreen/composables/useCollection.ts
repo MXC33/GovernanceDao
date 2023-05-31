@@ -1,7 +1,6 @@
 import { IXToken } from "@ix/base/composables/Token/useIXToken"
-import { TableSort, TableSortField } from "./useTable"
 
-interface FilterPayload {
+export interface FilterPayload {
   value: string
   trait_type: string
 }
@@ -10,7 +9,7 @@ export interface CollectionPayload {
   order: number,
   filter: {
     owned: boolean,
-    type:number,
+    type: number,
     search: string,
     attributes: FilterPayload[]
   }
@@ -19,7 +18,6 @@ interface FilterBase {
   title: string
   trait_type: string
   type: FilterType
-  selected: boolean
 }
 
 export interface APIFilter extends FilterBase {
@@ -36,6 +34,8 @@ export interface Filter extends FilterBase {
 }
 
 export type FilterType = 'radio' | 'checkbox'
+
+export type CollectionContext = 'my-assets' | 'outgoing-bids' | 'incoming-bids' | 'active-listings' | 'collection'
 
 export interface Collection {
   name: string
@@ -75,11 +75,6 @@ export const useCollectionSettings = () => {
   const activeFilters = useState<Filter[]>('activeFilters', () => ([]))
   const collectionOwners = useState('collectionOwners', () => ("All"))
 
-  // const sort = useState<TableSort<IXToken>>('colleciton-table-sort', () => ({
-  //   field: 'type',
-  //   direction: 'asc'
-  // }))
-
   const displayType = useState<CollectionDisplayType>('collection-display-type', () => 'grid')
 
   const toggleDisplayType = () => {
@@ -89,8 +84,30 @@ export const useCollectionSettings = () => {
       return displayType.value = 'grid'
   }
 
+  const createFilters = (data: CollectionData) => {
+    activeFilters.value = data.filters.map((filter) => ({
+      ...filter,
+      value: filter.value.map((name) => ({
+        name,
+        selected: false
+      }))
+    }))
+  }
+
+  const filtersAsPayload = computed(() =>
+    activeFilters.value
+      .map(({ trait_type, value }) => ({
+        trait_type,
+        value: value.find((item) => item.selected)?.name
+      }))
+      .filter((filter): filter is FilterPayload => !!filter.value)
+  )
+
+
   return {
     displayType,
+    filtersAsPayload,
+    createFilters,
     toggleDisplayType,
     activeFilters,
     collectionOwners,

@@ -95,6 +95,7 @@ const getCut = (position: Position, size: Size = 'md') => {
 
   return {
     ...depth,
+    'clip-path': 'polygon(var(--cut-path))',
     '--cut-opacity': 1,
     '--cut-path': path,
     "--cut-top-right-bottom-left": '0 0, calc(100% - var(--cut-depth)) 0, 100% var(--cut-depth), 100% 100%, var(--cut-depth) 100%, 0 calc(100% - var(--cut-depth));',
@@ -116,7 +117,7 @@ export const cutRules: Rule<Theme>[] = [
       '--cut-opacity': Number(op) / 100,
     }
   }],
-  [/^cut-b-(.+)$/, (arr, { theme, rawSelector }: RuleContext<Theme>) => {
+  [/^cut-b-(.+)$/, (arr, { theme, constructCSS, variantMatch, variantHandlers, rawSelector }: RuleContext<Theme>) => {
     const [mode, body] = arr
 
     const selector = e(rawSelector)
@@ -127,23 +128,34 @@ export const cutRules: Rule<Theme>[] = [
     if (!data)
       return
 
-    const { alpha, cssColor } = data
+    const { cssColor } = data
 
     if (!cssColor)
       return
 
     const colorString = colorToString(cssColor, 'var(--cut-opacity)')
 
+    const defaultSelector = constructCSS({})
+    const attributedSelector = defaultSelector.split("{")[0]
+
     return `
-      ${selector} {
+      .is-not-paint-supported ${attributedSelector} {
         border: 1px solid ${colorString};
       }
-      
-      .is-paint-supported ${selector} {
-        border: 0;
+    
+      .is-paint-supported ${attributedSelector} {
+        --cut-border: 1px;
+        position: relative;
       }
 
-      .is-paint-supported ${selector}:before {
+      .is-paint-supported ${attributedSelector}:before {
+        content: "";
+        display: block;
+        position: absolute;
+        inset: 0;
+        mask: paint(cut-corners);
+        pointer-events: none;
+        transition: background 150ms;
         background: ${colorString};
       }
     `

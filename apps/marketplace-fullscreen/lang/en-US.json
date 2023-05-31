@@ -75,7 +75,10 @@
     "selected": "selected",
     "repair": "Repair",
     "burn-assets": "Burn Assets",
-    "purchase": "Purchase"
+    "purchase": "Purchase",
+    "day": "day | days",
+    "month": "month | months",
+    "week": "week | weeks"
   },
   "popupNotification": {
     "copy-link": "Link copied to clipboard"
@@ -143,7 +146,7 @@
       "automatedTrans": "Automated Transmissions"
     }
   },
-  "mpFullscreen": {
+  "marketplace": {
     "headers": {
       "buyIxt": "Buy IXT",
       "playNow": "Play Now",
@@ -153,7 +156,7 @@
     },
     "myAssets": {
       "myItems": "My items",
-      "favorites": "Favorites",
+      "favourites": "Favourites",
       "incomingBids": "Incoming Bids",
       "outgoingBids": "Outgoing Bids",
       "activeListings": "Active Listings",
@@ -171,6 +174,17 @@
     },
     "transfer": {
       "title": "Transfer Asset",
+      "quantity": "Quantity",
+      "own": "You own",
+      "walletAdress": "Wallet Adress",
+      "placeholderText": "Put Adress Here",
+      "warningText": "Make sure the adress is correct!<br/>There is no way to reverse this transaction",
+      "verifyText": "I Verify that I am aware that the transaction is not<br/>reversible, and that the wallet address is correct.",
+      "confirm": "Confrim Adress",
+      "transferItem": "Transfer Item"
+    },
+    "list": {
+      "title": "List Item",
       "quantity": "Quantity",
       "own": "You own",
       "walletAdress": "Wallet Adress",

@@ -4,8 +4,11 @@ VList(justify="center" items="center" aspect="2/3" bg="black opacity-40" ref="me
     slot(name="media")
       TokenLazyVideo(:token="token" :key="token.collection + token.token_id" :is-hovered="isHovered")
 
-    HList(pos="absolute" inset="0" p="3" pointer-events="none" opacity="0 group-hover:100" transition="all")
+
+    HList(pos="absolute" inset="0" p="3")
       slot(name="icon-left")
+
+    HList(pos="absolute" inset="0" p="3" pointer-events="none" opacity="0 group-hover:100" transition="all")
 
       div(flex-grow="1")
 
@@ -24,35 +27,51 @@ VList(justify="center" items="center" aspect="2/3" bg="black opacity-40" ref="me
     div(text="md gray-200")
       slot(name="detail") Best offer: {{ token?.higher_bid_price }} IXT
 
-    Transition(name="slide-bottom")
+    Transition(name="slide-bottom" v-if="context=='my-assets'")
+      button(btn="~ primary" pos="absolute bottom-0 left-0 right-0" v-if="isHovered" @click.stop="onClickListItems") List Item
+    Transition(name="slide-bottom" v-else)
       button(btn="~ primary" pos="absolute bottom-0 left-0 right-0" v-if="isHovered" @click.stop="onClickCart") Add to cart
       
 </template>
 
 <script lang="ts" setup>
 import type { IXToken } from '@ix/base/composables/Token/useIXToken';
+import type { CollectionContext } from '~/composables/useCollection';
 
 const mediaElement = ref()
 const route = useRoute()
 const isHovered = useElementHover(mediaElement)
 const { addToCart } = useCart()
 
-const onClickCart = () => {
-  addToCart(props.token)
-}
+const { displayPopup } = usePopups()
 
-const onClickItem = () => {
-  const id = props.token.token_id
-  if (id)
-    navigateTo(route.path + `/${id}`)
-}
 
 const props = defineProps<{
   token: IXToken,
   quantity?: number,
   isInvalid?: boolean,
   isActive?: boolean,
-  page?: string,
+  context?: CollectionContext
 }>()
+
+const onClickCart = () => {
+  addToCart(props.token)
+}
+
+const onClickListItems = () => {
+  displayPopup({
+    type: 'list-item',
+    item: props.token
+  })
+}
+
+const onClickItem = () => {
+  const { token_id, network, collection } = props.token
+
+  if (token_id)
+    navigateTo(`/assets/${network}/${collection}/${token_id}`)
+}
+
+
 
 </script>

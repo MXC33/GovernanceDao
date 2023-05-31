@@ -1,6 +1,5 @@
 <template lang="pug">
 CollectionSingleItem(:item="singleItem" v-if="singleItem")
-
 </template>
 
 
@@ -15,5 +14,4 @@ const { data: singleItem, execute: fetchToken } = await useAssetAPI({
 })
 
 await fetchToken()
-
 </script>

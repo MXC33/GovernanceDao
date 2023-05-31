@@ -1,6 +1,5 @@
 import { defineConfig } from 'unocss'
-import baseLayer from '@ix/base/unocss.config';
-
+import baseLayer from '../../layers/ix-base/unocss.config';
 
 export default defineConfig({
   presets: [baseLayer],
@@ -8,15 +7,14 @@ export default defineConfig({
     fontFamily: {
       foundry: ['Foundry Gridnik', 'sans-serif'],
     },
-
     colors: {
       //@ts-ignore
       ...baseLayer.theme.colors,
       ix: {
-        primary: '#FF0014',
+        primary: '#C3000F',
       },
       corp: {
-        ne: '#CB0010'
+        ne: '#FF0014'
       }
     },
     shortcuts: [

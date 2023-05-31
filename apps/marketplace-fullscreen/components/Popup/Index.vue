@@ -1,17 +1,33 @@
 <template lang="pug">
-div(pos="fixed" inset="0" bg="black opacity-80" z="300" @click="$emit('close')")
+Transition(name="fade" appear)
+  VList(pos="fixed" inset="0" bg="black opacity-80" w="full" h="full" z="999"  items="center" justify="center" @click="closeActivePopup")
 
-div(pos="fixed top-50% left-50%" w="full" translate-x="-50%" translate-y="-50%" bg="ix-black" m="auto" z="310" rounded="2" b="1 white" max-w="120" color="white")
-  VList(p="x-3 y-3" text="center" b="b-1 white" v-if="$slots.header")
-    slot(name="header")
+    VList(w="full" pos="relative" @click.stop="" bg="gray-900" m="auto" z="1000" max-w="120" color="white" max-h="90%" overflow="auto")
 
-  VList(p="6" flex-grow="1")
-    slot()
+      HList(items="center" justify="between" px="6" py="3" b="b-1 gray-600" text="lg" font="bold" uppercase="~" pos="sticky top-0" bg="gray-900" z="2")
+        HList(space-x="3" items="center")
+          div(w="5" v-if="$slots.icon")
+            slot(name="icon")
 
-  VList(b="t-1 white" p="6" v-if="$slots.footer")
-    slot(name="footer")
+          h3
+            slot(name="header")
+
+        CloseIcon(w="4" cursor="pointer" @click.stop="closeActivePopup")
+
+      VList(flex-grow="1" p="6" space-y="2")
+        slot()
+
+      VList(b="t-1 gray-600" pos="sticky bottom-0" bg="gray-900" z="2")
+        VList(p="x-6 y-3")
+          slot(name="footer")
+
+        slot(name="buttons")
+          
 </template>
 
 <script setup lang="ts">
+import CloseIcon from '~/assets/icons/close.svg'
+const { closeActivePopup } = usePopups()
+
 defineEmits(["close"])
 </script>

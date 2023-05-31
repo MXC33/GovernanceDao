@@ -1,22 +1,46 @@
+import { IXToken } from "~/../../layers/ix-base/composables/Token/useIXToken";
+import { CartItem } from "./useCart";
+import { ListingItem } from "./useListing";
 
+export interface PopupBase {
+  type: string
+}
 
-export type Popups = 'copy-link' | 'add-to-cart' | 'remove-from-cart' | 'add-favorite' | 'remove-favorite' | 'transfer' | 'purchase-confirmed' | 'insufficient-funds' | 'transaction-error' | 'success'
+export interface PopupOnList extends PopupBase {
+  type: 'listing-successful',
+  items: ListingItem[]
+}
+
+export interface PopupOnBid extends PopupBase {
+  type: 'bidding-successful',
+  items: CartItem[]
+}
+
+export interface PopupTransfer extends PopupBase {
+  type: 'transfer-item',
+  item: IXToken
+}
+
+export interface PopupListItem extends PopupBase {
+  type: 'list-item',
+  item: IXToken
+}
+
+type Popup = PopupOnList | PopupOnBid | PopupTransfer | PopupListItem
 
 export const usePopups = () => {
-  const popupNotification = useState<Popups | null>('popup-notification', () => null)
-  const popupModal = useState<boolean | null>('popup-modal', () => null)
+  const popup = useState<Popup | null>('active-popup', () => null)
 
+  const displayPopup = (newPopup: Popup) => {
+    popup.value = newPopup
+  }
 
-  const setPopupTimeout = () => {
-    setTimeout(() => {
-      popupNotification.value = null
-    }, 5000);
-  };
+  const closeActivePopup = () => popup.value = null
 
   return {
-    popupNotification,
-    popupModal,
-    setPopupTimeout,
+    closeActivePopup,
+    displayPopup,
+    popup
   };
 };
 
