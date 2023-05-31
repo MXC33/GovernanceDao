@@ -1,6 +1,6 @@
 <template lang="pug">
-VList(aspect="square" w="full" pos="relative" overflow="hidden")
-  slot(name="media" @click="onClickItem")
+VList(aspect="square" w="full" pos="relative" overflow="hidden"  @click="onClickItem") 
+  slot(name="media")
     TokenLazyVideo(:token="token" :key="token.collection + token.token_id" :is-hovered="isHovered")
 
 
