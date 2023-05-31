@@ -54,11 +54,11 @@ const { addToCart } = useCart()
 const attributes = computed(() => getSingleAttributes(item))
 
 const saleColumns: TableColumn<Sale>[] = [
-  { label: "Sale Price", columnId: "price", sortable: true },
-  { label: "Quanitity", columnId: "quantity", sortable: true },
-  { label: "Expiration", columnId: "endtime", sortable: true },
-  { label: "Seller", columnId: "player_id", sortable: true },
-  { label: "Action", columnId: "action", width: 80 }
+  { label: "Sale Price", rowKey: "price", sortable: true },
+  { label: "Quanitity", rowKey: "quantity", sortable: true },
+  { label: "Expiration", rowKey: "endtime", sortable: true },
+  { label: "Seller", rowKey: "player_id", sortable: true },
+  { label: "Action", rowKey: "action", width: 80 }
 ]
 
 const addSaleToCart = (sale: Sale) => {
@@ -67,8 +67,8 @@ const addSaleToCart = (sale: Sale) => {
 
 
 const offerColumns: TableColumn<Bid>[] = [
-  { label: "Sale Price", columnId: "price", sortable: true },
-  { label: "Quanitity", columnId: "quantity", sortable: true },
+  { label: "Sale Price", rowKey: "price", sortable: true },
+  { label: "Quanitity", rowKey: "quantity", sortable: true },
 
 ]
 const { item } = defineProps<{

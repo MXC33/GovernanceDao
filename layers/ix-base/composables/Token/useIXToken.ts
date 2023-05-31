@@ -34,6 +34,7 @@ export interface IXToken {
   higher_bid_price: number
   parent: IXTokenParent
   my_shares: number
+  shares: number
   bid: Bid
   lowest_sale: LowestSale
   sales: Sale[]
