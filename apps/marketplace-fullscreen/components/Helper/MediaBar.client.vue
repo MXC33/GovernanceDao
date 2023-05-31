@@ -2,17 +2,17 @@
 HList(w="full" px="6" py="3" bg="gray-900" items="center" justify="between")
   HList(space-x="6")
     HelperHover(tooltip-id="like")
-      LikeIcon(w="4.5" cursor="pointer")
+      LikeIcon(w="4.5" cursor="pointer" fill="gray-200 hover:white")
 
     HelperHover(tooltip-id="transfer")
-      TransferIcon(w="4.5" cursor="pointer" @click="$emit('transfer')")
+      TransferIcon(w="4.5" cursor="pointer" fill="gray-200 hover:white" @click="$emit('transfer')")
 
     HelperHover(tooltip-id="link")
-      LinkIcon(w="5" cursor="pointer" @click="copyCurrentUrlToClipboard")
+      LinkIcon(w="5" cursor="pointer" fill="gray-200 hover:white" @click="copyCurrentUrlToClipboard")
 
   HelperHover(tooltip-id="chain")
     HList()
-      PolygonIcon(w="4.5" cursor="pointer")
+      PolygonIcon(w="4.5" cursor="pointer" fill="gray-200 hover:white")
 
 </template>
 

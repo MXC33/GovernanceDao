@@ -14,7 +14,8 @@ VList(pos="sticky top-0" z="99" w="full" @mouseenter="isSelected = true" @mousel
     HList(font="bold" space-x="6" px="6")
       HeaderLink(to="/" display="lt-md:none") help
       HeaderLink(to="/" display="lt-md:none")
-        HelperLanguage(language="EN")
+        template(#default)
+          HelperLanguage(language="EN")
 
     VList(items="center" pos="relative" ref="menuElement")
       HeaderLink(h="10" b="1 $mc-orange" color="$mc-orange" bg="" px="8" display="lt-md:none" to="/connect" items="center" v-if="walletState !== 'connected'") CONNECT WALLET
