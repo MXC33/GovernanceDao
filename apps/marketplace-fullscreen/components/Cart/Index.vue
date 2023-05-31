@@ -9,8 +9,9 @@ Transition(name="slide-right")
 
       div(b="b-0.5 gray-600" mx="-6")
 
-      HList()
+      HList(items="center" justify="between")
         h4(font="bold" text="md") {{ cartItems.length }} items
+        button(font="bold" text="md" @click="onClearCart") Clear all
 
     VList(flex-grow="1" space-y="3")
       template(v-for="(item, index) in cartItems" :key="getTokenKey(item.token)")
@@ -26,8 +27,11 @@ Transition(name="slide-right")
 <script lang="ts" setup>
 const cartElement = ref()
 const { getTokenKey } = useTokens()
-const { viewingCart, cartItems } = useCart()
+const { viewingCart, cartItems, clearCart } = useCart()
 
 
+const onClearCart = () => {
+  clearCart()
+}
 </script>
   
