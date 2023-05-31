@@ -4,7 +4,7 @@ VList()
 
   div(mt="3" color="white")
     div(v-if="loginStatus == 'logged-out'") {{$t(`wallet.playerProfile.notLoggedIn`)}}
-    HelperLoaderSpinnerSmall(text="sm" v-else-if="loginStatus == 'connecting'")
+    //- HelperLoaderSpinnerSmall(text="sm" v-else-if="loginStatus == 'connecting'")
       div {{$t(`wallet.playerProfile.playerConnecting`)}}...
     div(v-else-if="loginStatus == 'logged-in'" space-x="2") 
       span {{$t(`wallet.playerProfile.loggedInAs`)}}
