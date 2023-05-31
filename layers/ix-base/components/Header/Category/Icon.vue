@@ -1,5 +1,5 @@
 <template lang="pug">
-Icon(color="white")
+Icon()
 </template>
 
 <script lang="ts" setup>
