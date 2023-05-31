@@ -1,7 +1,7 @@
 <template lang="pug">
-VList(justify="center" items="center" aspect="2/3" bg="black opacity-40" ref="mediaElement" cursor="pointer" @click="onClickItem" group)
+VList(justify="center" items="center" aspect="2/3" bg="black opacity-40" ref="mediaElement" cursor="pointer"  group)
   VList(aspect="square" w="full" pos="relative" overflow="hidden")
-    slot(name="media")
+    slot(name="media" @click="onClickItem")
       TokenLazyVideo(:token="token" :key="token.collection + token.token_id" :is-hovered="isHovered")
 
 
@@ -12,7 +12,7 @@ VList(justify="center" items="center" aspect="2/3" bg="black opacity-40" ref="me
 
       div(flex-grow="1")
 
-      CollectionGridButtonSelect(pointer-events="auto")
+      CollectionGridButtonSelect(pointer-events="auto" @click="onSelectedItem")
 
   VList(w="full" flex-grow="1" items="start" bg="gray-900" :invalid="isInvalid" p="6" pos="relative")
     header(font="bold" w="full")
@@ -42,6 +42,8 @@ const mediaElement = ref()
 const route = useRoute()
 const isHovered = useElementHover(mediaElement)
 const { addToCart } = useCart()
+const { selectItem } = useSelection()
+
 
 const { displayPopup } = usePopups()
 
@@ -53,6 +55,10 @@ const props = defineProps<{
   isActive?: boolean,
   context?: CollectionContext
 }>()
+
+const onSelectedItem = () => {
+  selectItem(props.token)
+}
 
 const onClickCart = () => {
   addToCart(props.token)
