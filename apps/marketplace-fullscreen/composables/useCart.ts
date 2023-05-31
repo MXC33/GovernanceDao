@@ -19,7 +19,8 @@ import {ethers} from "ethers";
 
 export interface CartItem extends AdjustableNumber {
   token: IXToken,
-  sale?: Sale
+  sale?: Sale,
+  failed?: boolean
 }
 
 export const useCart = () => {
@@ -56,19 +57,8 @@ export const useCart = () => {
     //Todo Start loading overlay
     console.log('start Loading overlay')
     const { allowanceCheck } = getIXTokenContract()
-    const { fulfillAvailableAdvancedOrders } = getSeaportContract()
+    const { fulfillAvailableAdvancedOrders } = getSeaportContract(cartItems.value)
     await allowanceCheck(totalPrice)
-
-    const pixMerkleParam = {
-      merklePixInfo: {
-        to: "0x0000000000000000000000000000000000000000",
-        pixId: 0,
-        category: 0,
-        size: 0,
-      },
-      merkleRoot: "0x0000000000000000000000000000000000000000000000000000000000000000",
-      merkleProof: ["0x0000000000000000000000000000000000000000000000000000000000000000"],
-    }
 
     let BuyOrderComponents: AdvancedOrder[] = []
     let offers = []
@@ -87,10 +77,9 @@ export const useCart = () => {
 
         delete message.body.counter
         message.body.totalOriginalConsiderationItems = message.body.consideration.length
-        console.log('message.signature', message.signature)
         BuyOrderComponents.push({
           parameters: message.body,
-          numerator: item.sale.quantity,
+          numerator: item.value,
           denominator: message.body.offer[0].endAmount,
           signature: message.signature,
           extraData: "0x"
@@ -124,7 +113,7 @@ export const useCart = () => {
       return await fulfillAvailableAdvancedOrders(BuyOrderComponents, [], offers, considerations.map(item => item.value), conduitKey.polygon, "0x0000000000000000000000000000000000000000", BuyOrderComponents.length)
     }
     catch (err: any) {
-      console.log("fulfillAvailableAdvancedOrders error");
+      console.log("fulfillAvailableAdvancedOrders error", err);
       return false
     }
   }

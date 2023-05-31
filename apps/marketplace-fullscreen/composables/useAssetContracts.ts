@@ -17,7 +17,7 @@ import {
   assetsAddress,
   avatarNFTAddress,
   badgeNFTAddress,
-  IXTAddress, conduitAdress, seaportAdress
+  IXTAddress, conduitAdress, seaportAdress, conduitKey
 } from '@ix/base/composables/Contract/WalletAddresses'
 import ERC1155ABI from '@ix/base/composables/Contract/Abis/ERC1155.json'
 import ERC721ABI from '@ix/base/composables/Contract/Abis/ERC1155.json'
@@ -35,6 +35,9 @@ import { ContractContext as SeaportContract } from '@ix/base/composables/Contrac
 
 
 import { ZERO_ADDRESS } from './useTransferNFT'
+import {CartItem} from "~/composables/useCart";
+import {fetchIXAPI} from "~/composables/api/api";
+import {CollectionData} from "~/composables/useCollection";
 
 
 export const ERC1155Addresses = [assetsAddress.polygon?.toLowerCase(), avatarNFTAddress.polygon?.toLowerCase(), landmarkAddress.polygon?.toLowerCase()]
@@ -248,10 +251,11 @@ export interface ConsiderationItem {
 
 }
 
-export const getSeaportContract = <T extends ContractInterface<T> & SeaportContract>() => {
+export const getSeaportContract = <T extends ContractInterface<T> & SeaportContract>(items?: CartItem[]) => {
 
   const spenderAddress = conduitAdress.polygon as string
-  const { walletAdress } = useWallet()
+  const { walletAdress, getCollectionType } = useWallet()
+
 
   const { withContract, createTransaction, ...contractSpec } = defineContract<T>('Seaport-contract', {
     contractAddress: seaportAdress.polygon as string,
@@ -266,21 +270,69 @@ export const getSeaportContract = <T extends ContractInterface<T> & SeaportContr
 
   const fulfillAvailableAdvancedOrders = (advancedOrders: AdvancedOrder[], criteriaResolvers: [], offerFulfillments: [], considerationFulfillments: [], fulfillerConduitKey: string, recipient: string, maximumFulfilled: number) =>
     createTransaction((contract) => {
-      console.log('advancedOrders', advancedOrders)
-      console.log('criteriaResolvers', criteriaResolvers)
-      console.log('offerFulfillments', offerFulfillments)
-      console.log('considerationFulfillments', considerationFulfillments)
-      console.log('fulfillerConduitKey', fulfillerConduitKey)
-      console.log('recipient', recipient)
-      console.log('maximumFulfilled', maximumFulfilled)
       const address = walletAdress.value
       if (!address)
         return undefined
 
       return contract.fulfillAvailableAdvancedOrders(advancedOrders, criteriaResolvers, offerFulfillments, considerationFulfillments, fulfillerConduitKey, recipient, maximumFulfilled)
-    }, { failMessage : "Checkout failed"})
+    }, { failMessage : "Checkout failed", onFail: async (error) => {
+        if(items && items?.length > 0){
+          for (const item of items) {
+            if(item.sale){
+              let message: any = {}
+              try {
+                message = JSON.parse(item.sale.message)
+              } catch (e) {}
 
+              if (!message.body || !message.body.consideration) {
+                continue
+              }
 
+              delete message.body.counter
+              message.body.totalOriginalConsiderationItems = message.body.consideration.length
+              const buyOrderComponents: AdvancedOrder = {
+                parameters: message.body,
+                numerator: item.value,
+                denominator: message.body.offer[0].endAmount,
+                signature: message.signature,
+                extraData: "0x"
+              }
+              try {
+                await fulfillAdvancedOrderGasEstimate(buyOrderComponents)
+                item.failed = false
+              }
+              catch (e) {
+                item.failed = true
+                await fetchIXAPI('web3/sale/transfer/update/listing/job', 'POST',  {
+                  size: getCollectionType(message.body.offer[0].token),
+                  player_id: item.sale.player_id,
+                  network: 'polygon',
+                  collection: message.body.offer[0].token,
+                  token_id: message.body.offer[0].identifierOrCriteria,
+                })
+              }
+            }
+          }
+      }
+      }})
+
+  const fulfillAdvancedOrderGasEstimate = async (buyOrderComponents: AdvancedOrder) =>
+    withContract((contract) => {
+      const address = walletAdress.value
+      if (!address)
+        return undefined
+      const pixMerkleParam = {
+        merklePixInfo: {
+          to: "0x0000000000000000000000000000000000000000",
+          pixId: 0,
+          category: 0,
+          size: 0,
+        },
+        merkleRoot: "0x0000000000000000000000000000000000000000000000000000000000000000",
+        merkleProof: ["0x0000000000000000000000000000000000000000000000000000000000000000"],
+      }
+      return contract.estimateGas.fulfillAdvancedOrder(buyOrderComponents, [], conduitKey.polygon, ZERO_ADDRESS, pixMerkleParam)
+    })
 
   return {
     ...contractSpec,
