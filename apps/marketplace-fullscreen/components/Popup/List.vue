@@ -7,7 +7,9 @@ div#popups(v-if="popup")
 
   Transfer(v-else-if="popup.type == 'transfer-item'" :token="popup.item")
 
-  Listing(v-else-if="popup.type == 'list-item'" :items="[popup.item]")
+  Listing(v-else-if="popup.type == 'list-item'" :items="popup.items")
+
+  Bidding(v-else-if="popup.type == 'bid-item'" :items="popup.items")
 
 </template>
 

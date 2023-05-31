@@ -7,6 +7,7 @@ VList()
         HList(items="end" space-x="3" )
           span(color="white" font="bold" text="4xl") {{totalPrice}} IXT
           span(color="gray-200" font="bold" text="lg") ${{ ixtToUSD(totalPrice) }}
+
       template(v-else)
         span(color="gray-200") Max Price
         HList(items="end" space-x="3" )
@@ -38,8 +39,9 @@ VList()
         template(#suffix) IXT
 
   div(grid="~ cols-2" text="base")
-    button(btn="~ secondary" font="bold") Make offer
-    button(btn="~ primary" font="bold" @click="buy") Buy {{shares.value}} item
+    ButtonInteractive(btn="~ secondary" font="bold" @click="onClickOffer" text="Make offer")
+
+    ButtonInteractive(btn="~ primary" font="bold" @click="buy" :text="`Buy ${shares.value} item`")
 
 </template>
 
@@ -48,10 +50,20 @@ import type { SingleItemData } from '@ix/base/composables/Token/useIXToken';
 import { useBuyContract, useBuyItems } from "~/composables/useBuy";
 
 const { ixtToUSD } = useIXTPrice()
+const { displayPopup } = usePopups()
 const props = defineProps<{
   ownerValue?: string | number,
   item: SingleItemData
 }>()
+
+
+const onClickOffer = () => {
+  displayPopup({
+    type: 'bid-item',
+    items: [props.item]
+  })
+}
+
 const {
   isSubstituteListing,
   shares,
