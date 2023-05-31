@@ -8,11 +8,11 @@ VList(aspect="square" w="full" pos="relative" overflow="hidden")
     slot(name="icon-left")
       PolygonIcon(w="10" pos="absolute left-0 top-0")
 
-  HList(pos="absolute" inset="0" p="3" pointer-events="none" opacity="0 group-hover:100" transition="all")
+  //- HList(pos="absolute" inset="0" p="3" pointer-events="none" opacity="0 group-hover:100" transition="all")
 
-    div(flex-grow="1")
+  //-   div(flex-grow="1")
 
-    CollectionGridButtonSelect(pointer-events="auto" @click="onSelectedItem")
+  //-   //- CollectionGridButtonSelect(pointer-events="auto" @click="onSelectedItem")
 
 </template>
 
