@@ -48,6 +48,7 @@
     "tier": "Tier",
     "level": "Level",
     "required": "Required",
+    "quantity": "Quantity",
     "qty": "Quantity",
     "qty-colon": "Quantity:",
     "stand-by": "Stand By",
@@ -185,9 +186,16 @@
     },
     "list": {
       "title": "List Item",
-      "quantity": "Quantity",
       "own": "You own",
-      "walletAdress": "Wallet Adress",
+      "placeholderText": "Put Adress Here",
+      "warningText": "Make sure the adress is correct!<br/>There is no way to reverse this transaction",
+      "verifyText": "I Verify that I am aware that the transaction is not<br/>reversible, and that the wallet address is correct.",
+      "confirm": "Confrim Adress",
+      "transferItem": "Transfer Item"
+    },
+    "bid": {
+      "title": "List Item",
+      "own": "You own",
       "placeholderText": "Put Adress Here",
       "warningText": "Make sure the adress is correct!<br/>There is no way to reverse this transaction",
       "verifyText": "I Verify that I am aware that the transaction is not<br/>reversible, and that the wallet address is correct.",

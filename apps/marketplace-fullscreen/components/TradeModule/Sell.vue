@@ -29,7 +29,7 @@ const { displayPopup } = usePopups()
 const onClickSell = () => {
   displayPopup({
     type: 'list-item',
-    item
+    items: [item]
   })
 }
 
@@ -37,5 +37,4 @@ const { item } = defineProps<{
   item: IXToken
 }>()
 
-const maxPrice = ref(false)
 </script>

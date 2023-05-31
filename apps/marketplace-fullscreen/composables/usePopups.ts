@@ -23,10 +23,15 @@ export interface PopupTransfer extends PopupBase {
 
 export interface PopupListItem extends PopupBase {
   type: 'list-item',
-  item: IXToken
+  items: IXToken[]
 }
 
-type Popup = PopupOnList | PopupOnBid | PopupTransfer | PopupListItem
+export interface PopupBidItem extends PopupBase {
+  type: 'bid-item',
+  items: IXToken[]
+}
+
+type Popup = PopupOnList | PopupOnBid | PopupTransfer | PopupListItem | PopupBidItem
 
 export const usePopups = () => {
   const popup = useState<Popup | null>('active-popup', () => null)

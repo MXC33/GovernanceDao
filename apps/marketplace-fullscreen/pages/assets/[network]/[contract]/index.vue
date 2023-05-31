@@ -1,6 +1,7 @@
 <template lang="pug">
 Collection(:data="data" v-if="data" )
-button(@click="loadNextPage") LoadMore
+  template(#bottom)
+    button(@click="loadNextPage") LoadMore
 </template>
 
 

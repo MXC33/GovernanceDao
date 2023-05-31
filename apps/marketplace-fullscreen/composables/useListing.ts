@@ -7,12 +7,11 @@ import {
   conduitKey,
   feeTreasuryAdress,
   IXTAddress,
-  seaportAdress
 } from "@ix/base/composables/Contract/WalletAddresses";
 
 import { makeRandomNumberKey } from "@ix/base/composables/Utils/useHelpers";
 import { ListingAssets, ListingsBody, useListEndpoints } from "~/composables/api/post/useListAPI";
-import { AdjustableNumber } from "~/../../layers/ix-base/composables/Utils/useAdjustableNumber";
+import { TransactionItem } from "./useTransactions";
 
 export type DurationValue = 0 | 1 | 2 | 3
 
@@ -21,32 +20,8 @@ export interface Duration {
   name: string
 }
 
-export interface ListingItem {
-  token: IXToken,
-  shares: AdjustableNumber,
-  durationInDays: number,
-  ixtPrice: number
-}
-
-export const useListingDuration = () => {
-  const { t } = useI18n()
-
-  const formattedDays = (days: number) => {
-    const daysAsMonths = Math.floor(days / 30)
-    const daysAsWeek = Math.floor(days / 7)
-
-    if (days >= 30)
-      return `${daysAsMonths} ${t('general.month', daysAsMonths)}`
-
-    if (days >= 7)
-      return `${daysAsWeek} ${t('general.week', daysAsWeek)}`
-
-    return `${days} ${t('general.day', days)}`
-  }
-
-  return {
-    formattedDays
-  }
+export interface ListingItem extends TransactionItem {
+  type: 'list'
 }
 
 export const useListingItems = () => {
@@ -54,8 +29,9 @@ export const useListingItems = () => {
 
   const durationDayOptions = [1, 7, 14]
 
-  const createListItems = (items: IXToken[], shares: number) => {
+  const createListItems = (items: IXToken[]) => {
     listItems.value = items.map((token) => ({
+      type: 'list',
       token,
       shares: {
         min: 1,
@@ -67,14 +43,8 @@ export const useListingItems = () => {
     }))
   }
 
-  const getTotalIXTPrice = (items: ListingItem[]) =>
-    items.reduce((prev, item) =>
-      prev + (Number(item.ixtPrice) * item.shares.value)
-      , 0)
-
   return {
     createListItems,
-    getTotalIXTPrice,
     listItems
   }
 }

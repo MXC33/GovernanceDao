@@ -12,26 +12,31 @@ VList(flex-grow="1" min-h="0" pos="relative" p="8" space-y="6")
   //- HelperBorderScroll(pos="sticky top-33")
   CollectionFilter(:items="data.nfts" :filters="data.filters" :hide-toggle="hideGrid" v-if="data"  @toggle-filter="toggleFilterDrawer")
 
-  HList(space-x="0 on-open:3" pos="relative" :open="showFilters")
-    VList(pos="sticky top-48")
-      Transition(name="slide-left")
-        CollectionFilterSlideout(:items="data.filters" v-if="showFilters && data")
+  VList.page-transition()
+    HList(space-x="0 on-open:3" pos="relative" :open="showFilters")
+      VList(pos="sticky top-48")
+        Transition(name="slide-left")
+          CollectionFilterSlideout(:items="data.filters" v-if="showFilters && data")
 
-    Transition(name="fade" mode="out-in" v-if="data")
+      Transition(name="fade" mode="out-in" v-if="data")
 
-      CollectionGrid(v-if="displayType == 'grid' && !hideGrid" w="full" :is-open="showFilters")
-        CollectionGridItem.collection-grid-item(:token="token" v-for="token in data.nfts" b="gray-400" :context="context")
-          template(#icon-left)
-            HList(items="center" h="10" color="white" font="bold" bg="gray-600" px="5" cut="bottom-right md" v-if="is1155(token.collection)") x{{formatMyShareAmount(token.my_shares)}}
-            div(p="4" pos="absolute" v-else)
-              PolygonIcon(w="10" pos="absolute" inset="0")
+        CollectionGrid(v-if="displayType == 'grid' && !hideGrid" w="full" :is-open="showFilters")
+          CollectionGridItem.collection-grid-item(:token="token" v-for="token in data.nfts" b="gray-400" :context="context")
+            template(#icon-left)
+              HList(items="center" h="10" color="white" font="bold" bg="gray-600" px="5" cut="bottom-right md" v-if="is1155(token.collection)") x{{formatMyShareAmount(token.my_shares)}}
+              div(p="4" pos="absolute" v-else)
+                PolygonIcon(w="10" pos="absolute" inset="0")
 
-      Table(:columns="renderColumns" :rows="rows" v-else id="collection")
-        template(#item-name="{row}")
-          HList(items="center" space-x="2" font="bold")
-            div(w="12" h="12")
-              TokenImage(:token="row" w="12" h="12" :key="getTokenKey(row)")
-            TokenName(:token="row" capitalize="~" :key="getTokenKey(row)")
+        Table(:columns="renderColumns" :rows="rows" v-else id="collection")
+          template(#item-name="{row}")
+            HList(items="center" space-x="2" font="bold")
+              div(w="12" h="12")
+                TokenImage(:token="row" w="12" h="12" :key="getTokenKey(row)")
+              TokenName(:token="row" capitalize="~" :key="getTokenKey(row)")
+
+
+
+    slot(name="bottom")
 
   Transition(name="slide-bottom")
     CollectionSelectBar(v-if="cartItems.length > 0")
@@ -47,7 +52,7 @@ import PolygonIcon from '~/assets/icons/polygon_filled.svg'
 const { displayType, activeFilters } = useCollectionSettings()
 const { getTokenKey } = useTokens()
 const { cartItems } = useCart()
-const { ixtAsUSD, ixtPrice } = useIXTPrice()
+const { ixtToUSD, ixtPrice } = useIXTPrice()
 
 const { getCollectionAttributes } = useDefaulAttributes()
 const attributes = computed(() => data ? getCollectionAttributes(data) : [])
@@ -91,11 +96,11 @@ const rows = ref<IXToken[]>([])
 
 const usdPriceOrigin = (data: IXToken) => {
   if (context == 'outgoing-bids' || context == 'incoming-bids')
-    return ixtAsUSD(data.bid.price).value
+    return ixtToUSD(data.bid.price).value
   else if (context == 'active-listings')
-    return ixtAsUSD(data.sales[0].price).value
+    return ixtToUSD(data.sales[0].price).value
   else
-    return ixtAsUSD(data.sale_price).value
+    return ixtToUSD(data.sale_price).value
 }
 
 watch([data, ixtPrice], () => {
