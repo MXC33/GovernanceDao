@@ -12,6 +12,7 @@ export default defineConfig({
       ...baseLayer.theme.colors,
       ix: {
         primary: '#C3000F',
+        white: '#F9F9F9'
       },
       corp: {
         ne: '#FF0014'

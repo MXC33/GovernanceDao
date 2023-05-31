@@ -1,6 +1,7 @@
 <template lang="pug">
 ButtonSound(sound="md")
-  NuxtLink(:to="to" font="bdr" color="on-route:mc-orange white hover:opacity-80" uppercase="~" tracking="0.75" pos="relative" @mouseenter="isSelected = true" @mouseleave="isSelected = false" :route="isRouteActive") 
+  //-:route="isRouteActive"
+  NuxtLink(:to="to" font="bdr" color="on-route:mc-orange white hover:opacity-80" uppercase="~" tracking="0.75" pos="relative" @mouseenter="isSelected = true" @mouseleave="isSelected = false" ) 
     transition(name="fade-scale")
       //- IconSelectionCorner(pos="absolute" inset="0" :is-orange="true" v-if="isSelected")
 
@@ -11,7 +12,7 @@ ButtonSound(sound="md")
 
 
 <script lang="ts" setup>
-const props = defineProps<{ to: string }>()
+const props = defineProps<{ to?: string }>()
 
 const isSelected = ref(false)
 const route = useRoute()

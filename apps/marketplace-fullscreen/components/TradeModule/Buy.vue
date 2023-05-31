@@ -27,7 +27,7 @@ VList()
 
 
     VList(justify="end" space-y="3")
-      Adjustable(v-model="shares" h="full")
+      Adjustable(v-model="shares" h="full" :is-neutral="true")
       span(color="yellow-200" v-if="showIncreaseMaxPrice" ) Try increasing your max price to buy more items
 
   HList(px="6" py="3.5" b="t-1 b-1 gray-600" space-x="3" items="center" justify="between")

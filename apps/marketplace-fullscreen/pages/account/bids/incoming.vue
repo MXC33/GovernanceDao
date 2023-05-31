@@ -24,34 +24,34 @@ await fetchCollection()
 setupCollectionListeners()
 
 const columns: TableColumn<IXToken>[] = [
-  { label: "Asset", value: "name" },
+  { label: "Asset", columnId: "name" },
   {
-    label: "Price", value: "bid", getValue(row) {
+    label: "Price", columnId: "bid.price", getValue(row) {
       return row.bid.price
     }, type: 'ixt', sortable: true
   },
-  { label: "USD price", value: "usd", type: 'usd', sortable: true },
+  { label: "USD price", columnId: "usd", type: 'usd', sortable: true },
   {
-    label: "Floor Difference", value: "bid", getValue(row) {
+    label: "Floor Difference", columnId: "floor", getValue(row) {
       if (row.lowest_sale?.price)
         return (row.higher_bid_price - row.lowest_sale.price).toString().substring(0, 5)
       return row.higher_bid_price.toString()
     }, type: 'text'
   },
   {
-    label: "Quantity", value: "bid", getValue(row) {
+    label: "Quantity", columnId: "bid.quantity", getValue(row) {
       return row.bid.quantity.toString()
     }, type: 'text'
   },
   {
-    label: "From", value: "bidder_username", getValue(row) {
+    label: "From", columnId: "bid.bidder_username", getValue(row) {
       return row.bid.bidder_username
     }, type: 'text'
   },
   {
-    label: "Expires", value: "bid", getValue(row) {
-      return fromUnixTime(row.bid.due_date).toDateString()
-    }, type: 'text', sortable: true
+    label: "Expires", columnId: "bid.due_date", getValue(row) {
+      return row.bid.due_date
+    }, type: 'date', sortable: true
   },
   {
     type: 'buttons', buttons: [{

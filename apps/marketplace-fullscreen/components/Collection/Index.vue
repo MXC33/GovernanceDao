@@ -2,7 +2,8 @@
 VList(flex-grow="1" min-h="0" pos="relative" p="8" space-y="6")
   CollectionHeader() 
     template(#header) 
-      slot(name="name") {{ data?.name }}
+      slot(name="name" v-if="data?.name != 'PlanetIX Assets'") {{ data?.name }}
+      slot(name="name" v-else) PlanetIX - Assets
 
     template(#attributes)
       AttributeList(:attributes="attributes" v-if="data")
@@ -39,7 +40,7 @@ VList(flex-grow="1" min-h="0" pos="relative" p="8" space-y="6")
     slot(name="bottom")
 
   Transition(name="slide-bottom")
-    CollectionSelectBar(v-if="cartItems.length > 0")
+    CollectionSelectBar(v-if="selectedItems.length > 0" :context="context")
 </template>
 
 <script lang="ts" setup>
@@ -51,17 +52,17 @@ import PolygonIcon from '~/assets/icons/polygon_filled.svg'
 
 const { displayType, activeFilters } = useCollectionSettings()
 const { getTokenKey } = useTokens()
-const { cartItems } = useCart()
 const { ixtToUSD, ixtPrice } = useIXTPrice()
+const { selectedItems } = useSelection()
 
 const { getCollectionAttributes } = useDefaulAttributes()
 const attributes = computed(() => data ? getCollectionAttributes(data) : [])
 
 const defaultColumns: TableColumn<IXToken>[] = [
-  { label: "Asset", value: "name" },
-  { label: "Current price", value: "sale_price", type: 'ixt', sortable: true },
-  { label: "USD price", value: "usd", type: 'usd', sortable: true },
-  { label: "Best offer", value: "higher_bid_price", type: 'ixt', sortable: true },
+  { label: "Asset", columnId: "name" },
+  { label: "Current price", columnId: "sale_price", type: 'ixt', sortable: true },
+  { label: "USD price", columnId: "usd", type: 'usd', sortable: true },
+  { label: "Best offer", columnId: "higher_bid_price", type: 'ixt', sortable: true },
 ]
 
 const is1155 = (contractAddress: string) => ERC1155Addresses.includes(contractAddress)
