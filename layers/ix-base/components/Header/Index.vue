@@ -17,14 +17,15 @@ VList(pos="sticky top-0" z="99" w="full" @mouseenter="isSelected = true" @mousel
         HelperLanguage(language="EN")
 
     VList(items="center" pos="relative" ref="menuElement")
-      HList(h="10" b="1 $mc-mint" color="$mc-mint" font="bold" bg="$mc-mint-20" px="8" display="lt-md:none" @click="toggleMenu" items="center" ) 2,234,128 IXT
+      HeaderLink(h="10" b="1 $mc-orange" color="$mc-orange" bg="" px="8" display="lt-md:none" to="/connect" items="center" v-if="walletState == 'disconnected'") CONNECT WALLET
+      HList(h="10" b="1 $mc-mint" color="$mc-mint" font="bold" bg="$mc-mint-20" px="8" display="lt-md:none" @click="toggleMenu" items="center" v-else-if="walletState == 'connected'") 2,234,128 IXT
       VList(v-if="menuOpen" pos="absolute top-full left-0 right-0" b="1 gray-400" items="left") 
         //- div(v-for="subHeader in settingArr" h="10" p="3" bg="black" px="8" text="sm:3" font="bold" b="b-1 gray-600") {{ subHeader }}  
         div(h="10" p="3" bg="black" font="bold" px="4" b="b-1 gray-600" @click="toggleMenuButton" color="hover:$mc-orange") Add funds
         div(h="10" p="3" bg="black" font="bold" px="4" b="b-1 gray-600" @click="toggleMenuButton" color="hover:$mc-orange") 0x000 
           Copy(w="6" pos="absolute right-0")
         div(h="10" p="3" bg="black" font="bold" px="4" b="b-1 gray-600" @click="toggleMenuButton" color="hover:$mc-orange") Account Settings
-        div(h="10" p="3" bg="black" font="bold" px="4" b="b-1 gray-600" @click="toggleMenuButton" color="hover:$mc-orange") Log out
+        HeaderLink(h="10" p="3" bg="black" font="bold" px="4" b="b-1 gray-600" to="/connect" color="hover:$mc-orange" @click="toggleMenu") Log out
 
   Transition(name="slide-top" mode="out-in")
     HeaderItem(v-if="activeMenuIndex != null" :key="activeMenuIndex" @onClickItem="onClicked" :header="siteTopHeaders[activeMenuIndex]")
@@ -51,10 +52,13 @@ const OpenMeny = (index: number) => {
   activeMenuIndex.value = index
 }
 
+const { walletAdress, walletState } = useWallet()
 const { user } = useUser()
 const menuOpen = ref(false)
 const menuButton1 = ref(false)
+const loggedIn = ref(false)
 const isSelected = ref(false)
+const walletAd = ref(walletAdress.value)
 const menuElement = ref()
 const { isSoundEnabled } = useSoundSettings()
 
@@ -93,6 +97,9 @@ const toggleMenu = () => {
 const toggleMenuButton = () => {
   menuButton1.value = !menuButton1.value
   console.log("Clicked?" + menuButton1.value)
+  console.log('wallet is connecting?')
+  console.log(walletAdress.value)
+  console.log(walletState.value)
 }
 
 onClickOutside(menuElement, () => {
