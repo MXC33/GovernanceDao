@@ -1,10 +1,8 @@
 <template lang="pug">
-VList(flex-grow="1" min-h="0" pos="relative" p="8" space-y="6")
+VList(flex-grow="1" min-h="0" pos="relative" p="8 b-30" space-y="6")
   CollectionHeader() 
     template(#header) 
-      slot(name="name" v-if="data?.name == null") My Assets
-      slot(name="name" v-else-if="data?.name == 'PlanetIX Assets'") PlanetIX - Assets
-      slot(name="name" v-else) {{ data?.name }}
+      slot(name="name") {{ collectionName }}
 
     template(#cert v-if="data?.name != null")
       CertifiedIcon(w="6")
@@ -39,7 +37,7 @@ const { getCollectionAttributes } = useDefaulAttributes()
 const attributes = computed(() => data ? getCollectionAttributes(data) : [])
 
 const defaultColumns: TableColumn<IXToken>[] = [
-  { label: "Asset", type: 'asset' },
+  { label: "Asset", rowKey: "name", type: 'asset' },
   { label: "Current price", rowKey: "sale_price", type: 'ixt', sortable: true },
   { label: "USD price", rowKey: "sale_price", type: 'usd', sortable: true },
   { label: "Best offer", rowKey: "higher_bid_price", type: 'ixt', sortable: true },
@@ -59,6 +57,16 @@ const { data, columns, context = 'collection' } = defineProps<{
   hideGrid?: boolean,
   context?: CollectionContext
 }>()
+
+const collectionName = computed(() => {
+  if (data?.name == "PlanetIX Assets")
+    return "PlanetIX - Assets"
+
+  if (context != 'collection')
+    return "My Assets"
+
+  return data?.name
+})
 
 onBeforeUnmount(() => {
   activeFilters.value = []
