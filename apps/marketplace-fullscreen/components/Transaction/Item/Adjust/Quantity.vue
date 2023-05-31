@@ -3,7 +3,7 @@ TransactionItemAdjustRow(v-if="item")
   template(#header) Quantity
 
   template(#value)
-    Adjustable(v-model="item.shares" h="10")
+    Adjustable(v-model="item.shares" h="10"  :is-neutral="false")
     TransactionItemAdjustDetail() You own {{ item.token.my_shares }}
 
   template(#action)
