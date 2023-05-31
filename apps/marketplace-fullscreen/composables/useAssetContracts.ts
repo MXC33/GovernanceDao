@@ -245,7 +245,7 @@ export const getIXTokenContract = <T extends ContractInterface<T> & IXTokenContr
 }
 
 export interface ConsiderationItem {
-
+  recipient: string
 }
 
 export const getSeaportContract = <T extends ContractInterface<T> & SeaportContract>() => {

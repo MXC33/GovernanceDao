@@ -12,7 +12,7 @@
     "@ix/base": "*",
     "@types/node": "^18",
     "fuzzyjs": "^5.0.1",
-    "nuxt": "^3.5.1",
+    "nuxt": "^3.5.2",
     "v-lazy-show": "^0.2.3",
     "vite-plugin-pug": "^0.3.2",
     "vue-collapsed": "^1.1.3",

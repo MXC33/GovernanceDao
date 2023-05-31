@@ -1,5 +1,5 @@
 <template lang="pug">
-Collection(:data="data" :columns="columns" v-if="data" :hide-grid="true")
+Collection(:data="data" :columns="columns" :context="'outgoing-bids'" v-if="data" :hide-grid="true")
   template(#menu)
     AccountMenu()
 </template>
@@ -25,17 +25,17 @@ setupCollectionListeners()
 const columns: TableColumn<IXToken>[] = [
   { label: "Asset", value: "name" },
   {
-    label: "Offer", value: "bid", getValue(row) {
-      return row.bid.price.toString()
-    }, type: 'text', sortable: true
+    label: "Offer price", value: "bid", getValue(row) {
+      return row.bid.price
+    }, type: 'ixt', sortable: true
   },
   { label: "USD price", value: "usd", type: 'usd', sortable: true },
   {
     label: "Floor Difference", value: "bid", getValue(row) {
       if (row.lowest_sale?.price)
-        return (row.higher_bid_price - row.lowest_sale.price).toString().substring(0, 5)
+        return (row.higher_bid_price - row.bid.price).toString().substring(0, 5)
       return row.higher_bid_price.toString()
-    }, type: 'text', sortable: true
+    }, type: 'text'
   },
   {
     label: "Quantity", value: "bid", getValue(row) {
@@ -43,13 +43,13 @@ const columns: TableColumn<IXToken>[] = [
     }, type: 'text'
   },
   {
-    label: "Expiration", value: "bidder_username", getValue(row) {
-      return row.bid.bidder_username
-    }, type: 'text'
+    label: "Expiration", value: "bid", getValue(row) {
+      return fromUnixTime(row.bid.due_date).toDateString()
+    }, type: 'text', sortable: true
   },
   {
-    label: "Offer made", value: "due_date", getValue(row) {
-      return fromUnixTime(row.bid.due_date).toDateString()
+    label: "Offer made", value: "bid", getValue(row) {
+      return getStartDateFromMessage(row).toDateString()
     }, type: 'text', sortable: true
   },
   {
@@ -66,6 +66,12 @@ const columns: TableColumn<IXToken>[] = [
   },
 
 ]
+
+const getStartDateFromMessage = (row: IXToken) => {
+  const message = JSON.parse(row.bid.message)
+
+  return fromUnixTime(message.body.startTime)
+}
 
 const { removeBid, placeBid } = useBidsAPI()
 

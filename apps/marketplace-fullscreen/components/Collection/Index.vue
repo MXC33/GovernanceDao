@@ -1,5 +1,5 @@
 <template lang="pug">
-VList(flex-grow="1" min-h="0" pos="relative" p="8" space-y="6" )
+VList(flex-grow="1" min-h="0" pos="relative" p="8" space-y="6")
   CollectionHeader() 
     template(#header) 
       slot(name="name") {{ data?.name }}
@@ -9,7 +9,7 @@ VList(flex-grow="1" min-h="0" pos="relative" p="8" space-y="6" )
 
   slot(name="menu")
 
-  HelperBorderScroll(pos="sticky top-33")
+  //- HelperBorderScroll(pos="sticky top-33")
   CollectionFilter(:items="data.nfts" :filters="data.filters" :hide-toggle="hideGrid" v-if="data"  @toggle-filter="toggleFilterDrawer")
 
   HList(space-x="0 on-open:3" pos="relative" :open="showFilters")
@@ -20,7 +20,7 @@ VList(flex-grow="1" min-h="0" pos="relative" p="8" space-y="6" )
     Transition(name="fade" mode="out-in" v-if="data")
 
       CollectionGrid(v-if="displayType == 'grid' && !hideGrid" w="full" :is-open="showFilters")
-        CollectionGridItem.collection-grid-item(:token="token" v-for="token in data.nfts" b="gray-400")
+        CollectionGridItem.collection-grid-item(:token="token" v-for="token in data.nfts" b="gray-400" :context="context")
           template(#icon-left)
             HList(items="center" h="10" color="white" font="bold" bg="gray-600" px="5" cut="bottom-right md" v-if="is1155(token.collection)") x{{formatMyShareAmount(token.my_shares)}}
             div(p="4" pos="absolute" v-else)
@@ -39,7 +39,7 @@ VList(flex-grow="1" min-h="0" pos="relative" p="8" space-y="6" )
 
 <script lang="ts" setup>
 import type { IXToken } from '@ix/base/composables/Token/useIXToken';
-import type { CollectionData } from '~/composables/useCollection';
+import type { CollectionContext, CollectionData } from '~/composables/useCollection';
 import type { TableColumn } from '~/composables/useTable'
 import PolygonIcon from '~/assets/icons/polygon_filled.svg'
 
@@ -80,18 +80,22 @@ const isFilterActive = computed(() => {
     return true
 })
 
-const { data, columns, hideGrid } = defineProps<{
+const { data, columns, context = 'collection' } = defineProps<{
   data?: CollectionData,
   columns?: TableColumn<IXToken>[],
-  hideGrid?: boolean
+  hideGrid?: boolean,
+  context?: CollectionContext
 }>()
 
 const rows = ref<IXToken[]>([])
 
 const usdPriceOrigin = (data: IXToken) => {
-  if (hideGrid)
+  if (context == 'outgoing-bids' || context == 'incoming-bids')
     return ixtAsUSD(data.bid.price).value
-  return ixtAsUSD(data.sale_price).value
+  else if (context == 'active-listings')
+    return ixtAsUSD(data.sales[0].price).value
+  else
+    return ixtAsUSD(data.sale_price).value
 }
 
 watch([data, ixtPrice], () => {

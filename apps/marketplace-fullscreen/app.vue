@@ -63,8 +63,8 @@ const { x: xpos, y: ypos } = useMouse()
 
 const values = computed(() => {
 
-  const xPos = xpos.value - 40
-  const yPos = ypos.value - 180
+  const xPos = xpos.value - 38
+  const yPos = ypos.value - 190
 
   return {
     top: `${yPos}px`,

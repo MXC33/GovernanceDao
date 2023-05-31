@@ -14,13 +14,13 @@ VList()
 
   div(grid="~ cols-2" text="base")
     button(btn="~ secondary" font="bold") Accept offer
-    button(btn="~ primary" font="bold" @click="onClickSell") List Item
+    ButtonInteractive(btn="~ primary" font="bold" @click="onClickSell" text="List item")
 
 
 </template>
 
 <script lang="ts" setup>
-import type { SingleItemData } from '@ix/base/composables/Token/useIXToken';
+import type { IXToken } from '@ix/base/composables/Token/useIXToken';
 
 const { ixtToUSD } = useIXTPrice()
 
@@ -34,7 +34,7 @@ const onClickSell = () => {
 }
 
 const { item } = defineProps<{
-  item: SingleItemData
+  item: IXToken
 }>()
 
 const maxPrice = ref(false)

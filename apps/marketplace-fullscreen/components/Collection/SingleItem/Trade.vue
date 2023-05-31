@@ -10,7 +10,7 @@ VList(space-y="6")
     template(#header)
       TabItem(v-for="tab in tabs" :id="tab" v-model="activeTab") {{ tab }}
 
-  ContentDrawer(:start-open="true")
+  ContentDrawer(:start-open="true" :is-neutral="true" bg="gray-900")
     template(#titleicon)
       TitleWithIcon(icon="listing") listings
 
@@ -20,7 +20,7 @@ VList(space-y="6")
           button(@click="addSaleToCart(row)" bg="gray-500 hover:gray-400" transition="all" cut="bottom-right sm" p="x-6 y-3")
             CartIcon(w="6")
 
-  ContentDrawer(:start-open="true")
+  ContentDrawer(:start-open="true" :is-neutral="true" bg="gray-900")
     template(#titleicon)
       TitleWithIcon(icon="offer") offers
     template(#default)

@@ -1,13 +1,21 @@
 <template lang="pug">
 Popup()
-  template(#header) Success!
+  template(#icon)
+    CheckboxIcon(w="6" h="6")
+
+  template(#header) LIST SUCCESSFUL!
 
   template(#default)
-    VList(v-for="item in items")
-      CompleteItem(:item="item" )
+    VList(min-h="30")
+      TokenSlideshow(:tokens="mappedTokens")
+
+    VList()
+      HList(justify="between" v-for="item in items" font="bold" text="sm")
+        TokenName(:token="item.token")
+        div x{{ item.shares.value }}
 
   template(#footer)
-    div Quantity {{ items.length }}
+    ListingPrice(:items="items")
 
   template(#buttons)
     button(@click="closeActivePopup" btn="~ primary") Continue exploring 
@@ -16,12 +24,15 @@ Popup()
   
   
 <script lang="ts" setup>
-import type { CartItem } from '~/composables/useCart';
+import CheckboxIcon from '~/assets/icons/checkmark-green.svg'
+import type { ListingItem } from '~/composables/useListing';
 const { closeActivePopup } = usePopups()
-defineProps<{
-  items: CartItem[]
+const { items } = defineProps<{
+  items: ListingItem[]
 }>()
 
+const mappedTokens = computed(() => items.map((item) => item.token))
+console.log("Token", mappedTokens)
 defineEmits(["close"])
 </script>
   

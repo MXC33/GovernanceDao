@@ -1,5 +1,5 @@
 <template lang="pug">
-Collection(:data="data" :columns="columns" v-if="data" :hide-grid="true")
+Collection(:data="data" :columns="columns" :context="'incoming-bids'" v-if="data" :hide-grid="true")
   template(#menu)
     AccountMenu()
 </template>
@@ -27,16 +27,16 @@ const columns: TableColumn<IXToken>[] = [
   { label: "Asset", value: "name" },
   {
     label: "Price", value: "bid", getValue(row) {
-      return row.bid.price.toString()
-    }, type: 'text', sortable: true
+      return row.bid.price
+    }, type: 'ixt', sortable: true
   },
   { label: "USD price", value: "usd", type: 'usd', sortable: true },
   {
-    label: "Floor Difference", value: "bids", getValue(row) {
+    label: "Floor Difference", value: "bid", getValue(row) {
       if (row.lowest_sale?.price)
         return (row.higher_bid_price - row.lowest_sale.price).toString().substring(0, 5)
       return row.higher_bid_price.toString()
-    }, type: 'text', sortable: true
+    }, type: 'text'
   },
   {
     label: "Quantity", value: "bid", getValue(row) {
@@ -49,7 +49,7 @@ const columns: TableColumn<IXToken>[] = [
     }, type: 'text'
   },
   {
-    label: "Expires", value: "due_date", getValue(row) {
+    label: "Expires", value: "bid", getValue(row) {
       return fromUnixTime(row.bid.due_date).toDateString()
     }, type: 'text', sortable: true
   },

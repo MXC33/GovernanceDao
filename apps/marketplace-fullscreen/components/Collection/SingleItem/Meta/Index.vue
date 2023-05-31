@@ -1,16 +1,17 @@
 <template lang="pug">
 VList(space-y="6")
   VList(frame="~")
-    TokenMedia(:token="item" w="full" :is-large="true" pos="relative")
+    VList(aspect="square" w="full" min-h="0")
+      TokenMedia(:token="item" w="full" :is-large="true" pos="relative")
     HelperMediaBar(@transfer="onClickTransfer")
 
-  ContentDrawer(:start-open="true" v-if="item.description" bg="gray-900")
+  ContentDrawer(:start-open="true" v-if="item.description" :is-neutral="true" bg="gray-900")
     template(#titleicon)
       TitleWithIcon(icon="description") description
     template(#default) 
       div(p="6 t-3") {{ item.description }}
 
-  ContentDrawer(:start-open="true" bg="gray-900")
+  ContentDrawer(:start-open="true" :is-neutral="true" bg="gray-900")
     template(#titleicon)
       TitleWithIcon(icon="traits") traits
     template(#default) 
@@ -19,12 +20,12 @@ VList(space-y="6")
           template(#category) {{ trait.trait_type }}
           template(#name) {{ trait.value }}
 
-  ContentDrawer(:start-open="true")
+  ContentDrawer(:start-open="true" :is-neutral="true")
     template(#titleicon)
       TitleWithIcon(icon="details") details
 
     template(#default) 
-      CollectionSingleItemMetaDetails(:item="item")
+      CollectionSingleItemMetaDetails(:item="item" :is-neutral="true" bg="gray-900")
 
 </template>
 

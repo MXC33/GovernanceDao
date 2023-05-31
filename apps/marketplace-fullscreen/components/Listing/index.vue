@@ -22,24 +22,13 @@ Popup()
             template(#header) Floor price
             template(#button) Set to Floor
 
-      ListingItem(v-for="(item, index) in listItems" v-model="listItems[index]")
+      ListingItem(v-for="(_, index) in listItems" v-model="listItems[index]")
 
   template(#footer)
-    VList()
-      HList(w="full" justify="between")
-        div(color="gray-200") Total Price
-        p {{invalidPrice ?? roundToDecimals(totalIXTPrice, 4)}} IXT
-
-      HList(w="full" justify="between")
-        div(color="gray-200") Marketplace fee
-        p 2.5%
-
-      HList(w="full" justify="between" text="lg" font="bold")
-        p() Total potential earnings
-        p {{invalidPrice ?? roundToDecimals(totalIXTPrice * (1 - 0.025), 4)}} IXT
+    ListingPrice(:items="listItems")
 
   template(#buttons)
-    button(btn="~ primary" w="full" @click.prevent="onClickList") List Items
+    ButtonInteractive(btn="~ primary" w="full" @click.prevent="onClickList" text="List Items" :invalid="!!invalidPrice" :loading="isLoading")
 
 </template>
 
@@ -49,32 +38,40 @@ import ListingIcon from '~/assets/icons/listing.svg'
 
 defineEmits(['close'])
 
-const { createListItems, listItems, totalIXTPrice } = useListingItems()
+const { createListItems, listItems, getTotalIXTPrice } = useListingItems()
 const { listItem } = useListingContract()
 
 const invalidPrice = computed(() => {
-  if (!totalIXTPrice.value)
+  if (!getTotalIXTPrice(listItems.value))
     return '--'
 })
 
+
 // const { ixtToUSD, ixtAsUSD } = useIXTPrice()
 const { ixtBalance } = getIXTokenContract()
-
+const { displayPopup } = usePopups()
 const { data: ixt, refresh: fetchIXT } = ixtBalance()
 fetchIXT()
 
 const ixtBalanceRounded = computed(() => roundToDecimals(ixt.value ?? 0, 2))
 
-
+const isLoading = ref(false)
 const onClickList = async () => {
+  isLoading.value = true
   const list = await listItem(listItems.value[0])
+  isLoading.value = false
   console.log('List result', list)
+
+  displayPopup({
+    type: 'listing-successful',
+    items: listItems.value
+  })
 }
 
-const props = defineProps<{
+const { items } = defineProps<{
   items: SingleItemData[],
 }>()
 
-createListItems(props.items, 1)
+createListItems(items, 1)
 
 </script>

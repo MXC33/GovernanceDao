@@ -1,19 +1,18 @@
 <template lang="pug">
-ClientOnly
-  HList(w="full" px="6" py="3" bg="gray-900" items="center" justify="between")
-    HList(space-x="6")
-      HelperHover(tooltip-id="like")
-        LikeIcon(w="4.5" cursor="pointer")
+HList(w="full" px="6" py="3" bg="gray-900" items="center" justify="between")
+  HList(space-x="6")
+    HelperHover(tooltip-id="like")
+      LikeIcon(w="4.5" cursor="pointer")
 
-      HelperHover(tooltip-id="transfer")
-        TransferIcon(w="4.5" cursor="pointer" @click="$emit('transfer')")
+    HelperHover(tooltip-id="transfer")
+      TransferIcon(w="4.5" cursor="pointer" @click="$emit('transfer')")
 
-      HelperHover(tooltip-id="link")
-        LinkIcon(w="5" cursor="pointer" @click="copyCurrentUrlToClipboard")
+    HelperHover(tooltip-id="link")
+      LinkIcon(w="5" cursor="pointer" @click="copyCurrentUrlToClipboard")
 
-    HelperHover(tooltip-id="chain")
-      HList()
-        PolygonIcon(w="4.5" cursor="pointer")
+  HelperHover(tooltip-id="chain")
+    HList()
+      PolygonIcon(w="4.5" cursor="pointer")
 
 </template>
 
