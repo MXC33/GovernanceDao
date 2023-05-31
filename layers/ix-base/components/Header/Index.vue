@@ -1,5 +1,5 @@
 <template lang="pug">
-VList(pos="sticky top-0" z="99" w="full")
+VList(pos="sticky top-0" z="99" w="full" @mouseenter="isSelected = true" @mouseleave="isSelected = false")
   HList(items="center"  bg="gray-800" px="7.5" h="16")
     NuxtLink(to="https://www.planetix.com")
       PlanetIXNew(w="42.25")
@@ -16,12 +16,13 @@ VList(pos="sticky top-0" z="99" w="full")
       HeaderLink(to="/" display="lt-md:none")
         HelperLanguage(language="EN")
 
-    VList(items="center" pos="relative")
+    VList(items="center" pos="relative" ref="menuElement")
       HList(h="10" b="1 $mc-mint" color="$mc-mint" font="bold" bg="$mc-mint-20" px="8" display="lt-md:none" @click="toggleMenu" items="center" ) 2,234,128 IXT
       VList(v-if="menuOpen" pos="absolute top-full left-0 right-0" b="1 gray-400" items="left") 
         //- div(v-for="subHeader in settingArr" h="10" p="3" bg="black" px="8" text="sm:3" font="bold" b="b-1 gray-600") {{ subHeader }}  
         div(h="10" p="3" bg="black" font="bold" px="4" b="b-1 gray-600" @click="toggleMenuButton" color="hover:$mc-orange") Add funds
-        div(h="10" p="3" bg="black" font="bold" px="4" b="b-1 gray-600" @click="toggleMenuButton" color="hover:$mc-orange") 0x000
+        div(h="10" p="3" bg="black" font="bold" px="4" b="b-1 gray-600" @click="toggleMenuButton" color="hover:$mc-orange") 0x000 
+          Copy(w="6" pos="absolute right-0")
         div(h="10" p="3" bg="black" font="bold" px="4" b="b-1 gray-600" @click="toggleMenuButton" color="hover:$mc-orange") Account Settings
         div(h="10" p="3" bg="black" font="bold" px="4" b="b-1 gray-600" @click="toggleMenuButton" color="hover:$mc-orange") Log out
 
@@ -35,10 +36,8 @@ VList(pos="sticky top-0" z="99" w="full")
 <script lang="ts" setup>
 import IconSoundOn from '~/assets/images/sound/sound-on.svg'
 import IconSoundOff from '~/assets/images/sound/sound-off.svg'
-import Hamburger from '~/assets/images/header/hamburger.svg'
-import PlanetIX from '~/assets/images/header/planetix.svg'
 import PlanetIXNew from '~/assets/images/header/planetix-new.svg'
-import { buyIXTHeaderItems, type HeaderCategory } from '~/composables/useSiteHeader'
+import Copy from '~/assets/images/header/copy.svg'
 const { siteTopHeaders } = useSiteHeader()
 
 const activeMenuIndex = ref<number | null>(null)
@@ -52,14 +51,12 @@ const OpenMeny = (index: number) => {
   activeMenuIndex.value = index
 }
 
-const settingArr = ["Add funds", "0x000000000", "Account Settings", "Log Out"]
-
-const { gotoIXPage } = useIXLinks()
 const { user } = useUser()
 const menuOpen = ref(false)
 const menuButton1 = ref(false)
+const isSelected = ref(false)
+const menuElement = ref()
 const { isSoundEnabled } = useSoundSettings()
-const router = useRouter()
 
 const showIFrame = ref(false)
 
@@ -100,5 +97,12 @@ const toggleMenuButton = () => {
   menuButton1.value = !menuButton1.value
   console.log("Clicked?" + menuButton1.value)
 }
+
+onClickOutside(menuElement, () => {
+  menuOpen.value = false;
+  if (!isSelected.value) {
+    activeMenuIndex.value = null;
+  }
+})
 
 </script>
