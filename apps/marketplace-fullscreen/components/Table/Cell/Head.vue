@@ -26,7 +26,7 @@ const props = defineProps<{
 
 const emit = defineEmits<{
   toggleSort: [],
-  selectField: [item: TableSortField<T>]
+  selectField: [item: TableColumnText<T>]
 }>()
 
 const isActive = computed(() => props.sortField?.field == props.column.columnId)
@@ -42,7 +42,7 @@ const onClickSort = () => {
   if (isActive.value)
     return emit("toggleSort")
 
-  return emit("selectField", props.column.columnId)
+  return emit("selectField", props.column)
 }
 
 </script>

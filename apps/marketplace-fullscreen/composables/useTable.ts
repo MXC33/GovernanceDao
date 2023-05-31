@@ -17,7 +17,7 @@ interface TableColumnBase {
   width?: number
 }
 
-interface TableButton<T extends TableRow> {
+export interface TableButton<T extends TableRow> {
   type: 'primary' | 'secondary',
   text: string,
   onClick: (row: T) => void
@@ -37,7 +37,15 @@ export interface TableButtonColumn<T extends TableRow> extends TableColumnBase {
 
 export type TableColumn<T extends TableRow> = TableColumnText<T> | TableButtonColumn<T>
 
-export const useTable = <T extends TableRow>(rows: MaybeRef<T[]>, columns: MaybeRef<TableColumn<T>[]>, id: string) => {
+interface SortableColumn {
+  type?: string,
+  columnId: string
+}
+
+export const getSortField = (field: SortableColumn) =>
+  [field.columnId, field.type].filter(Boolean).join('-')
+
+export const useTableSort = <T extends TableRow>(id: string) => {
   const sort = useState<TableSort<T>>(`table-${id}`, () => ({
     field: 'type',
     direction: 'asc'
@@ -49,44 +57,59 @@ export const useTable = <T extends TableRow>(rows: MaybeRef<T[]>, columns: Maybe
     else return sort.value.direction = 'asc'
   }
 
-  const selectSortField = (field: TableSortField<T>) => {
+  const selectSortField = (field: TableColumnText<T>) => {
     sort.value = {
       direction: 'asc',
-      field: field
+      field: getSortField(field)
     }
   }
 
-  const getValue = (item: TableColumn<T>, row: T) => {
-    if (item.type == 'buttons')
+  return {
+    sort,
+    selectSortField,
+    toggleSortDirection
+  }
+}
+
+const getDotNotation = (obj: object, key: string) => {
+  const getKey = (item: any, key: string) => item[key]
+  return key.split('.').reduce(getKey, obj)
+}
+
+
+export const useTable = () => {
+
+  const getValue = <T extends TableRow>(column: TableColumn<T>, row: T) => {
+    if (column.type == 'buttons')
       return undefined
 
-    if (item.getValue)
-      return item.getValue(row)
+    if (column.getValue)
+      return column.getValue(row)
 
-    return row[item.columnId]
+    return getDotNotation(row, column.columnId)
   }
 
-  const columnIsSortable = (column: TableColumn<T>): column is TableColumnText<T> =>
+  const columnIsSortable = <T extends TableRow>(column: TableColumn<T>): column is TableColumnText<T> =>
     column.type != 'buttons'
 
-  const getSortableColumn = (columnId: string) =>
-    get(columns).find((col) => columnIsSortable(col) && col.columnId == columnId) as TableColumnText<T>
+  const getSortableColumn = <T extends TableRow>(columns: TableColumn<T>[], columnId: string) =>
+    get(columns).find((col) =>
+      columnIsSortable(col) && col.columnId == columnId) as TableColumnText<T>
 
-  const sortedRows = computed(() => {
-    const data = get(rows)
-    const { field, direction } = sort.value
+  const sortRows = <T extends TableRow>(columns: TableColumn<T>[], rows: T[], sort: TableSort<T>) => {
+    const { field, direction } = sort
 
     if (!field)
-      return data
+      return rows
 
-    const column = getSortableColumn(field)
+    const column = getSortableColumn(columns, field)
 
     if (!column)
-      return data
+      return rows
 
     const getField = (row: T) => getValue(column, row) ?? ''
 
-    return data.sort((a, b) => {
+    return rows.sort((a, b) => {
       const aField = getField(a)
       const bField = getField(b)
 
@@ -97,14 +120,11 @@ export const useTable = <T extends TableRow>(rows: MaybeRef<T[]>, columns: Maybe
           ? 1
           : 0;
     });
-  })
+  }
 
 
   return {
-    sort,
-    getValue,
-    toggleSortDirection,
-    selectSortField,
-    sortedRows
+    sortRows,
+    getValue
   }
 }
