@@ -17,7 +17,7 @@ VList(pos="sticky top-0" z="99" w="full" @mouseenter="isSelected = true" @mousel
         HelperLanguage(language="EN")
 
     VList(items="center" pos="relative" ref="menuElement")
-      HeaderLink(h="10" b="1 $mc-orange" color="$mc-orange" bg="" px="8" display="lt-md:none" to="/connect" items="center" v-if="walletState == 'disconnected'") CONNECT WALLET
+      HeaderLink(h="10" b="1 $mc-orange" color="$mc-orange" bg="" px="8" display="lt-md:none" to="/connect" items="center" v-if="walletState !== 'connected'") CONNECT WALLET
       HList(h="10" b="1 $mc-mint" color="$mc-mint" font="bold" bg="$mc-mint-20" px="8" display="lt-md:none" @click="toggleMenu" items="center" v-else-if="walletState == 'connected'") 2,234,128 IXT
       VList(v-if="menuOpen" pos="absolute top-full left-0 right-0" b="1 gray-400" items="left") 
         //- div(v-for="subHeader in settingArr" h="10" p="3" bg="black" px="8" text="sm:3" font="bold" b="b-1 gray-600") {{ subHeader }}  
