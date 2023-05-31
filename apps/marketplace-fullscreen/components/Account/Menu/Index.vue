@@ -6,8 +6,6 @@ VList(b="b-1 gray-400")
 </template>
     
 <script lang="ts" setup>
-const { y } = useWindowScroll()
-
 const { path } = useRoute()
 
 type Tab = 'myItems' | 'incomingBids' | 'outgoingBids' | 'activeListings'
