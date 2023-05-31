@@ -76,7 +76,7 @@ const onClicked = (type: string, category: string, item: string) => {
 
   switch (item) {
     case 'swap':
-      return showIFrame.value = true
+      return;// showIFrame.value = true
   }
 }
 
