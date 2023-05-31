@@ -2,7 +2,7 @@
 VList(justify="center" items="center" aspect="2/3" bg="black opacity-40" ref="mediaElement" cursor="pointer"  group)
   CollectionGridItemMedia(:token="token")
 
-  CollectionGridItemMeta(:token="token")
+  CollectionGridItemMeta(:token="token" :context="context")
     template(#footer)
       Transition(name="slide-bottom")
         button(btn="~ primary" pos="absolute bottom-0 left-0 right-0" v-if="isHovered" @click.stop="onClickButton") {{ buttonCopy }}
