@@ -35,7 +35,7 @@ VList(flex-grow="1" min-h="0" pos="relative" p="8" space-y="6")
             TokenName(:token="row" capitalize="~" :key="getTokenKey(row)")
 
   Transition(name="slide-bottom")
-    CollectionSelectBar(v-if="cartItems.length > 0")
+    CollectionSelectBar(v-if="selectedItems.length > 0" :context="context")
 </template>
 
 <script lang="ts" setup>
@@ -47,7 +47,7 @@ import PolygonIcon from '~/assets/icons/polygon_filled.svg'
 
 const { displayType, activeFilters } = useCollectionSettings()
 const { getTokenKey } = useTokens()
-const { cartItems } = useCart()
+const { selectedItems } = useSelection()
 const { ixtAsUSD, ixtPrice } = useIXTPrice()
 
 const { getCollectionAttributes } = useDefaulAttributes()
