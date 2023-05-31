@@ -38,7 +38,7 @@ VList()
         template(#suffix) IXT
 
   div(grid="~ cols-2" text="base")
-    button(btn="~ secondary" font="bold") Make offer
+    button(btn="~ secondary" font="bold" @click="makeOffer") Make offer
     button(btn="~ primary" font="bold" @click="buy") Buy {{shares.value}} item
 
 </template>
@@ -46,6 +46,7 @@ VList()
 <script lang="ts" setup>
 import type { SingleItemData } from '@ix/base/composables/Token/useIXToken';
 import { useBuyContract, useBuyItems } from "~/composables/useBuy";
+import {useBidContract, useBidItems} from "~/composables/useBid";
 
 const { ixtToUSD } = useIXTPrice()
 const props = defineProps<{
@@ -73,6 +74,19 @@ const buy = async () => {
     shares.value.value
   ))
 }
+
+
+/** BIDDING **/
+const { createBidItems, bidItems, getTotalIXTPrice } = useBidItems()
+const { bidItem } = useBidContract()
+createBidItems([props.item], 1)
+
+const makeOffer = async () => {
+  bidItems.value[0].ixtPrice = 0.01
+  const bid = await bidItem(bidItems.value[0])
+  console.log('makeOffer bid', bid)
+}
+/** END BIDDING **/
 
 </script>
 
