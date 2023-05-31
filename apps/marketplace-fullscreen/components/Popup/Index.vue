@@ -4,7 +4,7 @@ Transition(name="fade" appear)
 
     VList(w="full" pos="relative" @click.stop="" bg="gray-900" m="auto" z="1000" max-w="120" color="white" max-h="90%" overflow="auto")
 
-      HList(items="center" justify="between" px="6" py="3" b="b-1 gray-600" text="lg" font="bold" uppercase="~" pos="sticky top-0" bg="gray-900" z="2")
+      HList(items="center" justify="between" px="6" py="3" b="b-1 gray-600" text="lg" font="bold" uppercase="~" pos="sticky top-0" bg="gray-900" z="3")
         HList(space-x="3" items="center")
           div(w="5" v-if="$slots.icon")
             slot(name="icon")
