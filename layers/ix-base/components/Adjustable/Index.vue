@@ -4,7 +4,7 @@ HList(space-x="0.5" w="full" frame="~" items="center" justify="between")
     AdjustableButton(type="minus" @click="decreaseAmount" :is-adjustable="isDecreasable" :inline="inline")
 
   HList(justify="center" items="center" pos="relative")
-    AdjustableNumber(v-model="data")
+    AdjustableNumber(v-model="data" :is-neutral="isNeutral")
 
   HList(items="center")
     AdjustableButton(type="plus" @click="increaseAmount" :is-adjustable="isIncreasable" :inline="inline")
@@ -16,8 +16,9 @@ import type { AdjustableNumber, AdjustableToken } from '~/composables/Utils/useA
 
 const props = defineProps<{
   modelValue: AdjustableNumber | AdjustableToken,
-  inline?: boolean,
+  inline?: boolean
   hideMax?: boolean
+  isNeutral?: boolean
 }>()
 
 const emit = defineEmits(["update:modelValue"])
