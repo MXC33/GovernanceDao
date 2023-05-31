@@ -35,9 +35,9 @@ import { ContractContext as SeaportContract } from '@ix/base/composables/Contrac
 
 
 import { ZERO_ADDRESS } from './useTransferNFT'
-import {CartItem} from "~/composables/useCart";
-import {fetchIXAPI} from "~/composables/api/api";
-import {CollectionData} from "~/composables/useCollection";
+import { CartItem } from "~/composables/useCart";
+import { fetchIXAPI } from "~/composables/api/api";
+import { CollectionData } from "~/composables/useCollection";
 
 
 export const ERC1155Addresses = [assetsAddress.polygon?.toLowerCase(), avatarNFTAddress.polygon?.toLowerCase(), landmarkAddress.polygon?.toLowerCase()]
@@ -259,9 +259,6 @@ export const getSeaportContract = <T extends ContractInterface<T> & SeaportContr
 
   const { withContract, createTransaction, ...contractSpec } = defineContract<T>('Seaport-contract', {
     contractAddress: seaportAdress.polygon as string,
-    notifications: {
-      failMessage: 'Error Seaport'
-    },
     createContract(provider) {
       return new ethers.Contract(seaportAdress.polygon as string, Seaport.abi, provider.getSigner()) as unknown as T
     }
@@ -275,14 +272,15 @@ export const getSeaportContract = <T extends ContractInterface<T> & SeaportContr
         return undefined
 
       return contract.fulfillAvailableAdvancedOrders(advancedOrders, criteriaResolvers, offerFulfillments, considerationFulfillments, fulfillerConduitKey, recipient, maximumFulfilled)
-    }, { failMessage : "Checkout failed", onFail: async (error) => {
-        if(items && items?.length > 0){
+    }, {
+      failMessage: "Checkout failed", onFail: async (error) => {
+        if (items && items?.length > 0) {
           for (const item of items) {
-            if(item.sale){
+            if (item.sale) {
               let message: any = {}
               try {
                 message = JSON.parse(item.sale.message)
-              } catch (e) {}
+              } catch (e) { }
 
               if (!message.body || !message.body.consideration) {
                 continue
@@ -303,7 +301,7 @@ export const getSeaportContract = <T extends ContractInterface<T> & SeaportContr
               }
               catch (e) {
                 item.failed = true
-                await fetchIXAPI('web3/sale/transfer/update/listing/job', 'POST',  {
+                await fetchIXAPI('web3/sale/transfer/update/listing/job', 'POST', {
                   size: getCollectionType(message.body.offer[0].token),
                   player_id: item.sale.player_id,
                   network: 'polygon',
@@ -313,8 +311,9 @@ export const getSeaportContract = <T extends ContractInterface<T> & SeaportContr
               }
             }
           }
+        }
       }
-      }})
+    })
 
   const fulfillAdvancedOrderGasEstimate = async (buyOrderComponents: AdvancedOrder) =>
     withContract((contract) => {

@@ -24,7 +24,7 @@ import PolygonIcon from '~/assets/icons/polygon.svg'
 
 defineEmits(["transfer"])
 
-const { displayNotification } = useNotifications()
+const { displayNotification } = useSnackNotifications()
 
 const copyCurrentUrlToClipboard = async () => {
   const currentUrl = window.location.href;

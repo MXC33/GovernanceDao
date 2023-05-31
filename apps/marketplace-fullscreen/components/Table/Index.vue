@@ -37,15 +37,8 @@ const { sortRows } = useTable()
 const sortedRows = computed(() => sortRows(columns, rows, sort.value))
 
 const getColumnStyle = (item: TableColumn<Row>) => {
-  if (item.type == 'text' && item.rowKey == 'name')
-    return {
-      'width': '25%'
-    }
-
   if (!item.width)
-    return {
-      'width': '10%'
-    }
+    return {}
 
   return {
     'width': `${item.width}px`,

@@ -1,11 +1,11 @@
 
 
-export type NotificationType = 'copy-link' | 'add-to-cart' | 'remove-from-cart' | 'add-favorite' | 'remove-favorite' | 'transfer' | 'purchase-confirmed' | 'insufficient-funds' | 'transaction-error' | 'success'
+export type SnackNotificationType = 'copy-link' | 'add-to-cart' | 'remove-from-cart' | 'add-favorite' | 'remove-favorite' | 'transfer' | 'purchase-confirmed' | 'insufficient-funds' | 'transaction-error' | 'success'
 
-export const useNotifications = () => {
-  const activeNotification = useState<NotificationType | null>('active-notification', () => null)
+export const useSnackNotifications = () => {
+  const activeNotification = useState<SnackNotificationType | null>('active-notification', () => null)
 
-  const displayNotification = (type: NotificationType) => {
+  const displayNotification = (type: SnackNotificationType) => {
     activeNotification.value = type
     resetNotificationTimeout()
   }

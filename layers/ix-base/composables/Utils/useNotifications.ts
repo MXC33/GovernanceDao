@@ -24,7 +24,10 @@ export const useNotifications = () => {
   });
 
 
-  const addNotification = (description: string, errorCode?: string, link?: NotificationLink) => {
+  const addNotification = (description?: string, errorCode?: string, link?: NotificationLink) => {
+    if (!description)
+      return
+
     notifications.value.push({
       description,
       isRead: false,
