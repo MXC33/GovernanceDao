@@ -7,20 +7,9 @@ Popup()
 
   template(#default)
     VList()
-      VList()
-        HList(text="lg" font="bold" justify="between")
-          span() Your Balance
-          span(v-if="ixt") {{ ixtBalanceRounded }} IXT
-          span(v-else) ... IXT
-        HList(justify="end" color="gray-200")
-          span(mb="4") $
+      TransactionIXTBalance()
 
-      ContentDrawer(frame="none" mb="4" b="t-1 b-1 gray-600" :is-neutral="true")
-        template(#header) APPLY TO ALL
-        template(#default)
-          ListingApplyAll()
-            template(#header) Floor price
-            template(#button) Set to Floor
+      //- TransactionApplyToAll(v-model="listItems")
 
       ListingItem(v-for="(_, index) in listItems" v-model="listItems[index]")
 
@@ -28,34 +17,22 @@ Popup()
     ListingPrice(:items="listItems")
 
   template(#buttons)
-    ButtonInteractive(btn="~ primary" w="full" @click.prevent="onClickList" text="List Items" :invalid="!!invalidPrice" :loading="isLoading")
+    ButtonInteractive(btn="~ primary" w="full" @click.prevent="onClickList" text="List Items" :invalid="itemsInvalid(listItems)" :loading="isLoading")
 
 </template>
 
 <script lang="ts" setup>
-import type { SingleItemData } from "@ix/base/composables/Token/useIXToken"
+import type { IXToken } from "@ix/base/composables/Token/useIXToken"
 import ListingIcon from '~/assets/icons/listing.svg'
 
-defineEmits(['close'])
-
-const { createListItems, listItems, getTotalIXTPrice } = useListingItems()
-const { listItem } = useListingContract()
-
-const invalidPrice = computed(() => {
-  if (!getTotalIXTPrice(listItems.value))
-    return '--'
-})
-
-
-// const { ixtToUSD, ixtAsUSD } = useIXTPrice()
-const { ixtBalance } = getIXTokenContract()
-const { displayPopup } = usePopups()
-const { data: ixt, refresh: fetchIXT } = ixtBalance()
-fetchIXT()
-
-const ixtBalanceRounded = computed(() => roundToDecimals(ixt.value ?? 0, 2))
-
 const isLoading = ref(false)
+
+const { createListItems, listItems } = useListingItems()
+const { listItem } = useListingContract()
+const { itemsInvalid } = useTransactions()
+
+const { displayPopup } = usePopups()
+
 const onClickList = async () => {
   isLoading.value = true
   const list = await listItem(listItems.value[0])
@@ -69,9 +46,9 @@ const onClickList = async () => {
 }
 
 const { items } = defineProps<{
-  items: SingleItemData[],
+  items: IXToken[],
 }>()
 
-createListItems(items, 1)
+createListItems(items)
 
 </script>

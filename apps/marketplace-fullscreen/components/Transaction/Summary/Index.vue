@@ -3,7 +3,7 @@ VList()
   TransactionSummaryRow()
     template(#name) Total Price
     template(#value)
-      GlitchText(:text="priceRenderString(totalIXTPrice)" suffix=" IXT")
+      GlitchText(:text="totalPrice" suffix=" IXT")
 
   TransactionSummaryRow()
     template(#name) Marketplace fee
@@ -15,18 +15,28 @@ VList()
       GlitchText(:text="totalPotentialEarning" suffix=" IXT")
 
 </template>
-  
+
 <script lang="ts" setup>
 import type { ListingItem } from "~/composables/useListing";
 
-const { priceRenderString, getTotalIXTPrice } = useTransactions()
+const { getTotalIXTPrice } = useTransactions()
+
+const totalPrice = computed(() => String(invalidPrice.value ?? roundToDecimals(totalIXTPrice.value, 4)))
+
 const totalIXTPrice = computed(() => getTotalIXTPrice(items))
 
 const totalPotentialEarning = computed(() =>
-  priceRenderString(totalIXTPrice.value * (1 - 0.025))
+  String(invalidPrice.value ?? roundToDecimals(totalIXTPrice.value * (1 - 0.025), 4))
 )
+
+const invalidPrice = computed(() => {
+  if (!totalIXTPrice.value)
+    return '--'
+})
 
 const { items } = defineProps<{
   items: ListingItem[],
 }>()
+
+
 </script>

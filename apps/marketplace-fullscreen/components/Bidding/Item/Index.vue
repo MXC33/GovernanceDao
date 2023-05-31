@@ -8,7 +8,8 @@ TransactionItem(v-model="item")
 </template>
   
 <script lang="ts" setup>
-import type { ListingItem } from '~/composables/useListing'
-const item = defineModel<ListingItem>()
+import type { BiddingItem } from '~/composables/useBidding';
+const item = defineModel<BiddingItem>()
+console.log("BID ITEM", item)
 </script>
   
