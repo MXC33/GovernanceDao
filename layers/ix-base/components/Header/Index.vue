@@ -66,6 +66,7 @@ const showIFrame = ref(false)
 const { t } = useI18n()
 
 const onClicked = (type: string, category: string, item: string) => {
+  return;
   //console.log("onClicked Header index", type, category, item)
   const link = t(`marketplace.headers.${type}.${category}.${item}.link`)
 
