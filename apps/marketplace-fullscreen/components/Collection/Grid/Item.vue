@@ -12,7 +12,7 @@ VList(justify="center" items="center" aspect="2/3" bg="black opacity-40" ref="me
 
       div(flex-grow="1")
 
-      CollectionGridButtonSelect(pointer-events="auto" @click.stop="onSelectedItem" v-model="isSelected")
+      //- CollectionGridButtonSelect(pointer-events="auto" @click.stop="onSelectedItem" v-model="isSelected")
 
   VList(w="full" flex-grow="1" items="start" bg="gray-900" :invalid="isInvalid" p="6" pos="relative")
     header(font="bold" w="full")
