@@ -23,34 +23,34 @@ await fetchCollection()
 setupCollectionListeners()
 
 const columns: TableColumn<IXToken>[] = [
-  { label: "Asset", value: "name" },
+  { label: "Asset", columnId: "name" },
   {
-    label: "Offer price", value: "bid", getValue(row) {
+    label: "Offer price", columnId: "bid.price", getValue(row) {
       return row.bid.price
     }, type: 'ixt', sortable: true
   },
-  { label: "USD price", value: "usd", type: 'usd', sortable: true },
+  { label: "USD price", columnId: "usd", type: 'usd', sortable: true },
   {
-    label: "Floor Difference", value: "bid", getValue(row) {
+    label: "Floor Difference", columnId: "floor", getValue(row) {
       if (row.lowest_sale?.price)
         return (row.higher_bid_price - row.bid.price).toString().substring(0, 5)
       return row.higher_bid_price.toString()
     }, type: 'text'
   },
   {
-    label: "Quantity", value: "bid", getValue(row) {
+    label: "Quantity", columnId: "bid.quantity", getValue(row) {
       return row.bid.quantity.toString()
     }, type: 'text'
   },
   {
-    label: "Expiration", value: "bid", getValue(row) {
-      return fromUnixTime(row.bid.due_date).toDateString()
-    }, type: 'text', sortable: true
+    label: "Expiration", columnId: "bid.due_date", getValue(row) {
+      return row.bid.due_date
+    }, type: 'date', sortable: true
   },
   {
-    label: "Offer made", value: "bid", getValue(row) {
-      return getStartDateFromMessage(row).toDateString()
-    }, type: 'text', sortable: true
+    label: "Offer made", columnId: "offer_made", getValue(row) {
+      return getStartDateFromMessage(row)
+    }, type: 'date', sortable: true
   },
   {
     type: 'buttons', buttons: [{
@@ -70,7 +70,7 @@ const columns: TableColumn<IXToken>[] = [
 const getStartDateFromMessage = (row: IXToken) => {
   const message = JSON.parse(row.bid.message)
 
-  return fromUnixTime(message.body.startTime)
+  return message.body.startTime
 }
 
 const { removeBid, placeBid } = useBidsAPI()

@@ -29,8 +29,7 @@ const emit = defineEmits<{
   selectField: [item: TableSortField<T>]
 }>()
 
-
-const isActive = computed(() => props.sortField?.field == props.column.value)
+const isActive = computed(() => props.sortField?.field == props.column.columnId)
 
 const direction = computed(() => {
   if (isActive.value)
@@ -43,7 +42,7 @@ const onClickSort = () => {
   if (isActive.value)
     return emit("toggleSort")
 
-  return emit("selectField", props.column.value)
+  return emit("selectField", props.column.columnId)
 }
 
 </script>

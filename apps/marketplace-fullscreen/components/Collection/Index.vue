@@ -53,10 +53,10 @@ const { getCollectionAttributes } = useDefaulAttributes()
 const attributes = computed(() => data ? getCollectionAttributes(data) : [])
 
 const defaultColumns: TableColumn<IXToken>[] = [
-  { label: "Asset", value: "name" },
-  { label: "Current price", value: "sale_price", type: 'ixt', sortable: true },
-  { label: "USD price", value: "usd", type: 'usd', sortable: true },
-  { label: "Best offer", value: "higher_bid_price", type: 'ixt', sortable: true },
+  { label: "Asset", columnId: "name" },
+  { label: "Current price", columnId: "sale_price", type: 'ixt', sortable: true },
+  { label: "USD price", columnId: "usd", type: 'usd', sortable: true },
+  { label: "Best offer", columnId: "higher_bid_price", type: 'ixt', sortable: true },
 ]
 
 const is1155 = (contractAddress: string) => ERC1155Addresses.includes(contractAddress)

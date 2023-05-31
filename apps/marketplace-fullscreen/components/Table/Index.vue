@@ -11,9 +11,10 @@ table(bg="gray-900" w="full")
   tbody(divide-y="1")
     TableRow(v-for="(row, index) in sortedRows" :key="index")
       TableCell(v-for="item in columns") 
-        slot(:name="`item-${item.value}`" :row="row" :column="item" v-if="item.type != 'buttons'")
+        slot(:name="`item-${item.columnId}`" :row="row" :column="item" v-if="item.type != 'buttons'")
           Currency(:value="Number(getValue(item, row))" type="ixt" v-if="item.type == 'ixt'")
           Currency(:value="Number(getValue(item, row))" type="usd" v-else-if="item.type == 'usd'")
+          span(v-else-if="item.type == 'date'") {{ getDate(getValue(item, row)) }}
           span(v-else) {{getValue(item, row)}}
 
         HList(v-else space-x="3" justify="end")
@@ -25,6 +26,7 @@ table(bg="gray-900" w="full")
 
 <script setup lang="ts" generic="Row extends TableRow">
 import type { TableColumn, TableRow } from '~/composables/useTable';
+import { fromUnixTime } from "date-fns"
 
 
 const props = defineProps<{
@@ -38,9 +40,12 @@ const props = defineProps<{
 
 console.log(props.rows)
 
-const { sortedRows, sort, selectSortField, toggleSortDirection } = useTable(props.rows, props.id)
+const { sortedRows, sort, getValue, selectSortField, toggleSortDirection } = useTable(props.rows, props.columns, props.id)
 
 console.log("TABLE", props)
+
+const getDate = (date: string | number | undefined) =>
+  fromUnixTime(Number(date)).toDateString()
 
 const getColumnStyle = (item: TableColumn<Row>) => {
   if (!item.width)
@@ -51,15 +56,6 @@ const getColumnStyle = (item: TableColumn<Row>) => {
     'min-width': `${item.width}px`,
   }
 }
-
-const getValue = (item: TableColumn<Row>, row: Row) => {
-  if (item.type == 'buttons')
-    return undefined
-  if (item.getValue)
-    return item.getValue(row)
-  return row[item.value]
-}
-
 </script>
 
 <style scoped>
