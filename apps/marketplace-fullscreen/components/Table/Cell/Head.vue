@@ -17,10 +17,10 @@ th(p="3 first:l-6 last:r-6" bg="gray-900" z="3" font="400" color="gray-200")
 
 <script setup lang="ts" generic="T extends TableRow">
 import SortIcon from '~/assets/icons/sort.svg'
-import type { TableColumn, TableRow, TableSort, TableSortField } from '~/composables/useTable'
+import type { TableColumnText, TableRow, TableSort, TableSortField } from '~/composables/useTable'
 
 const props = defineProps<{
-  column: TableColumn<T>,
+  column: TableColumnText<T>,
   sortField?: TableSort<T>,
 }>()
 
@@ -29,8 +29,7 @@ const emit = defineEmits<{
   selectField: [item: TableSortField<T>]
 }>()
 
-
-const isActive = computed(() => props.sortField?.field == props.column.value)
+const isActive = computed(() => props.sortField?.field == props.column.columnId)
 
 const direction = computed(() => {
   if (isActive.value)
@@ -43,7 +42,7 @@ const onClickSort = () => {
   if (isActive.value)
     return emit("toggleSort")
 
-  return emit("selectField", props.column.value)
+  return emit("selectField", props.column.columnId)
 }
 
 </script>

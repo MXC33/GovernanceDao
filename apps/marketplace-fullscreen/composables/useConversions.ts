@@ -8,7 +8,7 @@ export const useIXTPrice = () => {
 
   const { data: ixtPrice, refresh: refreshIXTPrice, execute: fetchPrice } = useAsyncDataState('ixt-price', () =>
     $fetch(config.MC_API + '/ixt-price', { mode: 'cors' }) as Promise<PriceResponse>, {
-    transform: (data) => data.price
+    transform: (data) => Number(data)
   })
 
   const setupIXTPrice = () => {
@@ -19,13 +19,8 @@ export const useIXTPrice = () => {
   const ixtToUSD = (ixt: number) =>
     roundToDecimals(Number(ixt) * (ixtPrice?.value ?? 0), 2)
 
-  const ixtAsUSD = (ixt: number) => computed(() =>
-    roundToDecimals(Number(ixt) * (ixtPrice?.value ?? 0), 2)
-  )
-
   return {
     ixtPrice,
-    ixtAsUSD,
     ixtToUSD,
     setupIXTPrice
   }

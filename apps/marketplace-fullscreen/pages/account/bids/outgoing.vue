@@ -1,49 +1,86 @@
 <template lang="pug">
-AccountBidsOutgoing(:data="data" v-if="data" )
+Collection(:data="data" :columns="columns" :context="'outgoing-bids'" v-if="data" :hide-grid="true")
+  template(#menu)
+    AccountMenu()
 </template>
     
     
 <script lang="ts" setup>
+import type { TableColumn } from "~/composables/useTable";
+import type { IXToken } from "@ix/base/composables/Token/useIXToken";
+import { fromUnixTime } from "date-fns"
 
-import { useCollectionSettings } from "~/composables/useCollection";
-import type { CollectionPayload } from '~/composables/useCollection';
+const { myAssetsURL } = useCollectionsURL()
 
-const body = ref<CollectionPayload>({
-  page_key: 0,
-  order: 0,
+const { data: data, execute: fetchCollection, setupCollectionListeners } = useCollectionData(myAssetsURL('polygon'), {
   filter: {
     owned: true,
     type: 2,
-    search: "",
-    attributes: []
   }
 })
 
-const { data: data, execute: fetchCollection, refresh: refresh } = usePersonalAssetAPI(body.value)
+await fetchCollection()
+setupCollectionListeners()
 
-const { activeFilters } = useCollectionSettings()
+const columns: TableColumn<IXToken>[] = [
+  { label: "Asset", columnId: "name" },
+  {
+    label: "Offer price", columnId: "bid.price", getValue(row) {
+      return row.bid.price
+    }, type: 'ixt', sortable: true
+  },
+  { label: "USD price", columnId: "usd", type: 'usd', sortable: true },
+  {
+    label: "Floor Difference", columnId: "floor", getValue(row) {
+      if (row.lowest_sale?.price)
+        return (row.higher_bid_price - row.bid.price).toString().substring(0, 5)
+      return row.higher_bid_price.toString()
+    }, type: 'text'
+  },
+  {
+    label: "Quantity", columnId: "bid.quantity", getValue(row) {
+      return row.bid.quantity.toString()
+    }, type: 'text'
+  },
+  {
+    label: "Expiration", columnId: "bid.due_date", getValue(row) {
+      return row.bid.due_date
+    }, type: 'date', sortable: true
+  },
+  {
+    label: "Offer made", columnId: "offer_made", getValue(row) {
+      return getStartDateFromMessage(row)
+    }, type: 'date', sortable: true
+  },
+  {
+    type: 'buttons', buttons: [{
+      type: 'secondary', text: 'cancel', onClick: (token) => {
+        cancelBidOnClick(token)
+      },
+    },
+    {
+      type: 'primary', text: 'update', onClick: (token) => {
+        updateBidOnClick(token)
+      },
+    }]
+  },
 
-const createFilters = () => {
-  if (data.value)
-    activeFilters.value = data.value.filters.map((filter) => ({
-      ...filter,
-      value: filter.value.map((name) => ({
-        name,
-        selected: false
-      }))
-    }))
+]
+
+const getStartDateFromMessage = (row: IXToken) => {
+  const message = JSON.parse(row.bid.message)
+
+  return message.body.startTime
 }
 
-watch(() => data, (value) => {
-  if (activeFilters.value.length < 1)
-    createFilters()
-}, { deep: true })
+const { removeBid, placeBid } = useBidsAPI()
 
+const cancelBidOnClick = (token: IXToken) => {
+  console.log("Cancel", token)
+}
 
-onBeforeUnmount(() => {
-  activeFilters.value = []
-})
-onMounted(() => {
-  fetchCollection()
-})
+const updateBidOnClick = (token: IXToken) => {
+  console.log("Update", token)
+}
+
 </script>

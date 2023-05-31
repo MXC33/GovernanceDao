@@ -1,5 +1,5 @@
 <template lang="pug">
-VList(p="3" my="lt-md:1" justify="lt-md:center" cut="b-ix-primary opacity-60 bottom-right")
+VList(p="3" my="lt-md:1" justify="lt-md:center" cut="bottom-right sm b-ix-primary")
   h3(color="gray-50" text="xs" uppercase="~" font="bold")
     slot(name="category")
 

@@ -7,15 +7,17 @@ DropdownSelect(:items="collections" v-if="collections")
       div(w="8" h="8" mr="3")
         img(src="~/assets/testfiles/test-collection-bg.png" )
 
-      div(flex-grow="1") {{ item.name }}
+      div(flex-grow="1" v-if="item.name != 'PlanetIX Assets'") {{ item.name }}
+      div(flex-grow="1" v-else) PlanetIX - Assets
       div(color="gray-200" font="normal") 50 items
 
 </template>
 
 <script lang="ts" setup>
-import {useCollectionsData} from "~/composables/api/post/useCollectionAPI";
+import { useCollectionsData } from "~/composables/api/post/useCollectionAPI";
 
 const { data: collections, execute: fetchAllCollections } = useCollectionsData()
 
 await fetchAllCollections()
+
 </script>

@@ -5,7 +5,7 @@ import { CorporationAdjustableToken } from '../useCorporations'
 export interface AdjustableNumber {
   multiplier?: number,
   skipMultiplierSnap?: boolean
-  max?: number,
+  max?: number | ComputedRef<number>,
   min?: number,
   value: number,
 }

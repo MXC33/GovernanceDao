@@ -1,27 +1,20 @@
 import { IXToken, Sale } from "@ix/base/composables/Token/useIXToken"
 import { AdjustableNumber } from "@ix/base/composables/Utils/useAdjustableNumber"
-import {get1155Contract, getIXTokenContract, getSeaportContract} from "~/composables/useAssetContracts";
+import { get1155Contract, getIXTokenContract, getSeaportContract } from "~/composables/useAssetContracts";
 import {
-  ItemType,
-  OrderType,
-  signDomain,
-  typedData,
-  OfferItem,
-  OrderParameters,
   AdvancedOrder,
-  Fulfillment,
-  FulfillmentComponent
 } from "@ix/base/composables/Token/useIXToken"
 import {
   conduitKey
 } from "@ix/base/composables/Contract/WalletAddresses";
-import {ethers} from "ethers";
+import { ethers } from "ethers";
 
 export interface CartItem extends AdjustableNumber {
   token: IXToken,
   sale?: Sale,
   failed?: boolean
 }
+
 
 export const useCart = () => {
   const cartItems = useState<CartItem[]>('cart-items', () => [])
@@ -65,11 +58,11 @@ export const useCart = () => {
     let considerations = []
     let i = 0
     for (const item of carItems) {
-      if(item.sale){
+      if (item.sale) {
         let message: any = {}
         try {
-            message = JSON.parse(item.sale.message)
-        } catch (e) {}
+          message = JSON.parse(item.sale.message)
+        } catch (e) { }
 
         if (!message.body || !message.body.consideration) {
           continue

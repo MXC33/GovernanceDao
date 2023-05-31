@@ -4,7 +4,9 @@ VList(flex-grow="1" px="6" pos="relative")
 
 transition(name="fade-slow")
   HList(py="4" justify="between" items="center" pos="sticky top-16" z="5" bg="on-locked:ix-black" px="8" transition="all" :locked="isScrolling")
-    NetEmpireLogo(w="45")
+    //- NetEmpireLogo(w="45")
+    NuxtLink(:to="'/'" w="full")
+      NetBetaLogo(w="55")
 
     HList(space-x="4" w="full" justify="end" items="center")
       CollectionSelect()
@@ -18,7 +20,9 @@ transition(name="fade-slow")
 </template>
 
 <script lang="ts" setup>
-import NetEmpireLogo from '~/assets/icons/logo/netempire.svg'
+// import NetEmpireLogo from '~/assets/icons/logo/netempire.svg'
+import NetBetaLogo from '~/assets/icons/logo/netbeta.svg'
+
 import UserIcon from '~/assets/icons/user.svg'
 import CartIcon from '~/assets/icons/cart.svg'
 

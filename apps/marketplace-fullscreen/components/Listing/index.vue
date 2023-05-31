@@ -7,60 +7,48 @@ Popup()
 
   template(#default)
     VList()
-      VList()
-        HList(text="lg" font="bold" justify="between")
-          span() Your Balance
-          span() 123718 IXT
-        HList(justify="end" color="gray-200")
-          span(mb="4") $8.4
+      TransactionIXTBalance()
 
-      CollectionFilterDrawer(:is-small="true" :is-neutral="true" mx="-6" mb="4" b="t-1 gray-600")
-        template(#header) APPLY TO ALL
+      //- TransactionApplyToAll(v-model="listItems")
 
-      ListingItem(v-for="(item, index) in listItems" v-model="listItems[index]")
+      ListingItem(v-for="(_, index) in listItems" v-model="listItems[index]")
 
   template(#footer)
-    VList()
-      HList(w="full" justify="between")
-        div(color="gray-200") Total Price
-        p {{invalidPrice ?? roundToDecimals(totalIXTPrice, 4)}} IXT
-
-      HList(w="full" justify="between")
-        div(color="gray-200") Marketplace fee
-        p 2.5%
-
-      HList(w="full" justify="between" text="lg" font="bold")
-        p() Total potential earnings
-        p {{invalidPrice ?? roundToDecimals(totalIXTPrice * (1 - 0.025), 4)}} IXT
+    ListingPrice(:items="listItems")
 
   template(#buttons)
-    button(btn="~ primary" w="full" @click.prevent="onClickList") List Items
+    ButtonInteractive(btn="~ primary" w="full" @click.prevent="onClickList" text="List Items" :invalid="itemsInvalid(listItems)" :loading="isLoading")
 
 </template>
 
 <script lang="ts" setup>
-import type { SingleItemData } from "@ix/base/composables/Token/useIXToken"
+import type { IXToken } from "@ix/base/composables/Token/useIXToken"
 import ListingIcon from '~/assets/icons/listing.svg'
 
-defineEmits(['close'])
+const isLoading = ref(false)
 
-const { createListItems, listItems, totalIXTPrice } = useListingItems()
+const { createListItems, listItems } = useListingItems()
 const { listItem } = useListingContract()
+const { itemsInvalid } = useTransactions()
 
-const invalidPrice = computed(() => {
-  if (!totalIXTPrice.value)
-    return '--'
-})
+const { displayPopup } = usePopups()
 
 const onClickList = async () => {
+  isLoading.value = true
   const list = await listItem(listItems.value[0])
+  isLoading.value = false
   console.log('List result', list)
+
+  displayPopup({
+    type: 'listing-successful',
+    items: listItems.value
+  })
 }
 
-const props = defineProps<{
-  items: SingleItemData[],
+const { items } = defineProps<{
+  items: IXToken[],
 }>()
 
-createListItems(props.items, 1)
+createListItems(items)
 
 </script>

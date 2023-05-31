@@ -64,18 +64,21 @@ export const useTokenMedia = () => {
     if (!isIXToken(token))
       return await getTokenIdentifierImage(token)
 
-    const { image, icon, thumbnail } = token
+    const { icon, thumbnail } = token
+
+    const largeSize = 800
+    const transformedLarge = thumbnail.replace("thumbnailv2", `w_${largeSize}/convert-png`)
 
     if (large)
-      return image
+      return transformedLarge
 
     if (icon && !icon.includes("https://ipfs.io"))
       return icon
 
-    else if (thumbnail )
+    else if (thumbnail)
       return thumbnail
 
-    return image
+    return transformedLarge
   }
 
 

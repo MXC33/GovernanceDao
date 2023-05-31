@@ -7,12 +7,11 @@ import {
   conduitKey,
   feeTreasuryAdress,
   IXTAddress,
-  seaportAdress
 } from "@ix/base/composables/Contract/WalletAddresses";
 
 import { makeRandomNumberKey } from "@ix/base/composables/Utils/useHelpers";
 import { ListingAssets, ListingsBody, useListEndpoints } from "~/composables/api/post/useListAPI";
-import { AdjustableNumber } from "~/../../layers/ix-base/composables/Utils/useAdjustableNumber";
+import { TransactionItem } from "./useTransactions";
 
 export type DurationValue = 0 | 1 | 2 | 3
 
@@ -21,11 +20,8 @@ export interface Duration {
   name: string
 }
 
-export interface ListingItem {
-  token: IXToken,
-  shares: AdjustableNumber,
-  durationInDays: number,
-  ixtPrice: number
+export interface ListingItem extends TransactionItem {
+  type: 'list'
 }
 
 export const useListingItems = () => {
@@ -33,8 +29,9 @@ export const useListingItems = () => {
 
   const durationDayOptions = [1, 7, 14]
 
-  const createListItems = (items: IXToken[], shares: number) => {
+  const createListItems = (items: IXToken[]) => {
     listItems.value = items.map((token) => ({
+      type: 'list',
       token,
       shares: {
         min: 1,
@@ -46,15 +43,8 @@ export const useListingItems = () => {
     }))
   }
 
-  const totalIXTPrice = computed(() =>
-    listItems.value.reduce((prev, item) =>
-      prev + (Number(item.ixtPrice) * item.shares.value)
-      , 0)
-  )
-
   return {
     createListItems,
-    totalIXTPrice,
     listItems
   }
 }
@@ -112,7 +102,7 @@ export const useListingContract = () => {
       offerer: address,
       zone: ZERO_ADDRESS,
       offer: [{
-        itemType: ItemType.ERC1155,
+        itemType: item.token.nft_type === 0 ? ItemType.ERC1155 : ItemType.ERC721,
         token: collection,
         identifierOrCriteria: token_id,
         startAmount: shares.value,
@@ -177,7 +167,7 @@ export const useListingContract = () => {
   }
 
   const listItem = async (item: ListingItem) => {
-    const { shares, ixtPrice, durationInDays, token: { _index: index, collection, token_id, network } } = item
+    const { durationInDays } = item
 
     const endTime = Math.floor(add(new Date(), { days: durationInDays }).getTime() / 1000)
     const saleMessage = await createListingMessage(item, endTime)
@@ -189,32 +179,25 @@ export const useListingContract = () => {
       const listEndpoints = useListEndpoints()
       await listEndpoints.listAssets([listingsBody])
 
-      /*
-        Todo
-        Success message
-      */
-      alert('Success message')
+      return true
 
     } catch (error: any) {
-      /*
-        Todo
-        API error
-      */
+
       console.log(error.response)
       if (error.response && error.response._data && error.response._data.message) {
-        alert(error.response._data.message)
+        console.error(error.response._data.message)
       } else {
-        alert('Something wrong happened!!')
+        console.error('Something wrong happened!!')
       }
       return false
     }
-    return true
   }
+
   const listItems = async (items: ListingItem[]) => {
     const listingsBody: ListingsBody[] = []
 
     for (const item of items) {
-      const { shares, ixtPrice, durationInDays, token: { _index: index, collection, token_id, network } } = item
+      const { durationInDays } = item
 
       const endTime = Math.floor(add(new Date(), { days: durationInDays }).getTime() / 1000)
       const saleMessage = await createListingMessage(item, endTime)

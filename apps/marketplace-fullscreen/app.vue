@@ -29,7 +29,7 @@ const { user } = useUser()
 
 watch(y, (pos) => globalY.value = pos)
 
-
+setupIXTPrice()
 
 onMounted(async () => {
   //@ts-ignore
@@ -51,8 +51,6 @@ onMounted(async () => {
     if (user.value)
       setRefreshToken(0)
 
-    await setupIXTPrice()
-
     console.log("price", ixtPrice.value)
 
   } catch (err) {
@@ -65,8 +63,8 @@ const { x: xpos, y: ypos } = useMouse()
 
 const values = computed(() => {
 
-  const xPos = xpos.value - 40
-  const yPos = ypos.value - 180
+  const xPos = xpos.value - 38
+  const yPos = ypos.value - 190
 
   return {
     top: `${yPos}px`,

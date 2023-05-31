@@ -1,5 +1,5 @@
 <template lang="pug">
-VList(@keydown.down.stop.prevent="stepDown" @keydown.up.stop.prevent="stepUp" @keypress.enter.stop.prevent="selectFocused" @keypress="onKeyDown" pos="relative" frame="~" ref="element")
+VList(@keydown.down.stop.prevent="stepDown" @keydown.up.stop.prevent="stepUp" @keypress.enter.stop.prevent="selectFocused" @keypress="onKeyDown" pos="relative" frame="~ hover:gray-300" ref="element")
   HList(w="full" px="3" h="full")
     SearchIcon(w="4")
 

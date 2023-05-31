@@ -1,11 +1,12 @@
 import { EventFilter, Listener } from "@ethersproject/abstract-provider";
-import { ethers } from "ethers";
+import { Contract, ethers } from "ethers";
 import { useNotifications } from "./useNotifications";
 import { useTransactions } from "./useTransaction";
 
 export interface ContractInterface<T> {
   on: (event: EventFilter | string, listener: Listener) => T
 }
+
 interface ContractNotificationSettings {
   failMessage?: string,
   successMessage?: string
@@ -55,7 +56,7 @@ export const useDefinedContractSetups = () => {
   }
 }
 
-export const defineContract = <T extends ContractInterface<T>>(key: string, options: CreateContractOptions<T>) => {
+export const defineContract = <T extends ContractInterface<T> | object>(key: string, options: CreateContractOptions<T>) => {
   const { addContractSetupFn } = useDefinedContractSetups()
   const { provider } = useWallet()
   const contract = useState<T | null>(`contract-${key}`, () => null)
@@ -116,12 +117,18 @@ export const defineContract = <T extends ContractInterface<T>>(key: string, opti
 
       }
 
-      contract.on(eventKey, (senderAddress, ...args) => {
-        if (!contractSenderSameAsUser(senderAddress))
-          return
+      const contractHasEvents = (contract: ContractInterface<T> | object): contract is ContractInterface<T> => {
+        return !!(contract as ContractInterface<T>).on
+      }
 
-        contractCallback(eventKey, senderAddress, ...args)
-      })
+      if (contractHasEvents(contract)) {
+        contract.on(eventKey, (senderAddress, ...args) => {
+          if (!contractSenderSameAsUser(senderAddress))
+            return
+
+          contractCallback(eventKey, senderAddress, ...args)
+        })
+      }
     })
 
   }
@@ -172,6 +179,13 @@ export const defineContract = <T extends ContractInterface<T>>(key: string, opti
     if (contract.value)
       return fn(contract.value)
   }
+
+  // For utility things that are not transactions
+  const viewAsyncState = <P>(id: string, fn: (contract: T) => Promise<P>) => useAsyncDataState(id, async () => {
+    await beforeContractInteraction()
+    if (contract.value)
+      return fn(contract.value)
+  })
 
   // Default transaction methods
   const createTransaction = async (fn: (contract: T) => Promise<ethers.ContractTransaction> | undefined, txOptions?: TransactionOptions) => {
@@ -230,6 +244,7 @@ export const defineContract = <T extends ContractInterface<T>>(key: string, opti
   return {
     contract,
     contractAddress,
+    viewAsyncState,
     withContract,
     setupContract,
     createTransaction

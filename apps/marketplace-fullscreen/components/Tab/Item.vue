@@ -1,18 +1,18 @@
 <template lang="pug">
 VList(pos="relative")
-  HList(font="bold" px="6" py="3" uppercase="~" w="53" cursor="pointer" @click.stop="toggle")
-    span(color="white")
+  HList(font="bold" px="6" py="3" uppercase="~" w="53" cursor="pointer" @click="toggle" items="center" space-x="2")
+    span(color="gray-200 on-active:white" :active="isActive")
       slot
 
   Transition(name="fade-slow")
-    div(w="full" b="b-3.43 white on-primary:ix-primary" z="3" pos="absolute bottom-0" v-if="isActive" :primary="primary")
-  
+    div(w="full" b="b-3.43 white" z="4" pos="absolute bottom-0" v-if="isActive")
+
+
 </template>
 
 <script lang="ts" setup>
 const { id } = defineProps<{
   id: string,
-  primary?: boolean
 }>()
 
 const activeTab = defineModel<string>()
@@ -21,6 +21,5 @@ const isActive = computed(() => activeTab.value && id == activeTab.value)
 const toggle = () => {
   activeTab.value = id
 }
-
 
 </script>

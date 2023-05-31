@@ -1,6 +1,11 @@
 <template lang="pug">
 VList(space-y="6")
-  h3(text="3xl" font="bold") {{ item.name }}
+  VList()
+    h3(text="3xl" font="bold") {{ item.name }}
+
+    CollectionSingleItemSubHeader()
+      template(#default)
+        TokenCollection(:token="item" color="ix-ne") 
 
   AttributeList(:attributes="attributes" v-if="item")
 
@@ -10,7 +15,7 @@ VList(space-y="6")
     template(#header)
       TabItem(v-for="tab in tabs" :id="tab" v-model="activeTab") {{ tab }}
 
-  ContentDrawer(:start-open="true")
+  ContentDrawer(:start-open="true" :is-neutral="true" bg="gray-900")
     template(#titleicon)
       TitleWithIcon(icon="listing") listings
 
@@ -20,7 +25,7 @@ VList(space-y="6")
           button(@click="addSaleToCart(row)" bg="gray-500 hover:gray-400" transition="all" cut="bottom-right sm" p="x-6 y-3")
             CartIcon(w="6")
 
-  ContentDrawer(:start-open="true")
+  ContentDrawer(:start-open="true" :is-neutral="true" bg="gray-900")
     template(#titleicon)
       TitleWithIcon(icon="offer") offers
     template(#default)
@@ -41,11 +46,11 @@ const { addToCart } = useCart()
 const attributes = computed(() => getSingleAttributes(item))
 
 const saleColumns: TableColumn<Sale>[] = [
-  { label: "Sale Price", value: "price", sortable: true },
-  { label: "Quanitity", value: "quantity", sortable: true },
-  { label: "Expiration", value: "endtime", sortable: true },
-  { label: "Seller", value: "player_id", sortable: true },
-  { label: "Action", value: "action", width: 80 }
+  { label: "Sale Price", columnId: "price", sortable: true },
+  { label: "Quanitity", columnId: "quantity", sortable: true },
+  { label: "Expiration", columnId: "endtime", sortable: true },
+  { label: "Seller", columnId: "player_id", sortable: true },
+  { label: "Action", columnId: "action", width: 80 }
 ]
 
 const addSaleToCart = (sale: Sale) => {
@@ -53,8 +58,8 @@ const addSaleToCart = (sale: Sale) => {
 }
 
 const offerColumns: TableColumn<Bid>[] = [
-  { label: "Sale Price", value: "price", sortable: true },
-  { label: "Quanitity", value: "quantity", sortable: true },
+  { label: "Sale Price", columnId: "price", sortable: true },
+  { label: "Quanitity", columnId: "quantity", sortable: true },
 
 ]
 const { item } = defineProps<{
