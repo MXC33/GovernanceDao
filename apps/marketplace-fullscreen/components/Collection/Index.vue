@@ -2,8 +2,12 @@
 VList(flex-grow="1" min-h="0" pos="relative" p="8" space-y="6")
   CollectionHeader() 
     template(#header) 
-      slot(name="name" v-if="data?.name != 'PlanetIX Assets'") {{ data?.name }}
-      slot(name="name" v-else) PlanetIX - Assets
+      slot(name="name" v-if="data?.name == null") My Assets
+      slot(name="name" v-else-if="data?.name == 'PlanetIX Assets'") PlanetIX - Assets
+      slot(name="name" v-else) {{ data?.name }}
+
+    template(#cert v-if="data?.name != null")
+      CertifiedIcon(w="6")
 
     template(#attributes)
       AttributeList(:attributes="attributes" v-if="data")
@@ -48,6 +52,7 @@ import type { IXToken } from '@ix/base/composables/Token/useIXToken';
 import type { CollectionContext, CollectionData } from '~/composables/useCollection';
 import type { TableColumn } from '~/composables/useTable'
 import PolygonIcon from '~/assets/icons/polygon_filled.svg'
+import CertifiedIcon from '~/assets/icons/certified.svg'
 
 
 const { displayType, activeFilters } = useCollectionSettings()
@@ -92,6 +97,8 @@ const { data, columns, context = 'collection' } = defineProps<{
   hideGrid?: boolean,
   context?: CollectionContext
 }>()
+
+console.log('data', data?.name)
 
 const rows = ref<IXToken[]>([])
 
