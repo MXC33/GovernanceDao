@@ -6,7 +6,7 @@ VList(aspect="square" w="full" pos="relative" overflow="hidden")
 
   HList(pos="absolute" inset="0" p="3")
     slot(name="icon-left")
-      PolygonIcon(w="10" pos="absolute left-0 top-0")
+      PolygonIcon(w="10" pos="absolute left-3 top-3")
 
   HList(pos="absolute" inset="0" p="3" pointer-events="none" opacity="0 group-hover:100" transition="all")
 
