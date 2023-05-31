@@ -36,9 +36,6 @@ const checkout = async () => {
   isLoading.value = false
   if (checkout)
     didPlaceBids(cartItems.value)
-  else {
-    viewingCart.value = false
-  }
 
 
   // viewingCart.value = false
