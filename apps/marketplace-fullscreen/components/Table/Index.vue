@@ -5,8 +5,8 @@ table(bg="gray-900" w="full")
     col(v-for="column in columns" :style="getColumnStyle(column)")
 
   TableHead()
-    template(v-for="item in columns" )
-      TableCellHead(:column="item" :sort-field="sort" @select-field="selectSortField", @toggle-sort="toggleSortDirection" pos="sticky top-50 on-drawer:top-0" :drawer="inDrawer" v-if="item.type != 'buttons'") {{ item.label }}
+    template(v-for="item in columns")
+      TableCellHead(:column="item" :sort-field="sort" @select-field="selectSortField", @toggle-sort="toggleSortDirection" pos="sticky top-50 on-drawer:!top-(-0.2)" :drawer="inDrawer" v-if="item.type != 'buttons'") {{ item.label }}
 
   tbody(divide-y="1")
     TableRow(v-for="(row, index) in sortedRows" :key="index")

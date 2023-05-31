@@ -1,11 +1,13 @@
 <template lang="pug">
-HList(flex-grow="1" space-x="0.5" w="full")
-  AdjustableButton(type="minus" @click="decreaseAmount"  :is-adjustable="isDecreasable" :inline="inline")
+HList(space-x="0.5" w="full" frame="~" items="center" justify="between")
+  HList(items="center")
+    AdjustableButton(type="minus" @click="decreaseAmount" :is-adjustable="isDecreasable" :inline="inline")
 
-  HList(flex-grow="1" w="full" justify="center" bg="gray-600" items="center" pos="relative" :inline="inline")
-    AdjustableNumber(v-model="data")
+  HList(justify="center" items="center" pos="relative")
+    AdjustableNumber(v-model="data" :is-neutral="isNeutral")
 
-  AdjustableButton(type="plus" @click="increaseAmount"  :is-adjustable="isIncreasable" :inline="inline")
+  HList(items="center")
+    AdjustableButton(type="plus" @click="increaseAmount" :is-adjustable="isIncreasable" :inline="inline")
 
 </template>
 
@@ -14,8 +16,9 @@ import type { AdjustableNumber, AdjustableToken } from '~/composables/Utils/useA
 
 const props = defineProps<{
   modelValue: AdjustableNumber | AdjustableToken,
-  inline?: boolean,
+  inline?: boolean
   hideMax?: boolean
+  isNeutral?: boolean
 }>()
 
 const emit = defineEmits(["update:modelValue"])

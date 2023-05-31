@@ -4,9 +4,10 @@ HList(ref="hoverElement")
 
 Teleport(to="#infobox")
   HList(v-if="isHovered" opacity="on-active:100 0 on-hover:100" transition="opacity" :hover="isHovered" cursor="default" z="400")
-    HList
+    HList(items="center")
       div.info-box(font="bold" text="xs" bg="mc-gray" p="2" color="white" z="400")
-        span(bg="gray-900" px="4" py="1" font="bold" text="sm")  {{ $t('tooltips.' + tooltipId) }}
+        span(bg="gray-600" px="4" py="2" font="bold" text="sm")  {{ $t('tooltips.' + tooltipId) }}
+    div.triangle(pos="absolute top-7.6 left-8" z="999")
 </template>
 
 <script lang="ts" setup>
@@ -17,3 +18,13 @@ defineProps<{
   tooltipId: string
 }>()
 </script>
+
+<style>
+.triangle {
+  width: 0;
+  height: 0;
+  border: 8px solid transparent;
+  border-top: 10px solid #333333;
+  border-bottom: 0px;
+}
+</style>

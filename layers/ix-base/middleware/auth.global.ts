@@ -1,6 +1,4 @@
 export default defineNuxtRouteMiddleware(async (to, from) => {
-  await useNuxtApp().callHook('page:start')
-
   if (to.path == '/connect')
     return true
 

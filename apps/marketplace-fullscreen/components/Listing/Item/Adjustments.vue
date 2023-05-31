@@ -17,7 +17,7 @@ VList(space-y="3" v-if="item")
     template(#header) Quantity
 
     template(#value)
-      Adjustable(v-model="item.shares" h="10")
+      Adjustable(v-model="item.shares" h="10" :is-neutral="false")
       ListingItemDetail() You own {{ item.token.my_shares }}
 
     template(#action)
