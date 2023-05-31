@@ -1,5 +1,6 @@
 import { MaybeRef } from 'vue'
 import { get } from '@vueuse/core'
+import { IXToken } from '~/../../layers/ix-base/composables/Token/useIXToken'
 
 export type SortOrder = 'desc' | 'asc'
 
@@ -22,11 +23,17 @@ export interface TableButton<T extends TableRow> {
 }
 
 export interface TableColumnText<T extends TableRow> extends TableColumnBase {
-  columnId: string,
   label: string,
-  type?: 'text' | 'date' | 'ixt' | 'usd'
+  type?: 'text' | 'date' | 'ixt' | 'usd' | 'asset'
   sortable?: boolean,
+  rowKey?: string,
   getValue?: (row: T) => string | number
+}
+
+export interface TableColumnAsset extends TableColumnBase {
+  label: string,
+  type?: 'asset'
+  sortable?: boolean
 }
 
 export interface TableButtonColumn<T extends TableRow> extends TableColumnBase {
@@ -77,7 +84,8 @@ export const useTable = () => {
     if (column.getValue)
       return column.getValue(row)
 
-    return getDotNotation(row, column.columnId)
+    if (column.rowKey)
+      return getDotNotation(row, column.rowKey)
   }
 
   const sortRows = <T extends TableRow>(columns: TableColumn<T>[], rows: T[], sort: TableSort) => {

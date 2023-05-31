@@ -5,7 +5,7 @@ Transition(name="fade" mode="out-in" )
 
   Table(:columns="columns" :rows="items" v-else id="collection")
     template(#item-name="{row}")
-      HList(items="center" space-x="2" font="bold")
+      HList(items="center" space-x="2" font="bold" max-w="60")
         div(w="12" h="12")
           TokenImage(:token="row" w="12" h="12" :key="getTokenKey(row)")
         TokenName(:token="row" capitalize="~" :key="getTokenKey(row)")

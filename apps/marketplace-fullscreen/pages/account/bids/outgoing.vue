@@ -23,26 +23,26 @@ await fetchCollection()
 setupCollectionListeners()
 
 const columns: TableColumn<IXToken>[] = [
-  { label: "Asset", columnId: "name" },
+  { label: "Asset", rowKey: "name" },
   {
-    label: "Offer price", columnId: "bid.price", type: 'ixt', sortable: true
+    label: "Offer price", rowKey: "bid.price", type: 'ixt', sortable: true
   },
-  { label: "USD price", columnId: "bid.price", type: 'usd', sortable: true },
+  { label: "USD price", rowKey: "bid.price", type: 'usd', sortable: true },
   {
-    label: "Floor Difference", columnId: "floor", getValue(row) {
+    label: "Floor Difference", rowKey: "floor", getValue(row) {
       if (row.lowest_sale?.price)
         return (row.higher_bid_price - row.bid.price).toString().substring(0, 5)
       return row.higher_bid_price.toString()
     }, type: 'text'
   },
   {
-    label: "Quantity", columnId: "bid.quantity", type: 'text'
+    label: "Quantity", rowKey: "bid.quantity", type: 'text'
   },
   {
-    label: "Expiration", columnId: "bid.due_date", type: 'date', sortable: true
+    label: "Expiration", rowKey: "bid.due_date", type: 'date', sortable: true
   },
   {
-    label: "Offer made", columnId: "offer_made", getValue(row) {
+    label: "Offer made", rowKey: "offer_made", getValue(row) {
       return getStartDateFromMessage(row)
     }, type: 'date', sortable: true
   },
