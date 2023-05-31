@@ -25,9 +25,7 @@ setupCollectionListeners()
 const columns: TableColumn<IXToken>[] = [
   { label: "Asset", columnId: "name" },
   {
-    label: "Offer price", columnId: "bid.price", getValue(row) {
-      return row.bid.price
-    }, type: 'ixt', sortable: true
+    label: "Offer price", columnId: "bid.price", type: 'ixt', sortable: true
   },
   { label: "USD price", columnId: "bid.price", type: 'usd', sortable: true },
   {
