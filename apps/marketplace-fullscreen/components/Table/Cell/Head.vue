@@ -1,6 +1,6 @@
 
 <template lang="pug">
-th(p="3 first:l-6 last:r-6" bg="gray-900" z="3" font="400" color="gray-200")
+th(p="3 first:l-6 last:r-6" bg="gray-900" z="3" font="400" color="gray-200" whitespace="nowrap")
   button(v-if="column.sortable" @click="onClickSort" flex="~ row" items="start" color="on-active:white" :active="isActive" transition="all")
     HList(space-x="1")
       div()

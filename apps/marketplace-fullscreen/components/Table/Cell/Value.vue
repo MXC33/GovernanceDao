@@ -1,6 +1,6 @@
 
 <template lang="pug">
-VList()
+VList(flex-shrink="0" whitespace="nowrap")
   Currency(:value="Number(value)" type="ixt" v-if="column.type == 'ixt'")
 
   Currency(:value="ixtToUSD(value)" type="usd" v-else-if="column.type == 'usd'")
