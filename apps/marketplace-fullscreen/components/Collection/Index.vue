@@ -39,10 +39,10 @@ const { getCollectionAttributes } = useDefaulAttributes()
 const attributes = computed(() => data ? getCollectionAttributes(data) : [])
 
 const defaultColumns: TableColumn<IXToken>[] = [
-  { label: "Asset", columnId: "name" },
-  { label: "Current price", columnId: "sale_price", type: 'ixt', sortable: true },
-  { label: "USD price", columnId: "sale_price", type: 'usd', sortable: true },
-  { label: "Best offer", columnId: "higher_bid_price", type: 'ixt', sortable: true },
+  { label: "Asset", type: 'asset' },
+  { label: "Current price", rowKey: "sale_price", type: 'ixt', sortable: true },
+  { label: "USD price", rowKey: "sale_price", type: 'usd', sortable: true },
+  { label: "Best offer", rowKey: "higher_bid_price", type: 'ixt', sortable: true },
 ]
 
 const renderColumns = computed(() => columns ?? defaultColumns)

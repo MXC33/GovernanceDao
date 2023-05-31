@@ -3,9 +3,9 @@ Transition(name="fade" mode="out-in" )
   CollectionGrid(v-if="displayType == 'grid' && !hideGrid" w="full" :is-open="showFilters")
     CollectionGridItem.collection-grid-item(:token="token" v-for="token in items" b="gray-400" :context="context")
 
-  Table(:columns="columns" :rows="items" v-else id="collection")
+  Table(v-else :columns="columns" :rows="items" id="collection")
     template(#item-name="{row}")
-      HList(items="center" space-x="2" font="bold")
+      HList(items="center" space-x="2" font="bold" @click="onClickItem" cursor="pointer" max-w="60")
         div(w="12" h="12")
           TokenImage(:token="row" w="12" h="12" :key="getTokenKey(row)")
         TokenName(:token="row" capitalize="~" :key="getTokenKey(row)")
@@ -26,6 +26,14 @@ const { items, columns, context = 'collection' } = defineProps<{
   showFilters: boolean,
   context?: CollectionContext
 }>()
+
+const onClickItem = () =>
+  items.forEach((item: IXToken) => {
+    const { token_id, network, collection } = item
+
+    if (token_id)
+      navigateTo(`/assets/${network}/${collection}/${token_id}`)
+  })
 
 </script>
 
