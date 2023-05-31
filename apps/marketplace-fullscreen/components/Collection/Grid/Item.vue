@@ -1,7 +1,7 @@
 <template lang="pug">
-VList(justify="center" items="center" aspect="2/3" bg="black opacity-40" ref="mediaElement" cursor="pointer"  group)
+VList(justify="center" items="center" aspect="2/3" bg="black opacity-40" ref="mediaElement" cursor="pointer" @click="onClickItem" group)
   VList(aspect="square" w="full" pos="relative" overflow="hidden")
-    slot(name="media" @click="onClickItem")
+    slot(name="media" )
       TokenLazyVideo(:token="token" :key="token.collection + token.token_id" :is-hovered="isHovered")
 
 
@@ -12,7 +12,7 @@ VList(justify="center" items="center" aspect="2/3" bg="black opacity-40" ref="me
 
       div(flex-grow="1")
 
-      CollectionGridButtonSelect(pointer-events="auto" @click="onSelectedItem")
+      CollectionGridButtonSelect(pointer-events="auto" @click.stop="onSelectedItem" v-model="isSelected")
 
   VList(w="full" flex-grow="1" items="start" bg="gray-900" :invalid="isInvalid" p="6" pos="relative")
     header(font="bold" w="full")
@@ -42,7 +42,7 @@ const mediaElement = ref()
 const route = useRoute()
 const isHovered = useElementHover(mediaElement)
 const { addToCart } = useCart()
-const { selectItem } = useSelection()
+const { selectItem, removeSelectedItem } = useSelection()
 
 
 const { displayPopup } = usePopups()
@@ -56,8 +56,14 @@ const props = defineProps<{
   context?: CollectionContext
 }>()
 
+
+const isSelected = ref(false)
+
 const onSelectedItem = () => {
-  selectItem(props.token)
+  isSelected.value = !isSelected.value
+  if (isSelected.value)
+    return selectItem(props.token)
+  return removeSelectedItem(props.token)
 }
 
 const onClickCart = () => {
