@@ -36,7 +36,7 @@ const onClickButton = () => {
   if (context == 'my-assets')
     return onClickListItems()
 
-  addToCart(token)
+  addToCart(token, token.lowest_sale)
 }
 
 const onClickListItems = () => {
