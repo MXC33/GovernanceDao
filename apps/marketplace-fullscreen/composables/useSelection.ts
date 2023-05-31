@@ -11,10 +11,10 @@ export const useSelection = () => {
   const selectedItems = useState<SelectedItem[]>('selected-items', () => [])
   const viewingSelectedItems = useState('selected-items-visible', () => false)
 
-  const removeSelectedItem = (selectedItem: SelectedItem) => {
+  const removeSelectedItem = (selectedItem: IXToken) => {
 
     const index = selectedItems.value.findIndex((item) =>
-      selectedItem.token.token_id == item.token.token_id
+      selectedItem.token_id == item.token.token_id
     )
 
     selectedItems.value.splice(index, 1)

@@ -20,9 +20,4 @@ const { data: collections, execute: fetchAllCollections } = useCollectionsData()
 
 await fetchAllCollections()
 
-const nameOfCollection = computed(() => collections.value?.flatMap(item => item.name))
-
-
-
-console.log(nameOfCollection)
 </script>
