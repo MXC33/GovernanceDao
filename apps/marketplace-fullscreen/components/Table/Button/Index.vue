@@ -1,11 +1,19 @@
 <template lang="pug">
-ButtonSound(sound="sm" bg="gray-400 hover:gray-300 on-primary:(ix-primary hover:ix-ne)" :primary="isPrimary" cut="bottom-right sm" px="6" py="3" uppercase="~" font="bold")
+ButtonSound(sound="sm" bg="gray-400 hover:gray-300 on-primary:(ix-primary hover:ix-ne)" :primary="button.type == 'primary'" cut="bottom-right sm" px="6" py="3" uppercase="~" font="bold" @click="onClickButton")
   slot
 </template>
 
 
-<script setup lang="ts">
-defineProps<{
-  isPrimary?: boolean
+<script setup lang="ts" generic="T extends TableRow">
+import type { TableButton, TableRow } from '~/composables/useTable';
+
+const { button, row } = defineProps<{
+  button: TableButton<T>,
+  row: T
 }>()
+
+const onClickButton = () => {
+  button.onClick(row)
+}
+
 </script>

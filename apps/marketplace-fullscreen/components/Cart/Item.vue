@@ -1,5 +1,5 @@
 <template lang="pug">
-VList(bg="gray-800" v-if="item")
+VList(:bg="item.failed ? 'red-950' : 'gray-800'" v-if="item")
   header(p="x-6 y-3" font="bold" flex="~ row")
     TokenName(:token="item.token")
 
@@ -17,10 +17,10 @@ VList(bg="gray-800" v-if="item")
         button(@click="removeFromCart(item)")
           TrashIcon(w="6")
 
-      Adjustable(v-model="item" h="3")
+      Adjustable(v-model="item" h="10")
     
 </template>
-  
+
 <script lang="ts" setup>
 import type { CartItem } from '~/composables/useCart'
 import TrashIcon from '~/assets/icons/trash.svg'
@@ -34,4 +34,3 @@ const { viewingCart, removeFromCart } = useCart()
 const item = defineModel<CartItem>()
 
 </script>
-  

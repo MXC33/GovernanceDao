@@ -25,11 +25,9 @@ setupCollectionListeners()
 const columns: TableColumn<IXToken>[] = [
   { label: "Asset", columnId: "name" },
   {
-    label: "Offer price", columnId: "bid.price", getValue(row) {
-      return row.bid.price
-    }, type: 'ixt', sortable: true
+    label: "Offer price", columnId: "bid.price", type: 'ixt', sortable: true
   },
-  { label: "USD price", columnId: "usd", type: 'usd', sortable: true },
+  { label: "USD price", columnId: "bid.price", type: 'usd', sortable: true },
   {
     label: "Floor Difference", columnId: "floor", getValue(row) {
       if (row.lowest_sale?.price)
@@ -38,14 +36,10 @@ const columns: TableColumn<IXToken>[] = [
     }, type: 'text'
   },
   {
-    label: "Quantity", columnId: "bid.quantity", getValue(row) {
-      return row.bid.quantity.toString()
-    }, type: 'text'
+    label: "Quantity", columnId: "bid.quantity", type: 'text'
   },
   {
-    label: "Expiration", columnId: "bid.due_date", getValue(row) {
-      return row.bid.due_date
-    }, type: 'date', sortable: true
+    label: "Expiration", columnId: "bid.due_date", type: 'date', sortable: true
   },
   {
     label: "Offer made", columnId: "offer_made", getValue(row) {

@@ -26,11 +26,9 @@ setupCollectionListeners()
 const columns: TableColumn<IXToken>[] = [
   { label: "Asset", columnId: "name" },
   {
-    label: "Unit price", columnId: "sales.price", getValue(row) {
-      return row.sales[0].price
-    }, type: 'ixt', sortable: true
+    label: "Unit price", columnId: "sales[0].price", type: 'ixt', sortable: true
   },
-  { label: "USD price", columnId: "usd", type: 'usd', sortable: true },
+  { label: "USD price", columnId: "sales[0].price", type: 'usd', sortable: true },
   {
     label: "Floor Difference", columnId: "floor", getValue(row) {
       if (row.lowest_sale?.price)
@@ -39,9 +37,7 @@ const columns: TableColumn<IXToken>[] = [
     }, type: 'text'
   },
   {
-    label: "Expiration date", columnId: "sales.endtime", getValue(row) {
-      return row.sales[0].endtime
-    }, type: 'date', sortable: true
+    label: "Expiration date", columnId: "sales[0].endtime", type: 'date', sortable: true
   },
   {
     type: 'buttons', buttons: [{

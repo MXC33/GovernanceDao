@@ -9,7 +9,7 @@ ContentDrawer(frame="none" mb="4" b="t-1 b-1 gray-600" :is-neutral="true")
 </template>
 
 <script lang="ts" setup>
-import type { TransactionItem } from '~/composables/useListing';
+import type { TransactionItem } from '~/composables/useTransactions';
 
 defineModel<TransactionItem[]>()
 
