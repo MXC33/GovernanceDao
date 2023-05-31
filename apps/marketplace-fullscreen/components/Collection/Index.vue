@@ -27,7 +27,6 @@ import type { CollectionContext, CollectionData } from '~/composables/useCollect
 import type { TableColumn } from '~/composables/useTable'
 
 const { activeFilters } = useCollectionSettings()
-const { ixtToUSD } = useIXTPrice()
 const { selectedItems } = useSelection()
 
 const { getCollectionAttributes } = useDefaulAttributes()
@@ -55,22 +54,6 @@ const { data, columns, context = 'collection' } = defineProps<{
   context?: CollectionContext
 }>()
 
-
-const usdPriceOrigin = (data: IXToken) => {
-  if (context == 'outgoing-bids' || context == 'incoming-bids')
-    return ixtToUSD(data.bid.price)
-  else if (context == 'active-listings')
-    return ixtToUSD(data.sales[0].price)
-  else
-    return ixtToUSD(data.sale_price)
-}
-
-// watch([data, ixtPrice], () => {
-//   rows.value = (data?.nfts ?? []).map((row) => ({
-//     ...row
-//     // usd: usdPriceOrigin(row)
-//   }))
-// }, { immediate: true })
 
 onBeforeUnmount(() => {
   activeFilters.value = []

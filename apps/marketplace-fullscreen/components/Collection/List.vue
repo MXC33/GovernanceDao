@@ -14,7 +14,7 @@ Transition(name="fade" mode="out-in" )
 
 <script lang="ts" setup>
 import type { IXToken } from '@ix/base/composables/Token/useIXToken';
-import type { CollectionContext, CollectionData } from '~/composables/useCollection';
+import type { CollectionContext } from '~/composables/useCollection';
 import type { TableColumn } from '~/composables/useTable'
 const { displayType } = useCollectionSettings()
 const { getTokenKey } = useTokens()
@@ -26,28 +26,6 @@ const { items, columns, context = 'collection' } = defineProps<{
   showFilters: boolean,
   context?: CollectionContext
 }>()
-
-// const rows = ref<IXToken[]>([])
-
-// const usdPriceOrigin = (data: IXToken) => {
-//   if (context == 'outgoing-bids' || context == 'incoming-bids')
-//     return ixtToUSD(data.bid.price)
-//   else if (context == 'active-listings')
-//     return ixtToUSD(data.sales[0].price)
-//   else
-//     return ixtToUSD(data.sale_price)
-// }
-
-// watch([data, ixtPrice], () => {
-//   rows.value = (data?.nfts ?? []).map((row) => ({
-//     ...row,
-//     usd: usdPriceOrigin(row)
-//   }))
-// }, { immediate: true })
-
-// watch(rows, () => {
-//   console.log("New rows", rows.value)
-// }, { deep: true })
 
 </script>
 
