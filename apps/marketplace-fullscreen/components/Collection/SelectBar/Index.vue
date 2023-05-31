@@ -9,7 +9,7 @@ div(v-if="amountSelected != 0" w="full" p="3" pos="sticky bottom-0" z="2" bg="ix
     div(flex="grow")
 
     CollectionSelectBarButton(v-if="context=='my-assets'") Transfer {{amountSelected}} 
-    CollectionSelectBarButton(v-else-if="context=='collection'") Add {{amountSelected}} To Cart 
+    CollectionSelectBarButton(v-else-if="context=='collection'" @click="onAddToCart") Add {{amountSelected}} To Cart 
     tempate(v-else-if="context=='incoming-bids'")
       CollectionSelectBarButton() Reject {{amountSelected}} Bids
       CollectionSelectBarButton() Accept {{amountSelected}} Bids 
@@ -17,7 +17,9 @@ div(v-if="amountSelected != 0" w="full" p="3" pos="sticky bottom-0" z="2" bg="ix
 </template>
 
 <script lang="ts" setup>
+import type { IXToken } from '~/../../layers/ix-base/composables/Token/useIXToken';
 import type { CollectionContext } from '~/composables/useCollection';
+const { addToCart } = useCart()
 
 const props = defineProps<{
   context: CollectionContext
@@ -26,6 +28,10 @@ const props = defineProps<{
 onUnmounted(() => {
   clearSelectedItems()
 })
+
+const onAddToCart = () => {
+  selectedItems.value.map(item => addToCart(item.token))
+}
 
 
 const { selectedItems, clearSelectedItems } = useSelection()
