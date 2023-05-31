@@ -2,7 +2,8 @@
 VList(flex-grow="1" min-h="0" pos="relative" p="8" space-y="6")
   CollectionHeader() 
     template(#header) 
-      slot(name="name") {{ data?.name }}
+      slot(name="name" v-if="data?.name != 'PlanetIX Assets'") {{ data?.name }}
+      slot(name="name" v-else) PlanetIX - Assets
 
     template(#attributes)
       AttributeList(:attributes="attributes" v-if="data")

@@ -1,7 +1,7 @@
 <template lang="pug">
 VList(pos="relative")
   HList(font="bold" px="6" py="3" uppercase="~" w="53" cursor="pointer" @click="toggle" items="center" space-x="2")
-    span(color="white")
+    span(color="gray-200 on-active:white" :active="isActive")
       slot
 
   Transition(name="fade-slow")
