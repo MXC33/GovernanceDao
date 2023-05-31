@@ -4,7 +4,5 @@ VList(color="white" font="bold" uppercase="~" items="center" justify="center") c
 
 
 <script lang="ts" setup>
-definePageMeta({
-  middleware: 'netempire'
-})
+
 </script>
