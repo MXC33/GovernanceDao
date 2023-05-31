@@ -18,8 +18,12 @@ VList(pos="sticky top-0" z="99" w="full")
 
     VList(items="center" pos="relative")
       HList(h="10" b="1 $mc-mint" color="$mc-mint" font="bold" bg="$mc-mint-20" px="8" display="lt-md:none" @click="toggleMenu" items="center" ) 2,234,128 IXT
-      VList(v-if="menuOpen" @click="toggleMenu" pos="absolute top-full left-0 right-0" b="1 gray-400" items="left") 
-        div(v-for="subHeader in settingArr" h="10" p="3" bg="black" px="8" text="sm:3" font="bold" b="b-1 gray-600") {{ subHeader }}  
+      VList(v-if="menuOpen" pos="absolute top-full left-0 right-0" b="1 gray-400" items="left") 
+        //- div(v-for="subHeader in settingArr" h="10" p="3" bg="black" px="8" text="sm:3" font="bold" b="b-1 gray-600") {{ subHeader }}  
+        div(h="10" p="3" bg="black" font="bold" px="4" b="b-1 gray-600" @click="toggleMenuButton" color="hover:$mc-orange") Add funds
+        div(h="10" p="3" bg="black" font="bold" px="4" b="b-1 gray-600" @click="toggleMenuButton" color="hover:$mc-orange") 0x000
+        div(h="10" p="3" bg="black" font="bold" px="4" b="b-1 gray-600" @click="toggleMenuButton" color="hover:$mc-orange") Account Settings
+        div(h="10" p="3" bg="black" font="bold" px="4" b="b-1 gray-600" @click="toggleMenuButton" color="hover:$mc-orange") Log out
 
   Transition(name="slide-top" mode="out-in")
     HeaderItem(v-if="activeMenuIndex != null" :key="activeMenuIndex" @onClickItem="onClicked" :header="siteTopHeaders[activeMenuIndex]")
@@ -53,19 +57,20 @@ const settingArr = ["Add funds", "0x000000000", "Account Settings", "Log Out"]
 const { gotoIXPage } = useIXLinks()
 const { user } = useUser()
 const menuOpen = ref(false)
+const menuButton1 = ref(false)
 const { isSoundEnabled } = useSoundSettings()
 const router = useRouter()
 
 const showIFrame = ref(false)
 
-const {t} = useI18n()
+const { t } = useI18n()
 
 const onClicked = (type: string, category: string, item: string) => {
   //console.log("onClicked Header index", type, category, item)
   const link = t(`marketplace.headers.${type}.${category}.${item}.link`)
 
-  if(link != ''){
-    return navigateTo(link, {external: true})
+  if (link != '') {
+    return navigateTo(link, { external: true })
   }
 
   console.log("No link")
@@ -88,8 +93,11 @@ const toggleSound = () => {
 
 const toggleMenu = () => {
   menuOpen.value = !menuOpen.value
-  console.log('testing this area!')
-  console.log(menuOpen.value)
+}
+
+const toggleMenuButton = () => {
+  menuButton1.value = !menuButton1.value
+  console.log("Clicked?" + menuButton1.value)
 }
 
 </script>
