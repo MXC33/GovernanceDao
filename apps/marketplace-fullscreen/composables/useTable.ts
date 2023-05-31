@@ -42,10 +42,18 @@ interface SortableColumn {
   columnId: string
 }
 
-export const getSortField = (field: SortableColumn) =>
-  [field.columnId, field.type].filter(Boolean).join('-')
+export const useTableSortHelpers = () => {
+  const getSortFieldKey = (field: SortableColumn) =>
+    [field.columnId, field.type].filter(Boolean).join('-')
+
+  return {
+    getSortFieldKey
+  }
+}
 
 export const useTableSort = <T extends TableRow>(id: string) => {
+  const { getSortFieldKey } = useTableSortHelpers()
+
   const sort = useState<TableSort<T>>(`table-${id}`, () => ({
     field: 'type',
     direction: 'asc'
@@ -60,7 +68,7 @@ export const useTableSort = <T extends TableRow>(id: string) => {
   const selectSortField = (field: TableColumnText<T>) => {
     sort.value = {
       direction: 'asc',
-      field: getSortField(field)
+      field: getSortFieldKey(field)
     }
   }
 
@@ -78,6 +86,7 @@ const getDotNotation = (obj: object, key: string) => {
 
 
 export const useTable = () => {
+  const { getSortFieldKey } = useTableSortHelpers()
 
   const getValue = <T extends TableRow>(column: TableColumn<T>, row: T) => {
     if (column.type == 'buttons')
@@ -92,9 +101,13 @@ export const useTable = () => {
   const columnIsSortable = <T extends TableRow>(column: TableColumn<T>): column is TableColumnText<T> =>
     column.type != 'buttons'
 
-  const getSortableColumn = <T extends TableRow>(columns: TableColumn<T>[], columnId: string) =>
-    get(columns).find((col) =>
-      columnIsSortable(col) && col.columnId == columnId) as TableColumnText<T>
+  const getSortableColumn = <T extends TableRow>(columns: TableColumn<T>[], columnId: string) => {
+    const { getSortFieldKey } = useTableSortHelpers()
+
+    return get(columns).find((col) =>
+      columnIsSortable(col) && getSortFieldKey(col) == columnId
+    ) as TableColumnText<T>
+  }
 
   const sortRows = <T extends TableRow>(columns: TableColumn<T>[], rows: T[], sort: TableSort<T>) => {
     const { field, direction } = sort
