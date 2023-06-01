@@ -18,7 +18,9 @@ Popup()
     ListingPrice(:items="items")
 
   template(#buttons)
-    button(@click="closeActivePopup" btn="~ primary") Continue exploring 
+    HList()
+      button(@click="onClickActiveListings" btn="~ secondary") View in active listings
+      button(@click="closeActivePopup" btn="~ primary") Continue exploring 
 
 </template>
   
@@ -33,6 +35,12 @@ const { items } = defineProps<{
 
 const mappedTokens = computed(() => items.map((item) => item.token))
 console.log("Token", mappedTokens)
+
+const onClickActiveListings = () => {
+  navigateTo('/account/active-listings')
+  return closeActivePopup()
+}
+
 defineEmits(["close"])
 </script>
   
