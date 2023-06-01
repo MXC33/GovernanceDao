@@ -30,6 +30,13 @@ Popup(@close="$emit('close')")
 import type { IXToken } from "@ix/base/composables/Token/useIXToken"
 import type { TransferItem } from '~/composables/useTransfer';
 import TransferIcon from '~/assets/icons/transfer.svg'
+const { transferERC1155NFT, transferERC721NFT } = useTransferNFT()
+const { displayPopup } = usePopups()
+
+const isLoading = ref(false)
+const wallet = ref("")
+const oldWalletAdress = ref("")
+const isChecked = ref(false)
 
 defineEmits(['close'])
 
@@ -41,14 +48,11 @@ const transferItem = ref<TransferItem>({
   token: props.token,
   value: 1,
   min: 1,
-  max: props.token.my_shares
+  max: props.token.my_shares,
 })
 
-const { transferERC1155NFT, transferERC721NFT } = useTransferNFT()
 
-const wallet = ref("")
-const oldWalletAdress = ref("")
-const isChecked = ref(false)
+
 
 const onChange = () => {
   if (wallet != oldWalletAdress) {
@@ -60,18 +64,35 @@ const onChange = () => {
 const isWalletValid = computed(() => wallet.value.length > 25 && wallet.value.substring(0, 2) == '0x')
 const isERC1155 = computed(() => ERC1155Addresses.includes(props.token.collection.toLowerCase()))
 
-const itemTransfer = () => {
+const itemTransfer = async () => {
   console.log('transfering Item proccess starting')
   console.log(wallet.value)
   const { token_id, collection } = transferItem.value.token
-  // console.log(props.collectionData)
-  // console.log(props.collectionData.collection)
+
   if (token_id == null)
     return console.log("ERROR, no token ID")
 
-  if (isERC1155.value)
-    return transferERC1155NFT(collection, wallet.value, token_id, transferItem.value.value)
+  isLoading.value = true
+  await transferNFTType(collection, token_id)
+  isLoading.value = false
 
-  return transferERC721NFT(collection, wallet.value, token_id)
+  displayPopup({
+    type: 'transfer-item-successful',
+    item: {
+      ...transferItem.value,
+      toWallet: wallet.value
+    }
+  })
 }
+
+
+const transferNFTType = async (collection: string, token_id: number) => {
+
+  if (isERC1155.value)
+    return await transferERC1155NFT(collection, wallet.value, token_id, transferItem.value.value)
+
+  return await transferERC721NFT(collection, wallet.value, token_id)
+}
+
+
 </script>
