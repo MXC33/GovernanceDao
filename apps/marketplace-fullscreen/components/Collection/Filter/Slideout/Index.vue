@@ -1,5 +1,5 @@
 <template lang="pug">
-VList(w="100" ml="-8" mr="-3" pos="sticky top-52" overflow-y="scroll" h="273")
+VList(w="100" ml="-8" mr="-3" pos="sticky top-66 md:sticky top-52" overflow-y="scroll" h="273")
   CollectionFilterDrawer(v-for="(item, filterIndex) in activeFilters" :is-small="true")
 
     template(#header) {{item.trait_type}}

@@ -1,5 +1,5 @@
 <template lang="pug">
-VList(pos="relative")
+VList(pos="relative" text="lt-md:xs")
   HList(font="bold" px="0" py="3" uppercase="~" cursor="pointer" items="center" space-x="2")
     span(color="white")
       slot
