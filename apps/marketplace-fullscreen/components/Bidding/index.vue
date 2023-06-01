@@ -1,7 +1,7 @@
 <template lang="pug">
 Popup()
   template(#icon)
-    ListingIcon()
+    BiddingIcon()
 
   template(#header) {{ $t(`marketplace.bid.title`) }}
 
@@ -17,36 +17,37 @@ Popup()
     BiddingPrice(:items="bidItems" v-if="bidItems")
 
   template(#buttons)
-    ButtonInteractive(btn="~ primary" w="full" @click.prevent="onClickList" text="Place bid" :invalid="itemsInvalid(bidItems)" :loading="isLoading")
+    ButtonInteractive(btn="~ primary" w="full" @click.prevent="onClickBid" text="Place bid" :invalid="itemsInvalid(bidItems)" :loading="isLoading")
 
 </template>
 
 <script lang="ts" setup>
 import type { IXToken } from "@ix/base/composables/Token/useIXToken"
-import ListingIcon from '~/assets/icons/listing.svg'
-
-const { createBidItems, bidItems } = useBiddingItems()
-const { itemsInvalid } = useTransactions()
+import BiddingIcon from '~/assets/icons/bidding.svg'
 
 const isLoading = ref(false)
 
-const onClickList = async () => {
-  // isLoading.value = true
-  // const list = await listItem(listItems.value[0])
-  // isLoading.value = false
-  // console.log('List result', list)
+const { createBidItems, bidItems } = useBiddingItems()
+const { bidItem } = useBiddingContract()
+const { itemsInvalid } = useTransactions()
 
-  // displayPopup({
-  //   type: 'listing-successful',
-  //   items: listItems.value
-  // })
+const { displayPopup } = usePopups()
+
+const onClickBid = async () => {
+  isLoading.value = true
+  const bid = await bidItem(bidItems.value[0])
+  isLoading.value = false
+  console.log('Bid result', bid)
+
+  displayPopup({
+    type: 'bidding2-successful',
+    items: bidItems.value
+  })
 }
 
 const { items } = defineProps<{
   items: IXToken[],
 }>()
-
-console.log("BIDDDDD", items)
 
 createBidItems(items)
 

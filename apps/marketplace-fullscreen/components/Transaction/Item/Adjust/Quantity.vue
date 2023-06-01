@@ -10,7 +10,7 @@ TransactionItemAdjustRow(v-if="item")
     button(btn="~ form" w="full" @click="onClickMax") Max
 
 </template>
-  
+
 <script lang="ts" setup>
 import type { TransactionItem } from '~/composables/useTransactions'
 
@@ -20,7 +20,6 @@ const onClickMax = () => {
   if (!item.value)
     return
 
-  item.value.shares.value = item.value.token.my_shares
+  item.value.shares.value = item.value.shares.max ? item.value.shares.max as number : item.value.token.my_shares
 }
 </script>
-  
