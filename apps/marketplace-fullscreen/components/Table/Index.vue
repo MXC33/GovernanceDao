@@ -1,6 +1,6 @@
 
 <template lang="pug">
-VList(max-w="full" overflow-x="auto")
+VList(max-w="full" overflow-x="auto"  w="full")
   table(bg="gray-900")
     colgroup
       col(v-for="(column, index) in columns" :style="getColumnStyle(column)")
