@@ -24,24 +24,20 @@ await fetchCollection()
 setupCollectionListeners()
 
 const columns: TableColumn<IXToken>[] = [
-  { label: "Asset", columnId: "name" },
+  { label: "Asset", rowKey: "name" },
   {
-    label: "Unit price", columnId: "sales.price", getValue(row) {
-      return row.sales[0].price
-    }, type: 'ixt', sortable: true
+    label: "Unit price", rowKey: "sales[0].price", type: 'ixt', sortable: true
   },
-  { label: "USD price", columnId: "usd", type: 'usd', sortable: true },
+  { label: "USD price", rowKey: "sales[0].price", type: 'usd', sortable: true },
   {
-    label: "Floor Difference", columnId: "floor", getValue(row) {
+    label: "Floor Difference", rowKey: "floor", getValue(row) {
       if (row.lowest_sale?.price)
         return (row.higher_bid_price - row.lowest_sale.price).toString().substring(0, 5)
       return row.higher_bid_price.toString()
     }, type: 'text'
   },
   {
-    label: "Expiration date", columnId: "sales.endtime", getValue(row) {
-      return row.sales[0].endtime
-    }, type: 'date', sortable: true
+    label: "Expiration date", rowKey: "sales[0].endtime", type: 'date', sortable: true
   },
   {
     type: 'buttons', buttons: [{

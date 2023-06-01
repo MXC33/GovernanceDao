@@ -8,8 +8,6 @@ Collection(:data="data" :columns="columns" :context="'incoming-bids'" v-if="data
 <script lang="ts" setup>
 import type { TableColumn } from "~/composables/useTable";
 import type { IXToken } from "@ix/base/composables/Token/useIXToken";
-import { fromUnixTime } from "date-fns"
-
 
 const { myAssetsURL } = useCollectionsURL()
 
@@ -24,34 +22,28 @@ await fetchCollection()
 setupCollectionListeners()
 
 const columns: TableColumn<IXToken>[] = [
-  { label: "Asset", columnId: "name" },
+  { label: "Asset", rowKey: "name" },
   {
-    label: "Price", columnId: "bid.price", getValue(row) {
-      return row.bid.price
-    }, type: 'ixt', sortable: true
+    label: "Price", rowKey: "bid.price", type: 'ixt', sortable: true
   },
-  { label: "USD price", columnId: "usd", type: 'usd', sortable: true },
   {
-    label: "Floor Difference", columnId: "floor", getValue(row) {
+    label: "USD price", rowKey: "bid.price", type: 'usd', sortable: true
+  },
+  {
+    label: "Floor Difference", rowKey: "floor", getValue(row) {
       if (row.lowest_sale?.price)
         return (row.higher_bid_price - row.lowest_sale.price).toString().substring(0, 5)
       return row.higher_bid_price.toString()
     }, type: 'text'
   },
   {
-    label: "Quantity", columnId: "bid.quantity", getValue(row) {
-      return row.bid.quantity.toString()
-    }, type: 'text'
+    label: "Quantity", rowKey: "bid.quantity", type: 'text'
   },
   {
-    label: "From", columnId: "bid.bidder_username", getValue(row) {
-      return row.bid.bidder_username
-    }, type: 'text'
+    label: "From", rowKey: "bid.bidder_username", type: 'text'
   },
   {
-    label: "Expires", columnId: "bid.due_date", getValue(row) {
-      return row.bid.due_date
-    }, type: 'date', sortable: true
+    label: "Expires", rowKey: "bid.due_date", type: 'date', sortable: true
   },
   {
     type: 'buttons', buttons: [{

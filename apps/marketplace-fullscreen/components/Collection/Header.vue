@@ -9,7 +9,7 @@ VList(space-y="8")
     span(color="gray-50" font="bold" text="3xl")
       slot(name="header")
 
-    CertifiedIcon(w="6")
+    slot(name="cert")
 
   HList(w="full")
     slot(name="attributes")
@@ -17,7 +17,7 @@ VList(space-y="8")
 </template>
 
 <script lang="ts" setup>
-import CertifiedIcon from '~/assets/icons/certified.svg'
+
 </script>
 
 <style>

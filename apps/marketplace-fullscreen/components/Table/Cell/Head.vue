@@ -1,6 +1,6 @@
 
 <template lang="pug">
-th(p="3 first:l-6 last:r-6" bg="gray-900" z="3" font="400" color="gray-200")
+th(p="3 first:l-6 last:r-6" bg="gray-900" z="3" font="400" color="gray-200" whitespace="nowrap")
   button(v-if="column.sortable" @click="onClickSort" flex="~ row" items="start" color="on-active:white" :active="isActive" transition="all")
     HList(space-x="1")
       div()
@@ -17,23 +17,24 @@ th(p="3 first:l-6 last:r-6" bg="gray-900" z="3" font="400" color="gray-200")
 
 <script setup lang="ts" generic="T extends TableRow">
 import SortIcon from '~/assets/icons/sort.svg'
-import type { TableColumnText, TableRow, TableSort, TableSortField } from '~/composables/useTable'
+import type { TableColumnText, TableRow, TableSort } from '~/composables/useTable'
 
-const props = defineProps<{
+const { sortField, index, column } = defineProps<{
   column: TableColumnText<T>,
-  sortField?: TableSort<T>,
+  index: number,
+  sortField?: TableSort,
 }>()
 
 const emit = defineEmits<{
   toggleSort: [],
-  selectField: [item: TableSortField<T>]
+  selectField: [number]
 }>()
 
-const isActive = computed(() => props.sortField?.field == props.column.columnId)
+const isActive = computed(() => sortField?.columnIndex == index)
 
 const direction = computed(() => {
   if (isActive.value)
-    return props.sortField?.direction
+    return sortField?.direction
 
   return 'asc'
 })
@@ -42,7 +43,7 @@ const onClickSort = () => {
   if (isActive.value)
     return emit("toggleSort")
 
-  return emit("selectField", props.column.columnId)
+  return emit("selectField", index)
 }
 
 </script>

@@ -6,12 +6,12 @@ VList(pos="sticky bottom-6" z="300" @click="$emit('close')" w="full" items="end"
 </template>
 
 <script lang="ts" setup>
-import type { NotificationType } from '~/composables/useNotifications';
+import type { SnackNotificationType } from '~/composables/useNotifications';
 
 const { t } = useI18n()
 
 const { type } = defineProps<{
-  type: NotificationType
+  type: SnackNotificationType
 }>()
 
 const message = computed(() => t(`popupNotification.${type}`))

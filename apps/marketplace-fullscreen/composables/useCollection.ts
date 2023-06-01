@@ -64,6 +64,7 @@ export interface CollectionData {
   network: string
   collection: string
   parent: any
+  shares: number
   nfts: IXToken[]
   page_key: string
   filters: APIFilter[]

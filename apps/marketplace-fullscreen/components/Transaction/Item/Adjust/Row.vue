@@ -1,6 +1,6 @@
 <template lang="pug">
 VList(space-y="2")
-  h3(font="bold")
+  h3(font="bold" capitalize="~")
     slot(name="header")
 
   div(grid="~ cols-4 gap-3")

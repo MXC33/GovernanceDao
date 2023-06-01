@@ -458,7 +458,7 @@
       "transferItem": "Transfer Item"
     },
     "bid": {
-      "title": "List Item",
+      "title": "Place Bid",
       "own": "You own",
       "placeholderText": "Put Adress Here",
       "warningText": "Make sure the adress is correct!<br/>There is no way to reverse this transaction",

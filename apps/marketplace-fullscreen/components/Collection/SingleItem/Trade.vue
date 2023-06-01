@@ -20,16 +20,24 @@ VList(space-y="6")
       TitleWithIcon(icon="listing") listings
 
     template(#default)
-      Table(:columns="saleColumns" :rows="item.sales" id="single-item" :in-drawer="true")
+      Table(:columns="saleColumns" :rows="item.sales" id="single-item" :in-drawer="true" v-if="item.sales.length > 0")
         template(#item-action="{row}")
           button(@click="addSaleToCart(row)" bg="gray-500 hover:gray-400" transition="all" cut="bottom-right sm" p="x-6 y-3")
             CartIcon(w="6")
+
+      HList(v-else px="8" py="8" font="bold" color="gray-400" items="center" justify="center") 
+        span() No items found
 
   ContentDrawer(:start-open="true" :is-neutral="true" bg="gray-900")
     template(#titleicon)
       TitleWithIcon(icon="offer") offers
     template(#default)
-      Table(:columns="offerColumns" :rows="item.bids" id="offers" :in-drawer="true")
+      HList(px="8" py="8" font="bold" color="gray-400" items="center" justify="center" v-if="item.my_shares == 0") 
+        span() You do not own any item of this collection
+      HList(v-else-if="item.bids.length = 0" px="8" py="8" font="bold" color="gray-400" items="center" justify="center") 
+        span() There is no offers for this item
+      Table(:columns="offerColumns" :rows="item.bids" id="offers" :in-drawer="true" v-else="item.bids.length > 0")
+
 
 
 </template>
@@ -46,24 +54,28 @@ const { addToCart } = useCart()
 const attributes = computed(() => getSingleAttributes(item))
 
 const saleColumns: TableColumn<Sale>[] = [
-  { label: "Sale Price", columnId: "price", sortable: true },
-  { label: "Quanitity", columnId: "quantity", sortable: true },
-  { label: "Expiration", columnId: "endtime", sortable: true },
-  { label: "Seller", columnId: "player_id", sortable: true },
-  { label: "Action", columnId: "action", width: 80 }
+  { label: "Sale Price", rowKey: "price", sortable: true },
+  { label: "Quanitity", rowKey: "quantity", sortable: true },
+  { label: "Expiration", rowKey: "endtime", sortable: true },
+  { label: "Seller", rowKey: "player_id", sortable: true },
+  { label: "Action", rowKey: "action", width: 80 }
 ]
 
 const addSaleToCart = (sale: Sale) => {
   addToCart(item, sale)
 }
 
+
 const offerColumns: TableColumn<Bid>[] = [
-  { label: "Sale Price", columnId: "price", sortable: true },
-  { label: "Quanitity", columnId: "quantity", sortable: true },
+  { label: "Sale Price", rowKey: "price", sortable: true },
+  { label: "Quanitity", rowKey: "quantity", sortable: true },
 
 ]
 const { item } = defineProps<{
   item: SingleItemData
 }>()
+
+console.log(item.sales, 'item sales', item.my_shares, 'shares')
+
 
 </script>

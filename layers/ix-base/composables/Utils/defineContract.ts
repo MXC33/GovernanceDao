@@ -26,7 +26,7 @@ export interface CreateContractOptions<T> {
 export interface TransactionOptions {
   approve?: () => Promise<unknown>,
   onSuccess?: () => Promise<any>,
-  onFail?: (error? : any) => Promise<any>,
+  onFail?: (error?: any) => Promise<any>,
   onTxApproved?: () => Promise<any>,
   onSuccessAfterMs?: number,
   successOnEventKey?: string | string[],
@@ -158,8 +158,11 @@ export const defineContract = <T extends ContractInterface<T> | object>(key: str
       await txOptions.onFail(error)
 
     resetTransactionState()
-    if (txOptions?.failMessage)
-      addNotification(txOptions?.failMessage ?? failMessage, error?.error.data.message)
+    if (txOptions?.failMessage || failMessage) {
+      console.log("Add notification", failMessage)
+      addNotification(txOptions?.failMessage ?? failMessage, error?.message ?? error?.error?.data?.message)
+    }
+
     console.log("FAILED TX", error, txOptions?.failMessage)
     return false
   }

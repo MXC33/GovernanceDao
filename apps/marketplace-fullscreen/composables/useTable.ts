@@ -1,35 +1,41 @@
 import { MaybeRef } from 'vue'
 import { get } from '@vueuse/core'
+import { IXToken } from '~/../../layers/ix-base/composables/Token/useIXToken'
 
 export type SortOrder = 'desc' | 'asc'
 
 export interface TableRow extends Record<string, any> { }
 
-export interface TableSort<T extends TableRow> {
-  field?: string & keyof T,
+export interface TableSort {
+  columnIndex: number,
   direction: SortOrder
 }
-
-export type TableSortField<T extends TableRow> = string & keyof T
 
 interface TableColumnBase {
   type?: string,
   width?: number
 }
 
-interface TableButton<T extends TableRow> {
+export interface TableButton<T extends TableRow> {
   type: 'primary' | 'secondary',
   text: string,
   onClick: (row: T) => void
 }
 
 export interface TableColumnText<T extends TableRow> extends TableColumnBase {
-  columnId: TableSortField<T> | string,
   label: string,
-  type?: 'text' | 'date' | 'ixt' | 'usd'
+  type?: 'text' | 'date' | 'ixt' | 'usd' | 'asset'
   sortable?: boolean,
+  rowKey?: string,
   getValue?: (row: T) => string | number
 }
+
+export interface TableColumnAsset extends TableColumnBase {
+  label: string,
+  type?: 'asset'
+  sortable?: boolean
+}
+
 export interface TableButtonColumn<T extends TableRow> extends TableColumnBase {
   type: 'buttons'
   buttons: TableButton<T>[]
@@ -37,9 +43,10 @@ export interface TableButtonColumn<T extends TableRow> extends TableColumnBase {
 
 export type TableColumn<T extends TableRow> = TableColumnText<T> | TableButtonColumn<T>
 
-export const useTable = <T extends TableRow>(rows: MaybeRef<T[]>, columns: MaybeRef<TableColumn<T>[]>, id: string) => {
-  const sort = useState<TableSort<T>>(`table-${id}`, () => ({
-    field: 'type',
+
+export const useTableSort = (id: string) => {
+  const sort = useState<TableSort>(`table-${id}`, () => ({
+    columnIndex: 0,
     direction: 'asc'
   }))
 
@@ -49,44 +56,47 @@ export const useTable = <T extends TableRow>(rows: MaybeRef<T[]>, columns: Maybe
     else return sort.value.direction = 'asc'
   }
 
-  const selectSortField = (field: TableSortField<T>) => {
+  const selectSortField = (columnIndex: number) => {
     sort.value = {
       direction: 'asc',
-      field: field
+      columnIndex
     }
   }
 
-  const getValue = (item: TableColumn<T>, row: T) => {
-    if (item.type == 'buttons')
+  return {
+    sort,
+    selectSortField,
+    toggleSortDirection
+  }
+}
+
+const getDotNotation = (obj: object, key: string) => {
+  const getKey = (item: any, key: string) => item[key]
+  return key.split('.').reduce(getKey, obj)
+}
+
+
+export const useTable = () => {
+  const getValue = <T extends TableRow>(column: TableColumn<T>, row: T) => {
+    if (column.type == 'buttons')
       return undefined
 
-    if (item.getValue)
-      return item.getValue(row)
+    if (column.getValue)
+      return column.getValue(row)
 
-    return row[item.columnId]
+    if (column.rowKey)
+      return getDotNotation(row, column.rowKey)
   }
 
-  const columnIsSortable = (column: TableColumn<T>): column is TableColumnText<T> =>
-    column.type != 'buttons'
-
-  const getSortableColumn = (columnId: string) =>
-    get(columns).find((col) => columnIsSortable(col) && col.columnId == columnId) as TableColumnText<T>
-
-  const sortedRows = computed(() => {
-    const data = get(rows)
-    const { field, direction } = sort.value
-
-    if (!field)
-      return data
-
-    const column = getSortableColumn(field)
-
+  const sortRows = <T extends TableRow>(columns: TableColumn<T>[], rows: T[], sort: TableSort) => {
+    const { columnIndex, direction } = sort
+    const column = columns[columnIndex]
     if (!column)
-      return data
+      return
 
     const getField = (row: T) => getValue(column, row) ?? ''
 
-    return data.sort((a, b) => {
+    return rows.sort((a, b) => {
       const aField = getField(a)
       const bField = getField(b)
 
@@ -97,14 +107,11 @@ export const useTable = <T extends TableRow>(rows: MaybeRef<T[]>, columns: Maybe
           ? 1
           : 0;
     });
-  })
+  }
 
 
   return {
-    sort,
-    getValue,
-    toggleSortDirection,
-    selectSortField,
-    sortedRows
+    sortRows,
+    getValue
   }
 }

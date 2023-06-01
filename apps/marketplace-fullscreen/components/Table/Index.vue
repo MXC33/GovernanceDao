@@ -1,35 +1,29 @@
 
 <template lang="pug">
-table(bg="gray-900" w="full")
-  colgroup
-    col(v-for="column in columns" :style="getColumnStyle(column)")
+VList(max-w="full" overflow-x="auto")
+  table(bg="gray-900")
+    colgroup
+      col(v-for="(column, index) in columns" :style="getColumnStyle(column)")
 
-  TableHead()
-    template(v-for="item in columns")
-      TableCellHead(:column="item" :sort-field="sort" @select-field="selectSortField", @toggle-sort="toggleSortDirection" pos="sticky top-50 on-drawer:!top-(-0.2)" :drawer="inDrawer" v-if="item.type != 'buttons'") {{ item.label }}
+    TableHead()
+      template(v-for="(column, index) in columns")
+        TableCellHead(:column="column" :index="index" :sort-field="sort" @select-field="selectSortField", @toggle-sort="toggleSortDirection" pos="sticky top-(-0.2)" :drawer="inDrawer" v-if="column.type != 'buttons'") {{ column.label }}
 
-  tbody(divide-y="1")
-    TableRow(v-for="(row, index) in sortedRows" :key="index")
-      TableCell(v-for="item in columns") 
-        slot(:name="`item-${item.columnId}`" :row="row" :column="item" v-if="item.type != 'buttons'")
-          Currency(:value="Number(getValue(item, row))" type="ixt" v-if="item.type == 'ixt'")
-          Currency(:value="Number(getValue(item, row))" type="usd" v-else-if="item.type == 'usd'")
-          span(v-else-if="item.type == 'date'") {{ getDate(getValue(item, row)) }}
-          span(v-else) {{getValue(item, row)}}
+    tbody(divide-y="1")
+      TableRow(v-for="(row, index) in sortedRows" :key="index")
+        TableCell(v-for="column in columns" pos="on-buttons:(sticky right-0)" :buttons="column.type == 'buttons'") 
+          slot(:name="`item-${column.rowKey}`" :row="row" :column="column" v-if="column.type != 'buttons'")
+            TableCellValue(:column="column" :row="row")
 
-        HList(v-else space-x="3" justify="end")
-          TableButton(:row="row" :is-primary="button.type == 'primary'" @click="button.onClick(row)"  v-for="button in item.buttons" ) {{ button.text }}
-
-
+          HList(v-else space-x="3" justify="end")
+            TableButton(:row="row" :button="button" v-for="button in column.buttons" ) {{ button.text }}
 
 </template>
 
 <script setup lang="ts" generic="Row extends TableRow">
 import type { TableColumn, TableRow } from '~/composables/useTable';
-import { fromUnixTime } from "date-fns"
 
-
-const props = defineProps<{
+const { rows, columns, id } = defineProps<{
   columns: TableColumn<Row>[],
   rows: Row[],
   id: string,
@@ -38,14 +32,9 @@ const props = defineProps<{
   error?: string,
 }>()
 
-console.log(props.rows)
-
-const { sortedRows, sort, getValue, selectSortField, toggleSortDirection } = useTable(props.rows, props.columns, props.id)
-
-console.log("TABLE", props)
-
-const getDate = (date: string | number | undefined) =>
-  fromUnixTime(Number(date)).toDateString()
+const { toggleSortDirection, selectSortField, sort } = useTableSort(id)
+const { sortRows } = useTable()
+const sortedRows = computed(() => sortRows(columns, rows, sort.value))
 
 const getColumnStyle = (item: TableColumn<Row>) => {
   if (!item.width)

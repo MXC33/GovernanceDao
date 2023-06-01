@@ -21,7 +21,7 @@ const globalY = useGlobalWindowScroll()
 const { y } = useWindowScroll()
 const { connectWallet, walletState } = useWallet()
 const { setupIXTPrice, ixtPrice } = useIXTPrice()
-const { activeNotification } = useNotifications()
+const { activeNotification } = useSnackNotifications()
 
 const { setRefreshToken } = useLogin()
 const { user } = useUser()
