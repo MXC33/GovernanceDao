@@ -7,7 +7,6 @@ Popup(@close="$emit('close')")
 
   template(#default)
     VList(space-y="3")
-      //-Title Image Collection how many you have  
       TransferInfo(v-model="transferItem" :showAdjustable="isERC1155")
 
       div(v-html="$t(`marketplace.transfer.walletAdress`)")
@@ -22,7 +21,7 @@ Popup(@close="$emit('close')")
       div(v-html="$t(`marketplace.transfer.verifyText`)")
 
   template(#buttons)
-    button(btn="~ primary" disable="on-invalid:active" :invalid="!isChecked || !isWalletValid" @click="itemTransfer") {{  $t(`marketplace.transfer.transferItem`) }}
+    ButtonInteractive(btn="~ primary" disable="on-invalid:active" :invalid="!isChecked || !isWalletValid" @click="itemTransfer" :loading="isLoading" text="Transfer") {{  $t(`marketplace.transfer.transferItem`) }}
 
 </template>
 
@@ -51,17 +50,15 @@ const transferItem = ref<TransferItem>({
   max: props.token.my_shares,
 })
 
-
-
-
 const onChange = () => {
   if (wallet != oldWalletAdress) {
     isChecked.value = false;
     oldWalletAdress.value = wallet.value;
   }
 }
-//&& wallet.value.substring(0, 2) == '0x'
+
 const isWalletValid = computed(() => wallet.value.length > 25 && wallet.value.substring(0, 2) == '0x')
+
 const isERC1155 = computed(() => ERC1155Addresses.includes(props.token.collection.toLowerCase()))
 
 const itemTransfer = async () => {
@@ -73,16 +70,18 @@ const itemTransfer = async () => {
     return console.log("ERROR, no token ID")
 
   isLoading.value = true
-  await transferNFTType(collection, token_id)
+  const transfer = await transferNFTType(collection, token_id)
   isLoading.value = false
+  if (transfer) {
+    displayPopup({
+      type: 'transfer-item-successful',
+      item: {
+        ...transferItem.value,
+        toWallet: wallet.value
+      }
+    })
+  }
 
-  displayPopup({
-    type: 'transfer-item-successful',
-    item: {
-      ...transferItem.value,
-      toWallet: wallet.value
-    }
-  })
 }
 
 
