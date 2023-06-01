@@ -27,10 +27,6 @@ const is721 = ERC721Addresses.includes(item.collection)
 const cantBuy = computed(() => item.my_shares > 0 && is721)
 const canSell = computed(() => item.my_shares > 0)
 
-console.log(cantBuy.value, 'cant buy')
-
-// const { tabs, activeTab } = useTabList(['sell', 'buy'].filter((tab) => tab == 'buy' || cantBuy.value || canSell.value))
-
 const { tabs, activeTab } = useTabList(['sell', 'buy'].filter((tab) => {
   if (tab === 'buy') {
     return !cantBuy.value
