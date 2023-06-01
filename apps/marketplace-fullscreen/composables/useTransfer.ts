@@ -3,6 +3,7 @@ import { AdjustableNumber } from "@ix/base/composables/Utils/useAdjustableNumber
 
 export interface TransferItem extends AdjustableNumber {
   token: IXToken,
+  toWallet?: string
 }
 
 export const useTransfer = () => {

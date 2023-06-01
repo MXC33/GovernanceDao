@@ -1,7 +1,8 @@
 import { IXToken } from "~/../../layers/ix-base/composables/Token/useIXToken";
 import { CartItem } from "./useCart";
 import { ListingItem } from "./useListing";
-import {BiddingItem} from "~/composables/useBidding";
+import { BiddingItem } from "~/composables/useBidding";
+import { TransferItem } from "./useTransfer";
 
 export interface PopupBase {
   type: string
@@ -27,6 +28,11 @@ export interface PopupTransfer extends PopupBase {
   item: IXToken
 }
 
+export interface PopupTransferSuccess extends PopupBase {
+  type: 'transfer-item-successful',
+  item: TransferItem
+}
+
 export interface PopupListItem extends PopupBase {
   type: 'list-item',
   items: IXToken[]
@@ -37,7 +43,7 @@ export interface PopupBidItem extends PopupBase {
   items: IXToken[]
 }
 
-type Popup = PopupOnList | PopupOnBidding | PopupOnBid | PopupTransfer | PopupListItem | PopupBidItem
+type Popup = PopupOnList | PopupOnBidding | PopupOnBid | PopupTransfer | PopupListItem | PopupBidItem | PopupTransferSuccess
 
 export const usePopups = () => {
   const popup = useState<Popup | null>('active-popup', () => null)
