@@ -4,12 +4,8 @@ VList(pos="sticky top-0" z="99" w="full" @mouseenter="isSelected = true" @mousel
     NuxtLink(to="https://www.planetix.com")
       PlanetIXNew(w="42.25")
 
-    HList(space-x="8" px="8" items="center" font="bold" text="lg" flex-grow="1" overflow="auto")
-      HeaderLink(v-for="(item, index) in siteTopHeaders" @click="OpenMeny(index)") {{ $t(`marketplace.headers.${item.type}.title`)}}
-      //- HeaderLink(to="/" display="lt-md:none") buy ixt
-      //- HeaderLink(to="/" display="lt-md:none") play now
-      //- HeaderLink(to="/" display="lt-md:none") staking
-      //- HeaderLink(to="/" display="lt-md:none") community
+    HList(space-x="8" px="8" items="center" font="bold" text="lg" flex-grow="1" overflow="auto" display="lt-md:none")
+      HeaderLink(v-for="(item, index) in siteTopHeaders" @click="openMenu(index)") {{ $t(`marketplace.headers.${item.type}.title`)}}
 
     HList(font="bold" space-x="6" px="6")
       HeaderLink(to="/" display="lt-md:none") help
@@ -48,7 +44,7 @@ const { siteTopHeaders } = useSiteHeader()
 
 const activeMenuIndex = ref<number | null>(null)
 
-const OpenMeny = (index: number) => {
+const openMenu = (index: number) => {
   console.log("Open Menu", index);
 
   if (activeMenuIndex.value == index)

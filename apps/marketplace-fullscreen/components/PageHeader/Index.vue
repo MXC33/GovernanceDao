@@ -6,9 +6,19 @@ transition(name="fade-slow")
   HList(py="4" justify="between" items="center" pos="sticky top-16" z="5" bg="on-locked:ix-black" px="8" transition="all" :locked="isScrolling")
     //- NetEmpireLogo(w="45")
     NuxtLink(:to="'/'" w="full")
-      NetBetaLogo(w="55")
+      HList(justify="between")
+        NetBetaLogo(w="55")
 
-    HList(space-x="4" w="full" justify="end" items="center")
+        HList(space-x="4" display="md:none")
+          ButtonSquareIcon(@click="onClickAccount")
+            UserIcon(w="6")
+
+          ButtonSquareIcon(@click="viewingCart = true")
+            CartIcon(w="6")
+
+      CollectionSelect(display="md:none" py="4")
+
+    HList(space-x="4" w="full" justify="end" items="center" display="lt-md:none")
       CollectionSelect()
 
       ButtonSquareIcon(@click="onClickAccount")

@@ -1,8 +1,8 @@
 <template lang="pug">
-VList(max-w="full" overflow-x="auto")
+VList(max-w="full" overflow-x="auto" w="full")
   table(bg="gray-900")
-    colgroup
-      col(v-for="(column, index) in columns" :style="getColumnStyle(column)")
+    //- colgroup
+    //-   col(v-for="(column, index) in columns" :style="getColumnStyle(column)")
 
     TableHead()
       template(v-for="(column, index) in columns")
@@ -35,15 +35,15 @@ const { toggleSortDirection, selectSortField, sort } = useTableSort(id)
 const { sortRows } = useTable()
 const sortedRows = computed(() => sortRows(columns, rows, sort.value))
 
-const getColumnStyle = (item: TableColumn<Row>) => {
-  if (!item.width)
-    return {}
+// const getColumnStyle = (item: TableColumn<Row>) => {
+//   if (!item.width)
+//     return {}
 
-  return {
-    'width': `${item.width}px`,
-    'min-width': `${item.width}px`,
-  }
-}
+//   return {
+//     'width': `${item.width}px`,
+//     'min-width': `${item.width}px`,
+//   }
+// }
 
 </script>
 
