@@ -33,6 +33,9 @@ export const useBuyItems = (item: SingleItemData) => {
       maxPrice.value = 0
     else
       maxPrice.value = roundToDecimals(getAveragePrice(item.sales), 4)
+
+    if (shares.value.max && shares.value.value > shares.value.max)
+      shares.value.value = shares.value.max
   })
 
   const selectedSalesToBuy = computed<BuyItem>(() => {
@@ -93,8 +96,11 @@ export const useBuyItems = (item: SingleItemData) => {
 
   const aboveFloorPrice = computed<number>(() => {
     if (!averagePricePerItem) return 0
+    const avg = roundToDecimals(
+      getAveragePrice(selectedSalesToBuy.value.sales as Sale[])
+      , 8)
     return roundToDecimals(
-      ((averagePricePerItem.value * 100) / item.sale_price) - 100
+      ((avg * 100) / item.sale_price) - 100
       , 2)
   })
 

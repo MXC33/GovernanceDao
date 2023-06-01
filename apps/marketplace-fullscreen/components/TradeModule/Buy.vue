@@ -5,8 +5,12 @@ VList()
       template(v-if="!isSubstituteListing")
         span(color="gray-200") Total Price
         HList(items="end" space-x="3" )
-          span(color="white" font="bold" text="4xl") {{totalPrice}} IXT
-          span(color="gray-200" font="bold" text="lg") ${{ ixtToUSD(totalPrice) }}
+          template(v-if="!isDisabled" )
+            span(color="white" font="bold" text="4xl") {{totalPrice}} IXT
+            span(color="gray-200" font="bold" text="lg") ${{ ixtToUSD(totalPrice) }}
+          template
+            span(color="white" font="bold" text="4xl") -- IXT
+            span(color="gray-200" font="bold" text="lg") $ --
 
       template(v-else)
         span(color="gray-200") Max Price
@@ -41,27 +45,27 @@ VList()
   div(grid="~ cols-2" text="base")
     ButtonInteractive(btn="~ secondary" font="bold" @click="onClickOffer" text="Make offer")
 
-    ButtonInteractive(btn="~ primary" font="bold" @click="buy" :text="`Buy ${shares.value} item`")
+    ButtonInteractive(btn="~ primary" font="bold" @click="buy" v-if="!isDisabled" :text="`Buy ${shares.value} item`")
+    ButtonInteractive(btn="~ primary" bg="on-disabled:gray-700" color="on-disabled:gray-400" cursor="default" font="bold" :disabled="isDisabled" text="There is no sales" v-else)
 
 </template>
 
 <script lang="ts" setup>
 import type { SingleItemData } from '@ix/base/composables/Token/useIXToken';
 import { useBuyContract, useBuyItems } from "~/composables/useBuy";
-import {useBiddingContract, useBiddingItems} from "~/composables/useBidding";
 
 const { ixtToUSD } = useIXTPrice()
 const { displayPopup } = usePopups()
-const props = defineProps<{
-  ownerValue?: string | number,
+const { item, ownerValue, isDisabled } = defineProps<{
   item: SingleItemData
+  isDisabled?: boolean
+  ownerValue?: string | number
 }>()
-
 
 const onClickOffer = () => {
   displayPopup({
     type: 'bid-item',
-    items: [props.item]
+    items: [item]
   })
 }
 
@@ -75,7 +79,7 @@ const {
   averagePricePerItem,
   aboveFloorPrice,
   showIncreaseMaxPrice
-} = useBuyItems(props.item)
+} = useBuyItems(item)
 
 const { checkoutSales } = useBuyContract()
 
@@ -86,18 +90,6 @@ const buy = async () => {
     shares.value.value
   ))
 }
-
-/** BIDDING **/
-const { createBidItems, bidItems,  } = useBiddingItems()
-const { bidItem } = useBiddingContract()
-createBidItems([props.item])
-
-const makeOffer = async () => {
-  bidItems.value[0].ixtPrice = 0.01
-  const bid = await bidItem(bidItems.value[0])
-  console.log('makeOffer bid', bid)
-}
-/** END BIDDING **/
 
 </script>
 
