@@ -1,5 +1,5 @@
 <template lang="pug">
-Collection(:data="data" :columns="columns" :context="'active-listings'" v-if="data" :hide-grid="true")
+Collection(:data="splitSales" :columns="columns" :context="'active-listings'" v-if="data" :hide-grid="true")
   template(#menu)
     AccountMenu()
 
@@ -9,7 +9,7 @@ Collection(:data="data" :columns="columns" :context="'active-listings'" v-if="da
 <script lang="ts" setup>
 import type { TableColumn } from "~/composables/useTable";
 import type { IXToken } from "@ix/base/composables/Token/useIXToken";
-import { fromUnixTime } from "date-fns"
+import type { CollectionData } from "~/composables/useCollection";
 
 const { myAssetsURL } = useCollectionsURL()
 
@@ -53,6 +53,25 @@ const columns: TableColumn<IXToken>[] = [
   },
 
 ]
+
+const splitSales = computed<CollectionData | undefined>(() => {
+  if (!data.value)
+    return undefined
+  const newData = { ...data.value }
+
+  newData.nfts = newData.nfts.flatMap(nft => {
+    if (!nft.sales || nft.sales.length === 0)
+      return nft
+
+    return nft.sales.map(sale => {
+      const newNft = { ...nft }
+      newNft.sales = [sale]
+      return newNft
+    })
+  })
+
+  return newData
+})
 
 const { removeBid, placeBid } = useBidsAPI()
 
