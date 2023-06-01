@@ -7,6 +7,8 @@ div#popups()
 
     CompletePlacedBids(v-else-if="popup.type == 'bidding-successful'" :items="popup.items")
 
+    CompleteTransfer(v-else-if="popup.type == 'transfer-item-successful'" :item="popup.item")
+
     Transfer(v-else-if="popup.type == 'transfer-item'" :token="popup.item")
 
     Listing(v-else-if="popup.type == 'list-item'" :items="popup.items")
