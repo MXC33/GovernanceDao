@@ -133,7 +133,6 @@ export const useBuyContract = () => {
     }
 
     const { allowanceCheck } = getIXTokenContract()
-    const { fulfillAvailableAdvancedOrders } = getSeaportContract()
 
     if (!await allowanceCheck(totalPrice)) {
       /*
@@ -143,6 +142,8 @@ export const useBuyContract = () => {
       alert('Allowance didn\'t work')
       return false
     }
+
+    const { fulfillAvailableAdvancedOrders } = getSeaportContract()
 
     const pixMerkleParam = {
       merklePixInfo: {

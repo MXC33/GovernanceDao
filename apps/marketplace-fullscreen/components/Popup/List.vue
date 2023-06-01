@@ -3,6 +3,8 @@ div#popups()
   template(v-if="popup")
     CompleteListing(v-if="popup.type == 'listing-successful'" :items="popup.items")
 
+    CompleteBidding(v-else-if="popup.type == 'bidding2-successful'" :items="popup.items")
+
     CompletePlacedBids(v-else-if="popup.type == 'bidding-successful'" :items="popup.items")
 
     Transfer(v-else-if="popup.type == 'transfer-item'" :token="popup.item")

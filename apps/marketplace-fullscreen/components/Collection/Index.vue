@@ -12,10 +12,14 @@ VList(flex-grow="1" min-h="0" pos="relative" p="8 b-30" space-y="6")
 
   slot(name="menu")
 
-  //- HelperBorderScroll(pos="sticky top-33")
   CollectionFilter(:items="data.nfts" :filters="data.filters" :hide-toggle="hideGrid" v-if="data"  @toggle-filter="toggleFilterDrawer")
 
-  CollectionList(:columns="renderColumns" :items="data?.nfts" v-if="data" :hide-grid="hideGrid", :context="context" :show-filters="showFilters")
+  HList(space-x="0 on-open:3" pos="relative" :open="showFilters")
+    VList(pos="sticky top-48")
+      Transition(name="slide-left")
+        CollectionFilterSlideout(:items="data.filters" v-if="showFilters && data")
+
+    CollectionList(:columns="renderColumns" :items="data?.nfts" v-if="data" :hide-grid="hideGrid", :context="context" :show-filters="showFilters")
 
   slot(name="bottom")
 
@@ -49,6 +53,7 @@ const showFilters = ref(false)
 
 const toggleFilterDrawer = () => {
   showFilters.value = !showFilters.value
+  console.log(showFilters.value)
 }
 
 const { data, columns, context = 'collection' } = defineProps<{
