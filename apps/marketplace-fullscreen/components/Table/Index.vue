@@ -11,7 +11,7 @@ VList(max-w="full" overflow-x="auto"  w="full")
 
     tbody(divide-y="1")
       TableRow(v-for="(row, index) in sortedRows" :key="index")
-        TableCell(v-for="column in columns" pos="on-buttons:(sticky right-0)" :buttons="column.type == 'buttons'") 
+        TableCell(v-for="column in columns" pos="on-buttons:(sticky right-0)" :buttons="column.type == 'buttons'" bg="gray-900") 
           slot(:name="`item-${column.rowKey}`" :row="row" :column="column" v-if="column.type != 'buttons'")
             TableCellValue(:column="column" :row="row")
 
