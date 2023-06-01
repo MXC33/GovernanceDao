@@ -1,5 +1,5 @@
 <template lang="pug">
-VList(flex-grow="1" min-h="0" pos="relative" p="8 b-30" space-y="6")
+VList(flex-grow="1" min-h="0" pos="relative" p="4 t-4 b-30 md:8 b-30" space-y="6")
   CollectionHeader() 
     template(#header) 
       slot(name="name") {{ collectionName }}
