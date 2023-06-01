@@ -1,5 +1,5 @@
 <template lang="pug">
-VList(flex-grow="1" min-h="0" pos="relative" p="8 b-30" space-y="6")
+VList(flex-grow="1" min-h="0" pos="relative" p="4 t-4 b-30 md:8 b-30" space-y="6")
   CollectionHeader() 
     template(#header) 
       slot(name="name") {{ collectionName }}
@@ -14,12 +14,19 @@ VList(flex-grow="1" min-h="0" pos="relative" p="8 b-30" space-y="6")
 
   CollectionFilter(:items="data.nfts" :filters="data.filters" :hide-toggle="hideGrid" v-if="data"  @toggle-filter="toggleFilterDrawer")
 
-  HList(space-x="0 on-open:3" pos="relative" :open="showFilters")
-    VList(pos="sticky top-48")
+  HList(space-x="0 on-open:3" pos="relative" :open="showFilters" display="lt-md:none")
+    VList(pos="sticky top-48" z="99")
       Transition(name="slide-left")
         CollectionFilterSlideout(:items="data.filters" v-if="showFilters && data")
 
     CollectionList(:columns="renderColumns" :items="data?.nfts" v-if="data" :hide-grid="hideGrid", :context="context" :show-filters="showFilters")
+
+  HList(space-x="0 on-open:3" pos="sticky top-64" z="99" :open="showFilters" display="md:none")
+    VList(pos="sticky top-48" z="99")
+      Transition(name="slide-left")
+        CollectionFilterSlideout(:items="data.filters" v-if="showFilters && data")
+
+  CollectionList(:columns="renderColumns" :items="data?.nfts" v-if="data" :hide-grid="hideGrid", :context="context" :show-filters="showFilters" pos="sticky top-64" z="3" display="md:none")
 
   slot(name="bottom")
 
