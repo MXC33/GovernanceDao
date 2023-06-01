@@ -71,9 +71,14 @@ export const useTableSort = (id: string) => {
 }
 
 const getDotNotation = (obj: object, key: string) => {
-  const getKey = (item: any, key: string) => item[key]
-  return key.split('.').reduce(getKey, obj)
+  const keyParts = key.split(/[\.\[\]]+/).filter(Boolean); // split on . and [], and filter out empty strings
+  const getKey = (item: any, key: string) => {
+
+    return item[key];
+  }
+  return keyParts.reduce(getKey, obj);
 }
+
 
 
 export const useTable = () => {
