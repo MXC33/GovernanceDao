@@ -34,7 +34,7 @@ const { items } = defineProps<{
 }>()
 
 const mappedTokens = computed(() => items.map((item) => item.token))
-console.log("Token", mappedTokens)
+console.log("Token", mappedTokens.value)
 
 const onClickActiveListings = () => {
   navigateTo('/account/active-listings')

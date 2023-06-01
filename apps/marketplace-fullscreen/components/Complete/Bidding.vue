@@ -18,20 +18,29 @@ Popup()
     BiddingPrice(:items="items" )
 
   template(#buttons)
-    button(@click="closeActivePopup" btn="~ primary") Continue exploring
+    HList()
+      button(@click="onClickOutgoingBids" btn="~ secondary") View in outgoing bids
+      button(@click="closeActivePopup" btn="~ primary") Continue exploring
 
 </template>
 
 
 <script lang="ts" setup>
 import CheckboxIcon from '~/assets/icons/checkmark-green.svg'
-import type { ListingItem } from '~/composables/useListing';
+import type { BiddingItem } from '~/composables/useBidding';
 const { closeActivePopup } = usePopups()
 const { items } = defineProps<{
-  items: ListingItem[]
+  items: BiddingItem[]
 }>()
 
 const mappedTokens = computed(() => items.map((item) => item.token))
 console.log("Token", mappedTokens)
+
+const onClickOutgoingBids = () => {
+  navigateTo('/account/bids/outgoing')
+  return closeActivePopup()
+}
+
 defineEmits(["close"])
+
 </script>
