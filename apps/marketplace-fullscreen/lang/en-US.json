@@ -421,7 +421,7 @@
     },
     "myAssets": {
       "myItems": "My items",
-      "favourites": "Favourites",
+      "favorites": "Favorites",
       "incomingBids": "Incoming Bids",
       "outgoingBids": "Outgoing Bids",
       "activeListings": "Active Listings",
