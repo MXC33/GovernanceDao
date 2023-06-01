@@ -13,13 +13,6 @@ import { makeRandomNumberKey } from "@ix/base/composables/Utils/useHelpers";
 import { ListingAssets, ListingsBody, useListEndpoints } from "~/composables/api/post/useListAPI";
 import { TransactionItem } from "./useTransactions";
 
-export type DurationValue = 0 | 1 | 2 | 3
-
-export interface Duration {
-  value: DurationValue,
-  name: string
-}
-
 export interface ListingItem extends TransactionItem {
   type: 'list'
 }
