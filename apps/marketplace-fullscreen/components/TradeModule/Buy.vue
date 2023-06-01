@@ -48,6 +48,7 @@ VList()
 <script lang="ts" setup>
 import type { SingleItemData } from '@ix/base/composables/Token/useIXToken';
 import { useBuyContract, useBuyItems } from "~/composables/useBuy";
+import {useBiddingContract, useBiddingItems} from "~/composables/useBidding";
 
 const { ixtToUSD } = useIXTPrice()
 const { displayPopup } = usePopups()
@@ -85,6 +86,18 @@ const buy = async () => {
     shares.value.value
   ))
 }
+
+/** BIDDING **/
+const { createBidItems, bidItems,  } = useBiddingItems()
+const { bidItem } = useBiddingContract()
+createBidItems([props.item])
+
+const makeOffer = async () => {
+  bidItems.value[0].ixtPrice = 0.01
+  const bid = await bidItem(bidItems.value[0])
+  console.log('makeOffer bid', bid)
+}
+/** END BIDDING **/
 
 </script>
 

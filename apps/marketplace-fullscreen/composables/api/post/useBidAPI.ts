@@ -1,5 +1,16 @@
 import { CartItem } from "~/composables/useCart"
 
+export interface BiddingBody {
+  index: string,
+  reference_id: number,
+  price: number,
+  due_date: number,
+  quantity: number,
+  network: string,
+  collection: string,
+  message: string
+}
+
 export const useBids = () => {
   const { placeBid: placeBidAPI } = useBidsAPI()
 
@@ -18,13 +29,7 @@ export const useBids = () => {
 
 
 export const useBidsAPI = () => {
-  const placeBid = (index: string, referenceId: number, price: number, message: string, sale_id?: number) => fetchIXAPI('web3/bid', 'POST', {
-    index,
-    referenceId,
-    sale_id,
-    price,
-    message
-  })
+  const placeBid = async (body: BiddingBody[]) => fetchIXAPI('web3/bid', 'POST', body)
 
 
   const removeBid = (index: string, referenceId: number, playerId: number, saleId?: number) => fetchIXAPI('/web3/bid/remove/' + playerId, 'POST', {
