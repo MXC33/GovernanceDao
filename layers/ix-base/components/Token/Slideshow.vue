@@ -1,5 +1,5 @@
 <template lang="pug">
-Carousel(:items-to-show="tokens.length == 1 ? 0 : 1" :autoplay="2000" :wrap-around="true")
+Carousel(:items-to-show="length" :autoplay="2000" :wrap-around="true")
   Slide(v-for="(token, index) in tokens" :key="index")
     TokenImage(:token="token" :key="getTokenKey(token, '-', true)" h="full" w="full" pos="absolute")
 
@@ -10,9 +10,11 @@ import { Carousel, Slide } from 'vue3-carousel'
 import type { AnyToken } from '~/composables/Token/useTokens';
 const { getTokenKey } = useTokens()
 
-defineProps<{
+const { tokens } = defineProps<{
   tokens: AnyToken[]
 }>()
+
+const length = computed(() => tokens.length == 1 ? 0 : 1)
 
 </script>
 
