@@ -4,9 +4,9 @@ VList()
     span(color="gray-200") Best offer
 
     HList(items="end" space-x="3")
-      span(color="white" font="bold" text="4xl" v-if="!isDisabled") {{ item.sale_price }} IXT
+      span(color="white" font="bold" text="4xl" v-if="!isDisabled") {{ item.higher_bid_price }} IXT
       span(color="white" font="bold" text="4xl" v-else="isDisabled") -- IXT
-      span(color="gray-200" font="bold" text="lg" v-if="!isDisabled") ${{ ixtToUSD(item.sale_price) }}
+      span(color="gray-200" font="bold" text="lg" v-if="!isDisabled") ${{ ixtToUSD(item.higher_bid_price) }}
       span(color="gray-200" font="bold" text="lg" v-if="isDisabled") $ --
 
 

@@ -12,8 +12,7 @@ VList(space-y="6")
   //- Listing(:item="item")
 
   TradeModule(:item="item")
-    template(#header)
-      TabItem(v-for="tab in tabs" :id="tab" v-model="activeTab") {{ tab }}
+
 
   ContentDrawer(:start-open="true" :is-neutral="true" bg="gray-900")
     template(#titleicon)
@@ -25,17 +24,19 @@ VList(space-y="6")
           button(@click="addSaleToCart(row)" bg="gray-500 hover:gray-400" transition="all" cut="bottom-right sm" p="x-6 y-3")
             CartIcon(w="6")
 
-      HList(v-else px="8" py="8" font="bold" color="gray-400" items="center" justify="center") 
+      HList(v-else px="6" py="6" font="bold" color="gray-400" items="center" justify="center") 
         span() No items found
 
   ContentDrawer(:start-open="true" :is-neutral="true" bg="gray-900")
     template(#titleicon)
       TitleWithIcon(icon="offer") offers
     template(#default)
-      HList(px="8" py="8" font="bold" color="gray-400" items="center" justify="center" v-if="item.my_shares == 0") 
+      HList(px="6" py="6" font="bold" color="gray-400" items="center" justify="center" v-if="item.my_shares == 0") 
         span() You do not own any item of this collection
-      HList(v-else-if="item.bids.length = 0" px="8" py="8" font="bold" color="gray-400" items="center" justify="center") 
+
+      HList(v-else-if="item.bids.length < 1" px="6" py="6" font="bold" color="gray-400" items="center" justify="center") 
         span() There is no offers for this item
+
       Table(:columns="offerColumns" :rows="item.bids" id="offers" :in-drawer="true" v-else="item.bids.length > 0")
 
 
@@ -47,7 +48,7 @@ import CartIcon from '~/assets/icons/cart.svg'
 import type { Sale, SingleItemData, Bid } from '@ix/base/composables/Token/useIXToken';
 import type { TableColumn } from '~/composables/useTable';
 
-const { tabs, activeTab } = useTabList(['sell', 'buy'])
+// const { tabs, activeTab } = useTabList(['sell', 'buy'])
 
 const { getSingleAttributes } = useDefaulAttributes()
 const { addToCart } = useCart()
@@ -65,7 +66,6 @@ const addSaleToCart = (sale: Sale) => {
   addToCart(item, sale)
 }
 
-
 const offerColumns: TableColumn<Bid>[] = [
   { label: "Sale Price", rowKey: "price", sortable: true },
   { label: "Quanitity", rowKey: "quantity", sortable: true },
@@ -75,7 +75,7 @@ const { item } = defineProps<{
   item: SingleItemData
 }>()
 
-console.log(item.sales, 'item sales', item.my_shares, 'shares')
+console.log(item.sales, 'item sales', item.my_shares, 'shares', item.bids, 'bids')
 
 
 </script>
