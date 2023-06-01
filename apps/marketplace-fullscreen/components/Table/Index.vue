@@ -1,6 +1,5 @@
-
 <template lang="pug">
-VList(max-w="full" overflow-x="auto"  w="full")
+VList(max-w="full" overflow-x="auto")
   table(bg="gray-900")
     colgroup
       col(v-for="(column, index) in columns" :style="getColumnStyle(column)")
@@ -11,7 +10,7 @@ VList(max-w="full" overflow-x="auto"  w="full")
 
     tbody(divide-y="1")
       TableRow(v-for="(row, index) in sortedRows" :key="index")
-        TableCell(v-for="column in columns" pos="on-buttons:(sticky right-0)" :buttons="column.type == 'buttons'" bg="gray-900") 
+        TableCell(v-for="column in columns" pos="on-buttons:(sticky right-0)" :buttons="column.type == 'buttons'") 
           slot(:name="`item-${column.rowKey}`" :row="row" :column="column" v-if="column.type != 'buttons'")
             TableCellValue(:column="column" :row="row")
 
@@ -45,6 +44,7 @@ const getColumnStyle = (item: TableColumn<Row>) => {
     'min-width': `${item.width}px`,
   }
 }
+
 </script>
 
 <style scoped>

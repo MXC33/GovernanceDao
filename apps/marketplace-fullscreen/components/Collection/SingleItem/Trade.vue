@@ -34,12 +34,10 @@ VList(space-y="6")
       HList(px="6" py="6" font="bold" color="gray-400" items="center" justify="center" v-if="item.my_shares == 0") 
         span() You do not own any item of this collection
 
-      HList(v-else-if="item.bids.length < 1" px="6" py="6" font="bold" color="gray-400" items="center" justify="center") 
+      HList(px="6" py="6" font="bold" color="gray-400" items="center" justify="center" v-else-if="item.bids.length < 1" ) 
         span() There is no offers for this item
 
       Table(:columns="offerColumns" :rows="item.bids" id="offers" :in-drawer="true" v-else="item.bids.length > 0")
-
-
 
 </template>
 
