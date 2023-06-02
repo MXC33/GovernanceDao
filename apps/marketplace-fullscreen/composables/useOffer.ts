@@ -1,5 +1,7 @@
-import {Bid, IXToken, SingleItemData} from "@ix/base/composables/Token/useIXToken";
+import {AdvancedOrder, Bid, IXToken, SingleItemData} from "@ix/base/composables/Token/useIXToken";
 import {AdjustableNumber} from "@ix/base/composables/Utils/useAdjustableNumber";
+import {get1155Contract, getIXTokenContract, getSeaportContract} from "~/composables/useAssetContracts";
+import {conduitKey} from "@ix/base/composables/Contract/WalletAddresses";
 
 export interface OfferItem {
   token: IXToken,
@@ -118,5 +120,110 @@ export const useOfferItems = (item: SingleItemData) => {
     averageOfferPerItem,
     belowHighestOffer,
     showDecreaseMinPrice
+  }
+}
+
+export const useOfferContract = () => {
+  const acceptOffers = async (offerItem: OfferItem, totalOffer: number, quantity: number) => {
+    //Todo Start loading overlay
+    console.log('start Loading overlay')
+
+    const { token: { collection, token_id }, bids  } = offerItem
+
+    if (!bids || !bids.length) {
+      /*
+        Todo
+        There are no sales
+      */
+      alert('There are no offers')
+      return false
+    }
+
+    const IXTokenContract = get1155Contract(collection as string)
+    const approveNftCheck = await IXTokenContract.approveNftCheck()
+    if (!approveNftCheck) {
+      /*
+        Todo
+        Approve didn't work
+      */
+      alert('Approve didn\'t work')
+      return false
+    }
+
+    const { allowanceCheck } = getIXTokenContract()
+    if (!await allowanceCheck(totalOffer)) {
+      /*
+        Todo
+        Approve didn't work
+      */
+      alert('Allowance didn\'t work')
+      return false
+    }
+
+    const { fulfillAvailableAdvancedOrders } = getSeaportContract()
+
+    let BuyOrderComponents: AdvancedOrder[] = []
+    let offers = []
+    let considerations = []
+
+    for (const bid of bids) {
+      if(bid){
+        let message: any = {}
+        try {
+          message = JSON.parse(bid.message)
+        } catch (e) {}
+
+        if (!message.body || !message.body.consideration) {
+          continue
+        }
+
+        delete message.body.counter
+        message.body.totalOriginalConsiderationItems = message.body.consideration.length
+
+        const iterable = bid.quantity < quantity ? bid.quantity : quantity
+        for (let k = 0; k < iterable; k++) {
+          BuyOrderComponents.push({
+            parameters: message.body,
+            numerator: 1,
+            denominator: message.body.consideration[0].endAmount,
+            signature: message.signature,
+            extraData: "0x"
+          })
+        }
+      }
+    }
+    let i = 0
+    for (const BuyOrderComponent of BuyOrderComponents) {
+      offers.push([
+        { "orderIndex": i, "itemIndex": 0 }
+      ])
+
+      let j = 0;
+      for (const considerationItem of BuyOrderComponent.parameters.consideration) {
+        const foundIndex = considerations.findIndex(item => item.key === considerationItem.recipient)
+        if (foundIndex !== -1) {
+          considerations[foundIndex].value.push({ "orderIndex": i, "itemIndex": j })
+        } else {
+          considerations.push({
+            key: considerationItem.recipient,
+            value: [{ "orderIndex": i, "itemIndex": j }]
+          })
+        }
+        j++
+      }
+      i++
+    }
+    try {
+      // @ts-ignore
+      return await fulfillAvailableAdvancedOrders(BuyOrderComponents, [], offers, considerations.map(item => item.value), conduitKey.polygon, "0x0000000000000000000000000000000000000000", quantity)
+    }
+    catch (err: any) {
+      console.log("fulfillAvailableAdvancedOrders error");
+      return false
+    }
+  }
+
+  return {
+    acceptOffers
   }
 }

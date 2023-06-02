@@ -31,7 +31,7 @@ VList()
 
     VList(justify="end" space-y="3")
       Adjustable(v-model="shares" h="full" :is-neutral="true")
-      span(color="yellow-200" v-if="showDecreaseMinPrice" ) Try decreasing your min offer to accept more items
+      span(color="yellow-200" v-if="showDecreaseMinPrice" ) Try decreasing your lowest offer per unit to accept more items
 
   HList(px="6" py="3.5" b="t-1 b-1 gray-600" space-x="3" items="center" justify="between")
     InputCheckbox(v-model="isSubstituteOffering")
@@ -44,14 +44,14 @@ VList()
   div(grid="~ cols-2" text="base")
     ButtonInteractive(btn="~ secondary" font="bold" @click="onClickSell" text="List item")
 
-    ButtonInteractive(btn="~ primary " font="bold" v-if="!isDisabled" :text="`Accept ${shares.value} offer`")
+    ButtonInteractive(btn="~ primary " font="bold" @click="accept" v-if="!isDisabled" :text="`Accept ${shares.value} offer`")
     ButtonInteractive(btn="~ primary" bg="on-disabled:gray-700" color="on-disabled:gray-400" cursor="default" font="bold" :disabled="isDisabled" text="You have no offers" v-else)
 
 </template>
 
 <script lang="ts" setup>
 import type {SingleItemData} from "@ix/base/composables/Token/useIXToken";
-import {useOfferItems} from "~/composables/useOffer";
+import {useOfferContract, useOfferItems} from "~/composables/useOffer";
 
 const { ixtToUSD } = useIXTPrice()
 const { displayPopup } = usePopups()
@@ -78,6 +78,16 @@ const {
   belowHighestOffer,
   showDecreaseMinPrice
 } = useOfferItems(item)
+
+const { acceptOffers } = useOfferContract()
+
+const accept = async () => {
+  console.log('acceptOffers', await acceptOffers(
+    selectedBidsToAccept.value,
+    !isSubstituteOffering ? totalOffer.value : totalMinOffer.value,
+    shares.value.value
+  ))
+}
 
 </script>
 
