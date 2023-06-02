@@ -1,12 +1,14 @@
-import {AdvancedOrder, IXToken, Sale, SingleItemData} from "@ix/base/composables/Token/useIXToken";
-import {AdjustableNumber} from "@ix/base/composables/Utils/useAdjustableNumber";
-import {getIXTokenContract, getSeaportContract} from "~/composables/useAssetContracts";
-import {conduitKey} from "@ix/base/composables/Contract/WalletAddresses";
+import { AdvancedOrder, IXToken, Sale, SaleMessage, SingleItemData } from "@ix/base/composables/Token/useIXToken";
+import { AdjustableNumber } from "@ix/base/composables/Utils/useAdjustableNumber";
+import { getIXTokenContract, useSeaportContract } from "~/composables/useAssetContracts";
+import { conduitKey } from "@ix/base/composables/Contract/WalletAddresses";
 
 export interface BuyItem {
   token: IXToken,
   sales?: Sale[]
 }
+
+
 
 export const useBuyItems = (item: SingleItemData) => {
   const getAveragePrice = (sales: Sale[]) => {
@@ -59,7 +61,7 @@ export const useBuyItems = (item: SingleItemData) => {
           salesToBuy.push(sales[0])
           i += sales[0].quantity
         }
-        sales.splice(0,1)
+        sales.splice(0, 1)
       }
     }
     else {
@@ -118,98 +120,123 @@ export const useBuyItems = (item: SingleItemData) => {
   }
 }
 
-export const useBuyContract = () => {
-  const checkoutSales = async (buyItem: BuyItem, totalPrice: number, quantity: number) => {
-    //Todo Start loading overlay
-    console.log('start Loading overlay')
+interface OrderIdentifier {
+  orderIndex: number,
+  itemIndex: number
+}
 
-    if (!buyItem.sales || !buyItem.sales.length) {
-      /*
-        Todo
-        There are no sales
-      */
-      alert('There are no sales')
-      return false
+interface Consideration {
+  key: string,
+  value: OrderIdentifier[]
+}
+
+export const useBuyHelpers = () => {
+  const generateConsiderations = (buyOrders: AdvancedOrder[]) => {
+    const offers: OrderIdentifier[][] = []
+    const considerations: Consideration[] = []
+
+    buyOrders.forEach((buyOrder, orderIndex) => {
+      offers.push([
+        { orderIndex, "itemIndex": 0 }
+      ])
+
+      buyOrder.parameters.consideration.forEach((consideration, itemIndex) => {
+        const index = considerations.findIndex(item =>
+          item.key === consideration.recipient
+        )
+
+        const identifier: OrderIdentifier = { orderIndex, itemIndex }
+
+        if (index !== -1)
+          return considerations[index].value.push(identifier)
+
+        considerations.push({
+          key: consideration.recipient,
+          value: [identifier]
+        })
+      })
+    })
+
+    const mappedConsiderations = considerations.map((item) => item.value)
+
+    return {
+      offers,
+      considerations: mappedConsiderations
     }
+  }
+
+  const getSaleMessage = (sale: Sale) => {
+    try {
+      const message = JSON.parse(sale.message) as SaleMessage
+      return message
+    } catch (e) { }
+    return undefined
+  }
+
+  const createBuyOrder = (sale: Sale, quantity: number, substitute?: boolean) => {
+    const message = getSaleMessage(sale)
+    if (!message?.body?.consideration)
+      return
+
+    delete message.body.counter
+    message.body.totalOriginalConsiderationItems = message.body.consideration.length
+
+    const buyAmount = Math.min(sale.quantity, quantity)
+
+    const getOrder = (amount: number) => ({
+      parameters: message.body,
+      numerator: amount,
+      denominator: message.body.offer[0].endAmount,
+      signature: message.signature,
+      extraData: "0x"
+    }) as AdvancedOrder
+
+    const orders: AdvancedOrder[] = []
+
+    if (!substitute)
+      return [getOrder(buyAmount)]
+
+    for (var i = 0; i < buyAmount; i++) {
+      orders.push(getOrder(i))
+    }
+    return orders
+  }
+
+  const isAdvancedOrder = (order: AdvancedOrder[] | undefined): order is AdvancedOrder[] =>
+    order != undefined
+
+  return {
+    getSaleMessage,
+    isAdvancedOrder,
+    generateConsiderations,
+    createBuyOrder
+  }
+}
+
+export const useBuyContract = () => {
+  const buySingleItem = async (buyItem: BuyItem, totalPrice: number, quantity: number, substitute?: boolean) => {
+    const { generateConsiderations, createBuyOrder, isAdvancedOrder } = useBuyHelpers()
+
+    if (!buyItem.sales || !buyItem.sales.length)
+      throw new Error("No sales item")
 
     const { allowanceCheck } = getIXTokenContract()
 
-    if (!await allowanceCheck(totalPrice)) {
-      /*
-        Todo
-        Approve didn't work
-      */
-      alert('Allowance didn\'t work')
-      return false
-    }
+    if (!await allowanceCheck(totalPrice))
+      throw new Error("Allowance failed")
 
-    const { fulfillAvailableAdvancedOrders } = getSeaportContract()
+    const { fulfillAvailableAdvancedOrders } = useSeaportContract()
 
-    const pixMerkleParam = {
-      merklePixInfo: {
-        to: "0x0000000000000000000000000000000000000000",
-        pixId: 0,
-        category: 0,
-        size: 0,
-      },
-      merkleRoot: "0x0000000000000000000000000000000000000000000000000000000000000000",
-      merkleProof: ["0x0000000000000000000000000000000000000000000000000000000000000000"],
-    }
+    const sales = buyItem.sales ?? []
+    const buyOrders = sales.map((sale) =>
+      createBuyOrder(sale, quantity, substitute)
+    ).filter(isAdvancedOrder).flat()
 
-    let BuyOrderComponents: AdvancedOrder[] = []
-    let offers = []
-    let considerations = []
+    const { offers, considerations } = generateConsiderations(buyOrders)
 
-    for (const sale of buyItem.sales) {
-      if(sale){
-        let message: any = {}
-        try {
-          message = JSON.parse(sale.message)
-        } catch (e) {}
-
-        if (!message.body || !message.body.consideration) {
-          continue
-        }
-
-        delete message.body.counter
-        message.body.totalOriginalConsiderationItems = message.body.consideration.length
-
-        const iterable = sale.quantity < quantity ? sale.quantity : quantity
-        for (let k = 0; k < iterable; k++) {
-          BuyOrderComponents.push({
-            parameters: message.body,
-            numerator: 1,
-            denominator: message.body.offer[0].endAmount,
-            signature: message.signature,
-            extraData: "0x"
-          })
-        }
-      }
-    }
-    let i = 0
-    for (const BuyOrderComponent of BuyOrderComponents) {
-      offers.push([
-        { "orderIndex": i, "itemIndex": 0 }
-      ])
-
-      let j = 0;
-      for (const considerationItem of BuyOrderComponent.parameters.consideration) {
-        const foundIndex = considerations.findIndex(item => item.key === considerationItem.recipient)
-        if (foundIndex !== -1) {
-          considerations[foundIndex].value.push({ "orderIndex": i, "itemIndex": j })
-        } else {
-          considerations.push({
-            key: considerationItem.recipient,
-            value: [{ "orderIndex": i, "itemIndex": j }]
-          })
-        }
-        j++
-      }
-      i++
-    }
     try {
       // @ts-ignore
-      return await fulfillAvailableAdvancedOrders(BuyOrderComponents, [], offers, considerations.map(item => item.value), conduitKey.polygon, "0x0000000000000000000000000000000000000000", quantity)
+      return await fulfillAvailableAdvancedOrders(buyOrders, [], offers, considerations, conduitKey.polygon, ZERO_ADDRESS, quantity)
     }
     catch (err: any) {
       console.log("fulfillAvailableAdvancedOrders error");
@@ -218,6 +245,6 @@ export const useBuyContract = () => {
   }
 
   return {
-    checkoutSales
+    buySingleItem
   }
 }

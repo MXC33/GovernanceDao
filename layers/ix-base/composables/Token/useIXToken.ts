@@ -151,7 +151,7 @@ export interface OfferItem {
 }
 export interface OrderParameters {
   offerer: string,
-  address: string,
+  address?: string,
   offer: OfferItem[],
   consideration: ConsiderationItem[],
   orderType: typeof OrderType,
@@ -163,7 +163,7 @@ export interface OrderParameters {
   totalOriginalConsiderationItems: number
 }
 export interface AdvancedOrder {
-  parameters: OrderParameters,
+  parameters: OrderParameters | SaleBody,
   numerator: number,
   denominator: number,
   signature: string,
@@ -182,4 +182,43 @@ export const signDomain = {
   version: '1.1',
   chainId: CHAIN_NET_ADDRESS.polygon,
   verifyingContract: seaportAdress.polygon
+}
+
+
+export interface SaleMessage {
+  body: SaleBody
+  signature: string
+}
+
+export interface SaleBody {
+  offerer: string
+  zone: string
+  offer: SaleOffer[]
+  consideration: SaleConsideration[]
+  orderType: number
+  startTime: number
+  endTime: number
+  zoneHash: string
+  salt: string
+  totalOriginalConsiderationItems?: number,
+  conduitKey: string
+  counter?: number
+}
+
+export interface SaleOffer {
+  itemType: number
+  token: string
+  identifierOrCriteria: number
+  startAmount: number
+  endAmount: number
+  pixHash: string
+}
+
+export interface SaleConsideration {
+  itemType: number
+  token: string
+  identifierOrCriteria: number
+  startAmount: string
+  endAmount: string
+  recipient: string
 }

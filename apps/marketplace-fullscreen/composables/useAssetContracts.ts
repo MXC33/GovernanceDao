@@ -236,8 +236,6 @@ export const getIXTokenContract = <T extends ContractInterface<T> & IXTokenContr
     }
   }
 
-
-
   return {
     ...contractSpec,
     allowance,
@@ -251,12 +249,9 @@ export interface ConsiderationItem {
   recipient: string
 }
 
-export const getSeaportContract = <T extends ContractInterface<T> & SeaportContract>(items?: CartItem[]) => {
-
-  const spenderAddress = conduitAdress.polygon as string
+export const useSeaportContract = <T extends ContractInterface<T> & SeaportContract>() => {
   const { walletAdress, getCollectionType } = useWallet()
-
-
+  const { createBuyOrder, isAdvancedOrder, getSaleMessage } = useBuyHelpers()
   const { withContract, createTransaction, ...contractSpec } = defineContract<T>('Seaport-contract', {
     contractAddress: seaportAdress.polygon as string,
     createContract(provider) {
@@ -264,8 +259,7 @@ export const getSeaportContract = <T extends ContractInterface<T> & SeaportContr
     }
   })
 
-
-  const fulfillAvailableAdvancedOrders = (advancedOrders: AdvancedOrder[], criteriaResolvers: [], offerFulfillments: [], considerationFulfillments: [], fulfillerConduitKey: string, recipient: string, maximumFulfilled: number) =>
+  const fulfillAvailableAdvancedOrders = (advancedOrders: AdvancedOrder[], criteriaResolvers: [], offerFulfillments: [], considerationFulfillments: [], fulfillerConduitKey: string, recipient: string, maximumFulfilled: number, cartItems?: CartItem[]) =>
     createTransaction((contract) => {
       const address = walletAdress.value
       if (!address)
@@ -273,53 +267,49 @@ export const getSeaportContract = <T extends ContractInterface<T> & SeaportContr
 
       return contract.fulfillAvailableAdvancedOrders(advancedOrders, criteriaResolvers, offerFulfillments, considerationFulfillments, fulfillerConduitKey, recipient, maximumFulfilled)
     }, {
-      failMessage: "Checkout failed", onFail: async (error) => {
-        if (items && items?.length > 0) {
-          for (const item of items) {
-            if (item.sale) {
-              let message: any = {}
-              try {
-                message = JSON.parse(item.sale.message)
-              } catch (e) { }
+      getTransactionError: (error) => ({
+        title: "Purchase error",
+        serverError: error
+      }),
+      onFail: async (error) => {
+        if (!cartItems || cartItems?.length == 0)
+          return
 
-              if (!message.body || !message.body.consideration) {
-                continue
-              }
+        cartItems.forEach(async item => {
+          if (!item.sale)
+            return
+          const message = getSaleMessage(item.sale)
+          const buyOrder = createBuyOrder(item.sale, item.value, false)
 
-              delete message.body.counter
-              message.body.totalOriginalConsiderationItems = message.body.consideration.length
-              const buyOrderComponents: AdvancedOrder = {
-                parameters: message.body,
-                numerator: item.value,
-                denominator: message.body.offer[0].endAmount,
-                signature: message.signature,
-                extraData: "0x"
-              }
-              try {
-                await fulfillAdvancedOrderGasEstimate(buyOrderComponents)
-                item.failed = false
-              }
-              catch (e) {
-                item.failed = true
-                await fetchIXAPI('web3/sale/transfer/update/listing/job', 'POST', {
-                  size: getCollectionType(message.body.offer[0].token),
-                  player_id: item.sale.player_id,
-                  network: 'polygon',
-                  collection: message.body.offer[0].token,
-                  token_id: message.body.offer[0].identifierOrCriteria,
-                })
-              }
-            }
+          if (!isAdvancedOrder(buyOrder) || !message)
+            return
+
+          try {
+            await fulfillAdvancedOrderGasEstimate(buyOrder[0])
+            item.failed = false
           }
-        }
+          catch (e) {
+            item.failed = true
+            const { token, identifierOrCriteria } = message.body.offer[0]
+            await fetchIXAPI('web3/sale/transfer/update/listing/job', 'POST', {
+              size: getCollectionType(token),
+              player_id: item.sale?.player_id,
+              network: 'polygon',
+              collection: token,
+              token_id: identifierOrCriteria,
+            })
+          }
+        })
       }
     })
 
   const fulfillAdvancedOrderGasEstimate = async (buyOrderComponents: AdvancedOrder) =>
     withContract((contract) => {
       const address = walletAdress.value
+
       if (!address)
         return undefined
+
       const pixMerkleParam = {
         merklePixInfo: {
           to: "0x0000000000000000000000000000000000000000",
@@ -330,6 +320,7 @@ export const getSeaportContract = <T extends ContractInterface<T> & SeaportContr
         merkleRoot: "0x0000000000000000000000000000000000000000000000000000000000000000",
         merkleProof: ["0x0000000000000000000000000000000000000000000000000000000000000000"],
       }
+
       return contract.estimateGas.fulfillAdvancedOrder(buyOrderComponents, [], conduitKey.polygon, ZERO_ADDRESS, pixMerkleParam)
     })
 
