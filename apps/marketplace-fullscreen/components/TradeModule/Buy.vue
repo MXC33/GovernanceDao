@@ -53,10 +53,7 @@ import { useBiddingContract, useBiddingItems } from "~/composables/useBidding";
 const { ixtToUSD } = useIXTPrice()
 const { displayPopup } = usePopups()
 
-const { execute: buyItems, loading: isBuyLoading } = useContractRequest(() => buy(), {
-  title: 'Error processing your purchase'
-})
-
+const { execute: buyItems, loading: isBuyLoading } = useContractRequest(() => buy())
 
 const props = defineProps<{
   ownerValue?: string | number,
@@ -83,14 +80,26 @@ const {
   showIncreaseMaxPrice
 } = useBuyItems(props.item)
 
-const { checkoutSales } = useBuyContract()
+const { buySingleItem } = useBuyContract()
 
 const buy = async () => {
-  console.log('checkoutSales', await checkoutSales(
+  const price = !isSubstituteListing ? totalPrice.value : totalMaxPrice.value
+  const quantity = shares.value.value
+
+  const sale = await buySingleItem(
     selectedSalesToBuy.value,
-    !isSubstituteListing ? totalPrice.value : totalMaxPrice.value,
-    shares.value.value
-  ))
+    price,
+    quantity,
+    isSubstituteListing.value
+  )
+
+  if (sale)
+    displayPopup({
+      type: 'buy-items-success',
+      items: [props.item]
+    })
+
+  console.log('checkoutSales', sale)
 }
 
 /** BIDDING **/
