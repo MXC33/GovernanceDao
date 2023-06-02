@@ -60,20 +60,18 @@ export const useBiddingContract = () => {
     if (!ixt.value || ixt.value < totalPrice) {
       /*
         Todo
-        Your balance is insufficient!!
+        Your balance is insufficient!
       */
-      alert('Your balance is insufficient!!')
-      return false
+      throw new Error("Your balance is insufficient!")
     }
 
     const { allowanceCheck } = getIXTokenContract()
     if (!await allowanceCheck(totalPrice)) {
       /*
         Todo
-        Approve didn't work
+        Allowance didn't work"
       */
-      alert('Allowance didn\'t work')
-      return false
+      throw new Error("Allowance didn't work")
     }
 
     const ownerPrice = ethers.utils.parseUnits(
@@ -93,8 +91,7 @@ export const useBiddingContract = () => {
         Todo
         wallet address is undefined
       */
-      alert('wallet address is undefined')
-      return false
+      throw new Error("wallet address is undefined")
     }
 
     const message = {
@@ -173,12 +170,13 @@ export const useBiddingContract = () => {
 
       console.log(error.response)
       if (error.response && error.response._data && error.response._data.message) {
-        console.error(error.response._data.message)
+        throw new Error(error.response._data.message)
       } else {
-        console.error('Something wrong happened!!')
+        throw new Error("Something wrong happened!")
       }
-      return false
     }
+
+    return true
   }
 
   const bidItems = async (items: BiddingItem[]) => {
@@ -212,7 +210,6 @@ export const useBiddingContract = () => {
         Todo
         Success message
       */
-      alert('Success message')
 
     } catch (error: any) {
       /*
@@ -221,11 +218,10 @@ export const useBiddingContract = () => {
       */
       console.log(error.response)
       if (error.response && error.response._data && error.response._data.message) {
-        alert(error.response._data.message)
+        throw new Error(error.response._data.message)
       } else {
-        alert('Something wrong happened!!')
+        throw new Error("Something wrong happened!")
       }
-      return false
     }
     return true
   }

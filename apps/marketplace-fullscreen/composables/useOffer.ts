@@ -141,8 +141,7 @@ export const useOfferContract = () => {
         Todo
         There are no sales
       */
-      alert('There are no offers')
-      return false
+      throw new Error("There are no offers")
     }
 
     const nftContract = nft_type === NFTType.ERC1155 ? get1155Contract(collection as string) : get721Contract(collection as string)
@@ -152,18 +151,16 @@ export const useOfferContract = () => {
         Todo
         Approve didn't work
       */
-      alert('Approve didn\'t work')
-      return false
+      throw new Error("Approve didn't work")
     }
 
     const { allowanceCheck } = getIXTokenContract()
     if (!await allowanceCheck(totalOffer)) {
       /*
         Todo
-        Approve didn't work
+        Allowance didn't work
       */
-      alert('Allowance didn\'t work')
-      return false
+      throw new Error("Allowance didn't work")
     }
 
     const { fulfillAvailableAdvancedOrders } = getSeaportContract()
@@ -219,14 +216,9 @@ export const useOfferContract = () => {
       }
       i++
     }
-    try {
-      // @ts-ignore
-      return await fulfillAvailableAdvancedOrders(BuyOrderComponents, [], offers, considerations.map(item => item.value), conduitKey.polygon, "0x0000000000000000000000000000000000000000", quantity)
-    }
-    catch (err: any) {
-      console.log("fulfillAvailableAdvancedOrders error");
-      return false
-    }
+
+    // @ts-ignore
+    return await fulfillAvailableAdvancedOrders(BuyOrderComponents, [], offers, considerations.map(item => item.value), conduitKey.polygon, "0x0000000000000000000000000000000000000000", quantity)
   }
 
   return {

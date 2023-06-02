@@ -134,8 +134,7 @@ export const useBuyContract = () => {
         Todo
         There are no sales
       */
-      alert('There are no sales')
-      return false
+      throw new Error("There are no sales")
     }
 
     const { allowanceCheck } = getIXTokenContract()
@@ -143,24 +142,12 @@ export const useBuyContract = () => {
     if (!await allowanceCheck(totalPrice)) {
       /*
         Todo
-        Approve didn't work
+        Allowance didn't work
       */
-      alert('Allowance didn\'t work')
-      return false
+      throw new Error("Allowance didn't work")
     }
 
     const { fulfillAvailableAdvancedOrders } = getSeaportContract()
-
-    const pixMerkleParam = {
-      merklePixInfo: {
-        to: "0x0000000000000000000000000000000000000000",
-        pixId: 0,
-        category: 0,
-        size: 0,
-      },
-      merkleRoot: "0x0000000000000000000000000000000000000000000000000000000000000000",
-      merkleProof: ["0x0000000000000000000000000000000000000000000000000000000000000000"],
-    }
 
     let BuyOrderComponents: AdvancedOrder[] = []
     let offers = []
@@ -213,14 +200,9 @@ export const useBuyContract = () => {
       }
       i++
     }
-    try {
-      // @ts-ignore
-      return await fulfillAvailableAdvancedOrders(BuyOrderComponents, [], offers, considerations.map(item => item.value), conduitKey.polygon, "0x0000000000000000000000000000000000000000", quantity)
-    }
-    catch (err: any) {
-      console.log("fulfillAvailableAdvancedOrders error");
-      return false
-    }
+
+    // @ts-ignore
+    return await fulfillAvailableAdvancedOrders(BuyOrderComponents, [], offers, considerations.map(item => item.value), conduitKey.polygon, "0x0000000000000000000000000000000000000000", quantity)
   }
 
   return {

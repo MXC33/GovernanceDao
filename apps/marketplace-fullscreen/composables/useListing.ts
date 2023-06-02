@@ -20,8 +20,6 @@ export interface ListingItem extends TransactionItem {
 export const useListingItems = () => {
   const listItems = useState<ListingItem[]>('listing-items', () => [])
 
-  const durationDayOptions = [1, 7, 14]
-
   const createListItems = (items: IXToken[]) => {
     listItems.value = items.map((token) => ({
       type: 'list',
@@ -31,7 +29,7 @@ export const useListingItems = () => {
         value: 1,
         max: token.my_shares
       },
-      durationInDays: durationDayOptions[0],
+      durationInDays: 1,
       ixtPrice: 0
     }))
   }
@@ -61,8 +59,7 @@ export const useListingContract = () => {
         Todo
         Approve didn't work
       */
-      alert('Approve didn\'t work')
-      return false
+      throw new Error("Approve didn't work")
     }
 
     const totalPrice = Number(ixtPrice) * shares.value
@@ -84,8 +81,7 @@ export const useListingContract = () => {
         Todo
         wallet address is undefined
       */
-      alert('wallet address is undefined')
-      return false
+      throw new Error("wallet address is undefined")
     }
 
     const message = {
@@ -169,18 +165,17 @@ export const useListingContract = () => {
       const listEndpoints = useListEndpoints()
       await listEndpoints.listAssets([listingsBody])
 
-      return true
-
     } catch (error: any) {
 
       console.log(error.response)
       if (error.response && error.response._data && error.response._data.message) {
-        console.error(error.response._data.message)
+        throw new Error(error.response._data.message)
       } else {
-        console.error('Something wrong happened!!')
+        throw new Error("Something wrong happened!")
       }
-      return false
     }
+
+    return true
   }
 
   const listItems = async (items: ListingItem[]) => {
@@ -205,20 +200,17 @@ export const useListingContract = () => {
         Todo
         Success message
       */
-      alert('Success message')
 
     } catch (error: any) {
       /*
         Todo
         API error
       */
-      console.log(error.response)
       if (error.response && error.response._data && error.response._data.message) {
-        alert(error.response._data.message)
+        throw new Error(error.response._data.message)
       } else {
-        alert('Something wrong happened!!')
+        throw new Error("Something wrong happened!")
       }
-      return false
     }
     return true
   }

@@ -44,7 +44,7 @@ VList()
   div(grid="~ cols-2" text="base")
     ButtonInteractive(btn="~ secondary" font="bold" @click="onClickSell" text="List item")
 
-    ButtonInteractive(btn="~ primary " font="bold" @click="accept" v-if="!isDisabled" :text="`Accept ${shares.value} offer`")
+    ButtonInteractive(btn="~ primary " font="bold" @click="acceptItems" v-if="!isDisabled" :text="`Accept ${shares?.value} offer`" :loading="isAcceptLoading")
     ButtonInteractive(btn="~ primary" bg="on-disabled:gray-700" color="on-disabled:gray-400" cursor="default" font="bold" :disabled="isDisabled" text="You have no offers" v-else)
 
 </template>
@@ -83,12 +83,16 @@ const {
 const { acceptOffers } = useOfferContract()
 
 const accept = async () => {
-  console.log('acceptOffers', await acceptOffers(
+  await acceptOffers(
     selectedBidsToAccept.value,
     !isSubstituteOffering ? totalOffer.value : totalMinOffer.value,
     shares.value.value
-  ))
+  )
 }
+
+const { execute: acceptItems, loading: isAcceptLoading } = useContractRequest(() => accept(), {
+  title: 'Error processing your purchase'
+})
 
 </script>
 

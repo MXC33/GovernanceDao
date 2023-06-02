@@ -278,7 +278,7 @@ export const getSeaportContract = <T extends ContractInterface<T> & SeaportContr
 
       return contract.fulfillAvailableAdvancedOrders(advancedOrders, criteriaResolvers, offerFulfillments, considerationFulfillments, fulfillerConduitKey, recipient, maximumFulfilled)
     }, {
-      failMessage: "Checkout failed", onFail: async (error) => {
+      onFail: async (error) => {
         if (items && items?.length > 0) {
           for (const item of items) {
             if (item.sale) {
@@ -317,6 +317,7 @@ export const getSeaportContract = <T extends ContractInterface<T> & SeaportContr
             }
           }
         }
+        throw new Error(error)
       }
     })
 
