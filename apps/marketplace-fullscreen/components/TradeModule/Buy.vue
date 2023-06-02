@@ -41,7 +41,7 @@ VList()
   div(grid="~ cols-2" text="base")
     ButtonInteractive(btn="~ secondary" font="bold" @click="onClickOffer" text="Make offer")
 
-    ButtonInteractive(btn="~ primary" font="bold" @click="buy" :text="`Buy ${shares.value} item`" :loading="isBuyLoading")
+    ButtonInteractive(btn="~ primary" font="bold" @click="buyItems" :text="`Buy ${shares.value} item`" :loading="isBuyLoading")
 
 </template>
 
@@ -52,9 +52,12 @@ import { useBiddingContract, useBiddingItems } from "~/composables/useBidding";
 
 const { ixtToUSD } = useIXTPrice()
 const { displayPopup } = usePopups()
-const { } = useContractRequest(() => {
-  return buy()
-}, { title: 'Error processing your purchase' })
+
+const { execute: buyItems, loading: isBuyLoading } = useContractRequest(() => buy(), {
+  title: 'Error processing your purchase'
+})
+
+
 const props = defineProps<{
   ownerValue?: string | number,
   item: SingleItemData
