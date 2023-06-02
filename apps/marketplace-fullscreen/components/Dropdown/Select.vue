@@ -1,5 +1,5 @@
 <template lang="pug">
-VList(pos="relative" ref="element")
+VList(pos="relative" ref="element" w="lt-md:full")
   HList(font="bold" frame="~ gray-400 hover:gray-300" color="white" h="10" px="3" justify="between" items="center" cursor="pointer" space-x="3" @click="isOpen = !isOpen" )
     div(capitalize="~" select="none")
       slot(name="selectedName")

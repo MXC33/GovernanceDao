@@ -32,6 +32,7 @@ VList(flex-grow="1" min-h="0" pos="relative" p="4 t-4 b-4 md:(8 b-30)" space-y="
 
   Transition(name="slide-bottom")
     CollectionSelectBar(v-if="selectedItems.length > 0" :context="context")
+
 </template>
 
 <script lang="ts" setup>

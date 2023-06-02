@@ -15,7 +15,9 @@ transition(name="fade-slow")
 
           ButtonSquareIcon(@click="viewingCart = true")
             CartIcon(w="6")
-      CollectionSelect(display="md:none" py="4")
+
+    HList(py="4" w="full" display="md:none")
+      CollectionSelect()
 
 
     HList(space-x="4" w="full" justify="end" items="center" display="lt-md:none")
@@ -28,8 +30,6 @@ transition(name="fade-slow")
       ButtonSquareIcon(@click="viewingCart = true")
         CartIcon(w="6")
 
-    HList(display="md:none" gap="4")
-      
 
 
 
