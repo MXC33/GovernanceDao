@@ -63,7 +63,13 @@ const saleColumns: TableColumn<Sale>[] = [
   { label: "Sale Price", type: "ixt", rowKey: "price", sortable: true },
   { label: "Quanitity", rowKey: "quantity", sortable: true },
   { label: "Expiration", type: "date", rowKey: "endtime", sortable: true },
-  { label: "Seller", rowKey: "player_username", sortable: true },
+  {
+    label: "Seller", rowKey: "player_username", getValue(row) {
+      if (row.player_wallet.toLowerCase() == walletAdress.value?.toLowerCase())
+        return 'YOU'
+      return row.player_username
+    }, sortable: true
+  },
   { label: "Action", rowKey: "action", width: 80 }
 ]
 

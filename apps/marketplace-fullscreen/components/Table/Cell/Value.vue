@@ -7,6 +7,8 @@ VList(flex-shrink="0" whitespace="nowrap")
 
   span(v-else-if="column.type == 'date'") {{ getDate(value) }}
 
+  span(v-else-if="isYou" color="$mc-orange" font="bold") {{value}}
+
   span(v-else) {{value}}
 
 </template>
@@ -24,6 +26,8 @@ const { getValue } = useTable()
 const { ixtToUSD } = useIXTPrice()
 
 const value = computed(() => getValue(column, row))
+
+const isYou = computed(() => value.value === 'YOU')
 
 const getDate = (date: string | number | undefined) =>
   fromUnixTime(Number(date)).toDateString()
