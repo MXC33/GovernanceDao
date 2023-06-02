@@ -4,7 +4,7 @@ import {
   get1155Contract,
   get721Contract,
   getIXTokenContract,
-  getSeaportContract,
+  useSeaportContract,
   NFTType
 } from "~/composables/useAssetContracts";
 import { conduitKey } from "@ix/base/composables/Contract/WalletAddresses";
@@ -73,7 +73,7 @@ export const useOfferItems = (item: SingleItemData) => {
           bidsToAccept.push(sortedBids[0])
           i += sortedBids[0].quantity
         }
-        sortedBids.splice(0,1)
+        sortedBids.splice(0, 1)
       }
     }
     else {
@@ -140,7 +140,7 @@ export const useOfferContract = () => {
     //Todo Start loading overlay
     console.log('start Loading overlay')
 
-    const { token: { collection, nft_type }, bids  } = offerItem
+    const { token: { collection, nft_type }, bids } = offerItem
 
     if (!bids || !bids.length) {
       /*
@@ -169,7 +169,7 @@ export const useOfferContract = () => {
       throw new Error("Allowance didn't work")
     }
 
-    const { fulfillAvailableAdvancedOrders } = getSeaportContract()
+    const { fulfillAvailableAdvancedOrders } = useSeaportContract()
 
     let BuyOrderComponents: AdvancedOrder[] = []
     let offers = []
