@@ -1,7 +1,7 @@
 <template lang="pug"> 
 div(grid="~ cols-2") 
   div(v-for="category in getAllSmallCatagories(headerItem)" p="2")
-    div(text="gray-300") {{ $t(`marketplace.headers.${headerItem.type}.${category.type}.title`) }}
+    div(text="gray-300") {{ $t(`marketplace.navigation.${headerItem.type}.${category.type}.title`) }}
     div(b="b-1 gray-300" w="95%")
     HeaderCategoryDropDownItem(v-for="item in category.items" :header="headerItem.type" :category="category.type" :item="item")
 </template>
