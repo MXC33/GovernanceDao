@@ -222,9 +222,12 @@ export const getIXTokenContract = <T extends ContractInterface<T> & IXTokenContr
       const address = walletAdress.value
       if (!address)
         return undefined
-
-      const balance = await contract.balanceOf(address)
-      return Number(ethers.utils.formatUnits(balance))
+      try {
+        const balance = await contract.balanceOf(address)
+        return Number(ethers.utils.formatUnits(balance))
+      } catch (err) {
+        return undefined
+      }
     })
 
   const allowanceCheck = async (amount: number) => {
