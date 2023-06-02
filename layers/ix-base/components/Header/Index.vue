@@ -15,8 +15,8 @@ div()
         HeaderAccountButton()
     Transition(name="slide-top" mode="out-in")
       HeaderItem(v-if="activeMenuIndex != null" :key="activeMenuIndex" @onClickItem="onClicked" :header="siteTopHeaders[activeMenuIndex]")
-    Transition(name="slide-top" mode="out-in")
-      HeaderCategoryDropDown(@onClickItem="onClicked")
+    div(display="md:none")
+      HeaderCategoryDropDown()
 
   Popup(v-if="showIFrame")
     template(#header) Swap
