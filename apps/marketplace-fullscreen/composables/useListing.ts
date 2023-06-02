@@ -1,6 +1,6 @@
 import { IXToken, ItemType, OrderType, signDomain, typedData } from "@ix/base/composables/Token/useIXToken"
 import { add } from 'date-fns'
-import { get1155Contract } from "~/composables/useAssetContracts";
+import {get1155Contract, get721Contract, NFTType} from "~/composables/useAssetContracts";
 import { ethers } from "ethers";
 import { ZERO_ADDRESS } from "~/composables/useTransferNFT";
 import {
@@ -47,16 +47,15 @@ export const useListingContract = () => {
   const createListingMessage = async (item: ListingItem, endTime: number) => {
     //TODO update endtime
 
-    const { token: { collection, token_id }, ixtPrice, shares } = item
+    const { token: { collection, token_id, nft_type}, ixtPrice, shares } = item
     /*
       Todo
       Start loading overlay
     */
     console.log('start Loading overlay')
 
-    const IXTokenContract = get1155Contract(collection as string)
-    const approveNftCheck = await IXTokenContract.approveNftCheck()
-
+    const nftContract = nft_type === NFTType.ERC1155 ? get1155Contract(collection as string) : get721Contract(collection as string)
+    const approveNftCheck = await nftContract.approveNftCheck()
     if (!approveNftCheck) {
       /*
         Todo
@@ -67,8 +66,6 @@ export const useListingContract = () => {
     }
 
     const totalPrice = Number(ixtPrice) * shares.value
-
-
 
     const ownerPrice = ethers.utils.parseUnits(
       roundUp(((95 / 100) * totalPrice), 8).toString()
@@ -95,7 +92,7 @@ export const useListingContract = () => {
       offerer: address,
       zone: ZERO_ADDRESS,
       offer: [{
-        itemType: item.token.nft_type === 0 ? ItemType.ERC1155 : ItemType.ERC721,
+        itemType: item.token.nft_type === NFTType.ERC1155 ? ItemType.ERC1155 : ItemType.ERC721,
         token: collection,
         identifierOrCriteria: token_id,
         startAmount: shares.value,

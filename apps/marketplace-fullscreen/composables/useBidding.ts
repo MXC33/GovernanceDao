@@ -11,6 +11,7 @@ import {
 import {makeRandomNumberKey} from "@ix/base/composables/Utils/useHelpers";
 import {BiddingBody, useBidsAPI} from "~/composables/api/post/useBidAPI";
 import { TransactionItem } from "./useTransactions"
+import {NFTType} from "~/composables/useAssetContracts";
 
 export interface BiddingItem extends TransactionItem {
   type: 'bid'
@@ -109,7 +110,7 @@ export const useBiddingContract = () => {
       }],
       consideration:[
         {
-          itemType: item.token.nft_type === 0 ? ItemType.ERC1155 : ItemType.ERC721,
+          itemType: item.token.nft_type === NFTType.ERC1155 ? ItemType.ERC1155 : ItemType.ERC721,
           token: collection,
           identifierOrCriteria: token_id,
           startAmount: shares.value,

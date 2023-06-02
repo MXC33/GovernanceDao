@@ -29,7 +29,7 @@ VList()
     //- InputCheckbox(v-model="maxPrice")
     //-   span(color="gray-200") Max price per listing
 
-    VList(justify="end" space-y="3")
+    VList(justify="end" space-y="3" v-if="item.nft_type === NFTType.ERC1155" )
       Adjustable(v-model="shares" h="full" :is-neutral="true")
       span(color="yellow-200" v-if="showDecreaseMinPrice" ) Try decreasing your lowest offer per unit to accept more items
 
@@ -52,6 +52,7 @@ VList()
 <script lang="ts" setup>
 import type {SingleItemData} from "@ix/base/composables/Token/useIXToken";
 import {useOfferContract, useOfferItems} from "~/composables/useOffer";
+import {NFTType} from "~/composables/useAssetContracts";
 
 const { ixtToUSD } = useIXTPrice()
 const { displayPopup } = usePopups()

@@ -1,6 +1,12 @@
 import {AdvancedOrder, Bid, IXToken, SingleItemData} from "@ix/base/composables/Token/useIXToken";
 import {AdjustableNumber} from "@ix/base/composables/Utils/useAdjustableNumber";
-import {get1155Contract, getIXTokenContract, getSeaportContract} from "~/composables/useAssetContracts";
+import {
+  get1155Contract,
+  get721Contract,
+  getIXTokenContract,
+  getSeaportContract,
+  NFTType
+} from "~/composables/useAssetContracts";
 import {conduitKey} from "@ix/base/composables/Contract/WalletAddresses";
 
 export interface OfferItem {
@@ -128,7 +134,7 @@ export const useOfferContract = () => {
     //Todo Start loading overlay
     console.log('start Loading overlay')
 
-    const { token: { collection, token_id }, bids  } = offerItem
+    const { token: { collection, nft_type }, bids  } = offerItem
 
     if (!bids || !bids.length) {
       /*
@@ -139,8 +145,8 @@ export const useOfferContract = () => {
       return false
     }
 
-    const IXTokenContract = get1155Contract(collection as string)
-    const approveNftCheck = await IXTokenContract.approveNftCheck()
+    const nftContract = nft_type === NFTType.ERC1155 ? get1155Contract(collection as string) : get721Contract(collection as string)
+    const approveNftCheck = await nftContract.approveNftCheck()
     if (!approveNftCheck) {
       /*
         Todo
