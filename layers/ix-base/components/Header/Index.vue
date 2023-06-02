@@ -13,10 +13,13 @@ div()
         HeaderLink(to="/" display="lt-md:none")
           HelperLanguage(language="EN")
         HeaderAccountButton()
-    Transition(name="slide-top" mode="out-in")
-      HeaderItem(v-if="activeMenuIndex != null" :key="activeMenuIndex" @onClickItem="onClicked" :header="siteTopHeaders[activeMenuIndex]")
-    div(display="md:none")
-      HeaderCategoryDropDown()
+      div(grow="~")
+      SettingsIcon(pos="right" w="8" display="md:none" @click="toggleMeny")
+    Transition(name="slide-top" mode="out-in" )
+      HeaderItem(v-if="activeMenuIndex != null" :key="activeMenuIndex" @onClickItem="onClicked" :header="siteTopHeaders[activeMenuIndex]" display="lt-md:none")
+    Transition(name="slide-top")
+      div(v-if="activeMenuIndex != null" display="md:none")
+        HeaderCategoryDropDown()
 
   Popup(v-if="showIFrame")
     template(#header) Swap
@@ -27,6 +30,7 @@ div()
 
 <script lang="ts" setup>
 import PlanetIXNew from '~/assets/images/header/planetix-new.svg'
+import SettingsIcon from '~/assets/images/header/hamburger.svg'
 const { siteTopHeaders } = useSiteHeader()
 
 const activeMenuIndex = ref<number | null>(null)
@@ -38,6 +42,13 @@ const OpenMeny = (index: number) => {
     return activeMenuIndex.value = null
 
   activeMenuIndex.value = index
+}
+
+const toggleMeny = () => {
+  if (activeMenuIndex.value == null)
+    return activeMenuIndex.value = 1
+
+  activeMenuIndex.value = null
 }
 
 const isSelected = ref(false)
