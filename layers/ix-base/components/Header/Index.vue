@@ -12,7 +12,7 @@ div()
         HeaderLink(to="/" display="lt-md:none") help
         HeaderLink(to="/" display="lt-md:none")
           HelperLanguage(language="EN")
-        HeaderAccountButton()
+        HeaderAccountButton(@addFunds="iFrameToggle")
       div(grow="~" display="md:none")
       SettingsIcon(pos="right" w="8" display="md:none" @click="toggleMeny")
     Transition(name="slide-top" mode="out-in" )
@@ -49,6 +49,10 @@ const toggleMeny = () => {
     return activeMenuIndex.value = 1
 
   activeMenuIndex.value = null
+}
+
+const iFrameToggle = () => {
+  showIFrame.value = !showIFrame.value
 }
 
 const isSelected = ref(false)
