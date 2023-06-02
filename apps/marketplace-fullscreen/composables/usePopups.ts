@@ -43,7 +43,12 @@ export interface PopupBidItem extends PopupBase {
   items: IXToken[]
 }
 
-type Popup = PopupOnList | PopupOnBidding | PopupOnBid | PopupTransfer | PopupListItem | PopupBidItem | PopupTransferSuccess
+export interface PopupBuyItemSuccess extends PopupBase {
+  type: 'buy-items-success',
+  items: IXToken[]
+}
+
+type Popup = PopupOnList | PopupOnBidding | PopupOnBid | PopupTransfer | PopupListItem | PopupBidItem | PopupTransferSuccess | PopupBuyItemSuccess
 
 export const usePopups = () => {
   const popup = useState<Popup | null>('active-popup', () => null)

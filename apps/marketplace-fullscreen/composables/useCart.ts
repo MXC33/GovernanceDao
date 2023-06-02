@@ -1,6 +1,6 @@
 import { IXToken, Sale } from "@ix/base/composables/Token/useIXToken"
 import { AdjustableNumber } from "@ix/base/composables/Utils/useAdjustableNumber"
-import { get1155Contract, getIXTokenContract, getSeaportContract } from "~/composables/useAssetContracts";
+import { get1155Contract, getIXTokenContract, useSeaportContract } from "~/composables/useAssetContracts";
 import {
   AdvancedOrder,
 } from "@ix/base/composables/Token/useIXToken"
@@ -50,7 +50,7 @@ export const useCart = () => {
     //Todo Start loading overlay
     console.log('start Loading overlay')
     const { allowanceCheck } = getIXTokenContract()
-    const { fulfillAvailableAdvancedOrders } = getSeaportContract(cartItems.value)
+    const { fulfillAvailableAdvancedOrders } = useSeaportContract(cartItems.value)
     await allowanceCheck(totalPrice)
 
     let BuyOrderComponents: AdvancedOrder[] = []

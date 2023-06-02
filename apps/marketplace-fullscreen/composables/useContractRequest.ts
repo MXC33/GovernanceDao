@@ -1,6 +1,6 @@
 import { ContractError } from "@ix/base/composables/Utils/useContractErrors"
 
-export const useContractRequest = (fn: () => Promise<any>, errorOptions: ContractError) => {
+export const useContractRequest = (fn: () => Promise<any>, errorOptions?: ContractError) => {
   const { addError } = useContractErrors()
   const loading = ref(false)
 
@@ -13,10 +13,11 @@ export const useContractRequest = (fn: () => Promise<any>, errorOptions: Contrac
       const message: string = error?.message
 
       console.log("ERR", error)
-      addError({
-        ...errorOptions,
-        serverError: message
-      })
+      if (errorOptions)
+        addError({
+          ...errorOptions,
+          serverError: message
+        })
 
       loading.value = false
       return false
