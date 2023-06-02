@@ -7,7 +7,7 @@ VList(flex-shrink="0" whitespace="nowrap")
 
   span(v-else-if="column.type == 'date'") {{ getDate(value) }}
 
-  span(v-else-if="isYou" color="$mc-orange" font="bold") {{value}}
+  span(v-else-if="isYou" font="bold") {{value}}
 
   span(v-else) {{value}}
 
