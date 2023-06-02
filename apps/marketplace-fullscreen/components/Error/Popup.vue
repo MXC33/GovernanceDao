@@ -1,9 +1,9 @@
 <template lang="pug">
-Popup()
+Popup(@close="onClose" :disable-default-close="true")
   template(#icon)
-    CheckboxIcon(w="6" h="6")
+    WarningIcon(w="6" h="6")
 
-  template(#header) Error
+  template(#header) {{error.title}}
 
   template(#default)
     VList()
@@ -20,7 +20,7 @@ Popup()
   
   
 <script lang="ts" setup>
-import CheckboxIcon from '~/assets/icons/checkmark-green.svg'
+import WarningIcon from '~/assets/icons/warning.svg'
 import type { ContractError } from '@ix/base/composables/Utils/useContractErrors'
 
 const { markAllNotificationsRead } = useContractErrors()
@@ -28,6 +28,10 @@ const { markAllNotificationsRead } = useContractErrors()
 defineProps<{
   error: ContractError
 }>()
+
+const onClose = () => {
+  markAllNotificationsRead()
+}
 
 const onClick = () => {
   markAllNotificationsRead()

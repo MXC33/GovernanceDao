@@ -1,6 +1,6 @@
 import { IXToken, ItemType, OrderType, signDomain, typedData } from "@ix/base/composables/Token/useIXToken"
 import { add } from 'date-fns'
-import { get1155Contract } from "~/composables/useAssetContracts";
+import {get1155Contract, get721Contract, NFTType} from "~/composables/useAssetContracts";
 import { ethers } from "ethers";
 import { ZERO_ADDRESS } from "~/composables/useTransferNFT";
 import {
@@ -20,8 +20,6 @@ export interface ListingItem extends TransactionItem {
 export const useListingItems = () => {
   const listItems = useState<ListingItem[]>('listing-items', () => [])
 
-  const durationDayOptions = [1, 7, 14]
-
   const createListItems = (items: IXToken[]) => {
     listItems.value = items.map((token) => ({
       type: 'list',
@@ -31,7 +29,7 @@ export const useListingItems = () => {
         value: 1,
         max: token.my_shares
       },
-      durationInDays: durationDayOptions[0],
+      durationInDays: 1,
       ixtPrice: 0
     }))
   }
@@ -47,28 +45,24 @@ export const useListingContract = () => {
   const createListingMessage = async (item: ListingItem, endTime: number) => {
     //TODO update endtime
 
-    const { token: { collection, token_id }, ixtPrice, shares } = item
+    const { token: { collection, token_id, nft_type}, ixtPrice, shares } = item
     /*
       Todo
       Start loading overlay
     */
     console.log('start Loading overlay')
 
-    const IXTokenContract = get1155Contract(collection as string)
-    const approveNftCheck = await IXTokenContract.approveNftCheck()
-
+    const nftContract = nft_type === NFTType.ERC1155 ? get1155Contract(collection as string) : get721Contract(collection as string)
+    const approveNftCheck = await nftContract.approveNftCheck()
     if (!approveNftCheck) {
       /*
         Todo
         Approve didn't work
       */
-      alert('Approve didn\'t work')
-      return false
+      throw new Error("Approve didn't work")
     }
 
     const totalPrice = Number(ixtPrice) * shares.value
-
-
 
     const ownerPrice = ethers.utils.parseUnits(
       roundUp(((95 / 100) * totalPrice), 8).toString()
@@ -87,15 +81,14 @@ export const useListingContract = () => {
         Todo
         wallet address is undefined
       */
-      alert('wallet address is undefined')
-      return false
+      throw new Error("wallet address is undefined")
     }
 
     const message = {
       offerer: address,
       zone: ZERO_ADDRESS,
       offer: [{
-        itemType: item.token.nft_type === 0 ? ItemType.ERC1155 : ItemType.ERC721,
+        itemType: item.token.nft_type === NFTType.ERC1155 ? ItemType.ERC1155 : ItemType.ERC721,
         token: collection,
         identifierOrCriteria: token_id,
         startAmount: shares.value,
@@ -172,18 +165,17 @@ export const useListingContract = () => {
       const listEndpoints = useListEndpoints()
       await listEndpoints.listAssets([listingsBody])
 
-      return true
-
     } catch (error: any) {
 
       console.log(error.response)
       if (error.response && error.response._data && error.response._data.message) {
-        console.error(error.response._data.message)
+        throw new Error(error.response._data.message)
       } else {
-        console.error('Something wrong happened!!')
+        throw new Error("Something wrong happened!")
       }
-      return false
     }
+
+    return true
   }
 
   const listItems = async (items: ListingItem[]) => {
@@ -208,20 +200,17 @@ export const useListingContract = () => {
         Todo
         Success message
       */
-      alert('Success message')
 
     } catch (error: any) {
       /*
         Todo
         API error
       */
-      console.log(error.response)
       if (error.response && error.response._data && error.response._data.message) {
-        alert(error.response._data.message)
+        throw new Error(error.response._data.message)
       } else {
-        alert('Something wrong happened!!')
+        throw new Error("Something wrong happened!")
       }
-      return false
     }
     return true
   }
