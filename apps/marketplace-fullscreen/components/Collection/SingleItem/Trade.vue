@@ -32,7 +32,7 @@ VList(space-y="6")
       TitleWithIcon(icon="offer") offers
     template(#default)
       HList(px="6" py="6" font="bold" color="gray-400" items="center" justify="center" v-if="item.my_shares == 0") 
-        span() You do not own any item of this collection
+        span() You do not own this asset
 
       HList(px="6" py="6" font="bold" color="gray-400" items="center" justify="center" v-if="item.bids.length < 1" ) 
         span() There is no offers for this item
