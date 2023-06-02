@@ -19,7 +19,7 @@ VList(space-y="6")
       TitleWithIcon(icon="listing") listings
 
     template(#default)
-      Table(:columns="saleColumns" :rows="item.sales" id="single-item" :in-drawer="true" v-if="item.sales.length > 0")
+      Table(:columns="saleColumns" :rows="item.sales" id="single-item" :in-drawer="true" v-if="item.sales && item.sales.length > 0")
         template(#item-action="{row}")
           button(@click="addSaleToCart(row)" bg="gray-500 hover:gray-400" transition="all" cut="bottom-right sm" p="x-6 y-3")
             CartIcon(w="6")

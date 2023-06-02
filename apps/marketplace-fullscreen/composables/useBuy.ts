@@ -1,7 +1,7 @@
-import {AdvancedOrder, IXToken, Sale, SingleItemData} from "@ix/base/composables/Token/useIXToken";
-import {AdjustableNumber} from "@ix/base/composables/Utils/useAdjustableNumber";
-import {getIXTokenContract, getSeaportContract} from "~/composables/useAssetContracts";
-import {conduitKey} from "@ix/base/composables/Contract/WalletAddresses";
+import { AdvancedOrder, IXToken, Sale, SingleItemData } from "@ix/base/composables/Token/useIXToken";
+import { AdjustableNumber } from "@ix/base/composables/Utils/useAdjustableNumber";
+import { getIXTokenContract, getSeaportContract } from "~/composables/useAssetContracts";
+import { conduitKey } from "@ix/base/composables/Contract/WalletAddresses";
 
 export interface BuyItem {
   token: IXToken,
@@ -10,6 +10,8 @@ export interface BuyItem {
 
 export const useBuyItems = (item: SingleItemData) => {
   const getAveragePrice = (sales: Sale[]) => {
+    if (!sales || sales.length === 0)
+      return 0
     const totalQuantity = sales.reduce((prev, sale) => prev + sale.quantity, 0)
     const totalPrice = sales.reduce((prev, sale) => prev + sale.quantity * sale.price, 0)
     return totalPrice / totalQuantity
@@ -17,27 +19,30 @@ export const useBuyItems = (item: SingleItemData) => {
 
   const isSubstituteListing = ref(false)
   const maxPrice = ref<number>(0)
+  const sales = item.sales || []
   const shares = ref<AdjustableNumber>({
     value: 1,
     min: 1,
     max: computed<number>(() => {
       if (!isSubstituteListing.value) {
-        return item.sales.reduce((prev, sale) => prev + sale.quantity, 0)
+        return sales?.reduce((prev, sale) => prev + sale.quantity, 0)
       }
-      return item.sales.filter((item: Sale) => item.price <= maxPrice.value).reduce((prev, sale) => prev + sale.quantity, 0)
+      return sales.filter((item: Sale) => item.price <= maxPrice.value).reduce((prev, sale) => prev + sale.quantity, 0)
     })
-  })
+  });
 
   watch(isSubstituteListing, (val) => {
     if (!val)
       maxPrice.value = 0
     else
-      maxPrice.value = roundToDecimals(getAveragePrice(item.sales), 4)
+      maxPrice.value = roundToDecimals(getAveragePrice(sales), 4)
   })
 
   const selectedSalesToBuy = computed<BuyItem>(() => {
+    if (!sales || sales.length === 0)
+      return { token: item, sales: [] } // return early if no sales
 
-    let sales = [...item.sales]
+    let sortedSales = [...sales]
       .filter((item: Sale) => item.price <= maxPrice.value || !isSubstituteListing.value)
       .sort((a, b) => {
         if (!a.price) return 1
@@ -48,22 +53,22 @@ export const useBuyItems = (item: SingleItemData) => {
     let salesToBuy = []
     if (!isSubstituteListing.value) {
       let i = 0
-      while (i < shares.value.value && sales[0]) {
-        if (sales[0].quantity > shares.value.value - i) {
+      while (i < shares.value.value && sortedSales[0]) {
+        if (sortedSales[0].quantity > shares.value.value - i) {
           salesToBuy.push({
-            ...sales[0],
+            ...sortedSales[0],
             quantity: shares.value.value - i
           })
           i = shares.value.value
         } else {
-          salesToBuy.push(sales[0])
-          i += sales[0].quantity
+          salesToBuy.push(sortedSales[0])
+          i += sortedSales[0].quantity
         }
-        sales.splice(0,1)
+        sortedSales.splice(0, 1)
       }
     }
     else {
-      salesToBuy = sales
+      salesToBuy = sortedSales
     }
 
     return {
@@ -99,7 +104,7 @@ export const useBuyItems = (item: SingleItemData) => {
   })
 
   const showIncreaseMaxPrice = computed<boolean>(() => {
-    if (!selectedSalesToBuy || !selectedSalesToBuy.value || !selectedSalesToBuy.value.sales) return false
+    if (!selectedSalesToBuy || !selectedSalesToBuy.value || !selectedSalesToBuy.value.sales || !item.sales) return false
     const totalQuantity = item.sales.reduce((prev, sale) => prev + sale.quantity, 0)
     const totalSelectedQuantity = selectedSalesToBuy.value.sales.reduce((prev, sale) => prev + sale.quantity, 0)
     return (shares.value.value === shares.value.max && totalQuantity > totalSelectedQuantity)
@@ -161,11 +166,11 @@ export const useBuyContract = () => {
     let considerations = []
 
     for (const sale of buyItem.sales) {
-      if(sale){
+      if (sale) {
         let message: any = {}
         try {
           message = JSON.parse(sale.message)
-        } catch (e) {}
+        } catch (e) { }
 
         if (!message.body || !message.body.consideration) {
           continue
