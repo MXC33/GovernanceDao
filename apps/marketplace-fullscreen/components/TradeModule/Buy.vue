@@ -9,7 +9,7 @@ VList()
             span(color="white" font="bold" text="lg md:4xl") {{totalPrice}} IXT
             HList(translte-y="0.3")
               span(color="gray-200" font="bold" text="sm md:lg") ${{ ixtToUSD(totalPrice) }}
-          template
+          template(v-else)
             span(color="white" font="bold" text="lg md:4xl") -- IXT
             HList(translate-y="0.3")
               span(color="gray-200" font="bold" text="sm md:lg") $ --
@@ -120,6 +120,7 @@ const buy = async () => {
   console.log('checkoutSales', sale)
 }
 
+console.log(aboveFloorPrice.value)
 </script>
 
 <style scoped >
