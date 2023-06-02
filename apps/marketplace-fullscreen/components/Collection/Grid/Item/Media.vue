@@ -35,7 +35,7 @@ const onSelectedItem = () => {
 const onClickItem = () => {
   const { token_id, network, collection } = props.token
 
-  if (token_id)
+  if (token_id != null)
     navigateTo(`/assets/${network}/${collection}/${token_id}`)
 }
 
