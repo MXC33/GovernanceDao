@@ -1,31 +1,39 @@
 <template lang="pug">
 HeaderLink(group :to="link")
-  div(h="10" p="3" bg="black" b="b-1 gray-600" text="left" color="group-hover:$mc-orange" style="text-transform: none;" @click="OnClicked(clicked)" ) {{ displayText }}
-    Copy(v-if="icon" w="6" pos="relative" bottom="25px" left="125px" fill="white group-hover:$mc-orange")
+  div(h="10" p="3" bg="black" b="b-1 gray-600" text="left" color="group-hover:$mc-orange" style="text-transform: none;" @click="OnClicked(displayText)" ) {{ displayText }}
+    Icon( w="6" pos="relative" bottom="25px" left="125px" fill="white group-hover:$mc-orange")
 </template>
 
 
 <script lang="ts" setup>
-import Copy from '~/assets/images/header/copy.svg'
 const { walletAdress } = useWallet()
 
-//@click="toggleMenu"
-//@click="addFunds"
-//@click="copyAddressToClipboard"
-// link - connect
-// link - account
-
-const {displayText, link, clicked} = defineProps<{
+const {displayText, link, svgname} = defineProps<{
   displayText: string,
   link?: string,
-  clicked: string
-  icon?: boolean
+  svgname?: string
 }>()
 
-const OnClicked = (clicked: string ) =>{
-  console.log("OnClicked has been clicked", clicked)
+const emit = defineEmits(["addFunds", "close"])
 
+
+const OnClicked = (displayText: string ) =>{
+  console.log("OnClicked has been clicked", displayText)
+
+  if (displayText == 'copyAddressToClipboard'){
+    copyAddressToClipboard()
+  }
+  if (displayText == 'Add funds'){
+    emit('addFunds')
+  }
+  if (displayText == 'Account'){
+    emit('close')
+  }
+  if (displayText == 'Log out'){
+    emit('close')
+  }
 }
+
 
 const copyAddressToClipboard = async () => {
   const currentAddress = walletAdress.value;
@@ -39,7 +47,11 @@ const copyAddressToClipboard = async () => {
     console.error('Failed to copy Adress to clipboard:', error)
   }
 }
+//----------------------
+import FallbackVue from '~/components/Fallback.vue';
 
+const Icon = await import(`../../../assets/images/header/${svgname}.svg`).catch(() => FallbackVue)
+//----------------------
 
 //- HeaderLink(to="/")
     //-   div(h="10" p="3" bg="black" b="b-1 gray-600" text="left" style="text-transform: none;" @click="addFunds" color="hover:$mc-orange") Add funds
