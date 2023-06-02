@@ -7,30 +7,20 @@ VList(pos="relative"  ref="menuElement")
       div() {{ Math.round(ixtBalance * 100) / 100 }} IXT
       div(grow="~") 
   VList(v-if="menuOpen" pos="absolute top-full left-0 right-0" b="1 gray-400" items="left" z="99") 
-    HeaderLink(to="/")
-      div(h="10" p="3" bg="black" b="b-1 gray-600" text="left" style="text-transform: none;" @click="addFunds" color="hover:$mc-orange") Add funds
-    HeaderLink(group to="/")
-      div(h="10" p="3" bg="black" b="b-1 gray-600" text="left" style="text-transform: none;" @click="copyAddressToClipboard" color="white group-hover:$mc-orange") 0x4ac...89fc 
-        Copy(w="6" pos="relative" bottom="25px" left="125px" fill="white group-hover:$mc-orange")
-    HeaderLink(to="/")
-      div(h="10" p="3" bg="black" b="b-1 gray-600" text="left" style="text-transform: none;" @click="toggleMenuButton3" color="gray-400") Account
-    HeaderLink(to="/connect")
-      div(h="10" p="3" bg="black" b="b-1 gray-600" text="left" color="hover:$mc-orange" style="text-transform: none;" @click="toggleMenu") Log out
+    HeaderAccountButtonItem(v-for="index in arr", :displayText="index" :icon="true" :link="linkTest" :clicked="clickedIt")
 </template>
     
     
 <script lang="ts" setup>
-import Copy from '~/assets/images/header/copy.svg'
 const { walletAdress, walletState } = useWallet()
 const { ixtBalance } = useUserData()
 const menuOpen = ref(false)
 const menuButton1 = ref(false)
 const menuElement = ref()
 
-defineProps<{
-  buttonText?: string
-  ButtonLink?: string
-}>()
+const arr = ["Add funds", "0x4ac...89fc", "Account", "Log out"]
+const linkTest = "/account"
+const clickedIt = "copyAddressToClipboard"
 
 const emit = defineEmits(["addFunds"])
 
@@ -41,15 +31,11 @@ const addFunds = () => {
 
 const toggleMenu = () => {
   menuOpen.value = !menuOpen.value
+  console.log(clickedIt)
 }
 
 const toggleMenuButton1 = () => {
   menuButton1.value = !menuButton1.value
-}
-const toggleMenuButton3 = () => {
-  menuButton1.value = !menuButton1.value
-  console.log('Coming Soon!')
-  console.log(walletAdress.value)
 }
 
 const copyAddressToClipboard = async () => {
@@ -66,7 +52,7 @@ const copyAddressToClipboard = async () => {
 }
 
 onClickOutside(menuElement, () => {
-  menuOpen.value = false;
+  //menuOpen.value = false;
 })
 
 
