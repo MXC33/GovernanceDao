@@ -14,8 +14,8 @@ VList(max-w="full" overflow-x="auto" w="full")
           slot(:name="`item-${column.rowKey}`" :row="row" :column="column" v-if="column.type != 'buttons'")
             TableCellValue(:column="column" :row="row")
 
-          HList(v-else space-x="3" justify="end")
-            TableButton(:row="row" :button="button" v-for="button in column.buttons" ) {{ button.text }}
+          HList(v-else space-x="3" justify="end" bg="lt-md:gray-900" p="r-2")
+            TableButton(:row="row" :button="button" v-for="button in column.buttons") {{ button.text }}
 
 </template>
 

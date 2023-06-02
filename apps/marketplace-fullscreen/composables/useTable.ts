@@ -46,7 +46,7 @@ export type TableColumn<T extends TableRow> = TableColumnText<T> | TableButtonCo
 
 export const useTableSort = (id: string) => {
   const sort = useState<TableSort>(`table-${id}`, () => ({
-    columnIndex: 0,
+    columnIndex: 1,
     direction: 'asc'
   }))
 
@@ -105,13 +105,18 @@ export const useTable = () => {
       const aField = getField(a)
       const bField = getField(b)
 
+      if (aField === 0 && bField === 0) {
+        return 0
+      } else if (aField === 0) {
+        return 1
+      } else if (bField === 0) {
+        return -1
+      }
+
       return direction === 'asc'
-        ? aField < bField
-          ? -1 : aField > bField ? 1 : 0
-        : aField > bField ? -1 : aField < bField
-          ? 1
-          : 0;
-    });
+        ? (aField < bField ? -1 : aField > bField ? 1 : 0)
+        : aField > bField ? -1 : aField < bField ? 1 : 0
+    })
   }
 
 

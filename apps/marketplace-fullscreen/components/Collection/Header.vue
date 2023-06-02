@@ -1,5 +1,5 @@
 <template lang="pug">
-VList(space-y="8")
+VList(space-y="4 md:8")
 
   div(w="60")
     slot(name="collectionImage")
