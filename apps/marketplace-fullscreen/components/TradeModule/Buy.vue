@@ -43,7 +43,7 @@ VList()
   HList(px="4 md:6" py="4" b="t-1 b-1 gray-600" space-x="3" items="center" justify="between" w="full")
     div(flex="~ col md:row" space-y="4 md:0" w="full" flex-shrink="0" whitespace="nowrap")
       InputCheckbox(v-model="isSubstituteListing")
-        span(color="gray-200") Substitute listings
+        div(color="gray-200" whitespace="nowrap" w="full") Substitute listings
 
       div(flex="~ col md:row" items="center" w="full" v-if="isSubstituteListing" space-x="0 md:4")
         HList(color="white" w="full" justify="start md:end")
@@ -67,9 +67,7 @@ import { NFTType } from "~/composables/useAssetContracts";
 const { ixtToUSD } = useIXTPrice()
 const { displayPopup } = usePopups()
 
-const { execute: buyItems, loading: isBuyLoading } = useContractRequest(() => buy())
 
-const { item, ownerValue, isDisabled } = defineProps<{
   ownerValue?: string | number,
   item: SingleItemData
   isDisabled?: boolean
