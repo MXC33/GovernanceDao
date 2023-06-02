@@ -5,18 +5,18 @@ div()
       NuxtLink(to="https://www.planetix.com")
         PlanetIXNew(w="42.25")
 
-      HList(space-x="8" px="8" items="center" font="bold" text="lg" flex-grow="1")
-        HeaderLink(v-for="(item, index) in siteTopHeaders" @click="OpenMeny(index)" text="red") {{ $t(`marketplace.headers.${item.type}.title`)}}
+      //- HList(space-x="8" px="8" items="center" font="bold" text="lg" flex-grow="1")
+      //-   HeaderLink(v-for="(item, index) in siteTopHeaders" @click="OpenMenu(index)" text="red") {{ $t(`marketplace.headers.${item.type}.title`)}}
 
-      HList(font="bold" space-x="6" px="6")
-        HeaderLink(to="/" display="lt-md:none") help
-        HeaderLink(to="/" display="lt-md:none")
-          HelperLanguage(language="EN")
-        HeaderAccountButton(@addFunds="showIFrame=true")
-    Transition(name="slide-top" mode="out-in")
-      HeaderItem(v-if="activeMenuIndex != null" :key="activeMenuIndex" @onClickItem="onClicked" :header="siteTopHeaders[activeMenuIndex]")
-    Transition(name="slide-top" mode="out-in")
-      HeaderCategoryDropDown()
+    //-   HList(font="bold" space-x="6" px="6")
+    //-     HeaderLink(to="/" display="lt-md:none") help
+    //-     HeaderLink(to="/" display="lt-md:none")
+    //-       HelperLanguage(language="EN")
+    //-     HeaderAccountButton(@addFunds="showIFrame=true")
+    //- Transition(name="slide-top" mode="out-in")
+    //-   HeaderItem(v-if="activeMenuIndex != null" :key="activeMenuIndex" @onClickItem="onClicked" :header="siteTopHeaders[activeMenuIndex]")
+    //- Transition(name="slide-top" mode="out-in")
+    //-   HeaderCategoryDropDown()
 
   Popup(v-if="showIFrame")
     template(#header) Swap
@@ -31,7 +31,7 @@ const { siteTopHeaders } = useSiteHeader()
 
 const activeMenuIndex = ref<number | null>(null)
 
-const OpenMeny = (index: number) => {
+const OpenMenu = (index: number) => {
   console.log("Open Menu", index);
 
   if (activeMenuIndex.value == index)
