@@ -7,28 +7,58 @@ VList(pos="relative"  ref="menuElement")
       div() {{ Math.round(ixtBalance * 100) / 100 }} IXT
       div(grow="~") 
   VList(v-if="menuOpen" pos="absolute top-full left-0 right-0" b="1 gray-400" items="left" z="99") 
-    HeaderAccountButtonItem(v-for="index in arr", :displayText="index" :svgname="iconYes" :link="linkTest" @addFunds="$emit('addFunds')" @close="toggleMenu")
+    HeaderLink(to="")
+      div(h="10" p="3" bg="black" b="b-1 gray-600" text="left" style="text-transform: none;" @click="addFunds" color="hover:$mc-orange") {{ $t(`marketplace.navigation.menu.addFunds`)}}
+    HeaderLink(group to="")
+      div(h="10" p="3" bg="black" b="b-1 gray-600" text="left" style="text-transform: none;" @click="copyAddressToClipboard" color="white group-hover:$mc-orange") {{formatAdress}}
+        Copy(w="6" pos="relative" bottom="25px" left="125px" fill="white group-hover:$mc-orange")
+    HeaderLink(to="/account")
+      div(h="10" p="3" bg="black" b="b-1 gray-600" text="left" style="text-transform: none;" color="white group-hover:$mc-orange" @click="toggleMenu") {{ $t(`marketplace.navigation.menu.account`)}}
+    HeaderLink(to="/connect")
+      div(h="10" p="3" bg="black" b="b-1 gray-600" text="left" color="hover:$mc-orange" style="text-transform: none;" @click="toggleMenu") {{ $t(`marketplace.navigation.menu.logout`)}}
 </template>
     
     
 <script lang="ts" setup>
-const { walletState } = useWallet()
+import Copy from '~/assets/images/header/copy.svg'
+const { walletAdress, walletState } = useWallet()
 const { ixtBalance } = useUserData()
 const menuOpen = ref(false)
 const menuElement = ref()
+const currentAddress = walletAdress.value
 
-const arr = ["Add funds", "0x4ac...89fc", "Account", "Log out"]
-const linkTest = "/account"
-const iconYes = "copy"
+const emit = defineEmits(["addFunds"])
 
+const addFunds = () => {
+  emit('addFunds')
+}
 
 const toggleMenu = () => {
   menuOpen.value = !menuOpen.value
 }
 
+const copyAddressToClipboard = async () => {
+
+  try {
+    if (!currentAddress)
+      return
+    await navigator.clipboard.writeText(currentAddress.toString())
+  } catch (error) {
+    console.error('Failed to copy Adress to clipboard:', error)
+  }
+}
+
 onClickOutside(menuElement, () => {
-  //menuOpen.value = false;
+  menuOpen.value = false;
 })
 
+const formatAdress = computed(() => {
+  if (!currentAddress) {
+    return;
+  }
+  const firstFour = currentAddress.slice(0, 4);
+  const lastFour = currentAddress.slice(-4);
+  return `${firstFour}...${lastFour}`;
+})
 
 </script>

@@ -465,6 +465,11 @@
             "link": ""
           }
         }
+      },
+      "menu": {
+        "addFunds": "Add Funds",
+        "account": "Account",
+        "logout": "Log out"
       }
     }
   }
