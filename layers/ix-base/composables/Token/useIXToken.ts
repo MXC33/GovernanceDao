@@ -1,6 +1,6 @@
 import { CHAIN_NET_ADDRESS } from "~/composables/Contract/useWallet";
 import { seaportAdress } from "~/composables/Contract/WalletAddresses";
-import {ConsiderationItem, NFTType} from "@ix/marketplace/composables/useAssetContracts";
+import { ConsiderationItem, NFTType } from "@ix/marketplace/composables/useAssetContracts";
 
 export interface IXTokenAttribute {
   value: string
@@ -163,7 +163,7 @@ export interface OrderParameters {
   totalOriginalConsiderationItems: number
 }
 export interface AdvancedOrder {
-  parameters: OrderParameters | SaleBody,
+  parameters: OrderParameters,
   numerator: number,
   denominator: number,
   signature: string,
@@ -184,28 +184,12 @@ export const signDomain = {
   verifyingContract: seaportAdress.polygon
 }
 
-
-export interface SaleMessage {
-  body: SaleBody
+export interface OrderMessage {
+  body: OrderParameters
   signature: string
 }
 
-export interface SaleBody {
-  offerer: string
-  zone: string
-  offer: SaleOffer[]
-  consideration: SaleConsideration[]
-  orderType: number
-  startTime: number
-  endTime: number
-  zoneHash: string
-  salt: string
-  totalOriginalConsiderationItems?: number,
-  conduitKey: string
-  counter?: number
-}
-
-export interface SaleOffer {
+export interface Offer {
   itemType: number
   token: string
   identifierOrCriteria: number

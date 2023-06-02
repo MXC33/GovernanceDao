@@ -3,7 +3,7 @@ Popup()
   template(#icon)
     CheckboxIcon(w="6" h="6")
 
-  template(#header) Buy Successful!
+  template(#header) Purchase Successful!
 
   template(#default)
     CompleteTokenList(:items="items")
@@ -12,8 +12,9 @@ Popup()
     BiddingPrice(:items="items")
 
   template(#buttons)
-    button(@click="onClickAssets" btn="~ secondary" w="full") View my assets
-    button(@click="closeActivePopup" btn="~ primary" w="full") Continue exploring 
+    HList()
+      button(@click="onClickAssets" btn="~ secondary" w="full") View my assets
+      button(@click="closeActivePopup" btn="~ primary" w="full") Continue exploring 
 
 </template>
   

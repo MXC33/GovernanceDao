@@ -21,8 +21,7 @@ Transition(name="fade" appear)
         VList(p="x-6 y-3")
           slot(name="footer")
 
-        HList(w="full")
-          slot(name="buttons")
+        slot(name="buttons")
           
 </template>
 
