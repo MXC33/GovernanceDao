@@ -1,17 +1,17 @@
 import { IXToken, ItemType, OrderType, signDomain, typedData } from "@ix/base/composables/Token/useIXToken"
-import {add} from "date-fns"
-import {ethers} from "ethers";
-import {ZERO_ADDRESS} from "~/composables/useTransferNFT";
+import { add } from "date-fns"
+import { ethers } from "ethers";
+import { ZERO_ADDRESS } from "~/composables/useTransferNFT";
 import {
   conduitKey,
   feeTreasuryAdress,
   IXTAddress,
 } from "@ix/base/composables/Contract/WalletAddresses";
 
-import {makeRandomNumberKey} from "@ix/base/composables/Utils/useHelpers";
-import {BiddingBody, useBidsAPI} from "~/composables/api/post/useBidAPI";
+import { makeRandomNumberKey } from "@ix/base/composables/Utils/useHelpers";
+import { BiddingBody, useBidsAPI } from "~/composables/api/post/useBidAPI";
 import { TransactionItem } from "./useTransactions"
-import {NFTType} from "~/composables/useAssetContracts";
+import { NFTType } from "~/composables/useAssetContracts";
 
 export interface BiddingItem extends TransactionItem {
   type: 'bid'
@@ -101,11 +101,11 @@ export const useBiddingContract = () => {
         itemType: ItemType.ERC20,
         token: IXTAddress.polygon,
         identifierOrCriteria: 0,
-        startAmount: ownerPrice ,
+        startAmount: ownerPrice,
         endAmount: ownerPrice,
         pixHash: "0x0000000000000000000000000000000000000000000000000000000000000000"
       }],
-      consideration:[
+      consideration: [
         {
           itemType: item.token.nft_type === NFTType.ERC1155 ? ItemType.ERC1155 : ItemType.ERC721,
           token: collection,
@@ -175,8 +175,6 @@ export const useBiddingContract = () => {
         throw new Error("Something wrong happened!")
       }
     }
-
-    return true
   }
 
   const bidItems = async (items: BiddingItem[]) => {

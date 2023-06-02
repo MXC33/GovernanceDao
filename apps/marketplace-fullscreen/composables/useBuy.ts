@@ -1,4 +1,4 @@
-import { AdvancedOrder, IXToken, Sale, SaleMessage, SingleItemData } from "@ix/base/composables/Token/useIXToken";
+import { AdvancedOrder, Bid, IXToken, Sale, SaleMessage, SingleItemData } from "@ix/base/composables/Token/useIXToken";
 import { AdjustableNumber } from "@ix/base/composables/Utils/useAdjustableNumber";
 import { getIXTokenContract, useSeaportContract } from "~/composables/useAssetContracts";
 import { conduitKey } from "@ix/base/composables/Contract/WalletAddresses";
@@ -174,16 +174,16 @@ export const useBuyHelpers = () => {
     }
   }
 
-  const getSaleMessage = (sale: Sale) => {
+  const getOrderMessage = (item: Sale | Bid) => {
     try {
-      const message = JSON.parse(sale.message) as SaleMessage
+      const message = JSON.parse(item.message) as OrderMessage
       return message
     } catch (e) { }
     return undefined
   }
 
-  const createBuyOrder = (sale: Sale, quantity: number, substitute?: boolean) => {
-    const message = getSaleMessage(sale)
+  const createBuyOrder = (sale: Sale | Bid, quantity: number, substitute?: boolean) => {
+    const message = getOrderMessage(sale)
     if (!message?.body?.consideration)
       return
 
@@ -215,7 +215,7 @@ export const useBuyHelpers = () => {
     order != undefined
 
   return {
-    getSaleMessage,
+    getOrderMessage,
     isAdvancedOrder,
     generateConsiderations,
     createBuyOrder
