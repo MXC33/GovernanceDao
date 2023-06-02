@@ -275,10 +275,6 @@ export const useSeaportContract = <T extends ContractInterface<T> & SeaportContr
 
       return contract.fulfillAvailableAdvancedOrders(advancedOrders, criteriaResolvers, offerFulfillments, considerationFulfillments, fulfillerConduitKey, recipient, maximumFulfilled)
     }, {
-      getTransactionError: (error) => ({
-        title: "Purchase error",
-        serverError: error
-      }),
       onFail: async (error) => {
         if (!cartItems || cartItems?.length == 0)
           return

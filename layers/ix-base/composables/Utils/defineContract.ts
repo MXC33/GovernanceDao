@@ -32,7 +32,7 @@ export interface TransactionOptions {
   onTxApproved?: () => Promise<any>,
   onSuccessAfterMs?: number,
   successOnEventKey?: string | string[],
-  getTransactionError?: (errorCode?: string) => ContractError
+  // getTransactionError?: (errorCode?: string) => ContractError
   // successMessage?: string
 }
 
@@ -160,12 +160,12 @@ export const defineContract = <T extends ContractInterface<T> | object>(key: str
       await txOptions.onFail(error)
 
     resetTransactionState()
-    if (txOptions?.getTransactionError) {
-      addError(txOptions.getTransactionError(error?.message))
-    }
+    // if (txOptions?.getTransactionError) {
+    //   addError(txOptions.getTransactionError(error?.message))
+    // }
 
     console.log("FAILED TX", error)
-    return false
+    throw new Error(error?.message)
   }
 
   const beforeContractInteraction = async () => {

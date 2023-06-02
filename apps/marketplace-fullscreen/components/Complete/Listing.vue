@@ -6,21 +6,15 @@ Popup()
   template(#header) LIST SUCCESSFUL!
 
   template(#default)
-    VList(min-h="30")
-      TokenSlideshow(:tokens="mappedTokens")
-
-    VList()
-      HList(justify="between" v-for="item in items" font="bold" text="sm")
-        TokenName(:token="item.token")
-        div x{{ item.shares.value }}
+    CompleteTokenList(:items="items")
 
   template(#footer)
     ListingPrice(:items="items")
 
   template(#buttons)
     HList()
-      button(@click="onClickActiveListings" btn="~ secondary") View in active listings
-      button(@click="closeActivePopup" btn="~ primary") Continue exploring 
+      button(@click="onClickActiveListings" btn="~ secondary" w="full") View in active listings
+      button(@click="closeActivePopup" btn="~ primary" w="full") Continue exploring 
 
 </template>
   
