@@ -1,6 +1,6 @@
 <template lang="pug">
 Transition(name="slide-left")
-  HList(w="full" bg="ix-black" pos="sticky top-52" z="3" px="0 on-open:3" flex-wrap="~" space-x="4" :open="isOpen" gap="0.5")
+  HList(w="full" bg="ix-black" pos="sticky top-52" z="3" px="0 on-open:3" flex-wrap="~" space-x="4" :open="isOpen" gap="0.5" p="2 md:b-4")
     template(v-for="(item, filterIndex) in activeFilters")
       CollectionFilterButton(v-model="activeFilters[filterIndex].value[index].selected" v-for="(option, index) in item.value") {{ option.name }}
 

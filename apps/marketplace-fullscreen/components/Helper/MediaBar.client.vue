@@ -1,8 +1,9 @@
 <template lang="pug">
 HList(w="full" px="6" py="3" bg="gray-900" items="center" justify="between")
   HList(space-x="6")
-    HelperHover(tooltip-id="like")
-      LikeIcon(w="4.5" cursor="pointer" fill="gray-200 hover:white")
+    //- SAVE BELOW FOR USE IN FUTURE
+    //- HelperHover(tooltip-id="like")
+    //-   LikeIcon(w="4.5" cursor="pointer" fill="gray-200 hover:white")
 
     HelperHover(tooltip-id="transfer")
       TransferIcon(w="4.5" cursor="pointer" fill="gray-200 hover:white" @click="$emit('transfer')")
