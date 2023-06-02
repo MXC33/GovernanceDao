@@ -8,7 +8,7 @@ VList(w="114 md:100" ml="-8 md:(-8)" mr="-8 md:(-3)" pos="sticky top-66 md:(stic
         CollectionFilterRowSelect(v-model="activeFilters[filterIndex].value[index].selected" v-for="(option, index) in item.value" px="8")
           template(#default) {{ option.name }}
         div(h="4")
-      div(mt="4")
+      div(mt="4" bg="gray-900")
       
 </template>
 
