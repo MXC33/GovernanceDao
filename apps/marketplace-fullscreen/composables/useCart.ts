@@ -50,7 +50,7 @@ export const useCart = () => {
     //Todo Start loading overlay
     console.log('start Loading overlay')
     const { allowanceCheck } = getIXTokenContract()
-    const { fulfillAvailableAdvancedOrders } = useSeaportContract(cartItems.value)
+    const { fulfillAvailableAdvancedOrders } = useSeaportContract()
     await allowanceCheck(totalPrice)
 
     let BuyOrderComponents: AdvancedOrder[] = []

@@ -9,7 +9,7 @@ div#popups()
 
     CompleteTransfer(v-else-if="popup.type == 'transfer-item-successful'" :item="popup.item")
 
-    //- CompleteBuy(v-else-if="popup.type == 'buy-item-success'" :items="popup.items")
+    CompleteBuy(v-else-if="popup.type == 'buy-items-success'" :items="popup.items")
 
     Transfer(v-else-if="popup.type == 'transfer-item'" :token="popup.item")
 

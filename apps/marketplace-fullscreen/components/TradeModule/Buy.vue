@@ -101,7 +101,11 @@ const buy = async () => {
   if (sale)
     displayPopup({
       type: 'buy-items-success',
-      items: [item]
+      items: [{
+        token: item,
+        shares: shares.value,
+        ixtPrice: price
+      }]
     })
 
   console.log('checkoutSales', sale)
