@@ -2,7 +2,7 @@
 Transition(name="fade" appear)
   VList(pos="fixed" inset="0" bg="black opacity-80" w="full" h="full" z="999"  items="center" justify="center" @click="onClose")
 
-    VList(w="full" pos="relative" @click.stop="" bg="gray-900" m="auto" z="1000" max-w="120" color="white" max-h="90%" overflow="auto")
+    VList(w="full" pos="relative" @click.stop="" bg="gray-900" m="auto" z="1000" max-w="150" color="white" max-h="90%" overflow="auto")
 
       HList(items="center" justify="between" px="6" py="3" b="b-1 gray-600" text="lg" font="bold" uppercase="~" pos="sticky top-0" bg="gray-900" z="3")
         HList(space-x="3" items="center")
@@ -21,7 +21,8 @@ Transition(name="fade" appear)
         VList(p="x-6 y-3")
           slot(name="footer")
 
-        slot(name="buttons")
+        HList(w="full")
+          slot(name="buttons")
           
 </template>
 
