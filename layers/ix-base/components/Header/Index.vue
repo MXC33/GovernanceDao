@@ -19,6 +19,7 @@ div()
       HeaderItem(v-if="activeMenuIndex != null" :key="activeMenuIndex" @onClickItem="onClicked" :header="siteTopHeaders[activeMenuIndex]" display="lt-md:none")
     Transition(name="slide-top")
       div(v-if="activeMenuIndex != null" display="md:none")
+        HeaderCategoryDropDownWallet()
         HeaderCategoryDropDown()
 
   Popup(v-if="showIFrame")
