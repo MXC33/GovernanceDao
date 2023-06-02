@@ -45,10 +45,11 @@ export type TableColumn<T extends TableRow> = TableColumnText<T> | TableButtonCo
 
 
 export const useTableSort = (id: string) => {
-  const sort = useState<TableSort>(`table-${id}`, () => ({
-    columnIndex: 1,
-    direction: 'asc'
-  }))
+  const sort = useState<TableSort>(`table-${id}`, () => (
+    {
+      columnIndex: id == 'collection' ? 1 : 0,
+      direction: id == 'offers' ? 'desc' : 'asc'
+    }))
 
   const toggleSortDirection = () => {
     if (sort.value.direction == 'asc')
