@@ -12,7 +12,7 @@ div()
         HeaderLink(to="/" display="lt-md:none") help
         HeaderLink(to="/" display="lt-md:none")
           HelperLanguage(language="EN")
-        HeaderAccountButton(@addFunds="showIFrame=true")
+        HeaderAccountButton()
     Transition(name="slide-top" mode="out-in")
       HeaderItem(v-if="activeMenuIndex != null" :key="activeMenuIndex" @onClickItem="onClicked" :header="siteTopHeaders[activeMenuIndex]")
     Transition(name="slide-top" mode="out-in")
