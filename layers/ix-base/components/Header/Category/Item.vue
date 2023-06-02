@@ -3,9 +3,13 @@ NuxtLink(:to="linkPath" cursor="pointer")
   HList(group p="3" space-x="3" pos="right-0" text="left")
     //-TitleIcon(w="10" h="10" p="1" fill="white group-hover:$mc-orange")
     HeaderCategoryIcon(w="8" :header="header" :item="item" :category="category" fill="white group-hover:$mc-orange" flex-shrink="0")
-    VList(pos="relative")
-      div(color="white group-hover:$mc-orange") {{ $t(`${langPath}.title`)}} 
-      div(color="gray-200 group-hover:$mc-orange" text="sm") {{ $t(`${langPath}.description`) }}
+    div(pos="relative")
+      VList(pos="relative" v-if="linkPath")
+        div(color="white group-hover:$mc-orange") {{ $t(`${langPath}.title`)}} 
+        div(color="gray-200 group-hover:$mc-orange" text="sm" ) {{ $t(`${langPath}.description`) }}
+      VList(pos="relative" v-if="!linkPath")
+        div(color="gray") {{ $t(`${langPath}.title`)}}
+        div(color="$mc-orange" text="sm" ) {{ $t(`marketplace.headers.soon`)}}
 </template>
 
 <script lang="ts" setup>

@@ -44,6 +44,7 @@ export interface Collection {
   contract: string
   network: string
   currency: string
+  nft_count: number
   order: string
   volume: string
 }

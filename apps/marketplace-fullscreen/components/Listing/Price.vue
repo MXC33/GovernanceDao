@@ -29,4 +29,5 @@ const totalPotentialEarning = computed(() =>
 const { items } = defineProps<{
   items: ListingItem[],
 }>()
+
 </script>

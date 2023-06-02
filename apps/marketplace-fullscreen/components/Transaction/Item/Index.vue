@@ -1,10 +1,10 @@
 <template lang="pug">
 VList(bg="gray-800" v-if="item" frame="~" flex-shrink="0")
-  HList(justify="start"  @click="isOpen = !isOpen" cursor="pointer" pr="6" items="center")
+  HList(justify="start" @click="isOpen = !isOpen" cursor="pointer" p="l-3 r-6" items="center")
     VList(w="30" h="30" pos="relative" min-h="0")
-      TokenImage(:token="item.token" pos="absolute" inset="0" h="full" w="full")
+      TokenImage(:token="item.token")
 
-    VList(w="full" p="6")
+    VList(w="full" p="y-6 x-3")
       HList(space-x="3" font="bold")
         TokenName(:token="item.token" w="auto")
         span x{{ item.shares.value }}
