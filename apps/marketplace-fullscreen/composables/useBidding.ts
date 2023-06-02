@@ -11,6 +11,7 @@ import {
 import {makeRandomNumberKey} from "@ix/base/composables/Utils/useHelpers";
 import {BiddingBody, useBidsAPI} from "~/composables/api/post/useBidAPI";
 import { TransactionItem } from "./useTransactions"
+import {NFTType} from "~/composables/useAssetContracts";
 
 export interface BiddingItem extends TransactionItem {
   type: 'bid'
@@ -59,20 +60,18 @@ export const useBiddingContract = () => {
     if (!ixt.value || ixt.value < totalPrice) {
       /*
         Todo
-        Your balance is insufficient!!
+        Your balance is insufficient!
       */
-      alert('Your balance is insufficient!!')
-      return false
+      throw new Error("Your balance is insufficient!")
     }
 
     const { allowanceCheck } = getIXTokenContract()
     if (!await allowanceCheck(totalPrice)) {
       /*
         Todo
-        Approve didn't work
+        Allowance didn't work"
       */
-      alert('Allowance didn\'t work')
-      return false
+      throw new Error("Allowance didn't work")
     }
 
     const ownerPrice = ethers.utils.parseUnits(
@@ -92,8 +91,7 @@ export const useBiddingContract = () => {
         Todo
         wallet address is undefined
       */
-      alert('wallet address is undefined')
-      return false
+      throw new Error("wallet address is undefined")
     }
 
     const message = {
@@ -109,7 +107,7 @@ export const useBiddingContract = () => {
       }],
       consideration:[
         {
-          itemType: item.token.nft_type === 0 ? ItemType.ERC1155 : ItemType.ERC721,
+          itemType: item.token.nft_type === NFTType.ERC1155 ? ItemType.ERC1155 : ItemType.ERC721,
           token: collection,
           identifierOrCriteria: token_id,
           startAmount: shares.value,
@@ -172,12 +170,13 @@ export const useBiddingContract = () => {
 
       console.log(error.response)
       if (error.response && error.response._data && error.response._data.message) {
-        console.error(error.response._data.message)
+        throw new Error(error.response._data.message)
       } else {
-        console.error('Something wrong happened!!')
+        throw new Error("Something wrong happened!")
       }
-      return false
     }
+
+    return true
   }
 
   const bidItems = async (items: BiddingItem[]) => {
@@ -211,7 +210,6 @@ export const useBiddingContract = () => {
         Todo
         Success message
       */
-      alert('Success message')
 
     } catch (error: any) {
       /*
@@ -220,11 +218,10 @@ export const useBiddingContract = () => {
       */
       console.log(error.response)
       if (error.response && error.response._data && error.response._data.message) {
-        alert(error.response._data.message)
+        throw new Error(error.response._data.message)
       } else {
-        alert('Something wrong happened!!')
+        throw new Error("Something wrong happened!")
       }
-      return false
     }
     return true
   }

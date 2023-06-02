@@ -1,4 +1,5 @@
 import { IXToken } from "@ix/base/composables/Token/useIXToken"
+import {NFTType} from "~/composables/useAssetContracts";
 
 export interface FilterPayload {
   value: string
@@ -61,7 +62,7 @@ export interface CollectionData {
   unique_owners: number
   creators_fee: number
   nfts_from: number
-  nft_type: any
+  nft_type: NFTType
   network: string
   collection: string
   parent: any

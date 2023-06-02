@@ -44,6 +44,11 @@ export const ERC1155Addresses = [assetsAddress.polygon?.toLowerCase(), avatarNFT
 
 export const ERC721Addresses = [roverAddress.polygon?.toLowerCase(), badgeNFTAddress.polygon?.toLowerCase()]
 
+export const enum NFTType {
+  ERC1155 = 0,
+  ERC721 = 1
+}
+
 
 export const get1155Contract = <T extends ContractInterface<T> & ERC1155Contract>(address: string) => {
 
