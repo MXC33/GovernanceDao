@@ -11,7 +11,7 @@ VList(w="full" bg="gray-900")
 
   Transition(name="fade-slow" mode="out-in")
     TradeModuleSell(v-if="activeTab == 'sell' && item.my_shares > 0" :item="item" :is-disabled="item.bids.length == 0")
-    TradeModuleBuy(v-else :item="item" :is-disabled="item.sales.length == 0")
+    TradeModuleBuy(v-else :item="item" :is-disabled="item.sales?.length == 0")
 
 </template>
 
