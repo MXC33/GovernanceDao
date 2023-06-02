@@ -2,6 +2,7 @@ import { EventFilter, Listener } from "@ethersproject/abstract-provider";
 import { Contract, ethers } from "ethers";
 import { useNotifications } from "./useNotifications";
 import { useTransactions } from "./useTransaction";
+import { ContractError } from "./useContractErrors";
 
 export interface ContractInterface<T> {
   on: (event: EventFilter | string, listener: Listener) => T
@@ -23,6 +24,7 @@ export interface CreateContractOptions<T> {
 }
 // all<T extends readonly unknown[] | []>(values: T): Promise<{ -readonly [P in keyof T]: Awaited<T[P]> }>;
 
+
 export interface TransactionOptions {
   approve?: () => Promise<unknown>,
   onSuccess?: () => Promise<any>,
@@ -30,8 +32,8 @@ export interface TransactionOptions {
   onTxApproved?: () => Promise<any>,
   onSuccessAfterMs?: number,
   successOnEventKey?: string | string[],
-  failMessage?: string,
-  successMessage?: string
+  getTransactionError?: (errorCode?: string) => ContractError
+  // successMessage?: string
 }
 
 export const useDefinedContractSetups = () => {
@@ -67,13 +69,13 @@ export const defineContract = <T extends ContractInterface<T> | object>(key: str
   }
 
   const { setTransactionState, resetTransactionState } = useTransactions()
-  const { addNotification } = useNotifications()
+  const { addError } = useContractErrors()
   const { onTransactionResolved, ensureCorrectChain } = useWallet()
   const { contractAddress } = options
 
   const notifications: ContractNotificationSettings = {
     failMessage: options.notifications?.failMessage ?? 'Error processing your transactions',
-    successMessage: options.notifications?.successMessage
+    // successMessage: options.notifications?.successMessage
   }
 
   const { contractSenderSameAsUser } = useWallet()
@@ -135,7 +137,7 @@ export const defineContract = <T extends ContractInterface<T> | object>(key: str
 
 
   const transactionSuccess = async (txOptions?: TransactionOptions) => {
-    const { successMessage } = notifications
+    // const { successMessage } = notifications
 
     if (txOptions?.onSuccess) {
       if (txOptions?.onSuccessAfterMs) {
@@ -147,9 +149,9 @@ export const defineContract = <T extends ContractInterface<T> | object>(key: str
 
     resetTransactionState()
 
-    const message = txOptions?.successMessage ?? successMessage
-    if (message)
-      addNotification(message)
+    // const message = txOptions?.successMessage ?? successMessage
+    // if (message)
+    //   addNotification(message)
   }
 
   const transactionFailed = async (error?: any, txOptions?: TransactionOptions) => {
@@ -158,12 +160,12 @@ export const defineContract = <T extends ContractInterface<T> | object>(key: str
       await txOptions.onFail(error)
 
     resetTransactionState()
-    if (txOptions?.failMessage || failMessage) {
+    if (txOptions?.getTransactionError) {
       console.log("Add notification", failMessage)
-      addNotification(txOptions?.failMessage ?? failMessage, error?.message ?? error?.error?.data?.message)
+      addError(txOptions.getTransactionError(failMessage))
     }
 
-    console.log("FAILED TX", error, txOptions?.failMessage)
+    console.log("FAILED TX", error)
     return false
   }
 

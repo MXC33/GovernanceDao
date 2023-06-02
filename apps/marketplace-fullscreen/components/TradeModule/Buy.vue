@@ -41,17 +41,20 @@ VList()
   div(grid="~ cols-2" text="base")
     ButtonInteractive(btn="~ secondary" font="bold" @click="onClickOffer" text="Make offer")
 
-    ButtonInteractive(btn="~ primary" font="bold" @click="buy" :text="`Buy ${shares.value} item`")
+    ButtonInteractive(btn="~ primary" font="bold" @click="buy" :text="`Buy ${shares.value} item`" :loading="isBuyLoading")
 
 </template>
 
 <script lang="ts" setup>
 import type { SingleItemData } from '@ix/base/composables/Token/useIXToken';
 import { useBuyContract, useBuyItems } from "~/composables/useBuy";
-import {useBiddingContract, useBiddingItems} from "~/composables/useBidding";
+import { useBiddingContract, useBiddingItems } from "~/composables/useBidding";
 
 const { ixtToUSD } = useIXTPrice()
 const { displayPopup } = usePopups()
+const { } = useContractRequest(() => {
+  return buy()
+}, { title: 'Error processing your purchase' })
 const props = defineProps<{
   ownerValue?: string | number,
   item: SingleItemData
@@ -88,7 +91,7 @@ const buy = async () => {
 }
 
 /** BIDDING **/
-const { createBidItems, bidItems,  } = useBiddingItems()
+const { createBidItems, bidItems, } = useBiddingItems()
 const { bidItem } = useBiddingContract()
 createBidItems([props.item])
 

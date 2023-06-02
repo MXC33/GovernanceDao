@@ -15,12 +15,13 @@ div#popups()
 
     Bidding(v-else-if="popup.type == 'bid-item'" :items="popup.items")
 
-  ErrorPopup(v-if="activeNotification" :notification="activeNotification")
+  ErrorPopup(v-if="activeError" :error="activeError")
 
 </template>
 
 <script setup lang="ts">
 
 const { popup } = usePopups()
-const { activeNotification } = useNotifications()
+const { activeError } = useContractErrors()
+
 </script>

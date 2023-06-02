@@ -7,8 +7,11 @@ Popup()
 
   template(#default)
     VList()
-      p {{ notification.description }}
-      p {{ notification.errorCode }}
+      p {{ error.description }}
+      p {{ error.serverError }}
+
+    VList(v-if="error.items")
+      TokenImage(:token="token" v-for="token in error.items" )
 
   template(#buttons)
     button(@click="onClick" btn="~ primary") Ok 
@@ -18,16 +21,16 @@ Popup()
   
 <script lang="ts" setup>
 import CheckboxIcon from '~/assets/icons/checkmark-green.svg'
-import type { Notification } from '@ix/base/composables/utils/useNotifications'
+import type { ContractError } from '@ix/base/composables/Utils/useContractErrors'
 
-const { markCurrentNotificationRead } = useNotifications()
+const { markAllNotificationsRead } = useContractErrors()
 
-const { notification } = defineProps<{
-  notification: Notification
+defineProps<{
+  error: ContractError
 }>()
 
 const onClick = () => {
-  markCurrentNotificationRead()
+  markAllNotificationsRead()
 }
 
 </script>

@@ -33,16 +33,29 @@ const { itemsInvalid } = useTransactions()
 
 const { displayPopup } = usePopups()
 
+const { addError } = useContractErrors()
+
 const onClickList = async () => {
   isLoading.value = true
-  const list = await listItem(listItems.value[0])
-  isLoading.value = false
-  console.log('List result', list)
 
-  displayPopup({
-    type: 'listing-successful',
-    items: listItems.value
-  })
+  try {
+    await listItem(listItems.value[0])
+
+    displayPopup({
+      type: 'listing-successful',
+      items: listItems.value
+    })
+  } catch (err) {
+    console.log("ERR", err)
+    //@ts-ignore
+    const message = err?.message
+    addError({
+      title: 'Error listing',
+      serverError: message
+    })
+  }
+
+  isLoading.value = false
 }
 
 const { items } = defineProps<{
