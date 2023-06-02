@@ -1,42 +1,59 @@
 <template lang="pug">
-VList(pos="sticky top-0" z="99" w="full" @mouseenter="isSelected = true" @mouseleave="isSelected = false" ref="menuElement")
-  HList(items="center"  bg="gray-800" px="7.5" h="16")
-    NuxtLink(to="https://www.planetix.com")
-      PlanetIXNew(w="42.25")
+div()
+  VList(pos="sticky top-0" z="99" w="full" @mouseenter="isSelected = true" @mouseleave="isSelected = false" ref="menuElement")
+    HList(items="center"  bg="gray-800" px="7.5" h="16")
+      NuxtLink(to="https://www.planetix.com")
+        PlanetIXNew(w="42.25")
 
-    //- HList(space-x="8" px="8" items="center" font="bold" text="lg" flex-grow="1")
-    //-   HeaderLink(v-for="(item, index) in siteTopHeaders" @click="OpenMenu(index)" text="red") {{ $t(`marketplace.headers.${item.type}.title`)}}
+      HList(space-x="8" px="8" items="center" font="bold" text="lg" flex-grow="1" display="lt-md:none")
+        HeaderLink(v-for="(item, index) in siteTopHeaders" @click="OpenMeny(index)" text="red") {{ $t(`marketplace.navigation.${item.type}.title`)}}
 
-  //-   HList(font="bold" space-x="6" px="6")
-  //-     HeaderLink(to="/" display="lt-md:none") help
-  //-     HeaderLink(to="/" display="lt-md:none")
-  //-       HelperLanguage(language="EN")
-  //-     HeaderAccountButton(@addFunds="showIFrame=true")
-  //- Transition(name="slide-top" mode="out-in")
-  //-   HeaderItem(v-if="activeMenuIndex != null" :key="activeMenuIndex" @onClickItem="onClicked" :header="siteTopHeaders[activeMenuIndex]")
-  //- Transition(name="slide-top" mode="out-in")
-  //-   HeaderCategoryDropDown()
+      HList(font="bold" space-x="6" px="6")
+        HeaderLink(to="/" display="lt-md:none") help
+        HeaderLink(to="/" display="lt-md:none")
+          HelperLanguage(language="EN")
+        HeaderAccountButton(@addFunds="iFrameToggle")
+      div(grow="~" display="md:none")
+      SettingsIcon(pos="right" w="8" display="md:none" @click="toggleMeny")
+    Transition(name="slide-top" mode="out-in" )
+      HeaderItem(v-if="activeMenuIndex != null" :key="activeMenuIndex" @onClickItem="onClicked" :header="siteTopHeaders[activeMenuIndex]" display="lt-md:none")
+    Transition(name="slide-top")
+      div(v-if="activeMenuIndex != null" display="md:none")
+        HeaderCategoryDropDownWallet()
+        HeaderCategoryDropDown()
 
-Popup(v-if="showIFrame")
-  template(#header) Swap
-  template(#default)
-    VList(w="full" justify="center" items="center" display="lt-md:none")
-      iframe(src="https://ix.foundation/lefi" w="full md:100" h="full md:116" )
+  Popup(v-if="showIFrame")
+    template(#header) Swap
+    template(#default)
+      VList(w="full" justify="center" items="center" display="lt-md:none")
+        iframe(src="https://ix.foundation/lefi" w="full md:100" h="full md:116" )
 </template>
 
 <script lang="ts" setup>
 import PlanetIXNew from '~/assets/images/header/planetix-new.svg'
+import SettingsIcon from '~/assets/images/header/hamburger.svg'
 const { siteTopHeaders } = useSiteHeader()
 
 const activeMenuIndex = ref<number | null>(null)
 
-const OpenMenu = (index: number) => {
+const OpenMeny = (index: number) => {
   console.log("Open Menu", index);
 
   if (activeMenuIndex.value == index)
     return activeMenuIndex.value = null
 
   activeMenuIndex.value = index
+}
+
+const toggleMeny = () => {
+  if (activeMenuIndex.value == null)
+    return activeMenuIndex.value = 1
+
+  activeMenuIndex.value = null
+}
+
+const iFrameToggle = () => {
+  showIFrame.value = !showIFrame.value
 }
 
 const isSelected = ref(false)
@@ -53,7 +70,7 @@ const { t } = useI18n()
 
 const onClicked = (type: string, category: string, item: string) => {
   //console.log("onClicked Header index", type, category, item)
-  // const link = t(`marketplace.headers.${type}.${category}.${item}.link`)
+  // const link = t(`marketplace.navigation.${type}.${category}.${item}.link`)
   // if (link != '') {
   //   return navigateTo(link, { external: true })
   // }

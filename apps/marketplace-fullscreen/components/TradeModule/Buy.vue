@@ -53,14 +53,17 @@ VList()
 <script lang="ts" setup>
 import type { SingleItemData } from '@ix/base/composables/Token/useIXToken';
 import { useBuyContract, useBuyItems } from "~/composables/useBuy";
-import {NFTType} from "~/composables/useAssetContracts";
+import { NFTType } from "~/composables/useAssetContracts";
 
 const { ixtToUSD } = useIXTPrice()
 const { displayPopup } = usePopups()
+
+const { execute: buyItems, loading: isBuyLoading } = useContractRequest(() => buy())
+
 const { item, ownerValue, isDisabled } = defineProps<{
+  ownerValue?: string | number,
   item: SingleItemData
   isDisabled?: boolean
-  ownerValue?: string | number
 }>()
 
 const onClickOffer = () => {
@@ -82,19 +85,27 @@ const {
   showIncreaseMaxPrice
 } = useBuyItems(item)
 
-const { checkoutSales } = useBuyContract()
+const { buySingleItem } = useBuyContract()
 
 const buy = async () => {
-  await checkoutSales(
-    selectedSalesToBuy.value,
-    !isSubstituteListing ? totalPrice.value : totalMaxPrice.value,
-    shares.value.value
-  )
-}
+  const price = !isSubstituteListing ? totalPrice.value : totalMaxPrice.value
+  const quantity = shares.value.value
 
-const { execute: buyItems, loading: isBuyLoading } = useContractRequest(() => buy(), {
-  title: 'Error processing your purchase'
-})
+  const sale = await buySingleItem(
+    selectedSalesToBuy.value,
+    price,
+    quantity,
+    isSubstituteListing.value
+  )
+
+  if (sale)
+    displayPopup({
+      type: 'buy-items-success',
+      items: [item]
+    })
+
+  console.log('checkoutSales', sale)
+}
 
 </script>
 
