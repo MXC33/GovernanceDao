@@ -1,12 +1,12 @@
 <template lang="pug">
-HList(py="0 md:7" mb="lt-md:3" space-x="md:2" flex-wrap="none lt-md:~")
+HList(py="0 md:t-6" space-x="md:2" flex-wrap="none lt-md:~ ")
   template(v-for="attribute in attributes" )
 
     AttributeItem(v-if="attribute.value != undefined")
       template(#header) {{ $t(`collection.attributes.${attribute.key}`) }}
 
       template(#icon v-if="attribute.hasToken")
-        IXT(w="3 md:6" h="3 md:6")
+        IXT(w="3 md:5")
 
       template(#default) {{ attribute.value }}
 </template>
