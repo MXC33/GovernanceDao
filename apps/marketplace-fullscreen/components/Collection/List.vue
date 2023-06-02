@@ -5,7 +5,7 @@ Transition(name="fade" mode="out-in" )
 
   Table(v-else :columns="columns" :rows="items" id="collection")
     template(#item-name="{row}")
-      HList(items="center" space-x="2" font="bold" @click="onClickItem" cursor="pointer" max-w="60")
+      HList(items="center" space-x="2" font="bold" @click="onClickItem(row)" cursor="pointer" max-w="60")
         div(w="12" h="12")
           TokenImage(:token="row" w="12" h="12" :key="getTokenKey(row)")
         TokenName(:token="row" capitalize="~" :key="getTokenKey(row)")
@@ -27,13 +27,10 @@ const { items, columns, context = 'collection' } = defineProps<{
   context?: CollectionContext
 }>()
 
-const onClickItem = () =>
-  items.forEach((item: IXToken) => {
-    const { token_id, network, collection } = item
-
-    if (token_id)
-      navigateTo(`/assets/${network}/${collection}/${token_id}`)
-  })
+const onClickItem = (row: IXToken) => {
+  const { network, collection, token_id } = row
+  navigateTo(`/assets/${network}/${collection}/${token_id}`)
+}
 
 </script>
 
