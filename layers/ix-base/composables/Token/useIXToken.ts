@@ -1,6 +1,6 @@
 import { CHAIN_NET_ADDRESS } from "~/composables/Contract/useWallet";
 import { seaportAdress } from "~/composables/Contract/WalletAddresses";
-import { ConsiderationItem } from "@ix/marketplace/composables/useAssetContracts";
+import {ConsiderationItem, NFTType} from "@ix/marketplace/composables/useAssetContracts";
 
 export interface IXTokenAttribute {
   value: string
@@ -21,7 +21,7 @@ export interface IXToken {
   network: string
   token_id: number
   type: number
-  nft_type: number
+  nft_type: NFTType
   reference: any
   image: string
   thumbnail: string

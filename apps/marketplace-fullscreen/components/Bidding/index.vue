@@ -33,16 +33,29 @@ const { itemsInvalid } = useTransactions()
 
 const { displayPopup } = usePopups()
 
+const { addError } = useContractErrors()
+
 const onClickBid = async () => {
   isLoading.value = true
-  const bid = await bidItem(bidItems.value[0])
-  isLoading.value = false
-  console.log('Bid result', bid)
 
-  displayPopup({
-    type: 'bidding2-successful',
-    items: bidItems.value
-  })
+  try {
+    await bidItem(bidItems.value[0])
+
+    displayPopup({
+      type: 'bidding2-successful',
+      items: bidItems.value
+    })
+  } catch (err) {
+    console.log("ERR", err)
+    //@ts-ignore
+    const message = err?.message
+    addError({
+      title: 'Error bidding',
+      serverError: message
+    })
+  }
+
+  isLoading.value = false
 }
 
 const { items } = defineProps<{

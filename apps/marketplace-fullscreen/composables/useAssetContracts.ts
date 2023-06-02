@@ -44,6 +44,11 @@ export const ERC1155Addresses = [assetsAddress.polygon?.toLowerCase(), avatarNFT
 
 export const ERC721Addresses = [roverAddress.polygon?.toLowerCase(), badgeNFTAddress.polygon?.toLowerCase()]
 
+export const enum NFTType {
+  ERC1155 = 0,
+  ERC721 = 1
+}
+
 
 export const get1155Contract = <T extends ContractInterface<T> & ERC1155Contract>(address: string) => {
 
@@ -273,7 +278,7 @@ export const getSeaportContract = <T extends ContractInterface<T> & SeaportContr
 
       return contract.fulfillAvailableAdvancedOrders(advancedOrders, criteriaResolvers, offerFulfillments, considerationFulfillments, fulfillerConduitKey, recipient, maximumFulfilled)
     }, {
-      failMessage: "Checkout failed", onFail: async (error) => {
+      onFail: async (error) => {
         if (items && items?.length > 0) {
           for (const item of items) {
             if (item.sale) {
@@ -312,6 +317,7 @@ export const getSeaportContract = <T extends ContractInterface<T> & SeaportContr
             }
           }
         }
+        throw new Error(error)
       }
     })
 
