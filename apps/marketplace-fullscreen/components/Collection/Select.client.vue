@@ -9,8 +9,7 @@ DropdownSelect(:items="collections" v-if="collections")
 
       div(flex-grow="1" v-if="item.name != 'PlanetIX Assets'") {{ item.name }}
       div(flex-grow="1" v-else) PlanetIX - Assets
-      div(color="gray-200" font="normal") 50 items
-
+      div(color="gray-200" font="normal") {{ item.nft_count }}
 </template>
 
 <script lang="ts" setup>

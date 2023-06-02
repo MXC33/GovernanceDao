@@ -53,7 +53,7 @@ const { addToCart } = useCart()
 const attributes = computed(() => getSingleAttributes(item))
 
 const saleColumns: TableColumn<Sale>[] = [
-  { label: "Sale Price", rowKey: "price", sortable: true },
+  { label: "Sale Price", type: "ixt", rowKey: "price", sortable: true },
   { label: "Quanitity", rowKey: "quantity", sortable: true },
   { label: "Expiration", rowKey: "endtime", sortable: true },
   { label: "Seller", rowKey: "player_id", sortable: true },
@@ -65,7 +65,7 @@ const addSaleToCart = (sale: Sale) => {
 }
 
 const offerColumns: TableColumn<Bid>[] = [
-  { label: "Sale Price", rowKey: "price", sortable: true },
+  { label: "Sale Price", type: "ixt", rowKey: "price", sortable: true },
   { label: "Quanitity", rowKey: "quantity", sortable: true },
 
 ]
