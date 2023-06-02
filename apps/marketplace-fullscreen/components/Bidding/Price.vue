@@ -8,12 +8,12 @@ VList()
 </template>
   
 <script lang="ts" setup>
-import type { BiddingItem } from "~/composables/useBidding";
+import type { TransactionItem } from "~/composables/useTransactions";
 
 const { priceRenderString, getTotalIXTPrice } = useTransactions()
 const totalIXTPrice = computed(() => getTotalIXTPrice(items))
 
 const { items } = defineProps<{
-  items: BiddingItem[],
+  items: TransactionItem[],
 }>()
 </script>

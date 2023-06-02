@@ -21,8 +21,12 @@ VList(space-y="6")
     template(#default)
       Table(:columns="saleColumns" :rows="item.sales" id="single-item" :in-drawer="true" v-if="item.sales && item.sales.length > 0")
         template(#item-action="{row}")
-          button(@click="addSaleToCart(row)" bg="gray-500 hover:gray-400" transition="all" cut="bottom-right sm" p="x-6 y-3")
+          button(@click="addSaleToCart(row)" bg="gray-500 hover:gray-400" transition="all" cut="bottom-right sm" p="x-6 y-3" v-if="!playerOwnedSale(row)")
             CartIcon(w="6")
+          button(@click="removeListing(row)" bg="gray-500 hover:gray-400" transition="all" cut="bottom-right sm" p="x-6 y-3" v-else)
+            TrashIcon(w="6" fill="white")
+
+
 
       HList(v-else px="6" py="6" font="bold" color="gray-400" items="center" justify="center") 
         span() No items found
@@ -43,6 +47,8 @@ VList(space-y="6")
 
 <script lang="ts" setup>
 import CartIcon from '~/assets/icons/cart.svg'
+import TrashIcon from '~/assets/icons/trash.svg'
+
 import type { Sale, SingleItemData, Bid } from '@ix/base/composables/Token/useIXToken';
 import type { TableColumn } from '~/composables/useTable';
 
@@ -50,13 +56,20 @@ import type { TableColumn } from '~/composables/useTable';
 
 const { getSingleAttributes } = useDefaulAttributes()
 const { addToCart } = useCart()
+const { walletAdress } = useWallet()
 const attributes = computed(() => getSingleAttributes(item))
 
 const saleColumns: TableColumn<Sale>[] = [
   { label: "Sale Price", type: "ixt", rowKey: "price", sortable: true },
   { label: "Quanitity", rowKey: "quantity", sortable: true },
-  { label: "Expiration", rowKey: "endtime", sortable: true },
-  { label: "Seller", rowKey: "player_id", sortable: true },
+  { label: "Expiration", type: "date", rowKey: "endtime", sortable: true },
+  {
+    label: "Seller", rowKey: "player_username", getValue(row) {
+      if (row.player_wallet.toLowerCase() == walletAdress.value?.toLowerCase())
+        return 'YOU'
+      return row.player_username
+    }, sortable: true
+  },
   { label: "Action", rowKey: "action", width: 80 }
 ]
 
@@ -64,11 +77,23 @@ const addSaleToCart = (sale: Sale) => {
   addToCart(item, sale)
 }
 
+const removeListing = (sale: Sale) => {
+  console.log("remove listing")
+}
+
 const offerColumns: TableColumn<Bid>[] = [
   { label: "Sale Price", type: "ixt", rowKey: "price", sortable: true },
   { label: "Quanitity", rowKey: "quantity", sortable: true },
 
 ]
+
+const playerOwnedSale = (sale: Sale) => {
+  if (sale.player_wallet.toLowerCase() == walletAdress.value?.toLowerCase())
+    return true
+  return false
+}
+
+
 const { item } = defineProps<{
   item: SingleItemData
 }>()

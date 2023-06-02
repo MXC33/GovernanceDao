@@ -2,7 +2,7 @@
 VList(v-for="header in siteTopHeaders" grid="~ cols-2")
   CollectionFilterDrawer(bg="black")
     template(#header) 
-      div() {{ $t(`marketplace.headers.${header.type}.title`)}}
+      div() {{ $t(`marketplace.navigation.${header.type}.title`)}}
     template(#default) 
       //- HeaderCategory(
       //-   v-for="category in header.categories" grow="" items="center"

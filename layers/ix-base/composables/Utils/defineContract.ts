@@ -155,14 +155,13 @@ export const defineContract = <T extends ContractInterface<T> | object>(key: str
   }
 
   const transactionFailed = async (error?: any, txOptions?: TransactionOptions) => {
-    const { failMessage } = notifications
+    // const { failMessage } = notifications
     if (txOptions?.onFail)
       await txOptions.onFail(error)
 
     resetTransactionState()
     if (txOptions?.getTransactionError) {
-      console.log("Add notification", failMessage)
-      addError(txOptions.getTransactionError(failMessage))
+      addError(txOptions.getTransactionError(error?.message))
     }
 
     console.log("FAILED TX", error)

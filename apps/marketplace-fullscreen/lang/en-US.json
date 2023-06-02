@@ -151,8 +151,57 @@
     "headers": {
       "buyIxt": "Buy IXT",
       "playNow": "Play Now",
+      "help": "Help"
+    },
+    "myAssets": {
+      "myItems": "My items",
+      "favorites": "Favorites",
+      "incomingBids": "Incoming Bids",
+      "outgoingBids": "Outgoing Bids",
+      "activeListings": "Active Listings",
+      "activity": "Activity"
+    },
+    "filterType": {
+      "sales": "Sales",
+      "listings": "Listings",
+      "offers": "Offers",
+      "transfers": "Transfers",
+      "minted": "Minted",
+      "activity": "Activity",
+      "lowToHigh": "Low to High",
+      "highToLow": "High to Low"
+    },
+    "transfer": {
+      "title": "Transfer Asset",
+      "quantity": "Quantity",
+      "own": "You own",
+      "walletAdress": "Wallet Adress",
+      "placeholderText": "Put Adress Here",
+      "warningText": "Make sure the adress is correct!<br/>There is no way to reverse this transaction",
+      "verifyText": "I Verify that I am aware that the transaction is not<br/>reversible, and that the wallet address is correct.",
+      "confirm": "Confrim Adress",
+      "transferItem": "Transfer Item"
+    },
+    "list": {
+      "title": "List Item",
+      "own": "You own",
+      "placeholderText": "Put Adress Here",
+      "warningText": "Make sure the adress is correct!<br/>There is no way to reverse this transaction",
+      "verifyText": "I Verify that I am aware that the transaction is not<br/>reversible, and that the wallet address is correct.",
+      "confirm": "Confrim Adress",
+      "transferItem": "Transfer Item"
+    },
+    "bid": {
+      "title": "Place Bid",
+      "own": "You own",
+      "placeholderText": "Put Adress Here",
+      "warningText": "Make sure the adress is correct!<br/>There is no way to reverse this transaction",
+      "verifyText": "I Verify that I am aware that the transaction is not<br/>reversible, and that the wallet address is correct.",
+      "confirm": "Confrim Adress",
+      "transferItem": "Transfer Item"
+    },
+    "navigation": {
       "soon": "Coming Soon",
-      "help": "Help",
       "buy": {
         "title": "Buy IXT",
         "swap": {
@@ -416,54 +465,12 @@
             "link": ""
           }
         }
+      },
+      "menu": {
+        "addFunds": "Add Funds",
+        "account": "Account",
+        "logout": "Log out"
       }
-    },
-    "myAssets": {
-      "myItems": "My items",
-      "favorites": "Favorites",
-      "incomingBids": "Incoming Bids",
-      "outgoingBids": "Outgoing Bids",
-      "activeListings": "Active Listings",
-      "activity": "Activity"
-    },
-    "filterType": {
-      "sales": "Sales",
-      "listings": "Listings",
-      "offers": "Offers",
-      "transfers": "Transfers",
-      "minted": "Minted",
-      "activity": "Activity",
-      "lowToHigh": "Low to High",
-      "highToLow": "High to Low"
-    },
-    "transfer": {
-      "title": "Transfer Asset",
-      "quantity": "Quantity",
-      "own": "You own",
-      "walletAdress": "Wallet Adress",
-      "placeholderText": "Put Adress Here",
-      "warningText": "Make sure the adress is correct!<br/>There is no way to reverse this transaction",
-      "verifyText": "I Verify that I am aware that the transaction is not<br/>reversible, and that the wallet address is correct.",
-      "confirm": "Confrim Adress",
-      "transferItem": "Transfer Item"
-    },
-    "list": {
-      "title": "List Item",
-      "own": "You own",
-      "placeholderText": "Put Adress Here",
-      "warningText": "Make sure the adress is correct!<br/>There is no way to reverse this transaction",
-      "verifyText": "I Verify that I am aware that the transaction is not<br/>reversible, and that the wallet address is correct.",
-      "confirm": "Confrim Adress",
-      "transferItem": "Transfer Item"
-    },
-    "bid": {
-      "title": "Place Bid",
-      "own": "You own",
-      "placeholderText": "Put Adress Here",
-      "warningText": "Make sure the adress is correct!<br/>There is no way to reverse this transaction",
-      "verifyText": "I Verify that I am aware that the transaction is not<br/>reversible, and that the wallet address is correct.",
-      "confirm": "Confrim Adress",
-      "transferItem": "Transfer Item"
     }
   }
 }

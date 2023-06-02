@@ -3,6 +3,7 @@ import { CartItem } from "./useCart";
 import { ListingItem } from "./useListing";
 import { BiddingItem } from "~/composables/useBidding";
 import { TransferItem } from "./useTransfer";
+import { TransactionItem } from "./useTransactions";
 
 export interface PopupBase {
   type: string
@@ -43,7 +44,12 @@ export interface PopupBidItem extends PopupBase {
   items: IXToken[]
 }
 
-type Popup = PopupOnList | PopupOnBidding | PopupOnBid | PopupTransfer | PopupListItem | PopupBidItem | PopupTransferSuccess
+export interface PopupBuyItemSuccess extends PopupBase {
+  type: 'buy-items-success',
+  items: TransactionItem[]
+}
+
+type Popup = PopupOnList | PopupOnBidding | PopupOnBid | PopupTransfer | PopupListItem | PopupBidItem | PopupTransferSuccess | PopupBuyItemSuccess
 
 export const usePopups = () => {
   const popup = useState<Popup | null>('active-popup', () => null)

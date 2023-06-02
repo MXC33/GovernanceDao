@@ -1,8 +1,8 @@
 <template lang="pug">
-div(text="gray-300" p="2") {{ $t(`marketplace.headers.${parentType}.${category.type}.title`) }}
+div(text="gray-300" p="2") {{ $t(`marketplace.navigation.${parentType}.${category.type}.title`) }}
   div(b="b-1 gray-300" w="95%")
   div(grid="~ cols-1 cols-2")
-    //-div(text="$mc-orange" p="2") {{ $t(`marketplace.headers.${header.type}.${category.type}.title`) }} 
+    //-div(text="$mc-orange" p="2") {{ $t(`marketplace.navigation.${header.type}.${category.type}.title`) }} 
     HeaderCategoryDropDownItem(v-for="item in category.items" :header="parentType" :category="category.type" :item="item" ) 
 </template>
 

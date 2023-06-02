@@ -1,13 +1,13 @@
-import {AdvancedOrder, Bid, IXToken, SingleItemData} from "@ix/base/composables/Token/useIXToken";
-import {AdjustableNumber} from "@ix/base/composables/Utils/useAdjustableNumber";
+import { AdvancedOrder, Bid, IXToken, SingleItemData } from "@ix/base/composables/Token/useIXToken";
+import { AdjustableNumber } from "@ix/base/composables/Utils/useAdjustableNumber";
 import {
   get1155Contract,
   get721Contract,
   getIXTokenContract,
-  getSeaportContract,
+  useSeaportContract,
   NFTType
 } from "~/composables/useAssetContracts";
-import {conduitKey} from "@ix/base/composables/Contract/WalletAddresses";
+import { conduitKey } from "@ix/base/composables/Contract/WalletAddresses";
 
 export interface OfferItem {
   token: IXToken,
@@ -16,6 +16,8 @@ export interface OfferItem {
 
 export const useOfferItems = (item: SingleItemData) => {
   const getAveragePrice = (bids: Bid[]) => {
+    if (!bids || bids.length === 0)
+      return 0
     const totalQuantity = bids.reduce((prev, bid) => prev + bid.quantity, 0)
     const totalOffer = bids.reduce((prev, bid) => prev + bid.quantity * bid.price, 0)
     return totalOffer / totalQuantity
@@ -23,14 +25,15 @@ export const useOfferItems = (item: SingleItemData) => {
 
   const isSubstituteOffering = ref(false)
   const minOffer = ref<number>(0)
+  const bids = item.bids || []
   const shares = ref<AdjustableNumber>({
     value: 1,
     min: 1,
     max: computed<number>(() => {
       if (!isSubstituteOffering.value) {
-        return item.bids.reduce((prev, bid) => prev + bid.quantity, 0)
+        return bids.reduce((prev, bid) => prev + bid.quantity, 0)
       }
-      return item.bids.filter((item: Bid) => item.price >= minOffer.value).reduce((prev, bid) => prev + bid.quantity, 0)
+      return bids.filter((item: Bid) => item.price >= minOffer.value).reduce((prev, bid) => prev + bid.quantity, 0)
     })
   })
 
@@ -38,15 +41,17 @@ export const useOfferItems = (item: SingleItemData) => {
     if (!val)
       minOffer.value = 0
     else
-      minOffer.value = roundToDecimals(getAveragePrice(item.bids), 4)
+      minOffer.value = roundToDecimals(getAveragePrice(bids), 4)
 
     if (shares.value.max && shares.value.value > shares.value.max)
       shares.value.value = shares.value.max
   })
 
   const selectedBidsToAccept = computed<OfferItem>(() => {
+    if (!bids || bids.length === 0)
+      return { token: item, bids: [] } // return early if no bids
 
-    let bids = [...item.bids]
+    let sortedBids = [...bids]
       .filter((item: Bid) => item.price >= minOffer.value || !isSubstituteOffering.value)
       .sort((a, b) => {
         if (!a.price) return 1
@@ -57,22 +62,22 @@ export const useOfferItems = (item: SingleItemData) => {
     let bidsToAccept = []
     if (!isSubstituteOffering.value) {
       let i = 0
-      while (i < shares.value.value && bids[0]) {
-        if (bids[0].quantity > shares.value.value - i) {
+      while (i < shares.value.value && sortedBids[0]) {
+        if (sortedBids[0].quantity > shares.value.value - i) {
           bidsToAccept.push({
-            ...bids[0],
+            ...sortedBids[0],
             quantity: shares.value.value - i
           })
           i = shares.value.value
         } else {
-          bidsToAccept.push(bids[0])
-          i += bids[0].quantity
+          bidsToAccept.push(sortedBids[0])
+          i += sortedBids[0].quantity
         }
-        bids.splice(0,1)
+        sortedBids.splice(0, 1)
       }
     }
     else {
-      bidsToAccept = bids
+      bidsToAccept = sortedBids
     }
 
     return {
@@ -101,6 +106,7 @@ export const useOfferItems = (item: SingleItemData) => {
   })
 
   const belowHighestOffer = computed<number>(() => {
+    if (!averageOfferPerItem) return 0
     const avg = roundToDecimals(
       getAveragePrice(selectedBidsToAccept.value.bids as Bid[])
       , 8)
@@ -110,7 +116,7 @@ export const useOfferItems = (item: SingleItemData) => {
   })
 
   const showDecreaseMinPrice = computed<boolean>(() => {
-    if (!selectedBidsToAccept || !selectedBidsToAccept.value || !selectedBidsToAccept.value.bids) return false
+    if (!selectedBidsToAccept || !selectedBidsToAccept.value || !selectedBidsToAccept.value.bids || !item.bids) return false
     const totalQuantity = item.bids.reduce((prev, bid) => prev + bid.quantity, 0)
     const totalSelectedQuantity = selectedBidsToAccept.value.bids.reduce((prev, bid) => prev + bid.quantity, 0)
     return (shares.value.value === shares.value.max && totalQuantity > totalSelectedQuantity)
@@ -134,12 +140,12 @@ export const useOfferContract = () => {
     //Todo Start loading overlay
     console.log('start Loading overlay')
 
-    const { token: { collection, nft_type }, bids  } = offerItem
+    const { token: { collection, nft_type }, bids } = offerItem
 
     if (!bids || !bids.length) {
       /*
         Todo
-        There are no sales
+        There are no offers
       */
       throw new Error("There are no offers")
     }
@@ -163,18 +169,18 @@ export const useOfferContract = () => {
       throw new Error("Allowance didn't work")
     }
 
-    const { fulfillAvailableAdvancedOrders } = getSeaportContract()
+    const { fulfillAvailableAdvancedOrders } = useSeaportContract()
 
     let BuyOrderComponents: AdvancedOrder[] = []
     let offers = []
     let considerations = []
 
     for (const bid of bids) {
-      if(bid){
+      if (bid) {
         let message: any = {}
         try {
           message = JSON.parse(bid.message)
-        } catch (e) {}
+        } catch (e) { }
 
         if (!message.body || !message.body.consideration) {
           continue
