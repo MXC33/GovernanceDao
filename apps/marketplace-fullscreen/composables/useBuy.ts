@@ -243,14 +243,8 @@ export const useBuyContract = () => {
 
     const { offers, considerations } = generateConsiderations(buyOrders)
 
-    try {
-      // @ts-ignore
-      return await fulfillAvailableAdvancedOrders(buyOrders, [], offers, considerations, conduitKey.polygon, ZERO_ADDRESS, quantity)
-    }
-    catch (err: any) {
-      console.log("fulfillAvailableAdvancedOrders error");
-      return false
-    }
+    // @ts-ignore
+    return await fulfillAvailableAdvancedOrders(buyOrders, [], offers, considerations, conduitKey.polygon, ZERO_ADDRESS, quantity)
   }
 
   return {

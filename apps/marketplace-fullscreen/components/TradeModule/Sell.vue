@@ -40,7 +40,7 @@ VList()
     span(color="yellow-200" v-if="showDecreaseMinPrice") Try decreasing your lowest offer per unit to accept more items
 
   HList(px="4 md:6" py="4" b="t-1 b-1 gray-600" space-x="3" items="center" justify="between" w="full")
-    div(flex="~ col md:row" space-y="4 md:0" w="full")
+    div(flex="~ col md:row" space-y="4 md:0" w="full" whitespace="nowrap")
       InputCheckbox(v-model="isSubstituteOffering")
         span(color="gray-200") Substitute offers
 

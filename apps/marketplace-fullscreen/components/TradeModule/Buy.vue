@@ -67,7 +67,11 @@ import { NFTType } from "~/composables/useAssetContracts";
 const { ixtToUSD } = useIXTPrice()
 const { displayPopup } = usePopups()
 
+const { execute: buyItems, loading: isBuyLoading } = useContractRequest(() => buy(), {
+  title: "Error purchasing"
+})
 
+const { item, isDisabled } = defineProps<{
   ownerValue?: string | number,
   item: SingleItemData
   isDisabled?: boolean
