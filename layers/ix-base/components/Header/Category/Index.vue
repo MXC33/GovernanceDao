@@ -1,6 +1,6 @@
 <template lang="pug">
 div()
-  div(text="$mc-orange" p="2") {{ $t(`marketplace.headers.${parentType}.${category.type}.title`) }} 
+  div(text="$mc-orange" p="2") {{ $t(`marketplace.navigation.${parentType}.${category.type}.title`) }} 
   div(b="b-1 $mc-orange" w="95%")
 
   div(grid="~ cols-1 s-two:cols-2 s-three:cols-3" :state="gridState" )

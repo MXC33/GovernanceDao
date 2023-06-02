@@ -9,7 +9,7 @@ NuxtLink(:to="linkPath" cursor="pointer")
         div(color="gray-200 group-hover:$mc-orange" text="sm" ) {{ $t(`${langPath}.description`) }}
       VList(pos="relative" v-if="!linkPath")
         div(color="gray") {{ $t(`${langPath}.title`)}}
-        div(color="$mc-orange" text="sm" ) {{ $t(`marketplace.headers.soon`)}}
+        div(color="$mc-orange" text="sm" ) {{ $t(`marketplace.navigation.soon`)}}
 </template>
 
 <script lang="ts" setup>
@@ -20,9 +20,9 @@ const enter = () =>{
 }
 
 const imagePath = computed(() => [header, category, item].join('/'))
-const langPath = computed(() => `marketplace.headers.${header}.${category}.${item}`)
+const langPath = computed(() => `marketplace.navigation.${header}.${category}.${item}`)
 
-const linkPath = computed(() => t(`marketplace.headers.${header}.${category}.${item}.link`))
+const linkPath = computed(() => t(`marketplace.navigation.${header}.${category}.${item}.link`))
 
 console.log(linkPath.value)
 const {header, category, item} = defineProps<{

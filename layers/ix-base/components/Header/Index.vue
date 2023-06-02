@@ -5,8 +5,8 @@ div()
       NuxtLink(to="https://www.planetix.com")
         PlanetIXNew(w="42.25")
 
-      HList(space-x="8" px="8" items="center" font="bold" text="lg" flex-grow="1")
-        HeaderLink(v-for="(item, index) in siteTopHeaders" @click="OpenMeny(index)" text="red") {{ $t(`marketplace.headers.${item.type}.title`)}}
+      HList(space-x="8" px="8" items="center" font="bold" text="lg" flex-grow="1" display="lt-md:none")
+        HeaderLink(v-for="(item, index) in siteTopHeaders" @click="OpenMeny(index)" text="red") {{ $t(`marketplace.navigation.${item.type}.title`)}}
 
       HList(font="bold" space-x="6" px="6")
         HeaderLink(to="/" display="lt-md:none") help
@@ -16,7 +16,7 @@ div()
     Transition(name="slide-top" mode="out-in")
       HeaderItem(v-if="activeMenuIndex != null" :key="activeMenuIndex" @onClickItem="onClicked" :header="siteTopHeaders[activeMenuIndex]")
     Transition(name="slide-top" mode="out-in")
-      HeaderCategoryDropDown()
+      HeaderCategoryDropDown(@onClickItem="onClicked")
 
   Popup(v-if="showIFrame")
     template(#header) Swap
@@ -54,7 +54,7 @@ const { t } = useI18n()
 
 const onClicked = (type: string, category: string, item: string) => {
   //console.log("onClicked Header index", type, category, item)
-  // const link = t(`marketplace.headers.${type}.${category}.${item}.link`)
+  // const link = t(`marketplace.navigation.${type}.${category}.${item}.link`)
   // if (link != '') {
   //   return navigateTo(link, { external: true })
   // }
