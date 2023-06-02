@@ -1,6 +1,6 @@
 <template lang="pug">
 VList(justify="center" items="center" aspect="2/3" bg="black opacity-40" ref="mediaElement" cursor="pointer" group)
-  CollectionGridItemMedia(:token="token")
+  CollectionGridItemMedia(:token="token" :is-hovered="isHovered")
 
   CollectionGridItemMeta(:token="token" :context="context")
     template(#footer)
