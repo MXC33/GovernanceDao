@@ -41,7 +41,7 @@ VList()
     span(color="yellow-200" v-if="showIncreaseMaxPrice" ) Try increasing your max price to buy more items
 
   HList(px="4 md:6" py="4" b="t-1 b-1 gray-600" space-x="3" items="center" justify="between" w="full")
-    div(flex="~ col md:row" space-y="4 md:0" w="full")
+    div(flex="~ col md:row" space-y="4 md:0" w="full" flex-shrink="0" whitespace="nowrap")
       InputCheckbox(v-model="isSubstituteListing")
         span(color="gray-200") Substitute listings
 
@@ -51,8 +51,8 @@ VList()
         InputText(v-model="maxPrice" :class="{highlighted: showIncreaseMaxPrice}")
           template(#suffix) IXT
 
-  div(grid="~ cols-2" text="xs md:base")
-    ButtonInteractive(btn="~ secondary" font="bold" @click="onClickOffer" text="Make offer")
+  div(grid="~ cols-2 on-one-col:cols-1" text="xs md:base" :one-col="isSubstituteListing")
+    ButtonInteractive(btn="~ secondary" font="bold" @click="onClickOffer" text="Make offer" v-if="!isSubstituteListing")
 
     ButtonInteractive(btn="~ primary" font="bold" @click="buyItems" v-if="!isDisabled" :text="`Buy ${shares?.value} item`" :loading="isBuyLoading")
     ButtonInteractive(btn="~ primary" bg="on-disabled:gray-700" color="on-disabled:gray-400" cursor="default" font="bold" :disabled="isDisabled" text="There is no sales" v-else)
