@@ -136,6 +136,8 @@ export const useOfferItems = (item: SingleItemData) => {
 }
 
 export const useOfferContract = () => {
+  const { generateConsiderations, createBuyOrder } = useBuyHelpers()
+
   const acceptOffers = async (offerItem: OfferItem, totalOffer: number, quantity: number) => {
     //Todo Start loading overlay
     console.log('start Loading overlay')
@@ -172,8 +174,7 @@ export const useOfferContract = () => {
     const { fulfillAvailableAdvancedOrders } = useSeaportContract()
 
     let BuyOrderComponents: AdvancedOrder[] = []
-    let offers = []
-    let considerations = []
+    const buyOrders = bids.map((bid) => createBuyOrder(bid, quantity, true))
 
     for (const bid of bids) {
       if (bid) {
@@ -201,30 +202,11 @@ export const useOfferContract = () => {
         }
       }
     }
-    let i = 0
-    for (const BuyOrderComponent of BuyOrderComponents) {
-      offers.push([
-        { "orderIndex": i, "itemIndex": 0 }
-      ])
 
-      let j = 0;
-      for (const considerationItem of BuyOrderComponent.parameters.consideration) {
-        const foundIndex = considerations.findIndex(item => item.key === considerationItem.recipient)
-        if (foundIndex !== -1) {
-          considerations[foundIndex].value.push({ "orderIndex": i, "itemIndex": j })
-        } else {
-          considerations.push({
-            key: considerationItem.recipient,
-            value: [{ "orderIndex": i, "itemIndex": j }]
-          })
-        }
-        j++
-      }
-      i++
-    }
+    const { offers, considerations } = generateConsiderations(BuyOrderComponents)
 
     // @ts-ignore
-    return await fulfillAvailableAdvancedOrders(BuyOrderComponents, [], offers, considerations.map(item => item.value), conduitKey.polygon, "0x0000000000000000000000000000000000000000", quantity)
+    return await fulfillAvailableAdvancedOrders(BuyOrderComponents, [], offers, considerations, conduitKey.polygon, "0x0000000000000000000000000000000000000000", quantity)
   }
 
   return {
