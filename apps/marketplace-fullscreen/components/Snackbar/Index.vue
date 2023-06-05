@@ -12,7 +12,6 @@ import type { SnackNotification } from '~/composables/useNotifications';
 const { viewingCart } = useCart()
 const { t } = useI18n()
 const { getSnackType, closeNotification } = useSnackNotifications()
-useCart
 
 const type = computed(() => getSnackType(notification))
 

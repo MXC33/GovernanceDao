@@ -33,7 +33,6 @@ import type { SingleItemData } from "@ix/base/composables/Token/useIXToken";
 import { useOfferContract, useOfferItems } from "~/composables/useOffer";
 import { NFTType } from "~/composables/useAssetContracts";
 
-const { ixtToUSD } = useIXTPrice()
 const { displayPopup } = usePopups()
 const { item, isDisabled } = defineProps<{
   item: SingleItemData

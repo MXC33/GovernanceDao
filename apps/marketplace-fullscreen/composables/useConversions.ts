@@ -4,7 +4,6 @@ interface PriceResponse {
 
 export const useIXTPrice = () => {
   const config = useRuntimeConfig().public
-  console.log("", config.MC_API)
 
   const { data: ixtPrice, refresh: refreshIXTPrice, execute: fetchPrice } = useAsyncDataState('ixt-price', () =>
     $fetch(config.MC_API + '/ixt-price', { mode: 'cors' }) as Promise<PriceResponse>, {
