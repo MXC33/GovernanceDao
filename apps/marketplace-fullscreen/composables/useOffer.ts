@@ -136,6 +136,73 @@ export const useOfferItems = (item: SingleItemData) => {
 }
 
 export const useOfferContract = () => {
+  const acceptOffer = async (offerItem: OfferItem, quantity: number) => {
+    //Todo Start loading overlay
+    console.log('start Loading overlay')
+
+    const { token: { collection, nft_type }, bids } = offerItem
+
+    if (!bids || !bids[0]) {
+      /*
+        Todo
+        There are no offers
+      */
+      throw new Error("There is no offer")
+    }
+
+    const bid = bids[0]
+    const totalPrice = bid.price * quantity
+
+    let message: any = {}
+    try {
+      message = JSON.parse(bid.message)
+    } catch (e) { }
+
+    if (!message.body || !message.body.consideration) {
+      /*
+        Todo
+        Body is invalid
+      */
+      throw new Error("Invalid Body!")
+    }
+
+    const nftContract = nft_type === NFTType.ERC1155 ? get1155Contract(collection as string) : get721Contract(collection as string)
+    const approveNftCheck = await nftContract.approveNftCheck()
+    if (!approveNftCheck) {
+      /*
+        Todo
+        Approve didn't work
+      */
+      throw new Error("Approve didn't work")
+    }
+
+    const { allowanceCheck } = getIXTokenContract()
+    if (!await allowanceCheck(totalPrice)) {
+      /*
+        Todo
+        Allowance didn't work
+      */
+      throw new Error("Allowance didn't work")
+    }
+
+    const { fulfillAdvancedOrder } = useSeaportContract()
+
+    let BuyOrderComponents: AdvancedOrder;
+
+    delete message.body.counter
+    message.body.totalOriginalConsiderationItems = message.body.consideration.length
+
+    BuyOrderComponents = {
+      parameters: message.body,
+      numerator: quantity,
+      denominator: message.body.consideration[0].endAmount,
+      signature: message.signature,
+      extraData: "0x"
+    }
+
+    // @ts-ignore
+    return await fulfillAdvancedOrder(BuyOrderComponents, [], conduitKey.polygon, "0x0000000000000000000000000000000000000000")
+  }
   const acceptOffers = async (offerItem: OfferItem, totalOffer: number, quantity: number) => {
     //Todo Start loading overlay
     console.log('start Loading overlay')
@@ -228,6 +295,7 @@ export const useOfferContract = () => {
   }
 
   return {
+    acceptOffer,
     acceptOffers
   }
 }
