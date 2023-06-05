@@ -1,31 +1,32 @@
 <template lang="pug">
-VList(pos="sticky top-0" z="99" w="full" @mouseenter="isSelected = true" @mouseleave="isSelected = false" ref="menuElement")
-  HList(items="center"  bg="gray-800" px="7.5" h="16")
-    NuxtLink(to="https://www.planetix.com")
-      PlanetIXNew(w="42.25")
+div()
+  VList(pos="sticky top-0" z="99" w="full" @mouseenter="isSelected = true" @mouseleave="isSelected = false" ref="menuElement")
+    HList(items="center"  bg="gray-800" px="7.5" h="16")
+      NuxtLink(to="https://www.planetix.com")
+        PlanetIXNew(w="42.25")
 
-    HList(space-x="8" px="8" items="center" font="bold" text="lg" flex-grow="1" display="lt-md:none")
-      HeaderLink(v-for="(item, index) in siteTopHeaders" @click="OpenMeny(index)" text="red") {{ $t(`marketplace.navigation.${item.type}.title`)}}
+      HList(space-x="8" px="8" items="center" font="bold" text="lg" flex-grow="1" display="lt-md:none")
+        HeaderLink(v-for="(item, index) in siteTopHeaders" @click="OpenMeny(index)" text="red") {{ $t(`marketplace.navigation.${item.type}.title`)}}
 
-    HList(font="bold" space-x="6" px="6")
-      HeaderLink(to="/" display="lt-md:none") help
-      HeaderLink(to="/" display="lt-md:none")
-        HelperLanguage(language="EN")
-      HeaderAccountButton(@addFunds="iFrameToggle")
-    div(grow="~" display="md:none")
-    SettingsIcon(pos="right" w="8" display="md:none" @click="toggleMeny")
-  Transition(name="slide-top" mode="out-in" )
-    HeaderItem(v-if="activeMenuIndex != null" :key="activeMenuIndex" @onClickItem="onClicked" :header="siteTopHeaders[activeMenuIndex]" display="lt-md:none")
-  Transition(name="slide-top")
-    div(v-if="activeMenuIndex != null" display="md:none")
-      //-HeaderCategoryDropDownWallet()
-      HeaderCategoryDropDown()
+      HList(font="bold" space-x="6" px="6")
+        HeaderLink(to="/" display="lt-md:none") help
+        HeaderLink(to="/" display="lt-md:none")
+          HelperLanguage(language="EN")
+        HeaderAccountButton(@addFunds="iFrameToggle")
+      div(grow="~" display="md:none")
+      SettingsIcon(pos="right" w="8" display="md:none" @click="toggleMeny")
+    Transition(name="slide-top" mode="out-in" )
+      HeaderItem(v-if="activeMenuIndex != null" :key="activeMenuIndex" @onClickItem="onClicked" :header="siteTopHeaders[activeMenuIndex]" display="lt-md:none")
+    Transition(name="slide-top")
+      div(v-if="activeMenuIndex != null" display="md:none")
+        HeaderCategoryDropDownAccount()
+        HeaderCategoryDropDown()
 
-Popup(v-if="showIFrame")
-  template(#header) Swap
-  template(#default)
-    VList(w="full" justify="center" items="center" display="lt-md:none")
-      iframe(src="https://ix.foundation/lefi" w="full md:100" h="full md:116" )
+  Popup(v-if="showIFrame")
+    template(#header) Swap
+    template(#default)
+      VList(w="full" justify="center" items="center" display="lt-md:none")
+        iframe(src="https://ix.foundation/lefi" w="full md:100" h="full md:116" )
 </template>
 
 <script lang="ts" setup>

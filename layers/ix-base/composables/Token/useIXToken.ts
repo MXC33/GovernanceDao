@@ -159,6 +159,7 @@ export interface OrderParameters {
   endTime: number,
   zoneHash: string,
   salt: number,
+  counter?: number
   conduitKey: string,
   totalOriginalConsiderationItems: number
 }
