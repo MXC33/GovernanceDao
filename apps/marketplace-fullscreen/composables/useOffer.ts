@@ -3,8 +3,6 @@ import { AdjustableNumber } from "@ix/base/composables/Utils/useAdjustableNumber
 import {
   get1155Contract,
   get721Contract,
-  getIXTokenContract,
-  useSeaportContract,
   NFTType
 } from "~/composables/useAssetContracts";
 import { conduitKey } from "@ix/base/composables/Contract/WalletAddresses";
@@ -136,6 +134,9 @@ export const useOfferItems = (item: SingleItemData) => {
 }
 
 export const useOfferContract = () => {
+  const { allowanceCheck } = useIXTContract()
+  const { fulfillAvailableAdvancedOrders } = useSeaportContract()
+
   const acceptOffers = async (offerItem: OfferItem, totalOffer: number, quantity: number) => {
     //Todo Start loading overlay
     console.log('start Loading overlay')
@@ -160,7 +161,6 @@ export const useOfferContract = () => {
       throw new Error("Approve didn't work")
     }
 
-    const { allowanceCheck } = getIXTokenContract()
     if (!await allowanceCheck(totalOffer)) {
       /*
         Todo
@@ -169,7 +169,6 @@ export const useOfferContract = () => {
       throw new Error("Allowance didn't work")
     }
 
-    const { fulfillAvailableAdvancedOrders } = useSeaportContract()
 
     let BuyOrderComponents: AdvancedOrder[] = []
     let offers = []

@@ -21,7 +21,6 @@ import {
 } from '@ix/base/composables/Contract/WalletAddresses'
 import ERC1155ABI from '@ix/base/composables/Contract/Abis/ERC1155.json'
 import ERC721ABI from '@ix/base/composables/Contract/Abis/ERC1155.json'
-import IXToken from '@ix/base/composables/Contract/Abis/IXToken.json'
 import Seaport from '@ix/base/composables/Contract/Abis/Seaport.json'
 
 
@@ -29,7 +28,6 @@ import { ContractContext as ERC1155Contract } from '@ix/base/composables/Contrac
 
 import { ContractContext as ERC721Contract } from '@ix/base/composables/Contract/Abis/ERC721'
 
-import { ContractContext as IXTokenContract } from '@ix/base/composables/Contract/Abis/IXToken'
 
 import { ContractContext as SeaportContract } from '@ix/base/composables/Contract/Abis/Seaport'
 
@@ -173,83 +171,6 @@ export const get721Contract = <T extends ContractInterface<T> & ERC721Contract>(
     setApproval,
     approveNftCheck,
     transfer721Token
-  }
-}
-
-export const getIXTokenContract = <T extends ContractInterface<T> & IXTokenContract>() => {
-
-  const spenderAddress = conduitAdress.polygon as string
-  const { walletAdress } = useWallet()
-
-  const { viewAsyncState, withContract, createTransaction, ...contractSpec } = defineContract<T>('IXToken-contract', {
-    contractAddress: IXTAddress.polygon as string,
-    notifications: {
-      failMessage: 'Error allowance IXToken'
-    },
-    createContract(provider) {
-      return new ethers.Contract(IXTAddress.polygon as string, IXToken.abi, provider.getSigner()) as unknown as T
-    }
-  })
-
-  const allowance = () =>
-    withContract((contract) => {
-      const address = walletAdress.value
-      if (!address)
-        return undefined
-
-      /*return new Promise(async (resolve, reject) => {
-        try {
-          const allowance = await contract.allowance(address, spenderAddress)
-          resolve(Number(ethers.utils.formatUnits(allowance)))
-        } catch (e) {
-          resolve(0)
-        }
-      })*/
-      return contract.allowance(address, spenderAddress)
-    })
-
-  const approve = (amount: BigNumberish | string) =>
-    createTransaction((contract) => {
-      const address = walletAdress.value
-      if (!address)
-        return undefined
-
-      return contract.approve(spenderAddress, amount)
-    })
-
-  const ixtBalance = () =>
-    viewAsyncState('ixt-balance', async (contract) => {
-      const address = walletAdress.value
-      if (!address)
-        return undefined
-      try {
-        const balance = await contract.balanceOf(address)
-        return Number(ethers.utils.formatUnits(balance))
-      } catch (err) {
-        return undefined
-      }
-    })
-
-  const allowanceCheck = async (amount: number) => {
-    try {
-      const allowanceValue = Number(ethers.utils.formatUnits(await allowance()))
-
-      if (allowanceValue >= amount)
-        return true
-
-      return await approve(ethers.utils.parseUnits(amount.toString()))
-
-    } catch (e) {
-      return false
-    }
-  }
-
-  return {
-    ...contractSpec,
-    allowance,
-    approve,
-    allowanceCheck,
-    ixtBalance
   }
 }
 
