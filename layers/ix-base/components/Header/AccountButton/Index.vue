@@ -2,13 +2,11 @@
 VList(pos="relative"  ref="menuElement")
   HeaderLink(h="48px" w="166px" b="1 $mc-orange" bg="$mc-orange_20" display="lt-md:none" to="/connect" items="center" v-if="walletState !== 'connected'" text="$mc-orange")
     div(text="center xs" p="" font="" color="$mc-orange" ) CONNECT WALLET
-
   Transition(name="fade-slow" appear v-if="walletState == 'connected'")
-    HList(w="166px" b="1 $mc-mint" color="$mc-mint" bg="$mc-mint-20" px="8" py="2"  display="lt-md:none" @click="toggleMenu" items="center" cursor="pointer") 
+    HList(h="48px" w="166px" b="1 $mc-mint" color="$mc-mint" bg="$mc-mint-20" px="8"  display="lt-md:none" @click="toggleMenu" items="center" cursor="pointer") 
       div(grow="~") 
-      div() {{ roundToDecimals(Number(ixtBalance), 2) }} IXT
+      div() {{ Math.round((ixtBalance ?? 0) * 100) / 100 }} IXT
       div(grow="~") 
-
   VList(v-if="menuOpen" pos="absolute top-full left-0 right-0" b="1 gray-400" items="left" z="99") 
     HeaderLink(to="")
       div(v-bind="commonAttrs" @click="addFunds") {{ $t(`marketplace.navigation.menu.addFunds`)}}
@@ -19,7 +17,6 @@ VList(pos="relative"  ref="menuElement")
       div(v-bind="commonAttrs" @click="toggleMenu") {{ $t(`marketplace.navigation.menu.account`)}}
     HeaderLink(to="/connect")
       div(v-bind="commonAttrs" @click="toggleMenu") {{ $t(`marketplace.navigation.menu.logout`)}}
-
 </template>
     
     
