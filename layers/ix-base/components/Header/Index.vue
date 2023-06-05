@@ -1,5 +1,5 @@
 <template lang="pug">
-VList(pos="sticky top-0" z="99" w="full" @mouseenter="isSelected = true" @mouseleave="isSelected = false" ref="menuElement")
+VList(pos="sticky top-0" z="99" w="full" @mouseenter="isSelected = true" @mouseleave="isSelected = false" ref="menuElement" space-x="6")
   HList(items="center"  bg="gray-800" px="4 md:7.5" h="16")
     NuxtLink(to="https://www.planetix.com")
       PlanetIXNew(w="42.25")
@@ -7,7 +7,7 @@ VList(pos="sticky top-0" z="99" w="full" @mouseenter="isSelected = true" @mousel
     HList(space-x="8" px="8" items="center" font="bold" text="lg" flex-grow="1" display="lt-md:none")
       HeaderLink(v-for="(item, index) in siteTopHeaders" @click="OpenMeny(index)" text="red") {{ $t(`marketplace.navigation.${item.type}.title`)}}
 
-    HList(font="bold" space-x="6" px="6")
+    HList(font="bold" space-x="6")
       HeaderLink(to="/" display="lt-md:none") help
       HeaderLink(to="/" display="lt-md:none")
         HelperLanguage(language="EN")
@@ -18,7 +18,7 @@ VList(pos="sticky top-0" z="99" w="full" @mouseenter="isSelected = true" @mousel
     HList(v-if="activeMenuIndex != null")
       HelperLanguage(language="EN")
       CrossIcon(pos="right" w="8" display="md:none" @click="toggleMeny")
-      
+
   Transition(name="slide-top" mode="out-in" )
     HeaderItem(v-if="activeMenuIndex != null" :key="activeMenuIndex" @onClickItem="onClicked" :header="siteTopHeaders[activeMenuIndex]" display="lt-md:none")
   Transition(name="slide-top")
