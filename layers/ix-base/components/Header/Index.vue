@@ -15,17 +15,14 @@ VList(pos="sticky top-0" z="99" w="full" @mouseenter="isSelected = true" @mousel
     div(grow="~" display="md:none")
     SettingsIcon(v-if="activeMenuIndex == null" pos="right" w="8" display="md:none" 
     @click="toggleMeny")
-    HList(v-if="activeMenuIndex != null")
-      HelperLanguage(language="EN")
-      CrossIcon(pos="right" w="8" display="md:none" @click="toggleMeny")
+    
       
   Transition(name="slide-top" mode="out-in" )
     HeaderItem(v-if="activeMenuIndex != null" :key="activeMenuIndex" @onClickItem="onClicked" :header="siteTopHeaders[activeMenuIndex]" display="lt-md:none")
+  
   Transition(name="slide-top")
-    div(v-if="activeMenuIndex != null" display="md:none")
-      HeaderCategoryDropDownAccount(@swap="turnOnSwap")
-      HeaderCategoryDropDown()
-      HeaderButtonDisconnect()
+    HeaderCategoryDropDown(v-if="activeMenuIndex != null" @swap="turnOnSwap" @ConnectWallet="toggleMeny" @close="toggleMeny")
+      
 
 Popup(v-if="showIFrame")
   template(#header) Swap
@@ -39,7 +36,7 @@ Popup(v-if="showIFrame")
 <script lang="ts" setup>
 import PlanetIXNew from '~/assets/images/header/planetix-new.svg'
 import SettingsIcon from '~/assets/images/header/hamburger.svg'
-import CrossIcon from '~/assets/images/header/cross.svg'
+
 import GlobeIcon from '~/assets/images/header/Globe.svg'
 const { siteTopHeaders } = useSiteHeader()
 

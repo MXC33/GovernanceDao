@@ -7,4 +7,11 @@ div(bg="black" p="3" v-if="walletState == 'connected'")
 <script lang="ts" setup>
 const { logoutWallet } = useWallet()
 const { walletState } = useWallet()
+
+const emit = defineEmits(['disconnect'])
+
+const clikedLogout = () => {
+  emit('disconnect')
+  logoutWallet()
+}
 </script>

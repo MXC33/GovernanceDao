@@ -3,7 +3,7 @@ div(bg="black")
   HList(p="6")
     //-div(grow="~")
     NuxtLink(v-if="walletState !== 'connected'" bg="$mc-orange_20" h="48px" b="1 $mc-orange" color="$mc-orange" px="8" to="/connect" grow="~") 
-      div(text="center lg" p="2" font="bold") Connect Wallet 
+      div(text="center lg" p="2" font="bold" @click="ConnectWallet") Connect Wallet 
     HList(v-else grow="~")
       Icon(w="25" p="3" b="1 $mc-orange_40" bg="$mc-orange_20")
       VList(opacity="100%" grow="~")
@@ -26,7 +26,12 @@ const { user } = useUser()
 
 await fetchIXT()
 
-defineEmits(['swap'])
+const emit = defineEmits(['swap', 'ConnectWallet'])
+
+const ConnectWallet = () => {
+  emit('ConnectWallet')
+  console.log("ConnectWallet")
+}
 
 const userId = computed(() => user.value?.username || null)
 const Icon = await import(`../../../../assets/images/header/dropdown/badges/aocbadge.svg`).catch(() => FallbackVue)
