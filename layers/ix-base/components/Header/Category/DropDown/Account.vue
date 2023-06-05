@@ -6,7 +6,8 @@ div(bg="black")
       Icon(w="20" p="3" b="1 $mc-orange_40" bg="$mc-orange_20" )
       VList(opacity="100%" grow="~")
         div(p="2" b="1 $mc-orange_40" text="white" bg="$mc-orange_20" v-if="userId") {{userId}}
-          div(text="$mc-orange") Account settings
+          HeaderLink(to="/account")
+            div(text="$mc-orange") Account settings
         HList()
           HList(b="1 $mc-orange_40" p="2" grow="~" bg="$mc-orange_20")
             div() IXT : 
@@ -17,8 +18,10 @@ div(bg="black")
 
 <script lang="ts" setup>
 import FallbackVue from '~/components/Fallback.vue';
-const { ixtBalance } = useUserData()
+const { ixtBalance, fetchIXT } = useIXTContract()
 const { user } = useUser()
+
+await fetchIXT()
 
 const userId = computed(() => user.value?.username || null)
 const Icon = await import(`../../../../assets/images/header/dropdown/badges/aocbadge.svg`).catch(() => FallbackVue)
