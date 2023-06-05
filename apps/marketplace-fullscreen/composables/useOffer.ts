@@ -6,6 +6,7 @@ import {
   NFTType
 } from "~/composables/useAssetContracts";
 import { conduitKey } from "@ix/base/composables/Contract/WalletAddresses";
+import { useIXTContract } from "@ix/base/composables/Contract/useIXTContract";
 
 export interface OfferItem {
   token: IXToken,
