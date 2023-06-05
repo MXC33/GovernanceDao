@@ -18,7 +18,8 @@ interface TableColumnBase {
 
 export interface TableButton<T extends TableRow> {
   type: 'primary' | 'secondary',
-  text: string,
+  text?: string,
+  icon?: 'cart',
   onClick: (row: T) => void
 }
 

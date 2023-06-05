@@ -20,7 +20,7 @@ VList(space-y="6")
 
     template(#default)
       Table(:columns="saleColumns" :rows="item.sales" id="single-item" :in-drawer="true" v-if="item.sales && item.sales.length > 0")
-        template(#item-action="{row}")
+        template(#item-buttons="{row}")
           TableButtonSmall(v-if="!playerOwnedSale(row)" @click="addSaleToCart(row)" disable="on-in-cart:active" :in-cart="hasItemInCart(row)")
             CartIcon(w="6")
 
@@ -71,7 +71,9 @@ const saleColumns: TableColumn<Sale>[] = [
       return row.player_username
     }, sortable: true
   },
-  { label: "Action", rowKey: "action", width: 80 }
+  {
+    type: 'buttons', buttons: []
+  }
 ]
 
 const addSaleToCart = (sale: Sale) => {
