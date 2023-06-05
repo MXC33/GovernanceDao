@@ -10,7 +10,7 @@ VList(pos="relative"  ref="menuElement")
     HeaderLink(to="")
       div(v-bind="commonAttrs" @click="addFunds") {{ $t(`marketplace.navigation.menu.addFunds`)}}
     HeaderLink(group to="")
-      div(v-bind="commonAttrs" @click="copyAddressToClipboard") {{formatAdress}}
+      div(v-bind="commonAttrs" @click="copyAddressToClipboard") {{(formatAdress ?? "0x4ac...89fc")}}
         Copy(w="6" pos="relative" bottom="25px" left="125px" fill="white group-hover:$mc-orange")
     HeaderLink(to="/account")
       div(v-bind="commonAttrs" @click="toggleMenu") {{ $t(`marketplace.navigation.menu.account`)}}
