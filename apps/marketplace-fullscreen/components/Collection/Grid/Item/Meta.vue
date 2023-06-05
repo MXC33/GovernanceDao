@@ -2,16 +2,16 @@
 VList(w="full" flex-grow="1" items="start" bg="gray-900" p="6" pos="relative")
   header(font="bold" w="full")
     HList(items="center" space-x="3")
-      TokenName(:token="token" text="xl ellipsis" capitalize="~")
+      TokenName(:token="token" text="base md:xl ellipsis" capitalize="~")
 
-      div(v-if="is1155") x{{showAssetAmount}}
+      div(v-if="is1155" text="lt-md:xs") x{{showAssetAmount}}
 
-    div(text="lg" ) 
+    div(text="sm md:lg") 
       slot(name="subtitle") {{ token?.sale_price }} IXT
 
   div(flex-grow="1")
 
-  div(text="md gray-200")
+  div(text="sm md:base" color="gray-200")
     slot(name="detail") Best offer: {{ token?.higher_bid_price }} IXT
 
   slot(name="footer")

@@ -1,5 +1,5 @@
 <template lang="pug">
-HList(pos="sticky top-47 md:(sticky top-34)" z="5" b="on-scrolling:t-1 gray-400" ml="-4 md:(-8)" mr="-4 md:(-8)" :scrolling="isScrolling")
+HList(pos="sticky top-47 md:(sticky top-34)" z="4" b="on-scrolling:t-1 gray-400" ml="-4 md:(-8)" mr="-4 md:(-8)" :scrolling="isScrolling")
   HList(w="full" py="3" space-x="3" bg="ix-black" px="4 md:8")
 
     CollectionFilterToggleFilter(@click="$emit('toggleFilter')")
