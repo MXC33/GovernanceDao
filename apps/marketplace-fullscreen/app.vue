@@ -21,19 +21,17 @@ const globalY = useGlobalWindowScroll()
 const { y } = useWindowScroll()
 const { connectWallet, walletState } = useWallet()
 const { setupIXTPrice, ixtPrice } = useIXTPrice()
-const { snackNotifications } = useSnackNotifications()
 
 const { setRefreshToken } = useLogin()
 const { user } = useUser()
 
-
 watch(y, (pos) => globalY.value = pos)
-
-setupIXTPrice()
 
 onMounted(async () => {
   //@ts-ignore
   const isPaintSupported = !!CSS.paintWorklet
+
+  setupIXTPrice()
 
   if (isPaintSupported) {
     //@ts-ignore
