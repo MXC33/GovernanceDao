@@ -18,6 +18,7 @@ VList()
     template(#name) Chain
     template(#value) {{ network }}
 
+  //- SAVE FOR FUTURE USE
   //- AttributeRow()
   //-   template(#name) Last updated
   //-   template(#value) TODO
