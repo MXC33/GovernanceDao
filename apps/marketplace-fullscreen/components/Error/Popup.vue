@@ -7,9 +7,9 @@ Popup(@close="onClose" :disable-default-close="true")
 
   template(#default)
     VList(space-y="3")
-      VList(color="semantic-warning") {{ error.description }}
+      VList(color="semantic-warning" v-if="error.description") {{ error.description }}
 
-      VList(v-if="items" flex-shrink="0" space-y="3")
+      VList(v-if="items && items.length > 0" flex-shrink="0" space-y="3")
         HList(v-for="item in items" frame="~" items="center" space-x="3")
           TokenImage(:token="item.token" h="25" w="25")
 
@@ -19,7 +19,7 @@ Popup(@close="onClose" :disable-default-close="true")
               div(font="bold") {{ item.sale?.price }} IXT
               div(text="gray-300") ${{ ixtToUSD(item.sale?.price ?? 0)  }}
 
-      VList(pt="3")
+      VList()
         h3(font="bold") Error log 
         div(color="semantic-warning" max-h="15" overflow-y="auto" bg="black opacity-60" px="3") {{ error.serverError }}
 
