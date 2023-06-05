@@ -32,7 +32,13 @@ export const useCart = () => {
     cartItems.value.splice(index, 1)
   }
 
+  const hasItemInCart = (sale: Sale) =>
+    cartItems.value.some((item) => item.sale?.sale_id == sale.sale_id)
+
   const addToCart = (token: IXToken, sale: Sale) => {
+    if (hasItemInCart(sale))
+      return
+
     cartItems.value.push({
       type: 'bid',
       token,
@@ -72,6 +78,7 @@ export const useCart = () => {
   return {
     cartItems,
     viewingCart,
+    hasItemInCart,
     clearCart,
     removeFromCart,
     checkoutItems,
