@@ -1,7 +1,7 @@
 <template lang="pug">
 TokenImage(v-if="displayStillImage" :token="token" :is-large="(!icon && isLarge) || image" :key="componentKey")
 
-TokenVideo(v-else :token="token" :is-large="isLarge" h="full" inset="0" :key="componentKey + 'video'" fill="contain")
+TokenVideo(v-else :token="token" :is-large="isLarge" h="full" inset="0" :key="componentKey + 'video'" :fill="fill ?? 'contain'")
 </template>
 
 <script lang="ts" setup>
@@ -15,7 +15,8 @@ const props = defineProps<{
   token: TokenIdentifier,
   isLarge?: boolean,
   icon?: boolean
-  image?: boolean
+  image?: boolean,
+  fill?: 'cover' | 'contain'
 }>()
 
 const displayStillImage = computed(() => props.icon || props.image || !tokenHasVideo(props.token))

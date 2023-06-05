@@ -1,6 +1,6 @@
 <template lang="pug">
 VList(w="full" bg="gray-900")
-  HList(w="full" justify="between" items="center" b="b-1 gray-600")
+  HList(w="full" justify="between" items="center" b="b-1 gray-600" text="lt-md:xs" font="lt-md:bold")
     HList()
       template(v-for="tab in tabs")
         TabItem(:id="tab" v-model="activeTab") {{ tab }}
@@ -11,7 +11,7 @@ VList(w="full" bg="gray-900")
 
   Transition(name="fade-slow" mode="out-in")
     TradeModuleSell(v-if="activeTab == 'sell' && item.my_shares > 0" :item="item" :is-disabled="item.bids.length == 0")
-    TradeModuleBuy(v-else :item="item" :is-disabled="item.sales.length == 0")
+    TradeModuleBuy(v-else :item="item" :is-disabled="item.sales?.length == 0")
 
 </template>
 

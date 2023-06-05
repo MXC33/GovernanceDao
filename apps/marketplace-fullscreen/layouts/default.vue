@@ -11,6 +11,7 @@ main(w="full" h="full" flex="~ col grow" min-h="0")
 
   VList(pos="relative")
     slot
+    
 </template>
 
 <script lang="ts" setup>

@@ -4,7 +4,7 @@ footer(pos="sticky bottom-0" bg="ix-black")
     h3(text="gray-200" flex-grow="1") Total price
     div(font="bold") {{ totalPrice }} IXT
 
-  button(btn="~ primary" opacity="on-load:50" w="full" font="bold" @click="checkout" :load="isLoading" transition="all") Complete purchase
+  ButtonInteractive(btn="~ primary" opacity="on-load:50" w="full" font="bold" @click="checkout" :loading="isLoading" transition="all" text="Complete Purchase")
 </template>
 
 
@@ -13,8 +13,10 @@ import type { CartItem } from '~/composables/useCart';
 
 const { displayPopup } = usePopups()
 const { viewingCart, cartItems, checkoutItems } = useCart()
-const isLoading = ref(false)
-const boughtItems = ref<CartItem[]>([])
+
+const { loading: isLoading, execute: buyItems } = useContractRequest(() => checkoutItems(cartItems.value, totalPrice.value), {
+  title: "Purchase error"
+})
 
 const didPlaceBids = (items: CartItem[]) => {
   displayPopup({
@@ -22,23 +24,16 @@ const didPlaceBids = (items: CartItem[]) => {
     items
   })
 
-  boughtItems.value = items
   viewingCart.value = false
   cartItems.value = []
 }
 
 const checkout = async () => {
-  isLoading.value = true
-
   console.log("cartItems.value", cartItems.value)
+  const checkout = await buyItems()
 
-  const checkout = await checkoutItems(cartItems.value, totalPrice.value)
-  isLoading.value = false
   if (checkout)
     didPlaceBids(cartItems.value)
-
-
-  // viewingCart.value = false
 
 }
 

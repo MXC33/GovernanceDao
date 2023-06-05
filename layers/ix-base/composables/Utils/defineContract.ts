@@ -32,7 +32,7 @@ export interface TransactionOptions {
   onTxApproved?: () => Promise<any>,
   onSuccessAfterMs?: number,
   successOnEventKey?: string | string[],
-  getTransactionError?: (errorCode?: string) => ContractError
+  // getTransactionError?: (errorCode?: string) => ContractError
   // successMessage?: string
 }
 
@@ -160,12 +160,12 @@ export const defineContract = <T extends ContractInterface<T> | object>(key: str
       await txOptions.onFail(error)
 
     resetTransactionState()
-    if (txOptions?.getTransactionError) {
-      addError(txOptions.getTransactionError(error?.message))
-    }
+    // if (txOptions?.getTransactionError) {
+    //   addError(txOptions.getTransactionError(error?.message))
+    // }
 
     console.log("FAILED TX", error)
-    return false
+    throw new Error(error?.message)
   }
 
   const beforeContractInteraction = async () => {
@@ -193,56 +193,50 @@ export const defineContract = <T extends ContractInterface<T> | object>(key: str
 
   // Default transaction methods
   const createTransaction = async (fn: (contract: T) => Promise<ethers.ContractTransaction> | undefined, txOptions?: TransactionOptions) => {
-    try {
-      setTransactionState('signing')
+    setTransactionState('signing')
 
-      await beforeContractInteraction()
+    await beforeContractInteraction()
 
-      if (txOptions?.approve)
-        await txOptions?.approve()
+    if (txOptions?.approve)
+      await txOptions?.approve()
 
-      setTransactionState('signing')
+    setTransactionState('signing')
 
-      if (!fn)
-        return transactionFailed("No transaction", txOptions)
+    if (!fn)
+      return transactionFailed("No transaction", txOptions)
 
-      if (!contract.value)
-        return transactionFailed("No contract", txOptions)
+    if (!contract.value)
+      return transactionFailed("No contract", txOptions)
 
-      const transaction = await fn(contract.value)
+    const transaction = await fn(contract.value)
 
-      setTransactionState('minting')
+    setTransactionState('minting')
 
-      if (txOptions?.successOnEventKey)
-        pendingTxEvent.value = txOptions
-      else
-        pendingTxEvent.value = null
-      const hash = transaction?.hash
+    if (txOptions?.successOnEventKey)
+      pendingTxEvent.value = txOptions
+    else
+      pendingTxEvent.value = null
+    const hash = transaction?.hash
 
-      if (!hash)
-        return transactionFailed("No transaction hash", txOptions)
+    if (!hash)
+      return transactionFailed("No transaction hash", txOptions)
 
-      const resolvedTransaction = await onTransactionResolved(hash)
-      console.log("Resolved", resolvedTransaction)
+    const resolvedTransaction = await onTransactionResolved(hash)
+    console.log("Resolved", resolvedTransaction)
 
-      //@ts-ignore
-      if (resolvedTransaction.status == 0)
-        throw new Error("Transaction failed. Try increasing the gas manually.")
+    //@ts-ignore
+    if (resolvedTransaction.status == 0)
+      throw new Error("Transaction failed. Try increasing the gas manually.")
 
-      if (txOptions?.onTxApproved)
-        await txOptions?.onTxApproved()
+    if (txOptions?.onTxApproved)
+      await txOptions?.onTxApproved()
 
-      if (!pendingTxEvent.value)
-        await transactionSuccess(txOptions)
-      else
-        setTransactionState('extracting')
+    if (!pendingTxEvent.value)
+      await transactionSuccess(txOptions)
+    else
+      setTransactionState('extracting')
 
-      return true
-
-    } catch (error) {
-      await transactionFailed(error, txOptions)
-      return false
-    }
+    return true
   }
 
   return {

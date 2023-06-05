@@ -8,7 +8,7 @@ Popup(@close="onClose" :disable-default-close="true")
   template(#default)
     VList()
       p {{ error.description }}
-      p {{ error.serverError }}
+      div(color="semantic-warning" max-h="30" overflow-y="auto" p="3" bg="black opacity-20") {{ error.serverError }}
 
     VList(v-if="error.items")
       TokenImage(:token="token" v-for="token in error.items" )

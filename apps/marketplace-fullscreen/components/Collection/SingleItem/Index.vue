@@ -1,10 +1,15 @@
 <template lang="pug">
-div(grid="~ cols-8 gap-3" px="6" pb="6")
-  div(grid="col-span-3")
-    CollectionSingleItemMeta(:item="item")
+VList()
+  div(grid="~ md:cols-8 gap-3" px="6" pb="6" display="lt-md:none")
+    div(grid="col-span-3")
+      CollectionSingleItemMeta(:item="item")
 
-  div(grid="col-span-5")
-    CollectionSingleItemTrade(:item="item")
+    div(grid="col-span-5")
+      CollectionSingleItemTrade(:item="item")
+
+  div(grid="~ cols-5 gap-3" px="6" pb="6" display="md:none")
+    CollectionSingleItemMobile(:item="item" grid="col-span-5")
+
 </template>
 
 <script lang="ts" setup>

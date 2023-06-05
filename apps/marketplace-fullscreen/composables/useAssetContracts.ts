@@ -222,9 +222,12 @@ export const getIXTokenContract = <T extends ContractInterface<T> & IXTokenContr
       const address = walletAdress.value
       if (!address)
         return undefined
-
-      const balance = await contract.balanceOf(address)
-      return Number(ethers.utils.formatUnits(balance))
+      try {
+        const balance = await contract.balanceOf(address)
+        return Number(ethers.utils.formatUnits(balance))
+      } catch (err) {
+        return undefined
+      }
     })
 
   const allowanceCheck = async (amount: number) => {
@@ -256,7 +259,7 @@ export interface ConsiderationItem {
 
 export const useSeaportContract = <T extends ContractInterface<T> & SeaportContract>() => {
   const { walletAdress, getCollectionType } = useWallet()
-  const { createBuyOrder, isAdvancedOrder, getSaleMessage } = useBuyHelpers()
+  const { createBuyOrder, isAdvancedOrder, getOrderMessage } = useBuyHelpers()
   const { withContract, createTransaction, ...contractSpec } = defineContract<T>('Seaport-contract', {
     contractAddress: seaportAdress.polygon as string,
     createContract(provider) {
@@ -272,10 +275,6 @@ export const useSeaportContract = <T extends ContractInterface<T> & SeaportContr
 
       return contract.fulfillAvailableAdvancedOrders(advancedOrders, criteriaResolvers, offerFulfillments, considerationFulfillments, fulfillerConduitKey, recipient, maximumFulfilled)
     }, {
-      getTransactionError: (error) => ({
-        title: "Purchase error",
-        serverError: error
-      }),
       onFail: async (error) => {
         if (!cartItems || cartItems?.length == 0)
           return
@@ -283,7 +282,7 @@ export const useSeaportContract = <T extends ContractInterface<T> & SeaportContr
         cartItems.forEach(async item => {
           if (!item.sale)
             return
-          const message = getSaleMessage(item.sale)
+          const message = getOrderMessage(item.sale)
           const buyOrder = createBuyOrder(item.sale, item.value, false)
 
           if (!isAdvancedOrder(buyOrder) || !message)

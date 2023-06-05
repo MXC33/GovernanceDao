@@ -2,10 +2,10 @@ import { IXToken } from "@ix/base/composables/Token/useIXToken"
 import { AdjustableNumber } from "~/../../layers/ix-base/composables/Utils/useAdjustableNumber";
 
 export interface TransactionItem {
-  type: 'list' | 'bid'
+  type?: 'list' | 'bid'
   token: IXToken,
   shares: AdjustableNumber,
-  durationInDays: number,
+  durationInDays?: number,
   ixtPrice: number
 }
 

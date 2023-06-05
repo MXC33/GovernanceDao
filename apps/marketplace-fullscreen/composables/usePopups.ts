@@ -3,6 +3,7 @@ import { CartItem } from "./useCart";
 import { ListingItem } from "./useListing";
 import { BiddingItem } from "~/composables/useBidding";
 import { TransferItem } from "./useTransfer";
+import { TransactionItem } from "./useTransactions";
 
 export interface PopupBase {
   type: string
@@ -45,7 +46,7 @@ export interface PopupBidItem extends PopupBase {
 
 export interface PopupBuyItemSuccess extends PopupBase {
   type: 'buy-items-success',
-  items: IXToken[]
+  items: TransactionItem[]
 }
 
 type Popup = PopupOnList | PopupOnBidding | PopupOnBid | PopupTransfer | PopupListItem | PopupBidItem | PopupTransferSuccess | PopupBuyItemSuccess
