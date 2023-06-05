@@ -1,31 +1,39 @@
 <template lang="pug">
-VList(v-if="item") 
-  HList(space-x="3")
-    HList()
-      TokenImage(:token="item.token" inset="0" w="15" h="15" object="contain center" :key="getTokenKey(item.token)")
+VList(v-if="item" p="y-3" frame="~" bg="gray-800") 
+  HList()
+    HList( w="full" space-x="3" space-y="3")
+      TokenImage(:token="item.token" inset="0" w="25" h="25" object="contain center" :key="getTokenKey(item.token)" )
       VList()
-        div() {{getTokenName(item.token)}} 
-        div() "{Collection name}"  
+        div(font="bold") {{getTokenName(item.token)}} 
+        div(text="xs" opacity="60") {{collectionName(item.token.collection)}}
 
-    div(flex="grow")
-    VList(items="center")
-      div(v-html="$t(`marketplace.transfer.own`)") 
-      div() {{item.token.my_shares}}          
-
-  VList(v-if="showAdjustable" space-y="3")
-    div(v-html="$t(`marketplace.transfer.quantity`)") 
-    Adjustable(v-model="item" h="10")
+  div(b="b-0.5 gray-600" opacity="40")
+  VList(v-if="showAdjustable" space-y="3"  p="x-6" )
+    div(font="bold" p-t="6") {{ $t(`marketplace.transfer.quantity`) }}
+    HList(justify="between")
+      Adjustable(v-model="item" h="10" w="100")
+      button(bg=" hover:gray-400" transition="all" b="1 white opacity-40" cut="bottom-right sm b-gray-400" p="x-6"  @click="onMaxButton") Max
+    VList(text="xs" opacity="60" )
+      div() {{ $t(`marketplace.transfer.own`) + item.token.my_shares }}
+    
 </template>
 
 <script lang="ts" setup>
 import type { TransferItem } from '~/composables/useTransfer';
 
+const item = defineModel<TransferItem>()//v-Model in parent can be changed/mutated
+
 const props = defineProps<{//props can not be changed/mutated
   showAdjustable: boolean,
 }>()
 
-const item = defineModel<TransferItem>()//v-Model in parent can be changed/mutated
+const onMaxButton = () => {
+  if (!item.value)
+    return
+  item.value.value = item.value?.token.my_shares
+}
 
+console.log(item.value)
 const { getTokenKey, getTokenName } = useTokens()
 
 </script>
