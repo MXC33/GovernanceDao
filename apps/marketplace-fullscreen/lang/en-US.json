@@ -176,11 +176,12 @@
     "transfer": {
       "title": "Transfer Asset",
       "quantity": "Quantity",
-      "own": "You own",
+      "own": "You own ",
       "walletAdress": "Wallet Adress",
+      "transferTo": "Transfer to",
       "placeholderText": "Put Adress Here",
-      "warningText": "Make sure the adress is correct!<br/>There is no way to reverse this transaction",
-      "verifyText": "I Verify that I am aware that the transaction is not<br/>reversible, and that the wallet address is correct.",
+      "warningText": "Make sure the adress is correct! There is no way to reverse this transaction",
+      "verifyText": "I Verify that I am aware that the transaction is not reversible, and that the wallet address is correct.",
       "confirm": "Confrim Adress",
       "transferItem": "Transfer Item"
     },
