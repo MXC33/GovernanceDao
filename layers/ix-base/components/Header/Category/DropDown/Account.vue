@@ -34,6 +34,6 @@ const ConnectWallet = () => {
 }
 
 const userId = computed(() => user.value?.username || null)
-const Icon = await import(`../../../../assets/images/header/dropdown/badges/aocbadge.svg`).catch(() => FallbackVue)
+const Icon = await import(`../../../../assets/images/icons/aocbadge.svg`).catch(() => FallbackVue)
 const PlusIcon = await import(`../../../../assets/images/icons/plus.svg`).catch(() => FallbackVue)
 </script>
