@@ -37,6 +37,9 @@ const props = defineProps<{
 
 
 const onSelect = (option: Item) => {
+
+  navigateTo(`/assets/${option.network}/${option.collection}/${option.token_id}`)
+
   close()
   emit("selected", option)
 }

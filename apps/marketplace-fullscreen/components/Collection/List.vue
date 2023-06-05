@@ -36,7 +36,7 @@ const onClickItem = (row: IXToken) => {
 
 <style>
 .collection-grid-item:nth-child(5n + 6) {
-  border: 0px !important;
+  border: 0px;
 }
 
 @media only screen and (max-width: 600px) {

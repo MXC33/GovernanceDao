@@ -13,24 +13,34 @@ VList(pos="sticky top-0" z="99" w="full" @mouseenter="isSelected = true" @mousel
         HelperLanguage(language="EN")
       HeaderAccountButton(@addFunds="iFrameToggle")
     div(grow="~" display="md:none")
-    SettingsIcon(pos="right" w="8" display="md:none" @click="toggleMeny")
+    SettingsIcon(v-if="activeMenuIndex == null" pos="right" w="8" display="md:none" 
+    @click="toggleMeny")
+    HList(v-if="activeMenuIndex != null")
+      HelperLanguage(language="EN")
+      CrossIcon(pos="right" w="8" display="md:none" @click="toggleMeny")
+      
   Transition(name="slide-top" mode="out-in" )
     HeaderItem(v-if="activeMenuIndex != null" :key="activeMenuIndex" @onClickItem="onClicked" :header="siteTopHeaders[activeMenuIndex]" display="lt-md:none")
   Transition(name="slide-top")
     div(v-if="activeMenuIndex != null" display="md:none")
-      HeaderCategoryDropDownAccount()
+      HeaderCategoryDropDownAccount(@swap="turnOnSwap")
       HeaderCategoryDropDown()
+      HeaderButtonDisconnect()
 
 Popup(v-if="showIFrame")
   template(#header) Swap
   template(#default)
     VList(w="full" justify="center" items="center" display="lt-md:none")
-      iframe(src="https://ix.foundation/lefi" w="full md:100" h="full md:116")
+      iframe(src="https://ix.foundation/lefi" w="full md:100" h="full md:116" )
+    VList(w="full" justify="center" items="center" display="md:none")
+      iframe(src="https://ix.foundation/lefi" w="100%" h="100")
 </template>
 
 <script lang="ts" setup>
 import PlanetIXNew from '~/assets/images/header/planetix-new.svg'
 import SettingsIcon from '~/assets/images/header/hamburger.svg'
+import CrossIcon from '~/assets/images/header/cross.svg'
+import GlobeIcon from '~/assets/images/header/Globe.svg'
 const { siteTopHeaders } = useSiteHeader()
 
 const activeMenuIndex = ref<number | null>(null)
@@ -48,6 +58,12 @@ const toggleMeny = () => {
   if (activeMenuIndex.value == null)
     return activeMenuIndex.value = 1
 
+  activeMenuIndex.value = null
+}
+
+const turnOnSwap = () => {
+  console.log("turnOnSwap")
+  showIFrame.value = true
   activeMenuIndex.value = null
 }
 
