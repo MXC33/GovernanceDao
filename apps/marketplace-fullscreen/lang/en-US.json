@@ -83,7 +83,8 @@
   },
   "popupNotification": {
     "copy-link": "Link copied to clipboard",
-    "transaction-rejected": "User rejected transaction"
+    "transaction-rejected": "User rejected transaction",
+    "add-to-cart": "Added to cart"
   },
   "tooltips": {
     "link": "Copy Link to Clipboard",
@@ -220,7 +221,7 @@
             "description": "COMING SOON",
             "link": ""
           },
-          "ethereum" : {
+          "ethereum": {
             "title": "Ethereum",
             "description": "COMING SOON",
             "link": ""

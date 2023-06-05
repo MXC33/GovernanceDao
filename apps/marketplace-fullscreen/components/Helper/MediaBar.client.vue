@@ -25,7 +25,7 @@ import PolygonIcon from '~/assets/icons/polygon.svg'
 
 defineEmits(["transfer"])
 
-const { displayNotification } = useSnackNotifications()
+const { displaySnack } = useSnackNotifications()
 
 const copyCurrentUrlToClipboard = async () => {
   const currentUrl = window.location.href;
@@ -35,7 +35,7 @@ const copyCurrentUrlToClipboard = async () => {
   } catch (error) {
     console.error('Failed to copy URL to clipboard:', error)
   }
-  displayNotification('copy-link')
+  displaySnack('copy-link')
 }
 
 </script>

@@ -2,13 +2,13 @@ import { ContractError } from "@ix/base/composables/Utils/useContractErrors"
 
 export const useContractRequest = (fn: () => Promise<any>, errorOptions?: ContractError) => {
   const { addError } = useContractErrors()
-  const { displayNotification } = useSnackNotifications()
+  const { displaySnack } = useSnackNotifications()
   const loading = ref(false)
 
   const catchError = (serverError: string) => {
     console.log("Server", serverError)
     if (serverError?.includes('rejected'))
-      return displayNotification('transaction-rejected')
+      return displaySnack('transaction-rejected')
 
     if (errorOptions)
       addError({

@@ -19,6 +19,7 @@ export const useCart = () => {
   const cartItems = useState<CartItem[]>('cart-items', () => [])
   const viewingCart = useState('cart-visible', () => false)
   const { generateConsiderations, createBuyOrder, isAdvancedOrder } = useBuyHelpers()
+  const { displaySnack } = useSnackNotifications()
 
   const removeFromCart = (cartItem: CartItem) => {
 
@@ -39,7 +40,7 @@ export const useCart = () => {
       value: 1
     })
 
-    viewingCart.value = true
+    displaySnack('add-to-cart')
   }
 
   const clearCart = () => {

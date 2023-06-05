@@ -12,7 +12,7 @@ export interface SnackNotification {
 export const useSnackNotifications = () => {
   const snackNotifications = useState<SnackNotification[]>('active-notification', () => [])
 
-  const displayNotification = (id: SnackNotificationId) => {
+  const displaySnack = (id: SnackNotificationId) => {
     const timeout = addNotificationTimeout()
     snackNotifications.value.push({ id, timeout })
   }
@@ -50,7 +50,7 @@ export const useSnackNotifications = () => {
   return {
     snackNotifications,
     getSnackType,
-    displayNotification,
+    displaySnack,
     closeNotification,
   };
 };

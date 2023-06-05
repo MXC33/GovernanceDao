@@ -1,5 +1,5 @@
 <template lang="pug">
-HList(@click="closeNotification(notification)" frame="~ gray-400" p="x-4 y-3" bg="gray-800" space-x="3" items="center" pos="absolute right-0 bottom-0")
+HList(@click="onClickSnack" frame="~ gray-400" p="x-4 y-3" bg="gray-800" space-x="3" items="center" pos="absolute right-0 bottom-0")
 
   SnackbarIcon(:icon="type")
 
@@ -9,11 +9,25 @@ HList(@click="closeNotification(notification)" frame="~ gray-400" p="x-4 y-3" bg
 
 <script lang="ts" setup>
 import type { SnackNotification } from '~/composables/useNotifications';
-
+const { viewingCart } = useCart()
 const { t } = useI18n()
 const { getSnackType, closeNotification } = useSnackNotifications()
+useCart
 
 const type = computed(() => getSnackType(notification))
+
+const onClickSnack = () => {
+  closeNotification(notification)
+
+  switch (notification.id) {
+    case 'add-to-cart':
+      return viewingCart.value = true
+
+    default:
+      break
+  }
+
+}
 
 const { notification } = defineProps<{
   notification: SnackNotification
