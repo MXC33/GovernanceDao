@@ -9,7 +9,7 @@ export const clamp = (min: number, max: number, amount: number) =>
   Math.max(min, Math.min(max, amount))
 
 export const roundToDecimals = (num: number, decimalPlaces: number) => {
-  const fixedNumber = num.toFixed(12)
+  const fixedNumber = num?.toFixed(12) ?? 0
   const number = Math.round(Number(fixedNumber + "e" + decimalPlaces))
   return Number(number + "e" + -decimalPlaces);
 }
