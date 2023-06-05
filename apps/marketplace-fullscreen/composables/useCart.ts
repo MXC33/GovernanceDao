@@ -12,14 +12,15 @@ import { TransactionItem } from "./useTransactions";
 export interface CartItem extends TransactionItem {
   token: IXToken,
   sale?: Sale,
-  failed?: boolean
 }
 
 
 export const useCart = () => {
+  const cartFailedSales = useState<CartItem[]>('cart-failed-items', () => [])
   const cartItems = useState<CartItem[]>('cart-items', () => [])
   const viewingCart = useState('cart-visible', () => false)
   const { generateConsiderations, createBuyOrder, isAdvancedOrder } = useBuyHelpers()
+
   const { displaySnack } = useSnackNotifications()
 
   const removeFromCart = (cartItem: CartItem) => {
@@ -31,6 +32,26 @@ export const useCart = () => {
 
     cartItems.value.splice(index, 1)
   }
+
+  const removeFailedItemsFromCart = () => {
+    console.log("REMOVE ITMS", cartFailedSales.value.length)
+    cartFailedSales.value.forEach((item) => {
+      console.log("Remove item", item)
+      removeFromCart(item)
+    })
+  }
+
+  const clearFailedCartItems = () => cartFailedSales.value = []
+
+  const addFailedCartItem = (item: CartItem) => {
+    if (item.sale?.sale_id)
+      cartFailedSales.value.push(item)
+
+    console.log("Add fail")
+  }
+
+  const cartItemFailed = (cartItem: CartItem) =>
+    cartFailedSales.value.some((item) => item.sale?.sale_id == cartItem.sale?.sale_id)
 
   const hasItemInCart = (sale: Sale) =>
     cartItems.value.some((item) => item.sale?.sale_id == sale.sale_id)
@@ -78,6 +99,11 @@ export const useCart = () => {
   return {
     cartItems,
     viewingCart,
+    cartFailedSales,
+    cartItemFailed,
+    addFailedCartItem,
+    clearFailedCartItems,
+    removeFailedItemsFromCart,
     hasItemInCart,
     clearCart,
     removeFromCart,

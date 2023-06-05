@@ -13,12 +13,20 @@ footer(pos="sticky bottom-0" bg="ix-black")
 <script lang="ts" setup>
 import type { CartItem } from '~/composables/useCart';
 const { ixtToUSD } = useIXTPrice()
-
 const { displayPopup } = usePopups()
-const { viewingCart, cartItems, checkoutItems } = useCart()
+
+const { viewingCart, cartItems, cartFailedSales, checkoutItems, removeFailedItemsFromCart } = useCart()
 
 const { loading: isLoading, execute: buyItems } = useContractRequest(() => checkoutItems(cartItems.value, totalPrice.value), {
-  title: "Purchase error"
+  error: () => ({
+    title: "Purchase error",
+    description: "The purchase failed, following sales will be removed from your cart",
+    items: cartFailedSales.value
+  }),
+  onError: () => {
+    console.log("Has error", cartFailedSales.value.length)
+    removeFailedItemsFromCart()
+  }
 })
 
 const onPurchase = (items: CartItem[]) => {
@@ -43,7 +51,7 @@ const checkout = async () => {
 
 const totalPrice = computed(() =>
   roundToDecimals(cartItems.value.map((item) =>
-    item.shares.value * item.ixtPrice
+    item.shares.value * (item.ixtPrice ?? 0)
   ).reduce((a, b) => a + b, 0), 2)
 )
 </script>

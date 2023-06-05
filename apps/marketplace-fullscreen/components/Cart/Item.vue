@@ -1,5 +1,5 @@
 <template lang="pug">
-VList(:bg="item.failed ? 'red-950' : 'gray-800'" v-if="item")
+VList(bg="gray-800" v-if="item")
   header(p="x-6 y-3" font="bold" flex="~ row")
     TokenName(:token="item.token")
 
@@ -31,8 +31,9 @@ const cartElement = ref()
 
 onClickOutside(cartElement, () => viewingCart.value = false)
 
-const { viewingCart, removeFromCart } = useCart()
+const { viewingCart, removeFromCart, cartItemFailed } = useCart()
 
 const item = defineModel<CartItem>()
 
+const isFailed = computed(() => item.value && cartItemFailed(item.value))
 </script>

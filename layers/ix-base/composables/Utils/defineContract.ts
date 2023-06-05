@@ -154,7 +154,7 @@ export const defineContract = <T extends ContractInterface<T> | object>(key: str
     //   addNotification(message)
   }
 
-  const transactionFailed = async (error?: any, txOptions?: TransactionOptions) => {
+  const transactionFailed = async (error?: string, txOptions?: TransactionOptions) => {
     // const { failMessage } = notifications
     console.log("TX FAILED", error)
     if (txOptions?.onFail)
@@ -165,7 +165,7 @@ export const defineContract = <T extends ContractInterface<T> | object>(key: str
     //   addError(txOptions.getTransactionError(error?.message))
     // }
 
-    throw new Error(error?.message)
+    throw new Error(error)
   }
 
   const beforeContractInteraction = async () => {
@@ -205,35 +205,39 @@ export const defineContract = <T extends ContractInterface<T> | object>(key: str
     if (!contract.value)
       return transactionFailed("No contract", txOptions)
 
-    const transaction = await fn(contract.value)
+    try {
+      const transaction = await fn(contract.value)
 
-    setTransactionState('minting')
+      setTransactionState('minting')
 
-    if (txOptions?.successOnEventKey)
-      pendingTxEvent.value = txOptions
-    else
-      pendingTxEvent.value = null
-    const hash = transaction?.hash
+      if (txOptions?.successOnEventKey)
+        pendingTxEvent.value = txOptions
+      else
+        pendingTxEvent.value = null
+      const hash = transaction?.hash
 
-    if (!hash)
-      return transactionFailed("No transaction hash", txOptions)
+      if (!hash)
+        return transactionFailed("No transaction hash", txOptions)
 
-    const resolvedTransaction = await onTransactionResolved(hash)
-    console.log("Resolved", resolvedTransaction)
+      const resolvedTransaction = await onTransactionResolved(hash)
+      console.log("Resolved", resolvedTransaction)
 
-    //@ts-ignore
-    if (resolvedTransaction.status == 0)
-      throw new Error("Transaction failed. Try increasing the gas manually.")
+      //@ts-ignore
+      if (resolvedTransaction.status == 0)
+        throw new Error("Transaction failed. Try increasing the gas manually.")
 
-    if (txOptions?.onTxApproved)
-      await txOptions?.onTxApproved()
+      if (txOptions?.onTxApproved)
+        await txOptions?.onTxApproved()
 
-    if (!pendingTxEvent.value)
-      await transactionSuccess(txOptions)
-    else
-      setTransactionState('extracting')
+      if (!pendingTxEvent.value)
+        await transactionSuccess(txOptions)
+      else
+        setTransactionState('extracting')
 
-    return true
+      return true
+    } catch (err) {
+      return transactionFailed(err.message, txOptions)
+    }
   }
 
   return {

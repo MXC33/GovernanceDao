@@ -6,12 +6,24 @@ Popup(@close="onClose" :disable-default-close="true")
   template(#header) {{error.title}}
 
   template(#default)
-    VList()
-      p {{ error.description }}
-      div(color="semantic-warning" max-h="30" overflow-y="auto" p="3" bg="black opacity-20") {{ error.serverError }}
+    VList(space-y="3")
+      VList(color="semantic-warning") {{ error.description }}
 
-    VList(v-if="error.items")
-      TokenImage(:token="token" v-for="token in error.items" )
+      VList(v-if="items" flex-shrink="0" space-y="3")
+        HList(v-for="item in items" frame="~" items="center" space-x="3")
+          TokenImage(:token="item.token" h="25" w="25")
+
+          VList()
+            TokenName(:token="item.token" font="bold")
+            HList(space-x="3")
+              div(font="bold") {{ item.sale?.price }} IXT
+              div(text="gray-300") ${{ ixtToUSD(item.sale?.price ?? 0)  }}
+
+      VList(pt="3")
+        h3(font="bold") Error log 
+        div(color="semantic-warning" max-h="15" overflow-y="auto" bg="black opacity-60" px="3") {{ error.serverError }}
+
+
 
   template(#buttons)
     button(@click="onClick" btn="~ primary") Ok 
@@ -22,12 +34,14 @@ Popup(@close="onClose" :disable-default-close="true")
 <script lang="ts" setup>
 import WarningIcon from '~/assets/icons/warning.svg'
 import type { ContractError } from '@ix/base/composables/Utils/useContractErrors'
-
+import { get } from '@vueuse/core'
 const { markAllNotificationsRead } = useContractErrors()
-
-defineProps<{
+const { ixtToUSD } = useIXTPrice()
+const { error } = defineProps<{
   error: ContractError
 }>()
+
+const items = computed(() => error.items && get(error.items))
 
 const onClose = () => {
   markAllNotificationsRead()

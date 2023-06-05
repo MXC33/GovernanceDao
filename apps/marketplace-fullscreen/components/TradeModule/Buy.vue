@@ -36,7 +36,9 @@ import { NFTType } from "~/composables/useAssetContracts";
 const { displayPopup } = usePopups()
 
 const { execute: buyItems, loading: isBuyLoading } = useContractRequest(() => buy(), {
-  title: "Error purchasing"
+  error: () => ({
+    title: "Error purchasing"
+  })
 })
 
 const { item, isDisabled } = defineProps<{

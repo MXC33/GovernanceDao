@@ -69,7 +69,9 @@ const accept = async () => {
 }
 
 const { execute: acceptItems, loading: isAcceptLoading } = useContractRequest(() => accept(), {
-  title: 'Error processing your purchase'
+  error: () => ({
+    title: 'Error processing your purchase'
+  })
 })
 
 </script>
