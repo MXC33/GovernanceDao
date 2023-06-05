@@ -12,11 +12,6 @@ VList(space-y="6")
     template(#ixt) {{averagePricePerItem}} IXT
     template(#percentage) {{aboveFloorPrice}}% above floor price
 
-    //- SAVE BELOW FOR FUTURE NEED
-    //- HList(px="6" py="3.5" b="t-1 b-1 gray-600" space-x="3" items="center")
-    //- InputCheckbox(v-model="maxPrice")
-    //-   span(color="gray-200") Max price per listing
-
   TradeModuleSubstitute(v-model="isSubstituteListing")
     template(#title) Substitute listings
     template(#substituteTitle) Max price per listing
