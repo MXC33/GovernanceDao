@@ -18,7 +18,7 @@ HList(w="full" px="6" py="3" bg="gray-900" items="center" justify="between")
 </template>
 
 <script lang="ts" setup>
-import LikeIcon from '~/assets/icons/like.svg'
+// import LikeIcon from '~/assets/icons/like.svg'
 import TransferIcon from '~/assets/icons/transfer.svg'
 import LinkIcon from '~/assets/icons/link.svg'
 import PolygonIcon from '~/assets/icons/polygon.svg'

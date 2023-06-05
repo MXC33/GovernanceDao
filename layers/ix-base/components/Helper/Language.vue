@@ -1,7 +1,8 @@
 <template lang="pug">
 HList(items="center" space-x="1.85" group)
-  GLOBE(w="5.25" translate-y="-3%" fill="white group-hover:opacity-80")
-  span() {{ language }}
+  GLOBE(w="5.25" fill="white group-hover:opacity-80" translate-y="-0.3")
+  span(translate-y="0.4") {{ language }}
+
 </template>
 
 <script lang="ts" setup>

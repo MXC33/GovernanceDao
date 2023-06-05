@@ -8,6 +8,7 @@ VList(:bg="item.failed ? 'red-950' : 'gray-800'" v-if="item")
   HList()
     VList(w="30" justify="center" pos="relative")
       TokenImage(:token="item.token" w="30")
+
     VList(w="full")
       HList(flex-grow="1" px="3" items="center")
         VList(flex-grow="1" color="gray-200" space-y="1")
