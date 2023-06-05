@@ -2,7 +2,7 @@
 VList(pos="relative"  ref="menuElement")
   HeaderLink(h="48px" w="166px" b="1 $mc-orange" bg="$mc-orange_20" display="lt-md:none" to="/connect" items="center" v-if="walletState !== 'connected'" text="$mc-orange")
     div(text="center xs" p="" font="" color="$mc-orange" ) CONNECT WALLET
-  Transition(name="fade" appear v-if="walletState == 'connected'")
+  Transition(name="fade-slow" appear v-if="walletState == 'connected'")
     HList(h="48px" w="166px" b="1 $mc-mint" color="$mc-mint" bg="$mc-mint-20" px="8"  display="lt-md:none" @click="toggleMenu" items="center") 
       div(grow="~") 
       div() {{ Math.round(ixtBalance ?? 0 * 100) / 100 }} IXT

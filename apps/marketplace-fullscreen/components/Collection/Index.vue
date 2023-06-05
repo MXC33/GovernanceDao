@@ -19,7 +19,7 @@ VList(flex-grow="1" min-h="0" pos="relative" p="4 t-4 b-4 md:(8 b-30)" space-y="
       Transition(name="slide-left")
         CollectionFilterSlideout(:items="data.filters" v-if="showFilters && data")
 
-    CollectionList(v-if="data && !showFilters" :columns="renderColumns" :items="data?.nfts" :hide-grid="hideGrid", :context="context" :show-filters="showFilters")
+    CollectionList(v-if="data" :columns="renderColumns" :items="data?.nfts" :hide-grid="hideGrid", :context="context" :show-filters="showFilters")
 
   slot(name="bottom")
 
@@ -62,11 +62,6 @@ const { data, columns, context = 'collection' } = defineProps<{
   hideGrid?: boolean,
   context?: CollectionContext
 }>()
-
-const hideListOnFilterOpen = computed(() => {
-  if (showFilters)
-    return 'lt-md:none'
-})
 
 const collectionName = computed(() => {
   if (data?.name == "PlanetIX Assets")
