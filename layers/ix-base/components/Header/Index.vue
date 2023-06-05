@@ -16,7 +16,7 @@ VList(pos="sticky top-0" z="99" w="full" @mouseenter="isSelected = true" @mousel
     SettingsIcon(v-if="activeMenuIndex == null" pos="right" w="8" display="md:none" 
     @click="toggleMeny")
     HList(v-if="activeMenuIndex != null")
-      GlobeIcon(pos="right" w="8" display="md:none" @click="toggleMeny")
+      HelperLanguage(language="EN")
       CrossIcon(pos="right" w="8" display="md:none" @click="toggleMeny")
       
   Transition(name="slide-top" mode="out-in" )
