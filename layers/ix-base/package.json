@@ -9,7 +9,7 @@
     "build": "yarn run prepare && nuxt build",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
-    "prepare": "nuxi prepare && nuxi prepare",
+    "prepare": "nuxi prepare",
     "story:dev": "histoire dev",
     "story:build": "histoire build",
     "story:preview": "histoire preview",
