@@ -6,7 +6,7 @@ VList(display="md:none" pos="fixed" inset="0" bg="black" overflow-y="auto")
     div(grow="~")
     HelperLanguage(language="EN")
     CrossIcon(pos="right" w="8" display="md:none" @click="$emit('close')")
-  HeaderCategoryDropDownAccount(@swap="$emit('swap')" @ConnectWallet="$emit('ConnectWallet')")
+  HeaderCategoryDropDownAccount(@swap="Swap" @ConnectWallet="ConnectWallet")
   HeaderCategoryDropDownGrid()
   HeaderButtonDisconnect(@disconnect="$emit('disconnect')" pos="sticky bottom-0" z="1")
 
@@ -19,7 +19,12 @@ const emit = defineEmits(['swap', 'ConnectWallet', 'close'])
 
 const ConnectWallet = () =>{
   console.log("index Connect Wallet");
-  
+  emit('ConnectWallet')
+}
+
+const Swap = () =>{
+  console.log("index Swap");
+  emit('swap')
 }
 
 </script>
