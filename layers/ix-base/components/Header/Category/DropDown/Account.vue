@@ -14,7 +14,7 @@ div(bg="black")
           HList(b="1 $mc-orange_40" p="2" grow="~" bg="$mc-orange_20")
             div() IXT : 
             div(text="green") {{ Math.round((ixtBalance ?? 0) * 100) / 100 }}
-          div(b="1 $mc-orange_60" p="1" cut="bottom-right" bg="$mc-orange_40" @click="$emit('swap')") +  
+          PlusIcon(b="1 $mc-orange_60" fill="white" h="10" p="3" cut="bottom-right" bg="$mc-orange_40" @click="$emit('swap')")  
     //-div(grow="~")
 </template>
 
@@ -30,4 +30,5 @@ defineEmits(['swap'])
 
 const userId = computed(() => user.value?.username || null)
 const Icon = await import(`../../../../assets/images/header/dropdown/badges/aocbadge.svg`).catch(() => FallbackVue)
+const PlusIcon = await import(`../../../../assets/images/icons/plus.svg`).catch(() => FallbackVue)
 </script>
