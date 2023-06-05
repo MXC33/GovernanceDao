@@ -181,6 +181,7 @@ export interface ConsiderationItem {
 
 export const useSeaportContract = <T extends ContractInterface<T> & SeaportContract>() => {
   const { walletAdress, getCollectionType } = useWallet()
+  const { clearFailedCartItems, addFailedCartItem } = useCart()
   const { createBuyOrder, isAdvancedOrder, getOrderMessage } = useBuyHelpers()
   const { withContract, createTransaction, ...contractSpec } = defineContract<T>('Seaport-contract', {
     contractAddress: seaportAdress.polygon as string,
@@ -198,34 +199,41 @@ export const useSeaportContract = <T extends ContractInterface<T> & SeaportContr
       return contract.fulfillAvailableAdvancedOrders(advancedOrders, criteriaResolvers, offerFulfillments, considerationFulfillments, fulfillerConduitKey, recipient, maximumFulfilled)
     }, {
       onFail: async (error) => {
+        console.log("ON FAIL", error)
+        clearFailedCartItems()
+
         if (!cartItems || cartItems?.length == 0)
           return
 
-        cartItems.forEach(async item => {
-          if (!item.sale)
+        const requests = cartItems.map(async (item) => {
+          const { sale } = item
+          if (!sale)
             return
-          const message = getOrderMessage(item.sale)
-          const buyOrder = createBuyOrder(item.sale, item.shares.value, false)
+
+          const message = getOrderMessage(sale)
+          const buyOrder = createBuyOrder(sale, item.shares.value, false)
 
           if (!isAdvancedOrder(buyOrder) || !message)
             return
 
           try {
             await fulfillAdvancedOrderGasEstimate(buyOrder[0])
-            item.failed = false
-          }
-          catch (e) {
-            item.failed = true
+          } catch (err) {
+            addFailedCartItem(item)
+
             const { token, identifierOrCriteria } = message.body.offer[0]
-            await fetchIXAPI('web3/sale/transfer/update/listing/job', 'POST', {
+
+            return await fetchIXAPI('web3/sale/transfer/update/listing/job', 'POST', {
               size: getCollectionType(token),
-              player_id: item.sale?.player_id,
+              player_id: sale.player_id,
               network: 'polygon',
               collection: token,
               token_id: identifierOrCriteria,
             })
           }
         })
+
+        return Promise.all(requests)
       }
     })
 
