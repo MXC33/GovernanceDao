@@ -169,9 +169,6 @@ export const defineContract = <T extends ContractInterface<T> | object>(key: str
   }
 
   const beforeContractInteraction = async () => {
-    console.log(provider.value)
-    console.log(contract.value)
-
     await ensureCorrectChain(options.ethereum)
     if (!contract.value && provider.value)
       await setupContract(provider.value)
