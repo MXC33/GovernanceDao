@@ -9,8 +9,7 @@
 
     div#infobox(:style="values" z="400" pos="absolute")
 
-    Transition(name="fade-slow" mode="in-out")
-      HelperNotification(v-if="activeNotification" :type="activeNotification")
+    SnackbarList()
 
 </template>
 
@@ -18,10 +17,11 @@
 import 'vue3-easy-data-table/dist/style.css';
 
 const globalY = useGlobalWindowScroll()
+
 const { y } = useWindowScroll()
 const { connectWallet, walletState } = useWallet()
 const { setupIXTPrice, ixtPrice } = useIXTPrice()
-const { activeNotification } = useSnackNotifications()
+const { snackNotifications } = useSnackNotifications()
 
 const { setRefreshToken } = useLogin()
 const { user } = useUser()

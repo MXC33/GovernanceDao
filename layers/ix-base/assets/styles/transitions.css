@@ -171,3 +171,21 @@
   opacity: 0;
   transform: translateY(-50px);
 }
+
+
+/* 2. declare enter from and leave to state */
+.snackbar-enter-from {
+  opacity: 0;
+  transform: translateY(1rem);
+}
+
+.snackbar-leave-to {
+  opacity: 0;
+  transform: translateY(-1rem);
+}
+
+/* 3. ensure leaving items are taken out of layout flow so that moving
+      animations can be calculated correctly. */
+.snackbar-leave-active {
+  transition: all 150ms ease;
+}

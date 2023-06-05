@@ -18,7 +18,7 @@ const { loading: isLoading, execute: buyItems } = useContractRequest(() => check
   title: "Purchase error"
 })
 
-const didPlaceBids = (items: CartItem[]) => {
+const onPurchase = (items: CartItem[]) => {
   displayPopup({
     type: 'bidding-successful',
     items
@@ -29,11 +29,12 @@ const didPlaceBids = (items: CartItem[]) => {
 }
 
 const checkout = async () => {
-  console.log("cartItems.value", cartItems.value)
   const checkout = await buyItems()
+  console.log("cartItems.value", cartItems.value)
+  console.log("checkout", checkout)
 
   if (checkout)
-    didPlaceBids(cartItems.value)
+    onPurchase(cartItems.value)
 
 }
 
