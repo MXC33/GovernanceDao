@@ -37,6 +37,7 @@ import { CartItem } from "~/composables/useCart";
 import { fetchIXAPI } from "~/composables/api/api";
 import { CollectionData } from "~/composables/useCollection";
 
+const ZERO_ADRESS_LONG = "0x0000000000000000000000000000000000000000000000000000000000000000"
 
 export const ERC1155Addresses = [assetsAddress.polygon?.toLowerCase(), avatarNFTAddress.polygon?.toLowerCase(), landmarkAddress.polygon?.toLowerCase()]
 
@@ -237,13 +238,13 @@ export const useSeaportContract = <T extends ContractInterface<T> & SeaportContr
 
       const pixMerkleParam = {
         merklePixInfo: {
-          to: "0x0000000000000000000000000000000000000000",
+          to: ZERO_ADDRESS,
           pixId: 0,
           category: 0,
           size: 0,
         },
-        merkleRoot: "0x0000000000000000000000000000000000000000000000000000000000000000",
-        merkleProof: ["0x0000000000000000000000000000000000000000000000000000000000000000"],
+        merkleRoot: ZERO_ADRESS_LONG,
+        merkleProof: [ZERO_ADRESS_LONG],
       }
 
       return contract.estimateGas.fulfillAdvancedOrder(buyOrderComponents, [], conduitKey.polygon, ZERO_ADDRESS, pixMerkleParam)

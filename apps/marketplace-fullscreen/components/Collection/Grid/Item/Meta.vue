@@ -7,7 +7,7 @@ VList(w="full" flex-grow="1" items="start" bg="gray-900" p="6" pos="relative")
       div(v-if="is1155" text="lt-md:xs") x{{showAssetAmount}}
 
     div(text="sm md:lg") 
-      slot(name="subtitle") {{ token?.sale_price }} IXT
+      slot(name="subtitle") {{ roundToDecimals(token?.sale_price, 6) }} IXT
 
   div(flex-grow="1")
 

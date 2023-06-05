@@ -59,14 +59,8 @@ export const useCart = () => {
 
     const { considerations, offers } = generateConsiderations(buyOrders)
 
-    try {
-      // @ts-ignore
-      return await fulfillAvailableAdvancedOrders(buyOrders, [], offers, considerations, conduitKey.polygon, ZERO_ADDRESS, buyOrders.length)
-    }
-    catch (err: any) {
-      console.log("fulfillAvailableAdvancedOrders error", err);
-      return false
-    }
+    // @ts-ignore
+    return await fulfillAvailableAdvancedOrders(buyOrders, [], offers, considerations, conduitKey.polygon, ZERO_ADDRESS, buyOrders.length, cartItems)
   }
 
   return {
