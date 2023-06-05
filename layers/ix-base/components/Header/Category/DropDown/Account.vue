@@ -12,7 +12,7 @@ div(bg="black")
           HList(b="1 $mc-orange_40" p="2" grow="~" bg="$mc-orange_20")
             div() IXT : 
             div(text="green") {{ Math.round((ixtBalance ?? 0) * 100) / 100 }}
-          div(b="1 $mc-orange_60" p="1" cut="bottom-right" bg="$mc-orange_40") +  
+          div(b="1 $mc-orange_60" p="1" cut="bottom-right" bg="$mc-orange_40" @click="$emit('swap')") +  
     //-div(grow="~")
 </template>
 
@@ -22,6 +22,8 @@ const { ixtBalance, fetchIXT } = useIXTContract()
 const { user } = useUser()
 
 await fetchIXT()
+
+defineEmits(['swap'])
 
 const userId = computed(() => user.value?.username || null)
 const Icon = await import(`../../../../assets/images/header/dropdown/badges/aocbadge.svg`).catch(() => FallbackVue)
