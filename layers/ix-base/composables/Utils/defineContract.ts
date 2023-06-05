@@ -156,6 +156,7 @@ export const defineContract = <T extends ContractInterface<T> | object>(key: str
 
   const transactionFailed = async (error?: any, txOptions?: TransactionOptions) => {
     // const { failMessage } = notifications
+    console.log("TX FAILED", error)
     if (txOptions?.onFail)
       await txOptions.onFail(error)
 
@@ -164,7 +165,6 @@ export const defineContract = <T extends ContractInterface<T> | object>(key: str
     //   addError(txOptions.getTransactionError(error?.message))
     // }
 
-    console.log("FAILED TX", error)
     throw new Error(error?.message)
   }
 
