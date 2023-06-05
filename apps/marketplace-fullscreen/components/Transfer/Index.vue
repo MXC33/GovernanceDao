@@ -45,9 +45,11 @@ const props = defineProps<{
 
 const transferItem = ref<TransferItem>({
   token: props.token,
-  value: 1,
-  min: 1,
-  max: props.token.my_shares,
+  shares: {
+    value: 1,
+    min: 1,
+    max: props.token.my_shares,
+  }
 })
 
 const onChange = () => {
@@ -88,7 +90,7 @@ const itemTransfer = async () => {
 const transferNFTType = async (collection: string, token_id: number) => {
 
   if (isERC1155.value)
-    return await transferERC1155NFT(collection, wallet.value, token_id, transferItem.value.value)
+    return await transferERC1155NFT(collection, wallet.value, token_id, transferItem.value.shares.value)
 
   return await transferERC721NFT(collection, wallet.value, token_id)
 }

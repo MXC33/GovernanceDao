@@ -1,7 +1,7 @@
 import { IXToken } from "@ix/base/composables/Token/useIXToken"
-import { AdjustableNumber } from "@ix/base/composables/Utils/useAdjustableNumber"
+import { TransactionItem } from "./useTransactions"
 
-export interface TransferItem extends AdjustableNumber {
+export interface TransferItem extends TransactionItem {
   token: IXToken,
   toWallet?: string
 }
@@ -20,7 +20,11 @@ export const useTransfer = () => {
   const addToTransferList = (token: IXToken) => {
     transferItem.value.push({
       token,
-      value: 1
+      shares: {
+        min: 1,
+        max: token?.my_shares,
+        value: 1
+      }
     })
 
     viewingTransferItem.value = true

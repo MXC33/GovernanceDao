@@ -11,7 +11,7 @@ VList(v-if="item" p="y-3" frame="~" bg="gray-800")
   VList(v-if="showAdjustable" space-y="3"  p="x-6" )
     div(font="bold" p-t="6") {{ $t(`marketplace.transfer.quantity`) }}
     HList(justify="between")
-      Adjustable(v-model="item" h="10" w="100")
+      Adjustable(v-model="item.shares" h="10" w="100")
       button(bg=" hover:gray-400" transition="all" b="1 white opacity-40" cut="bottom-right sm b-gray-400" p="x-6"  @click="onMaxButton") Max
     VList(text="xs" opacity="60" )
       div() {{ $t(`marketplace.transfer.own`) + item.token.my_shares }}
@@ -30,7 +30,7 @@ const props = defineProps<{//props can not be changed/mutated
 const onMaxButton = () => {
   if (!item.value)
     return
-  item.value.value = item.value?.token.my_shares
+  item.value.shares.value = item.value?.token.my_shares
 }
 
 console.log(item.value)
