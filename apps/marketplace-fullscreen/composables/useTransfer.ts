@@ -14,7 +14,6 @@ export const useTransfer = () => {
 
     const index = transferItem.value.findIndex((item) => item.token.token_id == token.token_id)
     console.log("remove", index, token.token_id, transferItem.value.map((item) => item.token.token_id))
-
     transferItem.value.splice(index, 1)
   }
 

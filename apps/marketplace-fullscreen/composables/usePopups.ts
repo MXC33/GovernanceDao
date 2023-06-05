@@ -16,7 +16,7 @@ export interface PopupOnList extends PopupBase {
 
 export interface PopupOnBid extends PopupBase {
   type: 'bidding-successful',
-  items: TransferItem[]
+  items: TransactionItem[]
 }
 
 export interface PopupTransfer extends PopupBase {
@@ -44,7 +44,7 @@ export interface PopupBuyItemSuccess extends PopupBase {
   items: TransactionItem[]
 }
 
-type Popup = PopupOnList | PopupOnBidding | PopupOnBid | PopupTransfer | PopupListItem | PopupBidItem | PopupTransferSuccess | PopupBuyItemSuccess
+type Popup = PopupOnList | PopupOnBid | PopupTransfer | PopupListItem | PopupBidItem | PopupTransferSuccess | PopupBuyItemSuccess
 
 export const usePopups = () => {
   const popup = useState<Popup | null>('active-popup', () => null)
