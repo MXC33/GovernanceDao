@@ -21,11 +21,11 @@ VList(pos="sticky top-0" z="99" w="full" @mouseenter="isSelected = true" @mousel
       HeaderCategoryDropDownAccount()
       HeaderCategoryDropDown()
 
-//- Popup(v-if="showIFrame")
-//-   template(#header) Swap
-//-   template(#default)
-//-     VList(w="full" justify="center" items="center" display="lt-md:none")
-//-       iframe(src="https://ix.foundation/lefi" w="full md:100" h="full md:116")
+Popup(v-if="showIFrame")
+  template(#header) Swap
+  template(#default)
+    VList(w="full" justify="center" items="center" display="lt-md:none")
+      iframe(src="https://ix.foundation/lefi" w="full md:100" h="full md:116")
 </template>
 
 <script lang="ts" setup>
