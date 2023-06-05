@@ -6,8 +6,8 @@ div(bg="black")
       Icon(w="20" p="3" b="1 $mc-orange_40" bg="$mc-orange_20" )
       VList(opacity="100%" grow="~")
         div(p="2" b="1 $mc-orange_40" text="white" bg="$mc-orange_20" v-if="userId") {{userId}}
-          HeaderLink(to="/account")
-            div(text="$mc-orange") Account settings
+          NuxtLink(to="/account")
+            div(text="$mc-orange" font="") Account settings
         HList()
           HList(b="1 $mc-orange_40" p="2" grow="~" bg="$mc-orange_20")
             div() IXT : 
