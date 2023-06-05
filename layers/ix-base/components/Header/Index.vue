@@ -5,7 +5,7 @@ VList(pos="sticky top-0" z="99" w="full" @mouseenter="isSelected = true" @mousel
       PlanetIXNew(w="42.25")
 
     HList(space-x="8" px="8" items="center" font="bold" text="lg" flex-grow="1" display="lt-md:none")
-      HeaderLink(v-for="(item, index) in siteTopHeaders" @click="OpenMeny(index)" text="red") {{ $t(`marketplace.navigation.${item.type}.title`)}}
+      HeaderLink(v-for="(item, index) in siteTopHeaders" @click="openMenu(index)" text="red") {{ $t(`marketplace.navigation.${item.type}.title`)}}
 
     HList(font="bold" space-x="6" px="0")
       HeaderLink(to="/" display="lt-md:none") help
@@ -14,14 +14,14 @@ VList(pos="sticky top-0" z="99" w="full" @mouseenter="isSelected = true" @mousel
       HeaderAccountButton(@addFunds="iFrameToggle")
     div(grow="~" display="md:none")
     SettingsIcon(v-if="activeMenuIndex == null" pos="right" w="8" display="md:none" 
-    @click="toggleMeny")
+    @click="toggleMenu")
 
 
   Transition(name="slide-top" mode="out-in" )
     HeaderItem(v-if="activeMenuIndex != null" :key="activeMenuIndex" @onClickItem="onClicked" :header="siteTopHeaders[activeMenuIndex]" display="lt-md:none")
 
   Transition(name="slide-top")
-    HeaderCategoryDropDown(v-if="activeMenuIndex != null" @swap="turnOnSwap" @ConnectWallet="toggleMeny" @close="toggleMeny" overflow-y="auto")
+    HeaderCategoryDropDown(v-if="activeMenuIndex != null" @swap="turnOnSwap" @ConnectWallet="toggleMenu" @close="toggleMenu" overflow-y="auto")
 
 
 Popup(v-if="showIFrame")
@@ -42,7 +42,7 @@ const { siteTopHeaders } = useSiteHeader()
 
 const activeMenuIndex = ref<number | null>(null)
 
-const OpenMeny = (index: number) => {
+const openMenu = (index: number) => {
   console.log("Open Menu", index);
 
   if (activeMenuIndex.value == index)
@@ -51,7 +51,7 @@ const OpenMeny = (index: number) => {
   activeMenuIndex.value = index
 }
 
-const toggleMeny = () => {
+const toggleMenu = () => {
   if (activeMenuIndex.value == null)
     return activeMenuIndex.value = 1
 
