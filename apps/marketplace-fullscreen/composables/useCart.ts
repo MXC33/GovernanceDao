@@ -6,6 +6,7 @@ import {
 import {
   conduitKey
 } from "@ix/base/composables/Contract/WalletAddresses";
+import { useIXTContract } from "@ix/base/composables/Contract/useIXTContract";
 
 export interface CartItem extends AdjustableNumber {
   token: IXToken,

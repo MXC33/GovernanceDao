@@ -1,6 +1,6 @@
 <template lang="pug">
 VList(pos="sticky top-0" z="99" w="full" @mouseenter="isSelected = true" @mouseleave="isSelected = false" ref="menuElement")
-  HList(items="center"  bg="gray-800" px="7.5" h="16")
+  HList(items="center"  bg="gray-800" px="4 md:7.5" h="16")
     NuxtLink(to="https://www.planetix.com")
       PlanetIXNew(w="42.25")
 

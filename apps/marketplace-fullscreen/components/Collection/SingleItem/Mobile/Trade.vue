@@ -41,8 +41,6 @@ import CartIcon from '~/assets/icons/cart.svg'
 import type { Sale, SingleItemData, Bid } from '@ix/base/composables/Token/useIXToken';
 import type { TableColumn } from '~/composables/useTable';
 
-// const { tabs, activeTab } = useTabList(['sell', 'buy'])
-
 const { getSingleAttributes } = useDefaulAttributes()
 const { addToCart } = useCart()
 const attributes = computed(() => getSingleAttributes(item))

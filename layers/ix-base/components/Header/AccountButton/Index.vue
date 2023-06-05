@@ -21,6 +21,7 @@ VList(pos="relative"  ref="menuElement")
     
 <script lang="ts" setup>
 import Copy from '~/assets/images/header/copy.svg'
+import { useIXTContract } from "@ix/base/composables/Contract/useIXTContract";
 const { walletAdress, walletState } = useWallet()
 const { ixtBalance, fetchIXT } = useIXTContract()
 const menuOpen = ref(false)

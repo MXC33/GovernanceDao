@@ -12,6 +12,7 @@ import { makeRandomNumberKey } from "@ix/base/composables/Utils/useHelpers";
 import { BiddingBody, useBidsAPI } from "~/composables/api/post/useBidAPI";
 import { TransactionItem } from "./useTransactions"
 import { NFTType } from "~/composables/useAssetContracts";
+import { useIXTContract } from "@ix/base/composables/Contract/useIXTContract";
 
 export interface BiddingItem extends TransactionItem {
   type: 'bid'
