@@ -20,7 +20,7 @@ const { loading: isLoading, execute: buyItems } = useContractRequest(() => check
 
 const onPurchase = (items: CartItem[]) => {
   displayPopup({
-    type: 'bidding-successful',
+    type: 'buy-items-success',
     items
   })
 
@@ -38,10 +38,9 @@ const checkout = async () => {
 
 }
 
-
 const totalPrice = computed(() =>
   roundToDecimals(cartItems.value.map((item) =>
-    item.value * (item.sale?.price ?? 0)
+    item.shares.value * item.ixtPrice
   ).reduce((a, b) => a + b, 0), 2)
 )
 </script>

@@ -7,8 +7,9 @@ import {
   conduitKey
 } from "@ix/base/composables/Contract/WalletAddresses";
 import { useIXTContract } from "@ix/base/composables/Contract/useIXTContract";
+import { TransactionItem } from "./useTransactions";
 
-export interface CartItem extends AdjustableNumber {
+export interface CartItem extends TransactionItem {
   token: IXToken,
   sale?: Sale,
   failed?: boolean
@@ -31,13 +32,17 @@ export const useCart = () => {
     cartItems.value.splice(index, 1)
   }
 
-  const addToCart = (token: IXToken, sale?: Sale) => {
+  const addToCart = (token: IXToken, sale: Sale) => {
     cartItems.value.push({
+      type: 'bid',
       token,
       sale,
-      min: 1,
-      max: sale?.quantity,
-      value: 1
+      ixtPrice: sale.price,
+      shares: {
+        min: 1,
+        max: sale.quantity,
+        value: 1
+      }
     })
 
     displaySnack('add-to-cart')
@@ -55,7 +60,7 @@ export const useCart = () => {
     await allowanceCheck(totalPrice)
 
     const buyOrders = cartItems.map((item) =>
-      item.sale && createBuyOrder(item.sale, item.value, false)
+      item.sale && createBuyOrder(item.sale, item.shares.value, false)
     ).filter(isAdvancedOrder).flat()
 
     const { considerations, offers } = generateConsiderations(buyOrders)

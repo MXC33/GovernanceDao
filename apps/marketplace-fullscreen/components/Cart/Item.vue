@@ -18,7 +18,7 @@ VList(:bg="item.failed ? 'red-950' : 'gray-800'" v-if="item")
         button(@click="removeFromCart(item)")
           TrashIcon(w="6")
 
-      Adjustable(v-model="item" h="10")
+      Adjustable(v-model="item.shares" h="10")
     
 </template>
 

@@ -21,10 +21,10 @@ Popup()
 
 <script lang="ts" setup>
 import CheckboxIcon from '~/assets/icons/checkmark-green.svg'
-import type { BiddingItem } from '~/composables/useBidding';
+import type { TransferItem } from '~/composables/useTransfer';
 const { closeActivePopup } = usePopups()
 const { items } = defineProps<{
-  items: BiddingItem[]
+  items: TransferItem[]
 }>()
 
 const mappedTokens = computed(() => items.map((item) => item.token))

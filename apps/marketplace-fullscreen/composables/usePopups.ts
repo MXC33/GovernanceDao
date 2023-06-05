@@ -14,14 +14,9 @@ export interface PopupOnList extends PopupBase {
   items: ListingItem[]
 }
 
-export interface PopupOnBidding extends PopupBase {
-  type: 'bidding2-successful',
-  items: BiddingItem[]
-}
-
 export interface PopupOnBid extends PopupBase {
   type: 'bidding-successful',
-  items: CartItem[]
+  items: TransferItem[]
 }
 
 export interface PopupTransfer extends PopupBase {

@@ -205,7 +205,7 @@ export const useSeaportContract = <T extends ContractInterface<T> & SeaportContr
           if (!item.sale)
             return
           const message = getOrderMessage(item.sale)
-          const buyOrder = createBuyOrder(item.sale, item.value, false)
+          const buyOrder = createBuyOrder(item.sale, item.shares.value, false)
 
           if (!isAdvancedOrder(buyOrder) || !message)
             return
