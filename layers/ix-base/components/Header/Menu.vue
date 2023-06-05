@@ -7,7 +7,7 @@ div(pos="fixed right-0 top-0 bottom-0" overflow-y="auto" bg="black" p="5" w="80 
     div(color="white opacity-50") {{$t(`layouts.headers.accountBalance`)}}
     div(bg="warm-gray-900" rounded="10" b="1 white opacity-50" p="3")
       span(color="white opacity-50") {{$t(`layouts.headers.ixt`)}} 
-      span(color="mc-mint") {{ Math.round(ixtBalance * 100) / 100 }}
+      span(color="mc-mint") {{ Math.round((ixtBalance ?? 0) * 100) / 100 }}
 
   HeaderButton(@click="gotoMCPage('/terminal')") {{$t(`layouts.headers.terminal`)}}
   HeaderButton(@click="gotoMCPage('/')") {{$t(`layouts.headers.inventory`)}}
@@ -24,7 +24,7 @@ div(pos="fixed right-0 top-0 bottom-0" overflow-y="auto" bg="black" p="5" w="80 
 
 <script lang="ts" setup>
 
-const { ixtBalance } = useUserData()
+const { ixtBalance, fetchIXT } = useIXTContract()
 const menuOpen = ref(false)
 const router = useRouter()
 const { gotoIXPage } = useIXLinks()

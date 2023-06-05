@@ -41,6 +41,7 @@ export const useBiddingItems = () => {
 }
 
 export const useBiddingContract = () => {
+  const { ixtBalance, fetchIXT } = useIXTContract()
 
   const createBidMessage = async (item: BiddingItem, endTime: number) => {
 
@@ -53,11 +54,7 @@ export const useBiddingContract = () => {
 
     const totalPrice = ixtPrice * shares.value
 
-    const { ixtBalance } = getIXTokenContract()
-    const { data: ixt, refresh: fetchIXT } = ixtBalance()
-    await fetchIXT()
-
-    if (!ixt.value || ixt.value < totalPrice) {
+    if (!ixtBalance.value || ixtBalance.value < totalPrice) {
       /*
         Todo
         Your balance is insufficient!
@@ -65,7 +62,7 @@ export const useBiddingContract = () => {
       throw new Error("Your balance is insufficient!")
     }
 
-    const { allowanceCheck } = getIXTokenContract()
+    const { allowanceCheck } = useIXTContract()
     if (!await allowanceCheck(totalPrice)) {
       /*
         Todo

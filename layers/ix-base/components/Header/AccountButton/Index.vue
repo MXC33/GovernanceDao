@@ -4,7 +4,7 @@ VList(pos="relative"  ref="menuElement")
   Transition(name="fade" appear v-if="walletState == 'connected'")
     HList(h="48px" w="166px" b="1 $mc-mint" color="$mc-mint" bg="$mc-mint-20" px="8"  display="lt-md:none" @click="toggleMenu" items="center") 
       div(grow="~") 
-      div() {{ Math.round(ixtBalance * 100) / 100 }} IXT
+      div() {{ Math.round(ixtBalance ?? 0 * 100) / 100 }} IXT
       div(grow="~") 
   VList(v-if="menuOpen" pos="absolute top-full left-0 right-0" b="1 gray-400" items="left" z="99") 
     HeaderLink(to="")
@@ -22,12 +22,13 @@ VList(pos="relative"  ref="menuElement")
 <script lang="ts" setup>
 import Copy from '~/assets/images/header/copy.svg'
 const { walletAdress, walletState } = useWallet()
-const { ixtBalance } = useUserData()
+const { ixtBalance, fetchIXT } = useIXTContract()
 const menuOpen = ref(false)
 const menuElement = ref()
-const currentAddress = walletAdress.value
-
+const currentAdress = walletAdress.value
 const emit = defineEmits(["addFunds"])
+
+await fetchIXT()
 
 const addFunds = () => {
   emit('addFunds')
@@ -40,9 +41,9 @@ const toggleMenu = () => {
 const copyAddressToClipboard = async () => {
 
   try {
-    if (!currentAddress)
+    if (!currentAdress)
       return
-    await navigator.clipboard.writeText(currentAddress.toString())
+    await navigator.clipboard.writeText(currentAdress.toString())
   } catch (error) {
     console.error('Failed to copy Adress to clipboard:', error)
   }
@@ -53,11 +54,11 @@ onClickOutside(menuElement, () => {
 })
 
 const formatAdress = computed(() => {
-  if (!currentAddress) {
+  if (!currentAdress) {
     return;
   }
-  const firstFour = currentAddress.slice(0, 4);
-  const lastFour = currentAddress.slice(-4);
+  const firstFour = currentAdress.slice(0, 4);
+  const lastFour = currentAdress.slice(-4);
   return `${firstFour}...${lastFour}`;
 })
 
