@@ -7,7 +7,7 @@ VList(pos="sticky top-0" z="99" w="full" @mouseenter="isSelected = true" @mousel
     HList(space-x="8" px="8" items="center" font="bold" text="lg" flex-grow="1" display="lt-md:none")
       HeaderLink(v-for="(item, index) in siteTopHeaders" @click="OpenMeny(index)" text="red") {{ $t(`marketplace.navigation.${item.type}.title`)}}
 
-    HList(font="bold" space-x="6")
+    HList(font="bold" space-x="6" px="0")
       HeaderLink(to="/" display="lt-md:none") help
       HeaderLink(to="/" display="lt-md:none")
         HelperLanguage(language="EN")
