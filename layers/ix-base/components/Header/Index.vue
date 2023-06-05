@@ -25,6 +25,7 @@ VList(pos="sticky top-0" z="99" w="full" @mouseenter="isSelected = true" @mousel
     div(v-if="activeMenuIndex != null" display="md:none")
       HeaderCategoryDropDownAccount(@swap="turnOnSwap")
       HeaderCategoryDropDown()
+      HeaderButtonDisconnect()
 
 Popup(v-if="showIFrame")
   template(#header) Swap
