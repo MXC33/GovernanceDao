@@ -76,7 +76,9 @@ export default definePreset({
       'offscreen': 'pos-absolute pos-left--999 opacity-0 h-0',
       'modal': 'bg-mc-orange blur-10',
       'pos-absolute-center': 'pos-absolute pos-left-50% pos-top-50% translate-x--50% translate-y--50%',
-      'disable-active': 'pointer-events-none opacity-20 cursor-default'
+      'disable-active': 'pointer-events-none opacity-20 cursor-default',
+      'flex-fold-row': 'flex-s-md:lt-md:flex-row s-lg:lt-md:flex-row',
+      'flex-fold-col': 's-md:lt-md:flex-col s-lg:lt-md:flex-col',
     },
 
     {
