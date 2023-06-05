@@ -5,7 +5,7 @@ div(bg="black")
     NuxtLink(v-if="walletState !== 'connected'" bg="$mc-orange_20" h="48px" b="1 $mc-orange" color="$mc-orange" px="8" to="/connect" grow="~") 
       div(text="center lg" p="2" font="bold") Connect Wallet 
     HList(v-else grow="~")
-      Icon(w="20" p="3" b="1 $mc-orange_40" bg="$mc-orange_20" )
+      Icon(w="25" p="3" b="1 $mc-orange_40" bg="$mc-orange_20")
       VList(opacity="100%" grow="~")
         div(p="2" b="1 $mc-orange_40" text="white" bg="$mc-orange_20" v-if="userId") {{userId}}
           NuxtLink(to="/account")
