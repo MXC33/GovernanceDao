@@ -3,11 +3,6 @@ import { AdjustableNumber } from "@ix/base/composables/Utils/useAdjustableNumber
 import {
   get1155Contract,
   get721Contract,
-<<<<<<< Updated upstream
-  getIXTokenContract,
-  useSeaportContract,
-=======
->>>>>>> Stashed changes
   NFTType
 } from "~/composables/useAssetContracts";
 import { conduitKey } from "@ix/base/composables/Contract/WalletAddresses";
@@ -174,10 +169,6 @@ export const useOfferContract = () => {
       throw new Error("Allowance didn't work")
     }
 
-<<<<<<< Updated upstream
-    const { fulfillAvailableAdvancedOrders } = useSeaportContract()
-=======
->>>>>>> Stashed changes
 
     let BuyOrderComponents: AdvancedOrder[] = []
     let offers = []
