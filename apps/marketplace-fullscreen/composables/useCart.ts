@@ -1,6 +1,10 @@
 import { IXToken, Sale } from "@ix/base/composables/Token/useIXToken"
 import { AdjustableNumber } from "@ix/base/composables/Utils/useAdjustableNumber"
+<<<<<<< Updated upstream
 import { getIXTokenContract, useSeaportContract } from "~/composables/useAssetContracts";
+=======
+import { get1155Contract, useSeaportContract } from "~/composables/useAssetContracts";
+>>>>>>> Stashed changes
 import {
 } from "@ix/base/composables/Token/useIXToken"
 import {
@@ -44,11 +48,19 @@ export const useCart = () => {
     cartItems.value = []
   }
 
+<<<<<<< Updated upstream
   const checkoutItems = async (cartItems: CartItem[], totalPrice: number) => {
     const { allowanceCheck } = getIXTokenContract()
     const { fulfillAvailableAdvancedOrders } = useSeaportContract()
     const { generateConsiderations, createBuyOrder, isAdvancedOrder } = useBuyHelpers()
 
+=======
+  const checkoutItems = async (carItems: CartItem[], totalPrice: number) => {
+    //Todo Start loading overlay
+    console.log('start Loading overlay')
+    const { allowanceCheck } = useIXTContract()
+    const { fulfillAvailableAdvancedOrders } = useSeaportContract()
+>>>>>>> Stashed changes
     await allowanceCheck(totalPrice)
 
     const buyOrders = cartItems.map((item) =>

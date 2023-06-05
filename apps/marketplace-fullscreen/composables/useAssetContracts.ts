@@ -21,7 +21,6 @@ import {
 } from '@ix/base/composables/Contract/WalletAddresses'
 import ERC1155ABI from '@ix/base/composables/Contract/Abis/ERC1155.json'
 import ERC721ABI from '@ix/base/composables/Contract/Abis/ERC1155.json'
-import IXToken from '@ix/base/composables/Contract/Abis/IXToken.json'
 import Seaport from '@ix/base/composables/Contract/Abis/Seaport.json'
 
 
@@ -29,7 +28,6 @@ import { ContractContext as ERC1155Contract } from '@ix/base/composables/Contrac
 
 import { ContractContext as ERC721Contract } from '@ix/base/composables/Contract/Abis/ERC721'
 
-import { ContractContext as IXTokenContract } from '@ix/base/composables/Contract/Abis/IXToken'
 
 import { ContractContext as SeaportContract } from '@ix/base/composables/Contract/Abis/Seaport'
 
@@ -176,6 +174,7 @@ export const get721Contract = <T extends ContractInterface<T> & ERC721Contract>(
   }
 }
 
+<<<<<<< Updated upstream
 export const getIXTokenContract = <T extends ContractInterface<T> & IXTokenContract>() => {
 
   const spenderAddress = conduitAdress.polygon as string
@@ -253,6 +252,8 @@ export const getIXTokenContract = <T extends ContractInterface<T> & IXTokenContr
   }
 }
 
+=======
+>>>>>>> Stashed changes
 export interface ConsiderationItem {
   recipient: string
 }
