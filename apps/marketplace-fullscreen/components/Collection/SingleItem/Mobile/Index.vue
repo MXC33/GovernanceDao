@@ -54,6 +54,7 @@ VList(space-y="4")
 import CartIcon from '~/assets/icons/cart.svg'
 import type { Sale, SingleItemData, Bid } from '@ix/base/composables/Token/useIXToken';
 import type { TableColumn } from '~/composables/useTable';
+import TrashIcon from '~/assets/icons/trash.svg'
 
 const { getSingleAttributes } = useDefaulAttributes()
 const { addToCart } = useCart()

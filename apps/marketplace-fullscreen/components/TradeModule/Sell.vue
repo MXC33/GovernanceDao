@@ -1,59 +1,29 @@
 <template lang="pug">
-VList()
-  HList(px="4 md:6" py="0 md:8" p="t-6 b-4" space-y="2" items="start")
-    div(grow="1" w="full")
-      span(color="gray-200" v-if="shares.value > 1" text="lt-md:xs") Total offer amount
-      span(color="gray-200" v-else text="lt-md:xs") Highest offer
-      template(v-if="!isSubstituteOffering")
-        HList(items="center md:end" space-x="3")
-          template(v-if="!isDisabled")
-            span(color="white" font="bold" text="lg md:4xl") {{totalOffer}} IXT
-            HList(translate-y="0.3")
-              span(color="gray-200" font="bold" text="sm md:lg") ${{ ixtToUSD(totalOffer) }}
-          template(v-else)
-            span(color="white" font="bold" text="lg md:4xl") -- IXT
-            HList(translate-y="0.3")
-              span(color="gray-200" font="bold" text="sm md:lg") $ --
+VList(space-y="6")
+  TradeModuleHeader(v-model="shares" :ixt="isSubstituteOffering ? totalMinOffer : totalOffer" :disabled="isDisabled")
+    template(#title v-if="shares.value > 1") Total offer amount
+    template(#title v-else) Highest Offer
+    template(#adjust v-if="item.nft_type === NFTType.ERC1155")
+      TradeModuleHeaderAdjust(v-model="shares")
+        template(#error v-if="showDecreaseMinPrice") Try decreasing your lowest offer per unit to accept more items
 
-      template(v-else)
-        HList(items="end" space-x="3")
-          span(color="white" font="bold" text="lg md:4xl") {{totalMinOffer}} IXT
-          span(color="gray-200" font="bold" text="sm md:lg") ${{ ixtToUSD(totalMinOffer) }}
+  TradeModuleAverage(v-if="shares.value > 1")
+    template(#title) Avg. offer per unit
+    template(#ixt) {{averageOfferPerItem}} IXT
+    template(#percentage) {{belowHighestOffer}}% below highest offer
 
-      div(v-if="shares.value > 1" p="t-2")
-        span(color="gray-200" m="t-10" text="lt-md:xs") Avg. offer per unit
-        HList(items="end" space-x="3" text="lt-md:xs")
-          span(color="white" font="bold") {{averageOfferPerItem}} IXT
-          span(color="yellow-200") {{belowHighestOffer}}% below highest offer
-
-    //- SAVE BELOW FOR FUTURE NEED
-    //- HList(px="6" py="3.5" b="t-1 b-1 gray-600" space-x="3" items="center")
-    //- InputCheckbox(v-model="maxPrice")
-    //-   span(color="gray-200") Max price per listing
-
-    VList(justify="end" space-y="3" v-if="item.nft_type === NFTType.ERC1155" display="lt-md:none")
-      Adjustable(v-model="shares" h="full" :is-neutral="true")
-      span(color="yellow-200" v-if="showDecreaseMinPrice") Try decreasing your lowest offer per unit to accept more items
-
-  VList(px="4" p="b-6" space-y="3" v-if="item.nft_type === NFTType.ERC1155" display="md:none")
-    Adjustable(v-model="shares" h="full" :is-neutral="true")
-    span(color="yellow-200" v-if="showDecreaseMinPrice") Try decreasing your lowest offer per unit to accept more items
-
-  HList(px="4 md:6" py="4" b="t-1 b-1 gray-600" space-x="3" items="center" justify="between" w="full")
-    div(flex="~ col md:row" space-y="4 md:0" w="full" whitespace="nowrap")
-      InputCheckbox(v-model="isSubstituteOffering")
-        span(color="gray-200") Substitute offers
-
-      div(flex="~ col md:row" items="center" w="full" v-if="isSubstituteOffering" space-x="0 md:4")
-        HList(color="white" w="full" justify="start md:end")
-          span(color="white") Lowest offer per unit
-        InputText(v-model="minOffer" :class="{highlighted: showDecreaseMinPrice}")
-          template(#suffix) IXT
+  TradeModuleSubstitute(v-model="isSubstituteOffering")
+    template(#title) Substitute offers
+    template(#substituteTitle) Lowest offer per unit
+    template(#substituteInput) 
+      InputText(v-model="minOffer" :class="{highlighted: showDecreaseMinPrice}")
+        template(#suffix) IXT
 
   div(grid="~ cols-2" text="xs md:base")
     ButtonInteractive(btn="~ secondary" font="bold" @click="onClickSell" text="List item")
 
     ButtonInteractive(btn="~ primary " font="bold" @click="acceptItems" v-if="!isDisabled" :text="`Accept ${shares?.value} offer`" :loading="isAcceptLoading")
+
     ButtonInteractive(btn="~ primary" bg="on-disabled:gray-700" color="on-disabled:gray-400" cursor="default" font="bold" :disabled="isDisabled" text="You have no offers" v-else)
 
 </template>
