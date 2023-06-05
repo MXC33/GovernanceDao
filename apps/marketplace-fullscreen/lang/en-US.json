@@ -82,7 +82,8 @@
     "week": "week | weeks"
   },
   "popupNotification": {
-    "copy-link": "Link copied to clipboard"
+    "copy-link": "Link copied to clipboard",
+    "transaction-rejected": "User rejected transaction"
   },
   "tooltips": {
     "link": "Copy Link to Clipboard",
