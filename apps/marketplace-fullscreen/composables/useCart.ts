@@ -17,6 +17,7 @@ export interface CartItem extends AdjustableNumber {
 export const useCart = () => {
   const cartItems = useState<CartItem[]>('cart-items', () => [])
   const viewingCart = useState('cart-visible', () => false)
+  const { generateConsiderations, createBuyOrder, isAdvancedOrder } = useBuyHelpers()
 
   const removeFromCart = (cartItem: CartItem) => {
 
@@ -44,7 +45,7 @@ export const useCart = () => {
     cartItems.value = []
   }
 
-  const checkoutItems = async (carItems: CartItem[], totalPrice: number) => {
+  const checkoutItems = async (cartItems: CartItem[], totalPrice: number) => {
     //Todo Start loading overlay
     console.log('start Loading overlay')
     const { allowanceCheck } = useIXTContract()
