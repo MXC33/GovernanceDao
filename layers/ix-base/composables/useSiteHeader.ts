@@ -32,12 +32,12 @@ export const buyIXTHeaderItems: HeaderCategory[] = [
   },
   {
     type: 'bridge',
-    items: ['polygon']
+    items: ['polygon', "ethereum"]
   },
-  {
-    type: 'supply',
-    items: ['usdt', 'matic']
-  },
+  // {
+  //   type: 'supply',
+  //   items: ['usdt', 'matic']
+  // },
   {
     type: 'lend',
     items: ['capital']

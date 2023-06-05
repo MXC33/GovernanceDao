@@ -216,7 +216,12 @@
           "title": "Bridge",
           "polygon": {
             "title": "Polygon",
-            "description": "Bridge tokens to Polygon blockchain.",
+            "description": "COMING SOON",
+            "link": ""
+          },
+          "ethereum" : {
+            "title": "Ethereum",
+            "description": "COMING SOON",
             "link": ""
           }
         },
