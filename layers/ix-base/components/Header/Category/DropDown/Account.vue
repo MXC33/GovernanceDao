@@ -13,7 +13,7 @@ div(bg="black")
         HList()
           HList(b="1 $mc-orange_40" p="2" grow="~" bg="$mc-orange_20")
             div() IXT : 
-            div(text="green") {{ Math.round((ixtBalance ?? 0) * 100) / 100 }}
+            div(text="$mc-mint") {{ Math.round((ixtBalance ?? 0) * 100) / 100 }}
           PlusIcon(b="1 $mc-orange_60" fill="white" h="10" p="3" cut="bottom-right" bg="$mc-orange_40" @click="$emit('swap')")  
     //-div(grow="~")
 </template>
