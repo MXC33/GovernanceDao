@@ -1,5 +1,5 @@
 <template lang="pug">
-VList(display="md:none" pos="fixed" inset="0" bg="black" overflow-y="auto")
+VList(display="md:none" pos="fixed" inset="0" bg="black" overflow-y="auto" m="!l-0")
   HList(items="center"  bg="gray-800" px="4 md:7.5" h="16")
     NuxtLink(to="https://www.planetix.com")
       PlanetIXNew(w="42.25")  
