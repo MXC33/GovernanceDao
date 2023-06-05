@@ -53,6 +53,9 @@ export const useBiddingContract = () => {
     */
     console.log('start Loading overlay')
 
+    if (!ixtPrice)
+      throw new Error("Could not get IXT price")
+
     const totalPrice = ixtPrice * shares.value
 
     if (!ixtBalance.value || ixtBalance.value < totalPrice) {
