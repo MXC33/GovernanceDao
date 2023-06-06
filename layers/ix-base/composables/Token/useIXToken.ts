@@ -38,6 +38,7 @@ export interface IXToken {
   bid: Bid
   lowest_sale: LowestSale
   sales: Sale[]
+  updating?: boolean
 }
 
 export interface SingleItemData extends IXToken {
