@@ -1,16 +1,16 @@
 <template lang="pug">
 #app.antialiased(font="foundry" bg="ix-black" color="white" text="lt-md:sm" ref="app" overscroll="none" flex="~ col grow")
   NuxtLayout()
-    NuxtLoadingIndicator(color="rgb(255, 102, 71)")
+    VList()
+      NuxtLoadingIndicator(color="rgb(255, 102, 71)")
 
-    NuxtPage()
+      NuxtPage()
 
-    PopupList()
+      PopupList()
 
-    div#infobox(:style="values" z="400" pos="absolute")
+      div#infobox(:style="values" z="400" pos="absolute")
 
-    Transition(name="fade-slow" mode="in-out")
-      HelperNotification(v-if="activeNotification" :type="activeNotification")
+      SnackbarList()
 
 </template>
 
@@ -18,22 +18,21 @@
 import 'vue3-easy-data-table/dist/style.css';
 
 const globalY = useGlobalWindowScroll()
+
 const { y } = useWindowScroll()
 const { connectWallet, walletState } = useWallet()
 const { setupIXTPrice, ixtPrice } = useIXTPrice()
-const { activeNotification } = useSnackNotifications()
 
 const { setRefreshToken } = useLogin()
 const { user } = useUser()
 
-
 watch(y, (pos) => globalY.value = pos)
-
-setupIXTPrice()
 
 onMounted(async () => {
   //@ts-ignore
   const isPaintSupported = !!CSS.paintWorklet
+
+  setupIXTPrice()
 
   if (isPaintSupported) {
     //@ts-ignore

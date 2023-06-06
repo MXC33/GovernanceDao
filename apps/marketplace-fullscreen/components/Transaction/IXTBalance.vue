@@ -11,6 +11,7 @@ VList()
 </template>
 
 <script lang="ts" setup>
+import { useIXTContract } from "@ix/base/composables/Contract/useIXTContract";
 const { ixtToUSD } = useIXTPrice()
 const { ixtBalance, fetchIXT } = useIXTContract()
 

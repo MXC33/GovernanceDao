@@ -1,43 +1,32 @@
 <template lang="pug">
-VList(v-for="header in siteTopHeaders" grid="~ cols-2")
-  CollectionFilterDrawer(bg="black")
-    template(#header) 
-      div() {{ $t(`marketplace.navigation.${header.type}.title`)}}
-    template(#default) 
-      //- HeaderCategory(
-      //-   v-for="category in header.categories" grow="" items="center"
-      //-   :category="category" :parent-type="header.type")
+VList(display="md:none" pos="fixed" inset="0" bg="black" overflow-y="auto" m="!l-0")
+  HList(items="center"  bg="gray-800" px="4 md:7.5" h="16" space-x="3" justify="between")
+    NuxtLink(to="https://www.planetix.com")
+      PlanetIXNew(w="42.25")
 
-      //- HeaderCategoryDropDownGrid(v-for="category in getAllSmallCatagories(header)" :category="category" :parentType="header.type" grid="~ cols-2")
+    HList(space-x="4")
+      HelperLanguage(language="EN" font="bold")
+      CrossIcon(pos="right" w="8" display="md:none" @click="$emit('close')")
 
-      HeaderCategoryDropDownLargeGroup(v-for="category in getAllLargeCatagories(header)" :category="category" :parentType="header.type")
-
-      HeaderCategoryDropDownSmallGroup(:headerItem="header")
+  HeaderCategoryDropDownAccount(@swap="Swap" @ConnectWallet="ConnectWallet")
+  HeaderCategoryDropDownGrid()
+  HeaderButtonDisconnect(@disconnect="$emit('disconnect')" pos="sticky bottom-0" z="1")
 
 </template>
 
 <script lang="ts" setup>
+import CrossIcon from '~/assets/images/header/cross.svg'
+import PlanetIXNew from '~/assets/images/header/planetix-new.svg'
+const emit = defineEmits(['swap', 'ConnectWallet', 'close'])
 
-import type { HeaderItem, HeaderCategory } from '~/composables/useSiteHeader';
-const { siteTopHeaders } = useSiteHeader()
-const { t } = useI18n()
-
-const getAllLargeCatagories = (header: HeaderItem) => {
-  var largeCatagories = []
-  for(var i = 0; i < header.categories.length; i++){
-    const topHeader = header.categories[i]
-    const items = topHeader.items;
-    const length = items.length;
-    //console.log("items length",length)
-    if(length > 1){
-      largeCatagories.push(topHeader)
-    }
-  }
-  //console.log(header.type ,"length", largeCatagories.length)
-  return largeCatagories
+const ConnectWallet = () => {
+  console.log("index Connect Wallet");
+  emit('ConnectWallet')
 }
 
-// const props = defineProps<{
-//   headers: HeaderItem[]
-// }>()
+const Swap = () => {
+  console.log("index Swap");
+  emit('swap')
+}
+
 </script>

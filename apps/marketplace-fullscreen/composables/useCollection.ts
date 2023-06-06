@@ -1,5 +1,5 @@
 import { IXToken } from "@ix/base/composables/Token/useIXToken"
-import {NFTType} from "~/composables/useAssetContracts";
+import { NFTType } from "~/composables/useAssetContracts";
 
 export interface FilterPayload {
   value: string
@@ -73,6 +73,25 @@ export interface CollectionData {
 }
 
 export type CollectionDisplayType = 'list' | 'grid'
+
+export const collectionName = (collectionAddress: string) => {
+
+  switch (collectionAddress.toLowerCase()) {
+    case assetsAddress.polygon?.toLowerCase():
+      return 'Pix Assets'
+    case landmarkAddress.polygon?.toLowerCase():
+      return 'Landmarks'
+    case gravityGradeAddress.polygon?.toLowerCase():
+      return 'Gravity Grade'
+    case avatarNFTAddress.polygon?.toLowerCase():
+      return 'Avatars'
+    case badgeNFTAddress.polygon?.toLowerCase():
+      return 'AOC Badges'
+    case roverAddress.polygon?.toLowerCase():
+      return 'Rovers'
+
+  }
+}
 
 export const useCollectionSettings = () => {
   const activeFilters = useState<Filter[]>('activeFilters', () => ([]))

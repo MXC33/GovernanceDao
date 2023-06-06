@@ -1,7 +1,7 @@
 import { Ref } from 'vue'
 import { TokenIdentifier } from '../Token/useTokens'
 import { CorporationAdjustableToken } from '../useCorporations'
-
+import { get } from '@vueuse/core'
 export interface AdjustableNumber {
   multiplier?: number,
   skipMultiplierSnap?: boolean
@@ -57,7 +57,7 @@ export const useAdjustableNumber = (data: Ref<AdjustableNumber | AdjustableToken
   const { balanceOfToken } = useUserData()
 
   const max = computed(() => {
-    const staticMax = data.value.max ?? Infinity
+    const staticMax = get(data.value.max ?? Infinity)
 
     const model = data.value as AdjustableToken
     if (model.fromUser) {

@@ -1,25 +1,41 @@
 <template lang="pug">
-div(bg="black")
+VList(bg="ix-black" b="b-1 gray-600")
   HList(p="6")
-    div(grow="~")
-    HList()
-      Icon(w="20" p="3" b="1 $mc-orange_40" bg="$mc-orange_20")
-      VList(opacity="100%")
-        div(p="2" b="1 $mc-orange_40" text="white" bg="$mc-orange_20" v-if="userId") {{userId}}
-          div(text="$mc-orange") Account settings
+    NuxtLink(v-if="walletState !== 'connected'" bg="$mc-orange_20" h="48px" b="1 $mc-orange" color="$mc-orange" px="8" to="/connect" grow="~") 
+      div(text="center lg" p="2" font="bold" @click="ConnectWallet") Connect Wallet
+
+    HList(v-else flex-grow="1" cut="bottom-right sm b-ix-orange opacity-60")
+      Icon(w="25" p="3" bg="$mc-orange_20")
+
+      VList(flex-grow="1")
+        div(p="2" b="l-1 b-1 $mc-orange_40" text="white" bg="$mc-orange_20" v-if="userId") {{userId}}
+          NuxtLink(to="/account")
+            div(text="$mc-orange" font="") My Assets
+
         HList()
-          HList(b="1 $mc-orange_40" p="2" grow="~" bg="$mc-orange_20")
-            div() IXT : 
-            div(text="green") {{ Math.round((ixtBalance ?? 0) * 100) / 100 }}
-          div(b="1 $mc-orange_60" p="1" cut="bottom-right" bg="$mc-orange_40") +  
-    div(grow="~")
+          HList(b="l-1 r-1 $mc-orange_40" p="2" grow="~" bg="$mc-orange_20" space-x="1")
+            div() IXT: 
+            div(text="$mc-mint") {{ Math.round((ixtBalance ?? 0) * 100) / 100 }}
+          HList(bg="$mc-orange_20" p="l-3 r-3")
+            PlusIcon(fill="white" w="3" @click="$emit('swap')")  
 </template>
 
 <script lang="ts" setup>
 import FallbackVue from '~/components/Fallback.vue';
-const { ixtBalance } = useUserData()
+const { walletState } = useWallet()
+const { ixtBalance, fetchIXT } = useIXTContract()
 const { user } = useUser()
+
+await fetchIXT()
+
+const emit = defineEmits(['swap', 'ConnectWallet'])
+
+const ConnectWallet = () => {
+  emit('ConnectWallet')
+  console.log("ConnectWallet")
+}
 
 const userId = computed(() => user.value?.username || null)
 const Icon = await import(`../../../../assets/images/header/dropdown/badges/aocbadge.svg`).catch(() => FallbackVue)
+const PlusIcon = await import(`../../../../assets/images/icons/plus.svg`).catch(() => FallbackVue)
 </script>

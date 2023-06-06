@@ -1,25 +1,57 @@
 
 
-export type SnackNotificationType = 'copy-link' | 'add-to-cart' | 'remove-from-cart' | 'add-favorite' | 'remove-favorite' | 'transfer' | 'purchase-confirmed' | 'insufficient-funds' | 'transaction-error' | 'success'
+export type SnackNotificationId = 'copy-link' | 'add-to-cart' | 'remove-from-cart' | 'add-favorite' | 'remove-favorite' | 'transfer' | 'insufficient-funds' | 'transaction-rejected' | 'success'
+
+export type SnackNotificationType = 'success' | 'error' | 'warning' | 'purchase' | 'purchase-warning' | 'favorite'
+
+export interface SnackNotification {
+  id: SnackNotificationId,
+  timeout: number
+}
 
 export const useSnackNotifications = () => {
-  const activeNotification = useState<SnackNotificationType | null>('active-notification', () => null)
+  const snackNotifications = useState<SnackNotification[]>('active-notification', () => [])
 
-  const displayNotification = (type: SnackNotificationType) => {
-    activeNotification.value = type
-    resetNotificationTimeout()
+  const displaySnack = (id: SnackNotificationId) => {
+    const timeout = addNotificationTimeout()
+    snackNotifications.value.push({ id, timeout })
   }
 
-  const resetNotificationTimeout = (timeout: number = 5000) => {
-    setTimeout(() => {
-      activeNotification.value = null
-    }, 5000);
-  };
+  const closeNotification = (notification: SnackNotification) => {
+    clearTimeout(notification.timeout)
+    popLatestNotification()
+  }
+
+  const getSnackType = ({ id }: SnackNotification): SnackNotificationType => {
+    switch (id) {
+      case 'transaction-rejected':
+        return 'error'
+
+      case 'insufficient-funds':
+        return 'purchase-warning'
+
+      case 'add-favorite':
+      case 'remove-favorite':
+        return 'favorite'
+
+      default:
+        return 'success'
+    }
+  }
+
+  const popLatestNotification = () =>
+    snackNotifications.value.shift()
+
+  const addNotificationTimeout = (timeout: number = 5000) =>
+    Number(setTimeout(() => {
+      popLatestNotification()
+    }, 5000))
 
   return {
-    activeNotification,
-    displayNotification,
-    resetNotificationTimeout,
+    snackNotifications,
+    getSnackType,
+    displaySnack,
+    closeNotification,
   };
 };
 

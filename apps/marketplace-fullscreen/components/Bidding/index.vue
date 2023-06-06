@@ -42,7 +42,7 @@ const onClickBid = async () => {
     await bidItem(bidItems.value[0])
 
     displayPopup({
-      type: 'bidding2-successful',
+      type: 'bidding-successful',
       items: bidItems.value
     })
   } catch (err) {

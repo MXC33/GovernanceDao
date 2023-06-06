@@ -3,8 +3,8 @@ Collection(:data="data" :columns="columns" :context="'incoming-bids'" v-if="data
   template(#menu)
     AccountMenu()
 </template>
-    
-    
+
+
 <script lang="ts" setup>
 import type { TableColumn } from "~/composables/useTable";
 import type { IXToken } from "@ix/base/composables/Token/useIXToken";
@@ -30,10 +30,11 @@ const columns: TableColumn<IXToken>[] = [
     label: "USD price", rowKey: "bid.price", type: 'usd', sortable: true
   },
   {
-    label: "Floor Difference", rowKey: "floor", getValue(row) {
-      if (row.lowest_sale?.price)
-        return (row.higher_bid_price - row.lowest_sale.price).toString().substring(0, 5)
-      return row.higher_bid_price.toString()
+    label: "Floor Difference", rowKey: "price", getValue(row) {
+      const difference = roundToDecimals(
+        ((row.higher_bid_price * 100) / row.sale_price) - 100
+        , 2)
+      return Math.abs(difference)+ '% ' + (difference < 0 ? 'below' : 'above')
     }, type: 'text'
   },
   {
@@ -66,7 +67,12 @@ const counterBidOnClick = (token: IXToken) => {
   console.log(data.value?.nfts)
 }
 
+const { displayPopup } = usePopups()
+
 const acceptBidOnClick = (token: IXToken) => {
-  console.log("Accept", token)
+  displayPopup({
+    type: 'accept-item',
+    item: token
+  })
 }
 </script>
