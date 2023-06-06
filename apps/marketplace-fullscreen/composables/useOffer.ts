@@ -8,10 +8,40 @@ import {
   NFTType
 } from "~/composables/useAssetContracts";
 import { conduitKey } from "@ix/base/composables/Contract/WalletAddresses";
+import {TransactionItem} from "~/composables/useTransactions";
+import {BiddingItem} from "~/composables/useBidding";
 
 export interface OfferItem {
   token: IXToken,
   bids?: Bid[]
+}
+
+export interface AcceptingItem extends TransactionItem {
+  type: 'accept',
+  bid: Bid
+}
+
+export const useAcceptingItem = () => {
+  const acceptingItem = useState<AcceptingItem>('accepting-item')
+
+  const createAcceptingItem = (token: IXToken) => {
+    acceptingItem.value = {
+      type: 'accept',
+      token,
+      shares: {
+        min: 1,
+        value: 1,
+        max: token.my_shares > token.bid.quantity ? token.bid.quantity : token.my_shares
+      },
+      bid: token.bid,
+      ixtPrice: token.bid.price
+    }
+  }
+
+  return {
+    createAcceptingItem,
+    acceptingItem
+  }
 }
 
 export const useOfferItems = (item: SingleItemData) => {
@@ -136,13 +166,13 @@ export const useOfferItems = (item: SingleItemData) => {
 }
 
 export const useOfferContract = () => {
-  const acceptOffer = async (offerItem: OfferItem, quantity: number) => {
+  const acceptOffer = async (item: AcceptingItem) => {
     //Todo Start loading overlay
     console.log('start Loading overlay')
 
-    const { token: { collection, nft_type }, bids } = offerItem
+    const { token: { collection, nft_type }, bid, shares, ixtPrice } = item
 
-    if (!bids || !bids[0]) {
+    if (!bid) {
       /*
         Todo
         There are no offers
@@ -150,8 +180,7 @@ export const useOfferContract = () => {
       throw new Error("There is no offer")
     }
 
-    const bid = bids[0]
-    const totalPrice = bid.price * quantity
+    const totalPrice = ixtPrice * shares.value
 
     let message: any = {}
     try {
@@ -194,7 +223,7 @@ export const useOfferContract = () => {
 
     BuyOrderComponents = {
       parameters: message.body,
-      numerator: quantity,
+      numerator: shares.value,
       denominator: message.body.consideration[0].endAmount,
       signature: message.signature,
       extraData: "0x"

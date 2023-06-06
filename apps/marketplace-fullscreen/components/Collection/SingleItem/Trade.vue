@@ -53,8 +53,6 @@ import TrashIcon from '~/assets/icons/trash.svg'
 
 import type { Sale, SingleItemData, Bid } from '@ix/base/composables/Token/useIXToken';
 import type { TableColumn } from '~/composables/useTable';
-import { useOfferContract } from "~/composables/useOffer";
-import type { OfferItem } from "~/composables/useOffer";
 
 // const { tabs, activeTab } = useTabList(['sell', 'buy'])
 const { item } = defineProps<{
@@ -92,7 +90,7 @@ const offerColumns: TableColumn<Bid>[] = [
   { label: "Sale Price", type: "ixt", rowKey: "price", sortable: true },
   { label: "Quanitity", rowKey: "quantity", sortable: true },
   {
-    label: "Floor difference", rowKey: "price", getValue(row) {
+    label: "Floor Difference", rowKey: "price", getValue(row) {
       const difference = roundToDecimals(
         ((row.price * 100) / item.sale_price) - 100
         , 2)
@@ -106,13 +104,17 @@ if (item.my_shares > 0)
     { label: "Action", rowKey: "action", width: 80 }
   )
 
+
+const { displayPopup } = usePopups()
+
 const onClickAcceptOffer = (bid: Bid) => {
-  const { acceptOffer } = useOfferContract()
-  const offerItem: OfferItem = {
-    token: item,
-    bids: [bid]
-  }
-  console.log('acceptOffer', acceptOffer(offerItem, 1))
+  displayPopup({
+    type: 'accept-item',
+    item: {
+      ...item,
+      bid
+    }
+  })
 }
 
 const playerOwnedSale = (sale: Sale) => {

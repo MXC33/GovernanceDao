@@ -200,6 +200,9 @@
       "confirm": "Confrim Adress",
       "transferItem": "Transfer Item"
     },
+    "offer": {
+      "title": "Accept Offer"
+    },
     "navigation": {
       "soon": "Coming Soon",
       "buy": {
