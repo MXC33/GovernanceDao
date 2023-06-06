@@ -3,18 +3,18 @@ Collection(:data="data" :columns="columns" :context="'outgoing-bids'" v-if="data
   template(#menu)
     AccountMenu()
 </template>
-    
-    
+
+
 <script lang="ts" setup>
 import type { TableColumn } from "~/composables/useTable";
 import type { IXToken } from "@ix/base/composables/Token/useIXToken";
 import { fromUnixTime } from "date-fns"
 
-const { myAssetsURL } = useCollectionsURL()
-
 const { displayPopup } = usePopups()
 
-const { data: data, execute: fetchCollection, setupCollectionListeners } = useCollectionData(myAssetsURL('polygon'), {
+const { myAssetsURL } = useCollectionsURL()
+
+const { data: data, execute: fetchCollection, setupCollectionListeners, refresh: refresh } = useCollectionData(myAssetsURL('polygon'), {
   filter: {
     owned: true,
     type: 2,
@@ -69,18 +69,22 @@ const getStartDateFromMessage = (row: IXToken) => {
   return message.body.startTime
 }
 
+const { removeBid } = useBidsAPI()
 
-const cancelBidOnClick = (token: IXToken) => {
-  console.log("Cancel", token)
+const cancelBidOnClick = async (token: IXToken) => {
+  await removeBid(token._index, token.token_id, token.network, token.collection)
+  await refresh()
 }
 
 const updateBidOnClick = async (token: IXToken) => {
-
   displayPopup({
     type: 'bid-item',
-    items: [token]
+    items: [{
+      ...token,
+      updating: true
+    }]
   })
-
+  await refresh()
 }
 
 </script>

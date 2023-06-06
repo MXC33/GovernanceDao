@@ -201,7 +201,10 @@
       "warningText": "Make sure the adress is correct!<br/>There is no way to reverse this transaction",
       "verifyText": "I Verify that I am aware that the transaction is not<br/>reversible, and that the wallet address is correct.",
       "confirm": "Confrim Adress",
-      "transferItem": "Transfer Item"
+      "transferItem": "Transfer Item",
+      "update": {
+        "title": "Place Bid"
+      }
     },
     "offer": {
       "title": "Accept Offer"

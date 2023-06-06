@@ -31,12 +31,11 @@ export const useBids = () => {
 export const useBidsAPI = () => {
   const placeBid = async (body: BiddingBody[]) => fetchIXAPI('web3/bid', 'POST', body)
 
-
-  const removeBid = (index: string, referenceId: number, playerId: number, saleId?: number) => fetchIXAPI('/web3/bid/remove/' + playerId, 'POST', {
+  const removeBid = (index: string, referenceId: number, network: string, collection: string) => fetchIXAPI('web3/bid/remove/0', 'POST', {
     index,
-    referenceId,
-    saleId,
-    playerId,
+    reference_id: referenceId,
+    network,
+    collection,
   })
 
   const rejectBid = (index: string, referenceId: number, playerId: number, saleId?: number) => fetchIXAPI('/web3/bid/reject/' + playerId, 'POST', {
