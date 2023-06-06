@@ -18,14 +18,14 @@ HList(w="full" px="6" py="3" bg="gray-900" items="center" justify="between")
 </template>
 
 <script lang="ts" setup>
-import LikeIcon from '~/assets/icons/like.svg'
+// import LikeIcon from '~/assets/icons/like.svg'
 import TransferIcon from '~/assets/icons/transfer.svg'
 import LinkIcon from '~/assets/icons/link.svg'
 import PolygonIcon from '~/assets/icons/polygon.svg'
 
 defineEmits(["transfer"])
 
-const { displayNotification } = useSnackNotifications()
+const { displaySnack } = useSnackNotifications()
 
 const copyCurrentUrlToClipboard = async () => {
   const currentUrl = window.location.href;
@@ -35,7 +35,7 @@ const copyCurrentUrlToClipboard = async () => {
   } catch (error) {
     console.error('Failed to copy URL to clipboard:', error)
   }
-  displayNotification('copy-link')
+  displaySnack('copy-link')
 }
 
 </script>

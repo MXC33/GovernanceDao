@@ -1,8 +1,37 @@
 import { ContractError } from "@ix/base/composables/Utils/useContractErrors"
 
-export const useContractRequest = (fn: () => Promise<any>, errorOptions?: ContractError) => {
+
+interface RequestOptions {
+  error?: () => ContractError,
+  onError?: () => void
+}
+
+export const useContractRequest = (fn: () => Promise<any>, options: RequestOptions = {}) => {
   const { addError } = useContractErrors()
+  const { displaySnack } = useSnackNotifications()
   const loading = ref(false)
+  const {
+    onError,
+    error
+  } = options
+
+  const catchError = (serverError: string) => {
+    console.log("Server", serverError)
+
+    if (serverError?.includes('rejected'))
+      return displaySnack('transaction-rejected')
+
+    if (onError)
+      onError()
+
+    if (error) {
+      const errorData = error()
+      addError({
+        ...errorData,
+        serverError
+      })
+    }
+  }
 
   const execute = async () => {
     loading.value = true
@@ -12,12 +41,9 @@ export const useContractRequest = (fn: () => Promise<any>, errorOptions?: Contra
       //@ts-ignore
       const message: string = error?.message
 
-      console.log("ERR", error)
-      if (errorOptions)
-        addError({
-          ...errorOptions,
-          serverError: message
-        })
+      setTimeout(() => {
+        catchError(message)
+      }, 5)
 
       loading.value = false
       return false

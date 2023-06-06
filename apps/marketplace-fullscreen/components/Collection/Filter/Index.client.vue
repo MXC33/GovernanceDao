@@ -4,7 +4,7 @@ HList(pos="sticky top-48 md:(sticky top-34)" z="4" b="on-scrolling:t-1 gray-600"
 
     CollectionFilterToggleFilter(@click="$emit('toggleFilter')")
 
-    Search(:options="items" :search-paths="['name']" w="full")
+    Search(:options="items" :search-paths="['name']" w="md:full" flex-grow="lt-md:1")
       template(#item="{item}")
         HList(items="center" space-x="3")
           div(w="12")

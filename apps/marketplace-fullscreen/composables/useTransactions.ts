@@ -6,7 +6,7 @@ export interface TransactionItem {
   token: IXToken,
   shares: AdjustableNumber,
   durationInDays?: number,
-  ixtPrice: number
+  ixtPrice?: number
 }
 
 export const useTransactions = () => {

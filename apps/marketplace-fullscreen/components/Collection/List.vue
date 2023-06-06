@@ -3,7 +3,7 @@ Transition(name="fade" mode="out-in" )
   CollectionGrid(v-if="displayType == 'grid' && !hideGrid" w="full" :is-open="showFilters")
     CollectionGridItem.collection-grid-item(:token="token" v-for="token in items" b="gray-400" :context="context")
 
-  Table(v-else :columns="columns" :rows="items" id="collection")
+  Table(v-else :columns="columns" :rows="items" :id="context")
     template(#item-name="{row}")
       HList(items="center" space-x="2" font="bold" @click="onClickItem(row)" cursor="pointer" max-w="60")
         div(w="12" h="12")
@@ -37,5 +37,11 @@ const onClickItem = (row: IXToken) => {
 <style>
 .collection-grid-item:nth-child(5n + 6) {
   border: 0px;
+}
+
+@media only screen and (max-width: 600px) {
+  .collection-grid-item:nth-child(odd) {
+    border-right: 0.5px solid #636363 !important;
+  }
 }
 </style>

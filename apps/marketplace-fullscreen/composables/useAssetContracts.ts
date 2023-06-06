@@ -21,7 +21,6 @@ import {
 } from '@ix/base/composables/Contract/WalletAddresses'
 import ERC1155ABI from '@ix/base/composables/Contract/Abis/ERC1155.json'
 import ERC721ABI from '@ix/base/composables/Contract/Abis/ERC1155.json'
-import IXToken from '@ix/base/composables/Contract/Abis/IXToken.json'
 import Seaport from '@ix/base/composables/Contract/Abis/Seaport.json'
 
 
@@ -29,7 +28,6 @@ import { ContractContext as ERC1155Contract } from '@ix/base/composables/Contrac
 
 import { ContractContext as ERC721Contract } from '@ix/base/composables/Contract/Abis/ERC721'
 
-import { ContractContext as IXTokenContract } from '@ix/base/composables/Contract/Abis/IXToken'
 
 import { ContractContext as SeaportContract } from '@ix/base/composables/Contract/Abis/Seaport'
 
@@ -39,6 +37,7 @@ import { CartItem } from "~/composables/useCart";
 import { fetchIXAPI } from "~/composables/api/api";
 import { CollectionData } from "~/composables/useCollection";
 
+const ZERO_ADRESS_LONG = "0x0000000000000000000000000000000000000000000000000000000000000000"
 
 export const ERC1155Addresses = [assetsAddress.polygon?.toLowerCase(), avatarNFTAddress.polygon?.toLowerCase(), landmarkAddress.polygon?.toLowerCase()]
 
@@ -176,89 +175,13 @@ export const get721Contract = <T extends ContractInterface<T> & ERC721Contract>(
   }
 }
 
-export const getIXTokenContract = <T extends ContractInterface<T> & IXTokenContract>() => {
-
-  const spenderAddress = conduitAdress.polygon as string
-  const { walletAdress } = useWallet()
-
-  const { viewAsyncState, withContract, createTransaction, ...contractSpec } = defineContract<T>('IXToken-contract', {
-    contractAddress: IXTAddress.polygon as string,
-    notifications: {
-      failMessage: 'Error allowance IXToken'
-    },
-    createContract(provider) {
-      return new ethers.Contract(IXTAddress.polygon as string, IXToken.abi, provider.getSigner()) as unknown as T
-    }
-  })
-
-  const allowance = () =>
-    withContract((contract) => {
-      const address = walletAdress.value
-      if (!address)
-        return undefined
-
-      /*return new Promise(async (resolve, reject) => {
-        try {
-          const allowance = await contract.allowance(address, spenderAddress)
-          resolve(Number(ethers.utils.formatUnits(allowance)))
-        } catch (e) {
-          resolve(0)
-        }
-      })*/
-      return contract.allowance(address, spenderAddress)
-    })
-
-  const approve = (amount: BigNumberish | string) =>
-    createTransaction((contract) => {
-      const address = walletAdress.value
-      if (!address)
-        return undefined
-
-      return contract.approve(spenderAddress, amount)
-    })
-
-  const ixtBalance = () =>
-    viewAsyncState('ixt-balance', async (contract) => {
-      const address = walletAdress.value
-      if (!address)
-        return undefined
-      try {
-        const balance = await contract.balanceOf(address)
-        return Number(ethers.utils.formatUnits(balance))
-      } catch (err) {
-        return undefined
-      }
-    })
-
-  const allowanceCheck = async (amount: number) => {
-    try {
-      const allowanceValue = Number(ethers.utils.formatUnits(await allowance()))
-
-      if (allowanceValue >= amount)
-        return true
-
-      return await approve(ethers.utils.parseUnits(amount.toString()))
-
-    } catch (e) {
-      return false
-    }
-  }
-
-  return {
-    ...contractSpec,
-    allowance,
-    approve,
-    allowanceCheck,
-    ixtBalance
-  }
-}
-
 export interface ConsiderationItem {
   recipient: string
 }
 
 export const useSeaportContract = <T extends ContractInterface<T> & SeaportContract>() => {
   const { walletAdress, getCollectionType } = useWallet()
+  const { clearFailedCartItems, addFailedCartItem } = useCart()
   const { createBuyOrder, isAdvancedOrder, getOrderMessage } = useBuyHelpers()
   const { withContract, createTransaction, ...contractSpec } = defineContract<T>('Seaport-contract', {
     contractAddress: seaportAdress.polygon as string,
@@ -268,13 +191,13 @@ export const useSeaportContract = <T extends ContractInterface<T> & SeaportContr
   })
   const pixMerkleParam = {
     merklePixInfo: {
-      to: "0x0000000000000000000000000000000000000000",
+      to: ZERO_ADDRESS,
       pixId: 0,
       category: 0,
       size: 0,
     },
-    merkleRoot: "0x0000000000000000000000000000000000000000000000000000000000000000",
-    merkleProof: ["0x0000000000000000000000000000000000000000000000000000000000000000"],
+    merkleRoot: ZERO_ADRESS_LONG,
+    merkleProof: [ZERO_ADRESS_LONG]
   }
 
   const fulfillAvailableAdvancedOrders = (advancedOrders: AdvancedOrder[], criteriaResolvers: [], offerFulfillments: [], considerationFulfillments: [], fulfillerConduitKey: string, recipient: string, maximumFulfilled: number, cartItems?: CartItem[]) =>
@@ -286,34 +209,41 @@ export const useSeaportContract = <T extends ContractInterface<T> & SeaportContr
       return contract.fulfillAvailableAdvancedOrders(advancedOrders, criteriaResolvers, offerFulfillments, considerationFulfillments, fulfillerConduitKey, recipient, maximumFulfilled)
     }, {
       onFail: async (error) => {
+        console.log("ON FAIL", error)
+        clearFailedCartItems()
+
         if (!cartItems || cartItems?.length == 0)
           return
 
-        cartItems.forEach(async item => {
-          if (!item.sale)
+        const requests = cartItems.map(async (item) => {
+          const { sale } = item
+          if (!sale)
             return
-          const message = getOrderMessage(item.sale)
-          const buyOrder = createBuyOrder(item.sale, item.value, false)
+
+          const message = getOrderMessage(sale)
+          const buyOrder = createBuyOrder(sale, item.shares.value, false)
 
           if (!isAdvancedOrder(buyOrder) || !message)
             return
 
           try {
             await fulfillAdvancedOrderGasEstimate(buyOrder[0])
-            item.failed = false
-          }
-          catch (e) {
-            item.failed = true
+          } catch (err) {
+            addFailedCartItem(item)
+
             const { token, identifierOrCriteria } = message.body.offer[0]
-            await fetchIXAPI('web3/sale/transfer/update/listing/job', 'POST', {
+
+            return await fetchIXAPI('web3/sale/transfer/update/listing/job', 'POST', {
               size: getCollectionType(token),
-              player_id: item.sale?.player_id,
+              player_id: sale.player_id,
               network: 'polygon',
               collection: token,
               token_id: identifierOrCriteria,
             })
           }
         })
+
+        return Promise.all(requests)
       }
     })
 

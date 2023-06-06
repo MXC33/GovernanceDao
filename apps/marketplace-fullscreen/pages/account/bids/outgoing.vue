@@ -12,6 +12,8 @@ import { fromUnixTime } from "date-fns"
 
 const { myAssetsURL } = useCollectionsURL()
 
+const { displayPopup } = usePopups()
+
 const { data: data, execute: fetchCollection, setupCollectionListeners } = useCollectionData(myAssetsURL('polygon'), {
   filter: {
     owned: true,
@@ -67,14 +69,18 @@ const getStartDateFromMessage = (row: IXToken) => {
   return message.body.startTime
 }
 
-const { removeBid, placeBid } = useBidsAPI()
 
 const cancelBidOnClick = (token: IXToken) => {
   console.log("Cancel", token)
 }
 
-const updateBidOnClick = (token: IXToken) => {
-  console.log("Update", token)
+const updateBidOnClick = async (token: IXToken) => {
+
+  displayPopup({
+    type: 'bid-item',
+    items: [token]
+  })
+
 }
 
 </script>

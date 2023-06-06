@@ -7,8 +7,9 @@ import {
   SingleItemData
 } from "@ix/base/composables/Token/useIXToken";
 import { AdjustableNumber } from "@ix/base/composables/Utils/useAdjustableNumber";
-import { getIXTokenContract, useSeaportContract } from "~/composables/useAssetContracts";
+import { useSeaportContract } from "~/composables/useAssetContracts";
 import { conduitKey } from "@ix/base/composables/Contract/WalletAddresses";
+import { useIXTContract } from "@ix/base/composables/Contract/useIXTContract";
 
 export interface BuyItem {
   token: IXToken,
@@ -236,7 +237,7 @@ export const useBuyContract = () => {
     if (!buyItem.sales || !buyItem.sales.length)
       throw new Error("No sales item")
 
-    const { allowanceCheck } = getIXTokenContract()
+    const { allowanceCheck } = useIXTContract()
 
     if (!await allowanceCheck(totalPrice))
       throw new Error("Allowance failed")

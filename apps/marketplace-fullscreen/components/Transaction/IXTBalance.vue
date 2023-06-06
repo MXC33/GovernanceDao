@@ -2,19 +2,20 @@
 VList()
   HList(text="lg" font="bold" justify="between")
     span() Your Balance
-    span(v-if="ixt") {{ ixtBalanceRounded }} IXT
+    span(v-if="ixtBalance") {{ ixtBalanceRounded }} IXT
     span(v-else) ... IXT
 
   HList(justify="end" color="gray-200")
-    span(mb="4" v-if="ixt") $ {{ ixtToUSD(ixt) }}
+    span(mb="4" v-if="ixtBalance") $ {{ ixtToUSD(ixtBalance) }}
 
 </template>
 
 <script lang="ts" setup>
+import { useIXTContract } from "@ix/base/composables/Contract/useIXTContract";
 const { ixtToUSD } = useIXTPrice()
-const { ixtBalance } = getIXTokenContract()
-const { data: ixt, refresh: fetchIXT } = ixtBalance()
+const { ixtBalance, fetchIXT } = useIXTContract()
+
 fetchIXT()
 
-const ixtBalanceRounded = computed(() => roundToDecimals(ixt.value ?? 0, 2))
+const ixtBalanceRounded = computed(() => roundToDecimals(ixtBalance.value ?? 0, 2))
 </script>

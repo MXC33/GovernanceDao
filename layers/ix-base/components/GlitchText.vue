@@ -1,15 +1,26 @@
 <template lang="pug">
-div() {{ glitchedText }}{{  suffix }}
+div(ref="element") {{ glitchedText }}{{  suffix }}
 
 </template>
   
 <script lang="ts" setup>
+const element = ref()
 
-const { text, isHovered } = defineProps<{
+
+
+const { text, isHovered, autoHover } = defineProps<{
   text: string,
   suffix?: string,
-  isHovered?: boolean
+  isHovered?: boolean,
+  autoHover?: boolean
 }>()
+
+if (autoHover) {
+  const isHovering = useElementHover(element)
+  watch(isHovering, () => {
+    startGlitch()
+  })
+}
 
 watch(() => text, (newText) => {
   if (!isGlitchRunning.value && hasRunOnce.value)

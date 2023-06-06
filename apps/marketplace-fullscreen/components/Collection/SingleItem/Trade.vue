@@ -20,10 +20,11 @@ VList(space-y="6")
 
     template(#default)
       Table(:columns="saleColumns" :rows="item.sales" id="single-item" :in-drawer="true" v-if="item.sales && item.sales.length > 0")
-        template(#item-action="{row}")
-          button(@click="addSaleToCart(row)" bg="gray-500 hover:gray-400" transition="all" cut="bottom-right sm" p="x-6 y-3" v-if="!playerOwnedSale(row)")
+        template(#item-buttons="{row}")
+          TableButtonSmall(v-if="!playerOwnedSale(row)" @click="addSaleToCart(row)" disable="on-in-cart:active" :in-cart="hasItemInCart(row)")
             CartIcon(w="6")
-          button(@click="removeListing(row)" bg="gray-500 hover:gray-400" transition="all" cut="bottom-right sm" p="x-6 y-3" v-else)
+
+          TableButtonSmall(@click="removeListing(row)" v-else)
             TrashIcon(w="6" fill="white")
 
 
@@ -60,7 +61,7 @@ const { item } = defineProps<{
 }>()
 
 const { getSingleAttributes } = useDefaulAttributes()
-const { addToCart } = useCart()
+const { addToCart, hasItemInCart } = useCart()
 const { walletAdress } = useWallet()
 const attributes = computed(() => getSingleAttributes(item))
 
@@ -75,7 +76,9 @@ const saleColumns: TableColumn<Sale>[] = [
       return row.player_username
     }, sortable: true
   },
-  { label: "Action", rowKey: "action", width: 80 }
+  {
+    type: 'buttons', buttons: []
+  }
 ]
 
 const addSaleToCart = (sale: Sale) => {

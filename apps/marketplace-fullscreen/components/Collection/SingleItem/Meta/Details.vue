@@ -11,19 +11,21 @@ VList()
 
   AttributeRow()
     template(#name) Token standard
-    template(#value) TODO
+    template(#value v-if="is721") ERC-721
+    template(#value v-else-if="is1155") ERC-1155
 
   AttributeRow()
     template(#name) Chain
     template(#value) {{ network }}
 
-  AttributeRow()
-    template(#name) Last updated
-    template(#value) TODO
+  //- SAVE FOR FUTURE USE
+  //- AttributeRow()
+  //-   template(#name) Last updated
+  //-   template(#value) TODO
 
   AttributeRow()
     template(#name) Marketplace Fee
-    template(#value) TODO
+    template(#value) 5%
     
 </template>
 
@@ -33,8 +35,14 @@ import type { SingleItemData } from '@ix/base/composables/Token/useIXToken';
 const route = useRoute()
 const { network } = route.params
 
+
+
+
 const { item } = defineProps<{
   item: SingleItemData
 }>()
+
+const is721 = ERC721Addresses.includes(item.collection)
+const is1155 = ERC1155Addresses.includes(item.collection)
 
 </script>

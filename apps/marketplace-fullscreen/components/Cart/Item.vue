@@ -1,5 +1,5 @@
 <template lang="pug">
-VList(:bg="item.failed ? 'red-950' : 'gray-800'" v-if="item")
+VList(bg="gray-800" v-if="item")
   header(p="x-6 y-3" font="bold" flex="~ row")
     TokenName(:token="item.token")
 
@@ -8,6 +8,7 @@ VList(:bg="item.failed ? 'red-950' : 'gray-800'" v-if="item")
   HList()
     VList(w="30" justify="center" pos="relative")
       TokenImage(:token="item.token" w="30")
+
     VList(w="full")
       HList(flex-grow="1" px="3" items="center")
         VList(flex-grow="1" color="gray-200" space-y="1")
@@ -18,7 +19,7 @@ VList(:bg="item.failed ? 'red-950' : 'gray-800'" v-if="item")
         button(@click="removeFromCart(item)")
           TrashIcon(w="6")
 
-      Adjustable(v-model="item" h="10")
+      Adjustable(v-model="item.shares" h="10")
     
 </template>
 
@@ -30,8 +31,9 @@ const cartElement = ref()
 
 onClickOutside(cartElement, () => viewingCart.value = false)
 
-const { viewingCart, removeFromCart } = useCart()
+const { viewingCart, removeFromCart, cartItemFailed } = useCart()
 
 const item = defineModel<CartItem>()
 
+const isFailed = computed(() => item.value && cartItemFailed(item.value))
 </script>

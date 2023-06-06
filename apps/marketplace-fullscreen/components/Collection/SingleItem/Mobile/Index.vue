@@ -17,11 +17,34 @@ VList(space-y="4")
 
   TradeModule(:item="item") 
 
+  ContentDrawer(:start-open="false" :is-neutral="true" bg="gray-900")
+    template(#titleicon)
+      TitleWithIcon(icon="listing") listings
+
+    template(#default)
+      Table(:columns="saleColumns" :rows="item.sales" id="single-item" :in-drawer="true" v-if="item.sales && item.sales.length > 0")
+        template(#item-action="{row}")
+          button(@click="addSaleToCart(row)" bg="gray-500 hover:gray-400" transition="all" cut="bottom-right sm" p="x-3 y-1 md:x-6 y-3" v-if="!playerOwnedSale(row)")
+            CartIcon(w="3 md:6")
+          button(@click="removeListing(row)" bg="gray-500 hover:gray-400" transition="all" cut="bottom-right sm" p="x-3 y-1 md:x-6 y-3" v-else)
+            TrashIcon(w="3 md:6" fill="white")
+
+      HList(v-else px="6" py="6" font="bold" color="gray-400" items="center" justify="center") 
+        span() No items found
+
+  ContentDrawer(:start-open="false" :is-neutral="true" bg="gray-900")
+    template(#titleicon)
+      TitleWithIcon(icon="offer") offers
+    template(#default)
+      HList(px="6" py="6" font="bold" color="gray-400" items="center" justify="center" v-if="item.my_shares == 0") 
+        span() You do not own this asset
+
+      HList(px="6" py="6" font="bold" color="gray-400" items="center" justify="center" v-if="item.bids.length < 1" ) 
+        span() There is no offers for this item
+
+      Table(:columns="offerColumns" :rows="item.bids" id="offers" :in-drawer="true" v-else="item.bids.length > 0")
+
   CollectionSingleItemMobileMeta(:item="item")
-
-
-
-//- Listing(:item="item")
 
 </template>
 
@@ -29,11 +52,12 @@ VList(space-y="4")
 import CartIcon from '~/assets/icons/cart.svg'
 import type { Sale, SingleItemData, Bid } from '@ix/base/composables/Token/useIXToken';
 import type { TableColumn } from '~/composables/useTable';
-
-// const { tabs, activeTab } = useTabList(['sell', 'buy'])
+import TrashIcon from '~/assets/icons/trash.svg'
 
 const { getSingleAttributes } = useDefaulAttributes()
 const { addToCart } = useCart()
+const { walletAdress } = useWallet()
+
 const attributes = computed(() => getSingleAttributes(item))
 
 const saleColumns: TableColumn<Sale>[] = [
@@ -46,6 +70,16 @@ const saleColumns: TableColumn<Sale>[] = [
 
 const addSaleToCart = (sale: Sale) => {
   addToCart(item, sale)
+}
+
+const playerOwnedSale = (sale: Sale) => {
+  if (sale.player_wallet.toLowerCase() == walletAdress.value?.toLowerCase())
+    return true
+  return false
+}
+
+const removeListing = (sale: Sale) => {
+  console.log("remove listing")
 }
 
 const offerColumns: TableColumn<Bid>[] = [

@@ -5,7 +5,13 @@ VList(justify="center" items="center" aspect="2/3" bg="black opacity-40" ref="me
   CollectionGridItemMeta(:token="token" :context="context")
     template(#footer)
       Transition(name="slide-bottom")
-        button(btn="~ primary" pos="absolute bottom-0 left-0 right-0" v-if="isHovered" @click.stop="onClickButton") {{ buttonCopy }}
+        div(pos="absolute bottom-0 left-0 right-0" v-if="isHovered" bg="gray-900" cursor="pointer")
+          button(v-if="context == 'my-assets'" btn="~ primary" @click.stop="onClickListItems" w="full") 
+            GlitchText(text="List Item" :auto-hover="true")
+
+          button(v-else btn="~ primary" @click.stop="onClickCart" w="full" disable="on-no-click:active" :no-click="noClick")
+            GlitchText(text="Add to cart" :auto-hover="true")
+            
 
       
 </template>
@@ -17,7 +23,7 @@ import type { CollectionContext } from '~/composables/useCollection';
 const mediaElement = ref()
 const isHovered = useElementHover(mediaElement)
 
-const { addToCart } = useCart()
+const { addToCart, hasItemInCart } = useCart()
 const { displayPopup } = usePopups()
 
 const { token, context } = defineProps<{
@@ -25,17 +31,14 @@ const { token, context } = defineProps<{
   context?: CollectionContext
 }>()
 
-const buttonCopy = computed(() => {
-  switch (context) {
-    case 'my-assets': return 'List Item'
-    default: return 'Add to cart'
-  }
+const noClick = computed(() => {
+  if (context == 'my-assets')
+    return true
+
+  return hasItemInCart(token.lowest_sale)
 })
 
-const onClickButton = () => {
-  if (context == 'my-assets')
-    return onClickListItems()
-
+const onClickCart = () => {
   addToCart(token, token.lowest_sale)
 }
 

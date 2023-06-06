@@ -6,11 +6,7 @@ Popup()
   template(#header) TRANSFER SUCCESSFUL!
 
   template(#default)
-    VList(min-h="30" p="2" space-x="0.5" w="full" frame="~" )
-      TokenImage(:token="item.token")
-      HList(justify="between" font="bold" text="sm" )
-        TokenName(:token="item.token")
-        div x{{ item.value }}
+    CompleteTokenList(:items="[item]")
 
     VList()
       HList(justify="between" font="bold" text="sm")
@@ -19,9 +15,9 @@ Popup()
 
 
   template(#buttons)
-    HList()
-      button(@click="onClickMyAssets" btn="~ secondary") Go to my assets
-      button(@click="closeActivePopup" btn="~ primary") Continue exploring 
+    HList( justify="between")
+      button(@click="onClickMyAssets" btn="~ secondary" w="full") Go to my assets
+      button(@click="closeActivePopup" btn="~ primary" w="full") Continue exploring 
 
 </template>
   
