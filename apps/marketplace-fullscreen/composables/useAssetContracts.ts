@@ -189,6 +189,16 @@ export const useSeaportContract = <T extends ContractInterface<T> & SeaportContr
       return new ethers.Contract(seaportAdress.polygon as string, Seaport.abi, provider.getSigner()) as unknown as T
     }
   })
+  const pixMerkleParam = {
+    merklePixInfo: {
+      to: ZERO_ADDRESS,
+      pixId: 0,
+      category: 0,
+      size: 0,
+    },
+    merkleRoot: ZERO_ADRESS_LONG,
+    merkleProof: [ZERO_ADRESS_LONG]
+  }
 
   const fulfillAvailableAdvancedOrders = (advancedOrders: AdvancedOrder[], criteriaResolvers: [], offerFulfillments: [], considerationFulfillments: [], fulfillerConduitKey: string, recipient: string, maximumFulfilled: number, cartItems?: CartItem[]) =>
     createTransaction((contract) => {
@@ -244,22 +254,22 @@ export const useSeaportContract = <T extends ContractInterface<T> & SeaportContr
       if (!address)
         return undefined
 
-      const pixMerkleParam = {
-        merklePixInfo: {
-          to: ZERO_ADDRESS,
-          pixId: 0,
-          category: 0,
-          size: 0,
-        },
-        merkleRoot: ZERO_ADRESS_LONG,
-        merkleProof: [ZERO_ADRESS_LONG],
-      }
-
       return contract.estimateGas.fulfillAdvancedOrder(buyOrderComponents, [], conduitKey.polygon, ZERO_ADDRESS, pixMerkleParam)
+    })
+
+  const fulfillAdvancedOrder = (advancedOrders: AdvancedOrder, criteriaResolvers: [], fulfillerConduitKey: string, recipient: string) =>
+    createTransaction((contract) => {
+      const address = walletAdress.value
+      if (!address)
+        return undefined
+
+      // @ts-ignore
+      return contract.fulfillAdvancedOrder(advancedOrders, criteriaResolvers, fulfillerConduitKey, recipient, pixMerkleParam)
     })
 
   return {
     ...contractSpec,
+    fulfillAdvancedOrder,
     fulfillAvailableAdvancedOrders
   }
 }

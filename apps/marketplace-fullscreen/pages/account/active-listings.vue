@@ -4,8 +4,8 @@ Collection(:data="splitSales" :columns="columns" :context="'active-listings'" v-
     AccountMenu()
 
 </template>
-    
-    
+
+
 <script lang="ts" setup>
 import type { TableColumn } from "~/composables/useTable";
 import type { IXToken } from "@ix/base/composables/Token/useIXToken";
@@ -13,7 +13,7 @@ import type { CollectionData } from "~/composables/useCollection";
 
 const { myAssetsURL } = useCollectionsURL()
 
-const { data: data, execute: fetchCollection, setupCollectionListeners } = useCollectionData(myAssetsURL('polygon'), {
+const { data: data, execute: fetchCollection, setupCollectionListeners, refresh: refresh } = useCollectionData(myAssetsURL('polygon'), {
   filter: {
     owned: true,
     type: 3,
@@ -72,15 +72,24 @@ const splitSales = computed<CollectionData | undefined>(() => {
 
   return newData
 })
+const { removeList } = useListEndpoints()
+const { displayPopup } = usePopups()
 
-const { removeBid, placeBid } = useBidsAPI()
-
-const cancelBidOnClick = (token: IXToken) => {
-  console.log("Cancel", token)
+const cancelBidOnClick = async (token: IXToken) => {
+  if(token.sales?.length > 0){
+    await removeList(token._index, token.token_id, token.sales[0].sale_id, token.network, token.collection)
+    await refresh()
+  }
 }
 
 const updateBidOnClick = (token: IXToken) => {
-  console.log("Update", token)
+  displayPopup({
+    type: 'list-item',
+    items: [{
+      ...token,
+      updating: true
+    }]
+  })
 }
 
 </script>

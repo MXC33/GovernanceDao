@@ -9,11 +9,15 @@ div#popups()
 
     CompleteBuy(v-else-if="popup.type == 'buy-items-success'" :items="popup.items")
 
+    CompleteAccept(v-else-if="popup.type == 'accept-items-success'" :item="popup.item")
+
     Transfer(v-else-if="popup.type == 'transfer-item'" :token="popup.item")
 
     Listing(v-else-if="popup.type == 'list-item'" :items="popup.items")
 
     Bidding(v-else-if="popup.type == 'bid-item'" :items="popup.items")
+
+    Accepting(v-else-if="popup.type == 'accept-item'" :item="popup.item")
 
 
   ErrorPopup(v-if="activeError" :error="activeError")

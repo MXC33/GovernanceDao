@@ -7,10 +7,39 @@ import {
 } from "~/composables/useAssetContracts";
 import { conduitKey } from "@ix/base/composables/Contract/WalletAddresses";
 import { useIXTContract } from "@ix/base/composables/Contract/useIXTContract";
+import { TransactionItem } from "~/composables/useTransactions";
 
 export interface OfferItem {
   token: IXToken,
   bids?: Bid[]
+}
+
+export interface AcceptingItem extends TransactionItem {
+  type: 'accept',
+  bid: Bid
+}
+
+export const useAcceptingItem = () => {
+  const acceptingItem = useState<AcceptingItem>('accepting-item')
+
+  const createAcceptingItem = (token: IXToken) => {
+    acceptingItem.value = {
+      type: 'accept',
+      token,
+      shares: {
+        min: 1,
+        value: 1,
+        max: token.my_shares > token.bid.quantity ? token.bid.quantity : token.my_shares
+      },
+      bid: token.bid,
+      ixtPrice: token.bid.price
+    }
+  }
+
+  return {
+    createAcceptingItem,
+    acceptingItem
+  }
 }
 
 export const useOfferItems = (item: SingleItemData) => {
@@ -137,7 +166,71 @@ export const useOfferItems = (item: SingleItemData) => {
 export const useOfferContract = () => {
   const { generateConsiderations, createBuyOrder } = useBuyHelpers()
   const { allowanceCheck } = useIXTContract()
-  const { fulfillAvailableAdvancedOrders } = useSeaportContract()
+  const { fulfillAvailableAdvancedOrders, fulfillAdvancedOrder } = useSeaportContract()
+
+  const acceptOffer = async (item: AcceptingItem) => {
+    //Todo Start loading overlay
+    console.log('start Loading overlay')
+
+    const { token: { collection, nft_type }, bid, shares, ixtPrice } = item
+
+    if (!bid) {
+      /*
+        Todo
+        There are no offers
+      */
+      throw new Error("There is no offer")
+    }
+
+    const totalOffer = (ixtPrice || 0) * shares.value
+
+    let message: any = {}
+    try {
+      message = JSON.parse(bid.message)
+    } catch (e) { }
+
+    if (!message.body || !message.body.consideration) {
+      /*
+        Todo
+        Body is invalid
+      */
+      throw new Error("Invalid Body!")
+    }
+
+    const nftContract = nft_type === NFTType.ERC1155 ? get1155Contract(collection as string) : get721Contract(collection as string)
+    const approveNftCheck = await nftContract.approveNftCheck()
+    if (!approveNftCheck) {
+      /*
+        Todo
+        Approve didn't work
+      */
+      throw new Error("Approve didn't work")
+    }
+
+    if (!await allowanceCheck(totalOffer)) {
+      /*
+        Todo
+        Allowance didn't work
+      */
+      throw new Error("Allowance didn't work")
+    }
+
+    let BuyOrderComponents: AdvancedOrder;
+
+    delete message.body.counter
+    message.body.totalOriginalConsiderationItems = message.body.consideration.length
+
+    BuyOrderComponents = {
+      parameters: message.body,
+      numerator: shares.value,
+      denominator: message.body.consideration[0].endAmount,
+      signature: message.signature,
+      extraData: "0x"
+    }
+
+    // @ts-ignore
+    return await fulfillAdvancedOrder(BuyOrderComponents, [], conduitKey.polygon, "0x0000000000000000000000000000000000000000")
+  }
 
   const acceptOffers = async (offerItem: OfferItem, totalOffer: number, quantity: number) => {
     //Todo Start loading overlay
@@ -209,6 +302,7 @@ export const useOfferContract = () => {
   }
 
   return {
+    acceptOffer,
     acceptOffers
   }
 }
