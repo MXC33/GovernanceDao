@@ -11,7 +11,7 @@ import {
 
 import { makeRandomNumberKey } from "@ix/base/composables/Utils/useHelpers";
 import { ListingAssets, ListingsBody, useListEndpoints } from "~/composables/api/post/useListAPI";
-import { TransactionItem } from "./useTransactions";
+import {TransactionItem, useTransactions} from "./useTransactions";
 
 
 export interface ListingItem extends TransactionItem {
@@ -19,6 +19,7 @@ export interface ListingItem extends TransactionItem {
 }
 
 export const useListingItems = () => {
+  const { durationInDaysFromTimestamp } = useTransactions()
   const listItems = useState<ListingItem[]>('listing-items', () => [])
 
   const createListItems = (items: IXToken[]) => {
@@ -30,7 +31,7 @@ export const useListingItems = () => {
         value: token.updating ? token.sales[0].quantity : 1,
         max: token.my_shares
       },
-      durationInDays: 1,
+      durationInDays: token.updating ? durationInDaysFromTimestamp(token.sales[0].endtime) : 1,
       ixtPrice: token.updating ? token.sales[0].price : 0,
     }))
   }
