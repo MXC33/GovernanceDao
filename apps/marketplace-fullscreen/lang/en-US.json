@@ -87,10 +87,10 @@
     "add-to-cart": "Added to cart"
   },
   "tooltips": {
-    "link": "Copy Link to Clipboard",
-    "like": "Add Item to Favorites",
-    "transfer": "Transfer Item to Another Wallet",
-    "removeLike": "Remove Item from Favorites",
+    "link": "Copy link to clipboard",
+    "like": "Add item to favorites",
+    "transfer": "Transfer item to another wallet",
+    "removeLike": "Remove item from favorites",
     "chain": "Chain: Polygon"
   },
   "collection": {
