@@ -1,5 +1,5 @@
 <template lang="pug">
-Collection(:data="splitSales" :columns="columns" :context="'active-listings'" v-if="data" :hide-grid="true")
+Collection(:data="splitSales" :columns="columns" :context="'active-listings'" v-if="data" :hide-grid="true" :loading="pending")
   template(#menu)
     AccountMenu()
 
@@ -13,7 +13,7 @@ import type { CollectionData } from "~/composables/useCollection";
 
 const { myAssetsURL } = useCollectionsURL()
 
-const { data: data, execute: fetchCollection, setupCollectionListeners } = useCollectionData(myAssetsURL('polygon'), {
+const { data: data, execute: fetchCollection, setupCollectionListeners, pending } = useCollectionData(myAssetsURL('polygon'), {
   filter: {
     owned: true,
     type: 3,

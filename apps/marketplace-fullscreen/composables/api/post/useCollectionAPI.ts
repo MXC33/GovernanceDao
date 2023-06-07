@@ -52,7 +52,9 @@ export const useCollectionData = (url: string, options: CollectionOptions = {}) 
     }
   }))
 
-  const asyncState = useAsyncDataState('collection-' + url.replaceAll('/', '-') + body.value.page_key + options.filter?.type ?? '', () =>
+  const key = 'collection-' + url.replaceAll('/', '-') + body.value.page_key + options.filter?.type ?? ''
+
+  const asyncState = useAsyncDataState(key, () =>
     fetchIXAPI(url, 'POST', body.value) as Promise<CollectionResponse>, {
     transform: (item) => {
       console.log("Transformed the data", body.value, item.data)

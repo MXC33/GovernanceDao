@@ -19,8 +19,5 @@ const toggle = () => {
   console.log("Click toggle")
 }
 
-watch(isSelected, (newValue, oldValue) => {
-  console.log(`isSelected changed from ${oldValue} to ${newValue}`)
-})
 
 </script>
