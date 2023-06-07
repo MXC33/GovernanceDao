@@ -69,7 +69,7 @@
         ".nuxt/gql/*"
       ],
       "vue-i18n": [
-        "../../node_modules/vue-i18n/dist/vue-i18n.runtime"
+        "../../node_modules/vue-i18n/dist/vue-i18n"
       ],
       "@intlify/shared": [
         "../../node_modules/@intlify/shared/dist/shared"

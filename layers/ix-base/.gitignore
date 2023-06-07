@@ -1,6 +1,7 @@
 node_modules
 *.log
 nuxt.d.ts
+.nuxt
 .output
 .env
 package-lock.json

@@ -405,7 +405,7 @@ declare global {
   const useHead: typeof import('@unhead/vue')['useHead']
   const useHeadSafe: typeof import('@unhead/vue')['useHeadSafe']
   const useHoursLeft: typeof import('../../composables/Utils/useHelpers')['useHoursLeft']
-  const useI18n: typeof import('../../../../node_modules/vue-i18n/dist/vue-i18n.runtime')['useI18n']
+  const useI18n: typeof import('../../../../node_modules/vue-i18n/dist/vue-i18n')['useI18n']
   const useIXAPI: typeof import('../../composables/useIXAPI')['useIXAPI']
   const useIXHeaders: typeof import('../../composables/useIXAPI')['useIXHeaders']
   const useIXLinks: typeof import('../../composables/useIXLinks')['useIXLinks']
@@ -985,7 +985,7 @@ declare module 'vue' {
     readonly useHead: UnwrapRef<typeof import('@unhead/vue')['useHead']>
     readonly useHeadSafe: UnwrapRef<typeof import('@unhead/vue')['useHeadSafe']>
     readonly useHoursLeft: UnwrapRef<typeof import('../../composables/Utils/useHelpers')['useHoursLeft']>
-    readonly useI18n: UnwrapRef<typeof import('../../../../node_modules/vue-i18n/dist/vue-i18n.runtime')['useI18n']>
+    readonly useI18n: UnwrapRef<typeof import('../../../../node_modules/vue-i18n/dist/vue-i18n')['useI18n']>
     readonly useIXAPI: UnwrapRef<typeof import('../../composables/useIXAPI')['useIXAPI']>
     readonly useIXHeaders: UnwrapRef<typeof import('../../composables/useIXAPI')['useIXHeaders']>
     readonly useIXLinks: UnwrapRef<typeof import('../../composables/useIXLinks')['useIXLinks']>
@@ -1559,7 +1559,7 @@ declare module '@vue/runtime-core' {
     readonly useHead: UnwrapRef<typeof import('@unhead/vue')['useHead']>
     readonly useHeadSafe: UnwrapRef<typeof import('@unhead/vue')['useHeadSafe']>
     readonly useHoursLeft: UnwrapRef<typeof import('../../composables/Utils/useHelpers')['useHoursLeft']>
-    readonly useI18n: UnwrapRef<typeof import('../../../../node_modules/vue-i18n/dist/vue-i18n.runtime')['useI18n']>
+    readonly useI18n: UnwrapRef<typeof import('../../../../node_modules/vue-i18n/dist/vue-i18n')['useI18n']>
     readonly useIXAPI: UnwrapRef<typeof import('../../composables/useIXAPI')['useIXAPI']>
     readonly useIXHeaders: UnwrapRef<typeof import('../../composables/useIXAPI')['useIXHeaders']>
     readonly useIXLinks: UnwrapRef<typeof import('../../composables/useIXLinks')['useIXLinks']>

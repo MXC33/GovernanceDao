@@ -48,6 +48,6 @@ export { useNotifications } from '../composables/Utils/useNotifications';
 export { useTransactions } from '../composables/Utils/useTransaction';
 export { useGqlHeaders, useGqlToken, useGqlCors, useGqlHost, useGql, useGqlError, useAsyncGql } from '../../../node_modules/nuxt-graphql-client/dist/runtime/composables/index';
 export { GqlAuthed, GqlAvatarNFT, GqlBaseLevelCapacities, GqlBurnedAvatar, GqlCurrencies, GqlEternaLabsOrderCosts, GqlEternaLabsOrderInfo, GqlEthNFTs, GqlFacilityUpgradeCooldown, GqlFacilityUpgradeOrderCosts, GqlFacilityUpgradeOrderInfo, GqlGGSaleInfo, GqlGlobalWasteSystemOrderCosts, GqlGlobalWasteSystemOrderInfo, GqlGravityGradeNFTBalance, GqlIsGGEligible, GqlLand, GqlLandmarks, GqlLuckyCatRaffle, GqlNewLandsOrderCosts, GqlNewLandsOrderInfo, GqlOldStakedOnTile, GqlOldWasteNonce, GqlPlayerBaseLevel, GqlRelayerFee, GqlRovers, GqlStakedGenesisNFT, GqlStakedGenesisNFTEth, GqlStakedMCNFT, GqlStakedOnTile, GqlTokenInfo, GqlTokens, GqlUniqueLandWithInfo, GqlUniquePixWithInfoFromId, GqlWasteNonce, GqlBadgeNFT } from '#gql';
-export { useI18n } from '../../../node_modules/vue-i18n/dist/vue-i18n.runtime';
+export { useI18n } from '../../../node_modules/vue-i18n/dist/vue-i18n';
 export { useRouteBaseName, useLocalePath, useLocaleRoute, useSwitchLocalePath, useLocaleHead, useBrowserLocale, useCookieLocale, defineI18nRoute, defineI18nLocale, defineI18nConfig } from '../../../node_modules/@nuxtjs/i18n/dist/runtime/composables';
 export { definePageMeta } from '../../../node_modules/nuxt/dist/pages/runtime/composables';
