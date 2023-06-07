@@ -53,7 +53,6 @@ const showFilters = ref(false)
 
 const toggleFilterDrawer = () => {
   showFilters.value = !showFilters.value
-  console.log(showFilters.value)
 }
 
 const { data, columns, context = 'collection' } = defineProps<{
