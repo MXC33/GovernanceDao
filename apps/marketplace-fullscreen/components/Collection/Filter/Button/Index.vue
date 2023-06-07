@@ -1,8 +1,9 @@
 <template lang="pug">
-HList(cut="top-right sm b-gray-600 hover:(b-gray-500)" bg="gray-600 hover:gray-500" items="center" space-x="4" px="3" py="2" cursor="pointer" @click="toggle" :selected="isSelected" group v-if="isSelected")
-  span(color="gray-200 group-hover:gray-100" text="sm" translate-y="0.5" font="bold")
+HList(cut="top-right xs md:top-right sm b-gray-600 hover:(b-gray-500)" bg="gray-600 hover:gray-500" items="center" space-x="4" px="3" py="2" cursor="pointer" @click="toggle" :selected="isSelected" group v-if="isSelected")
+  span(color="md:gray-200 group-hover:gray-100" text="xs md:sm" translate-y="0.5" font="bold")
     slot()
-  CloseIcon(w="3")
+  HList(items="center" translate-y="0.2")
+    CloseIcon(w="2 md:3")
 </template>
 
 <script lang="ts" setup>

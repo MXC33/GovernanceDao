@@ -1,22 +1,27 @@
 <template lang="pug">
-VList(max-w="full" overflow-x="auto" w="full")
-  table(bg="gray-900")
-    //- colgroup
-    //-   col(v-for="(column, index) in columns" :style="getColumnStyle(column)")
+VList(w="full")
+  Transition(name="slide-left")
+    CollectionFilterButtonContainer(:is-open="isOpen")
 
-    TableHead()
-      template(v-for="(column, index) in columns")
-        TableCellHead(:column="column" :index="index" :sort-field="sort" @select-field="selectSortField", @toggle-sort="toggleSortDirection" pos="sticky top-(-0.2)" :drawer="inDrawer" v-if="column.type != 'buttons'") {{ column.label }}
+  VList(max-w="full" overflow-x="auto" w="full")
 
-    tbody(divide-y="1")
-      TableRow(v-for="(row, index) in sortedRows" :key="index")
-        TableCell(v-for="column in columns" pos="on-buttons:(sticky right-0)" :buttons="column.type == 'buttons'") 
-          slot(:name="`item-${column.rowKey}`" :row="row" :column="column" v-if="column.type != 'buttons'")
-            TableCellValue(:column="column" :row="row")
+    table(bg="gray-900")
+      //- colgroup
+      //-   col(v-for="(column, index) in columns" :style="getColumnStyle(column)")
 
-          HList(v-else space-x="3" justify="end" w="full")
-            slot(name="item-buttons" :buttons="column.buttons" :row="row")
-              TableButton(:row="row" :button="button" v-for="button in column.buttons") {{ button.text }}
+      TableHead()
+        template(v-for="(column, index) in columns")
+          TableCellHead(:column="column" :index="index" :sort-field="sort" @select-field="selectSortField", @toggle-sort="toggleSortDirection" pos="sticky top-(-0.2)" :drawer="inDrawer" v-if="column.type != 'buttons'") {{ column.label }}
+
+      tbody(divide-y="1")
+        TableRow(v-for="(row, index) in sortedRows" :key="index")
+          TableCell(v-for="column in columns" pos="on-buttons:(sticky right-0)" :buttons="column.type == 'buttons'") 
+            slot(:name="`item-${column.rowKey}`" :row="row" :column="column" v-if="column.type != 'buttons'")
+              TableCellValue(:column="column" :row="row")
+
+            HList(v-else space-x="3" justify="end" w="full")
+              slot(name="item-buttons" :buttons="column.buttons" :row="row")
+                TableButton(:row="row" :button="button" v-for="button in column.buttons") {{ button.text }}
 
 </template>
 
@@ -30,6 +35,7 @@ const { rows, columns, id } = defineProps<{
   inDrawer?: boolean,
   loading?: boolean,
   error?: string,
+  isOpen: boolean
 }>()
 
 const { toggleSortDirection, selectSortField, sort } = useTableSort(id)

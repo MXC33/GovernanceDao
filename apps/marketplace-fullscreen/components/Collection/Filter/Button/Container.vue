@@ -1,6 +1,6 @@
 <template lang="pug">
 Transition(name="slide-left")
-  HList(w="full" bg="ix-black" pos="sticky top-52" z="3" px="0 on-open:3" flex-wrap="~" space-x="4" :open="isOpen" gap="0.5" p="2 md:b-4")
+  HList(v-if="numberOfSelected" w="full" bg="ix-black" pos="sticky top-50 on-table:sticky top-30" z="3" px="0 on-open:3" flex-wrap="~" space-x="4" :open="isOpen" :active="isFilterActive" :table="isTable" gap="0.5" p="b-0 on-active:b-3")
     template(v-for="(item, filterIndex) in activeFilters")
       CollectionFilterButton(v-model="activeFilters[filterIndex].value[index].selected" v-for="(option, index) in item.value") {{ option.name }}
 
@@ -14,7 +14,7 @@ defineProps<{
   isOpen: boolean
 }>()
 
-const { activeFilters } = useCollectionSettings()
+const { activeFilters, displayType } = useCollectionSettings()
 
 const numberOfSelected = computed(() => {
   return activeFilters.value.reduce((count, filter) => {
@@ -25,6 +25,12 @@ const numberOfSelected = computed(() => {
 const moreThanOneSelected = computed(() => {
   return numberOfSelected.value > 1;
 });
+
+const isFilterActive = computed(() => activeFilters.value.length > 1)
+
+console.log(isFilterActive.value)
+
+const isTable = computed(() => displayType.value == 'list')
 
 const clearFilters = () => {
   activeFilters.value.forEach(filter => {
