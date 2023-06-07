@@ -5,7 +5,7 @@ VList(space-y="6")
 
     CollectionSingleItemSubHeader()
       template(#default)
-        TokenCollection(:token="item" color="ix-ne")
+        TokenCollection(:token="item" color="ix-ne" @click="backToCollection" cursor="pointer")
 
   AttributeList(:attributes="attributes" v-if="item")
 
@@ -80,6 +80,10 @@ const saleColumns: TableColumn<Sale>[] = [
     type: 'buttons', buttons: []
   }
 ]
+
+const backToCollection = () => {
+  navigateTo('/assets/polygon/' + item.collection)
+}
 
 const addSaleToCart = (sale: Sale) => {
   addToCart(item, sale)
