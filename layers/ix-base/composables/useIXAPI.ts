@@ -26,7 +26,7 @@ export const useIXAPI = () => {
 
   const onUnauthorized = async () => {
     logoutWallet()
-    await navigateTo('/connect')
+    await callWithNuxt(app, () => navigateTo('/connect'))
   }
 
   const fetchIXAPI = async (path: string, method: 'GET' | 'POST' = 'GET', body?: object) => {
@@ -42,7 +42,7 @@ export const useIXAPI = () => {
     } catch (err) {
 
       console.log("Has error", err)
-      await callWithNuxt(app, () => onUnauthorized())
+      await onUnauthorized()
       return null
     }
   }
