@@ -9,6 +9,7 @@ Transition(name="fade" mode="out-in" )
         div(w="12" h="12")
           TokenImage(:token="row" w="12" h="12" :key="getTokenKey(row)")
         TokenName(:token="row" capitalize="~" :key="getTokenKey(row)")
+        span(v-if="context == 'my-assets'" :key="(getTokenKey(row))" color="gray-200" font="normal") x{{ row.my_shares }}
 
 </template>
 
