@@ -15,6 +15,9 @@
 </template>
 
 <script setup lang="ts">
+useHead({
+  title: "Marketplace | PlanetIX"
+})
 import 'vue3-easy-data-table/dist/style.css';
 
 const globalY = useGlobalWindowScroll()

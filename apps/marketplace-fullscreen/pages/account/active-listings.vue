@@ -7,6 +7,10 @@ Collection(:data="splitSales" :columns="columns" :context="'active-listings'" v-
 
 
 <script lang="ts" setup>
+useHead({
+  title: "Active listings | Marketplace | PlanetIX"
+})
+
 import type { TableColumn } from "~/composables/useTable";
 import type { IXToken } from "@ix/base/composables/Token/useIXToken";
 import type { CollectionData } from "~/composables/useCollection";
