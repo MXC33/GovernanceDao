@@ -24,14 +24,14 @@ Popup()
 <script lang="ts" setup>
 import type { IXToken } from "@ix/base/composables/Token/useIXToken"
 import BiddingIcon from '~/assets/icons/bidding.svg'
-import {useAcceptingItem, useOfferContract} from "~/composables/useOffer";
+import { useAcceptingItem, useOfferContract } from "~/composables/useOffer";
 
 const isLoading = ref(false)
 
 const { createAcceptingItem, acceptingItem } = useAcceptingItem()
 const { acceptOffer } = useOfferContract()
 const { itemsInvalid } = useTransactions()
-
+const { displaySnack } = useSnackNotifications()
 const { displayPopup } = usePopups()
 
 const { addError } = useContractErrors()
@@ -51,13 +51,17 @@ const onClickAccept = async () => {
     console.log("ERR", err)
     //@ts-ignore
     const message = err?.message
+    isLoading.value = false
+
+    if (message?.includes('rejected'))
+      return displaySnack('transaction-rejected')
+
     addError({
       title: 'Error accepting offer',
       serverError: message
     })
   }
 
-  isLoading.value = false
 }
 
 const { item } = defineProps<{

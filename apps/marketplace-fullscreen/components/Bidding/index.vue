@@ -30,6 +30,7 @@ const isLoading = ref(false)
 const { createBidItems, bidItems } = useBiddingItems()
 const { bidItem } = useBiddingContract()
 const { itemsInvalid } = useTransactions()
+const { displaySnack } = useSnackNotifications()
 
 const { displayPopup } = usePopups()
 
@@ -49,13 +50,17 @@ const onClickBid = async () => {
     console.log("ERR", err)
     //@ts-ignore
     const message = err?.message
+    isLoading.value = false
+
+    if (message?.includes('rejected'))
+      return displaySnack('transaction-rejected')
+
     addError({
       title: 'Error bidding',
       serverError: message
     })
   }
 
-  isLoading.value = false
 }
 
 const { items } = defineProps<{
