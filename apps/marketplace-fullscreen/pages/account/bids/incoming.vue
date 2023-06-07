@@ -6,6 +6,9 @@ Collection(:data="data" :columns="columns" context="incoming-bids" :loading="pen
 
 
 <script lang="ts" setup>
+useHead({
+  title: "Incoming bids | Marketplace | PlanetIX"
+})
 import type { TableColumn } from "~/composables/useTable";
 import type { IXToken } from "@ix/base/composables/Token/useIXToken";
 

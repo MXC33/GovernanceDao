@@ -11,6 +11,9 @@ Collection(:data="data" v-if="data" context="my-assets" :loading="pending")
 
 <script lang="ts" setup>
 
+useHead({
+  title: "My Assets | Marketplace | PlanetIX"
+})
 const { myAssetsURL } = useCollectionsURL()
 
 const { data: data, execute: fetchCollection, loadNextPage, setupCollectionListeners, pending } = useCollectionData(myAssetsURL('polygon'), {
