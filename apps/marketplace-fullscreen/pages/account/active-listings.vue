@@ -1,5 +1,5 @@
 <template lang="pug">
-Collection(:data="splitSales" :columns="columns" :context="'active-listings'" v-if="data" :hide-grid="true")
+Collection(:data="splitSales" :columns="columns" :context="'active-listings'" v-if="data" :hide-grid="true" :loading="pending")
   template(#menu)
     AccountMenu()
 
@@ -13,7 +13,7 @@ import type { CollectionData } from "~/composables/useCollection";
 
 const { myAssetsURL } = useCollectionsURL()
 
-const { data: data, execute: fetchCollection, setupCollectionListeners, refresh: refresh } = useCollectionData(myAssetsURL('polygon'), {
+const { data: data, execute: fetchCollection, setupCollectionListeners, refresh: refresh, pending } = useCollectionData(myAssetsURL('polygon'), {
   filter: {
     owned: true,
     type: 3,
@@ -76,7 +76,7 @@ const { removeList } = useListEndpoints()
 const { displayPopup } = usePopups()
 
 const cancelBidOnClick = async (token: IXToken) => {
-  if(token.sales?.length > 0){
+  if (token.sales?.length > 0) {
     await removeList(token._index, token.token_id, token.sales[0].sale_id, token.network, token.collection)
     await refresh()
   }

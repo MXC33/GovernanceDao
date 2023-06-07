@@ -11,12 +11,16 @@ VList(max-w="full" overflow-x="auto" w="full")
     tbody(divide-y="1")
       TableRow(v-for="(row, index) in sortedRows" :key="index")
         TableCell(v-for="column in columns" pos="on-buttons:(sticky right-0)" :buttons="column.type == 'buttons'") 
-          slot(:name="`item-${column.rowKey}`" :row="row" :column="column" v-if="column.type != 'buttons'")
-            TableCellValue(:column="column" :row="row")
+          template(v-if="loading")
+            HelperSkeleton(h="6")
 
-          HList(v-else space-x="3" justify="end" w="full")
-            slot(name="item-buttons" :buttons="column.buttons" :row="row")
-              TableButton(:row="row" :button="button" v-for="button in column.buttons") {{ button.text }}
+          template(v-else)
+            slot(:name="`item-${column.rowKey}`" :row="row" :column="column" v-if="column.type != 'buttons'")
+              TableCellValue(:column="column" :row="row")
+
+            HList(v-else space-x="3" justify="end" w="full")
+              slot(name="item-buttons" :buttons="column.buttons" :row="row")
+                TableButton(:row="row" :button="button" v-for="button in column.buttons") {{ button.text }}
 
 </template>
 
@@ -31,7 +35,7 @@ const { rows, columns, id } = defineProps<{
   loading?: boolean,
   error?: string,
 }>()
-
+const ghostRows = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 const { toggleSortDirection, selectSortField, sort } = useTableSort(id)
 const { sortRows } = useTable()
 const sortedRows = computed(() => sortRows(columns, rows, sort.value))
