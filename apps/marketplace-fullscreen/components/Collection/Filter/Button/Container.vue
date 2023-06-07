@@ -28,8 +28,6 @@ const moreThanOneSelected = computed(() => {
 
 const isFilterActive = computed(() => activeFilters.value.length > 1)
 
-console.log(isFilterActive.value)
-
 const isTable = computed(() => displayType.value == 'list')
 
 const clearFilters = () => {
