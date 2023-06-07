@@ -35,7 +35,6 @@ const { rows, columns, id } = defineProps<{
   loading?: boolean,
   error?: string,
 }>()
-const ghostRows = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 const { toggleSortDirection, selectSortField, sort } = useTableSort(id)
 const { sortRows } = useTable()
 const sortedRows = computed(() => sortRows(columns, rows, sort.value))

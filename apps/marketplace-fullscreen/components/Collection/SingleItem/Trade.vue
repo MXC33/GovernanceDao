@@ -41,7 +41,7 @@ VList(space-y="6")
         span() There is no offers for this item
 
       Table(:columns="offerColumns" :rows="item.bids" id="offers" :in-drawer="true" v-else="item.bids.length > 0")
-        template(#item-action="{row}" )
+        template(#item-buttons="{row}" )
           button(@click="onClickAcceptOffer(row)" uppercase="~" bg="gray-500 hover:gray-400" transition="all" cut="bottom-right sm" p="x-6 y-3") Accept
 
 </template>
@@ -80,9 +80,7 @@ const saleColumns: TableColumn<Sale>[] = [
       return row.player_username
     }, sortable: true
   },
-  {
-    type: 'buttons', buttons: []
-  }
+  { type: 'buttons' }
 ]
 
 const addSaleToCart = (sale: Sale) => {
@@ -93,25 +91,27 @@ const removeListing = (sale: Sale) => {
   console.log("remove listing")
 }
 
-const offerColumns: TableColumn<Bid>[] = [
-  { label: "Sale Price", type: "ixt", rowKey: "price", sortable: true },
-  { label: "USD Price", type: "usd", rowKey: "price", sortable: true },
-  { label: "Quanitity", rowKey: "quantity", sortable: true },
-  {
-    label: "Floor Difference", rowKey: "price", getValue(row) {
-      const difference = roundToDecimals(
-        ((row.price * 100) / item.sale_price) - 100
-        , 2)
-      return Math.abs(difference) + '% ' + (difference < 0 ? 'below' : 'above')
-    }, sortable: true
-  },
-  { label: "Expiration", type: "date", rowKey: "due_date", sortable: true }
-]
-if (item.my_shares > 0)
-  offerColumns.push(
-    { label: "Action", rowKey: "action", width: 80 }
-  )
+const offerColumns = computed<TableColumn<Bid>[]>(() => {
+  const baseColumns: TableColumn<Bid>[] = [
+    { label: "Sale Price", type: "ixt", rowKey: "price", sortable: true },
+    { label: "USD Price", type: "usd", rowKey: "price", sortable: true },
+    { label: "Quanitity", rowKey: "quantity", sortable: true },
+    {
+      label: "Floor Difference", rowKey: "price", getValue(row) {
+        const difference = roundToDecimals(
+          ((row.price * 100) / item.sale_price) - 100
+          , 2)
+        return Math.abs(difference) + '% ' + (difference < 0 ? 'below' : 'above')
+      }, sortable: true
+    },
+    { label: "Expiration", type: "date", rowKey: "due_date", sortable: true }
 
+  ]
+  if (item.my_shares > 0)
+    baseColumns.push({ type: 'buttons' })
+
+  return baseColumns
+})
 
 const { displayPopup } = usePopups()
 

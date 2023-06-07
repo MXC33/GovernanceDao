@@ -5,7 +5,7 @@ Transition(name="fade" mode="out-in" )
       CollectionGridItem.collection-grid-item(:token="token" v-for="token in items" b="gray-400" :context="context")
 
     template(v-else)
-      CollectionGridItemSkeleton(v-for="item in ghostRows")
+      CollectionGridItemSkeleton(v-for="item in items.length > ghostRows.length ? items : ghostRows")
 
   Table(v-else :columns="columns" :rows="items" :id="context" :loading="loading")
     template(#item-name="{row}")
