@@ -8,8 +8,8 @@ VList(flex-grow="1" min-h="0" pos="relative" p="4 t-4 b-4 md:(8 b-30)" space-y="
       ClientOnly
         CertifiedIcon(w="6")
 
-    template(#attributes)
-      AttributeList(:attributes="attributes" v-if="data")
+    //- template(#attributes)
+    //-   AttributeList(:attributes="attributes" v-if="data")
 
   slot(name="menu")
 
