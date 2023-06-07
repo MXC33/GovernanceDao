@@ -21,7 +21,7 @@ export const useIXAPI = () => {
   const app = useNuxtApp()
 
   const baseURL = "https://api.planetix.com/api/v1"
-  const loginURL = `${baseURL}/auth/login`
+  const loginURL = `${baseURL}/auth/login-mpfs`
   const usernameFromWalletAddressURL = `${baseURL}/mission-controll/username/wallet`
 
   const onUnauthorized = async () => {
