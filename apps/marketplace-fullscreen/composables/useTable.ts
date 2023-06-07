@@ -39,7 +39,7 @@ export interface TableColumnAsset extends TableColumnBase {
 
 export interface TableButtonColumn<T extends TableRow> extends TableColumnBase {
   type: 'buttons'
-  buttons: TableButton<T>[]
+  buttons?: TableButton<T>[]
 }
 
 export type TableColumn<T extends TableRow> = TableColumnText<T> | TableButtonColumn<T>

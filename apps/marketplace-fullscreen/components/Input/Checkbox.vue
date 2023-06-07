@@ -14,11 +14,6 @@ import CheckmarkIcon from 'assets/icons/checkmark.svg'
 const isSelected = defineModel<boolean>()
 
 const toggle = () => {
-  console.log("Click toggle checkbox", isSelected.value)
   isSelected.value = !isSelected.value
 }
-
-watch(isSelected, (newValue, oldValue) => {
-  console.log(`isSelected changed from ${oldValue} to ${newValue}`)
-})
 </script>

@@ -46,7 +46,7 @@ export const useTransactions = () => {
     items.some((item) => !item.ixtPrice || !item.shares.value)
 
   const priceRenderString = (price: number | undefined) =>
-    String(price ? roundToDecimals(price, 4) : '--')
+    String(price ? roundToDecimals(price, 6) : '--')
 
   return {
     priceRenderString,

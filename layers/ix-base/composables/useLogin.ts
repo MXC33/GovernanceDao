@@ -1,5 +1,4 @@
 import { WalletConnector } from "./Contract/useWalletConnectors";
-import {BASE_API_ENDPOINT_URL, useIXHeaders} from "@ix/marketplace/composables/api/api";
 
 export interface APIUser {
   id: number;
@@ -58,7 +57,7 @@ export const useLogin = () => {
     try {
       const authUser = await loginIX(walletSigningToken.value) as APIAuthResponse
       authUserData.value = authUser
-      authTokenExpirationTime.value = new Date(new Date().getTime()+(1000 * 60 * 60 * 24)).getTime() // 1 day
+      authTokenExpirationTime.value = new Date(new Date().getTime() + (1000 * 60 * 60 * 24)).getTime() // 1 day
       setRefreshToken(authTokenExpirationTime.value - Date.now() - timeGap)
     } catch (error) {
       console.log("No user")
@@ -115,7 +114,7 @@ export const useLogin = () => {
       clearTimeout(authTokenExpirationTimeout)
 
       try {
-        const {data, status}: {data: { access_token: string }, status: number} = await $fetch(BASE_API_ENDPOINT_URL + '/auth/refresh', {
+        const { data, status }: { data: { access_token: string }, status: number } = await $fetch(BASE_API_ENDPOINT_URL + '/auth/refresh', {
           method: 'POST',
           headers: {
             ...headers.value
@@ -123,7 +122,7 @@ export const useLogin = () => {
         })
 
         if (authUserData && authUserData.value) {
-          authTokenExpirationTime.value = new Date(new Date().getTime()+(1000 * 60 * 60 * 24)).getTime() // 1 day
+          authTokenExpirationTime.value = new Date(new Date().getTime() + (1000 * 60 * 60 * 24)).getTime() // 1 day
           authUserData.value.access_token = data.access_token
           setRefreshToken(authTokenExpirationTime.value - Date.now() - timeGap)
           console.log('token updated')
@@ -132,7 +131,7 @@ export const useLogin = () => {
       } catch (error) {
         if (error.response && error.response.status !== 401 && tryingToRefresh <= 3) {
           setRefreshToken(0)
-          tryingToRefresh ++
+          tryingToRefresh++
         } else {
           logoutWallet()
           removeUser()
