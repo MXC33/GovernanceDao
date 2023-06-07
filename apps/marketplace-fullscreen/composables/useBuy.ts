@@ -1,4 +1,11 @@
-import { AdvancedOrder, Bid, IXToken, OrderMessage, Sale, SingleItemData } from "@ix/base/composables/Token/useIXToken";
+import {
+  AdvancedOrder,
+  Bid,
+  IXToken,
+  OrderMessage,
+  Sale,
+  SingleItemData
+} from "@ix/base/composables/Token/useIXToken";
 import { AdjustableNumber } from "@ix/base/composables/Utils/useAdjustableNumber";
 import { useSeaportContract } from "~/composables/useAssetContracts";
 import { conduitKey } from "@ix/base/composables/Contract/WalletAddresses";
