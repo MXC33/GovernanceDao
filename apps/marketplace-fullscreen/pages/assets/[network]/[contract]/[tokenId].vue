@@ -14,4 +14,8 @@ const { data: singleItem, execute: fetchToken } = await useAssetAPI({
 })
 
 await fetchToken()
+
+useHead({
+  title: (singleItem.value?.name ? singleItem.value.name + " | " : "") + "Marketplace | PlanetIX"
+})
 </script>

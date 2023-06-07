@@ -5,6 +5,11 @@ VList(flex-grow="1" pos="relative" min-h="0" justify="center" p="3" items="cente
 
 
 <script lang="ts" setup>
+
+useHead({
+  title: "Connect | Marketplace | PlanetIX"
+})
+
 const { isLoggedInAndConnected } = useLogin()
 const redirect = useLoginRedirect()
 const isDirty = ref(false)
