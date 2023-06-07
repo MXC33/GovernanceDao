@@ -14,10 +14,12 @@ export interface SingleItemResponse {
   data: SingleItemData
 }
 
-export const useAssetAPI = (identifier: AssetId) =>
-  useAsyncDataState(`nft-data-${Object.values(identifier).join('-')}`, () => {
+export const useAssetAPI = (identifier: AssetId) => {
+  const { fetchIXAPI } = useIXAPI()
+  return useAsyncDataState(`nft-data-${Object.values(identifier).join('-')}`, () => {
     const { network, contract, tokenId } = identifier
     return fetchIXAPI('collections/' + network + '/' + contract + '/' + tokenId) as Promise<SingleItemResponse>
   }, {
     transform: (response) => response?.data
   })
+}

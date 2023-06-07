@@ -26,14 +26,12 @@ export function useAsyncDataState<T extends O, O>(key: string, fetchData: () => 
     if (process.client)
       pending.value = true
 
-    console.log("FETCH", pending.value, key + '-pending')
     const response = await fetchData()
     const data = transform(response)
 
     if (process.client)
       pending.value = false
 
-    console.log("FETCH2", pending.value, key + '-pending')
     return data
   }
 
