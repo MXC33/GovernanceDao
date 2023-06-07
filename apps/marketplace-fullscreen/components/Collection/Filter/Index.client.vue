@@ -12,6 +12,8 @@ HList(pos="sticky top-48 md:(sticky top-34)" z="4" b="on-scrolling:t-1 gray-600"
 
           TokenName(:token="item" capitalize="~" :key="'name' + getTokenKey(item)")
 
+    //- CollectionFilterSort()
+
     CollectionFilterToggleDisplay(v-if="!hideToggle")
 
 </template>
