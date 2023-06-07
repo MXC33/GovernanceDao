@@ -3,10 +3,10 @@ VList(space-y="4")
 
   VList(pt="2" space-y="2")
     VList(w="full" space-y="1")
+      span(text="lg" font="bold" @click="backToCollection" cursor="pointer") {{ item.name }}
       CollectionSingleItemSubHeader()
         template(#default)
           TokenCollection(:token="item" color="ix-ne")
-      span(text="lg" font="bold") {{ item.name }}
 
     AttributeList(:attributes="attributes" v-if="item")
 
@@ -70,6 +70,10 @@ const saleColumns: TableColumn<Sale>[] = [
 
 const addSaleToCart = (sale: Sale) => {
   addToCart(item, sale)
+}
+
+const backToCollection = () => {
+  navigateTo('/assets/polygon/' + item.collection)
 }
 
 const playerOwnedSale = (sale: Sale) => {
