@@ -1,5 +1,5 @@
 <template lang="pug">
-Collection(:data="data" v-if="data" :context="'my-assets'")
+Collection(:data="data" v-if="data" context="my-assets" :loading="pending")
   template(#menu)
     AccountMenu()
 
@@ -13,7 +13,7 @@ Collection(:data="data" v-if="data" :context="'my-assets'")
 
 const { myAssetsURL } = useCollectionsURL()
 
-const { data: data, execute: fetchCollection, loadNextPage, setupCollectionListeners } = useCollectionData(myAssetsURL('polygon'), {
+const { data: data, execute: fetchCollection, loadNextPage, setupCollectionListeners, pending } = useCollectionData(myAssetsURL('polygon'), {
   filter: {
     owned: true,
     type: 0,

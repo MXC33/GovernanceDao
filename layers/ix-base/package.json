@@ -5,14 +5,10 @@
   "main": "./nuxt.config.ts",
   "scripts": {
     "dev": "nuxi dev --port 3333",
-    "story": "nuxi dev --port 3333",
     "build": "yarn run prepare && nuxt build",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "prepare": "nuxi prepare",
-    "story:dev": "histoire dev",
-    "story:build": "histoire build",
-    "story:preview": "histoire preview",
     "lint": "eslint .",
     "postinstall": "yarn run prepare",
     "abis": "node create-abis.js"

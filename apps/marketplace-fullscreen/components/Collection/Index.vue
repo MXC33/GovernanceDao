@@ -20,7 +20,7 @@ VList(flex-grow="1" min-h="0" pos="relative" p="4 t-4 b-4 md:(8 b-30)" space-y="
       Transition(name="slide-left")
         CollectionFilterSlideout(:items="data.filters" v-if="showFilters && data" z="99")
 
-    CollectionList(v-if="data" :columns="renderColumns" :items="data?.nfts" :hide-grid="hideGrid", :context="context" :show-filters="showFilters")
+    CollectionList(v-if="data" :columns="renderColumns" :items="data?.nfts" :hide-grid="hideGrid", :context="context" :show-filters="showFilters" :loading="loading")
 
   slot(name="bottom")
 
@@ -60,7 +60,8 @@ const { data, columns, context = 'collection' } = defineProps<{
   data?: CollectionData,
   columns?: TableColumn<IXToken>[],
   hideGrid?: boolean,
-  context?: CollectionContext
+  context?: CollectionContext,
+  loading?: boolean
 }>()
 
 const collectionName = computed(() => {

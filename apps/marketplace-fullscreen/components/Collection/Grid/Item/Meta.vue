@@ -2,7 +2,7 @@
 VList(w="full" flex-grow="1" items="start" bg="gray-900" p="6" pos="relative")
   header(font="bold" w="full")
     HList(items="center" space-x="3")
-      TokenName(:token="token" text="base md:xl ellipsis" capitalize="~")
+      TokenName(:token="token" :key="getTokenKey(token)" text="base md:xl ellipsis" capitalize="~")
 
       div(v-if="is1155" text="lt-md:xs") x{{showAssetAmount}}
 
@@ -23,7 +23,7 @@ import type { IXToken } from '@ix/base/composables/Token/useIXToken';
 import type { CollectionContext } from '~/composables/useCollection';
 
 const is1155 = computed(() => ERC1155Addresses.includes(token.collection))
-
+const { getTokenKey } = useTokens()
 
 const showAssetAmount = computed(() => {
   if (context == 'my-assets')

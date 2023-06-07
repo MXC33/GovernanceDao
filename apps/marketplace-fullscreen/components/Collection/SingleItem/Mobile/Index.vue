@@ -26,7 +26,7 @@ VList(space-y="4")
         template(#item-action="{row}")
           button(@click="addSaleToCart(row)" bg="gray-500 hover:gray-400" transition="all" cut="bottom-right sm" p="x-3 y-1 md:x-6 y-3" v-if="!playerOwnedSale(row)")
             CartIcon(w="3 md:6")
-          button(@click="removeListing(row)" bg="gray-500 hover:gray-400" transition="all" cut="bottom-right sm" p="x-3 y-1 md:x-6 y-3" v-else)
+          button(@click="cancelListingOnClick(row)" bg="gray-500 hover:gray-400" transition="all" cut="bottom-right sm" p="x-3 y-1 md:x-6 y-3" v-else)
             TrashIcon(w="3 md:6" fill="white")
 
       HList(v-else px="6" py="6" font="bold" color="gray-400" items="center" justify="center") 
@@ -78,8 +78,14 @@ const playerOwnedSale = (sale: Sale) => {
   return false
 }
 
-const removeListing = (sale: Sale) => {
-  console.log("remove listing")
+const cancelListingOnClick = async (sale: Sale) => {
+  displayPopup({
+    type: 'unlist-item',
+    item: {
+      ...item,
+      sale
+    }
+  })
 }
 
 const offerColumns: TableColumn<Bid>[] = [

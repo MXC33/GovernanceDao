@@ -29,6 +29,7 @@ export const useBids = () => {
 
 
 export const useBidsAPI = () => {
+  const { fetchIXAPI } = useIXAPI()
   const placeBid = async (body: BiddingBody[]) => fetchIXAPI('web3/bid', 'POST', body)
 
   const removeBid = (index: string, referenceId: number, network: string, collection: string) => fetchIXAPI('web3/bid/remove/0', 'POST', {

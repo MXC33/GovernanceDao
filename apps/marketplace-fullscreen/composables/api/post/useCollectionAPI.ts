@@ -38,6 +38,8 @@ export const useCollectionsURL = () => {
 }
 
 export const useCollectionData = (url: string, options: CollectionOptions = {}) => {
+  const { fetchIXAPI } = useIXAPI()
+
   const { activeFilters, filtersAsPayload, createFilters } = useCollectionSettings()
   const activePage = ref(0)
 
@@ -52,7 +54,9 @@ export const useCollectionData = (url: string, options: CollectionOptions = {}) 
     }
   }))
 
-  const asyncState = useAsyncDataState('collection-' + url.replaceAll('/', '-') + body.value.page_key + options.filter?.type ?? '', () =>
+  const key = 'collection-' + url.replaceAll('/', '-') + body.value.page_key + options.filter?.type ?? ''
+
+  const asyncState = useAsyncDataState(key, () =>
     fetchIXAPI(url, 'POST', body.value) as Promise<CollectionResponse>, {
     transform: (item) => {
       console.log("Transformed the data", body.value, item.data)
@@ -95,9 +99,11 @@ export const useCollectionData = (url: string, options: CollectionOptions = {}) 
   }
 }
 
-export const useCollectionsData = (network = 'polygon') =>
-  useAsyncDataState('collections', () =>
+export const useCollectionsData = (network = 'polygon') => {
+  const { fetchIXAPI } = useIXAPI()
+  return useAsyncDataState('collections', () =>
     fetchIXAPI('collections/?online=true') as Promise<CollectionsResponse>, {
     transform: (item) =>
       item.data as Collection[]
   })
+}
