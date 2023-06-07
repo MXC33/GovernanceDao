@@ -1,18 +1,16 @@
 <template lang="pug">
-div(v-if="amount != 0")
-  EllipseIcon(pos="absolute" w="6" z="1")
-  //-div(font="bold").number-badge-icon {{amount}}
-  div(pos="absolute" z="2" font="bold")
-    div(p="0.5" ) {{ amount }} 
-    //-div().number-badge-icon {{ amount }} 
-    
+div(v-if="amount != 0 || amount != null")
+  //-EllipseIcon(pos="absolute" w="6")
+  //-div(pos="absolute" z="1" text="center" font="bold" pl="0.5") {{ amount }} 
+  div(pos="absolute" z="1" pl="0.5")
+    div().number-badge-icon {{ amount }} 
 </template>
 
 <style>
 .number-badge-icon{
   position: absolute;
-  width: 25px;
-  height: 25px;
+  width: 20px;
+  height: 20px;
   background: red;
   color: white;
   display: flex;
@@ -21,6 +19,7 @@ div(v-if="amount != 0")
   border-radius: 50%;
   font: bold;
   text-align: center;
+  text-size-adjust: auto;
 }
 </style>
 
