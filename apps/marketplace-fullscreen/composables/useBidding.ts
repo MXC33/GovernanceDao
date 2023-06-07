@@ -43,7 +43,7 @@ export const useBiddingItems = () => {
 }
 
 export const useBiddingContract = () => {
-  const { ixtBalance, fetchIXT } = useIXTContract()
+  const { ixtBalance, refreshIXTBalance } = useIXTContract()
 
   const createBidMessage = async (item: BiddingItem, endTime: number) => {
 
@@ -59,6 +59,7 @@ export const useBiddingContract = () => {
 
     const totalPrice = ixtPrice * shares.value
 
+    await refreshIXTBalance()
     if (!ixtBalance.value || ixtBalance.value < totalPrice) {
       /*
         Todo
