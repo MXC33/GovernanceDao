@@ -16,7 +16,7 @@ export const useIXTPrice = () => {
   }
 
   const ixtToUSD = (ixt: number) =>
-    roundToDecimals(Number(ixt) * (ixtPrice?.value ?? 0), 2)
+    roundToDecimals(Number(ixt) * (ixtPrice?.value ?? 0), 5)
 
   return {
     ixtPrice,

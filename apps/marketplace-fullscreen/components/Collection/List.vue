@@ -1,9 +1,13 @@
 <template lang="pug">
 Transition(name="fade" mode="out-in" )
   CollectionGrid(v-if="displayType == 'grid' && !hideGrid" w="full" :is-open="showFilters")
-    CollectionGridItem.collection-grid-item(:token="token" v-for="token in items" b="gray-400" :context="context")
+    template(v-if="!loading")
+      CollectionGridItem.collection-grid-item(:token="token" v-for="token in items" b="gray-400" :context="context")
 
-  Table(v-else :columns="columns" :rows="items" :id="context" :is-open="showFilters")
+    template(v-else)
+      CollectionGridItemSkeleton(v-for="item in items.length > ghostRows.length ? items : ghostRows")
+
+  Table(v-else :columns="columns" :rows="items" :id="context" :loading="loading" :is-open="showFilters")
     template(#item-name="{row}")
       HList(items="center" space-x="2" font="bold" @click="onClickItem(row)" cursor="pointer" max-w="60")
         div(w="12" h="12")
@@ -19,13 +23,15 @@ import type { CollectionContext } from '~/composables/useCollection';
 import type { TableColumn } from '~/composables/useTable'
 const { displayType } = useCollectionSettings()
 const { getTokenKey } = useTokens()
+const ghostRows = [1, 2, 3, 4, 5, 6, 7, 8]
 
 const { items, columns, context = 'collection' } = defineProps<{
   items: IXToken[],
   columns: TableColumn<IXToken>[],
   hideGrid?: boolean,
   showFilters: boolean,
-  context?: CollectionContext
+  context?: CollectionContext,
+  loading?: boolean
 }>()
 
 const onClickItem = (row: IXToken) => {

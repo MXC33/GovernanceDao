@@ -1,5 +1,5 @@
 <template lang="pug">
-Collection(:data="data" :columns="columns" :context="'incoming-bids'" v-if="data" :hide-grid="true")
+Collection(:data="data" :columns="columns" context="incoming-bids" :loading="pending" v-if="data" :hide-grid="true")
   template(#menu)
     AccountMenu()
 </template>
@@ -11,7 +11,7 @@ import type { IXToken } from "@ix/base/composables/Token/useIXToken";
 
 const { myAssetsURL } = useCollectionsURL()
 
-const { data: data, execute: fetchCollection, setupCollectionListeners } = useCollectionData(myAssetsURL('polygon'), {
+const { data: data, execute: fetchCollection, setupCollectionListeners, pending } = useCollectionData(myAssetsURL('polygon'), {
   filter: {
     owned: true,
     type: 1,

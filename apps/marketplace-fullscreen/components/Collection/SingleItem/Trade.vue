@@ -5,14 +5,13 @@ VList(space-y="6")
 
     CollectionSingleItemSubHeader()
       template(#default)
-        TokenCollection(:token="item" color="ix-ne" @click="backToCollection" cursor="pointer")
+
+  NuxtLink(:to="collectionLink")
+    TokenCollection(:token="item" color="ix-ne")
 
   AttributeList(:attributes="attributes" v-if="item")
 
-  //- Listing(:item="item")
-
   TradeModule(:item="item")
-
 
   ContentDrawer(:start-open="true" :is-neutral="true" bg="gray-900")
     template(#titleicon)
@@ -43,7 +42,7 @@ VList(space-y="6")
         span() There is no offers for this item
 
       Table(:columns="offerColumns" :rows="item.bids" id="offers" :in-drawer="true" v-else="item.bids.length > 0")
-        template(#item-action="{row}" )
+        template(#item-buttons="{row}" )
           button(@click="onClickAcceptOffer(row)" uppercase="~" bg="gray-500 hover:gray-400" transition="all" cut="bottom-right sm" p="x-6 y-3") Accept
 
 </template>
@@ -60,6 +59,11 @@ const { item } = defineProps<{
   item: SingleItemData
 }>()
 
+const collectionLink = computed(() => {
+  const { network, collection } = item
+  return `/assets/${network}/${collection}`
+})
+
 const { getSingleAttributes } = useDefaulAttributes()
 const { addToCart, hasItemInCart } = useCart()
 const { walletAdress } = useWallet()
@@ -67,6 +71,7 @@ const attributes = computed(() => getSingleAttributes(item))
 
 const saleColumns: TableColumn<Sale>[] = [
   { label: "Sale Price", type: "ixt", rowKey: "price", sortable: true },
+  { label: "USD Price", type: "usd", rowKey: "price", sortable: true },
   { label: "Quanitity", rowKey: "quantity", sortable: true },
   { label: "Expiration", type: "date", rowKey: "endtime", sortable: true },
   {
@@ -76,9 +81,7 @@ const saleColumns: TableColumn<Sale>[] = [
       return row.player_username
     }, sortable: true
   },
-  {
-    type: 'buttons', buttons: []
-  }
+  { type: 'buttons' }
 ]
 
 const backToCollection = () => {
@@ -93,26 +96,30 @@ const removeListing = (sale: Sale) => {
   console.log("remove listing")
 }
 
-const offerColumns: TableColumn<Bid>[] = [
-  { label: "Sale Price", type: "ixt", rowKey: "price", sortable: true },
-  { label: "Quanitity", rowKey: "quantity", sortable: true },
-  {
-    label: "Floor Difference", rowKey: "price", getValue(row) {
-      if (item.sale_price == 0)
-        return 'No sale exist'
-      const difference = roundToDecimals(
-        ((row.price * 100) / item.sale_price) - 100
-        , 2)
-      return Math.abs(difference) + '% ' + (difference < 0 ? 'below' : 'above')
-    }, sortable: true
-  },
-  { label: "Expiration", type: "date", rowKey: "due_date", sortable: true }
-]
-if (item.my_shares > 0)
-  offerColumns.push(
-    { label: "Action", rowKey: "action", width: 80 }
-  )
+const offerColumns = computed<TableColumn<Bid>[]>(() => {
+  const baseColumns: TableColumn<Bid>[] = [
+    { label: "Sale Price", type: "ixt", rowKey: "price", sortable: true },
+    { label: "USD Price", type: "usd", rowKey: "price", sortable: true },
+    { label: "Quanitity", rowKey: "quantity", sortable: true },
+    {
+      label: "Floor Difference", rowKey: "price", getValue(row) {
+        if (item.sale_price == 0)
+          return 'No sale exist'
 
+        const difference = roundToDecimals(
+          ((row.price * 100) / item.sale_price) - 100
+          , 2)
+        return Math.abs(difference) + '% ' + (difference < 0 ? 'below' : 'above')
+      }, sortable: true
+    },
+    { label: "Expiration", type: "date", rowKey: "due_date", sortable: true }
+
+  ]
+  if (item.my_shares > 0)
+    baseColumns.push({ type: 'buttons' })
+
+  return baseColumns
+})
 
 const { displayPopup } = usePopups()
 
@@ -131,8 +138,5 @@ const playerOwnedSale = (sale: Sale) => {
     return true
   return false
 }
-
-console.log(item.sales, 'item sales', item.my_shares, 'shares', item.bids, 'bids')
-
 
 </script>

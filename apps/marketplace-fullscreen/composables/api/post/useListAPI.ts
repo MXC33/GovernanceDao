@@ -1,4 +1,3 @@
-import {BASE_API_ENDPOINT_URL, useIXHeaders} from "../api"
 export interface ListingAssets {
   index: string,
   token_id: number,
@@ -16,6 +15,7 @@ export interface ListingsBody {
 }
 
 export const useListEndpoints = () => {
+  const { fetchIXAPI } = useIXAPI()
 
   const headers = useIXHeaders()
 
