@@ -131,7 +131,4 @@ const playerOwnedSale = (sale: Sale) => {
   return false
 }
 
-console.log(item.sales, 'item sales', item.my_shares, 'shares', item.bids, 'bids')
-
-
 </script>
