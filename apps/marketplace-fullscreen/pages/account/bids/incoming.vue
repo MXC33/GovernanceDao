@@ -31,10 +31,12 @@ const columns: TableColumn<IXToken>[] = [
   },
   {
     label: "Floor Difference", rowKey: "price", getValue(row) {
+      if (row.sale_price == 0)
+        return 'No sale exist'
       const difference = roundToDecimals(
         ((row.higher_bid_price * 100) / row.sale_price) - 100
         , 2)
-      return Math.abs(difference)+ '% ' + (difference < 0 ? 'below' : 'above')
+      return Math.abs(difference) + '% ' + (difference < 0 ? 'below' : 'above')
     }, type: 'text'
   },
   {

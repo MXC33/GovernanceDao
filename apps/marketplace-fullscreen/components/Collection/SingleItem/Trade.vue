@@ -94,10 +94,12 @@ const offerColumns: TableColumn<Bid>[] = [
   { label: "Quanitity", rowKey: "quantity", sortable: true },
   {
     label: "Floor Difference", rowKey: "price", getValue(row) {
+      if (item.sale_price == 0)
+        return 'No sale exist'
       const difference = roundToDecimals(
         ((row.price * 100) / item.sale_price) - 100
         , 2)
-      return Math.abs(difference)+ '% ' + (difference < 0 ? 'below' : 'above')
+      return Math.abs(difference) + '% ' + (difference < 0 ? 'below' : 'above')
     }, sortable: true
   },
   { label: "Expiration", type: "date", rowKey: "due_date", sortable: true }
