@@ -25,8 +25,10 @@ export const useIXAPI = () => {
   const usernameFromWalletAddressURL = `${baseURL}/mission-controll/username/wallet`
 
   const onUnauthorized = async () => {
-    logoutWallet()
-    await callWithNuxt(app, () => navigateTo('/connect'))
+    await callWithNuxt(app, () => {
+      logoutWallet()
+      return navigateTo('/connect')
+    })
   }
 
   const fetchIXAPI = async (path: string, method: 'GET' | 'POST' = 'GET', body?: object) => {
