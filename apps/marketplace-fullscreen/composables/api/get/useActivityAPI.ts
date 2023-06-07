@@ -1,11 +1,5 @@
 import { IXToken, SingleItemData } from "@ix/base/composables/Token/useIXToken"
 
-interface AssetId {
-  contract: string,
-  network: string,
-  tokenId: string
-}
-
 export interface ActivityData {
   event: string
   hash: string

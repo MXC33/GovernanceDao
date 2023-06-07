@@ -1,11 +1,11 @@
 <template lang="pug">
 Transition(name="fade" mode="out-in" )
-  Table(:columns="columns" :rows="items" :id="context" :loading="loading" :is-open="showFilters")
-    template(#item-name="{row}")
-      HList(items="center" space-x="2" font="bold" @click="onClickItem(row)" cursor="pointer" max-w="60")
+  Table(:columns="columns" :rows="items" :id="'activity'" :loading="loading" )
+    template(#item-nft.name="{row}")
+      HList(items="center" space-x="2" font="bold" @click="onClickItem(row.nft)" cursor="pointer" max-w="60")
         div(w="12" h="12")
-          TokenImage(:token="row" w="12" h="12" :key="getTokenKey(row)")
-        TokenName(:token="row" capitalize="~" :key="getTokenKey(row)")
+          TokenImage(:token="row.nft" w="12" h="12" :key="getTokenKey(row.nft)")
+        TokenName(:token="row.nft" capitalize="~" :key="getTokenKey(row.nft)")
 
 
 </template>
@@ -19,12 +19,9 @@ const { displayType } = useCollectionSettings()
 const { getTokenKey } = useTokens()
 const ghostRows = [1, 2, 3, 4, 5, 6, 7, 8]
 
-const { items, columns, context = 'collection' } = defineProps<{
+const { items, columns } = defineProps<{
   items: ActivityData[],
-  columns: TableColumn<IXToken>[],
-  hideGrid?: boolean,
-  showFilters: boolean,
-  context?: CollectionContext,
+  columns: TableColumn<ActivityData>[],
   loading?: boolean
 }>()
 
