@@ -39,7 +39,7 @@ const onClickItem = (row: IXToken) => {
   border: 0px;
 }
 
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 540px) {
   .collection-grid-item:nth-child(odd) {
     border-right: 0.5px solid #636363 !important;
   }
