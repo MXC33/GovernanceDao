@@ -35,7 +35,7 @@ defineEmits<{
 const { y } = useWindowScroll()
 
 const isScrolling = computed(() => {
-  return y.value >= 565
+  return y.value >= 450
 })
 
 </script>

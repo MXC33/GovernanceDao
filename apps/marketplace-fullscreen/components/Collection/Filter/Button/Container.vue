@@ -11,7 +11,7 @@ Transition(name="slide-left")
 <script lang="ts" setup>
 
 defineProps<{
-  isOpen: boolean
+  isOpen?: boolean
 }>()
 
 const { activeFilters, displayType } = useCollectionSettings()

@@ -35,7 +35,7 @@ const { rows, columns, id } = defineProps<{
   inDrawer?: boolean,
   loading?: boolean,
   error?: string,
-  isOpen: boolean
+  isOpen?: boolean
 }>()
 
 const { toggleSortDirection, selectSortField, sort } = useTableSort(id)
