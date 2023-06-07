@@ -13,6 +13,7 @@ export interface ActivityData {
 
 export interface ActivityDataList {
   list: ActivityData[]
+  page_key: string
 }
 
 
@@ -25,9 +26,30 @@ export interface ActivityResponse {
 
 export const useActivityAPI = () => {
   const { fetchIXAPI } = useIXAPI()
-  return useAsyncDataState(`activity-data`, () => {
-    return fetchIXAPI('collections/account/activities/50') as Promise<ActivityResponse>
+
+  const activePage = ref(0)
+
+
+  const asyncData = useAsyncDataState(`activity-data`, () => {
+    return fetchIXAPI('collections/account/activities/' + activePage.value) as Promise<ActivityResponse>
   }, {
-    transform: (response) => response?.data
+    transform: (response) => response?.data,
+    mergePages: (oldData, newData) => {
+      return {
+        ...newData,
+        list: oldData.list.concat(newData.list)
+      }
+    }
   })
+
+  const loadNextPage = () => {
+    activePage.value = Number(asyncData.data.value?.page_key)
+    return asyncData.fetchAndMerge()
+  }
+
+
+  return {
+    ...asyncData,
+    loadNextPage
+  }
 }
