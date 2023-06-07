@@ -1,5 +1,5 @@
 <template lang="pug">
-VList(space-y="6")
+VList()
   TradeModuleHeader(v-model="shares" :ixt="isSubstituteOffering ? totalMinOffer : totalOffer" :disabled="isDisabled")
     template(#title v-if="shares.value > 1") Total offer amount
     template(#title v-else) Highest Offer
