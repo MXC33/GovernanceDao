@@ -11,7 +11,7 @@ VList(space-y="4")
     AttributeList(:attributes="attributes" v-if="item")
 
   VList(frame="~" mt="2")
-    VList(aspect="square" w="full" min-h="0")
+    VList(aspect="square" w="full" min-h="0" bg="black")
       TokenMedia(:token="item" w="full" :is-large="true" pos="relative")
     HelperMediaBar(@transfer="onClickTransfer")
 

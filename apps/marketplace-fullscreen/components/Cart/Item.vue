@@ -11,7 +11,7 @@ VList(bg="gray-800" v-if="item")
 
     VList(w="full")
       HList(flex-grow="1" px="3" items="center")
-        VList(flex-grow="1" color="gray-200" space-y="1")
+        VList(flex-grow="1" color="gray-200")
           TokenCollection(:token="item.token")
           div(v-if="item.sale") Available items: {{item.sale?.quantity}}
           div(flex-grow="1")
