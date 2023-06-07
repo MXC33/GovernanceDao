@@ -11,13 +11,15 @@ import {
 
 import { makeRandomNumberKey } from "@ix/base/composables/Utils/useHelpers";
 import { ListingAssets, ListingsBody, useListEndpoints } from "~/composables/api/post/useListAPI";
-import { TransactionItem } from "./useTransactions";
+import {TransactionItem, useTransactions} from "./useTransactions";
+
 
 export interface ListingItem extends TransactionItem {
   type: 'list'
 }
 
 export const useListingItems = () => {
+  const { durationInDaysFromTimestamp } = useTransactions()
   const listItems = useState<ListingItem[]>('listing-items', () => [])
 
   const createListItems = (items: IXToken[]) => {
@@ -26,11 +28,11 @@ export const useListingItems = () => {
       token,
       shares: {
         min: 1,
-        value: 1,
+        value: token.updating ? token.sales[0].quantity : 1,
         max: token.my_shares
       },
-      durationInDays: 1,
-      ixtPrice: 0
+      durationInDays: token.updating ? durationInDaysFromTimestamp(token.sales[0].endtime) : 1,
+      ixtPrice: token.updating ? token.sales[0].price : 0,
     }))
   }
 
@@ -153,7 +155,7 @@ export const useListingContract = () => {
   }
 
   const listItem = async (item: ListingItem) => {
-    const { durationInDays } = item
+    const { token:{updating}, durationInDays, token } = item
 
     const endTime = Math.floor(add(new Date(), { days: durationInDays }).getTime() / 1000)
     const saleMessage = await createListingMessage(item, endTime)
@@ -173,6 +175,10 @@ export const useListingContract = () => {
       } else {
         throw new Error("Something wrong happened!")
       }
+    }
+    if(updating){
+      const { removeList } = useListEndpoints()
+      await removeList(token._index, token.token_id, token.sales[0].sale_id, token.network, token.collection)
     }
 
     return true

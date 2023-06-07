@@ -3,19 +3,21 @@ div#popups()
   template(v-if="popup")
     CompleteListing(v-if="popup.type == 'listing-successful'" :items="popup.items")
 
-    CompleteBidding(v-else-if="popup.type == 'bidding2-successful'" :items="popup.items")
-
-    CompletePlacedBids(v-else-if="popup.type == 'bidding-successful'" :items="popup.items")
+    CompleteBidding(v-else-if="popup.type == 'bidding-successful'" :items="popup.items")
 
     CompleteTransfer(v-else-if="popup.type == 'transfer-item-successful'" :item="popup.item")
 
     CompleteBuy(v-else-if="popup.type == 'buy-items-success'" :items="popup.items")
+
+    CompleteAccept(v-else-if="popup.type == 'accept-items-success'" :item="popup.item")
 
     Transfer(v-else-if="popup.type == 'transfer-item'" :token="popup.item")
 
     Listing(v-else-if="popup.type == 'list-item'" :items="popup.items")
 
     Bidding(v-else-if="popup.type == 'bid-item'" :items="popup.items")
+
+    Accepting(v-else-if="popup.type == 'accept-item'" :item="popup.item")
 
 
   ErrorPopup(v-if="activeError" :error="activeError")

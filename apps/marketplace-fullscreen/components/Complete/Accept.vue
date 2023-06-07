@@ -3,17 +3,17 @@ Popup()
   template(#icon)
     CheckboxIcon(w="6" h="6")
 
-  template(#header) BID SUCCESSFUL!
+  template(#header) Accept offer Successful!
 
   template(#default)
-    CompleteTokenList(:items="items")
+    CompleteTokenList(:items="[item]")
 
   template(#footer)
-    BiddingPrice(:items="items" )
+    AcceptingPrice(:item="item")
 
   template(#buttons)
     HList()
-      button(@click="onClickOutgoingBids" btn="~ secondary" w="full") View in outgoing bids
+      button(@click="onClickAssets" btn="~ secondary" w="full") View my assets
       button(@click="closeActivePopup" btn="~ primary" w="full") Continue exploring
 
 </template>
@@ -23,18 +23,16 @@ Popup()
 import CheckboxIcon from '~/assets/icons/checkmark-green.svg'
 import type { TransactionItem } from '~/composables/useTransactions';
 const { closeActivePopup } = usePopups()
-const { items } = defineProps<{
-  items: TransactionItem[]
+
+const { item } = defineProps<{
+  item: TransactionItem
 }>()
 
-const mappedTokens = computed(() => items.map((item) => item.token))
-console.log("Token", mappedTokens)
 
-const onClickOutgoingBids = () => {
-  navigateTo('/account/bids/outgoing')
+const onClickAssets = () => {
+  navigateTo('/account')
   return closeActivePopup()
 }
 
 defineEmits(["close"])
-
 </script>

@@ -10,7 +10,7 @@ import {
 
 import { makeRandomNumberKey } from "@ix/base/composables/Utils/useHelpers";
 import { BiddingBody, useBidsAPI } from "~/composables/api/post/useBidAPI";
-import { TransactionItem } from "./useTransactions"
+import {TransactionItem, useTransactions} from "./useTransactions"
 import { NFTType } from "~/composables/useAssetContracts";
 import { useIXTContract } from "@ix/base/composables/Contract/useIXTContract";
 
@@ -19,6 +19,7 @@ export interface BiddingItem extends TransactionItem {
 }
 
 export const useBiddingItems = () => {
+  const { durationInDaysFromTimestamp } = useTransactions()
   const bidItems = useState<BiddingItem[]>('bidding-items', () => [])
 
   const createBidItems = (items: IXToken[]) => {
@@ -27,11 +28,11 @@ export const useBiddingItems = () => {
       token,
       shares: {
         min: 1,
-        value: 1,
+        value: token.updating ? token.bid.quantity : 1,
         max: token.shares
       },
-      durationInDays: 1,
-      ixtPrice: 0
+      durationInDays: token.updating ? durationInDaysFromTimestamp(token.bid.due_date) : 1,
+      ixtPrice: token.updating ? token.bid.price : 0
     }))
   }
 
@@ -52,6 +53,9 @@ export const useBiddingContract = () => {
       Start loading overlay
     */
     console.log('start Loading overlay')
+
+    if (!ixtPrice)
+      throw new Error("Could not get IXT price")
 
     const totalPrice = ixtPrice * shares.value
 

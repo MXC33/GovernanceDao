@@ -22,7 +22,7 @@ export const useIXAPI = () => {
   const { walletSigningToken, logoutAndReload } = useWallet()
 
   const baseURL = "https://api.planetix.com/api/v1"
-  const loginURL = `${baseURL}/auth/login`
+  const loginURL = `${baseURL}/auth/login-mpfs`
   const blogURL = `${baseURL}/blog/0/1?order=DESC`
   const raffleURL = `/mission-controll/raffles/`
   const usernameFromWalletAddressURL = `${baseURL}/mission-controll/username/wallet`

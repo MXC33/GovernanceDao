@@ -5,7 +5,7 @@ VList(space-y="6")
 
     CollectionSingleItemSubHeader()
       template(#default)
-        TokenCollection(:token="item" color="ix-ne") 
+        TokenCollection(:token="item" color="ix-ne")
 
   AttributeList(:attributes="attributes" v-if="item")
 
@@ -20,28 +20,31 @@ VList(space-y="6")
 
     template(#default)
       Table(:columns="saleColumns" :rows="item.sales" id="single-item" :in-drawer="true" v-if="item.sales && item.sales.length > 0")
-        template(#item-action="{row}")
-          button(@click="addSaleToCart(row)" bg="gray-500 hover:gray-400" transition="all" cut="bottom-right sm" p="x-6 y-3" v-if="!playerOwnedSale(row)")
+        template(#item-buttons="{row}")
+          TableButtonSmall(v-if="!playerOwnedSale(row)" @click="addSaleToCart(row)" disable="on-in-cart:active" :in-cart="hasItemInCart(row)")
             CartIcon(w="6")
-          button(@click="removeListing(row)" bg="gray-500 hover:gray-400" transition="all" cut="bottom-right sm" p="x-6 y-3" v-else)
+
+          TableButtonSmall(@click="removeListing(row)" v-else)
             TrashIcon(w="6" fill="white")
 
 
 
-      HList(v-else px="6" py="6" font="bold" color="gray-400" items="center" justify="center") 
+      HList(v-else px="6" py="6" font="bold" color="gray-400" items="center" justify="center")
         span() No items found
 
   ContentDrawer(:start-open="true" :is-neutral="true" bg="gray-900")
     template(#titleicon)
       TitleWithIcon(icon="offer") offers
     template(#default)
-      HList(px="6" py="6" font="bold" color="gray-400" items="center" justify="center" v-if="item.my_shares == 0") 
+      HList(px="6" py="6" font="bold" color="gray-400" items="center" justify="center" v-if="item.my_shares == 0")
         span() You do not own this asset
 
-      HList(px="6" py="6" font="bold" color="gray-400" items="center" justify="center" v-if="item.bids.length < 1" ) 
+      HList(px="6" py="6" font="bold" color="gray-400" items="center" justify="center" v-if="item.bids.length < 1" )
         span() There is no offers for this item
 
       Table(:columns="offerColumns" :rows="item.bids" id="offers" :in-drawer="true" v-else="item.bids.length > 0")
+        template(#item-action="{row}" )
+          button(@click="onClickAcceptOffer(row)" uppercase="~" bg="gray-500 hover:gray-400" transition="all" cut="bottom-right sm" p="x-6 y-3") Accept
 
 </template>
 
@@ -53,9 +56,12 @@ import type { Sale, SingleItemData, Bid } from '@ix/base/composables/Token/useIX
 import type { TableColumn } from '~/composables/useTable';
 
 // const { tabs, activeTab } = useTabList(['sell', 'buy'])
+const { item } = defineProps<{
+  item: SingleItemData
+}>()
 
 const { getSingleAttributes } = useDefaulAttributes()
-const { addToCart } = useCart()
+const { addToCart, hasItemInCart } = useCart()
 const { walletAdress } = useWallet()
 const attributes = computed(() => getSingleAttributes(item))
 
@@ -70,7 +76,9 @@ const saleColumns: TableColumn<Sale>[] = [
       return row.player_username
     }, sortable: true
   },
-  { label: "Action", rowKey: "action", width: 80 }
+  {
+    type: 'buttons', buttons: []
+  }
 ]
 
 const addSaleToCart = (sale: Sale) => {
@@ -84,19 +92,39 @@ const removeListing = (sale: Sale) => {
 const offerColumns: TableColumn<Bid>[] = [
   { label: "Sale Price", type: "ixt", rowKey: "price", sortable: true },
   { label: "Quanitity", rowKey: "quantity", sortable: true },
-
+  {
+    label: "Floor Difference", rowKey: "price", getValue(row) {
+      const difference = roundToDecimals(
+        ((row.price * 100) / item.sale_price) - 100
+        , 2)
+      return Math.abs(difference)+ '% ' + (difference < 0 ? 'below' : 'above')
+    }, sortable: true
+  },
+  { label: "Expiration", type: "date", rowKey: "due_date", sortable: true }
 ]
+if (item.my_shares > 0)
+  offerColumns.push(
+    { label: "Action", rowKey: "action", width: 80 }
+  )
+
+
+const { displayPopup } = usePopups()
+
+const onClickAcceptOffer = (bid: Bid) => {
+  displayPopup({
+    type: 'accept-item',
+    item: {
+      ...item,
+      bid
+    }
+  })
+}
 
 const playerOwnedSale = (sale: Sale) => {
   if (sale.player_wallet.toLowerCase() == walletAdress.value?.toLowerCase())
     return true
   return false
 }
-
-
-const { item } = defineProps<{
-  item: SingleItemData
-}>()
 
 console.log(item.sales, 'item sales', item.my_shares, 'shares', item.bids, 'bids')
 

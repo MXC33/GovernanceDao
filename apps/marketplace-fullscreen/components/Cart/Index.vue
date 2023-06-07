@@ -14,8 +14,9 @@ Transition(name="slide-right")
         button(font="bold" text="md" @click="onClearCart") Clear all
 
     VList(flex-grow="1" space-y="3")
-      template(v-for="(item, index) in cartItems" :key="getTokenKey(item.token)")
-        CartItem(v-model="cartItems[index]")
+      TransitionGroup(name="cart")
+        template(v-for="(item, index) in cartItems" :key="getTokenKey(item.token)")
+          CartItem(v-model="cartItems[index]")
 
       div(flex-grow="1")
 
@@ -35,3 +36,24 @@ const onClearCart = () => {
 }
 </script>
   
+
+<style>
+.cart-move,
+.cart-enter-active,
+.cart-leave-active {
+  transition: all 300ms ease;
+}
+
+/* 2. declare enter from and leave to state */
+.cart-enter-from,
+.cart-leave-to {
+  opacity: 0;
+  transform: translateX(1rem);
+}
+
+/* 3. ensure leaving items are taken out of layout flow so that moving
+      animations can be calculated correctly. */
+.cart-leave-active {
+  transition: all 300ms ease;
+}
+</style>

@@ -1,15 +1,16 @@
 <template lang="pug">
 #app.antialiased(font="foundry" bg="ix-black" color="white" text="lt-md:sm" ref="app" overscroll="none" flex="~ col grow")
   NuxtLayout()
-    NuxtLoadingIndicator(color="rgb(255, 102, 71)")
+    VList()
+      NuxtLoadingIndicator(color="rgb(255, 102, 71)")
 
-    NuxtPage()
+      NuxtPage()
 
-    PopupList()
+      PopupList()
 
-    div#infobox(:style="values" z="400" pos="absolute")
+      div#infobox(:style="values" z="400" pos="absolute")
 
-    SnackbarList()
+      SnackbarList()
 
 </template>
 

@@ -5,14 +5,14 @@ VList(pos="sticky top-0" z="99" w="full" @mouseenter="isSelected = true" @mousel
       PlanetIXNew(w="42.25")
       HelperNumberBadge(:amount="10")
 
-    HList(space-x="8" px="8" items="center" font="bold" text="lg" flex-grow="1" display="lt-md:none")
+    HList(space-x="8" px="8" items="center" font="bold" text="lg" flex-grow="1" display="lt-md:none" translate-y="0.4")
       HeaderLink(v-for="(item, index) in siteTopHeaders" @click="openMenu(index)" text="red") {{ $t(`marketplace.navigation.${item.type}.title`)}}
         HelperNumberBadge(:amount="10")
 
-    HList(font="bold" space-x="6" px="0")
+    HList(font="bold" space-x="6" px="0" translate-y="0.4")
       HeaderLink(to="/" display="lt-md:none") help
       HeaderLink(to="/" display="lt-md:none")
-        HelperLanguage(language="EN")
+        HelperLanguage(language="EN" translate-y="-0.2")
       HeaderAccountButton(@addFunds="iFrameToggle")
     div(grow="~" display="md:none")
     SettingsIcon(v-if="activeMenuIndex == null" pos="right" w="8" display="md:none" 

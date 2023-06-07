@@ -38,6 +38,7 @@ export interface IXToken {
   bid: Bid
   lowest_sale: LowestSale
   sales: Sale[]
+  updating?: boolean
 }
 
 export interface SingleItemData extends IXToken {
@@ -150,6 +151,7 @@ export interface OfferItem {
   endAmount: number
 }
 export interface OrderParameters {
+  counter: any,
   offerer: string,
   address?: string,
   offer: OfferItem[],

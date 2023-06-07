@@ -18,6 +18,4 @@ import type { SingleItemData } from '@ix/base/composables/Token/useIXToken';
 const { item } = defineProps<{
   item: SingleItemData
 }>()
-
-
 </script>

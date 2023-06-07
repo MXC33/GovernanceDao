@@ -18,7 +18,8 @@ interface TableColumnBase {
 
 export interface TableButton<T extends TableRow> {
   type: 'primary' | 'secondary',
-  text: string,
+  text?: string,
+  icon?: 'cart',
   onClick: (row: T) => void
 }
 
@@ -45,10 +46,13 @@ export type TableColumn<T extends TableRow> = TableColumnText<T> | TableButtonCo
 
 
 export const useTableSort = (id: string) => {
+
+  const colIndexOne = ['collection', 'incoming-bids', 'outgoing-bids', 'my-assets', 'active-listings']
+
   const sort = useState<TableSort>(`table-${id}`, () => (
     {
-      columnIndex: id == 'collection' ? 1 : 0,
-      direction: id == 'offers' ? 'desc' : 'asc'
+      columnIndex: colIndexOne.includes(id) ? 1 : 0,
+      direction: id == 'offers' || id == 'incoming-bids' ? 'desc' : 'asc'
     }))
 
   const toggleSortDirection = () => {

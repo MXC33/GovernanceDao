@@ -1,21 +1,23 @@
 <template lang="pug">
-div(bg="black")
+VList(bg="ix-black" b="b-1 gray-600")
   HList(p="6")
-    //-div(grow="~")
     NuxtLink(v-if="walletState !== 'connected'" bg="$mc-orange_20" h="48px" b="1 $mc-orange" color="$mc-orange" px="8" to="/connect" grow="~") 
-      div(text="center lg" p="2" font="bold" @click="ConnectWallet") Connect Wallet 
-    HList(v-else grow="~")
-      Icon(w="25" p="3" b="1 $mc-orange_40" bg="$mc-orange_20")
-      VList(opacity="100%" grow="~")
-        div(p="2" b="1 $mc-orange_40" text="white" bg="$mc-orange_20" v-if="userId") {{userId}}
+      div(text="center lg" p="2" font="bold" @click="ConnectWallet") Connect Wallet
+
+    HList(v-else flex-grow="1" cut="bottom-right sm b-ix-orange opacity-60")
+      Icon(w="25" p="3" bg="$mc-orange_20")
+
+      VList(flex-grow="1")
+        div(p="2" b="l-1 b-1 $mc-orange_40" text="white" bg="$mc-orange_20" v-if="userId") {{userId}}
           NuxtLink(to="/account")
             div(text="$mc-orange" font="") My Assets
+
         HList()
-          HList(b="1 $mc-orange_40" p="2" grow="~" bg="$mc-orange_20")
-            div() IXT : 
+          HList(b="l-1 r-1 $mc-orange_40" p="2" grow="~" bg="$mc-orange_20" space-x="1")
+            div() IXT: 
             div(text="$mc-mint") {{ Math.round((ixtBalance ?? 0) * 100) / 100 }}
-          PlusIcon(b="1 $mc-orange_60" fill="white" h="10" p="3" cut="bottom-right" bg="$mc-orange_40" @click="$emit('swap')")  
-    //-div(grow="~")
+          HList(bg="$mc-orange_20" p="l-3 r-3")
+            PlusIcon(fill="white" w="3" @click="$emit('swap')")  
 </template>
 
 <script lang="ts" setup>

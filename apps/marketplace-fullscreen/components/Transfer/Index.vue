@@ -9,16 +9,15 @@ Popup(@close="$emit('close')")
     VList(space-y="3")
       TransferInfo(v-model="transferItem" :showAdjustable="isERC1155")
 
-      div(v-html="$t(`marketplace.transfer.walletAdress`)")
+      div(font="bold") {{ $t(`marketplace.transfer.transferTo`)  }}
 
-      input(bg="transparent" b="0.5 gray-600" p="3" outline="0" placeholder="e.g 0x1a2..." v-model="wallet" @input="onChange")
-
-      div(v-html="$t(`marketplace.transfer.warningText`)")
+      HList(frame="~" p="2" outline="0")
+        input(bg="transparent"  placeholder="e.g 0x1a2..." v-model="wallet" @input="onChange" w="full")
 
   template(#footer)
     HList(space-x="3" disable="on-invalid:active" :invalid="!isWalletValid")
-      FormCheckbox(v-model="isChecked") 
-      div(v-html="$t(`marketplace.transfer.verifyText`)")
+      Checkbox(v-model="isChecked") 
+      div(text="sm") {{ $t(`marketplace.transfer.verifyText`) }}
 
   template(#buttons)
     ButtonInteractive(btn="~ primary" disable="on-invalid:active" :invalid="!isChecked || !isWalletValid" @click="itemTransfer" :loading="isLoading" text="Transfer") {{  $t(`marketplace.transfer.transferItem`) }}
@@ -29,6 +28,7 @@ Popup(@close="$emit('close')")
 import type { IXToken } from "@ix/base/composables/Token/useIXToken"
 import type { TransferItem } from '~/composables/useTransfer';
 import TransferIcon from '~/assets/icons/transfer.svg'
+import Checkbox from "../Input/Checkbox.vue";
 const { transferERC1155NFT, transferERC721NFT } = useTransferNFT()
 const { displayPopup } = usePopups()
 
@@ -45,9 +45,11 @@ const props = defineProps<{
 
 const transferItem = ref<TransferItem>({
   token: props.token,
-  value: 1,
-  min: 1,
-  max: props.token.my_shares,
+  shares: {
+    value: 1,
+    min: 1,
+    max: props.token.my_shares,
+  }
 })
 
 const onChange = () => {
@@ -88,7 +90,7 @@ const itemTransfer = async () => {
 const transferNFTType = async (collection: string, token_id: number) => {
 
   if (isERC1155.value)
-    return await transferERC1155NFT(collection, wallet.value, token_id, transferItem.value.value)
+    return await transferERC1155NFT(collection, wallet.value, token_id, transferItem.value.shares.value)
 
   return await transferERC721NFT(collection, wallet.value, token_id)
 }

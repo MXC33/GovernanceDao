@@ -61,15 +61,32 @@ const {
 const { acceptOffers } = useOfferContract()
 
 const accept = async () => {
-  await acceptOffers(
+  const totalOfferPrice = !isSubstituteOffering ? totalOffer.value : totalMinOffer.value
+  const quantity = shares.value.value
+
+  const acceptOffer = await acceptOffers(
     selectedBidsToAccept.value,
-    !isSubstituteOffering ? totalOffer.value : totalMinOffer.value,
-    shares.value.value
+    totalOfferPrice,
+    quantity
   )
+
+  if (acceptOffer)
+    displayPopup({
+      type: 'accept-items-success',
+      item: {
+        token: item,
+        shares: shares.value,
+        ixtPrice: totalOfferPrice
+      }
+    })
+
+  console.log('checkoutSales', acceptOffer)
 }
 
 const { execute: acceptItems, loading: isAcceptLoading } = useContractRequest(() => accept(), {
-  title: 'Error processing your purchase'
+  error: () => ({
+    title: 'Error processing your purchase'
+  })
 })
 
 </script>

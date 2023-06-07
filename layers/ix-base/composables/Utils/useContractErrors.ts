@@ -1,10 +1,17 @@
+import { IXToken, Sale } from "../Token/useIXToken"
 import { AnyToken } from "../Token/useTokens"
+import { MaybeRef } from 'vue'
+
+interface TokenWithSale {
+  token: AnyToken,
+  sale?: Sale
+}
 
 export interface ContractError {
   title: string,
   description?: string,
   serverError?: string,
-  items?: AnyToken[]
+  items?: MaybeRef<TokenWithSale[]>
 }
 
 export const useContractErrors = () => {

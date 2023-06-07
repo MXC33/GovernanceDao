@@ -181,6 +181,7 @@ export interface ConsiderationItem {
 
 export const useSeaportContract = <T extends ContractInterface<T> & SeaportContract>() => {
   const { walletAdress, getCollectionType } = useWallet()
+  const { clearFailedCartItems, addFailedCartItem } = useCart()
   const { createBuyOrder, isAdvancedOrder, getOrderMessage } = useBuyHelpers()
   const { withContract, createTransaction, ...contractSpec } = defineContract<T>('Seaport-contract', {
     contractAddress: seaportAdress.polygon as string,
@@ -188,6 +189,16 @@ export const useSeaportContract = <T extends ContractInterface<T> & SeaportContr
       return new ethers.Contract(seaportAdress.polygon as string, Seaport.abi, provider.getSigner()) as unknown as T
     }
   })
+  const pixMerkleParam = {
+    merklePixInfo: {
+      to: ZERO_ADDRESS,
+      pixId: 0,
+      category: 0,
+      size: 0,
+    },
+    merkleRoot: ZERO_ADRESS_LONG,
+    merkleProof: [ZERO_ADRESS_LONG]
+  }
 
   const fulfillAvailableAdvancedOrders = (advancedOrders: AdvancedOrder[], criteriaResolvers: [], offerFulfillments: [], considerationFulfillments: [], fulfillerConduitKey: string, recipient: string, maximumFulfilled: number, cartItems?: CartItem[]) =>
     createTransaction((contract) => {
@@ -198,34 +209,41 @@ export const useSeaportContract = <T extends ContractInterface<T> & SeaportContr
       return contract.fulfillAvailableAdvancedOrders(advancedOrders, criteriaResolvers, offerFulfillments, considerationFulfillments, fulfillerConduitKey, recipient, maximumFulfilled)
     }, {
       onFail: async (error) => {
+        console.log("ON FAIL", error)
+        clearFailedCartItems()
+
         if (!cartItems || cartItems?.length == 0)
           return
 
-        cartItems.forEach(async item => {
-          if (!item.sale)
+        const requests = cartItems.map(async (item) => {
+          const { sale } = item
+          if (!sale)
             return
-          const message = getOrderMessage(item.sale)
-          const buyOrder = createBuyOrder(item.sale, item.value, false)
+
+          const message = getOrderMessage(sale)
+          const buyOrder = createBuyOrder(sale, item.shares.value, false)
 
           if (!isAdvancedOrder(buyOrder) || !message)
             return
 
           try {
             await fulfillAdvancedOrderGasEstimate(buyOrder[0])
-            item.failed = false
-          }
-          catch (e) {
-            item.failed = true
+          } catch (err) {
+            addFailedCartItem(item)
+
             const { token, identifierOrCriteria } = message.body.offer[0]
-            await fetchIXAPI('web3/sale/transfer/update/listing/job', 'POST', {
+
+            return await fetchIXAPI('web3/sale/transfer/update/listing/job', 'POST', {
               size: getCollectionType(token),
-              player_id: item.sale?.player_id,
+              player_id: sale.player_id,
               network: 'polygon',
               collection: token,
               token_id: identifierOrCriteria,
             })
           }
         })
+
+        return Promise.all(requests)
       }
     })
 
@@ -236,22 +254,22 @@ export const useSeaportContract = <T extends ContractInterface<T> & SeaportContr
       if (!address)
         return undefined
 
-      const pixMerkleParam = {
-        merklePixInfo: {
-          to: ZERO_ADDRESS,
-          pixId: 0,
-          category: 0,
-          size: 0,
-        },
-        merkleRoot: ZERO_ADRESS_LONG,
-        merkleProof: [ZERO_ADRESS_LONG],
-      }
-
       return contract.estimateGas.fulfillAdvancedOrder(buyOrderComponents, [], conduitKey.polygon, ZERO_ADDRESS, pixMerkleParam)
+    })
+
+  const fulfillAdvancedOrder = (advancedOrders: AdvancedOrder, criteriaResolvers: [], fulfillerConduitKey: string, recipient: string) =>
+    createTransaction((contract) => {
+      const address = walletAdress.value
+      if (!address)
+        return undefined
+
+      // @ts-ignore
+      return contract.fulfillAdvancedOrder(advancedOrders, criteriaResolvers, fulfillerConduitKey, recipient, pixMerkleParam)
     })
 
   return {
     ...contractSpec,
+    fulfillAdvancedOrder,
     fulfillAvailableAdvancedOrders
   }
 }
