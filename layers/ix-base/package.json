@@ -10,7 +10,7 @@
     "preview": "nuxt preview .layer",
     "prepare": "nuxi prepare .layer",
     "lint": "eslint .",
-    "postinstall": "yarn run prepare .layer",
+    "postinstall": "yarn run prepare",
     "abis": "node create-abis.js"
   },
   "devDependencies": {
