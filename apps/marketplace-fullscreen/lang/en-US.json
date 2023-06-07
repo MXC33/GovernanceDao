@@ -194,6 +194,10 @@
       "confirm": "Confrim Adress",
       "transferItem": "Transfer Item"
     },
+    "unlist": {
+      "title": "Unlist Item",
+      "warningText": "Are you sure you want to unlist this item?"
+    },
     "bid": {
       "title": "Place Bid",
       "own": "You own",

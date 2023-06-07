@@ -49,7 +49,7 @@ const columns: TableColumn<IXToken>[] = [
   {
     type: 'buttons', buttons: [{
       type: 'secondary', text: 'cancel', onClick: (token) => {
-        cancelBidOnClick(token)
+        cancelListingOnClick(token)
       },
     },
     {
@@ -79,14 +79,18 @@ const splitSales = computed<CollectionData | undefined>(() => {
 
   return newData
 })
-const { removeList } = useListEndpoints()
 const { displayPopup } = usePopups()
 
-const cancelBidOnClick = async (token: IXToken) => {
-  if (token.sales?.length > 0) {
-    await removeList(token._index, token.token_id, token.sales[0].sale_id, token.network, token.collection)
-    await refresh()
-  }
+
+const cancelListingOnClick = async (item: IXToken) => {
+  const sale = item.sales[0]
+  displayPopup({
+    type: 'unlist-item',
+    item: {
+      ...item,
+      sale: sale
+    }
+  })
 }
 
 const updateBidOnClick = (token: IXToken) => {

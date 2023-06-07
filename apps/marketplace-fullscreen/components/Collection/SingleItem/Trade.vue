@@ -24,7 +24,7 @@ VList(space-y="6")
           TableButtonSmall(v-if="!playerOwnedSale(row)" @click="addSaleToCart(row)" disable="on-in-cart:active" :in-cart="hasItemInCart(row)")
             CartIcon(w="6")
 
-          TableButtonSmall(@click="removeListing(row)" v-else)
+          TableButtonSmall(@click="cancelListingOnClick(row)" v-else)
             TrashIcon(w="6" fill="white")
 
 
@@ -89,8 +89,14 @@ const addSaleToCart = (sale: Sale) => {
   addToCart(item, sale)
 }
 
-const removeListing = (sale: Sale) => {
-  console.log("remove listing")
+const cancelListingOnClick = async (sale: Sale) => {
+  displayPopup({
+    type: 'unlist-item',
+    item: {
+      ...item,
+      sale
+    }
+  })
 }
 
 const offerColumns: TableColumn<Bid>[] = [
