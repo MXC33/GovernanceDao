@@ -19,10 +19,6 @@ transition(name="fade-slow")
             CartIcon(w="6")
             CartCounter
 
-    //- HList(py="4" w="full" display="md:none")
-    //-   CollectionSelect()
-
-
     HList(space-x="4" w="full" justify="end" items="center" display="lt-md:none")
 
       CollectionSelect(display="lt-md:none")
