@@ -4,17 +4,13 @@
   "version": "0.0.1",
   "main": "./nuxt.config.ts",
   "scripts": {
-    "dev": "nuxi dev --port 3333",
-    "story": "nuxi dev --port 3333",
-    "build": "yarn run prepare && nuxt build",
-    "generate": "nuxt generate",
-    "preview": "nuxt preview",
-    "prepare": "nuxi prepare",
-    "story:dev": "histoire dev",
-    "story:build": "histoire build",
-    "story:preview": "histoire preview",
+    "dev": "nuxi dev .layer --port 3333",
+    "build": "yarn run prepare && nuxt build .layer",
+    "generate": "nuxt generate .layer",
+    "preview": "nuxt preview .layer",
+    "prepare": "nuxi prepare .layer",
     "lint": "eslint .",
-    "postinstall": "yarn run prepare",
+    "postinstall": "yarn run prepare .layer",
     "abis": "node create-abis.js"
   },
   "devDependencies": {
