@@ -7,7 +7,7 @@ transition(name="fade-slow")
     VList(w="full")
       HList(w="full" items="center")
         NuxtLink(:to="'/'" w="full")
-          NetBetaLogo(w="45")
+          NetBetaLogo(w="45" translate-y="lt-md:-1.5")
 
         HList(display="md:none" gap="2" justify="between" pb="3")
           CollectionSelectMobile()
