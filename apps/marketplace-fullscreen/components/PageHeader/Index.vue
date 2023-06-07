@@ -9,7 +9,9 @@ transition(name="fade-slow")
         NuxtLink(:to="'/'" w="full")
           NetBetaLogo(w="45")
 
-        HList(display="md:none" gap="2" justify="between")
+        HList(display="md:none" gap="2" justify="between" pb="3")
+          CollectionSelectMobile()
+
           ButtonSquareIcon(@click="onClickAccount")
             UserIcon(w="6")
 
@@ -17,8 +19,8 @@ transition(name="fade-slow")
             CartIcon(w="6")
             CartCounter
 
-    HList(py="4" w="full" display="md:none")
-      CollectionSelect()
+    //- HList(py="4" w="full" display="md:none")
+    //-   CollectionSelect()
 
 
     HList(space-x="4" w="full" justify="end" items="center" display="lt-md:none")
@@ -31,8 +33,6 @@ transition(name="fade-slow")
       ButtonSquareIcon(@click="viewingCart = true")
         CartIcon(w="6")
         CartCounter
-
-
 
 
 </template>
@@ -51,6 +51,12 @@ const route = useRoute()
 
 const onClickAccount = () => {
   navigateTo('/account')
+}
+
+const openDropdown = ref(false)
+
+const collectionOpen = () => {
+  openDropdown.value = !openDropdown.value
 }
 
 
