@@ -67,6 +67,7 @@ const attributes = computed(() => getSingleAttributes(item))
 
 const saleColumns: TableColumn<Sale>[] = [
   { label: "Sale Price", type: "ixt", rowKey: "price", sortable: true },
+  { label: "USD Price", type: "usd", rowKey: "price", sortable: true },
   { label: "Quanitity", rowKey: "quantity", sortable: true },
   { label: "Expiration", type: "date", rowKey: "endtime", sortable: true },
   {
@@ -91,13 +92,14 @@ const removeListing = (sale: Sale) => {
 
 const offerColumns: TableColumn<Bid>[] = [
   { label: "Sale Price", type: "ixt", rowKey: "price", sortable: true },
+  { label: "USD Price", type: "usd", rowKey: "price", sortable: true },
   { label: "Quanitity", rowKey: "quantity", sortable: true },
   {
     label: "Floor Difference", rowKey: "price", getValue(row) {
       const difference = roundToDecimals(
         ((row.price * 100) / item.sale_price) - 100
         , 2)
-      return Math.abs(difference)+ '% ' + (difference < 0 ? 'below' : 'above')
+      return Math.abs(difference) + '% ' + (difference < 0 ? 'below' : 'above')
     }, sortable: true
   },
   { label: "Expiration", type: "date", rowKey: "due_date", sortable: true }
