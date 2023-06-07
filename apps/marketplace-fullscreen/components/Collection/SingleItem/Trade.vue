@@ -5,14 +5,12 @@ VList(space-y="6")
 
     CollectionSingleItemSubHeader()
       template(#default)
-        TokenCollection(:token="item" color="ix-ne")
+        NuxtLink(:to="collectionLink")
+          TokenCollection(:token="item" color="ix-ne")
 
   AttributeList(:attributes="attributes" v-if="item")
 
-  //- Listing(:item="item")
-
   TradeModule(:item="item")
-
 
   ContentDrawer(:start-open="true" :is-neutral="true" bg="gray-900")
     template(#titleicon)
@@ -59,6 +57,11 @@ import type { TableColumn } from '~/composables/useTable';
 const { item } = defineProps<{
   item: SingleItemData
 }>()
+
+const collectionLink = computed(() => {
+  const { network, collection } = item
+  return `/assets/${network}/${collection}`
+})
 
 const { getSingleAttributes } = useDefaulAttributes()
 const { addToCart, hasItemInCart } = useCart()
