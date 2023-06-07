@@ -1,5 +1,5 @@
 <template lang="pug">
-div()
+div(v-if="amount != 0")
   EllipseIcon(pos="absolute" w="6" z="1")
   //-div(font="bold").number-badge-icon {{amount}}
   div(pos="absolute" z="2" font="bold")
