@@ -3,8 +3,9 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "build": "nuxt build",
+    "build": "yarn run prepare && nuxt build",
     "dev": "nuxt dev",
+    "prepare": "nuxi prepare",
     "generate": "nuxt generate",
     "preview": "nuxt preview"
   },
