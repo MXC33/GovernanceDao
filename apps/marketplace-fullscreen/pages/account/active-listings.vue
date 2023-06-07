@@ -25,15 +25,22 @@ setupCollectionListeners()
 
 const columns: TableColumn<IXToken>[] = [
   { label: "Asset", rowKey: "name" },
+
   {
     label: "Unit price", rowKey: "sales[0].price", type: 'ixt', sortable: true
   },
   { label: "USD price", rowKey: "sales[0].price", type: 'usd', sortable: true },
   {
+    label: "Quantity", rowKey: "sales[0].quantity", type: 'text'
+  },
+  {
     label: "Floor Difference", rowKey: "floor", getValue(row) {
-      if (row.lowest_sale?.price)
-        return (row.higher_bid_price - row.lowest_sale.price).toString().substring(0, 5)
-      return row.higher_bid_price.toString()
+      if (row.lowest_sale.price == 0)
+        return 'No sale exist'
+      const difference = roundToDecimals(
+        ((row.sales[0].price * 100) / row.lowest_sale.price) - 100
+        , 2)
+      return Math.abs(difference) + '% ' + (difference < 0 ? 'below' : 'above')
     }, type: 'text'
   },
   {
@@ -76,7 +83,7 @@ const { removeList } = useListEndpoints()
 const { displayPopup } = usePopups()
 
 const cancelBidOnClick = async (token: IXToken) => {
-  if(token.sales?.length > 0){
+  if (token.sales?.length > 0) {
     await removeList(token._index, token.token_id, token.sales[0].sale_id, token.network, token.collection)
     await refresh()
   }
