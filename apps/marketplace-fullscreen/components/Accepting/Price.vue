@@ -7,7 +7,7 @@ VList()
 
   TransactionSummaryRow()
     template(#name) Marketplace fee
-    template(#value) 2.5%
+    template(#value) 5%
 
   TransactionSummaryRow(:primary="true")
     template(#name) Total potential earnings

@@ -1,5 +1,6 @@
 import { IXToken } from "@ix/base/composables/Token/useIXToken"
 import { AdjustableNumber } from "~/../../layers/ix-base/composables/Utils/useAdjustableNumber";
+import { differenceInDays } from "date-fns";
 
 export interface TransactionItem {
   type?: 'list' | 'bid' | 'accept'
@@ -25,6 +26,15 @@ export const useTransactions = () => {
     return `${days} ${t('general.day', days)}`
   }
 
+  const durationInDaysFromTimestamp = (timestamp: number) => {
+    const difference = differenceInDays(new Date(timestamp*1000), new Date());
+    if (difference <= 1) return 1
+    else if (difference <= 3 ) return 3
+    else if (difference <= 7 ) return 7
+    else if (difference <= 30 ) return 30
+    else if (difference <= 91 ) return 91
+    else return 183
+  }
 
   const getTotalIXTPrice = (items: TransactionItem[]) =>
     items.reduce((prev, item) =>
@@ -42,6 +52,7 @@ export const useTransactions = () => {
     priceRenderString,
     itemsInvalid,
     getTotalIXTPrice,
-    formattedDays
+    formattedDays,
+    durationInDaysFromTimestamp
   }
 }

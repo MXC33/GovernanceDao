@@ -10,10 +10,11 @@ DropdownSelect(:items="collections" v-if="collections")
       div(flex-grow="1" v-if="item.name != 'PlanetIX Assets'") {{ item.name }}
       div(flex-grow="1" v-else) PlanetIX - Assets
       div(color="gray-200" font="normal") {{ item.nft_count }}
-</template>
+
+  </template>
 
 <script lang="ts" setup>
-import { useCollectionsData } from "~/composables/api/post/useCollectionAPI";
+import { useCollectionsData } from "~/composables/api/post/useCollectionAPI"
 
 const { data: collections, execute: fetchAllCollections } = useCollectionsData()
 

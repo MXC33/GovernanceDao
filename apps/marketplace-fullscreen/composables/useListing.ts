@@ -1,6 +1,6 @@
-import { IXToken, ItemType, OrderType, signDomain, typedData } from "@ix/base/composables/Token/useIXToken"
+import { IXToken, ItemType, OrderType, signDomain, typedData, Sale } from "@ix/base/composables/Token/useIXToken"
 import { add } from 'date-fns'
-import {get1155Contract, get721Contract, NFTType} from "~/composables/useAssetContracts";
+import { get1155Contract, get721Contract, NFTType } from "~/composables/useAssetContracts";
 import { ethers } from "ethers";
 import { ZERO_ADDRESS } from "~/composables/useTransferNFT";
 import {
@@ -11,14 +11,19 @@ import {
 
 import { makeRandomNumberKey } from "@ix/base/composables/Utils/useHelpers";
 import { ListingAssets, ListingsBody, useListEndpoints } from "~/composables/api/post/useListAPI";
-import { TransactionItem } from "./useTransactions";
+import { TransactionItem, useTransactions } from "./useTransactions";
 
 
 export interface ListingItem extends TransactionItem {
   type: 'list'
 }
 
+export interface UnlistingItem extends IXToken {
+  sale: Sale
+}
+
 export const useListingItems = () => {
+  const { durationInDaysFromTimestamp } = useTransactions()
   const listItems = useState<ListingItem[]>('listing-items', () => [])
 
   const createListItems = (items: IXToken[]) => {
@@ -30,7 +35,7 @@ export const useListingItems = () => {
         value: token.updating ? token.sales[0].quantity : 1,
         max: token.my_shares
       },
-      durationInDays: 1,
+      durationInDays: token.updating ? durationInDaysFromTimestamp(token.sales[0].endtime) : 1,
       ixtPrice: token.updating ? token.sales[0].price : 0,
     }))
   }
@@ -46,7 +51,7 @@ export const useListingContract = () => {
   const createListingMessage = async (item: ListingItem, endTime: number) => {
     //TODO update endtime
 
-    const { token: { collection, token_id, nft_type}, ixtPrice, shares } = item
+    const { token: { collection, token_id, nft_type }, ixtPrice, shares } = item
     /*
       Todo
       Start loading overlay
@@ -154,7 +159,7 @@ export const useListingContract = () => {
   }
 
   const listItem = async (item: ListingItem) => {
-    const { token:{updating}, durationInDays, token } = item
+    const { token: { updating }, durationInDays, token } = item
 
     const endTime = Math.floor(add(new Date(), { days: durationInDays }).getTime() / 1000)
     const saleMessage = await createListingMessage(item, endTime)
@@ -175,7 +180,7 @@ export const useListingContract = () => {
         throw new Error("Something wrong happened!")
       }
     }
-    if(updating){
+    if (updating) {
       const { removeList } = useListEndpoints()
       await removeList(token._index, token.token_id, token.sales[0].sale_id, token.network, token.collection)
     }

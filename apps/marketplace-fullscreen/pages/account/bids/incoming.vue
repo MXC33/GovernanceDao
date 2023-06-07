@@ -6,6 +6,9 @@ Collection(:data="data" :columns="columns" context="incoming-bids" :loading="pen
 
 
 <script lang="ts" setup>
+useHead({
+  title: "Incoming bids | Marketplace | PlanetIX"
+})
 import type { TableColumn } from "~/composables/useTable";
 import type { IXToken } from "@ix/base/composables/Token/useIXToken";
 
@@ -31,6 +34,8 @@ const columns: TableColumn<IXToken>[] = [
   },
   {
     label: "Floor Difference", rowKey: "price", getValue(row) {
+      if (row.sale_price == 0)
+        return 'No sale exist'
       const difference = roundToDecimals(
         ((row.higher_bid_price * 100) / row.sale_price) - 100
         , 2)

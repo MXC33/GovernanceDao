@@ -7,12 +7,13 @@ Transition(name="fade" mode="out-in" )
     template(v-else)
       CollectionGridItemSkeleton(v-for="item in items.length > ghostRows.length ? items : ghostRows")
 
-  Table(v-else :columns="columns" :rows="items" :id="context" :loading="loading")
+  Table(v-else :columns="columns" :rows="items" :id="context" :loading="loading" :is-open="showFilters")
     template(#item-name="{row}")
       HList(items="center" space-x="2" font="bold" @click="onClickItem(row)" cursor="pointer" max-w="60")
         div(w="12" h="12")
           TokenImage(:token="row" w="12" h="12" :key="getTokenKey(row)")
         TokenName(:token="row" capitalize="~" :key="getTokenKey(row)")
+        span(v-if="context == 'my-assets'" color="gray-200" font="normal") x{{ row.my_shares }}
 
 </template>
 
@@ -45,7 +46,7 @@ const onClickItem = (row: IXToken) => {
   border: 0px;
 }
 
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 540px) {
   .collection-grid-item:nth-child(odd) {
     border-right: 0.5px solid #636363 !important;
   }

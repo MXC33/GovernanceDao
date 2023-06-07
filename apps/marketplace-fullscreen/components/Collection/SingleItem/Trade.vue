@@ -5,8 +5,9 @@ VList(space-y="6")
 
     CollectionSingleItemSubHeader()
       template(#default)
-        NuxtLink(:to="collectionLink")
-          TokenCollection(:token="item" color="ix-ne")
+
+  NuxtLink(:to="collectionLink")
+    TokenCollection(:token="item" color="ix-ne")
 
   AttributeList(:attributes="attributes" v-if="item")
 
@@ -22,7 +23,7 @@ VList(space-y="6")
           TableButtonSmall(v-if="!playerOwnedSale(row)" @click="addSaleToCart(row)" disable="on-in-cart:active" :in-cart="hasItemInCart(row)")
             CartIcon(w="6")
 
-          TableButtonSmall(@click="removeListing(row)" v-else)
+          TableButtonSmall(@click="cancelListingOnClick(row)" v-else)
             TrashIcon(w="6" fill="white")
 
 
@@ -83,12 +84,22 @@ const saleColumns: TableColumn<Sale>[] = [
   { type: 'buttons' }
 ]
 
+const backToCollection = () => {
+  navigateTo('/assets/polygon/' + item.collection)
+}
+
 const addSaleToCart = (sale: Sale) => {
   addToCart(item, sale)
 }
 
-const removeListing = (sale: Sale) => {
-  console.log("remove listing")
+const cancelListingOnClick = async (sale: Sale) => {
+  displayPopup({
+    type: 'unlist-item',
+    item: {
+      ...item,
+      sale
+    }
+  })
 }
 
 const offerColumns = computed<TableColumn<Bid>[]>(() => {
@@ -98,6 +109,9 @@ const offerColumns = computed<TableColumn<Bid>[]>(() => {
     { label: "Quanitity", rowKey: "quantity", sortable: true },
     {
       label: "Floor Difference", rowKey: "price", getValue(row) {
+        if (item.sale_price == 0)
+          return 'No sale exist'
+
         const difference = roundToDecimals(
           ((row.price * 100) / item.sale_price) - 100
           , 2)
