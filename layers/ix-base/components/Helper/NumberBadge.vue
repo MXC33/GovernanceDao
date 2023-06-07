@@ -1,7 +1,7 @@
 <template lang="pug">
 div()
-  EllipseIcon(pos="absolute" w="6" z="1")
-  div(pos="absolute" px="0.5" font="bold" z="2") {{ amount }} 
+  EllipseIcon(pos="absolute" w="6")
+  div(pos="absolute" font="bold") {{ amount }} 
 </template>
 
 <script lang="ts" setup>
