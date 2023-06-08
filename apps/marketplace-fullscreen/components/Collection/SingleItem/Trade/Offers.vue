@@ -54,7 +54,7 @@ const offerColumns = computed<TableColumn<Bid>[]>(() => {
 
   ]
   if (item.my_shares > 0)
-    baseColumns.push({ type: 'buttons', width: 120 })
+    baseColumns.push({ type: 'buttons', width: 140 })
 
   return baseColumns
 })

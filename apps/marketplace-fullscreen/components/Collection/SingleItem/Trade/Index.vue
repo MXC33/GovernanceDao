@@ -22,7 +22,6 @@ VList(space-y="6")
 <script lang="ts" setup>
 import type { SingleItemData } from '@ix/base/composables/Token/useIXToken';
 
-// const { tabs, activeTab } = useTabList(['sell', 'buy'])
 const { item } = defineProps<{
   item: SingleItemData
 }>()
