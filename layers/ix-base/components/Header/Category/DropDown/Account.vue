@@ -12,7 +12,7 @@ HList(p="6" bg="ix-black" b="b-1 gray-600")
           div(text="$mc-orange" font="") My Assets
 
       HList()
-        HList(b="l-1 r-1 $mc-orange_40" p="2" bg="$mc-orange_20" space-x="1")
+        HList(b="l-1 r-1 $mc-orange_40" w="full" p="2" bg="$mc-orange_20" space-x="1")
           div() IXT: 
           div(text="$mc-mint") {{ Math.round((ixtBalance ?? 0) * 100) / 100 }}
         HList(bg="$mc-orange_20" p="l-3 r-3")
