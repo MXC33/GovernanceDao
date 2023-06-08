@@ -24,7 +24,6 @@ const { data: data, execute: fetchCollection, setupCollectionListeners, pending 
 await fetchCollection()
 setupCollectionListeners()
 
-console.log(data.value)
 
 const columns: TableColumn<IXToken>[] = [
   { label: "Asset", rowKey: "name" },

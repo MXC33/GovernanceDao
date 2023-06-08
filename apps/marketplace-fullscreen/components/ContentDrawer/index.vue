@@ -34,7 +34,6 @@ const mounted = useMounted()
 watch([mounted, () => startOpen], ([_, open]) => {
   nextTick(() => {
     isOpen.value = open
-    console.log("OPEN MAN", open)
   })
 }, { immediate: true })
 </script>
