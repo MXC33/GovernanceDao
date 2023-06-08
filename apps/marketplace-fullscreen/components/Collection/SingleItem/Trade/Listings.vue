@@ -1,5 +1,5 @@
 <template lang="pug">
-ContentDrawer(:start-open="true" :is-neutral="true" bg="gray-900")
+ContentDrawer(:start-open="!isMobile" :is-neutral="true" bg="gray-900")
   template(#titleicon)
     TitleWithIcon(icon="listing") listings
 
@@ -22,11 +22,13 @@ import TrashIcon from '~/assets/icons/trash.svg'
 
 import type { Sale, SingleItemData, Bid } from '@ix/base/composables/Token/useIXToken';
 import type { TableColumn } from '~/composables/useTable';
-
+const isMobile = onMobile()
 // const { tabs, activeTab } = useTabList(['sell', 'buy'])
 const { item } = defineProps<{
   item: SingleItemData
 }>()
+
+
 
 const { addToCart, hasItemInCart } = useCart()
 const { walletAdress } = useWallet()

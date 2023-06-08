@@ -1,7 +1,8 @@
 <template lang="pug">
-ContentDrawer(:start-open="true" :is-neutral="true" bg="gray-900")
+ContentDrawer(:start-open="!isMobile" :is-neutral="true" bg="gray-900")
   template(#titleicon)
     TitleWithIcon(icon="offer") offers
+
   template(#default)
     CollectionSingleItemTradeDetail(v-if="item.my_shares == 0") 
       | You do not own this asset
@@ -19,6 +20,7 @@ ContentDrawer(:start-open="true" :is-neutral="true" bg="gray-900")
 import type { SingleItemData, Bid } from '@ix/base/composables/Token/useIXToken';
 import type { TableColumn } from '~/composables/useTable';
 const { displayPopup } = usePopups()
+const isMobile = onMobile()
 
 const { item } = defineProps<{
   item: SingleItemData

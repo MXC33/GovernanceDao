@@ -24,9 +24,17 @@ const { startOpen } = defineProps<{
   isNeutral?: boolean
 }>()
 
-const isOpen = ref(startOpen)
-const dropDrawer = () => { isOpen.value = !isOpen.value }
+const isOpen = ref(false)
 
+const dropDrawer = () => {
+  isOpen.value = !isOpen.value
+}
+
+watch(() => startOpen, (open) => {
+  nextTick(() => {
+    isOpen.value = open
+  })
+}, { immediate: true })
 </script>
 
 
