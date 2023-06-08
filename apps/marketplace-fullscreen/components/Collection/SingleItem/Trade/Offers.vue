@@ -3,11 +3,11 @@ ContentDrawer(:start-open="true" :is-neutral="true" bg="gray-900")
   template(#titleicon)
     TitleWithIcon(icon="offer") offers
   template(#default)
-    HList(px="6" py="6" font="bold" color="gray-400" items="center" justify="center" v-if="item.my_shares == 0")
-      span() You do not own this asset
+    CollectionSingleItemTradeDetail(v-if="item.my_shares == 0") 
+      | You do not own this asset
 
-    HList(px="6" py="6" font="bold" color="gray-400" items="center" justify="center" v-if="item.bids.length < 1" )
-      span() There is no offers for this item
+    CollectionSingleItemTradeDetail(v-if="item.bids.length < 1" ) 
+      | There is no offers for this item
 
     Table(:columns="offerColumns" :rows="item.bids" id="offers" :in-drawer="true" v-else="item.bids.length > 0" :col-width="150")
       template(#item-buttons="{row}" )
