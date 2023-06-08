@@ -1,6 +1,6 @@
 <template lang="pug">
-span(v-if="cartItems.length" pos="absolute right-0 top-0" rounded="full" bg="red-600" text="white sm" w="5" h="5" font="mono" leading="tight" flex="~" items="center" justify="center")
-  span() {{ cartItems.length }}
+div(v-if="cartItems.length" pos="absolute right-(-2) top-(-1)" rounded="full" bg="ix-ne" color="white" text="xs" w="5" h="5" font="bold" flex="~" items="center" justify="center" z="99")
+  span(translate-y="0.2") {{ cartItems.length }}
 </template>
 
 <script lang="ts" setup>
