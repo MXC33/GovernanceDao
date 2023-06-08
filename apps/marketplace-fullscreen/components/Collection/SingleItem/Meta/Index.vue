@@ -3,7 +3,7 @@ VList(space-y="6")
   CollectionSingleItemHeader(:item="item" display="md:none")
 
   VList(frame="~")
-    VList(aspect="square" w="full" min-h="0")
+    VList(aspect="square" w="full" min-h="0" bg="#000")
       TokenMedia(:token="item" w="full" :is-large="true" pos="relative")
     HelperMediaBar(@transfer="onClickTransfer")
 
