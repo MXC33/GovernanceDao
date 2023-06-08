@@ -3,7 +3,7 @@ VList()
   AttributeRow()
     template(#name) Contract adress 
     template(#value) 
-      NuxtLink(color="ix-primary") {{ showAdress(item.collection)}} 
+      NuxtLink(:to="linkAdress" color="ix-primary") {{ showAdress(item.collection)}} 
       //-span(color="ix-primary") {{ item.collection}} 
 
   AttributeRow()
@@ -37,8 +37,8 @@ const route = useRoute()
 const { network } = route.params
 
 const showAdress = (str: string) => {
-  const firstFour = str.slice(0, 4);
-  const lastFour = str.slice(-4);
+  const firstFour = str.slice(0, 5);
+  const lastFour = str.slice(-5);
   return `${firstFour}...${lastFour}`;
 }
 
@@ -48,5 +48,7 @@ const { item } = defineProps<{
 
 const is721 = ERC721Addresses.includes(item.collection)
 const is1155 = ERC1155Addresses.includes(item.collection)
+
+const linkAdress = computed(() => `https://polygonscan.com/address/${item.collection}`)
 
 </script>
