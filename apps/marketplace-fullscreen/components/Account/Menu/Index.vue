@@ -7,9 +7,9 @@ VList(b="b-1 gray-400")
 
 <template lang="pug">
 VList(b="b-1 gray-400")
-  HList(w="full" space-x="12" mb="-2px")
+  HList.no-scrollbar(w="full" space-x="8 md:12" mb="-2px" overflow-x="scroll" whitespace="nowrap")
     HList(v-for="tab in accountTabs" :key="tab" :is-active="tab === activeTab")
-      HelperNumberBadge(:amount="99")
+      //- HelperNumberBadge(:amount="99")
       AccountMenuTab( @click="onClick(tab)") {{ $t(`marketplace.myAssets.${tab}`) }}
 </template>
 <script lang="ts" setup>
