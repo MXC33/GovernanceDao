@@ -17,7 +17,6 @@ const collectionAttributes: Attribute<CollectionData>[] = [
     hasToken: true
   },
   { key: 'listed' },
-  { key: 'unique_owners' },
   { key: 'owners' },
   { key: 'floor_price' }
 ]
