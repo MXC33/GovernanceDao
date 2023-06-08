@@ -51,7 +51,7 @@ const cancelBidOnClick = async (bid: Bid) => {
 
 const offerColumns = computed<TableColumn<Bid>[]>(() => {
   const baseColumns: TableColumn<Bid>[] = [
-    { label: "Sale Price", type: "ixt", rowKey: "price", sortable: true },
+    { label: "Unit Price", type: "ixt", rowKey: "price", sortable: true },
     { label: "USD Price", type: "usd", rowKey: "price", sortable: true },
     { label: "Quanitity", rowKey: "quantity", sortable: true },
     {
