@@ -24,16 +24,17 @@ const { startOpen } = defineProps<{
   isNeutral?: boolean
 }>()
 
-const isOpen = ref(mobile.value)
+const isOpen = ref(startOpen)
 
 const dropDrawer = () => {
   isOpen.value = !isOpen.value
 }
 
-
-watch(() => startOpen, (open) => {
+const mounted = useMounted()
+watch([mounted, () => startOpen], ([_, open]) => {
   nextTick(() => {
     isOpen.value = open
+    console.log("OPEN MAN", open)
   })
 }, { immediate: true })
 </script>
