@@ -9,10 +9,7 @@ Transition(name="fade" mode="out-in" )
 
   Table(v-else :columns="columns" :rows="items" :id="context" :loading="loading" :is-open="showFilters")
     template(#item-name="{row}")
-      HList(items="center" space-x="2" font="bold" @click="onClickItem(row)" cursor="pointer" max-w="60")
-        div(w="12" h="12")
-          TokenImage(:token="row" w="12" h="12" :key="getTokenKey(row)")
-        TokenName(:token="row" capitalize="~" :key="getTokenKey(row)")
+      TableCellToken(:token="row" @click="onClickItem(row)" max-w="60")
         span(v-if="context == 'my-assets'" color="gray-200" font="normal") x{{ row.my_shares }}
 
 </template>
@@ -22,7 +19,6 @@ import type { IXToken } from '@ix/base/composables/Token/useIXToken';
 import type { CollectionContext } from '~/composables/useCollection';
 import type { TableColumn } from '~/composables/useTable'
 const { displayType } = useCollectionSettings()
-const { getTokenKey } = useTokens()
 const ghostRows = [1, 2, 3, 4, 5, 6, 7, 8]
 
 const { items, columns, context = 'collection' } = defineProps<{
