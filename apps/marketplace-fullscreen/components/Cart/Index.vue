@@ -7,8 +7,7 @@ Transition(name="slide-right")
     header(pos="sticky top-0" px="6" space-y="3" bg="black" p="t-6 b-3" z="1")
       HList(items="center" justify="between")
         h3(text="xl" font="bold") My Cart
-        ClientOnly
-          CloseIcon(w="4" @click.stop="viewingCart = false" cursor="pointer" fill="white hover:opacity-80")
+        CloseIcon(w="4" @click.stop="viewingCart = false" cursor="pointer" fill="white hover:opacity-80")
 
       div(b="b-0.5 gray-600" mx="-6")
 
