@@ -3,8 +3,8 @@ Transition(name="fade" mode="out-in" )
   Table(:columns="columns" :rows="items" :id="'activity'" :loading="loading" )
     template(#item-event="{row}")
       HList(space-x="3")
-        Minted(v-if="row.event=='mint'" w="5")
-        Cart(v-else-if="row.event=='buy'" w="5")
+        //- Minted(v-if="row.event=='mint'" w="5")
+        Cart(v-if="row.event=='buy'" w="5")
         Purchase(v-else-if="row.event=='sell'" w="5")
         TransferIcon(v-else-if="row.event=='transfer'" w="5")
         TransferIcon(v-else-if="row.event=='burn'" w="5")
@@ -29,6 +29,7 @@ import type { ActivityData } from '~/composables/api/get/useActivityAPI';
 import type { TableColumn } from '~/composables/useTable'
 
 import Minted from '~/assets/icons/minted.svg'
+// import Minted from '~/assets/icons/minted.svg'
 import Cart from '~/assets/icons/cart.svg'
 import TransferIcon from '~/assets/icons/transfer-activity.svg'
 import Purchase from '~/assets/icons/notification/purchase.svg'
