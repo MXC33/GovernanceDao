@@ -21,7 +21,7 @@ HList(p="6" bg="ix-black" b="b-1 gray-600")
 
 <script lang="ts" setup>
 import Icon from '~/assets/images/header/dropdown/badges/aocbadge.svg'
-import PlusIcon from '~/assets/images/plus.svg'
+import PlusIcon from '~/assets/images/icons/plus.svg'
 
 const { walletState } = useWallet()
 const { ixtBalance, fetchIXT } = useIXTContract()
