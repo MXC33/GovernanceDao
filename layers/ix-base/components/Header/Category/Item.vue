@@ -37,16 +37,6 @@ const isNotLink = () => {
   const str = t(`marketplace.navigation.${header}.${category}.${item}.title`).toLowerCase()
   console.log(str)
 
-  const arr = ['swap']
-
-  for(let i = 0; i < arr.length; i++){
-    if(arr[i] == str){
-      return true
-    }
-  }
-  
-  return false
-
   switch (str) {
     case 'swap':
       return true
