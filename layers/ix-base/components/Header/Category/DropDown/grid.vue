@@ -34,7 +34,7 @@ const emit = defineEmits(['clikedItem'])
 
 const clikedItem = (header: string, category: string, item: string) => {
   emit('clikedItem', header, category, item);
-  console.log("Catragory dropdown grid", header, category, item)
+  //console.log("Catragory dropdown grid", header, category, item)
 }
 
 // const props = defineProps<{

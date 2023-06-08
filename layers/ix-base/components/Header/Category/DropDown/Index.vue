@@ -31,7 +31,7 @@ const Swap = () => {
 
 const clikedItem = (header: string, category: string, item: string) => {
   emit('clikedItem', header, category, item);
-  console.log("Catragory dropdown index", header, category, item)
+  //console.log("Catragory dropdown index", header, category, item)
 }
 
 </script>
