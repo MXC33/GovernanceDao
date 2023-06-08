@@ -1,6 +1,6 @@
 
 <template lang="pug">
-th(p="2 md:(3 first:l-6 last:r-6)" bg="gray-900" z="3" font="400" color="gray-200" whitespace="nowrap")
+TableCellHeadWrapper(:drawer="drawer")
   button(v-if="column.sortable" @click="onClickSort" flex="~ row" items="start" color="on-active:white" :active="isActive" transition="all")
     HList(space-x="1")
       div()
@@ -23,6 +23,7 @@ const { sortField, index, column } = defineProps<{
   column: TableColumnText<T>,
   index: number,
   sortField?: TableSort,
+  drawer?: boolean
 }>()
 
 const emit = defineEmits<{

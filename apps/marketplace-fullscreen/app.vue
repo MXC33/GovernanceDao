@@ -85,7 +85,7 @@ const values = computed(() => {
 <style>
 body,
 html {
-  background: #000;
+  background: #0C0C0C;
   --apply: font-foundry;
 }
 </style>
