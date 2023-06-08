@@ -9,13 +9,15 @@ export const useCookieState = <T extends any>(cookieName: string, init?: () => T
     })
   )
 
-  watch(cookie, (newValue) => {
-    useCookie<T>(cookieName, {
-      maxAge,
-      domain
-    }).value = newValue
-  }, { deep: true })
+  if (process.client) {
+    watch(cookie, (newValue) => {
+      useCookie<T>(cookieName, {
+        maxAge,
+        domain
+      }).value = newValue
+    }, { deep: true })
 
+  }
   return cookie
 
 }
