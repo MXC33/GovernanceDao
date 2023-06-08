@@ -1,6 +1,6 @@
 <template lang="pug">
 VList(v-if="data")
-  Activity(:data="data" :context="'activity'" v-if="data" :hide-grid="true" :loading="pending")
+  Activity(:data="noBurnData" :context="'activity'" v-if="data" :hide-grid="true" :loading="pending")
     template(#menu)
       AccountMenu()
 
@@ -11,6 +11,8 @@ VList(v-if="data")
 
 
 <script lang="ts" setup>
+import type { ActivityDataList } from '~/composables/api/get/useActivityAPI';
+
 
 const { data: data, execute: fetchActivity, refresh: refresh, pending, loadNextPage } = useActivityAPI()
 
@@ -18,6 +20,12 @@ await fetchActivity()
 
 console.log("data", data.value)
 
+const noBurnData = computed(() => {
+  return {
+    page_key: data.value?.page_key ? data.value?.page_key : '',
+    list: data.value?.list ? data.value?.list.filter(item => item.event !== 'burn') : []
+  }
+})
 
 
 </script>
