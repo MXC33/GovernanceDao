@@ -1,5 +1,5 @@
 <template lang="pug">
-VList(mt="4 md:6")
+VList()
   h3(text="3xl" font="bold") {{ item.name }}
 
   CollectionSingleItemSubHeader()

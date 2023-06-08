@@ -1,5 +1,5 @@
 <template lang="pug">
-VList(space-y="6")
+VList(gap="6")
   CollectionSingleItemHeader(:item="item" display="md:none")
 
   VList(frame="~")
