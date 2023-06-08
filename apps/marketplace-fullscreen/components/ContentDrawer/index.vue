@@ -1,18 +1,17 @@
 <template lang="pug">
 VList(max-h="85" frame="~")
-  VList(overflow-y="auto" h="full" pos="relative")
-    HList(h="12" px="6 on-small:3" bg="ix-black on-neutral:gray-900" items="center" justify="between" pos="sticky top-0" flex-shrink="0" z="1" @click.stop="dropDrawer" uppercase="~" cursor="pointer" :neutral="isNeutral" :small="isSmall")
-      span(color="white" text="md" font="bold" v-if="$slots.header")
-        slot(name="header")
+  HList(h="12" px="6 on-small:3" bg="ix-black on-neutral:gray-900" items="center" justify="between" pos="sticky top-0" flex-shrink="0" z="1" @click.stop="dropDrawer" uppercase="~" cursor="pointer" :neutral="isNeutral" :small="isSmall")
+    span(color="white" text="md" font="bold" v-if="$slots.header")
+      slot(name="header")
 
-      HList(v-else)
-        slot(name="titleicon")
+    HList(v-else)
+      slot(name="titleicon")
 
-      HelperChevron(w="5" :up="isOpen")
+    HelperChevron(w="5" :up="isOpen")
 
-    Transition(name="slide-top")
-      Collapse(:when="isOpen" class="v-collapse"  overflow-y="auto" )
-        slot
+  Transition(name="slide-top")
+    Collapse(:when="isOpen" class="v-collapse"  overflow-y="auto" )
+      slot
 
 </template>
 

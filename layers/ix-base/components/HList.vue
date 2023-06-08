@@ -1,5 +1,5 @@
 <template lang="pug">
-div(flex="~ row fold-col" :state="fold")
+div(flex="~ row")
   slot
   
 </template>
