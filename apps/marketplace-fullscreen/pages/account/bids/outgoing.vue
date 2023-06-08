@@ -71,11 +71,16 @@ const getStartDateFromMessage = (row: IXToken) => {
   return message.body.startTime
 }
 
-const { removeBid } = useBidsAPI()
+const cancelBidOnClick = async (item: IXToken) => {
+  const bid = item.bid
 
-const cancelBidOnClick = async (token: IXToken) => {
-  await removeBid(token._index, token.token_id, token.network, token.collection)
-  await refresh()
+  displayPopup({
+    type: 'unbid-item',
+    item: {
+      ...item,
+      bid
+    }
+  })
 }
 
 const updateBidOnClick = async (token: IXToken) => {
