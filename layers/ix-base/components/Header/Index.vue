@@ -21,7 +21,7 @@ VList(pos="sticky top-0" z="99" w="full" @mouseenter="isSelected = true" @mousel
     HeaderItem(v-if="activeMenuIndex != null" :key="activeMenuIndex" @onClickItem="onClicked" :header="siteTopHeaders[activeMenuIndex]" display="lt-md:none")
 
   Transition(name="slide-top")
-    HeaderCategoryDropDown(v-if="activeMenuIndex != null" @swap="turnOnSwap" @ConnectWallet="toggleMenu" @close="toggleMenu" overflow-y="auto")
+    HeaderCategoryDropDown(v-if="activeMenuIndex != null" @swap="turnOnSwap" @ConnectWallet="toggleMenu" @close="toggleMenu" @clikedItem="onClicked" overflow-y="auto")
 
 
 Popup(v-if="showIFrame")

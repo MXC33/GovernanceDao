@@ -3,7 +3,7 @@ div(grid="~ cols-2")
   div(v-for="category in getAllSmallCatagories(headerItem)" p="2")
     div(text="gray-300") {{ $t(`marketplace.navigation.${headerItem.type}.${category.type}.title`) }}
     div(b="b-1 gray-300" w="95%")
-    HeaderCategoryDropDownItem(v-for="item in category.items" :header="headerItem.type" :category="category.type" :item="item")
+    HeaderCategoryDropDownItem(v-for="item in category.items" :header="headerItem.type" :category="category.type" :item="item" @click="clikedItem(headerItem.type, category.type, item)")
 </template>
 
 <script lang="ts" setup>
@@ -25,5 +25,12 @@ const getAllSmallCatagories = (header: HeaderItem) => {
   }
   //console.log(header.type ,"length", smallCatagories.length)
   return smallCatagories
+}
+
+const emit = defineEmits(['clikedItem'])
+
+const clikedItem = (header: string, category: string, item: string) => {
+  emit('clikedItem', header, category, item);
+  //console.log("Cliked Small Group", header, category, item)
 }
 </script>
