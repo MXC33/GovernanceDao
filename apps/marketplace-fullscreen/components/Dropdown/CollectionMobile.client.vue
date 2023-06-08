@@ -11,6 +11,7 @@ Transition(name="fade-slow")
 
     VList(px="3" w="full" space-y="2" gap="2" pt="4")
       template(v-for="item in collections")
+        HList(bg="hover:gray-700")
         NuxtLink(:to="'/assets/polygon/' + item.contract" flex="~ row" items="center" w="full" @click="$emit('close')")
           div(w="10" h="10" mr="3")
             img(src="~/assets/testfiles/test-collection-bg.png" )

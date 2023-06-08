@@ -3,7 +3,7 @@ VList(w="full")
   Transition(name="slide-left")
     CollectionFilterButtonContainer(:is-open="isOpen")
 
-  VList(max-w="full" w="full" overflow-x="auto")
+  VList.no-scrollbar(max-w="full" w="full" overflow-x="auto")
     table.base-table(bg="gray-900" max-w="full")
       colgroup
         col(v-for="(column, index) in columns" :style="getColumnStyle(column)")
