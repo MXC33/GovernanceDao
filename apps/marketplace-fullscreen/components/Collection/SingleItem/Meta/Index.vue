@@ -1,5 +1,7 @@
 <template lang="pug">
 VList(space-y="6")
+  CollectionSingleItemHeader(:item="item" display="md:none")
+
   VList(frame="~")
     VList(aspect="square" w="full" min-h="0")
       TokenMedia(:token="item" w="full" :is-large="true" pos="relative")

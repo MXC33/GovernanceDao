@@ -85,7 +85,29 @@ const values = computed(() => {
 <style>
 body,
 html {
-  background: #000;
+  background: #0C0C0C;
   --apply: font-foundry;
+}
+
+/* Scroll bar stylings */
+::-webkit-scrollbar {
+  width: 2px;
+  height: 2px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #636363;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #636363;
+  border-radius: 2px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #636363;
 }
 </style>

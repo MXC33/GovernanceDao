@@ -4,11 +4,15 @@ Transition(name="fade" mode="out-in" )
     template(#item-event="{row}")
       HList(space-x="3")
         Minted(v-if="row.event=='mint'" w="5")
-        Cart(v-else-if="row.event=='buy' || row.event=='sell'" w="5")
+        Cart(v-else-if="row.event=='buy'" w="5")
+        Purchase(v-else-if="row.event=='sell'" w="5")
         TransferIcon(v-else-if="row.event=='transfer'" w="5")
         TransferIcon(v-else-if="row.event=='burn'" w="5")
 
         div() {{ capitalizeFirstLetter(row.event) }}
+
+    template(#item-timestamp="{row}")
+      div() {{ displayedTime(row.timestamp) }}
 
     template(#item-nft.name="{row}")
       HList(items="center" space-x="2" font="bold" @click="onClickItem(row.nft)" cursor="pointer" max-w="60")
@@ -27,8 +31,12 @@ import type { TableColumn } from '~/composables/useTable'
 import Minted from '~/assets/icons/minted.svg'
 import Cart from '~/assets/icons/cart.svg'
 import TransferIcon from '~/assets/icons/transfer-activity.svg'
+import Purchase from '~/assets/icons/notification/purchase.svg'
+
 
 const { getTokenKey } = useTokens()
+const { walletAdress } = useWallet()
+const { currentTime } = useGlobalTimestamp()
 
 const { items, columns } = defineProps<{
   items: ActivityData[],
@@ -43,6 +51,20 @@ const onClickItem = (row: IXToken) => {
 
 const capitalizeFirstLetter = (string: string) => {
   return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
+const isYourWalletAddress = (address: string) => {
+  if (walletAdress.value?.toLowerCase() == address.toLowerCase())
+    return true
+  return false
+}
+
+
+const displayedTime = (timestamp: number) => {
+  const { months, days } = useIntervalWithDays(timestamp, currentTime.value)
+
+  const optMonth = months && months > 0 ? `${months} Months and` : ''
+  return `${optMonth} ${days} Days ago`
 }
 
 </script>

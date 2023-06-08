@@ -30,13 +30,12 @@ export const useDaysLeft = (start: number, end: number) =>
   (end - start) / (1000 * 60 * 60) / 24
 
 export const useIntervalWithDays = (start: number, end: number) => {
-  const { minutes, seconds } = intervalToDuration({ start, end })
-  const days = Math.floor(useDaysLeft(start, end))
-  const hours = Math.floor(useHoursLeft(start, end))
-  const hoursLeft = Math.floor(((hours / 24) % 1) * 24)
-  // const monthString = formatDistanceStrict(start, end, { unit: 'month', roundingMethod: 'floor' })
-  // const months = monthString.split(" ")[0]
-  return { days, hours: hoursLeft, minutes, seconds }
+  const { months, days, hours, minutes, seconds } = intervalToDuration({ start, end })
+  // const days = Math.floor(useDaysLeft(start, end))
+  // const hours = Math.floor(useHoursLeft(start, end))
+  // const hoursLeft = Math.floor(((hours / 24) % 1) * 24)
+
+  return { months, days, hours, minutes, seconds }
 }
 
 export const isNumeric = (value: string) => {

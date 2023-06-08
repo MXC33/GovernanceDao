@@ -25,7 +25,7 @@ export interface TableButton<T extends TableRow> {
 
 export interface TableColumnText<T extends TableRow> extends TableColumnBase {
   label: string,
-  type?: 'text' | 'date' | 'ixt' | 'usd' | 'asset'
+  type?: 'text' | 'date' | 'ixt' | 'usd' | 'asset' | 'contractAdress'
   sortable?: boolean,
   rowKey?: string,
   getValue?: (row: T) => string | number
@@ -44,15 +44,24 @@ export interface TableButtonColumn<T extends TableRow> extends TableColumnBase {
 
 export type TableColumn<T extends TableRow> = TableColumnText<T> | TableButtonColumn<T>
 
+const columnIndex = (id: string) => {
+  const colIndexOne = ['collection', 'incoming-bids', 'outgoing-bids', 'my-assets', 'active-listings']
+  if (colIndexOne.includes(id))
+    return 1
+  if (id == 'activity')
+    return 6
+  return 0
+}
+
 
 export const useTableSort = (id: string) => {
 
-  const colIndexOne = ['collection', 'incoming-bids', 'outgoing-bids', 'my-assets', 'active-listings']
+  const isDescendingDirection = id == 'offers' || id == 'incoming-bids' || id == 'activity'
 
   const sort = useState<TableSort>(`table-${id}`, () => (
     {
-      columnIndex: colIndexOne.includes(id) ? 1 : 0,
-      direction: id == 'offers' || id == 'incoming-bids' ? 'desc' : 'asc'
+      columnIndex: columnIndex(id),
+      direction: isDescendingDirection ? 'desc' : 'asc'
     }))
 
   const toggleSortDirection = () => {
