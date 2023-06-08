@@ -1,6 +1,6 @@
 <template lang="pug">
 Transition(name="fade-slow")
-  VList(ref="element" w="full" h="100vh" bg="gray-900" z="99" pos="sticky top-0 left-0" v-if="isOpen")
+  VList(w="full" h="100vh" bg="gray-900" z="99" pos="sticky top-16 left-0" v-if="isOpen")
     HList(justify="between" items="center" b="b-0.5 gray-600" px="4" py="3")
       HList(items="center" space-x="2")
         CollectionIcon(w="6")
