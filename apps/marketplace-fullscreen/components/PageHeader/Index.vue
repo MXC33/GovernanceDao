@@ -60,13 +60,6 @@ const onClickAccount = () => {
   navigateTo('/account')
 }
 
-const openDropdown = ref(false)
-
-const collectionOpen = () => {
-  openDropdown.value = !openDropdown.value
-}
-
-
 const onSingleItem = computed(() =>
   route.matched.some((match) => match.path.includes("tokenId") || match.path.includes("connect"))
 )
