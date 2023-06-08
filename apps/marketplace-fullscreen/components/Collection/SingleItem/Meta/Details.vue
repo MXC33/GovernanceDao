@@ -1,9 +1,10 @@
 <template lang="pug">
 VList()
   AttributeRow()
-    template(#name) Contract adress
+    template(#name) Contract adress 
     template(#value) 
-      span(color="ix-primary") {{ item.collection}}
+      NuxtLink(color="ix-primary") {{ showAdress(item.collection)}} 
+      //-span(color="ix-primary") {{ item.collection}} 
 
   AttributeRow()
     template(#name) Token Id
@@ -35,8 +36,11 @@ import type { SingleItemData } from '@ix/base/composables/Token/useIXToken';
 const route = useRoute()
 const { network } = route.params
 
-
-
+const showAdress = (str: string) => {
+  const firstFour = str.slice(0, 4);
+  const lastFour = str.slice(-4);
+  return `${firstFour}...${lastFour}`;
+}
 
 const { item } = defineProps<{
   item: SingleItemData
