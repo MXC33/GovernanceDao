@@ -5,6 +5,8 @@ VList(flex-shrink="0" whitespace="nowrap")
 
   Currency(:value="ixtToUSD(value)" type="usd" v-else-if="column.type == 'usd'")
 
+  ContractAdress(:adress="value" v-else-if="column.type == 'contractAdress'")
+
   span(v-else-if="column.type == 'date'") {{ getDate(value) }}
 
   span(v-else-if="isYou" font="bold") {{value}}

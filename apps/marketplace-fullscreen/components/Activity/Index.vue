@@ -21,8 +21,6 @@ import type { CollectionContext } from '~/composables/useCollection';
 import type { TableColumn } from '~/composables/useTable'
 import type { ActivityDataList, ActivityData } from '~/composables/api/get/useActivityAPI';
 
-const { activeFilters } = useCollectionSettings()
-
 
 const defaultColumns: TableColumn<ActivityData>[] = [
 
@@ -42,10 +40,10 @@ const defaultColumns: TableColumn<ActivityData>[] = [
     label: "Quantity", rowKey: "quantity", type: 'text', sortable: true
   },
   {
-    label: "From", rowKey: "from", type: 'text'
+    label: "From", rowKey: "from", type: 'contractAdress'
   },
   {
-    label: "To", rowKey: "to", type: 'text'
+    label: "To", rowKey: "to", type: 'contractAdress'
   },
   {
     label: "Time", rowKey: "timestamp", type: 'date', sortable: true
@@ -54,7 +52,7 @@ const defaultColumns: TableColumn<ActivityData>[] = [
 
 
 
-const { data, columns, context = 'collection' } = defineProps<{
+const { data } = defineProps<{
   data?: ActivityDataList,
   columns?: TableColumn<IXToken>[],
   hideGrid?: boolean,
@@ -63,9 +61,5 @@ const { data, columns, context = 'collection' } = defineProps<{
 }>()
 
 
-
-onBeforeUnmount(() => {
-  activeFilters.value = []
-})
 
 </script>

@@ -11,14 +11,6 @@ Transition(name="fade" mode="out-in" )
 
         div() {{ capitalizeFirstLetter(row.event) }}
 
-    template(#item-to="{row}")
-      div(v-if="isYourWalletAddress(row.to)" font="bold") YOU
-      div(v-else) {{ row.to }}
-
-    template(#item-from="{row}")
-      div(v-if="isYourWalletAddress(row.from)" font="bold") YOU
-      div(v-else) {{ row.from }}
-
     template(#item-timestamp="{row}")
       div() {{ displayedTime(row.timestamp) }}
 

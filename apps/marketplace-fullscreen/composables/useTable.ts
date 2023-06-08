@@ -25,7 +25,7 @@ export interface TableButton<T extends TableRow> {
 
 export interface TableColumnText<T extends TableRow> extends TableColumnBase {
   label: string,
-  type?: 'text' | 'date' | 'ixt' | 'usd' | 'asset'
+  type?: 'text' | 'date' | 'ixt' | 'usd' | 'asset' | 'contractAdress'
   sortable?: boolean,
   rowKey?: string,
   getValue?: (row: T) => string | number

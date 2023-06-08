@@ -28,15 +28,6 @@ VList(space-y="6")
 <script lang="ts" setup>
 import type { SingleItemData } from '@ix/base/composables/Token/useIXToken';
 
-const { displayPopup } = usePopups()
-
-const onClickTransfer = () => {
-  displayPopup({
-    type: 'transfer-item',
-    item
-  })
-}
-
 const { item } = defineProps<{
   item: SingleItemData
 }>()

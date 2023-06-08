@@ -3,7 +3,7 @@ VList()
   AttributeRow()
     template(#name) Contract adress
     template(#value) 
-      span(color="ix-primary") {{ item.collection}}
+      ContractAdress(color="ix-primary" :adress="item.collection")
 
   AttributeRow()
     template(#name) Token Id
