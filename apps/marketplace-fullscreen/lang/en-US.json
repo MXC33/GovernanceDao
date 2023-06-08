@@ -210,6 +210,10 @@
         "title": "Place Bid"
       }
     },
+    "unbid": {
+      "title": "Remove Bid",
+      "warningText": "Are you sure you want to remove this bid?"
+    },
     "offer": {
       "title": "Accept Offer"
     },

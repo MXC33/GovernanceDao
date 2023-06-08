@@ -12,7 +12,8 @@ ContentDrawer(:start-open="!isMobile" :is-neutral="true" bg="gray-900")
 
     Table(:columns="offerColumns" :rows="item.bids" id="offers" :in-drawer="true" v-else="item.bids.length > 0" :col-width="150")
       template(#item-buttons="{row}" )
-        button(@click="onClickAcceptOffer(row)" uppercase="~" bg="gray-500 hover:gray-400" transition="all" cut="bottom-right sm" p="x-6 y-3" font="bold") Accept
+        button(@click="onClickAcceptOffer(row)" uppercase="~" bg="gray-500 hover:gray-400" transition="all" cut="bottom-right sm" p="x-6 y-3" font="bold" v-if="!playerOwnedSale(row)") Accept
+        button(@click="cancelBidOnClick(row)" uppercase="~" bg="gray-500 hover:gray-400" transition="all" cut="bottom-right sm" p="x-6 y-3" font="bold" v-else) Cancel
 
 </template>
 
@@ -20,6 +21,8 @@ ContentDrawer(:start-open="!isMobile" :is-neutral="true" bg="gray-900")
 import type { SingleItemData, Bid } from '@ix/base/composables/Token/useIXToken';
 import type { TableColumn } from '~/composables/useTable';
 const { displayPopup } = usePopups()
+const { walletAdress } = useWallet()
+
 const isMobile = onMobile()
 
 const { item } = defineProps<{
@@ -29,6 +32,16 @@ const { item } = defineProps<{
 const onClickAcceptOffer = (bid: Bid) => {
   displayPopup({
     type: 'accept-item',
+    item: {
+      ...item,
+      bid
+    }
+  })
+}
+
+const cancelBidOnClick = async (bid: Bid) => {
+  displayPopup({
+    type: 'unbid-item',
     item: {
       ...item,
       bid
@@ -61,6 +74,12 @@ const offerColumns = computed<TableColumn<Bid>[]>(() => {
   return baseColumns
 })
 
+const playerOwnedSale = (bid: Bid) => {
+  const message = JSON.parse(bid.message)
+  if (message.body.offerer.toLowerCase() == walletAdress.value?.toLowerCase())
+    return true
+  return false
+}
 
 
 </script>
