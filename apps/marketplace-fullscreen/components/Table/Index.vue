@@ -63,7 +63,6 @@ const getColumnStyle = (item: TableColumn<Row>) => {
 
 <style scoped>
 table {
-  border-collapse: initial;
   display: table;
   width: 100%;
   border-spacing: 0;
