@@ -6,11 +6,11 @@ VList(w="full" h="100vh" bg="gray-900" z="99" pos="sticky top-16 left-0" v-if="i
       span(color="white" font="bold" text="lg" translate-y="0.5" uppercase="~") explore collections
 
     HList(items="center" translate-y="0.2")
-      CloseIcon(w="4" cursor="pointer" @click="$emit('close')")
+      CloseIcon(w="4" cursor="pointer" @click="$emit('close')" mr="2")
 
-  VList(px="3" w="full")
+  VList(w="full")
     template(v-for="item in collections")
-      HList(bg="hover:gray-700" b="b-1 gray-600" ml="-3" mr="-3")
+      HList(bg="hover:gray-700" mt="3" px="3" space-x="3")
         NuxtLink(:to="'/assets/polygon/' + item.contract" flex="~ row" items="center" w="full" @click="$emit('close')")
           div(w="10" h="10" mr="3")
             img(src="~/assets/testfiles/test-collection-bg.png" )
