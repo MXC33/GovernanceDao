@@ -41,12 +41,39 @@ const { selectedItems } = useSelection()
 
 const { getCollectionAttributes } = useDefaulAttributes()
 const attributes = computed(() => data ? getCollectionAttributes(data) : [])
+const { currentTime } = useGlobalTimestamp()
+
 
 const defaultColumns: TableColumn<IXToken>[] = [
   { label: "Asset", rowKey: "name", type: 'asset' },
   { label: "Current price", rowKey: "sale_price", type: 'ixt', sortable: true },
   { label: "USD price", rowKey: "sale_price", type: 'usd', sortable: true },
   { label: "Best offer", rowKey: "higher_bid_price", type: 'ixt', sortable: true },
+  {
+    label: "Total quantity", rowKey: "shares", getValue(row) {
+      if (row.shares == 0)
+        return '-'
+      return row.shares.toString()
+    }, type: 'text'
+  },
+  {
+    label: "Seller", rowKey: "lowest_sale.player_username", getValue(row) {
+      if (!row.lowest_sale)
+        return ''
+      return row.lowest_sale.player_username
+    }, type: 'text'
+  },
+  {
+    label: "Time listed", rowKey: "lowest_sale.endtime", getValue(row) {
+      if (!row.lowest_sale)
+        return ''
+      const { days, minutes } = useIntervalWithDays((row.lowest_sale.timestamp * 1000), currentTime.value)
+      const optDays = days && days > 0 ? `${days} days` : ''
+
+      return `${optDays} ${minutes} minutes`
+    }, type: 'text'
+  },
+
 ]
 
 const renderColumns = computed(() => columns ?? defaultColumns)
