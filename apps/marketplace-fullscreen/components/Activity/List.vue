@@ -3,8 +3,8 @@ Transition(name="fade" mode="out-in" )
   Table(:columns="columns" :rows="items" :id="'activity'" :loading="loading" )
     template(#item-event="{row}")
       HList(space-x="3")
-        Minted(v-if="row.event=='mint'" w="5")
-        Cart(v-else-if="row.event=='buy'" w="5")
+        //- Minted(v-if="row.event=='mint'" w="5")
+        Cart(v-if="row.event=='buy'" w="5")
         Purchase(v-else-if="row.event=='sell'" w="5")
         TransferIcon(v-else-if="row.event=='transfer'" w="5")
         TransferIcon(v-else-if="row.event=='burn'" w="5")
@@ -15,11 +15,7 @@ Transition(name="fade" mode="out-in" )
       div() {{ displayedTime(row.timestamp) }}
 
     template(#item-nft.name="{row}")
-      HList(items="center" space-x="2" font="bold" @click="onClickItem(row.nft)" cursor="pointer" max-w="60")
-        div(w="12" h="12")
-          TokenImage(:token="row.nft" w="12" h="12" :key="getTokenKey(row.nft)")
-        TokenName(:token="row.nft" capitalize="~" :key="getTokenKey(row.nft)")
-
+      TableCellToken(:token="row.nft" @click="onClickItem(row.nft)" max-w="60")
 
 </template>
 
@@ -28,14 +24,13 @@ import type { IXToken } from '@ix/base/composables/Token/useIXToken';
 import type { ActivityData } from '~/composables/api/get/useActivityAPI';
 import type { TableColumn } from '~/composables/useTable'
 
-import Minted from '~/assets/icons/minted.svg'
+// import Minted from '~/assets/icons/minted.svg'
 import Cart from '~/assets/icons/cart.svg'
 import TransferIcon from '~/assets/icons/transfer-activity.svg'
 import Purchase from '~/assets/icons/notification/purchase.svg'
 
 
 const { getTokenKey } = useTokens()
-const { walletAdress } = useWallet()
 const { currentTime } = useGlobalTimestamp()
 
 const { items, columns } = defineProps<{
@@ -52,13 +47,6 @@ const onClickItem = (row: IXToken) => {
 const capitalizeFirstLetter = (string: string) => {
   return string.charAt(0).toUpperCase() + string.slice(1);
 }
-
-const isYourWalletAddress = (address: string) => {
-  if (walletAdress.value?.toLowerCase() == address.toLowerCase())
-    return true
-  return false
-}
-
 
 const displayedTime = (timestamp: number) => {
   const { months, days } = useIntervalWithDays(timestamp, currentTime.value)

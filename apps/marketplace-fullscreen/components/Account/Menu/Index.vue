@@ -1,6 +1,6 @@
 <!-- <template lang="pug">
 VList(b="b-1 gray-400")
-  HList(w="full" space-x="8 md:12" mb="-2px" overflow-x="scroll" whitespace="nowrap")
+  HList.no-scrollbar(w="full" space-x="8 md:12" mb="-2px" overflow-x="scroll" whitespace="nowrap")
     AccountMenuTab(v-for="tab in accountTabs" :key="tab" :is-active="tab === activeTab" @click="onClick(tab)") {{ $t(`marketplace.myAssets.${tab}`) }}
 
 </template> -->

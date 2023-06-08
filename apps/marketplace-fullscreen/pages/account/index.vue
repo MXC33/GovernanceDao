@@ -1,5 +1,5 @@
 <template lang="pug">
-Collection(:data="data" v-if="data" context="my-assets" :loading="pending")
+Collection(:data="data" :columns="columns" v-if="data" context="my-assets" :loading="pending")
   template(#menu)
     AccountMenu()
 
@@ -10,6 +10,8 @@ Collection(:data="data" v-if="data" context="my-assets" :loading="pending")
 
 
 <script lang="ts" setup>
+import type { TableColumn } from "~/composables/useTable";
+import type { IXToken } from "@ix/base/composables/Token/useIXToken";
 
 useHead({
   title: "My Assets | Marketplace | PlanetIX"
@@ -26,6 +28,11 @@ const { data: data, execute: fetchCollection, loadNextPage, setupCollectionListe
 await fetchCollection()
 setupCollectionListeners()
 
-console.log(data.value)
+const columns: TableColumn<IXToken>[] = [
+  { label: "Asset", rowKey: "name", type: 'asset' },
+  { label: "Current price", rowKey: "sale_price", type: 'ixt', sortable: true },
+  { label: "USD price", rowKey: "sale_price", type: 'usd', sortable: true },
+  { label: "Best offer", rowKey: "higher_bid_price", type: 'ixt', sortable: true },
+]
 
 </script>

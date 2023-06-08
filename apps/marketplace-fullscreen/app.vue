@@ -97,7 +97,7 @@ html {
 
 /* Track */
 ::-webkit-scrollbar-track {
-  background: #636363;
+  background: none;
 }
 
 /* Handle */
@@ -109,5 +109,13 @@ html {
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
   background: #636363;
+}
+
+.no-scrollbar {
+  scrollbar-width: none
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none
 }
 </style>

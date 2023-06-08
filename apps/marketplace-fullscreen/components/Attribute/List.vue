@@ -1,5 +1,5 @@
 <template lang="pug">
-HList(py="0 md:t-6" space-x="md:2" whitespace="nowrap" overflow-x="scroll")
+HList.no-scrollbar(py="2 md:t-4" space-x="2" whitespace="nowrap" overflow-x="scroll" h="16")
   template(v-for="attribute in attributes" )
 
     AttributeItem(v-if="attribute.value != undefined")
