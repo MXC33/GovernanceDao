@@ -12,8 +12,7 @@ ContentDrawer(:start-open="true" :is-neutral="true" bg="gray-900")
         TableButtonSmall(@click="cancelListingOnClick(row)" v-else)
           TrashIcon(w="6" fill="white")
 
-    HList(v-else px="6" py="6" font="bold" color="gray-400" items="center" justify="center")
-      span() No items found
+    CollectionSingleItemTradeDetail(v-else) No items found
 
 </template>
 
