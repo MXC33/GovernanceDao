@@ -7,7 +7,7 @@ VList()
       TradeModuleHeaderAdjust(v-model="shares")
         template(#error v-if="showDecreaseMinPrice") Try decreasing your lowest offer per unit to accept more items
 
-  TradeModuleAverage(v-if="shares.value > 1")
+  TradeModuleAverage(v-if="shares.value > 1" pb="4")
     template(#title) Avg. offer per unit
     template(#ixt) {{averageOfferPerItem}} IXT
     template(#percentage) {{belowHighestOffer}}% below highest offer
