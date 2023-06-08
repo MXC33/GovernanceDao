@@ -43,7 +43,7 @@ const { siteTopHeaders } = useSiteHeader()
 const activeMenuIndex = ref<number | null>(null)
 
 const openMenu = (index: number) => {
-  console.log("Open Menu", index);
+  //console.log("Open Menu", index);
 
   if (activeMenuIndex.value == index)
     return activeMenuIndex.value = null
@@ -59,7 +59,7 @@ const toggleMenu = () => {
 }
 
 const turnOnSwap = () => {
-  console.log("turnOnSwap")
+  //console.log("turnOnSwap")
   showIFrame.value = true
   activeMenuIndex.value = null
 }
