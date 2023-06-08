@@ -3,14 +3,16 @@ VList(w="full")
   Transition(name="slide-left")
     CollectionFilterButtonContainer(:is-open="isOpen")
 
-  VList(max-w="full" overflow-x="auto" w="full")
+  VList(max-w="full" w="full")
     table(bg="gray-900")
       //- colgroup
       //-   col(v-for="(column, index) in columns" :style="getColumnStyle(column)")
 
       TableHead()
         template(v-for="(column, index) in columns")
-          TableCellHead(:column="column" :index="index" :sort-field="sort" @select-field="selectSortField", @toggle-sort="toggleSortDirection" pos="sticky top-(-0.2)" :drawer="inDrawer" v-if="column.type != 'buttons'") {{ column.label }}
+          TableCellHead(:column="column" :index="index" :sort-field="sort" @select-field="selectSortField", @toggle-sort="toggleSortDirection" :drawer="inDrawer" v-if="column.type != 'buttons'") {{ column.label }}
+          TableCellHeadWrapper(v-else :drawer="inDrawer") Action
+
 
       tbody(divide-y="1")
         TableRow(v-for="(row, index) in sortedRows" :key="index")
