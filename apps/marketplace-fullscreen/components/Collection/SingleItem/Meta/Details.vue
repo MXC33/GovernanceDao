@@ -1,9 +1,10 @@
 <template lang="pug">
 VList()
   AttributeRow()
-    template(#name) Contract adress
+    template(#name) Contract adress 
     template(#value) 
-      ContractAdress(color="ix-primary" :adress="item.collection")
+      NuxtLink(:to="linkAdress" color="ix-primary") {{ showAdress(item.collection)}} 
+      //-span(color="ix-primary") {{ item.collection}} 
 
   AttributeRow()
     template(#name) Token Id
@@ -35,8 +36,11 @@ import type { SingleItemData } from '@ix/base/composables/Token/useIXToken';
 const route = useRoute()
 const { network } = route.params
 
-
-
+const showAdress = (str: string) => {
+  const firstFour = str.slice(0, 5);
+  const lastFour = str.slice(-5);
+  return `${firstFour}...${lastFour}`;
+}
 
 const { item } = defineProps<{
   item: SingleItemData
@@ -44,5 +48,7 @@ const { item } = defineProps<{
 
 const is721 = ERC721Addresses.includes(item.collection)
 const is1155 = ERC1155Addresses.includes(item.collection)
+
+const linkAdress = computed(() => `https://polygonscan.com/address/${item.collection}`)
 
 </script>
