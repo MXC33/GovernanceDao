@@ -12,8 +12,6 @@ VList(justify="center" items="center" aspect="2/3" bg="black opacity-40" ref="me
           button(v-else btn="~ primary" @click.stop="onClickCart" w="full" disable="on-no-click:active" :no-click="noClick")
             GlitchText(text="Add to cart" :auto-hover="true")
             
-
-      
 </template>
 
 <script lang="ts" setup>
@@ -48,6 +46,5 @@ const onClickListItems = () => {
     items: [token]
   })
 }
-
 
 </script>

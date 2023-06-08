@@ -1,8 +1,7 @@
 <template lang="pug">
-VList(aspect="square" w="full" pos="relative" overflow="hidden" @click="onClickItem") 
+NuxtLink(:to="getItemLink(token)" target="_blank" rel="noopener" aspect="square" w="full" pos="relative" overflow="hidden" @click.stop="onClickItem") 
   slot(name="media")
     TokenLazyVideo(:token="token" :key="token.collection + token.token_id" :is-hovered="isHovered")
-
 
   HList(pos="absolute" inset="0" p="3")
     slot(name="icon-left")
@@ -18,6 +17,11 @@ const props = defineProps<{
   token: IXToken,
   isHovered?: boolean
 }>()
+
+const getItemLink = (token: IXToken) => {
+  const { network, collection, token_id } = token
+  return `/assets/${network}/${collection}/${token_id}`
+}
 
 const onClickItem = () => {
   const { token_id, network, collection } = props.token
