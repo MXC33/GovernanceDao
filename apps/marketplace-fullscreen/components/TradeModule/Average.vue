@@ -1,5 +1,5 @@
 <template lang="pug">
-VList(px="3 md:6" text="lt-md:xs" )
+VList(px="3 md:6" text="lt-md:xs" pb="4")
   h3(color="gray-200") 
     slot(name="title")
 
