@@ -11,19 +11,20 @@ VList(w="full" @mouseenter="isSelected = true" @mouseleave="isSelected = false" 
 
     HList(font="bold" space-x="6" px="0" translate-y="0.4")
       HeaderLink(to="/" display="lt-md:none") help
-      HeaderLink(to="/" display="lt-md:none")
+      HeaderLink(to="/")
         HelperLanguage(language="EN" translate-y="-0.2")
       HeaderAccountButton(@addFunds="iFrameToggle")
 
+    div(display="lg:none"  @click="toggleMenu" cursor="pointer")
+      SettingsIcon(w="8" v-if="!isMenuOpen")
+      CrossIcon(w="8" v-else)
 
-    SettingsIcon(w="8" display="lg:none" 
-    @click="toggleMenu")
 
   Transition(name="slide-top" mode="out-in" )
-    HeaderItem(v-if="activeMenuIndex != null" :key="activeMenuIndex" @onClickItem="onClicked" :header="siteTopHeaders[activeMenuIndex]" display="lt-md:none")
+    HeaderItem(v-if="activeMenuIndex != null" :key="activeMenuIndex" @onClickItem="onClicked" :header="siteTopHeaders[activeMenuIndex]" display="lt-lg:none")
 
   Transition(name="slide-top")
-    HeaderCategoryDropDown(v-if="activeMenuIndex != null" @swap="turnOnSwap" @ConnectWallet="toggleMenu" @close="toggleMenu" overflow-y="auto")
+    HeaderMenuMobile(v-if="isMenuOpen" @swap="turnOnSwap" @close="toggleMenu" overflow-y="auto" display="lg:!none")
 
 
 Popup(v-if="showIFrame")
@@ -39,11 +40,13 @@ Popup(v-if="showIFrame")
 <script lang="ts" setup>
 import PlanetIXNew from '~/assets/images/header/planetix-new.svg'
 import SettingsIcon from '~/assets/images/header/hamburger.svg'
+import CrossIcon from '~/assets/images/header/cross.svg'
 
-import GlobeIcon from '~/assets/images/header/Globe.svg'
 const { siteTopHeaders } = useSiteHeader()
 
 const activeMenuIndex = ref<number | null>(null)
+
+const isMenuOpen = computed(() => activeMenuIndex.value != null)
 
 const openMenu = (index: number) => {
   console.log("Open Menu", index);
