@@ -7,7 +7,7 @@ VList()
       TradeModuleHeaderAdjust(v-model="shares")
         template(#error v-if="showIncreaseMaxPrice") Try increasing your max price to buy more items
 
-  TradeModuleAverage(v-if="shares.value > 1")
+  TradeModuleAverage(v-if="shares.value > 1" pb="4")
     template(#title) Avg. price per unit
     template(#ixt) {{averagePricePerItem}} IXT
     template(#percentage) {{aboveFloorPrice}}% above floor price

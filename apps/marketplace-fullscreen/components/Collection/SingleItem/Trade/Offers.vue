@@ -12,7 +12,7 @@ ContentDrawer(:start-open="!isMobile" :is-neutral="true" bg="gray-900")
 
     Table(:columns="offerColumns" :rows="item.bids" id="offers" :in-drawer="true" v-else="item.bids.length > 0" :col-width="150")
       template(#item-buttons="{row}" )
-        button(@click="onClickAcceptOffer(row)" uppercase="~" bg="gray-500 hover:gray-400" transition="all" cut="bottom-right sm" p="x-6 y-3") Accept
+        button(@click="onClickAcceptOffer(row)" uppercase="~" bg="gray-500 hover:gray-400" transition="all" cut="bottom-right sm" p="x-6 y-3" font="bold") Accept
 
 </template>
 

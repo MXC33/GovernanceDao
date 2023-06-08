@@ -7,10 +7,10 @@ ContentDrawer(:start-open="!isMobile" :is-neutral="true" bg="gray-900")
     Table(:columns="saleColumns" :rows="item.sales" id="single-item" :in-drawer="true" v-if="item.sales && item.sales.length > 0" :col-width="150")
       template(#item-buttons="{row}")
         TableButtonSmall(v-if="!playerOwnedSale(row)" @click="addSaleToCart(row)" disable="on-in-cart:active" :in-cart="hasItemInCart(row)")
-          CartIcon(w="6")
+          CartIcon(w="4 md:6")
 
         TableButtonSmall(@click="cancelListingOnClick(row)" v-else)
-          TrashIcon(w="6" fill="white")
+          TrashIcon(w="4 md:6" fill="white")
 
     CollectionSingleItemTradeDetail(v-else) No items found
 

@@ -1,5 +1,5 @@
 <template lang="pug">
-Transition(name="fade-slow")
+Transition(name="slide-right" mode="in-out")
   DropdownCollectionMobile(v-if="showCollection" v-model="toggleCollection" @close="toggleCollection")
 
 VList(flex-grow="1" px="0 md:6" pos="relative")

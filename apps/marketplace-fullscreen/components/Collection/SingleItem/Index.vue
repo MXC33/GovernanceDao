@@ -1,6 +1,6 @@
 <template lang="pug">
 VList()
-  div(grid="md:~ cols-8 gap-3" px="6" pb="6")
+  div(grid="md:~ cols-8 gap-3" px="4 md:6" pb="6")
     div(grid="col-span-3")
       CollectionSingleItemMeta(:item="item")
 
