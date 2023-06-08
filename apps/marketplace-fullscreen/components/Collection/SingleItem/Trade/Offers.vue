@@ -9,7 +9,7 @@ ContentDrawer(:start-open="true" :is-neutral="true" bg="gray-900")
     HList(px="6" py="6" font="bold" color="gray-400" items="center" justify="center" v-if="item.bids.length < 1" )
       span() There is no offers for this item
 
-    Table(:columns="offerColumns" :rows="item.bids" id="offers" :in-drawer="true" v-else="item.bids.length > 0")
+    Table(:columns="offerColumns" :rows="item.bids" id="offers" :in-drawer="true" v-else="item.bids.length > 0" :col-width="150")
       template(#item-buttons="{row}" )
         button(@click="onClickAcceptOffer(row)" uppercase="~" bg="gray-500 hover:gray-400" transition="all" cut="bottom-right sm" p="x-6 y-3") Accept
 

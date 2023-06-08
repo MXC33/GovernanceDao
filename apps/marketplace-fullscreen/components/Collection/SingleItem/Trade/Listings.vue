@@ -4,7 +4,7 @@ ContentDrawer(:start-open="true" :is-neutral="true" bg="gray-900")
     TitleWithIcon(icon="listing") listings
 
   template(#default)
-    Table(:columns="saleColumns" :rows="item.sales" id="single-item" :in-drawer="true" v-if="item.sales && item.sales.length > 0")
+    Table(:columns="saleColumns" :rows="item.sales" id="single-item" :in-drawer="true" v-if="item.sales && item.sales.length > 0" :col-width="150")
       template(#item-buttons="{row}")
         TableButtonSmall(v-if="!playerOwnedSale(row)" @click="addSaleToCart(row)" disable="on-in-cart:active" :in-cart="hasItemInCart(row)")
           CartIcon(w="6")

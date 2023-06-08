@@ -33,14 +33,15 @@ VList(w="full")
 <script setup lang="ts" generic="Row extends TableRow">
 import type { TableColumn, TableRow } from '~/composables/useTable';
 
-const { rows, columns, id } = defineProps<{
+const { rows, columns, id, colWidth = 200 } = defineProps<{
   columns: TableColumn<Row>[],
   rows: Row[],
   id: string,
   inDrawer?: boolean,
   loading?: boolean,
   error?: string,
-  isOpen?: boolean
+  isOpen?: boolean,
+  colWidth?: number
 }>()
 const { toggleSortDirection, selectSortField, sort } = useTableSort(id)
 const { sortRows } = useTable()
@@ -52,10 +53,8 @@ const getColumnStyle = (item: TableColumn<Row>) => {
     'min-width': `${width}px`
   })
 
-  const defaultWidth = 200
-
   if (!item.width)
-    return getStyle(defaultWidth)
+    return getStyle(colWidth)
 
   return getStyle(item.width)
 }
