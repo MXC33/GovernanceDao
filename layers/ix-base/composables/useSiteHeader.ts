@@ -53,10 +53,10 @@ export const playNowHeaderItems: HeaderCategory[] = [
     type: 'claimburn',
     items: ['aocbadge', 'avatar', 'arcade']
   },
-  {
-    type: 'analytics',
-    items: ['game', 'nft', 'vesting', 'ixt', 'smart-contracts']
-  },
+  // {
+  //   type: 'analytics',
+  //   items: ['game', 'nft', 'vesting', 'ixt', 'smart-contracts']
+  // },
 ]
 
 export const stakingHeaderItems: HeaderCategory[] = [

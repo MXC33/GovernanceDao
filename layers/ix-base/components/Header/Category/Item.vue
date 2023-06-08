@@ -4,10 +4,10 @@ NuxtLink(:to="linkPath" cursor="pointer")
     //-TitleIcon(w="10" h="10" p="1" fill="white group-hover:$mc-orange")
     HeaderCategoryIcon(w="8" :header="header" :item="item" :category="category" fill="white group-hover:$mc-orange" flex-shrink="0")
     div(pos="relative")
-      VList(pos="relative" v-if="linkPath")
+      VList(pos="relative" v-if="linkPath || isNotLink()")
         div(color="white group-hover:$mc-orange") {{ $t(`${langPath}.title`)}} 
         div(color="gray-200 group-hover:$mc-orange" text="sm" ) {{ $t(`${langPath}.description`) }}
-      VList(pos="relative" v-if="!linkPath")
+      VList(pos="relative" v-else)
         div(color="gray") {{ $t(`${langPath}.title`)}}
         div(color="$mc-orange" text="sm" ) {{ $t(`marketplace.navigation.soon`)}}
 </template>
@@ -23,13 +23,29 @@ const imagePath = computed(() => [header, category, item].join('/'))
 const langPath = computed(() => `marketplace.navigation.${header}.${category}.${item}`)
 
 const linkPath = computed(() => t(`marketplace.navigation.${header}.${category}.${item}.link`))
+const hasDescription = computed(() => t(`marketplace.navigation.${header}.${category}.${item}.description`))
 
-console.log(linkPath.value)
+
+//console.log(linkPath.value)
 const {header, category, item} = defineProps<{
   header: string,
   category: string,
   item: string
 }>()
+
+const isNotLink = () => {
+  const str = t(`marketplace.navigation.${header}.${category}.${item}.title`).toLowerCase()
+  //console.log(str)
+
+  switch (str) {
+    case 'swap':
+      return true
+  }
+
+  return false
+}
+
+
 
 
 

@@ -5,10 +5,8 @@ VList(flex-grow="1" w="full")
       template(#header) 
         div() {{ $t(`marketplace.navigation.${header.type}.title`)}}
       template(#default) 
-        HeaderCategoryDropDownLargeGroup(v-for="category in getAllLargeCatagories(header)" :category="category" :parentType="header.type")
-
-        HeaderCategoryDropDownSmallGroup(:headerItem="header")
-
+        HeaderCategoryDropDownSmallGroup(:headerItem="header" @clikedItem="clikedItem")
+        HeaderCategoryDropDownLargeGroup(v-for="category in getAllLargeCatagories(header)" :category="category" :parentType="header.type" @clikedItem="clikedItem")
 </template>
 
 <script lang="ts" setup>
@@ -30,6 +28,13 @@ const getAllLargeCatagories = (header: HeaderItem) => {
   }
   //console.log(header.type ,"length", largeCatagories.length)
   return largeCatagories
+}
+
+const emit = defineEmits(['clikedItem'])
+
+const clikedItem = (header: string, category: string, item: string) => {
+  emit('clikedItem', header, category, item);
+  //console.log("Catragory dropdown grid", header, category, item)
 }
 
 // const props = defineProps<{

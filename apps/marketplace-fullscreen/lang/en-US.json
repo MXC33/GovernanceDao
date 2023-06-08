@@ -229,12 +229,12 @@
           "title": "Bridge",
           "polygon": {
             "title": "Polygon",
-            "description": "COMING SOON",
+            "description": "",
             "link": ""
           },
           "ethereum": {
             "title": "Ethereum",
-            "description": "COMING SOON",
+            "description": "",
             "link": ""
           }
         },
@@ -276,7 +276,7 @@
           },
           "arena": {
             "title": "IX Arena",
-            "description": "COMING SOON",
+            "description": "",
             "link": ""
           },
           "mc": {
