@@ -1,20 +1,22 @@
 <template lang="pug">
-Collection(:data="data" :columns="columns" :context="'outgoing-bids'" v-if="data" :hide-grid="true")
+Collection(:data="data" :columns="columns" context="outgoing-bids" v-if="data" :hide-grid="true" :loading="pending")
   template(#menu)
     AccountMenu()
 </template>
 
 
 <script lang="ts" setup>
+useHead({
+  title: "Outgoing bids | Marketplace | PlanetIX"
+})
 import type { TableColumn } from "~/composables/useTable";
 import type { IXToken } from "@ix/base/composables/Token/useIXToken";
-import { fromUnixTime } from "date-fns"
 
 const { displayPopup } = usePopups()
 
 const { myAssetsURL } = useCollectionsURL()
 
-const { data: data, execute: fetchCollection, setupCollectionListeners, refresh: refresh } = useCollectionData(myAssetsURL('polygon'), {
+const { data: data, execute: fetchCollection, setupCollectionListeners, refresh: refresh, pending } = useCollectionData(myAssetsURL('polygon'), {
   filter: {
     owned: true,
     type: 2,

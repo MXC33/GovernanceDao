@@ -30,6 +30,7 @@ const isLoading = ref(false)
 const { createListItems, listItems } = useListingItems()
 const { listItem } = useListingContract()
 const { itemsInvalid } = useTransactions()
+const { displaySnack } = useSnackNotifications()
 
 const { displayPopup } = usePopups()
 
@@ -49,6 +50,10 @@ const onClickList = async () => {
     console.log("ERR", err)
     //@ts-ignore
     const message = err?.message
+
+    if (message?.includes('rejected'))
+      return displaySnack('transaction-rejected')
+
     addError({
       title: 'Error listing',
       serverError: message

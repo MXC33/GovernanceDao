@@ -1,6 +1,6 @@
 <!-- <template lang="pug">
 VList(b="b-1 gray-400")
-  HList(w="full" space-x="12" mb="-2px")
+  HList(w="full" space-x="8 md:12" mb="-2px" overflow-x="scroll" whitespace="nowrap")
     AccountMenuTab(v-for="tab in accountTabs" :key="tab" :is-active="tab === activeTab" @click="onClick(tab)") {{ $t(`marketplace.myAssets.${tab}`) }}
 
 </template> -->
@@ -15,8 +15,8 @@ VList(b="b-1 gray-400")
 <script lang="ts" setup>
 const { path } = useRoute()
 
-type Tab = 'myItems' | 'incomingBids' | 'outgoingBids' | 'activeListings'
-const accountTabs: Tab[] = ['myItems', 'incomingBids', 'outgoingBids', 'activeListings']
+type Tab = 'myItems' | 'incomingBids' | 'outgoingBids' | 'activeListings' | 'activity'
+const accountTabs: Tab[] = ['myItems', 'incomingBids', 'outgoingBids', 'activeListings', 'activity']
 
 const links = (tab: Tab) => {
   switch (tab) {
@@ -28,6 +28,8 @@ const links = (tab: Tab) => {
       return 'bids/outgoing'
     case 'activeListings':
       return 'active-listings'
+    case 'activity':
+      return 'activity'
   }
 }
 

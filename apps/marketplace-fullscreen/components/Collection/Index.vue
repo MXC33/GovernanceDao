@@ -5,21 +5,22 @@ VList(flex-grow="1" min-h="0" pos="relative" p="4 t-4 b-4 md:(8 b-30)" space-y="
       slot(name="name") {{ collectionName }}
 
     template(#cert v-if="data?.name != null")
-      CertifiedIcon(w="6")
+      ClientOnly
+        CertifiedIcon(w="6")
 
-    template(#attributes)
-      AttributeList(:attributes="attributes" v-if="data")
+    //- template(#attributes)
+    //-   AttributeList(:attributes="attributes" v-if="data")
 
   slot(name="menu")
 
   CollectionFilter(v-if="data" :items="data.nfts" :filters="data.filters" :hide-toggle="hideGrid" @toggle-filter="toggleFilterDrawer")
 
   HList(space-x="0 on-open:3" pos="relative" :open="showFilters")
-    VList(pos="sticky top-48" z="99")
+    VList()
       Transition(name="slide-left")
-        CollectionFilterSlideout(:items="data.filters" v-if="showFilters && data")
+        CollectionFilterSlideout(:items="data.filters" v-if="showFilters && data" z="99")
 
-    CollectionList(v-if="data" :columns="renderColumns" :items="data?.nfts" :hide-grid="hideGrid", :context="context" :show-filters="showFilters")
+    CollectionList(v-if="data" :columns="renderColumns" :items="data?.nfts" :hide-grid="hideGrid", :context="context" :show-filters="showFilters" :loading="loading")
 
   slot(name="bottom")
 
@@ -53,14 +54,14 @@ const showFilters = ref(false)
 
 const toggleFilterDrawer = () => {
   showFilters.value = !showFilters.value
-  console.log(showFilters.value)
 }
 
 const { data, columns, context = 'collection' } = defineProps<{
   data?: CollectionData,
   columns?: TableColumn<IXToken>[],
   hideGrid?: boolean,
-  context?: CollectionContext
+  context?: CollectionContext,
+  loading?: boolean
 }>()
 
 const collectionName = computed(() => {

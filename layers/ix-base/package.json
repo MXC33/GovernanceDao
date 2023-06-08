@@ -5,14 +5,10 @@
   "main": "./nuxt.config.ts",
   "scripts": {
     "dev": "nuxi dev --port 3333",
-    "story": "nuxi dev --port 3333",
     "build": "yarn run prepare && nuxt build",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "prepare": "nuxi prepare",
-    "story:dev": "histoire dev",
-    "story:build": "histoire build",
-    "story:preview": "histoire preview",
     "lint": "eslint .",
     "postinstall": "yarn run prepare",
     "abis": "node create-abis.js"
@@ -37,7 +33,7 @@
     "ethereum-abi-types-generator": "^1.3.2",
     "ethers": "5",
     "histoire": "^0.16.1",
-    "nuxt": "^3.5.2",
+    "nuxt": "3.5.2",
     "nuxt-graphql-client": "^0.2.27",
     "typescript": "^4.9.3",
     "unocss": "^0.52.5",

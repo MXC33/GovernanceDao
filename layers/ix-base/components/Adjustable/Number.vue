@@ -1,5 +1,5 @@
 <template lang="pug">
-input(outline="none" appearance="none" v-model="data.value" placeholder="0" b="none" font="bold" bg="gray-800 on-neutral:gray-900" :neutral="isNeutral" text="center" py="2" @keyup.enter="updateAmount" @focusout="updateAmount" :invalid="invalidNumber" :growing="!tight")
+input(outline="none" appearance="none" v-model="data.value" placeholder="0" b="none" font="bold" w="full" bg="gray-800 on-neutral:gray-900" :neutral="isNeutral" text="center" py="2" @keyup.enter="updateAmount" @focusout="updateAmount" :invalid="invalidNumber" :growing="!tight")
 </template>
 
 <script lang="ts" setup>

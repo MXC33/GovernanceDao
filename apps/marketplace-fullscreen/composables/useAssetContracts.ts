@@ -34,7 +34,6 @@ import { ContractContext as SeaportContract } from '@ix/base/composables/Contrac
 
 import { ZERO_ADDRESS } from './useTransferNFT'
 import { CartItem } from "~/composables/useCart";
-import { fetchIXAPI } from "~/composables/api/api";
 import { CollectionData } from "~/composables/useCollection";
 
 const ZERO_ADRESS_LONG = "0x0000000000000000000000000000000000000000000000000000000000000000"
@@ -181,6 +180,7 @@ export interface ConsiderationItem {
 
 export const useSeaportContract = <T extends ContractInterface<T> & SeaportContract>() => {
   const { walletAdress, getCollectionType } = useWallet()
+  const { fetchIXAPI } = useIXAPI()
   const { clearFailedCartItems, addFailedCartItem } = useCart()
   const { createBuyOrder, isAdvancedOrder, getOrderMessage } = useBuyHelpers()
   const { withContract, createTransaction, ...contractSpec } = defineContract<T>('Seaport-contract', {

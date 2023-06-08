@@ -82,9 +82,26 @@ export const useCart = () => {
   const checkoutItems = async (cartItems: CartItem[], totalPrice: number) => {
     //Todo Start loading overlay
     console.log('start Loading overlay')
-    const { allowanceCheck } = useIXTContract()
+
+    const { allowanceCheck, ixtBalance, refreshIXTBalance } = useIXTContract()
+
+    await refreshIXTBalance()
+    if (!ixtBalance.value || ixtBalance.value < totalPrice) {
+      /*
+        Todo
+        Your balance is insufficient!
+      */
+      throw new Error("Your balance is insufficient!")
+    }
+
+    if (!await allowanceCheck(totalPrice)) {
+      /*
+        Todo
+        Allowance didn't work"
+      */
+      throw new Error("Allowance didn't work")
+    }
     const { fulfillAvailableAdvancedOrders } = useSeaportContract()
-    await allowanceCheck(totalPrice)
 
     const buyOrders = cartItems.map((item) =>
       item.sale && createBuyOrder(item.sale, item.shares.value, false)

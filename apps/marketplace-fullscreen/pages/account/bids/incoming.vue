@@ -1,17 +1,20 @@
 <template lang="pug">
-Collection(:data="data" :columns="columns" :context="'incoming-bids'" v-if="data" :hide-grid="true")
+Collection(:data="data" :columns="columns" context="incoming-bids" :loading="pending" v-if="data" :hide-grid="true")
   template(#menu)
     AccountMenu()
 </template>
 
 
 <script lang="ts" setup>
+useHead({
+  title: "Incoming bids | Marketplace | PlanetIX"
+})
 import type { TableColumn } from "~/composables/useTable";
 import type { IXToken } from "@ix/base/composables/Token/useIXToken";
 
 const { myAssetsURL } = useCollectionsURL()
 
-const { data: data, execute: fetchCollection, setupCollectionListeners } = useCollectionData(myAssetsURL('polygon'), {
+const { data: data, execute: fetchCollection, setupCollectionListeners, pending } = useCollectionData(myAssetsURL('polygon'), {
   filter: {
     owned: true,
     type: 1,
@@ -20,6 +23,8 @@ const { data: data, execute: fetchCollection, setupCollectionListeners } = useCo
 
 await fetchCollection()
 setupCollectionListeners()
+
+console.log(data.value)
 
 const columns: TableColumn<IXToken>[] = [
   { label: "Asset", rowKey: "name" },
@@ -31,10 +36,12 @@ const columns: TableColumn<IXToken>[] = [
   },
   {
     label: "Floor Difference", rowKey: "price", getValue(row) {
+      if (row.sale_price == 0)
+        return 'No sale exist'
       const difference = roundToDecimals(
         ((row.higher_bid_price * 100) / row.sale_price) - 100
         , 2)
-      return Math.abs(difference)+ '% ' + (difference < 0 ? 'below' : 'above')
+      return Math.abs(difference) + '% ' + (difference < 0 ? 'below' : 'above')
     }, type: 'text'
   },
   {

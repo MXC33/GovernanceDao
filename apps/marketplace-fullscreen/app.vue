@@ -12,12 +12,21 @@
 
       SnackbarList()
 
+
 </template>
 
 <script setup lang="ts">
+useHead({
+  title: "Marketplace | PlanetIX"
+})
 import 'vue3-easy-data-table/dist/style.css';
 
 const globalY = useGlobalWindowScroll()
+const router = useRouter()
+
+router.onError((err) => {
+  console.log("#ERRRR", err)
+})
 
 const { y } = useWindowScroll()
 const { connectWallet, walletState } = useWallet()

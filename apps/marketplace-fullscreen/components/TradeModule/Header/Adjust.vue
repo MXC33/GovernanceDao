@@ -1,8 +1,9 @@
 <template lang="pug">
-VList(lt-md:px="4" p="lt-md:b-6" justify="md:end" space-y="3")
-  Adjustable(v-model="value" h="full" :is-neutral="true")
+VList(justify="md:end" pt="lt-md:6" space-y="3" w="full lt-md:full" flex-grow="1")
   span(color="yellow-200" v-if="$slots.error")
     slot(name="error")
+  HList(justify="end")
+    Adjustable(v-model="value" h="full" w="full md:50%" :is-neutral="true")
 
 </template>
 

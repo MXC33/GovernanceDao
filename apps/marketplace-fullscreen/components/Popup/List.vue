@@ -15,6 +15,8 @@ div#popups()
 
     Listing(v-else-if="popup.type == 'list-item'" :items="popup.items")
 
+    Unlisting(v-else-if="popup.type == 'unlist-item'" :item="popup.item")
+
     Bidding(v-else-if="popup.type == 'bid-item'" :items="popup.items")
 
     Accepting(v-else-if="popup.type == 'accept-item'" :item="popup.item")
