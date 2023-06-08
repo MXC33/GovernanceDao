@@ -4,9 +4,9 @@ VList(w="full")
     CollectionFilterButtonContainer(:is-open="isOpen")
 
   VList(max-w="full" w="full" overflow-x="auto")
-    table(bg="gray-900" max-w="full")
-      //- colgroup
-      //-   col(v-for="(column, index) in columns" :style="getColumnStyle(column)")
+    table.base-table(bg="gray-900" max-w="full")
+      colgroup
+        col(v-for="(column, index) in columns" :style="getColumnStyle(column)")
 
       TableHead()
         template(v-for="(column, index) in columns")
@@ -46,21 +46,29 @@ const { toggleSortDirection, selectSortField, sort } = useTableSort(id)
 const { sortRows } = useTable()
 const sortedRows = computed(() => sortRows(columns, rows, sort.value))
 
-// const getColumnStyle = (item: TableColumn<Row>) => {
-//   if (!item.width)
-//     return {}
+const getColumnStyle = (item: TableColumn<Row>) => {
+  const getStyle = (width: number) => ({
+    'width': `${width}px`,
+    'min-width': `${width}px`
+  })
 
-//   return {
-//     'width': `${item.width}px`,
-//     'min-width': `${item.width}px`,
-//   }
-// }
+  const defaultWidth = 200
+
+  if (!item.width)
+    return getStyle(defaultWidth)
+
+  return getStyle(item.width)
+}
 
 </script>
 
 <style scoped>
 table {
-  border-collapse: collapse;
+  border-collapse: initial;
+  display: table;
+  width: 100%;
   border-spacing: 0;
+  table-layout: fixed;
+  overflow-x: auto;
 }
 </style>

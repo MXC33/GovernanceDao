@@ -1,0 +1,73 @@
+<template lang="pug">
+ContentDrawer(:start-open="true" :is-neutral="true" bg="gray-900")
+  template(#titleicon)
+    TitleWithIcon(icon="listing") listings
+
+  template(#default)
+    Table(:columns="saleColumns" :rows="item.sales" id="single-item" :in-drawer="true" v-if="item.sales && item.sales.length > 0")
+      template(#item-buttons="{row}")
+        TableButtonSmall(v-if="!playerOwnedSale(row)" @click="addSaleToCart(row)" disable="on-in-cart:active" :in-cart="hasItemInCart(row)")
+          CartIcon(w="6")
+
+        TableButtonSmall(@click="cancelListingOnClick(row)" v-else)
+          TrashIcon(w="6" fill="white")
+
+    HList(v-else px="6" py="6" font="bold" color="gray-400" items="center" justify="center")
+      span() No items found
+
+</template>
+
+<script lang="ts" setup>
+import CartIcon from '~/assets/icons/cart.svg'
+import TrashIcon from '~/assets/icons/trash.svg'
+
+import type { Sale, SingleItemData, Bid } from '@ix/base/composables/Token/useIXToken';
+import type { TableColumn } from '~/composables/useTable';
+
+// const { tabs, activeTab } = useTabList(['sell', 'buy'])
+const { item } = defineProps<{
+  item: SingleItemData
+}>()
+
+const { addToCart, hasItemInCart } = useCart()
+const { walletAdress } = useWallet()
+
+const saleColumns: TableColumn<Sale>[] = [
+  { label: "Sale Price", type: "ixt", rowKey: "price", sortable: true },
+  { label: "USD Price", type: "usd", rowKey: "price", sortable: true },
+  { label: "Quanitity", rowKey: "quantity", sortable: true },
+  { label: "Expiration", type: "date", rowKey: "endtime", sortable: true },
+  {
+    label: "Seller", rowKey: "player_username", getValue(row) {
+      if (row.player_wallet.toLowerCase() == walletAdress.value?.toLowerCase())
+        return 'YOU'
+      return row.player_username
+    }, sortable: true
+  },
+  { type: 'buttons', width: 100 }
+]
+
+const addSaleToCart = (sale: Sale) => {
+  addToCart(item, sale)
+}
+
+const cancelListingOnClick = async (sale: Sale) => {
+  displayPopup({
+    type: 'unlist-item',
+    item: {
+      ...item,
+      sale
+    }
+  })
+}
+
+const { displayPopup } = usePopups()
+
+
+const playerOwnedSale = (sale: Sale) => {
+  if (sale.player_wallet.toLowerCase() == walletAdress.value?.toLowerCase())
+    return true
+  return false
+}
+
+</script>
