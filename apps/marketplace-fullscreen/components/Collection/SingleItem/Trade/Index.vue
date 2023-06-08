@@ -1,13 +1,6 @@
 <template lang="pug">
 VList(space-y="6")
-  VList()
-    h3(text="3xl" font="bold") {{ item.name }}
-
-    CollectionSingleItemSubHeader()
-      template(#default)
-
-  NuxtLink(:to="collectionLink")
-    TokenCollection(:token="item" color="ix-ne")
+  CollectionSingleItemHeader(:item="item" display="lt-md:!none")
 
   AttributeList(:attributes="attributes" v-if="item")
 
