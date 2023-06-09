@@ -1,8 +1,8 @@
 <template lang="pug">
 VList()
   TradeModuleHeader(v-model="shares" :ixt="isSubstituteListing ? totalMaxPrice : totalPrice" :disabled="isDisabled")
-    template(#title v-if="isSubstituteListing") Total Price
-    template(#title v-else) Max Price
+    template(#title v-if="isSubstituteListing") Max Price
+    template(#title v-else) Total Price
     template(#adjust v-if="item.nft_type === NFTType.ERC1155")
       TradeModuleHeaderAdjust(v-model="shares")
         template(#error v-if="showIncreaseMaxPrice") Try increasing your max price to buy more items
