@@ -1,5 +1,5 @@
 <template lang="pug">
-VList(w="full" h="100vh" bg="gray-900" z="99" pos="sticky top-16 left-0" v-if="isOpen" overflow-x="hidden")
+VList(w="full" h="100vh" bg="gray-900" z="99" pos="fixed top-0 left-0" v-if="isOpen" overflow-x="hidden")
   HList(justify="between" items="center" px="4" py="3")
     HList(items="center" space-x="2")
       CollectionIcon(w="6")
@@ -33,6 +33,6 @@ await fetchAllCollections()
 
 defineEmits(["close"])
 
-const isOpen = defineModel()
+const isOpen = defineModel<boolean>()
 
 </script>
