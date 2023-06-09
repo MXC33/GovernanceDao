@@ -1,7 +1,5 @@
 <template lang="pug">
-NuxtLink(:to="getItemLink(token)" rel="noopener" justify="center" items="center" aspect="2/3" bg="black opacity-40" ref="mediaElement" cursor="pointer" group)
-
-
+NuxtLink(:to="getItemLink(token)" rel="noopener" flex="~ col" justify="center" items="center" aspect="2/3" bg="black opacity-40" ref="mediaElement" cursor="pointer" group)
 
   CollectionGridItemMedia(:token="token" :is-hovered="isHovered")
 
