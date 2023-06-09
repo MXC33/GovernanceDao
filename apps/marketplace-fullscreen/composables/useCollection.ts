@@ -1,5 +1,6 @@
 import { IXToken } from "@ix/base/composables/Token/useIXToken"
 import { NFTType } from "~/composables/useAssetContracts";
+import { TableColumn, TableRow } from "./useTable";
 
 export interface FilterPayload {
   value: string
@@ -94,10 +95,15 @@ export const collectionName = (collectionAddress: string) => {
 }
 
 export const useCollectionSettings = () => {
+
   const activeFilters = useState<Filter[]>('activeFilters', () => ([]))
   const collectionOwners = useState('collectionOwners', () => ("All"))
+  const activeContext = useState<string | null>('collection-context', () => null)
+
 
   const displayType = useState<CollectionDisplayType>('collection-display-type', () => 'grid')
+
+  const setContext = (context: string) => activeContext.value = context
 
   const toggleDisplayType = () => {
     if (displayType.value == 'grid')
@@ -105,6 +111,7 @@ export const useCollectionSettings = () => {
     else
       return displayType.value = 'grid'
   }
+
 
   const createFilters = (data: CollectionData) => {
     activeFilters.value = data.filters.map((filter) => ({
@@ -129,9 +136,11 @@ export const useCollectionSettings = () => {
   return {
     displayType,
     filtersAsPayload,
-    createFilters,
-    toggleDisplayType,
+    activeContext,
     activeFilters,
     collectionOwners,
+    setContext,
+    createFilters,
+    toggleDisplayType,
   }
 }

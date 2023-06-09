@@ -3,7 +3,7 @@ VList(@keydown.down.stop.prevent="stepDown" @keydown.up.stop.prevent="stepUp" @k
   HList(w="full" px="3" h="full")
     SearchIcon(w="4")
 
-    input(type="text" v-model="searchTerm" :placeholder="placeholder ?? 'Search'" ref="searchElement" bg="ix-black" @click.stop="isOpen = true" outline="none" p="3" w="full")
+    input(type="text" v-model="searchTerm" :placeholder="placeholder ?? 'Search'" ref="searchElement" bg="ix-black" @click.stop="isOpen = true" outline="none" p="3" w="full" size="3")
 
   Transition(name="fade")
     SearchListContainer(v-if="isOpen" ref="scrollElement" w="full")

@@ -101,7 +101,7 @@ export default definePreset({
       'scrollable-desktop': 'md-overflow-y-auto md-scrollbar md-scrollbar-primary md-min-h-0'
     },
 
-    [/^size-(.*)$/, ([, c]) => `w-${c} h-${c}`]
+    [/^wh-(.*)$/, ([, c]) => `w-${c} h-${c}`]
   ],
   rules: [
     ...cutRules,

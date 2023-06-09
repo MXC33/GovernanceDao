@@ -1,5 +1,5 @@
 <template lang="pug">
-button(bg="gray-200 opacity-60 hover:opacity-100" transition="all" size="10" rounded="full" pos="relative" backdrop="~ blur-md")
+button(bg="gray-200 opacity-60 hover:opacity-100" transition="all" wh="10" rounded="full" pos="relative" backdrop="~ blur-md")
   Plus(w="5" pos="absolute-center" v-if="!isSelected")
   Checkmark(w="5" pos="absolute-center" v-else)
 

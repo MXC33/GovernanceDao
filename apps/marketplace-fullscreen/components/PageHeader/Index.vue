@@ -3,11 +3,9 @@ VList(flex-grow="1" px="0 md:6" pos="relative")
   .gradient-bg(pos="fixed left-0 right-0 top-16" h="50vh" :style="gradientStyle" v-if="!onSingleItem")
 
 Transition(name="fade-slow")
-  div(flex="~ col md:row" pt="lt-md:4" py="md:4" justify="between" items="center" pos="sticky top-16" z="10" bg="on-locked:ix-black" px="4 md:8" transition="all" :locked="isScrolling")
-    VList(w="full")
-      HList(w="full" items="center")
-        NuxtLink(:to="'/'" w="full")
-          NetBetaLogo(w="45" translate-y="lt-md:-1.5")
+  HList(w="full" items="center" justify="between"  pos="sticky top-16" z="10" bg="on-locked:ix-black" p="4 md:x-8" transition="all" :locked="isScrolling")
+    NuxtLink(:to="'/'" w="full")
+      NetBetaLogo(w="45" )
 
     HList(space-x="4" w="full" justify="end" items="center")
 

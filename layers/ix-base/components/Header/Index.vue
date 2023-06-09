@@ -1,24 +1,25 @@
 <template lang="pug">
-VList(pos="sticky top-0" z="99" w="full" @mouseenter="isSelected = true" @mouseleave="isSelected = false" ref="menuElement" space-x="6")
-  HList(items="center"  bg="gray-800" px="4 md:7.5" h="16")
+VList(pos="sticky top-0" z="99" w="full" @mouseenter="isSelected = true" @mouseleave="isSelected = false" ref="menuElement" )
+  HList(items="center"  bg="gray-800" px="4 md:7.5" h="16" space-x="6")
     NuxtLink(to="https://www.planetix.com")
       PlanetIXNew(w="42.25")
 
-    HList(space-x="8" px="8" items="center" font="bold" text="lg" flex-grow="1" display="lt-md:none" translate-y="0.4")
+    div(flex-grow="1" display="lg:none")
+
+    HList(space-x="8" px="8" items="center" font="bold" text="lg" flex-grow="1" display="lt-lg:none" translate-y="0.4" overflow-x="hidden" )
       HeaderLink(v-for="(item, index) in siteTopHeaders" @click="openMenu(index)" text="red") {{ $t(`marketplace.navigation.${item.type}.title`)}}
 
     HList(font="bold" space-x="6" px="0" translate-y="0.4")
-      HeaderLink(to="/" display="lt-md:none") help
-      HeaderLink(to="/" display="lt-md:none")
+      HeaderLink(to="/" display="lt-lg:none") help
+      HeaderLink(to="/" display="lt-lg:none")
         HelperLanguage(language="EN" translate-y="-0.2")
       HeaderAccountButton(@addFunds="iFrameToggle")
-    div(grow="~" display="md:none")
-    SettingsIcon(v-if="activeMenuIndex == null" pos="right" w="8" display="md:none" 
+
+    SettingsIcon(v-if="activeMenuIndex == null" pos="right" w="8" display="lg:none" 
     @click="toggleMenu")
 
-
   Transition(name="slide-top" mode="out-in" )
-    HeaderItem(v-if="activeMenuIndex != null" :key="activeMenuIndex" @onClickItem="onClicked" :header="siteTopHeaders[activeMenuIndex]" display="lt-md:none")
+    HeaderItem(v-if="activeMenuIndex != null" :key="activeMenuIndex" @onClickItem="onClicked" :header="siteTopHeaders[activeMenuIndex]" display="lt-lg:none")
 
   Transition(name="slide-top")
     HeaderCategoryDropDown(v-if="activeMenuIndex != null" @swap="turnOnSwap" @ConnectWallet="toggleMenu" @close="toggleMenu" @clikedItem="onClicked" overflow-y="auto")

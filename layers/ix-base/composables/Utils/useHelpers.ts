@@ -42,6 +42,9 @@ export const isNumeric = (value: string) => {
   return /^-?\d+$/.test(value)
 }
 
+export const notNull = <T>(val: T | null | undefined): val is T => {
+  return val !== null && val !== undefined
+}
 
 export const logServerTime = (name: string, timeStarted: Date) => {
   const { CHAIN_NET } = useRuntimeConfig().public
