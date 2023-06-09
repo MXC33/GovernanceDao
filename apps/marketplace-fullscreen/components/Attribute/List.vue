@@ -7,8 +7,8 @@ HList.no-scrollbar(space-x="2" whitespace="nowrap" overflow-x="scroll")
 
       template(#icon v-if="attribute.hasToken")
         IXT(w="3 md:5")
-
-      template(#default) {{ formatAmount(attribute.value) }}
+        template(v-if="formatAmount(attribute.value) == 0") --
+        template(v-else) {{ formatAmount(attribute.value) }}
 </template>
 
 <script lang="ts" setup generic="K extends object">
@@ -20,4 +20,5 @@ const { formatAmount } = useFormatNumber()
 defineProps<{
   attributes: Attribute<K>[],
 }>()
+
 </script>
