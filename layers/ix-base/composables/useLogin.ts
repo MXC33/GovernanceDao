@@ -25,9 +25,9 @@ export const useLoginRedirect = () => useState<string | null>('login-redirect', 
 
 export const useLogin = () => {
   const { loginIX } = useIXAPI()
-  const { user, removeUser } = useUser()
+  const { authUser, user, removeUser } = useUser()
   const { addSigningToken, connectWallet, logoutWallet, walletSigningToken, isWalletConnected, failedConnection } = useWallet()
-  const { setConnector } = useConnectors()
+  const { setConnector, currentConnector } = useConnectors()
   const authUserData = useAuthUserData()
   const authTokenExpirationTime = useAuthTokenExpirationTime()
 
@@ -79,6 +79,20 @@ export const useLogin = () => {
     loginFailType.value = null
   }
 
+  const createAuthCookies = (token: string, web3Token: string) => {
+    const web3AccountType = useCookieState<string | null>('web3AccountType', () => '')
+    web3AccountType.value = 'metamask'
+
+    const authStrategy = useCookieState<string | null>('auth.strategy', () => '')
+    authStrategy.value = 'local'
+
+    const authTokenLocal = useCookieState<string | null>('auth._token.local', () => '')
+    authTokenLocal.value = 'Bearer '+ token
+
+    const web3TokenCookie = useCookieState<string | null>('web3Token', () => '')
+    web3TokenCookie.value = web3Token
+  }
+
   const loginUser = async (connector: WalletConnector) => {
     resetState()
 
@@ -96,8 +110,12 @@ export const useLogin = () => {
 
     const newUser = await getIXUser()
 
-    if (newUser)
+    if (newUser){
+      if (currentConnector.value == 'injected' && authUser.value?.access_token && walletSigningToken.value)
+        createAuthCookies(authUser.value?.access_token, walletSigningToken.value)
+
       return loginSuccess()
+    }
     else
       return loginFailedNoUser()
   }
