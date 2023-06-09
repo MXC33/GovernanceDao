@@ -14,5 +14,4 @@ const { token, isLarge } = defineProps<{
 }>()
 
 const imageSrc = await getTokenImageURL(token, isLarge)
-console.log("TOKEN", token, imageSrc)
 </script>
