@@ -1,5 +1,5 @@
 <template lang="pug">
-NuxtLink(:to="getItemLink(token)" target="_blank" rel="noopener" aspect="square" w="full" pos="relative" overflow="hidden" @click.stop="onClickItem") 
+NuxtLink(:to="getItemLink(token)" aspect="square" w="full" pos="relative" overflow="hidden" @click.stop="onClickItem") 
   slot(name="media")
     TokenLazyVideo(:token="token" :key="token.collection + token.token_id" :is-hovered="isHovered")
 
