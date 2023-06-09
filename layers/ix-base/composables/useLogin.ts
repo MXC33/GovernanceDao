@@ -87,7 +87,7 @@ export const useLogin = () => {
     authStrategy.value = 'local'
 
     const authTokenLocal = useCookieState<string | null>('auth._token.local', () => '')
-    authTokenLocal.value = 'Bearer '+ token
+    authTokenLocal.value = 'Bearer ' + token
 
     const web3TokenCookie = useCookieState<string | null>('web3Token', () => '')
     web3TokenCookie.value = web3Token
@@ -110,7 +110,7 @@ export const useLogin = () => {
 
     const newUser = await getIXUser()
 
-    if (newUser){
+    if (newUser) {
       if (currentConnector.value == 'injected' && authUser.value?.access_token && walletSigningToken.value)
         createAuthCookies(authUser.value?.access_token, walletSigningToken.value)
 
@@ -143,7 +143,6 @@ export const useLogin = () => {
           authTokenExpirationTime.value = new Date(new Date().getTime() + (1000 * 60 * 60 * 24)).getTime() // 1 day
           authUserData.value.access_token = data.access_token
           setRefreshToken(authTokenExpirationTime.value - Date.now() - timeGap)
-          console.log('token updated')
         }
 
       } catch (error) {
