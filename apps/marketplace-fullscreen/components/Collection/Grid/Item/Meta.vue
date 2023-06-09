@@ -1,7 +1,7 @@
 <template lang="pug">
 VList(w="full" flex-grow="1" items="start" bg="gray-900" p="6" pos="relative")
   header(font="bold" w="full")
-    HList(items="center" space-x="3")
+    NuxtLink(:to="getItemLink(token)" flex="~ row" rel="noopener" items="center" space-x="3"  cursor="pointer")
       TokenName(:token="token" :key="getTokenKey(token)" text="base md:xl ellipsis" capitalize="~")
 
       div(v-if="is1155" text="lt-md:xs") x{{showAssetAmount}}
@@ -9,7 +9,7 @@ VList(w="full" flex-grow="1" items="start" bg="gray-900" p="6" pos="relative")
     div(text="sm md:lg") 
       slot(name="subtitle") 
         template(v-if="isDisabled") -- IXT
-        template(v-else) {{ roundToDecimals(token?.sale_price, 6) }} IXT
+        template(v-else) {{ setPriceDecimals }} IXT
 
   div(flex-grow="1")
 
@@ -36,13 +36,22 @@ const showAssetAmount = computed(() => {
   return formatAmount(token.shares)
 })
 
+const setPriceDecimals = computed(() => {
+  if (token?.sale_price < 0.009)
+    return roundToDecimals(token?.sale_price, 4)
+  return roundToDecimals(token?.sale_price, 2)
+})
+
+const getItemLink = (token: IXToken) => {
+  const { network, collection, token_id } = token
+  return `/assets/${network}/${collection}/${token_id}`
+}
+
 const { token, context } = defineProps<{
   token: IXToken,
   quantity?: number,
   context?: CollectionContext,
 }>()
-
-console.log(token?.sale_price)
 
 const isDisabled = computed(() => token?.sale_price == 0)
 
