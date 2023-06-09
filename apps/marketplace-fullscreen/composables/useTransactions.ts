@@ -27,20 +27,19 @@ export const useTransactions = () => {
   }
 
   const durationInDaysFromTimestamp = (timestamp: number) => {
-    const difference = differenceInDays(new Date(timestamp*1000), new Date());
+    const difference = differenceInDays(new Date(timestamp * 1000), new Date());
     if (difference <= 1) return 1
-    else if (difference <= 3 ) return 3
-    else if (difference <= 7 ) return 7
-    else if (difference <= 30 ) return 30
-    else if (difference <= 91 ) return 91
+    else if (difference <= 3) return 3
+    else if (difference <= 7) return 7
+    else if (difference <= 30) return 30
+    else if (difference <= 91) return 91
     else return 183
   }
 
   const getTotalIXTPrice = (items: TransactionItem[]) =>
     items.reduce((prev, item) =>
-      prev + (Number(item.ixtPrice) * item.shares.value)
+      prev + (Number(item.token.sale_price) * item.shares.value)
       , 0)
-
 
   const itemsInvalid = (items: TransactionItem[]) =>
     items.some((item) => !item.ixtPrice || !item.shares.value)
