@@ -10,6 +10,9 @@ VList(space-y="6")
 
   CollectionSingleItemTradeOffers(:item="item")
 
+  CollectionSingleItemMetaList(:item="item" display="md:none")
+
+
 </template>
 
 <script lang="ts" setup>
