@@ -1,5 +1,6 @@
 <template lang="pug">
-NuxtLink(:to="getItemLink(token)" aspect="square" w="full" pos="relative" overflow="hidden" @click.stop="onClickItem") 
+VList(aspect="square" w="full" pos="relative" overflow="hidden" @click.stop="onClickItem") 
+
   slot(name="media")
     TokenLazyVideo(:token="token" :key="token.collection + token.token_id" :is-hovered="isHovered")
 
@@ -17,11 +18,6 @@ const props = defineProps<{
   token: IXToken,
   isHovered?: boolean
 }>()
-
-const getItemLink = (token: IXToken) => {
-  const { network, collection, token_id } = token
-  return `/assets/${network}/${collection}/${token_id}`
-}
 
 const onClickItem = () => {
   const { token_id, network, collection } = props.token
