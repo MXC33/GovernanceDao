@@ -7,12 +7,16 @@ VList(w="full" flex-grow="1" items="start" bg="gray-900" p="6" pos="relative")
       div(v-if="is1155" text="lt-md:xs") x{{showAssetAmount}}
 
     div(text="sm md:lg") 
-      slot(name="subtitle") {{ roundToDecimals(token?.sale_price, 6) }} IXT
+      slot(name="subtitle") 
+        template(v-if="isDisabled") -- IXT
+        template(v-else) {{ roundToDecimals(token?.sale_price, 6) }} IXT
 
   div(flex-grow="1")
 
   div(text="sm md:base" color="gray-200" whitespace="nowrap")
-    slot(name="detail") Best offer: {{ token?.higher_bid_price }} IXT
+    slot(name="detail")
+      template(v-if="isDisabled") Best offer: -- IXT
+      template(v-else) Best offer: {{ token?.higher_bid_price }} IXT
 
   slot(name="footer")
       
@@ -35,8 +39,9 @@ const showAssetAmount = computed(() => {
 const { token, context } = defineProps<{
   token: IXToken,
   quantity?: number,
-  context?: CollectionContext
+  context?: CollectionContext,
 }>()
 
+const isDisabled = computed(() => token?.sale_price == 0)
 
 </script>
