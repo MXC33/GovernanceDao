@@ -43,6 +43,7 @@ const { rows, columns, id, colWidth = 200 } = defineProps<{
   isOpen?: boolean,
   colWidth?: number
 }>()
+
 const { toggleSortDirection, selectSortField, sort } = useTableSort(id)
 const { sortRows } = useTable()
 const sortedRows = computed(() => sortRows(columns, rows, sort.value))

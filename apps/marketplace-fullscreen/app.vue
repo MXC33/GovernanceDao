@@ -10,6 +10,8 @@
 
       div#infobox(:style="values" z="400" pos="absolute")
 
+      div#takeover
+
       SnackbarList()
 
 
