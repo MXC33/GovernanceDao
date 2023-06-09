@@ -7,8 +7,11 @@ VList(w="full" bg="gray-900" z="99" pos="fixed" inset="0" overflow-x="hidden" ov
 
     CloseIcon(w="4" cursor="pointer" @click="$emit('close')" translate-y="0.2")
 
-  VList(w="full" flex-grow="1")
-    slot(name="default")
+  VList(w="full" flex-grow="1" )
+    slot(name="beforeItems")
+
+    div(@click="onSelect")
+      slot(name="default")
 
   VList(pos="sticky bottom-0" v-if="$slots.buttons")
     slot(name="buttons")
@@ -18,6 +21,9 @@ VList(w="full" bg="gray-900" z="99" pos="fixed" inset="0" overflow-x="hidden" ov
 <script lang="ts" setup>
 import CloseIcon from '~/assets/icons/close.svg'
 
-defineEmits(["close"])
+const emit = defineEmits(["close"])
 
+const onSelect = () => {
+  setTimeout(() => emit('close'), 250)
+}
 </script>
