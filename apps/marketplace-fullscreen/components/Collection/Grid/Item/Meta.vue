@@ -24,18 +24,13 @@ import type { CollectionContext } from '~/composables/useCollection';
 
 const is1155 = computed(() => ERC1155Addresses.includes(token.collection))
 const { getTokenKey } = useTokens()
+const { formatAmount } = useFormatNumber()
 
 const showAssetAmount = computed(() => {
   if (context == 'my-assets')
-    return formatMyShareAmount(token.my_shares)
-  return formatMyShareAmount(token.shares)
+    return formatAmount(token.my_shares)
+  return formatAmount(token.shares)
 })
-
-const formatMyShareAmount = (shares: number) => {
-  if (shares > 1000)
-    return String(shares / 1000).substring(0, 4) + "K"
-  return shares
-}
 
 const { token, context } = defineProps<{
   token: IXToken,
