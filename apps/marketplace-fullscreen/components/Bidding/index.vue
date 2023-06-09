@@ -17,7 +17,7 @@ Popup()
     BiddingPrice(:items="bidItems" v-if="bidItems")
 
   template(#buttons)
-    ButtonInteractive(btn="~ primary" w="full" @click.prevent="onClickBid" text="Place bid" :invalid="isItemValid(bidItems)" :loading="isLoading")
+    ButtonInteractive(btn="~ primary" w="full" @click.prevent="onClickBid" text="Place bid" :invalid="isItemInvalid(bidItems)" :loading="isLoading")
 
 </template>
 
@@ -39,17 +39,14 @@ const { addError } = useContractErrors()
 
 import type { TransactionItem } from "~/composables/useTransactions";
 
-const isItemValid = (item: TransactionItem[]) => {
+const isItemInvalid = (item: TransactionItem[]) => {
   const invalid = !itemsInvalid(item)
   const price = getTotalIXTPrice(item);
-  // console.log("invalid", invalid)
-  // console.log("price", price)
 
-  if(invalid && price > 0.0000001){
+  if(invalid && price > 0){
     return false;
   }
   return true;
-
 }
 
 const onClickBid = async () => {

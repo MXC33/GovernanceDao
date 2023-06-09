@@ -62,7 +62,7 @@ export const playNowHeaderItems: HeaderCategory[] = [
 export const corporationsHeaderItems: HeaderCategory[] = [
   {
     type: 'netempire',
-    items: ['trande-land', 'trade-assets', 'incoming-bids']
+    items: ['trade-land', 'trade-assets', 'incoming-bids']
   },
   {
     type: 'eternallabs',
@@ -86,7 +86,7 @@ export const corporationsHeaderItems: HeaderCategory[] = [
   },
   {
     type: 'gws',
-    items: ['waste-management', 'gws-shop ']
+    items: ['waste-management', 'gws-shop']
   },
   {
     type: 'gravity-grade',
@@ -146,7 +146,7 @@ const siteTopHeaders: HeaderItem[] = [
   },
   // {
   //   type: 'corporations',
-  //   categories: playNowHeaderItems,
+  //   categories: corporationsHeaderItems,
   // },
   {
     type: 'staking',

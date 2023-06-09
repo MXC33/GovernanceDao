@@ -17,7 +17,7 @@ Popup()
     ListingPrice(:items="listItems")
 
   template(#buttons)
-    ButtonInteractive(btn="~ primary" w="full" @click.prevent="onClickList" text="List Items" :invalid="itemsInvalid(listItems)" :loading="isLoading")
+    ButtonInteractive(btn="~ primary" w="full" @click.prevent="onClickList" text="List Items" :invalid="isItemInvalid(listItems)" :loading="isLoading")
 
 </template>
 
@@ -29,7 +29,7 @@ const isLoading = ref(false)
 
 const { createListItems, listItems } = useListingItems()
 const { listItem } = useListingContract()
-const { itemsInvalid } = useTransactions()
+const { isItemInvalid } = useTransactions()
 const { displaySnack } = useSnackNotifications()
 
 const { displayPopup } = usePopups()

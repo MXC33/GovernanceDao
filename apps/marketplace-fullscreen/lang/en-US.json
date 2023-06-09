@@ -341,6 +341,139 @@
           }
         }
       },
+      "corporations": {
+        "title": "Corporations",
+        "netempire": {
+          "title": "NETEMPIRE",
+          "trade-land": {
+            "title": "TRADE LAND",
+            "description": "Upgrade your AOC badge for greater utility.",
+            "link": ""
+          },
+          "trade-assets": {
+            "title": "TRADE ASSETS",
+            "description": "Burn Avatars for in-game utility.",
+            "link": ""
+          },
+          "incoming-bids": {
+            "title": "INCOMING BIDS",
+            "description": "Burn Avatars for in-game utility.",
+            "link": ""
+          }
+        },
+        "eternallabs": {
+          "title": "ETERNALABS",
+          "bio-mods-lab": {
+            "title": "BIO-MODS LAB",
+            "description": "Upgrade your AOC badge for greater utility.",
+            "link": ""
+          },
+          "eternal-shop": {
+            "title": "ETERNALAB SHOP",
+            "description": "Burn Avatars for in-game utility.",
+            "link": ""
+          },
+          "stake-burn-asset": {
+            "title": "STAKE & BURN ASSETS",
+            "description": "Burn Avatars for in-game utility.",
+            "link": ""
+          }
+        },
+        "newlands": {
+          "title": "NEWLANDS",
+          "construction": {
+            "title": "CONSTRUCTION",
+            "description": "Upgrade your AOC badge for greater utility.",
+            "link": ""
+          },
+          "newlands-shop": {
+            "title": "NEWLANDS SHOP",
+            "description": "Burn Avatars for in-game utility.",
+            "link": ""
+          },
+          "stake-burn-asset": {
+            "title": "STAKE & BURN ASSETS",
+            "description": "Burn Avatars for in-game utility.",
+            "link": ""
+          }
+        },
+        "y_": {
+          "title": "Y_",
+          "y_shop": {
+            "title": "Y_ SHOP",
+            "description": "Upgrade your AOC badge for greater utility.",
+            "link": ""
+          },
+          "service-points": {
+            "title": "SERVICE POINTS",
+            "description": "Burn Avatars for in-game utility.",
+            "link": ""
+          },
+          "stake-burn-asset": {
+            "title": "STAKE & BURN ASSETS",
+            "description": "Burn Avatars for in-game utility.",
+            "link": ""
+          }
+        },
+        "luckycat": {
+          "title": "LUCKYCAT",
+          "lucky-raffle": {
+            "title": "LUCKY RAFFLES",
+            "description": "Upgrade your AOC badge for greater utility.",
+            "link": ""
+          },
+          "avatar": {
+            "title": "AVATAR",
+            "description": "Burn Avatars for in-game utility.",
+            "link": ""
+          }
+        },
+        "astrocap": {
+          "title": "ASTRO CAP",
+          "exchange-service": {
+            "title": "EXCHANGE SERVICE",
+            "description": "Upgrade your AOC badge for greater utility.",
+            "link": ""
+          }
+        },
+        "gws": {
+          "title": "GWS",
+          "waste-management": {
+            "title": "WASTE MANAGEMENT",
+            "description": "Upgrade your AOC badge for greater utility.",
+            "link": ""
+          },
+          "gws-shop": {
+            "title": "GWS SHOP",
+            "description": "Burn Avatars for in-game utility.",
+            "link": ""
+          }
+        },
+        "gravity-grade": {
+          "title": "GRAVITY GRADE",
+          "gg-shop": {
+            "title": "GG SHOP",
+            "description": "Upgrade your AOC badge for greater utility.",
+            "link": ""
+          }
+        },
+        "haveblue": {
+          "title": "HAVEBLUE",
+          "haveblue-shop": {
+            "title": "HAVEBLUE SHOP",
+            "description": "Upgrade your AOC badge for greater utility.",
+            "link": ""
+          }
+        },
+        "arcade": {
+          "title": "ARCADE",
+          "arcade": {
+            "title": "ARCADE",
+            "description": "Claim Arcade airdrops.",
+            "link": ""
+          }
+        }
+      },
       "staking": {
         "title": "Staking",
         "overview": {

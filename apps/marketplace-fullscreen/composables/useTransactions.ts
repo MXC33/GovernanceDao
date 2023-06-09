@@ -48,11 +48,22 @@ export const useTransactions = () => {
   const priceRenderString = (price: number | undefined) =>
     String(price ? roundToDecimals(price, 6) : '--')
 
+  const isItemInvalid = (item: TransactionItem[]) => {
+    const invalid = !itemsInvalid(item)
+    const price = getTotalIXTPrice(item);
+  
+    if(invalid && price > 0){
+      return false;
+    }
+    return true;
+  }
+
   return {
     priceRenderString,
     itemsInvalid,
     getTotalIXTPrice,
     formattedDays,
-    durationInDaysFromTimestamp
+    durationInDaysFromTimestamp,
+    isItemInvalid
   }
 }
