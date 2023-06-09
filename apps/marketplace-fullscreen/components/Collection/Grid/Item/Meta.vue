@@ -42,8 +42,6 @@ const { token, context } = defineProps<{
   context?: CollectionContext,
 }>()
 
-console.log(token?.sale_price)
-
 const isDisabled = computed(() => token?.sale_price == 0)
 
 </script>
