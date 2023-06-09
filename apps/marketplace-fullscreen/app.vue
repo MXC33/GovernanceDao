@@ -61,8 +61,6 @@ onMounted(async () => {
     if (user.value)
       setRefreshToken(0)
 
-    console.log("price", ixtPrice.value)
-
   } catch (err) {
     console.error("Error mounting app", err)
   }
