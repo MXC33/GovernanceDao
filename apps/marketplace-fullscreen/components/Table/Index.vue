@@ -33,7 +33,7 @@ VList(w="full")
 <script setup lang="ts" generic="Row extends TableRow">
 import type { TableColumn, TableRow } from '~/composables/useTable';
 
-const { rows, columns, id, colWidth = 200 } = defineProps<{
+const { rows, columns, id, colWidth } = defineProps<{
   columns: TableColumn<Row>[],
   rows: Row[],
   id: string,
@@ -47,7 +47,7 @@ const { rows, columns, id, colWidth = 200 } = defineProps<{
 const { toggleSortDirection, selectSortField, sort } = useTableSort(id)
 const { sortRows } = useTable()
 const sortedRows = computed(() => sortRows(columns, rows, sort.value))
-
+const isMobile = onMobile()
 const getColumnStyle = (item: TableColumn<Row>) => {
   const getStyle = (width: number) => ({
     'width': `${width}px`,
@@ -55,7 +55,7 @@ const getColumnStyle = (item: TableColumn<Row>) => {
   })
 
   if (!item.width)
-    return getStyle(colWidth)
+    return getStyle(colWidth ?? isMobile.value ? 150 : 200)
 
   return getStyle(item.width)
 }
