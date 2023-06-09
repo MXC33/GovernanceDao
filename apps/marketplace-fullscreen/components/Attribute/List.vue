@@ -8,12 +8,14 @@ HList.no-scrollbar(space-x="2" whitespace="nowrap" overflow-x="scroll")
       template(#icon v-if="attribute.hasToken")
         IXT(w="3 md:5")
 
-      template(#default) {{ attribute.value }}
+      template(#default) {{ formatAmount(attribute.value) }}
 </template>
 
 <script lang="ts" setup generic="K extends object">
 import IXT from '~/assets/icons/token/ixt.svg'
 import type { Attribute } from '~/composables/useAttributes';
+const { formatAmount } = useFormatNumber()
+
 
 defineProps<{
   attributes: Attribute<K>[],
