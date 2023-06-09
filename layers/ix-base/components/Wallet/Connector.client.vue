@@ -1,6 +1,6 @@
 <template lang="pug">
 VList(bg="ix-primary opacity-20" p="6" space-y="5" max-w="150" w="full" cut="bottom-right b-ix-primary b-opacity-60 lg")
-  h2(text="2xl white" font="druk" @click="debugWalletClick") {{ $t('wallet.title') }}
+  h2(text="2xl white" font="druk bold" @click="debugWalletClick") {{ $t('wallet.title') }}
 
   VList(text="white left")
     WalletStatus(v-if="isWalletConnected")
