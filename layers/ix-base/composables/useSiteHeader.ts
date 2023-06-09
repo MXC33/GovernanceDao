@@ -59,6 +59,49 @@ export const playNowHeaderItems: HeaderCategory[] = [
   // },
 ]
 
+export const corporationsHeaderItems: HeaderCategory[] = [
+  {
+    type: 'netempire',
+    items: ['trande-land', 'trade-assets', 'incoming-bids']
+  },
+  {
+    type: 'eternallabs',
+    items: ['bio-mods-lab', 'eternal-shop', 'stake-burn-asset']
+  },
+  {
+    type: 'newlands',
+    items: ['construction', 'newlands-shop', 'stake-burn-asset']
+  },
+  {
+    type: 'y_',
+    items: ['y_shop', 'service-points', 'stake-burn-asset']
+  },
+  {
+    type: 'luckycat',
+    items: ['lucky-raffle', 'avatar']
+  },
+  {
+    type: 'astrocap',
+    items: ['exchange-service']
+  },
+  {
+    type: 'gws',
+    items: ['waste-management', 'gws-shop ']
+  },
+  {
+    type: 'gravity-grade',
+    items: ['gg-shop']
+  },
+  {
+    type: 'haveblue',
+    items: ['haveblue-shop']
+  },
+  {
+    type: 'arcade',
+    items: ['arcade']
+  }, 
+] 
+
 export const stakingHeaderItems: HeaderCategory[] = [
   {
     type: 'overview',
@@ -101,6 +144,10 @@ const siteTopHeaders: HeaderItem[] = [
     type: 'play',
     categories: playNowHeaderItems,
   },
+  // {
+  //   type: 'corporations',
+  //   categories: playNowHeaderItems,
+  // },
   {
     type: 'staking',
     categories: stakingHeaderItems,
