@@ -1,7 +1,7 @@
 <template lang="pug">
-NuxtLink(:to="getItemLink(token)" rel="noopener" flex="~ col" justify="center" items="center" aspect="2/3" bg="black opacity-40" ref="mediaElement" cursor="pointer" group)
+VList(justify="center" items="center" aspect="2/3" bg="black opacity-40" ref="mediaElement" group)
 
-  CollectionGridItemMedia(:token="token" :is-hovered="isHovered")
+  CollectionGridItemMedia(:token="token" :is-hovered="isHovered"  cursor="pointer")
 
   CollectionGridItemMeta(:token="token" :context="context")
     template(#footer)
@@ -29,11 +29,6 @@ const { token, context } = defineProps<{
   token: IXToken,
   context?: CollectionContext
 }>()
-
-const getItemLink = (token: IXToken) => {
-  const { network, collection, token_id } = token
-  return `/assets/${network}/${collection}/${token_id}`
-}
 
 const noClick = computed(() => {
   if (context == 'my-assets')
