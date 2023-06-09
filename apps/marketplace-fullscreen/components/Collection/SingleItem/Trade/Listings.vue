@@ -64,7 +64,6 @@ const cancelListingOnClick = async (sale: Sale) => {
 
 const { displayPopup } = usePopups()
 
-
 const playerOwnedSale = (sale: Sale) => {
   if (sale.player_wallet.toLowerCase() == walletAdress.value?.toLowerCase())
     return true

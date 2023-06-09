@@ -1,7 +1,7 @@
 <template lang="pug">
 VList(pos="fixed bottom-6 right-6" z="999" space-y="3")
   TransitionGroup(name="snack")
-    Snackbar(:notification="snack" v-for="snack in snackNotifications"  :key="snack.timeout")
+    Snackbar(:notification="snack" v-for="snack in snackNotifications" :key="snack.timeout")
   
 </template>
 
