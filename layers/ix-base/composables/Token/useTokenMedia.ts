@@ -64,7 +64,10 @@ export const useTokenMedia = () => {
     if (!isIXToken(token))
       return await getTokenIdentifierImage(token)
 
-    const { icon, thumbnail } = token
+    const { icon, thumbnail, image } = token
+
+    if (thumbnail == "")
+      return icon
 
     const largeSize = 800
     const transformedLarge = thumbnail.replace("thumbnailv2", `w_${largeSize}/convert-png`)

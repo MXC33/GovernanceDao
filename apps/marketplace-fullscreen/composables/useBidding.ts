@@ -1,4 +1,4 @@
-import { IXToken, ItemType, OrderType, signDomain, typedData } from "@ix/base/composables/Token/useIXToken"
+import { IXToken, ItemType, OrderType, signDomain, typedData, Bid } from "@ix/base/composables/Token/useIXToken"
 import { add } from "date-fns"
 import { ethers } from "ethers";
 import { ZERO_ADDRESS } from "~/composables/useTransferNFT";
@@ -10,12 +10,16 @@ import {
 
 import { makeRandomNumberKey } from "@ix/base/composables/Utils/useHelpers";
 import { BiddingBody, useBidsAPI } from "~/composables/api/post/useBidAPI";
-import {TransactionItem, useTransactions} from "./useTransactions"
+import { TransactionItem, useTransactions } from "./useTransactions"
 import { NFTType } from "~/composables/useAssetContracts";
 import { useIXTContract } from "@ix/base/composables/Contract/useIXTContract";
 
 export interface BiddingItem extends TransactionItem {
   type: 'bid'
+}
+
+export interface UnbidItem extends IXToken {
+  bid: Bid
 }
 
 export const useBiddingItems = () => {

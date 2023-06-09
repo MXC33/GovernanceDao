@@ -16,6 +16,5 @@ VList(space-y="1" v-if="item")
 import type { TransactionItem } from '~/composables/useTransactions'
 
 const { item } = defineProps<{ item: TransactionItem }>()
-console.log("ITEM", item)
 </script>
   

@@ -3,7 +3,7 @@ VList()
   AttributeRow()
     template(#name) Contract adress 
     template(#value) 
-      NuxtLink(:to="linkAdress" color="ix-primary") {{ showAdress(item.collection)}} 
+      NuxtLink(:to="linkAdress" :external="true" target="_blank" color="ix-primary") {{ showAdress(item.collection)}} 
       //-span(color="ix-primary") {{ item.collection}} 
 
   AttributeRow()

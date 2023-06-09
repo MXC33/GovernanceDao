@@ -11,7 +11,7 @@ VList(w="full" flex-grow="1" items="start" bg="gray-900" p="6" pos="relative")
 
   div(flex-grow="1")
 
-  div(text="sm md:base" color="gray-200")
+  div(text="sm md:base" color="gray-200" whitespace="nowrap")
     slot(name="detail") Best offer: {{ token?.higher_bid_price }} IXT
 
   slot(name="footer")

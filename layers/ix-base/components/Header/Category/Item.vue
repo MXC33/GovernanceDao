@@ -5,10 +5,10 @@ NuxtLink(:to="linkPath" cursor="pointer")
     HeaderCategoryIcon(w="8" :header="header" :item="item" :category="category" fill="white group-hover:$mc-orange" flex-shrink="0")
     div(pos="relative")
       VList(pos="relative" v-if="linkPath || isNotLink()")
-        div(color="white group-hover:$mc-orange") {{ $t(`${langPath}.title`)}} 
+        div(color="white group-hover:$mc-orange" uppercase ="~") {{ $t(`${langPath}.title`)}} 
         div(color="gray-200 group-hover:$mc-orange" text="sm" ) {{ $t(`${langPath}.description`) }}
       VList(pos="relative" v-else)
-        div(color="gray") {{ $t(`${langPath}.title`)}}
+        div(color="gray" uppercase="~") {{ $t(`${langPath}.title`)}}
         div(color="$mc-orange" text="sm" ) {{ $t(`marketplace.navigation.soon`)}}
 </template>
 
