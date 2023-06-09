@@ -6,12 +6,13 @@ img(:src="imageSrc" w="full" h="full" object="contain center" v-if="imageSrc" )
 import type { AnyToken } from '@ix/base/composables/Token/useTokens';
 const { getTokenImageURL } = useTokenMedia()
 
-const props = defineProps<{
+const { token, isLarge } = defineProps<{
   token: AnyToken,
   isThumbnail?: boolean,
   isLarge?: boolean,
   isVector?: boolean,
 }>()
 
-const imageSrc = await getTokenImageURL(props.token, props.isLarge)
+const imageSrc = await getTokenImageURL(token, isLarge)
+console.log("TOKEN", token, imageSrc)
 </script>
