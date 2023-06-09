@@ -3,7 +3,19 @@ HList(@click="onClickSnack" frame="~ gray-400" p="x-4 y-3" bg="gray-800" space-x
 
   SnackbarIcon(:icon="type")
 
-  div(font="bold" text="md" color="white" cursor="pointer" translate-y="0.15" whitespace="nowrap") {{ message }}
+  div(v-if="type != 'purchase-warning'" font="bold" text="md" color="white" cursor="pointer" translate-y="0.15" whitespace="nowrap") {{ message }}
+
+  VList(v-else font="bold" text="md" color="white" cursor="pointer" translate-y="0.15" whitespace="nowrap")
+    span() {{ message }}
+    span(text="sm" @click="openSwap") Buy/Swap IXT here
+
+Popup(v-if="iFrameOpen")
+  template(#header) Swap
+  template(#default)
+    VList(w="full" justify="center" items="center" display="lt-md:none")
+      iframe(src="https://ix.foundation/lefi" w="full md:100" h="full md:116" )
+    VList(w="full" justify="center" items="center" display="md:none")
+      iframe(src="https://ix.foundation/lefi" w="100%" h="100")
   
 </template>
 
@@ -25,7 +37,12 @@ const onClickSnack = () => {
     default:
       break
   }
+}
 
+const iFrameOpen = ref(false)
+
+const openSwap = () => {
+  iFrameOpen.value = !iFrameOpen.value
 }
 
 const { notification } = defineProps<{

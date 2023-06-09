@@ -38,13 +38,11 @@ Popup(v-if="showIFrame")
 import PlanetIXNew from '~/assets/images/header/planetix-new.svg'
 import SettingsIcon from '~/assets/images/header/hamburger.svg'
 
-import GlobeIcon from '~/assets/images/header/Globe.svg'
 const { siteTopHeaders } = useSiteHeader()
 
 const activeMenuIndex = ref<number | null>(null)
 
 const openMenu = (index: number) => {
-  //console.log("Open Menu", index);
 
   if (activeMenuIndex.value == index)
     return activeMenuIndex.value = null
@@ -60,7 +58,6 @@ const toggleMenu = () => {
 }
 
 const turnOnSwap = () => {
-  //console.log("turnOnSwap")
   showIFrame.value = true
   activeMenuIndex.value = null
 }
@@ -75,11 +72,11 @@ const menuElement = ref()
 const showIFrame = ref(false)
 
 
-const textColor = computed(() => {
-  return 'isSelected'
-})
+// const textColor = computed(() => {
+//   return 'isSelected'
+// })
 
-const { t } = useI18n()
+// const { t } = useI18n()
 
 const onClicked = (type: string, category: string, item: string) => {
   //console.log("onClicked Header index", type, category, item)
@@ -95,12 +92,12 @@ const onClicked = (type: string, category: string, item: string) => {
   }
 }
 
-const goToPage = (title: string) => {
-  switch (title) {
-    case 'Polygon':
-      return window.location.href = 'https://dashboard.ix.foundation/'
-  }
-}
+// const goToPage = (title: string) => {
+//   switch (title) {
+//     case 'Polygon':
+//       return window.location.href = 'https://dashboard.ix.foundation/'
+//   }
+// }
 
 onClickOutside(menuElement, () => {
   showIFrame.value = false;

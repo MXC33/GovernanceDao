@@ -31,7 +31,6 @@ Transition(name="slide-right")
 import CloseIcon from '~/assets/icons/close.svg'
 
 const cartElement = ref()
-const { getTokenKey } = useTokens()
 const { viewingCart, cartItems, clearCart } = useCart()
 
 const onClearCart = () => {
@@ -46,15 +45,12 @@ const onClearCart = () => {
   transition: all 300ms ease;
 }
 
-/* 2. declare enter from and leave to state */
 .cart-enter-from,
 .cart-leave-to {
   opacity: 0;
   transform: translateX(1rem);
 }
 
-/* 3. ensure leaving items are taken out of layout flow so that moving
-      animations can be calculated correctly. */
 .cart-leave-active {
   transition: all 300ms ease;
 }
