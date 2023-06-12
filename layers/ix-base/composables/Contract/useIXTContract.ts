@@ -20,7 +20,7 @@ export const useIXTContract = <T extends ContractInterface<T> & IXTokenContract>
   })
 
 
-  const { execute: fetchIXT, data: ixtBalance, refresh: refreshIXTBalance } = viewAsyncState('ixt-balance', async (contract) => {
+  const { execute: fetchIXT, data: ixtBalance, refresh: refreshIXTBalance, pending: ixtPending } = viewAsyncState('ixt-balance', async (contract) => {
     const address = walletAdress.value
     if (!address)
       return 0
@@ -75,6 +75,7 @@ export const useIXTContract = <T extends ContractInterface<T> & IXTokenContract>
     allowance,
     approve,
     allowanceCheck,
+    ixtPending,
     ixtBalance,
     fetchIXT,
     refreshIXTBalance
