@@ -36,10 +36,17 @@ export const useTransactions = () => {
     else return 183
   }
 
-  const getTotalIXTPrice = (items: TransactionItem[]) =>
+  const getTotalIXTPrice = (items: TransactionItem[], userPrice?: boolean) =>
     items.reduce((prev, item) =>
-      prev + (Number(item.token.sale_price) * item.shares.value)
+      prev + (getItemPrice(item, userPrice) * item.shares.value)
       , 0)
+
+  const getItemPrice = (item: TransactionItem, userPrice?: boolean) => {
+    if (userPrice)
+      return Number(item.ixtPrice)
+
+    return Number(item.token.sale_price)
+  }
 
   const itemsInvalid = (items: TransactionItem[]) =>
     items.some(itemIsInvalid)
