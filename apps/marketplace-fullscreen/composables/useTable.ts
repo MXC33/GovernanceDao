@@ -1,6 +1,6 @@
 import { camelCaseIt } from 'case-it';
 
-export type SortOrder = 'desc' | 'asc'
+export type SortDirection = 'desc' | 'asc'
 
 export interface TableRow extends Record<string, any> { }
 
@@ -20,7 +20,7 @@ export type ServerSortKey = keyof typeof ServerSortOptions
 
 export interface TableSort {
   columnIndex: number,
-  direction: SortOrder
+  direction: SortDirection
 }
 
 interface TableColumnBase {
@@ -76,6 +76,8 @@ const columnIndex = (id: string) => {
 }
 
 export const useTableSort = (id: string) => {
+  const { activeServerSort } = useCollectionSettings()
+
   type SortableColumn = ReturnType<typeof getServerSortableColumns>[number]
 
   const { isTextColumn } = useTable()
@@ -137,9 +139,14 @@ export const useTableSort = (id: string) => {
   }
 
 
-  const selectSortField = (columnIndex: number) => {
+  const selectSortField = (columnIndex: number, direction?: SortDirection, key?: ServerSortKey) => {
+
+    if (key) {
+      activeServerSort.value = key
+    }
+
     sort.value = {
-      direction: sort.value.direction,
+      direction: direction ?? sort.value.direction,
       columnIndex
     }
   }
@@ -148,6 +155,7 @@ export const useTableSort = (id: string) => {
     sort,
     serverSortOptions,
     selectedSortOption,
+    isServerSort,
     setupSortOptions,
     selectSortField,
     toggleSortDirection

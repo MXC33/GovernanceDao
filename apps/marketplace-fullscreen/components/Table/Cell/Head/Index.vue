@@ -16,18 +16,18 @@ TableCellHeadWrapper(:drawer="drawer")
 
 <script setup lang="ts" generic="T extends TableRow">
 import SortIcon from '~/assets/icons/sort.svg'
-import type { TableColumnText, TableRow, TableSort } from '~/composables/useTable'
+import type { TableSortable, TableRow, TableSort } from '~/composables/useTable'
 
 const { sortField, index, column } = defineProps<{
-  column: TableColumnText<T>,
+  column: TableSortable,
   index: number,
   sortField?: TableSort,
   drawer?: boolean
 }>()
 
 const emit = defineEmits<{
-  toggleSort: [],
-  selectField: [number]
+  toggleSort: [TableSortable, number],
+  selectField: [TableSortable, number]
 }>()
 
 const isActive = computed(() => sortField?.columnIndex == index)
@@ -41,9 +41,9 @@ const direction = computed(() => {
 
 const onClickSort = () => {
   if (isActive.value)
-    return emit("toggleSort")
+    return emit("toggleSort", column, index)
 
-  return emit("selectField", index)
+  return emit("selectField", column, index)
 }
 
 </script>

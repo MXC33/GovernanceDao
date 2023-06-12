@@ -9,7 +9,9 @@ div(v-if="amountSelected != 0" w="full" p="3" pos="sticky bottom-0" z="2" bg="ix
     div(flex="grow")
 
     CollectionSelectBarButton(v-if="context=='my-assets'") Transfer {{amountSelected}} 
+
     CollectionSelectBarButton(v-else-if="context=='collection'" @click="onAddToCart") Add {{amountSelected}} To Cart 
+
     tempate(v-else-if="context=='incoming-bids'")
       CollectionSelectBarButton() Reject {{amountSelected}} Bids
       CollectionSelectBarButton() Accept {{amountSelected}} Bids 
@@ -21,7 +23,7 @@ import type { IXToken } from '~/../../layers/ix-base/composables/Token/useIXToke
 import type { CollectionContext } from '~/composables/useCollection';
 const { addToCart } = useCart()
 
-const props = defineProps<{
+defineProps<{
   context: CollectionContext
 }>()
 

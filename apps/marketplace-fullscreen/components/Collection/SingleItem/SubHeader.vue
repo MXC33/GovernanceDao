@@ -1,6 +1,6 @@
 <template lang="pug">
 HList(items="center" space-x="2")
-  div(font="bold" translate-y="0.2")
+  h2(font="bold" translate-y="0.2")
     slot()
   CertifiedIcon(w="4.5")
 

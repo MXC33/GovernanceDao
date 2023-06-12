@@ -10,7 +10,8 @@ VList(w="full")
 
       TableHead()
         template(v-for="(column, index) in columns")
-          TableCellHead(:column="column" :index="index" :sort-field="sort" @select-field="selectSortField", @toggle-sort="toggleSortDirection" :drawer="inDrawer" v-if="column.type != 'buttons'") {{ column.label }}
+          TableCellHead(:column="column" :index="index" :sort-field="sort" @select-field="onClickSort", @toggle-sort="onClickToggle" :drawer="inDrawer" v-if="column.type != 'buttons'") {{ column.label }}
+
           TableCellHeadWrapper(v-else :drawer="inDrawer") Action
 
 
@@ -31,7 +32,7 @@ VList(w="full")
 </template>
 
 <script setup lang="ts" generic="Row extends TableRow">
-import type { TableColumn, TableRow } from '~/composables/useTable';
+import type { ServerTableSort, TableColumn, TableRow, TableSortable } from '~/composables/useTable';
 
 const { rows, columns, id, colWidth } = defineProps<{
   columns: TableColumn<Row>[],
@@ -44,8 +45,31 @@ const { rows, columns, id, colWidth } = defineProps<{
   colWidth?: number
 }>()
 
-const { toggleSortDirection, selectSortField, sort } = useTableSort(id)
+const { toggleSortDirection, selectSortField, sort, isServerSort } = useTableSort(id)
+
+const { activeServerSort } = useCollectionSettings()
+
 const { sortRows } = useTable()
+
+const onClickToggle = ({ sortable }: TableSortable, columnIndex: number) => {
+  toggleSortDirection()
+
+  if (!isServerSort(sortable))
+    return
+
+  if (sortable.ascKey && sort.value.direction == 'asc')
+    return activeServerSort.value = sortable.ascKey
+
+  if (sortable.descKey && sort.value.direction == 'desc')
+    return activeServerSort.value = sortable.descKey
+
+}
+const onClickSort = (column: TableSortable, columnIndex: number) => {
+  const serverAscKey = (column.sortable as ServerTableSort)?.ascKey
+
+  selectSortField(columnIndex, 'asc', serverAscKey)
+}
+
 
 const sortedRows = computed(() => sortRows(columns, rows, sort.value))
 

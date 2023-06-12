@@ -1,4 +1,5 @@
 import { CollectionData, Collection, CollectionPayload } from "../../useCollection"
+import { ServerSortOptions } from '../../useTable'
 
 interface CollectionResponse {
   success: boolean
@@ -40,12 +41,12 @@ export const useCollectionsURL = () => {
 export const useCollectionData = (url: string, options: CollectionOptions = {}) => {
   const { fetchIXAPI } = useIXAPI()
 
-  const { activeFilters, filtersAsPayload, createFilters } = useCollectionSettings()
+  const { activeFilters, filtersAsPayload, activeServerSort, createFilters } = useCollectionSettings()
   const activePage = ref(0)
 
   const body = computed<CollectionPayload>(() => ({
     page_key: activePage.value,
-    order: 0,
+    order: ServerSortOptions[activeServerSort.value ?? 'PRICE_ASC'],
     filter: {
       owned: options.filter?.owned ?? false,
       type: options.filter?.type ?? 0,
@@ -72,7 +73,7 @@ export const useCollectionData = (url: string, options: CollectionOptions = {}) 
 
 
   const setupCollectionListeners = () => {
-    watch(activeFilters, () => {
+    watch([activeFilters, activeServerSort], () => {
       activePage.value = 0
       asyncState.refresh()
     }, { deep: true })
