@@ -17,7 +17,6 @@ defineProps<{
 const { activeFilters, displayType } = useCollectionSettings()
 
 const numberOfSelected = computed(() => {
-  console.log("AEOIHFADSFOIH", activeFilters.value)
   return activeFilters.value.reduce((count, filter) => {
     return count + filter.value.filter(option => option.selected).length;
   }, 0);

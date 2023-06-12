@@ -1,6 +1,6 @@
 <template lang="pug">
 OptionSelect(:items="uniqueSortFields" :large="true")
-  template(#header) {{ selectedSortOption?.label }}
+  template(#header) {{ selectedSort }}
 
   template(#icon)
     SortIcon()
@@ -15,6 +15,8 @@ OptionSelect(:items="uniqueSortFields" :large="true")
 <script lang="ts" setup>
 import SortIcon from '~/assets/icons/sort-arrows.svg'
 import type { ServerSortKey } from '~/composables/useTable';
+
+const { t } = useI18n()
 
 const { context } = defineProps<{
   context: string
@@ -32,6 +34,8 @@ const isSelected = (item: SortOpt, asc: boolean) =>
   asc == isAscending.value
 
 const { serverSortOptions, sort, selectSortField, selectedSortOption } = useTableSort(context)
+
+const selectedSort = computed(() => t(`collection.sort.${selectedSortOption.value}`))
 
 const uniqueSortFields = computed(() =>
   serverSortOptions.value.filter((item, index, array) =>

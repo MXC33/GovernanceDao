@@ -102,7 +102,10 @@
       "unique_owners": "Unique Owners",
       "sale_price": "Best Offer"
     },
-    "sort": {}
+    "sort": {
+      "PRICE_ASC": "Price low to high",
+      "PRICE_DESC": "Price high to low"
+    }
   },
   "wallet": {
     "title": "Connect Wallet",

@@ -96,11 +96,13 @@ export const useTableSort = (id: string) => {
     serverSortOptions.value = getServerSortableColumns(columns)
   }
 
-  const selectedSortOption = computed(() =>
-    serverSortOptions.value.find((item) =>
+  const selectedSortOption = computed(() => {
+    const sortValue = serverSortOptions.value.find((item) =>
       item.columnIndex == sort.value.columnIndex
     )
-  )
+    if (sortValue)
+      return sort.value.direction == 'asc' ? sortValue.ascKey : sortValue.descKey
+  })
 
   const isServerSort = (sortable?: Boolean | ServerTableSort): sortable is ServerTableSort => {
     const serverSort = (sortable as ServerTableSort)
