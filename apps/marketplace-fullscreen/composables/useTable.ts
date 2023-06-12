@@ -4,6 +4,20 @@ export type SortOrder = 'desc' | 'asc'
 
 export interface TableRow extends Record<string, any> { }
 
+export const ServerSortOptions = {
+  PRICE_ASC: 0,
+  LATEST_LISTED: 1,
+  LATEST_SOLD: 2,
+  ENDING_SOON: 3,
+  HIGHEST_LAST_SALE_PRICE: 4,
+  FAVORITES: 5,
+  PRICE_DESC: 6,
+  HIGHEST_DAILY_YIELD: 7,
+  RECENTLY_MINTED: 8
+} as const
+
+export type ServerSortKey = keyof typeof ServerSortOptions
+
 export interface TableSort {
   columnIndex: number,
   direction: SortOrder
@@ -21,18 +35,25 @@ export interface TableButton<T extends TableRow> {
   onClick: (row: T) => void
 }
 
-export interface TableColumnText<T extends TableRow> extends TableColumnBase {
+export interface TableSortable {
+  sortable?: ServerTableSort | boolean
+}
+
+export interface TableColumnText<T extends TableRow> extends TableColumnBase, TableSortable {
   label: string,
   type?: 'text' | 'date' | 'ixt' | 'usd' | 'asset' | 'contractAdress'
-  sortable?: boolean,
   rowKey?: string,
   getValue?: (row: T) => string | number
 }
 
-export interface TableColumnAsset extends TableColumnBase {
+export interface ServerTableSort {
+  ascKey: ServerSortKey,
+  descKey: ServerSortKey
+}
+
+export interface TableColumnAsset extends TableColumnBase, TableSortable {
   label: string,
   type?: 'asset'
-  sortable?: boolean
 }
 
 export interface TableButtonColumn<T extends TableRow> extends TableColumnBase {
@@ -44,14 +65,15 @@ export type TableColumn<T extends TableRow> = TableColumnText<T> | TableButtonCo
 
 const columnIndex = (id: string) => {
   const colIndexOne = ['collection', 'incoming-bids', 'outgoing-bids', 'my-assets', 'active-listings']
+
   if (colIndexOne.includes(id))
     return 1
+
   if (id == 'activity')
     return 6
+
   return 0
 }
-
-
 
 export const useTableSort = (id: string) => {
   type SortableColumn = ReturnType<typeof getSortableColumns>[number]
@@ -72,7 +94,11 @@ export const useTableSort = (id: string) => {
     sortOptions.value = getSortableColumns(columns)
   }
 
-  const selectedSortOption = computed(() => sortOptions.value.find((item) => item.columnIndex == sort.value.columnIndex))
+  const selectedSortOption = computed(() =>
+    sortOptions.value.find((item) =>
+      item.columnIndex == sort.value.columnIndex
+    )
+  )
 
   const getSortableColumns = <T extends TableRow>(columns: TableColumn<T>[]) =>
     columns
@@ -83,6 +109,7 @@ export const useTableSort = (id: string) => {
         const { label, type } = column
 
         return {
+          id,
           columnIndex,
           type,
           label

@@ -26,8 +26,6 @@ const { walletState } = useWallet()
 const { ixtBalance, fetchIXT } = useIXTContract()
 const { user } = useUser()
 
-await fetchIXT()
-
 const emit = defineEmits(['swap', 'ConnectWallet'])
 
 const ConnectWallet = () => {
@@ -36,6 +34,8 @@ const ConnectWallet = () => {
 }
 
 const userId = computed(() => user.value?.username || null)
+
 const Icon = await import(`../../../../assets/images/icons/aocbadge.svg`).catch(() => FallbackVue)
 const PlusIcon = await import(`../../../../assets/images/icons/plus.svg`).catch(() => FallbackVue)
+
 </script>

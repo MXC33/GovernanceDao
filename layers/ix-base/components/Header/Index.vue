@@ -37,7 +37,7 @@ Popup(v-if="showIFrame")
 <script lang="ts" setup>
 import PlanetIXNew from '~/assets/images/header/planetix-new.svg'
 import SettingsIcon from '~/assets/images/header/hamburger.svg'
-
+const { fetchIXT } = useIXTContract()
 const { siteTopHeaders } = useSiteHeader()
 
 const activeMenuIndex = ref<number | null>(null)

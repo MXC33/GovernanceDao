@@ -46,9 +46,21 @@ const { currentTime } = useGlobalTimestamp()
 
 const defaultColumns: TableColumn<IXToken>[] = [
   { label: "Asset", rowKey: "name", type: 'asset' },
-  { label: "Current price", rowKey: "sale_price", type: 'ixt', sortable: true },
-  { label: "USD price", rowKey: "sale_price", type: 'usd', sortable: true },
-  { label: "Best offer", rowKey: "higher_bid_price", type: 'ixt', sortable: true },
+  {
+    label: "Current price", rowKey: "sale_price", type: 'ixt', sortable: {
+      ascKey: 'PRICE_ASC',
+      descKey: 'PRICE_DESC'
+    }
+  },
+  {
+    label: "USD price", rowKey: "sale_price", type: 'usd', sortable: {
+      ascKey: 'PRICE_ASC',
+      descKey: 'PRICE_DESC'
+    }
+  },
+  {
+    label: "Best offer", rowKey: "higher_bid_price", type: 'ixt'
+  },
   {
     label: "Total quantity", rowKey: "shares", getValue(row) {
       if (row.shares == 0)

@@ -5,7 +5,7 @@ VList(v-if="item" p="y-3" frame="~" bg="gray-800")
       TokenImage(:token="item.token" inset="0" w="25" h="25" object="contain center" :key="getTokenKey(item.token)" )
       VList()
         div(font="bold") {{getTokenName(item.token)}} 
-        div(text="xs" opacity="60") {{collectionName(item.token.collection)}}
+        div(text="xs" opacity="60") {{useCollectionName(item.token.collection)}}
 
   div(b="b-0.5 gray-600" opacity="40")
   VList(v-if="showAdjustable" space-y="3"  p="x-6" )
@@ -21,9 +21,9 @@ VList(v-if="item" p="y-3" frame="~" bg="gray-800")
 <script lang="ts" setup>
 import type { TransferItem } from '~/composables/useTransfer';
 
-const item = defineModel<TransferItem>()//v-Model in parent can be changed/mutated
+const item = defineModel<TransferItem>()
 
-const props = defineProps<{//props can not be changed/mutated
+defineProps<{
   showAdjustable: boolean,
 }>()
 

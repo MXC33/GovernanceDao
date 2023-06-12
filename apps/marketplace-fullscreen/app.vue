@@ -31,8 +31,9 @@ router.onError((err) => {
 })
 
 const { y } = useWindowScroll()
-const { connectWallet, walletState } = useWallet()
+const { connectWallet, walletState, } = useWallet()
 const { setupIXTPrice, ixtPrice } = useIXTPrice()
+const { fetchIXT } = useIXTContract()
 
 const { setRefreshToken } = useLogin()
 const { user } = useUser()
@@ -62,6 +63,7 @@ onMounted(async () => {
       setRefreshToken(0)
 
     console.log("price", ixtPrice.value)
+    fetchIXT()
 
   } catch (err) {
     console.error("Error mounting app", err)

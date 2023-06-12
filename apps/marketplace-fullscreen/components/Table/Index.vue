@@ -46,7 +46,9 @@ const { rows, columns, id, colWidth } = defineProps<{
 
 const { toggleSortDirection, selectSortField, sort } = useTableSort(id)
 const { sortRows } = useTable()
+
 const sortedRows = computed(() => sortRows(columns, rows, sort.value))
+
 const isMobile = onMobile()
 const getColumnStyle = (item: TableColumn<Row>) => {
   const getStyle = (width: number) => ({

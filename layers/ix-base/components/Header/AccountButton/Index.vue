@@ -29,8 +29,6 @@ const menuOpen = ref(false)
 const menuElement = ref()
 const emit = defineEmits(["addFunds"])
 
-await fetchIXT()
-
 const addFunds = () => {
   emit('addFunds')
 }
