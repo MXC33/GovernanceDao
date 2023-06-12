@@ -10,21 +10,12 @@ const props = defineProps<{
   token: AnyToken,
 }>()
 
-const CollectionNames: Record<string, string> = {
-  "0x836545dfc47f71ff33c458b98b283732a8cee4f6": "Y_ Rovers",
-  "0x1d41e6723e7a5d7c889e4220e9b152d6cb84a157": "AOC Badges",
-  "0xba6666b118f8303f990f3519df07e160227cce87": "PlanetIX - Assets",
-  "0xfba348af5f7f7df1b2c8f114004303fde02df6dc": "Corporation Avatars",
-  "0x24cff55d808fd10a1e730b86037760e57ecaf549": "Landmark Relics",
-  "0x3376c61c450359d402f07909bda979a4c0e6c32f": "Gravity Grade"
-
-}
 
 const name = computed(() => {
   const collection = (props.token as IXToken).collection
 
   if (collection)
-    return CollectionNames[collection]
+    return useCollectionName(collection)
 
   else
     return ""

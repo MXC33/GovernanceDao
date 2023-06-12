@@ -92,13 +92,9 @@ const { data, columns, context = 'collection' } = defineProps<{
 }>()
 
 const collectionName = computed(() => {
-  if (data?.name == "PlanetIX Assets")
-    return "PlanetIX - Assets"
-
-  if (context != 'collection')
-    return "My Assets"
-
-  return data?.name
+  if (!data)
+    return ""
+  return useCollectionName(data.collection)
 })
 
 onBeforeUnmount(() => {
