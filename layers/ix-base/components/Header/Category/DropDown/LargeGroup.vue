@@ -13,10 +13,10 @@ const {parentType, category} = defineProps<{
   category: HeaderCategory
 }>()
 
-const emit = defineEmits(['clicked'])
+const emit = defineEmits(['clikedItem'])
 
 const clikedItem = (item: string) => {
-  emit('clicked', parentType, category.type, item);
+  emit('clikedItem', parentType, category.type, item);
 }
 
 </script>

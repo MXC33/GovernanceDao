@@ -17,7 +17,7 @@ Popup()
     BiddingPrice(:items="bidItems" v-if="bidItems")
 
   template(#buttons)
-    ButtonInteractive(btn="~ primary" w="full" @click.prevent="onClickBid" text="Place bid" :invalid="itemsInvalid(bidItems)" :loading="isLoading")
+    ButtonInteractive(btn="~ primary" w="full" @click.prevent="onClickBid" text="Place bid" :invalid="isItemInvalid(bidItems)" :loading="isLoading")
 
 </template>
 
@@ -29,7 +29,7 @@ const isLoading = ref(false)
 
 const { createBidItems, bidItems } = useBiddingItems()
 const { bidItem } = useBiddingContract()
-const { itemsInvalid } = useTransactions()
+const { isItemInvalid } = useTransactions()
 const { displaySnack } = useSnackNotifications()
 
 const { displayPopup } = usePopups()
