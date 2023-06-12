@@ -1,41 +1,33 @@
 <template lang="pug">
-HList(items="center" space-x="1.85" group )
-  GLOBE(w="5.25" fill="white group-hover:opacity-80" translate-y="-0.3")
-  span(translate-y="0.4" @click="toggleMenu = !toggleMenu") {{ language }}
-
-  //-VList(v-if="toggleMenu" pos="absolute top-full left-0 right-0" b="1 gray-400" items="left" z="99") 
-    div(@click="toggleMenu = !toggleMenu" bg="black") ENGLISH
-    div(@click="toggleMenu = !toggleMenu" bg="black") tiếng Việt 
-    div(@click="toggleMenu = !toggleMenu" bg="black") 한글
-    div(@click="toggleMenu = !toggleMenu" bg="black") TAGALOG
-    div(@click="toggleMenu = !toggleMenu" bg="black") русский язык
-
-  VList(v-if="toggleMenu" pos="absolute top-full left--50% right-0" b="1 gray-400" bg="black" pr="-50%" w="25" items="left" z="99") 
-    div(v-for="(text, i ) in arr" @click="toggleMenu = !toggleMenu" b="1 gray-400" text="~ white hover:$mc-orange" ) {{ text }}
+VList(pos="relative" z="1" justify="center" ref="element")
+  button(btn="menu")
+    HList(items="center" space-x="2" group @click="showMenu = !showMenu")
+      GLOBE(w="5" fill="white" )
+      div( ) {{ language }}
+  
+  Transition(name="fade-slow")
+    VList(v-if="showMenu" pos="absolute top-full left-0" mt="3" z="3" b="1 gray-400" divide-y="1" bg="black" items="left") 
+      button(btn="menu" v-for="text in availableLocales" p="1" b="gray-400" text="~ white hover:ix-orange" ) {{ text }}
 
 
 </template>
 
 <script lang="ts" setup>
+import type { LocaleObject } from '@nuxtjs/i18n/dist/runtime/composables';
 import GLOBE from '~/assets/images/header/language-globe.svg'
 
-const arr = ['ENGLISH', 'tiếng Việt','한글','TAGALOG','русский язык']
-const toggleMenu= ref(false);
+const showMenu = ref(false)
+const element = ref()
 
-const changeLanguage = (text: string) => {
-  switch(text){
-    case "ENGLISH": 
-    break;
-    case "tiếng Việt": 
-    break;
-    case "한글": 
-    break;
-    case "TAGALOG": 
-    break;
-    case "русский язык": 
-    break;
-  }
-}
+
+const { locales } = useI18n();
+const availableLocales = computed(() => 
+  locales.value.map((item) => 
+    (item as LocaleObject)?.name
+  ).filter(notNull)
+)
+
+onClickOutside(element, () => showMenu.value = false)
 
 defineProps<{
   language?: string

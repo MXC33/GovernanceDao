@@ -6,13 +6,12 @@ VList(pos="sticky top-0" z="99" w="full" @mouseenter="isSelected = true" @mousel
 
     div(flex-grow="1" display="lg:none")
 
-    HList(space-x="8" px="8" items="center" font="bold" text="lg" flex-grow="1" display="lt-lg:none" translate-y="0.4" overflow-x="hidden" )
-      HeaderLink(v-for="(item, index) in siteTopHeaders" @click="openMenu(index)" text="red") {{ $t(`marketplace.navigation.${item.type}.title`)}}
+    HList(space-x="8" px="8" items="center" flex-grow="1" display="lt-lg:none" overflow-x="hidden" )
+      button(v-for="(item, index) in siteTopHeaders" @click="openMenu(index)" btn="menu") {{ $t(`marketplace.navigation.${item.type}.title`)}}
 
-    HList(font="bold" space-x="6" px="0" translate-y="0.4")
-      HeaderLink(to="/" display="lt-lg:none") help
-      HeaderLink(to="/" display="lt-lg:none")
-        HelperLanguage(language="EN" translate-y="-0.2")
+    HList(space-x="6" px="0")
+      button(btn="menu" display="lt-lg:none") help
+      HelperLanguage(language="EN")
       HeaderAccountButton(@addFunds="iFrameToggle")
 
     SettingsIcon(v-if="activeMenuIndex == null" pos="right" w="8" display="lg:none" 
