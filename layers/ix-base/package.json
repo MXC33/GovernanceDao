@@ -33,7 +33,7 @@
     "ethereum-abi-types-generator": "^1.3.2",
     "ethers": "5",
     "histoire": "^0.16.1",
-    "nuxt": "3.5.2",
+    "nuxt": "^3.5.3",
     "nuxt-graphql-client": "^0.2.27",
     "typescript": "^4.9.3",
     "unocss": "^0.52.5",

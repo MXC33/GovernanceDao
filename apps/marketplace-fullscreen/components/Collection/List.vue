@@ -2,7 +2,7 @@
 Transition(name="fade" mode="out-in" )
   CollectionGrid(v-if="displayType == 'grid' && !hideGrid" w="full" :is-open="showFilters")
     template(v-if="!loading")
-      CollectionGridItem.collection-grid-item(:token="token" v-for="token in items" b="gray-400" :context="context")
+      CollectionGridItem.collection-grid-item(:token="token" v-for="token in sortedRows" b="gray-400" :context="context")
 
     template(v-else)
       CollectionGridItemSkeleton(v-for="item in items.length > ghostRows.length ? items : ghostRows")
@@ -18,6 +18,7 @@ Transition(name="fade" mode="out-in" )
 import type { IXToken } from '@ix/base/composables/Token/useIXToken';
 import type { CollectionContext } from '~/composables/useCollection';
 import type { TableColumn } from '~/composables/useTable'
+
 const { displayType } = useCollectionSettings()
 const ghostRows = [1, 2, 3, 4, 5, 6, 7, 8]
 
@@ -26,9 +27,14 @@ const { items, columns, context = 'collection' } = defineProps<{
   columns: TableColumn<IXToken>[],
   hideGrid?: boolean,
   showFilters: boolean,
-  context?: CollectionContext,
+  context: CollectionContext,
   loading?: boolean
 }>()
+
+const { sortRows } = useTable()
+const { setupSortOptions, sort } = useTableSort(context)
+const sortedRows = computed(() => sortRows(columns, items, sort.value))
+watch(() => columns, () => setupSortOptions(columns), { immediate: true })
 
 const onClickItem = (row: IXToken) => {
   const { network, collection, token_id } = row

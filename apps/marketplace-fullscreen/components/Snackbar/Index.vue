@@ -3,8 +3,10 @@ HList(@click="onClickSnack" frame="~ gray-400" p="x-4 y-3" bg="gray-800" space-x
 
   SnackbarIcon(:icon="type")
 
-  div(font="bold" text="md" color="white" cursor="pointer" translate-y="0.15" whitespace="nowrap") {{ message }}
-  
+  div(v-if="type != 'purchase-warning'" font="bold" text="md" color="white" cursor="pointer" translate-y="0.15" whitespace="nowrap") {{ message }}
+
+  VList(v-else font="bold" text="md" color="white" cursor="pointer" translate-y="0.15" whitespace="nowrap") {{ message }}
+
 </template>
 
 <script lang="ts" setup>
@@ -25,7 +27,12 @@ const onClickSnack = () => {
     default:
       break
   }
+}
 
+const iFrameOpen = ref(false)
+
+const openSwap = () => {
+  iFrameOpen.value = !iFrameOpen.value
 }
 
 const { notification } = defineProps<{

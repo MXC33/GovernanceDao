@@ -13,7 +13,7 @@ VList(flex-grow="1" min-h="0" pos="relative" p="4 md:(8 b-30)" space-y="0 md:6")
 
   slot(name="menu")
 
-  CollectionFilter(v-if="data" :items="data.nfts" :filters="data.filters" :hide-toggle="hideGrid" @toggle-filter="toggleFilterDrawer")
+  CollectionFilter(v-if="data" :items="data.nfts" :filters="data.filters" :hide-toggle="hideGrid" @toggle-filter="toggleFilterDrawer" :context="context")
 
   HList(space-x="0 on-open:3" pos="relative" :open="showFilters")
     VList()

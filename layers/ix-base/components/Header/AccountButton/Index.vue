@@ -53,5 +53,4 @@ const commonAttrs = {
   color: "white group-hover:$mc-orange"
 };
 
-
 </script>
