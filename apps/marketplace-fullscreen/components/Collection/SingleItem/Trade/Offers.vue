@@ -12,8 +12,8 @@ ContentDrawer(:start-open="!isMobile" :is-neutral="true" bg="gray-900")
 
     Table(:columns="offerColumns" :rows="item.bids" id="offers" :in-drawer="true" v-if="item.bids.length > 0" :col-width="150")
       template(#item-buttons="{row}" )
-        button(@click="onClickAcceptOffer(row)" uppercase="~" bg="gray-500 hover:gray-400" transition="all" cut="bottom-right sm" p="x-6 y-3" font="bold" v-if="!playerOwnedSale(row)") Accept
-        button(@click="cancelBidOnClick(row)" uppercase="~" bg="gray-500 hover:gray-400" transition="all" cut="bottom-right sm" p="x-6 y-3" font="bold" v-else) Cancel
+        TableButtonSmall(@click="onClickAcceptOffer(row)"  v-if="!playerOwnedSale(row)") Accept
+        TableButtonSmall(@click="cancelBidOnClick(row)" v-else) Cancel
 
 </template>
 

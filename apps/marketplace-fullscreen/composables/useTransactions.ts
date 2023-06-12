@@ -36,13 +36,23 @@ export const useTransactions = () => {
     else return 183
   }
 
-  const getTotalIXTPrice = (items: TransactionItem[]) =>
+  const getTotalIXTPrice = (items: TransactionItem[], userPrice?: boolean) =>
     items.reduce((prev, item) =>
-      prev + (Number(item.token.sale_price) * item.shares.value)
+      prev + (getItemPrice(item, userPrice) * item.shares.value)
       , 0)
 
+  const getItemPrice = (item: TransactionItem, userPrice?: boolean) => {
+    if (userPrice)
+      return Number(item.ixtPrice)
+
+    return Number(item.token.sale_price)
+  }
+
   const itemsInvalid = (items: TransactionItem[]) =>
-    items.some((item) => !item.ixtPrice || !item.shares.value)
+    items.some(itemIsInvalid)
+
+  const itemIsInvalid = (item: TransactionItem) =>
+    !item.ixtPrice || item.ixtPrice == 0 || !item.shares.value
 
   const priceRenderString = (price: number | undefined) =>
     String(price ? roundToDecimals(price, 6) : '--')
@@ -50,6 +60,7 @@ export const useTransactions = () => {
   return {
     priceRenderString,
     itemsInvalid,
+    itemIsInvalid,
     getTotalIXTPrice,
     formattedDays,
     durationInDaysFromTimestamp

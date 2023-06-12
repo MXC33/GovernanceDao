@@ -45,7 +45,7 @@ const saleColumns: TableColumn<Sale>[] = [
       return row.player_username
     }, sortable: true
   },
-  { type: 'buttons', width: 100 }
+  { type: 'buttons', width: 120 }
 ]
 
 const addSaleToCart = (sale: Sale) => {
@@ -63,7 +63,6 @@ const cancelListingOnClick = async (sale: Sale) => {
 }
 
 const { displayPopup } = usePopups()
-
 
 const playerOwnedSale = (sale: Sale) => {
   if (sale.player_wallet.toLowerCase() == walletAdress.value?.toLowerCase())

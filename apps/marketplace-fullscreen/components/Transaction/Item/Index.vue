@@ -18,7 +18,7 @@ VList(bg="gray-800" v-if="item" frame="~" flex-shrink="0")
 
 
   Collapse(:when="isOpen" class="v-collapse")
-    VList(p="6" w="full")
+    VList(p="6" w="full" space-y="3")
       TransactionItemDetails(:item="item")
 
       div(b="t-1 gray-600")

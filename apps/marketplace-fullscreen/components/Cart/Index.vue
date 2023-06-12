@@ -32,6 +32,7 @@ import CloseIcon from '~/assets/icons/close.svg'
 
 const cartElement = ref()
 const { viewingCart, cartItems, clearCart } = useCart()
+const { getTokenKey } = useTokens()
 
 const onClearCart = () => {
   clearCart()
