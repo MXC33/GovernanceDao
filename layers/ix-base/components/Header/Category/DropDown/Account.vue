@@ -11,8 +11,8 @@ HList(p="6" bg="ix-black" b="b-1 gray-600")
         NuxtLink(to="/account" color="ix-orange") {{ $t(`marketplace.navigation.menu.account`) }}
 
       HList(flex-grow="1" items="center")
-        HList(b="r-1 ix-orange opacity-40" p="2" flex-grow="1" h="full" items="center" space-x="1")
-          div() IXT: 
+        HList(b="r-1 ix-orange opacity-40" p="2" flex-grow="1" h="full" items="center" space-x="1" font="bold")
+          div(text="gray") IXT: 
           div(text="ix-mint") {{ roundToDecimals(ixtBalance ?? 0, 2) }}
 
         HList( p="l-3 r-3")
