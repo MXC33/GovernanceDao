@@ -11,9 +11,6 @@ const GQL_PROD_ENDPOINT = `${API_PROD_ENDPOINT}/graphql`
 // https://v3.nuxtjs.org/api/configuration/nuxt.config
 export default defineNuxtConfig({
 
-  app: {
-    pageTransition: { name: 'page', mode: 'out-in' }
-  },
 
   typescript: {
     includeWorkspace: true

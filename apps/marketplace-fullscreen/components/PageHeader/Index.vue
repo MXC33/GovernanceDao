@@ -1,31 +1,15 @@
 <template lang="pug">
-Transition(name="slide-right" mode="in-out")
-  DropdownCollectionMobile(v-if="showCollection" v-model="toggleCollection" @close="toggleCollection")
-
 VList(flex-grow="1" px="0 md:6" pos="relative")
   .gradient-bg(pos="fixed left-0 right-0 top-16" h="50vh" :style="gradientStyle" v-if="!onSingleItem")
 
-transition(name="fade-slow")
-  div(flex="~ col md:row" pt="lt-md:4" py="md:4" justify="between" items="center" pos="sticky top-16" z="10" bg="on-locked:ix-black" px="4 md:8" transition="all" :locked="isScrolling")
-    VList(w="full")
-      HList(w="full" items="center")
-        NuxtLink(:to="'/'" w="full")
-          NetBetaLogo(w="45" translate-y="lt-md:-1.5")
+Transition(name="fade-slow")
+  HList(w="full" items="center" justify="between"  pos="sticky top-16" z="10" bg="on-locked:ix-black" p="4 md:x-8" transition="all" :locked="isScrolling")
+    NuxtLink(:to="'/'" w="full")
+      NetBetaLogo(w="45" )
 
-        HList(display="md:none" gap="2" justify="between" pb="3")
-          ButtonSquareIcon()
-            CollectionIcon(w="6" @click="toggleCollection")
+    HList(space-x="4" w="full" justify="end" items="center")
 
-          ButtonSquareIcon(@click="onClickAccount")
-            UserIcon(w="6")
-
-          ButtonSquareIcon(@click="viewingCart = true")
-            CartIcon(w="6")
-            CartCounter
-
-    HList(space-x="4" w="full" justify="end" items="center" display="lt-md:none")
-
-      CollectionSelect(display="lt-md:none")
+      CollectionSelect()
 
       ButtonSquareIcon(@click="onClickAccount")
         UserIcon(w="6")
@@ -40,8 +24,6 @@ transition(name="fade-slow")
 <script lang="ts" setup>
 // import NetEmpireLogo from '~/assets/icons/logo/netempire.svg'
 import NetBetaLogo from '~/assets/icons/logo/netbeta.svg'
-import CollectionIcon from '~/assets/icons/explore-collection.svg'
-
 import UserIcon from '~/assets/icons/user.svg'
 import CartIcon from '~/assets/icons/cart.svg'
 
@@ -49,12 +31,6 @@ const { viewingCart } = useCart()
 const y = useGlobalWindowScroll()
 
 const route = useRoute()
-
-const showCollection = ref(false)
-
-const toggleCollection = () => {
-  showCollection.value = !showCollection.value
-}
 
 const onClickAccount = () => {
   navigateTo('/account')
@@ -72,23 +48,11 @@ const isScrolling = computed(() => {
   return y.value >= 10
 })
 
-watch(showCollection, (newVal, oldVal) => {
-  if (newVal) {
-    document.body.classList.add('no-scroll');
-  } else {
-    document.body.classList.remove('no-scroll');
-  }
-});
-
 </script>
 
 <style>
 .gradient-bg {
   background: rgb(12, 12, 12);
   background: linear-gradient(0deg, rgba(12, 12, 12, 0.5) 50%, rgba(203, 0, 16, 0.5) 100%);
-}
-
-.no-scroll {
-  overflow: hidden;
 }
 </style>

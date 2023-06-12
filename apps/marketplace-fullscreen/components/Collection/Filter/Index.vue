@@ -1,5 +1,5 @@
 <template lang="pug">
-HList(pos="sticky top-33 md:(sticky top-34)" z="8" b="on-scrolling:t-1 gray-600" ml="-4 md:(-8)" mr="-4 md:(-8)" :scrolling="isScrolling")
+HList(pos="sticky top-34" z="8" b="on-scrolling:t-1 gray-600" ml="-4 md:(-8)" mr="-4 md:(-8)" :scrolling="isScrolling")
   HList(w="full" py="3" space-x="3" bg="ix-black" px="4 md:8")
 
     CollectionFilterToggleFilter(@click="$emit('toggleFilter')")
@@ -12,7 +12,7 @@ HList(pos="sticky top-33 md:(sticky top-34)" z="8" b="on-scrolling:t-1 gray-600"
 
           TokenName(:token="item" capitalize="~" :key="'name' + getTokenKey(item)")
 
-    //- CollectionFilterSort()
+    CollectionFilterSort(:context="context")
 
     CollectionFilterToggleDisplay(v-if="!hideToggle")
 
@@ -22,10 +22,12 @@ HList(pos="sticky top-33 md:(sticky top-34)" z="8" b="on-scrolling:t-1 gray-600"
 import type { IXToken } from '@ix/base/composables/Token/useIXToken';
 
 const { getTokenKey } = useTokens()
+
 defineProps<{
   items: IXToken[],
   filters: any[],
-  hideToggle?: boolean
+  hideToggle?: boolean,
+  context: string
 }>()
 
 defineEmits<{

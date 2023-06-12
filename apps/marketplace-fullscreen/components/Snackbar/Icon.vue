@@ -16,6 +16,5 @@ import type { SnackNotificationType } from '~/composables/useNotifications'
 const { icon } = defineProps<{
   icon: SnackNotificationType
 }>()
-console.log("DISPLAY", icon)
 
 </script>

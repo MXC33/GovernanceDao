@@ -1,6 +1,4 @@
-import { MaybeRef } from 'vue'
-import { get } from '@vueuse/core'
-import { IXToken } from '~/../../layers/ix-base/composables/Token/useIXToken'
+import { camelCaseIt } from 'case-it';
 
 export type SortOrder = 'desc' | 'asc'
 
@@ -54,7 +52,11 @@ const columnIndex = (id: string) => {
 }
 
 
+
 export const useTableSort = (id: string) => {
+  type SortableColumn = ReturnType<typeof getSortableColumns>[number]
+
+  const { isTextColumn } = useTable()
 
   const isDescendingDirection = id == 'offers' || id == 'incoming-bids' || id == 'activity'
 
@@ -64,21 +66,50 @@ export const useTableSort = (id: string) => {
       direction: isDescendingDirection ? 'desc' : 'asc'
     }))
 
+  const sortOptions = useState<SortableColumn[]>(`collection-sort-options`, () => [])
+
+  const setupSortOptions = <T extends TableRow>(columns: TableColumn<T>[]) => {
+    sortOptions.value = getSortableColumns(columns)
+  }
+
+  const selectedSortOption = computed(() => sortOptions.value.find((item) => item.columnIndex == sort.value.columnIndex))
+
+  const getSortableColumns = <T extends TableRow>(columns: TableColumn<T>[]) =>
+    columns
+      .map((column, columnIndex) => {
+        if (!isTextColumn(column) || !column.sortable)
+          return null
+
+        const { label, type } = column
+
+        return {
+          columnIndex,
+          type,
+          label
+        }
+      })
+      .filter(notNull)
+
+
   const toggleSortDirection = () => {
     if (sort.value.direction == 'asc')
       return sort.value.direction = 'desc'
     else return sort.value.direction = 'asc'
   }
 
+
   const selectSortField = (columnIndex: number) => {
     sort.value = {
-      direction: 'asc',
+      direction: sort.value.direction,
       columnIndex
     }
   }
 
   return {
     sort,
+    sortOptions,
+    selectedSortOption,
+    setupSortOptions,
     selectSortField,
     toggleSortDirection
   }
@@ -107,6 +138,10 @@ export const useTable = () => {
       return getDotNotation(row, column.rowKey)
   }
 
+  const isTextColumn = <T extends TableRow>(col: TableColumn<T>): col is TableColumnText<T> => {
+    return col.type != 'buttons'
+  }
+
   const sortRows = <T extends TableRow>(columns: TableColumn<T>[], rows: T[], sort: TableSort) => {
     const { columnIndex, direction } = sort
     const column = columns[columnIndex]
@@ -133,8 +168,8 @@ export const useTable = () => {
     })
   }
 
-
   return {
+    isTextColumn,
     sortRows,
     getValue
   }

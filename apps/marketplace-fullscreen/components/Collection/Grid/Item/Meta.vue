@@ -1,18 +1,22 @@
 <template lang="pug">
 VList(w="full" flex-grow="1" items="start" bg="gray-900" p="6" pos="relative")
   header(font="bold" w="full")
-    HList(items="center" space-x="3")
+    NuxtLink(:to="getItemLink(token)" flex="~ row" rel="noopener" items="center" space-x="3"  cursor="pointer")
       TokenName(:token="token" :key="getTokenKey(token)" text="base md:xl ellipsis" capitalize="~")
 
       div(v-if="is1155" text="lt-md:xs") x{{showAssetAmount}}
 
     div(text="sm md:lg") 
-      slot(name="subtitle") {{ roundToDecimals(token?.sale_price, 6) }} IXT
+      slot(name="subtitle") 
+        template(v-if="isDisabled") -- IXT
+        template(v-else) {{ setPriceDecimals }} IXT
 
   div(flex-grow="1")
 
   div(text="sm md:base" color="gray-200" whitespace="nowrap")
-    slot(name="detail") Best offer: {{ token?.higher_bid_price }} IXT
+    slot(name="detail")
+      template(v-if="isDisabled") Best offer: -- IXT
+      template(v-else) Best offer: {{ token?.higher_bid_price }} IXT
 
   slot(name="footer")
       
@@ -24,24 +28,31 @@ import type { CollectionContext } from '~/composables/useCollection';
 
 const is1155 = computed(() => ERC1155Addresses.includes(token.collection))
 const { getTokenKey } = useTokens()
+const { formatAmount } = useFormatNumber()
 
 const showAssetAmount = computed(() => {
   if (context == 'my-assets')
-    return formatMyShareAmount(token.my_shares)
-  return formatMyShareAmount(token.shares)
+    return formatAmount(token.my_shares)
+  return formatAmount(token.shares)
 })
 
-const formatMyShareAmount = (shares: number) => {
-  if (shares > 1000)
-    return String(shares / 1000).substring(0, 4) + "K"
-  return shares
+const setPriceDecimals = computed(() => {
+  if (token?.sale_price < 0.009)
+    return roundToDecimals(token?.sale_price, 4)
+  return roundToDecimals(token?.sale_price, 2)
+})
+
+const getItemLink = (token: IXToken) => {
+  const { network, collection, token_id } = token
+  return `/assets/${network}/${collection}/${token_id}`
 }
 
 const { token, context } = defineProps<{
   token: IXToken,
   quantity?: number,
-  context?: CollectionContext
+  context?: CollectionContext,
 }>()
 
+const isDisabled = computed(() => token?.sale_price == 0)
 
 </script>
