@@ -2,7 +2,7 @@
 VList(flex-grow="1" min-h="0" pos="relative" p="4 t-4 b-4 md:(8 b-30)" space-y="0 md:6")
   CollectionHeader() 
     template(#header) 
-      slot(name="name") My Assets
+      slot(name="name") {{ $t(`marketplace.myAssets.title`) }}
 
   slot(name="menu")
 

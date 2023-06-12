@@ -1,7 +1,7 @@
 <template lang="pug">
 footer(pos="sticky bottom-0" bg="ix-black")
   HList(items="start" text="xl" p="3")
-    h3(font="bold" flex-grow="1") Total price
+    h3(font="bold" flex-grow="1") {{ $t(`marketplace.price.title`) }}
     VList()
       div(font="bold") {{ totalPrice }} IXT
       div(text="gray-200 sm") ${{ ixtToUSD(totalPrice) }}

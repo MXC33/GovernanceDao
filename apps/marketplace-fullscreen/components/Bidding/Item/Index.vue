@@ -3,7 +3,7 @@ TransactionItem(v-model="item")
   template(#adjustments)
     TransactionItemAdjustPrice(v-model="item")
     TransactionItemAdjustQuantity(v-model="item")
-      template(#max="{max}") Max amount {{ max }}
+      template(#max="{max}") {{ $t(`marketplace.bid.maxAmount`) }} {{ max }}
 
     TransactionItemAdjustDuration(v-model="item")
 

@@ -15,7 +15,7 @@
       SnackbarList()
 
       Popup(v-if="isSwapVisible" @close="isSwapVisible = false" :disable-default-close="true")
-        template(#header) Swap
+        template(#header) {{ $t(`marketplace.navigation.buy.swap.title`)}}
         template(#default)
           VList(w="full" justify="center" items="center" )
             iframe(src="https://ix.foundation/lefi" w="full" h="full" min-h="118")
@@ -37,7 +37,7 @@ router.onError((err) => {
   console.log("#ERRRR", err)
 })
 
-const {state: isSwapVisible} = useIXTSwapVisible()
+const { state: isSwapVisible } = useIXTSwapVisible()
 
 const { y } = useWindowScroll()
 const { connectWallet, walletState } = useWallet()

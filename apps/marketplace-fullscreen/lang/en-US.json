@@ -100,7 +100,7 @@
       "listed": "Listed",
       "owners": "Owners",
       "unique_owners": "Unique Owners",
-      "sale_price": "Best Offer"
+      "sale_price": "Best offer"
     },
     "sort": {
       "PRICE_ASC": "Price low to high",
@@ -160,6 +160,7 @@
       "help": "Help"
     },
     "myAssets": {
+      "title": "My Assets",
       "myItems": "My items",
       "favorites": "Favorites",
       "incomingBids": "Incoming Bids",
@@ -196,11 +197,26 @@
       "warningText": "Make sure the adress is correct!<br/>There is no way to reverse this transaction",
       "verifyText": "I Verify that I am aware that the transaction is not<br/>reversible, and that the wallet address is correct.",
       "confirm": "Confrim Adress",
-      "transferItem": "Transfer Item"
+      "transferItem": "Transfer Item",
+      "listSucess": "LIST SUCCESSFUL!"
     },
     "unlist": {
       "title": "Unlist Item",
       "warningText": "Are you sure you want to unlist this item?"
+    },
+    "transactions": {
+      "applyToAll": "APPLY TO ALL",
+      "setToFloor": "Set to Floor"
+    },
+    "cart": {
+      "title": "My Cart",
+      "items": "items",
+      "clearAll": "Clear all"
+    },
+    "price": {
+      "title": "Total Price",
+      "marketplaceFee": "Marketplace fee",
+      "totalEarnings": "Total potential earnings"
     },
     "bid": {
       "title": "Place Bid",
@@ -210,6 +226,7 @@
       "verifyText": "I Verify that I am aware that the transaction is not<br/>reversible, and that the wallet address is correct.",
       "confirm": "Confrim Adress",
       "transferItem": "Transfer Item",
+      "maxAmount": "Max amount",
       "update": {
         "title": "Place Bid"
       }
@@ -218,8 +235,22 @@
       "title": "Remove Bid",
       "warningText": "Are you sure you want to remove this bid?"
     },
+    "singleItem": {
+      "contractAdress": "Contract adress",
+      "tokenId": "Token Id",
+      "tokenStandard": "Token standard",
+      "chain": "Chain",
+      "description": "description",
+      "traits": "traits",
+      "details": "details"
+    },
     "offer": {
-      "title": "Accept Offer"
+      "title": "Accept Offer",
+      "acceptOffer": "Accept offer Successful!",
+      "purchaseSuccess": "Purchase Successful!",
+      "viewMyAssets": "View my assets",
+      "viewInActiveList": "View in active listings",
+      "continueExploring": "Continue exploring "
     },
     "navigation": {
       "soon": "Coming Soon",

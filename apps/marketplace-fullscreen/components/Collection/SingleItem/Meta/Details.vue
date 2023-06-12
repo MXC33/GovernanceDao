@@ -1,22 +1,22 @@
 <template lang="pug">
 VList()
   AttributeRow()
-    template(#name) Contract adress 
+    template(#name) {{ $t(`marketplace.singleItem.contractAdress`) }}
     template(#value) 
       NuxtLink(:to="linkAdress" :external="true" target="_blank" color="ix-primary") {{ showAdress(item.collection)}} 
       //-span(color="ix-primary") {{ item.collection}} 
 
   AttributeRow()
-    template(#name) Token Id
+    template(#name) {{ $t(`marketplace.singleItem.tokenId`) }}
     template(#value) {{ item.token_id}}
 
   AttributeRow()
-    template(#name) Token standard
+    template(#name) {{ $t(`marketplace.singleItem.tokenStandard`) }}
     template(#value v-if="is721") ERC-721
     template(#value v-else-if="is1155") ERC-1155
 
   AttributeRow()
-    template(#name) Chain
+    template(#name) {{ $t(`marketplace.singleItem.chain`) }}
     template(#value) {{ network }}
 
   //- SAVE FOR FUTURE USE
@@ -25,7 +25,7 @@ VList()
   //-   template(#value) TODO
 
   AttributeRow()
-    template(#name) Marketplace Fee
+    template(#name) {{ $t(`marketplace.price.marketplaceFee`) }}
     template(#value) 5%
     
 </template>
