@@ -5,8 +5,7 @@ VList(flex-grow="1" min-h="0" pos="relative" p="4 md:(8 b-30)" space-y="0 md:6")
       slot(name="name") {{ collectionName }}
 
     template(#cert v-if="data?.name != null")
-      ClientOnly
-        CertifiedIcon(w="6")
+      CertifiedIcon(w="6")
 
     template(#attributes)
       AttributeList(:attributes="attributes" v-if="data")
@@ -34,7 +33,6 @@ import type { IXToken } from '@ix/base/composables/Token/useIXToken';
 import type { CollectionContext, CollectionData } from '~/composables/useCollection';
 import type { TableColumn } from '~/composables/useTable'
 import CertifiedIcon from '~/assets/icons/certified.svg'
-// import PolygonIcon from '~/assets/icons/polygon_filled.svg'
 
 const { activeFilters } = useCollectionSettings()
 const { selectedItems } = useSelection()

@@ -1,5 +1,5 @@
 <template lang="pug">
-div(ref="element") {{ glitchedText }}{{  suffix }}
+span(ref="element") {{ glitchedText }}{{  suffix }}
 
 </template>
   

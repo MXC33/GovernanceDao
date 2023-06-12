@@ -12,7 +12,7 @@ HList(pos="sticky top-34" z="8" b="on-scrolling:t-1 gray-600" ml="-4 md:(-8)" mr
 
           TokenName(:token="item" capitalize="~" :key="'name' + getTokenKey(item)")
 
-    //- CollectionFilterSort(:context="context")
+    CollectionFilterSort(:context="context")
 
     CollectionFilterToggleDisplay(v-if="!hideToggle")
 
@@ -22,6 +22,7 @@ HList(pos="sticky top-34" z="8" b="on-scrolling:t-1 gray-600" ml="-4 md:(-8)" mr
 import type { IXToken } from '@ix/base/composables/Token/useIXToken';
 
 const { getTokenKey } = useTokens()
+
 
 defineProps<{
   items: IXToken[],

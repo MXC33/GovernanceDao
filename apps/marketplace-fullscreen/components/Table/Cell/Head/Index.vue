@@ -1,14 +1,13 @@
 
 <template lang="pug">
 TableCellHeadWrapper(:drawer="drawer")
-  button(v-if="column.sortable" @click="onClickSort" flex="~ row" items="start" color="on-active:white" :active="isActive" transition="all")
-    HList(space-x="1")
-      div()
-        slot
+  HList(v-if="column.sortable" cursor="pointer" space-x="1"  @click="onClickSort" flex="~ row" items="start" color="on-active:white" :active="isActive" transition="all")
+    div()
+      slot
 
-      Transition(name="fade" mode="out-in")
-        SortIcon(v-if="!isActive" w="4")
-        HelperChevron(:up="direction == 'desc'" w="4" :thick="true" v-else)
+    Transition(name="fade" mode="out-in")
+      SortIcon(v-if="!isActive" w="4")
+      HelperChevron(:up="direction == 'desc'" w="4" :thick="true" v-else)
 
   HList(v-else items="start")
     slot

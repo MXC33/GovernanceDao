@@ -1,12 +1,12 @@
 <template lang="pug">
 ButtonSound.button-interactive(sound="sm" btn="~ primary" opacity="s-invalid:50" w="full" font="bold" transition="all" ref="button" pos="relative" pointer-events="s-loading:none s-invalid:none" :state="buttonState")
   Transition(name="slide-left")
-    div(pos="absolute left-3" v-if="loading")
+    span(pos="absolute left-3" v-if="loading")
       LoadingBars.loading-bars(w="5" h="5")
 
   Transition(name="slide-shift-down" mode="out-in")
     GlitchText(:text="text" :hover="true" :is-hovered="isHovered" v-if="!loading")
-    div(v-else) {{ $t('general.loading') }}
+    span(v-else) {{ $t('general.loading') }}
 
 </template>
   

@@ -76,7 +76,7 @@ const columnIndex = (id: string) => {
 }
 
 export const useTableSort = (id: string) => {
-  type SortableColumn = ReturnType<typeof getSortableColumns>[number]
+  type SortableColumn = ReturnType<typeof getServerSortableColumns>[number]
 
   const { isTextColumn } = useTable()
 
@@ -88,28 +88,40 @@ export const useTableSort = (id: string) => {
       direction: isDescendingDirection ? 'desc' : 'asc'
     }))
 
-  const sortOptions = useState<SortableColumn[]>(`collection-sort-options`, () => [])
+  const serverSortOptions = useState<SortableColumn[]>(`collection-sort-options`, () => [])
 
   const setupSortOptions = <T extends TableRow>(columns: TableColumn<T>[]) => {
-    sortOptions.value = getSortableColumns(columns)
+    serverSortOptions.value = getServerSortableColumns(columns)
   }
 
   const selectedSortOption = computed(() =>
-    sortOptions.value.find((item) =>
+    serverSortOptions.value.find((item) =>
       item.columnIndex == sort.value.columnIndex
     )
   )
 
-  const getSortableColumns = <T extends TableRow>(columns: TableColumn<T>[]) =>
+  const isServerSort = (sortable?: Boolean | ServerTableSort): sortable is ServerTableSort => {
+    const serverSort = (sortable as ServerTableSort)
+    return !!(serverSort?.ascKey || serverSort?.descKey)
+  }
+
+  const getServerSortableColumns = <T extends TableRow>(columns: TableColumn<T>[]) =>
     columns
       .map((column, columnIndex) => {
-        if (!isTextColumn(column) || !column.sortable)
+        if (!isTextColumn(column))
           return null
 
-        const { label, type } = column
+        const { label, type, sortable } = column
+
+        if (!isServerSort(sortable))
+          return null
+
+        const { ascKey, descKey } = sortable
 
         return {
           id,
+          ascKey,
+          descKey,
           columnIndex,
           type,
           label
@@ -134,7 +146,7 @@ export const useTableSort = (id: string) => {
 
   return {
     sort,
-    sortOptions,
+    serverSortOptions,
     selectedSortOption,
     setupSortOptions,
     selectSortField,

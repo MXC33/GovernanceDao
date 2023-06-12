@@ -1,6 +1,6 @@
 <template lang="pug">
 VList()
-  h3(text="3xl" font="bold") {{ item.name }}
+  h1(text="3xl" font="bold") {{ item.name }}
 
   CollectionSingleItemSubHeader()
 

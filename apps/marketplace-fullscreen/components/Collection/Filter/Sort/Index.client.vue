@@ -1,22 +1,14 @@
 <template lang="pug">
-OptionSelect(:items="sortOptions" v-if="sortOptions" :large="true")
+OptionSelect(:items="serverSortOptions" v-if="serverSortOptions" :large="true")
   template(#header) {{ selectedSortOption?.label }}
 
   template(#icon)
     SortIcon()
 
-  template(#beforeItems)
-    OptionRow(@click="isAscending = !isAscending")
-      HList(space-x="3" items="center")
-        FormCheckbox(v-model="isAscending")
-
-        Transition(name="fade" mode="out-in")
-          div(v-if="isAscending") Ascending
-          div(v-else) Descending
-
   template(#item="{item}")
     OptionRowSelect(:selected="sort.columnIndex == item.columnIndex" @click="selectSortField(item.columnIndex)") {{ item.label }}
-    //{{ $t(`collection.sort.${getSortKey(item)}`) }}
+
+    OptionRowSelect(:selected="sort.columnIndex == item.columnIndex" @click="selectSortField(item.columnIndex)") {{ item.label }}
 
 </template>
 
@@ -33,7 +25,7 @@ const isAscending = computed({
 })
 
 
-const { sortOptions, sort, selectSortField, selectedSortOption } = useTableSort(context)
+const { serverSortOptions, sort, selectSortField, selectedSortOption } = useTableSort(context)
 
 </script>
   
