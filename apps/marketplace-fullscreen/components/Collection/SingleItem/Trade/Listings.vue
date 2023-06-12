@@ -45,7 +45,7 @@ const saleColumns: TableColumn<Sale>[] = [
       return row.player_username
     }, sortable: true
   },
-  { type: 'buttons', width: 100 }
+  { type: 'buttons', width: 120 }
 ]
 
 const addSaleToCart = (sale: Sale) => {

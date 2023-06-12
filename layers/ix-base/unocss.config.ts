@@ -38,7 +38,8 @@ export default definePreset({
         primary: '#C3000F',
         black: '#0C0C0C',
         ne: '#FF0014',
-        orange: '#FF6647'
+        orange: '#FF6647',
+        mint: '#84D4BC'
       },
       gray: {
         50: '#d9d9d9',
@@ -83,11 +84,16 @@ export default definePreset({
     },
 
     {
-      'btn': 'transition-all transition-duration-100 flex flex-col text-center justify-center items-center leading-none cursor-pointer',
-      'btn-solid': 'font-bold uppercase px-4 lg:px-12 py-4',
+      'btn': 'transition-all transition-duration-100 flex flex-col text-center justify-center items-center leading-none cursor-pointer font-bold uppercase',
+      'btn-lg': 'min-h-14',
+      'btn-md': 'min-h-10',
+      'btn-center': 'flex justify-center items-center',
+      'btn-solid': 'btn btn-lg px-4 lg:px-8',
       'btn-accent': 'btn-primary btn-solid',
       'btn-primary': 'btn-solid bg-ix-primary color-white',
+      'btn-soft': 'btn-solid btn-md bg-opacity-20 hover:bg-opacity-40 b-0.5',
       'btn-secondary': 'btn-solid bg-gray-600 color-white',
+      'btn-secondary-detail': 'btn-solid btn-md bg-gray-500 hover:bg-gray-400 cut-bottom-right cut-sm btn-center',
       'btn-form': 'font-400 py-3 px-1 cut-bottom-right cut-b-gray-400 hover:cut-b-gray-300',
       'btn-form-active': 'bg-gray-600',
       'btn-table': 'font-bold uppercase px-4 lg:px-6 py-3',
@@ -101,7 +107,8 @@ export default definePreset({
       'scrollable-desktop': 'md-overflow-y-auto md-scrollbar md-scrollbar-primary md-min-h-0'
     },
 
-    [/^wh-(.*)$/, ([, c]) => `w-${c} h-${c}`]
+    [/^wh-(.*)$/, ([, c]) => `w-${c} h-${c}`],
+    [/^btn-soft-(.*)$/, ([, c]) => `btn-soft bg-${c} b-${c} color-${c}`],
   ],
   rules: [
     ...cutRules,
