@@ -26,6 +26,7 @@ export default defineNuxtConfig({
       ],
       rules: {
         'element-required-attributes': 'off',
+        'heading-level': 'off',
         'text-content': 'off',
         'wcag/h30': 'off',
         'wcag/h37': 'off',

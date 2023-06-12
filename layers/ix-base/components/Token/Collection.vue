@@ -1,6 +1,6 @@
 <template lang="pug">
-div() {{ name }} 
-  </template>
+span() {{ name }} 
+</template>
   
 <script lang="ts" setup>
 import type { IXToken } from '~/composables/Token/useIXToken';

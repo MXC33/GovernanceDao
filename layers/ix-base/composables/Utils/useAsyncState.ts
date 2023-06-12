@@ -66,6 +66,7 @@ export function useAsyncDataState<T extends O, O>(key: string, fetchData: () => 
       return
 
     await fetchNewData()
+
     return
   }
 
