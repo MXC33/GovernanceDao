@@ -624,7 +624,8 @@
       "menu": {
         "addFunds": "Add Funds",
         "account": "Account",
-        "logout": "Log out"
+        "logout": "Log out",
+        "connectWallet": "Connect Wallet"
       }
     }
   }

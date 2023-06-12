@@ -1,41 +1,31 @@
 <template lang="pug">
-VList(bg="ix-black" b="b-1 gray-600")
-  HList(p="6")
-    NuxtLink(v-if="walletState !== 'connected'" bg="$mc-orange_20" h="48px" b="1 $mc-orange" color="$mc-orange" px="8" to="/connect" grow="~") 
-      div(text="center lg" p="2" font="bold" @click="ConnectWallet") Connect Wallet
+HList(p="6" bg="ix-black" b="b-1 gray-600")
+  NuxtLink(v-if="walletState !== 'connected'" to="/connect" btn="soft-ix-orange lg" w="full") {{ $t(`marketplace.navigation.menu.connectWallet`)}}
 
-    HList(v-else flex-grow="1" cut="bottom-right sm b-ix-orange opacity-60")
-      Icon(w="25" p="3" bg="$mc-orange_20")
+  HList(v-else flex-grow="1" cut="bottom-right sm b-ix-orange opacity-60" bg="ix-orange opacity-20")
+    AOCIcon(w="25" p="3")
 
-      VList(flex-grow="1")
-        div(p="2" b="l-1 b-1 $mc-orange_40" text="white" bg="$mc-orange_20" v-if="userId") {{userId}}
-          NuxtLink(to="/account")
-            div(text="$mc-orange" font="") My Assets
+    VList(b="l-1 ix-orange opacity-40" flex-grow="1")
+      div(p="2" b="b-1 ix-orange opacity-40" v-if="userId") {{userId}} 
+        NuxtLink(to="/account" color="ix-orange") {{ $t(`marketplace.navigation.menu.account`) }}
 
-        HList()
-          HList(b="l-1 r-1 $mc-orange_40" p="2" grow="~" bg="$mc-orange_20" space-x="1")
-            div() IXT: 
-            div(text="$mc-mint") {{ Math.round((ixtBalance ?? 0) * 100) / 100 }}
-          HList(bg="$mc-orange_20" p="l-3 r-3")
-            PlusIcon(fill="white" w="3" @click="$emit('swap')")  
+      HList(flex-grow="1" items="center")
+        HList(b="r-1 ix-orange opacity-40" p="2" flex-grow="1" h="full" items="center" space-x="1")
+          div() IXT: 
+          div(text="ix-mint") {{ roundToDecimals(ixtBalance ?? 0, 2) }}
+
+        HList( p="l-3 r-3")
+          PlusIcon(fill="white" w="3" @click="showIXTSwap")  
 </template>
 
 <script lang="ts" setup>
-import FallbackVue from '~/components/Fallback.vue';
+import AOCIcon from '~/assets/images/icons/aocbadge.svg'
+import PlusIcon from '~/assets/images/icons/plus.svg'
+
+const {enable: showIXTSwap} = useIXTSwapVisible()
 const { walletState } = useWallet()
-const { ixtBalance, fetchIXT } = useIXTContract()
+const { ixtBalance } = useIXTContract()
 const { user } = useUser()
 
-await fetchIXT()
-
-const emit = defineEmits(['swap', 'ConnectWallet'])
-
-const ConnectWallet = () => {
-  emit('ConnectWallet')
-  console.log("ConnectWallet")
-}
-
 const userId = computed(() => user.value?.username || null)
-const Icon = await import(`../../../../assets/images/icons/aocbadge.svg`).catch(() => FallbackVue)
-const PlusIcon = await import(`../../../../assets/images/icons/plus.svg`).catch(() => FallbackVue)
 </script>

@@ -10,36 +10,42 @@ VList(pos="sticky top-0" z="99" w="full" @mouseenter="isSelected = true" @mousel
       button(v-for="(item, index) in siteTopHeaders" @click="openMenu(index)" btn="menu") {{ $t(`marketplace.navigation.${item.type}.title`)}}
 
     HList(space-x="6" px="0")
-      button(btn="menu" display="lt-lg:none") help
-      HelperLanguage(language="EN")
-      HeaderAccountButton(@addFunds="iFrameToggle")
+      //-button(btn="menu" display="lt-lg:none") help
+      //-HeaderLanguage(language="EN")
+      HeaderAccountButton()
 
-    SettingsIcon(v-if="activeMenuIndex == null" pos="right" w="8" display="lg:none" 
-    @click="toggleMenu")
+
+    button(btn="menu" w="8" display="lg:none" @click="toggleMenu")
+      Transition(name="fade" mode="out-in")
+        SettingsIcon(v-if="activeMenuIndex == null")
+        CrossIcon(v-else)
 
   Transition(name="slide-top" mode="out-in" )
-    HeaderItem(v-if="activeMenuIndex != null" :key="activeMenuIndex" @onClickItem="onClicked" :header="siteTopHeaders[activeMenuIndex]" display="lt-lg:none")
+    HeaderItem(v-if="activeMenuIndex != null" :key="activeMenuIndex" :header="siteTopHeaders[activeMenuIndex]" display="lt-lg:none" @onClickItem="")
 
   Transition(name="slide-top")
-    HeaderCategoryDropDown(v-if="activeMenuIndex != null" @swap="turnOnSwap" @ConnectWallet="toggleMenu" @close="toggleMenu" @clikedItem="onClicked" overflow-y="auto")
+    HeaderMobile(v-if="activeMenuIndex != null" overflow-y="auto")
 
-
-Popup(v-if="showIFrame")
-  template(#header) Swap
-  template(#default)
-    VList(w="full" justify="center" items="center" display="lt-md:none")
-      iframe(src="https://ix.foundation/lefi" w="full md:100" h="full md:116" )
-    VList(w="full" justify="center" items="center" display="md:none")
-      iframe(src="https://ix.foundation/lefi" w="100%" h="100")
 </template>
 
 <script lang="ts" setup>
+import CrossIcon from '~/assets/images/header/cross.svg'
+
 import PlanetIXNew from '~/assets/images/header/planetix-new.svg'
 import SettingsIcon from '~/assets/images/header/hamburger.svg'
 
 const { siteTopHeaders } = useSiteHeader()
-
+const {state: swapVisible} = useIXTSwapVisible()
 const activeMenuIndex = ref<number | null>(null)
+
+const route = useRoute()
+
+const onClickItem = (type: string, catagory: string, item: string) => {
+  switch(item){
+    case 'swap':
+      return swapVisible.value = true;
+  }
+}
 
 const openMenu = (index: number) => {
 
@@ -53,56 +59,22 @@ const toggleMenu = () => {
   if (activeMenuIndex.value == null)
     return activeMenuIndex.value = 1
 
-  activeMenuIndex.value = null
-}
-
-const turnOnSwap = () => {
-  showIFrame.value = true
-  activeMenuIndex.value = null
-}
-
-const iFrameToggle = () => {
-  showIFrame.value = !showIFrame.value
+  closeMenu()
 }
 
 const isSelected = ref(false)
 const menuElement = ref()
-
-const showIFrame = ref(false)
-
-
-// const textColor = computed(() => {
-//   return 'isSelected'
-// })
-
-// const { t } = useI18n()
-
-const onClicked = (type: string, category: string, item: string) => {
-  //console.log("onClicked Header index", type, category, item)
-  // const link = t(`marketplace.navigation.${type}.${category}.${item}.link`)
-  // if (link != '') {
-  //   return navigateTo(link, { external: true })
-  // }
-  // console.log("No link")
-
-  switch (item) {
-    case 'swap':
-      return showIFrame.value = true
-  }
-}
-
-// const goToPage = (title: string) => {
-//   switch (title) {
-//     case 'Polygon':
-//       return window.location.href = 'https://dashboard.ix.foundation/'
-//   }
-// }
+const closeMenu = () => 
+  activeMenuIndex.value = null;
 
 onClickOutside(menuElement, () => {
-  showIFrame.value = false;
-  if (!isSelected.value) {
-    activeMenuIndex.value = null;
-  }
+  if (!isSelected.value) 
+    closeMenu()
+})
+
+watch([swapVisible, route], ([visible]) => {
+  if(visible)
+    closeMenu()
 })
 
 </script>

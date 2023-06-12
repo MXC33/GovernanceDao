@@ -14,6 +14,13 @@
 
       SnackbarList()
 
+      Popup(v-if="isSwapVisible" @close="isSwapVisible = false" :disable-default-close="true")
+        template(#header) Swap
+        template(#default)
+          VList(w="full" justify="center" items="center" )
+            iframe(src="https://ix.foundation/lefi" w="full" h="full" min-h="118")
+
+
 
 </template>
 
@@ -29,6 +36,8 @@ const router = useRouter()
 router.onError((err) => {
   console.log("#ERRRR", err)
 })
+
+const {state: isSwapVisible} = useIXTSwapVisible()
 
 const { y } = useWindowScroll()
 const { connectWallet, walletState } = useWallet()
@@ -68,6 +77,7 @@ onMounted(async () => {
     console.error("Error mounting app", err)
   }
 })
+
 
 watch(walletState, (state) => {
   if (state == 'connected')

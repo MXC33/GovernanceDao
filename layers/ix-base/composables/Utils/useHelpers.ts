@@ -164,3 +164,20 @@ export const scrollParentToChild = (parent: HTMLElement, child: HTMLElement) => 
     }
   }
 }
+
+
+
+export const useStateBoolean = (key: string, initialValue: boolean) => {
+  const state = useState(key, () => initialValue)
+
+  const toggle = () => state.value = !state.value
+  const enable = () => state.value = true
+  const disable = () => state.value = false
+
+  return {
+    state,
+    toggle,
+    enable,
+    disable
+  }
+}

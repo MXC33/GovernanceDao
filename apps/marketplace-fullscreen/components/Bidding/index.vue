@@ -29,25 +29,12 @@ const isLoading = ref(false)
 
 const { createBidItems, bidItems } = useBiddingItems()
 const { bidItem } = useBiddingContract()
-const { itemsInvalid, getTotalIXTPrice } = useTransactions()
+const { isItemInvalid } = useTransactions()
 const { displaySnack } = useSnackNotifications()
 
 const { displayPopup } = usePopups()
 
 const { addError } = useContractErrors()
-
-
-import type { TransactionItem } from "~/composables/useTransactions";
-
-const isItemInvalid = (item: TransactionItem[]) => {
-  const invalid = !itemsInvalid(item)
-  const price = getTotalIXTPrice(item);
-
-  if(invalid && price > 0){
-    return false;
-  }
-  return true;
-}
 
 const onClickBid = async () => {
   isLoading.value = true

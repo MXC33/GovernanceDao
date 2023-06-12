@@ -97,7 +97,7 @@ export default definePreset({
       'btn-form': 'font-400 py-3 px-1 cut-bottom-right cut-b-gray-400 hover:cut-b-gray-300',
       'btn-form-active': 'bg-gray-600',
       'btn-table': 'font-bold uppercase px-4 lg:px-6 py-3',
-      'btn-menu': 'opacity-100 hover:opacity-80 transition-opacity font-bold uppercase'
+      'btn-menu': 'opacity-100 hover:opacity-80 transition-opacity font-bold uppercase whitespace-nowrap p-1'
 
       // 'btn-table-primary': 'btn-primary'
     },

@@ -5,9 +5,9 @@ VList(pos="relative" z="1" justify="center" ref="element")
       GLOBE(w="5" fill="white" )
       div( ) {{ language }}
   
-  Transition(name="fade-slow")
-    VList(v-if="showMenu" pos="absolute top-full left-0" mt="3" z="3" b="1 gray-400" divide-y="1" bg="black" items="left") 
-      button(btn="menu" v-for="text in availableLocales" p="1" b="gray-400" text="~ white hover:ix-orange" ) {{ text }}
+  //-Transition(name="fade-slow")
+    HeaderSubmenuWrapper(v-if="showMenu") 
+      HeaderSubmenuButton(btn="menu" v-for="text in availableLocales") {{ text }}
 
 
 </template>
