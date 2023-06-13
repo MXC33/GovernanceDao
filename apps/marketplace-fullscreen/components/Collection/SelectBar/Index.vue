@@ -19,7 +19,6 @@ div(v-if="amountSelected != 0" w="full" p="3" pos="sticky bottom-0" z="2" bg="ix
 </template>
 
 <script lang="ts" setup>
-import type { IXToken } from '~/../../layers/ix-base/composables/Token/useIXToken';
 import type { CollectionContext } from '~/composables/useCollection';
 const { addToCart } = useCart()
 

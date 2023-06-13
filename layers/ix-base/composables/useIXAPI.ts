@@ -21,7 +21,6 @@ export const useIXAPI = () => {
   const { logoutWallet } = useWallet()
   const headers = useIXHeaders()
   const app = useNuxtApp()
-  const redirect = useLoginRedirect()
   const route = useRoute()
   const baseURL = "https://api.planetix.com/api/v1"
   const loginURL = `${baseURL}/auth/login`
