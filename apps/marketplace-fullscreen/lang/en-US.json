@@ -306,6 +306,7 @@
     },
     "navigation": {
       "soon": "Coming Soon",
+      "loadMore": "Load More",
       "buy": {
         "title": "Buy IXT",
         "swap": {
