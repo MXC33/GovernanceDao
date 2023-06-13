@@ -19,7 +19,7 @@ const { displayPopup } = usePopups()
 const onClickTransfer = () => {
   displayPopup({
     type: 'transfer-item',
-    item
+    items: [item]
   })
 }
 

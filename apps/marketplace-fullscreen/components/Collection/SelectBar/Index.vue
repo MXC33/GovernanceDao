@@ -9,7 +9,7 @@ div(v-if="amountSelected != 0" w="full" p="3" pos="sticky bottom-0" z="2" bg="ix
     div(flex="grow")
 
     template(v-if="context=='my-assets'")
-      CollectionSelectBarButton(:secondary="true") Transfer {{amountSelected}} 
+      CollectionSelectBarButton(:secondary="true" @click="onTransferMultiple") Transfer {{amountSelected}} 
       CollectionSelectBarButton(@click="onClickList") List {{amountSelected}} 
 
     CollectionSelectBarButton(v-else-if="context=='collection'" @click="onAddToCart") Add {{amountSelected}} To Cart 
@@ -32,6 +32,13 @@ const onClickList = () => {
   })
 }
 
+const onTransferMultiple = () => {
+  displayPopup({
+    type: 'transfer-item',
+    items: selectedItems.value.map(({ token }) => token)
+  })
+}
+
 defineProps<{
   context: CollectionContext
 }>()
@@ -43,6 +50,8 @@ onUnmounted(() => {
 const onAddToCart = () => {
   selectedItems.value.map(item => addToCart(item.token, item.token.lowest_sale))
 }
+
+
 
 
 const { selectedItems, clearSelectedItems } = useSelection()

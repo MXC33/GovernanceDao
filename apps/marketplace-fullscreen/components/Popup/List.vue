@@ -5,13 +5,13 @@ div#popups()
 
     CompleteBidding(v-else-if="popup.type == 'bidding-successful'" :items="popup.items")
 
-    CompleteTransfer(v-else-if="popup.type == 'transfer-item-successful'" :item="popup.item")
+    CompleteTransfer(v-else-if="popup.type == 'transfer-item-successful'" :items="popup.items")
 
     CompleteBuy(v-else-if="popup.type == 'buy-items-success'" :items="popup.items")
 
     CompleteAccept(v-else-if="popup.type == 'accept-items-success'" :item="popup.item")
 
-    Transfer(v-else-if="popup.type == 'transfer-item'" :token="popup.item")
+    Transfer(v-else-if="popup.type == 'transfer-item'" :items="popup.items")
 
     Listing(v-else-if="popup.type == 'list-item'" :items="popup.items")
 

@@ -6,12 +6,12 @@ Popup()
   template(#header) {{ $t(`marketplace.transfer.transferSucess`) }}
 
   template(#default)
-    CompleteTokenList(:items="[item]")
+    CompleteTokenList(:items="items")
 
     VList()
       HList(justify="between" font="bold" text="sm")
         div(w="full") {{ $t(`marketplace.transfer.transferTo`) }}
-          div(p="2" space-x="0.5" w="full" frame="~" items="center" opacity="60") {{ item.toWallet }}
+          div(p="2" space-x="0.5" w="full" frame="~" items="center" opacity="60") {{ items[0].toWallet }}
 
 
   template(#buttons)
@@ -27,8 +27,8 @@ import CheckboxIcon from '~/assets/icons/checkmark-green.svg'
 import type { TransferItem } from '~/composables/useTransfer';
 
 const { closeActivePopup } = usePopups()
-const { item } = defineProps<{
-  item: TransferItem
+const { items } = defineProps<{
+  items: TransferItem[]
 }>()
 
 const onClickMyAssets = () => {

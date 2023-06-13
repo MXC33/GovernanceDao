@@ -22,12 +22,12 @@ export interface PopupOnBid extends PopupBase {
 
 export interface PopupTransfer extends PopupBase {
   type: 'transfer-item',
-  item: IXToken
+  items: IXToken[]
 }
 
 export interface PopupTransferSuccess extends PopupBase {
   type: 'transfer-item-successful',
-  item: TransferItem
+  items: TransferItem[]
 }
 
 export interface PopupListItem extends PopupBase {
