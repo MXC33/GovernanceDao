@@ -3,11 +3,11 @@ Popup()
   template(#icon)
     WarningIcon(w="6" h="6")
 
-  template(#header) Inssufficient funds
+  template(#header) {{ $t('marketplace.ixt.insufficient.title') }}
 
   template(#default)
     VList(space-y="6")
-      div() You need more IXT to perform this purchase
+      div() {{ $t('marketplace.ixt.insufficient.description') }}
       IXTSwapIFrame()
 
   template(#footer)

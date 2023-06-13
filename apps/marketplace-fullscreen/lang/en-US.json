@@ -165,6 +165,12 @@
       "playNow": "Play Now",
       "help": "Help"
     },
+    "ixt": {
+      "insufficient": {
+        "title": "Insufficient funds",
+        "description": "You need more IXT to perform this purchase"
+      }
+    },
     "myAssets": {
       "title": "My Assets",
       "myItems": "My items",
