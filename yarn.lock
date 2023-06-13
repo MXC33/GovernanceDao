@@ -2461,7 +2461,7 @@ __metadata:
     "@ix/base": "*"
     "@types/node": ^18
     fuzzyjs: ^5.0.1
-    nuxt: ^3.5.3
+    nuxt: ^3.5.2
     v-lazy-show: ^0.2.3
     vite-plugin-pug: ^0.3.2
     vue-collapsed: ^1.1.3
@@ -5988,7 +5988,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"chalk@npm:^4.0.0, chalk@npm:^4.1.0, chalk@npm:^4.1.1":
+"chalk@npm:^4.0.0, chalk@npm:^4.1.0, chalk@npm:^4.1.1, chalk@npm:^4.1.2":
   version: 4.1.2
   resolution: "chalk@npm:4.1.2"
   dependencies:
@@ -6376,6 +6376,26 @@ __metadata:
   version: 0.0.1
   resolution: "concat-map@npm:0.0.1"
   checksum: 902a9f5d8967a3e2faf138d5cb784b9979bad2e6db5357c5b21c568df4ebe62bcb15108af1b2253744844eb964fc023fbd9afbbbb6ddd0bcc204c6fb5b7bf3af
+  languageName: node
+  linkType: hard
+
+"concurrently@npm:^8.2.0":
+  version: 8.2.0
+  resolution: "concurrently@npm:8.2.0"
+  dependencies:
+    chalk: ^4.1.2
+    date-fns: ^2.30.0
+    lodash: ^4.17.21
+    rxjs: ^7.8.1
+    shell-quote: ^1.8.1
+    spawn-command: 0.0.2
+    supports-color: ^8.1.1
+    tree-kill: ^1.2.2
+    yargs: ^17.7.2
+  bin:
+    conc: dist/bin/concurrently.js
+    concurrently: dist/bin/concurrently.js
+  checksum: eafe6a4d9b7fda87f55ea285cfc6acd937a5286ceec8991ab48e6cc27c45fce6a5c6f45e18d7555defa15dc7d7e8941bc5a9d1ceaf182e31441d420e00333434
   languageName: node
   linkType: hard
 
@@ -9713,7 +9733,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "ix-apps@workspace:."
   dependencies:
-    turbo: ^1.9.8
+    concurrently: ^8.2.0
   languageName: unknown
   linkType: soft
 
@@ -11445,7 +11465,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"nuxt@npm:^3.5.3":
+"nuxt@npm:^3.5.2, nuxt@npm:^3.5.3":
   version: 3.5.3
   resolution: "nuxt@npm:3.5.3"
   dependencies:
@@ -13471,7 +13491,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"shell-quote@npm:^1.7.3":
+"shell-quote@npm:^1.7.3, shell-quote@npm:^1.8.1":
   version: 1.8.1
   resolution: "shell-quote@npm:1.8.1"
   checksum: 5f01201f4ef504d4c6a9d0d283fa17075f6770bfbe4c5850b074974c68062f37929ca61700d95ad2ac8822e14e8c4b990ca0e6e9272e64befd74ce5e19f0736b
@@ -13669,6 +13689,13 @@ __metadata:
   version: 1.4.8
   resolution: "sourcemap-codec@npm:1.4.8"
   checksum: b57981c05611afef31605732b598ccf65124a9fcb03b833532659ac4d29ac0f7bfacbc0d6c5a28a03e84c7510e7e556d758d0bb57786e214660016fb94279316
+  languageName: node
+  linkType: hard
+
+"spawn-command@npm:0.0.2":
+  version: 0.0.2
+  resolution: "spawn-command@npm:0.0.2"
+  checksum: e35c5d28177b4d461d33c88cc11f6f3a5079e2b132c11e1746453bbb7a0c0b8a634f07541a2a234fa4758239d88203b758def509161b651e81958894c0b4b64b
   languageName: node
   linkType: hard
 
@@ -13951,6 +13978,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"supports-color@npm:^8.1.1":
+  version: 8.1.1
+  resolution: "supports-color@npm:8.1.1"
+  dependencies:
+    has-flag: ^4.0.0
+  checksum: c052193a7e43c6cdc741eb7f378df605636e01ad434badf7324f17fb60c69a880d8d8fcdcb562cf94c2350e57b937d7425ab5b8326c67c2adc48f7c87c1db406
+  languageName: node
+  linkType: hard
+
 "supports-color@npm:^9.3.1":
   version: 9.3.1
   resolution: "supports-color@npm:9.3.1"
@@ -14198,6 +14234,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"tree-kill@npm:^1.2.2":
+  version: 1.2.2
+  resolution: "tree-kill@npm:1.2.2"
+  bin:
+    tree-kill: cli.js
+  checksum: 49117f5f410d19c84b0464d29afb9642c863bc5ba40fcb9a245d474c6d5cc64d1b177a6e6713129eb346b40aebb9d4631d967517f9fbe8251c35b21b13cd96c7
+  languageName: node
+  linkType: hard
+
 "ts-log@npm:^2.2.3":
   version: 2.2.5
   resolution: "ts-log@npm:2.2.5"
@@ -14243,77 +14288,6 @@ __metadata:
   dependencies:
     safe-buffer: ^5.0.1
   checksum: 05f6510358f8afc62a057b8b692f05d70c1782b70db86d6a1e0d5e28a32389e52fa6e7707b6c5ecccacc031462e4bc35af85ecfe4bbc341767917b7cf6965711
-  languageName: node
-  linkType: hard
-
-"turbo-darwin-64@npm:1.9.9":
-  version: 1.9.9
-  resolution: "turbo-darwin-64@npm:1.9.9"
-  conditions: os=darwin & cpu=x64
-  languageName: node
-  linkType: hard
-
-"turbo-darwin-arm64@npm:1.9.9":
-  version: 1.9.9
-  resolution: "turbo-darwin-arm64@npm:1.9.9"
-  conditions: os=darwin & cpu=arm64
-  languageName: node
-  linkType: hard
-
-"turbo-linux-64@npm:1.9.9":
-  version: 1.9.9
-  resolution: "turbo-linux-64@npm:1.9.9"
-  conditions: os=linux & cpu=x64
-  languageName: node
-  linkType: hard
-
-"turbo-linux-arm64@npm:1.9.9":
-  version: 1.9.9
-  resolution: "turbo-linux-arm64@npm:1.9.9"
-  conditions: os=linux & cpu=arm64
-  languageName: node
-  linkType: hard
-
-"turbo-windows-64@npm:1.9.9":
-  version: 1.9.9
-  resolution: "turbo-windows-64@npm:1.9.9"
-  conditions: os=win32 & cpu=x64
-  languageName: node
-  linkType: hard
-
-"turbo-windows-arm64@npm:1.9.9":
-  version: 1.9.9
-  resolution: "turbo-windows-arm64@npm:1.9.9"
-  conditions: os=win32 & cpu=arm64
-  languageName: node
-  linkType: hard
-
-"turbo@npm:^1.9.8":
-  version: 1.9.9
-  resolution: "turbo@npm:1.9.9"
-  dependencies:
-    turbo-darwin-64: 1.9.9
-    turbo-darwin-arm64: 1.9.9
-    turbo-linux-64: 1.9.9
-    turbo-linux-arm64: 1.9.9
-    turbo-windows-64: 1.9.9
-    turbo-windows-arm64: 1.9.9
-  dependenciesMeta:
-    turbo-darwin-64:
-      optional: true
-    turbo-darwin-arm64:
-      optional: true
-    turbo-linux-64:
-      optional: true
-    turbo-linux-arm64:
-      optional: true
-    turbo-windows-64:
-      optional: true
-    turbo-windows-arm64:
-      optional: true
-  bin:
-    turbo: bin/turbo
-  checksum: 155c82b0e18edb08e5a985d1a78179b16a87960b3827c9de0a27cfc2f98500966eea5f2692bff8bb9f5ce7b0d06b75df4b02fdbde97054917def9110d8fba46b
   languageName: node
   linkType: hard
 
@@ -15829,7 +15803,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"yargs@npm:^17.0.0, yargs@npm:^17.5.1":
+"yargs@npm:^17.0.0, yargs@npm:^17.5.1, yargs@npm:^17.7.2":
   version: 17.7.2
   resolution: "yargs@npm:17.7.2"
   dependencies:
