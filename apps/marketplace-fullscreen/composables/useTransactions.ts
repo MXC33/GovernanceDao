@@ -48,18 +48,20 @@ export const useTransactions = () => {
     return Number(item.token.sale_price)
   }
 
-  const itemsInvalid = (items: TransactionItem[]) =>
-    items.some(itemIsInvalid)
+  const itemsInvalid = (items: TransactionItem[], userPrice?: boolean) =>
+    items.some((item) => itemIsInvalid(item, userPrice))
 
-  const itemIsInvalid = (item: TransactionItem) =>
-    !item.ixtPrice || item.ixtPrice == 0 || !item.shares.value
+  const itemIsInvalid = (item: TransactionItem, userPrice?: boolean) => {
+    const price = getItemPrice(item, userPrice)
+    return !price || price == 0 || !item.shares.value
+  }
 
   const priceRenderString = (price: number | undefined) =>
     String(price ? roundToDecimals(price, 6) : '--')
 
-  const isItemInvalid = (item: TransactionItem[]) => {
-    const invalid = !itemsInvalid(item)
-    const price = getTotalIXTPrice(item);
+  const isItemInvalid = (items: TransactionItem[], userPrice?: boolean) => {
+    const invalid = !itemsInvalid(items, userPrice)
+    const price = getTotalIXTPrice(items, userPrice);
 
     if (invalid && price > 0) {
       return false;
