@@ -2461,7 +2461,7 @@ __metadata:
     "@ix/base": "*"
     "@types/node": ^18
     fuzzyjs: ^5.0.1
-    nuxt: ^3.5.2
+    nuxt: ^3.5.3
     v-lazy-show: ^0.2.3
     vite-plugin-pug: ^0.3.2
     vue-collapsed: ^1.1.3
@@ -2852,32 +2852,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@nuxt/kit@npm:3.5.2, @nuxt/kit@npm:^3.5.2":
-  version: 3.5.2
-  resolution: "@nuxt/kit@npm:3.5.2"
-  dependencies:
-    "@nuxt/schema": 3.5.2
-    c12: ^1.4.1
-    consola: ^3.1.0
-    defu: ^6.1.2
-    globby: ^13.1.4
-    hash-sum: ^2.0.0
-    ignore: ^5.2.4
-    jiti: ^1.18.2
-    knitwork: ^1.0.0
-    lodash.template: ^4.5.0
-    mlly: ^1.3.0
-    pathe: ^1.1.0
-    pkg-types: ^1.0.3
-    scule: ^1.0.0
-    semver: ^7.5.1
-    unctx: ^2.3.1
-    unimport: ^3.0.7
-    untyped: ^1.3.2
-  checksum: 114a75b6edf0d2911b20d44a4e17c0dc9cd8340b1920038d836941f7b7b4044be9674b87c039b37cd3d1f4f961351c5188a7b45ca89ba00976cb141a03d05660
-  languageName: node
-  linkType: hard
-
 "@nuxt/kit@npm:3.5.3, @nuxt/kit@npm:^3.5.1":
   version: 3.5.3
   resolution: "@nuxt/kit@npm:3.5.3"
@@ -2900,6 +2874,32 @@ __metadata:
     unimport: ^3.0.7
     untyped: ^1.3.2
   checksum: 9ca83d488f77b52e51ec7ba2dec4ddc78172aa8f636fb5df22205c462872b8c235be2a4590d037a6f9bc4e85127da60cc2c5f5c81cadc4c678b717e895a4ab0e
+  languageName: node
+  linkType: hard
+
+"@nuxt/kit@npm:^3.5.2":
+  version: 3.5.2
+  resolution: "@nuxt/kit@npm:3.5.2"
+  dependencies:
+    "@nuxt/schema": 3.5.2
+    c12: ^1.4.1
+    consola: ^3.1.0
+    defu: ^6.1.2
+    globby: ^13.1.4
+    hash-sum: ^2.0.0
+    ignore: ^5.2.4
+    jiti: ^1.18.2
+    knitwork: ^1.0.0
+    lodash.template: ^4.5.0
+    mlly: ^1.3.0
+    pathe: ^1.1.0
+    pkg-types: ^1.0.3
+    scule: ^1.0.0
+    semver: ^7.5.1
+    unctx: ^2.3.1
+    unimport: ^3.0.7
+    untyped: ^1.3.2
+  checksum: 114a75b6edf0d2911b20d44a4e17c0dc9cd8340b1920038d836941f7b7b4044be9674b87c039b37cd3d1f4f961351c5188a7b45ca89ba00976cb141a03d05660
   languageName: node
   linkType: hard
 
@@ -3032,51 +3032,6 @@ __metadata:
   peerDependencies:
     vue: ^3.3.2
   checksum: 8cce2103d866c8bb2aadc6dadf48a43f3c610d0aa0d8b11ebdd9af011b01937dda096448869efb9d7bde388ec33b7c53f69595f0ccab9fe8215f04c64a6ca9b1
-  languageName: node
-  linkType: hard
-
-"@nuxt/vite-builder@npm:3.5.2":
-  version: 3.5.2
-  resolution: "@nuxt/vite-builder@npm:3.5.2"
-  dependencies:
-    "@nuxt/kit": 3.5.2
-    "@rollup/plugin-replace": ^5.0.2
-    "@vitejs/plugin-vue": ^4.2.3
-    "@vitejs/plugin-vue-jsx": ^3.0.1
-    autoprefixer: ^10.4.14
-    clear: ^0.1.0
-    consola: ^3.1.0
-    cssnano: ^6.0.1
-    defu: ^6.1.2
-    esbuild: ^0.17.19
-    escape-string-regexp: ^5.0.0
-    estree-walker: ^3.0.3
-    externality: ^1.0.0
-    fs-extra: ^11.1.1
-    get-port-please: ^3.0.1
-    h3: ^1.6.6
-    knitwork: ^1.0.0
-    magic-string: ^0.30.0
-    mlly: ^1.3.0
-    ohash: ^1.1.2
-    pathe: ^1.1.0
-    perfect-debounce: ^1.0.0
-    pkg-types: ^1.0.3
-    postcss: ^8.4.24
-    postcss-import: ^15.1.0
-    postcss-url: ^10.1.3
-    rollup-plugin-visualizer: ^5.9.0
-    std-env: ^3.3.3
-    strip-literal: ^1.0.1
-    ufo: ^1.1.2
-    unplugin: ^1.3.1
-    vite: ~4.3.9
-    vite-node: ^0.31.1
-    vite-plugin-checker: ^0.6.0
-    vue-bundle-renderer: ^1.0.3
-  peerDependencies:
-    vue: ^3.3.4
-  checksum: 0f09033aa829413bdb074eefdec417096e3ddc7abec803a5d7b395c4e2a5e71ad0dffc54c00b022edb3be9f751cad08ff93283755bf118621977f1fddf64a7d6
   languageName: node
   linkType: hard
 
@@ -11390,20 +11345,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"nuxi@npm:3.5.2":
-  version: 3.5.2
-  resolution: "nuxi@npm:3.5.2"
-  dependencies:
-    fsevents: ~2.3.2
-  dependenciesMeta:
-    fsevents:
-      optional: true
-  bin:
-    nuxi: bin/nuxi.mjs
-  checksum: 14651fa5d5da7e11a4d0398bba7145d77fbd492a2381fca914e32b25a118a48ef30ccaee359f6906e990b6573d68ff746df99b0953b5c7d991b5a32c287a8efb
-  languageName: node
-  linkType: hard
-
 "nuxi@npm:3.5.3":
   version: 3.5.3
   resolution: "nuxi@npm:3.5.3"
@@ -11501,73 +11442,6 @@ __metadata:
     nuxi: bin/nuxt.mjs
     nuxt: bin/nuxt.mjs
   checksum: c0c866de0043e67a75ee53fd364ecbbd45dfe9699d1ecf2d2605abeac2582db0b945731f3a7fdec05824dcbe0fce8faf829fe644775a374515234d61d066cfd4
-  languageName: node
-  linkType: hard
-
-"nuxt@npm:^3.5.2":
-  version: 3.5.2
-  resolution: "nuxt@npm:3.5.2"
-  dependencies:
-    "@nuxt/devalue": ^2.0.2
-    "@nuxt/kit": 3.5.2
-    "@nuxt/schema": 3.5.2
-    "@nuxt/telemetry": ^2.2.0
-    "@nuxt/ui-templates": ^1.1.1
-    "@nuxt/vite-builder": 3.5.2
-    "@unhead/ssr": ^1.1.27
-    "@unhead/vue": ^1.1.27
-    "@vue/shared": ^3.3.4
-    c12: ^1.4.1
-    chokidar: ^3.5.3
-    cookie-es: ^1.0.0
-    defu: ^6.1.2
-    destr: ^1.2.2
-    devalue: ^4.3.2
-    escape-string-regexp: ^5.0.0
-    estree-walker: ^3.0.3
-    fs-extra: ^11.1.1
-    globby: ^13.1.4
-    h3: ^1.6.6
-    hookable: ^5.5.3
-    jiti: ^1.18.2
-    klona: ^2.0.6
-    knitwork: ^1.0.0
-    local-pkg: ^0.4.3
-    magic-string: ^0.30.0
-    mlly: ^1.3.0
-    nitropack: ^2.4.1
-    nuxi: 3.5.2
-    nypm: ^0.2.0
-    ofetch: ^1.0.1
-    ohash: ^1.1.2
-    pathe: ^1.1.0
-    perfect-debounce: ^1.0.0
-    prompts: ^2.4.2
-    scule: ^1.0.0
-    strip-literal: ^1.0.1
-    ufo: ^1.1.2
-    ultrahtml: ^1.2.0
-    uncrypto: ^0.1.2
-    unctx: ^2.3.1
-    unenv: ^1.5.1
-    unimport: ^3.0.7
-    unplugin: ^1.3.1
-    unplugin-vue-router: ^0.6.4
-    untyped: ^1.3.2
-    vue: ^3.3.4
-    vue-bundle-renderer: ^1.0.3
-    vue-devtools-stub: ^0.1.0
-    vue-router: ^4.2.2
-  peerDependencies:
-    "@parcel/watcher": ^2.1.0
-    "@types/node": ^14.18.0 || >=16.10.0
-  peerDependenciesMeta:
-    "@parcel/watcher":
-      optional: true
-  bin:
-    nuxi: bin/nuxt.mjs
-    nuxt: bin/nuxt.mjs
-  checksum: 119bd9db8124eb0980fc99d8bfb984b5ac17a9c4b781d9a1aadc39f8c62b425e6b00387ab6d4a3fe072a18b5c6dd95126b722a4e75c1cc35d028f53f52d26745
   languageName: node
   linkType: hard
 
@@ -15081,7 +14955,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vite-node@npm:^0.31.0, vite-node@npm:^0.31.1":
+"vite-node@npm:^0.31.0":
   version: 0.31.1
   resolution: "vite-node@npm:0.31.1"
   dependencies:
