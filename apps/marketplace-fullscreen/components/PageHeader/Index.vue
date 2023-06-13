@@ -11,6 +11,9 @@ Transition(name="fade-slow")
 
       CollectionSelect()
 
+      ButtonSquareIcon(@click="onClickGlobe")
+        GlobeIcon(w="6")
+
       ButtonSquareIcon(@click="onClickAccount")
         UserIcon(w="6")
 
@@ -26,6 +29,7 @@ Transition(name="fade-slow")
 import NetBetaLogo from '~/assets/icons/logo/netbeta.svg'
 import UserIcon from '~/assets/icons/user.svg'
 import CartIcon from '~/assets/icons/cart.svg'
+import GlobeIcon from '~/assets/icons/globe.svg'
 
 const { viewingCart } = useCart()
 const y = useGlobalWindowScroll()
@@ -34,6 +38,10 @@ const route = useRoute()
 
 const onClickAccount = () => {
   navigateTo('/account')
+}
+
+const onClickGlobe = () => {
+  navigateTo('https://planetix.com/netempire/pix', { external: true })
 }
 
 const onSingleItem = computed(() =>
