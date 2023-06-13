@@ -17,18 +17,17 @@
       Popup(v-if="isSwapVisible" @close="isSwapVisible = false" :disable-default-close="true")
         template(#header) {{ $t(`marketplace.navigation.buy.swap.title`)}}
         template(#default)
-          VList(w="full" justify="center" items="center" )
-            iframe(src="https://ix.foundation/lefi" w="full" h="full" min-h="118")
 
 
 
 </template>
 
 <script setup lang="ts">
+// import 'vue3-easy-data-table/dist/style.css';
+
 useHead({
   title: "Marketplace | PlanetIX"
 })
-import 'vue3-easy-data-table/dist/style.css';
 
 const globalY = useGlobalWindowScroll()
 const router = useRouter()

@@ -65,7 +65,11 @@ export interface PopupAcceptItemsSuccess extends PopupBase {
   item: TransactionItem
 }
 
-type Popup = PopupOnList | PopupOnBid | PopupTransfer | PopupListItem | PopupUnlistItem | PopupBidItem | PopupUnbidItem | PopupTransferSuccess | PopupBuyItemSuccess | PopupAcceptItem | PopupAcceptItemsSuccess
+export interface PopupInsufficientFunds extends PopupBase {
+  type: 'insufficient-funds',
+}
+
+type Popup = PopupOnList | PopupOnBid | PopupTransfer | PopupListItem | PopupUnlistItem | PopupBidItem | PopupUnbidItem | PopupTransferSuccess | PopupBuyItemSuccess | PopupAcceptItem | PopupAcceptItemsSuccess | PopupInsufficientFunds
 
 export const usePopups = () => {
   const popup = useState<Popup | null>('active-popup', () => null)

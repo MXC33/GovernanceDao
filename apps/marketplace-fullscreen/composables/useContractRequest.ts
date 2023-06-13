@@ -9,11 +9,17 @@ interface RequestOptions {
 export const useContractRequest = (fn: () => Promise<any>, options: RequestOptions = {}) => {
   const { addError } = useContractErrors()
   const { displaySnack } = useSnackNotifications()
+  const { displayPopup } = usePopups()
+
   const loading = ref(false)
   const {
     onError,
     error
   } = options
+
+  const displayInsufficientFunds = () => {
+    displayPopup({ type: 'insufficient-funds' })
+  }
 
   const catchError = (serverError: string) => {
     console.log("Server", serverError)
@@ -21,8 +27,8 @@ export const useContractRequest = (fn: () => Promise<any>, options: RequestOptio
     if (serverError?.includes('rejected'))
       return displaySnack('transaction-rejected')
 
-    if (serverError?.includes('balance insufficient'))
-      return displaySnack('transaction-rejected')
+    if (serverError == CustomErrors.insufficientBalance)
+      return displayInsufficientFunds()
 
     if (onError)
       onError()
