@@ -17,7 +17,7 @@ Popup()
     BiddingPrice(:items="bidItems" v-if="bidItems")
 
   template(#buttons)
-    ButtonInteractive(btn="~ primary" w="full" @click.prevent="onClickBid" text="Place bid" :invalid="isItemInvalid(bidItems)" :loading="isLoading")
+    ButtonInteractive(btn="~ primary" w="full" @click.prevent="onClickBid" text="Place bid" :invalid="isItemInvalid(bidItems, true)" :loading="isLoading")
 
 </template>
 
