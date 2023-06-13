@@ -1,7 +1,7 @@
 <template lang="pug">
 OptionSelect(:items="collections")
   template(#header) 
-    | Explore Collections
+    | {{ $t(`collection.explore`) }}
 
   template(#icon)
     CollectionIcon()

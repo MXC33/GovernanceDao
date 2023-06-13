@@ -1,15 +1,15 @@
 <template lang="pug">
 TransactionItemAdjustRow(v-if="item")
-  template(#header) Price
+  template(#header) {{ $t(`marketplace.transactions.price`) }}
 
   template(#value)
     InputText(v-model="item.ixtPrice")
       template(#suffix) IXT
 
-    TransactionItemAdjustDetail() Total {{item.type}} price {{ listPrice }}
+    TransactionItemAdjustDetail() {{ $t(`marketplace.transactions.total`) }} {{item.type}} {{ $t(`marketplace.transactions.price`) }} {{ listPrice }}
 
   template(#action)
-    button(btn="~ form" w="full" @click="onClickFloor") Floor
+    button(btn="~ form" w="full" @click="onClickFloor") {{ $t(`marketplace.transactions.floor`) }} 
 
 </template>
   

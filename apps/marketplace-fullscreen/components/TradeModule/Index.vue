@@ -5,8 +5,8 @@ VList(w="full" bg="gray-900")
       template(v-for="tab in tabs")
         TabItem(:id="tab" v-model="activeTab") {{ tab }}
 
-    span(color="white" px="6" v-if="!is721") You own: {{ item.my_shares }}
-    span(color="white" px="6" v-else-if="is721 && canSell") Owned by: You
+    span(color="white" px="6" v-if="!is721") {{ $t(`marketplace.trade.youOwn`) }} {{ item.my_shares }}
+    span(color="white" px="6" v-else-if="is721 && canSell") {{ $t(`marketplace.trade.ownedByYou`) }}
 
 
   Transition(name="fade-slow" mode="out-in")

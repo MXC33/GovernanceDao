@@ -1,6 +1,6 @@
 <template lang="pug">
 TransactionItemAdjustRow(v-if="item")
-  template(#header) {{ item.type }} Duration
+  template(#header) {{ item.type }}  {{ $t(`marketplace.transactions.duration`) }}
 
   template(#value)
     div(grid="~ cols-4 gap-3")

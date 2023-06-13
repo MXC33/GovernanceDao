@@ -19,7 +19,7 @@ VList(space-y="4")
 
   ContentDrawer(:start-open="false" :is-neutral="true" bg="gray-900")
     template(#titleicon)
-      TitleWithIcon(icon="listing") listings
+      TitleWithIcon(icon="listing") {{ $t(`marketplace.singleItem.listings`) }}
 
     template(#default)
       Table(:columns="saleColumns" :rows="item.sales" id="single-item" :in-drawer="true" v-if="item.sales && item.sales.length > 0")
@@ -30,17 +30,17 @@ VList(space-y="4")
             TrashIcon(w="3 md:6" fill="white")
 
       HList(v-else px="6" py="6" font="bold" color="gray-400" items="center" justify="center") 
-        span() No items found
+        span() {{ $t(`marketplace.singleItem.noItemsFound`) }}
 
   ContentDrawer(:start-open="false" :is-neutral="true" bg="gray-900")
     template(#titleicon)
-      TitleWithIcon(icon="offer") offers
+      TitleWithIcon(icon="offer") {{ $t(`marketplace.singleItem.offers`) }}
     template(#default)
       HList(px="6" py="6" font="bold" color="gray-400" items="center" justify="center" v-if="item.my_shares == 0") 
-        span() You do not own this asset
+        span() {{ $t(`marketplace.singleItem.doNotOwn`) }}
 
       HList(px="6" py="6" font="bold" color="gray-400" items="center" justify="center" v-if="item.bids.length < 1" ) 
-        span() There is no offers for this item
+        span() {{ $t(`marketplace.singleItem.noOffers`) }}
 
       Table(:columns="offerColumns" :rows="item.bids" id="offers" :in-drawer="true" v-else="item.bids.length > 0")
 

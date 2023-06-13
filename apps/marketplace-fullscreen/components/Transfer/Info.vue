@@ -12,7 +12,7 @@ VList(v-if="item" p="y-3" frame="~" bg="gray-800")
     div(font="bold" p-t="6") {{ $t(`marketplace.transfer.quantity`) }}
     HList(justify="between")
       Adjustable(v-model="item.shares" h="10" w="100")
-      button(bg=" hover:gray-400" transition="all" b="1 white opacity-40" cut="bottom-right sm b-gray-400" p="x-6"  @click="onMaxButton") Max
+      button(bg=" hover:gray-400" transition="all" b="1 white opacity-40" cut="bottom-right sm b-gray-400" p="x-6"  @click="onMaxButton") {{ $t(`marketplace.transactions.max`) }}
     VList(text="xs" opacity="60" )
       div() {{ $t(`marketplace.transfer.own`) + item.token.my_shares }}
     

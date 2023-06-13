@@ -17,7 +17,7 @@ Popup()
 
   template(#buttons)
     HList()
-      button(btn="~ secondary" w="full" @click="cancelOnClick") Cancel 
+      button(btn="~ secondary" w="full" @click="cancelOnClick") {{ $t(`marketplace.unlist.cancel`) }}
       ButtonInteractive(btn="~ primary" w="full" @click.prevent="unlistOnClick" text="Unlist" :loading="isLoading") 
 
 </template>

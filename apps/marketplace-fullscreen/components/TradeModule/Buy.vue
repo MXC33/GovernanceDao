@@ -1,20 +1,20 @@
 <template lang="pug">
 VList()
   TradeModuleHeader(v-model="shares" :ixt="isSubstituteListing ? totalMaxPrice : totalPrice" :disabled="isDisabled")
-    template(#title v-if="isSubstituteListing") Max Price
+    template(#title v-if="isSubstituteListing")  {{ $t(`marketplace.trade.maxPrice`) }}
     template(#title v-else) {{ $t(`marketplace.price.title`) }}
     template(#adjust v-if="item.nft_type === NFTType.ERC1155")
       TradeModuleHeaderAdjust(v-model="shares")
-        template(#error v-if="showIncreaseMaxPrice") Try increasing your max price to buy more items
+        template(#error v-if="showIncreaseMaxPrice") {{ $t(`marketplace.trade.increaseMaxPrice`) }}
 
   TradeModuleAverage(v-if="shares.value > 1")
-    template(#title) Avg. price per unit
+    template(#title) {{ $t(`marketplace.trade.averagePrice`) }}
     template(#ixt) {{averagePricePerItem}} IXT
-    template(#percentage) {{aboveFloorPrice}}% above floor price
+    template(#percentage) {{aboveFloorPrice}}% {{ $t(`marketplace.trade.aboveFloorPrice`) }}
 
   TradeModuleSubstitute(v-model="isSubstituteListing")
-    template(#title) Substitute listings
-    template(#substituteTitle) Max price per listing
+    template(#title) {{ $t(`marketplace.trade.substituteList`) }}
+    template(#substituteTitle) {{ $t(`marketplace.trade.maxPriceList`) }}
     template(#substituteInput) 
       InputText(v-model="maxPrice" :class="{highlighted: showIncreaseMaxPrice}")
         template(#suffix) IXT

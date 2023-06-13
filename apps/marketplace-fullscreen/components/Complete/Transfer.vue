@@ -3,21 +3,21 @@ Popup()
   template(#icon)
     CheckboxIcon(w="6" h="6")
 
-  template(#header) TRANSFER SUCCESSFUL!
+  template(#header) {{ $t(`marketplace.transfer.transferSucess`) }}
 
   template(#default)
     CompleteTokenList(:items="[item]")
 
     VList()
       HList(justify="between" font="bold" text="sm")
-        div(w="full") Transfer to
+        div(w="full") {{ $t(`marketplace.transfer.transferTo`) }}
           div(p="2" space-x="0.5" w="full" frame="~" items="center" opacity="60") {{ item.toWallet }}
 
 
   template(#buttons)
     HList( justify="between")
-      button(@click="onClickMyAssets" btn="~ secondary" w="full") Go to my assets
-      button(@click="closeActivePopup" btn="~ primary" w="full") Continue exploring 
+      button(@click="onClickMyAssets" btn="~ secondary" w="full") {{ $t(`marketplace.offer.goToMyAssets`) }}
+      button(@click="closeActivePopup" btn="~ primary" w="full") {{ $t(`marketplace.offer.continueExploring`) }}
 
 </template>
   

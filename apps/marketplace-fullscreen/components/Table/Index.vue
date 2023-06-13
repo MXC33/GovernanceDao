@@ -12,7 +12,7 @@ VList(w="full")
         template(v-for="(column, index) in columns")
           TableCellHead(:column="column" :index="index" :sort-field="sort" @select-field="onClickSort", @toggle-sort="onClickToggle" :drawer="inDrawer" v-if="column.type != 'buttons'") {{ column.label }}
 
-          TableCellHeadWrapper(v-else :drawer="inDrawer") Action
+          TableCellHeadWrapper(v-else :drawer="inDrawer") {{ $t(`general.action`) }}
 
 
       tbody(divide-y="1")
