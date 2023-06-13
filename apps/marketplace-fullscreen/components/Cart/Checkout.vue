@@ -24,7 +24,6 @@ const { loading: isLoading, execute: buyItems } = useContractRequest(() => check
     items: cartFailedSales.value
   }),
   onError: () => {
-    console.log("Has error", cartFailedSales.value.length)
     removeFailedItemsFromCart()
   }
 })
