@@ -4,13 +4,12 @@
   "version": "0.0.1",
   "main": "./nuxt.config.ts",
   "scripts": {
-    "dev": "nuxi dev --port 3333",
+    "dev": "nuxt dev --port 3333",
     "build": "yarn run prepare && nuxt build",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
-    "prepare": "nuxi prepare",
+    "prepare": "nuxt prepare",
     "lint": "eslint .",
-    "postinstall": "yarn run prepare",
     "abis": "node create-abis.js"
   },
   "devDependencies": {
