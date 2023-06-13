@@ -1,5 +1,5 @@
 import { IXToken } from "@ix/base/composables/Token/useIXToken"
-import { AdjustableNumber } from "~/../../layers/ix-base/composables/Utils/useAdjustableNumber";
+import { AdjustableNumber } from "@ix/base/composables/Utils/useAdjustableNumber";
 import { differenceInDays } from "date-fns";
 
 export interface TransactionItem {
@@ -60,8 +60,8 @@ export const useTransactions = () => {
   const isItemInvalid = (item: TransactionItem[]) => {
     const invalid = !itemsInvalid(item)
     const price = getTotalIXTPrice(item);
-  
-    if(invalid && price > 0){
+
+    if (invalid && price > 0) {
       return false;
     }
     return true;

@@ -1,5 +1,5 @@
 import { IXToken, Sale } from "@ix/base/composables/Token/useIXToken"
-import { AdjustableNumber } from "@ix/base/composables/Utils/useAdjustableNumber"
+import { ZERO_ADRESS } from "@ix/base/composables/Utils/defineContract"
 import { get1155Contract, useSeaportContract } from "~/composables/useAssetContracts";
 import {
 } from "@ix/base/composables/Token/useIXToken"
@@ -13,7 +13,6 @@ export interface CartItem extends TransactionItem {
   token: IXToken,
   sale?: Sale,
 }
-
 
 export const useCart = () => {
   const cartFailedSales = useState<CartItem[]>('cart-failed-items', () => [])
@@ -87,11 +86,7 @@ export const useCart = () => {
 
     await refreshIXTBalance()
     if (!ixtBalance.value || ixtBalance.value < totalPrice) {
-      /*
-        Todo
-        Your balance is insufficient!
-      */
-      throw new Error("Your balance is insufficient!")
+      throw new Error(CustomErrors.insufficientBalance)
     }
 
     if (!await allowanceCheck(totalPrice)) {
@@ -99,7 +94,7 @@ export const useCart = () => {
         Todo
         Allowance didn't work"
       */
-      throw new Error("Allowance didn't work")
+      throw new Error(CustomErrors.allowanceError)
     }
     const { fulfillAvailableAdvancedOrders } = useSeaportContract()
 
@@ -110,7 +105,7 @@ export const useCart = () => {
     const { considerations, offers } = generateConsiderations(buyOrders)
 
     // @ts-ignore
-    return await fulfillAvailableAdvancedOrders(buyOrders, [], offers, considerations, conduitKey.polygon, ZERO_ADDRESS, buyOrders.length, cartItems)
+    return await fulfillAvailableAdvancedOrders(buyOrders, [], offers, considerations, conduitKey.polygon, ZERO_ADRESS, buyOrders.length, cartItems)
   }
 
   return {

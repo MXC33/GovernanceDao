@@ -4,13 +4,16 @@ VList(bg="ix-primary opacity-20" p="6" space-y="5" max-w="150" w="full" cut="bot
 
   VList(text="white left")
     WalletStatus(v-if="isWalletConnected")
+
     VList(v-else space-y="3") 
       div {{ $t('wallet.welcomeMessage') }}
+
       HList(v-if="!!walletError" color="mc-orange" space-x="1") 
         span(font="bold") {{$t(`general.errorConnecting`)}}
         span {{ walletError }}
 
   a(btn="~ lg secondary" href="https://planetix.com/connect" v-if="loginFailType == 'no-user'") Register on PlanetIX
+
   WalletButtonDisconnect(v-if="isWalletConnected")
 
   div(flex="~ col" space-y="3" v-else)

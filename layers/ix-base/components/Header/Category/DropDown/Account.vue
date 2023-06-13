@@ -23,7 +23,7 @@ HList(p="6" bg="ix-black" b="b-1 gray-600")
 import AOCIcon from '~/assets/images/icons/aocbadge.svg'
 import PlusIcon from '~/assets/images/icons/plus.svg'
 
-const {enable: showIXTSwap} = useIXTSwapVisible()
+const { enable: showIXTSwap } = useIXTSwapVisible()
 const { walletState } = useWallet()
 const { ixtBalance } = useIXTContract()
 const { user } = useUser()

@@ -17,7 +17,7 @@ import type { CollectionData } from "~/composables/useCollection";
 
 const { myAssetsURL } = useCollectionsURL()
 
-const { data: data, execute: fetchCollection, setupCollectionListeners, refresh: refresh, pending } = useCollectionData(myAssetsURL('polygon'), {
+const { data: data, execute: fetchCollection, setupCollectionListeners, pending } = useCollectionData(myAssetsURL('polygon'), {
   filter: {
     owned: true,
     type: 3,

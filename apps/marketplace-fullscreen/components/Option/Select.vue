@@ -1,7 +1,7 @@
 <template lang="pug">
 VList()
   ButtonSquareIcon(display="md:none" @click="toggleTakeOver" w="10 on-lg:12" :lg="large")
-    div(w="6" :lg="large")
+    span(w="6" :lg="large")
       slot(name="icon")
 
   VList(display="lt-md:none")
@@ -15,17 +15,17 @@ VList()
       template(#item="{item}")
         slot(name="item" :item="item")
 
-Teleport(to="#takeover")
   Transition(name="slide-bottom")
-    OptionPanel(v-if="showTakeOver" @close="showTakeOver = false")
-      template(#header) 
-        slot(name="header")
+    Teleport(to="#takeover" v-if="showTakeOver")
+      OptionPanel(@close="showTakeOver = false")
+        template(#header) 
+          slot(name="header")
 
-      template(#beforeItems)
-        slot(name="beforeItems")
+        template(#beforeItems)
+          slot(name="beforeItems")
 
-      template(#default)
-        slot(name="item" :item="item" v-for="item in items")
+        template(#default)
+          slot(name="item" :item="item" v-for="item in items")
 
 </template>
 
@@ -38,7 +38,7 @@ const toggleTakeOver = () => {
 }
 
 defineProps<{
-  items: T[],
+  items?: T[] | undefined | null,
   large?: boolean
 }>()
 

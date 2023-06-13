@@ -3,7 +3,7 @@ Popup()
   template(#icon)
     CheckboxIcon(w="6" h="6")
 
-  template(#header) Purchase Successful!
+  template(#header) {{ $t(`marketplace.offer.purchaseSuccess`) }}
 
   template(#default)
     CompleteTokenList(:items="items")
@@ -13,8 +13,8 @@ Popup()
 
   template(#buttons)
     HList()
-      button(@click="onClickAssets" btn="~ secondary" w="full") View my assets
-      button(@click="closeActivePopup" btn="~ primary" w="full") Continue exploring 
+      button(@click="onClickAssets" btn="~ secondary" w="full") {{ $t(`marketplace.offer.viewMyAssets`) }}
+      button(@click="closeActivePopup" btn="~ primary" w="full") {{ $t(`marketplace.offer.continueExploring`) }}
 
 </template>
   

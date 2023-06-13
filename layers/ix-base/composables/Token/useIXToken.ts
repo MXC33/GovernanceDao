@@ -151,7 +151,6 @@ export interface OfferItem {
   endAmount: number
 }
 export interface OrderParameters {
-  counter: any,
   offerer: string,
   address?: string,
   offer: OfferItem[],

@@ -5,8 +5,7 @@ VList(flex-grow="1" min-h="0" pos="relative" p="4 md:(8 b-30)" space-y="0 md:6")
       slot(name="name") {{ collectionName }}
 
     template(#cert v-if="data?.name != null")
-      ClientOnly
-        CertifiedIcon(w="6")
+      CertifiedIcon(w="6")
 
     template(#attributes)
       AttributeList(:attributes="attributes" v-if="data")
@@ -24,8 +23,8 @@ VList(flex-grow="1" min-h="0" pos="relative" p="4 md:(8 b-30)" space-y="0 md:6")
 
   slot(name="bottom")
 
-  Transition(name="slide-bottom")
-    CollectionSelectBar(v-if="selectedItems.length > 0" :context="context")
+  //- Transition(name="slide-bottom")
+  //-   CollectionSelectBar(v-if="selectedItems?.length > 0" :context="context")
 
 </template>
 
@@ -34,7 +33,6 @@ import type { IXToken } from '@ix/base/composables/Token/useIXToken';
 import type { CollectionContext, CollectionData } from '~/composables/useCollection';
 import type { TableColumn } from '~/composables/useTable'
 import CertifiedIcon from '~/assets/icons/certified.svg'
-// import PolygonIcon from '~/assets/icons/polygon_filled.svg'
 
 const { activeFilters } = useCollectionSettings()
 const { selectedItems } = useSelection()
@@ -46,9 +44,21 @@ const { currentTime } = useGlobalTimestamp()
 
 const defaultColumns: TableColumn<IXToken>[] = [
   { label: "Asset", rowKey: "name", type: 'asset' },
-  { label: "Current price", rowKey: "sale_price", type: 'ixt', sortable: true },
-  { label: "USD price", rowKey: "sale_price", type: 'usd', sortable: true },
-  { label: "Best offer", rowKey: "higher_bid_price", type: 'ixt', sortable: true },
+  {
+    label: "Current price", rowKey: "sale_price", type: 'ixt', sortable: {
+      ascKey: 'PRICE_ASC',
+      descKey: 'PRICE_DESC'
+    }
+  },
+  {
+    label: "USD price", rowKey: "sale_price", type: 'usd', sortable: {
+      ascKey: 'PRICE_ASC',
+      descKey: 'PRICE_DESC'
+    }
+  },
+  {
+    label: "Best offer", rowKey: "higher_bid_price", type: 'ixt'
+  },
   {
     label: "Total quantity", rowKey: "shares", getValue(row) {
       if (row.shares == 0)
@@ -92,13 +102,9 @@ const { data, columns, context = 'collection' } = defineProps<{
 }>()
 
 const collectionName = computed(() => {
-  if (data?.name == "PlanetIX Assets")
-    return "PlanetIX - Assets"
-
-  if (context != 'collection')
-    return "My Assets"
-
-  return data?.name
+  if (!data)
+    return ""
+  return useCollectionName(data.collection)
 })
 
 onBeforeUnmount(() => {

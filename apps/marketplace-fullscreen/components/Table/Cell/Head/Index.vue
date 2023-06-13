@@ -1,14 +1,13 @@
 
 <template lang="pug">
 TableCellHeadWrapper(:drawer="drawer")
-  button(v-if="column.sortable" @click="onClickSort" flex="~ row" items="start" color="on-active:white" :active="isActive" transition="all")
-    HList(space-x="1")
-      div()
-        slot
+  HList(v-if="column.sortable" cursor="pointer" space-x="1"  @click="onClickSort" flex="~ row" items="start" color="on-active:white" :active="isActive" transition="all")
+    div()
+      slot
 
-      Transition(name="fade" mode="out-in")
-        SortIcon(v-if="!isActive" w="4")
-        HelperChevron(:up="direction == 'desc'" w="4" :thick="true" v-else)
+    Transition(name="fade" mode="out-in")
+      SortIcon(v-if="!isActive" w="4")
+      HelperChevron(:up="direction == 'desc'" w="4" :thick="true" v-else)
 
   HList(v-else items="start")
     slot
@@ -17,18 +16,18 @@ TableCellHeadWrapper(:drawer="drawer")
 
 <script setup lang="ts" generic="T extends TableRow">
 import SortIcon from '~/assets/icons/sort.svg'
-import type { TableColumnText, TableRow, TableSort } from '~/composables/useTable'
+import type { TableSortable, TableRow, TableSort } from '~/composables/useTable'
 
 const { sortField, index, column } = defineProps<{
-  column: TableColumnText<T>,
+  column: TableSortable,
   index: number,
   sortField?: TableSort,
   drawer?: boolean
 }>()
 
 const emit = defineEmits<{
-  toggleSort: [],
-  selectField: [number]
+  toggleSort: [TableSortable, number],
+  selectField: [TableSortable, number]
 }>()
 
 const isActive = computed(() => sortField?.columnIndex == index)
@@ -42,9 +41,9 @@ const direction = computed(() => {
 
 const onClickSort = () => {
   if (isActive.value)
-    return emit("toggleSort")
+    return emit("toggleSort", column, index)
 
-  return emit("selectField", index)
+  return emit("selectField", column, index)
 }
 
 </script>

@@ -1,14 +1,14 @@
 <template lang="pug">
 TransactionItemAdjustRow(v-if="item")
-  template(#header) Quantity
+  template(#header) {{ $t(`marketplace.transactions.quantity`) }}
 
   template(#value)
     Adjustable(v-model="item.shares" h="10"  :is-neutral="false")
     TransactionItemAdjustDetail() 
-      slot(name="max" :max="item.shares.max") You own {{ item.shares.max }}
+      slot(name="max" :max="item.shares.max") {{ $t(`marketplace.transactions.youOwn`) }} {{ item.shares.max }}
 
   template(#action v-if="item.shares.max")
-    button(btn="~ form" w="full" @click="onClickMax") Max
+    button(btn="~ form" w="full" @click="onClickMax") {{ $t(`marketplace.transactions.max`) }}
 
 </template>
 

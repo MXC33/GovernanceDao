@@ -1,12 +1,26 @@
 import { camelCaseIt } from 'case-it';
 
-export type SortOrder = 'desc' | 'asc'
+export type SortDirection = 'desc' | 'asc'
 
 export interface TableRow extends Record<string, any> { }
 
+export const ServerSortOptions = {
+  PRICE_ASC: 0,
+  LATEST_LISTED: 1,
+  LATEST_SOLD: 2,
+  ENDING_SOON: 3,
+  HIGHEST_LAST_SALE_PRICE: 4,
+  FAVORITES: 5,
+  PRICE_DESC: 6,
+  HIGHEST_DAILY_YIELD: 7,
+  RECENTLY_MINTED: 8
+} as const
+
+export type ServerSortKey = keyof typeof ServerSortOptions
+
 export interface TableSort {
   columnIndex: number,
-  direction: SortOrder
+  direction: SortDirection
 }
 
 interface TableColumnBase {
@@ -21,18 +35,25 @@ export interface TableButton<T extends TableRow> {
   onClick: (row: T) => void
 }
 
-export interface TableColumnText<T extends TableRow> extends TableColumnBase {
+export interface TableSortable {
+  sortable?: ServerTableSort | boolean
+}
+
+export interface TableColumnText<T extends TableRow> extends TableColumnBase, TableSortable {
   label: string,
   type?: 'text' | 'date' | 'ixt' | 'usd' | 'asset' | 'contractAdress'
-  sortable?: boolean,
   rowKey?: string,
   getValue?: (row: T) => string | number
 }
 
-export interface TableColumnAsset extends TableColumnBase {
+export interface ServerTableSort {
+  ascKey: ServerSortKey,
+  descKey: ServerSortKey
+}
+
+export interface TableColumnAsset extends TableColumnBase, TableSortable {
   label: string,
   type?: 'asset'
-  sortable?: boolean
 }
 
 export interface TableButtonColumn<T extends TableRow> extends TableColumnBase {
@@ -44,17 +65,20 @@ export type TableColumn<T extends TableRow> = TableColumnText<T> | TableButtonCo
 
 const columnIndex = (id: string) => {
   const colIndexOne = ['collection', 'incoming-bids', 'outgoing-bids', 'my-assets', 'active-listings']
+
   if (colIndexOne.includes(id))
     return 1
+
   if (id == 'activity')
     return 6
+
   return 0
 }
 
-
-
 export const useTableSort = (id: string) => {
-  type SortableColumn = ReturnType<typeof getSortableColumns>[number]
+  const { activeServerSort } = useCollectionSettings()
+
+  type SortableColumn = ReturnType<typeof getServerSortableColumns>[number]
 
   const { isTextColumn } = useTable()
 
@@ -66,23 +90,42 @@ export const useTableSort = (id: string) => {
       direction: isDescendingDirection ? 'desc' : 'asc'
     }))
 
-  const sortOptions = useState<SortableColumn[]>(`collection-sort-options`, () => [])
+  const serverSortOptions = useState<SortableColumn[]>(`collection-sort-options`, () => [])
 
   const setupSortOptions = <T extends TableRow>(columns: TableColumn<T>[]) => {
-    sortOptions.value = getSortableColumns(columns)
+    serverSortOptions.value = getServerSortableColumns(columns)
   }
 
-  const selectedSortOption = computed(() => sortOptions.value.find((item) => item.columnIndex == sort.value.columnIndex))
+  const selectedSortOption = computed(() => {
+    const sortValue = serverSortOptions.value.find((item) =>
+      item.columnIndex == sort.value.columnIndex
+    )
+    if (sortValue)
+      return sort.value.direction == 'asc' ? sortValue.ascKey : sortValue.descKey
+  })
 
-  const getSortableColumns = <T extends TableRow>(columns: TableColumn<T>[]) =>
+  const isServerSort = (sortable?: Boolean | ServerTableSort): sortable is ServerTableSort => {
+    const serverSort = (sortable as ServerTableSort)
+    return !!(serverSort?.ascKey || serverSort?.descKey)
+  }
+
+  const getServerSortableColumns = <T extends TableRow>(columns: TableColumn<T>[]) =>
     columns
       .map((column, columnIndex) => {
-        if (!isTextColumn(column) || !column.sortable)
+        if (!isTextColumn(column))
           return null
 
-        const { label, type } = column
+        const { label, type, sortable } = column
+
+        if (!isServerSort(sortable))
+          return null
+
+        const { ascKey, descKey } = sortable
 
         return {
+          id,
+          ascKey,
+          descKey,
           columnIndex,
           type,
           label
@@ -98,17 +141,23 @@ export const useTableSort = (id: string) => {
   }
 
 
-  const selectSortField = (columnIndex: number) => {
+  const selectSortField = (columnIndex: number, direction?: SortDirection, key?: ServerSortKey) => {
+
+    if (key) {
+      activeServerSort.value = key
+    }
+
     sort.value = {
-      direction: sort.value.direction,
+      direction: direction ?? sort.value.direction,
       columnIndex
     }
   }
 
   return {
     sort,
-    sortOptions,
+    serverSortOptions,
     selectedSortOption,
+    isServerSort,
     setupSortOptions,
     selectSortField,
     toggleSortDirection

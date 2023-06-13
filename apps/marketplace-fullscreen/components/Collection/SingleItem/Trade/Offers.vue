@@ -1,19 +1,19 @@
 <template lang="pug">
 ContentDrawer(:start-open="!isMobile" :is-neutral="true" bg="gray-900")
   template(#titleicon)
-    TitleWithIcon(icon="offer") offers
+    TitleWithIcon(icon="offer") {{ $t(`marketplace.singleItem.offers`) }}
 
   template(#default)
     CollectionSingleItemTradeDetail(v-if="item.my_shares == 0") 
-      | You do not own this asset
+      | {{ $t(`marketplace.singleItem.doNotOwn`) }}
 
     CollectionSingleItemTradeDetail(v-if="item.bids.length < 1" ) 
-      | There is no offers for this item
+      | {{ $t(`marketplace.singleItem.noOffers`) }}
 
     Table(:columns="offerColumns" :rows="item.bids" id="offers" :in-drawer="true" v-if="item.bids.length > 0" :col-width="150")
       template(#item-buttons="{row}" )
-        TableButtonSmall(@click="onClickAcceptOffer(row)"  v-if="!playerOwnedSale(row)") Accept
-        TableButtonSmall(@click="cancelBidOnClick(row)" v-else) Cancel
+        TableButtonSmall(@click="onClickAcceptOffer(row)"  v-if="!playerOwnedSale(row)") {{ $t(`marketplace.singleItem.accept`) }}
+        TableButtonSmall(@click="cancelBidOnClick(row)" v-else) {{ $t(`marketplace.singleItem.cancel`) }}
 
 </template>
 

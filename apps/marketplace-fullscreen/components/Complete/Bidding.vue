@@ -3,7 +3,7 @@ Popup()
   template(#icon)
     CheckboxIcon(w="6" h="6")
 
-  template(#header) BID SUCCESSFUL!
+  template(#header) {{ $t(`marketplace.bid.bidSucess`) }}
 
   template(#default)
     CompleteTokenList(:items="items")
@@ -13,8 +13,8 @@ Popup()
 
   template(#buttons)
     HList()
-      button(@click="onClickOutgoingBids" btn="~ secondary" w="full") View in outgoing bids
-      button(@click="closeActivePopup" btn="~ primary" w="full") Continue exploring
+      button(@click="onClickOutgoingBids" btn="~ secondary" w="full") {{ $t(`marketplace.offer.viewInOutGoingBids`) }}
+      button(@click="closeActivePopup" btn="~ primary" w="full") {{ $t(`marketplace.offer.continueExploring`) }}
 
 </template>
 

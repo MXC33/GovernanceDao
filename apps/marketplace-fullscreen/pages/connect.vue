@@ -14,6 +14,7 @@ const { isLoggedInAndConnected } = useLogin()
 const redirect = useLoginRedirect()
 const isDirty = ref(false)
 
+const route = useRoute()
 
 definePageMeta({
   middleware: ''
@@ -28,15 +29,21 @@ watch(isLoggedInAndConnected, (connected) => {
     return
   }
 
-  if (origin == 'static')
-    return
+  const redirectQuery = route.query.redirectUrl
 
-  if (redirect.value) {
-    return navigateTo(redirect.value)
-  } else if (isDirty.value) {
-    return navigateTo('/')
+
+  if (redirectQuery) {
+    const path = decodeURIComponent(String(redirectQuery))
+    const ensureRelativeQuery = /^[^\/]+\/[^\/].*$|^\/[^\/].*$/gmi
+
+    if (path.match(ensureRelativeQuery))
+      return navigateTo(path)
   }
 
+  if (isDirty.value)
+    return navigateTo('/')
+
   isDirty.value = true
+
 }, { immediate: true })
 </script>

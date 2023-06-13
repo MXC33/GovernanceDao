@@ -1,6 +1,4 @@
-import { ERC1155Addresses, ERC721Addresses, get1155Contract } from "./useAssetContracts";
-export const ZERO_ADDRESS = "0x0000000000000000000000000000000000000000" as const
-
+import { get1155Contract } from "./useAssetContracts";
 
 export const useTransferNFT = () => {
 

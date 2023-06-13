@@ -1,7 +1,7 @@
 <template lang="pug">
 ContentDrawer(:start-open="!isMobile" :is-neutral="true" bg="gray-900")
   template(#titleicon)
-    TitleWithIcon(icon="listing") listings
+    TitleWithIcon(icon="listing") {{ $t(`marketplace.singleItem.listings`) }}
 
   template(#default)
     Table(:columns="saleColumns" :rows="item.sales" id="single-item" :in-drawer="true" v-if="item.sales && item.sales.length > 0" :col-width="150")
@@ -12,7 +12,7 @@ ContentDrawer(:start-open="!isMobile" :is-neutral="true" bg="gray-900")
         TableButtonSmall(@click="cancelListingOnClick(row)" v-else)
           TrashIcon(w="4 md:6" fill="white")
 
-    CollectionSingleItemTradeDetail(v-else) No items found
+    CollectionSingleItemTradeDetail(v-else) {{ $t(`marketplace.singleItem.noItemsFound`) }}
 
 </template>
 

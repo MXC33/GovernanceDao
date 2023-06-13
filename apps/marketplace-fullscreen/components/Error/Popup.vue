@@ -20,13 +20,13 @@ Popup(@close="onClose" :disable-default-close="true")
               div(text="gray-300") ${{ ixtToUSD(item.sale?.price ?? 0)  }}
 
       VList()
-        h3(font="bold") Error log 
+        h3(font="bold") {{ $t(`general.errorLog`) }}
         div(color="semantic-warning" max-h="15" overflow-y="auto" bg="black opacity-60" px="3") {{ error.serverError }}
 
 
 
   template(#buttons)
-    button(@click="onClick" btn="~ primary") Ok 
+    button(@click="onClick" btn="~ primary") {{ $t(`general.ok`) }}
 
 </template>
   

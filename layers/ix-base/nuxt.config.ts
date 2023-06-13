@@ -1,6 +1,8 @@
 import { createResolver } from '@nuxt/kit'
 const { resolve } = createResolver(import.meta.url)
 import svgLoader from 'vite-svg-loader'
+import { NodeGlobalsPolyfillPlugin } from '@esbuild-plugins/node-globals-polyfill'
+import { NodeModulesPolyfillPlugin } from '@esbuild-plugins/node-modules-polyfill'
 
 const API_DEV_ENDPOINT = 'https://mission-control-api-dev-s7ito.ondigitalocean.app'
 const API_PROD_ENDPOINT = 'https://api-mc.planetix.com'
@@ -35,11 +37,11 @@ export default defineNuxtConfig({
     '@nuxtjs/i18n',
     '@unocss/nuxt',
     '@vueuse/nuxt',
+    '@nuxtjs/html-validator',
   ],
   i18n: {
 
   },
-
   imports: {
     dirs: [
       'composables/**'
@@ -77,6 +79,21 @@ export default defineNuxtConfig({
       script: {
         defineModel: true,
         propsDestructure: true
+      }
+    },
+    optimizeDeps: {
+      esbuildOptions: {
+        define: {
+          global: 'globalThis',
+        },
+        // Enable esbuild polyfill plugins
+        plugins: [
+          NodeGlobalsPolyfillPlugin({
+            process: true,
+            buffer: true,
+          }),
+          NodeModulesPolyfillPlugin()
+        ]
       }
     },
     plugins: [

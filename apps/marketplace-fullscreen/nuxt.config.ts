@@ -7,6 +7,34 @@ export default defineNuxtConfig({
   css: [
     '@/assets/styles/fonts.css'
   ],
+
+  app: {
+    head: {
+      charset: 'utf-8',
+      viewport: 'width=device-width, initial-scale=1',
+      htmlAttrs: { lang: "en" }
+    }
+  },
+
+  htmlValidator: {
+    usePrettier: true,
+    options: {
+      extends: [
+        'html-validate:document',
+        'html-validate:recommended',
+        'html-validate:standard'
+      ],
+      rules: {
+        'element-required-attributes': 'off',
+        'heading-level': 'off',
+        'text-content': 'off',
+        'wcag/h30': 'off',
+        'wcag/h37': 'off',
+        'input-missing-label': 'off'
+      }
+    }
+  },
+
   typescript: {
     includeWorkspace: true
   },

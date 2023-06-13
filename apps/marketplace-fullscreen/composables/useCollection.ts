@@ -1,6 +1,6 @@
 import { IXToken } from "@ix/base/composables/Token/useIXToken"
 import { NFTType } from "~/composables/useAssetContracts";
-import { TableColumn, TableRow } from "./useTable";
+import { ServerSortKey, TableColumn, TableRow } from "./useTable";
 
 export interface FilterPayload {
   value: string
@@ -75,31 +75,13 @@ export interface CollectionData {
 
 export type CollectionDisplayType = 'list' | 'grid'
 
-export const collectionName = (collectionAddress: string) => {
-
-  switch (collectionAddress.toLowerCase()) {
-    case assetsAddress.polygon?.toLowerCase():
-      return 'Pix Assets'
-    case landmarkAddress.polygon?.toLowerCase():
-      return 'Landmarks'
-    case gravityGradeAddress.polygon?.toLowerCase():
-      return 'Gravity Grade'
-    case avatarNFTAddress.polygon?.toLowerCase():
-      return 'Avatars'
-    case badgeNFTAddress.polygon?.toLowerCase():
-      return 'AOC Badges'
-    case roverAddress.polygon?.toLowerCase():
-      return 'Rovers'
-
-  }
-}
 
 export const useCollectionSettings = () => {
 
-  const activeFilters = useState<Filter[]>('activeFilters', () => ([]))
+  const activeFilters = useState<Filter[]>('activeFilters', () => [])
+  const activeServerSort = useState<ServerSortKey | null>('active-server-sort', () => null)
   const collectionOwners = useState('collectionOwners', () => ("All"))
   const activeContext = useState<string | null>('collection-context', () => null)
-
 
   const displayType = useState<CollectionDisplayType>('collection-display-type', () => 'grid')
 
@@ -124,7 +106,7 @@ export const useCollectionSettings = () => {
   }
 
   const filtersAsPayload = computed(() =>
-    activeFilters.value
+    (activeFilters.value ?? [])
       .map(({ trait_type, value }) => ({
         trait_type,
         value: value.find((item) => item.selected)?.name
@@ -139,6 +121,7 @@ export const useCollectionSettings = () => {
     activeContext,
     activeFilters,
     collectionOwners,
+    activeServerSort,
     setContext,
     createFilters,
     toggleDisplayType,

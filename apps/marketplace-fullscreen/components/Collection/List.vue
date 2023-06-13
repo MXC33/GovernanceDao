@@ -31,11 +31,19 @@ const { items, columns, context = 'collection' } = defineProps<{
   loading?: boolean
 }>()
 
+
+
 const { sortRows } = useTable()
-const { setupSortOptions, sort } = useTableSort(context)
+const { setupSortOptions, sort, selectedSortOption } = useTableSort(context)
 const sortedRows = computed(() => sortRows(columns, items, sort.value))
+
 watch(() => columns, () => setupSortOptions(columns), { immediate: true })
 
+watch(selectedSortOption, (selected) => {
+  if (selectedSortOption) {
+
+  }
+})
 const onClickItem = (row: IXToken) => {
   const { network, collection, token_id } = row
   navigateTo(`/assets/${network}/${collection}/${token_id}`)

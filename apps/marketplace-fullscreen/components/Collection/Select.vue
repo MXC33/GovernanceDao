@@ -1,7 +1,7 @@
 <template lang="pug">
-OptionSelect(:items="collections" v-if="collections")
+OptionSelect(:items="collections")
   template(#header) 
-    | Explore Collections
+    | {{ $t(`collection.explore`) }}
 
   template(#icon)
     CollectionIcon()
@@ -18,5 +18,4 @@ import { useCollectionsData } from "~/composables/api/post/useCollectionAPI"
 const { data: collections, execute: fetchAllCollections } = useCollectionsData()
 
 await fetchAllCollections()
-
 </script>

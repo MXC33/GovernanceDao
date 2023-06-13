@@ -21,18 +21,22 @@ export function useAsyncDataState<T extends O, O>(key: string, fetchData: () => 
   const pending = useState(key + '-pending', () => false)
   const defaultTransform = (data: T) => data
   const transform = options?.transform ?? defaultTransform
+  const nuxt = useNuxtApp()
 
   const fetch = async () => {
+    if (nuxt.isHydrating)
+      return data.value
+
     if (process.client)
       pending.value = true
 
     const response = await fetchData()
-    const data = transform(response)
+    const fetchedData = transform(response)
 
     if (process.client)
       pending.value = false
 
-    return data
+    return fetchedData
   }
 
   const fetchNewData = async () => {
@@ -50,7 +54,7 @@ export function useAsyncDataState<T extends O, O>(key: string, fetchData: () => 
       return
     }
 
-    if (mergePagesFn) {
+    if (mergePagesFn && response) {
       data.value = mergePagesFn(oldData, response)
     } else {
       data.value = response
@@ -62,6 +66,7 @@ export function useAsyncDataState<T extends O, O>(key: string, fetchData: () => 
       return
 
     await fetchNewData()
+
     return
   }
 

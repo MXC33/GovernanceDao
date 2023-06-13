@@ -8,7 +8,7 @@ VList(@keydown.down.stop.prevent="stepDown" @keydown.up.stop.prevent="stepUp" @k
   Transition(name="fade")
     SearchListContainer(v-if="isOpen" ref="scrollElement" w="full")
       template(v-if="searchHits.length == 0")
-        div(p="2" bg="gray-300 opacity-20" rounded="md" opacity="50" cursor="default") Nothing found
+        div(p="2" bg="gray-300 opacity-20" rounded="md" opacity="50" cursor="default") {{ $t(`collection.nothingFound`) }}
 
       template(v-else)
         VList(v-for="(group, groupIndex) in searchHits" space-y="2")

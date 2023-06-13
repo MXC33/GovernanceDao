@@ -1,20 +1,20 @@
 <template lang="pug">
 VList()
   TradeModuleHeader(v-model="shares" :ixt="isSubstituteOffering ? totalMinOffer : totalOffer" :disabled="isDisabled")
-    template(#title v-if="shares.value > 1") Total offer amount
-    template(#title v-else) Highest Offer
+    template(#title v-if="shares.value > 1") {{ $t(`marketplace.trade.totalOfferAmount`) }}
+    template(#title v-else) {{ $t(`marketplace.trade.highestOffer`) }}
     template(#adjust v-if="item.nft_type === NFTType.ERC1155")
       TradeModuleHeaderAdjust(v-model="shares")
-        template(#error v-if="showDecreaseMinPrice") Try decreasing your lowest offer per unit to accept more items
+        template(#error v-if="showDecreaseMinPrice") {{ $t(`marketplace.trade.decreasingOffer`) }}
 
   TradeModuleAverage(v-if="shares.value > 1")
-    template(#title) Avg. offer per unit
+    template(#title) {{ $t(`marketplace.trade.averageOffer`) }}
     template(#ixt) {{averageOfferPerItem}} IXT
-    template(#percentage) {{belowHighestOffer}}% below highest offer
+    template(#percentage) {{belowHighestOffer}}% {{ $t(`marketplace.trade.belowHighestOffer`) }}
 
   TradeModuleSubstitute(v-model="isSubstituteOffering")
-    template(#title) Substitute offers
-    template(#substituteTitle) Lowest offer per unit
+    template(#title) {{ $t(`marketplace.trade.substituteOffers`) }}
+    template(#substituteTitle) {{ $t(`marketplace.trade.lowestOffer`) }}
     template(#substituteInput) 
       InputText(v-model="minOffer" :class="{highlighted: showDecreaseMinPrice}")
         template(#suffix) IXT

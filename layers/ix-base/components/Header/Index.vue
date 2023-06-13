@@ -33,7 +33,7 @@ import CrossIcon from '~/assets/images/header/cross.svg'
 
 import PlanetIXNew from '~/assets/images/header/planetix-new.svg'
 import SettingsIcon from '~/assets/images/header/hamburger.svg'
-
+const { fetchIXT } = useIXTContract()
 const { siteTopHeaders } = useSiteHeader()
 const {state: swapVisible} = useIXTSwapVisible()
 const activeMenuIndex = ref<number | null>(null)

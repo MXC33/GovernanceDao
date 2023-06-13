@@ -1,8 +1,7 @@
 <template lang="pug">
-ButtonSound(sound="sm" h="full" transition="all" cursor="pointer" items="center" justify="center" aspect="square"  pointer-events="on-adjustable:auto none" filter="on-adjustable:none grayscale-100" opacity="on-adjustable:100 50" :adjustable="isAdjustable" uppercase="~" :inline="inline")
-  HList(items="center" px="4")
-    component(v-if="type" :is="icon" w="3" h="3" fill="white")
-    slot(v-else)
+ButtonSound(sound="sm" h="full" transition="all" cursor="pointer" items="center" justify="center" aspect="square"  pointer-events="on-adjustable:auto none" filter="on-adjustable:none grayscale-100" opacity="on-adjustable:100 50" :adjustable="isAdjustable" uppercase="~" :inline="inline" flex="~ row" px="4")
+  component(v-if="type" :is="icon" w="3" h="3" fill="white")
+  slot(v-else)
 </template>
 
 <script lang="ts" setup>

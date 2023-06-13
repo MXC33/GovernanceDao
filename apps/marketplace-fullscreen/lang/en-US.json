@@ -10,8 +10,11 @@
     "nSelected": "{n} Selected",
     "accelerate": "Accelerate",
     "accelerateTask": "Accelerate Task",
+    "action": "Action",
     "previous": "Previous",
     "back": "Back",
+    "ok": "Ok",
+    "done": "Done",
     "cancel": "Cancel",
     "close": "Close",
     "claim": "Claim",
@@ -20,6 +23,7 @@
     "next": "Next",
     "disconnect": "Disconnect",
     "errorConnecting": "ERROR CONNECTING:",
+    "errorLog": "Error log",
     "exit": "Exit",
     "upgrade": "Upgrade",
     "goToInventory": "Go to inventory",
@@ -100,8 +104,14 @@
       "listed": "Listed",
       "owners": "Owners",
       "unique_owners": "Unique Owners",
-      "sale_price": "Best Offer"
-    }
+      "sale_price": "Best offer"
+    },
+    "sort": {
+      "PRICE_ASC": "Price low to high",
+      "PRICE_DESC": "Price high to low"
+    },
+    "explore": "Explore Collections",
+    "nothingFound": "Nothing found"
   },
   "wallet": {
     "title": "Connect Wallet",
@@ -155,7 +165,14 @@
       "playNow": "Play Now",
       "help": "Help"
     },
+    "ixt": {
+      "insufficient": {
+        "title": "Insufficient funds",
+        "description": "You need more IXT to perform this purchase"
+      }
+    },
     "myAssets": {
+      "title": "My Assets",
       "myItems": "My items",
       "favorites": "Favorites",
       "incomingBids": "Incoming Bids",
@@ -183,7 +200,8 @@
       "warningText": "Make sure the adress is correct! There is no way to reverse this transaction",
       "verifyText": "I Verify that I am aware that the transaction is not reversible, and that the wallet address is correct.",
       "confirm": "Confrim Adress",
-      "transferItem": "Transfer Item"
+      "transferItem": "Transfer Item",
+      "transferSucess": "TRANSFER SUCCESSFUL!"
     },
     "list": {
       "title": "List Item",
@@ -192,11 +210,37 @@
       "warningText": "Make sure the adress is correct!<br/>There is no way to reverse this transaction",
       "verifyText": "I Verify that I am aware that the transaction is not<br/>reversible, and that the wallet address is correct.",
       "confirm": "Confrim Adress",
-      "transferItem": "Transfer Item"
+      "transferItem": "Transfer Item",
+      "listSucess": "LIST SUCCESSFUL!"
     },
     "unlist": {
       "title": "Unlist Item",
-      "warningText": "Are you sure you want to unlist this item?"
+      "warningText": "Are you sure you want to unlist this item?",
+      "cancel": "Cancel"
+    },
+    "transactions": {
+      "applyToAll": "APPLY TO ALL",
+      "setToFloor": "Set to Floor",
+      "duration": "Duration",
+      "total": "Total",
+      "price": "Price",
+      "floor": "Floor",
+      "quantity": "Quantity",
+      "youOwn": "You own",
+      "max": "Max",
+      "priceNotSet": "Price not set",
+      "timeNotSet": "Time not set",
+      "yourBalance": "Your Balance"
+    },
+    "cart": {
+      "title": "My Cart",
+      "items": "items",
+      "clearAll": "Clear all"
+    },
+    "price": {
+      "title": "Total Price",
+      "marketplaceFee": "Marketplace fee",
+      "totalEarnings": "Total potential earnings"
     },
     "bid": {
       "title": "Place Bid",
@@ -206,19 +250,63 @@
       "verifyText": "I Verify that I am aware that the transaction is not<br/>reversible, and that the wallet address is correct.",
       "confirm": "Confrim Adress",
       "transferItem": "Transfer Item",
+      "maxAmount": "Max amount",
+      "bidSucess": "BID SUCCESSFUL!",
       "update": {
         "title": "Place Bid"
       }
     },
     "unbid": {
       "title": "Remove Bid",
-      "warningText": "Are you sure you want to remove this bid?"
+      "warningText": "Are you sure you want to remove this bid?",
+      "cancel": "Cancel"
+    },
+    "trade": {
+      "youOwn": "You own:",
+      "ownedByYou": "Owned by: You",
+      "maxPrice": "Max Price",
+      "increaseMaxPrice": "Try increasing your max price to buy more items",
+      "averagePrice": "Avg. price per unit",
+      "aboveFloorPrice": "above floor price",
+      "substituteList": "Substitute listings",
+      "maxPriceList": "Max price per listing",
+      "totalOfferAmount": "Total offer amount",
+      "highestOffer": "Highest Offer",
+      "decreasingOffer": "Try decreasing your lowest offer per unit to accept more items",
+      "averageOffer": "Avg. offer per unit",
+      "belowHighestOffer": "below highest offer",
+      "substituteOffers": "Substitute offers",
+      "lowestOffer": "Lowest offer per unit"
+    },
+    "singleItem": {
+      "contractAdress": "Contract adress",
+      "tokenId": "Token Id",
+      "tokenStandard": "Token standard",
+      "chain": "Chain",
+      "description": "description",
+      "traits": "traits",
+      "details": "details",
+      "offers": "offers",
+      "listings": "listings",
+      "noItemsFound": "No items found",
+      "doNotOwn": "You do not own this asset",
+      "noOffers": "There is no offers for this item",
+      "accept": "Accept",
+      "cancel": "Cancel"
     },
     "offer": {
-      "title": "Accept Offer"
+      "title": "Accept Offer",
+      "acceptOffer": "Accept offer Successful!",
+      "purchaseSuccess": "Purchase Successful!",
+      "viewMyAssets": "View my assets",
+      "goToMyAssets": "Go to my assets",
+      "viewInActiveList": "View in active listings",
+      "viewInOutGoingBids": "View in outgoing bids",
+      "continueExploring": "Continue exploring "
     },
     "navigation": {
       "soon": "Coming Soon",
+      "loadMore": "Load More",
       "buy": {
         "title": "Buy IXT",
         "swap": {

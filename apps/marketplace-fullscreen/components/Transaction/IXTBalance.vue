@@ -1,7 +1,7 @@
 <template lang="pug">
 VList()
   HList(text="lg" font="bold" justify="between")
-    span() Your Balance
+    span()  {{ $t(`marketplace.transactions.yourBalance`) }}
     span(v-if="ixtBalance") {{ ixtBalanceRounded }} IXT
     span(v-else) ... IXT
 
@@ -13,9 +13,7 @@ VList()
 <script lang="ts" setup>
 import { useIXTContract } from "@ix/base/composables/Contract/useIXTContract";
 const { ixtToUSD } = useIXTPrice()
-const { ixtBalance, fetchIXT } = useIXTContract()
-
-fetchIXT()
+const { ixtBalance } = useIXTContract()
 
 const ixtBalanceRounded = computed(() => roundToDecimals(ixtBalance.value ?? 0, 2))
 </script>

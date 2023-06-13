@@ -23,6 +23,8 @@ div#popups()
 
     Accepting(v-else-if="popup.type == 'accept-item'" :item="popup.item")
 
+    IXTInsufficient(v-else-if="popup.type == 'insufficient-funds'")
+
 
   ErrorPopup(v-if="activeError" :error="activeError")
 
