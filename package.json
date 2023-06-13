@@ -9,7 +9,7 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "concurrently \"yarn:dev:*\"",
+    "dev": "concurrently \"yarn:dev:*\" -c \"#C3000F,#84D4BC\"",
     "dev:mp": "yarn workspace @ix/marketplace dev",
     "dev:base": "yarn workspace @ix/base dev",
     "build": "yarn build:mp",
