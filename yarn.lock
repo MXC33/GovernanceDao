@@ -2461,7 +2461,7 @@ __metadata:
     "@ix/base": "*"
     "@types/node": ^18
     fuzzyjs: ^5.0.1
-    nuxt: ^3.5.2
+    nuxt: ^3.5.3
     v-lazy-show: ^0.2.3
     vite-plugin-pug: ^0.3.2
     vue-collapsed: ^1.1.3
@@ -11465,7 +11465,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"nuxt@npm:^3.5.2, nuxt@npm:^3.5.3":
+"nuxt@npm:^3.5.3":
   version: 3.5.3
   resolution: "nuxt@npm:3.5.3"
   dependencies:
