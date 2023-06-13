@@ -2,12 +2,12 @@ import { IXToken, ItemType, OrderType, signDomain, typedData, Sale } from "@ix/b
 import { add } from 'date-fns'
 import { get1155Contract, get721Contract, NFTType } from "~/composables/useAssetContracts";
 import { ethers } from "ethers";
-import { ZERO_ADDRESS } from "~/composables/useTransferNFT";
 import {
   conduitKey,
   feeTreasuryAdress,
   IXTAddress,
 } from "@ix/base/composables/Contract/WalletAddresses";
+import { ZERO_ADRESS, ZERO_ADRESS_LONG } from "@ix/base/composables/Utils/defineContract";
 
 import { makeRandomNumberKey } from "@ix/base/composables/Utils/useHelpers";
 import { ListingAssets, ListingsBody, useListEndpoints } from "~/composables/api/post/useListAPI";
@@ -46,26 +46,25 @@ export const useListingItems = () => {
   }
 }
 
+const mapAsyncRequests = async <T>(items: ListingItem[], fn: (item: ListingItem) => Promise<T | null>): Promise<T[]> => {
+  const requests = await Promise.all(items.map(fn))
+  return requests.filter(notNull)
+}
+
 export const useListingContract = () => {
+  const { handleAPIError } = useIXAPI()
+  const listEndpoints = useListEndpoints()
 
   const createListingMessage = async (item: ListingItem, endTime: number) => {
     //TODO update endtime
 
     const { token: { collection, token_id, nft_type }, ixtPrice, shares } = item
-    /*
-      Todo
-      Start loading overlay
-    */
-    console.log('start Loading overlay')
 
     const nftContract = nft_type === NFTType.ERC1155 ? get1155Contract(collection as string) : get721Contract(collection as string)
+
     const approveNftCheck = await nftContract.approveNftCheck()
     if (!approveNftCheck) {
-      /*
-        Todo
-        Approve didn't work
-      */
-      throw new Error("Approve didn't work")
+      throw new Error(CustomErrors.approvalError)
     }
 
     const totalPrice = Number(ixtPrice) * shares.value
@@ -82,24 +81,19 @@ export const useListingContract = () => {
 
     const address = walletAdress.value
 
-    if (!address) {
-      /*
-        Todo
-        wallet address is undefined
-      */
-      throw new Error("wallet address is undefined")
-    }
+    if (!address)
+      throw new Error(CustomErrors.noWallet)
 
     const message = {
       offerer: address,
-      zone: ZERO_ADDRESS,
+      zone: ZERO_ADRESS,
       offer: [{
         itemType: item.token.nft_type === NFTType.ERC1155 ? ItemType.ERC1155 : ItemType.ERC721,
         token: collection,
         identifierOrCriteria: token_id,
         startAmount: shares.value,
         endAmount: shares.value,
-        pixHash: "0x0000000000000000000000000000000000000000000000000000000000000000",
+        pixHash: ZERO_ADRESS_LONG,
       }],
       consideration: [
         {
@@ -121,8 +115,8 @@ export const useListingContract = () => {
       ],
       orderType: OrderType.PARTIAL_OPEN,
       startTime: Math.floor(Date.now() / 1000),
-      endTime: endTime,
-      zoneHash: "0x0000000000000000000000000000000000000000000000000000000000000000",
+      endTime,
+      zoneHash: ZERO_ADRESS_LONG,
       // salt: Web3.utils.toWei("2444686030276173"),
       // salt: "94446860302761739304752683030156737591518664810215442929817355887698947444400",
       salt: ethers.utils.parseUnits(makeRandomNumberKey(16).toString()).toString(),
@@ -139,7 +133,7 @@ export const useListingContract = () => {
   }
 
   const createListingsBody = (item: ListingItem, saleMessage: string, endTime: number): ListingsBody => {
-    const { shares, ixtPrice, durationInDays, token: { _index: index, collection, token_id, network } } = item
+    const { shares, ixtPrice, token: { _index: index, collection, token_id, network } } = item
 
     const listingAssets: ListingAssets = {
       index,
@@ -158,70 +152,47 @@ export const useListingContract = () => {
     }
   }
 
-  const listItem = async (item: ListingItem) => {
-    const { token: { updating }, durationInDays, token } = item
+  const convertListingItem = async (item: ListingItem) => {
+    const { durationInDays } = item
 
-    const endTime = Math.floor(add(new Date(), { days: durationInDays }).getTime() / 1000)
+    const endTime = getEndTime(durationInDays)
+
     const saleMessage = await createListingMessage(item, endTime)
+
     if (!saleMessage)
-      return false
-    try {
-      const listingsBody = createListingsBody(item, saleMessage, endTime)
+      return null
 
-      const listEndpoints = useListEndpoints()
-      await listEndpoints.listAssets([listingsBody])
-
-    } catch (error: any) {
-
-      console.log(error.response)
-      if (error.response && error.response._data && error.response._data.message) {
-        throw new Error(error.response._data.message)
-      } else {
-        throw new Error("Something wrong happened!")
-      }
-    }
-    if (updating) {
-      const { removeList } = useListEndpoints()
-      await removeList(token._index, token.token_id, token.sales[0].sale_id, token.network, token.collection)
-    }
-
-    return true
+    return createListingsBody(item, saleMessage, endTime)
   }
 
+  const updateListing = async (item: ListingItem) => {
+    const { token: { updating, _index, token_id, sales, network, collection } } = item
+
+    if (!updating)
+      return null
+
+    await listEndpoints.removeList(_index, token_id, sales[0].sale_id, network, collection)
+  }
+
+  const getEndTime = (durationInDays?: number) =>
+    Math.floor(add(new Date(), { days: durationInDays ?? 0 }).getTime() / 1000)
+
+  const listItem = async (item: ListingItem) =>
+    listItems([item])
+
   const listItems = async (items: ListingItem[]) => {
-    const listingsBody: ListingsBody[] = []
+    const body = await mapAsyncRequests(items, convertListingItem)
 
-    for (const item of items) {
-      const { durationInDays } = item
-
-      const endTime = Math.floor(add(new Date(), { days: durationInDays }).getTime() / 1000)
-      const saleMessage = await createListingMessage(item, endTime)
-      if (!saleMessage)
-        return false
-
-      listingsBody.push(createListingsBody(item, saleMessage, endTime))
-    }
+    if (body.length == 0)
+      return false
 
     try {
-      const listEndpoints = useListEndpoints()
-      await listEndpoints.listAssets(listingsBody)
-
-      /*
-        Todo
-        Success message
-      */
-
+      await listEndpoints.listAssets(body)
+      await mapAsyncRequests(items, updateListing)
     } catch (error: any) {
-      /*
-        Todo
-        API error
-      */
-      if (error.response && error.response._data && error.response._data.message) {
-        throw new Error(error.response._data.message)
-      } else {
-        throw new Error("Something wrong happened!")
-      }
+      handleAPIError(error)
     }
+
     return true
   }
 

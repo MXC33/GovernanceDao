@@ -2,6 +2,7 @@ import { IXToken, Sale } from "../Token/useIXToken"
 import { AnyToken } from "../Token/useTokens"
 import { MaybeRef } from 'vue'
 
+
 interface TokenWithSale {
   token: AnyToken,
   sale?: Sale
@@ -13,6 +14,18 @@ export interface ContractError {
   serverError?: string,
   items?: MaybeRef<TokenWithSale[]>
 }
+
+
+export const CustomErrors = {
+  insufficientBalance: "Your balance is insufficient",
+  allowanceError: "Allowance failed",
+  approvalError: "Approve didn't work",
+  invalidIXTPrice: "No IXT price set",
+  noPurchaseItem: "Missing item to purchase",
+  noWallet: "No wallet active",
+  unknownError: "Something went wrong",
+
+} as const
 
 export const useContractErrors = () => {
   const errors = useState<ContractError[]>('contract-errors', () => [])

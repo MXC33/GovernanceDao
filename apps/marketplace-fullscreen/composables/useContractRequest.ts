@@ -21,6 +21,9 @@ export const useContractRequest = (fn: () => Promise<any>, options: RequestOptio
     if (serverError?.includes('rejected'))
       return displaySnack('transaction-rejected')
 
+    if (serverError?.includes('balance insufficient'))
+      return displaySnack('transaction-rejected')
+
     if (onError)
       onError()
 

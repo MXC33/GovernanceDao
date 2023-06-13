@@ -1,5 +1,5 @@
 import { BigNumberish, ethers, ContractTransaction } from 'ethers'
-import { ContractInterface, defineContract } from "@ix/base/composables/Utils/defineContract"
+import { ContractInterface, defineContract, ZERO_ADRESS, ZERO_ADRESS_LONG } from "@ix/base/composables/Utils/defineContract"
 import {
   ItemType,
   OrderType,
@@ -32,11 +32,7 @@ import { ContractContext as ERC721Contract } from '@ix/base/composables/Contract
 import { ContractContext as SeaportContract } from '@ix/base/composables/Contract/Abis/Seaport'
 
 
-import { ZERO_ADDRESS } from './useTransferNFT'
 import { CartItem } from "~/composables/useCart";
-import { CollectionData } from "~/composables/useCollection";
-
-const ZERO_ADRESS_LONG = "0x0000000000000000000000000000000000000000000000000000000000000000"
 
 export const ERC1155Addresses = [assetsAddress.polygon?.toLowerCase(), avatarNFTAddress.polygon?.toLowerCase(), landmarkAddress.polygon?.toLowerCase()]
 
@@ -99,7 +95,7 @@ export const get1155Contract = <T extends ContractInterface<T> & ERC1155Contract
       if (!address)
         return undefined
 
-      return contract.safeTransferFrom(address, to, tokenId, amount, ZERO_ADDRESS)
+      return contract.safeTransferFrom(address, to, tokenId, amount, ZERO_ADRESS)
     })
 
   return {
@@ -162,7 +158,7 @@ export const get721Contract = <T extends ContractInterface<T> & ERC721Contract>(
       if (!address)
         return undefined
 
-      return contract.safeTransferFrom(address, to, tokenId, ZERO_ADDRESS)
+      return contract.safeTransferFrom(address, to, tokenId, ZERO_ADRESS)
     })
 
   return {
@@ -191,7 +187,7 @@ export const useSeaportContract = <T extends ContractInterface<T> & SeaportContr
   })
   const pixMerkleParam = {
     merklePixInfo: {
-      to: ZERO_ADDRESS,
+      to: ZERO_ADRESS,
       pixId: 0,
       category: 0,
       size: 0,
@@ -254,7 +250,7 @@ export const useSeaportContract = <T extends ContractInterface<T> & SeaportContr
       if (!address)
         return undefined
 
-      return contract.estimateGas.fulfillAdvancedOrder(buyOrderComponents, [], conduitKey.polygon, ZERO_ADDRESS, pixMerkleParam)
+      return contract.estimateGas.fulfillAdvancedOrder(buyOrderComponents, [], conduitKey.polygon, ZERO_ADRESS, pixMerkleParam)
     })
 
   const fulfillAdvancedOrder = (advancedOrders: AdvancedOrder, criteriaResolvers: [], fulfillerConduitKey: string, recipient: string) =>

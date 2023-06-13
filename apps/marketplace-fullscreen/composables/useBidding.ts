@@ -1,12 +1,12 @@
 import { IXToken, ItemType, OrderType, signDomain, typedData, Bid } from "@ix/base/composables/Token/useIXToken"
 import { add } from "date-fns"
 import { ethers } from "ethers";
-import { ZERO_ADDRESS } from "~/composables/useTransferNFT";
 import {
   conduitKey,
   feeTreasuryAdress,
   IXTAddress,
 } from "@ix/base/composables/Contract/WalletAddresses";
+import { ZERO_ADRESS } from "@ix/base/composables/Utils/defineContract";
 
 import { makeRandomNumberKey } from "@ix/base/composables/Utils/useHelpers";
 import { BiddingBody, useBidsAPI } from "~/composables/api/post/useBidAPI";
@@ -59,17 +59,13 @@ export const useBiddingContract = () => {
     console.log('start Loading overlay')
 
     if (!ixtPrice)
-      throw new Error("Could not get IXT price")
+      throw new Error(CustomErrors.invalidIXTPrice)
 
     const totalPrice = ixtPrice * shares.value
 
     await refreshIXTBalance()
     if (!ixtBalance.value || ixtBalance.value < totalPrice) {
-      /*
-        Todo
-        Your balance is insufficient!
-      */
-      throw new Error("Your balance is insufficient!")
+      throw new Error(CustomErrors.insufficientBalance)
     }
 
     const { allowanceCheck } = useIXTContract()
@@ -78,7 +74,7 @@ export const useBiddingContract = () => {
         Todo
         Allowance didn't work"
       */
-      throw new Error("Allowance didn't work")
+      throw new Error(CustomErrors.allowanceError)
     }
 
     const ownerPrice = ethers.utils.parseUnits(
@@ -98,12 +94,12 @@ export const useBiddingContract = () => {
         Todo
         wallet address is undefined
       */
-      throw new Error("wallet address is undefined")
+      throw new Error(CustomErrors.noWallet)
     }
 
     const message = {
       offerer: address,
-      zone: ZERO_ADDRESS,
+      zone: ZERO_ADRESS,
       offer: [{
         itemType: ItemType.ERC20,
         token: IXTAddress.polygon,
@@ -179,7 +175,7 @@ export const useBiddingContract = () => {
       if (error.response && error.response._data && error.response._data.message) {
         throw new Error(error.response._data.message)
       } else {
-        throw new Error("Something wrong happened!")
+        throw new Error(CustomErrors.unknownError)
       }
     }
   }
@@ -225,7 +221,7 @@ export const useBiddingContract = () => {
       if (error.response && error.response._data && error.response._data.message) {
         throw new Error(error.response._data.message)
       } else {
-        throw new Error("Something wrong happened!")
+        throw new Error(CustomErrors.unknownError)
       }
     }
     return true

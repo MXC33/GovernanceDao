@@ -15,6 +15,8 @@ export const useIXHeaders = () => {
   }))
 }
 
+
+
 export const useIXAPI = () => {
   const { logoutWallet } = useWallet()
   const headers = useIXHeaders()
@@ -23,6 +25,13 @@ export const useIXAPI = () => {
   const baseURL = "https://api.planetix.com/api/v1"
   const loginURL = `${baseURL}/auth/login`
   const usernameFromWalletAddressURL = `${baseURL}/mission-controll/username/wallet`
+
+  const handleAPIError = (error: any) => {
+    if (error.response && error.response._data && error.response._data.message)
+      throw new Error(error.response._data.message)
+
+    throw new Error(CustomErrors.unknownError)
+  }
 
   const onUnauthorized = async () => {
     await callWithNuxt(app, () => {
@@ -78,6 +87,7 @@ export const useIXAPI = () => {
     fetchIXAPI,
     loginIX,
     fetchUsernameFromWalletAddress,
+    handleAPIError
     // fetchActiveRaffle,
     // fetchUpcomingRaffles,
     // fetchPastRaffles,

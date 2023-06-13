@@ -10,6 +10,7 @@ import { AdjustableNumber } from "@ix/base/composables/Utils/useAdjustableNumber
 import { useSeaportContract } from "~/composables/useAssetContracts";
 import { conduitKey } from "@ix/base/composables/Contract/WalletAddresses";
 import { useIXTContract } from "@ix/base/composables/Contract/useIXTContract";
+import { ZERO_ADRESS } from "@ix/base/composables/Utils/defineContract";
 
 export interface BuyItem {
   token: IXToken,
@@ -235,12 +236,12 @@ export const useBuyContract = () => {
     const { generateConsiderations, createBuyOrder, isAdvancedOrder } = useBuyHelpers()
 
     if (!buyItem.sales || !buyItem.sales.length)
-      throw new Error("No sales item")
+      throw new Error(CustomErrors.noPurchaseItem)
 
     const { allowanceCheck } = useIXTContract()
 
     if (!await allowanceCheck(totalPrice))
-      throw new Error("Allowance failed")
+      throw new Error(CustomErrors.allowanceError)
 
     const { fulfillAvailableAdvancedOrders } = useSeaportContract()
 
@@ -252,7 +253,7 @@ export const useBuyContract = () => {
     const { offers, considerations } = generateConsiderations(buyOrders)
 
     // @ts-ignore
-    return await fulfillAvailableAdvancedOrders(buyOrders, [], offers, considerations, conduitKey.polygon, ZERO_ADDRESS, quantity)
+    return await fulfillAvailableAdvancedOrders(buyOrders, [], offers, considerations, conduitKey.polygon, ZERO_ADRESS, quantity)
   }
 
   return {

@@ -1,8 +1,9 @@
 import { EventFilter, Listener } from "@ethersproject/abstract-provider";
-import { Contract, ethers } from "ethers";
-import { useNotifications } from "./useNotifications";
+import { ethers } from "ethers";
 import { useTransactions } from "./useTransaction";
-import { ContractError } from "./useContractErrors";
+
+export const ZERO_ADRESS = "0x0000000000000000000000000000000000000000" as const
+export const ZERO_ADRESS_LONG = "0x0000000000000000000000000000000000000000000000000000000000000000" as const
 
 export interface ContractInterface<T> {
   on: (event: EventFilter | string, listener: Listener) => T
