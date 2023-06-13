@@ -58,8 +58,6 @@ export const useIXAPI = () => {
       })
       return data
     } catch (err) {
-
-      console.log("Has error", err)
       await onUnauthorized()
       return null
     }
