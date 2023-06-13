@@ -53,6 +53,8 @@ export default defineNuxtConfig({
     configFile: resolve('./unocss.config.ts'),
   },
 
+  watch: [resolve('./unocss.config.ts')],
+
   runtimeConfig: {
     public: {
       MC_API: process.env.CHAIN_NET == 'test' ? API_DEV_ENDPOINT : API_PROD_ENDPOINT,

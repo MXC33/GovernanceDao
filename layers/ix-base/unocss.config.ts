@@ -36,6 +36,7 @@ export default definePreset({
     colors: {
       ix: {
         primary: '#C3000F',
+        white: '#F9F9F9',
         black: '#0C0C0C',
         ne: '#FF0014',
         orange: '#FF6647',

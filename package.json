@@ -4,22 +4,30 @@
   "description": "",
   "main": "index.js",
   "private": true,
+  "engines": {
+    "node": "^18.12.0"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "turbo dev",
-    "build": "turbo build",
+    "dev": "concurrently \"yarn:dev:*\" -c \"#C3000F,#84D4BC\"",
+    "dev:mp": "yarn workspace @ix/marketplace dev",
+    "dev:base": "yarn workspace @ix/base dev",
+    "build": "yarn build:mp",
+    "build:mp": "yarn prepare:base && yarn workspace @ix/marketplace build",
+    "build:base": "yarn workspace @ix/base dev",
+    "prepare:base": "yarn workspace @ix/base prepare",
     "kill": "npx kill-port 3000 3333 8001 8002",
     "killmac": "kill -9 $(lsof -ti:3000,3333,8001,8002)"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "packageManager": "yarn@1.22.19",
+  "packageManager": "yarn@3.6.0",
   "workspaces": [
     "layers/*",
     "apps/*"
   ],
   "devDependencies": {
-    "turbo": "^1.9.8"
+    "concurrently": "^8.2.0"
   }
 }
