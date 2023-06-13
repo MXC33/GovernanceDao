@@ -15,6 +15,8 @@
   },
   "devDependencies": {
     "@coinbase/wallet-sdk": "^3.6.6",
+    "@esbuild-plugins/node-globals-polyfill": "^0.2.3",
+    "@esbuild-plugins/node-modules-polyfill": "^0.2.2",
     "@histoire/plugin-nuxt": "^0.16.1",
     "@histoire/plugin-vue": "^0.16.1",
     "@nuxt/eslint-config": "^0.1.1",
