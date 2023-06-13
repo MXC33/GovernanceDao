@@ -18,5 +18,4 @@ import { useCollectionsData } from "~/composables/api/post/useCollectionAPI"
 const { data: collections, execute: fetchAllCollections } = useCollectionsData()
 
 await fetchAllCollections()
-console.log("DATA", collections.value?.length)
 </script>

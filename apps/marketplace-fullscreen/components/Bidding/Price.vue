@@ -11,7 +11,7 @@ VList()
 import type { TransactionItem } from "~/composables/useTransactions";
 
 const { priceRenderString, getTotalIXTPrice } = useTransactions()
-const totalIXTPrice = computed(() => getTotalIXTPrice(items))
+const totalIXTPrice = computed(() => getTotalIXTPrice(items, true))
 
 const { items } = defineProps<{
   items: TransactionItem[],

@@ -21,7 +21,8 @@ export const useIXAPI = () => {
   const { logoutWallet } = useWallet()
   const headers = useIXHeaders()
   const app = useNuxtApp()
-
+  const redirect = useLoginRedirect()
+  const route = useRoute()
   const baseURL = "https://api.planetix.com/api/v1"
   const loginURL = `${baseURL}/auth/login`
   const usernameFromWalletAddressURL = `${baseURL}/mission-controll/username/wallet`
@@ -36,7 +37,13 @@ export const useIXAPI = () => {
   const onUnauthorized = async () => {
     await callWithNuxt(app, () => {
       logoutWallet()
-      return navigateTo('/connect')
+
+      return navigateTo({
+        path: '/connect',
+        query: {
+          redirectUrl: encodeURIComponent(route.path)
+        }
+      })
     })
   }
 
