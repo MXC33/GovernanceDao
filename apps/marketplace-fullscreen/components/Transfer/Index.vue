@@ -31,6 +31,15 @@ import Checkbox from "../Input/Checkbox.vue";
 const { displayPopup } = usePopups()
 
 const { transferItem, createTransferItem, transferERC1155NFT, transferERC721NFT } = useTransfer()
+const { selectedItems } = useSelection()
+const { myAssetsURL } = useCollectionsURL()
+
+const { refresh } = useCollectionData(myAssetsURL('polygon'), {
+  filter: {
+    owned: true,
+    type: 0,
+  }
+})
 
 const isLoading = shallowRef(false)
 const isChecked = shallowRef(false)
@@ -62,6 +71,8 @@ const itemTransfer = async () => {
         ...transferItem.value
       },
     })
+    refresh()
+    selectedItems.value = []
   }
 
 }
