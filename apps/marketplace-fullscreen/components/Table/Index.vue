@@ -25,7 +25,7 @@ VList(w="full")
 
             template(v-else)
               div(v-if="column.type == 'select'")
-                InputCheckbox(:model-value="isSelected(index)")
+                InputCheckbox(:model-value="isSelected(index)" @update:modelValue="val => onSelect(index, val)")
 
               HList(v-else-if="column.type == 'buttons'" space-x="3" justify="end" w="full")
                 slot(name="item-buttons" :buttons="column.buttons" :row="row")
@@ -48,33 +48,41 @@ const props = defineProps<{
   error?: string,
   isOpen?: boolean,
   colWidth?: number,
-  selectable?: boolean
+  selectable?: boolean,
+  modelValue: number[],
 }>()
 
-const selectedItems = defineModel<number[]>()
+const emits = defineEmits(["update:modelValue"])
+const selectedItems = useVModel(props, 'modelValue', emits)
 
-const isSelected = (index: number) => selectedItems.value?.includes(index)
+const isSelected = (index: number) =>
+  selectedItems.value?.includes(index)
+
+const onSelect = (index: number, val: boolean) => {
+  const hasItem = selectedItems.value.indexOf(index) > -1
+
+  if (hasItem && !val) {
+    return selectedItems.value = selectedItems.value.filter((item) => item != index)
+  }
+
+  if (val && !hasItem) {
+    return selectedItems.value = [...selectedItems.value, index]
+  }
+}
 
 const allSelected = computed(() =>
   (selectedItems.value ?? []).length == props.rows.length
 )
 
 const onSelectAll = () => {
-  const mapMan = props.rows.map((item, index) => index)
-  selectedItems.value = mapMan
-  console.log("SELECT", selectedItems.value, mapMan)
+  if (allSelected.value)
+    return selectedItems.value = []
+
+  selectedItems.value = props.rows.map((_, index) => index)
 }
-
-const emit = defineEmits<{
-  selectAll: [boolean]
-}>()
-
-const selectAll = ref(false)
-watch(selectAll, (val) => emit("selectAll", val))
-
 const { toggleSortDirection, selectSortField, sort, isServerSort } = useTableSort(props.id)
 
-const { activeServerSort, } = useCollectionSettings()
+const { activeServerSort } = useCollectionSettings()
 
 const { sortRows } = useTable()
 

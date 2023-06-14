@@ -35,6 +35,7 @@ import type { TableColumn } from '~/composables/useTable'
 import CertifiedIcon from '~/assets/icons/certified.svg'
 
 const { activeFilters } = useCollectionSettings()
+const { selectedItems } = useSelection()
 
 const { getCollectionAttributes } = useDefaulAttributes()
 const attributes = computed(() => data ? getCollectionAttributes(data) : [])
