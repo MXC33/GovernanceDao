@@ -92,6 +92,7 @@ export default definePreset({
       'btn-solid': 'btn btn-lg px-4 lg:px-8',
       'btn-accent': 'btn-primary btn-solid',
       'btn-primary': 'btn-solid bg-ix-primary color-white',
+      'btn-disabled': 'btn-solid bg-gray-700 color-gray-400',
       'btn-soft': 'btn px-4 btn-md bg-opacity-20 hover:bg-opacity-40 b-0.5',
       'btn-secondary': 'btn-solid bg-gray-600 color-white',
       'btn-secondary-detail': 'btn-solid btn-md bg-gray-500 hover:bg-gray-400 cut-bottom-right cut-sm btn-center',

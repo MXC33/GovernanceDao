@@ -15,17 +15,17 @@ VList()
       template(#item="{item}")
         slot(name="item" :item="item")
 
-  Transition(name="slide-bottom")
     Teleport(to="#takeover" v-if="showTakeOver")
-      OptionPanel(@close="showTakeOver = false")
-        template(#header) 
-          slot(name="header")
+      Transition(name="slide-bottom")
+        OptionPanel(@close="showTakeOver = false")
+          template(#header) 
+            slot(name="header")
 
-        template(#beforeItems)
-          slot(name="beforeItems")
+          template(#beforeItems)
+            slot(name="beforeItems")
 
-        template(#default)
-          slot(name="item" :item="item" v-for="item in items")
+          template(#default)
+            slot(name="item" :item="item" v-for="item in items")
 
 </template>
 
