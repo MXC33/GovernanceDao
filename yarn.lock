@@ -2670,8 +2670,9 @@ __metadata:
     "@types/uuid": ^9.0.1
     "@unocss/extractor-pug": ^0.53.1
     "@unocss/nuxt": ^0.53.1
-    "@volar/vue-language-plugin-pug": ^1.6.3
+    "@volar/vue-language-plugin-pug": ^1.6.5
     "@vueuse/nuxt": ^10.1.2
+    "@vueuse/router": ^10.1.2
     "@vueuse/sound": ^2.0.1
     "@walletconnect/ethereum-provider": ^2.7.2
     case-it: ^1.0.1
@@ -2700,11 +2701,13 @@ __metadata:
   dependencies:
     "@ix/base": "*"
     "@types/node": ^18
+    "@vueuse/router": ^10.1.2
     fuzzyjs: ^5.0.1
     nuxt: ^3.5.3
     v-lazy-show: ^0.2.3
     vite-plugin-pug: ^0.3.2
     vue-collapsed: ^1.1.3
+    vue-router: 4
     vue3-easy-data-table: ^1.5.42
     vue3-table-lite: ^1.3.7
   languageName: unknown
@@ -4859,7 +4862,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@volar/vue-language-plugin-pug@npm:^1.6.3":
+"@volar/vue-language-plugin-pug@npm:^1.6.5":
   version: 1.6.5
   resolution: "@volar/vue-language-plugin-pug@npm:1.6.5"
   dependencies:
@@ -5070,6 +5073,18 @@ __metadata:
   peerDependencies:
     nuxt: ^3.0.0
   checksum: 1957429bd5d5d8d410ae4c4ebc04c02628b2834f0b9b0a4b9bfff98b51227e25016bad274e04e2b531c84daa8d562e24c4b408c39d79e981f50e7ec224a494bc
+  languageName: node
+  linkType: hard
+
+"@vueuse/router@npm:^10.1.2":
+  version: 10.1.2
+  resolution: "@vueuse/router@npm:10.1.2"
+  dependencies:
+    "@vueuse/shared": 10.1.2
+    vue-demi: ">=0.14.0"
+  peerDependencies:
+    vue-router: ">=4.0.0-rc.1"
+  checksum: c21932be505b2c3830b00fb1a89699782a6c33300bfc1b52cf10e2536a05866ae07c7457f32bb67af6866aa044a9ca5c70b8dac5eb8f7aac8b704dd5c0b30e3c
   languageName: node
   linkType: hard
 
@@ -16151,6 +16166,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"vue-router@npm:4, vue-router@npm:^4.2.2":
+  version: 4.2.2
+  resolution: "vue-router@npm:4.2.2"
+  dependencies:
+    "@vue/devtools-api": ^6.5.0
+  peerDependencies:
+    vue: ^3.2.0
+  checksum: 4181b3776a57e51060490b7bcd82f48891d5023587e5ffb54cf47c1f6b03dd2d20f5392b99c9e659821fb7b3fee84da2dc532022dae92d8545e67fe96a168d64
+  languageName: node
+  linkType: hard
+
 "vue-router@npm:^4.2.0":
   version: 4.2.1
   resolution: "vue-router@npm:4.2.1"
@@ -16159,17 +16185,6 @@ __metadata:
   peerDependencies:
     vue: ^3.2.0
   checksum: 99ac17d79d46127e51d9ab2cd4577f4740ff31190e1d6cc719cf58c231b066f6442a2acd22bc185c0255bc9ad6d4c9074c23b84e61bff7ae47001f583173024d
-  languageName: node
-  linkType: hard
-
-"vue-router@npm:^4.2.2":
-  version: 4.2.2
-  resolution: "vue-router@npm:4.2.2"
-  dependencies:
-    "@vue/devtools-api": ^6.5.0
-  peerDependencies:
-    vue: ^3.2.0
-  checksum: 4181b3776a57e51060490b7bcd82f48891d5023587e5ffb54cf47c1f6b03dd2d20f5392b99c9e659821fb7b3fee84da2dc532022dae92d8545e67fe96a168d64
   languageName: node
   linkType: hard
 

@@ -1,6 +1,6 @@
 
 <template lang="pug">
-TableCellHeadWrapper(:drawer="drawer")
+TableCellHeadWrapper()
   HList(v-if="column.sortable" cursor="pointer" space-x="1"  @click="onClickSort" flex="~ row" items="start" color="on-active:white" :active="isActive" transition="all")
     div()
       slot
@@ -22,7 +22,6 @@ const { sortField, index, column } = defineProps<{
   column: TableSortable,
   index: number,
   sortField?: TableSort,
-  drawer?: boolean
 }>()
 
 const emit = defineEmits<{

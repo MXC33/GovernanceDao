@@ -17,7 +17,7 @@ VList(pos="relative" ref="element" w="lt-md:full")
 </template>
 
 <script lang="ts" setup generic="T extends object | string">
-const isOpen = ref(false)
+const isOpen = shallowRef(false)
 const element = ref()
 
 onClickOutside(element, () => isOpen.value = false)

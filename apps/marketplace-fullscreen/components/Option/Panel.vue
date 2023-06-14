@@ -7,7 +7,7 @@ VList(w="full" bg="gray-900" z="99" pos="fixed" inset="0" overflow-x="hidden" ov
 
     CloseIcon(w="4" cursor="pointer" @click="$emit('close')" translate-y="0.2")
 
-  VList(w="full" flex-grow="1" )
+  VList(w="full" flex-grow="1" b="t-1 gray-600")
     slot(name="beforeItems")
 
     div(@click="onSelect")

@@ -8,11 +8,13 @@ div(v-if="amountSelected != 0" w="full" p="3" pos="sticky bottom-0" z="2" bg="ix
     //- To Create space between the text on the left side an the buttons on the right 
     div(flex="grow")
 
-    CollectionSelectBarButton(v-if="context=='my-assets'") Transfer {{amountSelected}} 
+    template(v-if="context=='my-assets'")
+      CollectionSelectBarButton(:secondary="true" @click="onTransferMultiple" disable="on-differentCollection:active" :differentCollection="!selectedItemsIsSameCollection") Transfer {{amountSelected}} 
+      CollectionSelectBarButton(@click="onClickList") List {{amountSelected}} 
 
     CollectionSelectBarButton(v-else-if="context=='collection'" @click="onAddToCart") Add {{amountSelected}} To Cart 
 
-    tempate(v-else-if="context=='incoming-bids'")
+    template(v-else-if="context=='incoming-bids'")
       CollectionSelectBarButton() Reject {{amountSelected}} Bids
       CollectionSelectBarButton() Accept {{amountSelected}} Bids 
 
@@ -21,6 +23,22 @@ div(v-if="amountSelected != 0" w="full" p="3" pos="sticky bottom-0" z="2" bg="ix
 <script lang="ts" setup>
 import type { CollectionContext } from '~/composables/useCollection';
 const { addToCart } = useCart()
+const { displayPopup } = usePopups()
+const { selectedItemsIsSameCollection } = useSelection()
+
+const onClickList = () => {
+  displayPopup({
+    type: 'list-item',
+    items: selectedItems.value
+  })
+}
+
+const onTransferMultiple = () => {
+  displayPopup({
+    type: 'transfer-item',
+    items: selectedItems.value
+  })
+}
 
 defineProps<{
   context: CollectionContext
@@ -31,8 +49,9 @@ onUnmounted(() => {
 })
 
 const onAddToCart = () => {
-  selectedItems.value.map(item => addToCart(item.token))
+  selectedItems.value.map(item => addToCart(item, item.lowest_sale))
 }
+
 
 
 const { selectedItems, clearSelectedItems } = useSelection()

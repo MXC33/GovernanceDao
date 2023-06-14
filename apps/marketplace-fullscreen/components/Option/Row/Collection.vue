@@ -4,7 +4,7 @@ OptionRow()
     span(w="8" h="8" mr="3")
       img(src="~/assets/testfiles/test-collection-bg.png" )
 
-    span(flex-grow="1") {{ useCollectionName(item.contract) }}
+    span(flex-grow="1" font="lt-md:bold") {{ useCollectionName(item.contract) }}
     span(color="gray-200" font="normal") {{ item.nft_count }}
 
 </template>

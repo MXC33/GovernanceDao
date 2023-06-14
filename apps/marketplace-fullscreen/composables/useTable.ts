@@ -61,7 +61,11 @@ export interface TableButtonColumn<T extends TableRow> extends TableColumnBase {
   buttons?: TableButton<T>[]
 }
 
-export type TableColumn<T extends TableRow> = TableColumnText<T> | TableButtonColumn<T>
+export interface TableSelectColumn extends TableColumnBase {
+  type: 'select'
+}
+
+export type TableColumn<T extends TableRow> = TableColumnText<T> | TableButtonColumn<T> | TableSelectColumn
 
 const columnIndex = (id: string) => {
   const colIndexOne = ['collection', 'incoming-bids', 'outgoing-bids', 'my-assets', 'active-listings']
@@ -177,7 +181,7 @@ const getDotNotation = (obj: object, key: string) => {
 
 export const useTable = () => {
   const getValue = <T extends TableRow>(column: TableColumn<T>, row: T) => {
-    if (column.type == 'buttons')
+    if (column.type == 'buttons' || column.type == 'select')
       return undefined
 
     if (column.getValue)
@@ -195,7 +199,7 @@ export const useTable = () => {
     const { columnIndex, direction } = sort
     const column = columns[columnIndex]
     if (!column)
-      return
+      return []
 
     const getField = (row: T) => getValue(column, row) ?? ''
 
