@@ -61,9 +61,9 @@ const createMetaMaskProvider = async () => {
   });
   const ethereum = sdk.getProvider(); 
 
-  ethereum.request({ method: 'eth_requestAccounts', params: [] });
+  const provider = ethereum.request({ method: 'eth_requestAccounts', params: [] });
 
-  return ethereum;
+  return provider;
 }
 
 const createCoinbaseProvider = async () => {
