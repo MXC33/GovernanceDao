@@ -1,18 +1,27 @@
 <template lang="pug">
-NuxtLink(:to="getItemLink(token)" flex="~ col" rel="noopener" aspect="square" w="full" pos="relative" overflow="hidden") 
+VList(aspect="square" w="full" pos="relative" overflow="hidden") 
 
-  slot(name="media")
-    TokenLazyVideo(:token="token" :key="token.collection + token.token_id" :is-hovered="isHovered")
+  NuxtLink(:to="getItemLink(token)"  rel="noopener" )
+    slot(name="media")
+      TokenLazyVideo(:token="token" :key="token.collection + token.token_id" :is-hovered="isHovered")
 
-  HList(pos="absolute" inset="0" p="3")
+  HList(pos="absolute" inset="0" p="3" pointer-events="none")
     slot(name="icon-left")
       PolygonIcon(w="10" pos="absolute left-3 top-3")
+
+
+  HList(pos="absolute" inset="0" p="3" pointer-events="none" opacity="0 group-hover:100" transition="all")
+    CollectionGridButtonSelect(pointer-events="auto" @click.stop.prevent="onSelectedItem" pos="absolute right-3 top-3" v-model="isSelected")
+    
 
 </template>
 
 <script lang="ts" setup>
 import type { IXToken } from '@ix/base/composables/Token/useIXToken';
 import PolygonIcon from '~/assets/icons/polygon_filled.svg'
+const { selectItem, removeSelectedItem } = useSelection()
+
+const isSelected = ref(false)
 
 const props = defineProps<{
   token: IXToken,
@@ -24,13 +33,11 @@ const getItemLink = (token: IXToken) => {
   return `/assets/${network}/${collection}/${token_id}`
 }
 
-
-// const onClickItem = () => {
-//   const { token_id, network, collection } = props.token
-
-//   if (token_id != null)
-//     navigateTo(`/assets/${network}/${collection}/${token_id}`)
-// }
-
+const onSelectedItem = () => {
+  isSelected.value = !isSelected.value
+  if (isSelected.value)
+    return selectItem(props.token)
+  return removeSelectedItem(props.token)
+}
 
 </script>

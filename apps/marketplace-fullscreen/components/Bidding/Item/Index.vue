@@ -1,5 +1,5 @@
 <template lang="pug">
-TransactionItem(v-model="item")
+TransactionItem(v-model="item" :is-multiple="isMultiple")
   template(#adjustments)
     TransactionItemAdjustPrice(v-model="item")
     TransactionItemAdjustQuantity(v-model="item")
@@ -13,5 +13,9 @@ TransactionItem(v-model="item")
 import type { BiddingItem } from '~/composables/useBidding';
 const item = defineModel<BiddingItem>()
 console.log("BID ITEM", item)
+
+const { isMultiple } = defineProps<{
+  isMultiple?: boolean
+}>()
 </script>
   

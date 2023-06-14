@@ -1,11 +1,11 @@
 <template lang="pug">
-ButtonSound(sound="sm" btn="~ primary" cut="bottom-right")
+button(btn="~ on-primary:primary secondary md" cut="bottom-right" :primary="!secondary" opacity="hover:80")
   slot
 </template>
 
 
 <script setup lang="ts">
 defineProps<{
-  isPrimary?: boolean
+  secondary?: boolean
 }>()
 </script>

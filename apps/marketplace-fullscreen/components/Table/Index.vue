@@ -12,7 +12,7 @@ VList(w="full")
         template(v-for="(column, index) in columns")
           TableCellHead(:column="column" :index="index" :sort-field="sort" @select-field="onClickSort", @toggle-sort="onClickToggle" :drawer="inDrawer" v-if="column.type != 'buttons'") {{ column.label }}
 
-          TableCellHeadWrapper(v-else :drawer="inDrawer") {{ $t(`general.action`) }}
+          TableCellHeadWrapper(v-else-if="!isDisabled") {{ $t(`general.action`) }}
 
 
       tbody(divide-y="1")
@@ -25,7 +25,7 @@ VList(w="full")
               slot(:name="`item-${column.rowKey}`" :row="row" :column="column" v-if="column.type != 'buttons'")
                 TableCellValue(:column="column" :row="row")
 
-              HList(v-else space-x="3" justify="end" w="full")
+              HList(v-else-if="!isDisabled" space-x="3" justify="end" w="full")
                 slot(name="item-buttons" :buttons="column.buttons" :row="row")
                   TableButton(:row="row" :button="button" v-for="button in column.buttons") {{ button.text }}
 
@@ -42,7 +42,8 @@ const { rows, columns, id, colWidth } = defineProps<{
   loading?: boolean,
   error?: string,
   isOpen?: boolean,
-  colWidth?: number
+  colWidth?: number,
+  isDisabled?: boolean,
 }>()
 
 const { toggleSortDirection, selectSortField, sort, isServerSort } = useTableSort(id)

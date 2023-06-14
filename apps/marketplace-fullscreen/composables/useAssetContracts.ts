@@ -34,7 +34,7 @@ import { ContractContext as SeaportContract } from '@ix/base/composables/Contrac
 
 import { CartItem } from "~/composables/useCart";
 
-export const ERC1155Addresses = [assetsAddress.polygon?.toLowerCase(), avatarNFTAddress.polygon?.toLowerCase(), landmarkAddress.polygon?.toLowerCase()]
+export const ERC1155Addresses = [assetsAddress.polygon?.toLowerCase(), avatarNFTAddress.polygon?.toLowerCase(), landmarkAddress.polygon?.toLowerCase(), gravityGradeAddress.polygon?.toLowerCase()]
 
 export const ERC721Addresses = [roverAddress.polygon?.toLowerCase(), badgeNFTAddress.polygon?.toLowerCase()]
 
@@ -98,12 +98,22 @@ export const get1155Contract = <T extends ContractInterface<T> & ERC1155Contract
       return contract.safeTransferFrom(address, to, tokenId, amount, ZERO_ADRESS)
     })
 
+  const batchTransfer1155Token = (to: string, tokenId: number[], amount: number[]) =>
+    createTransaction((contract) => {
+      const address = walletAdress.value
+      if (!address)
+        return undefined
+
+      return contract.safeBatchTransferFrom(address, to, tokenId, amount, ZERO_ADRESS)
+    })
+
   return {
     ...contractSpec,
     isApproved,
     setApproval,
     approveNftCheck,
-    transfer1155Token
+    transfer1155Token,
+    batchTransfer1155Token
   }
 }
 
@@ -161,12 +171,22 @@ export const get721Contract = <T extends ContractInterface<T> & ERC721Contract>(
       return contract.safeTransferFrom(address, to, tokenId, ZERO_ADRESS)
     })
 
+  const batchTransfer721Token = (to: string, tokenId: number[]) =>
+    createTransaction((contract) => {
+      const address = walletAdress.value
+      if (!address)
+        return undefined
+
+      return contract.safeBatchTransferFrom(address, to, tokenId)
+    })
+
   return {
     ...contractSpec,
     isApproved,
     setApproval,
     approveNftCheck,
-    transfer721Token
+    transfer721Token,
+    batchTransfer721Token
   }
 }
 

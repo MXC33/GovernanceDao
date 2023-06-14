@@ -1,5 +1,5 @@
 <template lang="pug">
-TransactionItem(v-model="item")
+TransactionItem(v-model="item" :is-multiple="isMultiple")
   template(#adjustments)
     TransactionItemAdjustPrice(v-model="item")
     TransactionItemAdjustQuantity(v-model="item")
@@ -10,5 +10,9 @@ TransactionItem(v-model="item")
 <script lang="ts" setup>
 import type { ListingItem } from '~/composables/useListing'
 const item = defineModel<ListingItem>()
+
+const { isMultiple } = defineProps<{
+  isMultiple?: boolean
+}>()
 </script>
   

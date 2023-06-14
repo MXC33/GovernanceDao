@@ -10,8 +10,8 @@ ContentDrawer(:start-open="!isMobile" :is-neutral="true" bg="gray-900")
     CollectionSingleItemTradeDetail(v-if="item.bids.length < 1" ) 
       | {{ $t(`marketplace.singleItem.noOffers`) }}
 
-    Table(:columns="offerColumns" :rows="item.bids" id="offers" :in-drawer="true" v-if="item.bids.length > 0" :col-width="150")
-      template(#item-buttons="{row}" )
+    Table(:columns="offerColumns" :rows="item.bids" id="offers" :in-drawer="true" v-if="item.bids.length > 0" :col-width="150" :is-disabled="item.my_shares == 0")
+      template(#item-buttons="{row}" v-if="item.my_shares == 0")
         TableButtonSmall(@click="onClickAcceptOffer(row)"  v-if="!playerOwnedSale(row)") {{ $t(`marketplace.singleItem.accept`) }}
         TableButtonSmall(@click="cancelBidOnClick(row)" v-else) {{ $t(`marketplace.singleItem.cancel`) }}
 

@@ -11,7 +11,7 @@ Popup()
 
       //- TransactionApplyToAll(v-model="bidItems")
 
-      BiddingItem(v-for="(_, index) in bidItems" v-model="bidItems[index]")
+      BiddingItem(v-for="(_, index) in bidItems" v-model="bidItems[index]" :is-multiple="bidItems.length > 1")
 
   template(#footer)
     BiddingPrice(:items="bidItems" v-if="bidItems")
