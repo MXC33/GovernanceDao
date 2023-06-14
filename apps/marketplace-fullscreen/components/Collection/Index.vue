@@ -87,7 +87,7 @@ const defaultColumns: TableColumn<IXToken>[] = [
 ]
 
 const renderColumns = computed(() => columns ?? defaultColumns)
-const showFilters = ref(false)
+const showFilters = shallowRef(false)
 
 const toggleFilterDrawer = () => {
   showFilters.value = !showFilters.value

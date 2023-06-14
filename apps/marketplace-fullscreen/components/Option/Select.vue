@@ -32,7 +32,7 @@ VList()
 
 <script lang="ts" setup generic="T extends object | string">
 
-const showTakeOver = ref(false)
+const showTakeOver = shallowRef(false)
 
 const toggleTakeOver = () => {
   showTakeOver.value = !showTakeOver.value

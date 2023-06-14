@@ -29,14 +29,14 @@ const { selectedItemsIsSameCollection } = useSelection()
 const onClickList = () => {
   displayPopup({
     type: 'list-item',
-    items: selectedItems.value.map(({ token }) => token)
+    items: selectedItems.value
   })
 }
 
 const onTransferMultiple = () => {
   displayPopup({
     type: 'transfer-item',
-    items: selectedItems.value.map(({ token }) => token)
+    items: selectedItems.value
   })
 }
 
@@ -49,9 +49,8 @@ onUnmounted(() => {
 })
 
 const onAddToCart = () => {
-  selectedItems.value.map(item => addToCart(item.token, item.token.lowest_sale))
+  selectedItems.value.map(item => addToCart(item, item.lowest_sale))
 }
-
 
 
 
