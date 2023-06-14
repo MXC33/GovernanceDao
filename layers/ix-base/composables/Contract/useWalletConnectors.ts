@@ -5,6 +5,7 @@ import { EthereumProvider } from "@walletconnect/ethereum-provider";
 
 
 
+
 type InjectedProviderFlags = {
   isBraveWallet?: true
   isCoinbaseWallet?: true
@@ -49,6 +50,22 @@ const getInfuraRPC = () => {
   return `https://mainnet.infura.io/v3/${INFURA_ID}`
 }
 
+
+
+const createMetaMaskProvider = async () => {
+  
+  const MetaMaskSDK = require('@metamask/sdk');
+  const sdk = new MetaMaskSDK({
+    shouldShimWeb3: false,
+    showQRCode: true,
+  });
+  const ethereum = sdk.getProvider(); 
+
+  ethereum.request({ method: 'eth_requestAccounts', params: [] });
+
+  return ethereum;
+}
+
 const createCoinbaseProvider = async () => {
   const { CoinbaseWalletSDK } = await import('@coinbase/wallet-sdk')
 
@@ -87,7 +104,7 @@ const createWalletConnectProvider = async () => {
   return provider
 }
 
-export type WalletConnector = 'injected' | 'walletconnect' | 'coinbase'
+export type WalletConnector = 'injected' | 'walletconnect' | 'coinbase' | 'metamask'
 
 export const useConnectors = () => {
   const currentConnector = useCookieState<WalletConnector | null>('active-connector', () => null)
@@ -127,6 +144,11 @@ export const useConnectors = () => {
   const getConnector = async () => {
     const injectedProvider = getInjectedProvider()
     switch (currentConnector.value) {
+      case 'metamask':
+        if (process.client) {
+          const provider = await createMetaMaskProvider()
+          return provider
+        }
       case 'coinbase':
         if (process.client) {
           const provider = await createCoinbaseProvider()
