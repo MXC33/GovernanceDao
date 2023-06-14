@@ -34,7 +34,7 @@ import { ContractContext as SeaportContract } from '@ix/base/composables/Contrac
 
 import { CartItem } from "~/composables/useCart";
 
-export const ERC1155Addresses = [assetsAddress.polygon?.toLowerCase(), avatarNFTAddress.polygon?.toLowerCase(), landmarkAddress.polygon?.toLowerCase()]
+export const ERC1155Addresses = [assetsAddress.polygon?.toLowerCase(), avatarNFTAddress.polygon?.toLowerCase(), landmarkAddress.polygon?.toLowerCase(), gravityGradeAddress.polygon?.toLowerCase()]
 
 export const ERC721Addresses = [roverAddress.polygon?.toLowerCase(), badgeNFTAddress.polygon?.toLowerCase()]
 
