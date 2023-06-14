@@ -2,7 +2,7 @@ import { IXToken } from "@ix/base/composables/Token/useIXToken";
 import { CartItem } from "./useCart";
 import { ListingItem, UnlistingItem } from "./useListing";
 import { BiddingItem, UnbidItem } from "~/composables/useBidding";
-import { TransferItem } from "./useTransfer";
+import { TransferItem, TransferToWalletItem } from "./useTransfer";
 import { TransactionItem } from "./useTransactions";
 import { OfferItem } from "~/composables/useOffer";
 
@@ -27,7 +27,7 @@ export interface PopupTransfer extends PopupBase {
 
 export interface PopupTransferSuccess extends PopupBase {
   type: 'transfer-item-successful',
-  items: TransferItem[]
+  items: TransferToWalletItem
 }
 
 export interface PopupListItem extends PopupBase {

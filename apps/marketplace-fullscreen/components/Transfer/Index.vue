@@ -7,12 +7,12 @@ Popup(@close="$emit('close')")
 
   template(#default)
     VList(space-y="3")
-      TransferInfo(v-for="(_, index) in transferItem" v-model="transferItem[index]" :showAdjustable="isERC1155")
+      TransferItem(v-for="(_, index) in transferItem.items" v-model="transferItem.items[index]" :is-multiple="transferItem.items.length > 1")
 
       div(font="bold") {{ $t(`marketplace.transfer.transferTo`)  }}
 
       HList(frame="~" p="2" outline="0")
-        input(bg="transparent"  placeholder="e.g 0x1a2..." v-model="wallet" @input="onChange" w="full")
+        input(bg="transparent"  placeholder="e.g 0x1a2..." v-model="transferItem.toWallet" w="full")
 
   template(#footer)
     HList(space-x="3" disable="on-invalid:active" :invalid="!isWalletValid")
@@ -33,8 +33,6 @@ const { displayPopup } = usePopups()
 const { transferItem, createTransferItem, transferERC1155NFT, transferERC721NFT } = useTransfer()
 
 const isLoading = ref(false)
-const wallet = ref("")
-const oldWalletAdress = ref("")
 const isChecked = ref(false)
 
 defineEmits(['close'])
@@ -43,19 +41,16 @@ const { items } = defineProps<{
   items: IXToken[],
 }>()
 
-const onChange = () => {
-  if (wallet != oldWalletAdress) {
-    isChecked.value = false;
-    oldWalletAdress.value = wallet.value;
-  }
-}
 
-const isWalletValid = computed(() => wallet.value.length > 25 && wallet.value.substring(0, 2) == '0x')
+
+const isWalletValid = computed(() => transferItem.value?.toWallet?.length > 25 && transferItem.value?.toWallet?.substring(0, 2) == '0x')
 
 const isERC1155 = computed(() => ERC1155Addresses.includes(items[0].collection.toLowerCase()))
 
 const itemTransfer = async () => {
-  const collection = transferItem.value[0].token.collection
+  if (!transferItem.value)
+    return
+  const collection = transferItem.value.items[0].token.collection
 
   isLoading.value = true
   const transfer = await transferNFTType(collection)
@@ -64,8 +59,8 @@ const itemTransfer = async () => {
     displayPopup({
       type: 'transfer-item-successful',
       items: {
-        ...transferItem.value,
-      }
+        ...transferItem.value
+      },
     })
   }
 
@@ -75,11 +70,11 @@ const itemTransfer = async () => {
 const transferNFTType = async (collection: string) => {
 
   if (isERC1155.value)
-    return await transferERC1155NFT(collection, wallet.value, transferItem.value)
+    return await transferERC1155NFT(collection, transferItem.value)
 
-  return await transferERC721NFT(collection, wallet.value, transferItem.value)
+  return await transferERC721NFT(collection, transferItem.value)
 }
 
-createTransferItem(items, wallet.value)
+createTransferItem(items)
 
 </script>
