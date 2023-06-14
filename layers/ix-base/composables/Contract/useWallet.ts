@@ -118,6 +118,7 @@ export const useWallet = () => {
   }
 
   const failedConnection = (message?: string) => {
+    console.log('what is this', message)
     logoutWallet()
 
     if (!message)
@@ -233,7 +234,7 @@ export const useWallet = () => {
     return message
   }
 
-  const signTypedData = async (domain: any, types : any, value : any) => {
+  const signTypedData = async (domain: any, types: any, value: any) => {
     const signer = provider.value?.getSigner()
     if (!signer)
       throw new Error("No signer")
@@ -278,16 +279,16 @@ export const useWallet = () => {
 
   }
 
-  const contractErrorParser = (error: any, body: UpdateListJobBody | boolean = false, endpointUrl: string | null = null ) => {
+  const contractErrorParser = (error: any, body: UpdateListJobBody | boolean = false, endpointUrl: string | null = null) => {
     console.log('error', error)
     const e = error.toString()
-    const message = e.substring(e.indexOf("{") , e.lastIndexOf("}")+ 1);
+    const message = e.substring(e.indexOf("{"), e.lastIndexOf("}") + 1);
     let res = error
     try {
       res = JSON.parse(message)
-    } catch (e) {}
+    } catch (e) { }
 
-    if((res.message.includes("insufficient balance") || res.message.includes("execution reverted")) && body != false && endpointUrl){
+    if ((res.message.includes("insufficient balance") || res.message.includes("execution reverted")) && body != false && endpointUrl) {
       $fetch(endpointUrl, {
         method: 'POST',
         headers: {
@@ -300,7 +301,7 @@ export const useWallet = () => {
     return res.message
   }
 
-  const getCollectionType = function(collection: string) {
+  const getCollectionType = function (collection: string) {
     switch (collection.toLowerCase()) {
       case '0xb2435253c71fca27be41206eb2793e44e1df6b6d':
         return 0

@@ -28,7 +28,9 @@
     "apps/*"
   ],
   "devDependencies": {
-    "concurrently": "^8.2.0",
-    "nuxt": "^3.5.3"
+    "concurrently": "^8.2.0"
+  },
+  "dependencies": {
+    "@metamask/sdk": "^0.3.2"
   }
 }

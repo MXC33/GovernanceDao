@@ -10,7 +10,7 @@ VList(aspect="square" w="full" pos="relative" overflow="hidden")
       PolygonIcon(w="10" pos="absolute left-3 top-3")
 
 
-  HList(pos="absolute" inset="0" p="3" pointer-events="none" opacity="0 group-hover:100" transition="all")
+  HList(pos="absolute" inset="0" p="3" pointer-events="none" opacity="on-selected:100 group-hover:100 0" transition="all" :selected="isSelected")
     CollectionGridButtonSelect(pointer-events="auto" @click.stop.prevent="onSelectedItem" pos="absolute right-3 top-3" v-model="isSelected")
     
 
