@@ -28,6 +28,7 @@
     "apps/*"
   ],
   "devDependencies": {
-    "concurrently": "^8.2.0"
+    "concurrently": "^8.2.0",
+    "nuxt": "^3.5.3"
   }
 }

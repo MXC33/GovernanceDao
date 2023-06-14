@@ -37,7 +37,12 @@ export interface PopupListItem extends PopupBase {
 
 export interface PopupUnlistItem extends PopupBase {
   type: 'unlist-item',
-  item: UnlistingItem
+  items: UnlistingItem[]
+}
+
+export interface PopupUnlistItemSuccess extends PopupBase {
+  type: 'unlist-item-success',
+  items: UnlistingItem[]
 }
 
 export interface PopupBidItem extends PopupBase {
@@ -47,7 +52,12 @@ export interface PopupBidItem extends PopupBase {
 
 export interface PopupUnbidItem extends PopupBase {
   type: 'unbid-item',
-  item: UnbidItem
+  items: UnbidItem[]
+}
+
+export interface PopupUnbidSuccess extends PopupBase {
+  type: 'unbid-success',
+  items: UnbidItem[]
 }
 
 export interface PopupBuyItemSuccess extends PopupBase {
@@ -69,7 +79,7 @@ export interface PopupInsufficientFunds extends PopupBase {
   type: 'insufficient-funds',
 }
 
-type Popup = PopupOnList | PopupOnBid | PopupTransfer | PopupListItem | PopupUnlistItem | PopupBidItem | PopupUnbidItem | PopupTransferSuccess | PopupBuyItemSuccess | PopupAcceptItem | PopupAcceptItemsSuccess | PopupInsufficientFunds
+type Popup = PopupOnList | PopupOnBid | PopupTransfer | PopupListItem | PopupUnlistItem | PopupBidItem | PopupUnbidItem | PopupTransferSuccess | PopupBuyItemSuccess | PopupAcceptItem | PopupAcceptItemsSuccess | PopupInsufficientFunds | PopupUnlistItemSuccess | PopupUnbidSuccess
 
 export const usePopups = () => {
   const popup = useState<Popup | null>('active-popup', () => null)

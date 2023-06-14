@@ -6,14 +6,11 @@ Popup()
   template(#header) {{ $t(`marketplace.unlist.title`) }}
 
   template(#default)
-    VList(v-if="item" p="y-3" frame="~" bg="gray-800") 
-      HList()
-        HList( w="full" space-x="3" space-y="3")
-          TokenImage(:token="item" inset="0" w="25" h="25" object="contain center" :key="getTokenKey(item)" )
-          VList()
-            div(font="bold") {{getTokenName(item)}} 
-            div() x{{ item.sale.quantity }}
-    div(p="y-3") {{ $t(`marketplace.unlist.warningText`) }}
+    VList(space-y="3")
+      TransactionItemCancel(:token="item" v-for="item in items")
+        template(#detail) x{{ item.sale.quantity }}
+
+    div(p="y-3" color="semantic-warning") {{ $t(`marketplace.unlist.warningText`) }}
 
   template(#buttons)
     HList()
@@ -26,20 +23,26 @@ Popup()
 import ListingIcon from '~/assets/icons/listing.svg'
 import type { UnlistingItem } from "~/composables/useListing";
 
-const isLoading = shallowRef(false)
-
-const { getTokenKey, getTokenName } = useTokens()
-const { closeActivePopup } = usePopups()
+const { closeActivePopup, displayPopup } = usePopups()
 const { removeList } = useListEndpoints()
-const { addError } = useContractErrors()
+
 const { myAssetsURL } = useCollectionsURL()
 
+const { loading: isLoading, execute: removeListRequest } = useContractRequest(async () => {
+  const requests = items.map((item) =>
+    removeList(item, item.sale)
+  )
+
+  await Promise.all(requests)
+
+  return Promise.all([refreshSingleItem(), refreshMyAssets()])
+})
 
 const route = useRoute()
 const { network, tokenId, contract } = route.params
 
-const { item } = defineProps<{
-  item: UnlistingItem,
+const { items } = defineProps<{
+  items: UnlistingItem[],
 }>()
 
 const { refresh: refreshSingleItem } = await useAssetAPI({
@@ -56,26 +59,12 @@ const { refresh: refreshMyAssets } = useCollectionData(myAssetsURL('polygon'), {
 })
 
 const unlistOnClick = async () => {
-  isLoading.value = true
-
-  try {
-    await removeList(item._index, item.token_id, item.sale.sale_id, item.network, item.collection)
-    await refreshSingleItem()
-    await refreshMyAssets()
-
-  } catch (err) {
-    console.log("ERR", err)
-    //@ts-ignore
-    const message = err?.message
-
-    addError({
-      title: 'Error unlisting item',
-      serverError: message
+  const didUnlist = await removeListRequest()
+  if (didUnlist)
+    displayPopup({
+      type: 'unlist-item-success',
+      items
     })
-  }
-  isLoading.value = false
-
-  closeActivePopup()
 }
 
 const cancelOnClick = async () => {

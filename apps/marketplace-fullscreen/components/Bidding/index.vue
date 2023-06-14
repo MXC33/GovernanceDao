@@ -10,8 +10,8 @@ Popup()
       TransactionIXTBalance()
 
       //- TransactionApplyToAll(v-model="bidItems")
-
-      BiddingItem(v-for="(_, index) in bidItems" v-model="bidItems[index]" :is-multiple="bidItems.length > 1")
+      VList(space-y="6")
+        BiddingItem(v-for="(_, index) in bidItems" v-model="bidItems[index]" :is-multiple="bidItems.length > 1")
 
   template(#footer)
     BiddingPrice(:items="bidItems" v-if="bidItems")
@@ -25,43 +25,25 @@ Popup()
 import type { IXToken } from "@ix/base/composables/Token/useIXToken"
 import BiddingIcon from '~/assets/icons/bidding.svg'
 
-const isLoading = ref(false)
-
 const { createBidItems, bidItems } = useBiddingItems()
-const { bidItem } = useBiddingContract()
+const { placeBids } = useBiddingContract()
 const { isItemInvalid } = useTransactions()
-const { displaySnack } = useSnackNotifications()
-
 const { displayPopup } = usePopups()
 
-const { addError } = useContractErrors()
+const { loading: isLoading, execute: bidRequest } = useContractRequest(() =>
+  placeBids(bidItems.value)
+)
 
 const onClickBid = async () => {
-  isLoading.value = true
+  const bidSuccessful = await bidRequest()
 
-  try {
-    await bidItem(bidItems.value[0])
-
+  if (bidSuccessful)
     displayPopup({
       type: 'bidding-successful',
       items: bidItems.value
     })
-  } catch (err) {
-    console.log("ERR", err)
-    //@ts-ignore
-    const message = err?.message
-    isLoading.value = false
-
-    if (message?.includes('rejected'))
-      return displaySnack('transaction-rejected')
-
-    addError({
-      title: 'Error bidding',
-      serverError: message
-    })
-  }
-
 }
+
 
 const { items } = defineProps<{
   items: IXToken[],

@@ -19,9 +19,9 @@ Popup(@close="onClose" :disable-default-close="true")
               div(font="bold") {{ item.sale?.price }} IXT
               div(text="gray-300") ${{ ixtToUSD(item.sale?.price ?? 0)  }}
 
-      VList()
+      VList(space-y="3")
         h3(font="bold") {{ $t(`general.errorLog`) }}
-        div(color="semantic-warning" max-h="15" overflow-y="auto" bg="black opacity-60" px="3") {{ error.serverError }}
+        div(color="semantic-warning" max-h="15" overflow-y="auto" bg="black opacity-60" p="3") {{ error.serverError }}
 
 
 

@@ -42,10 +42,10 @@ const onClickAcceptOffer = (bid: Bid) => {
 const cancelBidOnClick = async (bid: Bid) => {
   displayPopup({
     type: 'unbid-item',
-    item: {
+    items: [{
       ...item,
       bid
-    }
+    }]
   })
 }
 

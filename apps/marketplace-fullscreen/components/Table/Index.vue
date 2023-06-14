@@ -39,6 +39,8 @@ VList(w="full")
 <script setup lang="ts" generic="Row extends TableRow">
 import type { ServerTableSort, TableColumn, TableRow, TableSortable } from '~/composables/useTable';
 
+const selectedItems = defineModel<number[]>()
+
 const props = defineProps<{
   columns: TableColumn<Row>[],
   rows: Row[],
@@ -50,16 +52,16 @@ const props = defineProps<{
   colWidth?: number,
   isDisabled?: boolean,
   selectable?: boolean,
-  modelValue: number[],
 }>()
 
-const emits = defineEmits(["update:modelValue"])
-const selectedItems = useVModel(props, 'modelValue', emits)
 
 const isSelected = (index: number) =>
   selectedItems.value?.includes(index)
 
 const onSelect = (index: number, val: boolean) => {
+  if (!selectedItems.value)
+    return
+
   const hasItem = selectedItems.value.indexOf(index) > -1
 
   if (hasItem && !val)
@@ -70,7 +72,7 @@ const onSelect = (index: number, val: boolean) => {
 }
 
 const allSelected = computed(() =>
-  (selectedItems.value ?? []).length == props.rows.length
+  (selectedItems.value ?? []).length == props.rows.length && props.rows.length > 0
 )
 
 const onSelectAll = () => {

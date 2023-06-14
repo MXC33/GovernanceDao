@@ -33,13 +33,12 @@ export const useContractRequest = (fn: () => Promise<any>, options: RequestOptio
     if (onError)
       onError()
 
-    if (error) {
-      const errorData = error()
-      addError({
-        ...errorData,
-        serverError
-      })
-    }
+    const errorData = error ? error() : { title: "Transaction Error" }
+
+    addError({
+      ...errorData,
+      serverError
+    })
   }
 
   const execute = async () => {

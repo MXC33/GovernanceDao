@@ -51,7 +51,9 @@ const columns: TableColumn<IXToken>[] = [
     }, type: 'date', sortable: true
   },
   {
-    type: 'buttons', buttons: [{
+    type: 'buttons',
+    width: 230,
+    buttons: [{
       type: 'secondary', text: 'cancel', onClick: (token) => {
         cancelBidOnClick(token)
       },
@@ -76,10 +78,10 @@ const cancelBidOnClick = async (item: IXToken) => {
 
   displayPopup({
     type: 'unbid-item',
-    item: {
+    items: [{
       ...item,
       bid
-    }
+    }]
   })
 }
 

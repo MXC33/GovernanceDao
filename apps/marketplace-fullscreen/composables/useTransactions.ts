@@ -1,6 +1,6 @@
 import { IXToken } from "@ix/base/composables/Token/useIXToken"
 import { AdjustableNumber } from "@ix/base/composables/Utils/useAdjustableNumber";
-import { differenceInDays } from "date-fns";
+import { differenceInDays, add } from "date-fns";
 
 export interface TransactionItem {
   type?: 'list' | 'bid' | 'accept' | 'transfer'
@@ -9,6 +9,30 @@ export interface TransactionItem {
   durationInDays?: number,
   ixtPrice?: number
 }
+
+
+export const useTransactionContract = () => {
+  const getEndTime = (durationInDays?: number) =>
+    Math.floor(add(new Date(), { days: durationInDays ?? 0 }).getTime() / 1000)
+
+  const baseConsideration = {
+    itemType: ItemType.ERC20,
+    token: IXTAddress.polygon,
+    identifierOrCriteria: 0,
+  }
+
+  const getItemType = (token: IXToken) => {
+    return token.nft_type === NFTType.ERC1155 ?
+      ItemType.ERC1155 : ItemType.ERC721
+  }
+
+  return {
+    baseConsideration,
+    getItemType,
+    getEndTime
+  }
+}
+
 
 export const useTransactions = () => {
   const { t } = useI18n()

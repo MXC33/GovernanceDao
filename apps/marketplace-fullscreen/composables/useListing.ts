@@ -1,11 +1,9 @@
 import { IXToken, ItemType, OrderType, signDomain, typedData, Sale } from "@ix/base/composables/Token/useIXToken"
-import { add } from 'date-fns'
 import { get1155Contract, get721Contract, NFTType } from "~/composables/useAssetContracts";
 import { ethers } from "ethers";
 import {
   conduitKey,
   feeTreasuryAdress,
-  IXTAddress,
 } from "@ix/base/composables/Contract/WalletAddresses";
 import { ZERO_ADRESS, ZERO_ADRESS_LONG } from "@ix/base/composables/Utils/defineContract";
 
@@ -54,10 +52,11 @@ const mapAsyncRequests = async <T>(items: ListingItem[], fn: (item: ListingItem)
 export const useListingContract = () => {
   const { handleAPIError } = useIXAPI()
   const listEndpoints = useListEndpoints()
+  const { walletAdress, signTypedData } = useWallet()
+  const { getEndTime, baseConsideration, getItemType } = useTransactionContract()
 
+  //TODO update endtime
   const createListingMessage = async (item: ListingItem, endTime: number) => {
-    //TODO update endtime
-
     const { token: { collection, token_id, nft_type }, ixtPrice, shares } = item
 
     const nftContract = nft_type === NFTType.ERC1155 ? get1155Contract(collection as string) : get721Contract(collection as string)
@@ -77,18 +76,17 @@ export const useListingContract = () => {
       roundDown(((5 / 100) * totalPrice), 8).toString()
     ).toString()
 
-    const { walletAdress, signTypedData } = useWallet()
-
     const address = walletAdress.value
 
     if (!address)
       throw new Error(CustomErrors.noWallet)
 
+
     const message = {
       offerer: address,
       zone: ZERO_ADRESS,
       offer: [{
-        itemType: item.token.nft_type === NFTType.ERC1155 ? ItemType.ERC1155 : ItemType.ERC721,
+        itemType: getItemType(item.token),
         token: collection,
         identifierOrCriteria: token_id,
         startAmount: shares.value,
@@ -97,17 +95,13 @@ export const useListingContract = () => {
       }],
       consideration: [
         {
-          itemType: ItemType.ERC20,
-          token: IXTAddress.polygon,
-          identifierOrCriteria: 0,
+          ...baseConsideration,
           startAmount: ownerPrice,
           endAmount: ownerPrice,
           recipient: address
         },
         {
-          itemType: ItemType.ERC20,
-          token: IXTAddress.polygon,
-          identifierOrCriteria: 0,
+          ...baseConsideration,
           startAmount: treasuaryFee,
           endAmount: treasuaryFee,
           recipient: feeTreasuryAdress.polygon // fee tresaury
@@ -144,7 +138,7 @@ export const useListingContract = () => {
     }
 
     return {
-      sale_message: saleMessage as string,
+      sale_message: saleMessage,
       sale_price: Number(ixtPrice),
       sale_type: 1, //always 1,
       sale_endtime: endTime,
@@ -166,21 +160,14 @@ export const useListingContract = () => {
   }
 
   const updateListing = async (item: ListingItem) => {
-    const { token: { updating, _index, token_id, sales, network, collection } } = item
+    const { token: { updating, sales }, token } = item
 
     if (!updating)
       return null
 
-    await listEndpoints.removeList(_index, token_id, sales[0].sale_id, network, collection)
+    await listEndpoints.removeList(token, sales[0])
   }
-
-  const getEndTime = (durationInDays?: number) =>
-    Math.floor(add(new Date(), { days: durationInDays ?? 0 }).getTime() / 1000)
-
-  const listItem = async (item: ListingItem) =>
-    listItems([item])
-
-  const listItems = async (items: ListingItem[]) => {
+  const placeListings = async (items: ListingItem[]) => {
     const body = await mapAsyncRequests(items, convertListingItem)
 
     if (body.length == 0)
@@ -197,7 +184,6 @@ export const useListingContract = () => {
   }
 
   return {
-    listItem,
-    listItems
+    placeListings
   }
 }

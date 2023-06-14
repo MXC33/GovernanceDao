@@ -25,42 +25,21 @@ Popup()
 import type { IXToken } from "@ix/base/composables/Token/useIXToken"
 import ListingIcon from '~/assets/icons/listing.svg'
 
-const isLoading = shallowRef(false)
-
 const { createListItems, listItems: activeListItems } = useListingItems()
-const { listItems } = useListingContract()
+const { placeListings } = useListingContract()
 const { isItemInvalid } = useTransactions()
-const { displaySnack } = useSnackNotifications()
-
 const { displayPopup } = usePopups()
 
-const { addError } = useContractErrors()
+const { loading: isLoading, execute: listItems } = useContractRequest(() => placeListings(activeListItems.value))
 
 const onClickList = async () => {
-  isLoading.value = true
+  const didList = await listItems()
 
-  try {
-    await listItems(activeListItems.value)
-
+  if (didList)
     displayPopup({
       type: 'listing-successful',
       items: activeListItems.value
     })
-  } catch (err) {
-    console.log("ERR", err)
-    //@ts-ignore
-    const message = err?.message
-
-    if (message?.includes('rejected'))
-      return displaySnack('transaction-rejected')
-
-    addError({
-      title: 'Error listing',
-      serverError: message
-    })
-  }
-
-  isLoading.value = false
 }
 
 const { items } = defineProps<{

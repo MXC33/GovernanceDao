@@ -1,3 +1,6 @@
+import { IXToken, Sale } from "@ix/base/composables/Token/useIXToken"
+import { UnlistingItem } from "~/composables/useListing"
+
 export interface ListingAssets {
   index: string,
   token_id: number,
@@ -37,13 +40,16 @@ export const useListEndpoints = () => {
     })
   })
 
-  const removeList = (index: string, token_id: number, sale_id: number, network: string, collection: string) => fetchIXAPI('web3/sale/remove', 'POST', {
-    index,
-    token_id,
-    sale_id,
-    network,
-    collection,
-  })
+
+  const removeList = ({ _index, token_id, collection, network }: IXToken, sale: Sale) => {
+    return fetchIXAPI('web3/sale/remove', 'POST', {
+      index: _index,
+      token_id,
+      sale_id: sale.sale_id,
+      network,
+      collection,
+    })
+  }
 
   return {
     listAssets,

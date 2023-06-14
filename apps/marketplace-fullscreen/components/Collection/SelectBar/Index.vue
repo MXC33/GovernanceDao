@@ -12,7 +12,11 @@ div(v-if="amountSelected != 0" w="full" p="3" pos="sticky bottom-0" z="2" bg="ix
       CollectionSelectBarButton(:secondary="true" @click="onTransferMultiple" disable="on-differentCollection:active" :differentCollection="!selectedItemsIsSameCollection") Transfer {{amountSelected}} 
       CollectionSelectBarButton(@click="onClickList") List {{amountSelected}} 
 
-    CollectionSelectBarButton(v-else-if="context=='collection'" @click="onAddToCart") Add {{amountSelected}} To Cart 
+    template(v-else-if="context=='collection'")
+      CollectionSelectBarButton(@click="onClickOffer" :secondary="true") Place {{amountSelected}} offer(s)
+
+      CollectionSelectBarButton(@click="onAddToCart") Add {{amountSelected}} To Cart 
+
 
     template(v-else-if="context=='incoming-bids'")
       CollectionSelectBarButton() Reject {{amountSelected}} Bids
@@ -29,6 +33,13 @@ const { selectedItemsIsSameCollection } = useSelection()
 const onClickList = () => {
   displayPopup({
     type: 'list-item',
+    items: selectedItems.value
+  })
+}
+
+const onClickOffer = () => {
+  displayPopup({
+    type: 'bid-item',
     items: selectedItems.value
   })
 }
