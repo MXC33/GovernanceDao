@@ -1,5 +1,7 @@
 
 import type { ExternalProvider } from "@ethersproject/providers";
+import type { MetaMaskSDKOptions } from "@metamask/sdk";
+import { DappMetadata } from '@metamask/sdk-communication-layer';
 //@ts-ignore
 import { EthereumProvider } from "@walletconnect/ethereum-provider";
 
@@ -30,6 +32,7 @@ const getProviderName = (provider: InjectedProvider) => {
   if (provider.isBitKeep) return 'BitKeep'
   if (provider.isBraveWallet) return 'Brave Wallet'
   if (provider.isCoinbaseWallet) return 'Coinbase Wallet'
+  if (provider.isMetaMask) return 'MetaMask'
   if (provider.isExodus) return 'Exodus'
   if (provider.isFrame) return 'Frame'
   if (provider.isOpera) return 'Opera'
@@ -50,17 +53,19 @@ const getInfuraRPC = () => {
   return `https://mainnet.infura.io/v3/${INFURA_ID}`
 }
 
-
-
 const createMetaMaskProvider = async () => {
-  
-  const MetaMaskSDK = require('@metamask/sdk');
-  const sdk = new MetaMaskSDK({
-    shouldShimWeb3: false,
-    showQRCode: true,
-  });
-  const ethereum = sdk.getProvider(); 
+  const { MetaMaskSDK } = await import('@metamask/sdk')
+  const d_data: DappMetadata = {}
+  const options: MetaMaskSDKOptions = {
+    dappMetadata: d_data
+  };
+  const sdk = new MetaMaskSDK(options);
 
+  console.log("PROVIDER", sdk)
+  const ethereum = sdk.getProvider();
+  if (ethereum == undefined) {
+    return
+  }
   const provider = ethereum.request({ method: 'eth_requestAccounts', params: [] });
 
   return provider;
@@ -113,6 +118,7 @@ export const useConnectors = () => {
     if (!process.client)
       return null
 
+    //@ts-ignore
     return window.ethereum as InjectedProvider
   }
 
@@ -120,9 +126,9 @@ export const useConnectors = () => {
     const injectedProvider = getInjectedProvider()
 
     if (injectedProvider?.isCoinbaseWallet)
-      return ['coinbase', 'walletconnect']
+      return ['metamask', 'coinbase', 'walletconnect']
     else
-      return ['injected', 'coinbase', 'walletconnect']
+      return ['metamask', 'coinbase', 'walletconnect']
   }
 
   const clearConnector = () => {
@@ -134,6 +140,8 @@ export const useConnectors = () => {
     switch (type) {
       case 'injected':
         return injectedProvider && getProviderName(injectedProvider)
+      case 'metamask':
+        return 'MetaMask'
       case 'coinbase':
         return 'Coinbase Wallet'
       case 'walletconnect':
@@ -146,8 +154,8 @@ export const useConnectors = () => {
     switch (currentConnector.value) {
       case 'metamask':
         if (process.client) {
-          const provider = await createMetaMaskProvider()
-          return provider
+          const mm = await createMetaMaskProvider()
+          return mm
         }
       case 'coinbase':
         if (process.client) {

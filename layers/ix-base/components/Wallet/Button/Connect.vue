@@ -64,4 +64,5 @@ const connectorName = computed(() => {
   else
     return name.value
 })
+
 </script>
