@@ -27,7 +27,9 @@ const { selectedItems } = useSelection()
 
 const rowsAsSelected = computed<number[]>({
   get: () =>
-    selectedItems.value.map((item) => sortedRows.value.findIndex((token) => token.token_id == item.token_id)),
+    selectedItems.value.map((item) =>
+      sortedRows.value.findIndex((token) => token.token_id == item.token_id)
+    ),
 
   set: (values: number[]) =>
     selectedItems.value = values.map((index) =>
