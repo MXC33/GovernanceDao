@@ -17,14 +17,13 @@ VList(max-h="85" frame="~")
 
 <script lang="ts" setup>
 import { Collapse } from 'vue-collapsed'
-const mobile = onMobile()
 const { startOpen } = defineProps<{
   startOpen?: boolean
   isSmall?: boolean
   isNeutral?: boolean
 }>()
 
-const isOpen = ref(startOpen)
+const isOpen = shallowRef(startOpen)
 
 const dropDrawer = () => {
   isOpen.value = !isOpen.value

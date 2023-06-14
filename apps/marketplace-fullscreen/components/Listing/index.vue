@@ -25,7 +25,7 @@ Popup()
 import type { IXToken } from "@ix/base/composables/Token/useIXToken"
 import ListingIcon from '~/assets/icons/listing.svg'
 
-const isLoading = ref(false)
+const isLoading = shallowRef(false)
 
 const { createListItems, listItems: activeListItems } = useListingItems()
 const { listItems } = useListingContract()

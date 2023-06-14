@@ -25,7 +25,7 @@ Popup()
 import ListingIcon from '~/assets/icons/listing.svg'
 import type { UnbidItem } from '~/composables/useBidding';
 
-const isLoading = ref(false)
+const isLoading = shallowRef(false)
 
 const { getTokenKey, getTokenName } = useTokens()
 const { closeActivePopup } = usePopups()

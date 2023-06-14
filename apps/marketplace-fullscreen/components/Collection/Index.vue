@@ -35,7 +35,6 @@ import type { TableColumn } from '~/composables/useTable'
 import CertifiedIcon from '~/assets/icons/certified.svg'
 
 const { activeFilters } = useCollectionSettings()
-const { selectedItems } = useSelection()
 
 const { getCollectionAttributes } = useDefaulAttributes()
 const attributes = computed(() => data ? getCollectionAttributes(data) : [])
@@ -87,7 +86,7 @@ const defaultColumns: TableColumn<IXToken>[] = [
 ]
 
 const renderColumns = computed(() => columns ?? defaultColumns)
-const showFilters = ref(false)
+const showFilters = shallowRef(false)
 
 const toggleFilterDrawer = () => {
   showFilters.value = !showFilters.value

@@ -26,7 +26,7 @@ Popup()
 import ListingIcon from '~/assets/icons/listing.svg'
 import type { UnlistingItem } from "~/composables/useListing";
 
-const isLoading = ref(false)
+const isLoading = shallowRef(false)
 
 const { getTokenKey, getTokenName } = useTokens()
 const { closeActivePopup } = usePopups()

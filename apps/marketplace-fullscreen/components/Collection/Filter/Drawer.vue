@@ -23,7 +23,7 @@ const { startOpen } = defineProps<{
   isNeutral?: boolean
 }>()
 
-const isOpen = ref(startOpen)
+const isOpen = shallowRef(startOpen)
 const dropDrawer = () => { isOpen.value = !isOpen.value }
 
 </script>

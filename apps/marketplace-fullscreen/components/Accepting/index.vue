@@ -26,7 +26,7 @@ import type { IXToken } from "@ix/base/composables/Token/useIXToken"
 import BiddingIcon from '~/assets/icons/bidding.svg'
 import { useAcceptingItem, useOfferContract } from "~/composables/useOffer";
 
-const isLoading = ref(false)
+const isLoading = shallowRef(false)
 
 const { createAcceptingItem, acceptingItem } = useAcceptingItem()
 const { acceptOffer } = useOfferContract()

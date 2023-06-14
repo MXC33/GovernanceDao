@@ -21,7 +21,7 @@ import type { IXToken } from '@ix/base/composables/Token/useIXToken';
 import PolygonIcon from '~/assets/icons/polygon_filled.svg'
 const { selectItem, removeSelectedItem } = useSelection()
 
-const isSelected = ref(false)
+const isSelected = shallowRef(false)
 
 const props = defineProps<{
   token: IXToken,

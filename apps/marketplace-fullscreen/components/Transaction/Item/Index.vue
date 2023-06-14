@@ -39,7 +39,7 @@ const { isTransfer = false, isMultiple } = defineProps<{
 
 
 const item = defineModel<TransactionItem>()
-const isOpen = ref(!isMultiple)
+const isOpen = shallowRef(!isMultiple)
 
 
 const isValid = computed(() => !!item.value?.ixtPrice && !!item.value.shares)

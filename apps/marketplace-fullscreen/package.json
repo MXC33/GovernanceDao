@@ -12,11 +12,13 @@
   "devDependencies": {
     "@ix/base": "*",
     "@types/node": "^18",
+    "@vueuse/router": "^10.1.2",
     "fuzzyjs": "^5.0.1",
     "nuxt": "^3.5.3",
     "v-lazy-show": "^0.2.3",
     "vite-plugin-pug": "^0.3.2",
     "vue-collapsed": "^1.1.3",
+    "vue-router": "4",
     "vue3-easy-data-table": "^1.5.42",
     "vue3-table-lite": "^1.3.7"
   }

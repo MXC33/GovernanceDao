@@ -29,12 +29,6 @@ const onClickSnack = () => {
   }
 }
 
-const iFrameOpen = ref(false)
-
-const openSwap = () => {
-  iFrameOpen.value = !iFrameOpen.value
-}
-
 const { notification } = defineProps<{
   notification: SnackNotification
 }>()

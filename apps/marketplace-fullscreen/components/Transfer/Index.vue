@@ -32,8 +32,8 @@ const { displayPopup } = usePopups()
 
 const { transferItem, createTransferItem, transferERC1155NFT, transferERC721NFT } = useTransfer()
 
-const isLoading = ref(false)
-const isChecked = ref(false)
+const isLoading = shallowRef(false)
+const isChecked = shallowRef(false)
 
 defineEmits(['close'])
 
