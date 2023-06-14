@@ -23,8 +23,8 @@ VList(flex-grow="1" min-h="0" pos="relative" p="4 md:(8 b-30)" space-y="0 md:6")
 
   slot(name="bottom")
 
-  //- Transition(name="slide-bottom")
-  //-   CollectionSelectBar(v-if="selectedItems?.length > 0" :context="context")
+  Transition(name="slide-bottom")
+    CollectionSelectBar(v-if="selectedItems?.length > 0" :context="context")
 
 </template>
 

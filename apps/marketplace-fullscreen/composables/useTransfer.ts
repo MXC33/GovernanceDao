@@ -1,44 +1,71 @@
 import { IXToken } from "@ix/base/composables/Token/useIXToken"
 import { TransactionItem } from "./useTransactions"
+import { get1155Contract } from "./useAssetContracts";
+
 
 export interface TransferItem extends TransactionItem {
-  token: IXToken,
-  toWallet?: string
+  type: 'transfer'
+}
+
+export interface TransferToWalletItem {
+  items: TransferItem[]
+  toWallet: string
 }
 
 export const useTransfer = () => {
-  const transferItem = useState<TransferItem[]>('transfer-items', () => [])
-  const viewingTransferItem = useState('transfer-visible', () => false)
+  const transferItem = useState<TransferToWalletItem>('transfer-items')
 
-  const removeFromTransferList = (token: IXToken) => {
-
-    const index = transferItem.value.findIndex((item) => item.token.token_id == token.token_id)
-    console.log("remove", index, token.token_id, transferItem.value.map((item) => item.token.token_id))
-    transferItem.value.splice(index, 1)
+  const createTransferItem = (items: IXToken[]) => {
+    transferItem.value = {
+      items: items.map((token) => ({
+        type: 'transfer',
+        token,
+        shares: {
+          min: 1,
+          value: 1,
+          max: token.my_shares
+        },
+      })),
+      toWallet: ''
+    }
   }
 
-  const addToTransferList = (token: IXToken) => {
-    transferItem.value.push({
-      token,
-      shares: {
-        min: 1,
-        max: token?.my_shares,
-        value: 1
-      }
-    })
+  const transferERC721NFT = async (contractAddress: string, items: TransferToWalletItem) => {
 
-    viewingTransferItem.value = true
+    const contract = get721Contract(contractAddress)
+
+    if (!contract)
+      return console.error("NO CONTRACT SET UP")
+
+    if (items.items.length == 1)
+      return contract.transfer721Token(items.toWallet, items.items[0].token.token_id)
+
+
+    const tokenIds = items.items.map(item => item.token.token_id)
+    return contract.batchTransfer721Token(items.toWallet, tokenIds)
   }
 
-  const clearTransferList = () => {
-    transferItem.value = []
+  const transferERC1155NFT = async (contractAddress: string, items: TransferToWalletItem) => {
+
+    const contract = get1155Contract(contractAddress)
+
+    if (!contract)
+      return console.error("NO CONTRACT SET UP")
+
+    if (items.items.length == 1)
+      return contract.transfer1155Token(items.toWallet, items.items[0].token.token_id, items.items[0].shares.value)
+
+
+    const tokenIds = items.items.map(item => item.token.token_id)
+    const quantity = items.items.map(item => item.shares.value)
+
+    return contract.batchTransfer1155Token(items.toWallet, tokenIds, quantity)
   }
 
   return {
     transferItem,
-    viewingTransferItem,
-    removeFromTransferList,
-    addToTransferList,
-    clearTransferList
+    createTransferItem,
+    transferERC721NFT,
+    transferERC1155NFT,
   }
 }

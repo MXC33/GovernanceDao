@@ -9,7 +9,7 @@ VList(bg="gray-800" v-if="item" frame="~" flex-shrink="0")
         TokenName(:token="item.token" w="auto")
         span x{{ item.shares.value }}
 
-      TransactionItemDescription(:item="item")
+      TransactionItemDescription(:item="item" v-if="!isTransfer")
 
     HList(space-x="6")
       CheckMarkIcon(opacity="0 on-valid:100" transition="all" :valid="isValid" w="6")
@@ -19,7 +19,7 @@ VList(bg="gray-800" v-if="item" frame="~" flex-shrink="0")
 
   Collapse(:when="isOpen" class="v-collapse")
     VList(p="6" w="full" space-y="3")
-      TransactionItemDetails(:item="item")
+      TransactionItemDetails(:item="item" v-if="!isTransfer")
 
       div(b="t-1 gray-600")
 
@@ -32,10 +32,17 @@ import type { TransactionItem } from '~/composables/useTransactions'
 import CheckMarkIcon from '~/assets/icons/checkmark-green.svg'
 import { Collapse } from 'vue-collapsed'
 
+const { isTransfer = false, isMultiple } = defineProps<{
+  isTransfer?: boolean
+  isMultiple?: boolean
+}>()
+
+
 const item = defineModel<TransactionItem>()
-const isOpen = ref(false)
+const isOpen = ref(!isMultiple)
+
 
 const isValid = computed(() => !!item.value?.ixtPrice && !!item.value.shares)
-console.log("Transaction", item)
+console.log("Transaction", item, "isTransfer", isTransfer)
 </script>
   
