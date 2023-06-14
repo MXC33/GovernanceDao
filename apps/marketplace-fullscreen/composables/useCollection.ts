@@ -73,8 +73,8 @@ export interface CollectionData {
   filters: APIFilter[]
 }
 
-export type CollectionDisplayType = 'list' | 'grid'
-
+export const CollectionDisplayTypes = ['list', 'grid'] as const
+export type CollectionDisplayType = typeof CollectionDisplayTypes[number]
 
 export const useCollectionSettings = () => {
 
@@ -83,12 +83,12 @@ export const useCollectionSettings = () => {
   const collectionOwners = useState('collectionOwners', () => ("All"))
   const activeContext = useState<string | null>('collection-context', () => null)
 
-  const displayType = useState<CollectionDisplayType>('collection-display-type', () => 'grid')
+  const displayType = useRouteQueryOptions('displayType', 'grid', ['grid', 'list'])
 
   const setContext = (context: string) => activeContext.value = context
 
   const toggleDisplayType = () => {
-    if (displayType.value == 'grid')
+    if (displayType.value)
       return displayType.value = 'list'
     else
       return displayType.value = 'grid'
