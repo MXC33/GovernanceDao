@@ -1,12 +1,6 @@
-
 import type { ExternalProvider } from "@ethersproject/providers";
 import type { MetaMaskSDKOptions } from "@metamask/sdk";
-import { DappMetadata } from '@metamask/sdk-communication-layer';
-//@ts-ignore
 import { EthereumProvider } from "@walletconnect/ethereum-provider";
-
-
-
 
 type InjectedProviderFlags = {
   isBraveWallet?: true
@@ -55,20 +49,24 @@ const getInfuraRPC = () => {
 
 const createMetaMaskProvider = async () => {
   const { MetaMaskSDK } = await import('@metamask/sdk')
-  const d_data: DappMetadata = {}
   const options: MetaMaskSDKOptions = {
-    dappMetadata: d_data
-  };
-  const sdk = new MetaMaskSDK(options);
-
-  console.log("PROVIDER", sdk)
-  const ethereum = sdk.getProvider();
-  if (ethereum == undefined) {
-    return
+    dappMetadata: {
+      name: 'Mission Control',
+      url: 'https://missioncontrol.planetix.com/IX-icon.png'
+    }
   }
-  const provider = ethereum.request({ method: 'eth_requestAccounts', params: [] });
+  const sdk = new MetaMaskSDK(options)
 
-  return provider;
+  const provider = sdk.getProvider()
+  if (provider == undefined) { return }
+  try {
+    await provider.request({ method: 'eth_requestAccounts' })
+    await provider.request({ method: 'eth_chainId' })
+    return provider
+  } catch (error) {
+    console.error('Error connecting to Ethereum accounts:', error)
+    return null
+  }
 }
 
 const createCoinbaseProvider = async () => {
@@ -89,6 +87,8 @@ const createCoinbaseProvider = async () => {
   } catch {
     return null
   }
+  console.log('test5', provider)
+
   return provider
 }
 
