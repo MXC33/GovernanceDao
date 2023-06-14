@@ -17,7 +17,7 @@ Popup()
     ListingPrice(:items="listItems")
 
   template(#buttons)
-    ButtonInteractive(btn="~ primary" w="full" @click.prevent="onClickList" text="List Items" :invalid="isItemInvalid(listItems)" :loading="isLoading")
+    ButtonInteractive(btn="~ primary" w="full" @click.prevent="onClickList" text="List Items" :invalid="isItemInvalid(listItems, true)" :loading="isLoading")
 
 </template>
 

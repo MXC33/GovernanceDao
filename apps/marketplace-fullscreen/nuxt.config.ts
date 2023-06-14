@@ -1,5 +1,6 @@
 
 // https://nuxt.com/docs/api/configuration/nuxt-config
+
 export default defineNuxtConfig({
   extends: [
     '@ix/base'
@@ -34,6 +35,7 @@ export default defineNuxtConfig({
       }
     }
   },
+  watch: ['./unocss.config.ts', '@ix/base/unocss.config'],
 
   typescript: {
     includeWorkspace: true

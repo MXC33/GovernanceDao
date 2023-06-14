@@ -17,7 +17,7 @@ Popup()
     AcceptingPrice(:item="acceptingItem" v-if="acceptingItem")
 
   template(#buttons)
-    ButtonInteractive(btn="~ primary" w="full" @click.prevent="onClickAccept" text="Accept offer" :invalid="itemsInvalid([acceptingItem])" :loading="isLoading")
+    ButtonInteractive(btn="~ primary" w="full" @click.prevent="onClickAccept" text="Accept offer" :invalid="itemsInvalid([acceptingItem], true)" :loading="isLoading")
 
 </template>
 
