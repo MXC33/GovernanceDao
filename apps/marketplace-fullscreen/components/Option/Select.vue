@@ -18,6 +18,7 @@ VList()
     Teleport(to="#takeover" v-if="showTakeOver")
       Transition(name="slide-bottom")
         OptionPanel(@close="showTakeOver = false")
+
           template(#header) 
             slot(name="header")
 

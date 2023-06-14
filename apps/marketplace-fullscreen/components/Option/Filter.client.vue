@@ -13,8 +13,6 @@ VList()
     Teleport(to="#takeover")
       Transition(name="slide-bottom")
         OptionPanel.no-scrollbar(@close="showTakeOver = false" v-if="showTakeOver")
-          template(#iconheader?)
-            slot(name="iconheader")
 
           template(#header) 
             slot(name="header")

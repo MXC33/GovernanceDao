@@ -1,7 +1,8 @@
 <template lang="pug">
 OptionSelect(:items="collections")
   template(#header) 
-    | {{ $t(`collection.explore`) }}
+    CollectionIcon(w="6" translate-y="-0.4" display="md:none")
+    span() {{ $t(`collection.explore`) }}
 
   template(#icon)
     CollectionIcon()
