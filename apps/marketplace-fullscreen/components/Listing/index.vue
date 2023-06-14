@@ -11,7 +11,7 @@ Popup()
 
       //- TransactionApplyToAll(v-model="listItems")
       VList(space-y="6")
-        ListingItem(v-for="(_, index) in activeListItems" v-model="activeListItems[index]")
+        ListingItem(v-for="(_, index) in activeListItems" v-model="activeListItems[index]" :is-multiple="activeListItems.length > 1")
 
   template(#footer)
     ListingPrice(:items="activeListItems")

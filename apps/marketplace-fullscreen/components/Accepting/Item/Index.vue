@@ -1,5 +1,5 @@
 <template lang="pug">
-TransactionItem(v-model="item")
+TransactionItem(v-model="item" :is-multiple="isMultiple")
   template(#adjustments)
     TransactionItemAdjustQuantity(v-model="item")
       template(#max="{max}") {{ $t(`marketplace.bid.maxAmount`) }} {{ max }}
@@ -11,4 +11,8 @@ import type { AcceptingItem } from "~/composables/useOffer";
 
 const item = defineModel<AcceptingItem>()
 console.log("ACCEPT ITEM", item)
+
+const { isMultiple } = defineProps<{
+  isMultiple?: boolean
+}>()
 </script>
