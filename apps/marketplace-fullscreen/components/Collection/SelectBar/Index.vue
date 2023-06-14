@@ -9,7 +9,7 @@ div(v-if="amountSelected != 0" w="full" p="3" pos="sticky bottom-0" z="2" bg="ix
     div(flex="grow")
 
     template(v-if="context=='my-assets'")
-      CollectionSelectBarButton(:secondary="true" @click="onTransferMultiple") Transfer {{amountSelected}} 
+      CollectionSelectBarButton(:secondary="true" @click="onTransferMultiple" disable="on-differentCollection:active" :differentCollection="!selectedItemsIsSameCollection") Transfer {{amountSelected}} 
       CollectionSelectBarButton(@click="onClickList") List {{amountSelected}} 
 
     CollectionSelectBarButton(v-else-if="context=='collection'" @click="onAddToCart") Add {{amountSelected}} To Cart 
@@ -24,6 +24,7 @@ div(v-if="amountSelected != 0" w="full" p="3" pos="sticky bottom-0" z="2" bg="ix
 import type { CollectionContext } from '~/composables/useCollection';
 const { addToCart } = useCart()
 const { displayPopup } = usePopups()
+const { selectedItemsIsSameCollection } = useSelection()
 
 const onClickList = () => {
   displayPopup({

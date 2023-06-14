@@ -11,6 +11,12 @@ export const useSelection = () => {
   const selectedItems = useState<SelectedItem[]>('selected-items', () => [])
   const viewingSelectedItems = useState('selected-items-visible', () => false)
 
+  const selectedItemsIsSameCollection = computed(() => {
+    const selectedItemsCollection = selectedItems.value.map(item => item.token.collection)
+
+    return selectedItemsCollection.every(val => val === selectedItemsCollection[0]);
+  })
+
   const removeSelectedItem = (selectedItem: IXToken) => {
 
     const index = selectedItems.value.findIndex((item) =>
@@ -38,6 +44,7 @@ export const useSelection = () => {
   return {
     selectedItems,
     viewingSelectedItems,
+    selectedItemsIsSameCollection,
     removeSelectedItem,
     selectItem,
     clearSelectedItems
