@@ -10,10 +10,10 @@ ContentDrawer(:start-open="!isMobile" :is-neutral="true" bg="gray-900")
     CollectionSingleItemTradeDetail(v-if="item.bids.length < 1" ) 
       | {{ $t(`marketplace.singleItem.noOffers`) }}
 
-    Table(:columns="offerColumns" :rows="item.bids" id="offers" v-if="item.bids.length > 0" :col-width="150" :is-disabled="item.my_shares == 0")
-      template(#item-buttons="{row}" v-if="item.my_shares != 0")
-        TableButtonSmall(@click="onClickAcceptOffer(row)"  v-if="!playerOwnedSale(row)") {{ $t(`marketplace.singleItem.accept`) }}
-        TableButtonSmall(@click="cancelBidOnClick(row)" v-else) {{ $t(`marketplace.singleItem.cancel`) }}
+    Table(:columns="offerColumns" :rows="item.bids" id="offers" v-if="item.bids.length > 0" :col-width="150" )
+      template(#item-buttons="{row}")
+        TableButtonSmall(@click="onClickAcceptOffer(row)"  v-if="!playerOwnedSale(row) && item.my_shares > 0") {{ $t(`marketplace.singleItem.accept`) }}
+        TableButtonSmall(@click="cancelBidOnClick(row)" v-else-if="playerOwnedSale(row)") {{ $t(`marketplace.singleItem.cancel`) }}
 
 </template>
 
@@ -66,18 +66,7 @@ const offerColumns = computed<TableColumn<Bid>[]>(() => {
       }, sortable: true
     },
     { label: "Expiration", type: "date", rowKey: "due_date", sortable: true },
-    {
-      type: 'buttons', buttons: [{
-        type: 'secondary', onClick: (token) => {
-          onClickAcceptOffer(token)
-        },
-      },
-      {
-        type: 'primary', onClick: (token) => {
-          cancelBidOnClick(token)
-        },
-      }]
-    },
+    { type: 'buttons', width: 120 }
   ]
 
   return baseColumns

@@ -10,7 +10,7 @@ VList(w="full")
 
       TableHead()
         template(v-for="(column, index) in displayColumns")
-          TableCellHeadWrapper(v-if="column.type == 'buttons' && !isDisabled") {{ $t('general.action') }}
+          TableCellHeadWrapper(v-if="column.type == 'buttons'") {{ $t('general.action') }}
 
           TableCellHeadWrapper(v-else-if="column.type == 'select'") 
             InputCheckbox(:model-value="allSelected" @update:modelValue="onSelectAll")
@@ -28,7 +28,7 @@ VList(w="full")
                 InputCheckbox(:model-value="isSelected(index)" @update:modelValue="val => onSelect(index, val)")
 
               HList(v-else-if="column.type == 'buttons'" space-x="3" justify="end" w="full")
-                slot(name="item-buttons" :buttons="column.buttons" :row="row" v-if="!isDisabled")
+                slot(name="item-buttons" :buttons="column.buttons" :row="row" )
                   TableButton(:row="row" :button="button" v-for="button in column.buttons") {{ button.text }}
 
               slot(v-else :name="`item-${column.rowKey}`" :row="row" :column="column" )
@@ -50,7 +50,6 @@ const props = defineProps<{
   error?: string,
   isOpen?: boolean,
   colWidth?: number,
-  isDisabled?: boolean,
   selectable?: boolean,
 }>()
 
