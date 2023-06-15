@@ -124,11 +124,16 @@ export const useConnectors = () => {
 
   const getAvailableConnectors = (): WalletConnector[] => {
     const injectedProvider = getInjectedProvider()
-
-    if (injectedProvider?.isCoinbaseWallet)
-      return ['metamask', 'coinbase', 'walletconnect']
-    else
-      return ['metamask', 'coinbase', 'walletconnect']
+    console.log(injectedProvider?.isCoinbaseWallet)
+    console.log(injectedProvider?.isMetaMask)
+    switch (true) {
+      case injectedProvider?.isMetaMask:
+        return ['injected', 'coinbase', 'walletconnect']
+      case injectedProvider?.isCoinbaseWallet:
+        return ['metamask', 'coinbase', 'walletconnect']
+      default:
+        return ['metamask', 'coinbase', 'walletconnect']
+    }
   }
 
   const clearConnector = () => {
