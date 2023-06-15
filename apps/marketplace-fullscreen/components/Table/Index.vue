@@ -10,7 +10,7 @@ VList(w="full")
 
       TableHead()
         template(v-for="(column, index) in displayColumns")
-          TableCellHeadWrapper(v-if="column.type == 'buttons'") {{ $t('general.action') }}
+          TableCellHeadWrapper(v-if="column.type == 'buttons' && !isDisabled") {{ $t('general.action') }}
 
           TableCellHeadWrapper(v-else-if="column.type == 'select'") 
             InputCheckbox(:model-value="allSelected" @update:modelValue="onSelectAll")
