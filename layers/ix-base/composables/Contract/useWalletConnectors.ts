@@ -78,7 +78,7 @@ const createCoinbaseProvider = async () => {
     darkMode: true
   })
 
-  console.log("PROVIDER", coinbaseWallet)
+  //console.log("PROVIDER", coinbaseWallet)
 
   const provider = coinbaseWallet.makeWeb3Provider(getInfuraRPC(), 137)
 
@@ -87,7 +87,6 @@ const createCoinbaseProvider = async () => {
   } catch {
     return null
   }
-  console.log('test5', provider)
 
   return provider
 }
@@ -124,8 +123,6 @@ export const useConnectors = () => {
 
   const getAvailableConnectors = (): WalletConnector[] => {
     const injectedProvider = getInjectedProvider()
-    console.log(injectedProvider?.isCoinbaseWallet)
-    console.log(injectedProvider?.isMetaMask)
     switch (true) {
       case injectedProvider?.isMetaMask:
         return ['injected', 'coinbase', 'walletconnect']

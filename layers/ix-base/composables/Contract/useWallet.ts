@@ -118,7 +118,6 @@ export const useWallet = () => {
   }
 
   const failedConnection = (message?: string) => {
-    console.log('what is this', message)
     logoutWallet()
 
     if (!message)

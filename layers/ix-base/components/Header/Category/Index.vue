@@ -10,7 +10,7 @@ div()
 
 <script lang="ts" setup>
 import type { HeaderCategory } from '~/composables/useSiteHeader';
-const {enable} = useIXTSwapVisible()
+const { enable } = useIXTSwapVisible()
 const props = defineProps<{
   parentType: string,
   category: HeaderCategory
@@ -18,12 +18,12 @@ const props = defineProps<{
 
 const emit = defineEmits(["onClickItem"])
 
-const onClickItem = (type: string, catagory: string, item: string) =>{
-  console.log("OnClicked Header category index", type, catagory, item)
+const onClickItem = (type: string, catagory: string, item: string) => {
+  //console.log("OnClicked Header category index", type, catagory, item)
   emit('onClickItem', type, catagory, item)
 
-  switch(item){
-    case 'swap' :
+  switch (item) {
+    case 'swap':
       enable()
       break
   }
@@ -33,10 +33,10 @@ const onClickItem = (type: string, catagory: string, item: string) =>{
 
 const gridState = computed(() => {
   const gridItems = props.category.items.length
-  if(gridItems > 6)
+  if (gridItems > 6)
     return 'three'
-  
-  if(gridItems > 3)
+
+  if (gridItems > 3)
     return 'two'
 })
 
