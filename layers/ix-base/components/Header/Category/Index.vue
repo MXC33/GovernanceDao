@@ -1,7 +1,7 @@
 <template lang="pug">
 div()
-  div(text="ix-orange" p="2") {{ $t(`marketplace.navigation.${parentType}.${category.type}.title`) }} 
-  div(b="b-1 ix-orange" w="95%")
+  div(text="gray-200" p="2") {{ $t(`marketplace.navigation.${parentType}.${category.type}.title`) }} 
+  div(b="b-1 gray-400" w="95%")
 
   div(grid="~ cols-1 s-two:cols-2 s-three:cols-3" :state="gridState" )
     HeaderCategoryItem(v-for="item in category.items" :header="parentType" :category="category.type" :item="item" @click="onClickItem(parentType, category.type, item)" items="center") 

@@ -1,6 +1,7 @@
 <template lang="pug">
-VList(pos="sticky top-0" z="99" w="full" @mouseenter="isSelected = true" @mouseleave="isSelected = false" ref="menuElement" )
-  HList(items="center"  bg="gray-800" px="4 md:7.5" h="16" space-x="6")
+VList(pos="sticky top-0" z="99" w="full" @mouseenter="isSelected = true" @mouseleave="isSelected = false" ref="menuElement")
+  HList(items="center"  bg="ix-black" px="4 md:7.5" h="16" space-x="6")
+    div(divide-y="0.1")
     NuxtLink(to="https://www.planetix.com")
       PlanetIXNew(w="42.25")
 
@@ -35,13 +36,13 @@ import PlanetIXNew from '~/assets/images/header/planetix-new.svg'
 import SettingsIcon from '~/assets/images/header/hamburger.svg'
 const { fetchIXT } = useIXTContract()
 const { siteTopHeaders } = useSiteHeader()
-const {state: swapVisible} = useIXTSwapVisible()
+const { state: swapVisible } = useIXTSwapVisible()
 const activeMenuIndex = ref<number | null>(null)
 
 const route = useRoute()
 
 const onClickItem = (type: string, catagory: string, item: string) => {
-  switch(item){
+  switch (item) {
     case 'swap':
       return swapVisible.value = true;
   }
@@ -64,16 +65,16 @@ const toggleMenu = () => {
 
 const isSelected = ref(false)
 const menuElement = ref()
-const closeMenu = () => 
+const closeMenu = () =>
   activeMenuIndex.value = null;
 
 onClickOutside(menuElement, () => {
-  if (!isSelected.value) 
+  if (!isSelected.value)
     closeMenu()
 })
 
 watch([swapVisible, route], ([visible]) => {
-  if(visible)
+  if (visible)
     closeMenu()
 })
 
