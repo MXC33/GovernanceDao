@@ -432,17 +432,17 @@
           "title": "NETEMPIRE",
           "trade-land": {
             "title": "TRADE LAND",
-            "description": "Upgrade your AOC badge for greater utility.",
-            "link": ""
+            "description": "Create your empire on the Planet IX map.",
+            "link": "https://planetix.com/netempire"
           },
           "trade-assets": {
             "title": "TRADE ASSETS",
-            "description": "Burn Avatars for in-game utility.",
+            "description": "Trade PIX and assets at NetEmpire Marketplace.",
             "link": ""
           },
           "incoming-bids": {
             "title": "INCOMING BIDS",
-            "description": "Burn Avatars for in-game utility.",
+            "description": "Check the latest bids on your assets and land.",
             "link": ""
           }
         },
@@ -450,62 +450,62 @@
           "title": "ETERNALABS",
           "bio-mods-lab": {
             "title": "BIO-MODS LAB",
-            "description": "Upgrade your AOC badge for greater utility.",
-            "link": ""
+            "description": "Refine waste, and create M3ta-M0ds.",
+            "link": "https://missioncontrol.planetix.com/eternalab/bio-mods-lab"
           },
           "eternal-shop": {
             "title": "ETERNALAB SHOP",
-            "description": "Burn Avatars for in-game utility.",
-            "link": ""
+            "description": "Purchase Bio-M0ds using waste.",
+            "link": "https://missioncontrol.planetix.com/eternalab/shop"
           },
           "stake-burn-asset": {
             "title": "STAKE & BURN ASSETS",
-            "description": "Burn Avatars for in-game utility.",
-            "link": ""
+            "description": "Stake or burn EternaLabs assets.",
+            "link": "https://missioncontrol.planetix.com/eternalab/stake-burn"
           }
         },
         "newlands": {
           "title": "NEWLANDS",
           "construction": {
             "title": "CONSTRUCTION",
-            "description": "Upgrade your AOC badge for greater utility.",
-            "link": ""
+            "description": "Build and upgrade facilities.",
+            "link": "https://missioncontrol.planetix.com/new-lands/construction"
           },
           "newlands-shop": {
             "title": "NEWLANDS SHOP",
-            "description": "Burn Avatars for in-game utility.",
-            "link": ""
+            "description": "Obtain additional land tiles in Mission Control.",
+            "link": "https://missioncontrol.planetix.com/new-lands/shop"
           },
           "stake-burn-asset": {
             "title": "STAKE & BURN ASSETS",
-            "description": "Burn Avatars for in-game utility.",
-            "link": ""
+            "description": "Stake or burn Newlands LLC assets.",
+            "link": "https://missioncontrol.planetix.com/new-lands/stake-burn"
           }
         },
         "y_": {
           "title": "Y_",
           "y_shop": {
             "title": "Y_ SHOP",
-            "description": "Upgrade your AOC badge for greater utility.",
-            "link": ""
+            "description": "Obtain harvesting vehicles that collect waste.",
+            "link": "https://missioncontrol.planetix.com/y-space/shop"
           },
           "service-points": {
             "title": "SERVICE POINTS",
-            "description": "Burn Avatars for in-game utility.",
-            "link": ""
+            "description": "Repair and rename Rovers.",
+            "link": "https://missioncontrol.planetix.com/y-space/service"
           },
           "stake-burn-asset": {
             "title": "STAKE & BURN ASSETS",
-            "description": "Burn Avatars for in-game utility.",
-            "link": ""
+            "description": "Stake or burn Y_ assets.",
+            "link": "https://missioncontrol.planetix.com/y-space/stake-burn"
           }
         },
         "luckycat": {
           "title": "LUCKYCAT",
           "lucky-raffle": {
             "title": "LUCKY RAFFLES",
-            "description": "Upgrade your AOC badge for greater utility.",
-            "link": ""
+            "description": "Participate in various raffles for great rewards.",
+            "link": "https://missioncontrol.planetix.com/lucky-cat/raffle"
           },
           "avatar": {
             "title": "AVATAR",
@@ -517,36 +517,36 @@
           "title": "ASTRO CAP",
           "exchange-service": {
             "title": "EXCHANGE SERVICE",
-            "description": "Upgrade your AOC badge for greater utility.",
-            "link": ""
+            "description": "Swap IXT for Astro Gold.",
+            "link": "https://missioncontrol.planetix.com/astro-cap/swap"
           }
         },
         "gws": {
           "title": "GWS",
           "waste-management": {
             "title": "WASTE MANAGEMENT",
-            "description": "Upgrade your AOC badge for greater utility.",
-            "link": ""
+            "description": "Sell waste or construct GWS machinery.",
+            "link": "https://missioncontrol.planetix.com/gws/waste-management"
           },
           "gws-shop": {
             "title": "GWS SHOP",
-            "description": "Burn Avatars for in-game utility.",
-            "link": ""
+            "description": "Become an owner of Global Waste Systems.",
+            "link": "https://missioncontrol.planetix.com/gws/shop"
           }
         },
         "gravity-grade": {
           "title": "GRAVITY GRADE",
           "gg-shop": {
             "title": "GG SHOP",
-            "description": "Upgrade your AOC badge for greater utility.",
-            "link": ""
+            "description": "Purchase GG Packs and Drops.",
+            "link": "https://missioncontrol.planetix.com/gravity-grade/shop"
           }
         },
         "haveblue": {
           "title": "HAVEBLUE",
           "haveblue-shop": {
             "title": "HAVEBLUE SHOP",
-            "description": "Upgrade your AOC badge for greater utility.",
+            "description": "Acquire AOC Badges and IX Corpo Avatar Packs.",
             "link": ""
           }
         },
@@ -554,7 +554,7 @@
           "title": "ARCADE",
           "arcade": {
             "title": "ARCADE",
-            "description": "Claim Arcade airdrops.",
+            "description": "Coming soon.",
             "link": ""
           }
         }
