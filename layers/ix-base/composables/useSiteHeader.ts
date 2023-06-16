@@ -47,11 +47,11 @@ export const buyIXTHeaderItems: HeaderCategory[] = [
 export const playNowHeaderItems: HeaderCategory[] = [
   {
     type: 'game',
-    items: ['teminal', 'market', 'arena', 'mc', 'gamebook']
+    items: ['teminal', 'mc', 'arena', 'gamebook']
   },
   {
-    type: 'claimburn',
-    items: ['aocbadge', 'avatar', 'arcade']
+    type: 'market',
+    items: ['trade-land', 'trade-asset']
   },
   // {
   //   type: 'analytics',
@@ -99,8 +99,8 @@ export const corporationsHeaderItems: HeaderCategory[] = [
   {
     type: 'arcade',
     items: ['arcade']
-  }, 
-] 
+  },
+]
 
 export const stakingHeaderItems: HeaderCategory[] = [
   {

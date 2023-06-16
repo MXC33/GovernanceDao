@@ -384,22 +384,17 @@
             "link": "https://whitepaper.planetix.com/"
           }
         },
-        "claimburn": {
-          "title": "CLAIM & BURN",
-          "aocbadge": {
-            "title": "AOC BADGE",
-            "description": "Upgrade your AOC badge for greater utility.",
-            "link": "https://planetix.com/aoc/burn"
+        "market": {
+          "title": "MARKETPLACE",
+          "trade-land": {
+            "title": "TRADE LAND",
+            "description": "Trade PIX and assets at NetEmpire",
+            "link": "https://planetix.com/netempire"
           },
-          "avatar": {
-            "title": "AVATAR",
-            "description": "Burn Avatars for in-game utility.",
-            "link": ""
-          },
-          "arcade": {
-            "title": "ARCADE",
-            "description": "Claim Arcade airdrops.",
-            "link": "https://planetix.com/claim/arcade"
+          "trade-asset": {
+            "title": "TRADE ASSETS",
+            "description": "Trade PIX and assets at NetEmpire Marketplace.",
+            "link": "https://marketplace.planetix.com/"
           }
         },
         "analytics": {
