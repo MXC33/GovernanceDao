@@ -69,7 +69,6 @@ export type ERC721MethodNames =
   | 'isApprovedForAll'
   | 'safeBatchTransferFrom'
   | 'safeTransferFrom'
-  | 'safeTransferFrom'
   | 'setApprovalForAll'
   | 'transferFrom'
   | 'transferOwnership';
@@ -153,23 +152,6 @@ export interface ERC721 {
     from: string,
     to: string,
     tokenId: BigNumberish,
-    overrides?: ContractTransactionOverrides
-  ): Promise<ContractTransaction>;
-  /**
-   * Payable: false
-   * Constant: false
-   * StateMutability: nonpayable
-   * Type: function
-   * @param from Type: address, Indexed: false
-   * @param to Type: address, Indexed: false
-   * @param tokenId Type: uint256, Indexed: false
-   * @param _data Type: bytes, Indexed: false
-   */
-  safeTransferFrom(
-    from: string,
-    to: string,
-    tokenId: BigNumberish,
-    _data: Arrayish,
     overrides?: ContractTransactionOverrides
   ): Promise<ContractTransaction>;
   /**
