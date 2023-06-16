@@ -388,12 +388,12 @@
           "title": "MARKETPLACE",
           "trade-land": {
             "title": "TRADE LAND",
-            "description": "Trade PIX and assets at NetEmpire",
+            "description": "Create your empire on the Planet IX map.",
             "link": "https://planetix.com/netempire"
           },
           "trade-asset": {
             "title": "TRADE ASSETS",
-            "description": "Trade PIX and assets at NetEmpire Marketplace.",
+            "description": "Trade assets at NetEmpire Marketplace.",
             "link": "https://marketplace.planetix.com/"
           }
         },
