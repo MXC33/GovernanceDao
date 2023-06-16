@@ -29,8 +29,6 @@ const onClickItem = (type: string, catagory: string, item: string) => {
   }
 }
 
-
-
 const gridState = computed(() => {
   const gridItems = props.category.items.length
   if (gridItems > 6)
