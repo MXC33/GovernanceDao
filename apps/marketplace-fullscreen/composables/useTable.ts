@@ -2,7 +2,9 @@ import { camelCaseIt } from 'case-it';
 
 export type SortDirection = 'desc' | 'asc'
 
-export interface TableRow extends Record<string, any> { }
+export interface TableRow extends Record<string, any> {
+  originalIndex?: number
+}
 
 export const ServerSortOptions = {
   PRICE_ASC: 0,
@@ -65,7 +67,7 @@ export interface TableSelectColumn extends TableColumnBase {
   type: 'select'
 }
 
-export type TableColumn<T extends TableRow> = TableColumnText<T> | TableButtonColumn<T> | TableSelectColumn
+export type TableColumn<T extends TableRow> = TableColumnText<T> | TableButtonColumn<T>
 
 const columnIndex = (id: string) => {
   const colIndexOne = ['collection', 'incoming-bids', 'outgoing-bids', 'my-assets', 'active-listings']
@@ -181,7 +183,7 @@ const getDotNotation = (obj: object, key: string) => {
 
 export const useTable = () => {
   const getValue = <T extends TableRow>(column: TableColumn<T>, row: T) => {
-    if (column.type == 'buttons' || column.type == 'select')
+    if (column.type == 'buttons')
       return undefined
 
     if (column.getValue)
@@ -198,12 +200,19 @@ export const useTable = () => {
   const sortRows = <T extends TableRow>(columns: TableColumn<T>[], rows: T[], sort: TableSort) => {
     const { columnIndex, direction } = sort
     const column = columns[columnIndex]
+    console.log("col", column, columnIndex, direction)
+
+    const mapped = rows.map((row, index) => ({
+      originalIndex: index,
+      ...row
+    }))
+
     if (!column)
       return []
 
     const getField = (row: T) => getValue(column, row) ?? ''
 
-    return rows.sort((a, b) => {
+    return mapped.sort((a, b) => {
       const aField = getField(a)
       const bField = getField(b)
 

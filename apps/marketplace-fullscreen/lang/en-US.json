@@ -198,7 +198,7 @@
       "transferTo": "Transfer to",
       "placeholderText": "Put Adress Here",
       "warningText": "Make sure the adress is correct! There is no way to reverse this transaction",
-      "verifyText": "I Verify that I am aware that the transaction is not reversible, and that the wallet address is correct.",
+      "verifyText": "I verify that I am aware that the transaction is not reversible, and that the wallet address is correct.",
       "confirm": "Confrim Adress",
       "transferItem": "Transfer Item",
       "transferSucess": "TRANSFER SUCCESSFUL!"
@@ -208,7 +208,7 @@
       "own": "You own",
       "placeholderText": "Put Adress Here",
       "warningText": "Make sure the adress is correct!<br/>There is no way to reverse this transaction",
-      "verifyText": "I Verify that I am aware that the transaction is not<br/>reversible, and that the wallet address is correct.",
+      "verifyText": "I verify that I am aware that the transaction is not<br/>reversible, and that the wallet address is correct.",
       "confirm": "Confrim Adress",
       "transferItem": "Transfer Item",
       "listSucess": "LIST SUCCESSFUL!"
@@ -248,7 +248,7 @@
       "own": "You own",
       "placeholderText": "Put Adress Here",
       "warningText": "Make sure the adress is correct!<br/>There is no way to reverse this transaction",
-      "verifyText": "I Verify that I am aware that the transaction is not<br/>reversible, and that the wallet address is correct.",
+      "verifyText": "I verify that I am aware that the transaction is not<br/>reversible, and that the wallet address is correct.",
       "confirm": "Confrim Adress",
       "transferItem": "Transfer Item",
       "maxAmount": "Max amount",
