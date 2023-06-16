@@ -437,13 +437,13 @@
           },
           "trade-assets": {
             "title": "TRADE ASSETS",
-            "description": "Trade PIX and assets at NetEmpire Marketplace.",
-            "link": ""
+            "description": "Trade assets at NetEmpire Marketplace.",
+            "link": "https://marketplace.planetix.com/"
           },
           "incoming-bids": {
             "title": "INCOMING BIDS",
-            "description": "Check the latest bids on your assets and land.",
-            "link": ""
+            "description": "Check the latest bids on your land.",
+            "link": "https://planetix.com/netempire/incoming-bids"
           }
         },
         "eternallabs": {
