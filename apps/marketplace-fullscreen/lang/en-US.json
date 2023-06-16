@@ -216,7 +216,8 @@
     "unlist": {
       "title": "Unlist Item",
       "warningText": "Are you sure you want to unlist this item?",
-      "cancel": "Cancel"
+      "cancel": "Cancel",
+      "success": "Successfully unlisted"
     },
     "transactions": {
       "applyToAll": "APPLY TO ALL",
@@ -259,7 +260,8 @@
     "unbid": {
       "title": "Remove Bid",
       "warningText": "Are you sure you want to remove this bid?",
-      "cancel": "Cancel"
+      "cancel": "Cancel",
+      "success": "Bid successfully removed"
     },
     "trade": {
       "youOwn": "You own:",

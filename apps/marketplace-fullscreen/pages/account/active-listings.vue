@@ -90,10 +90,10 @@ const cancelListingOnClick = async (item: IXToken) => {
   const sale = item.sales[0]
   displayPopup({
     type: 'unlist-item',
-    item: {
+    items: [{
       ...item,
       sale: sale
-    }
+    }]
   })
 }
 

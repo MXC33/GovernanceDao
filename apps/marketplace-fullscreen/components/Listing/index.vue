@@ -10,14 +10,14 @@ Popup()
       TransactionIXTBalance()
 
       //- TransactionApplyToAll(v-model="listItems")
-
-      ListingItem(v-for="(_, index) in listItems" v-model="listItems[index]")
+      VList(space-y="6")
+        ListingItem(v-for="(_, index) in activeListItems" v-model="activeListItems[index]" :is-multiple="activeListItems.length > 1")
 
   template(#footer)
-    ListingPrice(:items="listItems")
+    ListingPrice(:items="activeListItems")
 
   template(#buttons)
-    ButtonInteractive(btn="~ primary" w="full" @click.prevent="onClickList" text="List Items" :invalid="isItemInvalid(listItems, true)" :loading="isLoading")
+    ButtonInteractive(btn="~ primary" w="full" @click.prevent="onClickList" text="List Items" :invalid="isItemInvalid(activeListItems, true)" :loading="isLoading")
 
 </template>
 
@@ -25,42 +25,21 @@ Popup()
 import type { IXToken } from "@ix/base/composables/Token/useIXToken"
 import ListingIcon from '~/assets/icons/listing.svg'
 
-const isLoading = ref(false)
-
-const { createListItems, listItems } = useListingItems()
-const { listItem } = useListingContract()
+const { createListItems, listItems: activeListItems } = useListingItems()
+const { placeListings } = useListingContract()
 const { isItemInvalid } = useTransactions()
-const { displaySnack } = useSnackNotifications()
-
 const { displayPopup } = usePopups()
 
-const { addError } = useContractErrors()
+const { loading: isLoading, execute: listItems } = useContractRequest(() => placeListings(activeListItems.value))
 
 const onClickList = async () => {
-  isLoading.value = true
+  const didList = await listItems()
 
-  try {
-    await listItem(listItems.value[0])
-
+  if (didList)
     displayPopup({
       type: 'listing-successful',
-      items: listItems.value
+      items: activeListItems.value
     })
-  } catch (err) {
-    console.log("ERR", err)
-    //@ts-ignore
-    const message = err?.message
-
-    if (message?.includes('rejected'))
-      return displaySnack('transaction-rejected')
-
-    addError({
-      title: 'Error listing',
-      serverError: message
-    })
-  }
-
-  isLoading.value = false
 }
 
 const { items } = defineProps<{

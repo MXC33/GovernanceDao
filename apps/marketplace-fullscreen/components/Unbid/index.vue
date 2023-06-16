@@ -6,12 +6,10 @@ Popup()
   template(#header) {{ $t(`marketplace.unbid.title`) }}
 
   template(#default)
-    VList(v-if="item" p="y-3" frame="~" bg="gray-800") 
-      HList()
-        HList( w="full" space-x="3" space-y="3")
-          TokenImage(:token="item" inset="0" w="25" h="25" object="contain center" :key="getTokenKey(item)" )
-          VList()
-            div(font="bold") {{getTokenName(item)}} 
+    VList(space-y="3")
+      TransactionItemCancel(:token="item" v-for="item in items")
+        template(#detail) x{{ item.bid.quantity }}
+
     div(p="y-3") {{ $t(`marketplace.unbid.warningText`) }}
 
   template(#buttons)
@@ -25,20 +23,20 @@ Popup()
 import ListingIcon from '~/assets/icons/listing.svg'
 import type { UnbidItem } from '~/composables/useBidding';
 
-const isLoading = ref(false)
-
-const { getTokenKey, getTokenName } = useTokens()
-const { closeActivePopup } = usePopups()
+const { closeActivePopup, displayPopup } = usePopups()
 const { removeBid } = useBidsAPI()
-const { addError } = useContractErrors()
-const { myAssetsURL } = useCollectionsURL()
 
+const { myAssetsURL } = useCollectionsURL()
+const { loading: isLoading, execute: removeBidRequest } = useContractRequest(async () => {
+  await Promise.all(items.map((item) => removeBid(item)))
+  return Promise.all([refreshSingleItem(), refreshMyAssets()])
+})
 
 const route = useRoute()
 const { network, tokenId, contract } = route.params
 
-const { item } = defineProps<{
-  item: UnbidItem,
+const { items } = defineProps<{
+  items: UnbidItem[],
 }>()
 
 const { refresh: refreshSingleItem } = await useAssetAPI({
@@ -55,27 +53,13 @@ const { refresh: refreshMyAssets } = useCollectionData(myAssetsURL('polygon'), {
 })
 
 const unbidOnClick = async () => {
-  isLoading.value = true
+  const unbid = await removeBidRequest()
 
-  try {
-
-    await removeBid(item._index, item.token_id, item.network, item.collection)
-    await refreshSingleItem()
-    await refreshMyAssets()
-
-  } catch (err) {
-    console.log("ERR", err)
-    //@ts-ignore
-    const message = err?.message
-
-    addError({
-      title: 'Error unbidding item',
-      serverError: message
+  if (unbid)
+    displayPopup({
+      type: 'unbid-success',
+      items
     })
-  }
-  isLoading.value = false
-
-  closeActivePopup()
 }
 
 const cancelOnClick = async () => {

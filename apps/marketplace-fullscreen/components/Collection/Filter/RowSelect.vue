@@ -1,5 +1,5 @@
 <template lang="pug">
-div(cursor="pointer" flex="~ " justify="between" items="center" h="12" bg="ix-black hover:gray-900 on-selected:gray-900" p="r-8" w="full" :selected="isSelected" @click.stop="toggle" group)
+div(cursor="pointer" flex="~ " justify="between" items="center" h="12" p="r-8" w="full" :selected="isSelected" @click.stop="toggle" group)
   HList(space-x="4" w="full" justify="between" items="center")
     HList(items="center")
       InputCheckbox(v-model="isSelected")
@@ -8,7 +8,6 @@ div(cursor="pointer" flex="~ " justify="between" items="center" h="12" bg="ix-bl
 
     span(color="gray-200" font="base")
       slot(name="value")
-
 </template>
 
 <script lang="ts" setup>

@@ -61,7 +61,7 @@ export interface SingleItemData extends IXToken {
   favorite_count: number
 }
 
-export interface Bid {
+export interface Bid extends Record<string, any> {
   bidder_id: number
   quantity: number
   bidder_username: string

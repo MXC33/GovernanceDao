@@ -181,3 +181,44 @@ export const useStateBoolean = (key: string, initialValue: boolean) => {
     disable
   }
 }
+
+
+export const useRunOnce = (id: string, fn: () => void) => {
+  const hasRun = useState(`use-once-${id}-run`, () => false)
+
+  if (hasRun.value || !process.client)
+    return
+
+  hasRun.value = true
+  fn()
+}
+
+export const useRouteQueryOptions = <T extends string>(key: string, defaultVal: T, values: T[]) => {
+  const router = useRouter()
+  const route = useRoute()
+
+  const defaultValue = (() => {
+
+    const query = route.query[key]
+    if (values.includes(query as T))
+      return query as T
+
+    return defaultVal
+  })()
+
+  const state = useState(key, () => defaultValue)
+
+  useRunOnce(`route-${key}`, () => {
+    watch(state, (newState) => {
+      router.push({
+        path: route.path,
+        query: {
+          ...route.query,
+          [key]: newState,
+        },
+      })
+    })
+  })
+
+  return state
+}

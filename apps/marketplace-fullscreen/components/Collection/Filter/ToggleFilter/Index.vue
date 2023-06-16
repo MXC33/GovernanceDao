@@ -1,12 +1,26 @@
 <template lang="pug">
-HList(uppercase="~" font="bold" text="white" frame="~ hover:gray-300" flex-shrink="0" w="12" h="12" items="center" justify="center" pos="relative")
-  CollectionFilterToggleFilterButton()
-    FilterIcon(w="4 md:5")
+OptionFilter(:filters="activeFilters" :large="true" @toggle="$emit('toggle-filter')")
+  template(#icon)
+    FilterIcon()
+
+  template(#header)
+    FilterIcon(w="6" translate-y="-0.4")
+    span() FILTER
+
+  template(#item)
+    CollectionFilterSlideout(:items="data.filters" v-if="data?.filters")
 
 </template>
   
 
 <script lang="ts" setup>
+import type { CollectionData } from '~/composables/useCollection';
 import FilterIcon from '~/assets/icons/filter.svg'
+
+const { activeFilters } = useCollectionSettings()
+
+const { data } = defineProps<{
+  data?: CollectionData
+}>()
 
 </script>

@@ -22,10 +22,11 @@ VList(space-y="4")
       TitleWithIcon(icon="listing") {{ $t(`marketplace.singleItem.listings`) }}
 
     template(#default)
-      Table(:columns="saleColumns" :rows="item.sales" id="single-item" :in-drawer="true" v-if="item.sales && item.sales.length > 0")
+      Table(:columns="saleColumns" :rows="item.sales" id="single-item"  v-if="item.sales && item.sales.length > 0")
         template(#item-action="{row}")
           TableButtonSmall(@click="addSaleToCart(row)" v-if="!playerOwnedSale(row)")
             CartIcon(w="3 md:6")
+
           TableButtonSmall(@click="cancelListingOnClick(row)" v-else)
             TrashIcon(w="3 md:6" fill="white")
 
@@ -42,7 +43,7 @@ VList(space-y="4")
       HList(px="6" py="6" font="bold" color="gray-400" items="center" justify="center" v-if="item.bids.length < 1" ) 
         span() {{ $t(`marketplace.singleItem.noOffers`) }}
 
-      Table(:columns="offerColumns" :rows="item.bids" id="offers" :in-drawer="true" v-else="item.bids.length > 0")
+      Table(v-else-if="item.bids.length > 0" :columns="offerColumns" :rows="item.bids" id="offers")
 
   CollectionSingleItemMobileMeta(:item="item")
 

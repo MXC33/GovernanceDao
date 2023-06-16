@@ -15,23 +15,24 @@ VList()
       template(#item="{item}")
         slot(name="item" :item="item")
 
-  Transition(name="slide-bottom")
     Teleport(to="#takeover" v-if="showTakeOver")
-      OptionPanel(@close="showTakeOver = false")
-        template(#header) 
-          slot(name="header")
+      Transition(name="slide-bottom")
+        OptionPanel(@close="showTakeOver = false")
 
-        template(#beforeItems)
-          slot(name="beforeItems")
+          template(#header) 
+            slot(name="header")
 
-        template(#default)
-          slot(name="item" :item="item" v-for="item in items")
+          template(#beforeItems)
+            slot(name="beforeItems")
+
+          template(#default)
+            slot(name="item" :item="item" v-for="item in items")
 
 </template>
 
 <script lang="ts" setup generic="T extends object | string">
 
-const showTakeOver = ref(false)
+const showTakeOver = shallowRef(false)
 
 const toggleTakeOver = () => {
   showTakeOver.value = !showTakeOver.value

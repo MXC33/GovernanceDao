@@ -47,16 +47,14 @@ export const useBiddingItems = () => {
 }
 
 export const useBiddingContract = () => {
+  const { allowanceCheck } = useIXTContract()
   const { ixtBalance, refreshIXTBalance } = useIXTContract()
-
+  const { walletAdress, signTypedData } = useWallet()
+  const { handleAPIError } = useIXAPI()
+  const { getEndTime, baseConsideration, getItemType } = useTransactionContract()
   const createBidMessage = async (item: BiddingItem, endTime: number) => {
 
     const { token: { collection, token_id }, ixtPrice, shares } = item
-    /*
-      Todo
-      Start loading overlay
-    */
-    console.log('start Loading overlay')
 
     if (!ixtPrice)
       throw new Error(CustomErrors.invalidIXTPrice)
@@ -64,18 +62,13 @@ export const useBiddingContract = () => {
     const totalPrice = ixtPrice * shares.value
 
     await refreshIXTBalance()
-    if (!ixtBalance.value || ixtBalance.value < totalPrice) {
-      throw new Error(CustomErrors.insufficientBalance)
-    }
 
-    const { allowanceCheck } = useIXTContract()
-    if (!await allowanceCheck(totalPrice)) {
-      /*
-        Todo
-        Allowance didn't work"
-      */
+    if (!ixtBalance.value || ixtBalance.value < totalPrice)
+      throw new Error(CustomErrors.insufficientBalance)
+
+
+    if (!await allowanceCheck(totalPrice))
       throw new Error(CustomErrors.allowanceError)
-    }
 
     const ownerPrice = ethers.utils.parseUnits(
       roundUp(totalPrice, 8).toString()
@@ -85,17 +78,9 @@ export const useBiddingContract = () => {
       roundDown(((5 / 100) * totalPrice), 8).toString()
     ).toString()
 
-    const { walletAdress, signTypedData } = useWallet()
-
     const address = walletAdress.value
-
-    if (!address) {
-      /*
-        Todo
-        wallet address is undefined
-      */
+    if (!address)
       throw new Error(CustomErrors.noWallet)
-    }
 
     const message = {
       offerer: address,
@@ -110,7 +95,7 @@ export const useBiddingContract = () => {
       }],
       consideration: [
         {
-          itemType: item.token.nft_type === NFTType.ERC1155 ? ItemType.ERC1155 : ItemType.ERC721,
+          itemType: getItemType(item.token),
           token: collection,
           identifierOrCriteria: token_id,
           startAmount: shares.value,
@@ -118,9 +103,7 @@ export const useBiddingContract = () => {
           recipient: address
         },
         {
-          itemType: ItemType.ERC20,
-          token: IXTAddress.polygon,
-          identifierOrCriteria: 0,
+          ...baseConsideration,
           startAmount: treasuaryFee,
           endAmount: treasuaryFee,
           recipient: feeTreasuryAdress.polygon // fee tresaury
@@ -145,53 +128,18 @@ export const useBiddingContract = () => {
     })
   }
 
-  const bidItem = async (item: BiddingItem) => {
-    const { shares, ixtPrice, durationInDays, token: { _index: index, collection, token_id, network } } = item
+  const placeBids = async (items: BiddingItem[]) => {
 
-    const endTime = Math.floor(add(new Date(), { days: durationInDays }).getTime() / 1000)
-    const bidMessage = await createBidMessage(item, endTime)
-    if (!bidMessage)
-      return false
-    try {
-      const biddingBody: BiddingBody = {
-        index,
-        reference_id: token_id,
-        price: Number(ixtPrice),
-        quantity: shares.value,
-        due_date: endTime,
-        collection,
-        network,
-        message: bidMessage
-      }
-
-      const bidEndpoints = useBidsAPI()
-      await bidEndpoints.placeBid([biddingBody])
-
-      return true
-
-    } catch (error: any) {
-
-      console.log(error.response)
-      if (error.response && error.response._data && error.response._data.message) {
-        throw new Error(error.response._data.message)
-      } else {
-        throw new Error(CustomErrors.unknownError)
-      }
-    }
-  }
-
-  const bidItems = async (items: BiddingItem[]) => {
-    const biddingsBody: BiddingBody[] = []
-
-    for (const item of items) {
+    const requests = items.map(async (item) => {
       const { shares, ixtPrice, durationInDays, token: { _index: index, collection, token_id, network } } = item
 
-      const endTime = Math.floor(add(new Date(), { days: durationInDays }).getTime() / 1000)
+      const endTime = getEndTime(durationInDays)
+
       const bidMessage = await createBidMessage(item, endTime)
       if (!bidMessage)
-        return false
+        return null
 
-      biddingsBody.push({
+      return {
         index,
         reference_id: token_id,
         price: Number(ixtPrice),
@@ -200,35 +148,22 @@ export const useBiddingContract = () => {
         collection,
         network,
         message: bidMessage
-      })
-    }
+      } as BiddingBody
+    })
+
+    const biddingBodies = await Promise.all(requests)
 
     try {
       const bidEndpoints = useBidsAPI()
-      await bidEndpoints.placeBid(biddingsBody)
-
-      /*
-        Todo
-        Success message
-      */
-
+      await bidEndpoints.placeBid(biddingBodies.filter(notNull))
     } catch (error: any) {
-      /*
-        Todo
-        API error
-      */
-      console.log(error.response)
-      if (error.response && error.response._data && error.response._data.message) {
-        throw new Error(error.response._data.message)
-      } else {
-        throw new Error(CustomErrors.unknownError)
-      }
+      handleAPIError(error)
     }
+
     return true
   }
 
   return {
-    bidItem,
-    bidItems
+    placeBids
   }
 }

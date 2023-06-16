@@ -1,3 +1,4 @@
+import { IXToken } from "@ix/base/composables/Token/useIXToken"
 import { CartItem } from "~/composables/useCart"
 
 export interface BiddingBody {
@@ -11,30 +12,13 @@ export interface BiddingBody {
   message: string
 }
 
-export const useBids = () => {
-  const { placeBid: placeBidAPI } = useBidsAPI()
-
-  const placeBid = (item: CartItem) => {
-    const { token, sale } = item
-    if (!sale || !sale?.price)
-      return
-
-    return placeBidAPI(token._index, token.reference, sale.price, sale.message, sale.sale_id)
-  }
-
-  return {
-    placeBid
-  }
-}
-
-
 export const useBidsAPI = () => {
   const { fetchIXAPI } = useIXAPI()
   const placeBid = async (body: BiddingBody[]) => fetchIXAPI('web3/bid', 'POST', body)
 
-  const removeBid = (index: string, referenceId: number, network: string, collection: string) => fetchIXAPI('web3/bid/remove/0', 'POST', {
-    index,
-    reference_id: referenceId,
+  const removeBid = ({ _index, token_id, network, collection }: IXToken) => fetchIXAPI('web3/bid/remove/0', 'POST', {
+    index: _index,
+    reference_id: token_id,
     network,
     collection,
   })

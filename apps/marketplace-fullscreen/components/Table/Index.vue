@@ -3,38 +3,45 @@ VList(w="full")
   Transition(name="slide-left")
     CollectionFilterButtonContainer(:is-open="isOpen")
 
-  VList.no-scrollbar(max-w="full" w="full" overflow-x="auto")
-    table.base-table(bg="gray-900" max-w="full")
-      colgroup
-        col(v-for="(column, index) in columns" :style="getColumnStyle(column)")
+  VList.no-scrollbar(max-w="full" w="full" overflow-x="auto" bg="gray-900")
+    table.base-table(max-w="full")
+      colgroup()
+        col(v-for="column in displayColumns" :style="getColumnStyle(column)")
 
       TableHead()
-        template(v-for="(column, index) in columns")
-          TableCellHead(:column="column" :index="index" :sort-field="sort" @select-field="onClickSort", @toggle-sort="onClickToggle" :drawer="inDrawer" v-if="column.type != 'buttons'") {{ column.label }}
+        template(v-for="(column, index) in displayColumns")
+          TableCellHeadWrapper(v-if="column.type == 'buttons'") {{ $t('general.action') }}
 
-          TableCellHeadWrapper(v-else :drawer="inDrawer") {{ $t(`general.action`) }}
+          TableCellHeadWrapper(v-else-if="column.type == 'select'") 
+            InputCheckbox(:model-value="allSelected" @update:modelValue="onSelectAll")
 
+          TableCellHead(v-else :column="column" :index="index" :sortField="sort" @select-field="onClickSort", @toggle-sort="onClickToggle" ) {{ column.label }}
 
       tbody(divide-y="1")
         TableRow(v-for="(row, index) in sortedRows" :key="index")
-          TableCell(v-for="column in columns" pos="on-buttons:(sticky right-0)" :buttons="column.type == 'buttons'") 
+          TableCell(v-for="column in displayColumns" pos="on-buttons:(sticky right-0)" :buttons="column.type == 'buttons'") 
             template(v-if="loading")
               HelperSkeleton(h="6")
 
             template(v-else)
-              slot(:name="`item-${column.rowKey}`" :row="row" :column="column" v-if="column.type != 'buttons'")
-                TableCellValue(:column="column" :row="row")
+              div(v-if="column.type == 'select'")
+                InputCheckbox(:model-value="isSelected(index)" @update:modelValue="val => onSelect(index, val)")
 
-              HList(v-else space-x="3" justify="end" w="full")
-                slot(name="item-buttons" :buttons="column.buttons" :row="row")
+              HList(v-else-if="column.type == 'buttons'" space-x="3" justify="end" w="full")
+                slot(name="item-buttons" :buttons="column.buttons" :row="row" )
                   TableButton(:row="row" :button="button" v-for="button in column.buttons") {{ button.text }}
+
+              slot(v-else :name="`item-${column.rowKey}`" :row="row" :column="column" )
+                TableCellValue(:column="column" :row="row")
 
 </template>
 
 <script setup lang="ts" generic="Row extends TableRow">
 import type { ServerTableSort, TableColumn, TableRow, TableSortable } from '~/composables/useTable';
 
-const { rows, columns, id, colWidth } = defineProps<{
+const selectedItems = defineModel<number[]>()
+
+const props = defineProps<{
   columns: TableColumn<Row>[],
   rows: Row[],
   id: string,
@@ -42,14 +49,59 @@ const { rows, columns, id, colWidth } = defineProps<{
   loading?: boolean,
   error?: string,
   isOpen?: boolean,
-  colWidth?: number
+  colWidth?: number,
+  selectable?: boolean,
 }>()
 
-const { toggleSortDirection, selectSortField, sort, isServerSort } = useTableSort(id)
+
+const isSelected = (index: number) =>
+  selectedItems.value?.includes(index)
+
+const onSelect = (index: number, val: boolean) => {
+  if (!selectedItems.value)
+    return
+
+  const hasItem = selectedItems.value.indexOf(index) > -1
+
+  if (hasItem && !val)
+    return selectedItems.value = selectedItems.value.filter((item) => item != index)
+
+  if (val && !hasItem)
+    return selectedItems.value = [...selectedItems.value, index]
+}
+
+const allSelected = computed(() =>
+  (selectedItems.value ?? []).length == props.rows.length && props.rows.length > 0
+)
+
+const onSelectAll = () => {
+  if (allSelected.value)
+    return selectedItems.value = []
+
+  selectedItems.value = props.rows.map((_, index) => index)
+}
+
+const { toggleSortDirection, selectSortField, sort, isServerSort } = useTableSort(props.id)
 
 const { activeServerSort } = useCollectionSettings()
 
 const { sortRows } = useTable()
+
+const displayColumns = computed(() => {
+  if (!props.columns)
+    return []
+
+  if (!props.selectable)
+    return props.columns
+
+  const selectColumn: TableColumn<Row> = {
+    type: 'select',
+    width: 80
+  }
+
+  if (props.selectable)
+    return [selectColumn, ...props.columns]
+})
 
 const onClickToggle = ({ sortable }: TableSortable, columnIndex: number) => {
   toggleSortDirection()
@@ -71,7 +123,7 @@ const onClickSort = (column: TableSortable, columnIndex: number) => {
 }
 
 
-const sortedRows = computed(() => sortRows(columns, rows, sort.value))
+const sortedRows = computed(() => sortRows(props.columns, props.rows, sort.value))
 
 const isMobile = onMobile()
 const getColumnStyle = (item: TableColumn<Row>) => {
@@ -81,7 +133,7 @@ const getColumnStyle = (item: TableColumn<Row>) => {
   })
 
   if (!item.width)
-    return getStyle(colWidth ?? isMobile.value ? 150 : 200)
+    return getStyle(props.colWidth ?? isMobile.value ? 150 : 200)
 
   return getStyle(item.width)
 }

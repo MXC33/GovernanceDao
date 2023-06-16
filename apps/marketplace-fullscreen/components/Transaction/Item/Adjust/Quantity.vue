@@ -1,5 +1,5 @@
 <template lang="pug">
-TransactionItemAdjustRow(v-if="item")
+TransactionItemAdjustRow(v-if="item && isERC1155")
   template(#header) {{ $t(`marketplace.transactions.quantity`) }}
 
   template(#value)
@@ -16,6 +16,12 @@ TransactionItemAdjustRow(v-if="item")
 import type { TransactionItem } from '~/composables/useTransactions'
 import { get } from '@vueuse/core'
 const item = defineModel<TransactionItem>()
+
+const isERC1155 = computed(() => {
+  if (!item.value)
+    return null
+  return item.value.token.nft_type == 0
+})
 
 const onClickMax = () => {
   if (!item.value || !item.value.shares.max)
