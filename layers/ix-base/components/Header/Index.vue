@@ -21,7 +21,7 @@ VList(pos="sticky top-0" z="99" w="full" @mouseenter="isSelected = true" @mousel
         CrossIcon(v-else)
 
   Transition(name="slide-top" mode="out-in" )
-    HeaderItem(v-if="activeMenuIndex != null" :key="activeMenuIndex" :header="siteTopHeaders[activeMenuIndex]" display="lt-lg:none" @onClickItem="")
+    HeaderDesktop(v-if="activeMenuIndex != null" :key="activeMenuIndex" :header="siteTopHeaders[activeMenuIndex]" display="lt-lg:none" @onClickItem="")
 
   Transition(name="slide-top")
     HeaderMobile(v-if="activeMenuIndex != null" overflow-y="auto")

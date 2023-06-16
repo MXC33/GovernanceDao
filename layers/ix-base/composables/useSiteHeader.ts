@@ -144,10 +144,10 @@ const siteTopHeaders: HeaderItem[] = [
     type: 'play',
     categories: playNowHeaderItems,
   },
-  // {
-  //   type: 'corporations',
-  //   categories: corporationsHeaderItems,
-  // },
+  {
+    type: 'corporations',
+    categories: corporationsHeaderItems,
+  },
   {
     type: 'staking',
     categories: stakingHeaderItems,
