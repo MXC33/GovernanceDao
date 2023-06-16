@@ -16,8 +16,7 @@ Popup(@close="$emit('close')")
 
   template(#footer)
     HList(space-x="3" disable="on-invalid:active" :invalid="!isWalletValid")
-      Checkbox(v-model="isChecked") 
-      div(text="sm") {{ $t(`marketplace.transfer.verifyText`) }}
+      Checkbox(v-model="isChecked" text="sm") {{ $t(`marketplace.transfer.verifyText`) }}
 
   template(#buttons)
     ButtonInteractive(btn="~ primary" disable="on-invalid:active" :invalid="!isChecked || !isWalletValid" @click="itemTransfer" :loading="isLoading" text="Transfer") {{  $t(`marketplace.transfer.transferItem`) }}
