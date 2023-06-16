@@ -78,7 +78,8 @@ export const corporationsHeaderItems: HeaderCategory[] = [
   },
   {
     type: 'luckycat',
-    items: ['lucky-raffle', 'avatar']
+    items: ['lucky-raffle']
+    //items: ['lucky-raffle', 'avatar']
   },
   {
     type: 'astrocap',

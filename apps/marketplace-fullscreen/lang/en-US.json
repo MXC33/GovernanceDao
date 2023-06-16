@@ -574,7 +574,7 @@
             "link": "https://dashboard.ix.foundation/#/dashboard"
           }
         },
-        "staking": {
+        "stake": {
           "title": "TOKEN STAKING",
           "ixt": {
             "title": "IXT",
