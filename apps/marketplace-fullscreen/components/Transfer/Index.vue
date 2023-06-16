@@ -34,6 +34,15 @@ const { transferItem, createTransferItem, transferERC1155NFT, transferERC721NFT 
 const { selectedItems } = useSelection()
 const { myAssetsURL } = useCollectionsURL()
 
+const { loading: isLoading, execute: transferRequest } = useContractRequest(async () => {
+  if (!transferItem.value)
+    return
+  const collection = transferItem.value.items[0].token.collection
+
+  isLoading.value = true
+  return transferNFTType(collection)
+})
+
 const { refresh } = useCollectionData(myAssetsURL('polygon'), {
   filter: {
     owned: true,
@@ -41,7 +50,6 @@ const { refresh } = useCollectionData(myAssetsURL('polygon'), {
   }
 })
 
-const isLoading = shallowRef(false)
 const isChecked = shallowRef(false)
 
 defineEmits(['close'])
@@ -50,20 +58,13 @@ const { items } = defineProps<{
   items: IXToken[],
 }>()
 
-
-
 const isWalletValid = computed(() => transferItem.value?.toWallet?.length > 25 && transferItem.value?.toWallet?.substring(0, 2) == '0x')
 
 const isERC1155 = computed(() => ERC1155Addresses.includes(items[0].collection.toLowerCase()))
 
 const itemTransfer = async () => {
-  if (!transferItem.value)
-    return
-  const collection = transferItem.value.items[0].token.collection
+  const transfer = await transferRequest()
 
-  isLoading.value = true
-  const transfer = await transferNFTType(collection)
-  isLoading.value = false
   if (transfer) {
     displayPopup({
       type: 'transfer-item-successful',
@@ -74,9 +75,7 @@ const itemTransfer = async () => {
     refresh()
     selectedItems.value = []
   }
-
 }
-
 
 const transferNFTType = async (collection: string) => {
 
