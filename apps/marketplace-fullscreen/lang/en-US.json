@@ -314,8 +314,8 @@
         "swap": {
           "title": "Swap",
           "swap": {
-            "title": "Swap",
-            "description": "Swap any crypto or fiat to ixt",
+            "title": "Swap $ to IXT",
+            "description": "Swap any crypto or fiat to IXT.",
             "link": ""
           }
         },
@@ -357,9 +357,9 @@
       "play": {
         "title": "Play Now",
         "game": {
-          "title": "The Game",
-          "teminal": {
-            "title": "Teminal",
+          "title": "THE GAME",
+          "terminal": {
+            "title": "Terminal",
             "description": "Your personal game lobby.",
             "link": "https://missioncontrol.planetix.com/terminal"
           },
@@ -375,12 +375,12 @@
           },
           "mc": {
             "title": "Mission Control",
-            "description": "Farm, stake and earn.",
+            "description": "Farm resources, stake assets, and earn rewards.",
             "link": "https://missioncontrol.planetix.com/mission-control"
           },
           "gamebook": {
             "title": "Gamebook",
-            "description": "Deepdive into the Planet IX ecosystem.",
+            "description": "Learn all you need about Planet IX and Web3.",
             "link": "https://whitepaper.planetix.com/"
           }
         },
@@ -559,10 +559,10 @@
           }
         }
       },
-      "staking": {
-        "title": "Staking",
+      "stake": {
+        "title": "Stake",
         "overview": {
-          "title": "Overview",
+          "title": "OVERVIEW",
           "dashboard": {
             "title": "Dashboard",
             "description": "Overview of all your staking options.",
@@ -585,6 +585,16 @@
             "title": "LP",
             "description": "Stake IXT paired with MATIC at 33% APY.",
             "link": "https://dashboard.ix.foundation/#/dashboard"
+          },
+          "capital": {
+            "title": "LEND CAPITAL",
+            "description": "Lend 100x IXT with USDT as collateral.",
+            "link": ""
+          },
+          "ixt-cat-raff": {
+            "title": "IXT CAT RAFF",
+            "description": "Officials links to all Planet IX contracts.",
+            "link": "https://dashboard.ix.foundation/#/dashboard/ixt-cat-raff"
           },
           "supply-liquidity": {
             "title": "SUPPLY LIQUIDITY",
@@ -637,7 +647,7 @@
           "title": "GOVERNANCE",
           "proposals": {
             "title": "PROPOSALS",
-            "description": "Propose in-game changes and more.",
+            "description": "Propose and decide on in-game changes and more.",
             "link": ""
           },
           "discussion": {
@@ -660,7 +670,7 @@
           },
           "discord": {
             "title": "DISCORD",
-            "description": "Talk to our community, or chat with a game dev!",
+            "description": "Talk to our community, or chat with our team!",
             "link": "https://discord.gg/planetix"
           },
           "chinese-forum": {
@@ -676,12 +686,12 @@
         }
       },
       "analytics": {
-        "title": "Analytics",
+        "title": "ANALYZE",
         "analytics": {
           "title": "ANALYTICS",
           "game": {
             "title": "GAME PERFORMANCE",
-            "description": "Daily players, transaction volume and more.",
+            "description": "Daily players, transaction volumes and more.",
             "link": ""
           },
           "nft": {

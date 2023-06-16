@@ -47,7 +47,7 @@ export const buyIXTHeaderItems: HeaderCategory[] = [
 export const playNowHeaderItems: HeaderCategory[] = [
   {
     type: 'game',
-    items: ['teminal', 'mc', 'arena', 'gamebook']
+    items: ['terminal', 'mc', 'arena', 'gamebook']
   },
   {
     type: 'market',
@@ -102,18 +102,21 @@ export const corporationsHeaderItems: HeaderCategory[] = [
   },
 ]
 
-export const stakingHeaderItems: HeaderCategory[] = [
+export const stakeHeaderItems: HeaderCategory[] = [
   {
     type: 'overview',
-    items: ['dashboard', 'earnings-overview']
+    items: ['dashboard']
+    //items: ['dashboard', 'earnings-overview']
   },
   {
-    type: 'staking',
-    items: ['ixt', 'lp', 'supply-liquidity']
+    type: 'stake',
+    items: ['ixt', 'lp', 'capital', 'ixt-cat-raff']
+    //items: ['ixt', 'lp', 'supply-liquidity']
   },
   {
     type: 'in-game-assets',
-    items: ['territory', 'energy', 'governance', 'metashares', 'landmarks', 'ixt-cat-raff', 'lend-capital']
+    items: ['territory', 'metashares', 'landmarks', 'energy']
+    //items: ['territory', 'energy', 'governance', 'metashares', 'landmarks', 'ixt-cat-raff', 'lend-capital']
   },
 ]
 
@@ -149,17 +152,17 @@ const siteTopHeaders: HeaderItem[] = [
     categories: corporationsHeaderItems,
   },
   {
-    type: 'staking',
-    categories: stakingHeaderItems,
+    type: 'stake',
+    categories: stakeHeaderItems,
+  },
+  {
+    type: 'analytics',
+    categories: analyticsyHeaderItems,
   },
   {
     type: 'community',
     categories: communityHeaderItems,
   },
-  {
-    type: 'analytics',
-    categories: analyticsyHeaderItems,
-  }
 ]
 
 export const useSiteHeader = () => {
