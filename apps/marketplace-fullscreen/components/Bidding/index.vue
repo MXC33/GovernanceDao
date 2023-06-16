@@ -6,12 +6,12 @@ Popup()
   template(#header) {{ $t(`marketplace.bid.title`) }}
 
   template(#default)
-    VList()
+    VList(space-y="6")
       TransactionIXTBalance()
 
-      //- TransactionApplyToAll(v-model="bidItems")
-      VList(space-y="6")
-        BiddingItem(v-for="(_, index) in bidItems" v-model="bidItems[index]" :is-multiple="bidItems.length > 1")
+      TransactionApplyToAll(v-model="bidItems")
+
+      BiddingItem(v-for="(_, index) in bidItems" v-model="bidItems[index]" :is-multiple="bidItems.length > 1")
 
   template(#footer)
     BiddingPrice(:items="bidItems" v-if="bidItems")

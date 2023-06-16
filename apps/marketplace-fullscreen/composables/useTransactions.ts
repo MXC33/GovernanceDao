@@ -10,6 +10,8 @@ export interface TransactionItem {
   ixtPrice?: number
 }
 
+export const TransactionDays = [1, 3, 7, 30, 91, 183]
+
 
 export const useTransactionContract = () => {
   const getEndTime = (durationInDays?: number) =>

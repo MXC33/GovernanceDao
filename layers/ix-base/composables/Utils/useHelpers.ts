@@ -193,6 +193,16 @@ export const useRunOnce = (id: string, fn: () => void) => {
   fn()
 }
 
+export const allElementsEqual = <T>(items?: T[]) => {
+  if (!items || items.length == 0)
+    return false
+
+  if (items.every((item) => item == items[0]))
+    return items[0]
+
+  return false
+}
+
 export const useRouteQueryOptions = <T extends string>(key: string, defaultVal: T, values: T[]) => {
   const router = useRouter()
   const route = useRoute()

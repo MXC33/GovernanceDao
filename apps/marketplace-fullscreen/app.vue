@@ -54,8 +54,6 @@ onMounted(async () => {
   //@ts-ignore
   const isPaintSupported = !!CSS.paintWorklet
 
-  setupIXTPrice()
-
   if (isPaintSupported) {
     //@ts-ignore
     CSS.paintWorklet.addModule('/paint/border.js');
@@ -81,8 +79,11 @@ onMounted(async () => {
 
 
 watch(walletState, (state) => {
-  if (state == 'connected')
-    refreshIXTBalance()
+  if (state != 'connected')
+    return
+
+  setupIXTPrice()
+  refreshIXTBalance()
 }, { immediate: true })
 
 const { x: xpos, y: ypos } = useMouse()

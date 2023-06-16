@@ -1,38 +1,28 @@
-import { BigNumberish, ethers, ContractTransaction } from 'ethers'
+import { ethers } from 'ethers'
 import { ContractInterface, defineContract, ZERO_ADRESS, ZERO_ADRESS_LONG } from "@ix/base/composables/Utils/defineContract"
-import {
-  ItemType,
-  OrderType,
-  signDomain,
-  typedData,
-  OfferItem,
-  OrderParameters,
-  AdvancedOrder,
-  Fulfillment,
-  FulfillmentComponent
-} from "@ix/base/composables/Token/useIXToken"
+import { AdvancedOrder } from "@ix/base/composables/Token/useIXToken"
 
 import {
   roverAddress,
   assetsAddress,
   avatarNFTAddress,
   badgeNFTAddress,
-  IXTAddress, conduitAdress, seaportAdress, conduitKey
+  conduitAdress,
+  seaportAdress,
+  conduitKey
 } from '@ix/base/composables/Contract/WalletAddresses'
 import ERC1155ABI from '@ix/base/composables/Contract/Abis/ERC1155.json'
-import ERC721ABI from '@ix/base/composables/Contract/Abis/ERC1155.json'
+import ERC721ABI from '@ix/base/composables/Contract/Abis/ERC721.json'
 import Seaport from '@ix/base/composables/Contract/Abis/Seaport.json'
-
 
 import { ContractContext as ERC1155Contract } from '@ix/base/composables/Contract/Abis/ERC1155'
 
 import { ContractContext as ERC721Contract } from '@ix/base/composables/Contract/Abis/ERC721'
 
-
 import { ContractContext as SeaportContract } from '@ix/base/composables/Contract/Abis/Seaport'
 
-
 import { CartItem } from "~/composables/useCart";
+
 
 export const ERC1155Addresses = [assetsAddress.polygon?.toLowerCase(), avatarNFTAddress.polygon?.toLowerCase(), landmarkAddress.polygon?.toLowerCase(), gravityGradeAddress.polygon?.toLowerCase()]
 
@@ -168,7 +158,7 @@ export const get721Contract = <T extends ContractInterface<T> & ERC721Contract>(
       if (!address)
         return undefined
 
-      return contract.safeTransferFrom(address, to, tokenId, ZERO_ADRESS)
+      return contract.safeTransferFrom(address, to, tokenId)
     })
 
   const batchTransfer721Token = (to: string, tokenId: number[]) =>
