@@ -2,7 +2,9 @@ import { camelCaseIt } from 'case-it';
 
 export type SortDirection = 'desc' | 'asc'
 
-export interface TableRow extends Record<string, any> { }
+export interface TableRow extends Record<string, any> {
+  originalIndex?: number
+}
 
 export const ServerSortOptions = {
   PRICE_ASC: 0,
@@ -199,13 +201,18 @@ export const useTable = () => {
     const { columnIndex, direction } = sort
     const column = columns[columnIndex]
     console.log("col", column, columnIndex, direction)
+
+    const mapped = rows.map((row, index) => ({
+      originalIndex: index,
+      ...row
+    }))
+
     if (!column)
       return []
 
     const getField = (row: T) => getValue(column, row) ?? ''
 
-
-    return rows.sort((a, b) => {
+    return mapped.sort((a, b) => {
       const aField = getField(a)
       const bField = getField(b)
 

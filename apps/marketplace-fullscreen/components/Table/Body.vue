@@ -1,6 +1,6 @@
 <template lang="pug">
 tbody(divide-y="1")
-  TableRow(v-for="(row, index) in rows" :key="index")
+  TableRow(v-for="(row, index) in rows" :key="row.originalIndex ?? index")
     TableCell(v-if="selectable") 
       InputCheckbox(:model-value="isSelected(index)" @update:modelValue="val => onSelect(index, val)")
 

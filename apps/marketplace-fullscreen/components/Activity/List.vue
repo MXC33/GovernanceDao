@@ -1,6 +1,6 @@
 <template lang="pug">
 Transition(name="fade" mode="out-in" )
-  Table(:columns="columns" :rows="items" :id="'activity'" :loading="loading" )
+  Table(:columns="columns" :rows="items" id="activity" :loading="loading")
     template(#item-event="{row}")
       HList(space-x="3")
         Minted(v-if="row.event=='mint'" w="5")
@@ -29,8 +29,6 @@ import Cart from '~/assets/icons/cart.svg'
 import TransferIcon from '~/assets/icons/transfer-activity.svg'
 import Purchase from '~/assets/icons/notification/purchase.svg'
 
-
-const { getTokenKey } = useTokens()
 const { currentTime } = useGlobalTimestamp()
 
 const { items, columns } = defineProps<{

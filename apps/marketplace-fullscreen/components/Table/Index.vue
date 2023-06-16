@@ -9,7 +9,7 @@ VList(w="full")
         col(v-if="selectable", :style="{width: '80px'}")
         col(v-for="column in columns" :style="getColumnStyle(column)")
 
-      TableHeader(v-model="selectedItems" :columns="columns" :rows="rows" :selectable="selectable" :id="id")
+      TableHeader(v-model="selectedItems" :columns="columns" :rows="sortedRows" :selectable="selectable" :id="id")
 
       TableBody(v-model="selectedItems" :loading="loading" :rows="sortedRows" :columns="columns" :id="id" :selectable="selectable")
 
