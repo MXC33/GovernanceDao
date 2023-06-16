@@ -1,7 +1,7 @@
 <template lang="pug">
 VList(max-h="85" frame="~")
   HList(h="12" px="6 on-small:3" bg="ix-black on-neutral:gray-900" items="center" justify="between" pos="sticky top-0" flex-shrink="0" z="1" @click.stop="dropDrawer" uppercase="~" cursor="pointer" :neutral="isNeutral" :small="isSmall")
-    span(color="white" text="md" font="bold" v-if="$slots.header")
+    div(color="white" text="md" font="bold" v-if="$slots.header")
       slot(name="header")
 
     HList(v-else)

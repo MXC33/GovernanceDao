@@ -13,7 +13,7 @@ import type { TransactionItem } from '~/composables/useTransactions'
 
 const item = defineModel<TransactionItem>()
 
-const days = [1, 3, 7, 30, 91, 183]
+const days = TransactionDays
 
 const { formattedDays } = useTransactions()
 
