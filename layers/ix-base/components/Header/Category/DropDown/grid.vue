@@ -5,8 +5,8 @@ VList(flex-grow="1" w="full")
       template(#header) 
         div() {{ $t(`marketplace.navigation.${header.type}.title`)}}
       template(#default) 
-        HeaderCategoryDropDownSmallGroup(:headerItem="header" @clikedItem="clikedItem")
         HeaderCategoryDropDownLargeGroup(v-for="category in getAllLargeCatagories(header)" :category="category" :parentType="header.type" @clikedItem="clikedItem")
+        HeaderCategoryDropDownSmallGroup(:headerItem="header" @clikedItem="clikedItem")
 </template>
 
 <script lang="ts" setup>

@@ -1,6 +1,6 @@
 <template lang="pug">
 HList(p="6" bg="ix-black" b="b-1 gray-600")
-  NuxtLink(v-if="walletState !== 'connected'" to="/connect" btn="soft-ix-orange lg" w="full") {{ $t(`marketplace.navigation.menu.connectWallet`)}}
+  NuxtLink(v-if="walletState !== 'connected'" to="/connect" @click="$emit('close')" btn="soft-ix-orange lg" w="full") {{ $t(`marketplace.navigation.menu.connectWallet`)}}
 
   HList(v-else flex-grow="1" cut="bottom-right sm b-ix-orange opacity-60" bg="ix-orange opacity-20")
     AOCIcon(w="25" p="3")
@@ -20,6 +20,7 @@ HList(p="6" bg="ix-black" b="b-1 gray-600")
 </template>
 
 <script lang="ts" setup>
+const emit = defineEmits(['close'])
 import AOCIcon from '~/assets/images/icons/aocbadge.svg'
 import PlusIcon from '~/assets/images/icons/plus.svg'
 
