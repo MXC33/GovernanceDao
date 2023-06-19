@@ -1,5 +1,5 @@
 <template lang="pug">
-div(v-if="value") {{ pre }}{{ setPriceDecimals }}{{ post }}
+div() {{ pre }}{{ setPriceDecimals }}{{ post }}
 
 </template>
 
@@ -24,7 +24,7 @@ const post = computed(() => {
 
 const setPriceDecimals = computed(() => {
   if (!value)
-    return
+    return ' --'
   if (value < 0.009)
     return roundToDecimals(value, 4)
   return roundToDecimals(value, 2)
