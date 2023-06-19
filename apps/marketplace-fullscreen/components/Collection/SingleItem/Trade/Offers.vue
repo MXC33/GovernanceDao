@@ -11,15 +11,15 @@ ContentDrawer(:start-open="!isMobile" :is-neutral="true" bg="gray-900")
       | {{ $t(`marketplace.singleItem.noOffers`) }}
 
     Table(:columns="offerColumns" :rows="item.bids" id="offers" v-if="item.bids.length > 0" :col-width="150" )
-      template(#item-buttons="{row}")
-        TableButtonSmall(@click="onClickAcceptOffer(row)"  v-if="!playerOwnedSale(row) && item.my_shares > 0") {{ $t(`marketplace.singleItem.accept`) }}
-        TableButtonSmall(@click="cancelBidOnClick(row)" v-else-if="playerOwnedSale(row)") {{ $t(`marketplace.singleItem.cancel`) }}
+
 
 </template>
 
 <script lang="ts" setup>
 import type { SingleItemData, Bid } from '@ix/base/composables/Token/useIXToken';
 import type { TableColumn } from '~/composables/useTable';
+
+const { t } = useI18n()
 const { displayPopup } = usePopups()
 const { walletAdress } = useWallet()
 
@@ -66,7 +66,26 @@ const offerColumns = computed<TableColumn<Bid>[]>(() => {
       }, sortable: true
     },
     { label: "Expiration", type: "date", rowKey: "due_date", sortable: true },
-    { type: 'buttons', width: 120 }
+    {
+      type: 'buttons', width: 120, buttons: [
+        {
+          type: 'secondary',
+          onClick(row) {
+            onClickAcceptOffer(row)
+          },
+          text: t(`marketplace.singleItem.accept`),
+          hidden(row) { return playerOwnedSale(row) || item.my_shares == 0 },
+        },
+        {
+          type: 'secondary',
+          onClick(row) {
+            cancelBidOnClick(row)
+          },
+          text: t(`marketplace.singleItem.cancel`),
+          hidden(row) { return !playerOwnedSale(row) },
+        }
+      ]
+    }
   ]
 
   return baseColumns
