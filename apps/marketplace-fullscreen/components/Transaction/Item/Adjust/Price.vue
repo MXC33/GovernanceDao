@@ -9,7 +9,7 @@ TransactionItemAdjustRow(v-if="item")
     TransactionItemAdjustDetail() {{ $t(`marketplace.transactions.total`) }} {{item.type}} {{ $t(`marketplace.transactions.price`) }} {{ listPrice }}
 
   template(#action)
-    button(btn="~ form" w="full" @click="onClickFloor") {{ $t(`marketplace.transactions.floor`) }} 
+    button(btn="~ form" w="full" @click="onClickFloor" disable="on-disabled:active" :disabled="!item.token.sale_price") {{ $t(`marketplace.transactions.floor`) }} 
 
 </template>
   
