@@ -8,7 +8,7 @@ VList(pos="sticky top-0" z="99" w="full" @mouseenter="isSelected = true" @mousel
     div(flex-grow="1" display="lg:none")
 
     HList(space-x="8" px="8" items="center" flex-grow="1" display="lt-lg:none" overflow-x="hidden" )
-      button(v-for="(item, index) in siteTopHeaders" @click="openMenu(index)" btn="menu") {{ $t(`marketplace.navigation.${item.type}.title`)}}
+      button(v-for="(item, index) in siteTopHeaders" @click="openMenu(index)" btn="menu" color = "s-default:white s-selected:ix-orange" :state="selected(index)") {{ $t(`marketplace.navigation.${item.type}.title`)}}
 
     HList(space-x="6" px="0")
       //-button(btn="menu" display="lt-lg:none") help
@@ -21,7 +21,7 @@ VList(pos="sticky top-0" z="99" w="full" @mouseenter="isSelected = true" @mousel
         SettingsIcon(v-if="activeMenuIndex == null")
         CrossIcon(v-else)
 
-  Transition(name="slide-top" mode="out-in" )
+  Transition(name="slide-top" mode="out-in")
     HeaderDesktop(v-if="activeMenuIndex != null" :key="activeMenuIndex" :header="siteTopHeaders[activeMenuIndex]" display="lt-lg:none" @onClickItem="")
 
   Transition(name="slide-top" )
@@ -40,6 +40,14 @@ const { state: swapVisible } = useIXTSwapVisible()
 const activeMenuIndex = ref<number | null>(null)
 
 const route = useRoute()
+
+const selected = (index: number) => {
+  if(activeMenuIndex.value == index){
+    return 'selected'
+  }
+
+  return 'default'
+}
 
 const onClickItem = (type: string, catagory: string, item: string) => {
   switch (item) {
