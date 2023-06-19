@@ -12,6 +12,9 @@ VList(w="full")
       TableHeader(v-model="selectedItems" :columns="columns" :rows="sortedRows" :selectable="selectable" :id="id")
 
       TableBody(v-model="selectedItems" :loading="loading" :rows="sortedRows" :columns="columns" :id="id" :selectable="selectable")
+        template(#[getColumnKey(column)]="{row}" v-for="column in columns")
+          slot(:name="`item-${column.rowKey}`" :row="row" v-if="column.type != 'buttons'")
+          slot(name="item-buttons" v-else :row="row")
 
 </template>
 
@@ -20,6 +23,8 @@ import type { TableColumn, TableRow } from '~/composables/useTable';
 
 const selectedItems = defineModel<number[]>()
 const isMobile = onMobile()
+
+const { getColumnKey } = useTable()
 
 const { selectable, columns, isOpen, loading, rows, id, colWidth } = defineProps<{
   columns: TableColumn<Row>[],

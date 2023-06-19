@@ -10,7 +10,7 @@ tbody(divide-y="1")
 
       template(v-else)
         HList(v-if="column.type == 'buttons'" space-x="3" justify="end" w="full")
-          slot(name="item-buttons" :buttons="column.buttons" :row="row" )
+          slot(:name="getColumnKey(column)" :buttons="column.buttons" :row="row" )
             TableButton(:row="row" :button="button" v-for="button in column.buttons") {{ button.text }}
 
         slot(v-else :name="`item-${column.rowKey}`" :row="row" :column="column" )
@@ -21,6 +21,7 @@ tbody(divide-y="1")
 <script setup lang="ts" generic="Row extends TableRow">
 import type { TableColumn, TableRow } from '~/composables/useTable';
 
+const { getColumnKey } = useTable()
 
 const { rows, columns, loading, selectable } = defineProps<{
   columns: TableColumn<Row>[],
