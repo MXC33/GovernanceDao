@@ -4,22 +4,13 @@ ContentDrawer(:start-open="!isMobile" :is-neutral="true" bg="gray-900")
     TitleWithIcon(icon="listing") {{ $t(`marketplace.singleItem.listings`) }}
 
   template(#default)
-    TableBody(v-if="item.sales && item.sales.length > 0" :columns="saleColumns" :rows="item.sales" id="single-item" :col-width="150")
-      template(#item-buttons="{row}")
-        TableButtonSmall(v-if="!playerOwnedSale(row)" @click="addSaleToCart(row)" disable="on-in-cart:active" :in-cart="hasItemInCart(row)")
-          CartIcon(w="4 md:6")
-
-        TableButtonSmall(@click="cancelListingOnClick(row)" v-else)
-          TrashIcon(w="4 md:6" fill="white")
+    Table(v-if="item.sales && item.sales.length > 0" :columns="saleColumns" :rows="item.sales" id="single-item" :col-width="150")
 
     CollectionSingleItemTradeDetail(v-else) {{ $t(`marketplace.singleItem.noItemsFound`) }}
 
 </template>
 
 <script lang="ts" setup>
-import CartIcon from '~/assets/icons/cart.svg'
-import TrashIcon from '~/assets/icons/trash.svg'
-
 import type { Sale, SingleItemData, Bid } from '@ix/base/composables/Token/useIXToken';
 import type { TableColumn } from '~/composables/useTable';
 const isMobile = onMobile()
@@ -43,7 +34,27 @@ const saleColumns: TableColumn<Sale>[] = [
       return row.player_username
     }, sortable: true
   },
-  { type: 'buttons', width: 120 }
+  {
+    type: 'buttons', width: 120, buttons: [
+      {
+        type: 'secondary',
+        onClick(row) {
+          addSaleToCart(row)
+        },
+        icon: 'cart',
+        hidden(row) { return playerOwnedSale(row) },
+        disabled(row) { return hasItemInCart(row) }
+      },
+      {
+        type: 'secondary',
+        onClick(row) {
+          cancelListingOnClick(row)
+        },
+        icon: 'trash',
+        hidden(row) { return !playerOwnedSale(row) },
+      }
+    ]
+  }
 ]
 
 const addSaleToCart = (sale: Sale) => {

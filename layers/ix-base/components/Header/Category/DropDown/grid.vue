@@ -17,12 +17,12 @@ const { t } = useI18n()
 
 const getAllLargeCatagories = (header: HeaderItem) => {
   var largeCatagories = []
-  for(var i = 0; i < header.categories.length; i++){
+  for (var i = 0; i < header.categories.length; i++) {
     const topHeader = header.categories[i]
     const items = topHeader.items;
     const length = items.length;
     //console.log("items length",length)
-    if(length > 1){
+    if (length > 1) {
       largeCatagories.push(topHeader)
     }
   }

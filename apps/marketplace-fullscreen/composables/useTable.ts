@@ -33,8 +33,11 @@ interface TableColumnBase {
 export interface TableButton<T extends TableRow> {
   type: 'primary' | 'secondary',
   text?: string,
-  icon?: 'cart',
-  onClick: (row: T) => void
+  icon?: 'cart' | 'trash',
+  onClick: (row: T) => void,
+  hidden?: (row: T) => boolean
+  disabled?: (row: T) => boolean
+
 }
 
 export interface TableSortable {
@@ -197,6 +200,13 @@ export const useTable = () => {
     return col.type != 'buttons'
   }
 
+  const getColumnKey = <T extends TableRow>(col: TableColumn<T>) => {
+    if (col.type == 'buttons')
+      return 'item-buttons'
+
+    return `item-${col.rowKey}`
+  }
+
   const sortRows = <T extends TableRow>(columns: TableColumn<T>[], rows: T[], sort: TableSort) => {
     const { columnIndex, direction } = sort
     const column = columns[columnIndex]
@@ -231,6 +241,7 @@ export const useTable = () => {
   }
 
   return {
+    getColumnKey,
     isTextColumn,
     sortRows,
     getValue

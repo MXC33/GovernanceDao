@@ -47,11 +47,11 @@ export const buyIXTHeaderItems: HeaderCategory[] = [
 export const playNowHeaderItems: HeaderCategory[] = [
   {
     type: 'game',
-    items: ['teminal', 'market', 'arena', 'mc', 'gamebook']
+    items: ['terminal', 'mc', 'arena', 'gamebook']
   },
   {
-    type: 'claimburn',
-    items: ['aocbadge', 'avatar', 'arcade']
+    type: 'market',
+    items: ['trade-land', 'trade-asset']
   },
   // {
   //   type: 'analytics',
@@ -78,7 +78,8 @@ export const corporationsHeaderItems: HeaderCategory[] = [
   },
   {
     type: 'luckycat',
-    items: ['lucky-raffle', 'avatar']
+    items: ['lucky-raffle']
+    //items: ['lucky-raffle', 'avatar']
   },
   {
     type: 'astrocap',
@@ -99,21 +100,24 @@ export const corporationsHeaderItems: HeaderCategory[] = [
   {
     type: 'arcade',
     items: ['arcade']
-  }, 
-] 
+  },
+]
 
-export const stakingHeaderItems: HeaderCategory[] = [
+export const stakeHeaderItems: HeaderCategory[] = [
   {
     type: 'overview',
-    items: ['dashboard', 'earnings-overview']
+    items: ['dashboard']
+    //items: ['dashboard', 'earnings-overview']
   },
   {
-    type: 'staking',
-    items: ['ixt', 'lp', 'supply-liquidity']
+    type: 'stake',
+    items: ['ixt', 'lp', 'capital', 'ixt-cat-raff']
+    //items: ['ixt', 'lp', 'supply-liquidity']
   },
   {
     type: 'in-game-assets',
-    items: ['territory', 'energy', 'governance', 'metashares', 'landmarks', 'ixt-cat-raff', 'lend-capital']
+    items: ['territory', 'metashares', 'landmarks', 'energy']
+    //items: ['territory', 'energy', 'governance', 'metashares', 'landmarks', 'ixt-cat-raff', 'lend-capital']
   },
 ]
 
@@ -144,22 +148,22 @@ const siteTopHeaders: HeaderItem[] = [
     type: 'play',
     categories: playNowHeaderItems,
   },
-  // {
-  //   type: 'corporations',
-  //   categories: corporationsHeaderItems,
-  // },
   {
-    type: 'staking',
-    categories: stakingHeaderItems,
+    type: 'corporations',
+    categories: corporationsHeaderItems,
+  },
+  {
+    type: 'stake',
+    categories: stakeHeaderItems,
+  },
+  {
+    type: 'analytics',
+    categories: analyticsyHeaderItems,
   },
   {
     type: 'community',
     categories: communityHeaderItems,
   },
-  {
-    type: 'analytics',
-    categories: analyticsyHeaderItems,
-  }
 ]
 
 export const useSiteHeader = () => {

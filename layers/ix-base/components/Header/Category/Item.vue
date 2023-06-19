@@ -9,13 +9,13 @@ NuxtLink(:to="linkPath" cursor="pointer")
         div(color="gray-200 group-hover:ix-orange" text="sm" ) {{ $t(`${langPath}.description`) }}
       VList(pos="relative" v-else)
         div(color="gray" uppercase="~") {{ $t(`${langPath}.title`)}}
-        div(color="ix-orange" text="sm" ) {{ $t(`marketplace.navigation.soon`)}}
+        div(color="gray-200" text="sm" ) {{ $t(`marketplace.navigation.soon`)}}
 </template>
 
 <script lang="ts" setup>
 
 const { t } = useI18n()
-const enter = () =>{
+const enter = () => {
   console.log("enter");
 }
 
@@ -27,7 +27,7 @@ const hasDescription = computed(() => t(`marketplace.navigation.${header}.${cate
 
 
 //console.log(linkPath.value)
-const {header, category, item} = defineProps<{
+const { header, category, item } = defineProps<{
   header: string,
   category: string,
   item: string
