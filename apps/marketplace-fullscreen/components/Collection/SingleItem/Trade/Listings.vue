@@ -5,12 +5,6 @@ ContentDrawer(:start-open="!isMobile" :is-neutral="true" bg="gray-900")
 
   template(#default)
     Table(v-if="item.sales && item.sales.length > 0" :columns="saleColumns" :rows="item.sales" id="single-item" :col-width="150")
-      template(#item-buttons="{row}")
-        TableButtonSmall(v-if="!playerOwnedSale(row)" @click="addSaleToCart(row)" disable="on-in-cart:active" :in-cart="hasItemInCart(row)")
-          CartIcon(w="4 md:6")
-
-        TableButtonSmall(@click="cancelListingOnClick(row)" v-else)
-          TrashIcon(w="4 md:6" fill="white")
 
     CollectionSingleItemTradeDetail(v-else) {{ $t(`marketplace.singleItem.noItemsFound`) }}
 
