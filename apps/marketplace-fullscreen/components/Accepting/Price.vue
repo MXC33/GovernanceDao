@@ -20,7 +20,7 @@ VList()
 import type { TransactionItem } from "~/composables/useTransactions";
 
 const { priceRenderString, getTotalIXTPrice } = useTransactions()
-const totalIXTPrice = computed(() => getTotalIXTPrice([item]))
+const totalIXTPrice = computed(() => getTotalIXTPrice([item], true))
 
 const totalPotentialEarning = computed(() =>
   priceRenderString(totalIXTPrice.value * (1 - 0.025))
