@@ -6,10 +6,10 @@ Popup()
   template(#header) {{ $t(`marketplace.offer.acceptOffer`) }}
 
   template(#default)
-    CompleteTokenList(:items="[item]")
+    CompleteTokenList(:items="items")
 
   template(#footer)
-    AcceptingPrice(:item="item")
+    AcceptingPrice(:items="items")
 
   template(#buttons)
     HList()
@@ -24,8 +24,8 @@ import CheckboxIcon from '~/assets/icons/checkmark-green.svg'
 import type { TransactionItem } from '~/composables/useTransactions';
 const { closeActivePopup } = usePopups()
 
-const { item } = defineProps<{
-  item: TransactionItem
+const { items } = defineProps<{
+  items: TransactionItem[]
 }>()
 
 

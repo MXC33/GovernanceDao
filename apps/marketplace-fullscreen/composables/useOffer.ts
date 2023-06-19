@@ -1,10 +1,5 @@
-import { AdvancedOrder, Bid, IXToken, SingleItemData } from "@ix/base/composables/Token/useIXToken";
+import { AdvancedOrder, Bid, IXToken, OrderMessage, SingleItemData } from "@ix/base/composables/Token/useIXToken";
 import { AdjustableNumber } from "@ix/base/composables/Utils/useAdjustableNumber";
-import {
-  get1155Contract,
-  get721Contract,
-  NFTType
-} from "~/composables/useAssetContracts";
 import { conduitKey } from "@ix/base/composables/Contract/WalletAddresses";
 import { useIXTContract } from "@ix/base/composables/Contract/useIXTContract";
 import { TransactionItem } from "~/composables/useTransactions";
@@ -19,26 +14,57 @@ export interface AcceptingItem extends TransactionItem {
   bid: Bid
 }
 
-export const useAcceptingItem = () => {
-  const acceptingItem = useState<AcceptingItem>('accepting-item')
+export interface RejectionItem extends TransactionItem {
+  type: 'reject',
+  bid: Bid
+}
 
-  const createAcceptingItem = (token: IXToken) => {
-    acceptingItem.value = {
-      type: 'accept',
-      token,
-      shares: {
-        min: 1,
-        value: 1,
-        max: token.my_shares > token.bid.quantity ? token.bid.quantity : token.my_shares
-      },
-      bid: token.bid,
-      ixtPrice: token.bid.price
-    }
-  }
+export const useAcceptingItem = () => {
+  const acceptingItems = useState<AcceptingItem[]>('accepting-item')
+
+  const createAcceptingItem = (token: IXToken): AcceptingItem => ({
+    type: 'accept',
+    token,
+    shares: {
+      min: 1,
+      value: 1,
+      max: token.my_shares > token.bid.quantity ?
+        token.bid.quantity : token.my_shares
+    },
+    bid: token.bid,
+    ixtPrice: token.bid.price
+  })
+
+  const createAcceptingItems = (tokens: IXToken[]) =>
+    acceptingItems.value = tokens.map(createAcceptingItem)
 
   return {
-    createAcceptingItem,
-    acceptingItem
+    createAcceptingItems,
+    acceptingItems
+  }
+}
+
+export const useRejectItems = () => {
+  const rejectItems = useState<RejectionItem[]>('rejection-items')
+
+  const createRejectionItem = (token: IXToken): RejectionItem => ({
+    type: 'reject',
+    token,
+    shares: {
+      min: 1,
+      value: 1,
+      max: 1
+    },
+    bid: token.bid,
+    ixtPrice: token.bid.price
+  })
+
+  const createRejectionItems = (tokens: IXToken[]) =>
+    rejectItems.value = tokens.map(createRejectionItem)
+
+  return {
+    createRejectionItems,
+    rejectItems
   }
 }
 
@@ -164,144 +190,98 @@ export const useOfferItems = (item: SingleItemData) => {
 }
 
 export const useOfferContract = () => {
-  const { generateConsiderations, createBuyOrder } = useBuyHelpers()
+  const { generateConsiderations, getOrderMessage, getTransactionContract } = useTransactionHelpers()
   const { allowanceCheck } = useIXTContract()
   const { fulfillAvailableAdvancedOrders, fulfillAdvancedOrder } = useSeaportContract()
 
-  const acceptOffer = async (item: AcceptingItem) => {
-    //Todo Start loading overlay
-    console.log('start Loading overlay')
-
-    const { token: { collection, nft_type }, bid, shares, ixtPrice } = item
-
-    if (!bid) {
-      /*
-        Todo
-        There are no offers
-      */
-      throw new Error("There is no offer")
-    }
-
-    const totalOffer = (ixtPrice || 0) * shares.value
-
-    let message: any = {}
-    try {
-      message = JSON.parse(bid.message)
-    } catch (e) { }
-
-    if (!message.body || !message.body.consideration) {
-      /*
-        Todo
-        Body is invalid
-      */
-      throw new Error("Invalid Body!")
-    }
-
-    const nftContract = nft_type === NFTType.ERC1155 ? get1155Contract(collection as string) : get721Contract(collection as string)
-    const approveNftCheck = await nftContract.approveNftCheck()
-    if (!approveNftCheck) {
-      /*
-        Todo
-        Approve didn't work
-      */
-      throw new Error("Approve didn't work")
-    }
-
-    if (!await allowanceCheck(totalOffer)) {
-      /*
-        Todo
-        Allowance didn't work
-      */
-      throw new Error("Allowance didn't work")
-    }
-
-    let BuyOrderComponents: AdvancedOrder;
-
+  const getOrderBody = (message: OrderMessage, amount: number) => {
     delete message.body.counter
+
     message.body.totalOriginalConsiderationItems = message.body.consideration.length
 
-    BuyOrderComponents = {
+    const order: AdvancedOrder = {
       parameters: message.body,
-      numerator: shares.value,
-      denominator: message.body.consideration[0].endAmount,
+      numerator: amount,
+      denominator: message.body.consideration[0].endAmount ?? 0,
       signature: message.signature,
       extraData: "0x"
     }
 
+    return order
+  }
+
+  const multiAccept = async (item: AcceptingItem[]) => {
+    const accepts = item.map(acceptOffer)
+    return await Promise.all(accepts)
+  }
+
+  const acceptOffer = async (item: AcceptingItem) => {
+    const { token, bid, shares, ixtPrice } = item
+
+    if (!bid)
+      throw new Error("There is no offer")
+
+    const totalOffer = (ixtPrice || 0) * shares.value
+
+    const message = getOrderMessage(bid)
+    if (!message?.body?.consideration)
+      throw new Error("Invalid Body!")
+
+    const nftContract = getTransactionContract(token)
+    const approveNftCheck = await nftContract.approveNftCheck()
+
+    if (!approveNftCheck)
+      throw new Error(CustomErrors.approvalError)
+
+    if (!await allowanceCheck(totalOffer))
+      throw new Error(CustomErrors.allowanceError)
+
+    const order = getOrderBody(message, shares.value)
     // @ts-ignore
-    return await fulfillAdvancedOrder(BuyOrderComponents, [], conduitKey.polygon, "0x0000000000000000000000000000000000000000")
+    return await fulfillAdvancedOrder(order, [], conduitKey.polygon, ZERO_ADRESS)
   }
 
   const acceptOffers = async (offerItem: OfferItem, totalOffer: number, quantity: number) => {
-    //Todo Start loading overlay
-    console.log('start Loading overlay')
+    const { token, bids } = offerItem
 
-    const { token: { collection, nft_type }, bids } = offerItem
-
-    if (!bids || !bids.length) {
-      /*
-        Todo
-        There are no offers
-      */
+    if (!bids || !bids.length)
       throw new Error("There are no offers")
-    }
 
-    const nftContract = nft_type === NFTType.ERC1155 ? get1155Contract(collection as string) : get721Contract(collection as string)
+    const nftContract = getTransactionContract(token)
     const approveNftCheck = await nftContract.approveNftCheck()
-    if (!approveNftCheck) {
-      /*
-        Todo
-        Approve didn't work
-      */
-      throw new Error("Approve didn't work")
-    }
-
-    if (!await allowanceCheck(totalOffer)) {
-      /*
-        Todo
-        Allowance didn't work
-      */
-      throw new Error("Allowance didn't work")
-    }
+    if (!approveNftCheck)
+      throw new Error(CustomErrors.approvalError)
 
 
-    let BuyOrderComponents: AdvancedOrder[] = []
-    const buyOrders = bids.map((bid) => createBuyOrder(bid, quantity, true))
+    if (!await allowanceCheck(totalOffer))
+      throw new Error(CustomErrors.allowanceError)
 
-    for (const bid of bids) {
-      if (bid) {
-        let message: any = {}
-        try {
-          message = JSON.parse(bid.message)
-        } catch (e) { }
+    const buyOrders = bids.map((bid) => {
+      if (!bid)
+        return null
 
-        if (!message.body || !message.body.consideration) {
-          continue
-        }
+      const message = getOrderMessage(bid)
 
-        delete message.body.counter
-        message.body.totalOriginalConsiderationItems = message.body.consideration.length
+      if (!message?.body.consideration)
+        return null
 
-        const iterable = bid.quantity < quantity ? bid.quantity : quantity
-        for (let k = 0; k < iterable; k++) {
-          BuyOrderComponents.push({
-            parameters: message.body,
-            numerator: 1,
-            denominator: message.body.consideration[0].endAmount,
-            signature: message.signature,
-            extraData: "0x"
-          })
-        }
-      }
-    }
+      delete message.body.counter
 
-    const { offers, considerations } = generateConsiderations(BuyOrderComponents)
+      message.body.totalOriginalConsiderationItems = message.body.consideration.length
+
+      const offerAmount = bid.quantity < quantity ? bid.quantity : quantity
+
+      return Array.from({ length: offerAmount }, () => getOrderBody(message, 1))
+    }).flat().filter(notNull)
+
+    const { offers, considerations } = generateConsiderations(buyOrders)
 
     // @ts-ignore
-    return await fulfillAvailableAdvancedOrders(BuyOrderComponents, [], offers, considerations, conduitKey.polygon, "0x0000000000000000000000000000000000000000", quantity)
+    return await fulfillAvailableAdvancedOrders(buyOrders, [], offers, considerations, conduitKey.polygon, ZERO_ADRESS, quantity)
   }
 
   return {
+    multiAccept,
     acceptOffer,
     acceptOffers
   }

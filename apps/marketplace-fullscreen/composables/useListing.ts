@@ -54,12 +54,13 @@ export const useListingContract = () => {
   const listEndpoints = useListEndpoints()
   const { walletAdress, signTypedData } = useWallet()
   const { getEndTime, baseConsideration, getItemType } = useTransactionContract()
+  const { getTransactionContract } = useTransactionHelpers()
 
   //TODO update endtime
   const createListingMessage = async (item: ListingItem, endTime: number) => {
-    const { token: { collection, token_id, nft_type }, ixtPrice, shares } = item
+    const { token: { collection, token_id }, ixtPrice, shares, token } = item
 
-    const nftContract = nft_type === NFTType.ERC1155 ? get1155Contract(collection as string) : get721Contract(collection as string)
+    const nftContract = getTransactionContract(token)
 
     const approveNftCheck = await nftContract.approveNftCheck()
     if (!approveNftCheck) {

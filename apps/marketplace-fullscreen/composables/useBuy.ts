@@ -7,7 +7,7 @@ import {
   SingleItemData
 } from "@ix/base/composables/Token/useIXToken";
 import { AdjustableNumber } from "@ix/base/composables/Utils/useAdjustableNumber";
-import { useSeaportContract } from "~/composables/useAssetContracts";
+import { NFTType, useSeaportContract } from "~/composables/useAssetContracts";
 import { conduitKey } from "@ix/base/composables/Contract/WalletAddresses";
 import { useIXTContract } from "@ix/base/composables/Contract/useIXTContract";
 import { ZERO_ADRESS } from "@ix/base/composables/Utils/defineContract";
@@ -138,25 +138,30 @@ export const useBuyItems = (item: SingleItemData) => {
   }
 }
 
-interface OrderIdentifier {
+export interface OrderIdentifier {
   orderIndex: number,
   itemIndex: number
 }
 
-interface Consideration {
+export interface Consideration {
   key: string,
   value: OrderIdentifier[]
 }
 
-export const useBuyHelpers = () => {
+export const useTransactionHelpers = () => {
+  const getTransactionContract = ({ nft_type, collection }: IXToken) => {
+    if (nft_type === NFTType.ERC1155)
+      return get1155Contract(collection as string)
+
+    return get721Contract(collection as string)
+  }
+
   const generateConsiderations = (buyOrders: AdvancedOrder[]) => {
     const offers: OrderIdentifier[][] = []
     const considerations: Consideration[] = []
 
     buyOrders.forEach((buyOrder, orderIndex) => {
-      offers.push([
-        { orderIndex, "itemIndex": 0 }
-      ])
+      offers.push([{ orderIndex, "itemIndex": 0 }])
 
       buyOrder.parameters.consideration.forEach((consideration, itemIndex) => {
         const index = considerations.findIndex(item =>
@@ -224,6 +229,7 @@ export const useBuyHelpers = () => {
     order != undefined
 
   return {
+    getTransactionContract,
     getOrderMessage,
     isAdvancedOrder,
     generateConsiderations,
@@ -233,7 +239,7 @@ export const useBuyHelpers = () => {
 
 export const useBuyContract = () => {
   const buySingleItem = async (buyItem: BuyItem, totalPrice: number, quantity: number, substitute?: boolean) => {
-    const { generateConsiderations, createBuyOrder, isAdvancedOrder } = useBuyHelpers()
+    const { generateConsiderations, createBuyOrder, isAdvancedOrder } = useTransactionHelpers()
 
     if (!buyItem.sales || !buyItem.sales.length)
       throw new Error(CustomErrors.noPurchaseItem)
@@ -252,7 +258,6 @@ export const useBuyContract = () => {
 
     const { offers, considerations } = generateConsiderations(buyOrders)
 
-    // @ts-ignore
     return await fulfillAvailableAdvancedOrders(buyOrders, [], offers, considerations, conduitKey.polygon, ZERO_ADRESS, quantity)
   }
 
