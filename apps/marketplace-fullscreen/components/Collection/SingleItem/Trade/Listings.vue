@@ -43,7 +43,27 @@ const saleColumns: TableColumn<Sale>[] = [
       return row.player_username
     }, sortable: true
   },
-  { type: 'buttons', width: 120 }
+  {
+    type: 'buttons', width: 120, buttons: [
+      {
+        type: 'secondary',
+        onClick(row) {
+          addSaleToCart(row)
+        },
+        icon: 'cart',
+        hidden(row) { return playerOwnedSale(row) },
+        disabled(row) { return hasItemInCart(row) }
+      },
+      {
+        type: 'secondary',
+        onClick(row) {
+          cancelListingOnClick(row)
+        },
+        icon: 'trash',
+        hidden(row) { return !playerOwnedSale(row) },
+      }
+    ]
+  }
 ]
 
 const addSaleToCart = (sale: Sale) => {

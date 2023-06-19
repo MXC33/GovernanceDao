@@ -33,8 +33,11 @@ interface TableColumnBase {
 export interface TableButton<T extends TableRow> {
   type: 'primary' | 'secondary',
   text?: string,
-  icon?: 'cart',
-  onClick: (row: T) => void
+  icon?: 'cart' | 'trash',
+  onClick: (row: T) => void,
+  hidden?: (row: T) => boolean
+  disabled?: (row: T) => boolean
+
 }
 
 export interface TableSortable {
