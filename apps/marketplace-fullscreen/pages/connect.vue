@@ -11,8 +11,6 @@ useHead({
 })
 
 const { isLoggedInAndConnected } = useLogin()
-const redirect = useLoginRedirect()
-const isDirty = ref(false)
 
 const route = useRoute()
 
@@ -21,13 +19,8 @@ definePageMeta({
 })
 
 watch(isLoggedInAndConnected, (connected) => {
-  if (!process.client)
+  if (!process.client || !connected)
     return
-
-  if (!connected) {
-    isDirty.value = true
-    return
-  }
 
   const redirectQuery = route.query.redirectUrl
 
@@ -40,10 +33,6 @@ watch(isLoggedInAndConnected, (connected) => {
       return navigateTo(path)
   }
 
-  if (isDirty.value)
-    return navigateTo('/')
-
-  isDirty.value = true
 
 }, { immediate: true })
 </script>
