@@ -76,7 +76,7 @@ const offerColumns = computed<TableColumn<Bid>[]>(() => {
             onClickAcceptOffer(row)
           },
           text: t(`marketplace.singleItem.accept`),
-          hidden(row) { return playerOwnedSale(row) && item.my_shares == 0 },
+          hidden(row) { return playerOwnedSale(row) || item.my_shares == 0 },
         },
         {
           type: 'secondary',
