@@ -10,6 +10,10 @@ VList(space-y="1" v-if="item")
     template(#value) 
       Currency(:value="item.token?.higher_bid_price")
 
+  TransactionItemDetailsRow()
+    template(#name) {{ $t(`collection.attributes.sale_price`) }}
+    template(#value) 
+      Currency(:value="item.token?.higher_bid_price")
 </template>
 
 <script lang="ts" setup>

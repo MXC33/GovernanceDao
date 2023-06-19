@@ -1,6 +1,6 @@
 <template lang="pug">
 VList(bg="gray-800" frame="~" flex-shrink="0")
-  HList(justify="start" cursor="pointer" p="l-3 r-6" items="center" v-if="item")
+  HList(justify="start" cursor="pointer" p="l-3 r-6" items="center" @click="$emit('clickItem')")
     VList(w="30" h="30" pos="relative" min-h="0")
       TokenImage(:token="item.token")
 
@@ -23,6 +23,6 @@ import type { TransactionItem } from '~/composables/useTransactions'
 const { item } = defineProps<{
   item: TransactionItem
 }>()
-
+defineEmits(["clickItem"])
 </script>
   

@@ -25,6 +25,10 @@ const singleItemAttributes: Attribute<SingleItemData>[] = [
   {
     key: 'sale_price',
     hasToken: true
+  },
+  {
+    key: 'higher_bid_price',
+    hasToken: true
   }
 ]
 

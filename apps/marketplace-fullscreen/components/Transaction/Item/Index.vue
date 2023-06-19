@@ -1,5 +1,5 @@
 <template lang="pug">
-TransactionItemStatic(v-if="item" :item="item")
+TransactionItemStatic(v-if="item" :item="item" @clickItem="isOpen = !isOpen")
   template(#description)
     TransactionItemDescription(:item="item" v-if="!isTransfer")
 
@@ -33,7 +33,7 @@ const { isTransfer = false, isMultiple } = defineProps<{
 
 const item = defineModel<TransactionItem>()
 const isOpen = shallowRef(!isMultiple)
-
+console.log("TX", item.value)
 
 const isValid = computed(() => !!item.value?.ixtPrice && !!item.value.shares)
 console.log("Transaction", item, "isTransfer", isTransfer)

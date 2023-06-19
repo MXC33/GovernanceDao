@@ -104,7 +104,8 @@
       "listed": "Listed",
       "owners": "Owners",
       "unique_owners": "Unique Owners",
-      "sale_price": "Best offer"
+      "higher_bid_price": "Best offer",
+      "sale_price": "Lowest Sale"
     },
     "sort": {
       "PRICE_ASC": "Price low to high",
