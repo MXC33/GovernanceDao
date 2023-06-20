@@ -8,8 +8,6 @@ VList()
     span(w="6" :lg="large")
       slot(name="icon")
 
-
-
     Teleport(to="#takeover")
       Transition(name="slide-bottom")
         OptionPanel.no-scrollbar(@close="showTakeOver = false" v-if="showTakeOver")

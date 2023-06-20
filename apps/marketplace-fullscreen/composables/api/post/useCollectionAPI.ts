@@ -1,7 +1,7 @@
 import { CollectionData, Collection, CollectionPayload } from "../../useCollection"
 import { ServerSortOptions } from '../../useTable'
 
-interface CollectionResponse {
+export interface CollectionResponse {
   success: boolean
   status: number
   message: string
@@ -20,6 +20,7 @@ interface CollectionOptions {
   filter?: {
     owned?: boolean,
     type?: number
+    search?: string
   },
 }
 
@@ -41,7 +42,7 @@ export const useCollectionsURL = () => {
 export const useCollectionData = (url: string, options: CollectionOptions = {}) => {
   const { fetchIXAPI } = useIXAPI()
 
-  const { activeFilters, filtersAsPayload, activeServerSort, createFilters } = useCollectionSettings()
+  const { activeFilters, filtersAsPayload, activeServerSort, activeSearchTerm, createFilters } = useCollectionSettings()
   const activePage = ref(0)
 
   const body = computed<CollectionPayload>(() => ({
@@ -50,7 +51,7 @@ export const useCollectionData = (url: string, options: CollectionOptions = {}) 
     filter: {
       owned: options.filter?.owned ?? false,
       type: options.filter?.type ?? 0,
-      search: "",
+      search: activeSearchTerm.value ?? '',
       attributes: filtersAsPayload.value
     }
   }))
@@ -60,7 +61,6 @@ export const useCollectionData = (url: string, options: CollectionOptions = {}) 
   const asyncState = useAsyncDataState(key, () =>
     fetchIXAPI(url, 'POST', body.value) as Promise<CollectionResponse>, {
     transform: (item) => {
-      // console.log("Transformed the data", body.value, item.data)
       return item.data as CollectionData
     },
     mergePages: (oldData, newData) => {
@@ -73,9 +73,13 @@ export const useCollectionData = (url: string, options: CollectionOptions = {}) 
 
 
   const setupCollectionListeners = () => {
-    watch([activeFilters, activeServerSort], () => {
+    const refreshCollection = () => {
       activePage.value = 0
       asyncState.refresh()
+    }
+
+    watch([activeFilters, activeServerSort, activeSearchTerm], () => {
+      refreshCollection()
     }, { deep: true })
 
     watch(asyncState.data, (value) => {
@@ -100,7 +104,7 @@ export const useCollectionData = (url: string, options: CollectionOptions = {}) 
   }
 }
 
-export const useCollectionsData = (network = 'polygon') => {
+export const useCollectionsData = (network = 'polygon', tokenSearch: '') => {
   const { fetchIXAPI } = useIXAPI()
   return useAsyncDataState('collections', () =>
     fetchIXAPI('collections/?online=true') as Promise<CollectionsResponse>, {

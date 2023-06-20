@@ -1,51 +1,80 @@
 <template lang="pug">
-VList(@keydown.down.stop.prevent="stepDown" @keydown.up.stop.prevent="stepUp" @keypress.enter.stop.prevent="selectFocused" @keypress="onKeyDown" pos="relative" frame="~ hover:gray-300" ref="element")
-  HList(w="full" px="3" h="full")
-    SearchIcon(w="4")
+VList(@keydown.down.stop.prevent="stepDown" @keydown.escape.stop.prevent="close" @keydown.up.stop.prevent="stepUp" @keypress.enter.stop.prevent="selectFocused" @keypress="onKeyDown" pos="relative" ref="element" flex-grow="1" :class="frameClass")
+  HList(w="full" px="md:3" h="full")
+    SearchIcon(w="6" fill="gray-400")
 
-    input(type="text" v-model="searchTerm" :placeholder="placeholder ?? 'Search'" ref="searchElement" bg="ix-black" @click.stop="isOpen = true" outline="none" p="3" w="full" size="3")
+    input(type="text" v-model="searchTerm" :placeholder="placeholder ?? 'Search'" ref="searchElement" bg="gray-900 md:ix-black" @click.stop="isOpen = true" outline="none" p="0 md:3" px="2" w="full" size="3" @input="onChangeSearch")
 
   Transition(name="fade")
     SearchListContainer(v-if="isOpen" ref="scrollElement" w="full")
-      template(v-if="searchHits.length == 0")
-        div(p="2" bg="gray-300 opacity-20" rounded="md" opacity="50" cursor="default") {{ $t(`collection.nothingFound`) }}
+
+      template(v-if="searchHistoryVisible")
+        HList(font="bold" px="4 md:3" py="2" b="b-0.5 gray-600" v-if="searchHistory.length >= 1") Recent searches:
+
+        HList(font="bold" px="4 md:3" py="2" v-else) No recent searches.
+
+        VList(v-for="(search, index) in searchHistory" :key="index")
+          SearchItem(@click="onSelect(search)" :is-focused="isFocused(index)" @mouseenter="setFocusIndex(index)" @mouseleave="onLeave(index)")
+            HList(space-x="3" items="center" justify="")
+              SearchIcon(w="6")
+              div() {{ search }}
+
+              HList(flex-grow="1" justify="end")
+                CloseIcon(w="3" @click="removeRecentSearch(search)" translate-y="-0.2")
 
       template(v-else)
-        VList(v-for="(group, groupIndex) in searchHits" space-y="2")
-          SearchCategory(v-if="group.category") {{ group.category }}
+        HList(font="bold" px="3" py="2" b="b-0.5 gray-600") Did you mean?
 
-          SearchItem(:id="getId(groupIndex, index)" v-for="(item, index) in group.items" @click="onSelect(item)" :selected="isSelected(item)" :is-focused="isFocused({groupIndex, index})" @mouseenter="setFocusIndex({groupIndex, index})" @mouseleave="onLeave({groupIndex, index})") 
+        VList.no-scrollbar(divide-y="0.5")
+          SearchItem.no-scrollbar(:id="getId(index)" v-for="(item, index) in searchHits" @click="onSelect(item)" :is-focused="isFocused(index)" @mouseenter="setFocusIndex(index)" @mouseleave="onLeave(index)")
             slot(name="item" :item="item")
-              div {{ item[searchPaths[0]] }}
-
+              div {{ item }}
 </template>
-  
-  
-<script setup lang="ts" generic="Item extends Record<string, any>, Key extends keyof Item & string">
 
+<script setup lang="ts">
 import SearchIcon from '~/assets/icons/search.svg'
+import CloseIcon from '~/assets/icons/close.svg'
 
-const element = ref()
-const searchElement = ref()
-const scrollElement = ref()
+const element = shallowRef()
+const searchElement = shallowRef()
+const scrollElement = shallowRef()
+
 const props = defineProps<{
-  options: Readonly<Item[]>,
-  searchPaths: Key[],
-  selected?: Item,
+  options: string[]
   placeholder?: string,
+  hasFrame: boolean
 }>()
 
+const onSelect = (option: string | null) => {
+  if (!option) {
+    return finishedSearch(searchTerm.value ?? '')
+  }
 
-const onSelect = (option: Item) => {
-
-  navigateTo(`/assets/${option.network}/${option.collection}/${option.token_id}`)
-
-  close()
-  emit("selected", option)
+  searchTerm.value = option
+  finishedSearch(option)
 }
 
+
+const frameClass = computed(() => props.hasFrame ? 'frame-~ hover:gray-300' : '')
+
+const onChangeSearch = () => {
+  setSearchHits()
+  emit("input", searchTerm.value)
+}
+
+// const onRecentSearchClick = (term: string) => {
+//   console.log('Why tho?')
+//   searchTerm.value = term
+// }
+
+const finishedSearch = (term: string) => {
+  close()
+  emit("selected", term)
+  saveToHistory(term)
+}
+const computedOptions = computed(() => props.options)
+
 const {
-  setupInitialList,
   stepDown,
   stepUp,
   onKeyDown,
@@ -53,29 +82,42 @@ const {
   close,
   onLeave,
   isFocused,
-  isSelected,
+  setSearchHits,
   setFocusIndex,
   selectFocused,
+  setupInitialList,
+  searchHistory,
+  searchHistoryVisible,
   isOpen,
   searchHits,
   searchTerm
-} = useSearch<Item, Key>(props.options, props.searchPaths, searchElement, scrollElement, onSelect)
+} = useSearch(computedOptions, searchElement, scrollElement, onSelect)
 
-const emit = defineEmits(["selected"])
+
+const saveToHistory = (term: string) => {
+  if (term == null)
+    return
+
+  const uniqueItems = searchHistory.value.filter(item => item !== term)
+
+  searchHistory.value = [
+    ...uniqueItems,
+    term,
+  ].slice(0, 5)
+}
+
+const removeRecentSearch = (search: string) => {
+  searchHistory.value = searchHistory.value.filter(term => term !== search)
+}
+
+const emit = defineEmits(["selected", "input"])
 
 onClickOutside(element, () => {
   isOpen.value = false
 })
 
-watch(searchHits, () => {
-  nextTick(() => {
-    setupInitialList()
-  })
-})
-
 onMounted(() => {
   setupInitialList()
 })
-
 
 </script>

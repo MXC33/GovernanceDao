@@ -210,7 +210,6 @@ export const useTable = () => {
   const sortRows = <T extends TableRow>(columns: TableColumn<T>[], rows: T[], sort: TableSort) => {
     const { columnIndex, direction } = sort
     const column = columns[columnIndex]
-    console.log("col", column, columnIndex, direction)
 
     const mapped = rows.map((row, index) => ({
       originalIndex: index,

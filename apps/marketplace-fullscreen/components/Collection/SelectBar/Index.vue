@@ -13,7 +13,9 @@ div(v-if="amountSelected != 0" w="full" p="3" pos="sticky bottom-0" z="2" bg="ix
       CollectionSelectBarButton(@click="onClickList") List {{amountSelected}} 
 
     template(v-else-if="context=='collection'")
-      CollectionSelectBarButton(@click="onClickOffer" :secondary="true") Place {{amountSelected}} offer(s)
+      CollectionSelectBarButton(@click="onClickOffer" :secondary="true" v-if="amountSelected == 1") Place {{amountSelected}} offer
+      CollectionSelectBarButton(@click="onClickOffer" :secondary="true" v-else-if="amountSelected >= 1") Place {{amountSelected}} offers
+
 
       CollectionSelectBarButton(@click="onAddToCart") Add {{amountSelected}} To Cart 
 
@@ -77,8 +79,7 @@ const onAddToCart = () => {
   selectedItems.value.map(item => addToCart(item, item.lowest_sale))
 }
 
-
-
 const { selectedItems, clearSelectedItems } = useSelection()
 const amountSelected = computed(() => selectedItems.value.length)
+
 </script>

@@ -6,6 +6,7 @@ export interface FilterPayload {
   value: string
   trait_type: string
 }
+
 export interface CollectionPayload {
   page_key: number,
   order: number,
@@ -16,6 +17,7 @@ export interface CollectionPayload {
     attributes: FilterPayload[]
   }
 }
+
 interface FilterBase {
   title: string
   trait_type: string
@@ -79,10 +81,10 @@ export type CollectionDisplayType = typeof CollectionDisplayTypes[number]
 export const useCollectionSettings = () => {
 
   const activeFilters = useState<Filter[]>('activeFilters', () => [])
+  const activeSearchTerm = useState<string | null>('active-search-term', () => null)
   const activeServerSort = useState<ServerSortKey | null>('active-server-sort', () => null)
   const collectionOwners = useState('collectionOwners', () => ("All"))
   const activeContext = useState<string | null>('collection-context', () => null)
-
   const displayType = useRouteQueryOptions('displayType', 'grid', ['grid', 'list'])
 
   const setContext = (context: string) => activeContext.value = context
@@ -122,6 +124,7 @@ export const useCollectionSettings = () => {
     activeFilters,
     collectionOwners,
     activeServerSort,
+    activeSearchTerm,
     setContext,
     createFilters,
     toggleDisplayType,

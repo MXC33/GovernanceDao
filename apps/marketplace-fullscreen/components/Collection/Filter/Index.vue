@@ -4,13 +4,10 @@ HList(pos="sticky top-34" z="8" b="on-scrolling:t-1 gray-600" ml="-4 md:(-8)" mr
 
     CollectionFilterToggleFilter(@toggle="$emit('toggleFilter')" :data="data")
 
-    Search(:options="items" :search-paths="['name']" w="md:full" flex-grow="lt-md:1")
-      template(#item="{item}")
-        HList(items="center" space-x="3")
-          div(w="12")
-            TokenImage(:token="item"  :key="'img' + getTokenKey(item)")
+    CollectionFilterSearch()
 
-          TokenName(:token="item" capitalize="~" :key="'name' + getTokenKey(item)")
+    //- Search(:options="collection" @selected="updateSearchString")
+    //-   template(#item="{item}") {{ item }}
 
     CollectionFilterSort(:context="context" v-if="context == 'collection'")
 
@@ -19,10 +16,36 @@ HList(pos="sticky top-34" z="8" b="on-scrolling:t-1 gray-600" ml="-4 md:(-8)" mr
 </template>
 
 <script lang="ts" setup>
-import type { IXToken } from '@ix/base/composables/Token/useIXToken';
-import type { CollectionContext, CollectionData } from '~/composables/useCollection';
+// import { watchDebounced } from '@vueuse/core'
+import type { IXToken } from '@ix/base/composables/Token/useIXToken'
+import type { CollectionContext, CollectionData } from '~/composables/useCollection'
 
-const { getTokenKey } = useTokens()
+// const { activeSearchTerm } = useCollectionSettings()
+
+// const route = useRoute()
+// const { contract } = route.params
+// const { getCollectionURL } = useCollectionsURL()
+
+// let searchTerm = ref(activeSearchTerm.value ?? '')
+
+// const { data: collectionData, execute: fetchCollection } = useCollectionData(getCollectionURL(String(contract), 'polygon'), {
+//   filter: {
+//     owned: false,
+//     type: 0,
+//     search: searchTerm.value
+//   }
+// })
+
+// await fetchCollection()
+
+// const updateSearchString = (newSearchTerm: string) => {
+//   console.log('searchTerm has changed to', newSearchTerm)
+//   activeSearchTerm.value = newSearchTerm
+// }
+
+// const collection = computed(() => collectionData?.value?.nfts?.filter(item => item.name).map(item => item.name) || [])
+
+// console.log('collection', collection.value)
 
 defineProps<{
   data?: CollectionData
