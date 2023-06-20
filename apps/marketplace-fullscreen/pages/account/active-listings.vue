@@ -51,7 +51,9 @@ const columns: TableColumn<IXToken>[] = [
     label: "Expiration date", rowKey: "sales[0].endtime", type: 'date', sortable: true
   },
   {
-    type: 'buttons', buttons: [{
+    type: 'buttons',
+    width: 250,
+    buttons: [{
       type: 'secondary', text: 'cancel', onClick: (token) => {
         cancelListingOnClick(token)
       },
