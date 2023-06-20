@@ -4,7 +4,7 @@ VList(pos="sticky top-0" z="99" w="full" @mouseenter="isSelected = true" @mousel
     NuxtLink(to="https://www.planetix.com")
       PlanetIXNew(w="42.25")
 
-    HList(justify="end" flex-grow="1" display="lt-lg:none" overflow-x="hidden")
+    HList(justify="start" flex-grow="1" display="lt-lg:none" overflow-x="hidden")
       button(v-for="(item, index) in siteTopHeaders" @click="openMenu(index)" btn="menu" color = "s-default:white s-selected:ix-orange" :state="selected(index)") {{ $t(`marketplace.navigation.${item.type}.title`)}}
 
     HList(space-x="6" px="0")
