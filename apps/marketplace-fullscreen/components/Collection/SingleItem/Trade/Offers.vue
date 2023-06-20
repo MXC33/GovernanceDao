@@ -31,11 +31,11 @@ const { item } = defineProps<{
 
 const onClickAcceptOffer = (bid: Bid) => {
   displayPopup({
-    type: 'accept-item',
-    item: {
+    type: 'accept-items',
+    items: [{
       ...item,
       bid
-    }
+    }]
   })
 }
 

@@ -9,7 +9,7 @@ div#popups()
 
     CompleteBuy(v-else-if="popup.type == 'buy-items-success'" :items="popup.items")
 
-    CompleteAccept(v-else-if="popup.type == 'accept-items-success'" :item="popup.item")
+    CompleteAccept(v-else-if="popup.type == 'accept-items-success'" :items="popup.items")
 
     CompleteUnlisting(v-else-if="popup.type == 'unlist-item-success'" :items="popup.items")
 
@@ -25,7 +25,9 @@ div#popups()
 
     Unbid(v-else-if="popup.type == 'unbid-item'" :items="popup.items")
 
-    Accepting(v-else-if="popup.type == 'accept-item'" :item="popup.item")
+    Accepting(v-else-if="popup.type == 'accept-items'" :items="popup.items")
+
+    Rejecting(v-else-if="popup.type == 'reject-items'" :items="popup.items")
 
     IXTInsufficient(v-else-if="popup.type == 'insufficient-funds'")
 

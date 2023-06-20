@@ -18,7 +18,7 @@ export const useCart = () => {
   const cartFailedSales = useState<CartItem[]>('cart-failed-items', () => [])
   const cartItems = useState<CartItem[]>('cart-items', () => [])
   const viewingCart = useState('cart-visible', () => false)
-  const { generateConsiderations, createBuyOrder, isAdvancedOrder } = useBuyHelpers()
+  const { generateConsiderations, createBuyOrder, isAdvancedOrder } = useTransactionHelpers()
 
   const { displaySnack } = useSnackNotifications()
 

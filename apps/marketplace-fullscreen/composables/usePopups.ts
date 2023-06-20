@@ -1,10 +1,8 @@
 import { IXToken } from "@ix/base/composables/Token/useIXToken";
-import { CartItem } from "./useCart";
 import { ListingItem, UnlistingItem } from "./useListing";
-import { BiddingItem, UnbidItem } from "~/composables/useBidding";
-import { TransferItem, TransferToWalletItem } from "./useTransfer";
+import { UnbidItem } from "~/composables/useBidding";
+import { TransferToWalletItem } from "./useTransfer";
 import { TransactionItem } from "./useTransactions";
-import { OfferItem } from "~/composables/useOffer";
 
 export interface PopupBase {
   type: string
@@ -45,6 +43,11 @@ export interface PopupUnlistItemSuccess extends PopupBase {
   items: UnlistingItem[]
 }
 
+export interface PopupRejectItemsSuccess extends PopupBase {
+  type: 'reject-items-success',
+  items: TransactionItem[]
+}
+
 export interface PopupBidItem extends PopupBase {
   type: 'bid-item',
   items: IXToken[]
@@ -65,21 +68,26 @@ export interface PopupBuyItemSuccess extends PopupBase {
   items: TransactionItem[]
 }
 
-export interface PopupAcceptItem extends PopupBase {
-  type: 'accept-item',
-  item: IXToken
+export interface PopupAcceptItems extends PopupBase {
+  type: 'accept-items',
+  items: IXToken[]
+}
+
+export interface PopupRejectItems extends PopupBase {
+  type: 'reject-items',
+  items: IXToken[]
 }
 
 export interface PopupAcceptItemsSuccess extends PopupBase {
   type: 'accept-items-success',
-  item: TransactionItem
+  items: TransactionItem[]
 }
 
 export interface PopupInsufficientFunds extends PopupBase {
   type: 'insufficient-funds',
 }
 
-type Popup = PopupOnList | PopupOnBid | PopupTransfer | PopupListItem | PopupUnlistItem | PopupBidItem | PopupUnbidItem | PopupTransferSuccess | PopupBuyItemSuccess | PopupAcceptItem | PopupAcceptItemsSuccess | PopupInsufficientFunds | PopupUnlistItemSuccess | PopupUnbidSuccess
+type Popup = PopupOnList | PopupOnBid | PopupTransfer | PopupListItem | PopupUnlistItem | PopupBidItem | PopupUnbidItem | PopupTransferSuccess | PopupBuyItemSuccess | PopupAcceptItems | PopupAcceptItemsSuccess | PopupInsufficientFunds | PopupUnlistItemSuccess | PopupUnbidSuccess | PopupRejectItemsSuccess | PopupRejectItems
 
 export const usePopups = () => {
   const popup = useState<Popup | null>('active-popup', () => null)

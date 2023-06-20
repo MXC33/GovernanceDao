@@ -7,8 +7,7 @@ ContentDrawer(frame="none" mb="4" b="t-1 b-1 gray-600" :is-neutral="true")
         template(#header) {{ $t(`collection.attributes.floorPrice`) }}
         template(#value)
           div(grid="~ cols-4 gap-3")
-            button(btn="~ form on-active:form-active" :active="allSetToFloor" capitalize="~" @click="onClickSetToFloor") {{ $t(`marketplace.transactions.setToFloor`) }}
-
+            button(btn="~ form on-active:form-active" :active="allSetToFloor" capitalize="~" @click="onClickSetToFloor" disable="on-disabled:active" :disabled="floorDisabled") {{ $t(`marketplace.transactions.setToFloor`) }}
 
       TransactionItemAdjustRow()
         template(#header) {{ $t(`marketplace.transactions.duration`) }}
@@ -39,8 +38,11 @@ const allSetToFloor = computed(() => {
   return allElementsEqual(prices)
 })
 
-
 const items = defineModel<TransactionItem[]>()
+
+const floorDisabled = computed(() =>
+  items.value?.every((item) => !item.token.sale_price)
+)
 
 const onClickSetDuration = (days: number) => {
   if (!items.value)

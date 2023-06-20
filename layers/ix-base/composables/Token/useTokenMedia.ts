@@ -65,23 +65,22 @@ export const useTokenMedia = () => {
       return await getTokenIdentifierImage(token)
 
     const { icon, thumbnail, image } = token
-
-    if (thumbnail == "")
-      return icon
+    const missingURL = (url?: string) =>
+      !url || url == ""
 
     const largeSize = 800
     const transformedLarge = thumbnail.replace("thumbnailv2", `w_${largeSize}/convert-png`)
 
-    if (large)
+    if (large && !missingURL(transformedLarge))
       return transformedLarge
 
-    if (icon && !icon.includes("https://ipfs.io"))
+    if (!missingURL(icon) && !icon.includes("https://ipfs.io"))
       return icon
 
-    else if (thumbnail)
+    if (!missingURL(thumbnail))
       return thumbnail
 
-    return transformedLarge
+    return image
   }
 
 

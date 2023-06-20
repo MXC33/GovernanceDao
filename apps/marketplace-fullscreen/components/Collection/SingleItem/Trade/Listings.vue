@@ -11,9 +11,6 @@ ContentDrawer(:start-open="!isMobile" :is-neutral="true" bg="gray-900")
 </template>
 
 <script lang="ts" setup>
-import CartIcon from '~/assets/icons/cart.svg'
-import TrashIcon from '~/assets/icons/trash.svg'
-
 import type { Sale, SingleItemData, Bid } from '@ix/base/composables/Token/useIXToken';
 import type { TableColumn } from '~/composables/useTable';
 const isMobile = onMobile()

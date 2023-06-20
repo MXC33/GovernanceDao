@@ -77,8 +77,8 @@ const { displayPopup } = usePopups()
 
 const acceptBidOnClick = (token: IXToken) => {
   displayPopup({
-    type: 'accept-item',
-    item: token
+    type: 'accept-items',
+    items: [token]
   })
 }
 </script>

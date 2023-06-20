@@ -73,11 +73,11 @@ const accept = async () => {
   if (acceptOffer)
     displayPopup({
       type: 'accept-items-success',
-      item: {
+      items: [{
         token: item,
         shares: shares.value,
         ixtPrice: totalOfferPrice
-      }
+      }]
     })
 
   console.log('checkoutSales', acceptOffer)

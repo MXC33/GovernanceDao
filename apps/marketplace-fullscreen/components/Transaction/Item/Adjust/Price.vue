@@ -6,10 +6,13 @@ TransactionItemAdjustRow(v-if="item")
     InputText(v-model="item.ixtPrice")
       template(#suffix) IXT
 
-    TransactionItemAdjustDetail() {{ $t(`marketplace.transactions.total`) }} {{item.type}} {{ $t(`marketplace.transactions.price`) }} {{ listPrice }}
+    TransactionItemAdjustDetail() 
+      HList(space-x="1")
+        span {{ $t(`marketplace.transactions.total`) }} 
+        span(lowercase="~")  {{item.type}} {{ $t(`marketplace.transactions.price`) }} {{ listPrice }}
 
   template(#action)
-    button(btn="~ form" w="full" @click="onClickFloor") {{ $t(`marketplace.transactions.floor`) }} 
+    button(btn="~ form" w="full" @click="onClickFloor" disable="on-disabled:active" :disabled="!item.token.sale_price") {{ $t(`marketplace.transactions.floor`) }} 
 
 </template>
   
@@ -18,7 +21,9 @@ import type { TransactionItem } from '~/composables/useTransactions'
 
 const item = defineModel<TransactionItem>()
 
-const listPrice = computed(() => roundToDecimals((item.value?.ixtPrice ?? 0) * (item.value?.shares?.value ?? 0), 2))
+const listPrice = computed(() =>
+  roundToDecimals((item.value?.ixtPrice ?? 0) * (item.value?.shares?.value ?? 0), 4)
+)
 
 const onClickFloor = () => {
   if (!item.value)

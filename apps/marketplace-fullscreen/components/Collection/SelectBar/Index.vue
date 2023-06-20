@@ -19,8 +19,8 @@ div(v-if="amountSelected != 0" w="full" p="3" pos="sticky bottom-0" z="2" bg="ix
 
 
     template(v-else-if="context=='incoming-bids'")
-      CollectionSelectBarButton() Reject {{amountSelected}} Bids
-      CollectionSelectBarButton() Accept {{amountSelected}} Bids 
+      //- CollectionSelectBarButton(@click="onClickRejectBids") Reject {{amountSelected}} Bids
+      CollectionSelectBarButton(@click="onClickAcceptBids") Accept {{amountSelected}} Bids 
 
 </template>
 
@@ -29,6 +29,20 @@ import type { CollectionContext } from '~/composables/useCollection';
 const { addToCart } = useCart()
 const { displayPopup } = usePopups()
 const { selectedItemsIsSameCollection } = useSelection()
+
+const onClickRejectBids = () => {
+  displayPopup({
+    type: 'reject-items',
+    items: selectedItems.value
+  })
+}
+
+const onClickAcceptBids = () => {
+  displayPopup({
+    type: 'accept-items',
+    items: selectedItems.value
+  })
+}
 
 const onClickList = () => {
   displayPopup({
