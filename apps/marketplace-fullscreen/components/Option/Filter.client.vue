@@ -4,7 +4,7 @@ VList()
     span(w="6" :lg="large")
       slot(name="icon")
 
-  ButtonSquareIcon(display="md:none" @click="toggleTakeOver" w="10 on-lg:12" :lg="large")
+  ButtonSquareIcon(display="md:none" @click="toggleTakeOver" w="10 on-lg:22" :lg="large")
     span(w="6" :lg="large")
       slot(name="icon")
 
