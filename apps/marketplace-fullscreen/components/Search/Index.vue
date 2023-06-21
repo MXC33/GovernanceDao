@@ -1,6 +1,6 @@
 <template lang="pug">
 VList(@keydown.down.stop.prevent="stepDown" @keydown.escape.stop.prevent="close" @keydown.up.stop.prevent="stepUp" @keypress.enter.stop.prevent="selectFocused" @keypress="onKeyDown" pos="relative" ref="element" flex-grow="1" :class="frameClass")
-  HList(w="full" px="md:3" h="full")
+  HList(w="full" px="4 md:3" h="full")
     SearchIcon(w="6" fill="gray-400")
 
     input(type="text" v-model="searchTerm" :placeholder="placeholder ?? 'Search'" ref="searchElement" bg="gray-900 md:ix-black" @click.stop="isOpen = true" outline="none" p="0 md:3" px="2" w="full" size="3" @input="onChangeSearch")
@@ -15,7 +15,7 @@ VList(@keydown.down.stop.prevent="stepDown" @keydown.escape.stop.prevent="close"
 
         VList(v-for="(search, index) in searchHistory" :key="index")
           SearchItem(@click="onSelect(search)" :is-focused="isFocused(index)" @mouseenter="setFocusIndex(index)" @mouseleave="onLeave(index)")
-            HList(space-x="3" items="center" justify="")
+            HList(space-x="3" items="center" w="full" flex-grow="1")
               SearchIcon(w="6")
               div() {{ search }}
 
@@ -54,7 +54,6 @@ const onSelect = (option: string | null) => {
   finishedSearch(option)
 }
 
-
 const frameClass = computed(() => props.hasFrame ? 'frame-~ hover:gray-300' : '')
 
 const onChangeSearch = () => {
@@ -62,6 +61,7 @@ const onChangeSearch = () => {
   emit("input", searchTerm.value)
 }
 
+// Leave be for now
 // const onRecentSearchClick = (term: string) => {
 //   console.log('Why tho?')
 //   searchTerm.value = term

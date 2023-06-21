@@ -45,7 +45,6 @@ const searchFetch = async (term: string) => {
   autocompleteResults.value = autocompleteResults.value
     .concat(newData)
     .filter((val, index, array) => array.indexOf(val) == index)
-
 }
 
 onBeforeMount(() => {
@@ -69,7 +68,6 @@ const toggleTakeOver = () => {
 const selectedSearch = (newSearchTerm: string) => {
   activeSearchTerm.value = newSearchTerm
 }
-
 
 defineProps<{
   large?: boolean

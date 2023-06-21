@@ -1,5 +1,5 @@
 <template lang="pug">
-VList(max-h="90vh md:100" overflow-y="auto" scroll="smooth" bg="gray-900 md:gray-800" pos="absolute top-(8.5) left-(-4) right-(-8) md:(absolute top-full)" b="1 red" z="999")
+VList(max-h="90vh md:100" overflow-y="auto" scroll="smooth" bg="gray-900 md:gray-800" pos="absolute top-8.5 left-(-4) md:(absolute top-full)" z="999" w="lt-md:full" flex-grow="lt-md:1" ml="")
   slot
 </template>
 
