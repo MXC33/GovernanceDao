@@ -1,13 +1,10 @@
 <template lang="pug">
-Collection(:data="data" v-if="data" :loading="pending")
+Collection(:data="data" v-if="data" :loading="pending" @loadNextPage="loadNextPage")
   template(#bottom)
-    HList(w="lt-md:full" justify="center" py="2" v-if="!!data.page_key && Number(data.page_key) > 0")
-      button(@click="loadNextPage" btn="~ primary" py="3" cut="bottom-right sm b-ix-primary" bg="hover:ix-ne" w="lt-md:full") {{ $t(`marketplace.navigation.loadMore`)}}
 </template>
 
 
 <script lang="ts" setup>
-
 const route = useRoute()
 const { contract } = route.params
 
@@ -19,6 +16,7 @@ await fetchCollection()
 useHead({
   title: (data.value?.name ? data.value.name + " | " : "") + "Marketplace | PlanetIX"
 })
+
 setupCollectionListeners()
 
 </script>
