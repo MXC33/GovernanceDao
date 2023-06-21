@@ -25,14 +25,23 @@ const { activeSearchTerm } = useCollectionSettings()
 
 const route = useRoute()
 const { contract } = route.params
-const { getCollectionURL } = useCollectionsURL()
+const { getCollectionURL, myAssetsURL } = useCollectionsURL()
 
 const { fetchIXAPI } = useIXAPI()
 const autocompleteResults = shallowRef<string[]>([])
 const autocompleteSearch = shallowRef<string>('')
+const apiUrl = ref('')
+
+watch(() => route.path, (newPath) => {
+  if (newPath.includes('account')) {
+    apiUrl.value = myAssetsURL('polygon')
+  } else {
+    apiUrl.value = getCollectionURL(String(contract), 'polygon')
+  }
+}, { immediate: true })
 
 const searchFetch = async (term: string) => {
-  const collection = await fetchIXAPI(getCollectionURL(String(contract), 'polygon'), 'POST', {
+  const collection = await fetchIXAPI(apiUrl.value, 'POST', {
     filter: {
       owned: false,
       type: 0,
