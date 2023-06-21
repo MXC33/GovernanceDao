@@ -74,4 +74,15 @@ defineProps<{
   data?: CollectionData
 }>()
 
+const toggleScroll = (): void => {
+  const body = document.querySelector("body")
+  if (body) {
+    if (showTakeOver) {
+      body.classList.add("no-scroll")
+    } else {
+      body.classList.remove("no-scroll")
+    }
+  }
+}
+
 </script>

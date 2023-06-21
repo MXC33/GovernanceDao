@@ -40,7 +40,7 @@ const numberOfSelected = computed(() => {
 });
 
 const lessThanOneSelected = computed(() => {
-  return numberOfSelected.value < 1;
+  return numberOfSelected.value < 1
 });
 
 const showTakeOver = ref(false)
@@ -52,8 +52,8 @@ const toggleTakeOver = () => {
 const clearFilters = () => {
   activeFilters.value.forEach(filter => {
     filter.value.forEach(option => {
-      option.selected = false;
-    });
-  });
-};
+      option.selected = false
+    })
+  })
+}
 </script>
