@@ -94,4 +94,9 @@ const toggleScroll = (): void => {
   }
 }
 
+watch(showTakeOver, (newValue) => {
+  if (newValue) {
+    toggleScroll()
+  }
+})
 </script>
