@@ -1,77 +1,140 @@
 {
   "general": {
+    "detailedInformation": "详细信息",
+    "claimAll": "一键领取",
+    "summary": "概览",
+    "not-available": "不可用",
+    "mc": "任务控制",
+    "disclaimer": "免责声明",
+    "rename-title": "重命名",
+    "nSelected": "{n} 个已选",
     "accelerate": "加速",
     "accelerateTask": "加速任务",
+    "previous": "上一页",
     "back": "返回",
     "cancel": "取消",
     "close": "关闭",
     "claim": "领取",
     "confirm": "确认",
     "continue": "继续",
+    "next": "下一步",
     "disconnect": "断开连接",
     "errorConnecting": "连接错误：",
     "exit": "退出",
+    "upgrade": "升级",
     "goToInventory": "前往库存",
     "enter": "输入",
+    "attributes": "属性",
     "incoming": "收到的信息",
     "open": "打开",
     "loading": "正在加载",
     "nrgProd": "单位能量输出",
     "total": "合计",
+    "one-time-purchase": "一键购买",
     "visit": "前往访问",
     "recommended": "建议",
+    "description": "描述",
     "visitor": "请输入密码",
+    "wallet": "钱包:",
+    "newLands": "新大陆",
+    "astroCap": "星际兑换所",
+    "y-space": "Y_",
+    "gws": "环球废料处理系统",
+    "eternalab": "永恒实验室",
+    "astroCredits": "AC币",
+    "missionCtrl": "任务控制",
+    "price": "价格",
+    "free": "免费",
+    "tier": "层级",
+    "level": "等级",
+    "required": "要求",
+    "qty": "数量",
+    "qty-colon": "数量:",
+    "stand-by": "待命中",
+    "perks": "福利",
+    "ixt": "IXT",
+    "agold": "金币",
+    "agoldLite": "微金币",
+    "district": "区域",
+    "status": "状态:",
+    "manage-rent": "管理租赁",
+    "visit-ac": "访问星际兑换所",
+    "itemsOwnedText": "你持有的物品:",
+    "inInventory": "库存中:",
+    "itemsOwned": "你持有的物品: <strong>{count}</strong>",
+    "mission-control": "任务控制",
+    "balance": "余额:",
+    "inactive": "未激活",
+    "active": "已激活",
+    "pending": "列队中",
+    "product": "产物",
+    "details": "明细",
+    "burn": "燃烧",
+    "no-burn-items": "你没有可燃烧的物品。",
+    "no-items": "没有物品...",
+    "selected": "已选",
+    "repair": "维修",
+    "burn-assets": "燃烧资产",
+    "purchase": "购买",
     "amount": {
       "max": "最大",
       "min": "最小"
-    },
-    "transactions": {
-      "mintTransfer": "铸币与转账",
-      "confirm": "在已连接的钱包中确认交易",
-      "descriptions": {
-        "processing": "处理该交易需耐心等待一段时间。如果您想取消该操作，请在您的钱包应用程序中拒绝交易。"
-      }
-    },
-    "collected": {
-      "waste": "废物",
-      "collectedWaste": "已收集的废物",
-      "left": "剩余",
-      "youMust": "您需要清理该配置上的所有废物后，才能统一领取资源到您的道具库里。"
-    },
-    "avatars": {
-      "proxy": "变更代理",
-      "seina": "Seina",
-      "jeremiah": "Jeremiah",
-      "evePryde": "Eve-Pryde",
-      "buck": "Buck"
-    },
-    "noItemsFound": {
-      "no": "否",
-      "itemsFound": "发现物品",
-      "noFull": "未发现任何物品"
-    },
-    "navigation": {
-      "terminal": "终端",
-      "inventory": "库存",
-      "missionCtrl": "任务控制",
-      "netEmpire": "Netempire",
-      "taskMng": "任务管理器",
-      "manager": "管理员",
-      "build": "构建",
-      "starterPack": "新手包",
-      "payments": "付款"
-    },
-    "timeCost": {
-      "hours": "小时",
-      "cost": "费用"
-    },
-    "build": {
-      "overview": "概述",
-      "build": "构建"
-    },
-    "search": {
-      "example": "搜索地块ID：SE LE#329801"
     }
+  },
+  "collection": {
+    "attributes": {
+      "total_volume": "总量",
+      "listed": "列出",
+      "unique_owners": "独有订单",
+      "sale_price": "最佳报价"
+    }
+  },
+  "transactions": {
+    "mintTransfer": "铸币与转账",
+    "confirm": "在已连接的钱包中确认交易",
+    "descriptions": {
+      "processing": "处理该交易需耐心等待一段时间。如果您想取消该操作，请在您的钱包应用程序中拒绝交易。"
+    }
+  },
+  "collected": {
+    "waste": "废物",
+    "collectedWaste": "已收集的废物",
+    "left": "剩余",
+    "youMust": "您需要清理该配置上的所有废物后，才能统一领取资源到您的道具库里。"
+  },
+  "avatars": {
+    "proxy": "变更代理",
+    "seina": "Seina",
+    "jeremiah": "Jeremiah",
+    "evePryde": "Eve-Pryde",
+    "buck": "Buck"
+  },
+  "noItemsFound": {
+    "no": "否",
+    "itemsFound": "发现物品",
+    "noFull": "未发现任何物品"
+  },
+  "navigation": {
+    "terminal": "终端",
+    "inventory": "库存",
+    "missionCtrl": "任务控制",
+    "netEmpire": "Netempire",
+    "taskMng": "任务管理器",
+    "manager": "管理员",
+    "build": "构建",
+    "starterPack": "新手包",
+    "payments": "付款"
+  },
+  "timeCost": {
+    "hours": "小时",
+    "cost": "费用"
+  },
+  "build": {
+    "overview": "概述",
+    "build": "构建"
+  },
+  "search": {
+    "example": "搜索地块ID：SE LE#329801"
   },
   "treasureChest": {
     "itemsInTotal": "物品总数",
@@ -113,7 +176,7 @@
       }
     }
   },
-  "build": {
+  "build2": {
     "selectPix": {
       "title": "定义 Pix",
       "subTitle": "ADS:A2\\90"
@@ -331,37 +394,6 @@
     "extractingAssets": "正在打开道具中......",
     "extractingChest": "打开并铸造包含的道具可能需要一些时间。无需担心，您可以离开此页面，继续您的其他任务，奖励将会尽快发放到您的道具库中。"
   },
-  "wallet": {
-    "title": "连接您的钱包",
-    "welcomeMessage": "与我们提供的钱包开始连接",
-    "signing": {
-      "title": "请在已连接的钱包弹窗中确认交易",
-      "description": "处理该交易需耐心等待一段时间。如果您想取消该操作，请在您钱包里的弹窗拒绝交易。"
-    },
-    "minting": {
-      "title": "交易正在验证中",
-      "description": "请稍等。您的交易将很快获得验证。"
-    },
-    "approving": {
-      "title": "交易正在获取验证中",
-      "description": "正在将您的道具配置在地块上。如果您想取消该操作，请在您钱包里的弹窗拒绝交易。"
-    },
-    "minting-pix": {
-      "title": "铸造您的 PIX",
-      "description": "将您的 PIX 铸造到区块链上。"
-    },
-    "playerProfile": {
-      "notLoggedIn": "玩家资料未登录",
-      "playerConnecting": "玩家资料（连接）",
-      "loggedInAs": "用户已登陆"
-    },
-    "payments": {
-      "chooseMethod": "请选择支付方式",
-      "matic": "matic",
-      "usdt": "usdt",
-      "ixt": "ixt"
-    }
-  },
   "taskManager": {
     "claim": "领取资源",
     "noTasks": "没有进行中的任务",
@@ -489,295 +521,598 @@
       }
     }
   },
+  "Tips": [
+    {
+      "title": "游戏手册",
+      "subtitle": "AOC目录第723号",
+      "description": "如果您在太空中感到迷失，一定要查看Planet IX的游戏手册。",
+      "image": ""
+    },
+    {
+      "title": "传奇资产",
+      "subtitle": "AOC目录第954号",
+      "description": "大多数资产的级别和稀有程度各不相同，其中传奇资产最有价值。",
+      "image": "/nft/images/biomod/icon-legendary.png"
+    },
+    {
+      "title": "季节",
+      "subtitle": "AOC目录第341号",
+      "description": "随着越来越多的废弃物在Planet IX上被收集和处理，地球的气候将稳定下来，新的任务将出现。",
+      "image": "/nft/images/waste/image.png"
+    },
+    {
+      "title": "变革推动者",
+      "subtitle": "AOC目录第629号",
+      "description": "作为变革推动者，您的任务是复兴Planet IX",
+      "image": "/nft/images/aoc-badge-pack/transparent.png"
+    },
+    {
+      "title": "NETEMPIRE市场",
+      "subtitle": "AOC目录第683号",
+      "description": "通过在市场中发售您的PIX和其他资产，可以让潜在买家更容易地找到并购买它们。",
+      "image": "/tips/icons/netempire-marketplace.png"
+    },
+    {
+      "title": "地球纪年后",
+      "subtitle": "AOC目录第583号",
+      "description": "地球纪年于A.C.2089年结束。同年成为1 A.E.年。",
+      "image": ""
+    },
+    {
+      "title": "Tile Contracts",
+      "subtitle": "AOC目录第298号",
+      "description": "所有Tile Contracts都具有独特的品质，为收获车辆和设施带来了额外的好处。",
+      "image": "/nft/images/contract/icon-chronos.png"
+    },
+    {
+      "title": "领土",
+      "subtitle": "AOC目录第271号",
+      "description": "您可以将相邻的PIX组合起来创建领土。因此，您应该通过买卖正确的PIX来专注于地图的小部分。",
+      "image": "/nft/images/zone/image-common.png"
+    },
+    {
+      "title": "档案",
+      "subtitle": "AOC目录第577号",
+      "description": "当变革推动者在A.E.450年回归时，部分人类在大毁灭中幸存下来，散布在太阳系的行星和卫星之间。",
+      "image": "/nft/images/aoc-badge-pack/transparent.png"
+    },
+    {
+      "title": "IX 基金会",
+      "subtitle": "AOC目录第478号",
+      "description": "在IX 基金会上投资地标、领土和Metashares是确保IXT资金持续流动的好方法。",
+      "image": "/nft/images/ixt/token.png"
+    },
+    {
+      "title": "档案",
+      "subtitle": "AOC目录第123号",
+      "description": "A.M.E的发明者名叫Ame Valdis，她的妹妹Agnes Valdis记录了她们成长和死亡的数据日志。其中一些记录仍然隐藏在Planet IX上。",
+      "image": ""
+    },
+    {
+      "title": "漫游者",
+      "subtitle": "AOC目录第137号",
+      "description": "漫游者只需要每十天清空一次。",
+      "image": "/nft/images/rover/transparent.png"
+    },
+    {
+      "title": "漫游者",
+      "subtitle": "AOC目录第739号",
+      "description": "漫游者可能会发现M3ta-M0ds。",
+      "image": "/nft/images/biomod/image-dark.png"
+    },
+    {
+      "title": "漫游者 & 无人机",
+      "subtitle": "AOC目录第157号",
+      "description": "漫游者和无人机可以在Mission Control中放置在同一块Land Tile上。如果它们属于同一级别，无人机的性能将额外提高20%。",
+      "image": "/nft/images/drone/image-piercer.png"
+    },
+    {
+      "title": "无人机",
+      "subtitle": "AOC目录第866号",
+      "description": "漫游者有时可能需要维修，而无人机是众所周知的永不会坏掉的。",
+      "image": "/nft/images/drone/image-genesis.png"
+    },
+    {
+      "title": "PIX",
+      "subtitle": "AOC目录第324号",
+      "description": "Planet IX是地球的数字化再现，所有土地被划分为17亿个PIX，每个PIX都是一个独特的NFT。",
+      "image": "/nft/images/pix/image-legendary.png"
+    },
+    {
+      "title": "能源",
+      "subtitle": "AOC目录第429号",
+      "description": "将设施投资于领土而非PIX将带来更高的能源收益。",
+      "image": "/nft/images/energy/energy-image.png"
+    },
+    {
+      "title": "地标",
+      "subtitle": "AOC目录第726号",
+      "description": "根据其在Planet IX宇宙中的战略重要性，每个地标都被分配了稀有等级和星级。",
+      "image": "/nft/images/landmark/landmark-image.png"
+    },
+    {
+      "title": "地标",
+      "subtitle": "AOC目录第727号",
+      "description": "每个地标都有一个佣金区域，拥有并持有地标股份的人将根据该区域内进行的每笔交易的价值获得5%的佣金。",
+      "image": "/nft/images/landmark/landmark-image.png"
+    },
+    {
+      "title": "Metashares",
+      "subtitle": "AOC目录第1328号",
+      "description": "Metashares所有者将持续获得$IXT的奖励。从企业金库中分配的金额取决于企业的月收入。",
+      "image": "/nft/images/metashare/image-gws.png"
+    },
+    {
+      "title": "抽奖",
+      "subtitle": "AOC目录第196号",
+      "description": "如果您有额外的抽奖券，请务必访问Lucky Cat并参加即将到来的抽奖活动。",
+      "image": "/tips/icons/raffles.png"
+    },
+    {
+      "title": "M3TA-m0ds",
+      "subtitle": "AOC目录第659号",
+      "description": "M3ta-M0ds可用于升级设施。",
+      "image": "/nft/images/biomod/image-dark.png"
+    },
+    {
+      "title": "Tile Contracts",
+      "subtitle": "AOC目录第213号",
+      "description": "Tile Contracts可以在Newlands LLC购买。一旦您申请并下注Tile Contract，Mission Control将提供额外的Land Tile。",
+      "image": "/nft/images/contract/image-artemis.png"
+    },
+    {
+      "title": "AStro gold",
+      "subtitle": "AOC目录第258号",
+      "description": "激活额外的Land Tile每月需要花费1 Astro Gold或1 Astro Gold-Lite。",
+      "image": "/nft/images/astro-gold/astro-gold.png"
+    },
+    {
+      "title": "tile contracts",
+      "subtitle": "AOC目录第586号",
+      "description": "您可以在Mission Control中激活和停用Land Tile。",
+      "image": "/nft/images/contract/image-artemis.png"
+    },
+    {
+      "title": "web3钱包",
+      "subtitle": "AOC目录第330号",
+      "description": "如果载入画面似乎卡住了，请尝试使用Web3钱包中的加速功能。",
+      "image": ""
+    },
+    {
+      "title": "档案",
+      "subtitle": "AOC目录第986号",
+      "description": "Chasse Galerie是大毁灭后最后一艘到达Planet IX表面的太空船。该船的大部分数据日志至今下落不明。",
+      "image": ""
+    },
+    {
+      "title": "变革代理人",
+      "subtitle": "AOC目录第569号",
+      "description": "变革代理人既不是人类，也不是机器人；他们是由A.M.E.创造的未知生命形式",
+      "image": "/nft/images/aoc-badge-pack/transparent.png"
+    },
+    {
+      "title": "档案",
+      "subtitle": "AOC目录第410号",
+      "description": "变革代理人既不是人类，也不是机器人；他们是由A.M.E.创造的未知生命形式",
+      "image": ""
+    },
+    {
+      "title": "档案",
+      "subtitle": "AOC目录第1792号",
+      "description": "大毁灭结束后，内行星和外卫星之间的贸易对人类的生存至关重要。由于没有管理商业的监管机构，企业成为了太阳系的国家实体。",
+      "image": ""
+    },
+    {
+      "title": "大毁灭",
+      "subtitle": "AOC目录第5123号",
+      "description": "大毁灭的最后阶段是NeoVirus，一种专门为实现特定目标而设计的计算机病毒，即彻底消灭文明。",
+      "image": ""
+    },
+    {
+      "title": "pix & Land Tile",
+      "subtitle": "AOC目录第102号",
+      "description": "Planet IX上的数字化土地被称为PIX，可以在Mission Control的Land Tile上下注。",
+      "image": "/nft/images/pix/image-uncommon.png"
+    },
+    {
+      "title": "领土",
+      "subtitle": "AOC目录第850号",
+      "description": "通过连接10个或更多相邻的异常值PIX，在NetEmpire市场中创建异常值区域。",
+      "image": "/nft/images/area/image-outlier.png"
+    },
+    {
+      "title": "领土",
+      "subtitle": "AOC目录第851号",
+      "description": "大多数资产的级别和稀有程度各不相同，其中传奇资产最有价值。",
+      "image": "/nft/images/area/image-common.png"
+    },
+    {
+      "title": "领土",
+      "subtitle": "AOC目录第852号",
+      "description": "通过连接30个或更多相邻的异常值PIX，在NetEmpire市场中创建异常值区域。",
+      "image": "/nft/images/area/image-uncommon.png"
+    },
+    {
+      "title": "领土",
+      "subtitle": "AOC目录第853号",
+      "description": "通过连接40个或更多相邻的稀有PIX，在NetEmpire市场中创建稀有区域。",
+      "image": "/nft/images/area/image-rare.png"
+    },
+    {
+      "title": "领土",
+      "subtitle": "AOC目录第854号",
+      "description": "通过连接50个或更多相邻的传奇PIX，在NetEmpire市场中创建传奇区域。",
+      "image": "/nft/images/area/image-legendary.png"
+    },
+    {
+      "title": "设施",
+      "subtitle": "AOC目录第1023号",
+      "description": "您可以升级Newlands LLC的设施。当您升级时，它们会变得更好。",
+      "image": "/nft/images/facility/image-legendary.png"
+    },
+    {
+      "title": "无人机",
+      "subtitle": "AOC目录第423号",
+      "description": "无人机在48小时内收集废弃物。",
+      "image": "/nft/images/drone/image-night.png"
+    },
+    {
+      "title": "NEWLANDS GENESIS",
+      "subtitle": "AOC目录第419号",
+      "description": "通过下注Newlands Genesis，您将免费获得额外的Land Tile。",
+      "image": "/tips/icons/newland.png"
+    },
+    {
+      "title": "y_ GENESIS",
+      "subtitle": "AOC目录第421号",
+      "description": "在Y_ Genesis上下注可以免费维修漫游者。",
+      "image": "/tips/icons/genesis.png"
+    },
+    {
+      "title": "eternalab GENESIS",
+      "subtitle": "AOC目录第425号",
+      "description": "在Eternalab Genesis中下注提高了废弃物精炼实验成功的可能性。",
+      "image": "/tips/icons/eternalab.png"
+    },
+    {
+      "title": "空投",
+      "subtitle": "AOC目录第843号",
+      "description": "如果您携带AOC金牌，您将被添加到未来空投的白名单中。",
+      "image": "/tips/icons/airdrops.png"
+    }
+  ],
+  "wallet": {
+    "title": "连接钱包",
+    "welcomeMessage": "连接我们其中一个合作方的钱包",
+    "signing": {
+      "title": "在您的钱包内确认交易。",
+      "description": "处理转账需要花费一点时间，如果需要取消该交易，请在您的钱包中拒绝交易。"
+    },
+    "minting": {
+      "title": "正在将数据写入区块链",
+      "description": "稍等，正在验证您的交易。"
+    },
+    "approving": {
+      "title": "批准中",
+      "description": "正在批准您的资产进行质押。如果您想取消此操作，请在您的钱包中拒绝交易。"
+    },
+    "minting-pix": {
+      "title": "正在区块链中铸造您的地段",
+      "description": "正在将您的地段写入区块链中。"
+    },
+    "nonce": {
+      "title": "正在获取签名",
+      "description": "正在获取您的请求签名，请稍等几秒钟。"
+    },
+    "second-transaction": {
+      "title": "请等待第二笔交易。",
+      "description": "您需要等待第二笔交易来领取您的人像。这可能需要最多1分钟的时间！"
+    },
+    "playerProfile": {
+      "notLoggedIn": "玩家个人资料未登录。",
+      "playerConnecting": "玩家个人资料（连接中）",
+      "loggedInAs": "已登录为："
+    }
+  },
   "layouts": {
     "headers": {
-      "accountBalance": "帐户余额：",
-      "ixt": "IXT：",
+      "accountBalance": "账户余额:",
+      "ixt": "IXT:",
+      "dashboard": "IX 基金会",
       "terminal": "终端",
       "inventory": "库存",
-      "dashboard": "IX Foundation",
       "missionControl": "任务控制",
       "game": "游戏",
-      "planetIX": "Planet IX",
+      "planetIX": "第九星球",
       "automatedTrans": "自动传输"
     }
   },
   "cosmetics": {
-    "chooseCosmetics": "选择化妆品",
+    "chooseCosmetics": "选择饰品",
     "chooseNFT": "选择 NFT",
     "userInfo": {
-      "aoc": "变更代理",
-      "memberSince": "会员自",
+      "aoc": "变革特工",
+      "memberSince": "注册日期",
       "status": "状态",
-      "social": "社会",
-      "pm": "个人留言",
+      "social": "社交账号",
+      "pm": "私信",
       "showcase": "展示"
     }
   },
-      "Tips":[
-        {
-              "title": "游戏手册",
-              "subtitle": "AOC目录第723号",
-              "description": "如果您在太空中感到迷失，一定要查看Planet IX的游戏手册。",
-              "image":""
-          },
-
-          {
-              "title": "传奇资产",
-              "subtitle": "AOC目录第954号",
-              "description": "大多数资产的级别和稀有程度各不相同，其中传奇资产最有价值。",
-              "image":"/nft/images/biomod/icon-legendary.png"
-          },
-
-          {
-              "title": "季节",
-              "subtitle": "AOC目录第341号",
-              "description": "随着越来越多的废弃物在Planet IX上被收集和处理，地球的气候将稳定下来，新的任务将出现。",
-              "image":"/nft/images/waste/image.png"
-          },
-          {
-              "title": "变革推动者",
-              "subtitle": "AOC目录第629号",
-              "description": "作为变革推动者，您的任务是复兴Planet IX",
-              "image":"/nft/images/aoc-badge-pack/transparent.png"
-          },
-          {
-              "title": "NETEMPIRE市场",
-              "subtitle": "AOC目录第683号",
-              "description": "通过在市场中发售您的PIX和其他资产，可以让潜在买家更容易地找到并购买它们。",
-              "image":"/tips/icons/netempire-marketplace.png"
-          },
-
-
-          {
-              "title": "地球纪年后",
-              "subtitle": "AOC目录第583号",
-              "description": "地球纪年于A.C.2089年结束。同年成为1 A.E.年。",
-              "image":""
-          },
-          {
-              "title": "Tile Contracts",
-              "subtitle": "AOC目录第298号",
-              "description": "所有Tile Contracts都具有独特的品质，为收获车辆和设施带来了额外的好处。",
-              "image":"/nft/images/contract/icon-chronos.png"
-          },
-
-          {
-              "title": "领土",
-              "subtitle": "AOC目录第271号",
-              "description": "您可以将相邻的PIX组合起来创建领土。因此，您应该通过买卖正确的PIX来专注于地图的小部分。",
-              "image":"/nft/images/zone/image-common.png"
-          },
-          {
-              "title": "档案",
-              "subtitle": "AOC目录第577号",
-              "description": "当变革推动者在A.E.450年回归时，部分人类在大毁灭中幸存下来，散布在太阳系的行星和卫星之间。",
-              "image":"/nft/images/aoc-badge-pack/transparent.png"
-          },
-          {
-              "title": "IX 基金会",
-              "subtitle": "AOC目录第478号",
-              "description": "在IX 基金会上投资地标、领土和Metashares是确保IXT资金持续流动的好方法。",
-              "image":"/nft/images/ixt/token.png"
-          },
-          {
-              "title": "档案",
-              "subtitle": "AOC目录第123号",
-              "description": "A.M.E的发明者名叫Ame Valdis，她的妹妹Agnes Valdis记录了她们成长和死亡的数据日志。其中一些记录仍然隐藏在Planet IX上。",
-              "image":""
-          },
-          {
-              "title": "漫游者",
-              "subtitle": "AOC目录第137号",
-              "description": "漫游者只需要每十天清空一次。",
-              "image":"/nft/images/rover/transparent.png"
-          },
-          {
-              "title": "漫游者",
-              "subtitle": "AOC目录第739号",
-              "description": "漫游者可能会发现M3ta-M0ds。",
-              "image":"/nft/images/biomod/image-dark.png"
-          },
-          {
-              "title": "漫游者 & 无人机",
-              "subtitle": "AOC目录第157号",
-              "description": "漫游者和无人机可以在Mission Control中放置在同一块Land Tile上。如果它们属于同一级别，无人机的性能将额外提高20%。",
-              "image":"/nft/images/drone/image-piercer.png"
-          },
-          {
-              "title": "无人机",
-              "subtitle": "AOC目录第866号",
-              "description": "漫游者有时可能需要维修，而无人机是众所周知的永不会坏掉的。",
-              "image":"/nft/images/drone/image-genesis.png"
-          },
-          {
-              "title": "PIX",
-              "subtitle": "AOC目录第324号",
-              "description": "Planet IX是地球的数字化再现，所有土地被划分为17亿个PIX，每个PIX都是一个独特的NFT。",
-              "image":"/nft/images/pix/image-legendary.png"
-          },
-          {
-              "title": "能源",
-              "subtitle": "AOC目录第429号",
-              "description": "将设施投资于领土而非PIX将带来更高的能源收益。",
-              "image":"/nft/images/energy/energy-image.png"
-          },
-          {
-              "title": "地标",
-              "subtitle": "AOC目录第726号",
-              "description": "根据其在Planet IX宇宙中的战略重要性，每个地标都被分配了稀有等级和星级。",
-              "image":"/nft/images/landmark/landmark-image.png"
-          },
-          {
-              "title": "地标",
-              "subtitle": "AOC目录第727号",
-              "description": "每个地标都有一个佣金区域，拥有并持有地标股份的人将根据该区域内进行的每笔交易的价值获得5%的佣金。",
-              "image":"/nft/images/landmark/landmark-image.png"
-          },
-          {
-              "title": "Metashares",
-              "subtitle": "AOC目录第1328号",
-              "description": "Metashares所有者将持续获得$IXT的奖励。从企业金库中分配的金额取决于企业的月收入。",
-              "image":"/nft/images/metashare/image-gws.png"
-          },
-          {
-              "title": "抽奖",
-              "subtitle": "AOC目录第196号",
-              "description": "如果您有额外的抽奖券，请务必访问Lucky Cat并参加即将到来的抽奖活动。",
-              "image":"/tips/icons/raffles.png"
-          },
-
-          {
-              "title": "M3TA-m0ds",
-              "subtitle": "AOC目录第659号",
-              "description": "M3ta-M0ds可用于升级设施。",
-              "image":"/nft/images/biomod/image-dark.png"
-          },
-          {
-              "title": "Tile Contracts",
-              "subtitle": "AOC目录第213号",
-              "description": "Tile Contracts可以在Newlands LLC购买。一旦您申请并下注Tile Contract，Mission Control将提供额外的Land Tile。",
-              "image":"/nft/images/contract/image-artemis.png"
-          },
-          {
-              "title": "AStro gold",
-              "subtitle": "AOC目录第258号",
-              "description": "激活额外的Land Tile每月需要花费1 Astro Gold或1 Astro Gold-Lite。",
-              "image":"/nft/images/astro-gold/astro-gold.png"
-          },
-          {
-              "title": "tile contracts",
-              "subtitle": "AOC目录第586号",
-              "description": "您可以在Mission Control中激活和停用Land Tile。",
-              "image":"/nft/images/contract/image-artemis.png"
-          },
-          {
-              "title": "web3钱包",
-              "subtitle": "AOC目录第330号",
-              "description": "如果载入画面似乎卡住了，请尝试使用Web3钱包中的加速功能。",
-              "image":""
-          },
-          {
-              "title": "档案",
-              "subtitle": "AOC目录第986号",
-              "description": "Chasse Galerie是大毁灭后最后一艘到达Planet IX表面的太空船。该船的大部分数据日志至今下落不明。",
-              "image":""
-          },
-          {
-              "title": "变革代理人",
-              "subtitle": "AOC目录第569号",
-              "description": "变革代理人既不是人类，也不是机器人；他们是由A.M.E.创造的未知生命形式",
-              "image":"/nft/images/aoc-badge-pack/transparent.png"
-          },
-          {
-              "title": "档案",
-              "subtitle": "AOC目录第410号",
-              "description": "变革代理人既不是人类，也不是机器人；他们是由A.M.E.创造的未知生命形式",
-              "image":""
-          },
-          {
-              "title": "档案",
-              "subtitle": "AOC目录第1792号",
-              "description": "大毁灭结束后，内行星和外卫星之间的贸易对人类的生存至关重要。由于没有管理商业的监管机构，企业成为了太阳系的国家实体。",
-              "image":""
-          },
-          {
-              "title": "大毁灭",
-              "subtitle": "AOC目录第5123号",
-              "description": "大毁灭的最后阶段是NeoVirus，一种专门为实现特定目标而设计的计算机病毒，即彻底消灭文明。",
-              "image":""
-          },
-          {
-              "title": "pix & Land Tile",
-              "subtitle": "AOC目录第102号",
-              "description": "Planet IX上的数字化土地被称为PIX，可以在Mission Control的Land Tile上下注。",
-              "image":"/nft/images/pix/image-uncommon.png"
-          },
-          {
-              "title": "领土",
-              "subtitle": "AOC目录第850号",
-              "description": "通过连接10个或更多相邻的异常值PIX，在NetEmpire市场中创建异常值区域。",
-              "image":"/nft/images/area/image-outlier.png"
-          },
-          {
-              "title": "领土",
-              "subtitle": "AOC目录第851号",
-              "description": "大多数资产的级别和稀有程度各不相同，其中传奇资产最有价值。",
-              "image":"/nft/images/area/image-common.png"
-          },
-          {
-              "title": "领土",
-              "subtitle": "AOC目录第852号",
-              "description": "通过连接30个或更多相邻的异常值PIX，在NetEmpire市场中创建异常值区域。",
-              "image":"/nft/images/area/image-uncommon.png"
-          },
-          {
-              "title": "领土",
-              "subtitle": "AOC目录第853号",
-              "description": "通过连接40个或更多相邻的稀有PIX，在NetEmpire市场中创建稀有区域。",
-              "image":"/nft/images/area/image-rare.png"
-          },
-          {
-              "title": "领土",
-              "subtitle": "AOC目录第854号",
-              "description": "通过连接50个或更多相邻的传奇PIX，在NetEmpire市场中创建传奇区域。",
-              "image":"/nft/images/area/image-legendary.png"
-          },
-          {
-              "title": "设施",
-              "subtitle": "AOC目录第1023号",
-              "description": "您可以升级Newlands LLC的设施。当您升级时，它们会变得更好。",
-              "image":"/nft/images/facility/image-legendary.png"
-          },
-          {
-              "title": "无人机",
-              "subtitle": "AOC目录第423号",
-              "description": "无人机在48小时内收集废弃物。",
-              "image":"/nft/images/drone/image-night.png"
-          },
-          {
-              "title": "NEWLANDS GENESIS",
-              "subtitle": "AOC目录第419号",
-              "description": "通过下注Newlands Genesis，您将免费获得额外的Land Tile。",
-              "image":"/tips/icons/newland.png"
-          },
-          {
-              "title": "y_ GENESIS",
-              "subtitle": "AOC目录第421号",
-              "description": "在Y_ Genesis上下注可以免费维修漫游者。",
-              "image":"/tips/icons/genesis.png"
-          },
-          {
-              "title": "eternalab GENESIS",
-              "subtitle": "AOC目录第425号",
-              "description": "在Eternalab Genesis中下注提高了废弃物精炼实验成功的可能性。",
-              "image":"/tips/icons/eternalab.png"
-          },
-          {
-              "title": "空投",
-              "subtitle": "AOC目录第843号",
-              "description": "如果您携带AOC金牌，您将被添加到未来空投的白名单中。",
-              "image":"/tips/icons/airdrops.png"
-          }
-    ]
+  "tips": [
+    {
+      "title": "游戏手册",
+      "subtitle": "AOC 备忘录 723",
+      "description": "如果你在太空中感到迷失，请阅读《第九星球游戏手册》",
+      "image": ""
+    },
+    {
+      "title": "传奇资产",
+      "subtitle": "AOC 备忘录 954",
+      "description": "大多数资产在层级和稀有度上有所不同，传奇资产是最有价值的。",
+      "image": "/tips/images/biomod-legendary.png"
+    },
+    {
+      "title": "四季",
+      "subtitle": "AOC 备忘录 341",
+      "description": "随着在 第九星球 上收集和处理更多废料，该星球的气候将稳定下来，并出现新的任务。",
+      "image": "/tips/images/currency-waste.png"
+    },
+    {
+      "title": "变革特工",
+      "subtitle": "AOC 备忘录 629",
+      "description": "作为变革特工，您的使命是复兴 第九星球。",
+      "image": "/tips/images/aoc-white.png"
+    },
+    {
+      "title": "网络帝国 市场",
+      "subtitle": "AOC 备忘录 683",
+      "description": "通过在市场上列出您的 地段 和其他资产，您可以让潜在买家更容易找到并购买它们。",
+      "image": "/tips/images/pix-outlier.png"
+    },
+    {
+      "title": "AFTER EARTH",
+      "subtitle": "AOC 备忘录 583",
+      "description": "在2089年，地球毁灭了。从那一年开始，我们将其称为1 A.E.（After Earth）。",
+      "image": ""
+    },
+    {
+      "title": "瓷砖契约",
+      "subtitle": "AOC 备忘录 298",
+      "description": "每个瓷砖契约都有其独特的特点，其中大多数契约为车辆和工厂提供额外的福利。",
+      "image": "/tips/images/contract-chronos.png"
+    },
+    {
+      "title": "领土",
+      "subtitle": "AOC 备忘录 271",
+      "description": "您可以将相邻的地段合并为领土。因此，您应该专注于地图上的小块区域，通过买卖合适的领土来实现目标。",
+      "image": "/tips/images/zone-common.png"
+    },
+    {
+      "subtitle": "AOC 备忘录 577",
+      "description": "当改变之士们在450年A.E.回归时，人类的残余在毁灭事件中幸存下来，分散在太阳系的行星和卫星上。",
+      "image": "/tips/images/aoc-white.png"
+    },
+    {
+      "title": "IX 基金会",
+      "subtitle": "AOC 备忘录 478",
+      "description": "将地标、领土和元股抵押在IX基金会上是持续获得$IXT的好方法。",
+      "image": "/tips/images/currency-ixt.png"
+    },
+    {
+      "title": "归档",
+      "subtitle": "AOC 备忘录 123",
+      "description": "A.M.E的发明者名叫 Ame Valdis，她的姐姐 Agnes Valdis 记录了她们的成长和灭亡的数据日志。其中一些记录仍然隐藏在第九星球上。",
+      "image": ""
+    },
+    {
+      "title": "探测车",
+      "subtitle": "AOC 备忘录 137",
+      "description": "探测车只需要每隔十天进行一次清空操作。",
+      "image": "/tips/images/rover-piercer.png"
+    },
+    {
+      "title": "探测车",
+      "subtitle": "AOC 备忘录 739",
+      "description": "探测车也许能找到元宇胶囊。",
+      "image": "/tips/images/biomod-metamod.png"
+    },
+    {
+      "title": "探测车与无人机",
+      "subtitle": "AOC 备忘录 157",
+      "description": "在任务控制中，探测车和无人机可以放置在同一个地块上。如果它们的等级相同，无人机的性能将增加额外的20%。",
+      "image": "/tips/images/drone-piercer.png"
+    },
+    {
+      "title": "无人机",
+      "subtitle": "AOC 备忘录 866",
+      "description": "有时候探测车可能需要维修，而无人机则被认为永远不会出故障。",
+      "image": "/tips/images/drone-genesis.png"
+    },
+    {
+      "title": "地段",
+      "subtitle": "AOC 备忘录 324",
+      "description": "第九星球是地球的数字化再现，所有土地被划分为17亿个地段，每个地段都是独特的NFT。",
+      "image": "/tips/images/pix-legendary.png"
+    },
+    {
+      "title": "能源",
+      "subtitle": "AOC 备忘录 429",
+      "description": "将工厂质押在领土上而不是地段上，将得到更高的能源产量。",
+      "image": "/tips/images/currency-energy.png"
+    },
+    {
+      "title": "地标",
+      "subtitle": "AOC 备忘录 726",
+      "description": "每个地标都根据其在第九星球宇宙中的战略重要性被分配了稀有度等级和星级评级。",
+      "image": "/tips/images/landmark.png"
+    },
+    {
+      "title": "地标",
+      "subtitle": "AOC 备忘录 727",
+      "description": "每个地标都有一个佣金区域，拥有并质押该地标的人将获得在该区域内进行的每笔交易价值的5%佣金。",
+      "image": "/tips/images/landmark.png"
+    },
+    {
+      "title": "元股",
+      "subtitle": "AOC 备忘录 1328",
+      "description": "元股的持有者将持续获得$IXT奖励。分发的金额取决于公司每月的收入。",
+      "image": "/tips/images/metashare-gws.png"
+    },
+    {
+      "title": "抽奖券",
+      "subtitle": "AOC 备忘录 196",
+      "description": "如果你有多余的抽奖券，记得去幸运猫参加即将举行的抽奖活动。",
+      "image": "/tips/images/raffle-ticket-regular.png"
+    },
+    {
+      "title": "元宇胶囊",
+      "subtitle": "AOC 备忘录 659",
+      "description": "元宇胶囊可以用来升级工厂。",
+      "image": "/tips/images/biomod-metamod.png"
+    },
+    {
+      "title": "瓷砖契约",
+      "subtitle": "AOC 备忘录 213",
+      "description": "您可以在新大陆公司购买瓷砖契约。一旦您领取并锁定了瓷砖契约，额外的地块将会在任务控制中可用。",
+      "image": "/tips/images/contract-artemis.png"
+    },
+    {
+      "title": "金币",
+      "subtitle": "AOC 备忘录 258",
+      "description": "激活额外的瓷砖会产生每月1个金币或1个微金币的费用。",
+      "image": "/tips/images/currency-astro-gold.png"
+    },
+    {
+      "title": "瓷砖契约",
+      "subtitle": "AOC 备忘录 586",
+      "description": "您可以在任务控制中激活和停用瓷砖。",
+      "image": "/tips/images/contract-artemis.png"
+    },
+    {
+      "title": "web3 钱包",
+      "subtitle": "AOC 备忘录 330",
+      "description": "如果加载界面卡住了，请尝试在您的Web3钱包中使用加速功能。",
+      "image": ""
+    },
+    {
+      "title": "归档",
+      "subtitle": "AOC 备忘录 986",
+      "description": "在终结之后，Chasse-Galerie是最后一艘到达第九星球表面的太空飞船。该船的大部分数据记录仍然下落不明。",
+      "image": ""
+    },
+    {
+      "title": "变革代理人",
+      "subtitle": "AOC 备忘录 569",
+      "description": "变革代理人既不是人类也不是机器人；他们是由A.M.E创造的一种未知生命形式。",
+      "image": "/tips/images/aoc-white.png"
+    },
+    {
+      "title": "归档",
+      "subtitle": "AOC 备忘录 410",
+      "description": "偶尔在第九星球上会检测到奇怪的声音，尽管所有的生命都已经绝迹。",
+      "image": ""
+    },
+    {
+      "title": "归档",
+      "subtitle": "AOC 备忘录 1792",
+      "description": "终结之后，内部行星和外部卫星之间的贸易对人类的生存至关重要。在没有监管机构管理商业活动的情况下，各大公司成为了太阳系中类似国家的实体。",
+      "image": ""
+    },
+    {
+      "title": "大终结",
+      "subtitle": "AOC 备忘录 5123",
+      "description": "终结的最后阶段是NeoVirus，这是一种专门设计用来实现一个目标的计算机病毒——彻底摧毁文明。",
+      "image": ""
+    },
+    {
+      "title": "地段 & 土地瓷砖",
+      "subtitle": "AOC 备忘录 102",
+      "description": "在Planet IX上，数字土地的地块被称为PIX，又叫地段，可以在任务控制中放置在土地瓷砖上进行质押。",
+      "image": "/tips/images/pix-uncommon.png"
+    },
+    {
+      "title": "领土",
+      "subtitle": "AOC 备忘录 850",
+      "description": "在网络帝国的 市场中，通过连接10个或更多相邻的一般地段（PIX），可以创建一般地带（Area）。",
+      "image": "/tips/images/area-outlier.png"
+    },
+    {
+      "title": "领土",
+      "subtitle": "AOC 备忘录 851",
+      "description": "大多数资产都有不同的等级和稀有度，其中传奇资产是最有价值的。",
+      "image": "/tips/images/area-common.png"
+    },
+    {
+      "title": "领土",
+      "subtitle": "AOC 备忘录 852",
+      "description": "在网络帝国的 市场中，通过连接30个或更多相邻的罕见地段（PIX），可以创建罕见地带（Area）。",
+      "image": "/tips/images/area-uncommon.png"
+    },
+    {
+      "title": "领土",
+      "subtitle": "AOC 备忘录 853",
+      "description": "在网络帝国的 市场中，通过连接40个或更多相邻的稀有地段（PIX），可以创建稀有地带（Area）。",
+      "image": "/tips/images/area-rare.png"
+    },
+    {
+      "title": "领土",
+      "subtitle": "AOC 备忘录 854",
+      "description": "在网络帝国的 市场中，通过连接50个或更多相邻的传奇地段（PIX），可以创建传奇地带（Area）。",
+      "image": "/tips/images/area-legendary.png"
+    },
+    {
+      "title": "工厂",
+      "subtitle": "AOC 备忘录 1023",
+      "description": "您可以在新大陆公司升级工厂。一旦升级，它们的性能至少会提升一倍。",
+      "image": "/tips/images/facility-legendary.png"
+    },
+    {
+      "title": "无人机",
+      "subtitle": "AOC 备忘录 423",
+      "description": "无人机收集废料的周期是48小时一次。",
+      "image": "/tips/images/drone-night.png"
+    },
+    {
+      "title": "新大陆创世纪NFT",
+      "subtitle": "AOC 备忘录 419",
+      "description": "通过质押新大陆创世纪NFT，您将获得免费的额外土地瓷砖访问权限。",
+      "image": "/tips/images/genesis-new-lands.png"
+    },
+    {
+      "title": "y_ 创世纪NFT",
+      "subtitle": "AOC 备忘录 421",
+      "description": "质押Y_的创世纪NFT可以给您的探测车提供免费维修。",
+      "image": "/tips/images/genesis-y-space.png"
+    },
+    {
+      "title": "永恒实验室创世纪NFT",
+      "subtitle": "AOC 备忘录 425",
+      "description": "质押永恒实验室创世纪NFT会增加废料精炼实验成功的几率。",
+      "image": "/tips/images/genesis-eternalab.png"
+    },
+    {
+      "title": "空投",
+      "subtitle": "AOC 备忘录 843",
+      "description": "如果您持有AOC金徽章，您将被添加到未来空投的白名单中。",
+      "image": "/tips/images/aoc-bronze.png"
+    }
+  ],
+  "marketplaceFullscreen": {
+    "buyIxt": "购买 IXT",
+    "playNow": "立即开始游戏",
+    "staking": "质押",
+    "community": "社区",
+    "transfer": {
+      "title": "转移资产",
+      "quantity": "数量",
+      "own": "你拥有",
+      "own2": "个资产",
+      "walletAdress": "钱包地址",
+      "placeholderText": "在此输入钱包地址",
+      "warningText": "请确保地址无误！ <br/><br/>该操作无法撤销。",
+      "verifyText": "我确认过这是正确的地址",
+      "confirm": "确认地址"
+    }
+  }
 }
