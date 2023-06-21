@@ -137,4 +137,8 @@ html {
 .no-scrollbar::-webkit-scrollbar {
   display: none
 }
+
+.no-scroll {
+  overflow: hidden;
+}
 </style>

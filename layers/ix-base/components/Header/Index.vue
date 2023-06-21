@@ -1,13 +1,10 @@
 <template lang="pug">
 VList(pos="sticky top-0" z="99" w="full" @mouseenter="isSelected = true" @mouseleave="isSelected = false" ref="menuElement")
-  HList(items="center"  bg="ix-black" px="4 md:7.5" h="16" space-x="6")
-    div(divide-y="0.1")
+  HList(items="center" justify="between" bg="ix-black" px="4 md:7.5" h="16" space-x="6")
     NuxtLink(to="https://www.planetix.com")
       PlanetIXNew(w="42.25")
 
-    div(flex-grow="1" display="lg:none")
-
-    HList(space-x="8" px="8" items="center" flex-grow="1" display="lt-lg:none" overflow-x="hidden" )
+    HList(justify="start" flex-grow="1" display="lt-lg:none" overflow-x="hidden")
       button(v-for="(item, index) in siteTopHeaders" @click="openMenu(index)" btn="menu" color = "s-default:white s-selected:ix-orange" :state="selected(index)") {{ $t(`marketplace.navigation.${item.type}.title`)}}
 
     HList(space-x="6" px="0")
@@ -16,7 +13,7 @@ VList(pos="sticky top-0" z="99" w="full" @mouseenter="isSelected = true" @mousel
       HeaderAccountButton()
 
 
-    button(btn="menu" w="8" display="lg:none" @click="toggleMenu")
+    button(btn="menu" w="8" display="lg:none" @click="toggleMenu" ml="2")
       Transition(name="fade" mode="out-in")
         SettingsIcon(v-if="activeMenuIndex == null")
         CrossIcon(v-else)
@@ -42,7 +39,7 @@ const activeMenuIndex = ref<number | null>(null)
 const route = useRoute()
 
 const selected = (index: number) => {
-  if(activeMenuIndex.value == index){
+  if (activeMenuIndex.value == index) {
     return 'selected'
   }
 

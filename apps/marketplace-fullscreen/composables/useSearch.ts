@@ -1,51 +1,36 @@
 import { get, MaybeRef, MaybeComputedElementRef, unrefElement } from '@vueuse/core'
-
-import { ref } from 'vue'
 import { filter as fuzzy } from 'fuzzyjs'
-
-export interface Focus {
-  groupIndex: number,
-  index: number
-}
-
-export const useSearch = <Item extends Record<string, any>, Key extends string & keyof Item>(items: Readonly<MaybeRef<Item[]>>, searchPaths: Key[], searchElement: MaybeComputedElementRef, scrollElement: MaybeComputedElementRef, onSelect: (element: Item) => void) => {
-
-  interface GroupedItem {
-    category?: string;
-    items: Item[];
-  }
-
-  const focusIndex = ref<Focus | null>({ groupIndex: 0, index: 0 })
-  const selectedItem = shallowRef<Item | null>(null)
-  const isOpen = ref(false)
-
-  const searchTerm = ref<string | null>("")
-  const getId = (groupIndex: number, index: number) =>
-    `search-list-${groupIndex}-${index}`
+import { ref } from 'vue'
 
 
-  const onLeave = (item: Focus) => {
+export const useSearch = (items: Readonly<MaybeRef<string[]>>, searchElement: MaybeComputedElementRef, scrollElement: MaybeComputedElementRef, onSelect: (element: string | null) => void) => {
+  const focusIndex = shallowRef<number | null>(null)
+  const selectedItem = shallowRef<string | null>(null)
+  const searchHits = shallowRef<string[]>([])
+  const searchHistory = useCookieState<string[]>('search-history', () => [])
+  const searchHistoryVisible = shallowRef(false)
+  const isOpen = shallowRef(false)
+  const searchTerm = shallowRef<string | null>("")
+
+  const getId = (index: number) =>
+    `search-list-${index}`
+
+  const onLeave = (item: number) => {
     if (isFocused(item))
       focusIndex.value = null
   }
 
-  const isFocused = (item: Focus) => {
-    const focused = item.groupIndex ==
-      focusIndex.value?.groupIndex &&
-      item.index == focusIndex.value?.index
-
-    return focused
-  }
+  const isFocused = (item: number) =>
+    item == focusIndex.value
 
   const close = () => {
     isOpen.value = false
-    searchTerm.value = null
     const el = unrefElement(searchElement) as HTMLElement
     el?.blur()
   }
 
-  const scrollToItem = (item: Focus) => {
-    const id = getId(item.groupIndex, item.index)
+  const scrollToItem = (item: number) => {
+    const id = getId(item)
     const element = document.getElementById(id)
     const scrollEl = unrefElement(scrollElement) as HTMLElement
 
@@ -55,122 +40,88 @@ export const useSearch = <Item extends Record<string, any>, Key extends string &
     scrollParentToChild(scrollEl, element)
   }
 
-  const groupList = (items: Readonly<Item[]>): GroupedItem[] => {
-    if (!items)
-      return items
-
-    const groupedList: Record<string, Item[]> = groupBy(items, 'category')
-
-    return Object.keys(groupedList).map((key) => ({
-      category: key == 'undefined' ? undefined : key,
-      items: groupedList[key].filter((item) => {
-        return item.value != ""
-      })
-    }))
-  }
-
-  const getStartPosition = (): Focus => {
-    return {
-      index: 0,
-      groupIndex: 0
-    }
-  }
-
-  const searchHits = computed(() => {
+  const setSearchHits = () => {
     const list = get(items)
     const search = searchTerm.value?.trim()
-    const grouped = groupList(list)
 
-    if (search == "" || !search)
-      return grouped
+    if (search == "" || !search) {
+      return searchHistoryVisible.value = true
+    }
 
     const listWithHits = list.filter(fuzzy(search, {
-      iterator: (item: Item) => {
-        const value = joinItemValues(item)
-
-        const newval = value + ' ' + value.replaceAll('0', 'o').replaceAll('3', 'e').replaceAll('-', ' ')
-
-
+      iterator: (value: string) => {
+        const newval = value + ' ' + value.replaceAll('0', 'o').replaceAll('3', 'e').replaceAll('-', ' ').replaceAll('biomod', 'bio mod')
         return newval
       }
     }))
+    console.log("Get hits", search, listWithHits, list)
 
-    return groupList(listWithHits)
-  })
-
-  const joinItemValues = (item: Item) =>
-    searchPaths.map((prop) => item[prop]).join(' ')
+    searchHistoryVisible.value = false
+    searchHits.value = (listWithHits)
+  }
 
   const clamp = (n: number, max: number, min: number = 0) =>
     Math.max(min, Math.min(max, n))
 
-  const setupInitialList = () =>
-    setFocusIndex(getStartPosition())
-
-  const groupSize = computed(() => searchHits.value?.length ?? 0)
-
-  const setFocusIndex = (focus: Focus, scroll: boolean = false) => {
-    const groupIndex = clamp(focus.groupIndex, groupSize.value - 1)
-    const index = clamp(focus.index, searchHits.value[groupIndex]?.items?.length - 1 ?? 0)
-
-
-    focusIndex.value = { groupIndex, index }
-    if (scroll)
-      scrollToItem(focus)
+  const setupInitialList = () => {
+    searchHistoryVisible.value = true
   }
+
+  const setFocusIndex = (index: number, scroll: boolean = false) => {
+    const clampedIndex = clamp(index, lookupList.value.length - 1 ?? 0)
+
+    focusIndex.value = clampedIndex
+
+    if (scroll)
+      scrollToItem(focusIndex.value)
+
+    console.log("item", focusedItem.value, focusIndex.value)
+
+    if (focusedItem.value)
+      searchTerm.value = focusedItem.value
+  }
+
+  const focusedItem = computed(() => {
+    if (focusIndex.value == null)
+      return null
+
+    const index = focusIndex.value
+
+    return lookupList.value[index]
+  })
 
   const selectFocused = () => {
     if (focusIndex.value == null)
-      return
+      return onSelect(null)
 
-    const { groupIndex, index } = focusIndex.value
+    if (!lookupList.value.length)
+      return onSelect(null)
 
-    onSelect(searchHits.value[groupIndex].items[index])
+    onSelect(lookupList.value[focusIndex.value])
   }
 
-  const currentList = computed(() => {
-    if (!focusIndex.value)
-      return null
-
-    return searchHits.value[focusIndex.value.groupIndex]
-  })
-
-  const getFocusBase = (): Focus => {
-    const index = focusIndex.value?.index ?? 0
-    const groupIndex = focusIndex.value?.groupIndex ?? 0
-    return { index, groupIndex }
-  }
+  const lookupList = computed(() => searchHistoryVisible.value ? searchHistory.value : searchHits.value)
 
   const stepDown = () => {
-    const { index, groupIndex } = getFocusBase()
+    const index = focusIndex.value ?? 0
     const newIndex = index + 1
-    const currentGroupSize = currentList.value?.items?.length ?? 0
-    const selectFirstGroup = groupIndex + 1 >= groupSize.value
+    const currentSize = lookupList.value?.length ?? 0
 
-    if (newIndex >= currentGroupSize)
-      return setFocusIndex({
-        groupIndex: selectFirstGroup ? 0 : groupIndex + 1,
-        index: 0
-      })
+    if (newIndex >= currentSize)
+      return setFocusIndex(0)
 
-    setFocusIndex({ groupIndex, index: newIndex }, true)
+    setFocusIndex(newIndex, true)
   }
 
   const stepUp = () => {
-    const { index, groupIndex } = getFocusBase()
+    const index = focusIndex.value ?? 0
     const newIndex = index - 1
-    const selectLastGroup = groupIndex - 1 < 0
 
     if (newIndex < 0) {
-      const newGroup = selectLastGroup ? groupSize.value - 1 : groupIndex - 1
-      const index = selectLastGroup ? Infinity : (groupIndex == 0 ? 0 : Infinity)
-      return setFocusIndex({
-        groupIndex: newGroup,
-        index
-      })
+      return setFocusIndex(lookupList.value.length - 1)
     }
 
-    setFocusIndex({ groupIndex, index: newIndex }, true)
+    setFocusIndex(newIndex, true)
   }
 
   const onKeyDown = (ev: KeyboardEvent) => {
@@ -182,19 +133,20 @@ export const useSearch = <Item extends Record<string, any>, Key extends string &
       return
 
     unrefElement(searchElement)?.focus()
+
   }
 
-
-  const isSelected = (option: Item) => {
+  const isSelected = (option: string) => {
     const item = selectedItem.value
 
     if (!item)
       return
 
-    return joinItemValues(item) == joinItemValues(option)
+    return item == option
   }
 
   return {
+    setSearchHits,
     selectFocused,
     setFocusIndex,
     setupInitialList,
@@ -206,6 +158,9 @@ export const useSearch = <Item extends Record<string, any>, Key extends string &
     getId,
     onLeave,
     close,
+    searchHistoryVisible,
+    searchHistory,
+    focusedItem,
     searchHits,
     searchTerm,
     isOpen
