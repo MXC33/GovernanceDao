@@ -1,11 +1,7 @@
 <template lang="pug">
-Collection(:data="data" :columns="columns" v-if="data" context="my-assets" :loading="pending")
+Collection(:data="data" :columns="columns" v-if="data" context="my-assets" :loading="pending" @load-next-page="loadNextPage")
   template(#menu)
     AccountMenu()
-
-  template(#bottom)
-    HList(w="lt-md:full" justify="center" py="2" v-if="!!data.page_key && Number(data.page_key) > 0")
-      button(@click="loadNextPage" btn="~ primary" py="3" cut="bottom-right sm b-ix-primary" bg="hover:ix-ne" w="lt-md:full") {{ $t(`marketplace.navigation.loadMore`)}}
 </template>
 
 

@@ -13,7 +13,6 @@ VList(v-if="data")
 <script lang="ts" setup>
 import type { ActivityDataList } from '~/composables/api/get/useActivityAPI';
 
-
 const { data: data, execute: fetchActivity, refresh: refresh, pending, loadNextPage } = useActivityAPI()
 
 await fetchActivity()
