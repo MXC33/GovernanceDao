@@ -1,5 +1,4 @@
-import { IXToken, ItemType, OrderType, signDomain, typedData, Sale } from "@ix/base/composables/Token/useIXToken"
-import { get1155Contract, get721Contract, NFTType } from "~/composables/useAssetContracts";
+import { IXToken, OrderType, useSignDomainMessage, typedData, Sale } from "@ix/base/composables/Token/useIXToken"
 import { ethers } from "ethers";
 import {
   conduitKey,
@@ -50,6 +49,8 @@ const mapAsyncRequests = async <T>(items: ListingItem[], fn: (item: ListingItem)
 }
 
 export const useListingContract = () => {
+  const signDomain = useSignDomainMessage()
+
   const { handleAPIError } = useIXAPI()
   const listEndpoints = useListEndpoints()
   const { walletAdress, signTypedData } = useWallet()

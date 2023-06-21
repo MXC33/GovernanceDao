@@ -13,6 +13,8 @@ const WombatLogo = await import('../../../assets/images/wallet/wombat.svg')
 const BitKeepLogo = await import('../../../assets/images/wallet/bitkeep.svg')
 const CoinBaseLogo = await import('../../../assets/images/wallet/coinbase.svg')
 const WalletConnectLogo = await import('../../../assets/images/wallet/walletconnect.svg')
+const CryptoDefiLogo = await import('../../../assets/images/wallet/crypto-defi.svg')
+
 
 const props = defineProps<{
   connector: WalletConnector
@@ -34,6 +36,9 @@ const logo = computed(() => {
 
     case 'Wallet Connect':
       return WalletConnectLogo
+
+    case 'Crypto.com DeFi Wallet':
+      return CryptoDefiLogo
 
     default:
       return MetamaskLogo

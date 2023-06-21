@@ -1,4 +1,3 @@
-import { CHAIN_NET_ADDRESS } from "~/composables/Contract/useWallet";
 import { seaportAdress } from "~/composables/Contract/WalletAddresses";
 import { ConsiderationItem, NFTType } from "@ix/marketplace/composables/useAssetContracts";
 
@@ -179,11 +178,15 @@ export interface FulfillmentComponent {
   orderIndex: number,
   itemIndex: number
 }
-export const signDomain = {
-  name: "PIXMarketplace",
-  version: '1.1',
-  chainId: CHAIN_NET_ADDRESS.polygon,
-  verifyingContract: seaportAdress.polygon
+export const useSignDomainMessage = () => {
+  const { chainIds } = useChainInfo()
+
+  return {
+    name: "PIXMarketplace",
+    version: '1.1',
+    chainId: chainIds.polygon,
+    verifyingContract: seaportAdress.polygon
+  }
 }
 
 export interface OrderMessage {

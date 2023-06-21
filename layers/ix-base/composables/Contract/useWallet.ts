@@ -4,6 +4,7 @@ import { ethers } from "ethers";
 
 export type Net = 'polygon' | 'ethereum'
 export type Chain = 'goerli' | 'mumbai' | 'polygon' | 'ethereum'
+
 export type UpdateListJobBody = {
   size: 0 | 5 | 6,
   player_id: number,
@@ -12,13 +13,59 @@ export type UpdateListJobBody = {
   token_id: string
 }
 
-export const CHAIN_NET_ADDRESS: Record<Chain, number> = {
-  ethereum: 1,
-  goerli: 5,
-  polygon: 137,
-  mumbai: 80001
-}
+export const useChainInfo = () => {
+  const { INFURA_ID } = useRuntimeConfig().public
+  const INFURA_RPC = `https://mainnet.infura.io/v3/${INFURA_ID}`
 
+  const chainIds: Record<Chain, number> = {
+    ethereum: 1,
+    goerli: 5,
+    polygon: 137,
+    mumbai: 80001
+  }
+
+  const currency: Record<Chain, string> = {
+    ethereum: "Eth",
+    goerli: "Eth",
+    polygon: "Matic",
+    mumbai: "Matic"
+  }
+
+  const name: Record<Chain, string> = {
+    ethereum: "Ethereum",
+    goerli: "Goerli (Etherum Testnet)",
+    polygon: "Polygon",
+    mumbai: "Mumbai (Polygon Testnet)"
+  }
+
+  const rpcs: Record<Chain, string> = {
+    ethereum: "https://ethereum.publicnode.com",
+    goerli: "https://ethereum-goerli.publicnode.com",
+    polygon: INFURA_RPC,
+    mumbai: "https://polygon-mumbai-bor.publicnode.com"
+  }
+
+  const chainIdsRPCmap: Record<number, string> = Object.keys(rpcs).reduce((obj, chain) => {
+    const id = chainIds[chain as Chain]
+    obj[id] = rpcs[chain as Chain]
+    return obj
+  }, {} as Record<number, string>)
+
+  const getChainInfo = (chain: Chain) => ({
+    chainId: chainIds[chain],
+    chainHexId: `0x${Number(chainIds[chain]).toString(16)}`,
+    chainName: name[chain],
+    nativeCurrency: currency[chain],
+    rpcUrl: rpcs[chain]
+  })
+
+  return {
+    getChainInfo,
+    chainIdsRPCmap,
+    chainIds,
+    rpcs
+  }
+}
 export const useActiveChain = (chainNet: Net = 'polygon'): Chain => {
   const { CHAIN_NET } = useRuntimeConfig().public
   const isMainNet = CHAIN_NET == 'main'
@@ -33,6 +80,8 @@ export const useActiveChain = (chainNet: Net = 'polygon'): Chain => {
 export type WalletState = 'disconnected' | 'signing' | 'connecting' | 'connected'
 
 export const useWallet = () => {
+  const { getChainInfo } = useChainInfo()
+
   const { getConnector, clearConnector, currentConnector } = useConnectors()
   const { CHAIN_NET } = useRuntimeConfig().public
 
@@ -109,11 +158,14 @@ export const useWallet = () => {
       })
     })
 
-  const ensureCorrectChain = async (isEthereum?: true) => {
+  const ensureCorrectChain = async (isEthereum?: boolean) => {
     const currentChain = getChain(isEthereum ? 'ethereum' : 'polygon')
+    const { chainId } = getChainInfo(currentChain)
     const network = await provider.value?.getNetwork()
+    if (!network)
+      throw new Error("No network")
 
-    if (network?.chainId != CHAIN_NET_ADDRESS[currentChain])
+    if (network.chainId != chainId)
       await changeNetworkChain(currentChain)
   }
 
@@ -186,17 +238,13 @@ export const useWallet = () => {
         failedConnection()
         return false
       }
+
+      await ensureCorrectChain()
+
     } catch (e: any) {
-      failedConnection()
+      failedConnection(e?.message)
       return false
     }
-
-    const network = await provider.value.getNetwork()
-
-    const currentChain = getChain('polygon')
-
-    if (network.chainId != CHAIN_NET_ADDRESS[currentChain])
-      await changeNetworkChain(currentChain)
 
     walletState.value = 'signing'
     return true
@@ -211,13 +259,25 @@ export const useWallet = () => {
   }
 
   const changeNetworkChain = async (chain: Chain) => {
-    const address = CHAIN_NET_ADDRESS[chain]
+    const { chainId, chainName, nativeCurrency, rpcUrl, chainHexId } = getChainInfo(chain)
+    console.log("CHAIN", chain, chainId, chainName, chainHexId)
 
-    await provider.value?.send("wallet_switchEthereumChain", [{
-      chainId: `0x${Number(address).toString(16)}`
-    }])
-
-    return true
+    try {
+      await provider.value?.send("wallet_switchEthereumChain", [{ chainId: chainHexId }])
+    } catch (err) {
+      // missing wallet in provider
+      if (err && (err.code === 4902 || err.code === -32603)) {
+        await provider.value?.send("wallet_addEthereumChain", [{
+          chainId,
+          chainName,
+          nativeCurrency,
+          rpcUrls: [rpcUrl]
+        }]);
+      } else {
+        console.log("ERR", err)
+        throw new Error(err.message)
+      }
+    }
   }
 
   const signMessage = async (msg: string) => {

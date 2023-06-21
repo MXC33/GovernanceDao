@@ -1,5 +1,4 @@
-import { IXToken, ItemType, OrderType, signDomain, typedData, Bid } from "@ix/base/composables/Token/useIXToken"
-import { add } from "date-fns"
+import { IXToken, ItemType, OrderType, typedData, Bid } from "@ix/base/composables/Token/useIXToken"
 import { ethers } from "ethers";
 import {
   conduitKey,
@@ -11,7 +10,6 @@ import { ZERO_ADRESS } from "@ix/base/composables/Utils/defineContract";
 import { makeRandomNumberKey } from "@ix/base/composables/Utils/useHelpers";
 import { BiddingBody, useBidsAPI } from "~/composables/api/post/useBidAPI";
 import { TransactionItem, useTransactions } from "./useTransactions"
-import { NFTType } from "~/composables/useAssetContracts";
 import { useIXTContract } from "@ix/base/composables/Contract/useIXTContract";
 
 export interface BiddingItem extends TransactionItem {
@@ -47,6 +45,8 @@ export const useBiddingItems = () => {
 }
 
 export const useBiddingContract = () => {
+  const signDomain = useSignDomainMessage()
+
   const { allowanceCheck } = useIXTContract()
   const { ixtBalance, refreshIXTBalance } = useIXTContract()
   const { walletAdress, signTypedData } = useWallet()
