@@ -1,7 +1,7 @@
 <template lang="pug">
 VList(w="full" bg="gray-900" z="99" pos="fixed" inset="0" overflow-x="hidden" overflow-y="auto")
 
-  HList(justify="start" items="center" px="md:4" py="3" space-x="3" pos="sticky top-0" bg="gray-900" b="on-search:lt-md:(b-0.5 gray-600)" :search="isSearch")
+  HList(justify="start" items="center" px="3 on-search:0 md:4" py="3" space-x="3" pos="sticky top-0" bg="gray-900" b="on-search:lt-md:(b-0.5 gray-600)" :search="isSearch")
 
     HList(items="center" color="white" translate-y="0.5" w="full" flex-grow="1" v-if="$slots.search" @click="onSelect")
       slot(name="search")

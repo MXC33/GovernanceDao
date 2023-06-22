@@ -3,7 +3,7 @@ VList(flex-grow="md:1" w="md:full")
   Search(:options="autocompleteResults"  @selected="selectedSearch"  @input="updateSearchString" display="lt-md:none" :has-frame="true")
     template(#item="{item}") {{ item }}
 
-  ButtonSquareIcon(display="md:none" @click="toggleTakeOver" w="10 on-lg:22" :lg="large")
+  ButtonSquareIcon(display="md:none" @click="toggleTakeOver" w="10 on-lg:18" :lg="large")
     span(w="6" :lg="large")
       slot(name="icon")
 
