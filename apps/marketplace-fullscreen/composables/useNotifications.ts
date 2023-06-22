@@ -1,6 +1,6 @@
 
 
-export type SnackNotificationId = 'copy-link' | 'add-to-cart' | 'remove-from-cart' | 'add-favorite' | 'remove-favorite' | 'transfer' | 'insufficient-funds' | 'transaction-rejected' | 'success'
+export type SnackNotificationId = 'copy-link' | 'add-to-cart' | 'remove-from-cart' | 'add-favorite' | 'remove-favorite' | 'transfer' | 'insufficient-funds' | 'transaction-rejected' | 'success' | 'user-rejected'
 
 export type SnackNotificationType = 'success' | 'error' | 'warning' | 'purchase' | 'purchase-warning' | 'favorite'
 
@@ -25,6 +25,7 @@ export const useSnackNotifications = () => {
   const getSnackType = ({ id }: SnackNotification): SnackNotificationType => {
     switch (id) {
       case 'transaction-rejected':
+      case 'user-rejected':
         return 'error'
 
       case 'insufficient-funds':

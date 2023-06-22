@@ -4,6 +4,7 @@ import { EthereumProvider } from "@walletconnect/ethereum-provider";
 import MetaMaskSDK from "@metamask/sdk"
 import { DeFiWeb3Connector } from '@deficonnect/web3-connector'
 import { useChainInfo } from "./useWallet";
+import { useSnackNotifications } from "@ix/marketplace/composables/useNotifications";
 
 type InjectedProviderFlags = {
   isBraveWallet?: true
@@ -89,16 +90,20 @@ const createMetamaskProvider = async () => {
 
 const createWalletConnectProvider = async () => {
   const { chainIds } = useChainInfo()
-  //@ts-ignore
-  const provider = await EthereumProvider.init({
-    projectId: '861ef743dceed75deb813e6d390dc4a8',
-    chains: Object.values(chainIds)
-  });
+  const { displaySnack } = useSnackNotifications()
+
+  let provider
 
   try {
+    const provider = await EthereumProvider.init({
+      projectId: '861ef743dceed75deb813e6d390dc4a8',
+      chains: Object.values(chainIds),
+      showQrModal: true
+    })
+
     await provider.enable()
-  } catch {
-    return null
+  } catch (error) {
+    return displaySnack('user-rejected')
   }
   return provider
 }
@@ -106,7 +111,7 @@ const createWalletConnectProvider = async () => {
 export type WalletConnector = 'injected' | 'walletconnect' | 'coinbase' | 'metamask' | 'defi'
 
 export const useConnectors = () => {
-  const currentConnector = useCookieState<WalletConnector>('active-connector', () => null)
+  const currentConnector = useCookieState<WalletConnector | null>('active-connector', () => null)
 
   const getInjectedProvider = () => {
     if (!process.client)
@@ -117,7 +122,6 @@ export const useConnectors = () => {
 
   const getAvailableConnectors = (): WalletConnector[] => {
     const injectedProvider = getInjectedProvider()
-    console.log("Injected", injectedProvider)
     const defaultProviders: WalletConnector[] = ['walletconnect', 'defi']
 
     if (injectedProvider?.isCoinbaseWallet)
@@ -150,7 +154,7 @@ export const useConnectors = () => {
   }
 
   const getConnector = async () => {
-    if (!process.client)
+    if (!process.client || !currentConnector.value)
       return null
 
     const injectedProvider = getInjectedProvider()
