@@ -57,6 +57,7 @@ export const useIXAPI = () => {
       })
       return data
     } catch (err) {
+      // if (err.message.includes("403"))
       await onUnauthorized()
       return null
     }

@@ -21,7 +21,8 @@ VList(flex-grow="1" min-h="0" pos="relative" p="4 md:(8 b-30)" space-y="0 md:6")
 
     CollectionList(v-if="data" :columns="renderColumns" :items="data?.nfts" :hide-grid="hideGrid", :context="context" :show-filters="showFilters" :loading="loading")
 
-  slot(name="bottom")
+  HList(justify="center" w="full" py="2" v-if="loadMoreVisible")
+    ButtonInteractive(btn="~ primary " font="bold" @click="loadNextPage" :text="loading ? 'Loading' : 'Load More'" :loading="loading" w="80" ref="loadMoreButton")
 
   Transition(name="slide-bottom")
     CollectionSelectBar(v-if="selectedItems?.length > 0" :context="context")
@@ -35,12 +36,20 @@ import type { TableColumn } from '~/composables/useTable'
 import CertifiedIcon from '~/assets/icons/certified.svg'
 
 const { activeFilters } = useCollectionSettings()
+const { getCollectionAttributes } = useDefaulAttributes()
+const { currentTime } = useGlobalTimestamp()
 const { selectedItems } = useSelection()
 
-const { getCollectionAttributes } = useDefaulAttributes()
-const attributes = computed(() => data ? getCollectionAttributes(data) : [])
-const { currentTime } = useGlobalTimestamp()
+const loadMoreButton = ref<HTMLElement | null>(null)
+const showFilters = shallowRef(false)
 
+const emit = defineEmits(["loadNextPage"])
+const loadNextPage = () => emit("loadNextPage")
+
+useScrollLoadMore(loadMoreButton, loadNextPage)
+
+const attributes = computed(() => data ? getCollectionAttributes(data) : [])
+const renderColumns = computed(() => columns ?? defaultColumns)
 
 const defaultColumns: TableColumn<IXToken>[] = [
   { label: "Asset", rowKey: "name", type: 'asset' },
@@ -83,15 +92,11 @@ const defaultColumns: TableColumn<IXToken>[] = [
       return `${optDays} ${minutes} minutes`
     }, type: 'text'
   },
-
 ]
 
-const renderColumns = computed(() => columns ?? defaultColumns)
-const showFilters = shallowRef(false)
 
-const toggleFilterDrawer = () => {
+const toggleFilterDrawer = () =>
   showFilters.value = !showFilters.value
-}
 
 const { data, columns, context = 'collection' } = defineProps<{
   data?: CollectionData,
@@ -100,6 +105,12 @@ const { data, columns, context = 'collection' } = defineProps<{
   context?: CollectionContext,
   loading?: boolean
 }>()
+
+const loadMoreVisible = computed(() => {
+  const pageKey = Number(data?.page_key ?? null)
+  return pageKey > 0
+})
+
 
 const collectionName = computed(() => {
   if (!data)
@@ -112,3 +123,9 @@ onBeforeUnmount(() => {
 })
 
 </script>
+
+<style>
+.no-scroll {
+  overflow: hidden;
+}
+</style>

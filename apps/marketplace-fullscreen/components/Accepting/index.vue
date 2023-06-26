@@ -6,18 +6,18 @@ Popup()
   template(#header) {{ $t(`marketplace.offer.title`) }}
 
   template(#default)
-    VList()
+    VList(space-y="6")
       TransactionIXTBalance()
 
       //- TransactionApplyToAll(v-model="bidItems")
 
-      AcceptingItem(v-model="acceptingItem")
+      AcceptingItem(v-model="acceptingItems[index]" v-for="(item, index) in acceptingItems")
 
   template(#footer)
-    AcceptingPrice(:item="acceptingItem" v-if="acceptingItem")
+    AcceptingPrice(:items="acceptingItems" v-if="acceptingItems")
 
   template(#buttons)
-    ButtonInteractive(btn="~ primary" w="full" @click.prevent="onClickAccept" text="Accept offer" :invalid="itemsInvalid([acceptingItem], true)" :loading="isLoading")
+    ButtonInteractive(btn="~ primary" w="full" @click.prevent="onClickAccept" text="Accept offer" :invalid="itemsInvalid(acceptingItems, true)" :loading="isLoading")
 
 </template>
 
@@ -27,13 +27,13 @@ import BiddingIcon from '~/assets/icons/bidding.svg'
 import { useAcceptingItem, useOfferContract } from "~/composables/useOffer";
 
 
-const { createAcceptingItem, acceptingItem } = useAcceptingItem()
-const { acceptOffer } = useOfferContract()
+const { createAcceptingItems, acceptingItems } = useAcceptingItem()
+const { multiAccept } = useOfferContract()
 const { itemsInvalid } = useTransactions()
 const { displayPopup } = usePopups()
 
 const { loading: isLoading, execute: acceptRequest } = useContractRequest(() =>
-  acceptOffer(acceptingItem.value)
+  multiAccept(acceptingItems.value)
 )
 
 const onClickAccept = async () => {
@@ -42,14 +42,14 @@ const onClickAccept = async () => {
   if (accept)
     displayPopup({
       type: 'accept-items-success',
-      item: acceptingItem.value
+      items: acceptingItems.value
     })
 }
 
-const { item } = defineProps<{
-  item: IXToken,
+const { items } = defineProps<{
+  items: IXToken[],
 }>()
 
-createAcceptingItem(item)
+createAcceptingItems(items)
 
 </script>

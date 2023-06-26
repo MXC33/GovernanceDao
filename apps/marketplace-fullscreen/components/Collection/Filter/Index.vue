@@ -4,13 +4,7 @@ HList(pos="sticky top-34" z="8" b="on-scrolling:t-1 gray-600" ml="-4 md:(-8)" mr
 
     CollectionFilterToggleFilter(@toggle="$emit('toggleFilter')" :data="data")
 
-    Search(:options="items" :search-paths="['name']" w="md:full" flex-grow="lt-md:1")
-      template(#item="{item}")
-        HList(items="center" space-x="3")
-          div(w="12")
-            TokenImage(:token="item"  :key="'img' + getTokenKey(item)")
-
-          TokenName(:token="item" capitalize="~" :key="'name' + getTokenKey(item)")
+    CollectionFilterSearch()
 
     CollectionFilterSort(:context="context" v-if="context == 'collection'")
 
@@ -19,10 +13,8 @@ HList(pos="sticky top-34" z="8" b="on-scrolling:t-1 gray-600" ml="-4 md:(-8)" mr
 </template>
 
 <script lang="ts" setup>
-import type { IXToken } from '@ix/base/composables/Token/useIXToken';
-import type { CollectionContext, CollectionData } from '~/composables/useCollection';
-
-const { getTokenKey } = useTokens()
+import type { IXToken } from '@ix/base/composables/Token/useIXToken'
+import type { CollectionContext, CollectionData } from '~/composables/useCollection'
 
 defineProps<{
   data?: CollectionData

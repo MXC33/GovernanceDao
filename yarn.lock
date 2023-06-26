@@ -944,6 +944,61 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@deficonnect/provider@npm:^2.0.3":
+  version: 2.0.3
+  resolution: "@deficonnect/provider@npm:2.0.3"
+  dependencies:
+    "@deficonnect/qrcode-modal": ^2.0.3
+    "@deficonnect/types": ^2.0.3
+    "@deficonnect/utils": ^2.0.3
+  checksum: a4b30a62ddedbadcfe109629cf0a26b30ce8d73530dd8e53a709ea4752ebdf0bfdaf8b5717cee7f03ef43224733a43590739ac6d563cfca2690c7dc57e27df2b
+  languageName: node
+  linkType: hard
+
+"@deficonnect/qrcode-modal@npm:^2.0.3":
+  version: 2.0.3
+  resolution: "@deficonnect/qrcode-modal@npm:2.0.3"
+  dependencies:
+    "@deficonnect/utils": ^2.0.3
+    preact: ^10.7.2
+    qrcode: ^1.5.0
+  checksum: 5ed538a90f14096db8f74d3ddc6ee12fca711de9b9c9894c11c515bd7c495b7182e4fc8567271d4ee9a04662fce028e7d5552b9ef2197a8b38d89f2cf0a95d39
+  languageName: node
+  linkType: hard
+
+"@deficonnect/types@npm:^2.0.3":
+  version: 2.0.3
+  resolution: "@deficonnect/types@npm:2.0.3"
+  checksum: 132b77e74e9e6ffea7cadb656136536915d4b3123abb3fe314c9662799d8193557822880e94d0a5a8d5bc7e94cc5ba6206e13d1074fb997b12c37426b558c719
+  languageName: node
+  linkType: hard
+
+"@deficonnect/utils@npm:^2.0.3":
+  version: 2.0.3
+  resolution: "@deficonnect/utils@npm:2.0.3"
+  dependencies:
+    "@deficonnect/types": ^2.0.3
+    "@walletconnect/encoding": ^1.0.1
+    "@walletconnect/window-getters": ^1.0.0
+    detect-browser: ^5.3.0
+    query-string: ^7.1.1
+    uuid: ^8.3.2
+  checksum: 036571ad75410a454a75b236c28a2551f7ceeafaa70d0bbef95d6a64e91c1c00ad2c4cde6aa7eb51949b172c75d868330e7b74ed96f048e73a32a684547db809
+  languageName: node
+  linkType: hard
+
+"@deficonnect/web3-connector@npm:^2.0.3":
+  version: 2.0.3
+  resolution: "@deficonnect/web3-connector@npm:2.0.3"
+  dependencies:
+    "@deficonnect/provider": ^2.0.3
+    "@deficonnect/types": ^2.0.3
+    "@web3-react/abstract-connector": ^6.0.7
+    tiny-warning: ^1.0.3
+  checksum: 68c8e34ae1baa05232ccc94ed88e634fe1ad29879b0d314a1cee96f021d07b4d30b4c2ae1bcd44963a8d13cc0bac3b3bf4a57c5c64892bd7d9b3ecb269eff3b3
+  languageName: node
+  linkType: hard
+
 "@emotion/babel-plugin@npm:^11.11.0":
   version: 11.11.0
   resolution: "@emotion/babel-plugin@npm:11.11.0"
@@ -2660,6 +2715,7 @@ __metadata:
   resolution: "@ix/base@workspace:layers/ix-base"
   dependencies:
     "@coinbase/wallet-sdk": ^3.6.6
+    "@deficonnect/web3-connector": ^2.0.3
     "@esbuild-plugins/node-globals-polyfill": ^0.2.3
     "@esbuild-plugins/node-modules-polyfill": ^0.2.2
     "@histoire/plugin-nuxt": ^0.16.1
@@ -5135,6 +5191,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@walletconnect/encoding@npm:^1.0.1":
+  version: 1.0.2
+  resolution: "@walletconnect/encoding@npm:1.0.2"
+  dependencies:
+    is-typedarray: 1.0.0
+    tslib: 1.14.1
+    typedarray-to-buffer: 3.1.5
+  checksum: 648029d6a04e0e3675e1220b87c982e5d69764873e30a45a7c57f18223cd7c13e6758138d4644fd05d8fa03bd438fafb0a0ebc6ae168ed6f4a9bf1f93de1b82f
+  languageName: node
+  linkType: hard
+
 "@walletconnect/environment@npm:^1.0.1":
   version: 1.0.1
   resolution: "@walletconnect/environment@npm:1.0.1"
@@ -5386,7 +5453,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@walletconnect/window-getters@npm:^1.0.1":
+"@walletconnect/window-getters@npm:^1.0.0, @walletconnect/window-getters@npm:^1.0.1":
   version: 1.0.1
   resolution: "@walletconnect/window-getters@npm:1.0.1"
   dependencies:
@@ -5402,6 +5469,22 @@ __metadata:
     "@walletconnect/window-getters": ^1.0.1
     tslib: 1.14.1
   checksum: e82aea7195c6fe95c00e87bb38051c5549838c2e8302da94f1afa48206f79f0b620166c9820f847494505d282d1568e2086a1561b0493d2d0a1fa115f9106aef
+  languageName: node
+  linkType: hard
+
+"@web3-react/abstract-connector@npm:^6.0.7":
+  version: 6.0.7
+  resolution: "@web3-react/abstract-connector@npm:6.0.7"
+  dependencies:
+    "@web3-react/types": ^6.0.7
+  checksum: fa8b0ea3586e248da84756979dd5c5f6ddc2d1657a1698de63a6d0e38035c4b122841bd0e6b00f1a6f1825614b22f6552a584cafec3470ca6fbc2e127ab30b2a
+  languageName: node
+  linkType: hard
+
+"@web3-react/types@npm:^6.0.7":
+  version: 6.0.7
+  resolution: "@web3-react/types@npm:6.0.7"
+  checksum: 29ae264ae4a126e520a64a4b466ea712ee09b934f3fe13b957e09269249ffc882712cf11fff12c1c19dd66e38503075b4adf5e9d5f588ea0dd31bbedf6fa9a42
   languageName: node
   linkType: hard
 
@@ -7430,7 +7513,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"detect-browser@npm:5.3.0, detect-browser@npm:^5.2.0":
+"detect-browser@npm:5.3.0, detect-browser@npm:^5.2.0, detect-browser@npm:^5.3.0":
   version: 5.3.0
   resolution: "detect-browser@npm:5.3.0"
   checksum: dd6e08d55da1d9e0f22510ac79872078ae03d9dfa13c5e66c96baedc1c86567345a88f96949161f6be8f3e0fafa93bf179bdb1cd311b14f5f163112fcc70ab49
@@ -10215,7 +10298,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"is-typedarray@npm:~1.0.0":
+"is-typedarray@npm:1.0.0, is-typedarray@npm:^1.0.0, is-typedarray@npm:~1.0.0":
   version: 1.0.0
   resolution: "is-typedarray@npm:1.0.0"
   checksum: 3508c6cd0a9ee2e0df2fa2e9baabcdc89e911c7bd5cf64604586697212feec525aa21050e48affb5ffc3df20f0f5d2e2cf79b08caa64e1ccc9578e251763aef7
@@ -13126,6 +13209,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"preact@npm:^10.7.2":
+  version: 10.15.1
+  resolution: "preact@npm:10.15.1"
+  checksum: dabad11843b19b40b11846a25ff0b1fc4bc58268909e01a7faddb341a40983d24fbe7d44ad6e2c5d35e43091963af616800552fec9af44dd0a2f0f698d1bba1f
+  languageName: node
+  linkType: hard
+
 "prelude-ls@npm:^1.2.1":
   version: 1.2.1
   resolution: "prelude-ls@npm:1.2.1"
@@ -13426,7 +13516,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"qrcode@npm:1.5.3":
+"qrcode@npm:1.5.3, qrcode@npm:^1.5.0":
   version: 1.5.3
   resolution: "qrcode@npm:1.5.3"
   dependencies:
@@ -13456,7 +13546,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"query-string@npm:7.1.3":
+"query-string@npm:7.1.3, query-string@npm:^7.1.1":
   version: 7.1.3
   resolution: "query-string@npm:7.1.3"
   dependencies:
@@ -14958,6 +15048,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"tiny-warning@npm:^1.0.3":
+  version: 1.0.3
+  resolution: "tiny-warning@npm:1.0.3"
+  checksum: da62c4acac565902f0624b123eed6dd3509bc9a8d30c06e017104bedcf5d35810da8ff72864400ad19c5c7806fc0a8323c68baf3e326af7cb7d969f846100d71
+  languageName: node
+  linkType: hard
+
 "title-case@npm:^3.0.3":
   version: 3.0.3
   resolution: "title-case@npm:3.0.3"
@@ -15160,6 +15257,15 @@ __metadata:
   version: 2.19.0
   resolution: "type-fest@npm:2.19.0"
   checksum: a4ef07ece297c9fba78fc1bd6d85dff4472fe043ede98bd4710d2615d15776902b595abf62bd78339ed6278f021235fb28a96361f8be86ed754f778973a0d278
+  languageName: node
+  linkType: hard
+
+"typedarray-to-buffer@npm:3.1.5":
+  version: 3.1.5
+  resolution: "typedarray-to-buffer@npm:3.1.5"
+  dependencies:
+    is-typedarray: ^1.0.0
+  checksum: 99c11aaa8f45189fcfba6b8a4825fd684a321caa9bd7a76a27cf0c7732c174d198b99f449c52c3818107430b5f41c0ccbbfb75cb2ee3ca4a9451710986d61a60
   languageName: node
   linkType: hard
 

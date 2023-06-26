@@ -181,14 +181,15 @@ export const get721Contract = <T extends ContractInterface<T> & ERC721Contract>(
 }
 
 export interface ConsiderationItem {
-  recipient: string
+  recipient: string,
+  endAmount?: number
 }
 
 export const useSeaportContract = <T extends ContractInterface<T> & SeaportContract>() => {
   const { walletAdress, getCollectionType } = useWallet()
   const { fetchIXAPI } = useIXAPI()
   const { clearFailedCartItems, addFailedCartItem } = useCart()
-  const { createBuyOrder, isAdvancedOrder, getOrderMessage } = useBuyHelpers()
+  const { createBuyOrder, isAdvancedOrder, getOrderMessage } = useTransactionHelpers()
   const { withContract, createTransaction, ...contractSpec } = defineContract<T>('Seaport-contract', {
     contractAddress: seaportAdress.polygon as string,
     createContract(provider) {
@@ -206,13 +207,13 @@ export const useSeaportContract = <T extends ContractInterface<T> & SeaportContr
     merkleProof: [ZERO_ADRESS_LONG]
   }
 
-  const fulfillAvailableAdvancedOrders = (advancedOrders: AdvancedOrder[], criteriaResolvers: [], offerFulfillments: [], considerationFulfillments: [], fulfillerConduitKey: string, recipient: string, maximumFulfilled: number, cartItems?: CartItem[]) =>
+  const fulfillAvailableAdvancedOrders = (advancedOrders: AdvancedOrder[], criteriaResolvers: [], offerFulfillments: any[], considerationFulfillments: any[], fulfillerConduitKey: string | null, recipient: string, maximumFulfilled: number, cartItems?: CartItem[]) =>
     createTransaction((contract) => {
       const address = walletAdress.value
       if (!address)
         return undefined
 
-      return contract.fulfillAvailableAdvancedOrders(advancedOrders, criteriaResolvers, offerFulfillments, considerationFulfillments, fulfillerConduitKey, recipient, maximumFulfilled)
+      return contract.fulfillAvailableAdvancedOrders(advancedOrders, criteriaResolvers, offerFulfillments, considerationFulfillments, fulfillerConduitKey ?? '', recipient, maximumFulfilled)
     }, {
       onFail: async (error) => {
         console.log("ON FAIL", error)

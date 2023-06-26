@@ -1,5 +1,4 @@
-import { IXToken, ItemType, OrderType, signDomain, typedData, Sale } from "@ix/base/composables/Token/useIXToken"
-import { get1155Contract, get721Contract, NFTType } from "~/composables/useAssetContracts";
+import { IXToken, OrderType, useSignDomainMessage, typedData, Sale } from "@ix/base/composables/Token/useIXToken"
 import { ethers } from "ethers";
 import {
   conduitKey,
@@ -50,16 +49,19 @@ const mapAsyncRequests = async <T>(items: ListingItem[], fn: (item: ListingItem)
 }
 
 export const useListingContract = () => {
+  const signDomain = useSignDomainMessage()
+
   const { handleAPIError } = useIXAPI()
   const listEndpoints = useListEndpoints()
   const { walletAdress, signTypedData } = useWallet()
   const { getEndTime, baseConsideration, getItemType } = useTransactionContract()
+  const { getTransactionContract } = useTransactionHelpers()
 
   //TODO update endtime
   const createListingMessage = async (item: ListingItem, endTime: number) => {
-    const { token: { collection, token_id, nft_type }, ixtPrice, shares } = item
+    const { token: { collection, token_id }, ixtPrice, shares, token } = item
 
-    const nftContract = nft_type === NFTType.ERC1155 ? get1155Contract(collection as string) : get721Contract(collection as string)
+    const nftContract = getTransactionContract(token)
 
     const approveNftCheck = await nftContract.approveNftCheck()
     if (!approveNftCheck) {

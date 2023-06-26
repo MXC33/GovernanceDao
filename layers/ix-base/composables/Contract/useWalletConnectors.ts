@@ -1,6 +1,10 @@
 import type { ExternalProvider } from "@ethersproject/providers";
-import type { MetaMaskSDKOptions } from "@metamask/sdk";
+//@ts-ignore
 import { EthereumProvider } from "@walletconnect/ethereum-provider";
+import MetaMaskSDK from "@metamask/sdk"
+import { DeFiWeb3Connector } from '@deficonnect/web3-connector'
+import { useChainInfo } from "./useWallet";
+import { useSnackNotifications } from "@ix/marketplace/composables/useNotifications";
 
 type InjectedProviderFlags = {
   isBraveWallet?: true
@@ -26,7 +30,6 @@ const getProviderName = (provider: InjectedProvider) => {
   if (provider.isBitKeep) return 'BitKeep'
   if (provider.isBraveWallet) return 'Brave Wallet'
   if (provider.isCoinbaseWallet) return 'Coinbase Wallet'
-  if (provider.isMetaMask) return 'MetaMask'
   if (provider.isExodus) return 'Exodus'
   if (provider.isFrame) return 'Frame'
   if (provider.isOpera) return 'Opera'
@@ -42,73 +45,70 @@ const getProviderName = (provider: InjectedProvider) => {
 
 }
 
-const getInfuraRPC = () => {
-  const { INFURA_ID } = useRuntimeConfig().public
-  return `https://mainnet.infura.io/v3/${INFURA_ID}`
+const createDefiProvider = async () => {
+  const { chainIdsRPCmap, chainIds } = useChainInfo()
+  const connector = new DeFiWeb3Connector({
+    supportedChainIds: Object.values(chainIds),
+    appName: 'Planet IX',
+    chainType: 'eth',
+    chainId: '137',
+    rpcUrls: chainIdsRPCmap,
+  })
+
+  const walletProvider = await connector.activate()
+  return walletProvider.provider
 }
 
-const createMetaMaskProvider = async () => {
-  const { MetaMaskSDK } = await import('@metamask/sdk')
-  const options: MetaMaskSDKOptions = {
+const createCoinbaseProvider = async () => {
+  const app = useNuxtApp()
+  const { rpcs } = useChainInfo()
+  const coinbaseWallet = app.$coinbaseWallet
+
+  //@ts-ignore
+  const provider = coinbaseWallet.makeWeb3Provider(rpcs['polygon'], 137)
+
+  try {
+    await provider.enable()
+  } catch {
+    return null
+  }
+  return provider
+}
+
+const createMetamaskProvider = async () => {
+  const sdk = new MetaMaskSDK({
+    enableDebug: false,
     dappMetadata: {
       name: 'Mission Control',
       url: 'https://missioncontrol.planetix.com/IX-icon.png'
     }
-  }
-  const sdk = new MetaMaskSDK(options)
-
-  const provider = sdk.getProvider()
-  if (provider == undefined) { return }
-  try {
-    await provider.request({ method: 'eth_requestAccounts' })
-    await provider.request({ method: 'eth_chainId' })
-    return provider
-  } catch (error) {
-    console.error('Error connecting to Ethereum accounts:', error)
-    return null
-  }
-}
-
-const createCoinbaseProvider = async () => {
-  const { CoinbaseWalletSDK } = await import('@coinbase/wallet-sdk')
-
-  const coinbaseWallet = new CoinbaseWalletSDK({
-    appName: 'Mission Control',
-    appLogoUrl: 'https://missioncontrol.planetix.com/IX-icon.png',
-    darkMode: true
   })
 
-  //console.log("PROVIDER", coinbaseWallet)
-
-  const provider = coinbaseWallet.makeWeb3Provider(getInfuraRPC(), 137)
-
-  try {
-    await provider.enable()
-  } catch {
-    return null
-  }
-
-  return provider
+  return sdk.getProvider()
 }
 
 
 const createWalletConnectProvider = async () => {
-  //@ts-ignore
-  const provider = await EthereumProvider.init({
-    projectId: '861ef743dceed75deb813e6d390dc4a8',
-    chains: Object.values(CHAIN_NET_ADDRESS)
-  });
+  const { chainIds } = useChainInfo()
+  const { displaySnack } = useSnackNotifications()
 
+  let provider
 
   try {
+    const provider = await EthereumProvider.init({
+      projectId: '861ef743dceed75deb813e6d390dc4a8',
+      chains: Object.values(chainIds),
+      showQrModal: true
+    })
+
     await provider.enable()
-  } catch {
-    return null
+  } catch (error) {
+    return displaySnack('user-rejected')
   }
   return provider
 }
 
-export type WalletConnector = 'injected' | 'walletconnect' | 'coinbase' | 'metamask'
+export type WalletConnector = 'injected' | 'walletconnect' | 'coinbase' | 'metamask' | 'defi'
 
 export const useConnectors = () => {
   const currentConnector = useCookieState<WalletConnector | null>('active-connector', () => null)
@@ -117,20 +117,20 @@ export const useConnectors = () => {
     if (!process.client)
       return null
 
-    //@ts-ignore
     return window.ethereum as InjectedProvider
   }
 
   const getAvailableConnectors = (): WalletConnector[] => {
     const injectedProvider = getInjectedProvider()
-    switch (true) {
-      case injectedProvider?.isMetaMask:
-        return ['injected', 'coinbase', 'walletconnect']
-      case injectedProvider?.isCoinbaseWallet:
-        return ['metamask', 'coinbase', 'walletconnect']
-      default:
-        return ['metamask', 'coinbase', 'walletconnect']
-    }
+    const defaultProviders: WalletConnector[] = ['walletconnect', 'defi']
+
+    if (injectedProvider?.isCoinbaseWallet)
+      return ['coinbase', ...defaultProviders]
+
+    if (!injectedProvider || (injectedProvider?.isMetaMask && !injectedProvider.isBraveWallet))
+      return ['injected', 'coinbase', ...defaultProviders]
+
+    return ['injected', 'coinbase', ...defaultProviders]
   }
 
   const clearConnector = () => {
@@ -143,36 +143,38 @@ export const useConnectors = () => {
       case 'injected':
         return injectedProvider && getProviderName(injectedProvider)
       case 'metamask':
-        return 'MetaMask'
+        return 'Metamask'
       case 'coinbase':
         return 'Coinbase Wallet'
+      case 'defi':
+        return 'Crypto.com DeFi Wallet'
       case 'walletconnect':
         return 'Wallet Connect'
     }
   }
 
   const getConnector = async () => {
+    if (!process.client || !currentConnector.value)
+      return null
+
     const injectedProvider = getInjectedProvider()
     switch (currentConnector.value) {
-      case 'metamask':
-        if (process.client) {
-          const mm = await createMetaMaskProvider()
-          return mm
-        }
       case 'coinbase':
-        if (process.client) {
-          const provider = await createCoinbaseProvider()
-          return provider
-        }
+        return await createCoinbaseProvider()
 
       case 'injected':
-        if (injectedProvider?.isCoinbaseWallet && process.client)
+        if (injectedProvider?.isCoinbaseWallet)
           return createCoinbaseProvider()
         return injectedProvider
 
+      case 'metamask':
+        return await createMetamaskProvider()
+
+      case 'defi':
+        return await createDefiProvider()
+
       case 'walletconnect':
-        const wc = await createWalletConnectProvider()
-        return wc
+        return await createWalletConnectProvider()
     }
   }
 

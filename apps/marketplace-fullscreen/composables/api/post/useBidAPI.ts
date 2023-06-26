@@ -1,4 +1,4 @@
-import { IXToken } from "@ix/base/composables/Token/useIXToken"
+import { Bid, IXToken } from "@ix/base/composables/Token/useIXToken"
 import { CartItem } from "~/composables/useCart"
 
 export interface BiddingBody {
@@ -23,11 +23,11 @@ export const useBidsAPI = () => {
     collection,
   })
 
-  const rejectBid = (index: string, referenceId: number, playerId: number, saleId?: number) => fetchIXAPI('/web3/bid/reject/' + playerId, 'POST', {
-    index,
-    referenceId,
-    saleId,
-    playerId,
+  const rejectBid = ({ _index, token_id, network, collection }: IXToken, bid: Bid) => fetchIXAPI('web3/bid/reject/' + bid.bidder_id, 'POST', {
+    index: _index,
+    reference_id: token_id,
+    network,
+    collection
   })
 
   const rejectAllBid = (index: string, referenceId: number, saleId?: number) => fetchIXAPI('/web3/bid/reject/all', 'POST', {

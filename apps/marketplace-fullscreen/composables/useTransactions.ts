@@ -3,7 +3,7 @@ import { AdjustableNumber } from "@ix/base/composables/Utils/useAdjustableNumber
 import { differenceInDays, add } from "date-fns";
 
 export interface TransactionItem {
-  type?: 'list' | 'bid' | 'accept' | 'transfer'
+  type?: 'list' | 'bid' | 'accept' | 'transfer' | 'reject'
   token: IXToken,
   shares: AdjustableNumber,
   durationInDays?: number,
