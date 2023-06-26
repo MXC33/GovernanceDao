@@ -1,7 +1,7 @@
 <template lang="pug">
 div(m="!l-0" p="6" grid="~ cols-5" w="full" 
     bg="black" pos="absolute top-full")
-  HeaderCategory(grid="s-default:col-span-1 s-increseSpan:col-span-2" v-for="(category, index) in header.categories" items="center" :category="category" :parent-type="header.type" grow="" @onClickItem="onClickItem" :state="getColSpawn(index)")
+  HeaderCategory(grid="col-span-1 s-increased:col-span-2" v-for="(category, index) in header.categories" items="center" :category="category" :parent-type="header.type" grow="" @onClickItem="onClickItem" :state="columnSize[index]")
     
 //-img(:src="getBackground")
 </template> 
@@ -9,7 +9,7 @@ div(m="!l-0" p="6" grid="~ cols-5" w="full"
 <script lang="ts" setup>
 import FallbackVue from '~/components/Fallback.vue';
 import ImageCoreClient from '~/components/Token/ImageCore.client.vue';
-import type { HeaderItem } from '~/composables/useSiteHeader';
+import type { HeaderCategory, HeaderItem } from '~/composables/useSiteHeader';
 
 import Buy from "../../../assets/images/header/background/buy/background.png"
 import Play from "../../../assets/images/header/background/buy/background.png"
@@ -30,39 +30,23 @@ const {header} = defineProps<{
   header: HeaderItem,
 }>()
 
-const avalibleSpawn = ref(5 - header.categories.length)
-const amountSpawned = ref(0)
-const arrToReturn = ref([''])
+const columnSize = computed(() => {
+  let spansLeft = 5
 
-//console.log("avalibleSpawn", avalibleSpawn.value)
+  return header.categories.map((item) => {
+    const count = getColumnCount(item, spansLeft)
+    spansLeft -= count
+    return count == 2 ? 'increased' : ''
+  })
+})
 
-const getColSpawn = (index: number) => {
+const getColumnCount = (category: HeaderCategory, spansLeft: number) => {
+  if(category.items.length > 3 && spansLeft >= 2)
+    return 2
 
-  if(arrToReturn.value.length > header.categories.length){
-    //console.log("arrToReturn", arrToReturn.value[index + 1])
-    return arrToReturn.value[index + 1]
-  }
-    
-
-  //console.log('index', header.categories[index].type)
-  if(header.categories.length >= 5){
-    //console.log('default')
-    arrToReturn.value.push('default')
-    return 'default'
-  }
-
-  if(header.categories[index].items.length > 3 && avalibleSpawn.value > 0){
-    //console.log('increseSpan')
-    avalibleSpawn.value--
-    amountSpawned.value++
-    arrToReturn.value.push('increseSpan')
-    return 'increseSpan'
-  }
-
-  //console.log('default')
-  arrToReturn.value.push('default')
-  return 'default'
+  return 1
 }
+
 
 const getBackground = () =>{
   switch (header.type) {
