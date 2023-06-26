@@ -1,6 +1,6 @@
 <template lang="pug">
 VList(w="full" bg="gray-900")
-  HList(w="full" justify="between" items="center" b="b-1 gray-600" text="lt-md:xs" font="lt-md:bold")
+  HList(w="full" justify="between" items="center" b="b-1 gray-600"  font="lt-md:bold")
     HList(w="50%")
       template(v-for="tab in tabs")
         TabItem(:id="tab" v-model="activeTab") {{ tab }}

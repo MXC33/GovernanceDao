@@ -1,6 +1,9 @@
 
 // https://nuxt.com/docs/api/configuration/nuxt-config
 
+import { NodeGlobalsPolyfillPlugin } from '@esbuild-plugins/node-globals-polyfill'
+import { NodeModulesPolyfillPlugin } from '@esbuild-plugins/node-modules-polyfill'
+
 export default defineNuxtConfig({
   extends: [
     '@ix/base'
@@ -91,6 +94,21 @@ export default defineNuxtConfig({
       script: {
         defineModel: true,
         propsDestructure: true
+      }
+    },
+    optimizeDeps: {
+      esbuildOptions: {
+        define: {
+          global: 'globalThis',
+        },
+        // Enable esbuild polyfill plugins
+        plugins: [
+          NodeGlobalsPolyfillPlugin({
+            process: true,
+            buffer: true,
+          }),
+          NodeModulesPolyfillPlugin()
+        ]
       }
     },
     server: {

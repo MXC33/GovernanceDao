@@ -19,7 +19,7 @@ VList()
       InputText(v-model="minOffer" :class="{highlighted: showDecreaseMinPrice}")
         template(#suffix) IXT
 
-  div(grid="~ cols-2" text="xs md:base")
+  div(grid="~ cols-2")
     ButtonInteractive(btn="~ secondary" font="bold" @click="onClickSell" text="List item")
 
     ButtonInteractive(btn="~ primary " font="bold" @click="acceptItems" v-if="!isDisabled" :text="`Accept ${shares?.value} offer`" :loading="isAcceptLoading")

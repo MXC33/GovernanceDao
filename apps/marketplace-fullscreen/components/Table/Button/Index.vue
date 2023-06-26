@@ -1,5 +1,5 @@
 <template lang="pug">
-ButtonSound(v-if="!isHidden" sound="sm" bg="gray-400 hover:gray-300 on-primary:(ix-primary hover:ix-ne)" :primary="button.type == 'primary'" cut="bottom-right xs md:(bottom-right sm)" px="2.2 md:6" py="3 md:3" text="lt-md:xs" uppercase="~" font="bold" @click="onClickButton" w="full" disable="on-disabled:active" :disabled="isDisabled" flex="~ " justify="center")
+ButtonSound(v-if="!isHidden" sound="sm" bg="gray-400 hover:gray-300 on-primary:(ix-primary hover:ix-ne)" :primary="button.type == 'primary'" cut="bottom-right xs md:(bottom-right sm)" px="2.2 md:6" py="3 md:3"  uppercase="~" font="bold" @click="onClickButton" w="full" disable="on-disabled:active" :disabled="isDisabled" flex="~ " justify="center")
 
 
   CartIcon(w="4 md:6" v-if="button.icon == 'cart'")
