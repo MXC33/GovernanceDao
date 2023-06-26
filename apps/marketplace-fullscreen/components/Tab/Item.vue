@@ -1,6 +1,6 @@
 <template lang="pug">
 VList(pos="relative" w="full")
-  HList(font="bold" px="6" py="3" uppercase="~" w="full" cursor="pointer" @click="toggle" items="center" space-x="2" text="lt-md:xs")
+  HList(font="bold" px="6" py="3" uppercase="~" w="full" cursor="pointer" @click="toggle" items="center" space-x="2" )
     span(color="gray-200 on-active:white" :active="isActive")
       slot
 

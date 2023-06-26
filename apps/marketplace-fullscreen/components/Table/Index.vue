@@ -6,7 +6,7 @@ VList(w="full")
   VList.no-scrollbar(max-w="full" w="full" overflow-x="auto" bg="gray-900")
     table.base-table(max-w="full")
       colgroup()
-        col(v-if="selectable", :style="{width: '80px'}")
+        col(v-if="selectable", :style="{width: '50px'}")
         col(v-for="column in columns" :style="getColumnStyle(column)")
 
       TableHeader(v-model="selectedItems" :columns="columns" :rows="sortedRows" :selectable="selectable" :id="id")

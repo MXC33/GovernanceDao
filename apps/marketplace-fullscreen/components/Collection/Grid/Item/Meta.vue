@@ -4,7 +4,7 @@ VList(w="full" flex-grow="1" items="start" bg="gray-900" p="6" pos="relative")
     NuxtLink(:to="getItemLink(token)" flex="~ row" rel="noopener" items="center" space-x="3"  cursor="pointer")
       TokenName(:token="token" :key="getTokenKey(token)" text="base md:xl ellipsis" capitalize="~")
 
-      div(v-if="is1155" text="lt-md:xs") x{{showAssetAmount}}
+      div(v-if="is1155" ) x{{showAssetAmount}}
 
     div(text="sm md:lg") 
       slot(name="subtitle") 
