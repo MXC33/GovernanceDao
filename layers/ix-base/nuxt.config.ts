@@ -20,7 +20,11 @@ export default defineNuxtConfig({
   },
 
   //@ts-ignore
-  transpile: ['vue3-carousel'],
+  transpile: [
+    'vue3-carousel',
+    '@walletconnect/ethereum-provider',
+    '@coinbase/wallet-sdk'
+  ],
 
   css: [
     resolve('./assets/styles/fonts.css'),
