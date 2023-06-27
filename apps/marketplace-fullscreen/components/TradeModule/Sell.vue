@@ -20,11 +20,12 @@ VList()
         template(#suffix) IXT
 
   div(grid="~ cols-2")
-    ButtonInteractive(btn="~ secondary" font="bold" @click="onClickSell" text="List item")
+    ButtonInteractive(btn="~ secondary " font="bold" @click="acceptItems" v-if="!isDisabled" :text="`Accept ${shares?.value} offer`" :loading="isAcceptLoading")
 
-    ButtonInteractive(btn="~ primary " font="bold" @click="acceptItems" v-if="!isDisabled" :text="`Accept ${shares?.value} offer`" :loading="isAcceptLoading")
+    ButtonInteractive(btn="~ secondary" bg="on-disabled:gray-700" color="on-disabled:gray-400" cursor="default" font="bold" :disabled="isDisabled" text="You have no offers" v-else)
 
-    ButtonInteractive(btn="~ primary" bg="on-disabled:gray-700" color="on-disabled:gray-400" cursor="default" font="bold" :disabled="isDisabled" text="You have no offers" v-else)
+    ButtonInteractive(btn="~ primary" font="bold" @click="onClickSell" text="List item")
+
 
 </template>
 
