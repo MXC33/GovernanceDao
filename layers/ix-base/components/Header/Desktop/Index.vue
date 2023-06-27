@@ -1,7 +1,6 @@
 <template lang="pug">
-div(m="!l-0" p="6" grid="~ cols-5" w="full" 
-  bg="black" pos="absolute top-full")
-HeaderCategory(grid="col-span-1 s-increased:col-span-2" v-for="(category, index) in header.categories" items="center" :category="category" :parent-type="header.type" grow="" @onClickItem="onClickItem" :state="columnSize[index]")
+div(m="!l-0" p="6 t-3" grid="~ cols-5" w="full" bg="black" pos="absolute top-full")
+  HeaderCategory(grid="col-span-1 s-increased:col-span-2" v-for="(category, index) in header.categories" items="center" :category="category" :parent-type="header.type" grow="" @onClickItem="onClickItem" :state="columnSize[index]")
 
 //-img(:src="getBackground")
 </template> 
