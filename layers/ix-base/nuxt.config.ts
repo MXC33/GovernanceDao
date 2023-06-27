@@ -53,7 +53,6 @@ export default defineNuxtConfig({
     ]
   },
 
-
   unocss: {
     configFile: resolve('./unocss.config.ts'),
   },
@@ -90,9 +89,6 @@ export default defineNuxtConfig({
     },
     optimizeDeps: {
       esbuildOptions: {
-        define: {
-          global: 'window',
-        },
         // Enable esbuild polyfill plugins
         plugins: [
           NodeGlobalsPolyfillPlugin({
