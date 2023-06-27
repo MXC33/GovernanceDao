@@ -118,6 +118,7 @@ export const useConnectors = () => {
     if (!process.client)
       return null
 
+    //@ts-ignore
     return window.ethereum as InjectedProvider
   }
 
