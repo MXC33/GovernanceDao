@@ -98,6 +98,9 @@ export default defineNuxtConfig({
     },
     optimizeDeps: {
       esbuildOptions: {
+        define: {
+          global: 'window',
+        },
         // Enable esbuild polyfill plugins
         plugins: [
           NodeGlobalsPolyfillPlugin({
