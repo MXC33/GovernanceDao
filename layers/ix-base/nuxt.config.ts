@@ -24,7 +24,8 @@ export default defineNuxtConfig({
     'vue3-carousel',
     '@walletconnect/modal',
     '@walletconnect/ethereum-provider',
-    '@coinbase/wallet-sdk'
+    '@coinbase/wallet-sdk',
+    'buffer'
   ],
 
   css: [
