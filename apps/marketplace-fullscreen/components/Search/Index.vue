@@ -3,7 +3,7 @@ VList(@keydown.down.stop.prevent="stepDown" @keydown.escape.stop.prevent="close"
   HList(w="full" px="4 md:3" h="full")
     SearchIcon(w="6" fill="gray-400")
 
-    input(type="text" v-model="searchTerm" :placeholder="placeholder ?? 'Search'" ref="searchElement" bg="gray-900 md:ix-black" @click.stop="isOpen = true" outline="none" p="0 md:3" px="2" w="full" size="3" @input="onChangeSearch")
+    input(type="text" text="lt-md:base" v-model="searchTerm" :placeholder="placeholder ?? 'Search'" ref="searchElement" bg="gray-900 md:ix-black" @click.stop="isOpen = true" outline="none" p="0 md:3" px="2" w="full" size="3" @input="onChangeSearch")
 
   Transition(name="fade")
     SearchListContainer(v-if="isOpen" ref="scrollElement" w="full")

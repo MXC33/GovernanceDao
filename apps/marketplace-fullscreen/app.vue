@@ -25,10 +25,11 @@
 </template>
 
 <script setup lang="ts">
-// import 'vue3-easy-data-table/dist/style.css';
-
 useHead({
-  title: "Marketplace | PlanetIX"
+  title: "Marketplace | PlanetIX",
+  script: [
+    { src: '/global.js' },
+  ]
 })
 
 const globalY = useGlobalWindowScroll()

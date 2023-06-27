@@ -30,7 +30,9 @@
     "@vueuse/nuxt": "^10.1.2",
     "@vueuse/router": "^10.1.2",
     "@vueuse/sound": "^2.0.1",
-    "@walletconnect/ethereum-provider": "^2.7.2",
+    "@walletconnect/ethereum-provider": "^2.8.3",
+    "@walletconnect/modal": "^2.5.4",
+    "buffer": "^6.0.3",
     "case-it": "^1.0.1",
     "coinbase": "^2.0.8",
     "date-fns": "^2.30.0",
@@ -45,6 +47,7 @@
     "unocss": "^0.53.1",
     "unocss-preset-scrollbar": "^0.2.1",
     "uuid": "^9.0.0",
+    "vite-plugin-node-polyfills": "^0.9.0",
     "vite-svg-loader": "^4.0.0",
     "vue3-carousel": "^0.3.1",
     "web3-token": "^1.0.6"
