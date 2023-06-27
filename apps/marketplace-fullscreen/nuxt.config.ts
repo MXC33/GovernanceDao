@@ -98,9 +98,6 @@ export default defineNuxtConfig({
     },
     optimizeDeps: {
       esbuildOptions: {
-        define: {
-          global: 'globalThis',
-        },
         // Enable esbuild polyfill plugins
         plugins: [
           NodeGlobalsPolyfillPlugin({

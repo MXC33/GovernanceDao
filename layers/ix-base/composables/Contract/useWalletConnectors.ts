@@ -92,8 +92,6 @@ const createWalletConnectProvider = async () => {
   const { chainIds } = useChainInfo()
   const { displaySnack } = useSnackNotifications()
 
-  let provider
-
   try {
     const provider = await EthereumProvider.init({
       projectId: '861ef743dceed75deb813e6d390dc4a8',
@@ -102,11 +100,13 @@ const createWalletConnectProvider = async () => {
     })
 
     await provider.enable()
+
+    return provider
   } catch (error) {
     console.log("ERROR",)
-    return displaySnack('user-rejected')
+    displaySnack('user-rejected')
+    return false
   }
-  return provider
 }
 
 export type WalletConnector = 'injected' | 'walletconnect' | 'coinbase' | 'metamask' | 'defi'
