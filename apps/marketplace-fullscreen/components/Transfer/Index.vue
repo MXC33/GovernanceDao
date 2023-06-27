@@ -11,8 +11,8 @@ Popup(@close="$emit('close')")
 
       div(font="bold") {{ $t(`marketplace.transfer.transferTo`)  }}
 
-      HList(frame="~" p="2" outline="0")
-        input(bg="transparent"  placeholder="e.g 0x1a2..." v-model="transferItem.toWallet" w="full")
+      HList(frame="~" )
+        input(bg="transparent"  placeholder="e.g 0x1a2..." v-model="transferItem.toWallet" w="full" p="2" outline="0")
 
   template(#footer)
     HList(space-x="3" disable="on-invalid:active" :invalid="!isWalletValid")
