@@ -3,6 +3,7 @@ const { resolve } = createResolver(import.meta.url)
 import svgLoader from 'vite-svg-loader'
 import { NodeGlobalsPolyfillPlugin } from '@esbuild-plugins/node-globals-polyfill'
 import { NodeModulesPolyfillPlugin } from '@esbuild-plugins/node-modules-polyfill'
+import { nodePolyfills } from 'vite-plugin-node-polyfills'
 
 const API_DEV_ENDPOINT = 'https://mission-control-api-dev-s7ito.ondigitalocean.app'
 const API_PROD_ENDPOINT = 'https://api-mc.planetix.com'
@@ -88,19 +89,19 @@ export default defineNuxtConfig({
         propsDestructure: true
       }
     },
-    optimizeDeps: {
-      esbuildOptions: {
-        // Enable esbuild polyfill plugins
-        plugins: [
-          NodeGlobalsPolyfillPlugin({
-            process: true,
-            buffer: true,
-          }),
-          NodeModulesPolyfillPlugin()
-        ]
-      }
-    },
     plugins: [
+      nodePolyfills({
+        exclude: [
+          'fs', // Excludes the polyfill for `fs` and `node:fs`.
+        ],
+        globals: {
+          Buffer: true, // can also be 'build', 'dev', or false
+          global: true,
+          process: true,
+        },
+        // Whether to polyfill `node:` protocol imports.
+        protocolImports: true,
+      }),
       svgLoader({
         svgoConfig: {
           multipass: true,

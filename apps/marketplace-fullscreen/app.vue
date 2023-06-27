@@ -25,12 +25,6 @@
 </template>
 
 <script setup lang="ts">
-import { Buffer } from 'buffer/'
-if (process.client) {
-  //@ts-ignore
-  window.Buffer = Buffer
-}
-
 useHead({
   title: "Marketplace | PlanetIX",
   script: [

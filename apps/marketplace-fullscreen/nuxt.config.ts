@@ -3,6 +3,8 @@
 
 import { NodeGlobalsPolyfillPlugin } from '@esbuild-plugins/node-globals-polyfill'
 import { NodeModulesPolyfillPlugin } from '@esbuild-plugins/node-modules-polyfill'
+import { nodePolyfills } from 'vite-plugin-node-polyfills'
+import svgLoader from 'vite-svg-loader'
 
 export default defineNuxtConfig({
   extends: [
@@ -96,21 +98,28 @@ export default defineNuxtConfig({
         propsDestructure: true
       }
     },
-    optimizeDeps: {
-      esbuildOptions: {
-        define: {
-          global: 'window',
+    plugins: [
+      nodePolyfills({
+        exclude: [
+          'fs', // Excludes the polyfill for `fs` and `node:fs`.
+        ],
+        globals: {
+          Buffer: true, // can also be 'build', 'dev', or false
+          global: true,
+          process: true,
         },
-        // Enable esbuild polyfill plugins
-        plugins: [
-          NodeGlobalsPolyfillPlugin({
-            process: true,
-            buffer: true,
-          }),
-          NodeModulesPolyfillPlugin()
-        ]
-      }
-    },
+        // Whether to polyfill `node:` protocol imports.
+        protocolImports: true,
+      }),
+      svgLoader({
+        svgoConfig: {
+          multipass: true,
+          plugins: [
+            'removeDimensions',
+          ]
+        },
+      })
+    ],
     server: {
       hmr: {
         port: 8001,
