@@ -1,5 +1,5 @@
 <template lang="pug">
-HList(uppercase="~" font="bold" text="white" frame="~ hover:gray-300" flex-shrink="0 md:0" w="24")
+HList(uppercase="~" font="bold" text="white" frame="~ hover:gray-300" flex-shrink="0 md:0" min-w="24")
   CollectionFilterToggleDisplayButton(:active="displayType == 'grid'" @click="displayType = 'grid'")
     GridIcon(w="5 md:6")
 
