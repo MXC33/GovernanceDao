@@ -1,5 +1,5 @@
 <template lang="pug">
-FoldList(from="col" b="1 on-active:mc-mint white opacity-20" cursor="pointer" justify="center" items="center" :active="isActive" cut="bottom-right lg on-active:b-mc-mint b-white b-opacity-20 on-invalid:b-mc-orange" color="" aspect="4/5" w="50%" bg="on-active:(black opacity-20) on-video:black" :video="displayVideo" :invalid="isInvalid")
+FoldList(from="col" b="1 on-active:mc-mint white opacity-20" cursor="pointer" justify="center" items="center" :active="isActive" cut="bottom-right s-lg on-active:b-mc-mint b-white b-opacity-20 on-invalid:b-mc-orange" color="" aspect="4/5" w="50%" bg="on-active:(black opacity-20) on-video:black" :video="displayVideo" :invalid="isInvalid")
 
   div(aspect="square" w="full" p="4 md:8")
     div(pos="relative" w="full" h="full")
@@ -7,7 +7,7 @@ FoldList(from="col" b="1 on-active:mc-mint white opacity-20" cursor="pointer" ju
       TokenImage(:token="token" v-else w="full" h="full"  pos="absolute" inset="0" :is-large="true")
 
   VList(justify="center" items="center" w="full" flex-grow="1" font="bold" color="on-invalid:mc-orange white on-active:mc-mint" :invalid="isInvalid" :active="isActive" text="center")
-    slot 
+    slot
 
 </template>
 
