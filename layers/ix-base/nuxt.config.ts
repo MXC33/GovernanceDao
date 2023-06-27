@@ -1,8 +1,6 @@
 import { createResolver } from '@nuxt/kit'
 const { resolve } = createResolver(import.meta.url)
 import svgLoader from 'vite-svg-loader'
-import { NodeGlobalsPolyfillPlugin } from '@esbuild-plugins/node-globals-polyfill'
-import { NodeModulesPolyfillPlugin } from '@esbuild-plugins/node-modules-polyfill'
 import { nodePolyfills } from 'vite-plugin-node-polyfills'
 
 const API_DEV_ENDPOINT = 'https://mission-control-api-dev-s7ito.ondigitalocean.app'
