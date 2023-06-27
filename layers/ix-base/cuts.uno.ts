@@ -95,7 +95,6 @@ const Positions = ['top-left', 'top-right', 'bottom-left', 'bottom-right', 'top-
 type Position = typeof Positions[number]
 
 const getCutDepth = (size: Size) => {
-  console.log("SIZE", size)
   const px = SizePxMap[size]
   const pixSize = h.bracket.global.px(px)
 
@@ -153,7 +152,6 @@ export const cutRules: Rule<Theme>[] = [
 
     const defaultSelector = constructCSS({})
     const selectors = defaultSelector.split("{")
-    console.log("SELECTOR", selectors, rawSelector, defaultSelector)
 
     const mediaParameterIndex = selectors.findIndex((item) => item.includes("@media"))
     let mediaSelector = ""
