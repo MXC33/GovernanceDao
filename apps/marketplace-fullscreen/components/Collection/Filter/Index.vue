@@ -1,6 +1,6 @@
 <template lang="pug">
 HList(pos="sticky top-34" z="8" b="on-scrolling:t-1 gray-600" ml="-4 md:(-8)" mr="-4 md:(-8)" :scrolling="isScrolling")
-  HList(w="full" py="3" space-x="3" bg="ix-black" px="4 md:8")
+  HList(w="full" py="3" space-x="3 md:3" bg="ix-black" px="4 md:8" justify="lt-md:between")
 
     CollectionFilterToggleFilter(@toggle="$emit('toggleFilter')" :data="data")
 
