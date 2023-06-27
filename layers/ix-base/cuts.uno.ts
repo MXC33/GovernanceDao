@@ -85,10 +85,10 @@ const Sizes = ['xs', 'sm', 'md', 'lg'] as const
 type Size = typeof Sizes[number]
 
 const SizePxMap: Record<Size, string> = {
-  xs: '4',
-  sm: '8',
-  md: '12',
-  lg: '24'
+  'xs': '4',
+  'sm': '8',
+  'md': '12',
+  'lg': '24'
 }
 
 const Positions = ['top-left', 'top-right', 'bottom-left', 'bottom-right', 'top-left-bottom-right'] as const
@@ -112,10 +112,9 @@ const getCut = (position: Position, size: Size = 'md') => {
 
   return {
     ...depth,
-    'clip-path': 'polygon(var(--cut-path))',
     '--cut-opacity': 1,
     '--cut-path': path,
-    "--cut-top-right-bottom-left": '0 0, calc(100% - var(--cut-depth)) 0, 100% var(--cut-depth), 100% 100%, var(--cut-depth) 100%, 0 calc(100% - var(--cut-depth));',
+    '--cut-top-right-bottom-left': '0 0, calc(100% - var(--cut-depth)) 0, 100% var(--cut-depth), 100% 100%, var(--cut-depth) 100%, 0 calc(100% - var(--cut-depth));',
     '--cut-top-left-bottom-right': '0 var(--cut-depth), var(--cut-depth) 0, 100% 0, 100% calc(100% - var(--cut-depth)), calc(100% - var(--cut-depth)) 100%, 0 100%;',
     '--cut-top-left': '0 var(--cut-depth), var(--cut-depth) 0, 100% 0, 100% 100%, 0 100%;',
     '--cut-top-right': '0 0, calc(100% - var(--cut-depth)) 0, 100% var(--cut-depth), 100% 100%, 0 100%;',
@@ -127,17 +126,16 @@ const getCut = (position: Position, size: Size = 'md') => {
 
 export const cutRules: Rule<Theme>[] = [
   ...Positions.map(p => [`cut-${p}`, getCut(p)] as Rule<Theme>),
-  ...Sizes.map(s => [`cut-${s}`, getCutDepth(s)] as Rule<Theme>),
+  ...Sizes.map(s => [`cut-s-${s}`, getCutDepth(s)] as Rule<Theme>),
 
   [/^cut-opacity-(.+)$/, ([, op]) => {
     return {
       '--cut-opacity': Number(op) / 100,
     }
   }],
-  [/^cut-b-(.+)$/, (arr, { theme, constructCSS, variantMatch, variantHandlers, rawSelector }: RuleContext<Theme>) => {
-    const [mode, body] = arr
+  [/^cut-b-(.+)$/, (arr, { theme, constructCSS, rawSelector }: RuleContext<Theme>) => {
+    const [_, body] = arr
 
-    const selector = e(rawSelector)
     if (!body)
       return
 
@@ -153,15 +151,29 @@ export const cutRules: Rule<Theme>[] = [
     const colorString = colorToString(cssColor, 'var(--cut-opacity)')
 
     const defaultSelector = constructCSS({})
-    const attributedSelector = defaultSelector.split("{")[0]
+    const selectors = defaultSelector.split("{")
+
+    const mediaParameterIndex = selectors.findIndex((item) => item.includes("@media"))
+    let mediaSelector = ""
+
+    if (mediaParameterIndex == 0 && selectors.length >= 3) {
+      const selector = selectors.shift()
+      if (selector)
+        mediaSelector = selector + " {"
+    }
+    const mediaEndBracket = mediaSelector == "" ? "" : "}"
+
+    const attributedSelector = selectors.shift()
 
     return `
-      .is-not-paint-supported ${attributedSelector} {
-        border: 1px solid ${colorString};
-      }
-    
+      ${mediaSelector}
+        .is-not-paint-supported ${attributedSelector} {
+          border: 1px solid ${colorString} !important;
+        }
+
       .is-paint-supported ${attributedSelector} {
         --cut-border: 1px;
+        clip-path: polygon(var(--cut-path));
         position: relative;
       }
 
@@ -175,6 +187,7 @@ export const cutRules: Rule<Theme>[] = [
         transition: background 150ms;
         background: ${colorString};
       }
+      ${mediaEndBracket}
     `
   }],
 ]
