@@ -45,6 +45,13 @@ export const useChainInfo = () => {
     mumbai: "https://polygon-mumbai-bor.publicnode.com"
   }
 
+  const caipChains: Record<Chain, string> = {
+    ethereum: 'eip155:1',
+    goerli: 'eip155:5',
+    polygon: 'eip155:137',
+    mumbai: 'eip155:80001',
+  }
+
   const chainIdsRPCmap: Record<number, string> = Object.keys(rpcs).reduce((obj, chain) => {
     const id = chainIds[chain as Chain]
     obj[id] = rpcs[chain as Chain]
@@ -61,6 +68,7 @@ export const useChainInfo = () => {
 
   return {
     getChainInfo,
+    caipChains,
     chainIdsRPCmap,
     chainIds,
     rpcs

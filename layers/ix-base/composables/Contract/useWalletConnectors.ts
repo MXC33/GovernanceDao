@@ -103,6 +103,7 @@ const createWalletConnectProvider = async () => {
 
     await provider.enable()
   } catch (error) {
+    console.log("ERROR",)
     return displaySnack('user-rejected')
   }
   return provider

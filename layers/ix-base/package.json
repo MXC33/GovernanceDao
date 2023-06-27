@@ -31,6 +31,7 @@
     "@vueuse/router": "^10.1.2",
     "@vueuse/sound": "^2.0.1",
     "@walletconnect/ethereum-provider": "^2.8.3",
+    "@walletconnect/modal": "^2.5.4",
     "buffer": "^6.0.3",
     "case-it": "^1.0.1",
     "coinbase": "^2.0.8",

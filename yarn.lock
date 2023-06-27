@@ -2732,6 +2732,7 @@ __metadata:
     "@vueuse/router": ^10.1.2
     "@vueuse/sound": ^2.0.1
     "@walletconnect/ethereum-provider": ^2.8.3
+    "@walletconnect/modal": ^2.5.4
     buffer: ^6.0.3
     case-it: ^1.0.1
     coinbase: ^2.0.8
@@ -3095,7 +3096,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@motionone/svelte@npm:^10.15.5":
+"@motionone/svelte@npm:^10.15.5, @motionone/svelte@npm:^10.16.2":
   version: 10.16.2
   resolution: "@motionone/svelte@npm:10.16.2"
   dependencies:
@@ -3123,7 +3124,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@motionone/vue@npm:^10.15.5":
+"@motionone/vue@npm:^10.15.5, @motionone/vue@npm:^10.16.2":
   version: 10.16.2
   resolution: "@motionone/vue@npm:10.16.2"
   dependencies:
@@ -5342,6 +5343,38 @@ __metadata:
     pino: 7.11.0
     tslib: 1.14.1
   checksum: b686679d176d5d22a3441d93e71be2652e6c447682a6d6f014baf7c2d9dcd23b93e2f434d4410e33cc532d068333f6b3c1d899aeb0d6f60cc296ed17f57b0c2c
+  languageName: node
+  linkType: hard
+
+"@walletconnect/modal-core@npm:2.5.4":
+  version: 2.5.4
+  resolution: "@walletconnect/modal-core@npm:2.5.4"
+  dependencies:
+    buffer: 6.0.3
+    valtio: 1.10.6
+  checksum: 660a507a7a66812be7020b35fbe72e5052739df696424d59e0db55544dcbaf915e108c29c90578dcd82e7beeacd4891ed835e80bb9b16d2aed475fab3be1599c
+  languageName: node
+  linkType: hard
+
+"@walletconnect/modal-ui@npm:2.5.4":
+  version: 2.5.4
+  resolution: "@walletconnect/modal-ui@npm:2.5.4"
+  dependencies:
+    "@walletconnect/modal-core": 2.5.4
+    lit: 2.7.5
+    motion: 10.16.2
+    qrcode: 1.5.3
+  checksum: 40034612895ed7bc7f18e2972b0f3c681f75c59636eb88771387795d4c5e5f301bfbc7e59153d3084dd1606b70943d7885b52a54e22ce780a00696b0761f02de
+  languageName: node
+  linkType: hard
+
+"@walletconnect/modal@npm:^2.5.4":
+  version: 2.5.4
+  resolution: "@walletconnect/modal@npm:2.5.4"
+  dependencies:
+    "@walletconnect/modal-core": 2.5.4
+    "@walletconnect/modal-ui": 2.5.4
+  checksum: 4bf0974d635ae41df665ae31ed2812c16703b605715e1b61f48c9faf8b66eab589767ff9b6e33016a60b62b1dae05948593d69abe9024b5b68dd66eec170017d
   languageName: node
   linkType: hard
 
@@ -10934,6 +10967,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"lit@npm:2.7.5":
+  version: 2.7.5
+  resolution: "lit@npm:2.7.5"
+  dependencies:
+    "@lit/reactive-element": ^1.6.0
+    lit-element: ^3.3.0
+    lit-html: ^2.7.0
+  checksum: 61a3f87c57136618f47a30b36cdfb592fcba42dcfbdb104d2b5ca291148c2d9a32fcb713bb91090bd08d6897a00e73f8425da6e3626aa080eaf410a32397ae69
+  languageName: node
+  linkType: hard
+
 "local-pkg@npm:^0.4.3":
   version: 0.4.3
   resolution: "local-pkg@npm:0.4.3"
@@ -11627,6 +11671,20 @@ __metadata:
     "@motionone/utils": ^10.15.1
     "@motionone/vue": ^10.15.5
   checksum: 43e7883d95da6e4949b2e5ca01732bce28214f4978bf940511a3fbd8e00943ab7c00fcb28f3f1ce1ed099a404016f784243330be161c4805958deaf60d1b0571
+  languageName: node
+  linkType: hard
+
+"motion@npm:10.16.2":
+  version: 10.16.2
+  resolution: "motion@npm:10.16.2"
+  dependencies:
+    "@motionone/animation": ^10.15.1
+    "@motionone/dom": ^10.16.2
+    "@motionone/svelte": ^10.16.2
+    "@motionone/types": ^10.15.1
+    "@motionone/utils": ^10.15.1
+    "@motionone/vue": ^10.16.2
+  checksum: 0b91256808c2374d8b7f4ac5e7ed513f2ca8df2b7d1be4fbc00ec5baece5162ada648aedaa5bc1d60be9ad2e6c9bc1d3bb160333051c20ab79e241b8e02e3c92
   languageName: node
   linkType: hard
 
@@ -15815,6 +15873,21 @@ __metadata:
     react:
       optional: true
   checksum: a01d7cca44b3ff60213aa40470c42083f7522d8e2c2f2d9f696b0aa3eec4c3dba7393831d5ff47db1ad025904860d2788ce4d9654963ff3555481deb25376851
+  languageName: node
+  linkType: hard
+
+"valtio@npm:1.10.6":
+  version: 1.10.6
+  resolution: "valtio@npm:1.10.6"
+  dependencies:
+    proxy-compare: 2.5.1
+    use-sync-external-store: 1.2.0
+  peerDependencies:
+    react: ">=16.8"
+  peerDependenciesMeta:
+    react:
+      optional: true
+  checksum: 0e738aa204c479c8f8c89c0a7478d6784c28ddd712be529fdc5c421d3ec28157fec2fb022a75cd4f45b8c4b470fbc64a27032adba6ed9936bdad989256222adf
   languageName: node
   linkType: hard
 
