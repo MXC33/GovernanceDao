@@ -18,30 +18,19 @@
         template(#header) {{ $t(`marketplace.navigation.buy.swap.title`)}}
         template(#default)
           VList(w="full" justify="center" items="center" )
-            //- iframe(src="https://ix.foundation/lefi" w="full" h="full" min-h="118")
-            //- LiFiWidget(:config="widgetConfig" integrator="Planet IX")
+            iframe(src="https://ix.foundation/lefi" w="full" h="full" min-h="118")
 
 
 
 </template>
 
 <script setup lang="ts">
-// import { LiFiWidget, WidgetConfig } from '@lifi/widget'
-
 useHead({
   title: "Marketplace | PlanetIX",
   script: [
     { src: '/global.js' },
   ]
 })
-
-// const widgetConfig: WidgetConfig = {
-//   containerStyle: {
-//     border: '1px solid rgb(234, 234, 234)',
-//     borderRadius: '16px',
-//   },
-//   integrator: 'Planet IX'
-// };
 
 const globalY = useGlobalWindowScroll()
 const router = useRouter()

@@ -28,7 +28,6 @@
     "apps/*"
   ],
   "devDependencies": {
-    "@lifi/widget": "^2.1.1",
     "concurrently": "^8.2.0"
   },
   "dependencies": {
