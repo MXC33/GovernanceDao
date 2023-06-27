@@ -13,10 +13,10 @@ VList(pos="sticky top-0" z="99" w="full" @mouseenter="isSelected = true" @mousel
       HeaderAccountButton()
 
 
-    button(btn="menu" w="8" display="lg:none" @click="toggleMenu" ml="2")
-      Transition(name="fade" mode="out-in")
-        SettingsIcon(v-if="activeMenuIndex == null")
-        CrossIcon(v-else)
+      button(btn="menu" w="8" display="lg:none" @click="toggleMenu" ml="2")
+        Transition(name="fade" mode="out-in")
+          SettingsIcon(v-if="activeMenuIndex == null")
+          CrossIcon(v-else)
 
   Transition(name="slide-top" mode="out-in")
     HeaderDesktop(v-if="activeMenuIndex != null" :key="activeMenuIndex" :header="siteTopHeaders[activeMenuIndex]" display="lt-lg:none" @onClickItem="")
