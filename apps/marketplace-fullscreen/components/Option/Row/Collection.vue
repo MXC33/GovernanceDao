@@ -2,7 +2,7 @@
 OptionRow()
   NuxtLink(:to="'/assets/polygon/' + item.contract" flex="~ row" items="center" w="full")
     span(w="8" h="8" mr="3")
-      img(src="~/assets/testfiles/test-collection-bg.png" )
+      img(src="~/assets/images/collection/general.png")
 
     span(flex-grow="1" font="lt-md:bold") {{ useCollectionName(item.contract) }}
     span(color="gray-200" font="normal") {{ item.nft_count }}

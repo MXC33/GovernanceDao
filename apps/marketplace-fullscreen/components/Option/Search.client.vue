@@ -1,19 +1,18 @@
 <template lang="pug">
-VList(flex-grow="md:1" w="md:full")
-  Search(:options="autocompleteResults"  @selected="selectedSearch"  @input="updateSearchString" display="lt-md:none" :has-frame="true")
-    template(#item="{item}") {{ item }}
+Search(:options="autocompleteResults"  @selected="selectedSearch"  @input="updateSearchString" display="lt-md:none" :has-frame="true")
+  template(#item="{item}") {{ item }}
 
-  ButtonSquareIcon(display="md:none" @click="toggleTakeOver" w="10 on-lg:18" :lg="large")
-    span(w="6" :lg="large")
-      slot(name="icon")
+ButtonFrame(display="md:none" @click="toggleTakeOver")
+  span(w="6" :lg="large")
+    slot(name="icon")
 
-    Teleport(to="#takeover")
-      Transition(name="slide-bottom")
-        OptionPanel(@close="showTakeOver = false" v-if="showTakeOver" :is-search="true")
+  Teleport(to="#takeover")
+    Transition(name="slide-bottom")
+      OptionPanel(@close="showTakeOver = false" v-if="showTakeOver" :is-search="true")
 
-          template(#search)
-            Search(:options="autocompleteResults" @selected="selectedSearch" @input="updateSearchString" display="md:none" w="full" :has-frame="false")
-              template(#item="{item}") {{ item }}
+        template(#search)
+          Search(:options="autocompleteResults" @selected="selectedSearch" @input="updateSearchString" display="md:none" w="full" :has-frame="false")
+            template(#item="{item}") {{ item }}
 
 </template>
 
