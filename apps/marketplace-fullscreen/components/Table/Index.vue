@@ -22,9 +22,10 @@ VList(w="full")
 import type { TableColumn, TableRow } from '~/composables/useTable';
 
 const selectedItems = defineModel<number[]>()
-const isMobile = onMobile()
 
 const { getColumnKey } = useTable()
+
+const { isMobile } = useDevice()
 
 const { selectable, columns, isOpen, loading, rows, id, colWidth } = defineProps<{
   columns: TableColumn<Row>[],

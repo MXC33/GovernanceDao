@@ -28,7 +28,7 @@ VList(gap="6")
 <script lang="ts" setup>
 import type { SingleItemData } from '@ix/base/composables/Token/useIXToken';
 
-const isMobile = onMobile()
+const { isMobile } = useDevice()
 
 const { item } = defineProps<{
   item: SingleItemData

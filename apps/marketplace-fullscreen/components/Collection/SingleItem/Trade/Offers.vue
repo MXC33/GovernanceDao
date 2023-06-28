@@ -23,7 +23,7 @@ const { t } = useI18n()
 const { displayPopup } = usePopups()
 const { walletAdress } = useWallet()
 
-const isMobile = onMobile()
+const { isMobile } = useDevice()
 
 const { item } = defineProps<{
   item: SingleItemData
