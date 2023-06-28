@@ -1,6 +1,6 @@
 <template lang="pug">
 VList(pos="sticky top-0" z="99" w="full" @mouseenter="isSelected = true" @mouseleave="isSelected = false" ref="menuElement")
-  HList(items="center" justify="between" bg="ix-black" px="4 md:7.5" h="16" space-x="6")
+  HList(items="center" justify="between" bg="ix-black" px="4 md:7.5" h="12 md:16" space-x="6")
     NuxtLink(to="https://www.planetix.com")
       PlanetIXNew(w="42.25")
 
@@ -13,10 +13,10 @@ VList(pos="sticky top-0" z="99" w="full" @mouseenter="isSelected = true" @mousel
       HeaderAccountButton()
 
 
-      button(btn="menu" w="8" display="lg:none" @click="toggleMenu" ml="2")
+      button(btn="menu" display="lg:none" @click="toggleMenu" ml="2")
         Transition(name="fade" mode="out-in")
-          SettingsIcon(v-if="activeMenuIndex == null")
-          CrossIcon(v-else)
+          SettingsIcon(v-if="activeMenuIndex == null" w="6" )
+          CrossIcon(v-else w="6" )
 
   Transition(name="slide-top" mode="out-in")
     HeaderDesktop(v-if="activeMenuIndex != null" :key="activeMenuIndex" :header="siteTopHeaders[activeMenuIndex]" display="lt-lg:none" @onClickItem="")

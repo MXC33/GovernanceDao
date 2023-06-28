@@ -53,6 +53,10 @@ export default defineNuxtConfig({
     ]
   },
 
+  device: {
+    refreshOnResize: true
+  },
+
   unocss: {
     configFile: resolve('./unocss.config.ts'),
   },
