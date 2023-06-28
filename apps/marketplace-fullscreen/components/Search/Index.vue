@@ -1,5 +1,5 @@
 <template lang="pug">
-VList(@keydown.down.stop.prevent="stepDown" @keydown.escape.stop.prevent="close" @keydown.up.stop.prevent="stepUp" @keypress.enter.stop.prevent="selectFocused" @keypress="onKeyDown" pos="relative" ref="element" flex-grow="1" :class="frameClass")
+VList(@keydown.down.stop.prevent="stepDown" @keydown.escape.stop.prevent="close" @keydown.up.stop.prevent="stepUp" @keypress.enter.stop.prevent="selectFocused" @keypress="onKeyDown" pos="relative" ref="element" flex-grow="1" frame="~ gray-400 hover:gray-300 on-frameless:none" :frameless="!hasFrame")
   HList(w="full" px="4 md:3" h="full")
     SearchIcon(w="6" fill="gray-400")
 
@@ -121,3 +121,9 @@ onMounted(() => {
 })
 
 </script>
+
+<style>
+/* .frame-hover:hover {
+  background-color: red;
+} */
+</style>

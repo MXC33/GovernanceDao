@@ -11,23 +11,6 @@ const sizeMap: Record<string, string> = {
 }
 
 export const frameRules: Rule[] = [
-  [/^frame-none$/, ([], { rawSelector }) => {
-    const selector = e(rawSelector)
-    return `
-      ${selector} {
-        border: 0px solid var(--un-frame-color);
-        position: relative;
-      }
-    `
-  }],
-  [/^frame-disable$/, ([], { rawSelector }) => {
-    const selector = e(rawSelector)
-    return `
-      ${selector} {
-        border: 0px !important;
-      }
-    `
-  }],
   [/^frame(?:-(.+))?$/, ([, d], { rawSelector }) => {
     const selector = e(rawSelector)
     const px = sizeMap['md']
@@ -67,6 +50,12 @@ export const frameRules: Rule[] = [
   }],
 
   [/^frame-(.+)$/, colorResolver('--un-frame-color', 'frame-color'), { autocomplete: 'frame-$colors' }],
+
+  [/^frame-none$/, ([]) => {
+    return {
+      '--un-frame-color': 'transparent'
+    }
+  }],
 
   [/^frame-(xs|sm|md|lg)$/, ([, size]) => {
     const px = sizeMap[size] ?? sizeMap['md']
