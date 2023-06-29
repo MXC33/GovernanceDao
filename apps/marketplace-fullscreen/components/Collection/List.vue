@@ -73,10 +73,7 @@ const grid = useGrid(extendGrid('tailwind', {
   sm: 350
 }))
 
-const screen = useScreen()
-console.log(screen, 'screen')
-console.log(grid.breakpoint, '- breakpoint')
-
+// const screen = useScreen()
 
 const gridClass = computed(() => {
   if (showFilters && grid.breakpoint == '2xl') {
