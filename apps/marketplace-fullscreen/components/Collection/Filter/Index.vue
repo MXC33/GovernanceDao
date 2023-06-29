@@ -24,7 +24,7 @@ const showMobileFilter = ref(false)
 const onOpenFilter = () => {
   const isMobile = onMobile()
 
-  if (!isMobile.value)
+  if (isMobile.value)
     showMobileFilter.value = !showMobileFilter.value
   else
     emit('toggleFilter')

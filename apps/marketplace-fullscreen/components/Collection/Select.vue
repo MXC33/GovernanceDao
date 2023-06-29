@@ -1,5 +1,5 @@
 <template lang="pug">
-OptionSelect(:items="collections")
+OptionSelect(:items="collections" :is-banner="true")
   template(#header) 
     CollectionIcon(w="6" translate-y="-0.4" display="md:none")
     span() {{ $t(`collection.explore`) }}

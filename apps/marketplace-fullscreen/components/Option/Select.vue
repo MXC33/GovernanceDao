@@ -1,5 +1,5 @@
 <template lang="pug">
-ButtonFrame(display="md:none" @click="toggleTakeOver")
+ButtonFrame(display="md:none" @click="toggleTakeOver" :isBanner="isBanner")
   span(w="6" :lg="large")
     slot(name="icon")
 
@@ -40,6 +40,7 @@ const toggleTakeOver = () => {
 defineProps<{
   items?: T[] | undefined | null,
   large?: boolean
+  isBanner?: boolean
 }>()
 
 </script>

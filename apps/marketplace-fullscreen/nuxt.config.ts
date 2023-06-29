@@ -44,7 +44,7 @@ export default defineNuxtConfig({
   },
 
   modules: [
-    'v-lazy-show/nuxt'
+    'v-lazy-show/nuxt',
   ],
 
   imports: {
