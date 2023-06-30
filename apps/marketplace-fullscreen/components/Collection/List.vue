@@ -3,8 +3,7 @@ Transition(name="fade" mode="out-in")
   CollectionGrid(v-if="displayType == 'grid' && !hideGrid" w="full" :is-open="showFilters")
     template(v-if="!loading")
       template(v-for="token in sortedRows")
-        CollectionGridItem(v-if="isTokenIncluded(token.token_id, token.collection)" :token="token" :context="context")
-        CollectionGridItem(v-else-if="token.collection !== planetIXAddress" :token="token" b="gray-400" :context="context")
+        CollectionGridItem(:token="token" :context="context")
 
     template(v-else)
       CollectionGridItemSkeleton(v-for="item in items.length > ghostRows.length ? items : ghostRows")
@@ -57,14 +56,6 @@ watch(() => columns, () => setupSortOptions(columns), { immediate: true })
 const onClickItem = (row: IXToken) => {
   const { network, collection, token_id } = row
   navigateTo(`/assets/${network}/${collection}/${token_id}`)
-}
-
-const planetIXAddress = '0xba6666b118f8303f990f3519df07e160227cce87'
-
-const isTokenIncluded = (tokenId: number, tokenCollection: string) => {
-  const excludedTokenIds = [9698762, 26, 29, 34]
-  const targetCollectionAddress = '0xba6666b118f8303f990f3519df07e160227cce87'
-  return !excludedTokenIds.includes(tokenId) && tokenCollection === targetCollectionAddress
 }
 
 </script>

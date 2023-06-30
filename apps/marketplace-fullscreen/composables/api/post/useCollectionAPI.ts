@@ -56,11 +56,22 @@ export const useCollectionData = (url: string, options: CollectionOptions = {}) 
     }
   }))
 
+  const isTokenIncluded = (tokenId: number, tokenCollection: string) => {
+    const excludedTokenIds = [9698762, 26, 29, 34]
+    const targetCollectionAddress = '0xba6666b118f8303f990f3519df07e160227cce87'
+
+    if (tokenCollection === targetCollectionAddress)
+      return !excludedTokenIds.includes(tokenId)
+
+    return true
+  }
+
   const key = 'collection-' + url.replaceAll('/', '-') + body.value.page_key + options.filter?.type ?? ''
 
   const asyncState = useAsyncDataState(key, () =>
     fetchIXAPI(url, 'POST', body.value) as Promise<CollectionResponse>, {
     transform: (item) => {
+      item.data.nfts = item.data.nfts.filter(nft => isTokenIncluded(nft.token_id, nft.collection))
       return item.data as CollectionData
     },
     mergePages: (oldData, newData) => {
@@ -70,7 +81,6 @@ export const useCollectionData = (url: string, options: CollectionOptions = {}) 
       }
     }
   })
-
 
   const setupCollectionListeners = () => {
     const refreshCollection = () => {
