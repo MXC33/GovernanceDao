@@ -1,5 +1,5 @@
 <template lang="pug">
-VList(@keydown.down.stop.prevent="stepDown" @keydown.escape.stop.prevent="close" @keydown.up.stop.prevent="stepUp" @keypress.enter.stop.prevent="selectFocused" @keypress="onKeyDown" pos="relative" ref="element" flex-grow="1" h="10" frame="~ gray-400 hover:gray-300 md:none" justify="center")
+VList(@keydown.down.stop.prevent="stepDown" @keydown.escape.stop.prevent="close" @keydown.up.stop.prevent="stepUp" @keypress.enter.stop.prevent="selectFocused" @keypress="onKeyDown" pos="relative" ref="element" flex-grow="1" h="10" frame="~ gray-400 hover:gray-300 on-frameless:none" :frameless="!hasFrame" justify="center")
   HList(w="full" px="4 md:3" items="center")
     SearchIcon(w="6" fill="gray-400")
 
@@ -41,7 +41,8 @@ const scrollElement = shallowRef()
 
 const props = defineProps<{
   options: string[]
-  placeholder?: string,
+  placeholder?: string
+  hasFrame?: boolean
 }>()
 
 const onSelect = (option: string | null) => {
