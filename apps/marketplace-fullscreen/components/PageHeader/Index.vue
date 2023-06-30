@@ -5,7 +5,7 @@ VList(flex-grow="1" px="0 md:6" pos="relative")
 Transition(name="fade-slow")
   HList(w="full" items="center" justify="between" pos="sticky top-12 md:top-16" z="10" bg="on-locked:ix-black" space-x="3" p="x-4 y-2 md:(y-4 x-8)" translate-y="$header-offset" transition="all" :locked="isScrolling")
     NuxtLink(:to="'/'" w="full")
-      NetEmpireLogo(w="27 md:45" )
+      NetEmpireLogo(w="35 md:45" )
 
     HList(space-x="3 md:4" w="full" justify="end" items="center")
 
@@ -14,14 +14,12 @@ Transition(name="fade-slow")
 
       CollectionSelect()
 
-
       ButtonSquareIcon(@click="onClickAccount")
         UserIcon(w="6")
 
       ButtonSquareIcon(@click="viewingCart = true")
         CartIcon(w="6")
         CartCounter
-
 
 </template>
 
