@@ -16,8 +16,7 @@ VList(flex-grow="1" min-h="0" pos="relative" p="4 md:(8 b-30)" space-y="0 md:6")
 
   HList(space-x="0 on-open:3" pos="relative" :open="showFilters")
     VList(display="lt-md:none")
-      Transition(name="slide-left")
-        CollectionFilterSlideout(:items="data.filters" v-if="showFilters && data")
+      CollectionFilterSlideout(:items="data.filters" v-if="showFilters && data")
 
     CollectionList(v-if="data" :columns="renderColumns" :items="data?.nfts" :hide-grid="hideGrid", :context="context" :show-filters="showFilters" :loading="loading")
 

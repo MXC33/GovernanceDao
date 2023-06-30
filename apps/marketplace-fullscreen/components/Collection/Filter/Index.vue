@@ -1,6 +1,6 @@
 <template lang="pug">
-HList(pos="sticky top-24 md:top-34" z="8" b="on-scrolling:t-1 gray-600" ml="-4 md:(-8)"  mr="-4 md:(-8)" :scrolling="isScrolling")
-  div(w="full" py="3" gap="3" bg="ix-black" px="4 md:8" grid="lt-md:~ cols-3 on-toggle:cols-4" :toggle="!hideToggle" flex="md:~ row" items="stretch")
+HList(pos="sticky top-26 md:top-34" z="8" b="on-scrolling:t-1 gray-600" ml="-4 md:(-8)" mr="-4 md:(-8)" :scrolling="isScrolling")
+  div(w="full" py="2 md:3" bg="ix-black" gap="md:3" px="4 md:8" grid="lt-md:~ cols-3 on-toggle:cols-4" :toggle="!hideToggle" flex="md:~ row")
 
     CollectionFilterToggleFilter(@click="onOpenFilter")
 
@@ -19,16 +19,14 @@ import type { IXToken } from '@ix/base/composables/Token/useIXToken'
 import type { CollectionContext, CollectionData } from '~/composables/useCollection'
 
 const showMobileFilter = ref(false)
-
-
+const { isMobile } = useDevice()
 const onOpenFilter = () => {
-  const isMobile = onMobile()
-
   if (isMobile.value)
     showMobileFilter.value = !showMobileFilter.value
   else
     emit('toggleFilter')
 }
+
 defineProps<{
   data?: CollectionData
   items: IXToken[],
