@@ -1,10 +1,10 @@
 <template lang="pug">
-HList(uppercase="~" font="bold" text="white" frame="~ hover:gray-300" flex-shrink="0" min-w="24" min-h="12")
+HList(uppercase="~" font="bold" text="white" frame="~ hover:gray-300" flex-shrink="0" min-w="24" w="24" min-h="10")
   CollectionFilterToggleDisplayButton(:active="displayType == 'grid'" @click="displayType = 'grid'")
-    GridIcon(w="5 md:6")
+    GridIcon(w="6")
 
   CollectionFilterToggleDisplayButton(:active="displayType == 'list'" @click="displayType = 'list'")
-    ListIcon(w="5 md:6") 
+    ListIcon(w="6") 
 
 </template>
 

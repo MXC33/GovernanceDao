@@ -29,8 +29,6 @@ const { startOpen, noFrame = false, isMeta = false } = defineProps<{
 const isOpen = shallowRef(startOpen)
 const isMobile = shallowRef(false)
 
-
-
 const dropDrawer = () => {
   isOpen.value = !isOpen.value
 }

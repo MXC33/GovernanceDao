@@ -1,5 +1,5 @@
 <template lang="pug">
-Search(:options="autocompleteResults"  @selected="selectedSearch"  @input="updateSearchString" display="lt-md:none" :has-frame="true")
+Search(:options="autocompleteResults"  @selected="selectedSearch"  @input="updateSearchString" display="lt-md:none")
   template(#item="{item}") {{ item }}
 
 ButtonFrame(display="md:none" @click="toggleTakeOver")
@@ -11,7 +11,7 @@ ButtonFrame(display="md:none" @click="toggleTakeOver")
       OptionPanel(@close="showTakeOver = false" v-if="showTakeOver" :is-search="true")
 
         template(#search)
-          Search(:options="autocompleteResults" @selected="selectedSearch" @input="updateSearchString" display="md:none" w="full" :has-frame="false")
+          Search(:options="autocompleteResults" @selected="selectedSearch" @input="updateSearchString" display="md:none" w="full")
             template(#item="{item}") {{ item }}
 
 </template>
