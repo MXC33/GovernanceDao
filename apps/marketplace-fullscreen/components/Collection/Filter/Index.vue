@@ -1,5 +1,5 @@
 <template lang="pug">
-HList(pos="sticky top-26 md:top-34" z="8" b="on-scrolling:t-1 gray-600" ml="-4 md:(-8)" mr="-4 md:(-8)" :scrolling="isScrolling")
+HList(pos="sticky top-[calc(6.5rem+var(--header-offset))] md:top-34" z="8" b="on-scrolling:t-1 gray-600" ml="-4 md:(-8)" mr="-4 md:(-8)" :scrolling="isScrolling"  transition="all")
   div(w="full" py="2 md:3" bg="ix-black" gap="md:3" px="4 md:8" grid="lt-md:~ cols-3 on-toggle:cols-4" :toggle="!hideToggle" flex="md:~ row")
 
     CollectionFilterToggleFilter(@click="onOpenFilter")

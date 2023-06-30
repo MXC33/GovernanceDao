@@ -1,0 +1,8 @@
+:root {
+  --header-offset: 0rem;
+}
+@media (max-width: 767.9px) {
+  body.is-scrolling-down {
+    --header-offset: -3rem;
+  }
+}

@@ -2750,6 +2750,7 @@ __metadata:
     uuid: ^9.0.0
     vite-plugin-node-polyfills: ^0.9.0
     vite-svg-loader: ^4.0.0
+    vue-collapsed: ^1.1.3
     vue3-carousel: ^0.3.1
     web3-token: ^1.0.6
   languageName: unknown
@@ -2765,7 +2766,6 @@ __metadata:
     fuzzyjs: ^5.0.1
     nuxt: ^3.5.3
     v-lazy-show: ^0.2.3
-    vue-collapsed: ^1.1.3
     vue-router: 4
     vue3-easy-data-table: ^1.5.42
     vue3-table-lite: ^1.3.7

@@ -1,5 +1,5 @@
 <template lang="pug">
-VList(pos="sticky top-0" z="99" w="full" @mouseenter="isSelected = true" @mouseleave="isSelected = false" ref="menuElement")
+VList(pos="sticky top-0" translate-y="$header-offset" z="99" w="full" @mouseenter="isSelected = true" @mouseleave="isSelected = false" ref="menuElement" transition="all")
   HList(items="center" justify="between" bg="ix-black" px="4 md:7.5" h="12 md:16" space-x="6")
     NuxtLink(to="https://www.planetix.com")
       PlanetIXNew(w="42.25")
@@ -18,25 +18,43 @@ VList(pos="sticky top-0" z="99" w="full" @mouseenter="isSelected = true" @mousel
           SettingsIcon(v-if="activeMenuIndex == null" w="6" )
           CrossIcon(v-else w="6" )
 
-  Transition(name="slide-top" mode="out-in")
-    HeaderDesktop(v-if="activeMenuIndex != null" :key="activeMenuIndex" :header="siteTopHeaders[activeMenuIndex]" display="lt-lg:none" @onClickItem="")
+Transition(name="slide-top" mode="out-in")
+  HeaderDesktop(v-if="activeMenuIndex != null" :key="activeMenuIndex" :header="siteTopHeaders[activeMenuIndex]" display="lt-lg:none" @onClickItem="")
 
-  Transition(name="slide-top" )
-    HeaderMobile(v-if="activeMenuIndex != null" overflow-y="auto" display="lg:none" @close="toggleMenu")
+Transition(name="slide-top" )
+  HeaderMobile(v-if="activeMenuIndex != null" overflow-y="auto" display="lg:none" @close="toggleMenu")
 
 </template>
 
 <script lang="ts" setup>
 import CrossIcon from '~/assets/images/header/cross.svg'
-
 import PlanetIXNew from '~/assets/images/header/planetix-new.svg'
 import SettingsIcon from '~/assets/images/header/hamburger.svg'
-const { fetchIXT } = useIXTContract()
+import { useGlobalWindowScroll } from '@ix/marketplace/composables/useWindowScroll';
+
 const { siteTopHeaders } = useSiteHeader()
 const { state: swapVisible } = useIXTSwapVisible()
-const activeMenuIndex = ref<number | null>(null)
+
+const activeMenuIndex = shallowRef<number | null>(null)
+const isSelected = shallowRef(false)
+const menuElement = shallowRef()
 
 const route = useRoute()
+const scollingDown = shallowRef(false)
+
+const windowY = useGlobalWindowScroll()
+watch(windowY, (newValue, oldValue) =>
+  scollingDown.value = (newValue > oldValue)
+)
+
+watch(scollingDown, (active) => {
+  document.body.classList.toggle('is-scrolling-down', active)
+})
+
+watch([swapVisible, route], ([visible]) => {
+  if (visible)
+    closeMenu()
+})
 
 const selected = (index: number) => {
   if (activeMenuIndex.value == index) {
@@ -46,15 +64,7 @@ const selected = (index: number) => {
   return 'default'
 }
 
-const onClickItem = (type: string, catagory: string, item: string) => {
-  switch (item) {
-    case 'swap':
-      return swapVisible.value = true;
-  }
-}
-
 const openMenu = (index: number) => {
-
   if (activeMenuIndex.value == index)
     return activeMenuIndex.value = null
 
@@ -68,8 +78,6 @@ const toggleMenu = () => {
   closeMenu()
 }
 
-const isSelected = ref(false)
-const menuElement = ref()
 const closeMenu = () =>
   activeMenuIndex.value = null;
 
@@ -78,9 +86,5 @@ onClickOutside(menuElement, () => {
     closeMenu()
 })
 
-watch([swapVisible, route], ([visible]) => {
-  if (visible)
-    closeMenu()
-})
 
 </script>
