@@ -1,9 +1,9 @@
 <template lang="pug">
 VList(w="full")
   Transition(name="slide-left")
-    CollectionFilterButtonContainer(:is-open="isOpen")
+    CollectionFilterButtonContainer(:is-open="isOpen" pos="sticky top-42 md:(sticky top-52)" translate-y="$header-offset" z="99")
 
-  VList.no-scrollbar(max-w="full" w="full" overflow-x="auto" bg="gray-900")
+  VList.no-scrollbar(max-w="md:full" w="md:full" overflow-x="auto" bg="gray-900" mx="lt-md:-4")
     table.base-table(max-w="full")
       colgroup()
         col(v-if="selectable", :style="{width: '50px'}")

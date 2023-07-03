@@ -2,7 +2,7 @@
 VList()
   CollectionFilterButtonContainer(:is-open="isOpen" pos="sticky top-42 md:(sticky top-52)" translate-y="$header-offset" z="99")
 
-  div.grid(grid="~ cols-2 md:(cols-3 on-open:cols-1) xl:(cols-4 on-open:cols-3) 2xl:(cols-5 on-open:cols-4)" :open="isOpen" :state="gridState" w="full")
+  div.grid(grid="~ cols-2 md:(cols-3 on-open:cols-1) xl:(cols-4 on-open:cols-3) 2xl:(cols-5 on-open:cols-4)" mx="lt-md:-4" :open="isOpen" :state="gridState" w="md:full")
     slot
 
 </template>
