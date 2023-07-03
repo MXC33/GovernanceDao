@@ -2,7 +2,7 @@
 TableHeaderWrapper()
 
   TableCellHeadWrapper(v-if="selectable") 
-    InputCheckbox(:model-value="allSelected" @update:modelValue="onSelectAll")
+    InputCheckbox(:model-value="allSelected" @update:modelValue="onSelectAll" :is-table="true")
 
   template(v-for="(column, index) in columns")
     TableCellHeadWrapper(v-if="column.type == 'buttons'") {{ $t('general.action') }}
