@@ -1,6 +1,6 @@
 <template lang="pug">
 HList(pos="sticky top-[calc(6.5rem+var(--header-offset))] md:top-[calc(8.5rem+var(--header-offset))]" z="8" b="on-scrolling:t-1 gray-600" ml="-4 md:(-8)" mr="-4 md:(-8)" :scrolling="isScrolling" transition="all")
-  div(w="full" py="3 md:4" bg="ix-black" gap="md:3" px="4 md:8" flex="~ row" justify="lt-md:between")
+  div(w="full" py="3 md:4" bg="ix-black" gap="3 md:3" px="4 md:8" flex="~ row" :justify="justifyOrder")
 
     CollectionFilterToggleFilter(@click="onOpenFilter")
 
@@ -27,13 +27,20 @@ const onOpenFilter = () => {
     emit('toggleFilter')
 }
 
-defineProps<{
+const { context } = defineProps<{
   data?: CollectionData
   items: IXToken[],
   filters: any[],
   hideToggle?: boolean,
   context: CollectionContext
 }>()
+
+const justifyOrder = computed(() => {
+  if (context != 'collection')
+    return 'lt-md:start'
+
+  return 'lt-md:between'
+})
 
 const emit = defineEmits(["toggleFilter"])
 
