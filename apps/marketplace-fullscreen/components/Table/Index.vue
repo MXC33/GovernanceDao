@@ -1,5 +1,5 @@
 <template lang="pug">
-VList(w="full")
+VList(w="full" overflow-x="scroll")
   Transition(name="slide-left")
     CollectionFilterButtonContainer(:is-open="isOpen" pos="sticky top-48 md:(sticky top-52)" translate-y="$header-offset" z="99")
 
@@ -35,6 +35,7 @@ const { selectable, columns, isOpen, loading, rows, id, colWidth } = defineProps
   isOpen?: boolean,
   colWidth?: number,
   selectable?: boolean,
+  slideoutOpen?: boolean
 }>()
 
 const { sort } = useTableSort(id)
