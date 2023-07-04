@@ -1,12 +1,14 @@
 <template lang="pug">
-VList(w="full")
+VList(w="full" overflow-x="on-slideout:auto" :slideout="slideoutOpen")
   Transition(name="slide-left")
     CollectionFilterButtonContainer(:is-open="isOpen" pos="sticky top-48 md:(sticky top-52)" translate-y="$header-offset" z="99")
 
   VList.no-scrollbar(max-w="md:full" w="md:full" overflow-x="auto" bg="gray-900" mx="lt-md:-4")
     table.base-table(max-w="full")
       colgroup()
-        col(v-if="selectable", :style="{width: '50px'}")
+        col.standard-col(v-if="selectable && !isMobile", :style="{width: '50px'}")
+        col.standard-col(v-if="selectable && isMobile", :style="{width: '45px'}")
+
         col(v-for="column in columns" :style="getColumnStyle(column)")
 
       TableHeader(v-model="selectedItems" :columns="columns" :rows="sortedRows" :selectable="selectable" :id="id")

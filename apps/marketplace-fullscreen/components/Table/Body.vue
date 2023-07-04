@@ -13,8 +13,9 @@ tbody(divide-y="1")
           slot(:name="getColumnKey(column)" :buttons="column.buttons" :row="row" )
             TableButton(:row="row" :button="button" v-for="button in column.buttons") {{ button.text }}
 
-        slot(v-else :name="`item-${column.rowKey}`" :row="row" :column="column" )
+        slot(v-else :name="`item-${column.rowKey}`" :row="row" :column="column")
           TableCellValue(:column="column" :row="row")
+
 
 </template>
 

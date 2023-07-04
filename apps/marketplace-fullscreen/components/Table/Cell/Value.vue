@@ -1,9 +1,14 @@
 
 <template lang="pug">
 VList(flex-shrink="0" whitespace="nowrap")
-  Currency(:value="roundToDecimals(Number(value), 4)" type="ixt" v-if="column.type == 'ixt'")
+  Currency(:value="roundToDecimals(Number(value), 4)" type="ixt" v-if="column.type == 'ixt' && !isMobile")
 
   Currency(:value="ixtToUSD(value)" type="usd" v-else-if="column.type == 'usd'")
+
+  VList(v-else-if="isMobile" justify="end" items="end" pr="4")
+    Currency(:value="roundToDecimals(Number(value), 4)" type="ixt")
+
+    Currency(:value="ixtToUSD(value)" type="usd")
 
   ContractAdress(:adress="value" v-else-if="column.type == 'contractAdress'")
 
@@ -26,6 +31,7 @@ const { column, row } = defineProps<{
 
 const { getValue } = useTable()
 const { ixtToUSD } = useIXTPrice()
+const { device, isMobile } = useDevice()
 
 const value = computed(() => getValue(column, row))
 

@@ -1,7 +1,7 @@
 
 <template lang="pug">
 TableCellHeadWrapper()
-  HList(v-if="column.sortable" cursor="pointer" space-x="1"  @click="onClickSort" flex="~ row" items="start" color="on-active:white" :active="isActive" transition="all")
+  HList(v-if="column.sortable" cursor="pointer" space-x="1"  @click="onClickSort" flex="~ row" items="center" justify="start on-mobile:end" pr="on-mobile:3" :mobile="isMobile" color="on-active:white" :active="isActive" transition="all")
     div()
       slot
 
@@ -9,7 +9,7 @@ TableCellHeadWrapper()
       SortIcon(v-if="!isActive" w="4")
       HelperChevron(:up="direction == 'desc'" w="4" :thick="true" v-else)
 
-  HList(v-else items="start")
+  HList(v-else items="center" justify="start")
     slot
       
 </template>
@@ -30,6 +30,7 @@ const emit = defineEmits<{
 }>()
 
 const isActive = computed(() => sortField?.columnIndex == index)
+const { isMobile } = useDevice()
 
 const direction = computed(() => {
   if (isActive.value)

@@ -1,5 +1,5 @@
 <template lang="pug">
-thead(bg="gray-800" text="left" frame="~")
+thead(bg="gray-800" b="b-1 gray-600" text="left")
   tr()
     slot()
 </template>

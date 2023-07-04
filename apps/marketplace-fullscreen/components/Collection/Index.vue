@@ -18,7 +18,7 @@ VList(flex-grow="1" min-h="0" pos="relative" p="4 md:(8 b-30)" space-y="0 md:6")
     VList(display="lt-md:none")
       CollectionFilterSlideout(:items="data.filters" v-if="showFilters && data")
 
-    CollectionList(v-if="data" :columns="renderColumns" :items="data?.nfts" :hide-grid="hideGrid", :context="context" :show-filters="showFilters" :loading="loading")
+    CollectionList(v-if="data" :columns="columnResolution" :items="data?.nfts" :hide-grid="hideGrid", :context="context" :show-filters="showFilters" :loading="loading")
 
   HList(justify="center" w="full" py="2" v-if="loadMoreVisible")
     ButtonInteractive(btn="~ primary " font="bold" @click="loadNextPage" :text="loading ? 'Loading' : 'Load More'" :loading="loading" w="80" ref="loadMoreButton")
@@ -49,6 +49,27 @@ useScrollLoadMore(loadMoreButton, loadNextPage)
 
 const attributes = computed(() => data ? getCollectionAttributes(data) : [])
 const renderColumns = computed(() => columns ?? defaultColumns)
+const renderMobileColumns = computed(() => columns ?? mobileColumns)
+const { device } = useDevice()
+
+const columnResolution = computed(() => {
+  if (device.value == '4k' || device.value == 'desktop' || device.value == 'tablet') {
+    return renderColumns.value || []
+  } else if (device.value == 'mobile') {
+    return renderMobileColumns.value || []
+  }
+  return []
+})
+
+const mobileColumns: TableColumn<IXToken>[] = [
+  { label: "Asset", rowKey: "name", type: 'asset', width: 200 },
+  {
+    label: "Current price", rowKey: "sale_price", type: 'ixt', width: 120, sortable: {
+      ascKey: 'PRICE_ASC',
+      descKey: 'PRICE_DESC'
+    },
+  }
+]
 
 const defaultColumns: TableColumn<IXToken>[] = [
   { label: "Asset", rowKey: "name", type: 'asset', width: 200 },
