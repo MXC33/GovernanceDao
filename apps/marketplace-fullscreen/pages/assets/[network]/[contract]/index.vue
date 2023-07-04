@@ -1,5 +1,5 @@
 <template lang="pug">
-Collection(:data="data" v-if="data" :loading="pending" @loadNextPage="loadNextPage")
+Collection(:data="data" v-if="data" :loading="pending" @loadNextPage="loadNextPage" context="collection")
   template(#bottom)
 </template>
 
@@ -13,6 +13,7 @@ const { getCollectionURL } = useCollectionsURL()
 const { data: data, execute: fetchCollection, loadNextPage, setupCollectionListeners, pending } = useCollectionData(getCollectionURL(String(contract), 'polygon'))
 
 await fetchCollection()
+
 useHead({
   title: (data.value?.name ? data.value.name + " | " : "") + "Marketplace | PlanetIX"
 })

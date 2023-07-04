@@ -7,11 +7,12 @@ TableHeaderWrapper()
   template(v-for="(column, index) in columns")
     TableCellHeadWrapper(v-if="column.type == 'buttons'") {{ $t('general.action') }}
 
-    TableCellHead(v-else :column="column" :index="index" :sortField="sort" @select-field="onClickSort", @toggle-sort="onClickToggle" ) {{ column.label }}
+    TableCellHead(v-else :column="column" :index="index" :sortField="sort" @select-field="onClickSort", @toggle-sort="onClickToggle" :context="context") {{ column.label }}
 
 </template>
 
 <script setup lang="ts" generic="Row extends TableRow">
+import type { CollectionContext } from '~/composables/useCollection';
 import type { ServerTableSort, TableColumn, TableRow, TableSortable } from '~/composables/useTable';
 
 
@@ -20,6 +21,7 @@ const { selectable, rows, columns, id } = defineProps<{
   rows: Row[],
   id: string,
   selectable?: boolean,
+  context?: CollectionContext
 }>()
 
 const selectedItems = defineModel<number[]>()

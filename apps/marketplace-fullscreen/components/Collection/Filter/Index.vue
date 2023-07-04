@@ -33,7 +33,7 @@ const { context } = defineProps<{
   items: IXToken[],
   filters: any[],
   hideToggle?: boolean,
-  context: CollectionContext
+  context?: CollectionContext
 }>()
 
 const justifyOrder = computed(() => {
@@ -43,6 +43,7 @@ const justifyOrder = computed(() => {
     return 'between'
   }
 })
+
 
 const emit = defineEmits(["toggleFilter"])
 

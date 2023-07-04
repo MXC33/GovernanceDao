@@ -6,14 +6,14 @@ VList(w="full" overflow-x="on-slideout:auto" :slideout="slideoutOpen")
   VList.no-scrollbar(max-w="md:full" w="md:full" overflow-x="auto" bg="gray-900" mx="lt-md:-4")
     table.base-table(max-w="full")
       colgroup()
-        col.standard-col(v-if="selectable && !isMobile", :style="{width: '50px'}")
-        col.standard-col(v-if="selectable && isMobile", :style="{width: '45px'}")
+        col(v-if="selectable" :style="{width: `${columnWidth}`}")
+        //- col(v-else-if="selectable && isMobile" :style="{width: `${columnWidth}`}")
 
         col(v-for="column in columns" :style="getColumnStyle(column)")
 
-      TableHeader(v-model="selectedItems" :columns="columns" :rows="sortedRows" :selectable="selectable" :id="id")
+      TableHeader(v-model="selectedItems" :columns="columns" :rows="sortedRows" :selectable="selectable" :id="id" :context="context")
 
-      TableBody(v-model="selectedItems" :loading="loading" :rows="sortedRows" :columns="columns" :id="id" :selectable="selectable")
+      TableBody(v-model="selectedItems" :loading="loading" :rows="sortedRows" :columns="columns" :id="id" :selectable="selectable" :context="context")
         template(#[getColumnKey(column)]="{row}" v-for="column in columns")
           slot(:name="`item-${column.rowKey}`" :row="row" v-if="column.type != 'buttons'")
           slot(name="item-buttons" v-else :row="row")
@@ -21,6 +21,7 @@ VList(w="full" overflow-x="on-slideout:auto" :slideout="slideoutOpen")
 </template>
 
 <script setup lang="ts" generic="Row extends TableRow">
+import type { CollectionContext } from '~/composables/useCollection';
 import type { TableColumn, TableRow } from '~/composables/useTable';
 
 const selectedItems = defineModel<number[]>()
@@ -29,7 +30,7 @@ const { getColumnKey } = useTable()
 
 const { isMobile } = useDevice()
 
-const { selectable, columns, isOpen, loading, rows, id, colWidth } = defineProps<{
+const { selectable, columns, isOpen, loading, rows, id, colWidth, context } = defineProps<{
   columns: TableColumn<Row>[],
   rows: Row[],
   id: string,
@@ -37,7 +38,8 @@ const { selectable, columns, isOpen, loading, rows, id, colWidth } = defineProps
   isOpen?: boolean,
   colWidth?: number,
   selectable?: boolean,
-  slideoutOpen?: boolean
+  slideoutOpen?: boolean,
+  context?: CollectionContext
 }>()
 
 const { sort } = useTableSort(id)
@@ -58,6 +60,31 @@ const getColumnStyle = (item: TableColumn<Row>) => {
 
   return getStyle(item.width)
 }
+
+const columnWidth = computed(() => {
+  if (!isMobile.value) {
+    switch (context) {
+      case 'collection':
+        return '48px'
+      case 'my-assets':
+        return '30px'
+      case 'incoming-bids':
+        return '48px'
+      case 'outgoing-bids':
+        return '48px'
+      default:
+        return '48px'
+    }
+  } else if (isMobile.value) {
+    switch (context) {
+      default:
+        return '48px'
+    }
+  }
+
+})
+
+// Add both for mobil 
 
 </script>
 

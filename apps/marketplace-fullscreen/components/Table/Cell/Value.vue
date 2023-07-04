@@ -3,18 +3,18 @@
 VList(flex-shrink="0" whitespace="nowrap")
   Currency(:value="roundToDecimals(Number(value), 4)" type="ixt" v-if="column.type == 'ixt' && !isMobile")
 
-  Currency(:value="ixtToUSD(value)" type="usd" v-else-if="column.type == 'usd'")
+  Currency(:value="ixtToUSD(value)" type="usd" v-else-if="column.type == 'usd' && !isMobile")
 
-  VList(v-else-if="isMobile" justify="end" items="end" pr="4")
+  VList(v-else-if="isMobile && context == 'collection'" justify="end" items="end" pr="4" b="1 red")
     Currency(:value="roundToDecimals(Number(value), 4)" type="ixt")
 
     Currency(:value="ixtToUSD(value)" type="usd")
 
-  ContractAdress(:adress="value" v-else-if="column.type == 'contractAdress'")
+  ContractAdress(:adress="value" v-else-if="column.type == 'contractAdress' && !isMobile")
 
-  span(v-else-if="column.type == 'date'") {{ getDate(value) }}
+  span(v-else-if="column.type == 'date' && !isMobile") {{ getDate(value) }}
 
-  span(v-else-if="isYou" font="bold") {{value}}
+  span(v-else-if="isYou && !isMobile" font="bold") {{value}}
 
   span(v-else) {{value}}
 
@@ -23,15 +23,19 @@ VList(flex-shrink="0" whitespace="nowrap")
 <script setup lang="ts" generic="Row extends TableRow">
 import type { TableColumn, TableRow } from '~/composables/useTable';
 import { fromUnixTime } from "date-fns"
+import type { CollectionContext } from '~/composables/useCollection';
 
-const { column, row } = defineProps<{
+const { column, row, context } = defineProps<{
   column: TableColumn<Row>,
   row: Row,
+  context?: CollectionContext
 }>()
 
 const { getValue } = useTable()
 const { ixtToUSD } = useIXTPrice()
-const { device, isMobile } = useDevice()
+const { isMobile } = useDevice()
+
+console.log(context, 'context from cell value')
 
 const value = computed(() => getValue(column, row))
 
