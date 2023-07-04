@@ -1,6 +1,6 @@
 <template lang="pug">
-HList(pos="sticky top-[calc(6.5rem+var(--header-offset))] md:top-[calc(8.5rem+var(--header-offset))]" z="8" b="on-scrolling:t-1 gray-600" ml="-4 md:(-8)" mr="-4 md:(-8)" :scrolling="isScrolling" transition="all")
-  div(w="full" py="3 md:4" bg="ix-black" gap="3 md:3" px="4 md:8" flex="~ row" :justify="justifyOrder")
+HList(pos="sticky top-[calc(7.5rem+var(--header-offset))] md:top-[calc(8.5rem+var(--header-offset))]" z="8" b="on-scrolling:t-1 gray-600" ml="-4 md:(-8)" mr="-4 md:(-8)" :scrolling="isScrolling" transition="all")
+  div(flex="~ row" w="full" bg="ix-black" gap="3" p="l-4 r-4 t-4 b-4 md:(l-8 r-8 t-4 b-4)" :justify="justifyOrder")
 
     CollectionFilterToggleFilter(@click="onOpenFilter")
 

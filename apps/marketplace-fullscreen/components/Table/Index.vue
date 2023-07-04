@@ -1,7 +1,7 @@
 <template lang="pug">
 VList(w="full")
   Transition(name="slide-left")
-    CollectionFilterButtonContainer(:is-open="isOpen" pos="sticky top-42 md:(sticky top-52)" translate-y="$header-offset" z="99")
+    CollectionFilterButtonContainer(:is-open="isOpen" pos="sticky top-48 md:(sticky top-52)" translate-y="$header-offset" z="99")
 
   VList.no-scrollbar(max-w="md:full" w="md:full" overflow-x="auto" bg="gray-900" mx="lt-md:-4")
     table.base-table(max-w="full")

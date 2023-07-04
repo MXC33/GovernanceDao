@@ -1,7 +1,7 @@
 <template lang="pug">
 VList(space-y="4 md:8")
 
-  div(w="30 md:60")
+  div(w="30 md:60" frame="~")
     slot(name="collectionImage")
       img(src="~/assets/images/collection/general.png" v-if="context == 'collection'")
       img(src="~/assets/images/collection/my-assets.png" v-else)

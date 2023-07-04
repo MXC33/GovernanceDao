@@ -2,7 +2,7 @@
 tbody(divide-y="1")
   TableRow(v-for="(row, index) in rows" :key="row.originalIndex ?? index")
     TableCell(v-if="selectable") 
-      InputCheckbox(:model-value="isSelected(index)" @update:modelValue="val => onSelect(index, val)" :is-table="true")
+      InputCheckbox(:model-value="isSelected(index)" @update:modelValue="val => onSelect(index, val)")
 
     TableCell(v-for="column in columns" pos="on-buttons:(sticky right-0)" :buttons="column.type == 'buttons'") 
       template(v-if="loading")
