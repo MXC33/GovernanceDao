@@ -1,5 +1,5 @@
 <template lang="pug">
-VList(w="full" overflow-x="scroll")
+VList(w="full")
   Transition(name="slide-left")
     CollectionFilterButtonContainer(:is-open="isOpen" pos="sticky top-48 md:(sticky top-52)" translate-y="$header-offset" z="99")
 
