@@ -8,7 +8,7 @@ VList(pos="sticky top-0" translate-y="$header-offset" z="99" w="full" @mouseente
       button(v-for="(item, index) in siteTopHeaders" @click="openMenu(index)" btn="menu" color = "s-default:white s-selected:ix-orange" :state="selected(index)") {{ $t(`marketplace.navigation.${item.type}.title`)}}
       HList(flex-grow="1" justify="end" display="lt-md:none")
         NuxtLink(to="https://planetix.com/airdrop")
-          HList(rounded="full" b="1 $mc-mint" px="4" py="1" bg="hover:$mc-mint-40" uppercase="~" tracking="1" font="bold" items="center" justify="center")
+          HList(rounded="full" b="1 $mc-mint" px="4" py="1" bg="hover:$mc-mint-40" uppercase="~" tracking="0.65" font="bold" items="center" justify="center")
             span(translate-x="0.5") airdrop
 
     HList(space-x="6" px="0")
