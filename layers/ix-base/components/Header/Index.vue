@@ -1,5 +1,5 @@
 <template lang="pug">
-VList(pos="sticky top-0" translate-y="$header-offset" z="99" w="full" @mouseenter="isSelected = true" @mouseleave="isSelected = false" ref="menuElement" transition="all")
+VList(pos="sticky top-0" translate-y="$header-offset" z="999" w="full" @mouseenter="isSelected = true" @mouseleave="isSelected = false" ref="menuElement" transition="all")
   HList(items="center" justify="between" bg="ix-black" px="4 md:7.5" h="12 md:16" space-x="6")
     NuxtLink(to="https://www.planetix.com")
       PlanetIXNew(w="42.25")
