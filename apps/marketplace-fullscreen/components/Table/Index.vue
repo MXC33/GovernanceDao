@@ -1,9 +1,8 @@
 <template lang="pug">
-VList(w="full" overflow-x="on-slideout:auto" :slideout="slideoutOpen")
-  Transition(name="slide-left")
-    CollectionFilterButtonContainer(:is-open="isOpen" pos="sticky top-48 md:(sticky top-52)" translate-y="$header-offset" z="99")
+VList(w="full")
+  CollectionFilterButtonContainer(:is-open="isOpen" b="1 red" pos="sticky top-[calc(12rem+var(--header-offset))] md:!top-[calc(13rem+var(--header-offset))]")
 
-  VList.no-scrollbar(max-w="md:full" w="md:full" overflow-x="auto" bg="gray-900" mx="lt-md:-4")
+  VList.no-scrollbar(max-w="md:full" w="md:full" overflow-x="scroll" bg="gray-900" mx="lt-md:-4")
     table.base-table(max-w="full")
       colgroup()
         col(v-if="selectable" :style="{width: `${columnWidth}`}")
@@ -38,12 +37,12 @@ const { selectable, columns, isOpen, loading, rows, id, colWidth, context } = de
   isOpen?: boolean,
   colWidth?: number,
   selectable?: boolean,
-  slideoutOpen?: boolean,
   context?: CollectionContext
 }>()
 
 const { sort } = useTableSort(id)
 const { sortRows } = useTable()
+const { isDesktop } = useDevice()
 
 const sortedRows = computed(() =>
   sortRows(columns, rows, sort.value)
@@ -55,10 +54,15 @@ const getColumnStyle = (item: TableColumn<Row>) => {
     'min-width': `${width}px`
   })
 
-  if (!item.width)
-    return getStyle(colWidth ?? isMobile.value ? 150 : 200)
+  if (!item.width) {
 
-  return getStyle(item.width)
+    return getStyle(colWidth ?? isMobile.value ? 150 : 200)
+  } else if (isOpen) {
+
+    getStyle(colWidth ?? isMobile.value ? 150 : 100)
+  } else
+
+    return getStyle(item.width)
 }
 
 const columnWidth = computed(() => {
