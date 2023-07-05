@@ -1,6 +1,6 @@
 <template lang="pug">
 VList(w="full")
-  CollectionFilterButtonContainer(:is-open="isOpen" b="1 red" pos="sticky top-[calc(12rem+var(--header-offset))] md:!top-[calc(13rem+var(--header-offset))]")
+  CollectionFilterButtonContainer(:is-open="isOpen" pos="sticky top-[calc(12rem+var(--header-offset))] md:!top-[calc(13rem+var(--header-offset))]")
 
   VList.no-scrollbar(max-w="md:full" w="md:full" overflow-x="scroll" bg="gray-900" mx="lt-md:-4")
     table.base-table(max-w="full")
