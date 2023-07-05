@@ -595,7 +595,7 @@
           },
           "ixt-cat-raff": {
             "title": "IXT CAT RAFF",
-            "description": "Officials links to all Planet IX contracts.",
+            "description": "Stake IXT with raffle tickets for IXT rewards.",
             "link": "https://dashboard.ix.foundation/#/dashboard/ixt-cat-raff"
           },
           "supply-liquidity": {

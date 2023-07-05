@@ -21,10 +21,7 @@ const {header, category, item} = defineProps<{
 }>()
 
 const isNotLink = () => {
-  const str = t(`marketplace.navigation.${header}.${category}.${item}.title`).toLowerCase()
-  //console.log(str)
-
-  switch (str) {
+  switch (item) {
     case 'swap':
       return true
   }
