@@ -23,8 +23,8 @@ VList(flex-grow="1" min-h="0" pos="relative" p="4 md:(8 b-30)" space-y="0 md:6")
   HList(justify="center" w="full" py="2" v-if="loadMoreVisible")
     ButtonInteractive(btn="~ primary " font="bold" @click="loadNextPage" :text="loading ? 'Loading' : 'Load More'" :loading="loading" w="80" ref="loadMoreButton")
 
-  Transition(name="slide-bottom")
-    CollectionSelectBar(v-if="selectedItems?.length > 0" :context="context")
+Transition(name="slide-bottom")
+  CollectionSelectBar(v-if="selectedItems?.length > 0" :context="context")
 
 </template>
 

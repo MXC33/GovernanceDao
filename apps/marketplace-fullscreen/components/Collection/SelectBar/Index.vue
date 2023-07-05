@@ -1,28 +1,28 @@
 <template lang="pug">
-div(v-if="amountSelected != 0" w="full" p="3" pos="sticky bottom-0" z="2" bg="ix-black")
-  HList(space-x="3" items="center")
-    HList(font="bold" text="md" space-x="3")
-      div(text="white" capitalize="~") {{amountSelected}} Items selected 
-      button(text="red" capitalize="~" @click="clearSelectedItems") {{ $t(`marketplace.cart.clearAll`) }}
+div(v-if="amountSelected != 0" w="full" p="4 md:3" pos="sticky bottom-0" z="2" bg="ix-black")
+  div(flex="~ col md:row" space-x="md:3" space-y="lt-md:4" items="md:center" justify="between" px="0 md:5" w="full")
 
-    //- To Create space between the text on the left side an the buttons on the right 
-    div(flex="grow")
+    HList(font="bold" text="md" space-x="md:8" flex-grow="1" items="center" w="full" justify="lt-md:between")
+      div(v-if="amountSelected == 1" white="white" whitespace="nowrap") {{amountSelected}} Item selected 
+      div(v-else-if="amountSelected >= 1" color="white" whitespace="nowrap") {{amountSelected}} Items selected
+      button(color="ix-ne" capitalize="~" @click="clearSelectedItems" whitespace="nowrap") {{ $t(`marketplace.cart.clearAll`) }}
 
-    template(v-if="context=='my-assets'")
-      CollectionSelectBarButton(:secondary="true" @click="onTransferMultiple" disable="on-differentCollection:active" :differentCollection="!selectedItemsIsSameCollection") Transfer {{amountSelected}} 
-      CollectionSelectBarButton(@click="onClickList") List {{amountSelected}} 
+    HList(w="full" flex-grow="md:1" justify="between md:end" gap="4")
+      template(v-if="context=='my-assets'")
+        CollectionSelectBarButton(:secondary="true" @click="onTransferMultiple" disable="on-differentCollection:active" :differentCollection="!selectedItemsIsSameCollection") Transfer {{amountSelected}} 
+        CollectionSelectBarButton(@click="onClickList") List {{amountSelected}} 
 
-    template(v-else-if="context=='collection'")
-      CollectionSelectBarButton(@click="onClickOffer" :secondary="true" v-if="amountSelected == 1") Place {{amountSelected}} offer
-      CollectionSelectBarButton(@click="onClickOffer" :secondary="true" v-else-if="amountSelected >= 1") Place {{amountSelected}} offers
-
-
-      CollectionSelectBarButton(@click="onAddToCart") Add {{amountSelected}} To Cart 
+      template(v-else-if="context=='collection'")
+        CollectionSelectBarButton(@click="onClickOffer" :secondary="true" v-if="amountSelected == 1") Place {{amountSelected}} bid
+        CollectionSelectBarButton(@click="onClickOffer" :secondary="true" v-else-if="amountSelected >= 1") Place {{amountSelected}} bids
 
 
-    template(v-else-if="context=='incoming-bids'")
-      //- CollectionSelectBarButton(@click="onClickRejectBids") Reject {{amountSelected}} Bids
-      CollectionSelectBarButton(@click="onClickAcceptBids") Accept {{amountSelected}} Bids 
+        CollectionSelectBarButton(@click="onAddToCart") Add {{amountSelected}} To Cart 
+
+
+      template(v-else-if="context=='incoming-bids'")
+        //- CollectionSelectBarButton(@click="onClickRejectBids") Reject {{amountSelected}} Bids
+        CollectionSelectBarButton(@click="onClickAcceptBids") Accept {{amountSelected}} Offer 
 
 </template>
 
