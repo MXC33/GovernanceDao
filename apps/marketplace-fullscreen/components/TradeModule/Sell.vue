@@ -13,8 +13,8 @@ VList()
     template(#percentage) {{belowHighestOffer}}% {{ $t(`marketplace.trade.belowHighestOffer`) }}
 
   TradeModuleSubstitute(v-model="isSubstituteOffering")
-    template(#title) {{ $t(`marketplace.trade.substituteOffers`) }}
-    template(#substituteTitle) {{ $t(`marketplace.trade.lowestOffer`) }}
+    template(#title) {{ $t(`marketplace.trade.lowestOffer`) }}
+    template(#substituteTitle) 
     template(#substituteInput) 
       InputText(v-model="minOffer" :class="{highlighted: showDecreaseMinPrice}")
         template(#suffix) IXT

@@ -13,8 +13,8 @@ VList()
     template(#percentage) {{aboveFloorPrice}}% {{ $t(`marketplace.trade.aboveFloorPrice`) }}
 
   TradeModuleSubstitute(v-model="isSubstituteListing")
-    template(#title) {{ $t(`marketplace.trade.substituteList`) }}
-    template(#substituteTitle) {{ $t(`marketplace.trade.maxPriceList`) }}
+    template(#title) {{ $t(`marketplace.trade.maxPriceList`) }}
+    template(#substituteTitle) 
     template(#substituteInput) 
       InputText(v-model="maxPrice" :class="{highlighted: showIncreaseMaxPrice}")
         template(#suffix) IXT
