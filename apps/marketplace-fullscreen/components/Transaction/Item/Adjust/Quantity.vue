@@ -3,7 +3,7 @@ TransactionItemAdjustRow(v-if="item && isERC1155")
   template(#header) {{ $t(`marketplace.transactions.quantity`) }}
 
   template(#value)
-    Adjustable(v-model="item.shares" h="10"  :is-neutral="false")
+    Adjustable(v-model="item.shares" h="10"  :is-neutral="false" :has-frame="true")
     TransactionItemAdjustDetail() 
       slot(name="max" :max="item.shares.max") {{ $t(`marketplace.transactions.youOwn`) }} {{ item.shares.max }}
 

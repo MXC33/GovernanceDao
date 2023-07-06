@@ -1,13 +1,13 @@
 <template lang="pug">
-VList(bg="gray-800" v-if="item")
-  header(p="x-6 y-3" font="bold" flex="~ row")
+VList(bg="gray-900" v-if="item")
+  header(p="x-6 y-3" font="bold" flex="~ row" b="b-1 gray-600")
     TokenName(:token="item.token")
 
     div(whitespace="nowrap") {{ item.sale?.price }} IXT
 
   HList()
-    VList(w="30" justify="center" pos="relative")
-      TokenImage(:token="item.token" w="30")
+    VList(w="30" h="30" justify="center" pos="relative")
+      TokenImage(:token="item.token" min-w="30" h="30")
 
     VList(w="full")
       HList(flex-grow="1" px="3" items="center")
@@ -19,7 +19,7 @@ VList(bg="gray-800" v-if="item")
         button(@click="removeFromCart(item)")
           TrashIcon(w="6")
 
-      Adjustable(v-model="item.shares" h="10")
+      Adjustable(v-model="item.shares" h="10" :has-frame="false" :is-popup="true")
     
 </template>
 
