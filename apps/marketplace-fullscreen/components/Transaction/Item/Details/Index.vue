@@ -2,7 +2,7 @@
 VList(space-y="1" v-if="item")
   TransactionItemDetailsRow()
     template(#name) {{ $t(`collection.attributes.floorPrice`) }}
-    template(#value) 
+    template(#value)
       Currency(:value="item.token?.sale_price")
 
   TransactionItemDetailsRow()
@@ -16,5 +16,6 @@ VList(space-y="1" v-if="item")
 import type { TransactionItem } from '~/composables/useTransactions'
 
 const { item } = defineProps<{ item: TransactionItem }>()
+
 </script>
   
