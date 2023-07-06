@@ -6,7 +6,7 @@ VList(bg="gray-900" v-if="item")
     div(whitespace="nowrap") {{ item.sale?.price }} IXT
 
   HList()
-    VList(w="30" h="30" justify="center" pos="relative")
+    VList(w="30" h="30" justify="center" pos="relative" bg="black")
       TokenImage(:token="item.token" min-w="30" h="30")
 
     VList(w="full")
