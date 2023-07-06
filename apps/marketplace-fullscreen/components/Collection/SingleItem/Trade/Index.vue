@@ -4,7 +4,8 @@ VList(space-y="6")
 
   AttributeList(:attributes="attributes" v-if="item")
 
-  TradeModule(:item="item")
+  VList(mx="lt-md:-4")
+    TradeModule(:item="item")
 
   CollectionSingleItemTradeListings(:item="item")
 

@@ -4,13 +4,13 @@ VList(frame="~")
     template(#titleicon)
       TitleWithIcon(icon="description") {{ $t(`marketplace.singleItem.description`) }}
     template(#default) 
-      div(p="6 t-3") {{ item.description }}
+      div(p="6 b-4 t-0") {{ item.description }}
 
   ContentDrawer(:start-open="!isMobile" :is-neutral="true" bg="gray-900" :no-frame="true" :is-meta="true")
     template(#titleicon)
       TitleWithIcon(icon="traits") {{ $t(`marketplace.singleItem.traits`) }}
     template(#default) 
-      div(grid="~ cols-3 gap-3" p="6 t-3")
+      div(grid="~ cols-3 gap-3" p="6 b-4 t-0")
         AttributeTrait(v-for="trait in item.attributes")
           template(#category) {{ trait.trait_type }}
           template(#name) {{ trait.value }}
