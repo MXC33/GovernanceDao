@@ -16,7 +16,7 @@ VList()
     template(#title) {{ $t(`marketplace.trade.maxPriceList`) }}
     template(#substituteTitle) 
     template(#substituteInput) 
-      InputText(v-model="maxPrice" :class="{highlighted: showIncreaseMaxPrice}")
+      InputText(v-model="maxPrice" :class="{highlighted: showIncreaseMaxPrice}" :is-module="true")
         template(#suffix) IXT
 
   div(grid="~ cols-2 on-one-col:cols-1" :one-col="isSubstituteListing")

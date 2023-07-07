@@ -16,7 +16,7 @@ VList()
     template(#title) {{ $t(`marketplace.trade.lowestOffer`) }}
     template(#substituteTitle) 
     template(#substituteInput) 
-      InputText(v-model="minOffer" :class="{highlighted: showDecreaseMinPrice}")
+      InputText(v-model="minOffer" :class="{highlighted: showDecreaseMinPrice}" :is-module="true")
         template(#suffix) IXT
 
   div(grid="~ cols-1 md:cols-2")
