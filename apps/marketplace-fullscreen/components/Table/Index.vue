@@ -1,12 +1,11 @@
 <template lang="pug">
 VList(w="full")
-  CollectionFilterButtonContainer(:is-open="isOpen" pos="sticky top-[calc(12rem+var(--header-offset))] md:!top-[calc(13rem+var(--header-offset))]")
+  CollectionFilterButtonContainer(:is-open="isOpen" pos="sticky top-[calc(12rem+var(--header-offset))] md:!top-[calc(0rem+var(--header-offset))]")
 
   VList.no-scrollbar(max-w="md:full" w="md:full" overflow-x="scroll" bg="gray-900" mx="lt-md:-4")
     table.base-table(max-w="full")
       colgroup()
         col(v-if="selectable" :style="{width: `${columnWidth}`}")
-        //- col(v-else-if="selectable && isMobile" :style="{width: `${columnWidth}`}")
 
         col(v-for="column in columns" :style="getColumnStyle(column)")
 
@@ -66,29 +65,38 @@ const getColumnStyle = (item: TableColumn<Row>) => {
 }
 
 const columnWidth = computed(() => {
-  if (!isMobile.value) {
+  if (!isMobile.value && !isOpen) {
     switch (context) {
       case 'collection':
         return '48px'
       case 'my-assets':
-        return '30px'
+        return '27px'
       case 'incoming-bids':
-        return '48px'
+        return '55px'
       case 'outgoing-bids':
+        return '48px'
+      case 'active-listings':
+        return '48px'
+      case 'activity':
         return '48px'
       default:
         return '48px'
     }
-  } else if (isMobile.value) {
+  } else if (!isMobile.value && isOpen) {
+    console.log('we are here')
     switch (context) {
-      default:
-        return '48px'
+      case 'collection':
+        return '55px'
+      case 'my-assets':
+        return '55px'
+      case 'incoming-bids':
+        return '55px'
+      case 'outgoing-bids':
+        return '55px'
     }
   }
 
 })
-
-// Add both for mobil 
 
 </script>
 

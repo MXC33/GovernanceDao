@@ -19,7 +19,7 @@ VList(@keydown.down.stop.prevent="stepDown" @keydown.escape.stop.prevent="close"
               SearchIcon(w="6")
               div() {{ search }}
 
-              HList(flex-grow="1" justify="end")
+              HList(flex-grow="1" justify="end" translate-x="lt-md:-4")
                 CloseIcon(w="3" @click="removeRecentSearch(search)" translate-y="-0.2")
 
       template(v-else)

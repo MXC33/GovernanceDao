@@ -1,17 +1,17 @@
 <template lang="pug">
 VList(space-y="6")
-  CollectionSingleItemHeader(:item="item" display="lt-md:!none")
+  CollectionSingleItemHeader(:item="item" b="1 red" mt="4")
 
   AttributeList(:attributes="attributes" v-if="item")
 
-  VList(mx="lt-md:-4")
+  VList(mx="lt-md:-4" space-y="6")
     TradeModule(:item="item")
 
-  CollectionSingleItemTradeListings(:item="item")
+    CollectionSingleItemTradeListings(:item="item")
 
-  CollectionSingleItemTradeOffers(:item="item")
+    CollectionSingleItemTradeOffers(:item="item")
 
-  CollectionSingleItemMetaList(:item="item" display="md:none")
+    CollectionSingleItemMetaList(:item="item" display="lg:none")
 
 
 </template>

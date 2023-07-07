@@ -1,5 +1,5 @@
 <template lang="pug">
-ContentDrawer(frame="none" mb="4" b="t-1 b-1 gray-600" :is-neutral="true" mx="-4 md:-6")
+ContentDrawer(frame="none" mb="4" b="t-1 b-1 gray-600" :is-neutral="true" mx="-4 md:-4")
   template(#header) {{ $t(`marketplace.transactions.applyToAll`) }}
   template(#default)
     VList(p="6" space-y="6")

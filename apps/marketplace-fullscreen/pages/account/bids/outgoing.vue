@@ -40,7 +40,7 @@ const columns: TableColumn<IXToken>[] = [
     }, type: 'text'
   },
   {
-    label: "Quantity", rowKey: "bid.quantity", type: 'text'
+    label: "Quantity", rowKey: "bid.quantity", type: 'text', width: 100
   },
   {
     label: "Expiration", rowKey: "bid.due_date", type: 'date', sortable: true
@@ -52,7 +52,7 @@ const columns: TableColumn<IXToken>[] = [
   },
   {
     type: 'buttons',
-    width: 230,
+    width: 300,
     buttons: [{
       type: 'secondary', text: 'cancel', onClick: (token) => {
         cancelBidOnClick(token)

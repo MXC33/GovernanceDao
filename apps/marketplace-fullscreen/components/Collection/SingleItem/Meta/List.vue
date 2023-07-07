@@ -1,5 +1,5 @@
 <template lang="pug">
-VList(frame="~")
+VList(frame="~ gray-400 on-frameless:none on-mobile:!none" :frameless="noFrame" :mobile="isMobile")
   ContentDrawer(:start-open="!isMobile" v-if="item.description" :is-neutral="true" bg="gray-900" :no-frame="true")
     template(#titleicon)
       TitleWithIcon(icon="description") {{ $t(`marketplace.singleItem.description`) }}
@@ -20,7 +20,7 @@ VList(frame="~")
       TitleWithIcon(icon="details") {{ $t(`marketplace.singleItem.details`) }}
 
     template(#default) 
-      CollectionSingleItemMetaDetails(:item="item" :is-neutral="true" bg="gray-900" px="2")
+      CollectionSingleItemMetaDetails(:item="item" :is-neutral="true" bg="gray-900" px="2" b="1 red")
 
 </template>
 
@@ -31,6 +31,7 @@ const { isMobile } = useDevice()
 
 const { item } = defineProps<{
   item: SingleItemData
+  noFrame?: boolean
 }>()
 
 </script>
