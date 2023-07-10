@@ -62,11 +62,13 @@ export const useTransactions = () => {
     else return 183
   }
 
-  const getTotalIXTPrice = (items: TransactionItem[], userPrice?: boolean) =>
-    items.reduce((prev, item) =>
+  const getTotalIXTPrice = (items: TransactionItem[], userPrice?: boolean) => {
+    if (items.length == 1)
+      return items[0].ixtPrice ?? 0
+    return items.reduce((prev, item) =>
       prev + (getItemPrice(item, userPrice) * item.shares.value)
       , 0)
-
+  }
   const getItemPrice = (item: TransactionItem, userPrice?: boolean) => {
     if (userPrice)
       return Number(item.ixtPrice)
