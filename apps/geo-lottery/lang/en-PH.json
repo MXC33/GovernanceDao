@@ -1,0 +1,15 @@
+{
+  "marketplace": {
+    "navigation": {
+      "terminal": "Terminal",
+      "inventory": "Imbentaryo",
+      "missionCtrl": "Mission Control",
+      "netEmpire": "Netempire",
+      "taskMng": "Tagapangasiwa ng Gawain",
+      "manager": "Tagapamahala",
+      "build": "bumuo",
+      "starterPack": "Panimulang pakete",
+      "payments": "Mga pagbabayad"
+    }
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "marketplace": {
+    "navigation": {
+      "terminal": "终端",
+      "inventory": "库存",
+      "missionCtrl": "任务控制",
+      "netEmpire": "Netempire",
+      "taskMng": "任务管理器",
+      "manager": "管理员",
+      "build": "构建",
+      "starterPack": "新手包",
+      "payments": "付款"
+    }
+  }
+}

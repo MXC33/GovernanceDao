@@ -1,0 +1,421 @@
+{
+  "marketplace": {
+    "navigation": {
+      "soon": "Coming Soon",
+      "loadMore": "Load More",
+      "buy": {
+        "title": "Buy IXT",
+        "swap": {
+          "title": "Swap",
+          "swap": {
+            "title": "Swap $ to IXT",
+            "description": "Swap any crypto or fiat to IXT.",
+            "link": ""
+          }
+        },
+        "bridge": {
+          "title": "Bridge",
+          "polygon": {
+            "title": "Polygon",
+            "description": "",
+            "link": ""
+          },
+          "ethereum": {
+            "title": "Ethereum",
+            "description": "",
+            "link": ""
+          }
+        },
+        "supply": {
+          "title": "Supply",
+          "usdt": {
+            "title": "IXT/USDT (Quickswap)",
+            "description": "Secure IXT/USDT liquidity, earn 7% APR.",
+            "link": "https://quickswap.exchange/#/"
+          },
+          "matic": {
+            "title": "IXT/MATIC (Sushiswap)",
+            "description": "Secure IXT/USDT liquidity, earn 4% APR.",
+            "link": "https://www.sushi.com/swap"
+          }
+        },
+        "lend": {
+          "title": "Lend",
+          "capital": {
+            "title": "LEND CAPITAL",
+            "description": "Lend 100x IXT with USDT as collateral.",
+            "link": ""
+          }
+        }
+      },
+      "play": {
+        "title": "Play Now",
+        "game": {
+          "title": "THE GAME",
+          "terminal": {
+            "title": "Terminal",
+            "description": "Your personal game lobby.",
+            "link": "https://missioncontrol.planetix.com/terminal"
+          },
+          "market": {
+            "title": "MARKETPLACE",
+            "description": "Explore land & trade assets at NetEmpire.",
+            "link": "https://marketplace.planetix.com/"
+          },
+          "arena": {
+            "title": "IX Arena",
+            "description": "",
+            "link": ""
+          },
+          "mc": {
+            "title": "Mission Control",
+            "description": "Farm resources, stake assets, and earn rewards.",
+            "link": "https://missioncontrol.planetix.com/mission-control"
+          },
+          "gamebook": {
+            "title": "Gamebook",
+            "description": "Learn all you need about Planet IX and Web3.",
+            "link": "https://whitepaper.planetix.com/"
+          }
+        },
+        "market": {
+          "title": "MARKETPLACE",
+          "trade-land": {
+            "title": "TRADE LAND",
+            "description": "Create your empire on the Planet IX map.",
+            "link": "https://planetix.com/netempire"
+          },
+          "trade-asset": {
+            "title": "TRADE ASSETS",
+            "description": "Trade assets at NetEmpire Marketplace.",
+            "link": "https://marketplace.planetix.com/"
+          }
+        },
+        "analytics": {
+          "title": "ANALYTICS",
+          "game": {
+            "title": "GAME PERFORMANCE",
+            "description": "Daily players, transaction volume and more.",
+            "link": ""
+          },
+          "nft": {
+            "title": "NFT PERFORMANCE",
+            "description": "Dashboard reflecting our NFT assets performance.",
+            "link": ""
+          },
+          "vesting": {
+            "title": "VESTING SCHEDULE",
+            "description": "IX token vesting schedule.",
+            "link": ""
+          },
+          "ixt": {
+            "title": "IXT PERFORMANCE",
+            "description": "IX Token holders, stakers and more.",
+            "link": ""
+          },
+          "smart-contracts": {
+            "title": "SMART CONTRACTS ",
+            "description": "Officials links to all Planet IX contracts.",
+            "link": ""
+          }
+        }
+      },
+      "corporations": {
+        "title": "Corporations",
+        "netempire": {
+          "title": "NETEMPIRE",
+          "trade-land": {
+            "title": "TRADE LAND",
+            "description": "Create your empire on the Planet IX map.",
+            "link": "https://planetix.com/netempire"
+          },
+          "trade-assets": {
+            "title": "TRADE ASSETS",
+            "description": "Trade assets at NetEmpire Marketplace.",
+            "link": "https://marketplace.planetix.com/"
+          },
+          "incoming-bids": {
+            "title": "INCOMING BIDS",
+            "description": "Check the latest bids on your land.",
+            "link": "https://planetix.com/netempire/incoming-bids"
+          }
+        },
+        "eternallabs": {
+          "title": "ETERNALABS",
+          "bio-mods-lab": {
+            "title": "BIO-MODS LAB",
+            "description": "Refine waste, and create M3ta-M0ds.",
+            "link": "https://missioncontrol.planetix.com/eternalab/bio-mods-lab"
+          },
+          "eternal-shop": {
+            "title": "ETERNALAB SHOP",
+            "description": "Purchase Bio-M0ds using waste.",
+            "link": "https://missioncontrol.planetix.com/eternalab/shop"
+          },
+          "stake-burn-asset": {
+            "title": "STAKE & BURN ASSETS",
+            "description": "Stake or burn EternaLabs assets.",
+            "link": "https://missioncontrol.planetix.com/eternalab/stake-burn"
+          }
+        },
+        "newlands": {
+          "title": "NEWLANDS",
+          "construction": {
+            "title": "CONSTRUCTION",
+            "description": "Build and upgrade facilities.",
+            "link": "https://missioncontrol.planetix.com/new-lands/construction"
+          },
+          "newlands-shop": {
+            "title": "NEWLANDS SHOP",
+            "description": "Obtain additional land tiles in Mission Control.",
+            "link": "https://missioncontrol.planetix.com/new-lands/shop"
+          },
+          "stake-burn-asset": {
+            "title": "STAKE & BURN ASSETS",
+            "description": "Stake or burn Newlands LLC assets.",
+            "link": "https://missioncontrol.planetix.com/new-lands/stake-burn"
+          }
+        },
+        "y_": {
+          "title": "Y_",
+          "y_shop": {
+            "title": "Y_ SHOP",
+            "description": "Obtain harvesting vehicles that collect waste.",
+            "link": "https://missioncontrol.planetix.com/y-space/shop"
+          },
+          "service-points": {
+            "title": "SERVICE POINTS",
+            "description": "Repair and rename Rovers.",
+            "link": "https://missioncontrol.planetix.com/y-space/service"
+          },
+          "stake-burn-asset": {
+            "title": "STAKE & BURN ASSETS",
+            "description": "Stake or burn Y_ assets.",
+            "link": "https://missioncontrol.planetix.com/y-space/stake-burn"
+          }
+        },
+        "luckycat": {
+          "title": "LUCKYCAT",
+          "lucky-raffle": {
+            "title": "LUCKY RAFFLES",
+            "description": "Participate in various raffles for great rewards.",
+            "link": "https://missioncontrol.planetix.com/lucky-cat/raffle"
+          },
+          "avatar": {
+            "title": "AVATAR",
+            "description": "Burn Avatars for in-game utility.",
+            "link": ""
+          }
+        },
+        "astrocap": {
+          "title": "ASTRO CAP",
+          "exchange-service": {
+            "title": "EXCHANGE SERVICE",
+            "description": "Swap IXT for Astro Gold.",
+            "link": "https://missioncontrol.planetix.com/astro-cap/swap"
+          }
+        },
+        "gws": {
+          "title": "GWS",
+          "waste-management": {
+            "title": "WASTE MANAGEMENT",
+            "description": "Sell waste or construct GWS machinery.",
+            "link": "https://missioncontrol.planetix.com/gws/waste-management"
+          },
+          "gws-shop": {
+            "title": "GWS SHOP",
+            "description": "Become an owner of Global Waste Systems.",
+            "link": "https://missioncontrol.planetix.com/gws/shop"
+          }
+        },
+        "gravity-grade": {
+          "title": "GRAVITY GRADE",
+          "gg-shop": {
+            "title": "GG SHOP",
+            "description": "Purchase GG Packs and Drops.",
+            "link": "https://missioncontrol.planetix.com/gravity-grade/shop"
+          }
+        },
+        "haveblue": {
+          "title": "HAVEBLUE",
+          "haveblue-shop": {
+            "title": "HAVEBLUE SHOP",
+            "description": "Acquire AOC Badges and IX Corpo Avatar Packs.",
+            "link": ""
+          }
+        },
+        "arcade": {
+          "title": "ARCADE",
+          "arcade": {
+            "title": "ARCADE",
+            "description": "Coming soon.",
+            "link": ""
+          }
+        }
+      },
+      "stake": {
+        "title": "Stake",
+        "overview": {
+          "title": "OVERVIEW",
+          "dashboard": {
+            "title": "Dashboard",
+            "description": "Overview of all your staking options.",
+            "link": "https://dashboard.ix.foundation/#/dashboard"
+          },
+          "earnings-overview": {
+            "title": "Earnings Overview",
+            "description": "Track your staking rewards.",
+            "link": "https://dashboard.ix.foundation/#/dashboard"
+          }
+        },
+        "stake": {
+          "title": "TOKEN STAKING",
+          "ixt": {
+            "title": "IXT",
+            "description": "Earn up to 29% APY.",
+            "link": "https://dashboard.ix.foundation/#/dashboard"
+          },
+          "lp": {
+            "title": "LP",
+            "description": "Stake IXT paired with MATIC at 33% APY.",
+            "link": "https://dashboard.ix.foundation/#/dashboard"
+          },
+          "capital": {
+            "title": "LEND CAPITAL",
+            "description": "Lend 100x IXT with USDT as collateral.",
+            "link": ""
+          },
+          "ixt-cat-raff": {
+            "title": "IXT CAT RAFF",
+            "description": "Officials links to all Planet IX contracts.",
+            "link": "https://dashboard.ix.foundation/#/dashboard/ixt-cat-raff"
+          },
+          "supply-liquidity": {
+            "title": "SUPPLY LIQUIDITY",
+            "description": "Support and secure the IXT ecosystem.",
+            "link": "https://dashboard.ix.foundation/#/dashboard"
+          }
+        },
+        "in-game-assets": {
+          "title": "IN-GAME ASSETS STAKING",
+          "territory": {
+            "title": "TERRITORY",
+            "description": "Daily players, transaction volume and more.",
+            "link": "https://dashboard.ix.foundation/#/dashboard/territories"
+          },
+          "energy": {
+            "title": "ENERGY",
+            "description": "Dashboard reflecting our NFT assets performance.",
+            "link": "https://dashboard.ix.foundation/#/dashboard/energy"
+          },
+          "governance": {
+            "title": "GOVERNANCE",
+            "description": "IX token vesting schedule.",
+            "link": "https://ix.foundation/"
+          },
+          "metashares": {
+            "title": "METASHARES",
+            "description": "IX Token holders, stakers and more.",
+            "link": "https://dashboard.ix.foundation/#/dashboard/metashare"
+          },
+          "landmarks": {
+            "title": "LANDMARKS",
+            "description": "Officials links to all Planet IX contracts.",
+            "link": "https://dashboard.ix.foundation/#/dashboard/landmarks"
+          },
+          "ixt-cat-raff": {
+            "title": "IXT CAT RAFF",
+            "description": "Officials links to all Planet IX contracts.",
+            "link": "https://dashboard.ix.foundation/#/dashboard/ixt-cat-raff"
+          },
+          "lend-capital": {
+            "title": "LEND CAPITAL",
+            "description": "Officials links to all Planet IX contracts.",
+            "link": ""
+          }
+        }
+      },
+      "community": {
+        "title": "Community",
+        "governance": {
+          "title": "GOVERNANCE",
+          "proposals": {
+            "title": "PROPOSALS",
+            "description": "Propose and decide on in-game changes and more.",
+            "link": ""
+          },
+          "discussion": {
+            "title": "DISCUSSIONS",
+            "description": "Discuss game updates, strategies and more.",
+            "link": ""
+          }
+        },
+        "news-social": {
+          "title": "NEWS & SOCIALS",
+          "twitter": {
+            "title": "TWITTER",
+            "description": "Announcements, game updates and sneak peeks.",
+            "link": "https://twitter.com/Planetix0"
+          },
+          "news": {
+            "title": "NEWS",
+            "description": "Read up on the latest news from Planet IX.",
+            "link": "https://planetix.com/comms/"
+          },
+          "discord": {
+            "title": "DISCORD",
+            "description": "Talk to our community, or chat with our team!",
+            "link": "https://discord.gg/planetix"
+          },
+          "chinese-forum": {
+            "title": "CHINESE FORUM",
+            "description": "Chat, learn and grow with the Chinese community.",
+            "link": ""
+          },
+          "telegram": {
+            "title": "TELEGRAM",
+            "description": "Game updates and announcements.",
+            "link": ""
+          }
+        }
+      },
+      "analytics": {
+        "title": "ANALYZE",
+        "analytics": {
+          "title": "ANALYTICS",
+          "game": {
+            "title": "GAME PERFORMANCE",
+            "description": "Daily players, transaction volumes and more.",
+            "link": ""
+          },
+          "nft": {
+            "title": "NFT PERFORMANCE",
+            "description": "Dashboard reflecting our NFT assets performance.",
+            "link": ""
+          },
+          "vesting": {
+            "title": "VESTING SCHEDULE",
+            "description": "IX token vesting schedule.",
+            "link": ""
+          },
+          "ixt": {
+            "title": "IXT PERFORMANCE",
+            "description": "IX Token holders, stakers and more.",
+            "link": ""
+          },
+          "smart-contracts": {
+            "title": "SMART CONTRACTS ",
+            "description": "Officials links to all Planet IX contracts.",
+            "link": ""
+          }
+        }
+      },
+      "menu": {
+        "addFunds": "Add Funds",
+        "account": "Account",
+        "logout": "Log out",
+        "connectWallet": "Connect Wallet"
+      }
+    }
+  }
+}

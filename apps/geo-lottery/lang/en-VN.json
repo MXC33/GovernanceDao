@@ -1,0 +1,15 @@
+{
+  "marketplace": {
+    "navigation": {
+      "terminal": "Trạm",
+      "inventory": "Kho",
+      "missionCtrl": "Kiểm soát sứ mệnh",
+      "netEmpire": "Netempire",
+      "taskMng": "Trình quản lý nhiệm vụ",
+      "manager": "Trình quản lý",
+      "build": "xây dựng",
+      "starterPack": "Gói khởi động",
+      "payments": "Thanh toán"
+    }
+  }
+}

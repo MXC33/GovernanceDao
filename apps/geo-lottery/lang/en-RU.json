@@ -1,0 +1,15 @@
+{
+  "marketplace": {
+    "navigation": {
+      "terminal": "Терминал",
+      "inventory": "Инвентарь",
+      "missionCtrl": "Центр управления",
+      "netEmpire": "Netempire",
+      "taskMng": "Диспетчер задач",
+      "manager": "Диспетчер",
+      "build": "сборка",
+      "starterPack": "Начальный пакет",
+      "payments": "Платежи"
+    }
+  }
+}
