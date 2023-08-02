@@ -1,4 +1,132 @@
 {
+  "general": {
+    "detailedInformation": "详细信息",
+    "claimAll": "一键领取",
+    "summary": "概览",
+    "not-available": "不可用",
+    "mc": "任务控制",
+    "disclaimer": "免责声明",
+    "rename-title": "重命名",
+    "nSelected": "{n} 个已选",
+    "accelerate": "加速",
+    "accelerateTask": "加速任务",
+    "previous": "上一页",
+    "back": "返回",
+    "cancel": "取消",
+    "close": "关闭",
+    "claim": "领取",
+    "confirm": "确认",
+    "continue": "继续",
+    "next": "下一步",
+    "disconnect": "断开连接",
+    "errorConnecting": "连接错误：",
+    "exit": "退出",
+    "upgrade": "升级",
+    "goToInventory": "前往库存",
+    "enter": "输入",
+    "attributes": "属性",
+    "incoming": "收到的信息",
+    "open": "打开",
+    "loading": "正在加载",
+    "nrgProd": "单位能量输出",
+    "total": "合计",
+    "one-time-purchase": "一键购买",
+    "visit": "前往访问",
+    "recommended": "建议",
+    "description": "描述",
+    "visitor": "请输入密码",
+    "wallet": "钱包:",
+    "newLands": "新大陆",
+    "astroCap": "星际兑换所",
+    "y-space": "Y_",
+    "gws": "环球废料处理系统",
+    "eternalab": "永恒实验室",
+    "astroCredits": "AC币",
+    "missionCtrl": "任务控制",
+    "price": "价格",
+    "free": "免费",
+    "tier": "层级",
+    "level": "等级",
+    "required": "要求",
+    "qty": "数量",
+    "qty-colon": "数量:",
+    "stand-by": "待命中",
+    "perks": "福利",
+    "ixt": "IXT",
+    "agold": "金币",
+    "agoldLite": "微金币",
+    "district": "区域",
+    "status": "状态:",
+    "manage-rent": "管理租赁",
+    "visit-ac": "访问星际兑换所",
+    "itemsOwnedText": "你持有的物品:",
+    "inInventory": "库存中:",
+    "itemsOwned": "你持有的物品: <strong>{count}</strong>",
+    "mission-control": "任务控制",
+    "balance": "余额:",
+    "inactive": "未激活",
+    "active": "已激活",
+    "pending": "列队中",
+    "product": "产物",
+    "details": "明细",
+    "burn": "燃烧",
+    "no-burn-items": "你没有可燃烧的物品。",
+    "no-items": "没有物品...",
+    "selected": "已选",
+    "repair": "维修",
+    "burn-assets": "燃烧资产",
+    "purchase": "购买",
+    "amount": {
+      "max": "最大",
+      "min": "最小"
+    }
+  },
+  "wallet": {
+    "title": "连接钱包",
+    "welcomeMessage": "连接我们其中一个合作方的钱包",
+    "signing": {
+      "title": "在您的钱包内确认交易。",
+      "description": "处理转账需要花费一点时间，如果需要取消该交易，请在您的钱包中拒绝交易。"
+    },
+    "minting": {
+      "title": "正在将数据写入区块链",
+      "description": "稍等，正在验证您的交易。"
+    },
+    "approving": {
+      "title": "批准中",
+      "description": "正在批准您的资产进行质押。如果您想取消此操作，请在您的钱包中拒绝交易。"
+    },
+    "minting-pix": {
+      "title": "正在区块链中铸造您的地段",
+      "description": "正在将您的地段写入区块链中。"
+    },
+    "nonce": {
+      "title": "正在获取签名",
+      "description": "正在获取您的请求签名，请稍等几秒钟。"
+    },
+    "second-transaction": {
+      "title": "请等待第二笔交易。",
+      "description": "您需要等待第二笔交易来领取您的人像。这可能需要最多1分钟的时间！"
+    },
+    "playerProfile": {
+      "notLoggedIn": "玩家个人资料未登录。",
+      "playerConnecting": "玩家个人资料（连接中）",
+      "loggedInAs": "已登录为："
+    }
+  },
+  "layouts": {
+    "headers": {
+      "accountBalance": "账户余额:",
+      "ixt": "IXT:",
+      "dashboard": "IX 基金会",
+      "terminal": "终端",
+      "inventory": "库存",
+      "missionControl": "任务控制",
+      "game": "游戏",
+      "planetIX": "第九星球",
+      "automatedTrans": "自动传输"
+    }
+  },
   "marketplace": {
     "navigation": {
       "terminal": "终端",

@@ -1,4 +1,121 @@
 {
+  "general": {
+    "accelerate": "Pabilisin",
+    "accelerateTask": "Pabilisin ang Gawain",
+    "back": "Ibalik",
+    "cancel": "Kanselahin",
+    "close": "Isara",
+    "claim": "Angkinin",
+    "confirm": "Kumpirmahin",
+    "continue": "Ipagpatuloy",
+    "disconnect": "Idiskonekta",
+    "errorConnecting": "MALI SA PAGKUNEKTA",
+    "goToInventory": "Pumunta sa imbentaryo",
+    "enter": "Pumasok",
+    "incoming": "Natanggap ang mensahe",
+    "open": "Bukas",
+    "loading": "Pagkarga",
+    "nrgProd": "Paglabas ng Enerhiya bawat",
+    "total": "kabuuan",
+    "visit": "Bumisita sa Korporasyon",
+    "recommended": "Inirekomenda",
+    "visitor": "Pakipasok ang password",
+    "amount": {
+      "max": "Max",
+      "min": "Min"
+    },
+    "transactions": {
+      "mintTransfer": "Mint at ilipat",
+      "confirm": "Kumpirmahin ang transaksyon sa iyong nakakonektang wallet",
+      "descriptions": {
+        "processing": "Ang pagpoproseso ng transaksyon ay magtatagal ng ilang sandali. Kung gusto mong kanselahin ang pagpapatakbong ito, mangyaring tanggihan ang transaksyon sa iyong wallet app."
+      }
+    },
+    "collected": {
+      "waste": "Basura",
+      "collectedWaste": "Nakolektang Basura",
+      "left": "Kaliwa",
+      "youMust": "Kailangan mong ganap na linisin ang isang TILE mula sa BASURA para makuha ito."
+    },
+    "avatars": {
+      "proxy": "Proxy ng Pagbabago",
+      "seina": "Seina",
+      "jeremiah": "Jeremiah",
+      "evePryde": "Eve-Pryde",
+      "buck": "Buck"
+    },
+    "noItemsFound": {
+      "no": "Hindi",
+      "itemsFound": "Nahanap na mga bagay",
+      "noFull": "Hindi matagpuan ang bagay"
+    },
+    "navigation": {
+      "terminal": "Terminal",
+      "inventory": "Imbentaryo",
+      "missionCtrl": "Mission Control",
+      "netEmpire": "Netempire",
+      "taskMng": "Tagapangasiwa ng Gawain",
+      "manager": "Tagapamahala",
+      "build": "bumuo",
+      "starterPack": "Panimulang pakete",
+      "payments": "Mga pagbabayad"
+    },
+    "timeCost": {
+      "hours": "Oras",
+      "cost": "Gastos"
+    },
+    "build": {
+      "overview": "Pangkalahatang-ideya",
+      "build": "Bumuo"
+    },
+    "search": {
+      "example": "Halimbawa: SE LE#329801"
+    }
+  },
+  "wallet": {
+    "title": "Ikonekta ang Wallet",
+    "welcomeMessage": "Kumonekta sa isa sa aming mga magagamit na tagapagtustos ng wallet",
+    "signing": {
+      "title": "KUMPIRMAHIN ANG TRANSAKSIYON SA IYONG KONEKTADO NA WALLET",
+      "description": "Ang pagpoproseso ng transaksyon ay magtatagal ng ilang sandali. Kung gusto mong kanselahin ang pagpapatakbong ito, mangyaring tanggihan ang transaksyon sa iyong wallet app."
+    },
+    "minting": {
+      "title": "PAGSULAT SA KASULATAN",
+      "description": "Kumapit ka. Mapapatunayan ang iyong transaksyon sa lalong madaling panahon."
+    },
+    "approving": {
+      "title": "NAGPAPATIBAY",
+      "description": "Ang pag-apruba sa iyong ari-arian na itataya. Kung gusto mong kanselahin ang pagpapatakbong ito, mangyaring tanggihan ang transaksyon sa iyong wallet app."
+    },
+    "minting-pix": {
+      "title": "MINTING IYONG PIX",
+      "description": "Pag-minting ng iyong mga pix sa Chain."
+    },
+    "playerProfile": {
+      "notLoggedIn": "Ang profile ng manlalaro ay hindi naka-log in",
+      "playerConnecting": "Profile ng manlalaro (kumokonekta)",
+      "loggedInAs": "Naka-log in bilang"
+    },
+    "payments": {
+      "chooseMethod": "Pumili ng Paraan ng Pagbabayad",
+      "matic": "matic",
+      "usdt": "usdt",
+      "ixt": "ixt"
+    }
+  },
+  "layouts": {
+    "headers": {
+      "accountBalance": "Balanse sa account:",
+      "ixt": "IXT:",
+      "terminal": "TERMINAL",
+      "dashboard": "IX Foundation",
+      "inventory": "Imbentaryo",
+      "missionControl": "Mission Control",
+      "game": "Laro",
+      "planetIX": "Planet IX",
+      "automatedTrans": "Mga Awtomatikong Pagpapadala"
+    }
+  },
   "marketplace": {
     "navigation": {
       "terminal": "Terminal",

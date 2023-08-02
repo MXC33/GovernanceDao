@@ -7,7 +7,7 @@ h1 HOME
 
 <script lang="ts" setup>
 useHead({
-  title: "Home | PlanetIX"
+  title: "Home | Geo Lottery | PlanetIX"
 })
 
 </script>
