@@ -1,11 +1,11 @@
 <template lang="pug">
-VList(w="full")
-  CollectionFilterButtonContainer(:is-open="isOpen" pos="sticky top-[calc(12rem+var(--header-offset))] md:!top-[calc(0rem+var(--header-offset))]")
+VList(w="full" overflow-x="auto")
+  CollectionFilterButtonContainer(:is-open="isOpen")
 
   VList.no-scrollbar(max-w="md:full" w="md:full" overflow-x="scroll" bg="gray-900" mx="lt-md:-4")
     table.base-table(max-w="full")
       colgroup()
-        col(v-if="selectable" :style="{width: `${columnWidth}`}")
+        col(v-if="selectable" :style="{width: `${columnWidth}`}" flex-grow="0" flex-shrink="0")
 
         col(v-for="column in columns" :style="getColumnStyle(column)")
 
@@ -19,8 +19,8 @@ VList(w="full")
 </template>
 
 <script setup lang="ts" generic="Row extends TableRow">
-import type { CollectionContext } from '~/composables/useCollection';
-import type { TableColumn, TableRow } from '~/composables/useTable';
+import type { CollectionContext } from '~/composables/useCollection'
+import type { TableColumn, TableRow } from '~/composables/useTable'
 
 const selectedItems = defineModel<number[]>()
 
@@ -41,7 +41,6 @@ const { selectable, columns, isOpen, loading, rows, id, colWidth, context } = de
 
 const { sort } = useTableSort(id)
 const { sortRows } = useTable()
-const { isDesktop } = useDevice()
 
 const sortedRows = computed(() =>
   sortRows(columns, rows, sort.value)
@@ -55,46 +54,48 @@ const getColumnStyle = (item: TableColumn<Row>) => {
 
   if (!item.width) {
 
-    return getStyle(colWidth ?? isMobile.value ? 150 : 200)
+    return getStyle(colWidth ?? isMobile.value ? 250 : 250)
   } else if (isOpen) {
 
-    getStyle(colWidth ?? isMobile.value ? 150 : 100)
+    getStyle(colWidth ?? isMobile.value ? 250 : 250)
   } else
 
     return getStyle(item.width)
 }
 
 const columnWidth = computed(() => {
-  if (!isMobile.value && !isOpen) {
+  if (!isMobile.value) {
     switch (context) {
       case 'collection':
-        return '48px'
+        return '56px'
       case 'my-assets':
-        return '27px'
+        return '56px'
       case 'incoming-bids':
-        return '55px'
+        return '56px'
       case 'outgoing-bids':
-        return '48px'
+        return '56px'
       case 'active-listings':
         return '48px'
       case 'activity':
-        return '48px'
+        return '30px'
       default:
         return '48px'
     }
-  } else if (!isMobile.value && isOpen) {
-    console.log('we are here')
-    switch (context) {
-      case 'collection':
-        return '55px'
-      case 'my-assets':
-        return '55px'
-      case 'incoming-bids':
-        return '55px'
-      case 'outgoing-bids':
-        return '55px'
-    }
   }
+
+  // else if (isMobile.value) {
+  //   console.log("is mobile")
+  //   switch (context) {
+  //     case 'collection':
+  //       return '48px'
+  //     case 'my-assets':
+  //       return '52px'
+  //     case 'incoming-bids':
+  //       return '55px'
+  //     case 'outgoing-bids':
+  //       return '55px'
+  //   }
+  // }
 
 })
 

@@ -1,16 +1,16 @@
 <template lang="pug">
-tbody(divide-y="1")
-  TableRow(v-for="(row, index) in rows" :key="row.originalIndex ?? index")
-    TableCell(v-if="selectable" :context="context") 
-      InputCheckbox(:model-value="isSelected(index)" @update:modelValue="val => onSelect(index, val)")
+VList(w="full" flex-shrink="0")
+  TableNewRow(v-for="(row, index) in rows" :key="row.originalIndex ?? index")
+    HList(v-if="selectable" :context="context" b="b-1 gray-600" min-h="80px" items="center" p="l-4 r-4 md:(l-6 r-6)")
+      InputCheckbox(:model-value="isSelected(index)" @update:modelValue="val => onSelect(index, val)" :space-false="true")
 
-    TableCell(v-for="column in columns" pos="on-buttons:(sticky right-0)" :buttons="column.type == 'buttons'") 
+    TableNewCell(v-for="column in columns" pos="on-buttons:(sticky right-0)" :buttons="column.type == 'buttons'" p="on-buttons:r-6") 
       template(v-if="loading")
         HelperSkeleton(h="6")
 
       template(v-else)
         HList(v-if="column.type == 'buttons' && !isMobile" space-x="3" justify="end" w="full")
-          slot(:name="getColumnKey(column)" :buttons="column.buttons" :row="row" )
+          slot(:name="getColumnKey(column)" :buttons="column.buttons" :row="row")
             TableButton(:row="row" :button="button" v-for="button in column.buttons") {{ button.text }}
 
         HList(v-else-if="column.type == 'buttons'")
@@ -19,15 +19,13 @@ tbody(divide-y="1")
             div(rounded="full" bg="white" w="1" h="1")
             div(rounded="full" bg="white" w="1" h="1")
 
-          HList(v-else-if="openRows.includes(index)" space-x="3" justify="end" w="full")
+          HList(v-else-if="openRows.includes(index)" space-x="3" justify="end")
             CloseIcon(w="5" fill="ix-ne" @click="closeMenu(index)")
             slot(:name="getColumnKey(column)" :buttons="column.buttons" :row="row" )
               TableButton(:row="row" :button="button" v-for="button in column.buttons") {{ button.text }}
 
         slot(v-else :name="`item-${column.rowKey}`" :row="row" :column="column")
           TableCellValue(:column="column" :row="row" :context="context")
-
-
 </template>
 
 <script setup lang="ts" generic="Row extends TableRow">

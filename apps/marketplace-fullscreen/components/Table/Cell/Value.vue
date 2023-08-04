@@ -1,20 +1,20 @@
 
 <template lang="pug">
-VList(flex-shrink="0" whitespace="nowrap")
+VList(flex-shrink="0" whitespace="nowrap" p="md:r-6" flex-grow="lt-md:1")
   Currency(:value="roundToDecimals(Number(value), 4)" type="ixt" v-if="column.type == 'ixt' && !isMobile")
 
   Currency(:value="ixtToUSD(value)" type="usd" v-else-if="column.type == 'usd' && !isMobile")
 
-  VList(v-else-if="isMobile && context == 'collection'" justify="end" items="end" pr="4" b="1 red")
+  VList(v-else-if="isMobile && context == 'collection'" pr="4" w="full" items="end")
     Currency(:value="roundToDecimals(Number(value), 4)" type="ixt")
 
     Currency(:value="ixtToUSD(value)" type="usd")
 
-  ContractAdress(:adress="value" v-else-if="column.type == 'contractAdress' && !isMobile")
+  ContractAdress(:adress="value" v-else-if="column.type == 'contractAdress'")
 
   span(v-else-if="column.type == 'date' && !isMobile") {{ getDate(value) }}
 
-  span(v-else-if="isYou && !isMobile" font="bold") {{value}}
+  span(v-else-if="isYou" font="bold") {{value}}
 
   span(v-else) {{value}}
 
@@ -34,8 +34,6 @@ const { column, row, context } = defineProps<{
 const { getValue } = useTable()
 const { ixtToUSD } = useIXTPrice()
 const { isMobile } = useDevice()
-
-console.log(context, 'context from cell value')
 
 const value = computed(() => getValue(column, row))
 

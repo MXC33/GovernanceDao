@@ -1,5 +1,5 @@
 <template lang="pug">
-div(v-if="amountSelected != 0" w="full" p="4 md:3" pos="sticky bottom-0" z="2" bg="ix-black")
+div(v-if="amountSelected != 0" w="full" p="4 md:3" pos="sticky bottom-0" z="2" bg="ix-black" b="lt-md:t-1 gray-600")
   div(flex="~ col md:row" space-x="md:3" space-y="lt-md:4" items="md:center" justify="between" px="0 md:5" w="full")
 
     HList(font="bold" text="md" space-x="md:8" flex-grow="1" items="center" w="full" justify="lt-md:between")

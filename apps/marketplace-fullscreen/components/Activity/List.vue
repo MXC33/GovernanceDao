@@ -1,5 +1,5 @@
 <template lang="pug">
-Transition(name="fade" mode="out-in" )
+Transition(name="fade" mode="out-in")
   Table(:columns="columns" :rows="items" id="activity" :loading="loading")
     template(#item-event="{row}")
       HList(space-x="3")

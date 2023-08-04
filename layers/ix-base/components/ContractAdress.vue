@@ -1,7 +1,7 @@
 <template lang="pug">
 NuxtLink(:to="link" :external="true" target="_blank" v-if="adress") 
   span(v-if="isYourWalletAddress" font="bold") You
-  template(v-else) {{ strippedAdress }}
+  template(v-else ) {{ strippedAdress }}
 
 </template>
 

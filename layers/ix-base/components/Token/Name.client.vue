@@ -1,12 +1,14 @@
 <template lang="pug">
-div(text="ellipsis" w="[calc(100%)]" whitespace="nowrap" v-if="!noOverflow") {{ name }} 
+div(text="ellipsis" w="[calc(100%)]" whitespace="nowrap" v-if="!noOverflow" :max-w="contextWidth") {{ name }} 
 div(v-else) {{ name }} 
 </template>
 
 <script lang="ts" setup>
+import type { CollectionContext } from '@ix/marketplace/composables/useCollection';
 import type { AnyToken } from '~/composables/Token/useTokens';
 
 const props = defineProps<{
+  context?: CollectionContext
   token: AnyToken,
   isShort?: boolean,
   noOverflow?: boolean,
@@ -16,6 +18,7 @@ const props = defineProps<{
 const fullName = await useTokenName(props.token, props.noChainName)
 
 const name = computed(() => {
+
   if (smallName.value)
     return smallName.value
 
@@ -34,6 +37,13 @@ const smallName = computed(() => {
   }
 })
 
+const contextWidth = computed(() => {
+  if (props.context != 'collection')
+    return 'lt-md:20'
 
+  else
+    return 'lt-md:50;'
+
+})
 
 </script>
