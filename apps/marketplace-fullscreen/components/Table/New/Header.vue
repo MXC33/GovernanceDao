@@ -3,7 +3,7 @@ HList(bg="gray-800" flex-shrink="0" min-w="full" w="full")
   HList(bg="gray-900" z="3" font="400" color="gray-200" whitespace="nowrap" pos="sticky top-0" items="center" w="full" max-w="full")
 
     HList(min-h="49px" flex-shrink="0" items="center" b="b-1 gray-600" p="t-2 b-2 l-4 r-4 md:(t-3 b-3 l-6 r-6)")
-      InputCheckbox(v-if="selectable" :model-value="allSelected" @update:modelValue="onSelectAll" :space-false="true")
+      InputCheckbox(v-if="selectable" v-model="selectAllChecked")
 
     template(v-for="(column, index) in columns")
       HList(v-if="column.type == 'buttons' && !isMobile" min-w="250px" max-w="full" items="center" b="b-1 gray-600" p="t-3 b-3 r-6") {{ $t('general.action') }}
@@ -11,7 +11,6 @@ HList(bg="gray-800" flex-shrink="0" min-w="full" w="full")
       TableNewCell(v-else-if="column.type == 'buttons'" p="t-3 b-3 r-4" :is-open="isMenuOpen" :is-neutral="true" :is-button="true") {{ $t('general.action') }}
 
       TableNewCellHead(v-else :column="column" :index="index" :sortField="sort" @select-field="onClickSort", @toggle-sort="onClickToggle" :context="context") {{ column.label }}
-
 
 </template>
 
@@ -33,23 +32,25 @@ const { isMobile } = useDevice()
 
 const selectedItems = defineModel<number[]>()
 
-const openRows = ref<number[]>([])
-
 const isMenuOpen = computed(() => {
   return selectedItems.value ? selectedItems.value.length > 0 : false
-});
+})
 
-
-const allSelected = computed(() =>
+const isAllSelected = computed(() =>
   (selectedItems.value ?? []).length == rows.length && rows.length > 0
 )
 
-const onSelectAll = () => {
-  if (allSelected.value)
-    return selectedItems.value = []
-
-  selectedItems.value = rows.map((_, index) => index)
-}
+const selectAllChecked = computed({
+  get: () =>
+    isAllSelected.value
+  ,
+  set: (selected: boolean) => {
+    if (!selected)
+      return selectedItems.value = []
+    else
+      return selectedItems.value = rows.map((_, index) => index)
+  }
+})
 
 const { toggleSortDirection, selectSortField, sort, isServerSort } = useTableSort(id)
 
