@@ -10,7 +10,7 @@ Transition(name="fade" mode="out-in")
 
   //- Table(v-else :columns="columns" :rows="items" :id="context" :loading="loading" :isOpen="showFilters" :selectable="true" v-model="rowsAsSelected" :context="context")
 
-  TableNew(v-else :columns="columns" :rows="items" :id="context" :loading="loading" :isOpen="showFilters" :selectable="true" v-model="rowsAsSelected" :context="context")
+  Table(v-else :columns="columns" :rows="items" :id="context" :loading="loading" :isOpen="showFilters" :selectable="true" v-model="rowsAsSelected" :context="context")
 
     template(#item-name="{row}")
       TableCellToken(:token="row" @click="onClickItem(row)" max-w="full" :context="context")

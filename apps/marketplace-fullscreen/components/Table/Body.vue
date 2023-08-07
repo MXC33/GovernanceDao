@@ -1,52 +1,41 @@
 <template lang="pug">
-tbody(divide-y="1")
-  TableRow(v-for="(row, index) in rows" :key="row.originalIndex ?? index")
-    TableCell(v-if="selectable" :context="context") 
-      InputCheckbox(:model-value="isSelected(index)" @update:modelValue="val => onSelect(index, val)")
+//- VList(w="full" flex-shrink="0")
+template(v-for="(row, index) in rows" :key="row.originalIndex ?? index")
+  TableCellWrapper(v-if="selectable" :context="context" justify="center" pos="sticky left-0" bg="gray-900" z="2" shadow="on-scrolled:right" :scrolled="scrolledPastStart" transition="all")
+    InputCheckbox(:model-value="isSelected(index)" @update:modelValue="val => onSelect(index, val)")
 
-    TableCell(v-for="column in columns" pos="on-buttons:(sticky right-0)" :buttons="column.type == 'buttons'") 
-      template(v-if="loading")
-        HelperSkeleton(h="6")
+  TableCell(v-for="column in columns" :sticky="column.type == 'buttons'" :shadow="false") 
+    template(v-if="loading")
+      HelperSkeleton(h="6" flex-grow="1" mr="6")
 
-      template(v-else)
-        HList(v-if="column.type == 'buttons' && !isMobile" space-x="3" justify="end" w="full")
-          slot(:name="getColumnKey(column)" :buttons="column.buttons" :row="row" )
-            TableButton(:row="row" :button="button" v-for="button in column.buttons") {{ button.text }}
+    template(v-else)
+      //- ... MENU
+      HList(v-if="column.type == 'buttons'" w="full" space-x="3" pr="4" backdrop="blur-sm")
+        TableButtonGroup(v-if="isMobile")
+          TableButton(:row="row" :button="button" v-for="button in column.buttons") {{ button.text }}
 
-        HList(v-else-if="column.type == 'buttons'")
-          VList(v-if="!openRows.includes(index)" bg="gray-600" w="8" h="8" justify="center" items="center" space-y="1" py="2" cut="bottom-right s-sm b-gray-600" @click="actionMenu(index)")
-            div(rounded="full" bg="white" w="1" h="1")
-            div(rounded="full" bg="white" w="1" h="1")
-            div(rounded="full" bg="white" w="1" h="1")
+        TableButton(v-else :row="row" :button="button" v-for="button in column.buttons") {{ button.text }}
 
-          HList(v-else-if="openRows.includes(index)" space-x="3" justify="end" w="full")
-            CloseIcon(w="5" fill="ix-ne" @click="closeMenu(index)")
-            slot(:name="getColumnKey(column)" :buttons="column.buttons" :row="row" )
-              TableButton(:row="row" :button="button" v-for="button in column.buttons") {{ button.text }}
-
-        slot(v-else :name="`item-${column.rowKey}`" :row="row" :column="column")
-          TableCellValue(:column="column" :row="row" :context="context")
-
-
+      slot(v-else :name="`item-${column.rowKey}`" :row="row" :column="column")
+        TableCellValue(:column="column" :row="row" :context="context")
 </template>
 
 <script setup lang="ts" generic="Row extends TableRow">
 import type { CollectionContext } from '~/composables/useCollection'
 import type { TableColumn, TableRow } from '~/composables/useTable'
-import CloseIcon from '~/assets/icons/close.svg'
 
 const { getColumnKey } = useTable()
 
 const { isMobile } = useDevice()
 
-
-const { rows, columns, loading, selectable, showMore } = defineProps<{
+const { rows, columns, loading, selectable } = defineProps<{
   columns: TableColumn<Row>[],
   rows: Row[],
+  scrolledPastStart?: boolean,
+  scrolledPastEnd?: boolean,
   loading?: boolean,
   selectable?: boolean,
   context?: CollectionContext
-  showMore?: boolean
 }>()
 
 const selectedItems = defineModel<number[]>()
@@ -66,25 +55,5 @@ const onSelect = (index: number, val: boolean) => {
   if (val && !hasItem)
     return selectedItems.value = [...selectedItems.value, index]
 }
-
-const isOpen = shallowRef(showMore)
-
-const openRows = ref<number[]>([])
-
-const actionMenu = (index: number) => {
-  selectedItems.value?.includes(index)
-  isSelected(index)
-
-  if (openRows.value.includes(index)) {
-    openRows.value = openRows.value.filter(row => row !== index)
-  } else {
-    openRows.value.push(index)
-  }
-}
-
-const closeMenu = (index: number) => {
-  openRows.value = openRows.value.filter(row => row !== index)
-}
-
 
 </script>

@@ -1,9 +1,8 @@
-
 <template lang="pug">
 TableCellHeadWrapper()
-  HList(v-if="column.sortable" cursor="pointer" space-x="1"  @click="onClickSort" flex="~ row" items="center" :justify="justifyCells" :p="paddingRight" :mobile="isMobile" color="on-active:white" :active="isActive" transition="all")
+  HList(v-if="column.sortable" cursor="pointer" space-x="1"  @click="onClickSort" flex="~ row" items="center" color="on-active:white" :active="isActive" transition="all")
     div()
-      slot
+      slot()
 
     Transition(name="fade" mode="out-in")
       SortIcon(v-if="!isActive" w="4")
@@ -11,7 +10,6 @@ TableCellHeadWrapper()
 
   HList(v-else items="center" justify="start")
     slot
-      
 </template>
 
 <script setup lang="ts" generic="T extends TableRow">
@@ -47,28 +45,6 @@ const onClickSort = () => {
 
   return emit("selectField", column, index)
 }
-
-const paddingRight = computed(() => {
-  if (isMobile.value && context != 'collection') {
-    return 'r-0'
-  } else if (isMobile.value && context == 'collection') {
-    return 'r-3'
-  } else if (!isMobile.value) {
-    return 'r-0'
-  }
-})
-
-const justifyCells = computed(() => {
-  if (isMobile.value && context != 'collection') {
-    return 'start'
-  } else if (isMobile.value && context == 'collection') {
-    return 'end'
-  } else if (!isMobile.value && context == 'collection') {
-    return 'start'
-  }
-
-})
-
 
 </script>
 

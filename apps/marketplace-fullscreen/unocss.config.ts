@@ -7,6 +7,10 @@ export default defineConfig({
     fontFamily: {
       foundry: ['Foundry Gridnik', 'sans-serif'],
     },
+    boxShadow: {
+      right: '7px 0 7px #000',
+      left: '-7px 0 7px #000',
+    },
     fontSize: {
       'xs': ['var(--font-size-xs)', '1rem'],
       'sm': ['var(--font-size-sm)', '1.25rem'],

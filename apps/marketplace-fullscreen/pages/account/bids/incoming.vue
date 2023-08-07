@@ -53,6 +53,7 @@ const columns: TableColumn<IXToken>[] = [
     label: "Expires", rowKey: "bid.due_date", type: 'date', sortable: true
   },
   {
+    width: 'auto',
     type: 'buttons', buttons: [
       //   {
       //   type: 'secondary', text: 'counter', onClick: (token) => {

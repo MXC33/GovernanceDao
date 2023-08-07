@@ -27,7 +27,7 @@ export interface TableSort {
 
 interface TableColumnBase {
   type?: string,
-  width?: number
+  width?: number | 'auto'
 }
 
 export interface TableButton<T extends TableRow> {

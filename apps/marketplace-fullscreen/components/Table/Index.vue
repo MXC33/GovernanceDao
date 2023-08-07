@@ -1,20 +1,15 @@
 <template lang="pug">
-VList(w="full" overflow-x="auto")
+VList(w="full" max-w="full")
   CollectionFilterButtonContainer(:is-open="isOpen")
 
-  VList.no-scrollbar(max-w="md:full" w="md:full" overflow-x="scroll" bg="gray-900" mx="lt-md:-4")
-    table.base-table(max-w="full")
-      colgroup()
-        col(v-if="selectable" :style="{width: `${columnWidth}`}" flex-grow="0" flex-shrink="0")
+  div.no-scrollbar(grid="~ row-gap-0 gap-x-3" max-w="full" w="full" bg="gray-900" overflow-x="on-scrollable:scroll" :style="gridStyle" :scrollable="!!context" ref="scrollElement")
 
-        col(v-for="column in columns" :style="getColumnStyle(column)")
+    TableHeader(v-model="selectedItems" :columns="columns" :rows="sortedRows" :selectable="selectable" :id="id" :context="context")
 
-      TableHeader(v-model="selectedItems" :columns="columns" :rows="sortedRows" :selectable="selectable" :id="id" :context="context")
-
-      TableBody(v-model="selectedItems" :loading="loading" :rows="sortedRows" :columns="columns" :id="id" :selectable="selectable" :context="context")
-        template(#[getColumnKey(column)]="{row}" v-for="column in columns")
-          slot(:name="`item-${column.rowKey}`" :row="row" v-if="column.type != 'buttons'")
-          slot(name="item-buttons" v-else :row="row")
+    TableBody(v-model="selectedItems" :loading="loading" :rows="sortedRows" :columns="columns" :selectable="selectable" :context="context" :scrolled-past-end="hasScrolledPastEnd" :scrolled-past-start="hasScrolled")
+      //- Slots for overriding table column data with template(#item-name="{row}") etc
+      template(#[getColumnKey(column)]="{row}" v-for="column in columns")
+        slot(:name="`item-${column.rowKey}`" :row="row" v-if="column.type != 'buttons'")
 
 </template>
 
@@ -23,11 +18,16 @@ import type { CollectionContext } from '~/composables/useCollection'
 import type { TableColumn, TableRow } from '~/composables/useTable'
 
 const selectedItems = defineModel<number[]>()
-
+const scrollElement = ref()
 const { getColumnKey } = useTable()
 
-const { isMobile } = useDevice()
+const { x: scrollX, arrivedState } = useScroll(scrollElement)
 
+const hasScrolled = computed(() => arrivedState.left == false)
+const hasScrolledPastEnd = computed(() => arrivedState.right == false)
+watch(arrivedState, (a) => {
+  console.log("ARRIVE", a)
+})
 const { selectable, columns, isOpen, loading, rows, id, colWidth, context } = defineProps<{
   columns: TableColumn<Row>[],
   rows: Row[],
@@ -46,67 +46,24 @@ const sortedRows = computed(() =>
   sortRows(columns, rows, sort.value)
 )
 
-const getColumnStyle = (item: TableColumn<Row>) => {
-  const getStyle = (width: number) => ({
-    'width': `${width}px`,
-    'min-width': `${width}px`
-  })
+const gridStyle = computed(() => {
+  const columnStyles = columns.map((item) => {
+    if (!item.width)
+      return 'minmax(150px, 1fr)'
 
-  if (!item.width) {
+    if (item.width == 'auto')
+      return 'minmax(max-content, auto)'
+    else
+      return `minmax(${item.width}px, 2fr)`
+  }).join(' ')
 
-    return getStyle(colWidth ?? isMobile.value ? 250 : 250)
-  } else if (isOpen) {
+  const selectableStyle = selectable ? '56px ' : ''
 
-    getStyle(colWidth ?? isMobile.value ? 250 : 250)
-  } else
-
-    return getStyle(item.width)
-}
-
-const columnWidth = computed(() => {
-  if (!isMobile.value) {
-    switch (context) {
-      case 'collection':
-        return '56px'
-      case 'my-assets':
-        return '56px'
-      case 'incoming-bids':
-        return '56px'
-      case 'outgoing-bids':
-        return '56px'
-      case 'active-listings':
-        return '48px'
-      case 'activity':
-        return '30px'
-      default:
-        return '48px'
-    }
+  return {
+    'grid-template-columns': selectableStyle + columnStyles
   }
-
-  // else if (isMobile.value) {
-  //   console.log("is mobile")
-  //   switch (context) {
-  //     case 'collection':
-  //       return '48px'
-  //     case 'my-assets':
-  //       return '52px'
-  //     case 'incoming-bids':
-  //       return '55px'
-  //     case 'outgoing-bids':
-  //       return '55px'
-  //   }
-  // }
-
 })
 
 </script>
 
-<style scoped>
-table {
-  display: table;
-  width: 100%;
-  border-spacing: 0;
-  table-layout: fixed;
-  overflow-x: auto;
-}
-</style>
+<style scoped></style>

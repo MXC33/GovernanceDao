@@ -27,7 +27,7 @@ await fetchCollection()
 setupCollectionListeners()
 
 const columns: TableColumn<IXToken>[] = [
-  { label: "Asset", rowKey: "name" },
+  { label: "Asset", rowKey: "name", width: 200 },
   {
     label: "Offer price", rowKey: "bid.price", type: 'ixt', sortable: true
   },
@@ -40,7 +40,7 @@ const columns: TableColumn<IXToken>[] = [
     }, type: 'text'
   },
   {
-    label: "Quantity", rowKey: "bid.quantity", type: 'text', width: 100
+    label: "Quantity", rowKey: "bid.quantity", type: 'text', width: 'auto'
   },
   {
     label: "Expiration", rowKey: "bid.due_date", type: 'date', sortable: true
@@ -52,14 +52,14 @@ const columns: TableColumn<IXToken>[] = [
   },
   {
     type: 'buttons',
-    width: 300,
+    width: 'auto',
     buttons: [{
-      type: 'secondary', text: 'cancel', onClick: (token) => {
+      type: 'secondary', text: 'remove bid', onClick: (token) => {
         cancelBidOnClick(token)
       },
     },
     {
-      type: 'primary', text: 'update', onClick: (token) => {
+      type: 'primary', text: 'update bid', onClick: (token) => {
         updateBidOnClick(token)
       },
     }]
