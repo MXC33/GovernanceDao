@@ -2,11 +2,11 @@
 VList(w="full" flex-shrink="0")
   TableNewRow(v-for="(row, index) in rows" :key="row.originalIndex ?? index")
     HList(v-if="selectable" :context="context" b="b-1 gray-600" min-h="80px" items="center" p="l-4 r-4 md:(l-6 r-6)")
-      InputCheckbox(:model-value="isSelected(index)" @update:modelValue="val => onSelect(index, val)" :space-false="true")
+      InputCheckbox(:model-value="isSelected(index)" @update:modelValue="val => onSelect(index, val)")
 
     TableNewCell(v-for="column in columns" pos="on-buttons:(sticky right-0)" :buttons="column.type == 'buttons'" p="on-buttons:r-6 on-mobile:!r-4" :is-button="isButtonCell" :is-open="isMenuOpen" :mobile="isMobile") 
       template(v-if="loading")
-        HelperSkeleton(h="6")
+        HelperSkeleton(h="6" flex-grow="1" mr="6")
 
       template(v-else)
         HList(v-if="column.type == 'buttons' && !isMobile" space-x="3" justify="end" w="full")
