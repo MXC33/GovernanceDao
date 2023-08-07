@@ -46,26 +46,6 @@ const onClickSort = () => {
   return emit("selectField", column, index)
 }
 
-// const paddingRight = computed(() => {
-//   if (isMobile.value && context != 'collection') {
-//     return 'r-0'
-//   } else if (isMobile.value && context == 'collection') {
-//     return 'r-3'
-//   } else if (!isMobile.value) {
-//     return 'r-0'
-//   }
-// })
-
-// const justifyCells = computed(() => {
-//   if (isMobile.value && context == 'collection') {
-//     return 'end'
-//   } else if (isMobile.value && context == 'collection') {
-//     return 'end'
-//   } else if (!isMobile.value && context == 'collection') {
-//     return 'start'
-//   }
-// })
-
 </script>
 
 <style scoped></style>

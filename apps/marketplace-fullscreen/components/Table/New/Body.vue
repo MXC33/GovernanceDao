@@ -4,7 +4,7 @@ VList(w="full" flex-shrink="0")
     HList(v-if="selectable" :context="context" b="b-1 gray-600" min-h="80px" items="center" p="l-4 r-4 md:(l-6 r-6)")
       InputCheckbox(:model-value="isSelected(index)" @update:modelValue="val => onSelect(index, val)" :space-false="true")
 
-    TableNewCell(v-for="column in columns" pos="on-buttons:(sticky right-0)" :buttons="column.type == 'buttons'" p="on-buttons:r-6") 
+    TableNewCell(v-for="column in columns" pos="on-buttons:(sticky right-0)" :buttons="column.type == 'buttons'" p="on-buttons:r-6 on-mobile:!r-4" :is-button="isButtonCell" :is-open="isMenuOpen" :mobile="isMobile") 
       template(v-if="loading")
         HelperSkeleton(h="6")
 
@@ -13,13 +13,14 @@ VList(w="full" flex-shrink="0")
           slot(:name="getColumnKey(column)" :buttons="column.buttons" :row="row")
             TableButton(:row="row" :button="button" v-for="button in column.buttons") {{ button.text }}
 
+        //- ... MENU
         HList(v-else-if="column.type == 'buttons'")
           VList(v-if="!openRows.includes(index)" bg="gray-600" w="8" h="8" justify="center" items="center" space-y="1" py="2" cut="bottom-right s-sm b-gray-600" @click="actionMenu(index)")
             div(rounded="full" bg="white" w="1" h="1")
             div(rounded="full" bg="white" w="1" h="1")
             div(rounded="full" bg="white" w="1" h="1")
 
-          HList(v-else-if="openRows.includes(index)" space-x="3" justify="end")
+          HList(v-else-if="openRows.includes(index)" space-x="3")
             CloseIcon(w="5" fill="ix-ne" @click="closeMenu(index)")
             slot(:name="getColumnKey(column)" :buttons="column.buttons" :row="row" )
               TableButton(:row="row" :button="button" v-for="button in column.buttons") {{ button.text }}
@@ -37,14 +38,12 @@ const { getColumnKey } = useTable()
 
 const { isMobile } = useDevice()
 
-
-const { rows, columns, loading, selectable, showMore } = defineProps<{
+const { rows, columns, loading, selectable } = defineProps<{
   columns: TableColumn<Row>[],
   rows: Row[],
   loading?: boolean,
   selectable?: boolean,
   context?: CollectionContext
-  showMore?: boolean
 }>()
 
 const selectedItems = defineModel<number[]>()
@@ -65,8 +64,6 @@ const onSelect = (index: number, val: boolean) => {
     return selectedItems.value = [...selectedItems.value, index]
 }
 
-const isOpen = shallowRef(showMore)
-
 const openRows = ref<number[]>([])
 
 const actionMenu = (index: number) => {
@@ -80,9 +77,20 @@ const actionMenu = (index: number) => {
   }
 }
 
+const isMenuOpen = computed(() => {
+  return openRows.value.length > 0
+})
+
 const closeMenu = (index: number) => {
   openRows.value = openRows.value.filter(row => row !== index)
 }
 
+const isButtonCell = computed(() => {
+  const buttonCell = columns.some(column => column.type == 'buttons')
+
+  if (buttonCell)
+    return true
+  else false
+})
 
 </script>

@@ -8,7 +8,7 @@ HList(bg="gray-800" flex-shrink="0" min-w="full" w="full")
     template(v-for="(column, index) in columns")
       HList(v-if="column.type == 'buttons' && !isMobile" min-w="250px" max-w="full" items="center" b="b-1 gray-600" p="t-3 b-3 r-6") {{ $t('general.action') }}
 
-      HList(v-else-if="column.type == 'buttons'" min-w="60px" max-w="full" items="center" b="b-1 gray-600" p="t-3 b-3 r-6") {{ $t('general.action') }}
+      TableNewCell(v-else-if="column.type == 'buttons'" p="t-3 b-3 r-4" :is-open="isMenuOpen" :is-neutral="true" :is-button="true") {{ $t('general.action') }}
 
       TableNewCellHead(v-else :column="column" :index="index" :sortField="sort" @select-field="onClickSort", @toggle-sort="onClickToggle" :context="context") {{ column.label }}
 
@@ -19,17 +19,26 @@ HList(bg="gray-800" flex-shrink="0" min-w="full" w="full")
 import type { CollectionContext } from '~/composables/useCollection'
 import type { ServerTableSort, TableColumn, TableRow, TableSortable } from '~/composables/useTable'
 
-const { selectable, rows, columns, id } = defineProps<{
+const { selectable, rows, columns, id, isButton, isOpen } = defineProps<{
   columns: TableColumn<Row>[],
   rows: Row[],
   id: string,
   selectable?: boolean,
   context?: CollectionContext
+  isButton?: boolean
+  isOpen?: boolean
 }>()
+
+const { isMobile } = useDevice()
 
 const selectedItems = defineModel<number[]>()
 
-const { isMobile } = useDevice()
+const openRows = ref<number[]>([])
+
+const isMenuOpen = computed(() => {
+  return selectedItems.value ? selectedItems.value.length > 0 : false
+});
+
 
 const allSelected = computed(() =>
   (selectedItems.value ?? []).length == rows.length && rows.length > 0
