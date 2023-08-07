@@ -1,5 +1,5 @@
 <template lang="pug">
-HList(bg="gray-900" z="3" font="400" color="gray-200" whitespace="nowrap" pos="sticky top-0" min-w="250px" w="full" b="b-1 gray-600" justify="lt-md:last:end" p="t-3 b-3 r-4 md:t-3 b-3 r-6")
+HList(bg="gray-900" z="3" font="400" color="gray-200" whitespace="nowrap" pos="sticky top-0" b="b-1 gray-600" justify="lt-md:last:end")
   HList(v-if="column.sortable" cursor="pointer" space-x="1"  @click="onClickSort" flex="~ row" items="center" color="on-active:white" :active="isActive" transition="all")
     div()
       slot()

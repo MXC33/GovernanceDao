@@ -1,16 +1,16 @@
 <template lang="pug">
-HList(bg="gray-800" flex-shrink="0" min-w="full" w="full")
-  HList(bg="gray-900" z="3" font="400" color="gray-200" whitespace="nowrap" pos="sticky top-0" items="center" w="full" max-w="full")
+//- HList(bg="gray-800" flex-shrink="0" min-w="full" w="full")
+//-   HList(bg="gray-900" z="3" font="400" color="gray-200" whitespace="nowrap" pos="sticky top-0" items="center" w="full" max-w="full")
 
-    HList(min-h="49px" flex-shrink="0" items="center" b="b-1 gray-600" p="t-2 b-2 l-4 r-4 md:(t-3 b-3 l-6 r-6)")
-      InputCheckbox(v-if="selectable" v-model="selectAllChecked")
+HList(flex-shrink="0" items="center" b="b-1 gray-600" v-if="selectable" pos="sticky top-0")
+  InputCheckbox( v-model="selectAllChecked")
 
-    template(v-for="(column, index) in columns")
-      HList(v-if="column.type == 'buttons' && !isMobile" min-w="250px" max-w="full" items="center" b="b-1 gray-600" p="t-3 b-3 r-6") {{ $t('general.action') }}
+template(v-for="(column, index) in columns")
+  //- HList(v-if="column.type == 'buttons' && !isMobile" items="center" b="b-1 gray-600" p="t-3 b-3 r-6") {{ $t('general.action') }}
 
-      TableNewCell(v-else-if="column.type == 'buttons'" p="t-3 b-3 r-4" :is-open="isMenuOpen" :is-neutral="true" :is-button="true") {{ $t('general.action') }}
+  TableNewCell(v-if="column.type == 'buttons'" p="t-3 b-3 r-4" :is-open="isMenuOpen") {{ $t('general.action') }}
 
-      TableNewCellHead(v-else :column="column" :index="index" :sortField="sort" @select-field="onClickSort", @toggle-sort="onClickToggle" :context="context") {{ column.label }}
+  TableNewCellHead(v-else :column="column" :index="index" :sortField="sort" @select-field="onClickSort", @toggle-sort="onClickToggle" :context="context") {{ column.label }}
 
 </template>
 

@@ -1,8 +1,8 @@
 <template lang="pug">
-VList(w="full" max-w="full" overflow-x="scroll")
+VList(w="full" max-w="full")
   CollectionFilterButtonContainer(:is-open="isOpen")
 
-  VList.no-scrollbar(max-w="full" w="full" bg="gray-900" overflow-x="scroll")
+  div.no-scrollbar(grid="~" max-w="full" w="full" bg="gray-900" overflow-x="on-scrollable:scroll" :style="gridStyle" :scrollable="!!context")
 
     TableNewHeader(v-model="selectedItems" :columns="columns" :rows="sortedRows" :selectable="selectable" :id="id" :context="context")
 
@@ -39,6 +39,21 @@ const { sortRows } = useTable()
 const sortedRows = computed(() =>
   sortRows(columns, rows, sort.value)
 )
+
+const gridStyle = computed(() => {
+  const columnStyles = columns.map((item) => {
+    if (!item.width)
+      return 'minmax(150px, 1fr)'
+    else
+      return `minmax(${item.width}px, 1fr)`
+  }).join(' ')
+
+  const selectableStyle = selectable ? '56px ' : ''
+
+  return {
+    'grid-template-columns': selectableStyle + columnStyles
+  }
+})
 
 </script>
 

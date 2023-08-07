@@ -1,32 +1,32 @@
 <template lang="pug">
-VList(w="full" flex-shrink="0")
-  TableNewRow(v-for="(row, index) in rows" :key="row.originalIndex ?? index")
-    HList(v-if="selectable" :context="context" b="b-1 gray-600" min-h="80px" items="center" p="l-4 r-4 md:(l-6 r-6)")
-      InputCheckbox(:model-value="isSelected(index)" @update:modelValue="val => onSelect(index, val)")
+//- VList(w="full" flex-shrink="0")
+template(v-for="(row, index) in rows" :key="row.originalIndex ?? index")
+  HList(v-if="selectable" :context="context" b="b-1 gray-600" items="center")
+    InputCheckbox(:model-value="isSelected(index)" @update:modelValue="val => onSelect(index, val)")
 
-    TableNewCell(v-for="column in columns" pos="on-buttons:(sticky right-0)" :buttons="column.type == 'buttons'" p="on-buttons:r-6 on-mobile:!r-4" :is-button="isButtonCell" :is-open="isMenuOpen" :mobile="isMobile") 
-      template(v-if="loading")
-        HelperSkeleton(h="6" flex-grow="1" mr="6")
+  TableNewCell(v-for="column in columns" pos="on-buttons:(sticky right-0)" :buttons="column.type == 'buttons'" p="on-buttons:r-6 on-mobile:!r-4" :is-button="isButtonCell" :is-open="isMenuOpen" :mobile="isMobile") 
+    template(v-if="loading")
+      HelperSkeleton(h="6" flex-grow="1" mr="6")
 
-      template(v-else)
-        HList(v-if="column.type == 'buttons' && !isMobile" space-x="3" justify="end" w="full")
-          slot(:name="getColumnKey(column)" :buttons="column.buttons" :row="row")
+    template(v-else)
+      HList(v-if="column.type == 'buttons' && !isMobile" space-x="3" justify="end" w="full")
+        slot(:name="getColumnKey(column)" :buttons="column.buttons" :row="row")
+          TableButton(:row="row" :button="button" v-for="button in column.buttons") {{ button.text }}
+
+      //- ... MENU
+      HList(v-else-if="column.type == 'buttons'")
+        VList(v-if="!openRows.includes(index)" bg="gray-600" w="8" h="8" justify="center" items="center" space-y="1" py="2" cut="bottom-right s-sm b-gray-600" @click="actionMenu(index)")
+          div(rounded="full" bg="white" w="1" h="1")
+          div(rounded="full" bg="white" w="1" h="1")
+          div(rounded="full" bg="white" w="1" h="1")
+
+        HList(v-else-if="openRows.includes(index)" space-x="3")
+          CloseIcon(w="5" fill="ix-ne" @click="closeMenu(index)")
+          slot(:name="getColumnKey(column)" :buttons="column.buttons" :row="row" )
             TableButton(:row="row" :button="button" v-for="button in column.buttons") {{ button.text }}
 
-        //- ... MENU
-        HList(v-else-if="column.type == 'buttons'")
-          VList(v-if="!openRows.includes(index)" bg="gray-600" w="8" h="8" justify="center" items="center" space-y="1" py="2" cut="bottom-right s-sm b-gray-600" @click="actionMenu(index)")
-            div(rounded="full" bg="white" w="1" h="1")
-            div(rounded="full" bg="white" w="1" h="1")
-            div(rounded="full" bg="white" w="1" h="1")
-
-          HList(v-else-if="openRows.includes(index)" space-x="3")
-            CloseIcon(w="5" fill="ix-ne" @click="closeMenu(index)")
-            slot(:name="getColumnKey(column)" :buttons="column.buttons" :row="row" )
-              TableButton(:row="row" :button="button" v-for="button in column.buttons") {{ button.text }}
-
-        slot(v-else :name="`item-${column.rowKey}`" :row="row" :column="column")
-          TableCellValue(:column="column" :row="row" :context="context")
+      slot(v-else :name="`item-${column.rowKey}`" :row="row" :column="column")
+        TableCellValue(:column="column" :row="row" :context="context")
 </template>
 
 <script setup lang="ts" generic="Row extends TableRow">
