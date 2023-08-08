@@ -13,17 +13,13 @@ template(v-for="(column, index) in columns")
 import type { CollectionContext } from '~/composables/useCollection'
 import type { ServerTableSort, TableColumn, TableRow, TableSortable } from '~/composables/useTable'
 
-const { selectable, rows, columns, id, isButton, isOpen } = defineProps<{
+const { selectable, rows, columns, id } = defineProps<{
   columns: TableColumn<Row>[],
   rows: Row[],
   id: string,
   selectable?: boolean,
   context?: CollectionContext
-  isButton?: boolean
-  isOpen?: boolean
 }>()
-
-const { isMobile } = useDevice()
 
 const selectedItems = defineModel<number[]>()
 
