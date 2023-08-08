@@ -53,9 +53,4 @@ const sortedRows = computed(() => sortRows(columns, items, sort.value))
 
 watch(() => columns, () => setupSortOptions(columns), { immediate: true })
 
-const onClickItem = (row: IXToken) => {
-  const { network, collection, token_id } = row
-  navigateTo(`/assets/${network}/${collection}/${token_id}`)
-}
-
 </script>

@@ -7,6 +7,7 @@ export default defineNuxtConfig({
   extends: [
     '@ix/base'
   ],
+
   css: [
     '@/assets/styles/fonts.css'
   ],
@@ -45,6 +46,7 @@ export default defineNuxtConfig({
 
   modules: [
     'v-lazy-show/nuxt',
+    '@nuxtjs/i18n',
   ],
 
   imports: {
@@ -55,7 +57,9 @@ export default defineNuxtConfig({
 
 
   i18n: {
-    precompile: { strictMessage: false },
+    compilation: {
+      strictMessage: false,
+    },
     locales: [
       {
         code: 'en',
@@ -84,7 +88,7 @@ export default defineNuxtConfig({
         name: 'Russian'
       }
     ],
-    langDir: 'lang/',
+    langDir: './lang/',
     defaultLocale: 'en',
   },
 
