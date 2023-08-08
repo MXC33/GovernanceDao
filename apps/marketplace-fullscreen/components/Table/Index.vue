@@ -6,10 +6,10 @@ VList(w="full" max-w="full")
 
     TableHeader(v-model="selectedItems" :columns="columns" :rows="sortedRows" :selectable="selectable" :id="id" :context="context")
 
-    TableBody(v-model="selectedItems" :loading="loading" :rows="sortedRows" :columns="columns" :selectable="selectable" :context="context" :scrolled-past-end="hasScrolledPastEnd" :scrolled-past-start="hasScrolled")
+    TableBody(:loading="loading" :rows="sortedRows" :columns="columns"  :context="context" :scrolled-past-end="hasScrolledPastEnd" :scrolled-past-start="hasScrolled")
       //- Slots for overriding table column data with template(#item-name="{row}") etc
       template(#[getColumnKey(column)]="{row}" v-for="column in columns")
-        slot(:name="`item-${column.rowKey}`" :row="row" v-if="column.type != 'buttons'")
+        slot(:name="`item-${column.rowKey}`" :row="row" v-if="column.type != 'buttons' && column.type != 'asset'")
 
 </template>
 
@@ -28,13 +28,12 @@ const hasScrolledPastEnd = computed(() => arrivedState.right == false)
 watch(arrivedState, (a) => {
   console.log("ARRIVE", a)
 })
-const { selectable, columns, isOpen, loading, rows, id, colWidth, context } = defineProps<{
+const { selectable, columns, isOpen, loading, rows, id, context } = defineProps<{
   columns: TableColumn<Row>[],
   rows: Row[],
   id: string,
   loading?: boolean,
   isOpen?: boolean,
-  colWidth?: number,
   selectable?: boolean,
   context?: CollectionContext
 }>()
@@ -57,10 +56,8 @@ const gridStyle = computed(() => {
       return `minmax(${item.width}px, 2fr)`
   }).join(' ')
 
-  const selectableStyle = selectable ? '56px ' : ''
-
   return {
-    'grid-template-columns': selectableStyle + columnStyles
+    'grid-template-columns': columnStyles
   }
 })
 

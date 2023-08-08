@@ -20,7 +20,7 @@ VList(frame="~ gray-400 on-frameless:none on-mobile:!none" :frameless="noFrame" 
       TitleWithIcon(icon="details") {{ $t(`marketplace.singleItem.details`) }}
 
     template(#default) 
-      CollectionSingleItemMetaDetails(:item="item" :is-neutral="true" bg="gray-900" px="2" b="1 red")
+      CollectionSingleItemMetaDetails(:item="item" :is-neutral="true" bg="gray-900" px="2")
 
 </template>
 

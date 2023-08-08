@@ -1,6 +1,8 @@
 
 <template lang="pug">
 VList(flex-shrink="0" whitespace="nowrap" p="md:r-6" flex-grow="lt-md:1")
+  // Move asset type in here and combine with selected 
+
   Currency(:value="roundToDecimals(Number(value), 4)" type="ixt" v-if="column.type == 'ixt' && !isMobile")
 
   Currency(:value="ixtToUSD(value)" type="usd" v-else-if="column.type == 'usd' && !isMobile")

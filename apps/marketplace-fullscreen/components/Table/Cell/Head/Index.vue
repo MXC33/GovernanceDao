@@ -1,5 +1,5 @@
 <template lang="pug">
-TableCellHeadWrapper()
+TableCellHeadWrapper(pl="on-first:4" :first="index == 0")
   HList(v-if="column.sortable" cursor="pointer" space-x="1"  @click="onClickSort" flex="~ row" items="center" color="on-active:white" :active="isActive" transition="all")
     div()
       slot()
@@ -8,7 +8,7 @@ TableCellHeadWrapper()
       SortIcon(v-if="!isActive" w="4")
       HelperChevron(v-else :up="direction == 'desc'" w="4" :thick="true" )
 
-  HList(v-else items="center" justify="start")
+  HList(v-else items="center" justify="start" space-x="3")
     slot
 </template>
 

@@ -23,7 +23,7 @@ VList(flex-grow="1" min-h="0" pos="relative" p="4 md:(8 b-30)" space-y="0 md:6")
   HList(justify="center" w="full" py="2" v-if="loadMoreVisible")
     ButtonInteractive(btn="~ primary " font="bold" @click="loadNextPage" :text="loading ? 'Loading' : 'Load More'" :loading="loading" w="80" ref="loadMoreButton")
 
-VList(pos="fixed bottom-0" w="full")
+VList(pos="fixed bottom-0" w="full" z="10")
   Transition(name="slide-bottom")
     CollectionSelectBar(v-if="selectedItems?.length > 0" :context="context")
 
@@ -63,7 +63,7 @@ const columnResolution = computed(() => {
 })
 
 const mobileColumns: TableColumn<IXToken>[] = [
-  { label: "Asset", rowKey: "name", type: 'asset', width: 200 },
+  { label: "Asset", type: 'asset', width: 200 },
   {
     label: "Current price", rowKey: "sale_price", type: 'ixt', width: 120, sortable: {
       ascKey: 'PRICE_ASC',
@@ -73,7 +73,7 @@ const mobileColumns: TableColumn<IXToken>[] = [
 ]
 
 const defaultColumns: TableColumn<IXToken>[] = [
-  { label: "Asset", rowKey: "name", type: 'asset', width: 200 },
+  { label: "Asset", type: 'asset', width: 200 },
   {
     label: "Current price", rowKey: "sale_price", type: 'ixt', sortable: {
       ascKey: 'PRICE_ASC',

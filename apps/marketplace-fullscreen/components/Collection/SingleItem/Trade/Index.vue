@@ -1,6 +1,6 @@
 <template lang="pug">
 VList(space-y="6")
-  CollectionSingleItemHeader(:item="item" b="1 red" mt="4")
+  CollectionSingleItemHeader(:item="item" mt="4")
 
   AttributeList(:attributes="attributes" v-if="item")
 

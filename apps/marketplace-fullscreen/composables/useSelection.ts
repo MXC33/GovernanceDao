@@ -30,6 +30,13 @@ export const useSelection = () => {
     )
   }
 
+  const toggleItem = (token: IXToken) => {
+    if (isItemSelected(token))
+      return removeSelectedItem(token)
+    else
+      return selectItem(token)
+  }
+
   const selectItem = (token: IXToken) => {
     selectedItems.value.push(token)
     console.log(selectedItems.value)
@@ -47,7 +54,8 @@ export const useSelection = () => {
     isItemSelected,
     removeSelectedItem,
     selectItem,
-    clearSelectedItems
+    clearSelectedItems,
+    toggleItem
 
   }
 }

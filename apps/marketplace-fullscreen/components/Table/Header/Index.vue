@@ -2,23 +2,24 @@
 //- HList(bg="gray-800" flex-shrink="0" min-w="full" w="full")
 //-   HList(bg="gray-900" z="3" font="400" color="gray-200" whitespace="nowrap" pos="sticky top-0" items="center" w="full" max-w="full")
 
-TableCellHeadWrapper(v-if="selectable" justify="center")
-  InputCheckbox( v-model="selectAllChecked")
-
 template(v-for="(column, index) in columns")
   //- HList(v-if="column.type == 'buttons' && !isMobile" items="center" b="b-1 gray-600" p="t-3 b-3 r-6") {{ $t('general.action') }}
 
   TableCellHeadWrapper(v-if="column.type == 'buttons'" :is-open="isMenuOpen") {{ $t('general.action') }}
 
-  TableCellHead(v-else :column="column" :index="index" :sortField="sort" @select-field="onClickSort", @toggle-sort="onClickToggle" :context="context") {{ column.label }}
+  TableCellHead(v-else :column="column" :index="index" :sortField="sort" @select-field="onClickSort", @toggle-sort="onClickToggle" :context="context") 
+    InputCheckbox(v-model="selectAllChecked" v-if="column.type == 'asset' && !column.disableSelect")
+
+    div {{ column.label }}
+
 
 </template>
 
 <script lang="ts" setup generic="Row extends TableRow">
 import type { CollectionContext } from '~/composables/useCollection'
 import type { ServerTableSort, TableColumn, TableRow, TableSortable } from '~/composables/useTable'
-
-const { selectable, rows, columns, id, isButton, isOpen } = defineProps<{
+const { rowIsIXToken } = useTable()
+const { selectable, rows, columns, id } = defineProps<{
   columns: TableColumn<Row>[],
   rows: Row[],
   id: string,
