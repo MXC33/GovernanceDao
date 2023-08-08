@@ -1,12 +1,11 @@
 <template lang="pug">
-//- VList(w="full" flex-shrink="0")
 template(v-for="(row, index) in rows" :key="row.originalIndex ?? index")
   TableCell(v-for="column in columns" :sticky="column.type == 'buttons'" :shadow="false") 
     template(v-if="loading")
       HelperSkeleton(h="6" flex-grow="1" mr="6")
 
     template(v-else)
-      //- ... MENU
+
       HList(v-if="column.type == 'buttons'" w="full" space-x="3" pr="4" backdrop="blur-sm")
         TableButtonGroup(v-if="isMobile")
           TableButton(:row="row" :button="button" v-for="button in column.buttons") {{ button.text }}

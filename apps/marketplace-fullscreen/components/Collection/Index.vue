@@ -36,7 +36,7 @@ import type { TableColumn } from '~/composables/useTable'
 import CertifiedIcon from '~/assets/icons/certified.svg'
 
 const { activeFilters } = useCollectionSettings()
-const { getCollectionAttributes } = useDefaulAttributes()
+const { getCollectionAttributes } = useDefaultAttributes()
 const { currentTime } = useGlobalTimestamp()
 const { selectedItems } = useSelection()
 

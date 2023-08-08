@@ -1,16 +1,14 @@
 <template lang="pug">
-ContentDrawer(:start-open="!isMobile" :is-neutral="true" bg="gray-900")
+ContentDrawer(:start-open="!isMobile" :is-neutral="true" bg="gray-900" mx="lt-md:-4")
   template(#titleicon)
     TitleWithIcon(icon="offer") {{ $t(`marketplace.singleItem.offers`) }}
 
   template(#default)
-    CollectionSingleItemTradeDetail(v-if="item.my_shares == 0") 
-      | {{ $t(`marketplace.singleItem.doNotOwn`) }}
 
     CollectionSingleItemTradeDetail(v-if="item.bids.length < 1" ) 
-      | {{ $t(`marketplace.singleItem.noOffers`) }}
+      | {{ $t(`marketplace.singleItem.noCurrentBids`) }}
 
-      Table(:columns="offerColumns" :rows="item.bids" id="offers" v-if="item.bids.length > 0" :col-width="150" )
+    Table(:columns="offerColumns" :rows="item.bids" id="offers" v-if="item.bids.length > 0" :col-width="150" )
 
 
 </template>

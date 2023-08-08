@@ -26,6 +26,12 @@ VList(w="full" flex-grow="1" items="start" bg="gray-900" p="6" pos="relative")
 import type { IXToken } from '@ix/base/composables/Token/useIXToken';
 import type { CollectionContext } from '~/composables/useCollection';
 
+const { token, context } = defineProps<{
+  token: IXToken,
+  quantity?: number,
+  context?: CollectionContext,
+}>()
+
 const is1155 = computed(() => ERC1155Addresses.includes(token.collection))
 const { getTokenKey } = useTokens()
 const { formatAmount } = useFormatNumber()
@@ -46,12 +52,6 @@ const getItemLink = (token: IXToken) => {
   const { network, collection, token_id } = token
   return `/assets/${network}/${collection}/${token_id}`
 }
-
-const { token, context } = defineProps<{
-  token: IXToken,
-  quantity?: number,
-  context?: CollectionContext,
-}>()
 
 const isDisabled = computed(() => !token?.sale_price || token?.sale_price == 0)
 </script>
