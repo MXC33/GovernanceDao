@@ -1,7 +1,4 @@
 <template lang="pug">
-//- HList(bg="gray-800" flex-shrink="0" min-w="full" w="full")
-//-   HList(bg="gray-900" z="3" font="400" color="gray-200" whitespace="nowrap" pos="sticky top-0" items="center" w="full" max-w="full")
-
 template(v-for="(column, index) in columns")
   TableCellHeadWrapper(v-if="column.type == 'buttons'" :is-open="isMenuOpen") {{ $t('general.action') }}
 
@@ -9,7 +6,6 @@ template(v-for="(column, index) in columns")
     InputCheckbox(v-model="selectAllChecked" v-if="column.type == 'asset' && !column.disableSelect")
 
     div {{ column.label }}
-
 
 </template>
 

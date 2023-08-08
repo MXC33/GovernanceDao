@@ -4,7 +4,7 @@ VList(w="full" max-w="full")
 
   div.no-scrollbar(grid="~ row-gap-0 gap-x-3" max-w="full" w="full" bg="gray-900" overflow-x="on-scrollable:scroll" :style="gridStyle" :scrollable="!!context" ref="scrollElement")
 
-    TableHeader(v-model="selectedItems" :columns="columns" :rows="sortedRows" :selectable="selectable" :id="id" :context="context")
+    TableHeader(v-model="selectedItems" :columns="columns" :rows="sortedRows" :id="id" :context="context")
 
     TableBody(:loading="loading" :rows="sortedRows" :columns="columns"  :context="context" :scrolled-past-end="hasScrolledPastEnd" :scrolled-past-start="hasScrolled")
       //- Slots for overriding table column data with template(#item-name="{row}") etc

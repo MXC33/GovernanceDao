@@ -1,10 +1,9 @@
 
 <template lang="pug">
-
 HList(:context="context" justify="center" items="center" space-x="3" pos="sticky left-0" pl="4" bg="gray-900" z="2" shadow="on-scrolled:right" :scrolled="scrolling" transition="all")
   InputCheckbox(:model-value="isItemSelected(token)" @update:modelValue="() => toggleItem(token)" v-if="!column.disableSelect" )
 
-  TableCellToken(:token="token" max-w="full" :context="context")
+  TableCellToken(:token="token" max-w="full" :context="context" @click="onClickAsset")
     span(v-if="context == 'my-assets'" color="gray-200" font="normal" text="lt-md:sm") x{{ token.my_shares }}
 
 </template>
@@ -22,5 +21,10 @@ const { column, context, token } = defineProps<{
   scrolling?: boolean,
   context?: CollectionContext
 }>()
+
+const onClickAsset = () => {
+  const { network, collection, token_id } = token
+  navigateTo(`/assets/${network}/${collection}/${token_id}`)
+}
 
 </script>
