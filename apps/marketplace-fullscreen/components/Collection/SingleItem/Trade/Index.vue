@@ -23,10 +23,11 @@ const { item } = defineProps<{
   item: SingleItemData
 }>()
 
-const collectionLink = computed(() => {
-  const { network, collection } = item
-  return `/assets/${network}/${collection}`
-})
+// Not in use?
+// const collectionLink = computed(() => {
+//   const { network, collection } = item
+//   return `/assets/${network}/${collection}`
+// })
 
 const { getSingleAttributes } = useDefaulAttributes()
 const attributes = computed(() => getSingleAttributes(item))

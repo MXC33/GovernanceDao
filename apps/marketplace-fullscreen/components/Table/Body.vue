@@ -1,5 +1,4 @@
 <template lang="pug">
-//- VList(w="full" flex-shrink="0")
 template(v-for="(row, index) in rows" :key="row.originalIndex ?? index")
   TableCellWrapper(v-if="selectable" :context="context" justify="center" pos="sticky left-0" bg="gray-900" z="2" shadow="on-scrolled:right" :scrolled="scrolledPastStart" transition="all")
     InputCheckbox(:model-value="isSelected(index)" @update:modelValue="val => onSelect(index, val)")
@@ -9,7 +8,7 @@ template(v-for="(row, index) in rows" :key="row.originalIndex ?? index")
       HelperSkeleton(h="6" flex-grow="1" mr="6")
 
     template(v-else)
-      //- ... MENU
+
       HList(v-if="column.type == 'buttons'" w="full" space-x="3" pr="4" backdrop="blur-sm")
         TableButtonGroup(v-if="isMobile")
           TableButton(:row="row" :button="button" v-for="button in column.buttons") {{ button.text }}
