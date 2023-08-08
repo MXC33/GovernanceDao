@@ -1,5 +1,5 @@
 <template lang="pug">
-VList(frame="~ gray-400 on-frameless:none on-mobile:!none" :frameless="noFrame" :mobile="isMobile")
+VList(frame="~ gray-400 on-frameless:none on-mobile:!none" :frameless="noFrame" :mobile="isMobile" mx="lt-md:-4")
   ContentDrawer(:start-open="!isMobile" v-if="item.description" :is-neutral="true" bg="gray-900" :no-frame="true")
     template(#titleicon)
       TitleWithIcon(icon="description") {{ $t(`marketplace.singleItem.description`) }}
