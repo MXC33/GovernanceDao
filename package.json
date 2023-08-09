@@ -9,7 +9,8 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "concurrently \"yarn:dev:*\" -c \"#C3000F,#84D4BC\"",
+    "dev": "concurrently \"yarn:dev:*\" -c \"#C3000F,#84D4BC,green\"",
+    "dev:ix-geo": "yarn workspace @ix/geo-lottery dev",
     "dev:ix-mp": "yarn workspace @ix/marketplace dev",
     "dev:ix-base": "yarn workspace @ix/base dev",
     "build": "yarn build:mp",
