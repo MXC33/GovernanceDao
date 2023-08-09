@@ -22,9 +22,14 @@ div(v-if="amountSelected != 0" w="full" p="4 md:3" pos="sticky bottom-0" z="2" b
 
       template(v-else-if="context=='incoming-bids'")
         //- Reject Bids button when ready
-        //- CollectionSelectBarButton(@click="onClickRejectBids") Reject {{amountSelected}} Bids
+        CollectionSelectBarButton(@click="onClickRejectBids") Reject {{amountSelected}} Offers
         CollectionSelectBarButton(@click="onClickAcceptBids" v-if="amountSelected == 1") Accept {{amountSelected}} Offer
         CollectionSelectBarButton(@click="onClickAcceptBids" v-else-if="amountSelected >= 1") Accept {{amountSelected}} Offers
+
+      template(v-else-if="context == 'outgoing-bids'")
+        CollectionSelectBarButton(@click="onClickRemoveBids" v-if="amountSelected == 1") Remove {{amountSelected}} Bid
+        CollectionSelectBarButton(@click="onClickRemoveBids" v-else="amountSelected >= 1") Remove {{amountSelected}} Bids
+
 
 
 </template>
@@ -38,6 +43,13 @@ const { selectedItemsIsSameCollection } = useSelection()
 const onClickRejectBids = () => {
   displayPopup({
     type: 'reject-items',
+    items: selectedItems.value
+  })
+}
+
+const onClickRemoveBids = () => {
+  displayPopup({
+    type: 'unbid-item',
     items: selectedItems.value
   })
 }
