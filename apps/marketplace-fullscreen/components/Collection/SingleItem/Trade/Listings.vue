@@ -4,7 +4,7 @@ ContentDrawer(:start-open="!isMobile" :is-neutral="true" bg="gray-900" mx="lt-md
     TitleWithIcon(icon="listing") {{ $t(`marketplace.singleItem.listings`) }}
 
   template(#default)
-    Table(v-if="item.sales && item.sales.length > 0" :columns="saleColumns" :rows="item.sales" id="single-item" :col-width="150")
+    Table(v-if="item.sales && item.sales.length > 0" :columns="saleColumns" :rows="item.sales" id="single-item")
 
     CollectionSingleItemTradeDetail(v-else) {{ $t(`marketplace.singleItem.noItemsFound`) }}
 
