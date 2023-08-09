@@ -1,22 +1,33 @@
 <template lang="pug">
-ContentDrawer(:start-open="!isMobile" :is-neutral="true" bg="gray-900" mx="lt-md:-4")
+DefineTemplate()
+  Table(v-if="item.sales && item.sales.length > 0" :columns="saleColumns" :rows="item.sales" id="single-item")
+
+  CollectionSingleItemTradeDetail(v-else) {{ $t(`marketplace.singleItem.noItemsFound`) }}
+
+ContentDrawer(:start-open="!isMobile" :is-neutral="true" bg="gray-900" mx="lt-md:-4" v-if="hasDrawer")
   template(#titleicon)
     TitleWithIcon(icon="listing") {{ $t(`marketplace.singleItem.listings`) }}
 
   template(#default)
-    Table(v-if="item.sales && item.sales.length > 0" :columns="saleColumns" :rows="item.sales" id="single-item")
+    ReuseTemplate()
 
-    CollectionSingleItemTradeDetail(v-else) {{ $t(`marketplace.singleItem.noItemsFound`) }}
+VList.no-scrollbar(mx="-4" max-h="85" overflow-y="auto" v-else)
+  ReuseTemplate()
+
 
 </template>
 
 <script lang="ts" setup>
-import type { Sale, SingleItemData, Bid } from '@ix/base/composables/Token/useIXToken';
+import type { Sale, SingleItemData } from '@ix/base/composables/Token/useIXToken';
 import type { TableColumn } from '~/composables/useTable';
+
+const [DefineTemplate, ReuseTemplate] = createReusableTemplate()
+
 const { isMobile } = useDevice()
 
 const { item } = defineProps<{
-  item: SingleItemData
+  item: SingleItemData,
+  hasDrawer?: boolean
 }>()
 
 const { addToCart, hasItemInCart } = useCart()

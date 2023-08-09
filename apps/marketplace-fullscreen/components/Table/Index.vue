@@ -1,15 +1,20 @@
 <template lang="pug">
-VList(w="full" max-w="full")
+VList.no-scrollbar(w="full" max-w="full")
   CollectionFilterButtonContainer(:is-open="isOpen")
 
-  div.no-scrollbar(grid="~ row-gap-0 gap-x-3" max-w="full" w="full" bg="gray-900" overflow-x="on-scrollable:scroll" :style="gridStyle" :scrollable="!!context" ref="scrollElement")
+  HList.no-scrollbar(overflow-x="on-scrollable:scroll" :scrollable="!!context" w="full" bg="gray-900")
+    TableSpacer()
 
-    TableHeader(v-model="selectedItems" :columns="columns" :rows="sortedRows" :id="id" :context="context")
+    div.no-scrollbar(grid="~ row-gap-0 gap-x-3" :style="gridStyle" ref="scrollElement" flex-grow="1")
 
-    TableBody(:loading="loading" :rows="sortedRows" :columns="columns"  :context="context" :scrolled-past-end="hasScrolledPastEnd" :scrolled-past-start="hasScrolled")
-      //- Slots for overriding table column data with template(#item-name="{row}") etc
-      template(#[getColumnKey(column)]="{row}" v-for="column in columns")
-        slot(:name="`item-${column.rowKey}`" :row="row" v-if="column.type != 'buttons' && column.type != 'asset'")
+      TableHeader(v-model="selectedItems" :columns="columns" :rows="sortedRows" :id="id" :context="context")
+
+      TableBody(:loading="loading" :rows="sortedRows" :columns="columns"  :context="context" :scrolled-past-end="hasScrolledPastEnd" :scrolled-past-start="hasScrolled")
+        //- Slots for overriding table column data with template(#item-name="{row}") etc
+        template(#[getColumnKey(column)]="{row}" v-for="column in columns")
+          slot(:name="`item-${column.rowKey}`" :row="row" v-if="column.type != 'buttons' && column.type != 'asset'")
+
+    TableSpacer()
 
 </template>
 

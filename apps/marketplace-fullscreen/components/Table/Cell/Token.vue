@@ -1,12 +1,12 @@
 <template lang="pug">
-HList(v-if="isCollection" items="center" space-x="2" font="bold" cursor="pointer" p="r-6" w="full")
+HList(v-if="isCollection" items="center" space-x="2" font="bold" cursor="pointer" w="full")
   div(w="12" h="12")
     TokenImage(:token="token" w="12" h="12" :key="getTokenKey(token)")
   TokenName(:token="token" capitalize="~" :key="getTokenKey(token)" :context="context")
 
   slot
 
-HList(v-else items="center" space-x="2" font="bold" cursor="pointer" max-w="60" p="r-6")
+HList(v-else items="center" space-x="2" font="bold" cursor="pointer" max-w="60")
   div(w="12" h="12")
     TokenImage(:token="token" w="12" h="12" :key="getTokenKey(token)")
   TokenName(:token="token" capitalize="~" :key="getTokenKey(token)" :context="context")

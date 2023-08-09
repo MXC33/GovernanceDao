@@ -1,15 +1,19 @@
 <template lang="pug">
-ContentDrawer(:start-open="!isMobile" :is-neutral="true" bg="gray-900" mx="lt-md:-4")
+DefineTemplate()
+  CollectionSingleItemTradeDetail(v-if="item.bids.length < 1" ) 
+    | {{ $t(`marketplace.singleItem.noCurrentBids`) }}
+
+  Table(:columns="offerColumns" :rows="item.bids" id="offers" v-if="item.bids.length > 0")
+
+ContentDrawer(:start-open="!isMobile" :is-neutral="true" bg="gray-900" mx="lt-md:-4" v-if="hasDrawer")
   template(#titleicon)
     TitleWithIcon(icon="offer") {{ $t(`marketplace.singleItem.offers`) }}
 
   template(#default)
+    ReuseTemplate()
 
-    CollectionSingleItemTradeDetail(v-if="item.bids.length < 1" ) 
-      | {{ $t(`marketplace.singleItem.noCurrentBids`) }}
-
-    Table(:columns="offerColumns" :rows="item.bids" id="offers" v-if="item.bids.length > 0")
-
+VList.no-scrollbar(mx="-4" max-h="85" overflow-y="auto" v-else)
+  ReuseTemplate()
 
 </template>
 
@@ -18,13 +22,16 @@ import type { SingleItemData, Bid } from '@ix/base/composables/Token/useIXToken'
 import type { TableColumn } from '~/composables/useTable';
 
 const { t } = useI18n()
+const [DefineTemplate, ReuseTemplate] = createReusableTemplate()
+
 const { displayPopup } = usePopups()
 const { walletAdress } = useWallet()
 
 const { isMobile } = useDevice()
 
 const { item } = defineProps<{
-  item: SingleItemData
+  item: SingleItemData,
+  hasDrawer?: boolean
 }>()
 
 const onClickAcceptOffer = (bid: Bid) => {
@@ -51,7 +58,7 @@ const offerColumns = computed<TableColumn<Bid>[]>(() => {
   const baseColumns: TableColumn<Bid>[] = [
     { label: "Unit Price", type: "ixt", rowKey: "price", sortable: true },
     { label: "USD Price", type: "usd", rowKey: "price", sortable: true },
-    { label: "Quanitity", rowKey: "quantity", sortable: true },
+    { label: "Quanitity", rowKey: "quantity", sortable: true, width: 'auto' },
     {
       label: "Floor Difference", rowKey: "price", getValue(row) {
         if (item.sale_price == 0)

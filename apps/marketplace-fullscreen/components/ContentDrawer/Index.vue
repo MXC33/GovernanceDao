@@ -1,5 +1,5 @@
 <template lang="pug">
-VList(max-h="85" frame="~ gray-400 on-frameless:none on-mobile:none" :frameless="noFrame" :mobile="isMobile")
+VList(max-h="85" frame="~ gray-400 on-frameless:none on-mobile:none" :frameless="noFrame" :mobile="isMobile" v-if="!disable")
   HList(h="12" px="6 on-small:3" bg="ix-black on-neutral:gray-900" b="on-meta:t-1 gray-600" :meta="isMeta" items="center" justify="between" pos="sticky top-0" flex-shrink="0" z="1" @click.stop="dropDrawer" uppercase="~" cursor="pointer" :neutral="isNeutral" :small="isSmall")
     div(color="white" text="md" font="bold" v-if="$slots.header")
       slot(name="header")
@@ -13,6 +13,9 @@ VList(max-h="85" frame="~ gray-400 on-frameless:none on-mobile:none" :frameless=
     Collapse(:when="isOpen" class="v-collapse"  overflow-y="auto" )
       slot
 
+VList(overflow="auto" max-h="85"  v-else)
+  slot
+
 </template>
 
 <script lang="ts" setup>
@@ -24,21 +27,17 @@ const { startOpen, noFrame = false, isMeta = false } = defineProps<{
   isNeutral?: boolean
   noFrame?: boolean
   isMeta?: boolean
+  disable?: boolean
 }>()
 
 const isOpen = shallowRef(startOpen)
+
 const { isMobile } = useDevice()
 
 const dropDrawer = () => {
   isOpen.value = !isOpen.value
 }
 
-const mounted = useMounted()
-watch([mounted, () => startOpen], ([_, open]) => {
-  nextTick(() => {
-    isOpen.value = open
-  })
-}, { immediate: true })
 </script>
 
 

@@ -6,7 +6,7 @@ template(v-for="(row, index) in rows" :key="row.originalIndex ?? index")
 
     template(v-else)
 
-      HList(v-if="column.type == 'buttons'" w="full" space-x="3" pr="4" backdrop="blur-sm")
+      HList(v-if="column.type == 'buttons'" w="full" space-x="3" backdrop="blur-sm")
         TableButtonGroup(v-if="isMobile")
           TableButton(:row="row" :button="button" v-for="button in column.buttons") {{ button.text }}
 

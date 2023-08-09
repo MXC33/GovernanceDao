@@ -1,5 +1,5 @@
 <template lang="pug">
-TableCellHeadWrapper(pl="on-first:4" :first="index == 0")
+TableCellHeadWrapper()
   HList(v-if="column.sortable" cursor="pointer" space-x="1"  @click="onClickSort" flex="~ row" items="center" color="on-active:white" :active="isActive" transition="all")
     div()
       slot()
