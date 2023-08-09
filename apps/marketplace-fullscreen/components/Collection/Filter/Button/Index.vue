@@ -1,5 +1,5 @@
 <template lang="pug">
-HList(cut="top-right s-xs b-gray-600 md:(top-right s-sm b-gray-600 hover:(b-gray-500))" bg="gray-600" items="center" px="3" py="2" space-x="3 md:4" cursor="pointer" @click="toggle" :selected="isSelected" group v-if="isSelected")
+HList(cut="top-right s-xs b-gray-600 md:(top-right s-sm b-gray-600 hover:(b-gray-500))" bg="gray-600" items="center" px="3" py="2" space-x="3 md:4" cursor="pointer" @click="toggle" :selected="isSelected" group)
   HList(items="center" space-x="1")
     span(color="gray-200" text="xs md:sm" translate-y="0.5" font="bold")
       slot(name="category")

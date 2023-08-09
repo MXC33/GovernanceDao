@@ -1,9 +1,9 @@
 <template lang="pug">
 VList(w="full" bg="gray-900" z="99" pos="fixed" inset="0" overflow-x="hidden" overflow-y="auto")
 
-  HList(justify="start" items="center" px="3 on-search:0 md:4" py="3 on-search:1" space-x="3" pos="sticky top-0" bg="gray-900" b="on-search:lt-md:(b-0.5 gray-600)" :search="isSearch")
+  HList(justify="start" items="center" px="3 on-search:(0 md:4)" py="3 on-search:1" space-x="3" pos="sticky top-0" bg="gray-900" z="999" b="on-search:lt-md:(b-0.5 gray-600)" :search="isSearch")
 
-    HList(items="center" color="white" translate-y="0.5" w="full" flex-grow="1" v-if="$slots.search" @click="onSelect")
+    HList(items="center" color="white" translate-y="0.5" w="full" v-if="$slots.search" @click="onSelect")
       slot(name="search")
 
     HList(items="center" space-x="2" color="white" font="bold" text="lg" translate-y="0.5" uppercase="~" flex-grow="lt-md:1" v-if="$slots.header")

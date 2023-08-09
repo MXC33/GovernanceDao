@@ -14,7 +14,6 @@ const isSelected = defineModel<boolean>()
 
 const toggle = () => {
   isSelected.value = !isSelected.value
-  console.log("Click toggle")
 }
 
 
