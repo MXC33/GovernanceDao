@@ -1,8 +1,7 @@
 import { createResolver } from '@nuxt/kit'
 const { resolve } = createResolver(import.meta.url)
 import svgLoader from 'vite-svg-loader'
-import { NodeGlobalsPolyfillPlugin } from '@esbuild-plugins/node-globals-polyfill'
-import { NodeModulesPolyfillPlugin } from '@esbuild-plugins/node-modules-polyfill'
+import { nodePolyfills } from 'vite-plugin-node-polyfills'
 
 const API_DEV_ENDPOINT = 'https://mission-control-api-dev-s7ito.ondigitalocean.app'
 const API_PROD_ENDPOINT = 'https://api-mc.planetix.com'
@@ -20,7 +19,12 @@ export default defineNuxtConfig({
   },
 
   //@ts-ignore
-  transpile: ['vue3-carousel'],
+  transpile: [
+    'vue3-carousel',
+    '@walletconnect/modal',
+    '@walletconnect/ethereum-provider',
+    '@coinbase/wallet-sdk'
+  ],
 
   css: [
     resolve('./assets/styles/fonts.css'),
@@ -29,6 +33,7 @@ export default defineNuxtConfig({
     resolve('./assets/styles/cuts.css'),
     resolve('./assets/styles/transitions.css'),
     resolve('./assets/styles/corporations.css'),
+    resolve('./assets/styles/variables.css'),
     'vue3-carousel/dist/carousel.css',
     '@unocss/reset/tailwind.css',
   ],
@@ -48,6 +53,9 @@ export default defineNuxtConfig({
     ]
   },
 
+  device: {
+    refreshOnResize: true
+  },
 
   unocss: {
     configFile: resolve('./unocss.config.ts'),
@@ -83,22 +91,19 @@ export default defineNuxtConfig({
         propsDestructure: true
       }
     },
-    optimizeDeps: {
-      esbuildOptions: {
-        define: {
-          global: 'globalThis',
-        },
-        // Enable esbuild polyfill plugins
-        plugins: [
-          NodeGlobalsPolyfillPlugin({
-            process: true,
-            buffer: true,
-          }),
-          NodeModulesPolyfillPlugin()
-        ]
-      }
-    },
     plugins: [
+      nodePolyfills({
+        exclude: [
+          'fs', // Excludes the polyfill for `fs` and `node:fs`.
+        ],
+        globals: {
+          Buffer: true, // can also be 'build', 'dev', or false
+          global: true,
+          process: true,
+        },
+        // Whether to polyfill `node:` protocol imports.
+        protocolImports: true,
+      }),
       svgLoader({
         svgoConfig: {
           multipass: true,

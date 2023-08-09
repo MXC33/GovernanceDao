@@ -7,7 +7,7 @@ VList(bg="gray-800" frame="~" flex-shrink="0")
     VList(w="full" p="y-6 x-3")
       HList(space-x="3" font="bold")
         TokenName(:token="item.token" w="auto")
-        span x{{ item.shares.value }}
+        span(font="normal") x{{ item.shares.value }}
 
       slot(name="description")
 

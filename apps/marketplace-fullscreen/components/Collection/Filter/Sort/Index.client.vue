@@ -1,5 +1,5 @@
 <template lang="pug">
-OptionSelect(:items="uniqueSortFields" :large="true")
+OptionSelect(:items="uniqueSortFields")
   template(#header) 
     SortIcon(w="6" translate-y="-0.4" display="md:none")
     span() {{ selectedSort }}

@@ -1,5 +1,5 @@
 <template lang="pug">
-footer(pos="sticky bottom-0" bg="ix-black")
+footer(pos="sticky bottom-0" bg="ix-black" z="lt-md:201")
   HList(items="start" text="xl" p="3")
     h3(font="bold" flex-grow="1") {{ $t(`marketplace.price.title`) }}
     VList()

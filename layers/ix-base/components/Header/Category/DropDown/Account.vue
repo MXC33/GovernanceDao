@@ -2,7 +2,7 @@
 HList(p="6" bg="ix-black" b="b-1 gray-600")
   NuxtLink(v-if="walletState !== 'connected'" to="/connect" @click="$emit('close')" btn="soft-ix-orange lg" w="full") {{ $t(`marketplace.navigation.menu.connectWallet`)}}
 
-  HList(v-else flex-grow="1" cut="bottom-right sm b-ix-orange opacity-60" bg="ix-orange opacity-20")
+  HList(v-else flex-grow="1" cut="bottom-right s-sm b-ix-orange opacity-60" bg="ix-orange opacity-20")
     AOCIcon(w="25" p="3")
 
     VList(b="l-1 ix-orange opacity-40" flex-grow="1")

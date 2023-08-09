@@ -23,6 +23,7 @@ export interface CreateContractOptions<T> {
   listeners?: Record<string, (...args: Array<any>) => void>
   notifications?: ContractNotificationSettings,
 }
+
 // all<T extends readonly unknown[] | []>(values: T): Promise<{ -readonly [P in keyof T]: Awaited<T[P]> }>;
 
 
@@ -109,7 +110,7 @@ export const defineContract = <T extends ContractInterface<T> | object>(key: str
     Object.keys(listeners).forEach((eventKey: string) => {
       const listenerFn = listeners[eventKey]
 
-      const contractCallback = async (eventKey: string, senderAddress: any, ...args: any[]) => {
+      const contractCallback = async (eventKey: string, senderAddress: string, ...args: any[]) => {
         if (!pendingTxEvent.value?.successOnEventKey)
           return
         const hasSuccessKey = keyInSuccessKey(eventKey, pendingTxEvent.value?.successOnEventKey)

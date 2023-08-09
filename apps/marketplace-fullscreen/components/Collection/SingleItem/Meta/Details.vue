@@ -1,21 +1,21 @@
 <template lang="pug">
 VList()
-  AttributeRow()
+  AttributeRow(:is-details="true")
     template(#name) {{ $t(`marketplace.singleItem.contractAdress`) }}
     template(#value) 
       NuxtLink(:to="linkAdress" :external="true" target="_blank" color="ix-primary") {{ showAdress(item.collection)}} 
       //-span(color="ix-primary") {{ item.collection}} 
 
-  AttributeRow()
+  AttributeRow(:is-details="true")
     template(#name) {{ $t(`marketplace.singleItem.tokenId`) }}
     template(#value) {{ item.token_id}}
 
-  AttributeRow()
+  AttributeRow(:is-details="true")
     template(#name) {{ $t(`marketplace.singleItem.tokenStandard`) }}
     template(#value v-if="is721") ERC-721
     template(#value v-else-if="is1155") ERC-1155
 
-  AttributeRow()
+  AttributeRow(:is-details="true")
     template(#name) {{ $t(`marketplace.singleItem.chain`) }}
     template(#value) {{ network }}
 
@@ -24,7 +24,7 @@ VList()
   //-   template(#name) Last updated
   //-   template(#value) TODO
 
-  AttributeRow()
+  AttributeRow(:is-details="true" pb="4")
     template(#name) {{ $t(`marketplace.price.marketplaceFee`) }}
     template(#value) 5%
     

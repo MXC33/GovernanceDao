@@ -17,7 +17,7 @@ Popup()
     ListingPrice(:items="activeListItems")
 
   template(#buttons)
-    ButtonInteractive(btn="~ primary" w="full" @click.prevent="onClickList" text="List Items" :invalid="isItemInvalid(activeListItems, true)" :loading="isLoading")
+    ButtonInteractive(btn="~ primary on-invalid:!bg-gray-500" w="full" @click.prevent="onClickList" text="List Items" :invalid="isItemInvalid(activeListItems, true)" :loading="isLoading")
 
 </template>
 
@@ -47,5 +47,7 @@ const { items } = defineProps<{
 }>()
 
 createListItems(items)
+
+console.log(isItemInvalid(activeListItems.value, true), 'active')
 
 </script>

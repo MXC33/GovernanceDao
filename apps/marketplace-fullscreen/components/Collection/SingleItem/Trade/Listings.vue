@@ -13,7 +13,7 @@ ContentDrawer(:start-open="!isMobile" :is-neutral="true" bg="gray-900")
 <script lang="ts" setup>
 import type { Sale, SingleItemData, Bid } from '@ix/base/composables/Token/useIXToken';
 import type { TableColumn } from '~/composables/useTable';
-const isMobile = onMobile()
+const { isMobile } = useDevice()
 
 const { item } = defineProps<{
   item: SingleItemData

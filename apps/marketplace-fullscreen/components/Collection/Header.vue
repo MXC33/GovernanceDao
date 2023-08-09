@@ -1,9 +1,10 @@
 <template lang="pug">
 VList(space-y="4 md:8")
 
-  div(w="60")
+  div(w="30 md:60" frame="~")
     slot(name="collectionImage")
-      img(src="~/assets/testfiles/test-collection-bg.png" w="60")
+      img(src="~/assets/images/collection/general.png" v-if="context == 'collection'")
+      img(src="~/assets/images/collection/my-assets.png" v-else)
 
   HList(items="center" space-x="2")
     span(color="gray-50" font="bold" text="3xl")
@@ -17,12 +18,11 @@ VList(space-y="4 md:8")
 </template>
 
 <script lang="ts" setup>
+import type { CollectionContext } from '~/composables/useCollection';
 
+defineProps<{
+  context: CollectionContext
+}>()
 </script>
 
-<style>
-.graidentCollection {
-  background: rgb(0, 0, 0);
-  background: linear-gradient(0deg, rgba(0, 0, 0, 1) 50%, rgba(203, 0, 16, 1) 100%);
-}
-</style>
+<style></style>

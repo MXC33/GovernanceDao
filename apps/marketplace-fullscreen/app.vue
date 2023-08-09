@@ -1,5 +1,5 @@
 <template lang="pug">
-#app.antialiased(font="foundry" bg="ix-black" color="white" text="lt-md:sm" ref="app" overscroll="none" flex="~ col grow")
+#app.antialiased(font="foundry" text="base" bg="ix-black" color="white" ref="app" overscroll="none" flex="~ col grow")
   NuxtLayout()
     VList()
       NuxtLoadingIndicator(color="rgb(255, 102, 71)")
@@ -25,10 +25,11 @@
 </template>
 
 <script setup lang="ts">
-// import 'vue3-easy-data-table/dist/style.css';
-
 useHead({
-  title: "Marketplace | PlanetIX"
+  title: "Marketplace | PlanetIX",
+  script: [
+    { src: '/global.js' },
+  ]
 })
 
 const globalY = useGlobalWindowScroll()

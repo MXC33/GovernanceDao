@@ -1,7 +1,7 @@
 <template lang="pug">
 tbody(divide-y="1")
   TableRow(v-for="(row, index) in rows" :key="row.originalIndex ?? index")
-    TableCell(v-if="selectable") 
+    TableCell(v-if="selectable" :context="context") 
       InputCheckbox(:model-value="isSelected(index)" @update:modelValue="val => onSelect(index, val)")
 
     TableCell(v-for="column in columns" pos="on-buttons:(sticky right-0)" :buttons="column.type == 'buttons'") 
@@ -13,12 +13,14 @@ tbody(divide-y="1")
           slot(:name="getColumnKey(column)" :buttons="column.buttons" :row="row" )
             TableButton(:row="row" :button="button" v-for="button in column.buttons") {{ button.text }}
 
-        slot(v-else :name="`item-${column.rowKey}`" :row="row" :column="column" )
-          TableCellValue(:column="column" :row="row")
+        slot(v-else :name="`item-${column.rowKey}`" :row="row" :column="column")
+          TableCellValue(:column="column" :row="row" :context="context")
+
 
 </template>
 
 <script setup lang="ts" generic="Row extends TableRow">
+import type { CollectionContext } from '~/composables/useCollection';
 import type { TableColumn, TableRow } from '~/composables/useTable';
 
 const { getColumnKey } = useTable()
@@ -28,6 +30,7 @@ const { rows, columns, loading, selectable } = defineProps<{
   rows: Row[],
   loading?: boolean,
   selectable?: boolean,
+  context?: CollectionContext
 }>()
 
 const selectedItems = defineModel<number[]>()

@@ -11,10 +11,6 @@ export const useSelection = () => {
 
   const selectedItemsIsSameCollection = computed(() => {
     const selectedItemsCollection = selectedItems.value.map(item => item.collection)
-    const contains721Collection = ERC721Addresses.includes(selectedItemsCollection[1]?.toLowerCase())
-
-    if (contains721Collection)
-      return false
 
     return selectedItemsCollection.every(val => val === selectedItemsCollection[0]);
   })

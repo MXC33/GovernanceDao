@@ -1,6 +1,6 @@
 <template lang="pug">
-VList(max-h="85" frame="~")
-  HList(h="12" px="6 on-small:3" bg="ix-black on-neutral:gray-900" items="center" justify="between" pos="sticky top-0" flex-shrink="0" z="1" @click.stop="dropDrawer" uppercase="~" cursor="pointer" :neutral="isNeutral" :small="isSmall")
+VList(max-h="85" frame="~ gray-400 on-frameless:none on-mobile:none" :frameless="noFrame" :mobile="isMobile")
+  HList(h="12" px="6 on-small:3" bg="ix-black on-neutral:gray-900" b="on-meta:t-1 gray-600" :meta="isMeta" items="center" justify="between" pos="sticky top-0" flex-shrink="0" z="1" @click.stop="dropDrawer" uppercase="~" cursor="pointer" :neutral="isNeutral" :small="isSmall")
     div(color="white" text="md" font="bold" v-if="$slots.header")
       slot(name="header")
 
@@ -17,13 +17,17 @@ VList(max-h="85" frame="~")
 
 <script lang="ts" setup>
 import { Collapse } from 'vue-collapsed'
-const { startOpen } = defineProps<{
+
+const { startOpen, noFrame = false, isMeta = false } = defineProps<{
   startOpen?: boolean
   isSmall?: boolean
   isNeutral?: boolean
+  noFrame?: boolean
+  isMeta?: boolean
 }>()
 
 const isOpen = shallowRef(startOpen)
+const { isMobile } = useDevice()
 
 const dropDrawer = () => {
   isOpen.value = !isOpen.value
