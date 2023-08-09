@@ -7,9 +7,9 @@ VList(w="full" max-w="full" min-w="0")
 
     div.no-scrollbar(grid="~ row-gap-0 gap-x-3" :style="gridStyle" ref="scrollElement" flex-grow="1")
 
-      TableHeader(v-model="selectedItems" :columns="renderColumns" :rows="rows" :id="id" :context="context")
+      TableHeader(v-model="selectedItems" :columns="renderColumns" :rows="sortedRows" :id="id" :context="context")
 
-      TableBody(:loading="loading" :rows="rows" :columns="renderColumns"  :context="context" :scrolled-past-end="hasScrolledPastEnd" :scrolled-past-start="hasScrolled")
+      TableBody(:loading="loading" :rows="sortedRows" :columns="renderColumns"  :context="context" :scrolled-past-end="hasScrolledPastEnd" :scrolled-past-start="hasScrolled")
         //- Slots for overriding table column data with template(#item-name="{row}") etc
         template(#[getColumnKey(column)]="{row}" v-for="column in renderColumns")
           slot(:name="`item-${column.rowKey}`" :row="row" v-if="column.type != 'buttons' && column.type != 'asset'")
@@ -44,7 +44,12 @@ const { columns, isOpen, loading, rows, id, context } = defineProps<{
   context?: CollectionContext
 }>()
 
+const { sort } = useTableSort(id)
+const { sortRows } = useTable()
 const { isMobile } = useDevice()
+const sortedRows = computed(() =>
+  sortRows(columns, rows, sort.value)
+)
 
 const renderColumns = computed(() => columns.filter((item) =>
   !(isMobile.value && item.hideMobile)

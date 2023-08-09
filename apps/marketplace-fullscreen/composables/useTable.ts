@@ -230,11 +230,14 @@ export const useTable = () => {
     if (!column)
       return []
 
-    const getField = (row: T) => getValue(column, row) ?? ''
+    const getField = (row: T) => getValue(column, row)
 
     return mapped.sort((a, b) => {
       const aField = getField(a)
       const bField = getField(b)
+
+      if (aField == undefined)
+        return 1
 
       if (aField === 0 && bField === 0) {
         return 0
