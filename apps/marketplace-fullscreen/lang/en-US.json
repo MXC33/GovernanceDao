@@ -262,6 +262,7 @@
     "unbid": {
       "title": "Remove Bid",
       "warningText": "Are you sure you want to remove this bid?",
+      "warningTextMultiple": "Are you sure you want to remove these bids?",
       "cancel": "Cancel",
       "success": "Bid successfully removed"
     },
