@@ -27,7 +27,7 @@ await fetchCollection()
 setupCollectionListeners()
 
 const columns: TableColumn<IXToken>[] = [
-  { label: "Asset", rowKey: "name", width: 200 },
+  { label: "Asset", type: "asset", width: 200 },
   {
     label: "Offer price", rowKey: "bid.price", type: 'ixt', sortable: true
   },
