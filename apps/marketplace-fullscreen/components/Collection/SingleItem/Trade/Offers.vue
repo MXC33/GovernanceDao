@@ -1,19 +1,14 @@
 <template lang="pug">
-DefineTemplate()
-  CollectionSingleItemTradeDetail(v-if="item.bids.length < 1" ) 
-    | {{ $t(`marketplace.singleItem.noCurrentBids`) }}
-
-  Table(:columns="offerColumns" :rows="item.bids" id="offers" v-if="item.bids.length > 0")
-
-ContentDrawer(:start-open="!isMobile" :is-neutral="true" bg="gray-900" mx="lt-md:-4" v-if="hasDrawer")
+ContentDrawer(:start-open="!isMobile" :is-neutral="true" bg="gray-900" mx="lt-md:-4" :disable="!hasDrawer")
   template(#titleicon)
     TitleWithIcon(icon="offer") {{ $t(`marketplace.singleItem.offers`) }}
 
   template(#default)
-    ReuseTemplate()
+    CollectionSingleItemTradeDetail(v-if="item.bids.length < 1" ) 
+      | {{ $t(`marketplace.singleItem.noCurrentBids`) }}
 
-VList.no-scrollbar(mx="-4" max-h="85" overflow-y="auto" v-else)
-  ReuseTemplate()
+    Table(:columns="offerColumns" :rows="item.bids" id="offers" v-if="item.bids.length > 0")
+
 
 </template>
 

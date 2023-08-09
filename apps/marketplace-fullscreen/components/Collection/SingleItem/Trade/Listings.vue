@@ -1,18 +1,13 @@
 <template lang="pug">
-DefineTemplate()
-  Table(v-if="item.sales && item.sales.length > 0" :columns="saleColumns" :rows="item.sales" id="single-item")
-
-  CollectionSingleItemTradeDetail(v-else) {{ $t(`marketplace.singleItem.noItemsFound`) }}
-
-ContentDrawer(:start-open="!isMobile" :is-neutral="true" bg="gray-900" mx="lt-md:-4" v-if="hasDrawer")
+ContentDrawer(:start-open="!isMobile" :is-neutral="true" bg="gray-900" mx="lt-md:-4" :disable="!hasDrawer")
   template(#titleicon)
     TitleWithIcon(icon="listing") {{ $t(`marketplace.singleItem.listings`) }}
 
   template(#default)
-    ReuseTemplate()
 
-VList.no-scrollbar(mx="-4" max-h="85" overflow-y="auto" v-else)
-  ReuseTemplate()
+    Table(v-if="item.sales && item.sales.length > 0" :columns="saleColumns" :rows="item.sales" id="single-item")
+
+    CollectionSingleItemTradeDetail(v-else) {{ $t(`marketplace.singleItem.noItemsFound`) }}
 
 
 </template>

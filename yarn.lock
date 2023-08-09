@@ -2826,7 +2826,7 @@ __metadata:
     "@histoire/plugin-nuxt": ^0.16.1
     "@histoire/plugin-vue": ^0.16.1
     "@nuxt/eslint-config": ^0.1.1
-    "@nuxtjs/html-validator": ^1.4.0
+    "@nuxtjs/html-validator": ^1.5.2
     "@types/uuid": ^9.0.1
     "@unocss/extractor-pug": ^0.53.1
     "@unocss/nuxt": ^0.53.1
@@ -3446,7 +3446,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@nuxtjs/html-validator@npm:^1.4.0":
+"@nuxtjs/html-validator@npm:^1.5.2":
   version: 1.5.2
   resolution: "@nuxtjs/html-validator@npm:1.5.2"
   dependencies:

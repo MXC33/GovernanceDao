@@ -1,6 +1,6 @@
 <template lang="pug">
 HList(items="start" space-x="2" cursor="pointer" @click.stop="toggle" select="none")
-  HList(b="2 gray-400 on-selected:0" bg="on-selected:ix-primary" color="white" w="5" h="5" pos="relative" :selected="isSelected" flex-shrink="0")
+  HList(b="1 gray-400 on-selected:0" bg="on-selected:ix-primary" color="white" w="5" h="5" pos="relative" :selected="isSelected" flex-shrink="0")
     CheckmarkIcon(fill="white" w="3" h="3" pos="absolute-center" transition="all" v-if="isSelected")
 
   label(cursor="pointer" v-if="$slots.default")

@@ -1,9 +1,8 @@
 <template lang="pug">
 div(cursor="pointer" flex="~ " justify="between" items="center" h="12" p="r-8" w="full" :selected="isSelected" @click.stop="toggle" group)
   HList(space-x="4" w="full" justify="between" items="center")
-    HList(items="center")
-      InputCheckbox(v-model="isSelected")
-      span(translate-y="0.4")
+    InputCheckbox(v-model="isSelected")
+      span(translate-y="-0.1")
         slot()
 
     span(color="gray-200" font="base")

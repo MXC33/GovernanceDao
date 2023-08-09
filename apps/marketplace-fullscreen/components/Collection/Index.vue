@@ -18,7 +18,7 @@ VList(flex-grow="1" min-h="0" pos="relative" p="4 md:(8 b-30)" space-y="0 md:6")
     VList(display="lt-md:none")
       CollectionFilterSlideout(:items="data.filters" v-if="showFilters && data")
 
-    CollectionList(v-if="data" :columns="columnResolution" :items="data?.nfts" :hide-grid="hideGrid" :context="context" :show-filters="showFilters" :loading="loading")
+    CollectionList(v-if="data" :columns="renderColumns" :items="data?.nfts" :hide-grid="hideGrid" :context="context" :show-filters="showFilters" :loading="loading")
 
   HList(justify="center" w="full" py="2" v-if="loadMoreVisible")
     ButtonInteractive(btn="~ primary " font="bold" @click="loadNextPage" :text="loading ? 'Loading' : 'Load More'" :loading="loading" w="80" ref="loadMoreButton")
@@ -50,27 +50,6 @@ useScrollLoadMore(loadMoreButton, loadNextPage)
 
 const attributes = computed(() => data ? getCollectionAttributes(data) : [])
 const renderColumns = computed(() => columns ?? defaultColumns)
-const renderMobileColumns = computed(() => columns ?? mobileColumns)
-const { device } = useDevice()
-
-const columnResolution = computed(() => {
-  if (device.value == '4k' || device.value == 'desktop' || device.value == 'tablet') {
-    return renderColumns.value || []
-  } else if (device.value == 'mobile') {
-    return renderMobileColumns.value || []
-  }
-  return []
-})
-
-const mobileColumns: TableColumn<IXToken>[] = [
-  { label: "Asset", type: 'asset', width: 200 },
-  {
-    label: "Current price", rowKey: "sale_price", type: 'ixt', width: 120, sortable: {
-      ascKey: 'PRICE_ASC',
-      descKey: 'PRICE_DESC'
-    },
-  }
-]
 
 const defaultColumns: TableColumn<IXToken>[] = [
   { label: "Asset", type: 'asset', width: 200 },
@@ -81,30 +60,30 @@ const defaultColumns: TableColumn<IXToken>[] = [
     }
   },
   {
-    label: "USD price", rowKey: "sale_price", type: 'usd', sortable: {
+    label: "USD price", rowKey: "sale_price", type: 'usd', hideMobile: true, sortable: {
       ascKey: 'PRICE_ASC',
       descKey: 'PRICE_DESC'
     }
   },
   {
-    label: "Best offer", rowKey: "higher_bid_price", type: 'ixt'
+    label: "Best offer", rowKey: "higher_bid_price", hideMobile: true, type: 'ixt'
   },
   {
-    label: "Total quantity", rowKey: "shares", getValue(row) {
+    label: "Total quantity", hideMobile: true, rowKey: "shares", getValue(row) {
       if (row.shares == 0)
         return '-'
       return row.shares.toString()
     }, type: 'text'
   },
   {
-    label: "Seller", rowKey: "lowest_sale.player_username", getValue(row) {
+    label: "Seller", hideMobile: true, rowKey: "lowest_sale.player_username", getValue(row) {
       if (!row.lowest_sale)
         return ''
       return row.lowest_sale.player_username
     }, type: 'text'
   },
   {
-    label: "Time listed", rowKey: "lowest_sale.endtime", getValue(row) {
+    label: "Time listed", hideMobile: true, rowKey: "lowest_sale.endtime", getValue(row) {
       if (!row.lowest_sale)
         return ''
       const { days, minutes } = useIntervalWithDays((row.lowest_sale.timestamp * 1000), currentTime.value)

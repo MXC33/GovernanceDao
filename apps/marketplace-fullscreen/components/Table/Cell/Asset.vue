@@ -1,9 +1,9 @@
 
 <template lang="pug">
-HList(:context="context" justify="center" items="center" space-x="3" pos="sticky left-0" z="2" shadow="on-scrolled:right" :scrolled="scrolling" transition="all" min-w="0")
+HList(:context="context" justify="center" items="center" space-x="6" pos="sticky left-0" z="2" shadow="on-scrolled:right" :scrolled="scrolling" transition="all" min-w="0")
   InputCheckbox(:model-value="isItemSelected(token)" @update:modelValue="() => toggleItem(token)" v-if="!column.disableSelect" flex-shrink="0")
 
-  TableCellToken(:token="token" max-w="full" :context="context" @click="onClickAsset" min-w="0")
+  TableCellToken(:token="token" max-w="full" @click="onClickAsset" min-w="0")
     span(v-if="context == 'my-assets'" color="gray-200" font="normal" text="lt-md:sm") x{{ token.my_shares }}
 
 </template>

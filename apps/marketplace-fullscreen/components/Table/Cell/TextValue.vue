@@ -1,20 +1,19 @@
 
 <template lang="pug">
-VList(flex-shrink="0" whitespace="nowrap" p="md:r-6" flex-grow="lt-md:1")
-  // Move asset type in here and combine with selected 
+VList(flex-shrink="0" whitespace="nowrap")
 
-  Currency(:value="roundToDecimals(Number(value), 4)" type="ixt" v-if="column.type == 'ixt' && !isMobile")
+  template(v-if="column.type == 'ixt'")
+    Currency(:value="roundToDecimals(Number(value), 4)" type="ixt" v-if="!isMobile")
 
-  Currency(:value="ixtToUSD(value)" type="usd" v-else-if="column.type == 'usd' && !isMobile")
+    VList(v-else pr="4" w="full" items="end")
+      Currency(:value="roundToDecimals(Number(value), 4)" type="ixt")
+      Currency(:value="ixtToUSD(value)" type="usd")
 
-  VList(v-else-if="isMobile && context == 'collection'" pr="4" w="full" items="end")
-    Currency(:value="roundToDecimals(Number(value), 4)" type="ixt")
-
-    Currency(:value="ixtToUSD(value)" type="usd")
+  Currency(:value="ixtToUSD(value)" type="usd" v-else-if="column.type == 'usd'")
 
   ContractAdress(:adress="value" v-else-if="column.type == 'contractAdress'")
 
-  span(v-else-if="column.type == 'date' && !isMobile") {{ getDate(value) }}
+  span(v-else-if="column.type == 'date'") {{ getDate(value) }}
 
   span(v-else-if="isYou" font="bold") {{value}}
 

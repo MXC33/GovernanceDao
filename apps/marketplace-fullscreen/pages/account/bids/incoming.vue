@@ -26,7 +26,7 @@ setupCollectionListeners()
 
 
 const columns: TableColumn<IXToken>[] = [
-  { label: "Asset", rowKey: "name" },
+  { label: "Asset", type: 'asset', width: 250 },
   {
     label: "Highest bid", rowKey: "bid.price", type: 'ixt', sortable: true
   },

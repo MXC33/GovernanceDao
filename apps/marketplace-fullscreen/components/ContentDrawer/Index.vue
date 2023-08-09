@@ -13,7 +13,7 @@ VList(max-h="85" frame="~ gray-400 on-frameless:none on-mobile:none" :frameless=
     Collapse(:when="isOpen" class="v-collapse"  overflow-y="auto" )
       slot
 
-VList(overflow="auto" max-h="85"  v-else)
+VList.no-scrollbar(overflow="auto" max-h="85" v-else)
   slot
 
 </template>

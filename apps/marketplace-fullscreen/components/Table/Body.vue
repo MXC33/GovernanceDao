@@ -1,22 +1,23 @@
 <template lang="pug">
-template(v-for="(row, index) in rows" :key="row.originalIndex ?? index")
-  TableCell(v-for="column in columns" :sticky="column.type == 'buttons'" :shadow="false") 
-    template(v-if="loading")
-      HelperSkeleton(h="6" flex-grow="1" mr="6")
+template(v-for="row in rows")
+  template(v-for="(column, index) in columns")
+    TableCell(:sticky="column.type == 'buttons'" :shadow="false" :last-col="index == columns.length - 1")
+      template(v-if="loading")
+        HelperSkeleton(h="6" flex-grow="1")
 
-    template(v-else)
+      template(v-else)
 
-      HList(v-if="column.type == 'buttons'" w="full" space-x="3" backdrop="blur-sm")
-        TableButtonGroup(v-if="isMobile")
-          TableButton(:row="row" :button="button" v-for="button in column.buttons") {{ button.text }}
+        HList(v-if="column.type == 'buttons'" w="full" space-x="3" backdrop="blur-sm")
+          TableButtonGroup(v-if="isMobile")
+            TableButton(:row="row" :button="button" v-for="button in column.buttons") {{ button.text }}
 
-        TableButton(v-else :row="row" :button="button" v-for="button in column.buttons") {{ button.text }}
+          TableButton(v-else :row="row" :button="button" v-for="button in column.buttons") {{ button.text }}
 
-      template(v-else-if="column.type == 'asset'")
-        TableCellAsset(v-if="rowIsIXToken(row)" :column="column" :token="row")
+        template(v-else-if="column.type == 'asset'")
+          TableCellAsset(v-if="rowIsIXToken(row)" :column="column" :token="row")
 
-      slot(v-else :name="`item-${column.rowKey}`" :row="row" :column="column")
-        TableCellTextValue(:column="column" :row="row" :context="context")
+        slot(v-else :name="`item-${column.rowKey}`" :row="row" :column="column")
+          TableCellTextValue(:column="column" :row="row" :context="context")
 
 </template>
 

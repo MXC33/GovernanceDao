@@ -1,27 +1,25 @@
 <template lang="pug">
-TableCellHeadWrapper()
-  HList(v-if="column.sortable" cursor="pointer" space-x="1"  @click="onClickSort" flex="~ row" items="center" color="on-active:white" :active="isActive" transition="all")
-    div()
-      slot()
+TableCellHeadWrapper(:last-col="lastCol")
+  TableCellContainer(v-if="column.sortable" cursor="pointer" space-x="1"  @click="onClickSort" color="on-active:white" :active="isActive" transition="all")
+    slot()
 
     Transition(name="fade" mode="out-in")
       SortIcon(v-if="!isActive" w="4")
       HelperChevron(v-else :up="direction == 'desc'" w="4" :thick="true" )
 
-  HList(v-else items="center" justify="start" space-x="3")
+  TableCellContainer(v-else space-x="6")
     slot
 </template>
 
 <script setup lang="ts" generic="T extends TableRow">
 import SortIcon from '~/assets/icons/sort.svg'
-import type { CollectionContext } from '~/composables/useCollection';
 import type { TableSortable, TableRow, TableSort } from '~/composables/useTable'
 
-const { sortField, index, column, context } = defineProps<{
+const { sortField, index, column } = defineProps<{
   column: TableSortable,
   index: number,
   sortField?: TableSort,
-  context?: CollectionContext
+  lastCol?: boolean
 }>()
 
 const emit = defineEmits<{
@@ -30,7 +28,6 @@ const emit = defineEmits<{
 }>()
 
 const isActive = computed(() => sortField?.columnIndex == index)
-const { isMobile } = useDevice()
 
 const direction = computed(() => {
   if (isActive.value)
