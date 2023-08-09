@@ -40,6 +40,10 @@ router.onError((err) => {
 
 const { state: isSwapVisible } = useIXTSwapVisible()
 
+const {execute: fetchHeaderData } = useHeaderData()
+
+await fetchHeaderData()
+
 const { y } = useWindowScroll()
 const { connectWallet, walletState } = useWallet()
 const { setupIXTPrice } = useIXTPrice()

@@ -4,8 +4,15 @@ VList(pos="sticky top-0" z="99" w="full" @mouseenter="isSelected = true" @mousel
     NuxtLink(to="https://www.planetix.com")
       PlanetIXNew(w="42.25")
 
-    HList(justify="start" flex-grow="1" display="lt-lg:none" overflow-x="hidden")
-      button(v-for="(item, index) in siteTopHeaders" @click="openMenu(index)" btn="menu" color = "s-default:white s-selected:ix-orange" :state="selected(index)") {{ $t(`marketplace.navigation.${item.type}.title`)}}
+    HList(justify="start" flex-grow="1" display="lt-lg:none" overflow-x="hidden" space-x="4")
+      //-button(v-for="(item, index) in siteTopHeaders" @click="openMenu(index)" btn="menu" color = "s-default:white s-selected:ix-orange" :state="selected(index)") {{ $t(`marketplace.navigation.${item.type}.title`)}}
+      button(v-for="(header, index) in headerData" @click="openMenu(index)" btn="menu" color = "s-default:white s-selected:ix-orange" :state="selected(index)") {{ header.name }}
+
+
+      HList(flex-grow="1" justify="end" display="lt-md:none")
+        NuxtLink(to="https://planetix.com/airdrop")
+          HList(rounded="full" b="1 $mc-mint" px="4" py="1" bg="hover:$mc-mint-40" uppercase="~" tracking="0.65" font="bold" items="center" justify="center")
+            span(translate-x="0.5") airdrop
 
     HList(space-x="6" px="0")
       //-button(btn="menu" display="lt-lg:none") help
@@ -18,11 +25,14 @@ VList(pos="sticky top-0" z="99" w="full" @mouseenter="isSelected = true" @mousel
         SettingsIcon(v-if="activeMenuIndex == null")
         CrossIcon(v-else)
 
-  Transition(name="slide-top" mode="out-in")
-    HeaderDesktop(v-if="activeMenuIndex != null" :key="activeMenuIndex" :header="siteTopHeaders[activeMenuIndex]" display="lt-lg:none" @onClickItem="")
+//- Transition(name="slide-top" mode="out-in")
+//-   HeaderDesktop(v-if="activeMenuIndex != null" :key="activeMenuIndex" :header="siteTopHeaders[activeMenuIndex]" display="lt-lg:none" @onClickItem="")
 
-  Transition(name="slide-top" )
-    HeaderMobile(v-if="activeMenuIndex != null" overflow-y="auto" display="lg:none" @close="toggleMenu")
+//- Transition(name="slide-top")
+//-   HeaderMobile(v-if="activeMenuIndex != null" overflow-y="auto" display="lg:none" @close="toggleMenu")
+
+Transition(name="slide-top")
+  HeaderAPI(v-if="activeMenuIndex != null" overflow-y="auto" @close="toggleMenu")
 
 </template>
 
@@ -33,6 +43,10 @@ import PlanetIXNew from '~/assets/images/header/planetix-new.svg'
 import SettingsIcon from '~/assets/images/header/hamburger.svg'
 const { fetchIXT } = useIXTContract()
 const { siteTopHeaders } = useSiteHeader()
+const {data: headerData} = useHeaderData()
+//const {data} = useHeaderData()
+
+console.log(headerData)
 const { state: swapVisible } = useIXTSwapVisible()
 const activeMenuIndex = ref<number | null>(null)
 
