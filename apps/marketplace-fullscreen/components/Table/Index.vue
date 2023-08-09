@@ -2,10 +2,10 @@
 VList(w="full" max-w="full" min-w="0")
   CollectionFilterButtonContainer(:is-open="isOpen")
 
-  HList.no-scrollbar(overflow-x="on-scrollable:scroll" :scrollable="!!context" w="full" bg="gray-900")
+  HList.no-scrollbar(overflow-x="on-scrollable:scroll" :scrollable="!!context" w="full" bg="gray-900" ref="scrollElement")
     TableSpacer()
 
-    div.no-scrollbar(grid="~ row-gap-0 gap-x-3" :style="gridStyle" ref="scrollElement" flex-grow="1")
+    div.no-scrollbar(grid="~ row-gap-0 gap-x-3" :style="gridStyle" flex-grow="1")
 
       TableHeader(v-model="selectedItems" :columns="renderColumns" :rows="sortedRows" :id="id" :context="context")
 
@@ -26,7 +26,7 @@ const selectedItems = defineModel<number[]>()
 const scrollElement = ref()
 const { getColumnKey } = useTable()
 
-const { x: scrollX, arrivedState } = useScroll(scrollElement)
+const { arrivedState } = useScroll(scrollElement)
 
 const hasScrolled = computed(() => arrivedState.left == false)
 const hasScrolledPastEnd = computed(() => arrivedState.right == false)

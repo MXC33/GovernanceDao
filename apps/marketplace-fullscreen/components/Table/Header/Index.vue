@@ -27,7 +27,6 @@ const isMenuOpen = computed(() => {
   return selectedItems.value ? selectedItems.value.length > 0 : false
 })
 
-
 const isAllSelected = computed(() =>
   (selectedItems.value ?? []).length == rows.length && rows.length > 0
 )

@@ -1,7 +1,7 @@
 <template lang="pug">
 template(v-for="row in rows")
   template(v-for="(column, index) in columns")
-    TableCell(:sticky="column.type == 'buttons'" :shadow="false" :last-col="index == columns.length - 1")
+    TableCell(:sticky="getSticky(column)" :shadow="false" :last-col="index == columns.length - 1")
       template(v-if="loading")
         HelperSkeleton(h="6" flex-grow="1")
 
@@ -14,7 +14,7 @@ template(v-for="row in rows")
           TableButton(v-else :row="row" :button="button" v-for="button in column.buttons") {{ button.text }}
 
         template(v-else-if="column.type == 'asset'")
-          TableCellAsset(v-if="rowIsIXToken(row)" :column="column" :token="row")
+          TableCellAsset(v-if="rowIsIXToken(row)" :column="column" :token="row" :scrolling="scrolledPastStart")
 
         slot(v-else :name="`item-${column.rowKey}`" :row="row" :column="column")
           TableCellTextValue(:column="column" :row="row" :context="context")
@@ -25,9 +25,17 @@ template(v-for="row in rows")
 import type { CollectionContext } from '~/composables/useCollection'
 import type { TableColumn, TableRow } from '~/composables/useTable'
 
+const getSticky = (column: TableColumn<Row>) => {
+  if (column.type == 'buttons')
+    return 'right'
+  if (column.type == 'asset')
+    return 'left'
+}
+
+
 const { rowIsIXToken } = useTable()
 const { isMobile } = useDevice()
-const { rows, columns, loading } = defineProps<{
+const { rows, columns, loading, scrolledPastStart } = defineProps<{
   columns: TableColumn<Row>[],
   rows: Row[],
   scrolledPastStart?: boolean,
@@ -36,4 +44,7 @@ const { rows, columns, loading } = defineProps<{
   context?: CollectionContext
 }>()
 
+watch(() => scrolledPastStart, (value) => {
+  console.log("Scroll past", value)
+})
 </script>

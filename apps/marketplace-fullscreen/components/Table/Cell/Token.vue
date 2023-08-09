@@ -1,10 +1,13 @@
 <template lang="pug">
 HList(items="center" space-x="2" font="bold" cursor="pointer" w="full")
-  TokenImage(:token="token" w="10 lg:16" h="10 lg:16"  :key="getTokenKey(token)")
+  TokenImage(:token="token" w="10 md:16" h="10 md:16"  :key="getTokenKey(token)" pos="relative" z="1")
 
-  TokenName(:token="token" capitalize="~" :key="getTokenKey(token)")
+  Transition(name="slide-left" mode="out-in")
+    HList(v-if="!hideName" space-x="2" min-w="0")
+      TokenName(:token="token" capitalize="~" :key="getTokenKey(token)")
 
-  slot
+      slot
+    div(w="0" v-else)
 
 </template>
 
@@ -13,7 +16,8 @@ import type { AnyToken } from '@ix/base/composables/Token/useTokens';
 const { getTokenKey } = useTokens()
 
 const { token } = defineProps<{
-  token: AnyToken
+  token: AnyToken,
+  hideName?: boolean
 }>()
 
 </script>
