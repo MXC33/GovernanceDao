@@ -4,13 +4,12 @@ ContentDrawer(:start-open="!isMobile" :is-neutral="true" bg="gray-900")
     TitleWithIcon(icon="offer") {{ $t(`marketplace.singleItem.offers`) }}
 
   template(#default)
-    CollectionSingleItemTradeDetail(v-if="item.my_shares == 0") 
-      | {{ $t(`marketplace.singleItem.doNotOwn`) }}
 
     CollectionSingleItemTradeDetail(v-if="item.bids.length < 1" ) 
       | {{ $t(`marketplace.singleItem.noOffers`) }}
 
-    Table(:columns="offerColumns" :rows="item.bids" id="offers" v-if="item.bids.length > 0" :col-width="150" )
+    Table(:columns="offerColumns" :rows="item.bids" id="offers" v-else-if="item.bids.length > 0" :col-width="150" )
+    
 
 
 </template>
