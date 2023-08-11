@@ -8,8 +8,8 @@ export default defineConfig({
       foundry: ['Foundry Gridnik', 'sans-serif'],
     },
     boxShadow: {
-      right: '7px 2px 4px 0px #000',
-      left: '-7px 2px 4px 0px #000',
+      right: '7px 2px 7px 0px #000',
+      left: '-7px 2px 7px 0px #000',
     },
     fontSize: {
       'xs': ['var(--font-size-xs)', '1rem'],
