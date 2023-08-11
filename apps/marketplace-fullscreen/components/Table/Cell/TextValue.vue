@@ -5,9 +5,9 @@ VList(flex-shrink="0" whitespace="nowrap")
   template(v-if="column.type == 'ixt'")
     Currency(:value="roundToDecimals(Number(value), 4)" type="ixt" v-if="!isMobile")
 
-    VList(v-else pr="4" w="full" items="end")
+    VList(v-else pr="2" w="full" items="end")
       Currency(:value="roundToDecimals(Number(value), 4)" type="ixt")
-      Currency(:value="ixtToUSD(value)" type="usd")
+      Currency(:value="ixtToUSD(value)" type="usd" v-if="isInAccountRoute")
 
   Currency(:value="ixtToUSD(value)" type="usd" v-else-if="column.type == 'usd'")
 
@@ -42,5 +42,13 @@ const isYou = computed(() => value.value === 'YOU')
 
 const getDate = (date: string | number | undefined) =>
   fromUnixTime(Number(date)).toDateString()
+
+const route = useRoute()
+
+const isInAccountRoute = ref(false)
+
+watch(() => route.path, (newPath) => {
+  isInAccountRoute.value = newPath.endsWith('account/')
+}, { immediate: true })
 
 </script>
