@@ -21,8 +21,6 @@ const { data: data, execute: fetchCollection, loadNextPage, setupCollectionListe
   }
 })
 
-console.log(data.value, 'data from incoming')
-
 await fetchCollection()
 setupCollectionListeners()
 
