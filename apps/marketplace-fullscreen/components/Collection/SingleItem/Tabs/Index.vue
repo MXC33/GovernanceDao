@@ -1,7 +1,7 @@
 <template lang="pug">
 VList(w="full" px="4" b="b-1 gray-600" )
   HList(items="center" text="md" font="bold" :active="isActive" justify="between" capitalize="~" b="b-1 gray-600" mx="-4" px="4")
-    VList(v-for="(tab, index) in itemTabs" :key="index" color="white" bg="none" cursor="pointer" @click="handleTabClick(tab)" pos="relative" h="12" justify="center") 
+    VList(v-for="(tab, index) in itemTabs" :key="index" color="white" bg="none" cursor="pointer" @click="clickOnTab(tab)" pos="relative" h="12" justify="center") 
       div {{ tab }}
 
       Transition(name="fade-slow" mode="in-out")
@@ -23,8 +23,6 @@ const { isActive } = defineProps<{
   isActive?: boolean
 }>()
 
-const emit = defineEmits(['tab-clicked'])
-
 const activeTab = ref<SingleItemTabType>('details')
 
 const setActiveTab = (tab: SingleItemTabType) => {
@@ -33,8 +31,8 @@ const setActiveTab = (tab: SingleItemTabType) => {
 
 const isTabActive = computed(() => activeTab.value == activeTab.value)
 
-const handleTabClick = (tab: SingleItemTabType) => {
+const clickOnTab = (tab: SingleItemTabType) => {
   setActiveTab(tab)
-  emit('tab-clicked')
 }
+
 </script>

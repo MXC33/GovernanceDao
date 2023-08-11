@@ -13,7 +13,7 @@ VList(space-y="6")
   VList(mx="lt-md:-4" space-y="6")
     TradeModule(:item="item")
 
-    CollectionSingleItemTabs(v-if="isMobile" @tab-clicked="scrollToBottom")
+    CollectionSingleItemTabs(v-if="isMobile")
       template(#activeTab="{tab}")
 
         ReuseListing(v-if="tab == 'listings'" :in-drawer="false")
@@ -45,11 +45,5 @@ const { isMobile } = useDevice()
 
 const { getSingleAttributes } = useDefaultAttributes()
 const attributes = computed(() => getSingleAttributes(item))
-
-const scrollToBottom = () => {
-  setTimeout(() => {
-    window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' })
-  }, 300)
-}
 
 </script>
