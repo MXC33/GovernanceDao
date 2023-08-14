@@ -1,20 +1,21 @@
 
 <template lang="pug">
 VList(flex-shrink="0" whitespace="nowrap")
-  Currency(:value="roundToDecimals(Number(value), 4)" type="ixt" v-if="column.type == 'ixt' && !isMobile")
 
-  Currency(:value="ixtToUSD(value)" type="usd" v-else-if="column.type == 'usd' && !isMobile")
+  template(v-if="column.type == 'ixt'")
+    Currency(:value="roundToDecimals(Number(value), 4)" type="ixt" v-if="!isMobile")
 
-  VList(v-else-if="isMobile && context == 'collection'" justify="end" items="end" pr="4" b="1 red")
-    Currency(:value="roundToDecimals(Number(value), 4)" type="ixt")
+    VList(v-else pr="2" w="full" items="end")
+      Currency(:value="roundToDecimals(Number(value), 4)" type="ixt")
+      Currency(:value="ixtToUSD(value)" type="usd" v-if="isInAccountRoute")
 
-    Currency(:value="ixtToUSD(value)" type="usd")
+  Currency(:value="ixtToUSD(value)" type="usd" v-else-if="column.type == 'usd'")
 
-  ContractAdress(:adress="value" v-else-if="column.type == 'contractAdress' && !isMobile")
+  ContractAdress(:adress="value" v-else-if="column.type == 'contractAdress'")
 
-  span(v-else-if="column.type == 'date' && !isMobile") {{ getDate(value) }}
+  span(v-else-if="column.type == 'date'") {{ getDate(value) }}
 
-  span(v-else-if="isYou && !isMobile" font="bold") {{value}}
+  span(v-else-if="isYou" font="bold") {{value}}
 
   span(v-else) {{value}}
 
@@ -35,13 +36,19 @@ const { getValue } = useTable()
 const { ixtToUSD } = useIXTPrice()
 const { isMobile } = useDevice()
 
-console.log(context, 'context from cell value')
-
 const value = computed(() => getValue(column, row))
 
 const isYou = computed(() => value.value === 'YOU')
 
 const getDate = (date: string | number | undefined) =>
   fromUnixTime(Number(date)).toDateString()
+
+const route = useRoute()
+
+const isInAccountRoute = ref(false)
+
+watch(() => route.path, (newPath) => {
+  isInAccountRoute.value = newPath.endsWith('account/')
+}, { immediate: true })
 
 </script>

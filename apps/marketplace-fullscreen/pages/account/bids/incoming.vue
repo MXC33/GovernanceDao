@@ -1,5 +1,5 @@
 <template lang="pug">
-Collection(:data="data" :columns="columns" context="incoming-bids" :loading="pending" v-if="data" :hide-grid="true")
+Collection(:data="data" :columns="columns" context="incoming-bids" :loading="pending" v-if="data" :hide-grid="true" @load-next-page="loadNextPage")
   template(#menu)
     AccountMenu()
 </template>
@@ -14,7 +14,7 @@ import type { IXToken } from "@ix/base/composables/Token/useIXToken";
 
 const { myAssetsURL } = useCollectionsURL()
 
-const { data: data, execute: fetchCollection, setupCollectionListeners, pending } = useCollectionData(myAssetsURL('polygon'), {
+const { data: data, execute: fetchCollection, loadNextPage, setupCollectionListeners, pending } = useCollectionData(myAssetsURL('polygon'), {
   filter: {
     owned: true,
     type: 1,
@@ -26,7 +26,7 @@ setupCollectionListeners()
 
 
 const columns: TableColumn<IXToken>[] = [
-  { label: "Asset", rowKey: "name" },
+  { label: "Asset", type: 'asset', width: 250 },
   {
     label: "Highest bid", rowKey: "bid.price", type: 'ixt', sortable: true
   },
@@ -53,6 +53,7 @@ const columns: TableColumn<IXToken>[] = [
     label: "Expires", rowKey: "bid.due_date", type: 'date', sortable: true
   },
   {
+    width: 'auto',
     type: 'buttons', buttons: [
       //   {
       //   type: 'secondary', text: 'counter', onClick: (token) => {

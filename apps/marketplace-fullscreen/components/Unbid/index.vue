@@ -10,12 +10,14 @@ Popup()
       TransactionItemCancel(:token="item" v-for="item in items")
         template(#detail) x{{ item.bid.quantity }}
 
-    div(p="y-3") {{ $t(`marketplace.unbid.warningText`) }}
+    div(p="y-3" v-if="items.length > 1") {{ $t(`marketplace.unbid.warningTextMultiple`) }}
+    div(p="y-3" v-else="items.length") {{ $t(`marketplace.unbid.warningText`) }}
+
 
   template(#buttons)
     HList()
       button(btn="~ secondary" w="full" @click="cancelOnClick") {{ $t(`marketplace.unbid.cancel`) }}
-      ButtonInteractive(btn="~ primary" w="full" @click.prevent="unbidOnClick" text="Remove bid" :loading="isLoading") 
+      ButtonInteractive(btn="~ primary" w="full" @click.prevent="unbidOnClick" :text="`${selectedItems}`" :loading="isLoading") 
 
 </template>
 
@@ -38,6 +40,12 @@ const { network, tokenId, contract } = route.params
 const { items } = defineProps<{
   items: UnbidItem[],
 }>()
+
+const selectedItems = computed(() => {
+  if (items.length > 1)
+    return 'Remove Bids'
+  return 'Remove Bid'
+})
 
 const { refresh: refreshSingleItem } = await useAssetAPI({
   contract: String(contract),

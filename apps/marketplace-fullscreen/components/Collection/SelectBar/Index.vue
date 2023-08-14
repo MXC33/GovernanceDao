@@ -1,5 +1,5 @@
 <template lang="pug">
-div(v-if="amountSelected != 0" w="full" p="4 md:3" pos="sticky bottom-0" z="2" bg="ix-black")
+div(v-if="amountSelected != 0" w="full" p="4 md:3" pos="sticky bottom-0" z="2" bg="ix-black" b="lt-md:t-1 gray-600")
   div(flex="~ col md:row" space-x="md:3" space-y="lt-md:4" items="md:center" justify="between" px="0 md:5" w="full")
 
     HList(font="bold" text="md" space-x="md:8" flex-grow="1" items="center" w="full" justify="lt-md:between")
@@ -21,9 +21,15 @@ div(v-if="amountSelected != 0" w="full" p="4 md:3" pos="sticky bottom-0" z="2" b
 
 
       template(v-else-if="context=='incoming-bids'")
-        //- CollectionSelectBarButton(@click="onClickRejectBids") Reject {{amountSelected}} Bids
+        //- Reject Bids button when ready
+        CollectionSelectBarButton(@click="onClickRejectBids") Reject {{amountSelected}} Offers
         CollectionSelectBarButton(@click="onClickAcceptBids" v-if="amountSelected == 1") Accept {{amountSelected}} Offer
         CollectionSelectBarButton(@click="onClickAcceptBids" v-else-if="amountSelected >= 1") Accept {{amountSelected}} Offers
+
+      template(v-else-if="context == 'outgoing-bids'")
+        CollectionSelectBarButton(@click="onClickRemoveBids" v-if="amountSelected == 1") Remove {{amountSelected}} Bid
+        CollectionSelectBarButton(@click="onClickRemoveBids" v-else="amountSelected >= 1") Remove {{amountSelected}} Bids
+
 
 
 </template>
@@ -37,6 +43,13 @@ const { selectedItemsIsSameCollection } = useSelection()
 const onClickRejectBids = () => {
   displayPopup({
     type: 'reject-items',
+    items: selectedItems.value
+  })
+}
+
+const onClickRemoveBids = () => {
+  displayPopup({
+    type: 'unbid-item',
     items: selectedItems.value
   })
 }

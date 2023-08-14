@@ -1,7 +1,13 @@
 <template lang="pug">
-td(p="first:l-4 r-0 t-2 b-2 md:(3 first:l-6 last:r-6)" text="md:ellipsis" bg="last:gray-900 group-hover:!gray-800")
+TableCellWrapper(bg="last:gray-900 group-hover:!gray-800" pos="relative s-left:(sticky left-4) s-right:(sticky right-0)" shadow="on-shaded:left" :state="sticky" z="s-left:2 s-right-2" :shaded="sticky && shadow" transition="all" :align-end="lastCol")
   slot
 
 </template>
 
-<style></style>
+<script lang="ts" setup>
+defineProps<{
+  sticky?: 'left' | 'right',
+  shadow?: boolean,
+  lastCol?: boolean
+}>()
+</script>

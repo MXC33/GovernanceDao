@@ -33,9 +33,7 @@ const { isTransfer = false, isMultiple } = defineProps<{
 
 const item = defineModel<TransactionItem>()
 const isOpen = shallowRef(!isMultiple)
-// console.log("TX", item.value)
 
 const isValid = computed(() => !!item.value?.ixtPrice && !!item.value.shares)
-// console.log("Transaction", item, "isTransfer", isTransfer)
 </script>
   
