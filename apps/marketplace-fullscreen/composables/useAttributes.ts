@@ -32,7 +32,7 @@ const singleItemAttributes: Attribute<SingleItemData>[] = [
   }
 ]
 
-export const useDefaulAttributes = () => {
+export const useDefaultAttributes = () => {
 
   const getSingleAttributes = (list: SingleItemData) =>
     singleItemAttributes.map((item) => ({

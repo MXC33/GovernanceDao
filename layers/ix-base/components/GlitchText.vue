@@ -1,5 +1,6 @@
 <template lang="pug">
-span(ref="element") {{ glitchedText }}{{  suffix }}
+span(v-if="!isDollar" ref="element") {{ glitchedText }}{{ suffix }}
+span(v-else ref="element") {{ suffix }}{{ glitchedText }}
 
 </template>
   
@@ -12,7 +13,8 @@ const { text, isHovered, autoHover } = defineProps<{
   text: string,
   suffix?: string,
   isHovered?: boolean,
-  autoHover?: boolean
+  autoHover?: boolean,
+  isDollar?: boolean
 }>()
 
 if (autoHover) {

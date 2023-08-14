@@ -11,8 +11,12 @@ div.loading-skeleton(flex="~ col")
 }
 
 @keyframes shine {
-  to {
+  from {
     background-position-x: 400%;
+  }
+
+  to {
+    background-position-x: 0%;
   }
 }
 </style>

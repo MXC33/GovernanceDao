@@ -1,5 +1,5 @@
 <template lang="pug">
-#app.antialiased(font="foundry" bg="ix-black" color="white" ref="app" overscroll="none" flex="~ col grow")
+#app.antialiased(font="foundry" text="base" bg="ix-black" color="white" ref="app" overscroll="none" flex="~ col grow")
   NuxtLayout()
     VList()
       NuxtLoadingIndicator(color="rgb(255, 102, 71)")
@@ -109,12 +109,6 @@ html {
   --apply: font-foundry;
 }
 
-@media (max-width: 767.9px) {
-  html {
-    font-size: 14px;
-  }
-}
-
 /* Scroll bar stylings */
 ::-webkit-scrollbar {
   width: 2px;
@@ -141,7 +135,13 @@ html {
   scrollbar-width: none
 }
 
-.no-scrollbar::-webkit-scrollbar {
+.no-scrollbar::-webkit-scrollbar,
+.no-scrollbar ::-webkit-scrollbar {
+  display: none
+}
+
+.no-scrollbar::-webkit-scrollbar-thumb,
+.no-scrollbar ::-webkit-scrollbar-thumb {
   display: none
 }
 

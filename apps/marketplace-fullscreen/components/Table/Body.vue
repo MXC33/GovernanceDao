@@ -1,50 +1,50 @@
 <template lang="pug">
-tbody(divide-y="1")
-  TableRow(v-for="(row, index) in rows" :key="row.originalIndex ?? index")
-    TableCell(v-if="selectable") 
-      InputCheckbox(:model-value="isSelected(index)" @update:modelValue="val => onSelect(index, val)")
-
-    TableCell(v-for="column in columns" pos="on-buttons:(sticky right-0)" :buttons="column.type == 'buttons'") 
+template(v-for="row in rows")
+  template(v-for="(column, index) in columns")
+    TableCell(:sticky="getSticky(column)" :shadow="false" :last-col="index == columns.length - 1")
       template(v-if="loading")
-        HelperSkeleton(h="6")
+        HelperSkeleton(h="6" flex-grow="1")
 
       template(v-else)
-        HList(v-if="column.type == 'buttons'" space-x="3" justify="end" w="full")
-          slot(:name="getColumnKey(column)" :buttons="column.buttons" :row="row" )
+
+        HList(v-if="column.type == 'buttons'" w="full" space-x="3" backdrop="blur-sm")
+          TableButtonGroup(v-if="isMobile")
             TableButton(:row="row" :button="button" v-for="button in column.buttons") {{ button.text }}
 
-        slot(v-else :name="`item-${column.rowKey}`" :row="row" :column="column" )
-          TableCellValue(:column="column" :row="row")
+          TableButton(v-else :row="row" :button="button" v-for="button in column.buttons") {{ button.text }}
+
+        template(v-else-if="column.type == 'asset'")
+          TableCellAsset(v-if="rowIsIXToken(row)" :column="column" :token="row" :scrolling="scrolledPastStart")
+
+        slot(v-else :name="`item-${column.rowKey}`" :row="row" :column="column")
+          TableCellTextValue(:column="column" :row="row" :context="context")
 
 </template>
 
 <script setup lang="ts" generic="Row extends TableRow">
-import type { TableColumn, TableRow } from '~/composables/useTable';
+import type { CollectionContext } from '~/composables/useCollection'
+import type { TableColumn, TableRow } from '~/composables/useTable'
 
-const { getColumnKey } = useTable()
+const getSticky = (column: TableColumn<Row>) => {
+  if (column.type == 'buttons')
+    return 'right'
+  if (column.type == 'asset')
+    return 'left'
+}
 
-const { rows, columns, loading, selectable } = defineProps<{
+
+const { rowIsIXToken } = useTable()
+const { isMobile } = useDevice()
+const { rows, columns, loading, scrolledPastStart } = defineProps<{
   columns: TableColumn<Row>[],
   rows: Row[],
+  scrolledPastStart?: boolean,
+  scrolledPastEnd?: boolean,
   loading?: boolean,
-  selectable?: boolean,
+  context?: CollectionContext
 }>()
 
-const selectedItems = defineModel<number[]>()
-
-const isSelected = (index: number) =>
-  selectedItems.value?.includes(index)
-
-const onSelect = (index: number, val: boolean) => {
-  if (!selectedItems.value)
-    return
-
-  const hasItem = selectedItems.value.indexOf(index) > -1
-
-  if (hasItem && !val)
-    return selectedItems.value = selectedItems.value.filter((item) => item != index)
-
-  if (val && !hasItem)
-    return selectedItems.value = [...selectedItems.value, index]
-}
+watch(() => scrolledPastStart, (value) => {
+  console.log("Scroll past", value)
+})
 </script>

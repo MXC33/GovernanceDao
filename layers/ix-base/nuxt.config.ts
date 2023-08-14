@@ -23,8 +23,7 @@ export default defineNuxtConfig({
     'vue3-carousel',
     '@walletconnect/modal',
     '@walletconnect/ethereum-provider',
-    '@coinbase/wallet-sdk',
-    'buffer'
+    '@coinbase/wallet-sdk'
   ],
 
   css: [
@@ -34,23 +33,24 @@ export default defineNuxtConfig({
     resolve('./assets/styles/cuts.css'),
     resolve('./assets/styles/transitions.css'),
     resolve('./assets/styles/corporations.css'),
+    resolve('./assets/styles/variables.css'),
     'vue3-carousel/dist/carousel.css',
     '@unocss/reset/tailwind.css',
   ],
   modules: [
     'nuxt-graphql-client',
-    '@nuxtjs/i18n',
     '@unocss/nuxt',
     '@vueuse/nuxt',
     '@nuxtjs/html-validator',
   ],
-  i18n: {
-
-  },
   imports: {
     dirs: [
       'composables/**'
     ]
+  },
+
+  device: {
+    refreshOnResize: true
   },
 
   unocss: {

@@ -1,17 +1,14 @@
-
 <template lang="pug">
-TableCellHeadWrapper()
-  HList(v-if="column.sortable" cursor="pointer" space-x="1"  @click="onClickSort" flex="~ row" items="start" color="on-active:white" :active="isActive" transition="all")
-    div()
-      slot
+TableCellHeadWrapper(:last-col="lastCol")
+  TableCellContainer(v-if="column.sortable" cursor="pointer" space-x="1"  @click="onClickSort" color="on-active:white" :active="isActive" transition="all")
+    slot()
 
     Transition(name="fade" mode="out-in")
       SortIcon(v-if="!isActive" w="4")
-      HelperChevron(:up="direction == 'desc'" w="4" :thick="true" v-else)
+      HelperChevron(v-else :up="direction == 'desc'" w="4" :thick="true" )
 
-  HList(v-else items="start")
+  TableCellContainer(v-else space-x="6")
     slot
-      
 </template>
 
 <script setup lang="ts" generic="T extends TableRow">
@@ -22,6 +19,7 @@ const { sortField, index, column } = defineProps<{
   column: TableSortable,
   index: number,
   sortField?: TableSort,
+  lastCol?: boolean
 }>()
 
 const emit = defineEmits<{

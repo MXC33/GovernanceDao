@@ -1,3 +1,4 @@
+import { IXToken } from '@ix/base/composables/Token/useIXToken';
 import { camelCaseIt } from 'case-it';
 
 export type SortDirection = 'desc' | 'asc'
@@ -27,7 +28,8 @@ export interface TableSort {
 
 interface TableColumnBase {
   type?: string,
-  width?: number
+  hideMobile?: boolean,
+  width?: number | 'auto'
 }
 
 export interface TableButton<T extends TableRow> {
@@ -37,16 +39,16 @@ export interface TableButton<T extends TableRow> {
   onClick: (row: T) => void,
   hidden?: (row: T) => boolean
   disabled?: (row: T) => boolean
-
 }
 
 export interface TableSortable {
   sortable?: ServerTableSort | boolean
 }
 
+
 export interface TableColumnText<T extends TableRow> extends TableColumnBase, TableSortable {
   label: string,
-  type?: 'text' | 'date' | 'ixt' | 'usd' | 'asset' | 'contractAdress'
+  type?: 'text' | 'date' | 'ixt' | 'usd' | 'contractAdress'
   rowKey?: string,
   getValue?: (row: T) => string | number
 }
@@ -58,7 +60,8 @@ export interface ServerTableSort {
 
 export interface TableColumnAsset extends TableColumnBase, TableSortable {
   label: string,
-  type?: 'asset'
+  type: 'asset',
+  disableSelect?: boolean
 }
 
 export interface TableButtonColumn<T extends TableRow> extends TableColumnBase {
@@ -70,7 +73,9 @@ export interface TableSelectColumn extends TableColumnBase {
   type: 'select'
 }
 
-export type TableColumn<T extends TableRow> = TableColumnText<T> | TableButtonColumn<T>
+export type TableColumn<T extends TableRow> = TableColumnText<T> | TableButtonColumn<T> | TableColumnAsset
+
+
 
 const columnIndex = (id: string) => {
   const colIndexOne = ['collection', 'incoming-bids', 'outgoing-bids', 'my-assets', 'active-listings']
@@ -185,8 +190,11 @@ const getDotNotation = (obj: object, key: string) => {
 
 
 export const useTable = () => {
+  const rowIsIXToken = (row: TableRow | IXToken): row is IXToken =>
+    (<IXToken>row).token_id !== undefined
+
   const getValue = <T extends TableRow>(column: TableColumn<T>, row: T) => {
-    if (column.type == 'buttons')
+    if (column.type == 'buttons' || column.type == 'asset')
       return undefined
 
     if (column.getValue)
@@ -204,6 +212,9 @@ export const useTable = () => {
     if (col.type == 'buttons')
       return 'item-buttons'
 
+    if (col.type == 'asset')
+      return 'item-asset'
+
     return `item-${col.rowKey}`
   }
 
@@ -219,11 +230,14 @@ export const useTable = () => {
     if (!column)
       return []
 
-    const getField = (row: T) => getValue(column, row) ?? ''
+    const getField = (row: T) => getValue(column, row)
 
     return mapped.sort((a, b) => {
       const aField = getField(a)
       const bField = getField(b)
+
+      if (aField == undefined)
+        return 1
 
       if (aField === 0 && bField === 0) {
         return 0
@@ -240,6 +254,7 @@ export const useTable = () => {
   }
 
   return {
+    rowIsIXToken,
     getColumnKey,
     isTextColumn,
     sortRows,

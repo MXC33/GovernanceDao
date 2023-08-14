@@ -262,6 +262,7 @@
     "unbid": {
       "title": "Remove Bid",
       "warningText": "Are you sure you want to remove this bid?",
+      "warningTextMultiple": "Are you sure you want to remove these bids?",
       "cancel": "Cancel",
       "success": "Bid successfully removed"
     },
@@ -295,6 +296,7 @@
       "noItemsFound": "No items found",
       "doNotOwn": "You do not own this asset",
       "noOffers": "There is no offers for this item",
+      "noCurrentBids": "There is no current bids for this item.",
       "accept": "Accept",
       "cancel": "Cancel"
     },
@@ -595,7 +597,7 @@
           },
           "ixt-cat-raff": {
             "title": "IXT CAT RAFF",
-            "description": "Officials links to all Planet IX contracts.",
+            "description": "Stake IXT with raffle tickets for IXT rewards.",
             "link": "https://dashboard.ix.foundation/#/dashboard/ixt-cat-raff"
           },
           "supply-liquidity": {

@@ -1,9 +1,9 @@
 <template lang="pug">
-VList(@keydown.down.stop.prevent="stepDown" @keydown.escape.stop.prevent="close" @keydown.up.stop.prevent="stepUp" @keypress.enter.stop.prevent="selectFocused" @keypress="onKeyDown" pos="relative" ref="element" flex-grow="1" frame="~ gray-400 hover:gray-300 on-frameless:none" :frameless="!hasFrame")
-  HList(w="full" px="4 md:3" h="full")
+VList(@keydown.down.stop.prevent="stepDown" @keydown.escape.stop.prevent="close" @keydown.up.stop.prevent="stepUp" @keypress.enter.stop.prevent="selectFocused" @keypress="onKeyDown" pos="relative" ref="element" flex-grow="1" h="10" frame="~ gray-400 hover:gray-300 on-frameless:none" :frameless="!hasFrame" justify="center")
+  HList(w="full" px="4 md:3" items="center")
     SearchIcon(w="6" fill="gray-400")
 
-    input(type="text" text="lt-md:16px" v-model="searchTerm" :placeholder="placeholder ?? 'Search'" ref="searchElement" bg="gray-900 md:ix-black" @click.stop="isOpen = true" outline="none" p="0 md:3" px="2" w="full" size="3" @input="onChangeSearch")
+    input(type="text" text="lt-md:base" v-model="searchTerm" :placeholder="placeholder ?? 'Search'" ref="searchElement" bg="gray-900 md:ix-black" @click.stop="isOpen = true" outline="none" px="2" w="full" size="3" @input="onChangeSearch")
 
   Transition(name="fade")
     SearchListContainer(v-if="isOpen" ref="scrollElement" w="full")
@@ -19,7 +19,7 @@ VList(@keydown.down.stop.prevent="stepDown" @keydown.escape.stop.prevent="close"
               SearchIcon(w="6")
               div() {{ search }}
 
-              HList(flex-grow="1" justify="end")
+              HList(flex-grow="1" justify="end" translate-x="lt-md:-4")
                 CloseIcon(w="3" @click="removeRecentSearch(search)" translate-y="-0.2")
 
       template(v-else)
@@ -41,8 +41,8 @@ const scrollElement = shallowRef()
 
 const props = defineProps<{
   options: string[]
-  placeholder?: string,
-  hasFrame: boolean
+  placeholder?: string
+  hasFrame?: boolean
 }>()
 
 const onSelect = (option: string | null) => {
@@ -54,18 +54,10 @@ const onSelect = (option: string | null) => {
   finishedSearch(option)
 }
 
-const frameClass = computed(() => props.hasFrame ? 'frame-~ hover:gray-300' : '')
-
 const onChangeSearch = () => {
   setSearchHits()
   emit("input", searchTerm.value)
 }
-
-// Leave be for now
-// const onRecentSearchClick = (term: string) => {
-//   console.log('Why tho?')
-//   searchTerm.value = term
-// }
 
 const finishedSearch = (term: string) => {
   close()
@@ -121,9 +113,3 @@ onMounted(() => {
 })
 
 </script>
-
-<style>
-/* .frame-hover:hover {
-  background-color: red;
-} */
-</style>

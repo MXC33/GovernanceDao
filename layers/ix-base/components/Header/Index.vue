@@ -1,6 +1,6 @@
 <template lang="pug">
-VList(pos="sticky top-0" z="99" w="full" @mouseenter="isSelected = true" @mouseleave="isSelected = false" ref="menuElement")
-  HList(items="center" justify="between" bg="ix-black" px="4 md:7.5" h="16" space-x="6")
+VList(pos="sticky top-0" translate-y="$header-offset" z="99" w="full" @mouseenter="isSelected = true" @mouseleave="isSelected = false" ref="menuElement" transition="all")
+  HList(items="center" justify="between" bg="ix-black" px="4 md:7.5" h="12 md:16" space-x="6")
     NuxtLink(to="https://www.planetix.com")
       PlanetIXNew(w="42.25")
 
@@ -8,7 +8,7 @@ VList(pos="sticky top-0" z="99" w="full" @mouseenter="isSelected = true" @mousel
       button(v-for="(item, index) in siteTopHeaders" @click="openMenu(index)" btn="menu" color = "s-default:white s-selected:ix-orange" :state="selected(index)") {{ $t(`marketplace.navigation.${item.type}.title`)}}
       HList(flex-grow="1" justify="end" display="lt-md:none")
         NuxtLink(to="https://planetix.com/airdrop")
-          HList(rounded="full" b="1 $mc-mint" px="4" py="1" bg="hover:$mc-mint-40" uppercase="~" tracking="1" font="bold" items="center" justify="center")
+          HList(rounded="full" b="1 $mc-mint" px="4" py="1" bg="hover:$mc-mint-40" uppercase="~" tracking="0.65" font="bold" items="center" justify="center")
             span(translate-x="0.5") airdrop
 
     HList(space-x="6" px="0")
@@ -17,30 +17,48 @@ VList(pos="sticky top-0" z="99" w="full" @mouseenter="isSelected = true" @mousel
       HeaderAccountButton()
 
 
-      button(btn="menu" w="8" display="lg:none" @click="toggleMenu" ml="2")
+      button(btn="menu" display="lg:none" @click="toggleMenu" ml="2")
         Transition(name="fade" mode="out-in")
-          SettingsIcon(v-if="activeMenuIndex == null")
-          CrossIcon(v-else)
+          SettingsIcon(v-if="activeMenuIndex == null" w="6" )
+          CrossIcon(v-else w="6" )
 
-  Transition(name="slide-top" mode="out-in")
-    HeaderDesktop(v-if="activeMenuIndex != null" :key="activeMenuIndex" :header="siteTopHeaders[activeMenuIndex]" display="lt-lg:none" @onClickItem="")
+Transition(name="slide-top" mode="out-in")
+  HeaderDesktop(v-if="activeMenuIndex != null" :key="activeMenuIndex" :header="siteTopHeaders[activeMenuIndex]" display="lt-lg:none" @onClickItem="")
 
-  Transition(name="slide-top" )
-    HeaderMobile(v-if="activeMenuIndex != null" overflow-y="auto" display="lg:none" @close="toggleMenu")
+Transition(name="slide-top" )
+  HeaderMobile(v-if="activeMenuIndex != null" overflow-y="auto" display="lg:none" @close="toggleMenu")
 
 </template>
 
 <script lang="ts" setup>
 import CrossIcon from '~/assets/images/header/cross.svg'
-
 import PlanetIXNew from '~/assets/images/header/planetix-new.svg'
 import SettingsIcon from '~/assets/images/header/hamburger.svg'
-const { fetchIXT } = useIXTContract()
+import { useGlobalWindowScroll } from '@ix/marketplace/composables/useWindowScroll';
+
 const { siteTopHeaders } = useSiteHeader()
 const { state: swapVisible } = useIXTSwapVisible()
-const activeMenuIndex = ref<number | null>(null)
+
+const activeMenuIndex = shallowRef<number | null>(null)
+const isSelected = shallowRef(false)
+const menuElement = shallowRef()
 
 const route = useRoute()
+const scollingDown = shallowRef(false)
+
+const windowY = useGlobalWindowScroll()
+watch(windowY, (newValue, oldValue) =>
+  scollingDown.value = (newValue > oldValue)
+)
+
+watch(scollingDown, (active) => {
+  document.body.classList.toggle('is-scrolling-down', active)
+})
+
+watch([swapVisible, route], ([visible]) => {
+  if (visible)
+    closeMenu()
+})
 
 const selected = (index: number) => {
   if (activeMenuIndex.value == index) {
@@ -50,15 +68,7 @@ const selected = (index: number) => {
   return 'default'
 }
 
-const onClickItem = (type: string, catagory: string, item: string) => {
-  switch (item) {
-    case 'swap':
-      return swapVisible.value = true;
-  }
-}
-
 const openMenu = (index: number) => {
-
   if (activeMenuIndex.value == index)
     return activeMenuIndex.value = null
 
@@ -72,8 +82,6 @@ const toggleMenu = () => {
   closeMenu()
 }
 
-const isSelected = ref(false)
-const menuElement = ref()
 const closeMenu = () =>
   activeMenuIndex.value = null;
 
@@ -82,9 +90,5 @@ onClickOutside(menuElement, () => {
     closeMenu()
 })
 
-watch([swapVisible, route], ([visible]) => {
-  if (visible)
-    closeMenu()
-})
 
 </script>

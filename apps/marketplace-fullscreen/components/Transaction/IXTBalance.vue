@@ -1,12 +1,14 @@
 <template lang="pug">
 VList()
-  HList(text="lg" font="bold" justify="between")
-    span()  {{ $t(`marketplace.transactions.yourBalance`) }}
-    span(v-if="ixtBalance") {{ ixtBalanceRounded }} IXT
-    span(v-else) ... IXT
+  VList(text="lg" font="bold" justify="between")
+    span(color="gray-200")  {{ $t(`marketplace.transactions.yourBalance`) }}
+    HList(justify="between")
+      span(v-if="ixtBalance") {{ ixtBalanceRounded }} IXT
+      span(v-else) -- IXT
 
-  HList(justify="end" color="gray-200")
-    span(mb="4" v-if="ixtBalance") $ {{ ixtToUSD(ixtBalance) }}
+      HList(justify="end" color="gray-200" mb="4" font="normal")
+        span(v-if="ixtBalance") ${{ usdBalanceRounded }}
+        span(v-else) $ --
 
 </template>
 
@@ -16,4 +18,6 @@ const { ixtToUSD } = useIXTPrice()
 const { ixtBalance } = useIXTContract()
 
 const ixtBalanceRounded = computed(() => roundToDecimals(ixtBalance.value ?? 0, 2))
+const usdBalanceRounded = computed(() => roundToDecimals(ixtToUSD(ixtBalance.value ?? 0), 2))
+
 </script>

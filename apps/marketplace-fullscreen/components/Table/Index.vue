@@ -1,68 +1,77 @@
 <template lang="pug">
-VList(w="full")
-  Transition(name="slide-left")
-    CollectionFilterButtonContainer(:is-open="isOpen")
+VList(w="full" max-w="full" min-w="0")
+  CollectionFilterButtonContainer(:is-open="isOpen")
 
-  VList.no-scrollbar(max-w="full" w="full" overflow-x="auto" bg="gray-900")
-    table.base-table(max-w="full")
-      colgroup()
-        col(v-if="selectable", :style="{width: '50px'}")
-        col(v-for="column in columns" :style="getColumnStyle(column)")
+  HList.no-scrollbar(overflow-x="on-scrollable:scroll" :scrollable="!!context" w="full" bg="gray-900" ref="scrollElement")
+    TableSpacer()
 
-      TableHeader(v-model="selectedItems" :columns="columns" :rows="sortedRows" :selectable="selectable" :id="id")
+    div.no-scrollbar(grid="~ row-gap-0 gap-x-3" :style="gridStyle" flex-grow="1")
 
-      TableBody(v-model="selectedItems" :loading="loading" :rows="sortedRows" :columns="columns" :id="id" :selectable="selectable")
-        template(#[getColumnKey(column)]="{row}" v-for="column in columns")
-          slot(:name="`item-${column.rowKey}`" :row="row" v-if="column.type != 'buttons'")
-          slot(name="item-buttons" v-else :row="row")
+      TableHeader(v-model="selectedItems" :columns="renderColumns" :rows="sortedRows" :id="id" :context="context")
+
+      TableBody(:loading="loading" :rows="sortedRows" :columns="renderColumns"  :context="context" :scrolled-past-end="hasScrolledPastEnd" :scrolled-past-start="hasScrolled")
+        //- Slots for overriding table column data with template(#item-name="{row}") etc
+        template(#[getColumnKey(column)]="{row}" v-for="column in renderColumns")
+          slot(:name="`item-${column.rowKey}`" :row="row" v-if="column.type != 'buttons' && column.type != 'asset'")
+
+    TableSpacer()
 
 </template>
 
 <script setup lang="ts" generic="Row extends TableRow">
-import type { TableColumn, TableRow } from '~/composables/useTable';
+import type { CollectionContext } from '~/composables/useCollection'
+import type { TableColumn, TableRow } from '~/composables/useTable'
 
 const selectedItems = defineModel<number[]>()
-const isMobile = onMobile()
-
+const scrollElement = ref()
 const { getColumnKey } = useTable()
 
-const { selectable, columns, isOpen, loading, rows, id, colWidth } = defineProps<{
+const { arrivedState } = useScroll(scrollElement)
+
+const hasScrolled = computed(() => arrivedState.left == false)
+const hasScrolledPastEnd = computed(() => arrivedState.right == false)
+
+watch(arrivedState, (a) => {
+  console.log("ARRIVE", a)
+})
+
+const { columns, isOpen, loading, rows, id, context } = defineProps<{
   columns: TableColumn<Row>[],
   rows: Row[],
   id: string,
   loading?: boolean,
   isOpen?: boolean,
-  colWidth?: number,
-  selectable?: boolean,
+  context?: CollectionContext
 }>()
 
 const { sort } = useTableSort(id)
 const { sortRows } = useTable()
-
+const { isMobile } = useDevice()
 const sortedRows = computed(() =>
   sortRows(columns, rows, sort.value)
 )
 
-const getColumnStyle = (item: TableColumn<Row>) => {
-  const getStyle = (width: number) => ({
-    'width': `${width}px`,
-    'min-width': `${width}px`
-  })
+const renderColumns = computed(() => columns.filter((item) =>
+  !(isMobile.value && item.hideMobile)
+))
 
-  if (!item.width)
-    return getStyle(colWidth ?? isMobile.value ? 150 : 200)
+const gridStyle = computed(() => {
+  const columnStyles = renderColumns.value.map((item) => {
+    if (!item.width)
+      return 'minmax(150px, 1fr)'
 
-  return getStyle(item.width)
-}
+    if (item.width == 'auto')
+      return 'minmax(max-content, auto)'
+
+    else
+      return `minmax(${item.width}px, 2fr)`
+  }).join(' ')
+
+  return {
+    'grid-template-columns': columnStyles
+  }
+})
 
 </script>
 
-<style scoped>
-table {
-  display: table;
-  width: 100%;
-  border-spacing: 0;
-  table-layout: fixed;
-  overflow-x: auto;
-}
-</style>
+<style scoped></style>

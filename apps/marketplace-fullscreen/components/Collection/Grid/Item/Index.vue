@@ -1,5 +1,5 @@
 <template lang="pug">
-VList(justify="center" items="center" aspect="2/3" bg="black opacity-40" ref="mediaElement" group)
+VList.collection-grid-item(justify="center" items="center" aspect="2/3" bg="black opacity-40" ref="mediaElement")
 
   CollectionGridItemMedia(:token="token" :is-hovered="isHovered"  cursor="pointer")
 

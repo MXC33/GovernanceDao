@@ -1,22 +1,28 @@
 <template lang="pug">
-ContentDrawer(:start-open="!isMobile" :is-neutral="true" bg="gray-900")
+ContentDrawer(:start-open="!isMobile" :is-neutral="true" bg="gray-900" mx="lt-md:-4" :disable="!hasDrawer")
   template(#titleicon)
     TitleWithIcon(icon="listing") {{ $t(`marketplace.singleItem.listings`) }}
 
   template(#default)
-    Table(v-if="item.sales && item.sales.length > 0" :columns="saleColumns" :rows="item.sales" id="single-item" :col-width="150")
+
+    Table(v-if="item.sales && item.sales.length > 0" :columns="saleColumns" :rows="item.sales" id="single-item")
 
     CollectionSingleItemTradeDetail(v-else) {{ $t(`marketplace.singleItem.noItemsFound`) }}
+
 
 </template>
 
 <script lang="ts" setup>
-import type { Sale, SingleItemData, Bid } from '@ix/base/composables/Token/useIXToken';
+import type { Sale, SingleItemData } from '@ix/base/composables/Token/useIXToken';
 import type { TableColumn } from '~/composables/useTable';
-const isMobile = onMobile()
+
+const [DefineTemplate, ReuseTemplate] = createReusableTemplate()
+
+const { isMobile } = useDevice()
 
 const { item } = defineProps<{
-  item: SingleItemData
+  item: SingleItemData,
+  hasDrawer?: boolean
 }>()
 
 const { addToCart, hasItemInCart } = useCart()
@@ -35,7 +41,7 @@ const saleColumns: TableColumn<Sale>[] = [
     }, sortable: true
   },
   {
-    type: 'buttons', width: 120, buttons: [
+    type: 'buttons', width: 'auto', buttons: [
       {
         type: 'secondary',
         onClick(row) {

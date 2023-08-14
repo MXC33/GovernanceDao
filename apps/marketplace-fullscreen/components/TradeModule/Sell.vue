@@ -13,13 +13,13 @@ VList()
     template(#percentage) {{belowHighestOffer}}% {{ $t(`marketplace.trade.belowHighestOffer`) }}
 
   TradeModuleSubstitute(v-model="isSubstituteOffering")
-    template(#title) {{ $t(`marketplace.trade.substituteOffers`) }}
-    template(#substituteTitle) {{ $t(`marketplace.trade.lowestOffer`) }}
+    template(#title) {{ $t(`marketplace.trade.lowestOffer`) }}
+    template(#substituteTitle) 
     template(#substituteInput) 
-      InputText(v-model="minOffer" :class="{highlighted: showDecreaseMinPrice}")
+      InputText(v-model="minOffer" :class="{highlighted: showDecreaseMinPrice}" :is-module="true")
         template(#suffix) IXT
 
-  div(grid="~ cols-2")
+  div(grid="~ cols-1 md:cols-2")
     ButtonInteractive(btn="~ secondary " font="bold" @click="acceptItems" v-if="!isDisabled" :text="`Accept ${shares?.value} offer`" :loading="isAcceptLoading")
 
     ButtonInteractive(btn="~ secondary" bg="on-disabled:gray-700" color="on-disabled:gray-400" cursor="default" font="bold" :disabled="isDisabled" text="You have no offers" v-else)

@@ -1,5 +1,5 @@
 <template lang="pug">
-button(bg="transparent on-active:gray-600 hover:gray-800" :active="active" p="2" transition="all" h="full" pos="relative" flex-shrink="0" aspect="square" min-w="0" items="center" flex="~" justify="center")
+button(bg="transparent on-active:gray-600 hover:gray-800" :active="active" p="2" transition="all" h="full" pos="relative" flex-shrink="0" min-w="12" items="center" flex="~" justify="center")
   slot
   
 </template>

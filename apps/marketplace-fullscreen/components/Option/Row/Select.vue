@@ -2,7 +2,7 @@
 OptionRow(font="400 on-selected:bold" :selected="selected")
   slot
 
-  CheckmarkIcon(w="3" v-if="selected")
+  CheckmarkIcon(w="3" translate-x="lt-md:-2.7" v-if="selected")
 </template>
 
 <script setup lang="ts">

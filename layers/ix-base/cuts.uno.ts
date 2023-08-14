@@ -67,9 +67,6 @@ export const frameRules: Rule[] = [
   }]
 ]
 
-// just for cherrypicking
-
-
 const Sizes = ['xs', 'sm', 'md', 'lg'] as const
 type Size = typeof Sizes[number]
 
@@ -113,6 +110,27 @@ const getCut = (position: Position, size: Size = 'md') => {
   }
 }
 
+const getSelector = ({ constructCSS }: RuleContext<Theme>) => {
+  const defaultSelector = constructCSS({})
+  const selectors = defaultSelector.split("{")
+  const mediaParameterIndex = selectors.findIndex((item) => item.includes("@media"))
+  let mediaSelector = ""
+
+  if (mediaParameterIndex == 0 && selectors.length >= 3) {
+    const selector = selectors.shift()
+    if (selector)
+      mediaSelector = selector + " {"
+  }
+
+  const attributedSelector = selectors.shift()
+
+  return {
+    attributedSelector,
+    mediaSelector
+  }
+
+}
+
 export const cutRules: Rule<Theme>[] = [
   ...Positions.map(p => [`cut-${p}`, getCut(p)] as Rule<Theme>),
   ...Sizes.map(s => [`cut-s-${s}`, getCutDepth(s)] as Rule<Theme>),
@@ -122,7 +140,18 @@ export const cutRules: Rule<Theme>[] = [
       '--cut-opacity': Number(op) / 100,
     }
   }],
-  [/^cut-b-(.+)$/, (arr, { theme, constructCSS, rawSelector }: RuleContext<Theme>) => {
+  [/^cut$/, (_, ruleContext) => {
+    const { mediaSelector, attributedSelector } = getSelector(ruleContext)
+
+    return `
+      ${mediaSelector}
+        .is-paint-supported ${attributedSelector} {
+          clip-path: polygon(var(--cut-path));
+        }
+      `
+  }],
+  [/^cut-b-(.+)$/, (arr, ruleContext) => {
+    const { theme } = ruleContext
     const [_, body] = arr
 
     if (!body)
@@ -139,20 +168,8 @@ export const cutRules: Rule<Theme>[] = [
 
     const colorString = colorToString(cssColor, 'var(--cut-opacity)')
 
-    const defaultSelector = constructCSS({})
-    const selectors = defaultSelector.split("{")
-
-    const mediaParameterIndex = selectors.findIndex((item) => item.includes("@media"))
-    let mediaSelector = ""
-
-    if (mediaParameterIndex == 0 && selectors.length >= 3) {
-      const selector = selectors.shift()
-      if (selector)
-        mediaSelector = selector + " {"
-    }
+    const { mediaSelector, attributedSelector } = getSelector(ruleContext)
     const mediaEndBracket = mediaSelector == "" ? "" : "}"
-
-    const attributedSelector = selectors.shift()
 
     return `
       ${mediaSelector}

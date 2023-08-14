@@ -16,6 +16,7 @@ const props = defineProps<{
 const fullName = await useTokenName(props.token, props.noChainName)
 
 const name = computed(() => {
+
   if (smallName.value)
     return smallName.value
 
@@ -33,7 +34,5 @@ const smallName = computed(() => {
     case 'metashare': return 'METASHARE'
   }
 })
-
-
 
 </script>

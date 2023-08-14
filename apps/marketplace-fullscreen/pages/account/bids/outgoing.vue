@@ -1,5 +1,5 @@
 <template lang="pug">
-Collection(:data="data" :columns="columns" context="outgoing-bids" v-if="data" :hide-grid="true" :loading="pending")
+Collection(:data="data" :columns="columns" context="outgoing-bids" v-if="data" :hide-grid="true" :loading="pending" @load-next-page="loadNextPage")
   template(#menu)
     AccountMenu()
 </template>
@@ -16,7 +16,7 @@ const { displayPopup } = usePopups()
 
 const { myAssetsURL } = useCollectionsURL()
 
-const { data: data, execute: fetchCollection, setupCollectionListeners, refresh: refresh, pending } = useCollectionData(myAssetsURL('polygon'), {
+const { data: data, execute: fetchCollection, loadNextPage, setupCollectionListeners, refresh: refresh, pending } = useCollectionData(myAssetsURL('polygon'), {
   filter: {
     owned: true,
     type: 2,
@@ -27,7 +27,7 @@ await fetchCollection()
 setupCollectionListeners()
 
 const columns: TableColumn<IXToken>[] = [
-  { label: "Asset", rowKey: "name" },
+  { label: "Asset", type: "asset", width: 200 },
   {
     label: "Offer price", rowKey: "bid.price", type: 'ixt', sortable: true
   },
@@ -40,7 +40,7 @@ const columns: TableColumn<IXToken>[] = [
     }, type: 'text'
   },
   {
-    label: "Quantity", rowKey: "bid.quantity", type: 'text'
+    label: "Quantity", rowKey: "bid.quantity", type: 'text', width: 'auto'
   },
   {
     label: "Expiration", rowKey: "bid.due_date", type: 'date', sortable: true
@@ -52,14 +52,14 @@ const columns: TableColumn<IXToken>[] = [
   },
   {
     type: 'buttons',
-    width: 230,
+    width: 'auto',
     buttons: [{
-      type: 'secondary', text: 'cancel', onClick: (token) => {
+      type: 'secondary', text: 'remove bid', onClick: (token) => {
         cancelBidOnClick(token)
       },
     },
     {
-      type: 'primary', text: 'update', onClick: (token) => {
+      type: 'primary', text: 'update bid', onClick: (token) => {
         updateBidOnClick(token)
       },
     }]

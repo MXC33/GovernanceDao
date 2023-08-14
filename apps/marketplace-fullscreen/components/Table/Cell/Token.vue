@@ -1,18 +1,23 @@
 <template lang="pug">
-HList(items="center" space-x="2" font="bold" cursor="pointer" max-w="60")
-  div(w="12" h="12")
-    TokenImage(:token="token" w="12" h="12" :key="getTokenKey(token)")
-  TokenName(:token="token" capitalize="~" :key="getTokenKey(token)")
+HList(items="center" space-x="2" font="bold" cursor="pointer" w="full")
+  TokenImage(:token="token" w="10 md:16" h="10 md:16"  :key="getTokenKey(token)" pos="relative" z="1")
 
-  slot
-  
+  Transition(name="slide-left" mode="out-in")
+    HList(v-if="!hideName" space-x="2" min-w="0")
+      TokenName(:token="token" capitalize="~" :key="getTokenKey(token)")
+
+      slot
+    div(w="0" v-else)
+
 </template>
 
 <script setup lang="ts">
 import type { AnyToken } from '@ix/base/composables/Token/useTokens';
 const { getTokenKey } = useTokens()
 
-defineProps<{
-  token: AnyToken
+const { token } = defineProps<{
+  token: AnyToken,
+  hideName?: boolean
 }>()
+
 </script>

@@ -5,13 +5,14 @@ VList(flex-grow="1" w="full")
       template(#header) 
         div() {{ $t(`marketplace.navigation.${header.type}.title`)}}
       template(#default) 
-        HeaderCategoryDropDownLargeGroup(v-for="category in getAllLargeCatagories(header)" :category="category" :parentType="header.type" @clikedItem="clikedItem")
-        HeaderCategoryDropDownSmallGroup(:headerItem="header" @clikedItem="clikedItem")
+        HeaderCategoryDropDownLargeGroup(v-for="category in getAllLargeCatagories(header)" :category="category" :parentType="header.type" @clikedItem="onClickItem")
+        HeaderCategoryDropDownSmallGroup(:headerItem="header" @clikedItem="onClickItem")
 </template>
 
 <script lang="ts" setup>
 
-import type { HeaderItem, HeaderCategory } from '~/composables/useSiteHeader';
+import type { HeaderItem, HeaderCategory } from '~/composables/useSiteHeader'
+const { enable } = useIXTSwapVisible()
 const { siteTopHeaders } = useSiteHeader()
 const { t } = useI18n()
 
@@ -30,11 +31,17 @@ const getAllLargeCatagories = (header: HeaderItem) => {
   return largeCatagories
 }
 
-const emit = defineEmits(['clikedItem'])
+const emit = defineEmits(['onClickItem'])
 
-const clikedItem = (header: string, category: string, item: string) => {
-  emit('clikedItem', header, category, item);
-  //console.log("Catragory dropdown grid", header, category, item)
+const onClickItem = (type: string, catagory: string, item: string) => {
+  //console.log("OnClicked Header category index", type, catagory, item)
+  //emit('onClickItem', type, catagory, item)
+
+  switch (item) {
+    case 'swap':
+      enable()
+      break
+  }
 }
 
 // const props = defineProps<{
