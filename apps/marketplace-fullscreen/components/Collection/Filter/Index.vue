@@ -38,9 +38,9 @@ const { context } = defineProps<{
 
 const justifyOrder = computed(() => {
   if (context != 'collection') {
-    return 'between'
-  } else {
     return 'start'
+  } else {
+    return 'between'
   }
 })
 
