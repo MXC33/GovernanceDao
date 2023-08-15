@@ -3,7 +3,7 @@ Popup()
   template(#icon)
     CheckboxIcon(w="6" h="6")
 
-  template(#header) {{ $t(`marketplace.list.unlistSuccess`) }}
+  template(#header) {{ $t(`marketplace.unlist.success`) }}
 
   template(#default)
     CompleteCancelList(:items="items")
