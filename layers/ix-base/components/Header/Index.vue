@@ -25,14 +25,14 @@ VList(pos="sticky top-0" translate-y="$header-offset" z="99" w="full" @mouseente
           SettingsIcon(v-if="activeMenuIndex == null" w="6" )
           CrossIcon(v-else w="6" )
 
-//- Transition(name="slide-top" mode="out-in")
-//-   HeaderDesktop(v-if="activeMenuIndex != null" :key="activeMenuIndex" :header="siteTopHeaders[activeMenuIndex]" display="lt-lg:none" @onClickItem="")
+Transition(name="slide-top" mode="out-in")
+  HeaderDesktop(v-if="activeMenuIndex != null && headerData != null" :key="activeMenuIndex" :header="headerData[activeMenuIndex]" display="lt-lg:none")
 
 //- Transition(name="slide-top")
 //-   HeaderMobile(v-if="activeMenuIndex != null" overflow-y="auto" display="lg:none" @close="toggleMenu")
 
-Transition(name="slide-top")
-  HeaderAPI(v-if="activeMenuIndex != null" overflow-y="auto" @close="toggleMenu")
+//- Transition(name="slide-top")
+//-   HeaderAPI(v-if="activeMenuIndex != null" overflow-y="auto" display="lg:none" @close="toggleMenu")
 
 </template>
 
@@ -46,10 +46,9 @@ const { siteTopHeaders } = useSiteHeader()
 const {data: headerData} = useHeaderData()
 //const {data} = useHeaderData()
 
-console.log(headerData)
 const { state: swapVisible } = useIXTSwapVisible()
 
-const activeMenuIndex = shallowRef<number | null>(null)
+const activeMenuIndex = useHeaderIndex()
 const isSelected = shallowRef(false)
 const menuElement = shallowRef()
 

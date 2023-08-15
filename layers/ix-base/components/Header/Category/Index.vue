@@ -1,36 +1,22 @@
 <template lang="pug">
 div()
-  div(text="gray-200" p="2") {{ $t(`marketplace.navigation.${parentType}.${category.type}.title`) }} 
+  div(text="gray-200" p="2") {{ subNavigation.title }} 
   div(b="b-1 gray-400" w="95%")
 
-  div(grid="~ cols-1 s-two:cols-2 s-three:cols-3" :state="gridState" )
-    HeaderCategoryItem(v-for="item in category.items" :header="parentType" :category="category.type" :item="item" @click="onClickItem(parentType, category.type, item)" items="center") 
+  div(grid="~ cols-1 s-two:cols-2 s-three:cols-3" :state="gridState")
+    HeaderCategoryItem(v-for="subItem in subNavigation.item" :item="subItem" items="center") 
 
 </template>
 
 <script lang="ts" setup>
-import type { HeaderCategory } from '~/composables/useSiteHeader';
-const { enable } = useIXTSwapVisible()
+import type { HeaderMenuSubNavigation } from '~/composables/useSiteHeader';
+
 const props = defineProps<{
-  parentType: string,
-  category: HeaderCategory
+  subNavigation: HeaderMenuSubNavigation,
 }>()
 
-const emit = defineEmits(["onClickItem"])
-
-const onClickItem = (type: string, catagory: string, item: string) => {
-  //console.log("OnClicked Header category index", type, catagory, item)
-  emit('onClickItem', type, catagory, item)
-
-  switch (item) {
-    case 'swap':
-      enable()
-      break
-  }
-}
-
 const gridState = computed(() => {
-  const gridItems = props.category.items.length
+  const gridItems = props.subNavigation.item.length
   if (gridItems > 6)
     return 'three'
 

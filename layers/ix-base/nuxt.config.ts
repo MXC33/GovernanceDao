@@ -42,7 +42,7 @@ export default defineNuxtConfig({
     '@nuxtjs/i18n',
     '@unocss/nuxt',
     '@vueuse/nuxt',
-    '@nuxtjs/html-validator',
+
   ],
   i18n: {
 

@@ -1,49 +1,32 @@
 <template lang="pug">
-NuxtLink(:to="linkPath" cursor="pointer")
+NuxtLink(:to="item.absolute_url" cursor="pointer" @click="onClick")
   HList(group p="3" space-x="3" pos="right-0" text="left")
     //-TitleIcon(w="10" h="10" p="1" fill="white group-hover:ix-orange")
-    HeaderCategoryIcon(w="8" :header="header" :item="item" :category="category" fill="white group-hover:ix-orange" flex-shrink="0")
+    HeaderCategoryIcon(w="8" fill="white group-hover:ix-orange" flex-shrink="0" :item="item.icon")
     div(pos="relative")
-      VList(pos="relative" v-if="linkPath || isNotLink()")
-        div(color="white group-hover:ix-orange" uppercase ="~") {{ $t(`${langPath}.title`)}} 
-        div(color="gray-200 group-hover:ix-orange" text="sm" ) {{ $t(`${langPath}.description`) }}
+      VList(pos="relative" v-if="item.absolute_url || isSwap")
+        div(color="white group-hover:ix-orange" uppercase ="~") {{ item.name}} 
+        div(color="gray-200 group-hover:ix-orange" text="sm" ) {{ item.description}} 
       VList(pos="relative" v-else)
-        div(color="gray" uppercase="~") {{ $t(`${langPath}.title`)}}
+        div(color="gray" uppercase="~") {{ item.name}} 
         div(color="gray-200" text="sm" ) {{ $t(`marketplace.navigation.soon`)}}
 </template>
 
 <script lang="ts" setup>
+import type { HeaderMenuSubNavigationItem } from '~/composables/useSiteHeader'
 
-const { t } = useI18n()
-const enter = () => {
-  console.log("enter");
-}
+const { enable: enableSwap } = useIXTSwapVisible()
 
-const imagePath = computed(() => [header, category, item].join('/'))
-const langPath = computed(() => `marketplace.navigation.${header}.${category}.${item}`)
-
-const linkPath = computed(() => t(`marketplace.navigation.${header}.${category}.${item}.link`))
-const hasDescription = computed(() => t(`marketplace.navigation.${header}.${category}.${item}.description`))
-
-
-//console.log(linkPath.value)
-const { header, category, item } = defineProps<{
-  header: string,
-  category: string,
-  item: string
+const { item } = defineProps<{
+  item: HeaderMenuSubNavigationItem
 }>()
 
-const isNotLink = () => {
-  switch (item) {
-    case 'swap':
-      return true
-  }
+const isSwap = computed(() => 
+  item.modal_type?.toLowerCase() == 'swap'
+)
 
-  return false
+const onClick = () => {
+  if(isSwap.value)
+    enableSwap()
 }
-
-
-
-
-
 </script>
