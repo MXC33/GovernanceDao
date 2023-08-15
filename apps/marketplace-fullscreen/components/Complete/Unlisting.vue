@@ -25,9 +25,6 @@ const { items } = defineProps<{
   items: UnlistingItem[]
 }>()
 
-
-console.log(items, 'items')
-
 defineEmits(["close"])
 </script>
   
