@@ -76,7 +76,6 @@ const cancelListingOnClick = async (sale: Sale) => {
       sale
     }]
   })
-  console.log(item, sale, 'sale and item')
 }
 
 
