@@ -4,7 +4,7 @@ ContentDrawer(:start-open="!isMobile" :is-neutral="true" bg="gray-900" mx="lt-md
     TitleWithIcon(icon="offer") {{ $t(`marketplace.singleItem.offers`) }}
 
   template(#default)
-    CollectionSingleItemTradeDetail(v-if="item.bids.length < 1" ) 
+    CollectionSingleItemTradeDetail(v-if="item.bids.length < 1") 
       | {{ $t(`marketplace.singleItem.noCurrentBids`) }}
 
     Table(:columns="offerColumns" :rows="item.bids" id="offers" v-if="item.bids.length > 0")
@@ -48,6 +48,13 @@ const cancelBidOnClick = async (bid: Bid) => {
   })
 }
 
+const itemOwned = computed(() => {
+  if (item.my_shares == 0) {
+    return false
+  } else if (item.my_shares > 0)
+    return true
+})
+
 const offerColumns = computed<TableColumn<Bid>[]>(() => {
   const baseColumns: TableColumn<Bid>[] = [
     { label: "Unit Price", type: "ixt", rowKey: "price", sortable: true },
@@ -65,8 +72,13 @@ const offerColumns = computed<TableColumn<Bid>[]>(() => {
       }, sortable: true
     },
     { label: "Expiration", type: "date", rowKey: "due_date", sortable: true },
-    {
-      type: 'buttons', width: 'auto', buttons: [
+  ]
+
+  if (itemOwned.value) {
+    baseColumns.push({
+      type: 'buttons',
+      width: 'auto',
+      buttons: [
         {
           type: 'secondary',
           onClick(row) {
@@ -84,9 +96,9 @@ const offerColumns = computed<TableColumn<Bid>[]>(() => {
           hidden(row) { return !playerOwnedSale(row) },
         }
       ]
-    }
-  ]
-
+    })
+  }
+  console.log(itemOwned.value)
   return baseColumns
 })
 
@@ -96,6 +108,5 @@ const playerOwnedSale = (bid: Bid) => {
     return true
   return false
 }
-
 
 </script>

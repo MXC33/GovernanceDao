@@ -89,10 +89,8 @@ const buy = async () => {
       }]
     })
 
-  console.log('checkoutSales', sale)
 }
 
-console.log(aboveFloorPrice.value)
 </script>
 
 <style scoped >
