@@ -52,7 +52,7 @@ const columns: TableColumn<IXToken>[] = [
   },
   {
     type: 'buttons',
-    width: 250,
+    width: 'auto',
     buttons: [{
       type: 'secondary', text: 'cancel', onClick: (token) => {
         cancelListingOnClick(token)
