@@ -1,6 +1,6 @@
 <template lang="pug">
 VList(pos="sticky top-0" translate-y="$header-offset" z="99" w="full" @mouseenter="isSelected = true" @mouseleave="isSelected = false" ref="menuElement" transition="all")
-  HList(items="center" justify="between" bg="ix-black" px="4 md:7.5" h="12 md:16" space-x="6")
+  HList(items="center" justify="between" bg="ix-black" px="4 md:7.5" h="$header-height-mobile md:$header-height-desktop" space-x="6")
     NuxtLink(to="https://www.planetix.com")
       PlanetIXNew(w="42.25")
 
@@ -25,14 +25,14 @@ VList(pos="sticky top-0" translate-y="$header-offset" z="99" w="full" @mouseente
           SettingsIcon(v-if="activeMenuIndex == null" w="6" )
           CrossIcon(v-else w="6" )
 
-//- Transition(name="slide-top" mode="out-in")
-//-   HeaderDesktop(v-if="activeMenuIndex != null && headerData != null" :key="activeMenuIndex" :header="headerData[activeMenuIndex]" display="lt-lg:none")
+  //- Transition(name="slide-top" mode="out-in")
+  //-   HeaderDesktop(v-if="activeMenuIndex != null && headerData != null" :key="activeMenuIndex" :header="headerData[activeMenuIndex]" display="lt-lg:none")
 
-//- Transition(name="slide-top")
-//-   HeaderMobile(v-if="activeMenuIndex != null" overflow-y="auto" display="lg:none" @close="toggleMenu")
+  //- Transition(name="slide-top")
+  //-   HeaderMobile(v-if="activeMenuIndex != null" overflow-y="auto" display="lg:none" @close="toggleMenu")
 
-Transition(name="slide-top" mode="out-in")
-  HeaderAPI(v-if="activeMenuIndex != null && headerData != null"  :key="activeMenuIndex" :header="headerData[activeMenuIndex]")
+  Transition(name="slide-top" mode="out-in")
+    HeaderNavigation(v-if="activeMenuIndex != null && headerData != null"  :key="activeMenuIndex" :header="headerData[activeMenuIndex]")
 
 </template>
 
@@ -103,3 +103,10 @@ onClickOutside(menuElement, () => {
 
 
 </script>
+
+<style>
+:root {
+  --header-height-mobile: 3rem;
+  --header-height-desktop: 4rem;
+}
+</style>

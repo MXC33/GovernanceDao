@@ -3,11 +3,19 @@
 }
 
 body.is-scrolling-down {
-  --header-offset: -4rem;
+  --header-offset: calc(-1 * var(--header-height-desktop));
+}
+
+body.is-scroll-locked {
+  overflow: hidden;
+}
+
+body.is-scroll-locked.is-scrolling-down {
+  --header-offset: 0 !important;
 }
 
 @media (max-width: 767.9px) {
   body.is-scrolling-down {
-    --header-offset: -3rem;
+    --header-offset: calc(-1 * var(--header-height-mobile));
   }
 }
