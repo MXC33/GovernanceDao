@@ -32,7 +32,7 @@ const hasScrolled = computed(() => arrivedState.left == false)
 const hasScrolledPastEnd = computed(() => arrivedState.right == false)
 
 watch(arrivedState, (a) => {
-  console.log("ARRIVE", a)
+  a
 })
 
 const { columns, isOpen, loading, rows, id, context } = defineProps<{
