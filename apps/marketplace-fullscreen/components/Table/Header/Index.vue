@@ -1,6 +1,6 @@
 <template lang="pug">
 template(v-for="(column, index) in columns")
-  VList(v-if="!(isMobile && column.hideMobile)")
+  template(v-if="!(isMobile && column.hideMobile)")
     TableCellHeadWrapper(v-if="column.type == 'buttons'" :is-open="isMenuOpen") {{ $t('general.action') }}
 
     TableCellHead(v-else :column="column" :index="index" :sortField="sort" @select-field="onClickSort", @toggle-sort="onClickToggle" :last-col="index == columns.length - 1") 
