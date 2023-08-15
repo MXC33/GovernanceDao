@@ -1,7 +1,7 @@
 
 <template lang="pug">
 HList(min-w="0" overflow="hidden")
-  div(w="30 md:36" pos="absolute left--6 top--1.8 bottom--1.8" shadow="on-scrolled:right" :scrolled="scrolling" transition="all" bg="gray-900")
+  div(w="30 md:36" pos="absolute left--6 top--1.3 bottom--1.3" shadow="on-scrolled:right" :scrolled="scrolling" transition="all" bg="gray-900")
     div()
 
   HList(justify="center" items="center" space-x="6" z="2" min-w="0")
