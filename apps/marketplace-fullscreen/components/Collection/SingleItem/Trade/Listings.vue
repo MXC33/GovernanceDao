@@ -14,6 +14,7 @@ ContentDrawer(:start-open="!isMobile" :is-neutral="true" bg="gray-900" mx="lt-md
 
 <script lang="ts" setup>
 import type { Sale, SingleItemData } from '@ix/base/composables/Token/useIXToken';
+import type { UnlistingItem } from 'composables/useListing';
 import type { TableColumn } from '~/composables/useTable';
 
 const [DefineTemplate, ReuseTemplate] = createReusableTemplate()
@@ -70,12 +71,14 @@ const addSaleToCart = (sale: Sale) => {
 const cancelListingOnClick = async (sale: Sale) => {
   displayPopup({
     type: 'unlist-item',
-    item: {
+    items: [{
       ...item,
       sale
-    }
+    }]
   })
+  console.log(item, sale, 'sale and item')
 }
+
 
 const { displayPopup } = usePopups()
 
