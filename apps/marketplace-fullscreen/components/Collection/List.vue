@@ -10,9 +10,9 @@ Transition(name="fade" mode="out-in")
 
   Table(v-else :columns="columns" :rows="items" :id="context" :loading="loading" :isOpen="showFilters" :selectable="true" v-model="rowsAsSelected" :context="context")
 
-    template(#item-name="{row}")
-      TableCellToken(:token="row" @click="onClickItem(row)" max-w="full")
-        span(v-if="context == 'my-assets'" color="gray-200" font="normal" text="lt-md:sm") x{{ row.my_shares }}
+    //- template(#item-name="{row}")
+    //-   TableCellToken(:token="row" @click="onClickItem(row)" max-w="full" :context="context")
+    //-     span(v-if="context == 'my-assets'" color="gray-200" font="normal" text="lt-md:sm") x{{ row.my_shares }}
 
 </template>
 
@@ -52,10 +52,5 @@ const { setupSortOptions, sort } = useTableSort(context)
 const sortedRows = computed(() => sortRows(columns, items, sort.value))
 
 watch(() => columns, () => setupSortOptions(columns), { immediate: true })
-
-const onClickItem = (row: IXToken) => {
-  const { network, collection, token_id } = row
-  navigateTo(`/assets/${network}/${collection}/${token_id}`)
-}
 
 </script>

@@ -39,14 +39,10 @@ export default defineNuxtConfig({
   ],
   modules: [
     'nuxt-graphql-client',
-    '@nuxtjs/i18n',
     '@unocss/nuxt',
     '@vueuse/nuxt',
 
   ],
-  i18n: {
-
-  },
   imports: {
     dirs: [
       'composables/**'

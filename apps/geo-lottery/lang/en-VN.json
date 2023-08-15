@@ -1,0 +1,132 @@
+{
+  "general": {
+    "accelerate": "Tăng tốc",
+    "accelerateTask": "Tăng tốc nhiệm vụ",
+    "back": "Quay lại",
+    "cancel": "Hủy",
+    "close": "Đóng",
+    "claim": "Nhận",
+    "confirm": "Xác nhận",
+    "continue": "Tiếp tục",
+    "disconnect": "Ngắt kết nối",
+    "errorConnecting": "LỖI KẾT NỐI:",
+    "goToInventory": "Đến kho",
+    "enter": "Nhập",
+    "incoming": "Đã nhận được tin nhắn",
+    "open": "Mở",
+    "loading": "Đang tải",
+    "nrgProd": "Sản lượng năng lượng mỗi",
+    "total": "tổng cộng",
+    "visit": "Đến công ty",
+    "recommended": "Khuyến nghị",
+    "visitor": "Vui lòng nhập mật khẩu",
+    "amount": {
+      "max": "Tối đa",
+      "min": "Tối thiểu"
+    },
+    "transactions": {
+      "mintTransfer": "Đào và chuyển khoản",
+      "confirm": "Xác nhận giao dịch trong ví đã kết nối của bạn",
+      "descriptions": {
+        "processing": "Quá trình xử lý giao dịch sẽ mất một thời gian ngắn. Nếu bạn muốn hủy thao tác này, vui lòng từ chối giao dịch trong ứng dụng ví của bạn."
+      }
+    },
+    "collected": {
+      "waste": "Chất thải",
+      "collectedWaste": "Chất thải đã thu gom",
+      "left": "Còn lại",
+      "youMust": "Bạn phải dọn sạch toàn bộ CHẤT THẢI trên Ô ĐẤT để nhận."
+    },
+    "avatars": {
+      "proxy": "Proxy of Change",
+      "seina": "Seina",
+      "jeremiah": "Jeremiah",
+      "evePryde": "Eve-Pryde",
+      "buck": "Buck"
+    },
+    "noItemsFound": {
+      "no": "Không",
+      "itemsFound": "Vật phẩm được tìm thấy",
+      "noFull": "Không tìm thấy vật phẩm"
+    },
+    "navigation": {
+      "terminal": "Trạm",
+      "inventory": "Kho",
+      "missionCtrl": "Kiểm soát sứ mệnh",
+      "netEmpire": "Netempire",
+      "taskMng": "Trình quản lý nhiệm vụ",
+      "manager": "Trình quản lý",
+      "build": "xây dựng",
+      "starterPack": "Gói khởi động",
+      "payments": "Thanh toán"
+    },
+    "timeCost": {
+      "hours": "Giờ",
+      "cost": "Chi phí"
+    },
+    "build": {
+      "overview": "Tổng quan",
+      "build": "Xây dựng"
+    },
+    "search": {
+      "example": "Ví dụ: SE LE#329801"
+    }
+  },
+  "wallet": {
+    "title": "Kết nối ví",
+    "welcomeMessage": "Kết nối với một trong những nhà cung cấp ví có sẵn của chúng tôi",
+    "signing": {
+      "title": "XÁC NHẬN GIAO DỊCH TRONG VÍ ĐÃ KẾT NỐI CỦA BẠN",
+      "description": "Quá trình xử lý giao dịch sẽ mất một thời gian ngắn. Nếu bạn muốn hủy thao tác này, vui lòng từ chối giao dịch trong ứng dụng ví của bạn."
+    },
+    "minting": {
+      "title": "ĐANG GHI LÊN CHUỖI",
+      "description": "Chờ một chút. Giao dịch của bạn sẽ sớm được xác thực."
+    },
+    "approving": {
+      "title": "ĐANG PHÊ DUYỆT",
+      "description": "Phê duyệt tài sản của bạn để tiến hành tích lũy. Nếu bạn muốn hủy thao tác này, vui lòng từ chối giao dịch trong ứng dụng ví của bạn."
+    },
+    "minting-pix": {
+      "title": "ĐANG ĐÀO PIX",
+      "description": "Đang đào pix của bạn để nhận."
+    },
+    "playerProfile": {
+      "notLoggedIn": "Chưa đăng nhập vào hồ sơ người chơi",
+      "playerConnecting": "Hồ sơ người chơi (đang kết nối)",
+      "loggedInAs": "Đã đăng nhập với tư cách là"
+    },
+    "payments": {
+      "chooseMethod": "Chọn phương thức thanh toán",
+      "matic": "matic",
+      "usdt": "usdt",
+      "ixt": "ixt"
+    }
+  },
+  "layouts": {
+    "headers": {
+      "accountBalance": "Số dư tài khoản:",
+      "ixt": "IXT:",
+      "terminal": "TRẠM",
+      "dashboard": "IX Foundation",
+      "inventory": "Kho",
+      "missionControl": "Kiểm soát sứ mệnh",
+      "game": "Trò chơi",
+      "planetIX": "Planet IX",
+      "automatedTrans": "Thông báo tự động"
+    }
+  },
+  "marketplace": {
+    "navigation": {
+      "terminal": "Trạm",
+      "inventory": "Kho",
+      "missionCtrl": "Kiểm soát sứ mệnh",
+      "netEmpire": "Netempire",
+      "taskMng": "Trình quản lý nhiệm vụ",
+      "manager": "Trình quản lý",
+      "build": "xây dựng",
+      "starterPack": "Gói khởi động",
+      "payments": "Thanh toán"
+    }
+  }
+}

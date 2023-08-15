@@ -3,6 +3,7 @@ VList(pos="relative")
   HList(font="bold" px="0" py="3" uppercase="~" cursor="pointer" items="center" space-x="2")
     span(color="white")
       slot
+
     HList(pos="relative" w="5" h="5" bg="ix-primary" items="center" justify="center" rounded="full" v-if="hasBids")
       div(color="white" text="xs" leading="1em" translate-y="5.4%" translate-x="-8%")
         slot(name="bids")

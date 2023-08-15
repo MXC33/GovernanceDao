@@ -59,12 +59,6 @@ const onChangeSearch = () => {
   emit("input", searchTerm.value)
 }
 
-// Leave be for now
-// const onRecentSearchClick = (term: string) => {
-//   console.log('Why tho?')
-//   searchTerm.value = term
-// }
-
 const finishedSearch = (term: string) => {
   close()
   emit("selected", term)
