@@ -1,5 +1,5 @@
 <template lang="pug">
-VList(aspect="square" w="full" pos="relative" overflow="hidden") 
+VList(aspect="square" w="full" pos="relative" overflow="hidden" group) 
 
   NuxtLink(:to="getItemLink(token)"  rel="noopener" )
     slot(name="media")
@@ -10,7 +10,7 @@ VList(aspect="square" w="full" pos="relative" overflow="hidden")
       PolygonIcon(w="10" pos="absolute left-3 top-3")
 
 
-  HList(pos="absolute" inset="0" pointer-events="none" opacity="on-selected:100 group-hover:100 0" transition="all" :selected="isSelected")
+  HList(pos="absolute" inset="0" pointer-events="none" opacity="on-selected:100 group-hover:100 0 on-mobile:100" transition="all" :selected="isSelected" :mobile="isMobile")
     CollectionGridButtonSelect(pointer-events="auto" @click.stop.prevent="onSelectedItem" pos="absolute right-3 top-3" v-model="isSelected")
     
 
@@ -22,6 +22,7 @@ import PolygonIcon from '~/assets/icons/polygon_filled.svg'
 const { selectItem, removeSelectedItem } = useSelection()
 
 const isSelected = shallowRef(false)
+const { isMobile } = useDevice()
 
 const props = defineProps<{
   token: IXToken,
