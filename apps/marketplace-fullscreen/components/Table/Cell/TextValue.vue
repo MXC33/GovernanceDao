@@ -48,7 +48,7 @@ const route = useRoute()
 const isInAccountRoute = ref(false)
 
 watch(() => route.path, (newPath) => {
-  isInAccountRoute.value = newPath.endsWith('account/')
+  isInAccountRoute.value = newPath.endsWith('account/') || newPath.startsWith('/assets')
 }, { immediate: true })
 
 </script>
