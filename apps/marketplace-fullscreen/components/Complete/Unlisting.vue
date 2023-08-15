@@ -7,7 +7,7 @@ Popup()
 
   template(#default)
     CompleteCancelList(:items="items")
-      template(#detail="{item}") x{{ item.sales[0].quantity }}
+      template(#detail="{item}") x{{ item }}
 
   template(#buttons)
     button(@click="closeActivePopup" btn="~ primary" w="full") {{ $t(`marketplace.offer.continueExploring`) }}
