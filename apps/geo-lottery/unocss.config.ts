@@ -5,7 +5,7 @@ export default defineConfig({
   presets: [baseLayer],
   theme: {
     fontFamily: {
-      foundry: ['Foundry Gridnik', 'sans-serif'],
+      foundry: ['BlenderPro-Bold'],
     },
 
     colors: {

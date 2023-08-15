@@ -9,19 +9,6 @@ VList(w="full")
 div(grid="~ md:cols-12" p="6")
   div(col="start-4 span-6" p="x-14")
     VList(pos="relative" w="full")
-      List()
-        template(#content) One country is drawn every week, if you own a territory in that country you win! Feeling lucky?
-        template(#enter) Criteria to enter:
-      Button(:value="'next'") Continue
-      Button(:value="'next-blur'") Continue
-      Button(:value="'next-black'") Continue
-      Button(:value="'disable'") Continue
-      TimeCountdown()
-      Statistics()
-        template(#content) PLAYERS
-        template(#number) 21,355
-        template(#content-2) TICKET ENTRIES
-        template(#number-2) 341,680
 //VList(flex-grow="1" pos="relative" min-h="0" justify="center" p="3" items="center" bg="red")
 //  ButtonSound(sound="lg" btn="~ accent lg" color="white" text-shadow="none" @click="logoutWallet" cut="bottom-right s-md b-ix-primary") {{$t(`general.disconnect`)}}
 //
@@ -49,9 +36,30 @@ div(grid="~ md:cols-12" p="6")
         Button() Continue
         TimeCountdown()
 
-div(flex-grow="1" space-y="12" px="4 md:8" bg="black" )
-  //Accoardion Box
+VList(flex-grow="1" space-y="12" px="4 md:8" bg="black" )
 
+  //Back Frame
+  div(grid="~ md:cols-12" py="6"  gap="4 md:8")
+    div(grid=" md:col-start-4 md:col-span-6" space-y="4")
+      PopupFrame()
+        template(#content)
+          VList(p="4" pb="8" border-t="~" border-solid="~" border-gray-700="~" z="3" text="md" font="400" color="$mc-whitenew" space-y="6")
+            div() Choose method
+            div()
+              InputRadio(v-model="ixtPrice" :model-value="'1'" :is-selected="false" @update:modelValue="")
+                template(#default) test 1
+                template(#value) 1
+              InputRadio(v-model="ixtPrice" :model-value="'15'" :is-selected="false" @update:modelValue="")
+                template(#default) test 2 isSelected
+                template(#value) 15
+              InputRadio(v-model="ixtPrice" :model-value="'3'" :is-selected="ixtPricefalse" @update:modelValue="")
+                template(#default) test 3
+                template(#value) 3
+
+            VList()
+              Button() Continue
+
+  //Accoardion Box
   div(grid="~ md:cols-12" py="6" gap="4 md:8")
     div(grid=" md:col-start-4 md:col-span-6" space-y="4")
       AccordionItem()
@@ -60,7 +68,6 @@ div(flex-grow="1" space-y="12" px="4 md:8" bg="black" )
           p Perks with subscribing:
           div()
             p text with icon
-
       AccordionItem()
         template(#header) What is a territory?
         template(#default)
@@ -75,12 +82,6 @@ div(flex-grow="1" space-y="12" px="4 md:8" bg="black" )
             p text with icon
 
       //Acc with icon
-      AccordionItem(:status="true")
-        template(#header) Location: Sweden
-        template(#default)
-          p Perks with subscribing:
-          div()
-            p text with icon
       AccordionItem()
         template(#icon)
           Plus()
@@ -90,11 +91,41 @@ div(flex-grow="1" space-y="12" px="4 md:8" bg="black" )
           div()
             p text with icon
 
-      AccordionItem()
+
+      //Acc with status
+      AccordionItem(status="accept")
+        template(#header) Location: Sweden
         template(#default)
           p Perks with subscribing:
           div()
             p text with icon
+      AccordionItem(status="accept" :startOpen="true")
+        template(#header) Location: Sweden
+        template(#default)
+          VList(my="md:2" divide-y="~ md:none" divide-x="md:~" divide-gray-700 flex="~ col md:row" text="center")
+            VList(flex-1 py="3 md:2" px="0 md:5" items="center" justify="center")
+              span(color="gray-100" text="sm" uppercase ="~" font-medium="~") Winners
+              span(text="xl") 21,355
+            VList(flex-1 py="3 md:2" px="0 md:5" items="center" justify="center")
+              span(color="gray-100" text="sm" uppercase ="~" font-medium="~") Tickets
+              span(text="xl") 42,810
+            VList(flex-1 py="3 md:2" px="0 md:5" items="center" justify="center")
+              span(color="gray-100" text="sm" uppercase ="~" font-medium="~") Payout Per Ticket
+              span(text="xl") 160,000
+
+
+      AccordionItem(status="decline")
+        template(#header) Location: Sweden
+        template(#default)
+          VList(my="md:2" divide-y="~ md:none" divide-x="md:~" divide-gray-700 flex="~ col md:row" text="center")
+            VList(flex-1 py="3 md:2" px="0 md:5" items="center" justify="center")
+              span(color="gray-100" text="sm" uppercase ="~" font-medium="~") Winners
+              span(text="xl") 0
+            VList(flex-1 py="3 md:2" px="0 md:5" items="center" justify="center")
+              span(color="gray-100" text="sm" uppercase ="~" font-medium="~") Tickets
+              span(text="xl") 42,810
+            VList(flex-1 py="3 md:2" px="0 md:5" items="center" justify="center")
+              span(text="text-sm") IXT in this pool will be pushed to next raffle, since it had 0 winners.
 
   //Back Frame
   div(grid="~ md:cols-12" py="6"  gap="4 md:8")
@@ -118,8 +149,8 @@ div(flex-grow="1" space-y="12" px="4 md:8" bg="black" )
                 span() 6 IXT
 
             VList()
-              ButtonSound(sound="sm" btn="~ primary" opacity="s-invalid:50" w="full" font="bold" transition="all" ref="button" pos="relative" pointer-events="s-loading:none s-invalid:none")
-                span() BuTton
+              Button() PURCHASE
+
 </template>
 
 
@@ -133,12 +164,13 @@ const { id } = defineProps<{
   id: string,
 }>()
 
+const ixtPricefalse = true
+const ixtPrice = 15
 
 import type { AdjustableNumber } from '@ix/base/composables/Utils/useAdjustableNumber';
 /*const value = defineModel<AdjustableNumber>()*/
 
 import Plus  from '~/assets/icons/plus.svg'
-import Statistics from "~/components/Statistics.vue";
 
 const value = {
   multiplier: 3,
