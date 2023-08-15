@@ -1,7 +1,7 @@
 <template lang="pug">
 HList(p="6" bg="ix-black" b="b-1 gray-600")
   NuxtLink(v-if="walletState !== 'connected'" to="/connect" @click="$emit('close')" btn="soft-ix-orange lg" w="full" color="white") Connect Wallet
-  //{{ $t(`general.navigation.menu.connectWallet`)}}
+  //-{{ $t(`general.navigation.menu.connectWallet`)}}
 
   HList(v-else flex-grow="1" cut="bottom-right s-sm b-ix-orange opacity-60" bg="ix-orange opacity-20")
     AOCIcon(w="25" p="3")
@@ -9,7 +9,8 @@ HList(p="6" bg="ix-black" b="b-1 gray-600")
     VList(b="l-1 ix-orange opacity-40" flex-grow="1")
       VList(p="2" b="b-1 ix-orange opacity-40" v-if="userId")
         div(text="white") {{userId}} 
-        div(color="ix-orange") {{ $t(`general.navigation.menu.account`) }} 
+        div(color="ix-orange") {{ $t(`marketplace.navigation.menu.account`)}}
+        
         //-NuxtLink(to="/account" color="ix-orange") Account
 
 
@@ -24,7 +25,8 @@ HList(p="6" bg="ix-black" b="b-1 gray-600")
 
 <script lang="ts" setup>
 const emit = defineEmits(['close'])
-import AOCIcon from '~/assets/images/ui/user/user-profile.svg'
+//import AOCIcon from '~/assets/images/ui/user/user-profile.svg'
+import AOCIcon from '~/assets/images/icons/aocbadge.svg'
 import PlusIcon from '~/assets/images/ui/plus.svg'
 //import AOCIcon from '~/assets/images/icons/aocbadge.svg'
 //import PlusIcon from '~/assets/images/icons/plus.svg'

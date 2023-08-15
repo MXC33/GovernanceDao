@@ -7,8 +7,7 @@ NuxtLink(:to="item.absolute_url" cursor="pointer" @click="onClick")
 
     VList(v-else)
       div(color="gray" uppercase ="~") {{ item.name }} 
-      div(color="ix-orange" text="xs lg:sm") {{ $t(`general.navigation.soon`)}}
-
+      div(color="ix-orange" text="xs lg:sm") {{ $t(`marketplace.navigation.soon`)}}
 </template>
   
 <script lang="ts" setup>

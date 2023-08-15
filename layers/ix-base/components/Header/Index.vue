@@ -25,14 +25,14 @@ VList(pos="sticky top-0" translate-y="$header-offset" z="99" w="full" @mouseente
           SettingsIcon(v-if="activeMenuIndex == null" w="6" )
           CrossIcon(v-else w="6" )
 
-Transition(name="slide-top" mode="out-in")
-  HeaderDesktop(v-if="activeMenuIndex != null && headerData != null" :key="activeMenuIndex" :header="headerData[activeMenuIndex]" display="lt-lg:none")
+//- Transition(name="slide-top" mode="out-in")
+//-   HeaderDesktop(v-if="activeMenuIndex != null && headerData != null" :key="activeMenuIndex" :header="headerData[activeMenuIndex]" display="lt-lg:none")
 
 //- Transition(name="slide-top")
 //-   HeaderMobile(v-if="activeMenuIndex != null" overflow-y="auto" display="lg:none" @close="toggleMenu")
 
-//- Transition(name="slide-top")
-//-   HeaderAPI(v-if="activeMenuIndex != null" overflow-y="auto" display="lg:none" @close="toggleMenu")
+Transition(name="slide-top" mode="out-in")
+  HeaderAPI(v-if="activeMenuIndex != null && headerData != null"  :key="activeMenuIndex" :header="headerData[activeMenuIndex]")
 
 </template>
 
@@ -82,6 +82,8 @@ const openMenu = (index: number) => {
     return activeMenuIndex.value = null
 
   activeMenuIndex.value = index
+
+  console.log(activeMenuIndex.value)
 }
 
 const toggleMenu = () => {
