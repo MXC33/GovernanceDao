@@ -9,6 +9,7 @@ VList(w="full")
 div(grid="~ md:cols-12" p="6")
   div(col="start-4 span-6" p="x-14")
     VList(pos="relative" w="full")
+      TestEnterLottery(mb="6")
       List()
         template(#content) One country is drawn every week, if you own a territory in that country you win! Feeling lucky?
         template(#enter) Criteria to enter:
@@ -139,6 +140,7 @@ import type { AdjustableNumber } from '@ix/base/composables/Utils/useAdjustableN
 
 import Plus  from '~/assets/icons/plus.svg'
 import Statistics from "~/components/Statistics.vue";
+import TestEnterLottery from "~/components/TestEnterLottery.vue";
 
 const value = {
   multiplier: 3,

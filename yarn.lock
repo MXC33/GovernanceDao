@@ -2865,6 +2865,7 @@ __metadata:
   resolution: "@ix/geo-lottery@workspace:apps/geo-lottery"
   dependencies:
     "@ix/base": "*"
+    "@nuxtjs/i18n": ^8.0.0-rc.2
     "@types/node": ^18
     "@vueuse/router": ^10.1.2
     fuzzyjs: ^5.0.1
