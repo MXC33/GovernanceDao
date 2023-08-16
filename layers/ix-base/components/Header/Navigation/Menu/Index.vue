@@ -4,7 +4,7 @@ VList(flex-grow="1" w="full")
     //-div(v-for="navigation in header.subNavigations") {{ navigation.title }}
     //-CollectionFilterDrawer(bg="black")
     //-div(v-for="navigation in header.subNavigations") {{ navigation.title }} 
-    HeaderNavigationDrawer(bg="black")
+    CollectionFilterDrawer(bg="black")
       template(#header) 
         div {{ header.name }}
 

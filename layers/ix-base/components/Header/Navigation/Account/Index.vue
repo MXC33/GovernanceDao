@@ -1,7 +1,6 @@
 <template lang="pug">
 HList(p="6" bg="ix-black" b="b-1 gray-600")
-  NuxtLink(v-if="walletState !== 'connected'" to="/connect" @click="$emit('close')" btn="soft-ix-orange lg" w="full" color="white") Connect Wallet
-  //-{{ $t(`general.navigation.menu.connectWallet`)}}
+  NuxtLink(v-if="walletState !== 'connected'" to="/connect" @click="$emit('close')" btn="soft-ix-orange lg" w="full" color="white") {{ $t(`marketplace.navigation.menu.connectWallet`)}}
 
   HList(v-else flex-grow="1" cut="bottom-right s-sm b-ix-orange opacity-60" bg="ix-orange opacity-20")
     AOCIcon(w="25" p="3")
@@ -19,17 +18,12 @@ HList(p="6" bg="ix-black" b="b-1 gray-600")
           div(text="gray") IXT: 
           div(text="ix-mint") {{ roundToDecimals(ixtBalance ?? 0, 2) }}
 
-        //-HList( p="l-3 r-3")
-          PlusIcon(fill="white" w="3" @click="showIXTSwap")  
 </template>
 
 <script lang="ts" setup>
 const emit = defineEmits(['close'])
-//import AOCIcon from '~/assets/images/ui/user/user-profile.svg'
 import AOCIcon from '~/assets/images/icons/aocbadge.svg'
-//import PlusIcon from '~/assets/images/ui/plus.svg'
-//import AOCIcon from '~/assets/images/icons/aocbadge.svg'
-//import PlusIcon from '~/assets/images/icons/plus.svg'
+
 
 const { enable: showIXTSwap } = useIXTSwapVisible()
 const { walletState } = useWallet()
