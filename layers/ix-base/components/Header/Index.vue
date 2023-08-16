@@ -4,7 +4,7 @@ VList(pos="sticky top-0" translate-y="$header-offset" z="99" w="full" @mouseente
     NuxtLink(to="https://www.planetix.com")
       PlanetIXNew(w="42.25")
 
-    HList(justify="start" flex-grow="1" display="lt-lg:none" overflow-x="hidden" space-x="4")
+    HList(v-if="!isMobile" justify="start" flex-grow="1" overflow-x="hidden" space-x="4")
       //-button(v-for="(item, index) in siteTopHeaders" @click="openMenu(index)" btn="menu" color = "s-default:white s-selected:ix-orange" :state="selected(index)") {{ $t(`marketplace.navigation.${item.type}.title`)}}
       button(v-for="(header, index) in headerData" @click="openMenu(index)" btn="menu" color = "s-default:white s-selected:ix-orange" :state="selected(index)") {{ header.name }}
 
@@ -20,7 +20,7 @@ VList(pos="sticky top-0" translate-y="$header-offset" z="99" w="full" @mouseente
       HeaderAccountButton()
 
 
-      button(btn="menu" display="lg:none" @click="toggleMenu" ml="2")
+      button(v-if="isMobile" btn="menu" @click="toggleMenu" ml="2")
         Transition(name="fade" mode="out-in")
           SettingsIcon(v-if="activeMenuIndex == null" w="6" )
           CrossIcon(v-else w="6" )
@@ -42,6 +42,7 @@ import PlanetIXNew from '~/assets/images/header/planetix-new.svg'
 import SettingsIcon from '~/assets/images/header/hamburger.svg'
 import { useGlobalWindowScroll } from '@ix/marketplace/composables/useWindowScroll';
 
+const { isMobile } = useDevice()
 const { siteTopHeaders } = useSiteHeader()
 const {data: headerData} = useHeaderData()
 //const {data} = useHeaderData()
@@ -82,8 +83,6 @@ const openMenu = (index: number) => {
     return activeMenuIndex.value = null
 
   activeMenuIndex.value = index
-
-  console.log(activeMenuIndex.value)
 }
 
 const toggleMenu = () => {
