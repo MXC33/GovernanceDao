@@ -7,10 +7,10 @@ VList.collection-grid-item(justify="center" items="center" aspect="2/3" bg="blac
     template(#footer)
       Transition(name="slide-bottom")
         div(pos="absolute bottom-0 left-0 right-0" v-if="isHovered" bg="gray-900" cursor="pointer")
-          button(v-if="context == 'my-assets'" btn="~ primary" @click.stop="onClickListItems" w="full") 
+          button(v-if="context == 'my-assets'" btn="~ primary" @click.stop="onClickListItems" w="full" display="on-mobile:none" :mobile="isMobile") 
             GlitchText(text="List Item" :auto-hover="true")
 
-          button(v-else btn="~ primary" @click.stop="onClickCart" w="full" disable="on-no-click:active" :no-click="noClick")
+          button(v-else btn="~ primary" @click.stop="onClickCart" w="full" disable="on-no-click:active" :no-click="noClick" display="on-mobile:none" :mobile="isMobile")
             GlitchText(text="Add to cart" :auto-hover="true")
             
 </template>
@@ -24,6 +24,7 @@ const isHovered = useElementHover(mediaElement)
 
 const { addToCart, hasItemInCart } = useCart()
 const { displayPopup } = usePopups()
+const { isMobile } = useDevice()
 
 const { token, context } = defineProps<{
   token: IXToken,

@@ -4,19 +4,24 @@ VList(w="full" flex-grow="1" items="start" bg="gray-900" p="6" pos="relative")
     NuxtLink(:to="getItemLink(token)" flex="~ row" rel="noopener" items="center" space-x="3"  cursor="pointer")
       TokenName(:token="token" :key="getTokenKey(token)" text="base md:xl ellipsis" capitalize="~")
 
-      div(v-if="is1155" ) x{{showAssetAmount}}
+      div(v-if="is1155" font="normal" text="sm md:base" color="gray-200") x{{showAssetAmount}}
 
     div(text="sm md:lg") 
-      slot(name="subtitle") 
-        template(v-if="isDisabled") -- IXT
-        template(v-else) {{ setPriceDecimals }} IXT
+      slot(name="subtitle")
+        HList(gap="2" items="center")
+          template(v-if="isDisabled") -- IXT
+          template(v-else) {{ setPriceDecimals }} IXT
+
+          div()
+            div(color="gray-200" font="normal" text="sm md:base" v-if="isDisabled") $ --
+            div(color="gray-200" font="normal" text="sm md:base" v-else="isDisabled") ${{ ixtToUSD(token.sale_price) }}
 
   div(flex-grow="1")
 
   div(text="sm md:base" color="gray-200" whitespace="nowrap")
     slot(name="detail")
       template(v-if="!token?.higher_bid_price") {{ $t(`collection.attributes.sale_price`) }}: -- IXT
-      template(v-else) {{ $t(`collection.attributes.sale_price`) }}: {{ token?.higher_bid_price }} IXT
+      template(v-else) {{ $t(`collection.attributes.higher_bid_price`) }}: {{ token?.higher_bid_price }} IXT
 
   slot(name="footer")
       
@@ -35,6 +40,7 @@ const { token, context } = defineProps<{
 const is1155 = computed(() => ERC1155Addresses.includes(token.collection))
 const { getTokenKey } = useTokens()
 const { formatAmount } = useFormatNumber()
+const { ixtToUSD } = useIXTPrice()
 
 const showAssetAmount = computed(() => {
   if (context == 'my-assets')
