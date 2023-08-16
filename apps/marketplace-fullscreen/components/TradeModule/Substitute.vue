@@ -1,5 +1,5 @@
 <template lang="pug">
-div(grid="~ cols-1 md:cols-4" space-y="2 md:0" px="4 md:6" py="4 md:3" b="t-1 gray-600 md:(t-1 b-1 gray-600)" items="center")
+div(grid="~ cols-1 md:cols-4" space-y="4 md:0" px="4 md:6" py="4 md:3" b="t-1 gray-600 md:(t-1 b-1 gray-600)" items="center")
   div(grid="col-span-1" w="full" whitespace="nowrap")
     InputCheckbox(v-model="isSubstitue")
       span(color="gray-200") 

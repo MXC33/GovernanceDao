@@ -98,7 +98,6 @@ const offerColumns = computed<TableColumn<Bid>[]>(() => {
       ]
     })
   }
-  console.log(itemOwned.value)
   return baseColumns
 })
 
