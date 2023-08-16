@@ -9,8 +9,8 @@ HList(min-w="0" pos="relative")
     TableCellToken(:token="token" max-w="full" @click="onClickAsset" min-w="0" :hide-name="scrolling")
       span(v-if="context == 'my-assets'" color="gray-200" font="normal" text="lt-md:sm") x{{ token.my_shares }}
 
-  Transition(name="fade")
-    div(pos="absolute top--3 bottom--3 md:(top--2 bottom--2)" left="-8" bg="gray-900" w="31 md:42" v-if="scrolling")
+  Transition(name="slide-left" mode="in-out")
+    div(pos="absolute top--3 bottom--3 md:(top--2 bottom--2)" left="-8" bg="gray-900" w="31 md:40" v-if="scrolling")
       div(w="full" pos="absolute bottom-0" b="b-1 gray-600")
       div(w="2" pos="absolute left-full top-0 bottom-0" :class="tableScroll")
 
