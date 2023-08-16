@@ -30,7 +30,7 @@ export const useIXTContract = <T extends ContractInterface<T> & IXTokenContract>
   })
 
 
-  const allowance = () =>
+  const allowance = (otherSpenderAddress: string = '') =>
     withContract((contract) => {
       const address = walletAdress.value
       if (!address)
@@ -44,26 +44,26 @@ export const useIXTContract = <T extends ContractInterface<T> & IXTokenContract>
           resolve(0)
         }
       })*/
-      return contract.allowance(address, spenderAddress)
+      return contract.allowance(address, otherSpenderAddress || spenderAddress)
     })
 
-  const approve = (amount: BigNumberish | string) =>
+  const approve = (amount: BigNumberish | string, otherSpenderAddress: string = '') =>
     createTransaction((contract) => {
       const address = walletAdress.value
       if (!address)
         return undefined
 
-      return contract.approve(spenderAddress, amount)
+      return contract.approve(otherSpenderAddress || spenderAddress, amount)
     })
 
-  const allowanceCheck = async (amount: number) => {
+  const allowanceCheck = async (amount: number, otherSpenderAddress: string = '') => {
     try {
-      const allowanceValue = Number(ethers.utils.formatUnits(await allowance()))
+      const allowanceValue = Number(ethers.utils.formatUnits(await allowance(otherSpenderAddress)))
 
       if (allowanceValue >= amount)
         return true
 
-      return await approve(ethers.utils.parseUnits(amount.toString()))
+      return await approve(ethers.utils.parseUnits(amount.toString()), otherSpenderAddress)
 
     } catch (e) {
       return false
