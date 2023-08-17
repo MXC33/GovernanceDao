@@ -2,7 +2,7 @@
 VList(w="full" max-w="full" min-w="0")
   CollectionFilterButtonContainer(:is-open="isOpen")
 
-  HList.no-scrollbar(overflow-x="on-scrollable:scroll" :scrollable="!!context" w="full" bg="gray-900" ref="scrollElement")
+  HList.no-scrollbar(overflow-x="on-scrollable:scroll" :scrollable="!!context" w="full" bg="gray-900" frame="none on-framed:(~ gray-400)" ref="scrollElement" :framed="hasFrame")
     TableSpacer()
 
     div.no-scrollbar(grid="~ row-gap-0 gap-x-3" :style="gridStyle" flex-grow="1")
@@ -42,6 +42,7 @@ const { columns, isOpen, loading, rows, id, context } = defineProps<{
   loading?: boolean,
   isOpen?: boolean,
   context?: CollectionContext
+  hasFrame?: boolean
 }>()
 
 const { sort } = useTableSort(id)

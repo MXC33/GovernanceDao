@@ -22,7 +22,7 @@ export const frameRules: Rule[] = [
       display: block;
       position: absolute;
       pointer-events: none;
-      z-index: 2;
+      z-index: 4;
       left: 0;
       right: 0;`
 

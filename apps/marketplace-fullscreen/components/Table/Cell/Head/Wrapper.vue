@@ -1,6 +1,6 @@
 
 <template lang="pug">
-TableCellWrapper(z="3" font="400" color="gray-200" pos="sticky top-0" py="2" :align-end="lastCol" :has-bg="true")
+TableCellWrapper(z="3" font="400" color="gray-200" pos="sticky top-0" py="2.5" :align-end="lastCol" :has-bg="true" :singleItem="!isSmallTable")
   slot
       
 </template>
@@ -8,6 +8,7 @@ TableCellWrapper(z="3" font="400" color="gray-200" pos="sticky top-0" py="2" :al
 <script setup lang="ts">
 defineProps<{
   lastCol?: boolean
+  isSmallTable?: boolean
 }>()
 </script>
 
