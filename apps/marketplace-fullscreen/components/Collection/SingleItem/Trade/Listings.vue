@@ -1,5 +1,5 @@
 <template lang="pug">
-ContentDrawer(:start-open="!isMobile" :is-neutral="true" bg="gray-900" mx="lt-md:-4" :disable="!hasDrawer")
+ContentDrawer(:start-open="!isMobile" :is-neutral="true" bg="gray-900" mx="lt-md:-4" :disable="!hasDrawer" :is-table="true")
   template(#titleicon)
     TitleWithIcon(icon="listing") {{ $t(`marketplace.singleItem.listings`) }}
 
