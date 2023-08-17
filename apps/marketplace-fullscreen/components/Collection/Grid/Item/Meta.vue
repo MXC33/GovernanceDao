@@ -14,14 +14,14 @@ VList(w="full" flex-grow="1" items="start" bg="gray-900" p="6" pos="relative")
 
           div()
             div(color="gray-200" font="normal" text="sm md:base" v-if="isDisabled") $ --
-            div(color="gray-200" font="normal" text="sm md:base" v-else="isDisabled") ${{ ixtToUSD(token.sale_price) }}
+            div(color="gray-200" font="normal" text="sm md:base" v-else="isDisabled") ${{ usdDecimals }}
 
   div(flex-grow="1")
 
   div(text="sm md:base" color="gray-200" whitespace="nowrap")
     slot(name="detail")
       template(v-if="!token?.higher_bid_price") {{ $t(`collection.attributes.sale_price`) }}: -- IXT
-      template(v-else) {{ $t(`collection.attributes.higher_bid_price`) }}: {{ token?.higher_bid_price }} IXT
+      template(v-else) {{ $t(`collection.attributes.higher_bid_price`) }}: {{ bidDecimals }} IXT
 
   slot(name="footer")
       
@@ -41,6 +41,7 @@ const is1155 = computed(() => ERC1155Addresses.includes(token.collection))
 const { getTokenKey } = useTokens()
 const { formatAmount } = useFormatNumber()
 const { ixtToUSD } = useIXTPrice()
+const { ixtBalance } = useIXTContract()
 
 const showAssetAmount = computed(() => {
   if (context == 'my-assets')
@@ -54,10 +55,26 @@ const setPriceDecimals = computed(() => {
   return roundToDecimals(token?.sale_price, 2)
 })
 
+const usdDecimals = computed(() => {
+  const price = ixtToUSD(token.sale_price)
+  if (token?.sale_price < 0.009)
+    return roundToDecimals(price, 3)
+  return roundToDecimals(price, 2)
+})
+
+const bidDecimals = computed(() => {
+  if (token?.higher_bid_price < 0.09)
+    return roundToDecimals(token?.higher_bid_price, 3)
+  return roundToDecimals(token?.higher_bid_price, 2)
+})
+
 const getItemLink = (token: IXToken) => {
   const { network, collection, token_id } = token
   return `/assets/${network}/${collection}/${token_id}`
 }
+
+const ixtBalanceRounded = computed(() => roundToDecimals(ixtBalance.value ?? 0, 2))
+const usdBalanceRounded = computed(() => roundToDecimals(ixtToUSD(token.sale_price ?? 0), 2))
 
 const isDisabled = computed(() => !token?.sale_price || token?.sale_price == 0)
 </script>
