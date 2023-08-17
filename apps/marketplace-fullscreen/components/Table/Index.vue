@@ -2,7 +2,7 @@
 VList(w="full" max-w="full" min-w="0")
   CollectionFilterButtonContainer(:is-open="isOpen")
 
-  HList.no-scrollbar(overflow-x="on-scrollable:scroll" :scrollable="!!context" w="full" bg="gray-900" frame="none on-framed:(~ gray-400)" ref="scrollElement" :framed="hasFrame")
+  HList.no-scrollbar(overflow-x="on-scrollable:scroll" :scrollable="!!context" w="full" bg="gray-900" frame="none on-framed:(~ gray-400) on-mobile:!none" ref="scrollElement" :framed="hasFrame" :mobile="isMobile")
     TableSpacer()
 
     div.no-scrollbar(grid="~ row-gap-0 gap-x-3" :style="gridStyle" flex-grow="1")
