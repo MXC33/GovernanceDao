@@ -13,7 +13,9 @@ template(v-for="(column, index) in columns")
 <script lang="ts" setup generic="Row extends TableRow">
 import type { CollectionContext } from '~/composables/useCollection'
 import type { ServerTableSort, TableColumn, TableRow, TableSortable } from '~/composables/useTable'
+
 const { isMobile } = useDevice()
+
 const { rows, columns, id } = defineProps<{
   columns: TableColumn<Row>[],
   rows: Row[],

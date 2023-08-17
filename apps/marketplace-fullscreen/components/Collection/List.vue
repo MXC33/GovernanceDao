@@ -8,11 +8,7 @@ Transition(name="fade" mode="out-in")
     template(v-else)
       CollectionGridItemSkeleton(v-for="item in items.length > ghostRows.length ? items : ghostRows")
 
-  Table(v-else :columns="columns" :rows="items" :id="context" :loading="loading" :isOpen="showFilters" :selectable="true" v-model="rowsAsSelected" :context="context")
-
-    //- template(#item-name="{row}")
-    //-   TableCellToken(:token="row" @click="onClickItem(row)" max-w="full" :context="context")
-    //-     span(v-if="context == 'my-assets'" color="gray-200" font="normal" text="lt-md:sm") x{{ row.my_shares }}
+  Table(v-else :columns="columns" :rows="items" :id="context" :loading="loading" :isOpen="showFilters" v-model="rowsAsSelected" :context="context")
 
 </template>
 

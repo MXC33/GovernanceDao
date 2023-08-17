@@ -1,7 +1,7 @@
 <template lang="pug">
 VList.collection-grid-item(justify="center" items="center" aspect="2/3" bg="black opacity-40" ref="mediaElement")
 
-  CollectionGridItemMedia(:token="token" :is-hovered="isHovered"  cursor="pointer")
+  CollectionGridItemMedia(:token="token" :is-hovered="isHovered" cursor="pointer")
 
   CollectionGridItemMeta(:token="token" :context="context")
     template(#footer)

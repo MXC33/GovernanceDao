@@ -9,7 +9,7 @@ VList(w="full" max-w="full" min-w="0")
 
       TableHeader(v-model="selectedItems" :columns="renderColumns" :rows="sortedRows" :id="id" :context="context")
 
-      TableBody(:loading="loading" :rows="sortedRows" :columns="renderColumns"  :context="context" :scrolled-past-end="hasScrolledPastEnd" :scrolled-past-start="hasScrolled")
+      TableBody(:loading="loading" :rows="sortedRows" :columns="renderColumns" :context="context" :scrolled-past-end="hasScrolledPastEnd" :scrolled-past-start="hasScrolled")
         //- Slots for overriding table column data with template(#item-name="{row}") etc
         template(#[getColumnKey(column)]="{row}" v-for="column in renderColumns")
           slot(:name="`item-${column.rowKey}`" :row="row" v-if="column.type != 'buttons' && column.type != 'asset'")
