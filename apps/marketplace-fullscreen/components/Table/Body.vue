@@ -32,9 +32,9 @@ const getSticky = (column: TableColumn<Row>) => {
     return 'left'
 }
 
-
 const { rowIsIXToken } = useTable()
 const { isMobile } = useDevice()
+
 const { rows, columns, loading, scrolledPastStart } = defineProps<{
   columns: TableColumn<Row>[],
   rows: Row[],

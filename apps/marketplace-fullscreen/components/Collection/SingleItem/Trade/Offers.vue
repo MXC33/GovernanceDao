@@ -58,8 +58,8 @@ const itemOwned = computed(() => {
 const offerColumns = computed<TableColumn<Bid>[]>(() => {
   const baseColumns: TableColumn<Bid>[] = [
     { label: "Unit Price", type: "ixt", rowKey: "price", sortable: true },
-    { label: "USD Price", type: "usd", rowKey: "price", sortable: true },
-    { label: "Quanitity", rowKey: "quantity", sortable: true, width: 'auto' },
+    { label: "USD Price", type: "usd", rowKey: "price", sortable: true, hideMobile: true },
+    { label: "Quanitity", rowKey: "quantity", sortable: true },
     {
       label: "Floor Difference", rowKey: "price", getValue(row) {
         if (item.sale_price == 0)

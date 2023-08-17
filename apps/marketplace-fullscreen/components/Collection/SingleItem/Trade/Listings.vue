@@ -31,7 +31,7 @@ const { walletAdress } = useWallet()
 
 const saleColumns: TableColumn<Sale>[] = [
   { label: "Unit Price", type: "ixt", rowKey: "price", sortable: true },
-  { label: "USD Price", type: "usd", rowKey: "price", sortable: true },
+  { label: "USD Price", type: "usd", rowKey: "price", sortable: true, hideMobile: true },
   { label: "Quanitity", rowKey: "quantity", sortable: true },
   { label: "Expiration", type: "date", rowKey: "endtime", sortable: true },
   {
