@@ -12,12 +12,12 @@ VList()
     template(#ixt) {{averagePricePerItem}} IXT
     template(#percentage) {{aboveFloorPrice}}% {{ $t(`marketplace.trade.aboveFloorPrice`) }}
 
-  TradeModuleSubstitute(v-model="isSubstituteListing")
-    template(#title) {{ $t(`marketplace.trade.maxPriceList`) }}
-    template(#substituteTitle) 
-    template(#substituteInput) 
-      InputText(v-model="maxPrice" :class="{highlighted: showIncreaseMaxPrice}" :is-module="true")
-        template(#suffix) IXT
+  //- TradeModuleSubstitute(v-model="isSubstituteListing")
+  //-   template(#title) {{ $t(`marketplace.trade.maxPriceList`) }}
+  //-   template(#substituteTitle) 
+  //-   template(#substituteInput) 
+  //-     InputText(v-model="maxPrice" :class="{highlighted: showIncreaseMaxPrice}" :is-module="true")
+  //-       template(#suffix) IXT
 
   div(grid="~ cols-2 on-one-col:cols-1" :one-col="isSubstituteListing")
     ButtonInteractive(btn="~ secondary" font="bold" @click="onClickOffer" text="Make offer" v-if="!isSubstituteListing")
