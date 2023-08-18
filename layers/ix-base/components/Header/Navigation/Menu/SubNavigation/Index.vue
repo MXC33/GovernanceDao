@@ -5,7 +5,7 @@ div()
     div() {{ navigation.title }}
     div(b="b-1 gray-300" w="95%")
 
-    div(grid="~ cols-1 cols-2")
+    div(grid="~ cols-2")
       HeaderNavigationMenuSubNavigationItem(:item="subItem" v-for="subItem in navigation.item" ) 
   //-Display this when in Landscape mode
   div(display="lt-lg:none")

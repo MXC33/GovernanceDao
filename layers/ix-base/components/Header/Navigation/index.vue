@@ -10,7 +10,6 @@ div(m="!l-0" p="6 t-3" grid="~ cols-5" w="full" bg="black" pos="absolute top-16"
 </template>
 
 <script lang="ts" setup>
-//defineEmits(['close'])
 import type { HeaderMenuItem, HeaderMenuSubNavigation} from '~/composables/useSiteHeader';
 const { isMobile } = useDevice()
 const {header} = defineProps<{
@@ -21,7 +20,6 @@ const isMounted = useMounted()
 
 const lockScroll = (active: boolean) => {
   document.body.classList.toggle("is-scroll-locked", active)
-  console.log("Lock scroll", active)
 }
 
 watch([isMounted], ([mounted]) => {

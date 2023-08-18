@@ -5,7 +5,6 @@ VList(pos="sticky top-0" translate-y="$header-offset" z="99" w="full" @mouseente
       PlanetIXNew(w="42.25")
 
     HList(v-if="!isMobile" justify="start" flex-grow="1" overflow-x="hidden" space-x="4")
-      //-button(v-for="(item, index) in siteTopHeaders" @click="openMenu(index)" btn="menu" color = "s-default:white s-selected:ix-orange" :state="selected(index)") {{ $t(`marketplace.navigation.${item.type}.title`)}}
       button(v-for="(header, index) in headerData" @click="openMenu(index)" btn="menu" color = "s-default:white s-selected:ix-orange" :state="selected(index)") {{ header.name }}
 
 
@@ -25,12 +24,6 @@ VList(pos="sticky top-0" translate-y="$header-offset" z="99" w="full" @mouseente
           SettingsIcon(v-if="activeMenuIndex == null" w="6" )
           CrossIcon(v-else w="6" )
 
-  //- Transition(name="slide-top" mode="out-in")
-  //-   HeaderDesktop(v-if="activeMenuIndex != null && headerData != null" :key="activeMenuIndex" :header="headerData[activeMenuIndex]" display="lt-lg:none")
-
-  //- Transition(name="slide-top")
-  //-   HeaderMobile(v-if="activeMenuIndex != null" overflow-y="auto" display="lg:none" @close="toggleMenu")
-
   Transition(name="slide-top" mode="out-in")
     HeaderNavigation(v-if="activeMenuIndex != null && headerData != null"  :key="activeMenuIndex" :header="headerData[activeMenuIndex]")
 
@@ -43,7 +36,6 @@ import SettingsIcon from '~/assets/images/header/hamburger.svg'
 import { useGlobalWindowScroll } from '@ix/marketplace/composables/useWindowScroll';
 
 const { isMobile } = useDevice()
-const { siteTopHeaders } = useSiteHeader()
 const {data: headerData} = useHeaderData()
 //const {data} = useHeaderData()
 

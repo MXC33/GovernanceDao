@@ -1,14 +1,13 @@
 <template lang="pug">
 NuxtLink(:to="item.absolute_url" cursor="pointer" @click="onClick")
   HList(group p="3" space-x="3" pos="right-0" text="left")
-    //-TitleIcon(w="10" h="10" p="1" fill="white group-hover:ix-orange")
     //-Display this image/svg when in Landscape mode
     HeaderNavigationMenuSubNavigationIcon(w="8" fill="white group-hover:ix-orange" flex-shrink="0" :item="item.icon" display="lt-lg:none")
-    div(pos="relative")
-      VList(pos="relative" v-if="item.absolute_url || isSwap")
+    div()
+      VList(v-if="item.absolute_url || isSwap")
         div(color="white group-hover:ix-orange" uppercase ="~") {{ item.name}} 
         div(color="gray-200 group-hover:ix-orange" text="sm" ) {{ item.description}} 
-      VList(pos="relative" v-else)
+      VList(v-else)
         div(color="gray" uppercase="~") {{ item.name}} 
         div(color="ix-orange" text="sm" ) {{ $t(`marketplace.navigation.soon`)}}
 </template>
