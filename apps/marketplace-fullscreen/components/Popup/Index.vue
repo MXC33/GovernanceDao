@@ -12,7 +12,7 @@ Transition(name="fade" appear)
           h3
             slot(name="header")
 
-        CloseIcon(w="4" cursor="pointer" @click.stop="onClose")
+        CloseIcon(w="4" cursor="pointer" fill="white hover:opacity-80" @click.stop="onClose")
 
       VList(flex-grow="1" p="4 md:6" space-y="2")
         slot()
