@@ -19,19 +19,24 @@ VList()
       InputText(v-model="maxPrice" :class="{highlighted: showIncreaseMaxPrice}" :is-module="true")
         template(#suffix) IXT
 
-  div(grid="~ cols-2 on-one-col:cols-1" :one-col="isSubstituteListing")
+  div(grid="~ cols-1 md:cols-2 on-one-col:cols-1" :one-col="isSubstituteListing")
     ButtonInteractive(btn="~ secondary" font="bold" @click="onClickOffer" text="Make offer" v-if="!isSubstituteListing")
 
-    ButtonInteractive(btn="~ primary" font="bold" @click="buyItems" v-if="!isDisabled" :text="`Buy ${shares?.value} item`" :loading="isBuyLoading")
+    HList(v-if="!isDisabled")
+      ButtonInteractive(btn="~ primary" font="bold" @click="buyItems" :text="`Buy ${shares?.value} item`" :loading="isBuyLoading" :is-shared="true")
+      HList(w="20" justify="center" cursor="pointer" @click="onClickCart" bg="ix-primary hover:(ix-primary opacity-80)" b="l-1 gray-900")
+        CartIcon(w="6")
 
     ButtonInteractive(btn="~ primary" bg="on-disabled:gray-700" color="on-disabled:gray-400" cursor="default" font="bold" :disabled="isDisabled" text="There is no sales" v-else)
 
 </template>
 
 <script lang="ts" setup>
-import type { SingleItemData } from '@ix/base/composables/Token/useIXToken';
-import { useBuyContract, useBuyItems } from "~/composables/useBuy";
-import { NFTType } from "~/composables/useAssetContracts";
+import type { SingleItemData } from '@ix/base/composables/Token/useIXToken'
+import { useBuyContract, useBuyItems } from "~/composables/useBuy"
+import { NFTType } from "~/composables/useAssetContracts"
+import CartIcon from '~/assets/icons/cart.svg'
+
 
 const { displayPopup } = usePopups()
 
@@ -65,6 +70,16 @@ const {
   aboveFloorPrice,
   showIncreaseMaxPrice
 } = useBuyItems(item)
+
+const { addToCart } = useCart()
+
+const onClickCart = () => {
+  const specificSale = item.sales.reduce((minSale, currentSale) => {
+    return currentSale.price < minSale.price ? currentSale : minSale
+  }, item.sales[0])
+
+  addToCart(item, specificSale)
+}
 
 const { buySingleItem } = useBuyContract()
 

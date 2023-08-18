@@ -5,7 +5,7 @@ div(grid="~ cols-1 md:cols-4" space-y="4 md:0" px="4 md:6" py="4 md:3" b="t-1 gr
       span(color="gray-200") 
         slot(name="title")
 
-  div(flex="~ row" grid="col-span-1 md:col-start-4" color="white" align="lt-md:left" whitespace="nowrap" w="full" gap="1 md:3" v-if="isSubstitue")
+  div(flex="~ row" grid="col-span-1 col-start-1 md:col-start-4" color="white" align="lt-md:left" whitespace="nowrap" w="full" gap="1 md:3" v-if="isSubstitue")
     HList(flex-grow="1" justify="start md:between" w="full")
       slot(name="substituteInput")
 

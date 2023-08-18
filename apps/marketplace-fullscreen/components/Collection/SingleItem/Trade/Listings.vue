@@ -7,7 +7,7 @@ ContentDrawer(:start-open="!isMobile" :is-neutral="true" bg="gray-900" mx="lt-md
 
     Table(v-if="item.sales && item.sales.length > 0" :columns="saleColumns" :rows="item.sales" id="single-item")
 
-    CollectionSingleItemTradeDetail(v-else) {{ $t(`marketplace.singleItem.noItemsFound`) }}
+    CollectionSingleItemTradeDetail(v-else :item="item") {{ $t(`marketplace.singleItem.noItemsFound`) }}
 
 
 </template>

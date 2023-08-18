@@ -1,5 +1,5 @@
 <template lang="pug">
-ButtonSound.button-interactive(sound="sm" btn="~ primary" opacity="s-invalid:50" w="full" font="bold" transition="all" ref="button" pos="relative" pointer-events="s-loading:none s-invalid:none" :state="buttonState")
+ButtonSound.button-interactive(sound="sm" btn="~ primary" opacity="s-invalid:50" w="full" font="bold" transition="all" ref="button" pl="lt-md:on-shared:20" :shared="isShared" pos="relative" pointer-events="s-loading:none s-invalid:none" :state="buttonState")
   Transition(name="slide-left")
     span(pos="absolute left-3" v-if="loading")
       LoadingBars.loading-bars(w="5" h="5")
@@ -27,6 +27,7 @@ const { loading, invalid } = defineProps<{
   text: string,
   loading?: boolean,
   invalid?: boolean
+  isShared?: boolean
 }>()
 </script>
   

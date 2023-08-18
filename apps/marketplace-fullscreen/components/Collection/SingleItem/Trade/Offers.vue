@@ -4,7 +4,7 @@ ContentDrawer(:start-open="!isMobile" :is-neutral="true" bg="gray-900" mx="lt-md
     TitleWithIcon(icon="offer") {{ $t(`marketplace.singleItem.offers`) }}
 
   template(#default)
-    CollectionSingleItemTradeDetail(v-if="item.bids.length < 1") 
+    CollectionSingleItemTradeDetail(v-if="item.bids.length < 1" :item="item") 
       | {{ $t(`marketplace.singleItem.noCurrentBids`) }}
 
     Table(:columns="offerColumns" :rows="item.bids" id="offers" v-if="item.bids.length > 0")
