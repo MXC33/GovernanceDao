@@ -20,8 +20,6 @@ VList(pos="relative" display="lt-md:none"  ref="menuElement")
 </template>
     
 <script lang="ts" setup>
-import { useIXTContract } from "@ix/base/composables/Contract/useIXTContract";
-
 const { walletState } = useWallet()
 const { ixtBalance, ixtPending } = useIXTContract()
 const menuOpen = ref(false)
