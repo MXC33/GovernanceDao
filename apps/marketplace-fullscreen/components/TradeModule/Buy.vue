@@ -24,7 +24,7 @@ VList()
 
     HList(v-if="!isDisabled")
       ButtonInteractive(btn="~ primary" font="bold" @click="buyItems" :text="`Buy ${shares?.value} item`" :loading="isBuyLoading" :is-shared="true")
-      HList(v-if="!isSubstituteListing" w="20" justify="center" cursor="pointer" @click="onClickCart" bg="ix-primary hover:(ix-primary opacity-80)" b="l-1 gray-900")
+      HList(v-if="!isSubstituteListing" w="20" justify="center" cursor="pointer" @click="onClickCart" bg="ix-primary hover:(ix-ne)" b="l-1 gray-900")
         CartIcon(w="6")
 
     ButtonInteractive(btn="~ primary" bg="on-disabled:gray-700" color="on-disabled:gray-400" cursor="default" font="bold" :disabled="isDisabled" text="There is no sales" v-else)
