@@ -12,20 +12,24 @@ VList(bg="gray-900" v-if="item")
     VList(w="full")
       HList(flex-grow="1" px="3" items="center")
         VList(flex-grow="1" color="gray-200")
-          TokenCollection(:token="item.token")
+          HList(space-x="1.5")
+            TokenCollection(:token="item.token")
+            CertifiedIcon(w="4" translate-y="-0.3")
           div(v-if="item.sale") Available items: {{item.sale?.quantity}}
           div(flex-grow="1")
 
         button(@click="removeFromCart(item)")
           TrashIcon(w="6")
 
-      Adjustable(v-model="item.shares" h="10" :has-frame="false" :is-popup="true")
+      Adjustable(v-model="item.shares" h="10" :has-frame="false" :is-popup="true" :is-neutral="true")
     
 </template>
 
 <script lang="ts" setup>
 import type { CartItem } from '~/composables/useCart'
 import TrashIcon from '~/assets/icons/trash.svg'
+import CertifiedIcon from '~/assets/icons/certified.svg'
+
 
 const cartElement = ref()
 
