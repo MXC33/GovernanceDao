@@ -1,29 +1,30 @@
 <template lang="pug">
-HList(frame="~ hover:gray-300" items="center" :w="moduleSize" :module="isModule" ref="element" group)
-  input(@click="userClick" bg="transparent group-hover:gray-800 focus:gray-800" p="x-3 y-2" outline="0" v-model="model" w="full" display="block" transition="all")
+HList(@focus="isFocused = true"  @blur="isFocused = false" frame="~ hover:gray-300" bg="transparent hover:gray-800 on-focused:gray-800" w="full" ref="element" :focused="isFocused" group)
+  HList(items="center" :w="moduleSize" :module="isModule")
+    input(@click="userClick"  p="x-3 y-2" outline="0" bg="transparent" v-model="model" w="full" display="block" transition="all")
 
-  HList(v-if="$slots.suffix" p="x-3" color="gray-200" :bg="focusRules" h="full" items="center")
-    slot(name="suffix")
+    HList(v-if="$slots.suffix" p="x-3" color="gray-200" bg="transparent" h="full" items="center")
+      slot(name="suffix")
 </template>
 
 <script setup lang="ts">
 const model = defineModel<string | number | undefined>()
-const focused = ref(false)
+const isFocused = ref(false)
 const element = ref()
 
-onClickOutside(element, () => focused.value = false)
+onClickOutside(element, () => isFocused.value = false)
 
 defineProps<{
   isModule?: boolean
 }>()
 
 const focusRules = computed(() => {
-  return focused.value ? 'gray-800' : 'transparent group-hover:gray-800';
+  return isFocused.value ? 'gray-800' : 'transparent group-hover:gray-800';
 })
 
 const userClick = () => {
-  focused.value = true
-  console.log(focused.value)
+  isFocused.value = true
+  console.log(isFocused.value)
 }
 
 const { isMobile } = useDevice()
