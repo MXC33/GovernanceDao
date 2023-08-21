@@ -18,10 +18,6 @@ defineProps<{
   isModule?: boolean
 }>()
 
-const focusRules = computed(() => {
-  return isFocused.value ? 'gray-800' : 'transparent group-hover:gray-800';
-})
-
 const userClick = () => {
   isFocused.value = true
 }
