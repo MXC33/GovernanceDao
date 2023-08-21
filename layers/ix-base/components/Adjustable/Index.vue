@@ -4,7 +4,7 @@ HList(w="full" frame="~ gray-400 hover:gray-300 on-frameless:none" :frameless="!
     AdjustableButton(type="minus" @click="decreaseAmount" :is-adjustable="isDecreasable" :inline="inline")
 
   HList(justify="center" items="center" pos="relative" b="on-frameless:(l-1 r-1 gray-900)" :frameless="!hasFrame")
-    AdjustableNumber(v-model="data" :neutral="isNeutral" :cart="isCart" :is-cart="isCart" bg="gray-800 on-cart:(gray-600 hover:gray-400) on-neutral:(gray-900 group-hover:gray-800)" :frameless="!hasFrame" :is-popup="isPopup")
+    AdjustableNumber(v-model="data" :neutral="isNeutral" :solid="isSolid" bg="gray-800 on-solid:(gray-600 hover:gray-400) on-neutral:(gray-900 group-hover:gray-800)" :frameless="!hasFrame" :is-popup="isPopup")
 
   HList(items="center" justify="on-frameless:center" flex-grow="on-frameless:1" bg="on-frameless:hover:gray-400" h="on-frameless:full" :frameless="!hasFrame")
     AdjustableButton(type="plus" @click="increaseAmount" :is-adjustable="isIncreasable" :inline="inline")
@@ -19,9 +19,9 @@ const props = defineProps<{
   inline?: boolean
   hideMax?: boolean
   isNeutral?: boolean
-  isCart?: boolean
   hasFrame?: boolean
   isPopup?: boolean
+  isSolid?: boolean
 }>()
 
 const emit = defineEmits(["update:modelValue"])

@@ -10,7 +10,6 @@ const props = defineProps<{
   tight?: boolean
   isNeutral?: boolean
   isPopup?: boolean
-  isCart?: boolean
 }>()
 
 const isFocused = ref(false)
