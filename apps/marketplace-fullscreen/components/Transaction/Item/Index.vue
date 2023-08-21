@@ -5,7 +5,7 @@ TransactionItemStatic(v-if="item" :item="item" @clickItem="isOpen = !isOpen")
 
   template(#icons)
     HList(space-x="6")
-      CheckMarkIcon(opacity="0 on-valid:100" transition="all" :valid="isValid" w="6")
+      CheckMarkIcon(opacity="0 on-valid:100" transition="all" fill="white" :valid="isValid" w="6")
 
       HelperChevron(w="5" :up="isOpen")
 
