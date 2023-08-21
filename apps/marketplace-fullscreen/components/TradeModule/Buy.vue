@@ -22,8 +22,8 @@ VList()
   div(grid="~ cols-1 md:cols-2 on-one-col:cols-1" :one-col="isSubstituteListing")
     ButtonInteractive(btn="~ secondary" font="bold" @click="onClickOffer" text="Make offer" v-if="!isSubstituteListing")
 
-    HList(v-if="!isDisabled")
-      ButtonInteractive(btn="~ primary" font="bold" @click="buyItems" :text="`Buy ${shares?.value} item`" :loading="isBuyLoading" :is-shared="true")
+    HList(v-if="!isDisabled" pos="relative")
+      ButtonInteractive(btn="~ primary" font="bold" @click="buyItems" :text="`Buy ${shares?.value} item`" :loading="isBuyLoading" pl="lt-md:20")
       HList(v-if="!isSubstituteListing" w="20" justify="center" cursor="pointer" @click="onClickCart" bg="ix-primary hover:(ix-ne)" b="l-1 gray-900")
         CartIcon(w="6")
 

@@ -24,7 +24,6 @@ const focusRules = computed(() => {
 
 const userClick = () => {
   isFocused.value = true
-  console.log(isFocused.value)
 }
 
 const { isMobile } = useDevice()
