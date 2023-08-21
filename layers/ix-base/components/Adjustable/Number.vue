@@ -1,5 +1,5 @@
 <template lang="pug">
-input(outline="none" appearance="none" v-model="data.value" placeholder="0" b="none" font="bold" w="full" bg="gray-800 on-neutral:gray-900 on-popup:gray-600" :popup="isPopup" :neutral="isNeutral" text="center" py="2" @keyup.enter="updateAmount" @focusout="updateAmount" :invalid="invalidNumber" :growing="!tight")
+input(@focus="isFocused = true" @blur="isFocused = false" outline="none" appearance="none" v-model="data.value" placeholder="0" b="none" font="bold" w="full" bg="gray-800 on-neutral:gray-900 on-popup:gray-600 on-focused:!(gray-400 hover:gray-400)" ref="inputElement" :focused="isFocused" :popup="isPopup" :neutral="isNeutral" text="center" py="2" @keyup.enter="updateAmount" @focusout="updateAmount" :invalid="invalidNumber" :growing="!tight")
 </template>
 
 <script lang="ts" setup>
@@ -10,7 +10,11 @@ const props = defineProps<{
   tight?: boolean
   isNeutral?: boolean
   isPopup?: boolean
+  isCart?: boolean
 }>()
+
+const isFocused = ref(false)
+const inputElement = ref()
 
 const emit = defineEmits(["update:modelValue"])
 
