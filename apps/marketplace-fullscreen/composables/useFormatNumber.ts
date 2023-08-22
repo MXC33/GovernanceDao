@@ -1,27 +1,3 @@
-// export const useFormatNumber = () => {
-//   const formatAmount = (amount: number | string) => {
-//     if (typeof amount === 'string') {
-//       amount = parseFloat(amount)
-//     }
-
-//     if (amount >= 1000000) {
-//       const formattedAmount = (amount / 1000000).toFixed(1)
-//       return formattedAmount.replace(".0", "") + "M"
-//     }
-
-//     else if (amount >= 1000) {
-//       const formattedAmount = (amount / 1000).toFixed(1)
-//       return formattedAmount.replace(".0", "") + "K"
-//     }
-
-//     return amount.toString();
-//   }
-
-//   return {
-//     formatAmount
-//   }
-// }
-
 export const useFormatNumber = () => {
   const formatAmount = (amount: number | string) => {
     if (typeof amount === 'string') {
@@ -30,23 +6,37 @@ export const useFormatNumber = () => {
 
     const formatNumber = (num: number, divisor: number, suffix: string) => {
       let base = num / divisor
-      let formatted = String(base)
-      let dotIndex = formatted.indexOf('.')
 
-      if (dotIndex !== -1) {
-        formatted = formatted.substring(0, dotIndex + 3)
-        if (formatted.endsWith('.00')) {
-          formatted = formatted.substring(0, dotIndex)
+      if (suffix === 'M') {
+        if (base >= 10) {
+          return Math.floor(base) + suffix
+        }
+        if (base >= 1 && base < 10) {
+          if (num % 1000000 === 200000) {
+            return (Math.floor(base * 10) / 10).toFixed(1) + suffix
+          }
+          return Math.floor(base) + suffix
         }
       }
 
-      return formatted + suffix
+      if (suffix === 'K') {
+        if (base >= 10) {
+          return Math.floor(base) + suffix
+        }
+        if (base >= 1 && base < 10) {
+          if (num % 1000 === 200) {
+            return (Math.floor(base * 10) / 10).toFixed(1) + suffix
+          }
+          return Math.floor(base) + suffix
+        }
+      }
+
+      return base + suffix
     }
 
     if (amount >= 1000000) {
       return formatNumber(amount, 1000000, 'M')
-    }
-    else if (amount >= 1000) {
+    } else if (amount >= 1000) {
       return formatNumber(amount, 1000, 'K')
     }
 

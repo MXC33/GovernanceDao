@@ -3,7 +3,7 @@ VList(bg="gray-900" v-if="item")
   header(p="x-6 y-3" font="bold" flex="~ row" b="b-1 gray-600")
     TokenName(:token="item.token")
 
-    div(whitespace="nowrap") {{ item.sale?.price }} IXT
+    div(whitespace="nowrap") {{ roundToDecimals(item.token?.sale_price, 5) }} IXT
 
   HList()
     VList(w="30" h="30" justify="center" pos="relative" bg="black")
@@ -39,5 +39,6 @@ const { viewingCart, removeFromCart, cartItemFailed } = useCart()
 
 const item = defineModel<CartItem>()
 
+// Are we using isFailed for anything?
 const isFailed = computed(() => item.value && cartItemFailed(item.value))
 </script>
