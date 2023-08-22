@@ -55,6 +55,8 @@ const itemOwned = computed(() => {
     return true
 })
 
+console.log(item, 'item from offers')
+
 const offerColumns = computed<TableColumn<Bid>[]>(() => {
   const baseColumns: TableColumn<Bid>[] = [
     { label: "Unit Price", type: "ixt", rowKey: "price", sortable: true },
@@ -72,6 +74,11 @@ const offerColumns = computed<TableColumn<Bid>[]>(() => {
       }, sortable: true
     },
     { label: "Expiration", type: "date", rowKey: "due_date", sortable: true },
+    {
+      label: "Buyer", width: 100, rowKey: "bidder_username", getValue(row) {
+        return row.bidder_username
+      }, sortable: true
+    }
   ]
 
   if (itemOwned.value) {
