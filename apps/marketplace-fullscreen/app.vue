@@ -25,6 +25,8 @@
 </template>
 
 <script setup lang="ts">
+//import { useNeMessages, useNeNotifications } from 'composables/useNeNotificationsAndMessages';
+
 useHead({
   title: "Marketplace | PlanetIX",
   script: [
@@ -42,8 +44,12 @@ router.onError((err) => {
 const { state: isSwapVisible } = useIXTSwapVisible()
 
 const {execute: fetchHeaderData } = useHeaderData()
+const {execute: fetchMessageData } = useNeMessages()
+const {execute: fetchNotificationData } = useNeNotifications()
 
 await fetchHeaderData()
+await fetchMessageData()
+//await fetchNotificationData()
 
 const { y } = useWindowScroll()
 const { connectWallet, walletState } = useWallet()

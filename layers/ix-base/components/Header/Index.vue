@@ -12,7 +12,7 @@ VList(pos="sticky top-0" translate-y="$header-offset" z="99" w="full" @mouseente
         NuxtLink(to="https://planetix.com/airdrop")
           HList(rounded="full" b="1 $mc-mint" px="4" py="1" bg="hover:$mc-mint-40" uppercase="~" tracking="0.65" font="bold" items="center" justify="center")
             span(translate-x="0.5") airdrop
-
+    Notifications()
     HList(space-x="6" px="0")
       //-button(btn="menu" display="lt-lg:none") help
       //-HeaderLanguage(language="EN")
@@ -34,10 +34,13 @@ import CrossIcon from '~/assets/images/header/cross.svg'
 import PlanetIXNew from '~/assets/images/header/planetix-new.svg'
 import SettingsIcon from '~/assets/images/header/hamburger.svg'
 import { useGlobalWindowScroll } from '@ix/marketplace/composables/useWindowScroll';
+//import { useNetEmpireMessages, useNetEmpireNotifications } from '@ix/marketplace/composables/useNeNotificationsAndMessages';
 
-const { isMobile } = useDevice()
+const  isMobile = false
 const {data: headerData} = useHeaderData()
 //const {data} = useHeaderData()
+
+
 
 const { state: swapVisible } = useIXTSwapVisible()
 
