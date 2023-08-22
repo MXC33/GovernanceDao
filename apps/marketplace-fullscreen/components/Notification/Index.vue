@@ -2,7 +2,8 @@
 button(@click="toggleNotification")
   BellFilled(v-if="!showNotification" w="6" h="6")
   BellEmpty(v-else w="6" h="6")
-NotificationMenu(v-if="showNotification")
+Transition(name="slide-top" mode="out-in")
+  NotificationMenu(v-if="showNotification" )
 </template>
 
 <script lang="ts" setup>

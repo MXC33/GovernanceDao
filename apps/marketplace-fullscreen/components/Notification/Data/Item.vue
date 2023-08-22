@@ -1,8 +1,7 @@
 <template lang ="pug">
 button(w="full")
   VList(items="center" p="1")
-    div() {{ message.title }}
-    div() {{ message.categories }} 
+    div() {{ message.title }} 
 </template>
 
 <script lang="ts" setup>
@@ -11,13 +10,6 @@ import type { NotificationMessage } from '~/composables/useNeNotificationsAndMes
 const {message} = defineProps<{
   message: NotificationMessage
 }>()
-
-// const {message} = defineProps<{
-//   message: string
-// }>()
-
-//message: string
-
 
 console.log("message", message);
 

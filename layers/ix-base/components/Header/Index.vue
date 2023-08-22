@@ -34,14 +34,11 @@ import CrossIcon from '~/assets/images/header/cross.svg'
 import PlanetIXNew from '~/assets/images/header/planetix-new.svg'
 import SettingsIcon from '~/assets/images/header/hamburger.svg'
 import { useGlobalWindowScroll } from '@ix/marketplace/composables/useWindowScroll';
-//import { useNetEmpireMessages, useNetEmpireNotifications } from '@ix/marketplace/composables/useNeNotificationsAndMessages';
+import Notifications from '@ix/marketplace/components/Notification/Index.vue';
 
 const  isMobile = false
+
 const {data: headerData} = useHeaderData()
-//const {data} = useHeaderData()
-
-
-
 const { state: swapVisible } = useIXTSwapVisible()
 
 const activeMenuIndex = useHeaderIndex()
