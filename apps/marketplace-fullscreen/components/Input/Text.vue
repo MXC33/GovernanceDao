@@ -1,7 +1,7 @@
 <template lang="pug">
-HList(@focus="isFocused = true"  @blur="isFocused = false" frame="~ hover:gray-300" bg="transparent hover:gray-800 on-focused:gray-800" w="full" ref="element" :focused="isFocused" group)
+HList(@focus="isFocused = true" @blur="isFocused = false" frame="~ hover:gray-300" bg="transparent hover:gray-800 on-focused:gray-800" w="full" ref="element" :focused="isFocused" group)
   HList(items="center" :w="moduleSize" :module="isModule")
-    input(@click="userClick"  p="x-3 y-2" outline="0" bg="transparent" v-model="model" w="full" display="block" transition="all")
+    input(@click="userClick" p="x-3 y-2" outline="0" bg="transparent" v-model="model" w="full" display="block" transition="all")
 
     HList(v-if="$slots.suffix" p="x-3" color="gray-200" bg="transparent" h="full" items="center")
       slot(name="suffix")
