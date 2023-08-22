@@ -5,30 +5,17 @@ export const useFormatNumber = () => {
     }
 
     const formatNumber = (num: number, divisor: number, suffix: string) => {
-      let base = num / divisor
+      let base = Math.floor(num / divisor)
+      let remainder = Math.floor((num % divisor) / (divisor / 10))
 
-      if (suffix === 'M') {
-        if (base >= 10) {
-          return Math.floor(base) + suffix
-        }
-        if (base >= 1 && base < 10) {
-          if (num % 1000000 === 200000) {
-            return (Math.floor(base * 10) / 10).toFixed(1) + suffix
-          }
-          return Math.floor(base) + suffix
-        }
+      if (suffix === 'M' && divisor === 1000000 && base < 10 && remainder > 0) {
+        let formatted = base + '.' + remainder
+        return formatted + suffix
       }
 
-      if (suffix === 'K') {
-        if (base >= 10) {
-          return Math.floor(base) + suffix
-        }
-        if (base >= 1 && base < 10) {
-          if (num % 1000 === 200) {
-            return (Math.floor(base * 10) / 10).toFixed(1) + suffix
-          }
-          return Math.floor(base) + suffix
-        }
+      if (suffix === 'K' && divisor === 1000 && base < 10 && remainder > 0) {
+        let formatted = base + '.' + remainder
+        return formatted + suffix
       }
 
       return base + suffix
