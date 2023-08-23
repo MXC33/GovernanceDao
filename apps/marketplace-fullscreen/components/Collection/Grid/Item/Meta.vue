@@ -73,8 +73,5 @@ const getItemLink = (token: IXToken) => {
   return `/assets/${network}/${collection}/${token_id}`
 }
 
-const ixtBalanceRounded = computed(() => roundToDecimals(ixtBalance.value ?? 0, 2))
-const usdBalanceRounded = computed(() => roundToDecimals(ixtToUSD(token.sale_price ?? 0), 2))
-
 const isDisabled = computed(() => !token?.sale_price || token?.sale_price == 0)
 </script>

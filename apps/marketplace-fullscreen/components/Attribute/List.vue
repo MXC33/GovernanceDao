@@ -8,7 +8,7 @@ HList.no-scrollbar(space-x="2" whitespace="nowrap" overflow-x="scroll")
       template(#icon v-if="attribute.hasToken")
         IXT(w="3 md:5")
 
-      template(#default v-if="formatAmount(attribute.value) == 0") --
+      template(#default v-if="Number(attribute.value) == 0") --
       template(#default v-else) {{ formatAmount(attribute.value) }}
 </template>
 
