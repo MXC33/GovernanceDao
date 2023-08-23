@@ -13,8 +13,8 @@ HList.no-scrollbar(space-x="2" whitespace="nowrap" overflow-x="scroll" overflow-
 </template>
 
 <script lang="ts" setup generic="K extends object">
-import IXT from '~/assets/icons/token/ixt.svg'
 import type { Attribute } from '~/composables/useAttributes'
+import IXT from '~/assets/icons/token/ixt.svg'
 
 const { formatAmount } = useFormatNumber()
 
