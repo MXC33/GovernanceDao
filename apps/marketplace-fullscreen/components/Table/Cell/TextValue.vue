@@ -22,9 +22,8 @@ VList(flex-shrink="0" whitespace="nowrap")
 </template>
 
 <script setup lang="ts" generic="Row extends TableRow">
-import type { TableColumn, TableRow } from '~/composables/useTable';
+import type { TableColumn, TableRow } from '~/composables/useTable'
 import { fromUnixTime } from "date-fns"
-import type { CollectionContext } from '~/composables/useCollection';
 
 const { column, row } = defineProps<{
   column: TableColumn<Row>,
