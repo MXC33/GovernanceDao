@@ -16,7 +16,6 @@ import type { SingleItemData, Bid } from '@ix/base/composables/Token/useIXToken'
 import type { TableColumn } from '~/composables/useTable';
 
 const { t } = useI18n()
-const [DefineTemplate, ReuseTemplate] = createReusableTemplate()
 
 const { displayPopup } = usePopups()
 const { walletAdress } = useWallet()
@@ -54,8 +53,6 @@ const itemOwned = computed(() => {
   } else if (item.my_shares > 0)
     return true
 })
-
-console.log(item, 'item from offers')
 
 const offerColumns = computed<TableColumn<Bid>[]>(() => {
   const baseColumns: TableColumn<Bid>[] = [
