@@ -14,12 +14,13 @@ HList.no-scrollbar(space-x="2" whitespace="nowrap" overflow-x="scroll" overflow-
 
 <script lang="ts" setup generic="K extends object">
 import IXT from '~/assets/icons/token/ixt.svg'
-import type { Attribute } from '~/composables/useAttributes';
+import type { Attribute } from '~/composables/useAttributes'
+
 const { formatAmount } = useFormatNumber()
 
 
 defineProps<{
-  attributes: Attribute<K>[],
+  attributes: Attribute<K>[]
 }>()
 
 </script>
