@@ -38,8 +38,6 @@ const { isMobile } = useDevice()
 
 const value = computed(() => getValue(column, row))
 
-console.log(value.value, 'from text value')
-
 const isYou = computed(() => value.value === 'YOU')
 
 const getDate = (date: string | number | undefined) =>
