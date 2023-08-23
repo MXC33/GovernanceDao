@@ -18,7 +18,7 @@ template(v-for="row in rows")
             TableCellAsset(v-if="rowIsIXToken(row)" :column="column" :token="row" :scrolling="scrolledPastStart")
 
           slot(v-else :name="`item-${column.rowKey}`" :row="row" :column="column")
-            TableCellTextValue(:column="column" :row="row" :context="context")
+            TableCellTextValue(:column="column" :row="row")
 
 </template>
 
