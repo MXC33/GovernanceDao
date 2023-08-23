@@ -7,7 +7,7 @@ HList(min-w="0" pos="relative")
     InputCheckbox(:model-value="isItemSelected(token)" @update:modelValue="() => toggleItem(token)" v-if="!column.disableSelect" flex-shrink="0")
 
     TableCellToken(:token="token" max-w="full" @click="onClickAsset" min-w="0" :hide-name="scrolling")
-      span(v-if="onAccountPage" color="gray-200" font="normal" text="xs md:sm" translate-y="0.8") x{{ token.my_shares }}
+      span(v-if="onAccountPage" color="gray-200" font="normal" text="xs md:sm" translate-y="") x{{ token.my_shares }}
 
   Transition(name="slide-right" mode="in-out")
     div(pos="absolute top--3 bottom--3 md:(top--2 bottom--2)" left="-8" bg="gray-900" w="31 md:40" v-if="scrolling")
@@ -43,9 +43,8 @@ const tableScroll = computed(() => {
   return ''
 })
 
-const onAccountPage = computed(() =>
-  route.matched.some((match) => match.path.includes('account'))
-)
+const onAccountPage = computed(() => route.matched.some((match) => match.path === '/account'))
+
 </script>
 
 <style>
