@@ -48,6 +48,4 @@ const { items } = defineProps<{
 
 createListItems(items)
 
-console.log(isItemInvalid(activeListItems.value, true), 'active')
-
 </script>

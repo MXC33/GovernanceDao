@@ -34,7 +34,6 @@ const allSetToFloor = computed(() => {
   const prices = items.value?.map((item) =>
     item.ixtPrice == item.token.sale_price
   )
-  console.log("PRICES", prices)
   return allElementsEqual(prices)
 })
 
