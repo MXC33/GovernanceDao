@@ -6,7 +6,7 @@ VList(flex-shrink="0" whitespace="nowrap")
     Currency(:value="value" type="ixt" v-if="!isMobile")
 
     VList(v-else pr="2" w="full" :items="alignOrder")
-      Currency(:value="roundToDecimals(Number(value), 8)" type="ixt")
+      Currency(:value="value" type="ixt")
       Currency(:value="ixtToUSD(value)" type="usd")
 
   Currency(:value="ixtToUSD(value)" type="usd" v-else-if="column.type == 'usd' && !isMobile")
