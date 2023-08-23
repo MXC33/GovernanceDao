@@ -14,10 +14,7 @@ ContentDrawer(:start-open="!isMobile" :is-neutral="true" bg="gray-900" mx="lt-md
 
 <script lang="ts" setup>
 import type { Sale, SingleItemData } from '@ix/base/composables/Token/useIXToken';
-import type { UnlistingItem } from 'composables/useListing';
 import type { TableColumn } from '~/composables/useTable';
-
-const [DefineTemplate, ReuseTemplate] = createReusableTemplate()
 
 const { isMobile } = useDevice()
 
@@ -28,6 +25,8 @@ const { item } = defineProps<{
 
 const { addToCart, hasItemInCart } = useCart()
 const { walletAdress } = useWallet()
+
+console.log(item)
 
 const saleColumns: TableColumn<Sale>[] = [
   { label: "Unit Price", type: "ixt", rowKey: "price", sortable: true },
