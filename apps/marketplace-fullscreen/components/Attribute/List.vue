@@ -1,5 +1,5 @@
 <template lang="pug">
-HList.no-scrollbar(space-x="2" whitespace="nowrap" overflow-x="scroll")
+HList.no-scrollbar(space-x="2" whitespace="nowrap" overflow-x="scroll" overflow-y="hidden")
   template(v-for="attribute in attributes" )
 
     AttributeItem(v-if="attribute.value != undefined")
