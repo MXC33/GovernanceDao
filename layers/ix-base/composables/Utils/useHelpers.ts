@@ -17,7 +17,6 @@ export const clamp = (min: number, max: number, amount: number) =>
 export const roundToDecimals = (num: number, decimalPlaces: number) => {
   const multiplier = Math.pow(10, decimalPlaces)
   const result = Math.floor(num * multiplier) / multiplier
-  console.log(result)
   return result
 }
 

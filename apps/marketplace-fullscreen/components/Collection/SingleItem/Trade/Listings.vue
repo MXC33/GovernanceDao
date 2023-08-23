@@ -26,8 +26,6 @@ const { item } = defineProps<{
 const { addToCart, hasItemInCart } = useCart()
 const { walletAdress } = useWallet()
 
-console.log(item)
-
 const saleColumns: TableColumn<Sale>[] = [
   { label: "Unit Price", type: "ixt", rowKey: "price", sortable: true },
   { label: "USD Price", type: "usd", rowKey: "price", sortable: true, hideMobile: true },
