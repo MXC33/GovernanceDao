@@ -17,7 +17,7 @@ Transition(name="fade" appear)
       VList(flex-grow="1" p="4 md:6" space-y="2")
         slot()
 
-      VList(b="t-1 gray-600" pos="sticky bottom-0" bg="gray-900" z="2")
+      VList(b="t-1 gray-600" pos="sticky bottom-0" bg="gray-900" z="4")
         VList(p="x-6 y-3")
           slot(name="footer")
 
