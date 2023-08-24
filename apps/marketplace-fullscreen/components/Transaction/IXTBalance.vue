@@ -1,8 +1,8 @@
 <template lang="pug">
 VList()
-  VList(text="lg" font="bold" justify="between")
+  HList(text="lg" font="bold" justify="between")
     span(color="gray-200")  {{ $t(`marketplace.transactions.yourBalance`) }}
-    HList(justify="between")
+    VList(justify="between")
       span(v-if="ixtBalance") {{ ixtBalanceRounded }} IXT
       span(v-else) -- IXT
 

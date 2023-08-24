@@ -27,6 +27,7 @@ const { loading, invalid } = defineProps<{
   text: string,
   loading?: boolean,
   invalid?: boolean
+  isShared?: boolean
 }>()
 </script>
   

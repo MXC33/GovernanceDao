@@ -8,10 +8,16 @@ export const IPFSURLVideo = "https://nftstorage.link/ipfs/"
 export const clamp = (min: number, max: number, amount: number) =>
   Math.max(min, Math.min(max, amount))
 
+// export const roundToDecimals = (num: number, decimalPlaces: number) => {
+//   const fixedNumber = num?.toFixed(12) ?? 0
+//   const number = Math.round(Number(fixedNumber + "e" + decimalPlaces))
+//   return Number(number + "e" + -decimalPlaces);
+// }
+
 export const roundToDecimals = (num: number, decimalPlaces: number) => {
-  const fixedNumber = num?.toFixed(12) ?? 0
-  const number = Math.round(Number(fixedNumber + "e" + decimalPlaces))
-  return Number(number + "e" + -decimalPlaces);
+  const multiplier = Math.pow(10, decimalPlaces)
+  const result = Math.floor(num * multiplier) / multiplier
+  return result
 }
 
 export const roundUp = (num: number, precision: number) => {

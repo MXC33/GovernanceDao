@@ -30,6 +30,7 @@ interface TableColumnBase {
   type?: string,
   hideMobile?: boolean,
   width?: number | 'auto'
+  align?: 'start' | 'end'
 }
 
 export interface TableButton<T extends TableRow> {

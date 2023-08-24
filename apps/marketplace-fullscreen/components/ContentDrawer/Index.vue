@@ -1,6 +1,6 @@
 <template lang="pug">
 VList(max-h="85" frame="~ gray-400 on-frameless:none on-mobile:none" :frameless="noFrame" :mobile="isMobile" v-if="!disable")
-  HList(h="12" px="6 on-small:3" bg="ix-black on-neutral:gray-900" b="on-meta:t-1 gray-600" :meta="isMeta" items="center" justify="between" pos="sticky top-0" flex-shrink="0" z="1" @click.stop="dropDrawer" uppercase="~" cursor="pointer" :neutral="isNeutral" :small="isSmall")
+  HList(h="12" px="6 on-small:3" bg="ix-black on-neutral:gray-900" b="on-table:b-1 gray-600 on-meta:t-1 gray-600" :meta="isMeta" items="center" justify="between" pos="sticky top-0" flex-shrink="0" z="1" @click.stop="dropDrawer" uppercase="~" cursor="pointer" :neutral="isNeutral" :small="isSmall" :table="isTable")
     div(color="white" text="md" font="bold" v-if="$slots.header")
       slot(name="header")
 
@@ -27,6 +27,7 @@ const { startOpen, noFrame = false, isMeta = false } = defineProps<{
   isNeutral?: boolean
   noFrame?: boolean
   isMeta?: boolean
+  isTable?: boolean
   disable?: boolean
 }>()
 

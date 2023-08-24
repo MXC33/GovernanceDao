@@ -12,8 +12,9 @@ VList()
   TransactionSummaryRow(:primary="true")
     template(#name) {{ $t(`marketplace.price.totalEarnings`) }}
     template(#value)
-      VList(space-y="-1.5")
-        GlitchText(:text="totalPotentialEarning" suffix=" IXT")
+      VList(space-y="-1.5" text="sm md:base")
+        VList(text="base md:lg")
+          GlitchText(:text="totalPotentialEarning" suffix=" IXT")
         //- div(font="normal") ${{ usdBalanceRounded }}
         GlitchText(:text="usdBalanceRounded" suffix="$ " font="normal" :is-dollar="true" v-if="spacingUsd")
         GlitchText(:text="usdBalanceRounded" suffix="$" font="normal" :is-dollar="true" v-else)

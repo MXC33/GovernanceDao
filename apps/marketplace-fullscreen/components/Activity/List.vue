@@ -1,6 +1,6 @@
 <template lang="pug">
 Transition(name="fade" mode="out-in")
-  Table(:columns="columns" :rows="items" id="activity" :loading="loading")
+  Table(:columns="columns" :rows="items" id="activity" :loading="loading" :has-frame="true")
     template(#item-event="{row}")
       HList(space-x="3")
         Minted(v-if="row.event=='mint'" w="5")

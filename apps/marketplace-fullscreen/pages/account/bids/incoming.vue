@@ -31,7 +31,7 @@ const columns: TableColumn<IXToken>[] = [
     label: "Highest bid", rowKey: "bid.price", type: 'ixt', sortable: true
   },
   {
-    label: "USD price", rowKey: "bid.price", type: 'usd', sortable: true
+    label: "USD price", rowKey: "bid.price", type: 'usd', sortable: true, hideMobile: true
   },
   {
     label: "Floor Difference", rowKey: "price", getValue(row) {
@@ -69,10 +69,10 @@ const columns: TableColumn<IXToken>[] = [
 
 ]
 
-const counterBidOnClick = (token: IXToken) => {
-  console.log("Counter", token)
-  console.log(data.value?.nfts)
-}
+// const counterBidOnClick = (token: IXToken) => {
+//   console.log("Counter", token)
+//   console.log(data.value?.nfts)
+// }
 
 const { displayPopup } = usePopups()
 

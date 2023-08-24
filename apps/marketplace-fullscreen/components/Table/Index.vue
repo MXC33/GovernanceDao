@@ -2,14 +2,14 @@
 VList(w="full" max-w="full" min-w="0")
   CollectionFilterButtonContainer(:is-open="isOpen")
 
-  HList.no-scrollbar(overflow-x="on-scrollable:scroll" :scrollable="!!context" w="full" bg="gray-900" ref="scrollElement")
+  HList.no-scrollbar(overflow-x="on-scrollable:scroll" :scrollable="!!context" w="full" bg="gray-900" frame="none on-framed:(~ gray-400) on-mobile:!none" ref="scrollElement" :framed="hasFrame" :mobile="isMobile")
     TableSpacer()
 
     div.no-scrollbar(grid="~ row-gap-0 gap-x-3" :style="gridStyle" flex-grow="1")
 
       TableHeader(v-model="selectedItems" :columns="renderColumns" :rows="sortedRows" :id="id" :context="context")
 
-      TableBody(:loading="loading" :rows="sortedRows" :columns="renderColumns"  :context="context" :scrolled-past-end="hasScrolledPastEnd" :scrolled-past-start="hasScrolled")
+      TableBody(:loading="loading" :rows="sortedRows" :columns="renderColumns" :context="context" :scrolled-past-end="hasScrolledPastEnd" :scrolled-past-start="hasScrolled")
         //- Slots for overriding table column data with template(#item-name="{row}") etc
         template(#[getColumnKey(column)]="{row}" v-for="column in renderColumns")
           slot(:name="`item-${column.rowKey}`" :row="row" v-if="column.type != 'buttons' && column.type != 'asset'")
@@ -32,7 +32,7 @@ const hasScrolled = computed(() => arrivedState.left == false)
 const hasScrolledPastEnd = computed(() => arrivedState.right == false)
 
 watch(arrivedState, (a) => {
-  console.log("ARRIVE", a)
+  a
 })
 
 const { columns, isOpen, loading, rows, id, context } = defineProps<{
@@ -42,6 +42,7 @@ const { columns, isOpen, loading, rows, id, context } = defineProps<{
   loading?: boolean,
   isOpen?: boolean,
   context?: CollectionContext
+  hasFrame?: boolean
 }>()
 
 const { sort } = useTableSort(id)

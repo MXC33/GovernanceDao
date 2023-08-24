@@ -1,5 +1,5 @@
 <template lang="pug">
-ButtonSound(sound="sm" h="full" transition="all" cursor="pointer" items="center" justify="center" aspect="square" pointer-events="on-adjustable:auto none" filter="on-adjustable:none grayscale-100" opacity="on-adjustable:100 50" :adjustable="isAdjustable" uppercase="~" :inline="inline" flex="~ row" px="4")
+ButtonSound(sound="sm" h="full" transition="all" cursor="pointer" items="center" justify="center" pointer-events="on-adjustable:auto none" filter="on-adjustable:none grayscale-100" opacity="on-adjustable:100 50" :adjustable="isAdjustable" uppercase="~" :inline="inline" flex="~ row" px="4" :frameless="!hasFrame")
   component(v-if="type" :is="icon" w="3" h="3" fill="white")
   slot(v-else)
 </template>
@@ -22,6 +22,7 @@ const props = defineProps<{
   text?: string
   inline?: boolean,
   isAdjustable?: boolean
+  hasFrame?: boolean
 }>();
 
 </script>
