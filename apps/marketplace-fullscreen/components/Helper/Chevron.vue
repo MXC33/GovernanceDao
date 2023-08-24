@@ -1,5 +1,5 @@
 <template lang="pug">
-component(:is="icon" w="5" :up="up" rotate="on-up:-180deg")
+component(:is="icon" w="5" fill="white hover:(white opacity-80)" :up="up" rotate="on-up:-180deg")
 </template>
   
 <script lang="ts" setup>

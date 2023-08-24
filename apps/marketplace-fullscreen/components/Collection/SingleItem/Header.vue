@@ -5,7 +5,7 @@ VList()
   CollectionSingleItemSubHeader()
 
     NuxtLink(:to="collectionLink")
-      TokenCollection(:token="item" color="ix-ne")
+      TokenCollection(:token="item" color="ix-ne hover:opacity-80")
 
 </template>
 

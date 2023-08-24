@@ -27,6 +27,6 @@ const setPriceDecimals = computed(() => {
     return ' --'
   if (value < 0.009)
     return roundToDecimals(value, 4)
-  return roundToDecimals(value, 2)
+  return roundToDecimals(value, 4)
 })
 </script>

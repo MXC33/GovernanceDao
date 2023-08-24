@@ -94,6 +94,6 @@ const { execute: acceptItems, loading: isAcceptLoading } = useContractRequest(()
 
 <style scoped >
 .highlighted {
-  box-shadow: 0px 0px 8px 1px rgba(246, 186, 30, 0.75);
+  box-shadow: 0px 0px 8px 1px rgba(249, 249, 249, 0.25);
 }
 </style>

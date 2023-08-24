@@ -54,7 +54,7 @@ const renderColumns = computed(() => columns ?? defaultColumns)
 const defaultColumns: TableColumn<IXToken>[] = [
   { label: "Asset", type: 'asset', width: 200 },
   {
-    label: "Current price", rowKey: "sale_price", type: 'ixt', sortable: {
+    label: "Current price", rowKey: "sale_price", type: 'ixt', align: 'end', sortable: {
       ascKey: 'PRICE_ASC',
       descKey: 'PRICE_DESC'
     }

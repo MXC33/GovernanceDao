@@ -3,9 +3,31 @@ export const useFormatNumber = () => {
     if (typeof amount === 'string') {
       amount = parseFloat(amount)
     }
-    if (amount > 1000)
-      return String(amount / 1000).substring(0, 4) + "K"
-    return amount
+
+    const formatNumber = (num: number, divisor: number, suffix: string) => {
+      let base = Math.floor(num / divisor)
+      let remainder = Math.floor((num % divisor) / (divisor / 10))
+
+      if (suffix === 'M' && divisor === 1000000 && base < 10 && remainder > 0) {
+        let formatted = base + '.' + remainder
+        return formatted + suffix
+      }
+
+      if (suffix === 'K' && divisor === 1000 && base < 10 && remainder > 0) {
+        let formatted = base + '.' + remainder
+        return formatted + suffix
+      }
+
+      return base + suffix
+    }
+
+    if (amount >= 1000000) {
+      return formatNumber(amount, 1000000, 'M')
+    } else if (amount >= 1000) {
+      return formatNumber(amount, 1000, 'K')
+    }
+
+    return amount.toString()
   }
 
   return {

@@ -8,7 +8,6 @@ export const useScrollLoadMore = (el: Ref<HTMLElement | null>, loadNextPage: () 
       if (visible) {
 
         loadNextPage()
-        console.log("LOAD MORE", visible)
       }
     })
   })
