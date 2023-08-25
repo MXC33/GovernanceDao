@@ -72,6 +72,8 @@ export const useNeNotifications = () => {
       // this may need to be changed depending on what data we want to fetch
   }, {transform: (response) => response?.data})
 }
+//Use this instead of 1 to fetch all notifications
+export const useNotificationCount = () => shallowRef<number>(1)
 
 export const useNeMessages = () => {
   const { fetchIXAPI } = useIXAPI()
@@ -79,3 +81,5 @@ export const useNeMessages = () => {
     return (await fetchIXAPI('notifications/messages/1?unread=false')) as NotificationRequest
   }, {transform: (response) => response?.data} )
 }
+//Use this instead of 1 to fetch all messages
+export const useMessageCount = () => shallowRef<number>(1)

@@ -22,6 +22,7 @@ VList(pos="fixed right-0 lg:right-2 lt-lg:left-0 lg:top-18" bg="ix-black" h="lt-
 </template>
 
 <script lang="ts" setup>
+import type { NotificationData } from 'composables/useNeNotificationsAndMessages';
 import mail from '~/assets/icons/mail.svg'
 
 const {execute: fetchMessageDate, data: messagesData} = useNeMessages()
@@ -54,5 +55,11 @@ watch([isMounted], ([mounted]) => {
 onUnmounted(() => {
   lockScroll(false)
 })
+
+const notificationsSize = 5
+
+const getDataLength = (data: NotificationData ) => {
+  return Math.ceil((data.today.length + data.yesterday.length + data.old.length) / notificationsSize) + 1
+}
 
 </script>
