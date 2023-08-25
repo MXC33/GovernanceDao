@@ -1,16 +1,19 @@
 <template lang ="pug">
-button(w="full")
-  VList(items="center" p="1")
-    div() {{ message.title }} 
+//-cut="bottom-right b-ix-primary b-opacity-60 s-lg"
+button(w="full" )
+  HList(items="center")
+    VList(items="left" p="1")
+      div(text="left") {{ message.title }} 
+      HList()
+        div(text="left" v-html="message.message") 
+        div() {{ message.price }}
 </template>
 
 <script lang="ts" setup>
-import type { NotificationMessage } from '~/composables/useNeNotificationsAndMessages';
+import type { NotificationBids, NotificationMessage } from '~/composables/useNeNotificationsAndMessages';
 
 const {message} = defineProps<{
-  message: NotificationMessage
+  message: NotificationBids
 }>()
-
-console.log("message", message);
 
 </script>

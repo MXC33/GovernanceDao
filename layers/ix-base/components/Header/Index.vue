@@ -4,7 +4,7 @@ VList(pos="sticky top-0" translate-y="$header-offset" z="99" w="full" @mouseente
     NuxtLink(to="https://www.planetix.com")
       PlanetIXNew(w="42.25")
 
-    HList(v-if="!isMobile" justify="start" flex-grow="1" overflow-x="hidden" space-x="4")
+    HList(display="lt-md:none" justify="start" flex-grow="1" overflow-x="hidden" space-x="4")
       button(v-for="(header, index) in headerData" @click="openMenu(index)" btn="menu" color = "s-default:white s-selected:ix-orange" :state="selected(index)") {{ header.name }}
 
 
@@ -12,14 +12,18 @@ VList(pos="sticky top-0" translate-y="$header-offset" z="99" w="full" @mouseente
         NuxtLink(to="https://planetix.com/airdrop")
           HList(rounded="full" b="1 $mc-mint" px="4" py="1" bg="hover:$mc-mint-40" uppercase="~" tracking="0.65" font="bold" items="center" justify="center")
             span(translate-x="0.5") airdrop
-    Notifications()
-    HList(space-x="6" px="0")
+    div(display="lt-lg:none")
+      Notifications()    
+
+    HList(space-x="6" px="0" items="center")
       //-button(btn="menu" display="lt-lg:none") help
       //-HeaderLanguage(language="EN")
       HeaderAccountButton()
 
+      div(display="lg:none")
+        Notifications()
 
-      button(v-if="isMobile" btn="menu" @click="toggleMenu" ml="2")
+      button(display="lg:none" btn="menu" @click="toggleMenu" ml="2")
         Transition(name="fade" mode="out-in")
           SettingsIcon(v-if="activeMenuIndex == null" w="6" )
           CrossIcon(v-else w="6" )
@@ -27,7 +31,7 @@ VList(pos="sticky top-0" translate-y="$header-offset" z="99" w="full" @mouseente
   Transition(name="slide-top" mode="out-in")
     HeaderNavigation(v-if="activeMenuIndex != null && headerData != null"  :key="activeMenuIndex" :header="headerData[activeMenuIndex]")
 
-</template>
+</template> 
 
 <script lang="ts" setup>
 import CrossIcon from '~/assets/images/header/cross.svg'
@@ -36,7 +40,7 @@ import SettingsIcon from '~/assets/images/header/hamburger.svg'
 import { useGlobalWindowScroll } from '@ix/marketplace/composables/useWindowScroll';
 import Notifications from '@ix/marketplace/components/Notification/Index.vue';
 
-const  isMobile = false
+const isMobile = useDevice()
 
 const {data: headerData} = useHeaderData()
 const { state: swapVisible } = useIXTSwapVisible()

@@ -1,6 +1,6 @@
 <template lang="pug">
 //-Display this when in portrait mode
-VList(pos="fixed  right-0 left-0 top-12 " bg="black" h="[calc(100vh-var(--header-height-mobile))]" overflow-y="auto" z="200" v-if="isMobile")
+VList(v-if="isMobile" pos="fixed  right-0 left-0 top-12 " bg="black" h="[calc(100vh-var(--header-height-mobile))]" overflow-y="auto" z="200")
   HeaderNavigationAccount(@close="$emit('close')")
   HeaderNavigationMenu()
   HeaderNavigationButtonDisconnect(pos="sticky bottom-0" z="1")
