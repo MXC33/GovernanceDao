@@ -95,9 +95,6 @@ watch(walletState, (state) => {
   fetchMessageData()
   fetchNotificationData()
 
-  console.log("messageData", messageData)
-  console.log("notificationData", notificationData)
-
   setupIXTPrice()
   refreshIXTBalance()
 }, { immediate: true })
