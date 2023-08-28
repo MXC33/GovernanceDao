@@ -1,5 +1,5 @@
 <template lang="pug">
-div(flex="~ col md:row" px="3 md:6" pt="6 md:8" pb="6" items="start")
+div(flex="~ col md:row" px="4 md:6" pt="6 md:8" pb="6" items="start")
   VList(flex-grow="1" w="full" color="gray-200" ) 
     slot(name="title")
 

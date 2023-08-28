@@ -1,10 +1,10 @@
 <template lang="pug">
-ContentDrawer(:start-open="!isMobile" :is-neutral="true" bg="gray-900" mx="lt-md:-4" :disable="!hasDrawer")
+ContentDrawer(:start-open="!isMobile" :is-neutral="true" bg="gray-900" mx="lt-md:-4" :disable="!hasDrawer" :is-table="true")
   template(#titleicon)
     TitleWithIcon(icon="offer") {{ $t(`marketplace.singleItem.offers`) }}
 
   template(#default)
-    CollectionSingleItemTradeDetail(v-if="item.bids.length < 1" ) 
+    CollectionSingleItemTradeDetail(v-if="item.bids.length < 1" :item="item") 
       | {{ $t(`marketplace.singleItem.noCurrentBids`) }}
 
     Table(:columns="offerColumns" :rows="item.bids" id="offers" v-if="item.bids.length > 0")
@@ -16,7 +16,6 @@ import type { SingleItemData, Bid } from '@ix/base/composables/Token/useIXToken'
 import type { TableColumn } from '~/composables/useTable';
 
 const { t } = useI18n()
-const [DefineTemplate, ReuseTemplate] = createReusableTemplate()
 
 const { displayPopup } = usePopups()
 const { walletAdress } = useWallet()
@@ -48,11 +47,18 @@ const cancelBidOnClick = async (bid: Bid) => {
   })
 }
 
+const itemOwned = computed(() => {
+  if (item.my_shares == 0) {
+    return false
+  } else if (item.my_shares > 0)
+    return true
+})
+
 const offerColumns = computed<TableColumn<Bid>[]>(() => {
   const baseColumns: TableColumn<Bid>[] = [
     { label: "Unit Price", type: "ixt", rowKey: "price", sortable: true },
-    { label: "USD Price", type: "usd", rowKey: "price", sortable: true },
-    { label: "Quanitity", rowKey: "quantity", sortable: true, width: 'auto' },
+    { label: "USD Price", type: "usd", rowKey: "price", sortable: true, hideMobile: true },
+    { label: "Quanitity", rowKey: "quantity", sortable: true },
     {
       label: "Floor Difference", rowKey: "price", getValue(row) {
         if (item.sale_price == 0)
@@ -66,7 +72,17 @@ const offerColumns = computed<TableColumn<Bid>[]>(() => {
     },
     { label: "Expiration", type: "date", rowKey: "due_date", sortable: true },
     {
-      type: 'buttons', width: 'auto', buttons: [
+      label: "Buyer", width: 100, rowKey: "bidder_username", getValue(row) {
+        return row.bidder_username
+      }, sortable: true
+    }
+  ]
+
+  if (itemOwned.value) {
+    baseColumns.push({
+      type: 'buttons',
+      width: 'auto',
+      buttons: [
         {
           type: 'secondary',
           onClick(row) {
@@ -84,9 +100,8 @@ const offerColumns = computed<TableColumn<Bid>[]>(() => {
           hidden(row) { return !playerOwnedSale(row) },
         }
       ]
-    }
-  ]
-
+    })
+  }
   return baseColumns
 })
 
@@ -96,6 +111,5 @@ const playerOwnedSale = (bid: Bid) => {
     return true
   return false
 }
-
 
 </script>

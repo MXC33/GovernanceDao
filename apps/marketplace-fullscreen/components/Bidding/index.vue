@@ -6,7 +6,7 @@ Popup()
   template(#header) {{ $t(`marketplace.bid.title`) }}
 
   template(#default)
-    VList(space-y="6")
+    VList()
       TransactionIXTBalance()
 
       TransactionApplyToAll(v-model="bidItems")

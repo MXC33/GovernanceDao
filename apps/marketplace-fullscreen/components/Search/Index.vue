@@ -20,7 +20,7 @@ VList(@keydown.down.stop.prevent="stepDown" @keydown.escape.stop.prevent="close"
               div() {{ search }}
 
               HList(flex-grow="1" justify="end" translate-x="lt-md:-4")
-                CloseIcon(w="3" @click="removeRecentSearch(search)" translate-y="-0.2")
+                CloseIcon(w="3" @click="removeRecentSearch(search)" translate-y="-0.2" fill="white hover:opacity-80")
 
       template(v-else)
         HList(font="bold" px="3" py="2" b="b-0.5 gray-600") Did you mean?
