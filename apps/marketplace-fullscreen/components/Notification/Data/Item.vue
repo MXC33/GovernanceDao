@@ -7,7 +7,7 @@ button(w="full")
       div(text="left" v-html="message.message")
       div(v-if="message.price != null" text="ix-mint left") {{ message.price }} IXT
     div(grow="~")
-    div(v-if="message.pix_id != null" bg="red" w="1" h="1" rounded="full")
+    div(bg="red" w="1" h="1" rounded="full")
 </template>
 
 <script lang="ts" setup>

@@ -66,20 +66,47 @@ export interface NotificationBids extends NotificationMessage {
  * Fetches notifications.
  */
 export const useNeNotifications = () => { 
+  
+  const notificationCount = ref(1)
+
+  const loadMoreNotifications = () => {
+    notificationCount.value++
+    asyncData.execute()
+  }
+
     const { fetchIXAPI } = useIXAPI()
-    return useAsyncDataState('notification', async () => {
-      return (await fetchIXAPI('notifications/notification/1?unread=false')) as NotificationRequest
+    const asyncData = useAsyncDataState('notification', async () => {
+      return (await fetchIXAPI(`notifications/notification/${notificationCount}?unread=false`)) as NotificationRequest
+      //return (await fetchIXAPI('notifications/notification/1?unread=false')) as NotificationRequest
       // this may need to be changed depending on what data we want to fetch
   }, {transform: (response) => response?.data})
+
+  return {
+    ...asyncData,
+    loadMoreNotifications
+  }
 }
-//Use this instead of 1 to fetch all notifications
-export const useNotificationCount = () => shallowRef<number>(1)
+
+
+
 
 export const useNeMessages = () => {
+  
+  const messageCount = ref(1)
+
+  const loadMoreMessages = () => {
+    messageCount.value++
+    return asyncData.fetchAndMerge()
+  }
+
   const { fetchIXAPI } = useIXAPI()
-  return useAsyncDataState('notification-messages', async () => {
-    return (await fetchIXAPI('notifications/messages/1?unread=false')) as NotificationRequest
+  const asyncData = useAsyncDataState('notification-messages', async () => {
+    return (await fetchIXAPI(`notifications/messages/${messageCount}?unread=false`)) as NotificationRequest
   }, {transform: (response) => response?.data} )
+
+
+  return {
+    ...asyncData,
+    loadMoreMessages
+  }
 }
-//Use this instead of 1 to fetch all messages
-export const useMessageCount = () => shallowRef<number>(1)

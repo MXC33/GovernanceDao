@@ -13,11 +13,13 @@ VList(b="gray-400")
     div(w="full" b="b-1 gray-400" text="s gray-300" p="3") Old
     NotificationDataItem(v-for="message in data.old" :message="message.notification" b="b-1 gray-400" p="3")
   
-  button(p="3" text="center" @click="loadMore(data)") Load More
+  button(p="3" text="center" @click="More(data)") Load More
 </template>
 
 <script lang="ts" setup>
 import type { NotificationData, Notification } from 'composables/useNeNotificationsAndMessages';
+const {loadMoreMessages} = useNeMessages()
+const {loadMoreNotifications} = useNeNotifications()
 
 const arrayNames = ['today', 'yesterday', 'old']
 
@@ -25,8 +27,31 @@ const {data} = defineProps<{
   data: NotificationData
 }>()
 
-const loadMore = (data: NotificationData) => {
-  console.log(data)
+const getValidData = (data: NotificationData) => {
+  if(data.today.length > 0)
+    return data.today[0]
+  if(data.yesterday.length > 0)
+    return data.yesterday[0]
+  if(data.old.length > 0)
+    return data.old[0]
+  return null
+}
+
+const isNotafications = (data: NotificationData) => {
+  const message = getValidData(data)
+  if(message == null)
+    return false
+  if(message.notification.price != null)
+    return true
+  return false
+}
+
+const More = (data: NotificationData) => {
+  console.log("More")
+  if(isNotafications(data))
+    loadMoreNotifications()
+  else
+    loadMoreMessages()
 }
 
 const isValidData = (arr :Notification[]) => arr.length > 0
