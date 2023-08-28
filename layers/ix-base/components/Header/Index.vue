@@ -1,11 +1,11 @@
 <template lang="pug">
 VList(pos="sticky top-0" translate-y="$header-offset" z="99" w="full" @mouseenter="isSelected = true" @mouseleave="isSelected = false" ref="menuElement" transition="all")
-  HList(items="center" justify="between" bg="ix-black" px="4 md:7.5" h="$header-height-mobile md:$header-height-desktop" space-x="6")
+  HList(items="center" justify="between" bg="ix-black" px="4 md:7.5" h="$header-height" space-x="6")
     NuxtLink(to="https://www.planetix.com")
       PlanetIXNew(w="42.25")
 
     HList(display="lt-md:none" justify="start" flex-grow="1" overflow-x="hidden" space-x="4")
-      button(v-for="(header, index) in headerData" @click="openMenu(index)" btn="menu" color = "s-default:white s-selected:ix-orange" :state="selected(index)") {{ header.name }}
+      button(v-for="(header, index) in headerData" @click="openMenu(index)" btn="menu" color="s-default:white s-selected:ix-orange" :state="selected(index)") {{ header.name }}
 
 
       HList(flex-grow="1" justify="end" display="lt-md:none")
@@ -13,7 +13,7 @@ VList(pos="sticky top-0" translate-y="$header-offset" z="99" w="full" @mouseente
           HList(rounded="full" b="1 $mc-mint" px="4" py="1" bg="hover:$mc-mint-40" uppercase="~" tracking="0.65" font="bold" items="center" justify="center")
             span(translate-x="0.5") airdrop
     div(display="lt-lg:none")
-      Notifications()    
+      Notification()    
 
     HList(space-x="6" px="0" items="center")
       //-button(btn="menu" display="lt-lg:none") help
@@ -21,7 +21,7 @@ VList(pos="sticky top-0" translate-y="$header-offset" z="99" w="full" @mouseente
       HeaderAccountButton()
 
       div(display="lg:none")
-        Notifications()
+        Notification()
 
       button(display="lg:none" btn="menu" @click="toggleMenu" ml="2")
         Transition(name="fade" mode="out-in")
@@ -37,12 +37,8 @@ VList(pos="sticky top-0" translate-y="$header-offset" z="99" w="full" @mouseente
 import CrossIcon from '~/assets/images/header/cross.svg'
 import PlanetIXNew from '~/assets/images/header/planetix-new.svg'
 import SettingsIcon from '~/assets/images/header/hamburger.svg'
-import { useGlobalWindowScroll } from '@ix/marketplace/composables/useWindowScroll';
-import Notifications from '@ix/marketplace/components/Notification/Index.vue';
 
-const isMobile = useDevice()
-
-const {data: headerData} = useHeaderData()
+const { data: headerData } = useHeaderData()
 const { state: swapVisible } = useIXTSwapVisible()
 
 const activeMenuIndex = useHeaderIndex()
@@ -98,10 +94,3 @@ onClickOutside(menuElement, () => {
 
 
 </script>
-
-<style>
-:root {
-  --header-height-mobile: 3rem;
-  --header-height-desktop: 4rem;
-}
-</style>

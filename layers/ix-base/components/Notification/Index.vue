@@ -7,8 +7,8 @@ Transition(name="slide-top" mode="out-in")
 </template>
 
 <script lang="ts" setup>
-import BellFilled from '~/assets/icons/bellFilled.svg'
-import BellEmpty from '~/assets/icons/bellEmpty.svg'
+import BellFilled from '~/assets/images/icons/bellFilled.svg'
+import BellEmpty from '~/assets/images/icons/bellEmpty.svg'
 const showNotification = ref(false)
 
 const toggleNotification = () => showNotification.value = !showNotification.value

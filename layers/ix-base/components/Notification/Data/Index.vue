@@ -4,19 +4,27 @@ VList(b="gray-400")
   NotificationDataList(v-if="isValidData(data.today)" :notifications="data.today") Today
   NotificationDataList(v-if="isValidData(data.yesterday)" :notifications="data.yesterday") Yesterday
   NotificationDataList(v-if="isValidData(data.old)" :notifications="data.old") Old
-  button(p="3" text="center hover:ix-orange" @click="LoadMore(data)") Load More
+
+
+  Transition(name="fade" mode="out-in")
+    button(v-if="!isPending" p="3" text="center hover:ix-orange" @click="loadMore(data)") Load More
+    div(v-else pb="3")
+      HelperLoader(mx="auto" wh="12" fill="ix-orange")
+
+
 </template>
 
 <script lang="ts" setup>
 import type { NotificationData, Notification } from 'composables/useNeNotificationsAndMessages';
-const { loadMoreMessages } = useNeMessages()
-const { loadMoreNotifications } = useNeNotifications()
-
-const arrayNames = ['today', 'yesterday', 'old']
+const { loadMoreMessages, pending: isMessagesPending } = useNeMessages()
+const { loadMoreNotifications, pending: isNotificationPending } = useNeNotifications()
 
 const { data } = defineProps<{
   data: NotificationData
 }>()
+
+
+const isPending = computed(() => isMessagesPending.value || isNotificationPending.value)
 
 const getValidData = (data: NotificationData) => {
   if (data.today.length > 0)
@@ -37,7 +45,7 @@ const isNotifications = (data: NotificationData) => {
   return false
 }
 
-const LoadMore = (data: NotificationData) => {
+const loadMore = (data: NotificationData) => {
   if (isNotifications(data))
     loadMoreNotifications()
   else

@@ -65,44 +65,54 @@ export interface NotificationBids extends NotificationMessage {
 /**
  * Fetches notifications.
  */
-export const useNeNotifications = () => { 
-  
+export const useNeNotifications = () => {
+
   const notificationCount = ref(1)
+
+
 
   const loadMoreNotifications = () => {
     notificationCount.value++
     return asyncData.fetchAndMerge()
   }
 
-    const { fetchIXAPI } = useIXAPI()
-    const asyncData = useAsyncDataState('notification', async () => {
-      return (await fetchIXAPI(`notifications/notification/${notificationCount}?unread=false`)) as NotificationRequest
-      //return (await fetchIXAPI('notifications/notification/1?unread=false')) as NotificationRequest
-      // this may need to be changed depending on what data we want to fetch
+  const { fetchIXAPI } = useIXAPI()
+  const asyncData = useAsyncDataState('notification', async () => {
+    return (await fetchIXAPI(`notifications/notification/${notificationCount}?unread=false`)) as NotificationRequest
+    //return (await fetchIXAPI('notifications/notification/1?unread=false')) as NotificationRequest
+    // this may need to be changed depending on what data we want to fetch
   }, {
-    transform: (response) => response?.data, 
-      mergePages: (oldData, newData) => {
-        return {
-          ...newData,
-          today: oldData.today.concat(newData.today),
-          yesterday: oldData.yesterday.concat(newData.yesterday),
-          old: oldData.old.concat(newData.old)
-        }
+    transform: (response) => response?.data,
+    mergePages: (oldData, newData) => {
+      return {
+        ...newData,
+        today: oldData.today.concat(newData.today),
+        yesterday: oldData.yesterday.concat(newData.yesterday),
+        old: oldData.old.concat(newData.old)
       }
-    })
+    }
+  })
 
   return {
     ...asyncData,
-    loadMoreNotifications
+    loadMoreNotifications,
+  }
+}
+
+export const useNotificationSettings = () => {
+  const showUnreadNotifications = useState('neNotificationUnread', () => false)
+
+  return {
+    showUnreadNotifications
   }
 }
 
 
-
-
 export const useNeMessages = () => {
-  
+
   const messageCount = ref(1)
+
+
 
   const loadMoreMessages = () => {
     messageCount.value++
@@ -113,16 +123,16 @@ export const useNeMessages = () => {
   const asyncData = useAsyncDataState('notification-messages', async () => {
     return (await fetchIXAPI(`notifications/messages/${messageCount}?unread=false`)) as NotificationRequest
   }, {
-    transform: (response) => response?.data, 
-      mergePages: (oldData, newData) => {
-        return {
-          ...newData,
-          today: oldData.today.concat(newData.today),
-          yesterday: oldData.yesterday.concat(newData.yesterday),
-          old: oldData.old.concat(newData.old)
-        }
+    transform: (response) => response?.data,
+    mergePages: (oldData, newData) => {
+      return {
+        ...newData,
+        today: oldData.today.concat(newData.today),
+        yesterday: oldData.yesterday.concat(newData.yesterday),
+        old: oldData.old.concat(newData.old)
       }
-    })
+    }
+  })
 
 
   return {
