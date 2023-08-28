@@ -6,16 +6,16 @@ VList(pos="fixed right-0 lg:right-2 lt-lg:left-0 lg:top-18" bg="ix-black" h="lt-
   NotificationMenuButton()
     template(#default) 
       | Mark all as read
-      | 
     template(#icon)
       MailIcon(wh="6")
 
   //-HList(space-x="3" items="center")
-  div(p="2" bg="gray-700")
-    button(v-for="(title, index) in dataTitle" text="s-selected:ix-orange" b="s-selected:b-1" p="3" @click="dataIndex = index" :state="selected(index)") {{ title }}
+  span(p="2" bg="gray-700")
+    button(v-for="(title, index) in dataTitle" text="s-selected:ix-orange hover:ix-orange" b="s-selected:b-1" p="3"  @click="dataIndex = index" :state="selected(index)") {{ title }}
+
 
   //- fix this look bad having 2 NotificationData, should only use 1 and dynamically change the data to display
-  //-NotificationData.no-scrollbar(overflow="auto" max-h="85" v-if="notifications[dataIndex] != null" :data="notifications[dataIndex]")
+  //-NotificationData.no-scrollbar(overflow="auto" max-h="85" v-if="notifications[dataIndex] != null" :data="notifications")
   NotificationData.no-scrollbar(overflow="auto" max-h="85" v-if="notificationData && dataIndex == 0" :data="notificationData")
   NotificationData.no-scrollbar(overflow="auto" max-h="85" v-if="messagesData && dataIndex == 1" :data="messagesData")
   
@@ -28,16 +28,8 @@ import MailIcon from '~/assets/icons/mail.svg'
 const { data: messagesData } = useNeMessages()
 const { data: notificationData } = useNeNotifications()
 
-const notifications = computed(() => {
-  let arr = []
-  if (messagesData != null)
-    arr.push(messagesData)
-  if (notificationData != null)
-    arr.push(notificationData)
+const notifications = computed((index: number) => {
 
-  console.log(arr)
-
-  return arr
 })
 
 const isMounted = useMounted()

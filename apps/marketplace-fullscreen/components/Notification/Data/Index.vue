@@ -4,7 +4,7 @@ VList(b="gray-400")
   NotificationDataList(v-if="isValidData(data.today)" :notifications="data.today") Today
   NotificationDataList(v-if="isValidData(data.yesterday)" :notifications="data.yesterday") Yesterday
   NotificationDataList(v-if="isValidData(data.old)" :notifications="data.old") Old
-  button(p="3" text="center" @click="LoadMore(data)") Load More
+  button(p="3" text="center hover:ix-orange" @click="LoadMore(data)") Load More
 </template>
 
 <script lang="ts" setup>

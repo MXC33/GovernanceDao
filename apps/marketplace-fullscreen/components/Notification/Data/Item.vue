@@ -1,9 +1,9 @@
 <template lang ="pug">
 //-cut="bottom-right b-ix-primary b-opacity-60 s-lg"
-button(w="full")
+button(w="full" text="hover:ix-orange")
   HList(items="center")
     VList(items="left" p="1")
-      div(text="left ix-white") {{ message.title }} 
+      div(text="left") {{ message.title }} 
       div(text="left" v-html="message.message")
       div(v-if="message.price != null" text="ix-mint left") {{ message.price }} IXT
     div(grow="~")
@@ -13,7 +13,7 @@ button(w="full")
 <script lang="ts" setup>
 import type { NotificationBids } from '~/composables/useNeNotificationsAndMessages';
 
-const {message} = defineProps<{
+const { message } = defineProps<{
   message: NotificationBids
 }>()
 
