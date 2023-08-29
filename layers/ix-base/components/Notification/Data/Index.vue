@@ -26,14 +26,11 @@ const { data } = defineProps<{
 
 const isPending = computed(() => isMessagesPending.value || isNotificationPending.value)
 
-const getValidData = (data: NotificationData) => {
-  if (data.today.length > 0)
-    return data.today[0]
-  if (data.yesterday.length > 0)
-    return data.yesterday[0]
-  if (data.old.length > 0)
-    return data.old[0]
-  return null
+const loadMore = (data: NotificationData) => {
+  if (isNotifications(data))
+    loadMoreNotifications()
+  else
+    loadMoreMessages()
 }
 
 const isNotifications = (data: NotificationData) => {
@@ -45,11 +42,14 @@ const isNotifications = (data: NotificationData) => {
   return false
 }
 
-const loadMore = (data: NotificationData) => {
-  if (isNotifications(data))
-    loadMoreNotifications()
-  else
-    loadMoreMessages()
+const getValidData = (data: NotificationData) => {
+  if (data.today.length > 0)
+    return data.today[0]
+  if (data.yesterday.length > 0)
+    return data.yesterday[0]
+  if (data.old.length > 0)
+    return data.old[0]
+  return null
 }
 
 const isValidData = (arr: Notification[]) => arr.length > 0

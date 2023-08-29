@@ -43,9 +43,9 @@ router.onError((err) => {
 
 const { state: isSwapVisible } = useIXTSwapVisible()
 
-const {execute: fetchHeaderData } = useHeaderData()
-const {execute: fetchMessageData, data: messageData} = useNeMessages()
-const {execute: fetchNotificationData, data: notificationData } = useNeNotifications()
+const { execute: fetchHeaderData } = useHeaderData()
+const { execute: fetchMessageData, data: messageData } = useNeMessages()
+const { execute: fetchNotificationData, data: notificationData } = useNeNotifications()
 
 
 await fetchHeaderData()
@@ -55,7 +55,7 @@ const { connectWallet, walletState } = useWallet()
 const { setupIXTPrice } = useIXTPrice()
 const { refreshIXTBalance } = useIXTContract()
 
-const { setRefreshToken } = useLogin()
+const { setRefreshToken, loginStatus } = useLogin()
 const { user } = useUser()
 
 watch(y, (pos) => globalY.value = pos)
@@ -88,8 +88,8 @@ onMounted(async () => {
 })
 
 
-watch(walletState, (state) => {
-  if (state != 'connected')
+watch(loginStatus, (state) => {
+  if (state != 'logged-in')
     return
 
   fetchMessageData()

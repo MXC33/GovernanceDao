@@ -69,7 +69,15 @@ export const useNeNotifications = () => {
 
   const notificationCount = ref(1)
 
+  // async markAsRead({ commit }) {
+  //   const response = await this.$axios.$put('/notifications/markAllAsRead');
+  //   commit('MARK_AS_READ', response.data)
+  //   return response;
+  // }
 
+  const markAsRead = () => {
+
+  }
 
   const loadMoreNotifications = () => {
     notificationCount.value++
@@ -78,7 +86,8 @@ export const useNeNotifications = () => {
 
   const { fetchIXAPI } = useIXAPI()
   const asyncData = useAsyncDataState('notification', async () => {
-    return (await fetchIXAPI(`notifications/notification/${notificationCount}?unread=false`)) as NotificationRequest
+    return (await fetchIXAPI("notifications/notification/" + notificationCount.value + "?unread=false")) as NotificationRequest
+    //return (await fetchIXAPI(`notifications/notification/${notificationCount}?unread=false`)) as NotificationRequest
     //return (await fetchIXAPI('notifications/notification/1?unread=false')) as NotificationRequest
     // this may need to be changed depending on what data we want to fetch
   }, {
@@ -121,7 +130,8 @@ export const useNeMessages = () => {
 
   const { fetchIXAPI } = useIXAPI()
   const asyncData = useAsyncDataState('notification-messages', async () => {
-    return (await fetchIXAPI(`notifications/messages/${messageCount}?unread=false`)) as NotificationRequest
+    return (await fetchIXAPI("notifications/messages/" + messageCount.value + "?unread=false")) as NotificationRequest
+    //-return (await fetchIXAPI(`notifications/messages/${messageCount}?unread=false`)) as NotificationRequest
   }, {
     transform: (response) => response?.data,
     mergePages: (oldData, newData) => {

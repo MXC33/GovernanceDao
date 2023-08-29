@@ -23,12 +23,12 @@ VList(pos="fixed right-0 lg:right-7.5 lt-lg:left-0 top-$header-height" bg="ix-bl
   //- fix this look bad having 2 NotificationData, should only use 1 and dynamically change the data to display
   //-NotificationData.no-scrollbar(overflow="auto" max-h="85" v-if="notifications[dataIndex] != null" :data="notifications")
   NotificationData.no-scrollbar(overflow="auto" h="full" v-if="notifications" :data="notifications")
-  //- NotificationData.no-scrollbar(overflow="auto" max-h="85" v-if="messagesData && dataIndex == 1" :data="messagesData")
+  //-NotificationData.no-scrollbar(overflow="auto" max-h="85" v-if="messagesData && dataIndex == 1" :data="messagesData")
   
 </template>
 
 <script lang="ts" setup>
-import type { NotificationData } from 'composables/useNeNotificationsAndMessages';
+import type { NotificationData, Notification } from 'composables/useNeNotificationsAndMessages';
 import MailIcon from '~/assets/icons/mail.svg'
 
 const { data: messagesData, } = useNeMessages()
@@ -37,11 +37,39 @@ const { showUnreadNotifications } = useNotificationSettings()
 
 
 const notifications = computed(() => {
-  if (dataIndex.value == 0)
-    return notificationData.value
+  // if (dataIndex.value == 0)
+  //   return notificationData.value
 
-  return messagesData.value
+  // if (dataIndex.value == 1)
+  //   return messagesData.value
+
+  if (notificationData.value != null && dataIndex.value == 0)
+    return filterNotifications(notificationData.value)
+
+  if (messagesData.value != null && dataIndex.value == 1)
+    return filterNotifications(messagesData.value)
+
+  return null
 })
+
+const filterNotifications = (data: NotificationData) => {
+  const copy = data;
+  const messages = createNestleArray(copy)
+  messages.forEach(date => {
+    date.filter((notification: Notification) => {
+      if (showUnreadNotifications.value && notification.is_read == 0) {
+        return false
+      }
+      return true
+    })
+  });
+
+  return copy
+}
+
+const createNestleArray = (data: NotificationData) => {
+  return [data.today, data.yesterday, data.today]
+}
 
 const isMounted = useMounted()
 const dataIndex = ref(0)
