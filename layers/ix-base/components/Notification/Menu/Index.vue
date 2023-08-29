@@ -7,7 +7,7 @@ VList(pos="fixed right-0 lg:right-7.5 lt-lg:left-0 top-$header-height" bg="ix-bl
 
     HList(items="center")
       button(grow="~" text="left" @click="showUnreadNotifications = showUnreadNotifications") Show Only Unread
-      InputCheckbox(v-model="showUnreadNotifications")
+      InputCheckbox(v-model="showUnreadNotifications" @click="reloadData")
 
     NotificationMenuButton()
       template(#default) 
@@ -28,53 +28,34 @@ VList(pos="fixed right-0 lg:right-7.5 lt-lg:left-0 top-$header-height" bg="ix-bl
 </template>
 
 <script lang="ts" setup>
-import type { NotificationData, Notification } from 'composables/useNeNotificationsAndMessages';
+import type { NotificationData } from 'composables/useNeNotificationsAndMessages';
 import MailIcon from '~/assets/icons/mail.svg'
 
-const { data: messagesData, } = useNeMessages()
-const { data: notificationData } = useNeNotifications()
+const { data: messagesData, refresh: refreshMessages } = useNeMessages()
+const { data: notificationData, refresh: refreshNotifications } = useNeNotifications()
 const { showUnreadNotifications } = useNotificationSettings()
 
-
 const notifications = computed(() => {
-  // if (dataIndex.value == 0)
-  //   return notificationData.value
+  if (dataIndex.value == 0)
+    return notificationData.value
 
-  // if (dataIndex.value == 1)
-  //   return messagesData.value
+  if (dataIndex.value == 1)
+    return messagesData.value
 
-  if (notificationData.value != null && dataIndex.value == 0)
-    return filterNotifications(notificationData.value)
-
-  if (messagesData.value != null && dataIndex.value == 1)
-    return filterNotifications(messagesData.value)
-
-  return null
 })
-
-const filterNotifications = (data: NotificationData) => {
-  const copy = data;
-  const messages = createNestleArray(copy)
-  messages.forEach(date => {
-    date.filter((notification: Notification) => {
-      if (showUnreadNotifications.value && notification.is_read == 0) {
-        return false
-      }
-      return true
-    })
-  });
-
-  return copy
-}
-
-const createNestleArray = (data: NotificationData) => {
-  return [data.today, data.yesterday, data.today]
-}
 
 const isMounted = useMounted()
 const dataIndex = ref(0)
 
 const dataTitle = ['Notifications', 'Messages']
+
+const reloadData = () => {
+  console.log("reloadData")
+  console.log(messagesData.value?.count)
+  refreshMessages()
+  refreshNotifications()
+  console.log(messagesData.value?.count)
+}
 
 const selected = (index: number) => {
   if (dataIndex.value == index) {

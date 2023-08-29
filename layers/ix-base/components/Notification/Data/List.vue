@@ -8,20 +8,8 @@ VList(p="3")
 <script lang="ts" setup>
 import type { Notification } from 'composables/useNeNotificationsAndMessages';
 
-const { showUnreadNotifications } = useNotificationSettings()
-
 const { notifications } = defineProps<{
   notifications: Notification[]
 }>()
-
-console.log("notifications", notifications)
-
-// const filterNotifications = computed(() => {
-//   return notifications.filter((notification) => {
-//     if (showUnreadNotifications.value)
-//       return !notification.read
-//     return true
-//   })
-// })
 
 </script>

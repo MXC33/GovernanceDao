@@ -69,14 +69,8 @@ export const useNeNotifications = () => {
 
   const notificationCount = ref(1)
 
-  // async markAsRead({ commit }) {
-  //   const response = await this.$axios.$put('/notifications/markAllAsRead');
-  //   commit('MARK_AS_READ', response.data)
-  //   return response;
-  // }
-
-  const markAsRead = () => {
-
+  const reloadNotifications = () => {
+    return asyncData.fetchAndMerge()
   }
 
   const loadMoreNotifications = () => {
@@ -85,10 +79,10 @@ export const useNeNotifications = () => {
   }
 
   const { fetchIXAPI } = useIXAPI()
+  const { showUnreadNotifications } = useNotificationSettings()
   const asyncData = useAsyncDataState('notification', async () => {
-    return (await fetchIXAPI("notifications/notification/" + notificationCount.value + "?unread=false")) as NotificationRequest
+    return (await fetchIXAPI("notifications/notification/" + notificationCount.value + "?unread=" + showUnreadNotifications.value)) as NotificationRequest
     //return (await fetchIXAPI(`notifications/notification/${notificationCount}?unread=false`)) as NotificationRequest
-    //return (await fetchIXAPI('notifications/notification/1?unread=false')) as NotificationRequest
     // this may need to be changed depending on what data we want to fetch
   }, {
     transform: (response) => response?.data,
@@ -105,23 +99,17 @@ export const useNeNotifications = () => {
   return {
     ...asyncData,
     loadMoreNotifications,
+    reloadNotifications
   }
 }
-
-export const useNotificationSettings = () => {
-  const showUnreadNotifications = useState('neNotificationUnread', () => false)
-
-  return {
-    showUnreadNotifications
-  }
-}
-
 
 export const useNeMessages = () => {
 
   const messageCount = ref(1)
 
-
+  const reloadMessages = () => {
+    return asyncData.fetchAndMerge()
+  }
 
   const loadMoreMessages = () => {
     messageCount.value++
@@ -129,8 +117,11 @@ export const useNeMessages = () => {
   }
 
   const { fetchIXAPI } = useIXAPI()
+  const { showUnreadNotifications } = useNotificationSettings()
+
   const asyncData = useAsyncDataState('notification-messages', async () => {
-    return (await fetchIXAPI("notifications/messages/" + messageCount.value + "?unread=false")) as NotificationRequest
+    console.log("showUnreadNotifications.value", showUnreadNotifications.value)
+    return (await fetchIXAPI("notifications/messages/" + messageCount.value + "?unread=" + showUnreadNotifications.value)) as NotificationRequest
     //-return (await fetchIXAPI(`notifications/messages/${messageCount}?unread=false`)) as NotificationRequest
   }, {
     transform: (response) => response?.data,
@@ -147,6 +138,15 @@ export const useNeMessages = () => {
 
   return {
     ...asyncData,
-    loadMoreMessages
+    loadMoreMessages,
+    reloadMessages
+  }
+}
+
+export const useNotificationSettings = () => {
+  const showUnreadNotifications = useState('neNotificationUnread', () => true)
+
+  return {
+    showUnreadNotifications
   }
 }
