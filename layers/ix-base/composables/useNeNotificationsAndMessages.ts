@@ -69,10 +69,6 @@ export const useNeNotifications = () => {
 
   const notificationCount = ref(1)
 
-  const readNotification = async () => {
-
-  }
-
   const loadMoreNotifications = () => {
     notificationCount.value++
     return asyncData.fetchAndMerge()
