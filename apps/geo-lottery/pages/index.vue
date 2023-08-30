@@ -15,6 +15,38 @@ div( pos="relative" overflow="hidden" z="0" min-h="600px")
         Button(:value="'white'" w="250px sm:auto" min-w="md:255px") SWAP ASTRO GOLD
 div(w="full" flex="~" justify="center")
   div(container mx-3 lg:px-10 xl:px-30)
+
+    //How to Play Section
+    HList(flex="~ col lg:row" items="center" gap="12 lg:32")
+      div(flex="~ 1" items="center")
+        div(space-y="4")
+          div(color="ix-white" text="4xl sm:6xl" uppercase="~") how to play
+          ul(list="square" color="ix-white" font="bold" text="lg" space-y="6" pl="5")
+            li() Each week, a geolocation, size, and tier are randomly selected through a drawing. If you happen to own a territory that matches all three attributes, you become the winner of the jackpot!
+            li() Pool 2 will be shared among all territory owners whose tier and geolocation match the draw. This means that even if your territory size doesn't match, you will still be a winner!
+            li() Furthermore, owners of territories that only match the drawn geolocation will share the prizes from Pool 3!
+          p(color="ix-white" font="bold" text="lg") Don’t own a territory?
+          ButtonSound(sound="lg" btn="~ accent lg" color="white" text-shadow="none" @click="logoutWallet" cut="bottom-right s-md b-ix-primary") Get Your Own At Netempire
+
+      VList(flex="~ 1 col" space-y="6" items="center" justify="center" w="full")
+        FramePinkWithImg()
+          template(#title) COMMON PRIZE
+          template(#subtitle) COUNTRY
+          template(#content)
+            img(src="~/assets/images/country-img-line.png")
+        FramePinkWithImg()
+          template(#title) RARE PRIZE
+          template(#subtitle) COUNTRY <br> + TIER
+          template(#content)
+            TireHexagonColor(tier="Rare")
+        FramePinkWithImg()
+          template(#title) COMMON PRIZE
+          template(#subtitle) COUNTRY <br> + TIER <br> + Size
+          template(#content)
+            TireSizeIcon(tier="Outlier" size="Domain")
+
+
+
     RoundCountdown()
       template(#minutes)
       template(#seconds) 09
@@ -36,6 +68,22 @@ div(w="full" flex="~" justify="center")
         template(#header) ROUND #029
         template(#claimed) claimed
         template()
+
+    //Prize Check
+    HList(flex="~ col lg:row" items="center" gap="12 lg:32")
+      div(flex="~ 1" items="center")
+        div(space-y="4")
+          div(color="ix-white" text="4xl sm:6xl" uppercase="~") Prize Check
+          p(color="ix-white" font="bold" text="lg") Streamable Dynamic NFTs Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur vulputate, ipsum in ultricies dictum, erat diam porttitor diam, quis pharetra sapien dui et massa. Lorem ipsum.
+          ul(list="square" color="ix-white" font="bold" text="lg" pl="5")
+            li() Stream your winnings continually to your wallet
+            li() Full ownership rights
+            li() Fully tradable
+      VList(flex="~ 1 col" space-y="6" items="lg:end" justify="center" w="full")
+        div() Link with svg for info
+
+
+
 
 //div(grid="~ md:cols-12" p="6")
 //  div(col="start-4 span-6" p="x-14")
