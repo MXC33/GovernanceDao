@@ -37,7 +37,7 @@ const onClick = () => {
   if (message.is_read == 0) {
     socket.emit('notification_read', message.notification.id)
     emitStatusUpdate(message)
-    //This is ugly idealy we would want a function to handle the mutation
+    //This is ugly, Idealy we would want a function in useNeNotificationsAndMessages to handle the mutation of the notification 
     message.is_read = 1
   }
 }
