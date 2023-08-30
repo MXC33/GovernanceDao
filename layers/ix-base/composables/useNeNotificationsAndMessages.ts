@@ -69,8 +69,8 @@ export const useNeNotifications = () => {
 
   const notificationCount = ref(1)
 
-  const reloadNotifications = () => {
-    return asyncData.fetchAndMerge()
+  const readNotification = async () => {
+
   }
 
   const loadMoreNotifications = () => {
@@ -99,7 +99,6 @@ export const useNeNotifications = () => {
   return {
     ...asyncData,
     loadMoreNotifications,
-    reloadNotifications
   }
 }
 
@@ -120,7 +119,6 @@ export const useNeMessages = () => {
   const { showUnreadNotifications } = useNotificationSettings()
 
   const asyncData = useAsyncDataState('notification-messages', async () => {
-    console.log("showUnreadNotifications.value", showUnreadNotifications.value)
     return (await fetchIXAPI("notifications/messages/" + messageCount.value + "?unread=" + showUnreadNotifications.value)) as NotificationRequest
     //-return (await fetchIXAPI(`notifications/messages/${messageCount}?unread=false`)) as NotificationRequest
   }, {

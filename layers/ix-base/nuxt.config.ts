@@ -41,8 +41,13 @@ export default defineNuxtConfig({
     'nuxt-graphql-client',
     '@unocss/nuxt',
     '@vueuse/nuxt',
-
+    'nuxt3-socket.io',
   ],
+  socket: {
+    // JSON serializable options only.
+    // options object to pass when instantiating socket server.
+    serverOptions: {}
+  },
   imports: {
     dirs: [
       'composables/**'
