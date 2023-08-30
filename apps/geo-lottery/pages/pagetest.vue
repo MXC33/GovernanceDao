@@ -68,23 +68,38 @@ VList(flex-grow="1" space-y="12" px="4 md:8" py="4 md:8" bg="$mc-pink" )
 
 
       //Price & Pool Distribution
-      HList(flex="~ col lg:row" items="center" gap="12 lg:32")
-        VList(flex="~ 1 col" space-y="6" items="lg:end" justify="center" w="full")
-          div() Link with svg for info
+      //HList(flex="~ col lg:row" items="center" gap="12 xl:32")
+        VList(flex="~ 1 col" space-y="6" justify="center lx:start" w="full")
+          div(max-w="450px" text-left)
+            ClientOnly(fallback-tag="span" fallback="Price & Pool Distribution Chart")
+              //apexchart(width="500" type="bar" :options="options" :series="series")
+              apexchart(:options="chartRadial" :series="seriesRadial")
 
-        div(flex="~ 1" items="center")
+        div(flex="~ 1" items="center" pl="xl:42")
           div(space-y="4")
             div(color="ix-white" text="4xl sm:6xl" uppercase="~") Price & Pool Distribution
             p(color="ix-white" font="bold" text="lg") Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur vulputate, ipsum in ultricies dictum, erat diam porttitor diam, quis pharetra sapien dui et massa. Lorem ipsum.
-            //HList(gap="2")
-            //  div(bg="#FF1E6E" rounded="full" w="4" h="4" shrink="0" mt="1.5")
-            //  div(color="ix-white" font="bold" text="lg" pr="2" min-w="18") 15%
-            //  div(color="ix-white" font="bold" text="lg") LuckyCat Metashare
-            //
-            //HList(gap="2")
-            //  div(bg="#20DCBA" rounded="full" w="4" h="4" shrink="0" mt="1.5")
-            //  div(color="ix-white" font="bold" text="lg" pr="2" min-w="18") 16.67%
-            //  div(color="ix-white" font="bold" text="lg") Jackpot prize: Country + Tier + Territory
+
+            InfoPercentWithColor(circleBG="#FF1E6E" :percent="15" info="LuckyCat Metashare")
+            InfoPercentWithColor(circleBG="#FFAFCC" :percent="14" info="Territory staking")
+            InfoPercentWithColor(circleBG="#FFFFFF" :percent="1" info="Astro Cap Metashare")
+            InfoPercentWithColor(circleBG="#D862EB" :percent="10" info="Amelia Foundation")
+            InfoPercentWithColor(circleBG="#7562EB" :percent="10" info="Burn")
+            InfoPercentWithColor(circleBG="#41B2F2" :percent="16.67" info="Common prize: Country")
+            InfoPercentWithColor(circleBG="#20DCBA" :percent="16.67" info="Rare prize: Country + Tier")
+            InfoPercentWithColor(circleBG="#CEF2BD" :percent="16.67" info="Jackpot prize: Country + Tier + Territory")
+
+      div(grid="~ lg:cols-2" bg="black" space-y="30" )
+        VList(col="span-1" flex="~ 1 col" justify="center lx:start" w="full")
+          div(max-w="450px" text-left)
+            ClientOnly(fallback-tag="span" fallback="Price & Pool Distribution Chart")
+              //apexchart(width="500" type="bar" :options="options" :series="series")
+              apexchart(:options="chartRadial" :series="seriesRadial")
+
+        div(flex="~ 1" items="center" pl="2xl:42")
+          div(space-y="4")
+            div(color="ix-white" text="4xl sm:5xl xl:6xl" uppercase="~") Price & Pool Distribution
+            p(color="ix-white" font="bold" text="lg") Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur vulputate, ipsum in ultricies dictum, erat diam porttitor diam, quis pharetra sapien dui et massa. Lorem ipsum.
 
             InfoPercentWithColor(circleBG="#FF1E6E" :percent="15" info="LuckyCat Metashare")
             InfoPercentWithColor(circleBG="#FFAFCC" :percent="14" info="Territory staking")
@@ -97,7 +112,82 @@ VList(flex-grow="1" space-y="12" px="4 md:8" py="4 md:8" bg="$mc-pink" )
 
 </template>
 <script lang="ts" setup>
-import InfoPercentWithColor from "~/components/InfoPercentWithColor.vue";
+
+
+
+/*const options = {
+  chart: {
+    id: "vuechart-example",
+  },
+  xaxis: {
+    categories: [1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998],
+  },
+};
+const series = [
+  {
+    name: "series-1",
+    data: [30, 40, 35, 50, 49, 60, 70, 91],
+  },
+];*/
+
+
+const chartRadial = {
+  chart: {
+    width: 380,
+    type: 'donut',
+    redrawOnWindowResize: true,
+    redrawOnParentResize: true
+  },
+  states: {
+    normal: {
+      filter: {
+        type: 'none',
+      }
+    },
+    hover: {
+      filter: {
+        type: 'none',
+      }
+    },
+    active: {
+      filter: {
+        type: 'none',
+      }
+    },
+  },
+  legend: {
+    show: false,
+    offsetY: 0,
+    height: 0,
+  },
+  tooltip: {
+    enabled: false,
+  },
+  dataLabels: {
+    enabled: false,
+  },
+  colors: [ '#FF1E6E', '#FF1E6E', '#FF1E6E', '#FF1E6E', '#FF1E6E', '#FF1E6E',
+            '#FFAFCC', '#FFAFCC', '#FFAFCC', '#FFAFCC', '#FFAFCC', '#FFAFCC',
+            '#F9F9F9',
+            '#CEF2BD', '#CEF2BD', '#CEF2BD', '#CEF2BD', '#CEF2BD', '#CEF2BD', '#CEF2BD',
+            '#20DCBA', '#20DCBA', '#20DCBA', '#20DCBA', '#20DCBA', '#20DCBA',
+            '#41B2F2', '#41B2F2', '#41B2F2', '#41B2F2', '#41B2F2', '#41B2F2',
+            '#7562EB', '#7562EB', '#7562EB', '#7562EB',
+            '#D862EB', '#D862EB', '#D862EB', '#D862EB'],
+  stroke: {
+    show: true,
+    curve: 'smooth',
+    lineCap: 'round',
+    //colors: [ "#560723" ],
+    colors: [ "#560723" ],
+    width: 10,
+    dashArray:0,
+  },
+};
+const seriesRadial = [1,1,1,1,1,1,1,1,1,1,
+                      1,1,1,1,1,1,1,1,1,1,
+                      1,1,1,1,1,1,1,1,1,1,
+                      1,1,1,1,1,1,1,1,1,1]
 
 useHead({
   title: "Home | Geo Lottery | PlanetIX"
