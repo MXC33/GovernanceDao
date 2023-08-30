@@ -34,6 +34,9 @@ export const useIXAPI = () => {
   }
 
   const onUnauthorized = async () => {
+    if (route.path.includes('connect'))
+      return
+
     await callWithNuxt(app, () => {
       logoutWallet()
 

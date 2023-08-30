@@ -1,4 +1,5 @@
 export default defineNuxtRouteMiddleware(async (to, from) => {
+  console.log("TOOO", to.path)
   if (to.path == '/connect')
     return true
 

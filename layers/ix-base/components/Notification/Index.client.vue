@@ -12,24 +12,18 @@ import BellFilled from '~/assets/images/icons/bellFilled.svg'
 import BellEmpty from '~/assets/images/icons/bellEmpty.svg'
 const showNotification = ref(false)
 
-const toggleNotification = () => showNotification.value = !showNotification.value
+const toggleNotification = () =>
+  showNotification.value = !showNotification.value
 
-const authUserData = useAuthUserData()
-//wss://api.planetix.com/socket.io/?EIO=4&transport=websocket
-
-
-const io = useIO()
-const socket = io('ws://api.planetix.com/socket.io/?EIO=4&transport=websocket')
-
+const socket = useSocket()
 
 const statusUpdate = () => {
-  // if (socket) {
-  //   socket.emit('statusUpdate', {
-  //     notification_id: 62972696,
-  //     type: 2,
-  //     player_id: 578214,
-  //   })
-  // }
+  socket.emit('statusUpdate', {
+    notification_id: 62972696,
+    type: 2,
+    player_id: 578214,
+  })
+  console.log("Yes!!")
 }
 
 onMounted(() => {
