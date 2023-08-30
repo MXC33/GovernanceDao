@@ -1,4 +1,6 @@
 
+import type { Notification } from '~/composables/useNeNotificationsAndMessages'
+
 export interface NotificationSocket {
   title: string,
   message: string
@@ -18,7 +20,21 @@ export const useNotificationsLibrary = () => {
 }
 
 export const useSocket = () => {
+  const { user } = useUser()
   const nuxt = useNuxtApp()
 
-  return nuxt.$socket
+  const socket = nuxt.$socket
+
+  const emitStatusUpdate = ({ notification: { id, type } }: Notification) => {
+    socket.emit('statusUpdate', {
+      notification_id: id,
+      type,
+      player_id: user.value?.id,
+    })
+  }
+
+  return {
+    emitStatusUpdate,
+    socket
+  }
 }

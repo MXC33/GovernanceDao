@@ -1,6 +1,6 @@
 <template lang ="pug">
 //-cut="bottom-right b-ix-primary b-opacity-60 s-lg"
-button(w="full" text="hover:ix-orange")
+button(w="full" text="hover:ix-orange" @click="onClick")
   HList(items="center")
     VList(items="left" p="1 r-3" )
       div(text="left") {{ message.notification.title }} 
@@ -13,8 +13,20 @@ button(w="full" text="hover:ix-orange")
 <script lang="ts" setup>
 import type { Notification } from '~/composables/useNeNotificationsAndMessages';
 
+const { socket, emitStatusUpdate } = useSocket()
+
 const { message } = defineProps<{
   message: Notification
 }>()
+
+const onClick = () => {
+  console.log("onClick")
+  console.log(message)
+  if (message.is_read == 0) {
+    socket.emit('notification_read', message.notification.id)
+    emitStatusUpdate(message)
+    message.is_read = 1
+  }
+}
 
 </script>

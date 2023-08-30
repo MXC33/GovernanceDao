@@ -18,8 +18,23 @@ export default defineNuxtPlugin(() => {
     addMessage("Connected", "Hello world")
   });
 
-  socket.on('42', (data) => console.log("Data", data))
-  socket.on('data', (data) => console.log("Dateea", data))
+  const { user } = useUser()
+
+  socket.on('notification_global', (payload) => {
+    console.log("I been has mesug")
+  })
+
+  watch(user, (player, oldPlayer) => {
+    const playerID = player?.id
+    const oldID = oldPlayer?.id
+    console.log("playerID", playerID, "oldID", oldID)
+    if (oldID)
+      socket.off('notification_' + oldID)
+
+    socket.on('notification_' + playerID, (payload) => {
+      console.log("I got notificationzzz")
+    })
+  }, { deep: true, immediate: true })
 
   socket.on('message', (data) => {
     console.log(data, 'base');

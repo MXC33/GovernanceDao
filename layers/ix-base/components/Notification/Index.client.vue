@@ -15,20 +15,4 @@ const showNotification = ref(false)
 const toggleNotification = () =>
   showNotification.value = !showNotification.value
 
-const socket = useSocket()
-
-const statusUpdate = () => {
-  socket.emit('statusUpdate', {
-    notification_id: 62972696,
-    type: 2,
-    player_id: 578214,
-  })
-  console.log("Yes!!")
-}
-
-onMounted(() => {
-  statusUpdate()
-})
-
-
 </script>
