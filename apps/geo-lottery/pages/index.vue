@@ -1,126 +1,127 @@
 <template lang="pug">
-VList(w="full")
-  div( flex px="4 md:10 lg:25")
-    div(flex border-color="$mc-gray-700" border="b-1" w="full")
-      a(font="bold" text="base" color="$mc-pink"  m="r-6" p="b-5 l-3 r-3" border-color="$mc-pink" border="b-3" cursor="pointer") Raffle
-      a(font="bold" text="base" color="hover:$mc-pink" m="r-6" p="b-5 l-3 r-3" cursor="pointer") How it works
-      a(font="bold" text="base" color="hover:$mc-pink" m="r-6"  p="b-5 l-3 r-3" cursor="pointer") History
-      a(font="bold" text="base" color="hover:$mc-pink" p="b-5 l-3 r-3" cursor="pointer") Introduction
-div(grid="~ md:cols-12" p="6")
-  div(col="start-4 span-6" p="x-14")
-    VList(pos="relative" w="full")
-      TestEnterLottery(mb="6")
-      List()
-        template(#content) One country is drawn every week, if you own a territory in that country you win! Feeling lucky?
-        template(#enter) Criteria to enter:
-      Button(:value="'next'") Continue
-      Button(:value="'next-blur'") Continue
-      Button(:value="'next-black'") Continue
-      Button(:value="'disable'") Continue
-      TimeCountdown()
-      Statistics()
-        template(#content) PLAYERS
-        template(#number) 21,355
-        template(#content-2) TICKET ENTRIES
-        template(#number-2) 341,680
-//VList(flex-grow="1" pos="relative" min-h="0" justify="center" p="3" items="center" bg="red")
-//  ButtonSound(sound="lg" btn="~ accent lg" color="white" text-shadow="none" @click="logoutWallet" cut="bottom-right s-md b-ix-primary") {{$t(`general.disconnect`)}}
-//
-//  WalletButtonConnect()
-//  FormCheckbox()
-//
-//  AdjustableButton(type="minus" @click="decreaseAmount" :is-adjustable="isDecreasable" :inline="inline")
-//
-//
-//  template(#collapsable)
-//    Collapse(:when="true" class="v-collapse")
-//      VList(p="6" w="full" space-y="3")
-//
-//        div(b="t-1 gray-600")
-//
-//        slot(name="adjustments")
-//          p ajhsdjkash askjdhas kdjaskh asjkhdka
-//
-
-
+VList(w="full" mt="10")
+div( pos="relative" overflow="hidden" z="0" min-h="600px")
+  Background( inset="0" object="cover center" pos="absolute" z="-1")
+  div(w="full" flex="~" justify="center" h="full" items-center pos="absolute")
+    div(container mx-3 lg:px-10 xl:px-30 h="full" flex=" ~ col" justify="space-between" p="t-6 b-8 sm:t-8 sm:b-16")
       div()
-        List()
-          template(#content) One country is drawn every week, if you own a territory in that country you win! Feeling lucky?
-          template(#enter) Criteria to enter:
-        Button() Continue
-        TimeCountdown()
-
-div(flex-grow="1" space-y="12" px="4 md:8" bg="black" )
-  //Accoardion Box
-
-  div(grid="~ md:cols-12" py="6" gap="4 md:8")
-    div(grid=" md:col-start-4 md:col-span-6" space-y="4")
+        h3(color="$mc-pink" font="bdrA3mik" text="3xl center") TERRITORY LOTTERY
+        h1(text="lg center" font="blender") OWN TERRITORIES | BUY TICKETS | WIN BIG
+      div()
+        p(font="bold" text="base sm:lg center" ) Every week, territories from around the world are randomly selected. <br> Join today and you will have the chance to win:
+        h1(text="4xl md:6xl lg:8xl center" font="bdrA3mik") 2,050,080 IXT
+      div(flex="~ col sm:row" justify="center" m="t-6" items-center)
+        Button(:value="'pink'" w="250px sm:auto" min-w="md:255px" mb="3 sm:0" mr="0 sm:3") JOIN NOW
+        Button(:value="'white'" w="250px sm:auto" min-w="md:255px") SWAP ASTRO GOLD
+div(w="full" flex="~" justify="center")
+  div(container mx-3 lg:px-10 xl:px-30)
+    RoundCountdown()
+      template(#minutes)
+      template(#seconds) 09
+    TierSize()
+      template(#tier) LEGENDARY
+      template(#size) sector
+      template(#id) CN
+    div(b="t-1 gray-600" mb="20")
       AccordionItem()
-        template(#header) Ticket entry pool split
-        template(#default)
-          p Perks with subscribing:
-          div()
-            p text with icon
-
+        template(#header) ROUND #027
+        template(#claimed_size) CLAIM YOUR PRIZE
+        template(#claim_now) CLAIM NOW
+        template()
       AccordionItem()
-        template(#header) What is a territory?
-        template(#default)
-          p Perks with subscribing:
-          div()
-            p text with icon
-      AccordionItem()
-        template(#header) How to buy IXT
-        template(#default)
-          p Perks with subscribing:
-          div()
-            p text with icon
-
-      //Acc with icon
-      AccordionItem(:status="true")
-        template(#header) Location: Sweden
-        template(#default)
-          p Perks with subscribing:
-          div()
+        template(#header) ROUND #028
+        template()
             p text with icon
       AccordionItem()
-        template(#icon)
-          Plus()
-        template(#header) Size: Domain
-        template(#default)
-          p Perks with subscribing:
-          div()
-            p text with icon
+        template(#header) ROUND #029
+        template(#claimed) claimed
+        template()
 
-      AccordionItem()
-        template(#default)
-          p Perks with subscribing:
-          div()
-            p text with icon
-
-  //Back Frame
-  div(grid="~ md:cols-12" py="6"  gap="4 md:8")
-    div(grid=" md:col-start-4 md:col-span-6" space-y="4")
-      PopupFrame()
-        template(#content)
-          VList(p="4" pb="8" border-t="~" border-solid="~" border-gray-700="~" z="3" text="md" font="400" color="$mc-whitenew" space-y="8")
-            div() Better your chances with ticket entries!
-            div()
-              Adjustable(v-model="value"  w="full" :is-neutral="true" frame="~ hover:gray-300")
-              div(mt="1" text="3" color="gray-200") Your entries 0
-
-          VList(p="4" border-t="~" border-solid="~" border-gray-700="~" z="3" text="base" font="400" color="$mc-whitenew" space-y="4")
-            VList(space-y="2")
-              HList(justify="between" flex-shrink="0")
-                span() Total ticket entries
-                span() 1
-
-              HList(justify="between" flex-shrink="0")
-                span() Total price
-                span() 6 IXT
-
-            VList()
-              ButtonSound(sound="sm" btn="~ primary" opacity="s-invalid:50" w="full" font="bold" transition="all" ref="button" pos="relative" pointer-events="s-loading:none s-invalid:none")
-                span() BuTton
+//div(grid="~ md:cols-12" p="6")
+//  div(col="start-4 span-6" p="x-14")
+//    VList(pos="relative" w="full")
+//      TestEnterLottery(mb="6")
+//      Button(:value="'pink'") GET YOUR OWN AT NETEMPIRE
+//      List()
+//        template(#content) One country is drawn every week, if you own a territory in that country you win! Feeling lucky?
+//        template(#enter) Criteria to enter:
+//      TimeCountdown()
+//      Statistics()
+//        template(#content) PLAYERS
+//        template(#number) 21,355
+//        template(#content-2) TICKET ENTRIES
+//        template(#number-2) 341,680
+//div(flex-grow="1" space-y="12" px="4 md:8" bg="black" )
+//  //Accoardion Box
+//
+//  div(grid="~ md:cols-12" py="6" gap="4 md:8")
+//    div(grid=" md:col-start-4 md:col-span-6" space-y="4")
+//      AccordionItem()
+//        template(#header) Ticket entry pool split
+//        template(#default)
+//          p Perks with subscribing:
+//          div()
+//            p text with icon
+//
+//      AccordionItem()
+//        template(#header) What is a territory?
+//        template(#default)
+//          p Perks with subscribing:
+//          div()
+//            p text with icon
+//      AccordionItem()
+//        template(#header) How to buy IXT
+//        template(#default)
+//          p Perks with subscribing:
+//          div()
+//            p text with icon
+//
+//      //Acc with icon
+//      AccordionItem(:status="true")
+//        template(#header) Location: Sweden
+//        template(#default)
+//          p Perks with subscribing:
+//          div()
+//            p text with icon
+//      AccordionItem()
+//        template(#icon)
+//          Plus()
+//        template(#header) Size: Domain
+//        template(#default)
+//          p Perks with subscribing:
+//          div()
+//            p text with icon
+//
+//      AccordionItem()
+//        template(#default)
+//          p Perks with subscribing:
+//          div()
+//            p text with icon
+//
+//  //Back Frame
+//  div(grid="~ md:cols-12" py="6"  gap="4 md:8")
+//    div(grid=" md:col-start-4 md:col-span-6" space-y="4")
+//      PopupFrame()
+//        template(#content)
+//          VList(p="4" pb="8" border-t="~" border-solid="~" border-gray-700="~" z="3" text="md" font="400" color="$mc-whitenew" space-y="8")
+//            div() Better your chances with ticket entries!
+//            div()
+//              Adjustable(v-model="value"  w="full" :is-neutral="true" frame="~ hover:gray-300")
+//              div(mt="1" text="3" color="gray-200") Your entries 0
+//
+//          VList(p="4" border-t="~" border-solid="~" border-gray-700="~" z="3" text="base" font="400" color="$mc-whitenew" space-y="4")
+//            VList(space-y="2")
+//              HList(justify="between" flex-shrink="0")
+//                span() Total ticket entries
+//                span() 1
+//
+//              HList(justify="between" flex-shrink="0")
+//                span() Total price
+//                span() 6 IXT
+//
+//            VList()
+//              ButtonSound(sound="sm" btn="~ primary" opacity="s-invalid:50" w="full" font="bold" transition="all" ref="button" pos="relative" pointer-events="s-loading:none s-invalid:none")
+//                span() BuTton
 </template>
 
 
@@ -141,6 +142,8 @@ import type { AdjustableNumber } from '@ix/base/composables/Utils/useAdjustableN
 import Plus  from '~/assets/icons/plus.svg'
 import Statistics from "~/components/Statistics.vue";
 import TestEnterLottery from "~/components/TestEnterLottery.vue";
+import Background from "~/components/Background.vue";
+import TierSize from "~/components/TierSize.vue";
 
 const value = {
   multiplier: 3,

@@ -1,19 +1,18 @@
 <template lang="pug">
 VList(pos="sticky top-0" translate-y="$header-offset" z="99" w="full" @mouseenter="isSelected = true" @mouseleave="isSelected = false" ref="menuElement" transition="all")
-  HList(items="center" justify="between" bg="ix-black" px="4 md:7.5" h="12 md:16" space-x="6")
+  HList(items="center" justify="between" bg="$mc-pink" px="4 md:7.5" h="12 md:16" space-x="6")
     NuxtLink(to="https://www.planetix.com")
       PlanetIXNew(w="42.25")
 
     HList(justify="start" flex-grow="1" display="lt-lg:none" overflow-x="hidden" space-x="4")
-      button(v-for="(item, index) in siteTopHeaders" @click="openMenu(index)" btn="menu" color = "s-default:white s-selected:ix-orange" :state="selected(index)") {{ $t(`marketplace.navigation.${item.type}.title`)}}
+      button(v-for="(item, index) in siteTopHeaders" @click="openMenu(index)" btn="menu" color="s-default:white s-selected:ix-orange hover:black" opacity="hover:100" :state="selected(index)") {{ $t(`marketplace.navigation.${item.type}.title`)}}
       HList(flex-grow="1" justify="end" display="lt-md:none")
         NuxtLink(to="https://planetix.com/airdrop")
-          HList(rounded="full" b="1 $mc-mint" px="4" py="1" bg="hover:$mc-mint-40" uppercase="~" tracking="0.65" font="bold" items="center" justify="center")
-            span(translate-x="0.5") airdrop
+
 
     HList(space-x="6" px="0")
-      //-button(btn="menu" display="lt-lg:none") help
-      //-HeaderLanguage(language="EN")
+      button(btn="menu" display="lt-lg:none" color="hover:black") help
+      HeaderLanguage(color="hover:black" language="EN")
       HeaderAccountButton()
 
 
@@ -32,7 +31,7 @@ Transition(name="slide-top" )
 
 <script lang="ts" setup>
 import CrossIcon from '~/assets/images/header/cross.svg'
-import PlanetIXNew from '~/assets/images/header/planetix-new.svg'
+import PlanetIXNew from '~/assets/images/header/logo.svg'
 import SettingsIcon from '~/assets/images/header/hamburger.svg'
 import { useGlobalWindowScroll } from '@ix/marketplace/composables/useWindowScroll';
 
