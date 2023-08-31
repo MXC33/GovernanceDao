@@ -38,3 +38,10 @@ export const useDevice = () => {
     device
   }
 }
+//add this to useDevice istead of separate composable
+export const useMobileBreakpoint = (breakpoint: Breakpoint = 'lg') => {
+  const breakWidth = Number(theme.breakpoints[breakpoint].replace('px', ''))
+  const isMounted = useMounted()
+  const { width } = useWindowSize()
+  return computed(() => isMounted.value && width.value < breakWidth)
+}
