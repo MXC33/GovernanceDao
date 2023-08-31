@@ -4,9 +4,8 @@ VList(pos="sticky top-0" translate-y="$header-offset" z="99" w="full" @mouseente
     NuxtLink(to="https://www.planetix.com")
       PlanetIXNew(w="42.25")
 
-    HList(v-if="!isMobile" justify="start" flex-grow="1" overflow-x="hidden" space-x="4")
-      button(v-for="(header, index) in headerData" @click="openMenu(index)" btn="menu" color = "s-default:white s-selected:ix-orange" :state="selected(index)") {{ header.name }}
-
+    HList(display="lt-lg:none" justify="start" flex-grow="1" overflow-x="hidden" space-x="4")
+      button(v-for="(header, index) in headerData" @mouseenter="hoverMenu(index)" @click="openMenu(index)" btn="menu" color = "s-default:white s-selected:ix-orange" :state="selected(index)") {{ header.name }}
 
       HList(flex-grow="1" justify="end" display="lt-md:none")
         NuxtLink(to="https://planetix.com/airdrop")
@@ -19,7 +18,7 @@ VList(pos="sticky top-0" translate-y="$header-offset" z="99" w="full" @mouseente
       HeaderAccountButton()
 
 
-      button(v-if="isMobile" btn="menu" @click="toggleMenu" ml="2")
+      button(display="lg:none" btn="menu" @click="toggleMenu" ml="2")
         Transition(name="fade" mode="out-in")
           SettingsIcon(v-if="activeMenuIndex == null" w="6" )
           CrossIcon(v-else w="6" )
@@ -35,8 +34,8 @@ import PlanetIXNew from '~/assets/images/header/planetix-new.svg'
 import SettingsIcon from '~/assets/images/header/hamburger.svg'
 import { useGlobalWindowScroll } from '@ix/marketplace/composables/useWindowScroll';
 
-const { isMobile } = useDevice()
-const {data: headerData} = useHeaderData()
+//const { isMobile } = useDevice()
+const { data: headerData } = useHeaderData()
 //const {data} = useHeaderData()
 
 const { state: swapVisible } = useIXTSwapVisible()
@@ -68,6 +67,10 @@ const selected = (index: number) => {
   }
 
   return 'default'
+}
+
+const hoverMenu = (index: number) => {
+  activeMenuIndex.value = index
 }
 
 const openMenu = (index: number) => {
