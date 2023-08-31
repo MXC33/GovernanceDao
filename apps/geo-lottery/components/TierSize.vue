@@ -24,7 +24,7 @@ div(flex="~" justify="center" font="bold" uppercase="~" text="base md:xl" m="b-1
       slot() 10
     span()
       slot() Subscription TICKETS
-div(flex="~ col md:row" justify="center" mb="10" items-center )
+div(flex="~ col md:row" justify="center" items-center )
   Button(:value="'pink'" mb="3 lg:0" w="250px sm:auto" mr="0 sm:3") PURCHASE TICKETS
   Button(:value="'white'" w="250px sm:auto") MANAGE TICKETS
 </template>

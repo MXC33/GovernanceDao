@@ -7,7 +7,7 @@ export default defineConfig({
     fontFamily: {
       foundry: ['Foundry Gridnik'],
       blender: ['BlenderPro-Bold'],
-      bdrA3mik: ['BDR A3MIK'],
+      bdrA3mik: ['BDRA3MiK-Regular'],
     },
 
     colors: {

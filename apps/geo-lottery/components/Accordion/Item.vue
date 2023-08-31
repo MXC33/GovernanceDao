@@ -1,6 +1,6 @@
 <template lang="pug">
 VList()
-  VList(overflow-y="auto" h="full" pos="relative"  rounded="0.5" border="b-1" border-solid="~" border-gray-700="~")
+  VList(overflow-y="auto" h="full" pos="relative"  rounded="0.5"  border-solid="~" b="gray-300 b-1")
     HList(h="16" items="center" justify="between" pos="md:sticky top-0" flex-shrink="0" z="md:1" gap="2" @click.stop="dropDrawer" cursor="pointer" :small="isSmall" :neutral="isNeutral")
       VList(v-if="$slots.icon" w="6")
         slot(name="icon")
@@ -20,7 +20,7 @@ VList()
         IconChevron(w="4" :up="isOpen")
     Transition(name="slide-top")
       Collapse(:when="isOpen" class="v-collapse" overflow-y="auto" )
-        div(p="t-5 sm:t-8 r-2 sm:r-8 b-5 sm:b-17  l-2 sm:l-8" b="t-1 gray-700" bg="$mc-pink-blur")
+        div(p="t-5 sm:t-8 r-2 sm:r-8 b-5 sm:b-17  l-2 sm:l-8" b="t-1 gray-300" bg="$mc-pink-blur")
           div(flex="~")
             div(basis="1/4" flex="~ col" justify="start")
               div(flex="~ col" mb="6")
@@ -35,7 +35,7 @@ VList()
 
             div(basis="1/2" flex="~ col" align="center" mx="2 md:10" justify="start sm:center")
               p(color="$mc-whitenew" text="base bold"  uppercase="~" mb="2 sm:4") your prize
-              div(flex justify="center" items="center" bg="$mc-pink-blur" border-color="$mc-pink" p="2 sm:3 md:5" border="1"  h="10 sm:18" text="base sm:2xl lg:5xl" rounded="full" m="b-4") 50,320 AGOLD
+              div(flex justify="center" items="center" font="bdrA3mik" bg="$mc-pink-blur" border-color="$mc-pink" p="2 sm:3 md:5" border="1"  h="10 sm:18" text="base sm:2xl lg:2xl xl:3xl 2xl:5xl" rounded="full" m="b-4") 50,320 AGOLD
 
             div(basis="1/4" flex="~ col" )
               div(flex="~ col" mb="6" align="end")

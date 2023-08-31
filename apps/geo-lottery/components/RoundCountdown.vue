@@ -15,8 +15,8 @@ div(class="round_tracker" m="b-16 lg:b-20")
         slot(name="minutes") -
       span(text="center md md:xl lg:2xl" font="bdrA3mik") MINUTES
     div(flex="~ col" items-center)
-      div(flex justify="center" items="center" bg="$mc-pink-blur" border-color="$mc-pink" p="5" border="1" w="20 sm:28 md:30 lg:44" h="14 sm:18 lg:24" text="2xl lg:6xl" rounded="full" m="b-4" font="bdrA3mik")
-        slot(name="seconds" font="bdrA3mik bold") -
+      div(flex justify="center" items="center" color="$mc-pink" bg="$mc-pink-blur" border-color="$mc-pink" p="5" border="1" w="20 sm:28 md:30 lg:44" h="14 sm:18 lg:24" text="2xl lg:6xl" rounded="full" m="b-4" font="bdrA3mik")
+        slot(name="seconds") -
       span(text="center md md:xl lg:2xl" font="bdrA3mik") SECONDS
 
 </template>
