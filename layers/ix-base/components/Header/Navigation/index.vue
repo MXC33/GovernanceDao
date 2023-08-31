@@ -11,8 +11,8 @@ div(m="!l-0" p="6 t-3" grid="~ cols-5" w="full" bg="black" pos="absolute top-16"
 
 <script lang="ts" setup>
 import type { HeaderMenuItem, HeaderMenuSubNavigation } from '~/composables/useSiteHeader';
-const isMobile = useMobileBreakpoint()
-//const { isMobile } = useDevice()
+const { useMobileBreakpoint } = useDevice()
+const isMobile = useMobileBreakpoint('lg')
 const { header } = defineProps<{
   header: HeaderMenuItem
 }>()

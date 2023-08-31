@@ -30,18 +30,16 @@ export const useDevice = () => {
   const isDesktop = computed(() => device.value == 'desktop')
   const is4K = computed(() => device.value == '4k')
 
+  const useMobileBreakpoint = (breakpoint: Breakpoint = 'lg') => {
+    return computed(() => mounted.value && width.value < getBreakPoint(breakpoint))
+  }
+
   return {
     isMobile,
     isTablet,
     isDesktop,
     is4K,
-    device
+    device,
+    useMobileBreakpoint
   }
-}
-//add this to useDevice istead of separate composable
-export const useMobileBreakpoint = (breakpoint: Breakpoint = 'lg') => {
-  const breakWidth = Number(theme.breakpoints[breakpoint].replace('px', ''))
-  const isMounted = useMounted()
-  const { width } = useWindowSize()
-  return computed(() => isMounted.value && width.value < breakWidth)
 }
