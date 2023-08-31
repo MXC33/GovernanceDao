@@ -1,6 +1,6 @@
 <template lang="pug">
 Transition(name="fade")
-  img(src="~/assets/images/cat-background.png" inset="0"  z="0" object="cover" h="full" w="full")
+  slot(name="image-source")
 </template>
 
 <script lang="ts" setup>
