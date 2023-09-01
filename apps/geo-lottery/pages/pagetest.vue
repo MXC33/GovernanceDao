@@ -87,8 +87,14 @@ VList(flex-grow="1" space-y="12" px="4 md:8" py="4 md:8" bg="$mc-pink" )
             InfoPercentWithColor(circleBG="#20DCBA" :percent="16.67" info="Rare prize: Country + Tier")
             InfoPercentWithColor(circleBG="#CEF2BD" :percent="16.67" info="Jackpot prize: Country + Tier + Territory")
 
+
+//PopupTypePurchaseTickets()
+
+
+
 </template>
 <script lang="ts" setup>
+import RadialChart from "~/components/Chart/RadialChart.vue";
 const colorsRadial = [ '#FF1E6E', '#FF1E6E', '#FF1E6E', '#FF1E6E', '#FF1E6E', '#FF1E6E',
   '#FFAFCC', '#FFAFCC', '#FFAFCC', '#FFAFCC', '#FFAFCC', '#FFAFCC',
   '#F9F9F9',
@@ -103,7 +109,7 @@ const seriesRadial = [1,1,1,1,1,1,1,1,1,1,
   1,1,1,1,1,1,1,1,1,1,
   1,1,1,1,1,1,1,1,1,1]
 
-import RadialChart from "~/components/Chart/RadialChart.vue";
+const popUpYouWin = false;
 
 useHead({
   title: "Home | Geo Lottery | PlanetIX"
