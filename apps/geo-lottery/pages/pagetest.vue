@@ -28,7 +28,7 @@ VList(flex-grow="1" space-y="12" px="4 md:8" py="4 md:8" bg="$mc-pink" )
       HList(flex="~ col lg:row" items="center" gap="12 lg:32")
         div(flex="~ 1" items="center")
           div(space-y="4")
-            div(color="ix-white" text="4xl sm:6xl" uppercase="~") how to play
+            div(color="ix-white" text="4xl xl:6xl" uppercase="~") how to play
             ul(list="square" color="ix-white" font="bold" text="lg" space-y="6" pl="5")
               li() Each week, a geolocation, size, and tier are randomly selected through a drawing. If you happen to own a territory that matches all three attributes, you become the winner of the jackpot!
               li() Pool 2 will be shared among all territory owners whose tier and geolocation match the draw. This means that even if your territory size doesn't match, you will still be a winner!
@@ -57,7 +57,7 @@ VList(flex-grow="1" space-y="12" px="4 md:8" py="4 md:8" bg="$mc-pink" )
       HList(flex="~ col lg:row" items="center" gap="12 lg:32")
         div(flex="~ 1" items="center")
           div(space-y="4")
-            div(color="ix-white" text="4xl sm:6xl" uppercase="~") Prize Check
+            div(color="ix-white" text="4xl xl:6xl" uppercase="~") Prize Check
             p(color="ix-white" font="bold" text="lg") Streamable Dynamic NFTs Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur vulputate, ipsum in ultricies dictum, erat diam porttitor diam, quis pharetra sapien dui et massa. Lorem ipsum.
             ul(list="square" color="ix-white" font="bold" text="lg" pl="5")
               li() Stream your winnings continually to your wallet
@@ -68,37 +68,14 @@ VList(flex-grow="1" space-y="12" px="4 md:8" py="4 md:8" bg="$mc-pink" )
 
 
       //Price & Pool Distribution
-      //HList(flex="~ col lg:row" items="center" gap="12 xl:32")
-        VList(flex="~ 1 col" space-y="6" justify="center lx:start" w="full")
-          div(max-w="450px" text-left)
-            ClientOnly(fallback-tag="span" fallback="Price & Pool Distribution Chart")
-              //apexchart(width="500" type="bar" :options="options" :series="series")
-              apexchart(:options="chartRadial" :series="seriesRadial")
-
-        div(flex="~ 1" items="center" pl="xl:42")
-          div(space-y="4")
-            div(color="ix-white" text="4xl sm:6xl" uppercase="~") Price & Pool Distribution
-            p(color="ix-white" font="bold" text="lg") Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur vulputate, ipsum in ultricies dictum, erat diam porttitor diam, quis pharetra sapien dui et massa. Lorem ipsum.
-
-            InfoPercentWithColor(circleBG="#FF1E6E" :percent="15" info="LuckyCat Metashare")
-            InfoPercentWithColor(circleBG="#FFAFCC" :percent="14" info="Territory staking")
-            InfoPercentWithColor(circleBG="#FFFFFF" :percent="1" info="Astro Cap Metashare")
-            InfoPercentWithColor(circleBG="#D862EB" :percent="10" info="Amelia Foundation")
-            InfoPercentWithColor(circleBG="#7562EB" :percent="10" info="Burn")
-            InfoPercentWithColor(circleBG="#41B2F2" :percent="16.67" info="Common prize: Country")
-            InfoPercentWithColor(circleBG="#20DCBA" :percent="16.67" info="Rare prize: Country + Tier")
-            InfoPercentWithColor(circleBG="#CEF2BD" :percent="16.67" info="Jackpot prize: Country + Tier + Territory")
-
       div(grid="~ lg:cols-2" bg="black" space-y="30" )
         VList(col="span-1" flex="~ 1 col" justify="center lx:start" w="full")
           div(max-w="450px" text-left)
-            ClientOnly(fallback-tag="span" fallback="Price & Pool Distribution Chart")
-              //apexchart(width="500" type="bar" :options="options" :series="series")
-              apexchart(:options="chartRadial" :series="seriesRadial")
+            RadialChart(:seriesChart="seriesRadial" :colorsChart="colorsRadial" titleChart="Price & Pool Distribution Chart")
 
         div(flex="~ 1" items="center" pl="2xl:42")
           div(space-y="4")
-            div(color="ix-white" text="4xl sm:5xl xl:6xl" uppercase="~") Price & Pool Distribution
+            div(color="ix-white" text="4xl xl:6xl" uppercase="~") Price & Pool Distribution
             p(color="ix-white" font="bold" text="lg") Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur vulputate, ipsum in ultricies dictum, erat diam porttitor diam, quis pharetra sapien dui et massa. Lorem ipsum.
 
             InfoPercentWithColor(circleBG="#FF1E6E" :percent="15" info="LuckyCat Metashare")
@@ -110,84 +87,29 @@ VList(flex-grow="1" space-y="12" px="4 md:8" py="4 md:8" bg="$mc-pink" )
             InfoPercentWithColor(circleBG="#20DCBA" :percent="16.67" info="Rare prize: Country + Tier")
             InfoPercentWithColor(circleBG="#CEF2BD" :percent="16.67" info="Jackpot prize: Country + Tier + Territory")
 
+
+//PopupTypePurchaseTickets()
+
+
+
 </template>
 <script lang="ts" setup>
+import RadialChart from "~/components/Chart/RadialChart.vue";
+const colorsRadial = [ '#FF1E6E', '#FF1E6E', '#FF1E6E', '#FF1E6E', '#FF1E6E', '#FF1E6E',
+  '#FFAFCC', '#FFAFCC', '#FFAFCC', '#FFAFCC', '#FFAFCC', '#FFAFCC',
+  '#F9F9F9',
+  '#CEF2BD', '#CEF2BD', '#CEF2BD', '#CEF2BD', '#CEF2BD', '#CEF2BD', '#CEF2BD',
+  '#20DCBA', '#20DCBA', '#20DCBA', '#20DCBA', '#20DCBA', '#20DCBA',
+  '#41B2F2', '#41B2F2', '#41B2F2', '#41B2F2', '#41B2F2', '#41B2F2',
+  '#7562EB', '#7562EB', '#7562EB', '#7562EB',
+  '#D862EB', '#D862EB', '#D862EB', '#D862EB'];
 
-
-
-/*const options = {
-  chart: {
-    id: "vuechart-example",
-  },
-  xaxis: {
-    categories: [1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998],
-  },
-};
-const series = [
-  {
-    name: "series-1",
-    data: [30, 40, 35, 50, 49, 60, 70, 91],
-  },
-];*/
-
-
-const chartRadial = {
-  chart: {
-    width: 380,
-    type: 'donut',
-    redrawOnWindowResize: true,
-    redrawOnParentResize: true
-  },
-  states: {
-    normal: {
-      filter: {
-        type: 'none',
-      }
-    },
-    hover: {
-      filter: {
-        type: 'none',
-      }
-    },
-    active: {
-      filter: {
-        type: 'none',
-      }
-    },
-  },
-  legend: {
-    show: false,
-    offsetY: 0,
-    height: 0,
-  },
-  tooltip: {
-    enabled: false,
-  },
-  dataLabels: {
-    enabled: false,
-  },
-  colors: [ '#FF1E6E', '#FF1E6E', '#FF1E6E', '#FF1E6E', '#FF1E6E', '#FF1E6E',
-            '#FFAFCC', '#FFAFCC', '#FFAFCC', '#FFAFCC', '#FFAFCC', '#FFAFCC',
-            '#F9F9F9',
-            '#CEF2BD', '#CEF2BD', '#CEF2BD', '#CEF2BD', '#CEF2BD', '#CEF2BD', '#CEF2BD',
-            '#20DCBA', '#20DCBA', '#20DCBA', '#20DCBA', '#20DCBA', '#20DCBA',
-            '#41B2F2', '#41B2F2', '#41B2F2', '#41B2F2', '#41B2F2', '#41B2F2',
-            '#7562EB', '#7562EB', '#7562EB', '#7562EB',
-            '#D862EB', '#D862EB', '#D862EB', '#D862EB'],
-  stroke: {
-    show: true,
-    curve: 'smooth',
-    lineCap: 'round',
-    //colors: [ "#560723" ],
-    colors: [ "#560723" ],
-    width: 10,
-    dashArray:0,
-  },
-};
 const seriesRadial = [1,1,1,1,1,1,1,1,1,1,
-                      1,1,1,1,1,1,1,1,1,1,
-                      1,1,1,1,1,1,1,1,1,1,
-                      1,1,1,1,1,1,1,1,1,1]
+  1,1,1,1,1,1,1,1,1,1,
+  1,1,1,1,1,1,1,1,1,1,
+  1,1,1,1,1,1,1,1,1,1]
+
+const popUpYouWin = false;
 
 useHead({
   title: "Home | Geo Lottery | PlanetIX"
