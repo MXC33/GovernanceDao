@@ -69,6 +69,15 @@ export const useNeNotifications = () => {
 
   const notificationCount = ref(1)
 
+  const addSocketItem = (item: Notification) => {
+    console.log(asyncData.data.value?.today)
+    asyncData.data.value?.today.unshift(item)
+    console.log(asyncData.data.value?.today)
+  }
+
+  const reloadNotifications = () => {
+    return asyncData.fetchAndMerge()
+  }
   const loadMoreNotifications = () => {
     notificationCount.value++
     return asyncData.fetchAndMerge()
@@ -78,8 +87,6 @@ export const useNeNotifications = () => {
   const { showUnreadNotifications } = useNotificationSettings()
   const asyncData = useAsyncDataState('notification', async () => {
     return (await fetchIXAPI("notifications/notification/" + notificationCount.value + "?unread=" + showUnreadNotifications.value)) as NotificationRequest
-    //return (await fetchIXAPI(`notifications/notification/${notificationCount}?unread=false`)) as NotificationRequest
-    // this may need to be changed depending on what data we want to fetch
   }, {
     transform: (response) => response?.data,
     mergePages: (oldData, newData) => {
@@ -95,6 +102,8 @@ export const useNeNotifications = () => {
   return {
     ...asyncData,
     loadMoreNotifications,
+    reloadNotifications,
+    addSocketItem
   }
 }
 
@@ -105,7 +114,6 @@ export const useNeMessages = () => {
   const reloadMessages = () => {
     return asyncData.fetchAndMerge()
   }
-
   const loadMoreMessages = () => {
     messageCount.value++
     return asyncData.fetchAndMerge()
@@ -116,7 +124,6 @@ export const useNeMessages = () => {
 
   const asyncData = useAsyncDataState('notification-messages', async () => {
     return (await fetchIXAPI("notifications/messages/" + messageCount.value + "?unread=" + showUnreadNotifications.value)) as NotificationRequest
-    //-return (await fetchIXAPI(`notifications/messages/${messageCount}?unread=false`)) as NotificationRequest
   }, {
     transform: (response) => response?.data,
     mergePages: (oldData, newData) => {

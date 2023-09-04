@@ -1,6 +1,5 @@
 <template lang ="pug">
-//-div() {{ connected }}
-button(@click="toggleNotification")
+button(@click="toggleNotification" bg="red" wh="1" rounded="full")
   BellFilled(v-if="!showNotification" w="6" h="6")
   BellEmpty(v-else w="6" h="6")
 Transition(name="slide-top" mode="out-in")

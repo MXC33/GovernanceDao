@@ -1,9 +1,10 @@
 
+import { useNeMessages, useNeNotifications } from '~/composables/useNeNotificationsAndMessages';
 import { io } from 'socket.io-client';
 
 export default defineNuxtPlugin(() => {
-  const { addMessage } = useNotificationsLibrary()
-
+  const { addSocketItem } = useNeNotifications()
+  const { reloadMessages } = useNeMessages()
   const socket = io("wss://api.planetix.com", {
     path: '/socket.io',
     upgrade: true,
@@ -11,17 +12,17 @@ export default defineNuxtPlugin(() => {
     transports: ['websocket'],
   });
 
-  console.log("SOCKET MAN!")
+  console.log("In Script")
 
   socket.on('connect', () => {
-    console.log('connected');
-    addMessage("Connected", "Hello world")
+    console.log('connected to planetIX');
   });
 
   const { user } = useUser()
 
   socket.on('notification_global', (payload) => {
-    console.log("I been has mesug")
+    console.log("I has recived a message")
+    reloadMessages()
   })
 
   watch(user, (player, oldPlayer) => {
@@ -32,7 +33,8 @@ export default defineNuxtPlugin(() => {
       socket.off('notification_' + oldID)
 
     socket.on('notification_' + playerID, (payload) => {
-      console.log("I got notificationzzz")
+      console.log("I has recived a notificationz", payload)
+      addSocketItem(payload)
     })
   }, { deep: true, immediate: true })
 
