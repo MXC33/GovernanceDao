@@ -2,12 +2,13 @@
 //-cut="bottom-right b-ix-primary b-opacity-60 s-lg"
 VList.notification(w="full" @click="onClick" cursor="on-link:pointer" :link="!!link")
   HList(items="center")
-    VList(items="left" p="1 r-3" )
+    VList(items="left" p="1 r-3")
       h4(font="bold") {{ message.notification.title }} 
       div(v-html="message.notification.message" color="gray-200")
       div(v-if="message.notification.price != null" text="ix-mint") {{ message.notification.price }} IXT
     div(grow="~")
-    div(v-if="message.is_read == 0" bg="red" wh="1" rounded="full")
+    div(p="1")
+      div(v-if="message.is_read == 0"  bg="red" wh="1" rounded="full")
 </template>
 
 <script lang="ts" setup>
