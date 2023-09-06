@@ -94,7 +94,8 @@ VList(flex-grow="1" space-y="12" px="4 md:8" py="4 md:8" bg="$mc-pink" )
 //PopupTypeSubscribe()
 //PopupTypeSubscribeSuccess(:hideCloseButton="true")
 //PopupTypeSwap()
-PopupTypeManageTickets()
+//PopupTypeManageTickets()
+PopupTypeError(:hideCloseButton="true" :isError="true")
 
 
 

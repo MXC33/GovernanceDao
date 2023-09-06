@@ -20,6 +20,17 @@ ButtonSound.button-interactive(sound="sm" opacity="s-invalid:50" transition="all
     GlitchText(:text="text" :hover="true" :is-hovered="isHovered" v-if="!loading")
     span(v-else) {{ $t('general.loading') }}
 
+ButtonSound.button-interactive(sound="sm" opacity="s-invalid:50" transition="all" ref="button" pos="relative"
+  bg="ix-ne hover:(ix-ne opacity-60) " p="x-9 sm:x-10 md:x-12 y-3" color="$mc-whitenew"  border-color="$mc-whitenew" h="12"  font="bold" uppercase="~" text="sm sm:base" rounded="full"
+  pointer-events="s-loading:none s-invalid:none" :state="buttonState" v-if="value == 'red'" v-bind="$attrs")
+  Transition(name="slide-left")
+    span(pos="absolute left-3" v-if="true")
+      LoadingBars.loading-bars(w="4" h="4")
+
+  Transition(name="slide-shift-down" mode="out-in")
+    GlitchText(:text="text" :hover="true" :is-hovered="isHovered" v-if="!loading")
+    span(v-else) {{ $t('general.loading') }}
+
 </template>
 
 

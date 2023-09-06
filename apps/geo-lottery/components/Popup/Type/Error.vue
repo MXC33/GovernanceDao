@@ -2,18 +2,16 @@
 Popup()
   template(#default)
     HList(items="center" justify="center" text="2xl" pt="6" font="bold" uppercase="~")
-      h3() Congratulations!
+      h3() Error
 
-    VList(flex-grow="1" items="center" justify="center" text="md center" font="normal" space-y="6")
+    VList(flex-grow="1" items="center" justify="center" text="md center" font="normal" space-y="6" )
       VList()
-        p() 1 ticket added successfully!
-        p() Hope the luck be with you!
-      VList()
-        p() Winners will be drawn in:
-        p(font="bold") 6 hours 43 minutes 16 seconds
+
+        div(bg="black opacity-60" p="3" )
+          div(color="semantic-warning" max-h="34" overflow-y="auto") Error Message
 
   template(#footer)
-    Button(:value="'pink'" w="full") CLOSE
+    ButtonItem(:value="'red'" min-w="300px md:350px"  :text="'CLOSE'")
 
 </template>
 <script lang="ts" setup>

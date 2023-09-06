@@ -1,8 +1,8 @@
 <template lang="pug">
 Popup()
   template(#default)
-    HList(items="center" justify="center" text="2xl" pt="6" font="bold")
-      h3() CONGRATULATIONS!
+    HList(items="center" justify="center" text="2xl" pt="6" font="bold" uppercase="~")
+      h3() Congratulations!
 
     VList(flex-grow="1" items="center" justify="center" text="md center" font="normal" space-y="6")
       VList()

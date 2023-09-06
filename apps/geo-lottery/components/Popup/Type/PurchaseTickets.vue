@@ -1,6 +1,6 @@
 <template lang="pug">
 Popup()
-  template(#header) PURCHASE TICKETS
+  template(#header) Purchase Tickets
 
   template(#default)
     VList(space-Y="4" pos="relative")

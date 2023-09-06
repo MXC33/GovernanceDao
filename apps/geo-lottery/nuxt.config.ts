@@ -9,7 +9,8 @@ export default defineNuxtConfig({
   ],
 
   css: [
-    '@/assets/styles/fonts.css'
+    '@/assets/styles/fonts.css',
+    '@/assets/styles/general.css'
   ],
 
   app: {
