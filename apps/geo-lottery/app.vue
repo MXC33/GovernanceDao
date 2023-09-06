@@ -8,11 +8,11 @@
 
       PopupList()
 
-      div#infobox(:style="values" z="400" pos="absolute")
+      div#infobox(:style="values" z="901" pos="absolute")
 
       div#takeover
 
-      SnackbarList()
+      //SnackbarList()
 
       Popup(v-if="isSwapVisible" @close="isSwapVisible = false" :disable-default-close="true")
         template(#header) {{ $t(`marketplace.navigation.buy.swap.title`)}}
@@ -93,7 +93,7 @@ const { x: xpos, y: ypos } = useMouse()
 const values = computed(() => {
 
   const xPos = xpos.value - 38
-  const yPos = ypos.value - 190
+  const yPos = ypos.value - 60
 
   return {
     top: `${yPos}px`,

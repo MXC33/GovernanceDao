@@ -20,12 +20,13 @@
   --mc-gray-300: #858585;
   --mc-gray-400: #636363;
   --mc-gray-500: #474747;
-  --mc-gray-600: #333333;
+  --mc-gray-600: #580623;
   --mc-gray-700: #242424;
   --mc-gray-800: #1A1A1A;
   --mc-gray-900: #141414;
   --mc-pink: #FF1E6E;
   --mc-pink-blur: rgba(255, 30, 110, 0.10);
+  --mc-pink-blur2: rgba(200, 10, 110, 1);
   --mc-pink-60: rgba(255, 30, 110, 0.60);
   --mc-blacks: #0C0C0C;
   --mc-arcade-rgb: 189, 255, 0;

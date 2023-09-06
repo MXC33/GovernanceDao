@@ -1,11 +1,7 @@
 <template lang="pug">
-button(bg="$mc-pink" p="x-12 y-3" color="$mc-blacks" font="bold" uppercase="~" text="base" rounded="~" v-if="value == 'next'")
+button(class="pink-btn" bg="hover:gray-300" p="x-9 sm:x-10 md:x-12 y-3" color="$mc-whitenew" font="bold" uppercase="~" text="sm sm:base" rounded="full" h="12"  v-if="value == 'pink'" v-bind="$attrs")
   slot()
-button(bg="$mc-pink-blur" p="x-12 y-3" color="$mc-white-rgb" border-color="$mc-pink-60" border="1" font="bold" uppercase="~" text="base" rounded="~" m="y-4" v-if="value == 'next-blur'")
-  slot()
-button(bg="$mc-blacks" p="x-12 y-3" color="$mc-pink" font="bold" uppercase="~" text="base" rounded="~" m="y-4" v-if="value == 'next-black'")
-  slot()
-button(bg="$mc-gray-600" p="x-12 y-3" color="$mc-gray-700" border-color="$mc-gray-500" border="1" font="bold" uppercase="~" text="base" rounded="~" m="y-4" v-if="value == 'disable'" disabled="~")
+button(bg="transparent hover:(white opacity-10) " p="x-9 sm:x-10 md:x-12 y-3" color="$mc-whitenew"  border-color="$mc-whitenew" border="1" h="12"  font="bold" uppercase="~" text="sm sm:base" rounded="full" v-if="value == 'white'" v-bind="$attrs")
   slot()
 </template>
 
@@ -14,3 +10,13 @@ defineProps<{
   value: string
 }>()
 </script>
+<style>
+
+.pink-btn{
+  background-image: linear-gradient(rgba(255, 30, 110, 1) , rgba(200, 10, 77, 1));
+}
+.pink-btn:hover{
+  background-image: none;
+  background-color: #FF1E6E;
+}
+</style>

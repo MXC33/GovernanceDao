@@ -1,5 +1,5 @@
-<template lang="pug"> 
-div(grid="~ cols-2") 
+<template lang="pug">
+div(grid="~ cols-2" class="border-white")
   div(v-for="category in getAllSmallCatagories(headerItem)" p="2")
     div(text="gray-300") {{ $t(`marketplace.navigation.${headerItem.type}.${category.type}.title`) }}
     div(b="b-1 gray-300" w="95%")
