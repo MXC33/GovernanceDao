@@ -1,99 +1,37 @@
-import { IXToken } from "@ix/base/composables/Token/useIXToken";
-import { ListingItem, UnlistingItem } from "./useListing";
-import { UnbidItem } from "~/composables/useBidding";
-import { TransferToWalletItem } from "./useTransfer";
-import { TransactionItem } from "./useTransactions";
 
 export interface PopupBase {
   type: string
 }
 
-export interface PopupOnList extends PopupBase {
-  type: 'listing-successful',
-  items: ListingItem[]
-}
-
-export interface PopupOnBid extends PopupBase {
-  type: 'bidding-successful',
-  items: TransactionItem[]
-}
-
-export interface PopupTransfer extends PopupBase {
-  type: 'transfer-item',
-  items: IXToken[]
-}
-
-export interface PopupTransferSuccess extends PopupBase {
-  type: 'transfer-item-successful',
-  items: TransferToWalletItem
-}
-
-export interface PopupListItem extends PopupBase {
-  type: 'list-item',
-  items: IXToken[]
-}
-
-export interface PopupUnlistItem extends PopupBase {
-  type: 'unlist-item',
-  items: UnlistingItem[]
-}
-
-export interface PopupUnlistItemSuccess extends PopupBase {
-  type: 'unlist-item-success',
-  items: UnlistingItem[]
-}
-
-export interface PopupRejectItemsSuccess extends PopupBase {
-  type: 'reject-items-success',
-  items: TransactionItem[]
-}
-
-export interface PopupBidItem extends PopupBase {
-  type: 'bid-item',
-  items: IXToken[]
-}
-
-export interface PopupUnbidItem extends PopupBase {
-  type: 'unbid-item',
-  items: UnbidItem[]
-}
-
-export interface PopupUnbidSuccess extends PopupBase {
-  type: 'unbid-success',
-  items: UnbidItem[]
-}
-
-export interface PopupBuyItemSuccess extends PopupBase {
-  type: 'buy-items-success',
-  items: TransactionItem[]
-}
-
-export interface PopupAcceptItems extends PopupBase {
-  type: 'accept-items',
-  items: IXToken[]
-}
-
-export interface PopupRejectItems extends PopupBase {
-  type: 'reject-items',
-  items: IXToken[]
-}
-
-export interface PopupAcceptItemsSuccess extends PopupBase {
-  type: 'accept-items-success',
-  items: TransactionItem[]
-}
-
-export interface PopupInsufficientFunds extends PopupBase {
-  type: 'insufficient-funds',
-}
 
 //My interface
 export interface PopupTypeYouWin extends PopupBase {
   type: 'popup-type-you-win',
 }
+export interface PopupTypePurchaseTickets extends PopupBase {
+  type: 'popup-type-purchase-tickets',
+}
+export interface PopupTypeOneTimeEntry extends PopupBase {
+  type: 'popup-type-one-time-entry',
+}
+export interface PopupTypeOneTimeEntrySuccess extends PopupBase {
+  type: 'popup-type-one-time-entry-success',
+}
+export interface PopupTypeSubscribe extends PopupBase {
+  type: 'popup-type-subscribe',
+}
+export interface PopupTypeSubscribeSuccess extends PopupBase {
+  type: 'popup-type-subscribe-success',
+}
+export interface PopupTypeSwap extends PopupBase {
+  type: 'popup-type-swap',
+}
+export interface PopupTypeManageTickets extends PopupBase {
+  type: 'popup-type-manage-tickets',
+}
 
-type Popup = PopupOnList | PopupOnBid | PopupTransfer | PopupListItem | PopupUnlistItem | PopupBidItem | PopupUnbidItem | PopupTransferSuccess | PopupBuyItemSuccess | PopupAcceptItems | PopupAcceptItemsSuccess | PopupInsufficientFunds | PopupUnlistItemSuccess | PopupUnbidSuccess | PopupRejectItemsSuccess | PopupRejectItems | PopupTypeYouWin
-
+type Popup =  PopupTypeYouWin | PopupTypePurchaseTickets | PopupTypeOneTimeEntry | PopupTypeOneTimeEntrySuccess | PopupTypeSubscribe | PopupTypeSubscribeSuccess | PopupTypeSwap
+ | PopupTypeManageTickets
 export const usePopups = () => {
   const popup = useState<Popup | null>('active-popup', () => null)
 

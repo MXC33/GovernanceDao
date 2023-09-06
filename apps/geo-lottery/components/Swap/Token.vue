@@ -1,0 +1,14 @@
+<template lang="pug">
+HList(flex="~" justify="between" items="center" w="full" text="md" font="normal" color="white")
+  HList(space-x="2" items="center")
+    WalletIcon(w="5")
+    p() Wallet balance
+
+  HList(space-x="2" items="center")
+    HelperAdjustableNumber(text="right")
+
+</template>
+<script lang="ts" setup>
+import WalletIcon from '~/assets/icons/wallet.svg'
+import CirclePlusIcon from '~/assets/icons/circle-plus.svg'
+</script>

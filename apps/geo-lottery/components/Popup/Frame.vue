@@ -17,7 +17,7 @@ const arrowBackElement = ref()
 const isBackHovered = useElementHover(arrowBackElement)
 
 const { hideBackButton } = defineProps<{
-  hideBackButton: boolean,
+  hideBackButton?: boolean,
 }>()
 </script>
 <style>

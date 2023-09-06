@@ -34,7 +34,7 @@ VList(flex-grow="1" space-y="12" px="4 md:8" py="4 md:8" bg="$mc-pink" )
               li() Pool 2 will be shared among all territory owners whose tier and geolocation match the draw. This means that even if your territory size doesn't match, you will still be a winner!
               li() Furthermore, owners of territories that only match the drawn geolocation will share the prizes from Pool 3!
             p(color="ix-white" font="bold" text="lg") Don’t own a territory?
-            ButtonSound(sound="lg" btn="~ accent lg" color="white" text-shadow="none" @click="logoutWallet" cut="bottom-right s-md b-ix-primary") Get Your Own At Netempire
+            ButtonSound(sound="lg" btn="~ accent lg" color="white" text-shadow="none" cut="bottom-right s-md b-ix-primary") Get Your Own At Netempire
 
         VList(flex="~ 1 col" space-y="6" items="center" justify="center" w="full")
           FramePinkWithImg()
@@ -89,12 +89,20 @@ VList(flex-grow="1" space-y="12" px="4 md:8" py="4 md:8" bg="$mc-pink" )
 
 
 //PopupTypePurchaseTickets()
+//PopupTypeOneTimeEntry()
+//PopupTypeOneTimeEntrySuccess(:hideCloseButton="true")
+//PopupTypeSubscribe()
+//PopupTypeSubscribeSuccess(:hideCloseButton="true")
+//PopupTypeSwap()
+PopupTypeManageTickets()
 
 
 
 </template>
 <script lang="ts" setup>
 import RadialChart from "~/components/Chart/RadialChart.vue";
+import OneTimeEntry from "~/components/Popup/Type/OneTimeEntry.vue";
+import Popup from "~/components/Error/Popup.vue";
 const colorsRadial = [ '#FF1E6E', '#FF1E6E', '#FF1E6E', '#FF1E6E', '#FF1E6E', '#FF1E6E',
   '#FFAFCC', '#FFAFCC', '#FFAFCC', '#FFAFCC', '#FFAFCC', '#FFAFCC',
   '#F9F9F9',
