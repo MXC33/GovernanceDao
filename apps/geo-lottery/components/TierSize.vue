@@ -25,8 +25,8 @@ div(class="tier_size")
       span()
         slot() Subscription TICKETS
   div(flex="~ col md:row" justify="center" items-center )
-    Button(:value="'pink'" mb="3 md:0" w="250px sm:auto" mr="0 sm:3" min-w="250px") PURCHASE TICKETS
-    Button(:value="'white'" w="250px sm:auto" min-w="250px") MANAGE TICKETS
+    ButtonItem(:value="'pink'" mb="3 md:0" mr="0 md:3" min-w="300px md:265px" :text="'PURCHASE TICKETS'")
+    ButtonItem(:value="'white'" min-w="300px md:265px" :text="'MANAGE TICKETS'")
 </template>
 
 <script lang="ts" setup>

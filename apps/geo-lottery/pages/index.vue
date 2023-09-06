@@ -13,8 +13,8 @@ div(class="body-main")
             p(font="bold" text="base sm:lg center" ) Every week, territories from around the world are randomly selected. <br> Join today and you will have the chance to win:
             h1(text="4xl md:7xl lg:8xl center" font="bdrA3mik") 2,050,080 IXT
           div(flex="~ col sm:row" justify="center" m="t-6" items-center)
-            Button(:value="'pink'" w="250px sm:auto" min-w="sm:255px" mb="3 sm:0" mr="0 sm:3") JOIN NOW
-            Button(:value="'white'" w="250px sm:auto" min-w="sm:255px") SWAP ASTRO GOLD
+            ButtonItem(:value="'pink'" :text="'SWAP ASTRO GOLD'"  min-w="300px md:255px" mb="3 sm:0" mr="0 sm:3")
+            ButtonItem(:value="'white'" :text="'SWAP ASTRO GOLD'" min-w="300px md:255px" )
   VList(class="background-holder"  pos="relative" overflow="hidden" z="0")
     Background()
       template(#image-source)
@@ -32,7 +32,7 @@ div(class="body-main")
                 li() Furthermore, owners of territories that only match the drawn geolocation will share the prizes from Pool 3!
               p(color="ix-white" font="bold" text="base sm:lg") Don’t own a territory?
               div(flex="~" justify="center sm:start")
-                Button(:value="'pink'" w="auto sm:350px" min-w="md:255px" @click="logoutWallet") Get Your Own At Netempire
+                ButtonItem(:value="'pink'" min-w="300px md:350px" @click="logoutWallet" :text="'Get Your Own At Netempire'")
 
           VList(flex="~ 1 col" space-y="6" items="center" justify="center" w="full")
             FramePinkWithImg()
@@ -89,65 +89,50 @@ div(class="body-main")
                 li() Fully tradable
           VList(flex="~ 1 col" space-y="6" items="lg:end" justify="center" w="full")
             div() Link with svg for info
+        //Price & Pool Distribution
+        div(flex flex-col lg:flex-row)
+          div(basis="5/5 md:3/5" flex="~ col" justify="center items-start" w="full")
+            div(max-w="450px lg:550px" text-left mb="10 lg:0")
+              RadialChart(:seriesChart="seriesRadial" :colorsChart="colorsRadial" titleChart="Price & Pool Distribution Chart")
 
-        //Prize Check
-        HList(flex="~ col lg:row" items="center" gap="12 lg:32")
-          div(flex="~ 1" items="center")
-            div(space-y="3 md:4")
-              div(color="ix-white" text="4xl xl:5xl 2xl:6xl" uppercase="~" font="bdrA3mik") Prize Check
-              p(color="ix-white" font="bold" text="base sm:lg") Streamable Dynamic NFTs Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur vulputate, ipsum in ultricies dictum, erat diam porttitor diam, quis pharetra sapien dui et massa. Lorem ipsum.
-              ul(list="square" color="ix-white" font="bold" text="base sm:lg" pl="5")
-                li() Stream your winnings continually to your wallet
-                li() Full ownership rights
-                li() Fully tradable
-          VList(flex="~ 1 col" space-y="6" items="lg:end" justify="center" w="full")
-            div() Link with svg for info
-        //Prize Check
-        HList(flex="~ col lg:row" items="center" gap="12 lg:32")
-          div(flex="~ 1" items="center")
-            div(space-y="3 md:4")
-              div(color="ix-white" text="4xl xl:5xl 2xl:6xl" uppercase="~" font="bdrA3mik") Prize Check
-              p(color="ix-white" font="bold" text="base sm:lg") Streamable Dynamic NFTs Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur vulputate, ipsum in ultricies dictum, erat diam porttitor diam, quis pharetra sapien dui et massa. Lorem ipsum.
-              ul(list="square" color="ix-white" font="bold" text="base sm:lg" pl="5")
-                li() Stream your winnings continually to your wallet
-                li() Full ownership rights
-                li() Fully tradable
-          VList(flex="~ 1 col" space-y="6" items="lg:end" justify="center" w="full")
-            div() Link with svg for info
-              //Prize Check
-        HList(flex="~ col lg:row" items="center" gap="12 lg:32")
-          div(flex="~ 1" items="center")
-            div(space-y="3 md:4")
-              div(color="ix-white" text="4xl xl:5xl 2xl:6xl" uppercase="~" font="bdrA3mik") Prize Check
-              p(color="ix-white" font="bold" text="base sm:lg") Streamable Dynamic NFTs Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur vulputate, ipsum in ultricies dictum, erat diam porttitor diam, quis pharetra sapien dui et massa. Lorem ipsum.
-              ul(list="square" color="ix-white" font="bold" text="base sm:lg" pl="5")
-                li() Stream your winnings continually to your wallet
-                li() Full ownership rights
-                li() Fully tradable
-          VList(flex="~ 1 col" space-y="6" items="lg:end" justify="center" w="full")
-            div() Link with svg for info
+          div(basis="5/5 md:2/5" items="center")
+            div(space-y="4")
+              div(color="ix-white" text="4xl xl:6xl" uppercase="~" font="bdrA3mik") Price & Pool Distribution
+              p(color="ix-white" font="bold" text="lg") Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur vulputate, ipsum in ultricies dictum, erat diam porttitor diam, quis pharetra sapien dui et massa. Lorem ipsum.
+
+              InfoPercentWithColor(circleBG="#FF1E6E" :percent="15" info="LuckyCat Metashare")
+              InfoPercentWithColor(circleBG="#FFAFCC" :percent="14" info="Territory staking")
+              InfoPercentWithColor(circleBG="#FFFFFF" :percent="1" info="Astro Cap Metashare")
+              InfoPercentWithColor(circleBG="#D862EB" :percent="10" info="Amelia Foundation")
+              InfoPercentWithColor(circleBG="#7562EB" :percent="10" info="Burn")
+              InfoPercentWithColor(circleBG="#41B2F2" :percent="16.67" info="Common prize: Country")
+              InfoPercentWithColor(circleBG="#20DCBA" :percent="16.67" info="Rare prize: Country + Tier")
+              InfoPercentWithColor(circleBG="#CEF2BD" :percent="16.67" info="Jackpot prize: Country + Tier + Territory")
 
 
 </template>
 
 
 <script lang="ts" setup>
-import TimeCountdown from "~/components/TimeCountdown.vue";
+import RadialChart from "~/components/Chart/RadialChart.vue";
+const colorsRadial = [ '#FF1E6E', '#FF1E6E', '#FF1E6E', '#FF1E6E', '#FF1E6E', '#FF1E6E',
+  '#FFAFCC', '#FFAFCC', '#FFAFCC', '#FFAFCC', '#FFAFCC', '#FFAFCC',
+  '#F9F9F9',
+  '#CEF2BD', '#CEF2BD', '#CEF2BD', '#CEF2BD', '#CEF2BD', '#CEF2BD', '#CEF2BD',
+  '#20DCBA', '#20DCBA', '#20DCBA', '#20DCBA', '#20DCBA', '#20DCBA',
+  '#41B2F2', '#41B2F2', '#41B2F2', '#41B2F2', '#41B2F2', '#41B2F2',
+  '#7562EB', '#7562EB', '#7562EB', '#7562EB',
+  '#D862EB', '#D862EB', '#D862EB', '#D862EB'];
+
+const seriesRadial = [1,1,1,1,1,1,1,1,1,1,
+  1,1,1,1,1,1,1,1,1,1,
+  1,1,1,1,1,1,1,1,1,1,
+  1,1,1,1,1,1,1,1,1,1]
 
 useHead({
   title: "Home | Geo Lottery | PlanetIX"
 })
-const { id } = defineProps<{
-  id: string,
-}>()
 
-
-import type { AdjustableNumber } from '@ix/base/composables/Utils/useAdjustableNumber';
-/*const value = defineModel<AdjustableNumber>()*/
-
-import Plus  from '~/assets/icons/plus.svg'
-import Statistics from "~/components/Statistics.vue";
-import TestEnterLottery from "~/components/TestEnterLottery.vue";
 import Background from "~/components/Background.vue";
 import TierSize from "~/components/TierSize.vue";
 

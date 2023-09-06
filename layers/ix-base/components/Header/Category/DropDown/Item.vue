@@ -1,15 +1,15 @@
 <template lang="pug">
 NuxtLink(:to="linkPath" cursor="pointer")
-  VList(p="3" space-y="2" group)
+  VList(p="3" space-y="2" group class="pink-hover")
     HeaderCategoryIcon(w="8" :header="header" :item="item" :category="category" fill="white group-hover:ix-orange" flex-shrink="0")
-    VList(v-if="linkPath || isNotLink()")
-      div(color="white group-hover:ix-orange" uppercase ="~") {{ $t(`${langPath}.title`)}} 
+    VList(v-if="linkPath || isNotLink()" class="pink-hover")
+      div(color="white group-hover:ix-orange" uppercase ="~") {{ $t(`${langPath}.title`)}}
       div(color="gray-200 group-hover:ix-orange" text="sm") {{ $t(`${langPath}.description`) }}
     VList(v-else)
-      div(color="gray" uppercase ="~") {{ $t(`${langPath}.title`)}} 
+      div(color="gray" uppercase ="~") {{ $t(`${langPath}.title`)}}
       div(color="ix-orange" text="sm") {{ $t(`marketplace.navigation.soon`)}}
 </template>
-  
+
 <script lang="ts" setup>
 const { t } = useI18n()
 const langPath = computed(() => `marketplace.navigation.${header}.${category}.${item}`)
