@@ -28,11 +28,12 @@ watch(isLoggedInAndConnected, (connected) => {
   if (redirectQuery) {
     const path = decodeURIComponent(String(redirectQuery))
     const ensureRelativeQuery = /^[^\/]+\/[^\/].*$|^\/[^\/].*$/gmi
-
     if (path.match(ensureRelativeQuery))
       return navigateTo(path)
+  } else {
+    return navigateTo('/')
   }
 
 
-}, { immediate: true })
+})
 </script>
