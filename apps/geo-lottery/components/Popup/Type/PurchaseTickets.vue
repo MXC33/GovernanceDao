@@ -1,29 +1,39 @@
 <template lang="pug">
 Popup()
-  template(#icon)
-    CheckboxIcon(w="6" h="6")
-
-  template(#header) Purchase Tickets
+  template(#header) PURCHASE TICKETS
 
   template(#default)
-    div() test default
+    VList(space-Y="4" pos="relative")
+      HList(space-x="3" pos="relative")
+        p() Choose method
+        HelperHover(tooltip-id="Choose method Info tooltip")
+          InfoIcon(w="5")
+
+      InputRadio(v-model="radioTestModel" value="1")
+        template(#default) One-time entry
+        template(#info) 0 entries out of 20
+      InputRadio(v-model="radioTestModel" value="2")
+        template(#default) Subscription
+        template(#info) 0 entries out of 30
+
 
   template(#footer)
     VList()
-      button( btn="~ secondary" w="full") {{ $t(`marketplace.offer.viewInActiveList`) }}
-      button( btn="~ primary" w="full") {{ $t(`marketplace.offer.continueExploring`) }}
-
-  template(#buttons)
-    VList()
-      button( btn="~ secondary" w="full") {{ $t(`marketplace.offer.viewInActiveList`) }}
-      button( btn="~ primary" w="full") {{ $t(`marketplace.offer.continueExploring`) }}
+      Button(:value="'pink'" w="full") CONTINUE
 
 </template>
-
-
 <script lang="ts" setup>
-import CheckboxIcon from '~/assets/icons/arrow-left.svg'
+
+import InfoIcon from '~/assets/icons/info.svg'
+
 const { closeActivePopup } = usePopups()
+
+const radioTestModel = ref(1)
+
+const onClickAssets = () => {
+  navigateTo('/')
+  return closeActivePopup()
+}
 
 defineEmits(["close"])
 </script>
