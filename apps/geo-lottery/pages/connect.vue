@@ -30,6 +30,8 @@ watch(isLoggedInAndConnected, (connected) => {
     const ensureRelativeQuery = /^[^\/]+\/[^\/].*$|^\/[^\/].*$/gmi
     if (path.match(ensureRelativeQuery))
       return navigateTo(path)
+    else
+      return navigateTo('/')
   } else {
     return navigateTo('/')
   }
