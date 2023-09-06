@@ -1,11 +1,11 @@
 <template lang="pug">
-VList(flex-grow="1" w="full")
+VList(flex-grow="1" w="full" )
   VList(v-for="header in siteTopHeaders")
-    CollectionFilterDrawer(bg="black")
-      template(#header) 
+    CollectionFilterDrawer(bg="black" )
+      template(#header)
         div() {{ $t(`marketplace.navigation.${header.type}.title`)}}
-      template(#default) 
-        HeaderCategoryDropDownLargeGroup(v-for="category in getAllLargeCatagories(header)" :category="category" :parentType="header.type" @clikedItem="onClickItem")
+      template(#default)
+        HeaderCategoryDropDownLargeGroup(class="border-white" v-for="category in getAllLargeCatagories(header)" :category="category" :parentType="header.type" @clikedItem="onClickItem")
         HeaderCategoryDropDownSmallGroup(:headerItem="header" @clikedItem="onClickItem")
 </template>
 

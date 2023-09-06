@@ -1,9 +1,9 @@
 <template lang="pug">
 VList(pos="relative" display="lt-md:none"  ref="menuElement")
-  button(btn-soft="s-connected:ix-mint ix-orange" bg="s-connected:(mint opacity-10 hover:opacity-10) ix-mint opacity-10 hover:opacity-10" b="s-connected:(white 1) white 1" color="white" @click="toggleMenu" :state="walletState" )
+  button(btn-soft="s-connected:ix-mint ix-orange" @click="toggleMenu" :state="walletState")
     Transition(name="fade-slow" mode="out-in")
       span(v-if="walletState == 'disconnected'") {{ $t(`marketplace.navigation.menu.connectWallet`)}}
-      span(v-else-if="!ixtPending && ixtBalance != undefined && walletState == 'connected'" w="25" color="$mc-whitenew") {{ roundToDecimals(ixtBalance, 2) }} IXT
+      span(v-else-if="!ixtPending && ixtBalance != undefined && walletState == 'connected'" w="25") {{ roundToDecimals(ixtBalance, 2) }} IXT
       HelperLoader(v-else fill="ix-mint on-wallet:ix-orange" w="4" :wallet="walletState != 'connected'")
 
   HeaderSubmenuWrapper(v-if="menuOpen" :align-right="true")

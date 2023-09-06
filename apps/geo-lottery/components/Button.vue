@@ -1,9 +1,7 @@
 <template lang="pug">
-button(bg="$mc-pink" p="x-12 y-3" color="$mc-whitenew" font="bold" uppercase="~" text="base" rounded="full" h="12"  v-if="value == 'pink'" v-bind="$attrs")
+button(class="pink-btn" bg="hover:gray-300" p="x-9 sm:x-10 md:x-12 y-3" color="$mc-whitenew" font="bold" uppercase="~" text="sm sm:base" rounded="full" h="12"  v-if="value == 'pink'" v-bind="$attrs")
   slot()
-button(bg="transparent" p="x-12 y-3" color="$mc-whitenew"  border-color="$mc-whitenew" border="1" h="12"  font="bold" uppercase="~" text="base" rounded="full" v-if="value == 'white'" v-bind="$attrs")
-  slot()
-button(bg="$mc-blacks" p="x-12 y-3" color="$mc-white-rgb" font="bold" uppercase="~" text="base" rounded="full" m="x-4" h="12"  v-if="value == 'black'" v-bind="$attrs")
+button(bg="transparent hover:(white opacity-10) " p="x-9 sm:x-10 md:x-12 y-3" color="$mc-whitenew"  border-color="$mc-whitenew" border="1" h="12"  font="bold" uppercase="~" text="sm sm:base" rounded="full" v-if="value == 'white'" v-bind="$attrs")
   slot()
 </template>
 
@@ -12,3 +10,13 @@ defineProps<{
   value: string
 }>()
 </script>
+<style>
+
+.pink-btn{
+  background-image: linear-gradient(rgba(255, 30, 110, 1) , rgba(200, 10, 77, 1));
+}
+.pink-btn:hover{
+  background-image: none;
+  background-color: #FF1E6E;
+}
+</style>
