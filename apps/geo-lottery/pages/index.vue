@@ -13,7 +13,7 @@ div(class="body-main")
             p(font="bold" text="base sm:lg center" ) Every week, territories from around the world are randomly selected. <br> Join today and you will have the chance to win:
             h1(text="4xl md:7xl lg:8xl center" font="bdrA3mik") 2,050,080 IXT
           div(flex="~ col sm:row" justify="center" m="t-6" items-center)
-            ButtonItem(:value="'pink'" :text="'SWAP ASTRO GOLD'"  min-w="300px md:255px" mb="3 sm:0" mr="0 sm:3")
+            ButtonItem(:value="'pink'" :text="'Join now'"  min-w="300px md:255px" mb="3 sm:0" mr="0 sm:3" @click="openPurchaseTickets()")
             ButtonItem(:value="'white'" :text="'SWAP ASTRO GOLD'" min-w="300px md:255px" )
   VList(class="background-holder"  pos="relative" overflow="hidden" z="0")
     Background()
@@ -135,12 +135,24 @@ useHead({
 
 import Background from "~/components/Background.vue";
 import TierSize from "~/components/TierSize.vue";
+import {useHelperMethods} from "~/composables/useHelperMethods";
 
 const value = {
   multiplier: 3,
   max: 10,
   min: 1,
   value: 2,
+}
+
+const { displayPopup } = usePopups()
+const { checkIsAuth } = useHelperMethods()
+const openPurchaseTickets = () => {
+  if (!checkIsAuth()) return
+
+  displayPopup({
+    type: 'popup-type-purchase-tickets',
+    //backModal: 'popup-type-one-time-entry'
+  })
 }
 </script>
 <style>
