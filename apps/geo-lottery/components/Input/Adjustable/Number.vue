@@ -1,5 +1,11 @@
 <template lang="pug">
-input(outline="none" appearance="none" placeholder="0" b="none" bg="white opacity-0" w="full" text="lg center on-invalid:red-500" color="$corporation-text-color"  font="bold" v-model="data.value")
+input(
+  outline="none" appearance="none" placeholder="0" b="none" bg="white opacity-0" w="full" text="lg center on-invalid:red-500" color="$corporation-text-color"  font="bold"
+  v-model="data.value"
+  @keyup.enter="updateAmount"
+  @focusout="updateAmount"
+  :invalid="invalidNumber"
+)
 </template>
 
 <script lang="ts" setup>

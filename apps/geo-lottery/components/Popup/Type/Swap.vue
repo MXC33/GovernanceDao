@@ -2,7 +2,7 @@
 Popup()
   template(#content)
     VList(flex-grow="1" p="4" text="md" font="normal")
-      SwapToken(m-y="2" order="1")
+      SwapToken(m-y="2" order="1" v-model="input1" )
         template(#icon)
           IxtCircleBlackIcon(w="10")
         template(#title) Ix Token
@@ -12,7 +12,7 @@ Popup()
         div(flex="~" justify="center" items="center" w="12" h="12" cursor="pointer" bg="ix-pink hover:opacity-80" rounded="full")
           SortArrowsIcon(w="5")
 
-      SwapToken(m-y="2" order="3")
+      SwapToken(m-y="2" order="3" v-model="input2")
         template(#icon)
           AstroGoldCircleYellowIcon(w="10")
         template(#title) Astro Gold
@@ -34,4 +34,6 @@ const onClickAssets = () => {
 }
 
 defineEmits(["close"])
+const input1 = ref(12)
+const input2 = ref(21)
 </script>

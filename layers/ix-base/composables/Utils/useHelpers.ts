@@ -42,6 +42,9 @@ export const isNumeric = (value: string) => {
   return /^-?\d+$/.test(value)
 }
 
+export const convertToNumber = (input: number | string) =>
+  isNaN(Number(input)) ? 0 : Number(input)
+
 export const notNull = <T>(val: T | null | undefined): val is T => {
   return val !== null && val !== undefined
 }

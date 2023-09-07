@@ -10,10 +10,14 @@ HList(flex="~" justify="between" items="center" w="full" text="md" font="normal"
         slot(name="balance")
 
   HList(space-x="2" items="center")
-    HelperAdjustableNumber(text="right")
+    InputNumber(text="right" v-model="data" )
 
 </template>
 <script lang="ts" setup>
-import WalletIcon from '~/assets/icons/wallet.svg'
-import CirclePlusIcon from '~/assets/icons/circle-plus.svg'
+const props = defineProps<{
+  modelValue: number
+}>()
+
+const emit = defineEmits(["update:modelValue"])
+const data = useVModel(props, 'modelValue', emit)
 </script>

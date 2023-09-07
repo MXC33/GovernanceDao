@@ -1,5 +1,5 @@
 <template lang="pug">
-ButtonSound.button-interactive(class="pink-btn" opacity="s-invalid:50" transition="all" ref="button" pos="relative"
+ButtonSound.button-interactive(sound="sm" class="pink-btn" opacity="s-invalid:50" transition="all" ref="button" pos="relative"
   bg="hover:gray-300" p="x-9 sm:x-10 md:x-12 y-3" color="$mc-whitenew" font="bold" uppercase="~" text="sm sm:base" rounded="full" h="12"
   pointer-events="s-loading:none s-invalid:none" :state="buttonState" v-if="value == 'pink'" v-bind="$attrs")
   Transition(name="slide-left")
