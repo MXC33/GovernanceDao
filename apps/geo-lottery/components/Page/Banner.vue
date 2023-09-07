@@ -12,10 +12,25 @@ VList(class="background-holder" pos="relative" overflow="hidden" z="0" min-h="60
         p(font="bold" text="base sm:lg center" ) Every week, territories from around the world are randomly selected. <br> Join today and you will have the chance to win:
         h1(text="4xl md:7xl lg:8xl center" font="bdrA3mik") 2,050,080 IXT
       div(flex="~ col sm:row" justify="center" m="t-6" items-center)
-        ButtonItem(:value="'pink'" :text="'SWAP ASTRO GOLD'"  min-w="300px md:255px" mb="3 sm:0" mr="0 sm:3")
-        ButtonItem(:value="'white'" :text="'SWAP ASTRO GOLD'" min-w="300px md:255px" )
+        ButtonItem(:value="'pink'" :text="'JOIN NOW'"  min-w="300px md:255px" mb="3 sm:0" mr="0 sm:3" @click="openPurchaseTickets")
+        ButtonItem(:value="'white'" :text="'SWAP ASTRO GOLD'" min-w="300px md:255px" @click="openSwap")
 </template>
 
 <script lang="ts" setup>
+const { displayPopup } = usePopups()
+const { checkIsAuth } = useHelperMethods()
+const openPurchaseTickets = () => {
+  if (!checkIsAuth()) return
 
+  displayPopup({
+    type: 'popup-type-purchase-tickets'
+  })
+}
+const openSwap = () => {
+  if (!checkIsAuth()) return
+
+  displayPopup({
+    type: 'popup-type-swap'
+  })
+}
 </script>

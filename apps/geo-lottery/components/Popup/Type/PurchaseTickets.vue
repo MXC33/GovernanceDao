@@ -9,30 +9,30 @@ Popup()
         HelperHover(tooltip-id="Choose method Info tooltip")
           InfoIcon(w="5")
 
-      InputRadio(v-model="radioTestModel" value="1")
+      InputRadio(v-model="purchaseTypeModel" :value="'popup-type-one-time-entry'")
         template(#default) One-time entry
         template(#info) 0 entries out of 20
-      InputRadio(v-model="radioTestModel" value="2")
+      InputRadio(v-model="purchaseTypeModel" :value="'popup-type-subscribe'")
         template(#default) Subscription
         template(#info) 0 entries out of 30
 
 
   template(#footer)
     VList()
-      Button(:value="'pink'" w="full") CONTINUE
+      ButtonItem(:value="'pink'" :text="'CONTINUE'" @click="onContinue()")
 
 </template>
 <script lang="ts" setup>
-
 import InfoIcon from '~/assets/icons/info.svg'
+const { displayPopup, closeActivePopup } = usePopups()
 
-const { closeActivePopup } = usePopups()
+const purchaseTypeModel = ref<'popup-type-one-time-entry' | 'popup-type-subscribe'>('popup-type-one-time-entry')
 
-const radioTestModel = ref(1)
-
-const onClickAssets = () => {
-  navigateTo('/')
-  return closeActivePopup()
+const onContinue = () => {
+  displayPopup({
+    type: purchaseTypeModel.value,
+    backModal: 'popup-type-purchase-tickets'
+  })
 }
 
 defineEmits(["close"])

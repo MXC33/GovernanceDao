@@ -12,7 +12,6 @@ main(w="full" h="full" flex="~ col grow" min-h="0")
 
 <script lang="ts" setup>
 import PlanetIXLogo from '~/assets/images/logo.svg'
-import Button from "~/components/Helper/Adjustable/Button.vue";
 </script>
 
 <style>

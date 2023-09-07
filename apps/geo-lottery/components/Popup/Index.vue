@@ -6,7 +6,7 @@ Transition(name="fade" appear)
 
       HList(v-if="$slots.header || !hideCloseButton" items="center" justify="between" min-h="12" px="4" py="3" b="b-1 ix-white opacity-60" text="md" font="bold" uppercase="~" pos="sticky top-0" z="3")
         HList(space-x="3" items="center")
-          //HList(space-x="3" items="center" v-if="true" cursor="pointer" @click.stop="onClickBack")
+          HList(space-x="3" items="center" v-if="popup.backModal" cursor="pointer" @click.stop="onClickBack")
             BackIcon(w="5" fill="ix-white opacity-60")
             h3(font="normal" color="ix-white opacity-60") Back
 
@@ -32,7 +32,7 @@ Transition(name="fade" appear)
 <script setup lang="ts">
 import CloseIcon from '~/assets/icons/close.svg'
 import BackIcon from '~/assets/icons/arrow-left.svg'
-const { closeActivePopup } = usePopups()
+const { closeActivePopup, displayPopup, popup } = usePopups()
 
 const onClose = () => {
   if (!disableDefaultClose)
@@ -47,8 +47,10 @@ const { disableDefaultClose, hideCloseButton, isError } = defineProps<{
 }>()
 
 const onClickBack = () => {
-  navigateTo(backUrl)
-  return closeActivePopup()
+  if (popup.value)
+    displayPopup({
+      type: popup.value.backModal
+    })
 }
 
 const emit = defineEmits(["close"])
