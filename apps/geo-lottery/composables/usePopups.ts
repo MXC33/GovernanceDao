@@ -1,8 +1,8 @@
 
 export interface PopupBase {
-  type: string
+  type: string,
+  backModal?: any
 }
-
 
 //My interface
 export interface PopupTypeYouWin extends PopupBase {
@@ -30,7 +30,7 @@ export interface PopupTypeManageTickets extends PopupBase {
   type: 'popup-type-manage-tickets',
 }
 
-type Popup =  PopupTypeYouWin | PopupTypePurchaseTickets | PopupTypeOneTimeEntry | PopupTypeOneTimeEntrySuccess | PopupTypeSubscribe | PopupTypeSubscribeSuccess | PopupTypeSwap
+type Popup = PopupTypeYouWin | PopupTypePurchaseTickets | PopupTypeOneTimeEntry | PopupTypeOneTimeEntrySuccess | PopupTypeSubscribe | PopupTypeSubscribeSuccess | PopupTypeSwap
  | PopupTypeManageTickets
 export const usePopups = () => {
   const popup = useState<Popup | null>('active-popup', () => null)
