@@ -12,11 +12,23 @@ main(w="full" h="full" flex="~ col grow" min-h="0")
 
 <script lang="ts" setup>
 import PlanetIXLogo from '~/assets/images/logo.svg'
+import Button from "~/components/Helper/Adjustable/Button.vue";
 </script>
 
 <style>
 .geo-lottery-header  > div{
   background-color: rgba(255, 30, 110, 1)
+}
+.geo-lottery-header .border-white-ixt button, .geo-lottery-header .border-white-ixt{
+  border-color: rgba(249, 249, 249, 0.6);
+  color: white;
+  background-color: #f33076;
+}
+.geo-lottery-header .border-white-ixt button:hover, .geo-lottery-header .border-white-ixt:hover{
+  background-color:rgba(249, 249, 249, 0.1);
+}
+.geo-lottery-header .border-white:hover{
+  background-color: rgba(132, 212, 188, 0.1);
 }
 .geo-lottery-header [btn~="menu"]{
   font-size: 16px;

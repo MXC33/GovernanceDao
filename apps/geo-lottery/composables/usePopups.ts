@@ -26,12 +26,16 @@ export interface PopupTypeSubscribeSuccess extends PopupBase {
 export interface PopupTypeSwap extends PopupBase {
   type: 'popup-type-swap',
 }
+export interface PopupTypeSwapSuccess extends PopupBase {
+  type: 'popup-type-swap-success',
+}
 export interface PopupTypeManageTickets extends PopupBase {
   type: 'popup-type-manage-tickets',
 }
 
+
 type Popup = PopupTypeYouWin | PopupTypePurchaseTickets | PopupTypeOneTimeEntry | PopupTypeOneTimeEntrySuccess | PopupTypeSubscribe | PopupTypeSubscribeSuccess | PopupTypeSwap
- | PopupTypeManageTickets
+ | PopupTypeManageTickets | PopupTypeSwapSuccess
 export const usePopups = () => {
   const popup = useState<Popup | null>('active-popup', () => null)
 
