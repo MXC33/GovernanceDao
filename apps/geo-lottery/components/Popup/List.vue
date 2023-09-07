@@ -46,6 +46,8 @@ div#popups()
 
     PopupTypeSwap(v-else-if="popup.type == 'popup-type-swap'")
 
+    PopupTypeSwapSuccess(v-else-if="popup.type == 'popup-type-swap-success'")
+
     PopupTypeManageTickets(v-else-if="popup.type == 'popup-type-manage-tickets'")
 
 
