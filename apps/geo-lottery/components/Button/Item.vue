@@ -3,7 +3,7 @@ ButtonSound.button-interactive(class="pink-btn" opacity="s-invalid:50" transitio
   bg="hover:gray-300" p="x-9 sm:x-10 md:x-12 y-3" color="$mc-whitenew" font="bold" uppercase="~" text="sm sm:base" rounded="full" h="12"
   pointer-events="s-loading:none s-invalid:none" :state="buttonState" v-if="value == 'pink'" v-bind="$attrs")
   Transition(name="slide-left")
-    span(pos="absolute left-3" v-if="true")
+    span(pos="absolute left-3" v-if="loading")
       LoadingBars.loading-bars(w="4" h="4")
 
   Transition(name="slide-shift-down" mode="out-in")
@@ -13,7 +13,7 @@ ButtonSound.button-interactive(sound="sm" opacity="s-invalid:50" transition="all
   bg="transparent hover:(white opacity-10) " p="x-9 sm:x-10 md:x-12 y-3" color="$mc-whitenew"  border-color="$mc-whitenew" border="1" h="12"  font="bold" uppercase="~" text="sm sm:base" rounded="full"
   pointer-events="s-loading:none s-invalid:none" :state="buttonState" v-if="value == 'white'" v-bind="$attrs")
   Transition(name="slide-left")
-    span(pos="absolute left-3" v-if="true")
+    span(pos="absolute left-3" v-if="loading")
       LoadingBars.loading-bars(w="4" h="4")
 
   Transition(name="slide-shift-down" mode="out-in")
@@ -24,7 +24,7 @@ ButtonSound.button-interactive(sound="sm" opacity="s-invalid:50" transition="all
   bg="ix-ne hover:(ix-ne opacity-60) " p="x-9 sm:x-10 md:x-12 y-3" color="$mc-whitenew"  border-color="$mc-whitenew" h="12"  font="bold" uppercase="~" text="sm sm:base" rounded="full"
   pointer-events="s-loading:none s-invalid:none" :state="buttonState" v-if="value == 'red'" v-bind="$attrs")
   Transition(name="slide-left")
-    span(pos="absolute left-3" v-if="true")
+    span(pos="absolute left-3" v-if="loading")
       LoadingBars.loading-bars(w="4" h="4")
 
   Transition(name="slide-shift-down" mode="out-in")
