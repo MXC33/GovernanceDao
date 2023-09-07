@@ -3,15 +3,29 @@ Popup()
   template(#header) Manage Tickets
 
   template(#default)
-    VList(space-Y="4" pos="relative")
-      HList(space-x="3" pos="relative")
-        p() Your one-time entries
-        CirclePlusIcon(w="5")
-
-
+    VList( pos="relative")
+      HList( pos="relative" flex="~ col" mb-7)
+        p( mb-1) Your one-time entries
+        div(flex="~" ml="0")
+          CirclePlusIcon(w="5" mr-3)
+          p(font="bold" text="lg") 10 tickets
+      HList( pos="relative" flex="~ col" mb-7)
+        p( mb-1) Your subscription entries
+        div(flex="~" ml="0")
+          CirclePlusIcon(w="5" mr-3)
+          p(font="bold" text="lg") 5 tickets
+      HList( pos="relative" flex="~ col" mb-7)
+        p( mb-1) Your one-time entries
+        div(flex="~" ml="0" items-center)
+          InputSwitch(w="6" h="6" v-model="switchModel")
+          p(font="bold" text="lg" )
+            template(v-if="switchModel & !switchModelUpdated") Active
+            template(v-else-if="switchModel & switchModelUpdated") Activate - Press continue to comfirm
+            template(v-else-if="!switchModel & !switchModelUpdated") Inactive
+            template(v-else-if="!switchModel & switchModelUpdated") Deactivate - Press continue to comfirm
   template(#footer)
     VList()
-      Button(:value="'pink'" w="full") CONTINUE
+      Button(:value="'pink'" w="full" v-if="switchModelUpdated" ) CONTINUE
 
 </template>
 <script lang="ts" setup>
@@ -19,8 +33,19 @@ import CirclePlusIcon from '~/assets/icons/circle-plus.svg'
 
 const { closeActivePopup } = usePopups()
 
-const radioTestModel = ref(1)
+// get subscription status and update those
+const switchModel = ref(false)
+const switchModelSaved = ref(false)
 
+const switchModelUpdated = ref(false)
+
+watch(switchModel, (val) => {
+  console.log(val) // console log value when changed from InputSwitch component
+  if(switchModelSaved.value != val)
+    switchModelUpdated.value = true
+  else
+    switchModelUpdated.value = false
+})
 const onClickAssets = () => {
   navigateTo('/')
   return closeActivePopup()

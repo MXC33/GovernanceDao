@@ -1,6 +1,6 @@
 <template lang="pug">
 div(class="round_tracker")
-  p(text="xl center" font="extrabold" m="b-4 md:b-9" ) ROUND #031
+  p(text="xl center" font="extrabold" m="b-4 md:b-8" ) ROUND #031
   div(grid grid-cols="4" gap-1 p=" md:x-15 lg:x-25 2xl:x-65")
     div(flex="~ col" items-center)
       div(flex justify="center" items="center" bg="$mc-pink-blur" border-color="$mc-pink" p="5" border="1" w="20 xs:60 sm:28 lg:44" h="14 sm:18 lg:24" text="2xl lg:6xl" rounded="full" m="b-4" font="bdrA3mik")
