@@ -1,6 +1,6 @@
 <template lang="pug">
 div(class="body-main")
-  PageBanner()
+  PageBanner(:livepage="true")
   VList(class="background-holder"  pos="relative" overflow="hidden" z="0")
     Background()
       template(#image-source)
