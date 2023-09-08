@@ -1,7 +1,8 @@
 <template lang ="pug">
 button(@click="toggleNotification" bg="s-unread:ix-orange" wh="2" rounded="full" :state="isUnread()")
-  BellFilled(v-if="!showNotification" w="6" h="6")
-  BellEmpty(v-else w="6" h="6")
+  div(w="6" h="6")
+    BellFilled(v-if="!showNotification")
+    BellEmpty(v-else)
 Transition(name="slide-top" mode="out-in")
   NotificationMenu(v-if="showNotification")
 </template>
@@ -20,33 +21,25 @@ const { data: messagesData } = useNeMessages()
 const { data: notificationData } = useNeNotifications()
 
 const isUnread = () => {
-  const notifications = []
+  //Messages
+  const todayMessagesUnread = messagesData.value?.today && isUnreadInNotifications(messagesData.value.today)
+  const yesterdayMessagesUnread = messagesData.value?.yesterday && isUnreadInNotifications(messagesData.value.yesterday)
+  const oldMessagesUnread = messagesData.value?.old && isUnreadInNotifications(messagesData.value.old)
+  
+  if(todayMessagesUnread || yesterdayMessagesUnread || oldMessagesUnread)
+    return 'unread'
 
-  if(messagesData.value?.today)
-    notifications.push(messagesData.value.today)
-  if(messagesData.value?.today)
-    notifications.push(messagesData.value.yesterday)
-  if(messagesData.value?.today)
-    notifications.push(messagesData.value.old)
+  //Notification
+  const todayNotificationUnread = notificationData.value?.today && isUnreadInNotifications(notificationData.value.today)
+  const yesterdayNotificationUnread = notificationData.value?.yesterday && isUnreadInNotifications(notificationData.value.yesterday)
+  const oldNotificationUnread = notificationData.value?.old && isUnreadInNotifications(notificationData.value.old)
 
-  if(notificationData.value?.today)
-    notifications.push(notificationData.value.today)
-  if(notificationData.value?.today)
-    notifications.push(notificationData.value.today)
-  if(notificationData.value?.today)
-    notifications.push(notificationData.value.today)
-
-  for(let i = 0; i < notifications.length; i++){
-    console.log("index", i, notifications[i])
-    if(isUnreadInNotifications(notifications[i])){
-      return 'unread'
-    }
-  }  
+  if(todayNotificationUnread || yesterdayNotificationUnread || oldNotificationUnread)
+    return 'unread'
 }
 
 const isUnreadInNotifications = (Notifications: Notification[]) => {
   for(let i = 0; i < Notifications.length; i++){
-    
     if(Notifications[i].is_read == 0)
       return true
   } 

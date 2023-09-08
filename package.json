@@ -30,9 +30,7 @@
   ],
   "devDependencies": {
     "concurrently": "^8.2.0",
-    "nuxt": "^3.6.5",
-    "nuxt-socket-io": "^3.0.13",
-    "nuxt3-socket.io": "^0.2.0"
+    "nuxt": "^3.6.5"
   },
   "dependencies": {
     "@metamask/sdk": "^0.3.2"

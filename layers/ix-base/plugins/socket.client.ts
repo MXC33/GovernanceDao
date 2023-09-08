@@ -21,19 +21,19 @@ export default defineNuxtPlugin(() => {
   const { user } = useUser()
 
   socket.on('notification_global', (payload) => {
-    console.log("I has recived a message")
+    //console.log("I has recived a message")
     reloadMessages()
   })
 
   watch(user, (player, oldPlayer) => {
     const playerID = player?.id
     const oldID = oldPlayer?.id
-    console.log("playerID", playerID, "oldID", oldID)
+    //console.log("playerID", playerID, "oldID", oldID)
     if (oldID)
       socket.off('notification_' + oldID)
 
     socket.on('notification_' + playerID, (payload) => {
-      console.log("I has recived a notificationz", payload)
+      //console.log("I has recived a notificationz", payload)
       addSocketItem(payload)
     })
   }, { deep: true, immediate: true })

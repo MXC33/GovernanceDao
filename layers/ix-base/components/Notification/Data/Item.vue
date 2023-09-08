@@ -8,13 +8,14 @@ VList.notification(w="full" @click="onClick" cursor="on-link:pointer" :link="!!l
       div(v-if="message.notification.price != null" text="ix-mint") {{ message.notification.price }} IXT
     div(grow="~")
     div(p="1")
-      div(v-if="message.is_read == 0"  bg="red" wh="1" rounded="full")
+      div(v-if="message.is_read == 0"  bg="ix-mint" wh="1" rounded="full")
 </template>
 
 <script lang="ts" setup>
 import type { Notification } from '~/composables/useNeNotificationsAndMessages';
-
-const { socket, emitStatusUpdate } = useSocket()
+const { readMessagesItem } = useNeMessages()
+const { readNotificationItem } = useNeNotifications()
+const { emitStatusUpdate } = useSocket()
 
 const { message } = defineProps<{
   message: Notification
@@ -31,15 +32,16 @@ const link = computed(() => {
 
 
 const onClick = () => {
-  console.log("onClick")
-  console.log(message)
   if (link.value)
     window.open(link.value, '_blank')
   if (message.is_read == 0) {
-    socket.emit('notification_read', message.notification.id)
     emitStatusUpdate(message)
     //This is ugly, Idealy we would want a function in useNeNotificationsAndMessages to handle the mutation of the notification 
-    message.is_read = 1
+    if(message.notification.type == 2){
+      readNotificationItem(message)
+    }else{
+      readMessagesItem(message)
+    }
   }
 }
 

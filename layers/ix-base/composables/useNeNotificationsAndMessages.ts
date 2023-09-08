@@ -66,13 +66,16 @@ export interface NotificationBids extends NotificationMessage {
  * Fetches notifications.
  */
 export const useNeNotifications = () => {
-
   const notificationCount = ref(1)
 
   const addSocketItem = (item: Notification) => {
     console.log(asyncData.data.value?.today)
     asyncData.data.value?.today.unshift(item)
     console.log(asyncData.data.value?.today)
+  }
+
+  const readNotificationItem = (item: Notification) => {
+    item.is_read = 1;
   }
 
   const reloadNotifications = () => {
@@ -103,13 +106,23 @@ export const useNeNotifications = () => {
     ...asyncData,
     loadMoreNotifications,
     reloadNotifications,
-    addSocketItem
+    addSocketItem,
+    readNotificationItem
   }
 }
 
 export const useNeMessages = () => {
-
   const messageCount = ref(1)
+
+  const addSocketItem = (item: Notification) => {
+    console.log(asyncData.data.value?.today)
+    asyncData.data.value?.today.unshift(item)
+    console.log(asyncData.data.value?.today)
+  }
+
+  const readMessagesItem = (item: Notification) => {
+    item.is_read = 1;
+  }
 
   const reloadMessages = () => {
     return asyncData.fetchAndMerge()
@@ -140,7 +153,9 @@ export const useNeMessages = () => {
   return {
     ...asyncData,
     loadMoreMessages,
-    reloadMessages
+    reloadMessages,
+    addSocketItem,
+    readMessagesItem
   }
 }
 
