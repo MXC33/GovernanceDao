@@ -4,9 +4,8 @@ VList(pos="sticky top-0" translate-y="$header-offset" z="99" w="full" @mouseente
     NuxtLink(to="https://www.planetix.com")
       PlanetIXNew(w="42.25")
 
-    HList(display="lt-md:none" justify="start" flex-grow="1" overflow-x="hidden" space-x="4")
-      button(v-for="(header, index) in headerData" @click="openMenu(index)" btn="menu" color="s-default:white s-selected:ix-orange" :state="selected(index)") {{ header.name }}
-
+    HList(display="lt-lg:none" justify="start" flex-grow="1" overflow-x="hidden" space-x="4")
+      button(v-for="(header, index) in headerData" @mouseenter="hoverMenu(index)" @click="openMenu(index)" btn="menu" color = "s-default:white s-selected:ix-orange" :state="selected(index)") {{ header.name }}
 
       HList(flex-grow="1" justify="end" display="lt-md:none")
         NuxtLink(to="https://planetix.com/airdrop")
@@ -68,6 +67,10 @@ const selected = (index: number) => {
   }
 
   return 'default'
+}
+
+const hoverMenu = (index: number) => {
+  activeMenuIndex.value = index
 }
 
 const openMenu = (index: number) => {
