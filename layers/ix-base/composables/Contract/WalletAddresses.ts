@@ -221,6 +221,16 @@ export const seaportAdress: ContractAddress = {
 }
 
 export const luckyCatGeoLotteryAdress: ContractAddress = {
-  mumbai: "0xC3f58c8067FBFab9875334ba907489f257c8c6c4", //to be updated
-  polygon: "0xC3f58c8067FBFab9875334ba907489f257c8c6c4",
+  mumbai: "0xEFB617088a9A224D156AC0C8012CDDf360c3D42B", //to be updated
+  polygon: "0xEFB617088a9A224D156AC0C8012CDDf360c3D42B",
+}
+
+export const astroGoldAdress: ContractAddress = {
+  mumbai: "0x3CAD7147c15C0864B8cF0EcCca43f98735e6e782", //to be updated
+  polygon: "0x3CAD7147c15C0864B8cF0EcCca43f98735e6e782",
+}
+
+export const luckyCatGeoLotterySuperAppAdress: ContractAddress = {
+  mumbai: "0xC2687B3173fcdEB306C52744C30Ee435103C5BA7", //to be updated
+  polygon: "0xC2687B3173fcdEB306C52744C30Ee435103C5BA7",
 }

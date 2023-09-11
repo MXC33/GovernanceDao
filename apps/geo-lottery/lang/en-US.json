@@ -549,5 +549,11 @@
         "connectWallet": "Connect Wallet"
       }
     }
+  },
+  "popupNotification": {
+    "copy-link": "Link copied to clipboard",
+    "transaction-rejected": "User rejected transaction",
+    "add-to-cart": "Added to cart",
+    "user-rejected": "Rejected by user"
   }
 }

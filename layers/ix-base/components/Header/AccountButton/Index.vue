@@ -4,6 +4,10 @@ VList(pos="relative" display="lt-md:none"  ref="menuElement")
     Transition(name="fade-slow" mode="out-in")
       span(v-if="walletState == 'disconnected'") {{ $t(`marketplace.navigation.menu.connectWallet`)}}
       span(v-else-if="!ixtPending && ixtBalance != undefined && walletState == 'connected'" w="25") {{ roundToDecimals(ixtBalance, 2) }} IXT
+
+      //span(v-else-if="activeCurrency == 'IXT' && !ixtPending && ixtBalance != undefined && walletState == 'connected'" w="25") {{ roundToDecimals(ixtBalance, 2) }} IXT
+      //span(v-else-if="activeCurrency == 'aGold' && !astroGoldPending && astroGoldBalance != undefined && walletState == 'connected'" w="25") {{ roundToDecimals(astroGoldBalance, 2) }} AGOLD
+
       HelperLoader(v-else fill="ix-mint on-wallet:ix-orange" w="4" :wallet="walletState != 'connected'")
 
   HeaderSubmenuWrapper(v-if="menuOpen" :align-right="true")
@@ -21,13 +25,18 @@ VList(pos="relative" display="lt-md:none"  ref="menuElement")
 
 <script lang="ts" setup>
 import { useIXTContract } from "@ix/base/composables/Contract/useIXTContract";
+import { useAstroGoldContract } from "@ix/base/composables/Contract/useAstroGoldContract";
+import { useSiteHeader} from "@ix/base/composables/useSiteHeader";
 
 const { walletState } = useWallet()
-const { ixtBalance, ixtPending } = useIXTContract()
 const menuOpen = ref(false)
 const menuElement = ref()
 const { enable: showIXTSwap } = useIXTSwapVisible()
 const route = useRoute()
+
+//const { activeCurrency } = useSiteHeader()
+const { ixtBalance, ixtPending } = useIXTContract()
+//const { astroGoldBalance, astroGoldPending } = useAstroGoldContract()
 
 const toggleMenu = () => {
   if (walletState.value !== 'connected') {
