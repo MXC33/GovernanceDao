@@ -32,7 +32,9 @@ div#popups()
     //IXTInsufficient(v-else-if="popup.type == 'insufficient-funds'")
 
     //my Compontents
-    PopupTypeYouWin(v-if="popup.type == 'popup-type-you-win'")
+    PopupTypeInsufficientFunds(v-if="popup.type == 'insufficient-funds'")
+
+    PopupTypeYouWin(v-else-if="popup.type == 'popup-type-you-win'")
 
     PopupTypePurchaseTickets(v-else-if="popup.type == 'popup-type-purchase-tickets'")
 
@@ -51,7 +53,7 @@ div#popups()
     PopupTypeManageTickets(v-else-if="popup.type == 'popup-type-manage-tickets'")
 
 
-  ErrorPopup(v-if="activeError" :error="activeError")
+  PopupTypeError(v-if="activeError" :error="activeError" )
 
 </template>
 

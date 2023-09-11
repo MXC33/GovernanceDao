@@ -12,7 +12,7 @@
 
       div#takeover
 
-      //SnackbarList()
+      SnackbarList()
 
       Popup(v-if="isSwapVisible" @close="isSwapVisible = false" :disable-default-close="true")
         template(#header) {{ $t(`marketplace.navigation.buy.swap.title`)}}
@@ -26,6 +26,8 @@
 
 <script setup lang="ts">
 import {useGlobalWindowScroll} from "@ix/base/composables/useWindowScroll";
+import {useAstroGoldContract} from "@ix/base/composables/Contract/useAstroGoldContract";
+import {useSiteHeader} from "@ix/base/composables/useSiteHeader";
 
 useHead({
   title: "Geo Lottery | PlanetIX",
@@ -47,6 +49,8 @@ const { y } = useWindowScroll()
 const { connectWallet, walletState } = useWallet()
 const { setupIXTPrice } = useIXTPrice()
 const { refreshIXTBalance } = useIXTContract()
+const { refreshAstroGoldBalance } = useAstroGoldContract()
+const { setActiveCurrency } = useSiteHeader()
 
 const { setRefreshToken } = useLogin()
 const { user } = useUser()
@@ -86,6 +90,8 @@ watch(walletState, (state) => {
 
   setupIXTPrice()
   refreshIXTBalance()
+  refreshAstroGoldBalance()
+  setActiveCurrency('aGold')
 }, { immediate: true })
 
 const { x: xpos, y: ypos } = useMouse()

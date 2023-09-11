@@ -5,11 +5,17 @@ HList(flex="~" justify="between" items="center" w="full" text="md" font="normal"
     p() Wallet balance
 
   HList(space-x="2" items="center")
-    p() 53 AGOLD
+    p() {{ roundToDecimals(astroGoldBalance, 2) }} AGOLD
     CirclePlusIcon(w="5")
 
 </template>
 <script lang="ts" setup>
 import WalletIcon from '~/assets/icons/wallet.svg'
 import CirclePlusIcon from '~/assets/icons/circle-plus.svg'
+import { useAstroGoldContract } from "@ix/base/composables/Contract/useAstroGoldContract";
+
+const { refreshAstroGoldBalance, astroGoldBalance } = useAstroGoldContract()
+
+refreshAstroGoldBalance()
+
 </script>

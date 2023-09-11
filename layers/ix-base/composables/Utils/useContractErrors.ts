@@ -25,6 +25,8 @@ export const CustomErrors = {
   noWallet: "No wallet active",
   unknownError: "Something went wrong",
 
+  ticketPriceError: "getting Ticket price went wrong",
+
 } as const
 
 export const useContractErrors = () => {

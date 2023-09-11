@@ -182,11 +182,18 @@ export const useSiteHeader = () => {
     }
   }
 
-
+  type Currency = 'IXT' | 'aGold'
+  const activeCurrency = useState<Currency>('active-currency', () => 'IXT')
+  const setActiveCurrency = (currency: Currency) => {
+    activeCurrency.value = currency
+  }
 
   return {
     siteTopHeaders,
-    OnClickSubHeader
+    OnClickSubHeader,
+
+    activeCurrency,
+    setActiveCurrency
   }
 }
 
