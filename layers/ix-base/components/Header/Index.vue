@@ -1,6 +1,6 @@
 <template lang="pug">
 VList(pos="sticky top-0" translate-y="$header-offset" z="99" w="full" @mouseenter="isSelected = true" @mouseleave="isSelected = false" ref="menuElement" transition="all")
-  HList(items="center" justify="between" bg="ix-black" px="4 md:7.5" h="$header-height-mobile md:$header-height-desktop" space-x="6")
+  HList(items="center" justify="between" bg="ix-black" px="4 md:7.5" h="$header-height" space-x="6")
     NuxtLink(to="https://www.planetix.com")
       PlanetIXNew(w="42.25")
 
@@ -11,12 +11,16 @@ VList(pos="sticky top-0" translate-y="$header-offset" z="99" w="full" @mouseente
         NuxtLink(to="https://planetix.com/airdrop")
           HList(rounded="full" b="1 $mc-mint" px="4" py="1" bg="hover:$mc-mint-40" uppercase="~" tracking="0.65" font="bold" items="center" justify="center")
             span(translate-x="0.5") airdrop
+    div(display="lt-lg:none")
+      Notification()    
 
-    HList(space-x="6" px="0")
+    HList(space-x="6" px="0" items="center")
       //-button(btn="menu" display="lt-lg:none") help
       //-HeaderLanguage(language="EN")
       HeaderAccountButton()
 
+      div(display="lg:none")
+        Notification()
 
       button(display="lg:none" btn="menu" @click="toggleMenu" ml="2")
         Transition(name="fade" mode="out-in")
@@ -26,18 +30,14 @@ VList(pos="sticky top-0" translate-y="$header-offset" z="99" w="full" @mouseente
   Transition(name="slide-top" mode="out-in")
     HeaderNavigation(v-if="activeMenuIndex != null && headerData != null"  :key="activeMenuIndex" :header="headerData[activeMenuIndex]")
 
-</template>
+</template> 
 
 <script lang="ts" setup>
 import CrossIcon from '~/assets/images/header/cross.svg'
 import PlanetIXNew from '~/assets/images/header/planetix-new.svg'
 import SettingsIcon from '~/assets/images/header/hamburger.svg'
-import { useGlobalWindowScroll } from '@ix/marketplace/composables/useWindowScroll';
 
-//const { isMobile } = useDevice()
 const { data: headerData } = useHeaderData()
-//const {data} = useHeaderData()
-
 const { state: swapVisible } = useIXTSwapVisible()
 
 const activeMenuIndex = useHeaderIndex()
@@ -97,10 +97,3 @@ onClickOutside(menuElement, () => {
 
 
 </script>
-
-<style>
-:root {
-  --header-height-mobile: 3rem;
-  --header-height-desktop: 4rem;
-}
-</style>

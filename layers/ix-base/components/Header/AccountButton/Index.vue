@@ -6,7 +6,7 @@ VList(pos="relative" display="lt-md:none"  ref="menuElement")
       span(v-else-if="!ixtPending && ixtBalance != undefined && walletState == 'connected'" w="25") {{ roundToDecimals(ixtBalance, 2) }} IXT
       HelperLoader(v-else fill="ix-mint on-wallet:ix-orange" w="4" :wallet="walletState != 'connected'")
 
-  HeaderSubmenuWrapper(v-if="menuOpen" :align-right="true") 
+  HeaderSubmenuWrapper(v-if="menuOpen" :align-right="true")  
 
     VList(b="gray-400")
       HeaderSubmenuButton(@click="showIXTSwap") {{ $t(`marketplace.navigation.menu.addFunds`)}}

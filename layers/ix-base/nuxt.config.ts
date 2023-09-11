@@ -41,7 +41,6 @@ export default defineNuxtConfig({
     'nuxt-graphql-client',
     '@unocss/nuxt',
     '@vueuse/nuxt',
-
   ],
   imports: {
     dirs: [

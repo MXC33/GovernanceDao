@@ -34,6 +34,9 @@ export const useIXAPI = () => {
   }
 
   const onUnauthorized = async () => {
+    if (route.path.includes('connect'))
+      return
+
     await callWithNuxt(app, () => {
       logoutWallet()
 
@@ -57,8 +60,8 @@ export const useIXAPI = () => {
       })
       return data
     } catch (err) {
-      // if (err.message.includes("403"))
-      await onUnauthorized()
+      if (err.message.includes("403"))
+        await onUnauthorized()
       return null
     }
   }
