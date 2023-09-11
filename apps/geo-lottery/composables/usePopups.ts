@@ -5,6 +5,9 @@ export interface PopupBase {
 }
 
 //My interface
+export interface PopupTypeInsufficientFunds extends PopupBase {
+  type: 'insufficient-funds',
+}
 export interface PopupTypeYouWin extends PopupBase {
   type: 'popup-type-you-win',
 }
@@ -16,6 +19,7 @@ export interface PopupTypeOneTimeEntry extends PopupBase {
 }
 export interface PopupTypeOneTimeEntrySuccess extends PopupBase {
   type: 'popup-type-one-time-entry-success',
+  entries: number
 }
 export interface PopupTypeSubscribe extends PopupBase {
   type: 'popup-type-subscribe',
@@ -34,7 +38,7 @@ export interface PopupTypeManageTickets extends PopupBase {
 }
 
 
-type Popup = PopupTypeYouWin | PopupTypePurchaseTickets | PopupTypeOneTimeEntry | PopupTypeOneTimeEntrySuccess | PopupTypeSubscribe | PopupTypeSubscribeSuccess | PopupTypeSwap
+type Popup = PopupTypeInsufficientFunds | PopupTypeYouWin | PopupTypePurchaseTickets | PopupTypeOneTimeEntry | PopupTypeOneTimeEntrySuccess | PopupTypeSubscribe | PopupTypeSubscribeSuccess | PopupTypeSwap
  | PopupTypeManageTickets | PopupTypeSwapSuccess
 export const usePopups = () => {
   const popup = useState<Popup | null>('active-popup', () => null)

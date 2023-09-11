@@ -11,7 +11,6 @@ HList(@click="onClickSnack" frame="~ gray-400" p="x-4 y-3" bg="gray-800" space-x
 
 <script lang="ts" setup>
 import type { SnackNotification } from '~/composables/useNotifications';
-const { viewingCart } = useCart()
 const { t } = useI18n()
 const { getSnackType, closeNotification } = useSnackNotifications()
 
@@ -19,20 +18,11 @@ const type = computed(() => getSnackType(notification))
 
 const onClickSnack = () => {
   closeNotification(notification)
-
-  switch (notification.id) {
-    case 'add-to-cart':
-      return viewingCart.value = true
-
-    default:
-      break
-  }
 }
 
 const { notification } = defineProps<{
   notification: SnackNotification
 }>()
-
 const message = computed(() => t(`popupNotification.${notification.id}`))
 
 </script>
