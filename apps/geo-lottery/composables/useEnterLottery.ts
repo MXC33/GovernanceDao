@@ -4,7 +4,7 @@ import {ethers} from "ethers";
 import {useLuckyCatGeoLotteryContract} from "~/composables/useLuckyCatGeoLotteryContract";
 import {useAstroGoldContract} from "@ix/base/composables/Contract/useAstroGoldContract";
 
-export const MAX_ONE_TIME_ENTRIES = 30
+export const MAX_ONE_TIME_ENTRIES = 20
 
 export const useEnterLottery = () => {
   const oneTimeLotteryEntries = useState<AdjustableNumber>('lottery-entries', () => ({
