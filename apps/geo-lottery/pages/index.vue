@@ -8,14 +8,16 @@ div(class="body-main")
     div(w="full" flex="~" justify="center")
       div(container mx-3 lg:px-10 xl:px-30 space-y-14 md:space-y-18 lg:space-y-32 m="y-14 sm:y-22 md:y-32")
         //How to Play Section
-        PageInfo
+        PageInfo()
         PageWeekDraw()
         PageRounds()
 
+        //The Jackpot
+        PageJackpot()
         //Prize Check
-        PagePrizeCheck
+        PagePrizeCheck()
         //Price & Pool Distribution
-        PageDistribution
+        PageDistribution()
 
 
 </template>

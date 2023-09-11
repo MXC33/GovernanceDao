@@ -2,7 +2,7 @@
 HList(flex="~ col lg:row" items="center" gap="12 lg:32")
   div(flex="~ 1" items="center")
     div(space-y="3 md:4")
-      div(color="ix-white" text="4xl xl:5xl 2xl:6xl" uppercase="~" font="bdrA3mik") How to play
+      div(color="ix-white" text="3xl md:4xl xl:5xl" uppercase="~" font="bdrA3mik") How to play
       div(color="ix-white" font="bold" text="base sm:lg" space-y="2 md:6")
         p() To qualify for entering the Territory Lottery you simply need to own a Territory and purchase a lottery ticket. Every week, a Country, a Territory Tier and a Territory Size are randomly selected through a draw. To become a winner your Territory firstly needs to be located in the country drawn. Your winnings increase if your Territory also matches the Territory Tier drawn. If you, on top of Country and Tier, also hold the Territory size drawn your winnings increase even more. Each week equals a new chance to win!
         p() Common Prize <br/> Win by Country - The common prize pool is shared by players whose territory is located in the randomly selected country.

@@ -41,7 +41,8 @@ export default definePreset({
         ne: '#FF0014',
         orange: '#FF6647',
         mint: '#84D4BC',
-        pink: '#FF1E6E'
+        pink: '#FF1E6E',
+        yellow: '#FFF61E',
       },
       gray: {
         50: '#d9d9d9',
