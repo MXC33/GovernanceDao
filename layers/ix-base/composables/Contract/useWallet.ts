@@ -97,8 +97,8 @@ export const useWallet = () => {
 
   const provider = useState<ethers.providers.Web3Provider | null>('provider', () => null)
 
-  const walletAdress = useCookieState<string | null>('wallet-accounts', () => null)
-  const walletSigningToken = useCookieState<string | null>('wallet-token', () => null)
+  const walletAdress = useCookieState<string | null>('wallet-accounts', () => null, { consentLevel: 'necessary' })
+  const walletSigningToken = useCookieState<string | null>('wallet-token', () => null, { consentLevel: 'necessary' })
 
   const walletError = useState<string | null>('wallet-error', () => null)
   const walletState = useState<WalletState>('wallet-state', () => 'disconnected')

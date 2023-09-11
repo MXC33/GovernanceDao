@@ -14,6 +14,8 @@
 
       SnackbarList()
 
+      CookieBot(:id="cookieBotId")
+
       Popup(v-if="isSwapVisible" @close="isSwapVisible = false" :disable-default-close="true")
         template(#header) {{ $t(`marketplace.navigation.buy.swap.title`)}}
         template(#default)
@@ -34,6 +36,7 @@ useHead({
 
 const globalY = useGlobalWindowScroll()
 const router = useRouter()
+const cookieBotId = "2f5a2e80-772d-413d-9cc6-1edcc72e0de8"
 
 router.onError((err) => {
   console.log("#ERRRR", err)
@@ -41,7 +44,7 @@ router.onError((err) => {
 
 const { state: isSwapVisible } = useIXTSwapVisible()
 
-const {execute: fetchHeaderData } = useHeaderData()
+const { execute: fetchHeaderData } = useHeaderData()
 
 await fetchHeaderData()
 

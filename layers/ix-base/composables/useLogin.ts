@@ -17,8 +17,8 @@ export interface APIAuthResponse {
 type LoginStatus = 'logged-in' | 'logged-out' | 'connecting' | 'checking'
 type LoginFailState = 'no-user'
 
-export const useAuthUserData = () => useCookieState<APIAuthResponse | null>('auth-data', () => null)
-export const useAuthTokenExpirationTime = () => useCookieState<number | null>('auth-token-expiration', () => 0)
+export const useAuthUserData = () => useCookieState<APIAuthResponse | null>('auth-data', () => null, { consentLevel: "necessary" })
+export const useAuthTokenExpirationTime = () => useCookieState<number | null>('auth-token-expiration', () => 0, { consentLevel: "necessary" })
 
 export const useLoginRedirect = () => useState<string | null>('login-redirect', () => null)
 
@@ -80,17 +80,13 @@ export const useLogin = () => {
   }
 
   const createAuthCookies = (token: string, web3Token: string) => {
-    const web3AccountType = useCookieState<string | null>('web3AccountType', () => '')
-    web3AccountType.value = 'metamask'
+    useCookieState<string | null>('web3AccountType', () => 'metamask', { consentLevel: "necessary" })
 
-    const authStrategy = useCookieState<string | null>('auth.strategy', () => '')
-    authStrategy.value = 'local'
+    useCookieState<string | null>('auth.strategy', () => 'local', { consentLevel: "necessary" })
 
-    const authTokenLocal = useCookieState<string | null>('auth._token.local', () => '')
-    authTokenLocal.value = 'Bearer ' + token
+    useCookieState<string | null>('auth._token.local', () => 'Bearer ' + token, { consentLevel: "necessary" })
 
-    const web3TokenCookie = useCookieState<string | null>('web3Token', () => '')
-    web3TokenCookie.value = web3Token
+    useCookieState<string | null>('web3Token', () => web3Token, { consentLevel: "necessary" })
   }
 
   const loginUser = async (connector: WalletConnector) => {
