@@ -9,6 +9,7 @@ import {
 } from "@ix/base/composables/Contract/WalletAddresses";
 import {useChainInfo} from "@ix/base/composables/Contract/useWallet";
 import { Framework } from "@superfluid-finance/sdk-core";
+import { weeklyFlowRateConst } from "~/composables/useLottery";
 
 
 export const useLuckyCatGeoLotteryContract = <T extends ContractInterface<T> & LuckyCatGeoLotteryContract>() => {
@@ -41,7 +42,7 @@ export const useLuckyCatGeoLotteryContract = <T extends ContractInterface<T> & L
     })
 
   const calculateFlowRate = (amount: number) => {
-    const weeklyAmountInSec = roundUp(amount / (3600 * 24 * 7), 16)
+    const weeklyAmountInSec = roundUp(amount * weeklyFlowRateConst, 16)
     return ethers.utils.parseUnits(weeklyAmountInSec.toString()).toString();
   }
 
@@ -87,9 +88,32 @@ export const useLuckyCatGeoLotteryContract = <T extends ContractInterface<T> & L
       });
 
       return await createFlowOperation.exec(superSigner)
-    } catch (error) {
+    } catch (error: any) {
       console.log(error)
-      throw new Error("Hmmm, your transaction threw an error. Make sure that this stream does not already exist, and that you've entered a valid Ethereum address!")
+      if (error.toString().includes('rejected'))
+        throw new Error(error)
+      throw new Error("Your transaction threw an error. Make sure that you've entered a valid Ethereum address!")
+    }
+  }
+
+  const updateLotteryFlow = async (amount: number) => {
+
+    const {superSigner, superToken} = await initSuperApp()
+
+    try {
+      const updateFlowOperation = superToken.updateFlow({
+        sender: await superSigner.getAddress(),
+        receiver: luckyCatGeoLotterySuperAppAdress.polygon as string,
+        flowRate: calculateFlowRate(amount)
+        // userData?: string
+      });
+
+      return await updateFlowOperation.exec(superSigner)
+    } catch (error: any) {
+      console.log(error)
+      if (error.toString().includes('rejected'))
+        throw new Error(error)
+      throw new Error("Your transaction threw an error. Make sure that you've entered a valid Ethereum address!")
     }
   }
 
@@ -105,9 +129,11 @@ export const useLuckyCatGeoLotteryContract = <T extends ContractInterface<T> & L
       });
 
       return await deleteFlowOperation.exec(superSigner)
-    } catch (error) {
+    } catch (error: any) {
       console.error(error)
-      throw new Error("Hmmm, your transaction threw an error. Make sure that this stream does not already exist, and that you've entered a valid Ethereum address!")
+      if (error.toString().includes('rejected'))
+        throw new Error(error)
+      throw new Error("Your transaction threw an error. Make sure that you've entered a valid Ethereum address!")
     }
   }
 
@@ -168,6 +194,7 @@ export const useLuckyCatGeoLotteryContract = <T extends ContractInterface<T> & L
     /** Write **/
     enterLottery,
     enterLotteryFlow,
+    updateLotteryFlow,
     removeLotteryFlow,
     claimReward,
     /** Read **/

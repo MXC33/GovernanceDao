@@ -26,6 +26,7 @@ export interface PopupTypeSubscribe extends PopupBase {
 }
 export interface PopupTypeSubscribeSuccess extends PopupBase {
   type: 'popup-type-subscribe-success',
+  entries: number
 }
 export interface PopupTypeSwap extends PopupBase {
   type: 'popup-type-swap',
