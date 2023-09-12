@@ -1,7 +1,7 @@
 <template lang="pug">
 //- remove hardcoded text and use jason data instead
 //-VList(pos="fixed right-0 lg:right-7.5 lt-lg:left-0 top-$header-height" bg="ix-black" max-h="150" h="lt-lg:[calc(100vh-var(--header-height))]" 
-      w="lg:100" overflow-y="auto" z="200" b="~ gray-700" )
+  w="lg:100" overflow-y="auto" z="200" b="~ gray-700" )
 VList(pos="fixed right-0 lg:right-7.5 lt-lg:left-0 lt-lg:top-$header-height top-[calc(15vh-var(--header-height))]" bg="ix-black" h="lt-lg:[calc(100vh-var(--header-height))]" w="lg:100" max-h="lg:150" overflow-y="auto" z="200" )
   //-pos="fixed  right-0 left-0 top-12" bg="black" h="[calc(100vh-var(--header-height))]" overflow-y="auto" z="200"
   //-frame="~ gray-400" display="lt-lg:none"
@@ -21,13 +21,13 @@ VList(pos="fixed right-0 lg:right-7.5 lt-lg:left-0 lt-lg:top-$header-height top-
       div(grow="~")
       HList(p="3")
         CheckMark(wh="6" P="3")
-        button(row="~" text="right") Mark All As Read
+        button(v-if="notifications" row="~" text="right" @click="readAll(notifications)") Mark All As Read
   NotificationData.no-scrollbar(overflow="auto" h="full" v-if="notifications" :data="notifications")
   
 </template>
 
 <script lang="ts" setup>
-import type { NotificationData } from 'composables/useNeNotificationsAndMessages';
+import type { NotificationData, Notification } from 'composables/useNeNotificationsAndMessages';
 import CheckMark from '~/assets/images/icons/Checkmark.svg'
 //import MailIcon from '~/assets/images/icons/mail.svg'
 
@@ -52,12 +52,18 @@ const dataTitle = ['Notifications', 'Messages']
 const showUnread = (value: boolean) => showUnreadNotifications.value == value ? 'selected' : ''
 
 const readAll = (data: NotificationData) => {
-  for(let i = 0; i < data.today.length; i++){
-    switch(data.today[i].notification.type){
+  ReadArray(data.today)
+  ReadArray(data.yesterday)
+  ReadArray(data.old)
+}
+
+const ReadArray = (notifications: Notification[]) => {
+  for (let i = 0; i < notifications.length; i++) {
+    switch (notifications[i].notification.type) {
       case 2:
-        readNotificationItem(data.today[i])
+        readNotificationItem(notifications[i])
       default:
-        readMessagesItem(data.today[i])
+        readMessagesItem(notifications[i])
     }
   }
 }
