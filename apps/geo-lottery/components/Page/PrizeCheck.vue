@@ -1,15 +1,15 @@
 <template lang="pug">
 HList(flex="~ col lg:row" items="center" gap="12 lg:32")
-  div(flex="~ 1" items="center")
-    div(space-y="3 md:4")
-      div(color="ix-white" text="4xl xl:5xl 2xl:6xl" uppercase="~" font="bdrA3mik") Prize Check
-      p(color="ix-white" font="bold" text="base sm:lg") Streamable Dynamic NFTs Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur vulputate, ipsum in ultricies dictum, erat diam porttitor diam, quis pharetra sapien dui et massa. Lorem ipsum.
-      ul(list="square" color="ix-white" font="bold" text="base sm:lg" pl="5")
+  VList(flex="~ 1 col" space-y="6" justify="center" w="full" order="2 lg:1")
+    div() Link with svg for info
+  div(flex="~ 1" items="center" order="1 lg:2")
+    div(space-y="3 md:4" color="ix-white" font="bold" text="base sm:lg")
+      div(color="ix-white" text="3xl md:4xl xl:5xl" uppercase="~" font="bdrA3mik") prize check
+      p() Your payments for tickets and prize payouts are powered by our exclusive AGOLD token. AGOLD is not just any token; AGOLD provides a constant stream, similar to renting tiles in Mission Control. The magic? It's tied to a tradable NFT. Hold, transfer or sell this NFT, and the AGOLD immediately starts streaming to its new owner. The speed of your payout change depending on the size of the prize.
+      ul(list="square" pl="8")
         li() Stream your winnings continually to your wallet
         li() Full ownership rights
         li() Fully tradable
-  VList(flex="~ 1 col" space-y="6" items="lg:end" justify="center" w="full")
-    div() Link with svg for info
 </template>
 <script lang="ts" setup>
 </script>

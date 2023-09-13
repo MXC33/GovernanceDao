@@ -1,13 +1,9 @@
 <template lang="pug">
-div(flex flex-col lg:flex-row)
-  div(basis="5/5 md:3/5" flex="~ col" justify="center items-start" w="full")
-    div(max-w="450px lg:550px" text-left mb="10 lg:0")
-      RadialChart(:seriesChart="seriesRadial" :colorsChart="colorsRadial" titleChart="Price & Pool Distribution Chart")
-
-  div(basis="5/5 md:2/5" items="center")
-    div(space-y="4")
-      div(color="ix-white" text="4xl xl:6xl" uppercase="~" font="bdrA3mik") Price & Pool Distribution
-      p(color="ix-white" font="bold" text="lg") Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur vulputate, ipsum in ultricies dictum, erat diam porttitor diam, quis pharetra sapien dui et massa. Lorem ipsum.
+div(flex flex-col lg:flex-row gap-y="10 lg:0")
+  div(basis="5/5" items="center")
+    div(space-y="3 md:4" color="ix-white" font="bold" text="lg")
+      div(color="ix-white" text="3xl md:4xl xl:5xl" uppercase="~" font="bdrA3mik") AGOLD Distribution
+      p() Purchased tickets are moved into various pools & burns, read more about the distribution below.
 
       InfoPercentWithColor(circleBG="#FF1E6E" :percent="15" info="LuckyCat Metashare")
       InfoPercentWithColor(circleBG="#FFAFCC" :percent="14" info="Territory staking")
@@ -17,6 +13,10 @@ div(flex flex-col lg:flex-row)
       InfoPercentWithColor(circleBG="#41B2F2" :percent="16.67" info="Common prize: Country")
       InfoPercentWithColor(circleBG="#20DCBA" :percent="16.67" info="Rare prize: Country + Tier")
       InfoPercentWithColor(circleBG="#CEF2BD" :percent="16.67" info="Jackpot prize: Country + Tier + Territory")
+
+  div(basis="5/5" flex="~ col" justify="end" items="center lg:end" w="full")
+    div(w="100% sm:450px xl:550px" text-left mb="10 lg:0")
+      RadialChart(:seriesChart="seriesRadial" :colorsChart="colorsRadial" :titleChart="'Price & Pool Distribution Chart'")
 </template>
 <script lang="ts" setup>
 import RadialChart from "~/components/Chart/RadialChart.vue";
