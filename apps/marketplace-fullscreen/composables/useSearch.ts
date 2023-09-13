@@ -7,7 +7,7 @@ export const useSearch = (items: Readonly<MaybeRef<string[]>>, searchElement: Ma
   const focusIndex = shallowRef<number | null>(null)
   const selectedItem = shallowRef<string | null>(null)
   const searchHits = shallowRef<string[]>([])
-  const searchHistory = useCookieState<string[]>('search-history', () => [])
+  const searchHistory = useCookieState<string[]>('search-history', () => [], { consentLevel: "preferences" })
   const searchHistoryVisible = shallowRef(false)
   const isOpen = shallowRef(false)
   const searchTerm = shallowRef<string | null>("")

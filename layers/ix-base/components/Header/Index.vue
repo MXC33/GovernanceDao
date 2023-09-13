@@ -1,11 +1,13 @@
 <template lang="pug">
 VList(pos="sticky top-0" translate-y="$header-offset" z="99" w="full" @mouseenter="isSelected = true" @mouseleave="isSelected = false" ref="menuElement" transition="all")
-  HList(items="center" justify="between" bg="ix-black" px="4 md:7.5" h="12 md:16" space-x="6")
+  HList(items="center" justify="between" bg="ix-black" px="4 md:7.5" h="$header-height-mobile md:$header-height-desktop" space-x="6")
     NuxtLink(to="https://www.planetix.com")
       PlanetIXNew(w="42.25")
 
-    HList(justify="start" flex-grow="1" display="lt-lg:none" overflow-x="hidden" space-x="4")
-      button(v-for="(item, index) in siteTopHeaders" @click="openMenu(index)" btn="menu" color = "s-default:white s-selected:ix-orange" :state="selected(index)") {{ $t(`marketplace.navigation.${item.type}.title`)}}
+    HList(v-if="!isMobile" justify="start" flex-grow="1" overflow-x="hidden" space-x="4")
+      button(v-for="(header, index) in headerData" @click="openMenu(index)" btn="menu" color = "s-default:white s-selected:ix-orange" :state="selected(index)") {{ header.name }}
+
+
       HList(flex-grow="1" justify="end" display="lt-md:none")
         NuxtLink(to="https://planetix.com/airdrop")
           HList(rounded="full" b="1 $mc-mint" px="4" py="1" bg="hover:$mc-mint-40" uppercase="~" tracking="0.65" font="bold" items="center" justify="center")
@@ -17,16 +19,13 @@ VList(pos="sticky top-0" translate-y="$header-offset" z="99" w="full" @mouseente
       HeaderAccountButton()
 
 
-      button(btn="menu" display="lg:none" @click="toggleMenu" ml="2")
+      button(v-if="isMobile" btn="menu" @click="toggleMenu" ml="2")
         Transition(name="fade" mode="out-in")
           SettingsIcon(v-if="activeMenuIndex == null" w="6" )
           CrossIcon(v-else w="6" )
 
-Transition(name="slide-top" mode="out-in")
-  HeaderDesktop(v-if="activeMenuIndex != null" :key="activeMenuIndex" :header="siteTopHeaders[activeMenuIndex]" display="lt-lg:none" @onClickItem="")
-
-Transition(name="slide-top" )
-  HeaderMobile(v-if="activeMenuIndex != null" overflow-y="auto" display="lg:none" @close="toggleMenu")
+  Transition(name="slide-top" mode="out-in")
+    HeaderNavigation(v-if="activeMenuIndex != null && headerData != null"  :key="activeMenuIndex" :header="headerData[activeMenuIndex]")
 
 </template>
 
@@ -36,10 +35,13 @@ import PlanetIXNew from '~/assets/images/header/planetix-new.svg'
 import SettingsIcon from '~/assets/images/header/hamburger.svg'
 import { useGlobalWindowScroll } from '@ix/marketplace/composables/useWindowScroll';
 
-const { siteTopHeaders } = useSiteHeader()
+const { isMobile } = useDevice()
+const {data: headerData} = useHeaderData()
+//const {data} = useHeaderData()
+
 const { state: swapVisible } = useIXTSwapVisible()
 
-const activeMenuIndex = shallowRef<number | null>(null)
+const activeMenuIndex = useHeaderIndex()
 const isSelected = shallowRef(false)
 const menuElement = shallowRef()
 
@@ -92,3 +94,10 @@ onClickOutside(menuElement, () => {
 
 
 </script>
+
+<style>
+:root {
+  --header-height-mobile: 3rem;
+  --header-height-desktop: 4rem;
+}
+</style>
