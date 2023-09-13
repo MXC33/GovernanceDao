@@ -98,12 +98,16 @@ export const useWallet = () => {
   const provider = useState<ethers.providers.Web3Provider | null>('provider', () => null)
 
   const walletAdress = useCookieState<string | null>('wallet-accounts', () => null, { consentLevel: 'necessary' })
-  const walletSigningToken = useCookieState<string | null>('wallet-token', () => null, { consentLevel: 'necessary' })
+
+  const walletAccountType = useCookieState<string | null>('web3AccountType', () => 'metamask')
+  const walletSigningToken = useCookieState<string | null>('web3Token')
 
   const walletError = useState<string | null>('wallet-error', () => null)
   const walletState = useState<WalletState>('wallet-state', () => 'disconnected')
 
-  const isWalletConnected = computed(() => walletAdress.value != null && walletSigningToken.value != null)
+  const isWalletConnected = computed(() =>
+    walletAdress.value != null && walletSigningToken.value != null
+  )
 
   const setupProvider = async () => {
     const connector = await getConnector()
@@ -391,6 +395,7 @@ export const useWallet = () => {
     getChain,
     addSigningToken,
     provider,
+    walletAccountType,
     walletError,
     isWalletConnected,
     walletAdress,

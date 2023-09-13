@@ -9,13 +9,18 @@ interface CookieStateOptions {
   consentLevel?: CookieConsentLevel
 }
 
+const useCookieDomain = () =>
+  process.client && window?.location?.host?.includes("planetix") ? 'planetix.com' : undefined
+
+
 export const useCookieConsentState = () => {
   const { readCookieValue } = useConsentCookie()
   return useState<CookieConsent | EmptyObject>('cookie-consent-state', () => readCookieValue())
 }
 
 export const useConsentCookie = () => {
-  const cookie = useCookie<string>("CookieConsent")
+  const domain = useCookieDomain()
+  const cookie = useCookie<string>("CookieConsent", { domain })
 
   const readCookieValue = (): CookieConsent | EmptyObject => {
     try {
@@ -45,9 +50,9 @@ export const useConsentCookie = () => {
 }
 
 export const useCookieState = <T extends any>(cookieName: string, initValue?: () => T | Ref<T>, options: CookieStateOptions = {}) => {
-  const domain = process.client && window?.location?.host?.includes("planetix") ? 'planetix.com' : undefined
   const { maxAge, consentLevel = 'necessary' } = options
   const consentState = useCookieConsentState()
+  const domain = useCookieDomain()
   const cookie = useCookie<T | null | undefined>(cookieName, { maxAge, domain })
 
   const hasConsent = computed(() => {
@@ -66,7 +71,6 @@ export const useCookieState = <T extends any>(cookieName: string, initValue?: ()
   )
 
   const updateCookie = (newValue: T | null | undefined) => {
-    console.log("Update cookie", cookieName, newValue)
     if (!hasConsent.value)
       return
 
@@ -74,14 +78,11 @@ export const useCookieState = <T extends any>(cookieName: string, initValue?: ()
   }
 
   const clearValue = () => {
-    console.log("Clear cookie", cookieName)
     cookie.value = null
   }
 
   useRunOnce(`cookie-consent-${cookieName}`, () => {
-    console.log("Setup listeners", cookieName)
     watch([consentState, hasConsent], ([_, newValue], [__, oldValue]) => {
-      console.log("New data", newValue, oldValue)
       if (!hasConsent.value) {
         return clearValue()
       }
