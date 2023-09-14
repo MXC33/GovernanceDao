@@ -1,38 +1,29 @@
 import {AdjustableNumber} from "@ix/base/composables/Utils/useAdjustableNumber";
 import {MerkleProofsResponse, usePlayerAPI} from "~/composables/api/get/usePlayerAPI";
-import {ethers} from "ethers";
 import {useLuckyCatGeoLotteryContract} from "~/composables/useLuckyCatGeoLotteryContract";
 import {useAstroGoldContract} from "@ix/base/composables/Contract/useAstroGoldContract";
-
-export const MAX_ONE_TIME_ENTRIES = 20
+import {useLottery} from "~/composables/useLottery";
 
 export const useEnterLottery = () => {
+  const maxOneTimeEntries = useState<number>('max-one-time-entries', () => 20)
+  const setMaxOneTimeEntries = (entries: number) => {
+    maxOneTimeEntries.value = entries
+  }
+
+  const { enteredTickets } = useLottery()
   const oneTimeLotteryEntries = useState<AdjustableNumber>('lottery-entries', () => ({
     value: 1,
     min: 1,
-    max: MAX_ONE_TIME_ENTRIES
+    max: computed<number>(() => {
+      return maxOneTimeEntries.value - enteredTickets.value.entered_tickets
+    })
   }))
 
-
   const {
-    enterLottery: enterLotteryContract,
-    enterLotteryFlow: enterLotteryFlowContract,
-    removeLotteryFlow: removeLotteryFlowContract,
-    ticketPrice: ticketPriceContract,
-    territoryStaking: territoryStakingContract,
-    claimReward: claimRewardContract,
+    enterLottery: enterLotteryContract
   } = useLuckyCatGeoLotteryContract()
 
-  const ticketPrice = useState<number>('lottery-ticket-price', () => 0)
-  const getTicketPrice = async () => {
-    try {
-      ticketPrice.value = Number(ethers.utils.formatUnits(await ticketPriceContract()))
-      return ticketPrice.value
-    } catch (e) {
-      ticketPrice.value = 0
-      return 0
-    }
-  }
+  const { getTicketPrice } = useLottery()
 
   const hasTerritories = async () => {
     const { hasTerritories } = usePlayerAPI()
@@ -57,44 +48,10 @@ export const useEnterLottery = () => {
     return await enterLotteryContract(entries)
   }
 
-  const enterLotteryFlow = async (entries: number) => {
-
-    await hasTerritories()
-    const ticketPrice = await getTicketPrice()
-    await enterLotteryFlowContract(ticketPrice * entries)
-  }
-
-  const removeLotteryFlow = async () => {
-    await removeLotteryFlowContract()
-  }
-
-  const getMerkleProofs = async (id: number) => {
-    const { getMerkleProofs } = usePlayerAPI()
-
-    try {
-      const merkleProofs = await getMerkleProofs(id)
-      if (!merkleProofs.data)
-        throw new Error("There are no merkle proofs!")
-
-      return merkleProofs.data
-    } catch (e) {
-      throw new Error(CustomErrors.unknownError)
-    }
-  }
-
-  const claimReward = async (id: number) => {
-    const merkleProofs = await getMerkleProofs(id)
-
-    return await claimRewardContract(id, merkleProofs)
-  }
-
   return {
     oneTimeLotteryEntries,
-    ticketPrice,
-    getTicketPrice,
-    enterLottery,
-    enterLotteryFlow,
-    removeLotteryFlow,
-    claimReward
+    maxOneTimeEntries,
+    setMaxOneTimeEntries,
+    enterLottery
   }
 }

@@ -6,7 +6,7 @@ input(outline="none" appearance="none" placeholder="0" b="none" bg="white opacit
 import {convertToNumber} from "@ix/base/composables/Utils/useHelpers";
 
 const props = defineProps<{
-  modelValue: number
+  modelValue: number | string
 }>()
 
 const emit = defineEmits(["update:modelValue"])

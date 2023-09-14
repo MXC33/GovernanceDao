@@ -1,7 +1,7 @@
 import { BigNumberish, ethers } from "ethers"
 import { ContractInterface } from "@ix/base/composables/Utils/defineContract"
-import { ContractContext as AstroGoldTokenContract } from '@ix/base/composables/Contract/Abis/IXToken'
-import AstroGoldToken from '@ix/base/composables/Contract/Abis/IXToken.json'
+import { ContractContext as AstroGoldTokenContract } from '@ix/base/composables/Contract/Abis/AstroGold'
+import AstroGoldToken from '@ix/base/composables/Contract/Abis/AstroGold.json'
 import { astroGoldAdress, luckyCatGeoLotteryAdress } from "@ix/base/composables/Contract/WalletAddresses";
 
 
@@ -63,6 +63,24 @@ export const useAstroGoldContract = <T extends ContractInterface<T> & AstroGoldT
     }
   }
 
+  const swapIXTtoAGOLD = (amount: number) =>
+    createTransaction((contract) => {
+      const address = walletAdress.value
+      if (!address)
+        return undefined
+
+      return contract.upgrade(ethers.utils.parseUnits(amount.toString()))
+    })
+
+  const swapAGOLDtoIXT = (amount: number) =>
+    createTransaction((contract) => {
+      const address = walletAdress.value
+      if (!address)
+        return undefined
+
+      return contract.downgrade(ethers.utils.parseUnits(amount.toString()))
+    })
+
   return {
     ...contractSpec,
     allowance,
@@ -71,6 +89,9 @@ export const useAstroGoldContract = <T extends ContractInterface<T> & AstroGoldT
     astroGoldPending,
     astroGoldBalance,
     fetchAstroGold,
-    refreshAstroGoldBalance
+    refreshAstroGoldBalance,
+
+    swapIXTtoAGOLD,
+    swapAGOLDtoIXT
   }
 }

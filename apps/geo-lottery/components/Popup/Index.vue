@@ -49,7 +49,8 @@ const { disableDefaultClose, hideCloseButton, isError } = defineProps<{
 const onClickBack = () => {
   if (popup.value)
     displayPopup({
-      type: popup.value.backModal
+      type: popup.value.backModal,
+      backModal: popup.value.parentBackModal || null
     })
 }
 

@@ -2,7 +2,7 @@
 Popup()
   template(#content)
     HList(items="center" justify="between" p="4" b="b-1 ix-white opacity-60")
-      WalletBalanceAgold()
+      WalletBalanceAgold(backModal="popup-type-one-time-entry" :parentBackModal="popup.backModal")
 
     VList(flex-grow="1" p="4" space-y="4" b="b-1 ix-white opacity-60" text="md" font="normal")
       p() Choose ticket amount
@@ -21,18 +21,23 @@ Popup()
 
 </template>
 <script lang="ts" setup>
+import {useLottery} from "~/composables/useLottery";
+import {useEnterLottery} from "~/composables/useEnterLottery";
+
 const { walletState, isWalletConnected } = useWallet()
+const { getEnteredTickets } = useLottery()
+const { displayPopup, popup } = usePopups()
 
 const {
   oneTimeLotteryEntries,
-  ticketPrice,
-  getTicketPrice,
-
   enterLottery
 } = useEnterLottery()
 
+const { ticketPrice, getTicketPrice } = useLottery()
+
 const loadChainInfo = async () => {
   await getTicketPrice()
+  await getEnteredTickets()
 }
 
 watch(walletState, async (state) => {
@@ -48,18 +53,15 @@ onMounted(async () => {
   await loadChainInfo()
 })
 
-
 import { useContractRequest } from "~/composables/useContractRequest";
 const { loading: isLoading, execute: oneTimeEntryRequest } = useContractRequest(() =>
   enterLottery(oneTimeLotteryEntries.value.value)
 )
 
 const onPurchase = async () => {
-  const enterLotteryFlow = await oneTimeEntryRequest()
+  const oneTimeEntry = await oneTimeEntryRequest()
 
-
-  const { displayPopup } = usePopups()
-  if (enterLotteryFlow)
+  if (oneTimeEntry)
     displayPopup({
       type: 'popup-type-one-time-entry-success',
       entries: oneTimeLotteryEntries.value.value

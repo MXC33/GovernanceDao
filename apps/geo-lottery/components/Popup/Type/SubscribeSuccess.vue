@@ -6,23 +6,30 @@ Popup()
 
     VList(flex-grow="1" items="center" justify="center" text="md center" font="normal" space-y="6")
       VList()
-        p() Subscription activated and 1 ticket added!
+        p() Subscription activated and {{ popup.entries }} ticket added!
         p() Hope the luck be with you!
       VList()
         p() Winners will be drawn in:
-        p(font="bold") 6 hours 43 minutes 16 seconds
+        HelperCountDown(:endTimestamp="endDate")
 
   template(#footer)
-    Button(:value="'pink'" w="full") CLOSE
+    Button(:value="'pink'" w="full" @click="onClose") CLOSE
 
 </template>
 <script lang="ts" setup>
-const { closeActivePopup } = usePopups()
 
-const onClickAssets = () => {
-  navigateTo('/')
-  return closeActivePopup()
-}
+const { popup, closeActivePopup } = usePopups()
+const { subscriptionEntries } = useSubscription()
+const onClose = (() => {
+  closeActivePopup()
+})
 
-defineEmits(["close"])
+import { useLottery } from "~/composables/useLottery";
+const { lotteryStartedAtDate } = useLottery()
+const startDate = await lotteryStartedAtDate()
+const endDate = startDate.setDate(startDate.getDate() + 7)
+
+onUnmounted(() => {
+  subscriptionEntries.value.value = 1
+})
 </script>

@@ -10,12 +10,16 @@ HList(flex="~" justify="between" items="center" w="full" text="md" font="normal"
         slot(name="balance")
 
   HList(space-x="2" items="center")
-    InputNumber(text="right" v-model="data" )
+    strong(v-show="disabledValue" opacity="40") {{disabledValue}}
+    InputAdjustableNumber(v-show="!disabledValue" text="right" v-model="data" )
 
 </template>
 <script lang="ts" setup>
+import type { AdjustableNumber } from "@ix/base/composables/Utils/useAdjustableNumber";
+
 const props = defineProps<{
-  modelValue: number
+  modelValue: AdjustableNumber,
+  disabledValue?: string | number
 }>()
 
 const emit = defineEmits(["update:modelValue"])
