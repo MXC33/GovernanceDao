@@ -28,6 +28,7 @@
 import {useGlobalWindowScroll} from "@ix/base/composables/useWindowScroll";
 import {useAstroGoldContract} from "@ix/base/composables/Contract/useAstroGoldContract";
 import {useSiteHeader} from "@ix/base/composables/useSiteHeader";
+import {useLottery} from "~/composables/useLottery";
 
 useHead({
   title: "Geo Lottery | PlanetIX",
@@ -51,6 +52,7 @@ const { setupIXTPrice } = useIXTPrice()
 const { refreshIXTBalance } = useIXTContract()
 const { refreshAstroGoldBalance } = useAstroGoldContract()
 const { setActiveCurrency } = useSiteHeader()
+const { getEnteredTickets } = useLottery()
 
 const { setRefreshToken } = useLogin()
 const { user } = useUser()
@@ -92,6 +94,7 @@ watch(walletState, (state) => {
   refreshIXTBalance()
   refreshAstroGoldBalance()
   setActiveCurrency('aGold')
+  getEnteredTickets()
 }, { immediate: true })
 
 const { x: xpos, y: ypos } = useMouse()

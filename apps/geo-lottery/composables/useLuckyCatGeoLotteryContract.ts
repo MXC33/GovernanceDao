@@ -23,7 +23,7 @@ export const useLuckyCatGeoLotteryContract = <T extends ContractInterface<T> & L
   } = defineContract<T>('LuckyCatGeoLottery-contract', {
     contractAddress: luckyCatGeoLotteryAdress.polygon as string,
     notifications: {
-      failMessage: 'Error allowance IXToken'
+      failMessage: 'Error'
     },
     createContract(provider) {
       return new ethers.Contract(luckyCatGeoLotteryAdress.polygon as string, LuckyCatGeoLottery.abi, provider.getSigner()) as unknown as T

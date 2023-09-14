@@ -2,6 +2,7 @@
 export interface PopupBase {
   type: string,
   backModal?: any
+  parentBackModal?: any
 }
 
 //My interface
@@ -33,6 +34,8 @@ export interface PopupTypeSwap extends PopupBase {
 }
 export interface PopupTypeSwapSuccess extends PopupBase {
   type: 'popup-type-swap-success',
+  tokenSwapOrder: string,
+  value: number
 }
 export interface PopupTypeManageTickets extends PopupBase {
   type: 'popup-type-manage-tickets',

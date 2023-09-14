@@ -2,7 +2,7 @@
 Popup()
   template(#content)
     HList(items="center" justify="between" p="4" b="b-1 ix-white opacity-60")
-      WalletBalanceAgold()
+      WalletBalanceAgold(backModal="popup-type-subscribe" :parentBackModal="popup.backModal")
 
     VList(flex-grow="1" p="4" space-y="4" b="b-1 ix-white opacity-60" text="md" font="normal")
       p() Choose ticket amount
@@ -15,7 +15,7 @@ Popup()
       span() {{subscriptionEntries.value}}
     HList(items="center" justify="between" mt="2")
       span() Total price
-      span() 10 AGOLD/WEEK
+      span() {{subscriptionEntries.value * ticketPrice}} AGOLD/WEEK
 
     ButtonItem(:value="'pink'" :text="'Subscribe'" @click="onSubscribe()" :loading="isLoading")
 
@@ -26,6 +26,7 @@ import {useSubscription} from "~/composables/useSubscription";
 
 const { walletState, isWalletConnected } = useWallet()
 const { getEnteredTickets, enteredTickets } = useLottery()
+const { displayPopup, popup } = usePopups()
 
 const {
   subscriptionEntries,
@@ -64,11 +65,10 @@ const { loading: isLoading, execute: subscriptionRequest } = useContractRequest(
 const onSubscribe = async () => {
   const subscription = await subscriptionRequest()
 
-  const { displayPopup } = usePopups()
   if (subscription)
     displayPopup({
       type: 'popup-type-subscribe-success',
-      entries: subscriptionEntries.value.value
+      entries: subscriptionEntries.value.value,
     })
 }
 
