@@ -29,9 +29,9 @@ const openPurchaseTickets = () => {
     type: 'popup-type-purchase-tickets'
   })
 }
-defineProps<{
-  livepage: boolean
-}>()
+
+const livepage = ref(true)
+
 const openSwap = () => {
   if (!checkIsAuth()) return
 
