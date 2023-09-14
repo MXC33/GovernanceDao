@@ -18,13 +18,21 @@ import PlanetIXLogo from '~/assets/images/logo.svg'
 .geo-lottery-header  > div{
   background-color: rgba(255, 30, 110, 1)
 }
-.geo-lottery-header .border-white-ixt button, .geo-lottery-header .border-white-ixt{
+.geo-lottery-header .border-white-ixt button,
+.geo-lottery-header .border-white-ixt {
   border-color: rgba(249, 249, 249, 0.6);
   color: white;
   background-color: #f33076;
+  width: 100%;
+}
+.geo-lottery-header .border-white-ixt button svg,
+.geo-lottery-header .border-white-ixt svg {
+  fill: white !important;
 }
 .geo-lottery-header .border-white-ixt button:hover, .geo-lottery-header .border-white-ixt:hover{
-  background-color:rgba(249, 249, 249, 0.1);
+  /*background-color:rgba(249, 249, 249, 0.1);*/
+  color: rgba(249, 249, 249, 0.6);
+  opacity: 1;
 }
 .geo-lottery-header .border-white:hover{
   background-color: rgba(132, 212, 188, 0.1);

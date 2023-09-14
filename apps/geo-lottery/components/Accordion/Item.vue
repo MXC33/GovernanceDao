@@ -76,11 +76,11 @@ const dropDrawer = () => { isOpen.value = !isOpen.value }
 .v-collapse {
   transition: height 300ms cubic-bezier(0.33, 1, 0.68, 1);
 }
-.pink-btn{
+/*.pink-btn{
   background-image: linear-gradient(rgba(255, 30, 110, 1) , rgba(200, 10, 77, 1));
 }
 .pink-btn:hover{
   background-image: none;
   background-color: #FF1E6E;
-}
+}*/
 </style>
