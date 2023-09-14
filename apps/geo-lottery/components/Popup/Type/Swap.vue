@@ -9,8 +9,8 @@ Popup()
         template(#balance) BALANACE: {{ roundToDecimals(ixtBalance, 2) }} IXT
 
       VList(justify="center" items="center" m-y="2" order="2")
-        div(flex="~" justify="center" items="center" w="12" h="12" cursor="pointer" bg="ix-pink hover:opacity-80" rounded="full")
-          SortArrowsIcon.ease-in.duration-200(w="5" @click="swapTokenOrder" :rotate="tokenSwapOrder === 'IXT-AGOLD' ? '0' : '180'")
+        div(flex="~" justify="center" items="center" w="12" h="12" cursor="pointer" bg="ix-pink hover:opacity-80" rounded="full" @click="swapTokenOrder")
+          SortArrowsIcon.ease-in.duration-200(w="5" :rotate="tokenSwapOrder === 'IXT-AGOLD' ? '0' : '180'")
 
       SwapToken(m-y="2" :order="tokenSwapOrder === 'IXT-AGOLD' ? '3' : '1'" v-model="aGoldValue" :disabledValue="tokenSwapOrder === 'IXT-AGOLD' ? ixtValue.value : null")
         template(#icon)
@@ -50,13 +50,19 @@ const { loading: isLoading, execute: swapRequest } = useContractRequest(() =>{
 const onSwap = async () => {
   const swap = await swapRequest()
 
-  if (swap)
+  if (swap) {
     displayPopup({
       type: 'popup-type-swap-success',
       tokenSwapOrder: tokenSwapOrder.value,
       value: tokenSwapOrder.value === 'IXT-AGOLD' ? ixtValue.value.value : aGoldValue.value.value,
-      backModal: popup.value?.backModal || null
+      backModal: popup.value?.backModal || null,
+      parentBackModal: popup.value?.parentBackModal || null
     })
+
+    ixtValue.value.value = 1
+    aGoldValue.value.value = 1
+    tokenSwapOrder.value = 'IXT-AGOLD'
+  }
 }
 
 </script>

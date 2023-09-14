@@ -7,13 +7,13 @@ PopupBlank()
         h1(text="4xl md:6xl lg:8xl center" font="bdrA3mik" whitespace="pre-wrap") You Win
         div( w="450px" h="450px" bg-gradient-to-b to-purple-500 from-pink-500 mb="2")
         Button(:value="'pink'" w="auto sm:390px" ) Claim Now
-        button(color="white" text="lg" @click="closeActivePopup" underline="~ offset-2") I’ll do this later
+        button(color="white" text="lg" @click="onClose" underline="~ offset-2") I’ll do this later
 
 </template>
-
-
 <script lang="ts" setup>
 const { closeActivePopup } = usePopups()
 
-defineEmits(["close"])
+const onClose = () => {
+  closeActivePopup()
+}
 </script>

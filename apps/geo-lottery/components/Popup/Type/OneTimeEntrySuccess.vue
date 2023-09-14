@@ -13,7 +13,7 @@ Popup(:hideCloseButton="true")
         HelperCountDown(:endTimestamp="endDate")
 
   template(#footer)
-    Button(:value="'pink'" w="full" @click="onClose") CLOSE
+    ButtonItem(:value="'pink'" :text="'CLOSE'" @click="onClose()")
 
 </template>
 <script lang="ts" setup>

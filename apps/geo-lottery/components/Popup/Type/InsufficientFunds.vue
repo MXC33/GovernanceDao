@@ -11,16 +11,13 @@ Popup()
           div(color="semantic-warning" max-h="34" overflow-y="auto") Insufficient Funds!
 
   template(#footer)
-    ButtonItem(:value="'red'" min-w="300px md:350px"  :text="'CLOSE'")
+    ButtonItem(:value="'red'" min-w="300px md:350px"  :text="'CLOSE'" @click="onClose")
 
 </template>
 <script lang="ts" setup>
 const { closeActivePopup } = usePopups()
 
-const onClickAssets = () => {
-  navigateTo('/')
-  return closeActivePopup()
+const onClose = () => {
+  closeActivePopup()
 }
-
-defineEmits(["close"])
 </script>
