@@ -13,10 +13,10 @@ defineProps<{
 <style>
 
 .pink-btn{
-  background-image: linear-gradient(rgba(255, 30, 110, 1) , rgba(200, 10, 77, 1));
+  background: linear-gradient(rgba(255, 30, 110, 1) , rgba(200, 10, 77, 1));
+  transition: none;
 }
 .pink-btn:hover{
-  background-image: none;
-  background-color: #FF1E6E;
+  background: #FF1E6E;
 }
 </style>
