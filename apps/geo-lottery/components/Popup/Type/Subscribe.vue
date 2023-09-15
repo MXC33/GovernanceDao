@@ -17,7 +17,7 @@ Popup()
       span() Total price
       span() {{subscriptionEntries.value * ticketPrice}} AGOLD/WEEK
 
-    ButtonItem(:value="'pink'" :text="'Subscribe'" @click="onSubscribe()" :loading="isLoading")
+    ButtonItem(:value="'pink'" w="full" mt="5" :text="'Subscribe'" @click="onSubscribe()" :loading="isLoading")
 
 </template>
 <script lang="ts" setup>
