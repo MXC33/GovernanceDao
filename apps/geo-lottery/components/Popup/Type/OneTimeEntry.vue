@@ -17,7 +17,7 @@ Popup()
       span() Total price
       span() {{oneTimeLotteryEntries.value * ticketPrice}} AGOLD
 
-    ButtonItem(:value="'pink'" :text="'Purcahse'" @click="onPurchase()" :loading="isLoading")
+    ButtonItem(:value="'pink'" w="full" mt="5" :text="'Purcahse'" @click="onPurchase()" :loading="isLoading")
 
 </template>
 <script lang="ts" setup>
