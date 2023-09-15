@@ -22,8 +22,6 @@ div(class="body-main")
 
 
 </template>
-
-
 <script lang="ts" setup>
 import {useLottery} from "~/composables/useLottery";
 
