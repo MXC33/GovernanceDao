@@ -7,10 +7,12 @@ export const useLottery = () => {
     lotteryID,
     lotteryStartedAt: lotteryStartedAtContract,
     ticketPrice: ticketPriceContract,
-    claimReward: claimRewardContract
+    claimReward: claimRewardContract,
+    userLotteryRate: userLotteryRateContract,
   } = useLuckyCatGeoLotteryContract()
 
-  const lotteryStartDate = useState<Date>('lottery-start-date', () => new Date(1694782800000))
+  //const lotteryStartDate = useState<Date>('lottery-start-date', () => new Date(1694782800000))
+  const lotteryStartDate = useState<Date>('lottery-start-date', () => new Date(1684782800000))
   const isLotteryActive = useState<boolean>('lottery-active', () => false)
   const checkLotteryActive = () => {
     const now = new Date()
@@ -44,13 +46,18 @@ export const useLottery = () => {
     const { getEnteredTickets } = usePlayerAPI()
 
     try {
-      const enteredTicketsResponse = id ? await getEnteredTickets(id) : await getEnteredTickets(await lotteryID())
+      const currentLotteryID = await lotteryID()
+      const enteredTicketsResponse = id ? await getEnteredTickets(id) : await getEnteredTickets(currentLotteryID)
       if (!enteredTicketsResponse.data)
         throw new Error("There are no entered tickets!")
 
+      const userLotteryRate = Number(ethers.utils.formatUnits(await userLotteryRateContract(currentLotteryID)))
+
       enteredTickets.value = {
         ...enteredTicketsResponse.data,
-        entered_weekly_tickets: Math.round((enteredTicketsResponse.data.active_rate / weeklyFlowRateConst) / 6)
+        active_rate_live: userLotteryRate,
+        entered_weekly_tickets: Math.round((userLotteryRate / weeklyFlowRateConst) / 6),
+        entered_weekly_tickets_backend: Math.round((enteredTicketsResponse.data.active_rate / weeklyFlowRateConst) / 6)
       }
       return enteredTickets.value
     } catch (e) {
@@ -58,7 +65,9 @@ export const useLottery = () => {
         entered_tickets: 0,
         entered_stream: 0,
         active_rate: 0,
-        entered_weekly_tickets: 0
+        active_rate_live: 0,
+        entered_weekly_tickets: 0,
+        entered_weekly_tickets_backend: 0
       }
       throw new Error(CustomErrors.unknownError)
     }
