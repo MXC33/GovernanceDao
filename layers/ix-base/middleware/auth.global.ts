@@ -1,5 +1,5 @@
 export default defineNuxtRouteMiddleware(async (to, from) => {
-  if (to.path == '/connect')
+  if (to.path == '/connect' || to.path == '/pagetest' || to.path == '/')
     return true
 
   const { isWalletConnected, logoutWallet } = useWallet()
