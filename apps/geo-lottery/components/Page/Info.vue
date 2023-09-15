@@ -10,7 +10,7 @@ HList(flex="~ col lg:row" items="center" gap="12 lg:32")
         p() Legendary Prize <br/> Win by Country + Tier + Size - The Legendary prize pool is shared by players whose territory is located in the randomly selected country, tier type and size.
         p() Don’t own a territory?
       div(flex="~" justify="center sm:start")
-        ButtonItem(:value="'pink'" min-w="full md:415px"  :text="'BUILD OR BUY YOUR OWN AT NETEMPIRE'")
+        ButtonItem(:value="'pink'" min-w="full md:415px" @click="goToNetempire" :text="'BUILD OR BUY YOUR OWN AT NETEMPIRE'")
 
   VList(flex="~ 1 col" space-y="6" items="center" justify="center" w="full")
     FramePinkWithImg()
@@ -30,6 +30,9 @@ HList(flex="~ col lg:row" items="center" gap="12 lg:32")
         TireSizeIcon(tier="Outlier" size="Domain")
 </template>
 <script lang="ts" setup>
+const goToNetempire = ( ) => {
+  return window.location.href = 'https://planetix.com/netempire'
+}
 </script>
 <style>
 </style>
