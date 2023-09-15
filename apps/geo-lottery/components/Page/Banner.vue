@@ -15,7 +15,7 @@ VList(class="background-holder" pos="relative" overflow="hidden" z="0" min-h="60
       div(flex="~ col sm:row" justify="center" m="t-6" items-center)
         ButtonItem(:value="'pink'" :text="'JOIN NOW'"  min-w="300px md:255px" mb="3 sm:0" mr="0 sm:3" @click="openPurchaseTickets" v-if="livepage")
         ButtonItem(:value="'white'" :text="'SWAP ASTRO GOLD'" min-w="300px md:255px" @click="openSwap" v-if="livepage")
-        ButtonItem( class="watch_teaser" :value="'pink'" :text="'WATCH TEASER'" h="15" min-w="300px"  @click="openSwap" pos="relative" v-if="!livepage")
+        ButtonItem( class="watch_teaser" :value="'pink'" :text="'WATCH TEASER'" h="15" min-w="300px"  @click="goToYoutubeLink" pos="relative" v-if="!livepage")
 </template>
 
 <script lang="ts" setup>
@@ -41,6 +41,10 @@ const openSwap = () => {
   displayPopup({
     type: 'popup-type-swap'
   })
+}
+const goToYoutubeLink = ( ) => {
+  //return window.location.href = 'https://www.youtube.com/watch?v=nr8_gWSexg0&ab_channel=PLANETIX'
+  return window.open('https://www.youtube.com/watch?v=nr8_gWSexg0&ab_channel=PLANETIX')
 }
 </script>
 <style>
