@@ -36,12 +36,6 @@ watch(walletState, async (state) => {
   await loadChainInfo()
 })
 
-onMounted(async () => {
-  if (!isWalletConnected.value)
-    return
-  await loadChainInfo()
-})
-
 const { displayPopup } = usePopups()
 const { checkIsAuth } = useHelperMethods()
 
