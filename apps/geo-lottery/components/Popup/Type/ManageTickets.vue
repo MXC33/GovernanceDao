@@ -17,7 +17,7 @@ Popup()
       HList( pos="relative" flex="~ col" mb-7)
         p( mb-1) Your one-time entries
         div(flex="~" ml="0" items-center)
-          InputSwitch(w="6" h="6" v-model="switchModel")
+          InputSwitch(v-model="switchModel")
           p(font="bold" text="lg" )
             template(v-if="switchModel & !switchModelUpdated") Active
             template(v-else-if="switchModel & switchModelUpdated") Activate - Press continue to comfirm
@@ -25,7 +25,7 @@ Popup()
             template(v-else-if="!switchModel & switchModelUpdated") Deactivate - Press continue to comfirm
   template(#footer)
     VList()
-      Button(:value="'pink'" w="full" v-if="switchModelUpdated" ) CONTINUE
+      ButtonItem(:value="'pink'" :text="'CONTINUE'")
 
 </template>
 <script lang="ts" setup>
@@ -46,10 +46,5 @@ watch(switchModel, (val) => {
   else
     switchModelUpdated.value = false
 })
-const onClickAssets = () => {
-  navigateTo('/')
-  return closeActivePopup()
-}
 
-defineEmits(["close"])
 </script>

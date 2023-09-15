@@ -9,11 +9,12 @@ div(class="body-main")
       div(container mx-3 lg:px-10 xl:px-30 space-y-14 md:space-y-18 lg:space-y-32 m="y-14 sm:y-22 md:y-32")
         //How to Play Section
         PageInfo()
-        PageWeekDraw()
-        PageRounds()
-
+        PageWeekDraw(v-if="isLotteryActive")
         //The Jackpot
         PageJackpot()
+
+        PageRounds(v-if="isLotteryActive")
+
         //Prize Check
         PagePrizeCheck()
         //Price & Pool Distribution
@@ -21,9 +22,16 @@ div(class="body-main")
 
 
 </template>
-
-
 <script lang="ts" setup>
+import {useLottery} from "~/composables/useLottery";
+
+const {isLotteryActive, checkLotteryActive} = useLottery()
+const lotteryActiveInterval = setInterval(() => {
+  checkLotteryActive()
+  if (isLotteryActive.value)
+    clearInterval(lotteryActiveInterval)
+}, 1000)
+
 useHead({
   title: "Home | Geo Lottery | PlanetIX"
 })

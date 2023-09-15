@@ -19,7 +19,8 @@ VList(class="background-holder" pos="relative" overflow="hidden" z="0" min-h="60
 </template>
 
 <script lang="ts" setup>
-import PlayTeaser from '~/assets/icons/play-teaser.png'
+import {useLottery} from "~/composables/useLottery";
+const { isLotteryActive } = useLottery()
 const { displayPopup } = usePopups()
 const { checkIsAuth } = useHelperMethods()
 const openPurchaseTickets = () => {
@@ -30,7 +31,9 @@ const openPurchaseTickets = () => {
   })
 }
 
-const livepage = ref(true)
+const livepage = computed(() => {
+  return isLotteryActive.value
+})
 
 const openSwap = () => {
   if (!checkIsAuth()) return
