@@ -17,7 +17,9 @@ export interface EnteredTickets {
   entered_tickets: number,
   entered_stream: number,
   active_rate: number,
+  active_rate_live?: number,
   entered_weekly_tickets?: number
+  entered_weekly_tickets_backend?: number
 }
 export interface EnteredTicketsResponse extends ObjectResponse {
   data: EnteredTickets

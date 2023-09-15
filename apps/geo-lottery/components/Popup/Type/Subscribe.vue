@@ -55,8 +55,11 @@ onMounted(async () => {
 })
 
 import { useContractRequest } from "~/composables/useContractRequest";
-const { loading: isLoading, execute: subscriptionRequest } = useContractRequest(() => {
-  if (enteredTickets.value.active_rate > 0 )
+import {useLuckyCatGeoLotteryContract} from "~/composables/useLuckyCatGeoLotteryContract";
+
+const { userFlowActive } = useLuckyCatGeoLotteryContract()
+const { loading: isLoading, execute: subscriptionRequest } = useContractRequest(async () => {
+  if (await userFlowActive())
     return updateLotteryFlow(subscriptionEntries.value.value)
   else
     return enterLotteryFlow(subscriptionEntries.value.value)

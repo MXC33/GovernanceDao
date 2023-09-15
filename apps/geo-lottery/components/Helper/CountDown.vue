@@ -18,7 +18,7 @@ template(v-if="type == 'large'" )
       span(text="center sm sm:lg md:xl lg:2xl" font="bdrA3mik")
         slot(name="seconds") SECONDS
 template(v-else)
-  p(font="bold") {{days}} slot(name="days") days {{hours}} hours {{minutes}} minutes {{seconds}} seconds
+  p(font="bold") {{days}} days {{hours}} hours {{minutes}} minutes {{seconds}} seconds
 </template>
 
 <script lang="ts" setup>

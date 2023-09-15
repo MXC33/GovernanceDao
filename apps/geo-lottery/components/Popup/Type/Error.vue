@@ -27,7 +27,6 @@ const { error } = defineProps<{
 const items = computed(() => error.items && get(error.items))
 
 const errorParsed = computed(() => {
-  console.log('fisky error.serverError', error.serverError)
   if (!error || !error.serverError) return ''
 
   const e = error.serverError.toString()
