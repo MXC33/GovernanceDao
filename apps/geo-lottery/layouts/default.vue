@@ -79,6 +79,11 @@ import PlanetIXLogo from '~/assets/images/logo.svg'
   fill: white;
   opacity: 1;
 }
+
+.geo-lottery-header-desktop .pink-hover:hover > div > div , .geo-lottery-header-desktop .pink-hover:hover svg path {
+  color: #FF1E6E;
+  fill: #FF1E6E;
+}
 </style>
 
 
