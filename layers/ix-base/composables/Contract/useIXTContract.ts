@@ -60,8 +60,6 @@ export const useIXTContract = <T extends ContractInterface<T> & IXTokenContract>
     try {
       const allowanceValue = Number(ethers.utils.formatUnits(await allowance(otherSpenderAddress)))
 
-      console.log('fisky otherSpenderAddress', otherSpenderAddress, allowanceValue)
-
       if (allowanceValue >= amount)
         return true
 

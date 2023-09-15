@@ -187,6 +187,24 @@ export const useLuckyCatGeoLotteryContract = <T extends ContractInterface<T> & L
 
       return contract.ticketPrice()
     })
+
+  const userFlowActive = () =>
+    withContract((contract) => {
+      const address = walletAdress.value
+      if (!address)
+        return undefined
+
+      return contract.userFlowActive(address)
+    })
+
+  const userLotteryRate = (lotteryID: number) =>
+    withContract((contract) => {
+      const address = walletAdress.value
+      if (!address)
+        return undefined
+
+      return contract.userLotteryRate(address, lotteryID)
+    })
   /** endRead **/
 
   return {
@@ -201,6 +219,8 @@ export const useLuckyCatGeoLotteryContract = <T extends ContractInterface<T> & L
     lotteryID,
     lotteryStartedAt,
     ticketPrice,
-    territoryStaking
+    territoryStaking,
+    userFlowActive,
+    userLotteryRate
   }
 }
