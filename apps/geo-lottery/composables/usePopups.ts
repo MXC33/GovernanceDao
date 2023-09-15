@@ -40,10 +40,12 @@ export interface PopupTypeSwapSuccess extends PopupBase {
 export interface PopupTypeManageTickets extends PopupBase {
   type: 'popup-type-manage-tickets',
 }
-
+export interface PopupTypeUnsubscribeSuccess extends PopupBase {
+  type: 'popup-type-unsubscribe-success'
+}
 
 type Popup = PopupTypeInsufficientFunds | PopupTypeYouWin | PopupTypePurchaseTickets | PopupTypeOneTimeEntry | PopupTypeOneTimeEntrySuccess | PopupTypeSubscribe | PopupTypeSubscribeSuccess | PopupTypeSwap
- | PopupTypeManageTickets | PopupTypeSwapSuccess
+ | PopupTypeManageTickets | PopupTypeSwapSuccess | PopupTypeUnsubscribeSuccess
 export const usePopups = () => {
   const popup = useState<Popup | null>('active-popup', () => null)
 
