@@ -43,6 +43,7 @@ const openSwap = () => {
   })
 }
 const goToYoutubeLink = ( ) => {
+  //return window.location.href = 'https://www.youtube.com/watch?v=nr8_gWSexg0&ab_channel=PLANETIX'
   return window.open('https://www.youtube.com/watch?v=nr8_gWSexg0&ab_channel=PLANETIX')
 }
 </script>
