@@ -10,6 +10,14 @@ export const useLottery = () => {
     claimReward: claimRewardContract
   } = useLuckyCatGeoLotteryContract()
 
+  const lotteryStartDate = useState<Date>('lottery-start-date', () => new Date(1694782800000))
+  const isLotteryActive = useState<boolean>('lottery-active', () => false)
+  const checkLotteryActive = () => {
+    const now = new Date()
+    const diff = lotteryStartDate.value.getTime() - now.getTime()
+    isLotteryActive.value = diff < 0
+  }
+
   const lotteryStartedAtDate = async () => {
     const startedAt = Number(await lotteryStartedAtContract(await lotteryID()))
     return new Date(startedAt * 1000)
@@ -77,6 +85,10 @@ export const useLottery = () => {
   }
 
   return {
+    lotteryStartDate,
+    isLotteryActive,
+    checkLotteryActive,
+
     lotteryStartedAtDate,
     enteredTickets,
     getEnteredTickets,
