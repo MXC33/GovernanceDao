@@ -52,6 +52,8 @@ div#popups()
 
     PopupTypeManageTickets(v-else-if="popup.type == 'popup-type-manage-tickets'")
 
+    PopupTypeUnsubscribeSuccess(v-else-if="popup.type == 'popup-type-unsubscribe-success'")
+
 
   PopupTypeError(v-if="activeError" :error="activeError" )
 

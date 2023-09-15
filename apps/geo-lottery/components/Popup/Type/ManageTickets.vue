@@ -7,44 +7,92 @@ Popup()
       HList( pos="relative" flex="~ col" mb-7)
         p( mb-1) Your one-time entries
         div(flex="~" ml="0")
-          CirclePlusIcon(w="5" mr-3)
-          p(font="bold" text="lg") 10 tickets
+          CirclePlusIcon(w="5" mr-3 cursor="pointer" @click="onOneTimeEntries()")
+          p(font="bold" text="lg") {{enteredTickets.entered_tickets}} tickets
       HList( pos="relative" flex="~ col" mb-7)
         p( mb-1) Your subscription entries
         div(flex="~" ml="0")
-          CirclePlusIcon(w="5" mr-3)
-          p(font="bold" text="lg") 5 tickets
+          CirclePlusIcon(w="5" mr-3 cursor="pointer" @click="onSubscribe()")
+          p(font="bold" text="lg") {{enteredTickets.entered_weekly_tickets || 0}} tickets
       HList( pos="relative" flex="~ col" mb-7)
         p( mb-1) Your one-time entries
         div(flex="~" ml="0" items-center)
           InputSwitch(v-model="switchModel")
           p(font="bold" text="lg" )
-            template(v-if="switchModel & !switchModelUpdated") Active
-            template(v-else-if="switchModel & switchModelUpdated") Activate - Press continue to comfirm
-            template(v-else-if="!switchModel & !switchModelUpdated") Inactive
-            template(v-else-if="!switchModel & switchModelUpdated") Deactivate - Press continue to comfirm
+            template(v-if="switchModel") Active
+              span(v-if="showContinueButton" ) &nbsp;- Press continue to comfirm
+            template(v-else) Inactive
+              span(v-if="showContinueButton") &nbsp;- Press continue to comfirm
   template(#footer)
     VList()
-      ButtonItem(:value="'pink'" :text="'CONTINUE'")
+      ButtonItem(v-if="showContinueButton" :value="'pink'" :text="'CONTINUE'" @click="onContinue()" :loading="isLoading")
 
 </template>
 <script lang="ts" setup>
 import CirclePlusIcon from '~/assets/icons/circle-plus.svg'
+import {useLottery} from "~/composables/useLottery";
+import {useManageTickets} from "~/composables/useManageTickets";
+import {useContractRequest} from "~/composables/useContractRequest";
+import {useSubscription} from "~/composables/useSubscription";
+import {useLuckyCatGeoLotteryContract} from "~/composables/useLuckyCatGeoLotteryContract";
 
-const { closeActivePopup } = usePopups()
+const { displayPopup, closeActivePopup } = usePopups()
+const { walletState, isWalletConnected } = useWallet()
+const { switchModel, setupSwitchModal, userFlowActive, showContinueButton } = useManageTickets()
 
-// get subscription status and update those
-const switchModel = ref(false)
-const switchModelSaved = ref(false)
+const { getEnteredTickets, enteredTickets } = useLottery()
 
-const switchModelUpdated = ref(false)
+const loadChainInfo = async () => {
+  await getEnteredTickets()
+  await setupSwitchModal()
+}
 
-watch(switchModel, (val) => {
-  console.log(val) // console log value when changed from InputSwitch component
-  if(switchModelSaved.value != val)
-    switchModelUpdated.value = true
-  else
-    switchModelUpdated.value = false
+watch(walletState, async (state) => {
+  if (state != 'connected')
+    return
+
+  await loadChainInfo()
 })
+
+onMounted(async () => {
+  if (!isWalletConnected.value)
+    return
+  await loadChainInfo()
+})
+
+const { removeLotteryFlow } = useSubscription()
+const { loading: isLoading, execute: removeLotteryFlowRequest } = useContractRequest(() =>
+  removeLotteryFlow()
+)
+
+const { userFlowActive: userFlowActiveContract } = useLuckyCatGeoLotteryContract()
+const onContinue = async () => {
+  if (await userFlowActiveContract()) {
+    const removeLotteryFlow = await removeLotteryFlowRequest()
+    if (removeLotteryFlow)
+      displayPopup({
+        type: 'popup-type-unsubscribe-success'
+      })
+  } else {
+    displayPopup({
+      type: 'popup-type-subscribe',
+      backModal: 'popup-type-manage-tickets'
+    })
+  }
+}
+
+const onOneTimeEntries = () => {
+  displayPopup({
+    type: 'popup-type-one-time-entry',
+    backModal: 'popup-type-manage-tickets'
+  })
+}
+
+const onSubscribe = () => {
+  displayPopup({
+    type: 'popup-type-subscribe',
+    backModal: 'popup-type-manage-tickets'
+  })
+}
 
 </script>
