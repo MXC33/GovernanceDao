@@ -45,13 +45,7 @@ watch(walletState, async (state) => {
     return
 
   await loadChainInfo()
-})
-
-onMounted(async () => {
-  if (!isWalletConnected.value)
-    return
-  await loadChainInfo()
-})
+}, { immediate: true })
 
 import { useContractRequest } from "~/composables/useContractRequest";
 const { loading: isLoading, execute: oneTimeEntryRequest } = useContractRequest(() =>

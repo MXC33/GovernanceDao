@@ -52,13 +52,7 @@ watch(walletState, async (state) => {
     return
 
   await loadChainInfo()
-})
-
-onMounted(async () => {
-  if (!isWalletConnected.value)
-    return
-  await loadChainInfo()
-})
+}, { immediate: true })
 
 const { removeLotteryFlow } = useSubscription()
 const { loading: isLoading, execute: removeLotteryFlowRequest } = useContractRequest(() =>

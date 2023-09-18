@@ -143,8 +143,6 @@ export const useLuckyCatGeoLotteryContract = <T extends ContractInterface<T> & L
       if (!address)
         return undefined
 
-      console.log('fisky lotteryID', lotteryID)
-      console.log('fisky merkleProofs', merkleProofs)
       return contract.claimReward(lotteryID, merkleProofs)
     })
 
