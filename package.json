@@ -37,5 +37,8 @@
   },
   "dependencies": {
     "@metamask/sdk": "^0.3.2"
+  },
+  "resolutions": {
+    "unimport": "3.2.0"
   }
 }
