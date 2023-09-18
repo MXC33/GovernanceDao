@@ -3,15 +3,36 @@ div(class="tier_size")
   div(grid grid-cols="3" gap="2 md:4" p="x-3 md:x-10 2xl:x-23")
     div( flex="~ col" justify="center" align="center" pb="4"  border-color="$mc-pink" border="b-2")
       p(color="white opacity-40" text="sm md:xl" font="extrabold" mb="1" uppercase="~") ID
-      div(color="$mc-finegreen" text="lg md:2xl lg:4xl" font="extrabold" v-if="$slots.id" uppercase="~") CN
+
+      div(:color="id.is_winner ? '$mc-finegreen' : '$mc-red'" :line-through="!id.is_winner" text="lg md:2xl lg:4xl" font="extrabold" uppercase="~" v-if="id && id.name") {{id.name}}
+      div(color="white" text="lg md:2xl lg:4xl" font="extrabold" uppercase="~"  v-else) -
+
     div( flex="~ col" justify="center" align="center" pb="4" border-color="$mc-pink" border="b-2")
       p(color="white opacity-40" text="sm md:xl" font="extrabold" mb="1" uppercase="~") TIER
-      div( color="$mc-finegreen" text="lg md:2xl lg:4xl" font="extrabold" v-if="$slots.tier" uppercase="~") Legendary
+
+      div(:color="tier.is_winner ? '$mc-finegreen' : '$mc-red'" :line-through="!tier.is_winner" text="lg md:2xl lg:4xl" font="extrabold" uppercase="~" v-if="tier && tier.name") {{tier.name}}
+      div(color="white" text="lg md:2xl lg:4xl" font="extrabold" uppercase="~"  v-else) -
+
     div( flex="~ col" justify="center" align="center" pb="4" border-color="$mc-pink" border="b-2")
       p(color="white opacity-40" text="sm md:xl" font="extrabold" mb="1" uppercase="~") SIZE
-      div(color="$mc-red" text="lg md:2xl lg:4xl" font="extrabold"  line-through v-if="$slots.size" uppercase="~") Sector
+
+      div(:color="size.is_winner ? '$mc-finegreen' : '$mc-red'" :line-through="!size.is_winner" text="lg md:2xl lg:4xl" font="extrabold" uppercase="~" v-if="size && size.name") {{size.name}}
+      div(color="white" text="lg md:2xl lg:4xl" font="extrabold" uppercase="~"  v-else) -
 </template>
 
 <script lang="ts" setup>
-
+const { id, tier, size } = defineProps<{
+  id?: {
+    name: string,
+    is_winner: boolean
+  }
+  tier?: {
+    name: string,
+    is_winner: boolean
+  }
+  size?: {
+    name: string,
+    is_winner: boolean
+  }
+}>()
 </script>

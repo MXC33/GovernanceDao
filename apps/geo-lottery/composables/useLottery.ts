@@ -1,6 +1,10 @@
 import {useLuckyCatGeoLotteryContract} from "~/composables/useLuckyCatGeoLotteryContract";
 import {ethers} from "ethers";
-import {EnteredTickets, usePlayerAPI} from "~/composables/api/get/usePlayerAPI";
+import {
+  EnteredTickets,
+  usePlayerAPI,
+  WeeksDraw
+} from "~/composables/api/get/usePlayerAPI";
 export const weeklyFlowRateConst = 1 / (3600 * 24 * 7)
 export const useLottery = () => {
   const {
@@ -92,6 +96,32 @@ export const useLottery = () => {
     return await claimRewardContract(id, merkleProofs)
   }
 
+  const weeksDraw = useState<WeeksDraw>('lottery-weeks-draw', () => ({
+    last_drawn_lottery: null,
+    jackpot: null,
+    rounds: []
+  }))
+  const getWeeksDraw = async () => {
+    const { getWeeksDraw } = usePlayerAPI()
+
+    try {
+      const weeksDrawResponse = await getWeeksDraw()
+      console.log('fisky weeksDrawResponse', weeksDrawResponse)
+      if (!weeksDrawResponse.data)
+        throw new Error("There are no data!")
+
+      weeksDraw.value = weeksDrawResponse.data
+      return weeksDraw.value
+    } catch (e) {
+      weeksDraw.value = {
+        last_drawn_lottery: null,
+        jackpot: null,
+        rounds: []
+      }
+      throw new Error(CustomErrors.unknownError)
+    }
+  }
+
   return {
     lotteryStartDate,
     isLotteryActive,
@@ -100,8 +130,13 @@ export const useLottery = () => {
     lotteryStartedAtDate,
     enteredTickets,
     getEnteredTickets,
+
     ticketPrice,
     getTicketPrice,
+
+    weeksDraw,
+    getWeeksDraw,
+
     claimReward
   };
 };

@@ -3,8 +3,8 @@ div()
   h2(mb-7 text="3xl md:4xl xl:5xl" font="bdrA3mik") THIS WEEK’S DRAW
   div(bg="black" rounded="4" b="1 $mc-pink" py-16)
     div(mb="18")
-      p(text="xl center" font="extrabold" m="b-4 md:b-8" ) ROUND #031
-      HelperCountDown(:endTimestamp="1694776976000" :type="'large'")
+      p(text="xl center" font="extrabold" m="b-4 md:b-8" ) ROUND {{'#' + roundID}}
+      HelperCountDown(:endTimestamp="endDate" :type="'large'")
 
     TierSize()
 
@@ -21,20 +21,30 @@ div()
 
 <script lang="ts" setup>
 import {useLottery} from "~/composables/useLottery";
+import {useLuckyCatGeoLotteryContract} from "~/composables/useLuckyCatGeoLotteryContract";
 
 const { getEnteredTickets, enteredTickets } = useLottery()
 const { walletState, isWalletConnected } = useWallet()
+const { lotteryStartedAtDate } = useLottery()
+const { lotteryID } = useLuckyCatGeoLotteryContract()
+
+const endDate = ref<number>(new Date().getTime())
+const roundID = ref<number>(0)
 
 const loadChainInfo = async () => {
-  await getEnteredTickets()
+  const startDate = await lotteryStartedAtDate()
+  endDate.value = startDate.setDate(startDate.getDate() + 7)
+  roundID.value = Number(await lotteryID())
 }
+
 
 watch(walletState, (state) => {
   if (state != 'connected')
     return
 
+  loadChainInfo()
   setTimeout(async () => {
-    await loadChainInfo()
+    await getEnteredTickets()
   }, 1000)
 }, { immediate: true })
 

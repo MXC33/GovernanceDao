@@ -52,7 +52,7 @@ const { setupIXTPrice } = useIXTPrice()
 const { refreshIXTBalance } = useIXTContract()
 const { refreshAstroGoldBalance } = useAstroGoldContract()
 const { setActiveCurrency } = useSiteHeader()
-const { getEnteredTickets } = useLottery()
+const { getEnteredTickets, getWeeksDraw } = useLottery()
 
 const { setRefreshToken } = useLogin()
 const { user } = useUser()
@@ -96,6 +96,7 @@ watch(walletState, (state) => {
     refreshAstroGoldBalance()
     setActiveCurrency('aGold')
     getEnteredTickets()
+    getWeeksDraw()
   }, 1000)
 }, { immediate: true })
 
