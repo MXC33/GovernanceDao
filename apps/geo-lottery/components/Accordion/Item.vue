@@ -15,7 +15,9 @@ VList()
       div(flex space-x="3")
         div(@click.stop="")
           ButtonItem(:value="'pink'"  min-w="180px sm:190px" h="10" :text="'Claim now'" flex="~" items-center justify-center
-          v-if="round.winning_pools && round.winning_pools.length && !round.claimed"
+            v-if="round.winning_pools && round.winning_pools.length && !round.claimed"
+            @click="onClaimReward()"
+            :loading="isLoading"
           )
         IconChevron(w="4" :up="isOpen")
     Transition(name="slide-top")
@@ -64,8 +66,9 @@ import { Collapse } from 'vue-collapsed'
 import Checked  from '~/assets/icons/checked.svg'
 import Decline  from '~/assets/icons/decline.svg'
 import type {Round} from "~/composables/api/get/usePlayerAPI";
+import {useLottery} from "~/composables/useLottery";
 
-const { startOpen } = defineProps<{
+const { startOpen, round } = defineProps<{
   startOpen?: boolean
   isSmall?: boolean
   isNeutral?: boolean
@@ -75,6 +78,20 @@ const { startOpen } = defineProps<{
 
 const isOpen = shallowRef(startOpen)
 const dropDrawer = () => { isOpen.value = !isOpen.value }
+
+const {
+  claimReward
+} = useLottery()
+const { loading: isLoading, execute: claimRewardRequest } = useContractRequest(() =>
+  claimReward(round.id)
+)
+
+const onClaimReward = async () => {
+  const claimReward = await claimRewardRequest()
+
+  if (claimReward)
+    console.log('fisky claimReward', claimReward)
+}
 
 </script>
 

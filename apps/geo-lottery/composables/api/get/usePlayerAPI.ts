@@ -78,7 +78,8 @@ export const usePlayerAPI = () => {
   const hasTerritories = () => fetchIXAPI('territories/has') as Promise<HasTerritoriesResponse>
   const getMerkleProofs = (id: number) => fetchIXAPI('geo/lottery/claim/data/' + id) as Promise<MerkleProofsResponse>
   const getEnteredTickets = (id: number) => fetchIXAPI('geo/lottery/ticket/entries/' + id) as Promise<EnteredTicketsResponse>
-  const getWeeksDraw = () => {
+  const getWeeksDraw = () => fetchIXAPI('geo/lottery/details/table') as Promise<WeeksDrawResponse>
+  /*const getWeeksDraw = () => {
     return {
       data: {
         "last_drawn_lottery": {
@@ -122,7 +123,7 @@ export const usePlayerAPI = () => {
         ]
       }
     }
-  }
+  }*/
 
   return {
     hasTerritories,
