@@ -1,25 +1,18 @@
 <template lang="pug">
 VList(b="t-1 gray-300" mb="20")
-  AccordionItem()
-    template(#header) ROUND #027
-    template(#claimed_size) CLAIM YOUR PRIZE
-    template(#claim_now) CLAIM NOW
-    template(#tier) UNCOMMON
-    template(#size) AREA
-    template(#id) CN
-    template(#winners) 253
-    template(#ticket) 29
-    template(#total) 53,784
-  AccordionItem()
-    template(#header) ROUND #028
-    template()
-      p text with icon
-  AccordionItem()
-    template(#header) ROUND #029
-    template(#claimed) claimed
-    template()
+  AccordionItem(v-for="round in rounds" :key="'round-'+round.id" :round="round")
 </template>
 
 <script lang="ts" setup>
+import {useLottery} from "~/composables/useLottery";
+import type {Round} from "~/composables/api/get/usePlayerAPI";
 
+const { weeksDraw } = useLottery()
+const rounds = ref<Round[]>([])
+watch(weeksDraw, (state) => {
+  if (!state.rounds)
+    return
+  rounds.value = state.rounds
+
+}, { immediate: true })
 </script>

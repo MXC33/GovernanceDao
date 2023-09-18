@@ -57,6 +57,9 @@ export interface Round {
   your_tickets: number,
   total_tickets: number,
   prize: number
+  claimed: boolean,
+  nft_link: string,
+  winning_pools?: number[]
 }
 
 export interface WeeksDraw {
@@ -111,7 +114,10 @@ export const usePlayerAPI = () => {
             "your_tickets": 3,
             "prize": 2.507142857142857,
             "claimed": false,
-            "nft_link": "https://api.planetix.app/api/v1/geo/lottery/token/2/animation_url"
+            "nft_link": "https://api.planetix.app/api/v1/geo/lottery/token/2/animation_url",
+            "winning_pools": [
+              6
+            ]
           }
         ]
       }

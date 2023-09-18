@@ -106,7 +106,6 @@ export const useLottery = () => {
 
     try {
       const weeksDrawResponse = await getWeeksDraw()
-      console.log('fisky weeksDrawResponse', weeksDrawResponse)
       if (!weeksDrawResponse.data)
         throw new Error("There are no data!")
 

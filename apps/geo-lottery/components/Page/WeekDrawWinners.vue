@@ -20,7 +20,6 @@ div()
 
 <script lang="ts" setup>
 import {useLottery} from "~/composables/useLottery";
-import {useLuckyCatGeoLotteryContract} from "~/composables/useLuckyCatGeoLotteryContract";
 
 type TierSize = {
   name: string,

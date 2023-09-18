@@ -14,7 +14,7 @@ div(class="body-main")
         //The Jackpot
         PageJackpot()
 
-        PageRounds(v-if="isLotteryActive")
+        PageRounds(v-if="isLotteryActive && weeksDraw.rounds && weeksDraw.rounds.length")
 
         //Prize Check
         PagePrizeCheck()
