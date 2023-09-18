@@ -67,6 +67,7 @@ import Checked  from '~/assets/icons/checked.svg'
 import Decline  from '~/assets/icons/decline.svg'
 import type {Round} from "~/composables/api/get/usePlayerAPI";
 import {useLottery} from "~/composables/useLottery";
+const { displayPopup } = usePopups()
 
 const { startOpen, round } = defineProps<{
   startOpen?: boolean
@@ -90,7 +91,10 @@ const onClaimReward = async () => {
   const claimReward = await claimRewardRequest()
 
   if (claimReward)
-    console.log('fisky claimReward', claimReward)
+    displayPopup({
+      type: 'popup-type-you-claimed',
+      nft_link: round.nft_link
+    })
 }
 
 </script>
