@@ -29,12 +29,14 @@ const loadChainInfo = async () => {
   await getEnteredTickets()
 }
 
-watch(walletState, async (state) => {
+watch(walletState, (state) => {
   if (state != 'connected')
     return
 
-  await loadChainInfo()
-})
+  setTimeout(async () => {
+    await loadChainInfo()
+  }, 1000)
+}, { immediate: true })
 
 const { displayPopup } = usePopups()
 const { checkIsAuth } = useHelperMethods()
