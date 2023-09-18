@@ -1,5 +1,0 @@
-query Landmarks($credentials: CredentialsInput!) {
-  landmarks(credentials: $credentials) {
-    ...NFT
-    }
-}

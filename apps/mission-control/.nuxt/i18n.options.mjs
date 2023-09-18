@@ -17,6 +17,32 @@ export const resolveNuxtI18nOptions = async (context) => {
           }
   nuxtI18nOptions.vueI18n = Object({})
   nuxtI18nOptions.vueI18n.messages ??= {}
+  const deepCopy = (src, des, predicate) => {
+            for (const key in src) {
+              if (typeof src[key] === 'object') {
+                if (!typeof des[key] === 'object') des[key] = {}
+                deepCopy(src[key], des[key], predicate)
+              } else {
+                if (predicate) {
+                  if (predicate(src[key], des[key])) {
+                    des[key] = src[key]
+                  }
+                } else {
+                  des[key] = src[key]
+                }
+              }
+            }
+          }
+          const mergeMessages = async (messages, loader) => {
+            const layerConfig = await vueI18nConfigLoader(loader)
+            const vueI18n = layerConfig || {}
+            const layerMessages = vueI18n.messages || {}
+            for (const [locale, message] of Object.entries(layerMessages)) {
+              messages[locale] ??= {}
+              deepCopy(message, messages[locale])
+            }
+          }
+  await mergeMessages(nuxtI18nOptions.vueI18n.messages, (() => import("../../../layers/ix-base/i18n.config.ts?hash=d903cff7&config=1" /* webpackChunkName: "i18n_config_d903cff7" */)))
   nuxtI18nOptions.locales = []
   nuxtI18nOptions.defaultLocale = ""
   nuxtI18nOptions.defaultDirection = "ltr"

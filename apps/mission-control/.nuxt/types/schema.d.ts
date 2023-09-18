@@ -23,6 +23,12 @@ declare module 'nuxt/schema' {
    },
   }
   interface PublicRuntimeConfig {
+   MC_API: string,
+
+   CHAIN_NET: string,
+
+   s3: string,
+
    "graphql-client": {
       clients: {
          default: {
@@ -61,11 +67,7 @@ declare module 'nuxt/schema' {
 
    environment: string,
 
-   s3: string,
-
    INFURA_ID: string,
-
-   CHAIN_NET: string,
 
    disablePlaycanvas: boolean,
 

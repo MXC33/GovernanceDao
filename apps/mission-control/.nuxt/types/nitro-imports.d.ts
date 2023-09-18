@@ -5,7 +5,6 @@ declare global {
   const GqlBadgeNFT: typeof import('#gql-nitro')['GqlBadgeNFT']
   const GqlBaseLevelCapacities: typeof import('#gql-nitro')['GqlBaseLevelCapacities']
   const GqlBurnedAvatar: typeof import('#gql-nitro')['GqlBurnedAvatar']
-  const GqlCurrencies: typeof import('#gql-nitro')['GqlCurrencies']
   const GqlEternaLabsOrderCosts: typeof import('#gql-nitro')['GqlEternaLabsOrderCosts']
   const GqlEternaLabsOrderInfo: typeof import('#gql-nitro')['GqlEternaLabsOrderInfo']
   const GqlEthNFTs: typeof import('#gql-nitro')['GqlEthNFTs']
@@ -17,7 +16,6 @@ declare global {
   const GqlGlobalWasteSystemOrderInfo: typeof import('#gql-nitro')['GqlGlobalWasteSystemOrderInfo']
   const GqlGravityGradeNFTBalance: typeof import('#gql-nitro')['GqlGravityGradeNFTBalance']
   const GqlIsGGEligible: typeof import('#gql-nitro')['GqlIsGGEligible']
-  const GqlLand: typeof import('#gql-nitro')['GqlLand']
   const GqlLandmarks: typeof import('#gql-nitro')['GqlLandmarks']
   const GqlLuckyCatRaffle: typeof import('#gql-nitro')['GqlLuckyCatRaffle']
   const GqlMetamodFusionOrderCosts: typeof import('#gql-nitro')['GqlMetamodFusionOrderCosts']
@@ -138,7 +136,7 @@ declare global {
   const useStorage: typeof import('/Users/isakburstrom/dev/ix-apps/node_modules/nitropack/dist/runtime')['useStorage']
   const writeEarlyHints: typeof import('h3')['writeEarlyHints']
 }
-export { GqlAssetConverterRecipes, GqlAuthed, GqlAvatarNFT, GqlBaseLevelCapacities, GqlBurnedAvatar, GqlCurrencies, GqlEternaLabsOrderCosts, GqlEternaLabsOrderInfo, GqlEthNFTs, GqlFacilityUpgradeCooldown, GqlFacilityUpgradeOrderCosts, GqlFacilityUpgradeOrderInfo, GqlGGPackContent, GqlGlobalWasteSystemOrderCosts, GqlGlobalWasteSystemOrderInfo, GqlGravityGradeNFTBalance, GqlIsGGEligible, GqlLand, GqlLandmarks, GqlLuckyCatRaffle, GqlMetamodFusionOrderCosts, GqlMetamodFusionOrderInfo, GqlNewLandsOrderCosts, GqlNewLandsOrderInfo, GqlOldStakedOnTile, GqlOldWasteNonce, GqlPlayerBaseLevel, GqlRelayerFee, GqlRovers, GqlSaleInfo, GqlStakedGenesisNFT, GqlStakedGenesisNFTEth, GqlStakedMCNFT, GqlStakedOnTile, GqlTokenInfo, GqlTokenInfoTypeTier, GqlTokens, GqlUniqueLandWithInfo, GqlUniquePixWithInfoFromId, GqlWasteNonce, GqlBadgeNFT } from '#gql-nitro';
+export { GqlAssetConverterRecipes, GqlAuthed, GqlAvatarNFT, GqlBaseLevelCapacities, GqlBurnedAvatar, GqlEternaLabsOrderCosts, GqlEternaLabsOrderInfo, GqlEthNFTs, GqlFacilityUpgradeCooldown, GqlFacilityUpgradeOrderCosts, GqlFacilityUpgradeOrderInfo, GqlGGPackContent, GqlGlobalWasteSystemOrderCosts, GqlGlobalWasteSystemOrderInfo, GqlGravityGradeNFTBalance, GqlIsGGEligible, GqlLandmarks, GqlLuckyCatRaffle, GqlMetamodFusionOrderCosts, GqlMetamodFusionOrderInfo, GqlNewLandsOrderCosts, GqlNewLandsOrderInfo, GqlOldStakedOnTile, GqlOldWasteNonce, GqlPlayerBaseLevel, GqlRelayerFee, GqlRovers, GqlSaleInfo, GqlStakedGenesisNFT, GqlStakedGenesisNFTEth, GqlStakedMCNFT, GqlStakedOnTile, GqlTokenInfo, GqlTokenInfoTypeTier, GqlTokens, GqlUniqueLandWithInfo, GqlUniquePixWithInfoFromId, GqlWasteNonce, GqlBadgeNFT } from '#gql-nitro';
 export { defineCachedFunction, defineCachedEventHandler, cachedFunction, cachedEventHandler, useRuntimeConfig, useStorage, useNitroApp, defineNitroPlugin, nitroPlugin, defineRenderHandler, getRouteRules, useAppConfig } from '/Users/isakburstrom/dev/ix-apps/node_modules/nitropack/dist/runtime';
 export { appendCorsHeaders, appendCorsPreflightHeaders, appendHeader, appendHeaders, appendResponseHeader, appendResponseHeaders, assertMethod, callNodeListener, clearSession, createApp, createAppEventHandler, createError, createEvent, createRouter, defaultContentType, defineEventHandler, defineLazyEventHandler, defineNodeListener, defineNodeMiddleware, deleteCookie, dynamicEventHandler, eventHandler, fetchWithEvent, fromNodeMiddleware, getCookie, getHeader, getHeaders, getMethod, getProxyRequestHeaders, getQuery, getRequestHeader, getRequestHeaders, getRequestHost, getRequestPath, getRequestProtocol, getRequestURL, getResponseHeader, getResponseHeaders, getResponseStatus, getResponseStatusText, getRouterParam, getRouterParams, getSession, handleCacheHeaders, handleCors, isCorsOriginAllowed, isError, isEvent, isEventHandler, isMethod, isPreflightRequest, isStream, lazyEventHandler, parseCookies, promisifyNodeListener, proxyRequest, readBody, readMultipartFormData, readRawBody, sanitizeStatusCode, sanitizeStatusMessage, sealSession, send, sendError, sendNoContent, sendProxy, sendRedirect, sendStream, setCookie, setHeader, setHeaders, setResponseHeader, setResponseHeaders, setResponseStatus, splitCookiesString, toEventHandler, toNodeListener, unsealSession, updateSession, useBase, useSession, writeEarlyHints } from 'h3';
 export { buildAssetsURL as __buildAssetsURL, publicAssetsURL as __publicAssetsURL } from '../../../../node_modules/nuxt/dist/core/runtime/nitro/paths';

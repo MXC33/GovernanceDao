@@ -113,6 +113,8 @@
     "./nuxt.d.ts",
     "../**/*",
     "../**/*",
+    "../../../layers/ix-base/**/*",
+    "../../../**/*",
     "/Users/isakburstrom/dev/ix-apps/apps/mission-control",
     "/Users/isakburstrom/dev/ix-apps/apps/mission-control/*",
     "/Users/isakburstrom/dev/ix-apps/apps/mission-control",

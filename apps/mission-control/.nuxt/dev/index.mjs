@@ -126,6 +126,9 @@ const _inlineRuntimeConfig = {
     }
   },
   "public": {
+    "MC_API": "https://api-mc.planetix.com",
+    "CHAIN_NET": "main",
+    "s3": "/s3",
     "graphql-client": {
       "clients": {
         "default": {
@@ -149,11 +152,9 @@ const _inlineRuntimeConfig = {
       }
     },
     "apiEndpoint": "https://api-mc.planetix.com",
-    "cacheKey": "1695038105443",
+    "cacheKey": "1695038351152",
     "environment": "development",
-    "s3": "/s3",
     "INFURA_ID": "8e5cebf5c2304f8a88989bee0c59210b",
-    "CHAIN_NET": "main",
     "disablePlaycanvas": false,
     "mapboxApiToken": "pk.eyJ1IjoiZG91Z2xhc25pYmlydSIsImEiOiJjbDEwcW10YW0wZWlmM2ptczFqeWR4NGx0In0.DyXm6Qm2Lk4kbvDOwuQVkw",
     "i18n": {
