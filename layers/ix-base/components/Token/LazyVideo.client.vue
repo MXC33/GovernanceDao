@@ -10,9 +10,6 @@ VList(ref="containerElement" w="full" h="full" pos="absolute" inset="0" )
 <script lang="ts" setup>
 import type { AnyToken } from '~/composables/Token/useTokens';
 
-
-const { tokenHasVideo } = useTokenMedia()
-
 const containerElement = ref()
 const isElementHovered = useElementHover(containerElement)
 
