@@ -9,11 +9,12 @@ div(class="body-main")
       div(container mx-3 lg:px-10 xl:px-30 space-y-14 md:space-y-18 lg:space-y-32 m="y-14 sm:y-22 md:y-32")
         //How to Play Section
         PageInfo()
-        PageWeekDraw(v-if="isLotteryActive")
+        PageWeekDraw(v-if="isLotteryActive && !weeksDraw.last_drawn_lottery")
+        PageWeekDrawWinners(v-if="weeksDraw.last_drawn_lottery && weeksDraw.last_drawn_lottery.id")
         //The Jackpot
         PageJackpot()
 
-        PageRounds(v-if="isLotteryActive")
+        PageRounds(v-if="isLotteryActive && weeksDraw.rounds && weeksDraw.rounds.length")
 
         //Prize Check
         PagePrizeCheck()
@@ -26,6 +27,8 @@ div(class="body-main")
 import {useLottery} from "~/composables/useLottery";
 
 const {isLotteryActive, checkLotteryActive} = useLottery()
+const { weeksDraw } = useLottery()
+
 const lotteryActiveInterval = setInterval(() => {
   checkLotteryActive()
   if (isLotteryActive.value)

@@ -52,7 +52,7 @@ const { setupIXTPrice } = useIXTPrice()
 const { refreshIXTBalance } = useIXTContract()
 const { refreshAstroGoldBalance } = useAstroGoldContract()
 const { setActiveCurrency } = useSiteHeader()
-const { getEnteredTickets } = useLottery()
+const { getEnteredTickets, getWeeksDraw } = useLottery()
 
 const { setRefreshToken } = useLogin()
 const { user } = useUser()
@@ -90,11 +90,14 @@ watch(walletState, (state) => {
   if (state != 'connected')
     return
 
-  setupIXTPrice()
-  refreshIXTBalance()
-  refreshAstroGoldBalance()
-  setActiveCurrency('aGold')
-  getEnteredTickets()
+  setTimeout(async () => {
+    setupIXTPrice()
+    refreshIXTBalance()
+    refreshAstroGoldBalance()
+    setActiveCurrency('aGold')
+    getEnteredTickets()
+    getWeeksDraw()
+  }, 1000)
 }, { immediate: true })
 
 const { x: xpos, y: ypos } = useMouse()

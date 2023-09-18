@@ -53,12 +53,6 @@ watch(walletState, async (state) => {
     return
 
   await loadChainInfo()
-})
-
-onMounted(async () => {
-  if (!isWalletConnected.value)
-    return
-  await loadChainInfo()
-})
+}, { immediate: true })
 
 </script>
