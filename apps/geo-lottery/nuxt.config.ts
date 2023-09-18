@@ -55,7 +55,7 @@ export default defineNuxtConfig({
 
 
   i18n: {
-    precompile: { strictMessage: false },
+    compilation: { strictMessage: false },
     locales: [
       {
         code: 'en',

@@ -6,6 +6,9 @@ export default {
     fallbackLocale: 'en',
   },
   defaultLocale: 'en',
+  compilation: {
+    strictMessage: false,
+  },
   locales: [
     {
       code: 'en',
