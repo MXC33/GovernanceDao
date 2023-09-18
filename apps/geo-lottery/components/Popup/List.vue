@@ -36,6 +36,8 @@ div#popups()
 
     PopupTypeYouWin(v-else-if="popup.type == 'popup-type-you-win'")
 
+    PopupTypeYouClaimed(v-else-if="popup.type == 'popup-type-you-claimed'")
+
     PopupTypePurchaseTickets(v-else-if="popup.type == 'popup-type-purchase-tickets'")
 
     PopupTypeOneTimeEntry(v-else-if="popup.type == 'popup-type-one-time-entry'")
@@ -55,6 +57,8 @@ div#popups()
     PopupTypeUnsubscribeSuccess(v-else-if="popup.type == 'popup-type-unsubscribe-success'")
 
 
+  PopupTypeTour(v-if="tour")
+
   PopupTypeError(v-if="activeError" :error="activeError" )
 
 </template>
@@ -63,5 +67,7 @@ div#popups()
 
 const { popup } = usePopups()
 const { activeError } = useContractErrors()
+
+const tour = ref(false)
 
 </script>
