@@ -16,15 +16,18 @@ ListSection(:title="`DISTRICT ${contract.ring}`")
 
     BuildContractSummary(:contract="contract")
 </template>
-
+  
 <script setup lang="ts">
 import type { TileContract } from '~~/composables/useTileContract';
+const { activateContractMode } = useGameInterface();
+
 
 const { selectedContract } = useTileContract()
 const { getRingName } = useTileRings()
 
 const selectContract = () => {
   selectedContract.value = props.contract
+  activateContractMode()
 }
 
 const ringName = computed(() => getRingName(props.contract.ring))

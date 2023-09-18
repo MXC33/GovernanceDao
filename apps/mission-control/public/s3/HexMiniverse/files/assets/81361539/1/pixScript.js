@@ -97,9 +97,6 @@ PixScript.prototype.initialize = function() {
         
     this.seartchForArraysTags();
     this.deHighlight();
-    
-    //this.setGraphicState(GraphicsQuality.Low);
-    //this.pixCord = this is set in the setPix function
 };
 
 PixScript.prototype.seartchForArraysTags = function() {
@@ -111,15 +108,6 @@ PixScript.prototype.seartchForArraysTags = function() {
     this.billBoardEdges = this.entity.findByTag("BillBoardEdges");
     this.children = this.entity.findByTag("StarModel");
 };
-
-/*
-PixScript.prototype.setGraphicState = function(state) {
-    this.graphicsQuality = state;
-    //GraphicsQuality.Low
-    //GraphicsQuality.Medium
-    //GraphicsQuality.High
-    //GraphicsQuality.Ultra
-};*/
 
 PixScript.prototype.highlight = function() {
     this.onHighlight.forEach(e => e.enabled = true);
@@ -138,13 +126,13 @@ PixScript.prototype.highlightInitial = function() {
     //console.log('Hello, is it me you are lookig for?'); 
     //console.log("OnHighlightInit");
 };
-PixScript.prototype.highlightContract = function() {
-    //this.onHighlightContract.forEach(e => e.enabled = true);
-    this.onHighlightContract.forEach(e => e.enabled = false);
+PixScript.prototype.highlightContract = function () {
+    this.onHighlightContract.forEach(e => e.enabled = true);
+    //this.onHighlightContract.forEach(e => e.enabled = false);
     //console.log("OnHighlightContract");
 };
 
-PixScript.prototype.deHighlight = function() {
+PixScript.prototype.deHighlight = function () {
     this.onHighlight.forEach(e => e.enabled = false);
     this.onHighlightBuild.forEach(e => e.enabled = false);
     this.onHighlightAction.forEach(e => e.enabled = false);
@@ -152,58 +140,23 @@ PixScript.prototype.deHighlight = function() {
     this.onHighlightContract.forEach(e => e.enabled = false);
 };
 
-
-/*
-PixScript.prototype.highlight = function() {
-    this.entity.findByTag("OnHighlight").forEach(e => e.enabled = true);
-};
-PixScript.prototype.highlightBuild = function() {
-    this.entity.findByTag("OnHighlightBuild").forEach(e => e.enabled = true);
-};
-PixScript.prototype.highlightAction = function() {
-    this.entity.findByTag("OnHighlightAction").forEach(e => e.enabled = true);
-};
-PixScript.prototype.highlightInitial = function() {
-    this.entity.findByTag("OnHighlightInit").forEach(e => e.enabled = true);
-};
-PixScript.prototype.highlightContract = function() {
-    this.entity.findByTag("OnHighlightContract").forEach(e => e.enabled = true);
-};
-
-PixScript.prototype.deHighlight = function() {
-    this.entity.findByTag("OnHighlight").forEach(e => e.enabled = false);
-    this.entity.findByTag("OnHighlightBuild").forEach(e => e.enabled = false);
-    this.entity.findByTag("OnHighlightAction").forEach(e => e.enabled = false);
-    this.entity.findByTag("OnHighlightInit").forEach(e => e.enabled = false);
-    this.entity.findByTag("OnHighlightContract").forEach(e => e.enabled = false);
-};*/
-
-PixScript.prototype.updatePixStateIndicator = function() {
+PixScript.prototype.updatePixStateIndicator = function () {
     //Hack: Show/Hide visibility
-    
-    const activeIndicator = this.entity.findByName("ActiveIndicator");
-    if(activeIndicator)
-        activeIndicator.enabled = this.pixState == PixState.Active;
+    //console.log("pixScript.pixState", this.pixCord, GetStringFromState(this.pixState));
+    this.enabledEntityOnPixState("ActiveIndicator", PixState.Active);
+    this.enabledEntityOnPixState("InActiveIndicator", PixState.InActive);
+    this.enabledEntityOnPixState("PendingInActiveIndicator", PixState.PendingInActive);
+    this.enabledEntityOnPixState("PendingActiveIndicator", PixState.PendingActive);
+    this.enabledEntityOnPixState("NoContractIndicator", PixState.NoContract);
+    this.enabledEntityOnPixState("NotStakedIndicator", PixState.NotStaked);
+};
 
-    const inActiveIndicator = this.entity.findByName("InActiveIndicator");
-    if(inActiveIndicator)
-        inActiveIndicator.enabled = this.pixState == PixState.InActive;
-        
-    const pendingInActiveIndicator = this.entity.findByName("PendingInActiveIndicator");
-    if(pendingInActiveIndicator)
-        pendingInActiveIndicator.enabled = this.pixState == PixState.PendingInActive;
-        
-    const pendingActiveIndicator = this.entity.findByName("PendingActiveIndicator");
-    if(pendingActiveIndicator)
-        pendingActiveIndicator.enabled = this.pixState == PixState.PendingActive;
-
-    const noContractIndicator = this.entity.findByName("NoContractIndicator");
-    if(noContractIndicator)
-        noContractIndicator.enabled = this.pixState == PixState.NoContract;
-
-    const notStakedIndicator = this.entity.findByName("NotStakedIndicator");
-    if(notStakedIndicator)
-        notStakedIndicator.enabled = this.pixState == PixState.NotStaked;
+PixScript.prototype.enabledEntityOnPixState = function (entityName, pixState) {
+    const entity = this.entity.findByName(entityName);
+    if (entity) {
+        const state = this.pixState == pixState
+        entity.enabled = state;
+    }
 };
 
 PixScript.prototype.getWaste = function() {
@@ -228,6 +181,7 @@ PixScript.prototype.setWaste = function(waste) {
 
 PixScript.prototype.setEnergy = function(energy) {
     this.currentEnergy = energy;
+    console.log("setEnergy", this.currentEnergy);
     /*if(this.energyEntity == null)
         return;
     for(var i = 0; i < 5; i++) {
@@ -238,7 +192,7 @@ PixScript.prototype.setEnergy = function(energy) {
 PixScript.prototype.setProgress = function(progress, type) {
     if (!Number.isInteger(type)){ 
         //console.log('we dont know type');
-        // Set progess on drone.
+        //Set progess on drone.
         type = 0;
     }
     if(this.hasDrone() && type == 0)
@@ -320,94 +274,40 @@ PixScript.prototype.setFacility = function(level) {
     //}
 };
 
+//This is an ugly hack, ran into initilazation problems with playcanvas when seperation this into it's own script file. And therefore put this here instead.
 PixScript.prototype.setFacilityLevel = function(level) {
-    //level = 5;
-    //console.log("pixTier " + this.pixTier + " setLevelElement = " + level);
-
     console.log("setFacilityLevel", level);
 
-    const children = this.children;//this.entity.findByTag("StarModel");
-    const billBoardEdges = this.billBoardEdges;// 
-
-    const length = children.length;
-    for(var i = 0; i < length; i++){
-        children[i].enabled = false;
+    const childrenLength = this.children.length;
+    for (let i = 0; i < childrenLength; i++) {
+        this.children[i].enabled = false;
     }
 
-    if(!billBoardEdges || !children){
+    if (!this.billBoardEdges || !this.children) {
         console.log("billBoardEdges || this.children is null");
         return;
     }
+    
     this.spaceBetween = 0.2;
-    billBoardEdges[0].setLocalPosition(0.2 * -level, 0, 0);
-    billBoardEdges[1].setLocalPosition(0.2 * level, 0, 0);
+    this.billBoardEdges[0].setLocalPosition(0.2 * -level, 0, 0);
+    this.billBoardEdges[1].setLocalPosition(0.2 * level, 0, 0);
 
-    if(level <= 1){
-        children[0].enabled = true;
+    if (level <= 1) {
+        this.children[0].enabled = true;
         const t = 0.5;
-        var lerpValue = Lerp(billBoardEdges[0].getLocalPosition().x, billBoardEdges[1].getLocalPosition().x, t);
-        children[0].setLocalPosition(lerpValue, 0, 0);
-        //console.log("level is less than or equal to 1", level);
+        let lerpValue = Lerp(this.billBoardEdges[0].getLocalPosition().x, this.billBoardEdges[1].getLocalPosition().x, t);
+        this.children[0].setLocalPosition(lerpValue, 0, 0);
         return;
     }
 
     const percent = (1 / level);
-    for(var i = 0; i < level; i++){
-        children[i].enabled = true;
+    for (let i = 0; i < level; i++) {
+        this.children[i].enabled = true;
         const index = i + 1;
-        const isEvan = (level % 2) ? 0.5 : 0.5;
-        const t = (percent * index) - (percent * isEvan);
-        var lerpValue = Lerp(billBoardEdges[0].getLocalPosition().x, billBoardEdges[1].getLocalPosition().x, t);
-        //console.log(t);
-        children[i].setLocalPosition(lerpValue, 0, 0);
-        //console.log(children[i]);
+        const t = (percent * index) - (percent *  0.5);
+        let lerpValue = Lerp(this.billBoardEdges[0].getLocalPosition().x, this.billBoardEdges[1].getLocalPosition().x, t);
+        this.children[i].setLocalPosition(lerpValue, 0, 0);
     }
-};
-
-PixScript.prototype.setGraphicState = function(state) {
-    return;
-    if(!this.facilityEntity || state == null){
-        //console.log("NoFacility");
-        return;
-    }
-        
-
-    const length = this.facilityEntity.script.setGraphicState.graphicsEntity.length;
-    //const facilityEntity = [];
-    if(length == 0){
-        const facilityLow = this.entity.findByTag("GraphicsLow");
-        const facilityMedium = this.entity.findByTag("GraphicsMedium");
-        const facilityHigh = this.entity.findByTag("GraphicsHigh");
-
-        /*facilityEntity.push(facilityLow);
-        facilityEntity.push(facilityMedium);
-        facilityEntity.push(facilityHigh);*/
-
-        this.facilityEntity.script.setGraphicState.graphicsEntity.push(facilityLow);
-        this.facilityEntity.script.setGraphicState.graphicsEntity.push(facilityMedium);
-        this.facilityEntity.script.setGraphicState.graphicsEntity.push(facilityHigh);
-    }
-
-    //console.log(this.graphicsEntitys);  
-
-    for(var i = 0; i < length; i++){
-        this.facilityEntity.script.setGraphicState.graphicsEntity[i].enabled = false;
-        //facilityEntity[i].enabled = false;
-    }
-
-    //var index = Math.max(0, Math.min(length - state, length - 1));
-    var index = Math.max(0, Math.min(state, length - 1));
-    
-    index = length - 1 - index;
-    //console.log("index = " + index);
-    
-    this.facilityEntity.script.setGraphicState.graphicsEntity[index].enabled = true;
-    
-    //facilityEntity[index].enabled = true;
-    //console.log("PixScript = " + getString(state));
-    //console.log(this.getString(index));  
-    //console.log(this.facilityEntity.script.setGraphicState.graphicsEntity);  
-    //var facilityParticals = this.entity.findByTag("facilityParticals");
 };
 
 PixScript.prototype.setDrone = function(level) {
@@ -425,55 +325,45 @@ PixScript.prototype.setDrone = function(level) {
 //@HERE - function(level, state) - Make it have an extra variable to decide what skin/material to use
 PixScript.prototype.setRover = function(level, durability) {
     
-    if(this.roverEntity == null)
+    if(!this.roverEntity) {
         return;
-    
+    }
+
     this.roverLevel = level;
     this.roverEntity.enabled = level > 0;
 
-    if(durability == 3){
+    if(durability === 3) {
         const roverModels = this.roverEntity.findByName("RoverModels");
         roverModels.script.setDamagedRover.activate();
-        /*var glowPlanes = roverModels.findByTag("Glow");
-        glowPlanes.forEach(c => {
-            c.script.emissivePulse.enabled = false;
-            c.script.enabled = false;
-            c.script.emissivePulse.pulseSpeed = 0;
-        });
-        console.log("durability = " + durability);*/
-    }
+    } 
     else if(level > 0) {
-        const roverModels = this.roverEntity.findByName("RoverModels").findByTag("Rover");
-        roverModels[level - 1].enabled = true;
-        var rMats = roverModels[level - 1].findByTag("RoverMaterial");
-        //rMats.forEach(c => c.script.changeMaterial.setMaterial(Math.floor(Math.random() * 3))); // Chnge Math.floor to durability
-        //rMats.forEach(c => c.script.changeMaterial.setMaterial(durability)); // Chnge Math.floor to durability
-        rMats.forEach(c => c.script.changeMaterial.setMaterialEmmisive(durability));
-        var rwMats = roverModels[level - 1].findByTag("RoverWheelMaterial");
-        var glowPlanes = roverModels[level - 1].findByTag("Glow");
-        //glowPlanes[0].script.changeWheelMaterial.setMaterial(durability);
-        const pulseSpeed = [0, 5, 10, 0];
-        glowPlanes.forEach(c => {
-            c.script.changeWheelMaterial.setMaterial(durability);
-            if(durability != 0){
-                c.script.emissivePulse.enabled = true;
-                c.script.emissivePulse.pulseSpeed = pulseSpeed[durability];
-            }else{
-                c.script.emissivePulse.enabled = false;
-            }
+        const roverModelsByTag = this.roverEntity.findByName("RoverModels").findByTag("Rover");
+        const currentRoverModel = roverModelsByTag[level - 1];
+        currentRoverModel.enabled = true;
 
-        }); // Change Math.floor to durability
-        //rwMats.forEach(c => c.script.changeWheelMaterial.setMaterial(durability)); // Chnge Math.floor to durability
-        //@HERE - We Can add an extra variable to do another search and set the correct model/material.
+        const roverMaterials = currentRoverModel.findByTag("RoverMaterial");
+        roverMaterials.forEach(mat => mat.script.changeMaterial.setMaterialEmmisive(durability));
+        const glowPlanes = currentRoverModel.findByTag("Glow");
+
+        const pulseSpeed = [0, 5, 10, 0];
+        glowPlanes.forEach(plane => {
+            plane.script.changeWheelMaterial.setMaterial(durability);
+            
+            const isEmissivePulseEnabled = durability !== 0;
+            plane.script.emissivePulse.enabled = isEmissivePulseEnabled;
+            if(isEmissivePulseEnabled) {
+                plane.script.emissivePulse.pulseSpeed = pulseSpeed[durability];
+            }
+        });
     }
 
     const statusBars = this.roverEntity.findByName("Status").findByTag("RoverDurabilityUI");
-    statusBars.forEach(c => c.enabled = false);//roverModels.children.forEach
-    //statusBars.children.forEach(c => {console.log(c.name);});
-    statusBars[durability].enabled = true;//roverModels.children
+    statusBars.forEach(bar => bar.enabled = false);
+    statusBars[durability].enabled = true;
 
     this.setWaste(0);
 };
+
 
 function getString(state) {
     switch(state){
@@ -525,16 +415,6 @@ PixScript.prototype.isInCurrentContractPix = function() {
     
     return isSecondRingStakedTileSlot;
 };
-
-/*
-PixScript.prototype.isNoContract = function() {
-    return this.pixState == PixState.NoContract;
-};
-
-PixScript.prototype.isNotStaked = function() {
-    return this.pixState == PixState.NotStaked;
-};
-*/
 
 PixScript.prototype.isContractPix = function() {
     return this.isActivateableTile() || this.isInCurrentContractPix();
@@ -594,4 +474,21 @@ PixScript.prototype.canSpawnWaste = function() {
 
 PixScript.prototype.canBeLooted = function() {
     return  this.isStakedPix() && this.currentWaste > 0 || this.getProgress() >= 1.0; 
+};
+
+function GetStringFromState(state) {
+    switch(state){
+        case PixState.Active: 
+            return 'Active'
+        case PixState.InActive: 
+            return 'InActive'
+        case PixState.NoContract: 
+            return 'NoContract'
+        case PixState.NotStaked: 
+            return 'NotStaked'
+        case PixState.PendingActive: 
+            return 'PendingActive'
+        case PixState.PendingInActive: 
+            return 'PendingInActive'
+    }
 };

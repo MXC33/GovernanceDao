@@ -13,7 +13,7 @@ Rotator.prototype.initialize = function() {
 // update code called every frame
 Rotator.prototype.update = function(dt) {
     //if(this.app.renderNextFrame)
-        this.entity.rotateLocal(0, dt * this.rotationSpeed*360, 0);
+    this.entity.rotateLocal(0, dt * this.rotationSpeed*360, 0);
 };
 
 // swap method called for script hot-reloading

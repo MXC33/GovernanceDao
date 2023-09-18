@@ -22,24 +22,6 @@ StarPlacer.attributes.add('starModelTag', {
 StarPlacer.prototype.initialize = function(){
     this.children = this.entity.findByTag("StarModel");
     this.timer = 0;
-
-        /*this.on('enable', function () {
-            if(!this.isAdded) {
-                console.log("enable " + this.entity.name);
-            }
-        }, this);
-
-        this.on('destroy', function () {
-            if(this.isAdded) {
-                console.log("destroy " + this.entity.name);
-            }
-        }, this);
-
-        this.on('disable', function () {
-            if(this.isAdded) {
-                console.log("disable " + this.entity.name);
-            }
-        }, this);*/
 }
 
 StarPlacer.prototype.update = function(dt) {

@@ -100,8 +100,6 @@ PixGrid.prototype.setPix = function(pixCord, pix) {
         pixScript.setEnergy(0);
         pixScript.setWaste(0);
     }
-
-    pixScript.setGraphicState(this.gameLogics.getCurrentModelQuality());
 };
 
 PixGrid.prototype.createPix = function(pixTier, pixTerritory, pixState, graphicsQuality) {
@@ -125,7 +123,7 @@ PixGrid.prototype.createPix = function(pixTier, pixTerritory, pixState, graphics
     //console.log("currentModelGraphicsQuality", this.gameLogics.currentModelGraphicsQuality);
     //facility.findByName("LevelIndicator").addChild(levelIndicator);
 
-    //set all but terrain to false because terrain shuld always be true
+    //set all butt terrain to false because terrain shuld always be true
     terrain.enabled = true;
     drone.enabled = false;
     rover.enabled = false;

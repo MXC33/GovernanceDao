@@ -31,6 +31,7 @@ export const useGameInterface = () => {
   const { transactionState } = useTransactions()
   const { tokenInfoForRing } = useTileRings()
   const documentVisibility = useDocumentVisibility()
+  const { selectedContract } = useTileContract()
 
   const gameMenu = useGameMenu()
 
@@ -52,6 +53,12 @@ export const useGameInterface = () => {
         return
 
       gameInterface.value?.setGraphicState(newQuality)
+
+    }, { immediate: true })
+
+    watch(selectedContract, (contract) => {
+      if (contract == null)
+        gameInterface.value?.activateInspectMode()
 
     }, { immediate: true })
 
@@ -320,9 +327,18 @@ export const useGameInterface = () => {
 
   const activateBuildMode = (tile?: Tile[]) => {
     if (buildMode.value == 'build')
-      return null;//gameInterface.value?.activateBuildModeAny()
-    else
-      return gameInterface.value?.activateContractMode(tile)
+      return null; //gameInterface.value?.activateBuildModeAny()
+    // else if (selectedContract.value != null) {
+    //   const { ring } = selectedContract.value
+    //   return gameInterface.value?.activateContractMode(TileRings[ring])
+    // }
+  }
+
+  const activateContractMode = () => {
+    if (selectedContract.value != null) {
+      const { ring } = selectedContract.value
+      return gameInterface.value?.activateContractMode(TileRings[ring])
+    }
   }
 
   const resetMode = () => {
@@ -359,7 +375,6 @@ export const useGameInterface = () => {
     console.log("enable facility building mode", item.tier, 1)
     gameInterface.value?.activateFacilityPlacingMode(item.tier, 1)
     console.log("enable facility building mode", item.tier, 1)
-
   }
 
 
@@ -396,6 +411,7 @@ export const useGameInterface = () => {
     setPixPendingActive,
     setGraphicState,
     getGraphicState,
-    gameQuality
+    gameQuality,
+    activateContractMode
   }
 }
