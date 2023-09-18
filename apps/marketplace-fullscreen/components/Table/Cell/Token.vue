@@ -13,7 +13,7 @@ HList(items="center" space-x="2" font="bold" cursor="pointer" w="full")
 
 <script setup lang="ts">
 import type { AnyToken } from '@ix/base/composables/Token/useTokens';
-const { getTokenKey } = useTokens()
+
 
 const { token } = defineProps<{
   token: AnyToken,

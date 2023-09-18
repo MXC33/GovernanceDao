@@ -9,7 +9,7 @@ PopupWrapper()
 
       VList(px="4" py="4" gap="2")
 
-        WalletButtonTokens(v-for="item in activePaymentItems" :token-type="item" @click="chosenPaymentCurrency(item)" :is-selected="isSelected(item)")
+        PaymentsButton(v-for="item in activePaymentItems" :token-type="item" @click="chosenPaymentCurrency(item)" :is-selected="isSelected(item)")
           template(#price) {{ item }}
 
     div(grid="~ cols-2" w="full" gap="2")

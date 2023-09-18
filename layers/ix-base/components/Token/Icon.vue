@@ -4,7 +4,7 @@ Icon(:filter="outline ? 'url(#white-outline)' : ''")
 
 <script lang="ts" setup>
 import type { TokenIdentifier } from '~/composables/Token/useTokens';
-const { getTokenKey } = useTokens()
+
 
 const svgPath = computed(() => getTokenKey(props.token))
 const Icon = await import(`../../assets/images/ui/token/${svgPath.value}.svg?component`).catch(() => '<div></div>')

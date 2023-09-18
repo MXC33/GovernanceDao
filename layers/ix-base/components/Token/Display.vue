@@ -15,7 +15,7 @@ VList(justify="center" items="center" aspect="4/5" w="50%" bg="black opacity-40"
 <script lang="ts" setup>
 import type { TokenIdentifier } from '~/composables/Token/useTokens';
 
-const { getTokenKey } = useTokens()
+
 
 
 const displayVideo = computed(() => {

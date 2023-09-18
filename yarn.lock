@@ -2854,6 +2854,7 @@ __metadata:
     eslint: ^8.28.0
     ethereum-abi-types-generator: ^1.3.2
     ethers: 5
+    get-graphql-schema: ^2.1.2
     histoire: ^0.16.1
     nuxt: 3.7.0
     nuxt-graphql-client: ^0.2.30
@@ -7491,7 +7492,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"chalk@npm:^2.4.2":
+"chalk@npm:^2.4.1, chalk@npm:^2.4.2":
   version: 2.4.2
   resolution: "chalk@npm:2.4.2"
   dependencies:
@@ -10179,6 +10180,20 @@ __metadata:
   languageName: node
   linkType: hard
 
+"get-graphql-schema@npm:^2.1.2":
+  version: 2.1.2
+  resolution: "get-graphql-schema@npm:2.1.2"
+  dependencies:
+    chalk: ^2.4.1
+    graphql: ^14.0.2
+    minimist: ^1.2.0
+    node-fetch: ^2.2.0
+  bin:
+    get-graphql-schema: dist/index.js
+  checksum: 2e299841d4eb34aeb25aa158cefacf343606e14c49cc9a36a2beb14f8d2f6486350024d276c76c115c4ad27c49e96b07c4f955a12e9a035582f25cba13419152
+  languageName: node
+  linkType: hard
+
 "get-intrinsic@npm:^1.0.2, get-intrinsic@npm:^1.1.1, get-intrinsic@npm:^1.1.3, get-intrinsic@npm:^1.2.1":
   version: 1.2.1
   resolution: "get-intrinsic@npm:1.2.1"
@@ -10451,6 +10466,15 @@ __metadata:
   peerDependencies:
     graphql: ">=0.11 <=16"
   checksum: 7b622944823fa12a77ea490656121a77e1a1daf08114a6a0b027922113f4481d95f4fe380a5de369a51657ef777d35757dc31f63e41071c21f3e97ca47e4205a
+  languageName: node
+  linkType: hard
+
+"graphql@npm:^14.0.2":
+  version: 14.7.0
+  resolution: "graphql@npm:14.7.0"
+  dependencies:
+    iterall: ^1.2.2
+  checksum: e5f4e60799421a573904f390e1ec0aa76360f751688dbbe62e9c35baa0d3727c8d59a659bfc524f126dffe3518da87fd8ecaa78c94fd5c0fe4e035c670745242
   languageName: node
   linkType: hard
 
@@ -11471,6 +11495,13 @@ __metadata:
   version: 0.1.2
   resolution: "isstream@npm:0.1.2"
   checksum: 1eb2fe63a729f7bdd8a559ab552c69055f4f48eb5c2f03724430587c6f450783c8f1cd936c1c952d0a927925180fcc892ebd5b174236cf1065d4bd5bdb37e963
+  languageName: node
+  linkType: hard
+
+"iterall@npm:^1.2.2":
+  version: 1.3.0
+  resolution: "iterall@npm:1.3.0"
+  checksum: c78b99678f8c99be488cca7f33e4acca9b72c1326e050afbaf023f086e55619ee466af0464af94a0cb3f292e60cb5bac53a8fd86bd4249ecad26e09f17bb158b
   languageName: node
   linkType: hard
 
@@ -12936,7 +12967,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"node-fetch@npm:^2.6.1, node-fetch@npm:^2.6.12, node-fetch@npm:^2.6.7":
+"node-fetch@npm:^2.2.0, node-fetch@npm:^2.6.1, node-fetch@npm:^2.6.12, node-fetch@npm:^2.6.7":
   version: 2.7.0
   resolution: "node-fetch@npm:2.7.0"
   dependencies:

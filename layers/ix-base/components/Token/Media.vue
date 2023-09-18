@@ -8,7 +8,7 @@ TokenVideo(v-else :token="token" :is-large="isLarge" h="full" inset="0" :key="co
 
 import type { TokenIdentifier } from '~/composables/Token/useTokens'
 
-const { getTokenKey } = useTokens()
+
 const { tokenHasVideo } = useTokenMedia()
 
 const props = defineProps<{

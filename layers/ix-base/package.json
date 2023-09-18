@@ -10,7 +10,8 @@
     "preview": "nuxt preview",
     "prepare": "nuxt prepare",
     "lint": "eslint .",
-    "abis": "node create-abis.js"
+    "abis": "node create-abis.js",
+    "schema": "get-graphql-schema https://mission-control-api-dev-s7ito.ondigitalocean.app/graphql > schema.graphql"
   },
   "devDependencies": {
     "@coinbase/wallet-sdk": "^3.6.6",
@@ -39,6 +40,7 @@
     "eslint": "^8.28.0",
     "ethereum-abi-types-generator": "^1.3.2",
     "ethers": "5",
+    "get-graphql-schema": "^2.1.2",
     "histoire": "^0.16.1",
     "nuxt": "3.7.0",
     "nuxt-graphql-client": "^0.2.30",

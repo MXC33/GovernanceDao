@@ -1,7 +1,7 @@
 <template lang="pug">
 ClientOnly()
   transition(name="fade-slow")
-    WalletPayments(v-if="popup == 'payments'")
+    Payments(v-if="popup == 'payments'")
 
   Notifications()
 
