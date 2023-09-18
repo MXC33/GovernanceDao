@@ -1,0 +1,49 @@
+{
+  "general": {
+    "previous": "Previous",
+    "back": "Back",
+    "cancel": "Cancel",
+    "close": "Close",
+    "claim": "Claim",
+    "confirm": "Confirm",
+    "continue": "Continue",
+    "next": "Next",
+    "disconnect": "Disconnect",
+    "errorConnecting": "ERROR CONNECTING:",
+    "exit": "Exit",
+    "upgrade": "Upgrade",
+    "enter": "Enter",
+    "wallet": "Wallet:""navigation": {
+      "terminal": "Terminal",
+      "inventory": "Inventory",
+      "missionCtrl": "Mission Control",
+      "netEmpire": "Netempire",
+      "marketPlace": "Marketplace",
+      "airdrop": "Airdrop",
+      "taskMng": "Task Manager",
+      "manager": "Manager",
+      "build": "build",
+      "overview": "Overview",
+      "starterPack": "Starter pack",
+      "payments": "Payments",
+      "soon": "Coming Soon",
+      "loadMore": "Load More",
+      "sound": "Sound",
+      "settings": {
+        "title": "Settings",
+        "sound": "SOUND ON/OFF",
+        "graphics-Settings": "GRAPHICS SETTINGS",
+        "low": "LOW",
+        "medium": "MEDIUM",
+        "high": "HIGH",
+        "back": "Back"
+      },
+      "menu": {
+        "addFunds": "Add Funds",
+        "account": "Account",
+        "logout": "Log out",
+        "connectWallet": "Connect Wallet"
+      }
+    }
+  }
+}

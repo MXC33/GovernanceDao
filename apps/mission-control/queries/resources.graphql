@@ -1,0 +1,71 @@
+
+query StakedOnTile($credentials: CredentialsInput!, $tiles: [TileInput!]!) {
+  stakedOnTile(credentials: $credentials, tiles: $tiles) {
+    ...StakedNFT
+  }
+}
+
+query OldStakedOnTile($credentials: CredentialsInput!) {
+  oldStakedOnTile(credentials: $credentials) {
+    ...StakedNFT
+  }
+}
+
+query WasteNonce($credentials: CredentialsInput!) {
+  wasteNonce(credentials: $credentials)
+}
+
+query OldWasteNonce($credentials: CredentialsInput!) {
+  oldWasteNonce(credentials: $credentials)
+}
+
+fragment Tile on Tile {
+  q
+  r
+  s
+}
+
+fragment StakedNFT on StakedNFT {
+  tiles {
+    ...Tile
+  }
+  base {
+    ...StakedPixInfo
+  }
+  top {
+    ...StakedTopAssetInfo
+  }
+  isRented
+  rentPrice
+  rentalToken
+  tileName
+  ring
+}
+
+fragment StakedPixInfo on StakedPixInfo {
+  stakedAddress
+  nonce
+  land {
+    ...NFT
+  }
+  resource {
+    ...NFT
+  }
+}
+
+fragment StakedTopAssetInfo on StakedTopAssetInfo {
+  stakedAddress
+  token {
+    ...NFT
+  }
+  nonce
+  timeLeft
+  resource {
+    ...NFT
+  }
+  index
+  resourceAmount
+  progress
+  finishTime
+  cap
+}

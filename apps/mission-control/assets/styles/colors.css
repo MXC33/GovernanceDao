@@ -1,0 +1,109 @@
+:root {
+  --mc-black: #0C0C0C;
+  --mc-black-rgb: 12, 12, 12;
+  --mc-orange-rgb: 255, 102, 71;
+  --mc-mint-rgb: 132, 212, 188;
+  --mc-white-rgb: 249, 249, 249;
+  --mc-black-rgb: 12, 12, 12;
+  --mc-yellow-rgb: 246, 186, 30;
+  --mc-ygreen-rgb: 95, 190, 135;
+  --mc-blue: #0E84D9;
+  --mc-gray: #1E1E1E;
+  --mc-red: #E52424;
+  --mc-gray_light: #f9f9f999;
+  --mc-finegreen: #14C75C;
+  --mc-whitenew: #f9f9f9;
+  --mc-warning: #F6BA1E;
+  --mc-gray-50: #d9d9d9;
+  --mc-gray-100: #C4C4C4;
+  --mc-gray-200: #A8A8A8;
+  --mc-gray-300: #858585;
+  --mc-gray-400: #636363;
+  --mc-gray-500: #474747;
+  --mc-gray-600: #333333;
+  --mc-gray-700: #242424;
+  --mc-gray-800: #1A1A1A;
+  --mc-arcade-rgb: 189, 255, 0;
+  --mc-gravity-grade-rgb: 255, 65, 0;
+  --mc-menu-button-rgb: 249, 249, 249;
+  --mc-accent-light: var(--mc-accent);
+
+  --mc-arcade: rgb(var(--mc-arcade-rgb));
+  --mc-arcade_10: rgba(var(--mc-arcade-rgb), 0.1);
+  --mc-arcade_20: rgba(var(--mc-arcade-rgb), 0.2);
+  --mc-arcade_40: rgba(var(--mc-arcade-rgb), 0.4);
+  --mc-arcade_60: rgba(var(--mc-arcade-rgb), 0.6);
+
+  --mc-orange: rgb(var(--mc-orange-rgb));
+  --mc-orange_10: rgba(var(--mc-orange-rgb), 0.1);
+  --mc-orange_20: rgba(var(--mc-orange-rgb), 0.2);
+  --mc-orange_40: rgba(var(--mc-orange-rgb), 0.4);
+  --mc-orange_60: rgba(var(--mc-orange-rgb), 0.6);
+
+  --mc-yellow: rgb(var(--mc-yellow-rgb));
+  --mc-yellow_10: rgba(var(--mc-yellow-rgb), 0.1);
+  --mc-yellow_20: rgba(var(--mc-yellow-rgb), 0.2);
+  --mc-yellow_40: rgba(var(--mc-yellow-rgb), 0.4);
+  --mc-yellow_60: rgba(var(--mc-yellow-rgb), 0.6);
+
+  --mc-ygreen: rgb(var(--mc-ygreen-rgb));
+  --mc-ygreen_10: rgba(var(--mc-ygreen-rgb), 0.1);
+  --mc-ygreen_20: rgba(var(--mc-ygreen-rgb), 0.2);
+  --mc-ygreen_40: rgba(var(--mc-ygreen-rgb), 0.4);
+  --mc-ygreen_60: rgba(var(--mc-ygreen-rgb), 0.6);
+
+  --mc-mint: rgb(var(--mc-mint-rgb));
+  --mc-mint-10: rgba(var(--mc-mint-rgb), 0.1);
+  --mc-mint-20: rgba(var(--mc-mint-rgb), 0.2);
+  --mc-mint-40: rgba(var(--mc-mint-rgb), 0.4);
+  --mc-mint-60: rgba(var(--mc-mint-rgb), 0.6);
+  --mc-mint-80: rgba(var(--mc-mint-rgb), 0.8);
+
+  --mc-gravity-grade: rgb(var(--mc-gravity-grade-rgb));
+  --mc-gravity-grade_10: rgba(var(--mc-gravity-grade-rgb), 0.1);
+  --mc-gravity-grade_20: rgba(var(--mc-gravity-grade-rgb), 0.2);
+  --mc-gravity-grade_40: rgba(var(--mc-gravity-grade-rgb), 0.4);
+  --mc-gravity-grade_60: rgba(var(--mc-gravity-grade-rgb), 0.6);
+
+  --mc-white: rgb(var(--mc-white));
+  --mc-white_10: rgba(var(--mc-white), 0.1);
+  --mc-white_20: rgba(var(--mc-white), 0.2);
+  --mc-white_40: rgba(var(--mc-white), 0.4);
+  --mc-white_60: rgba(var(--mc-white), 0.6);
+  --mc-white_80: rgba(var(--mc-white), 0.8);
+
+  --mc-black: rgb(var(--mc-black));
+  --mc-black_10: rgba(var(--mc-black), 0.1);
+  --mc-black_20: rgba(var(--mc-black), 0.2);
+  --mc-black_40: rgba(var(--mc-black), 0.4);
+  --mc-black_60: rgba(var(--mc-black), 0.6);
+  --mc-black_80: rgba(var(--mc-black), 0.8);
+
+  --mc-accent-rgb: var(--mc-orange-rgb);
+  --mc-secondary-rgb: var(--mc-mint-rgb);
+
+  --mc-accent: rgb(var(--mc-accent-rgb));
+  --mc-accent-10: rgba(var(--mc-accent-rgb), 0.1);
+  --mc-accent-20: rgba(var(--mc-accent-rgb), 0.2);
+  --mc-accent-40: rgba(var(--mc-accent-rgb), 0.4);
+  --mc-accent-60: rgba(var(--mc-accent-rgb), 0.6);
+  --mc-accent-80: rgba(var(--mc-accent-rgb), 0.8);
+
+  --mc-secondary: rgb(var(--mc-secondary-rgb));
+  --mc-secondary_10: rgba(var(--mc-secondary-rgb), 0.1);
+  --mc-secondary_20: rgba(var(--mc-secondary-rgb), 0.2);
+  --mc-secondary_40: rgba(var(--mc-secondary-rgb), 0.4);
+  --mc-secondary_60: rgba(var(--mc-secondary-rgb), 0.6);
+
+  --listitem-base-color: var(--mc-gray-400);
+  --listitem-select-color: var(--mc-mint-80);
+  --listitem-hover-color: var(--mc-mint-60);
+
+  --mc-menu-button: rgb(var(--mc-menu-button-rgb));
+  --mc-menu-button_10: rgba(var(--mc-menu-button-rgb), 0.1);
+  --mc-menu-button_20: rgba(var(--mc-menu-button-rgb), 0.2);
+  --mc-menu-button_40: rgba(var(--mc-menu-button-rgb), 0.4);
+  --mc-menu-button_60: rgba(var(--mc-menu-button-rgb), 0.6);
+  --mc-menu-button_80: rgba(var(--mc-secondary-rgb), 0.8);
+
+}

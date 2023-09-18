@@ -1,0 +1,5 @@
+query Currencies($credentials: CredentialsInput!) {
+  currencies(credentials: $credentials) {
+    ...NFT
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "name": "@ix/mc",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "build": "nuxt build",
+    "dev": "nuxt dev --port 3000",
+    "prepare": "nuxt prepare",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
+    "abis": "node create-abis.js",
+    "playcanvas": "node fetch-playcanvas.js",
+    "graph": "DEBUG=1 graphclient build --fileType json",
+    "schema": "get-graphql-schema https://mission-control-api-dev-s7ito.ondigitalocean.app/graphql > schema.graphql",
+    "schema-local": "get-graphql-schema http://localhost:4000/graphql > schema.graphql"
+  },
+  "devDependencies": {
+    "@ix/base": "*",
+    "@nuxtjs/i18n": "^8.0.0-rc.2",
+    "@types/node": "^18",
+    "@vueuse/router": "^10.1.2",
+    "fuzzyjs": "^5.0.1",
+    "interactive-shader-format": "^2.8.1",
+    "nuxt": "^3.5.3",
+    "playcanvas": "1.57.1",
+    "polychrome": "^4.1.2",
+    "v-lazy-show": "^0.2.3",
+    "vue-router": "4",
+    "vue-scrollto": "^2.20.0",
+    "vue3-autocounter": "^1.0.6",
+    "vue3-easy-data-table": "^1.5.42",
+    "vue3-table-lite": "^1.3.7"
+  }
+}
