@@ -1,7 +1,7 @@
 export default {
   lazy: true,
   strategy: 'no_prefix',
-  langDir: './locales',
+  langDir: './lang',
   vueI18n: {
     fallbackLocale: 'en',
   },

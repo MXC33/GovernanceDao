@@ -21,6 +21,7 @@
     "@histoire/plugin-vue": "^0.16.1",
     "@nuxt/eslint-config": "^0.1.1",
     "@nuxtjs/html-validator": "^1.5.2",
+    "@nuxtjs/i18n": "next",
     "@types/uuid": "^9.0.1",
     "@unocss/extractor-pug": "^0.53.1",
     "@unocss/nuxt": "^0.53.1",

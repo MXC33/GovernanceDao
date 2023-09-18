@@ -15,6 +15,7 @@ export default defineNuxtConfig({
   ],
 
   typescript: {
+    includeWorkspace: true,
     shim: false,
     strict: false
   },
@@ -27,31 +28,19 @@ export default defineNuxtConfig({
   //@ts-ignore
   transpile: ['vue3-carousel'],
 
-  modules: [
-    '@vueuse/nuxt',
-    "@unocss/nuxt",
-    'nuxt-graphql-client',
-    '@nuxtjs/i18n',
-  ],
-
   css: [
     '@/assets/styles/fonts.css',
     '@/assets/styles/colors.css',
     '@/assets/styles/corners.css',
-    '@/assets/styles/cuts.css',
     '@/assets/styles/transitions.css',
     '@/assets/styles/corporations.css',
     '@unocss/reset/tailwind.css',
     'vue3-carousel/dist/carousel.css'
   ],
 
-
   define: {
     global: "globalThis",
   },
-
-
-  uno: false,
 
   runtimeConfig: {
     public: {
@@ -96,6 +85,11 @@ export default defineNuxtConfig({
   },
 
   vite: {
+    server: {
+      hmr: {
+        port: 8005,
+      },
+    },
     vue: {
       script: {
         defineModel: true,

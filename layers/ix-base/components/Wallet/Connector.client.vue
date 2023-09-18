@@ -1,15 +1,15 @@
 <template lang="pug">
 VList(bg="ix-primary opacity-20" p="6" space-y="5" max-w="150" w="full" cut="bottom-right b-ix-primary b-opacity-60 s-lg")
-  h2(text="2xl white" font="druk bold" @click="debugWalletClick") {{ $t('wallet.title') }}
+  h2(text="2xl white" font="druk bold" @click="debugWalletClick") {{ $t('base.wallet.title') }}
 
   VList(text="white left")
     WalletStatus(v-if="isWalletConnected")
 
     VList(v-else space-y="3") 
-      div {{ $t('wallet.welcomeMessage') }}
+      div {{ $t('base.wallet.welcomeMessage') }}
 
       HList(v-if="!!walletError" color="mc-orange" space-x="1") 
-        span(font="bold") {{$t(`general.errorConnecting`)}}
+        span(font="bold") {{$t(`base.errorConnecting`)}}
         span {{ walletError }}
 
   a(btn="~ lg secondary" href="https://planetix.com/connect" v-if="loginFailType == 'no-user'") Register on PlanetIX
@@ -19,7 +19,7 @@ VList(bg="ix-primary opacity-20" p="6" space-y="5" max-w="150" w="full" cut="bot
   div(flex="~ col" space-y="3" v-else)
     WalletButtonConnect(v-for="connector in connectors" :connector="connector")
 
-  ButtonSound(sound="lg" btn="~ secondary lg" cut="bottom-right" v-if="walletState == 'connecting' || walletState == 'signing'" @click="logoutWallet") {{$t(`general.cancel`)}}
+  ButtonSound(sound="lg" btn="~ secondary lg" cut="bottom-right" v-if="walletState == 'connecting' || walletState == 'signing'" @click="logoutWallet") {{$t(`base.cancel`)}}
 
 
 </template>

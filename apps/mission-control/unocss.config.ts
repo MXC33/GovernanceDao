@@ -1,38 +1,16 @@
 import { defineConfig } from 'unocss'
 
-import presetAttributify from "@unocss/preset-attributify";
-import extractorPug from "@unocss/extractor-pug";
-import presetUno, { Theme } from "@unocss/preset-uno"
-
-import { Rule, extractorSplit } from "@unocss/core";
-import { presetScrollbar } from 'unocss-preset-scrollbar'
-import transformerVariantGroup from '@unocss/transformer-variant-group'
-import { stateOnMatcher, stateMatcher, parentClassMatcher } from './variants.uno';
 import { cutRules } from './cuts.uno'
 
+import baseLayer from '@ix/base/unocss.config';
+
 export default defineConfig({
-  presets: [
-    //@ts-ignore
-    presetUno({ attributifyPseudo: true }),
-    //@ts-ignore
-    presetAttributify({
-      ignoreAttributes: ['placeholder']
-    }),
-    presetScrollbar({}),
-  ],
-  transformers: [
-    //@ts-ignore
-    transformerVariantGroup(),
-  ],
-  extractors: [
-    extractorPug(),
-    extractorSplit
-  ],
-  variants: [
-    stateOnMatcher,
-    stateMatcher,
-    parentClassMatcher
-  ],
+  presets: [baseLayer],
+  // variants: [
+  //   stateOnMatcher,
+  //   stateMatcher,
+  //   parentClassMatcher
+  // ],
   theme: {
     fontFamily: {
       apercu: ['Apercu Mono', 'sans-serif'],
@@ -270,8 +248,7 @@ export default defineConfig({
       'scrollable-mobile': 'lt-md-overflow-y-auto lt-md-scrollbar lt-md-scrollbar-primary lt-md-min-h-0',
       'scrollable-desktop': 'md-overflow-y-auto md-scrollbar md-scrollbar-primary md-min-h-0'
     },
-    
-    [/^cut-b-(.*)$/, ([, c]) => `parent-is-paint-supported:before:bg-${c} parent-is-paint-supported:!b-0 parent-is-not-paint-supported:b-1 parent-is-not-paint-supported:b-${c}`],  
+
     [/^size-(.*)$/, ([, c]) => `w-${c} h-${c}`],
     [/^mc-ring-(\d)$/, ([, c]) => `ring-${c}`],
     [/^mc-ring-hover(\d)$/, ([, c]) => `hover:ring-${c} group-hover:ring-${c}`],
