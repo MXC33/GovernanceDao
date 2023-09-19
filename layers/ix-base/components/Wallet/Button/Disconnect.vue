@@ -1,5 +1,5 @@
 <template lang="pug">
-ButtonSound(sound="lg" btn="~ accent lg" color="white" text-shadow="none" @click="logoutWallet" cut="bottom-right s-md b-ix-primary") {{$t(`general.disconnect`)}}
+ButtonSound(sound="lg" btn="~ secondary lg" color="white" text-shadow="none" @click="logoutWallet" cut="bottom-right s-md") {{$t(`general.disconnect`)}}
 </template>
 
 <script setup lang="ts">

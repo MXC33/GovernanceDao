@@ -33,6 +33,9 @@ export default definePreset({
     stateMatcher
   ],
   theme: {
+    fontFamily: {
+      foundry: ['Foundry Gridnik', 'sans-serif'],
+    },
     colors: {
       ix: {
         primary: '#C3000F',
@@ -98,7 +101,8 @@ export default definePreset({
       'btn-soft': 'btn px-4 btn-md bg-opacity-20 hover:bg-opacity-40 b-0.5',
       'btn-secondary': 'btn-solid bg-gray-600 color-white hover:bg-gray-400',
       'btn-secondary-detail': 'btn-solid btn-md bg-gray-500 hover:bg-gray-400 cut-bottom-right cut-sm btn-center',
-      'btn-form': 'font-400 py-3 px-1 cut-bottom-right cut-b-gray-400 hover:cut-b-gray-300',
+      'btn-tertriary': 'cut-bottom-right cut-b-gray-400 hover:cut-b-gray-300',
+      'btn-form': 'font-400 py-3 px-1 btn-tertriary',
       'btn-form-active': 'bg-gray-600',
       'btn-table': 'font-bold uppercase px-4 lg:px-6 py-3',
       'btn-menu': 'opacity-100 hover:opacity-80 transition-opacity font-bold uppercase whitespace-nowrap p-1'

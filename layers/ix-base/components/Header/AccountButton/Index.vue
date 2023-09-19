@@ -13,13 +13,13 @@ VList(pos="relative" display="lt-md:none"  ref="menuElement")
   HeaderSubmenuWrapper(v-if="menuOpen" :align-right="true")
 
     VList(b="gray-400")
-      HeaderSubmenuButton(@click="showIXTSwap") {{ $t(`marketplace.navigation.menu.addFunds`)}}
+      HeaderSubmenuButton(@click="showIXTSwap") {{ $t(`general.navigation.menu.addFunds`)}}
 
       NuxtLink(to="/account")
-        HeaderSubmenuButton(b="t-1 b-1 gray-400") {{ $t(`marketplace.navigation.menu.account`)}}
+        HeaderSubmenuButton(b="t-1 b-1 gray-400") {{ $t(`general.navigation.menu.account`)}}
 
       NuxtLink(to="/connect" @click="toggleMenu")
-        HeaderSubmenuButton() {{ $t(`marketplace.navigation.menu.logout`)}}
+        HeaderSubmenuButton() {{ $t(`general.navigation.menu.logout`)}}
 
 </template>
 
