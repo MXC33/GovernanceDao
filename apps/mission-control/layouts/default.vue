@@ -1,13 +1,12 @@
 <template lang="pug">
 main(w="full" h="full" flex="~ col grow" min-h="0")
   Header()
-    template(#settings)
+    template(#contentRight)
       button(@click="toggleSettings")
         Settings(wh="6" fill="white" ) 
-    template(#sound)
       button(@click="toggleSound" wh="6")
-        SoundOn(v-if="isSoundEnabled" fill="white" )
-        SoundOff(v-else fill="white")
+        SoundOn(v-if="isSoundEnabled" fill="white")
+        SoundOff(v-else fill="white")    
 
   //- Used for teleports
   div(id="overlays" select="none")

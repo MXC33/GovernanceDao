@@ -16,11 +16,8 @@ VList(pos="sticky top-0" translate-y="$header-offset" z="99" w="full" @mouseente
     HList(items="center" space-x="6" px="0")
       //-button(btn="menu" display="lt-lg:none") help
       //-HeaderLanguage(language="EN")
-      slot(name="menu")
+      slot(name="contentRight")
 
-      slot(name="settings")
-
-      slot(name="sound")
       HeaderAccountButton()
 
 

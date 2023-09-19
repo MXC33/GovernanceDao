@@ -1,6 +1,6 @@
 import { ethers } from 'ethers';
 import { NftFragment } from '#gql';
-;
+
 const TOKENS_KEY = 'user-nft-tokens'
 export type UserResource = 'astro-credit' | 'ixt' | 'drone' | 'waste' | 'power' | 'energy' | 'gas-price' | 'astro-gold' | 'astro-gold-lite' | 'mc-level'
 
