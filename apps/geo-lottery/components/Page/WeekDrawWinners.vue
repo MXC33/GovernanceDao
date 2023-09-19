@@ -15,7 +15,7 @@ div()
       span(  color="$mc-pink" m="x-1") {{streamTickets}}
       span() Subscription TICKETS
     div(flex="~ col md:row" justify="center" items-center )
-      ButtonItem(:value="'pink'" :text="'Claim'" v-if="showClaimButton" @click="onClaimReward()" :loading="isLoading")
+      ButtonItem(:value="'pink'" :text="'Claim'" min-w="300px md:265px" v-if="showClaimButton" @click="onClaimReward()" :loading="isLoading")
 </template>
 
 <script lang="ts" setup>

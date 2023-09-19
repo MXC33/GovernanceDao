@@ -57,7 +57,7 @@ div#popups()
     PopupTypeUnsubscribeSuccess(v-else-if="popup.type == 'popup-type-unsubscribe-success'")
 
 
-  PopupTypeTour(v-if="tour")
+  PopupTypeTour(v-if="false")
 
   PopupTypeError(v-if="activeError" :error="activeError" )
 
@@ -68,6 +68,6 @@ div#popups()
 const { popup } = usePopups()
 const { activeError } = useContractErrors()
 
-const tour = ref(false)
+const tour = ref(true)
 
 </script>
