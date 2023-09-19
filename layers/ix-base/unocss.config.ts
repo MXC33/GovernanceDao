@@ -85,7 +85,7 @@ export default definePreset({
     },
 
     {
-      'btn': 'transition-all transition-duration-100 flex flex-col text-center justify-center items-center leading-none cursor-pointer font-bold uppercase',
+      'btn': 'transition-all transition-duration-100 flex flex-col text-center justify-center items-center leading-none cursor-pointer font-bold uppercase min-h-12',
       'btn-lg': 'min-h-14',
       'btn-md': 'min-h-10',
       'btn-center': 'flex justify-center items-center',

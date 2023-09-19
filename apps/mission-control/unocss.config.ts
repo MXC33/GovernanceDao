@@ -36,24 +36,12 @@ export default defineConfig({
     },
     colors: {
       ix: {
-        primary: '#C3000F',
+        primary: '#84D4BC',
         white: '#F9F9F9',
         black: '#0C0C0C',
         ne: '#FF0014',
         orange: '#FF6647',
         mint: '#84D4BC'
-      },
-      gray: {
-        50: '#d9d9d9',
-        100: '#C4C4C4',
-        200: '#A8A8A8',
-        300: '#858585',
-        400: '#636363',
-        500: '#474747',
-        600: '#333333',
-        700: '#242424',
-        800: '#1A1A1A',
-        900: '#141414'
       },
       'mc': {
         'menu-button': '#d9d9d9',
@@ -176,6 +164,11 @@ export default defineConfig({
       },
     },
   },
+
+  // Good search regex for all btn-accent implementations is
+  // btn="[^"]*accent[^"]*"
+  // Adjust to needs.
+
   shortcuts: [
     {
       'text-ellipsis': 'text-ellipsis w-[100%] overflow-hidden',
@@ -196,42 +189,21 @@ export default defineConfig({
       'card-no-bg': '!bg-transparent',
       'card-active': 'btn-accent b-$mc-accent bg-$mc-accent-20',
       'card-selected': 'b-$mc-secondary_40 hover:b-$mc-secondary bg-$mc-secondary_20  hover:bg-$mc-secondary_40 text-$mc-secondary text-shadow-$mc-secondary',
-      'btn-loading-outline': 'bg-$mc-orange_20 hover:bg-$mc-orange_20 color-mc-orange',
+      'btn-primary': 'b-mc-mint bg-mc-mint bg-opacity-40 hover:bg-opacity-60',
       'btn-primary-outline': 'bg-transparent b-mc-mint b-opacity-40 hover:b-opacity-60 hover:bg-transparent color-mc-mint',
       'btn-accent': 'b-$mc-accent-40 hover:b-$mc-accent bg-$mc-accent-10 hover:bg-$mc-accent-20 color-$mc-accent cursor-pointer transition-all',
       'btn-accent-filled': 'bg-$mc-accent hover:bg-$mc-accent color-$corporation-over-accent-color hover:opacity-80 b-$mc-accent',
       'btn-accent-outline': 'bg-transparent b-$mc-accent hover:bg-transparent color-$mc-accent hover-opacity-80',
-      'btn-fixed-width': 'min-w-50',
-      'btn-accent-active': 'btn-accent b-$mc-accent bg-$mc-accent-20',
       'btn-card': 'b-$mc-secondary hover:b-$mc-secondary bg-$mc-secondary_40 hover:bg-$mc-secondary_40 text-$mc-whitenew text-shadow-$mc-whitenew',
       'btn-secondary-outline': 'bg-transparent b-$mc-secondary_40 hover:b-$mc-secondary_60 hover:bg-transparent color-$mc-secondary ',
-      'btn-corporation': 'b-$mc-accent',
-      'btn-lg': 'min-h-14',
       'btn-tab': 'bg-mc-orange bg-opacity-20 hover:bg-opacity-40 backdrop-blur-lg b-mc-orange b-1 b-opacity-60 color-mc-orange uppercase transition-all font-400 tracking-normal cut-b-mc-orange cut-b-opacity-60',
       'btn-uppercase': 'uppercase',
       'btn-tab-active': 'btn-tab bg-mc-mint color-mc-mint b-mc-mint',
-      'btn-subtab': 'btn-accent b-0 transition-all backdrop-blur-lg hover:b-0',
-      'btn-subtab-active': 'btn-subtab btn-secondary ring-0 hover:ring-0',
       'icon-button': 'w-8 h-8 cursor-pointer hover:opacity-50" transition-opacity',
       'btn-disable': 'opacity-80 cursor-default pointer-events-none filter-grayscale',
-      'pickable': 'transition-all on-active:!b-mc-mint_60 b-white b-opacity-20 hover:b-opacity-40',
       'btn-inline': 'bg-transparent b-transparent',
-      'pickable-active': 'pickable bg-black bg-opacity-40',
-      'scrollable-all': 'overflow-y-auto scrollbar scrollbar-mc min-h-0',
-      'scrollable-mobile': 'lt-md-overflow-y-auto lt-md-scrollbar lt-md-scrollbar-mc lt-md-min-h-0',
-      'scrollable-desktop': 'md-overflow-y-auto md-scrollbar md-scrollbar-mc md-min-h-0',
-      'listitem': 'b-0.5 b-$listitem-base-color hover:b-$listitem-select-color group-hover:b-$listitem-select-color transition-all',
-
-      'btn-md': 'min-h-10',
-      'btn-center': 'flex justify-center items-center',
-      'btn-solid': 'btn btn-lg px-4 lg:px-8',
-      'btn-disabled': 'btn-solid bg-gray-700 color-gray-400',
       'btn-soft': 'btn px-4 btn-md bg-opacity-20 hover:bg-opacity-40 b-0.5',
-      'btn-secondary-detail': 'btn-solid btn-md bg-gray-500 hover:bg-gray-400 cut-bottom-right cut-sm btn-center',
-      'btn-form': 'font-400 py-3 px-1 cut-bottom-right cut-b-gray-400 hover:cut-b-gray-300',
-      'btn-form-active': 'bg-gray-600',
-      'btn-table': 'font-bold uppercase px-4 lg:px-6 py-3',
-      'btn-menu': 'opacity-100 hover:opacity-80 transition-opacity font-bold uppercase whitespace-nowrap p-1'
+      'listitem': 'b-0.5 b-$listitem-base-color hover:b-$listitem-select-color group-hover:b-$listitem-select-color transition-all',
 
       // 'btn-table-primary': 'btn-primary'
     },
