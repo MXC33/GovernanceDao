@@ -1,15 +1,15 @@
 <template lang="pug">
 VList(bg="ix-primary opacity-20" p="6" space-y="5" max-w="150" w="full" cut="bottom-right b-ix-primary b-opacity-60 s-lg")
-  h2(text="2xl white" font="druk bold" @click="debugWalletClick") {{ $t('base.wallet.title') }}
+  h2(text="2xl white" font="druk bold" @click="debugWalletClick") {{ $t('general.wallet.title') }}
 
   VList(text="white left")
     WalletStatus(v-if="isWalletConnected")
 
     VList(v-else space-y="3") 
-      div {{ $t('base.wallet.welcomeMessage') }}
+      div {{ $t('general.wallet.welcomeMessage') }}
 
       HList(v-if="!!walletError" color="mc-orange" space-x="1") 
-        span(font="bold") {{$t(`base.errorConnecting`)}}
+        span(font="bold") {{$t(`general.errorConnecting`)}}
         span {{ walletError }}
 
   a(btn="~ lg secondary" href="https://planetix.com/connect" v-if="loginFailType == 'no-user'") Register on PlanetIX
