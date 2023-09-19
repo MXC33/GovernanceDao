@@ -85,8 +85,8 @@ export const wrappedEthAddress: ContractAddress = {
   polygon: "0xE06Bd4F5aAc8D0aA337D13eC88dB6defC6eAEefE"
 }*/
 export const IXTAddress: ContractAddress = {
-  mumbai: "0x078D8492250B5931913cfE70dBCE90464178886E", // emilCoin
-  polygon: "0x078D8492250B5931913cfE70dBCE90464178886E"
+  mumbai: "0x12168dD03349fa6B3dae6ac8c552b6C86810Bf55", // emilCoin
+  polygon: "0xE06Bd4F5aAc8D0aA337D13eC88dB6defC6eAEefE"
 }
 
 export const oracleManagerAddress: ContractAddress = {
