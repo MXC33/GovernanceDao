@@ -189,8 +189,6 @@ export default defineConfig({
       'card-no-bg': '!bg-transparent',
       'card-active': 'btn-accent b-$mc-accent bg-$mc-accent-20',
       'card-selected': 'b-$mc-secondary_40 hover:b-$mc-secondary bg-$mc-secondary_20  hover:bg-$mc-secondary_40 text-$mc-secondary text-shadow-$mc-secondary',
-      'btn-primary': 'b-mc-mint bg-mc-mint bg-opacity-40 hover:bg-opacity-60',
-      'btn-primary-outline': 'bg-transparent b-mc-mint b-opacity-40 hover:b-opacity-60 hover:bg-transparent color-mc-mint',
       'btn-accent': 'b-$mc-accent-40 hover:b-$mc-accent bg-$mc-accent-10 hover:bg-$mc-accent-20 color-$mc-accent cursor-pointer transition-all',
       'btn-accent-filled': 'bg-$mc-accent hover:bg-$mc-accent color-$corporation-over-accent-color hover:opacity-80 b-$mc-accent',
       'btn-accent-outline': 'bg-transparent b-$mc-accent hover:bg-transparent color-$mc-accent hover-opacity-80',

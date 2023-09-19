@@ -1,6 +1,6 @@
 <template lang="pug"> 
-VList(bg="ix-primary opacity-20" p="6" space-y="5" max-w="150" w="full" cut="bottom-right b-ix-primary b-opacity-60 s-lg")
-  h2(text="2xl white" font="druk bold" @click="debugWalletClick") {{ $t('general.wallet.title') }}
+VList(bg="ix-ne opacity-20" p="6" space-y="5" max-w="150" w="full" cut="bottom-right b-ix-ne b-opacity-60 s-lg")
+  h2(text="2xl white" font="gridnik bold" @click="debugWalletClick") {{ $t('general.wallet.title') }}
 
   VList(text="white left")
     WalletStatus(v-if="isWalletConnected")
@@ -8,7 +8,7 @@ VList(bg="ix-primary opacity-20" p="6" space-y="5" max-w="150" w="full" cut="bot
     VList(v-else space-y="3") 
       div {{ $t('general.wallet.welcomeMessage') }}
 
-      HList(v-if="!!walletError" color="mc-orange" space-x="1") 
+      HList(v-if="!!walletError" color="ix-orange" space-x="1") 
         span(font="bold") {{$t(`general.errorConnecting`)}}
         span {{ walletError }}
 

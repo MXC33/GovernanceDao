@@ -1,5 +1,5 @@
 <template lang="pug">
-ButtonSound(sound="lg" btn="~ primary on-active:active lg" bg="ix-primary opacity-20 hover:opacity-40" color="white" p="x-3 y-3" @click="onClickConnect" w="full" text="white left" flex="~ row" space-x="4" tracking="0" leading="0.33em" justify="start" opacity="on-available:100 50" normal-case="~" pointer-events="on-available:auto none" :active="isActive(connector)" :available="isConnectorAvailable" cut="bottom-right b-ix-primary") 
+ButtonSound(sound="lg" btn="~ secondary on-active:active lg" color="white" p="3" @click="onClickConnect" w="full" flex="~ row" space-x="4" justify="start" normal-case="~" disable="on-available:active" :active="isActive(connector)" :unavailable="!isConnectorAvailable" ) 
   component(:is="logo" w="10")
 
   span {{ connectorName ?? 'No injected wallet found' }}
