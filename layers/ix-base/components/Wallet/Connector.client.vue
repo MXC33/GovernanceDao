@@ -1,4 +1,4 @@
-<template lang="pug">
+<template lang="pug"> 
 VList(bg="ix-primary opacity-20" p="6" space-y="5" max-w="150" w="full" cut="bottom-right b-ix-primary b-opacity-60 s-lg")
   h2(text="2xl white" font="druk bold" @click="debugWalletClick") {{ $t('general.wallet.title') }}
 

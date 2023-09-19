@@ -1,8 +1,7 @@
-import { PixInfoFragment } from '#gql'
 import { callWithNuxt } from 'nuxt/app'
-// import type { RaffleUpcomingResponse, RafflePastResponse, ActiveRaffleResponse } from './IX-API/types'
-
+// import type { RaffleUpcomingResponse, RafflePastResponse, ActiveRaffleResponse } from './IX-API/types' import { PixInfoFragment } from '#gql'
 export const BASE_API_ENDPOINT_URL = 'https://api.planetix.com/api/v1'
+export const BASE_API_DEV_ENDPOINT_URL = 'https://api.planetix.app/api/v1'
 
 export const useIXHeaders = () => {
   const { walletSigningToken } = useWallet()
