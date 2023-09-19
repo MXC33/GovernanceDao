@@ -1,5 +1,5 @@
 
-import type { Notification } from '~/composables/useNeNotificationsAndMessages'
+import type { Notification } from '@ix/base/composables/useNeNotificationsAndMessages'
 
 export interface NotificationSocket {
   title: string,

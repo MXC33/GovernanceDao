@@ -45,7 +45,7 @@ export const useIXAPI = () => {
     })
   }
 
-  const fetchIXAPI = async (path: string, method: 'GET' | 'POST' = 'GET', body?: object) => {
+  const fetchIXAPI = async (path: string, method: 'GET' | 'POST' | "PUT" = 'GET', body?: object) => {
     try {
       const data = await $fetch(BASE_API_ENDPOINT_URL + '/' + path, {
         method: method,

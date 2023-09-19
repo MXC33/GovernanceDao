@@ -3,7 +3,7 @@ import { ethers } from 'ethers';
 import { kebabCaseIt } from 'case-it';
 import { TokenType } from './Token/tokenMaps';
 import { TokenIdentifier } from './Token/useTokens';
-;
+
 const TOKENS_KEY = 'user-nft-tokens'
 const IXT_KEY = 'user-ixt-balance'
 
