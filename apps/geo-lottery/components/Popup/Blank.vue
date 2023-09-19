@@ -1,6 +1,6 @@
 <template lang="pug">
 Transition(name="fade" appear)
-  VList(pos="fixed" inset="0" bg="black opacity-80" w="full" h="full" z="999" items="center" justify="center" @click="onClose" backdrop-blur-sm)
+  VList(pos="fixed" inset="0" bg="black opacity-80" w="full" h="full" z="905" items="center" justify="center" @click="onClose" backdrop-blur-sm)
     slot()
 </template>
 
