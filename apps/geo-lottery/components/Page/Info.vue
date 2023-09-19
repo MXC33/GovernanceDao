@@ -30,7 +30,7 @@ HList(flex="~ col lg:row wrap" items="center" justify="between" gap-y="10")
       template(#content)
         TireHexagonColor(tier="Rare")
     FramePinkWithImg()
-      template(#title) COMMON PRIZE
+      template(#title) LEGENDARY PRIZE
       template(#subtitle) COUNTRY <br> + TIER <br> + Size
       template(#content)
         TireSizeIcon(tier="Rare" size="Zone")
