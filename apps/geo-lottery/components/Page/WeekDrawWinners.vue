@@ -15,11 +15,12 @@ div()
       span(  color="$mc-pink" m="x-1") {{streamTickets}}
       span() Subscription TICKETS
     div(flex="~ col md:row" justify="center" items-center )
-      ButtonItem(:value="'pink'" :text="'Claim'" @click="" v-if="showClaimButton && false" )
+      ButtonItem(:value="'pink'" :text="'Claim'" v-if="showClaimButton" @click="onClaimReward()" :loading="isLoading")
 </template>
 
 <script lang="ts" setup>
 import {useLottery} from "~/composables/useLottery";
+const { displayPopup } = usePopups()
 
 type TierSize = {
   name: string,
@@ -44,6 +45,8 @@ const roundID = ref<number>(0)
 const enteredOneTimeTickets = ref<number>(0)
 const streamTickets = ref<number>(0)
 
+const nft_link = ref<string>('')
+
 watch(weeksDraw, (state) => {
   if (!state.last_drawn_lottery)
     return
@@ -62,12 +65,37 @@ watch(weeksDraw, (state) => {
     is_winner: lastDrawnLottery.winning_pools?.includes(7) || false
   }
 
-  showClaimButton.value = !lastDrawnLottery.winning_pools ? false : lastDrawnLottery.winning_pools.length > 0
+  showClaimButton.value = !lastDrawnLottery.winning_pools ? false : lastDrawnLottery.winning_pools.length > 0 && !lastDrawnLottery.claimed
 
   roundID.value = lastDrawnLottery.id
 
   enteredOneTimeTickets.value = lastDrawnLottery.entries.entered_tickets
   streamTickets.value = lastDrawnLottery.entries.entered_tickets
+  nft_link.value = lastDrawnLottery.nft_link || ''
+
+  if (showClaimButton.value)
+    displayPopup({
+      type: 'popup-type-you-win',
+      nft_link: nft_link.value,
+      lottery_id: roundID.value
+    })
 }, { immediate: true })
+
+const {
+  claimReward
+} = useLottery()
+const { loading: isLoading, execute: claimRewardRequest } = useContractRequest(() =>
+  claimReward(roundID.value)
+)
+
+const onClaimReward = async () => {
+  const claimReward = await claimRewardRequest()
+
+  if (claimReward)
+    displayPopup({
+      type: 'popup-type-you-claimed',
+      nft_link: nft_link.value
+    })
+}
 
 </script>
