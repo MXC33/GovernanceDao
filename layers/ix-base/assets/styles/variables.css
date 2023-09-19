@@ -14,8 +14,16 @@ body.is-scroll-locked.is-scrolling-down {
   --header-offset: 0 !important;
 }
 
+:root {
+  --header-height: 4rem;
+}
+
 @media (max-width: 767.9px) {
+  :root {
+    --header-height: 3rem;
+  }
+
   body.is-scrolling-down {
-    --header-offset: calc(-1 * var(--header-height-mobile));
+    --header-offset: calc(-1 * var(--header-height));
   }
 }

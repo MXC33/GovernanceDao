@@ -23,9 +23,12 @@ watch(isLoggedInAndConnected, (connected) => {
 
   const redirectQuery = route.query.redirectUrl
 
-
   if (redirectQuery) {
     const path = decodeURIComponent(String(redirectQuery))
+
+    if (path.includes('connect'))
+      return
+
     const ensureRelativeQuery = /^[^\/]+\/[^\/].*$|^\/[^\/].*$/gmi
     if (path.match(ensureRelativeQuery))
       return navigateTo(path)

@@ -59,3 +59,7 @@
 [corners~="accent"] {
   --corner-color: var(--mc-accent);
 }
+
+[corners~="pink"] {
+  --corner-color: var(--mc-pink);
+}

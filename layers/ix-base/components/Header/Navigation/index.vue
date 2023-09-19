@@ -1,6 +1,6 @@
 <template lang="pug">
 //-Display this when in portrait mode
-VList(pos="fixed  right-0 left-0 top-12 " bg="black" h="[calc(100vh-var(--header-height-mobile))]" overflow-y="auto" z="200" v-if="isMobile")
+VList(v-if="isMobile" pos="fixed  right-0 left-0 top-12" bg="black" h="[calc(100vh-var(--header-height))]" overflow-y="auto" z="200")
   HeaderNavigationAccount(@close="$emit('close')")
   HeaderNavigationMenu()
   HeaderNavigationButtonDisconnect(pos="sticky bottom-0" z="1")
@@ -10,9 +10,10 @@ div(m="!l-0" p="6 t-3" grid="~ cols-5" w="full" bg="black" pos="absolute top-16"
 </template>
 
 <script lang="ts" setup>
-import type { HeaderMenuItem, HeaderMenuSubNavigation} from '~/composables/useSiteHeader';
-const { isMobile } = useDevice()
-const {header} = defineProps<{
+import type { HeaderMenuItem, HeaderMenuSubNavigation } from '~/composables/useSiteHeader';
+const { useMobileBreakpoint } = useDevice()
+const isMobile = useMobileBreakpoint('lg')
+const { header } = defineProps<{
   header: HeaderMenuItem
 }>()
 
@@ -24,11 +25,11 @@ const lockScroll = (active: boolean) => {
 
 watch([isMounted], ([mounted]) => {
   const enable = mounted
-  if(!process.client) {
+  if (!process.client) {
     return
   }
   lockScroll(enable)
-}, {immediate: true})
+}, { immediate: true })
 
 onUnmounted(() => {
   lockScroll(false)

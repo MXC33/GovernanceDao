@@ -171,6 +171,8 @@ export const useWallet = () => {
     })
 
   const ensureCorrectChain = async (isEthereum?: boolean) => {
+    if (process.server)
+      return
     const currentChain = getChain(isEthereum ? 'ethereum' : 'polygon')
     const { chainId } = getChainInfo(currentChain)
     const network = provider.value?.network

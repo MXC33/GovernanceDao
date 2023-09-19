@@ -27,6 +27,8 @@
 </template>
 
 <script setup lang="ts">
+//import { useNeMessages, useNeNotifications } from 'composables/useNeNotificationsAndMessages';
+
 useHead({
   title: "Marketplace | PlanetIX",
   script: [
@@ -45,6 +47,9 @@ router.onError((err) => {
 const { state: isSwapVisible } = useIXTSwapVisible()
 
 const { execute: fetchHeaderData } = useHeaderData()
+const { execute: fetchMessageData, data: messageData } = useNeMessages()
+const { execute: fetchNotificationData, data: notificationData } = useNeNotifications()
+
 
 await fetchHeaderData()
 
@@ -53,7 +58,7 @@ const { connectWallet, walletState } = useWallet()
 const { setupIXTPrice } = useIXTPrice()
 const { refreshIXTBalance } = useIXTContract()
 
-const { setRefreshToken } = useLogin()
+const { setRefreshToken, loginStatus } = useLogin()
 const { user } = useUser()
 
 watch(y, (pos) => globalY.value = pos)
@@ -86,9 +91,12 @@ onMounted(async () => {
 })
 
 
-watch(walletState, (state) => {
-  if (state != 'connected')
+watch(loginStatus, (state) => {
+  if (state != 'logged-in')
     return
+
+  fetchMessageData()
+  fetchNotificationData()
 
   setupIXTPrice()
   refreshIXTBalance()
