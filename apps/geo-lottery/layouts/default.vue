@@ -15,9 +15,15 @@ import PlanetIXLogo from '~/assets/images/logo.svg'
 </script>
 
 <style>
-.geo-lottery-header  > div{
-  background-color: rgba(255, 30, 110, 1)
+.geo-lottery-header-header {
+  background: black;
 }
+
+.geo-lottery-header,
+.geo-lottery-header>div:first-child {
+  background-color: rgba(255, 30, 110, 1);
+}
+
 .geo-lottery-header .border-white-ixt button,
 .geo-lottery-header .border-white-ixt {
   border-color: rgba(249, 249, 249, 0.6);
@@ -25,62 +31,82 @@ import PlanetIXLogo from '~/assets/images/logo.svg'
   background-color: #f33076;
   width: 100%;
 }
+
 .geo-lottery-header .border-white-ixt button svg,
 .geo-lottery-header .border-white-ixt svg {
   fill: white !important;
 }
-.geo-lottery-header .border-white-ixt button:hover, .geo-lottery-header .border-white-ixt:hover{
+
+.geo-lottery-header .border-white-ixt button:hover,
+.geo-lottery-header .border-white-ixt:hover {
   /*background-color:rgba(249, 249, 249, 0.1);*/
   color: rgba(249, 249, 249, 0.6);
   opacity: 1;
 }
-.geo-lottery-header .border-white:hover{
+
+.geo-lottery-header .border-white:hover {
   background-color: rgba(132, 212, 188, 0.1);
 }
-.geo-lottery-header [btn~="menu"]{
+
+.geo-lottery-header [btn~="menu"] {
   font-size: 16px;
 }
-.geo-lottery-header [btn~="menu"]:hover{
+
+.geo-lottery-header [btn~="menu"]:hover {
   color: black;
 }
-.geo-lottery-header-mobile > div > div{
+
+.geo-lottery-header-mobile>div>div {
   background-color: rgba(255, 30, 110, 0.10);
 }
-.geo-lottery-header-mobile > div > div::before{
+
+.geo-lottery-header-mobile>div>div::before {
   background-color: white !important;
 }
-.geo-lottery-header-mobile .border-white, .geo-lottery-header-mobile .border-white > div, .geo-lottery-header-mobile .border-white > div >div {
+
+.geo-lottery-header-mobile .border-white,
+.geo-lottery-header-mobile .border-white>div,
+.geo-lottery-header-mobile .border-white>div>div {
   border-color: white;
   color: white;
 }
-.geo-lottery-header-mobile .pink-hover:hover > div > div , .geo-lottery-header-mobile .pink-hover:hover svg path {
+
+.geo-lottery-header-mobile .pink-hover:hover>div>div,
+.geo-lottery-header-mobile .pink-hover:hover svg path {
   color: #FF1E6E;
   fill: #FF1E6E;
 }
-.geo-lottery-header-mobile .pink-hover  > div >div {
+
+.geo-lottery-header-mobile .pink-hover>div>div {
   color: white;
 }
-.geo-lottery-header-mobile .pink-hover  > div >div[color~="ix-orange"] {
+
+.geo-lottery-header-mobile .pink-hover>div>div[color~="ix-orange"] {
   color: #FF1E6E;
 }
-.geo-lottery-header-mobile .pink-text{
+
+.geo-lottery-header-mobile .pink-text {
   color: #FF1E6E;
 }
-.geo-lottery-header-mobile .pink-btn{
+
+.geo-lottery-header-mobile .pink-btn {
   color: white;
   background-color: #FF1E6E;
   border-color: transparent;
   cursor: pointer;
 }
-.geo-lottery-header .hamburger-menu svg path{
+
+.geo-lottery-header .hamburger-menu svg path {
   fill: white;
 }
-.geo-lottery-header .hamburger-menu:hover svg path{
+
+.geo-lottery-header .hamburger-menu:hover svg path {
   fill: white;
   opacity: 1;
 }
 
-.geo-lottery-header-desktop .pink-hover:hover > div > div , .geo-lottery-header-desktop .pink-hover:hover svg path {
+.geo-lottery-header-desktop .pink-hover:hover>div>div,
+.geo-lottery-header-desktop .pink-hover:hover svg path {
   color: #FF1E6E;
   fill: #FF1E6E;
 }
