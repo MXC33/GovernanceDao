@@ -91,7 +91,7 @@ export const useWallet = () => {
   const walletState = useState<WalletState>('wallet-state', () => 'disconnected')
 
   const isWalletConnected = computed(() =>
-    walletAdress.value != null && walletSigningToken.value != null
+    walletAdress.value != null && walletSigningToken.value != null && provider.value != null
   )
 
   const setupProvider = async () => {

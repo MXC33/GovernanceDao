@@ -56,7 +56,17 @@ const menuElement = shallowRef()
 const route = useRoute()
 const scollingDown = shallowRef(false)
 
+const { refreshIXTBalance } = useIXTContract()
 const windowY = useGlobalWindowScroll()
+const { isWalletConnected } = useWallet()
+
+watch(isWalletConnected, (connected) => {
+  // Adds a timeout because sometimes it seems to be a race condition with contract being setup
+  if (connected)
+    setTimeout(() => refreshIXTBalance(), 10)
+}, { immediate: true })
+
+
 watch(windowY, (newValue, oldValue) =>
   scollingDown.value = (newValue > oldValue)
 )

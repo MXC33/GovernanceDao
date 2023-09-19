@@ -25,7 +25,7 @@ div(pos="fixed right-0 top-0 bottom-0" overflow-y="auto" bg="black" p="5" w="80 
 <script lang="ts" setup>
 import { useIXTContract } from "@ix/base/composables/Contract/useIXTContract";
 
-const { ixtBalance, fetchIXT } = useIXTContract()
+const { ixtBalance } = useIXTContract()
 const menuOpen = ref(false)
 const router = useRouter()
 const { gotoIXPage } = useIXLinks()

@@ -1,5 +1,5 @@
 export default defineNuxtRouteMiddleware(async (to, from) => {
-  
+
   if (to.path == '/connect')
     return true
 
@@ -22,8 +22,6 @@ export default defineNuxtRouteMiddleware(async (to, from) => {
     'X-Wallet': user.value.wallet_address ?? "",
     'X-Signing-Token': walletSigningToken.value ?? ""
   }
-
-  console.log("SET SIGNINGS", walletHeaders)
 
   useGqlHeaders(walletHeaders)
 
