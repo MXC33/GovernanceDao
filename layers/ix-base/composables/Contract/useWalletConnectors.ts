@@ -110,7 +110,7 @@ const createWalletConnectProvider = async () => {
 export type WalletConnector = 'injected' | 'walletconnect' | 'coinbase' | 'metamask' | 'defi'
 
 export const useConnectors = () => {
-  const currentConnector = useCookieState<WalletConnector | null>('active-connector', () => null)
+  const currentConnector = useCookieState<WalletConnector | null>('active-connector', () => null, { consentLevel: 'necessary' })
 
   const getInjectedProvider = () => {
     if (!process.client)

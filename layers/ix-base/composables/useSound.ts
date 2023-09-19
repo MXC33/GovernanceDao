@@ -12,7 +12,7 @@ interface Module {
   default?: string
 }
 export const useSoundSettings = () => {
-  const isSoundEnabled = useCookieState('sound-on', () => true)
+  const isSoundEnabled = useCookieState('sound-on', () => true, { consentLevel: 'preferences' })
   const soundVolume = computed(() => isSoundEnabled.value ? 0.25 : 0)
 
   return {

@@ -38,7 +38,7 @@ export interface NavigationMedia {
   name: string
 }
 
-export const useHeaderData = () => 
+export const useHeaderData = () =>
   useAsyncDataState('site-header-menu', async () => {
     const request = (await $fetch('https://api.planetix.app/api/v1/navigation')) as HeaderRequest
 
@@ -46,3 +46,16 @@ export const useHeaderData = () =>
   });
 
 export const useHeaderIndex = () => shallowRef<number | null>(null)
+
+export const useSiteHeader = () => {
+  type Currency = 'IXT' | 'aGold'
+  const activeCurrency = useState<Currency>('active-currency', () => 'IXT')
+  const setActiveCurrency = (currency: Currency) => {
+    activeCurrency.value = currency
+  }
+
+  return {
+    activeCurrency,
+    setActiveCurrency
+  }
+};

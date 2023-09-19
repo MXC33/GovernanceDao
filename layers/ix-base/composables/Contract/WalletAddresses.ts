@@ -80,6 +80,10 @@ export const wrappedEthAddress: ContractAddress = {
   polygon: "0x7ceB23fD6bC0adD59E62ac25578270cFf1b9f619"
 }
 
+/*export const IXTAddress: ContractAddress = {
+  mumbai: "0x12168dD03349fa6B3dae6ac8c552b6C86810Bf55", // emilCoin
+  polygon: "0xE06Bd4F5aAc8D0aA337D13eC88dB6defC6eAEefE"
+}*/
 export const IXTAddress: ContractAddress = {
   mumbai: "0x12168dD03349fa6B3dae6ac8c552b6C86810Bf55", // emilCoin
   polygon: "0xE06Bd4F5aAc8D0aA337D13eC88dB6defC6eAEefE"
@@ -214,4 +218,19 @@ export const feeTreasuryAdress: ContractAddress = {
 export const seaportAdress: ContractAddress = {
   mumbai: "0x78852a22b6178406683afea36d1e4bdd2ff9c08d", //to be updated
   polygon: "0x78852a22b6178406683afea36d1e4bdd2ff9c08d",
+}
+
+export const luckyCatGeoLotteryAdress: ContractAddress = {
+  mumbai: "0xEFB617088a9A224D156AC0C8012CDDf360c3D42B", //to be updated
+  polygon: "0xEFB617088a9A224D156AC0C8012CDDf360c3D42B",
+}
+
+export const astroGoldAdress: ContractAddress = {
+  mumbai: "0x3CAD7147c15C0864B8cF0EcCca43f98735e6e782",
+  polygon: "0xFAc83774854237b6E31c4B051b91015e403956d3"
+}
+
+export const luckyCatGeoLotterySuperAppAdress: ContractAddress = {
+  mumbai: "0x6e488C8A7F7afcF4FfDbAd628d4ef9b312Bb11E1", //to be updated
+  polygon: "0x6e488C8A7F7afcF4FfDbAd628d4ef9b312Bb11E1",
 }

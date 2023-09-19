@@ -1,6 +1,7 @@
 <template lang="pug">
 VList(flex-grow="1" pos="relative" min-h="0" justify="center" p="3" items="center")
   WalletConnector()
+
 </template>
 
 
@@ -28,12 +29,14 @@ watch(isLoggedInAndConnected, (connected) => {
   if (redirectQuery) {
     const path = decodeURIComponent(String(redirectQuery))
     const ensureRelativeQuery = /^[^\/]+\/[^\/].*$|^\/[^\/].*$/gmi
-    if (path.includes('connect'))
-      return
     if (path.match(ensureRelativeQuery))
       return navigateTo(path)
+    else
+      return navigateTo('/')
+  } else {
+    return navigateTo('/')
   }
 
 
-}, { immediate: true })
+})
 </script>
