@@ -91,13 +91,13 @@ watch(walletState, (state) => {
     return
 
   setTimeout(async () => {
-    setupIXTPrice()
+    //setupIXTPrice()
     refreshIXTBalance()
     refreshAstroGoldBalance()
     setActiveCurrency('aGold')
     getEnteredTickets()
     getWeeksDraw()
-  }, 1000)
+  }, 1200)
 }, { immediate: true })
 
 const { x: xpos, y: ypos } = useMouse()
