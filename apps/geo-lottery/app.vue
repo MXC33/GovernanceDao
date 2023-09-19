@@ -29,6 +29,7 @@ import { useGlobalWindowScroll } from "@ix/base/composables/useWindowScroll";
 import { useAstroGoldContract } from "@ix/base/composables/Contract/useAstroGoldContract";
 import { useSiteHeader } from "@ix/base/composables/useSiteHeader";
 import { useLottery } from "~/composables/useLottery";
+const { execute: fetchHeaderData } = useHeaderData()
 
 useHead({
   title: "Geo Lottery | PlanetIX",
@@ -36,6 +37,8 @@ useHead({
     { src: '/global.js' },
   ]
 })
+
+await fetchHeaderData()
 
 const globalY = useGlobalWindowScroll()
 const router = useRouter()
