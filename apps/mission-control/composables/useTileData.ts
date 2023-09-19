@@ -3,10 +3,10 @@
 import { NftFragment } from '#gql';
 import { TileGroup, Tile, TileCoord } from '~~/composables/useTiles';
 
-const fetchTiles = async (tiles: Tile[]): Promise<TileGroup[]> => {
+const useFetchTiles = () => async (tiles: Tile[]): Promise<TileGroup[]> => {
 
   const credentials = useGraphqlCredentials()
-
+  console.log("FETCHING TILES", credentials)
   const stakedOnTile = await GqlStakedOnTile({ credentials, tiles })
 
   const tileGroups = stakedOnTile.stakedOnTile.map((stakedItem, index) => {
@@ -37,6 +37,7 @@ const TILE_KEY = 'tile-data'
 
 export const useTileData = () => {
   const { tilesAreEqual } = useTileSelection()
+  const fetchTiles = useFetchTiles()
   const allTiles = Object.values(TileRings).flat()
   const pending = useState('tiles-pending', () => false)
   const getTileKey = (tile: Tile) => `${TILE_KEY}-${tileToId(tile)}`

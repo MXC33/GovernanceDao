@@ -8,16 +8,17 @@ const isUserAuthenticated = async () => {
 }
 
 export default defineNuxtRouteMiddleware(async (to, from) => {
+  if (to.path == '/connect' || !to.name)
+    return true
+
   const { isWalletConnected, walletAdress, walletSigningToken, logoutWallet } = useWallet()
   const { user } = useUser()
 
-  useGqlHeaders({ 'X-Wallet': walletAdress.value, 'X-Signing-Token': walletSigningToken.value })
+  // const isUserAuthed = await isUserAuthenticated()
 
-  const isUserAuthed = await isUserAuthenticated()
-
-  if (!isWalletConnected.value || !user.value || !isUserAuthed) {
+  if (!isWalletConnected.value || !user.value) {
     logoutWallet()
-    return await navigateTo(`/connect?origin=${to.name.toString()}`)
+    return navigateTo(`/connect?origin=${to.name.toString()}`)
   }
   return true
 })
