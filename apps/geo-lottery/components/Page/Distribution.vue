@@ -2,7 +2,7 @@
 div(flex flex-col lg:flex-row gap-y="10 lg:0")
   div(basis="5/5" items="center")
     div(space-y="3 md:4" color="ix-white" font="bold" text="lg")
-      div(color="ix-white" text="3xl md:4xl xl:5xl" uppercase="~" font="bdrA3mik") AGOLD Distribution
+      div(color="ix-white" text="3xl md:4xl xl:5xl" uppercase="~" font="bdrA3mik normal") AGOLD Distribution
       p() Purchased tickets are moved into various pools & burns, read more about the distribution below.
 
       InfoPercentWithColor(circleBG="#FF1E6E" :percent="15" info="LuckyCat Metashare")
@@ -34,10 +34,6 @@ const seriesRadial = [1,1,1,1,1,1,1,1,1,1,
   1,1,1,1,1,1,1,1,1,1,
   1,1,1,1,1,1,1,1,1,1,
   1,1,1,1,1,1,1,1,1,1]
-
-useHead({
-  title: "Home | Geo Lottery | PlanetIX"
-})
 
 </script>
 <style>

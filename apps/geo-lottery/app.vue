@@ -32,7 +32,7 @@ import { useLottery } from "~/composables/useLottery";
 const { execute: fetchHeaderData } = useHeaderData()
 
 useHead({
-  title: "Geo Lottery | PlanetIX",
+  title: "Territory Lottery | PlanetIX",
   script: [
     { src: '/global.js' },
   ]
