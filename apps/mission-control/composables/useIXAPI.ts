@@ -72,8 +72,6 @@ export const useIXAPI = () => {
       console.log("DATA", data)
       return data
     } catch (err) {
-      console.log("API Error:", err)
-
       if (err.message.includes("403"))
         await onUnauthorized()
 

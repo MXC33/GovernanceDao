@@ -2,7 +2,7 @@ export default defineNuxtRouteMiddleware(async (to, from) => {
   if (to.path == '/connect')
     return true
 
-  const { isWalletConnected, logoutWallet } = useWallet()
+  const { isWalletConnected, walletSigningToken, logoutWallet } = useWallet()
   const { user, removeUser } = useUser()
 
   if (!isWalletConnected.value || !user.value) {
@@ -16,6 +16,15 @@ export default defineNuxtRouteMiddleware(async (to, from) => {
       }
     })
   }
+
+  const walletHeaders = {
+    'X-Wallet': user.value.wallet_address ?? "",
+    'X-Signing-Token': walletSigningToken.value ?? ""
+  }
+
+  console.log("SET SIGNINGS", walletHeaders)
+
+  useGqlHeaders(walletHeaders)
 
   return true
 })
