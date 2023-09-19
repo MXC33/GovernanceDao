@@ -25,10 +25,10 @@
 </template>
 
 <script setup lang="ts">
-import {useGlobalWindowScroll} from "@ix/base/composables/useWindowScroll";
-import {useAstroGoldContract} from "@ix/base/composables/Contract/useAstroGoldContract";
-import {useSiteHeader} from "@ix/base/composables/useSiteHeader";
-import {useLottery} from "~/composables/useLottery";
+import { useGlobalWindowScroll } from "@ix/base/composables/useWindowScroll";
+import { useAstroGoldContract } from "@ix/base/composables/Contract/useAstroGoldContract";
+import { useSiteHeader } from "@ix/base/composables/useSiteHeader";
+import { useLottery } from "~/composables/useLottery";
 
 useHead({
   title: "Geo Lottery | PlanetIX",
@@ -86,14 +86,14 @@ onMounted(async () => {
   }
 })
 
-const {isLotteryActive} = useLottery()
+const { isLotteryActive } = useLottery()
 
 watch(walletState, (state) => {
   if (state != 'connected')
     return
 
   setTimeout(async () => {
-    //setupIXTPrice()
+    setupIXTPrice()
     refreshIXTBalance()
     refreshAstroGoldBalance()
     setActiveCurrency('aGold')
