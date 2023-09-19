@@ -222,7 +222,7 @@
       "success": "Successfully unlisted"
     },
     "transactions": {
-      "applyToAll": "APPLY TO ALL",
+      "applyToAll": "Apply to all",
       "setToFloor": "Set to Floor",
       "duration": "Duration",
       "total": "Total",

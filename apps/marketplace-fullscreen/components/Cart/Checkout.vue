@@ -51,6 +51,6 @@ const checkout = async () => {
 const totalPrice = computed(() =>
   roundToDecimals(cartItems.value.map((item) =>
     item.shares.value * (item.ixtPrice ?? 0)
-  ).reduce((a, b) => a + b, 0), 2)
+  ).reduce((a, b) => a + b, 0), 4)
 )
 </script>

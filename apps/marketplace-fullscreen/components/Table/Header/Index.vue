@@ -1,19 +1,22 @@
 <template lang="pug">
-template(v-for="(column, index) in columns")
-  VList(v-if="!(isMobile && column.hideMobile)")
-    TableCellHeadWrapper(v-if="column.type == 'buttons'" :is-open="isMenuOpen") {{ $t('general.action') }}
+div.table-row-item(display="contents")
+  template(v-for="(column, index) in columns")
+    template(v-if="!(isMobile && column.hideMobile)")
+      TableCellHeadWrapper(v-if="column.type == 'buttons'" :is-open="isMenuOpen") {{ $t('general.action') }}
 
-    TableCellHead(v-else :column="column" :index="index" :sortField="sort" @select-field="onClickSort", @toggle-sort="onClickToggle" :last-col="index == columns.length - 1") 
-      InputCheckbox(v-model="selectAllChecked" v-if="column.type == 'asset' && !column.disableSelect")
+      TableCellHead(v-else :column="column" :index="index" :sortField="sort" @select-field="onClickSort", @toggle-sort="onClickToggle" :last-col="index == columns.length - 1") 
+        InputCheckbox(v-model="selectAllChecked" v-if="column.type == 'asset' && !column.disableSelect")
 
-      div {{ column.label }}
+        div {{ column.label }}
 
 </template>
 
 <script lang="ts" setup generic="Row extends TableRow">
 import type { CollectionContext } from '~/composables/useCollection'
 import type { ServerTableSort, TableColumn, TableRow, TableSortable } from '~/composables/useTable'
+
 const { isMobile } = useDevice()
+
 const { rows, columns, id } = defineProps<{
   columns: TableColumn<Row>[],
   rows: Row[],

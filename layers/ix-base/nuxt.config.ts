@@ -41,7 +41,7 @@ export default defineNuxtConfig({
     'nuxt-graphql-client',
     '@unocss/nuxt',
     '@vueuse/nuxt',
-    '@nuxtjs/html-validator',
+
   ],
   imports: {
     dirs: [

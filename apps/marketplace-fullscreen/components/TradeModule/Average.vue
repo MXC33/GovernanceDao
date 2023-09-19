@@ -7,7 +7,7 @@ VList(px="3 md:6"  pb="4")
     span(color="white" font="bold") 
       slot(name="ixt") 
 
-    span(color="yellow-200") 
+    span(color="gray-200") 
       slot(name="percentage")
 
 </template>

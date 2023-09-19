@@ -13,7 +13,7 @@ Transition(name="slide-right")
 
       HList(items="center" justify="between")
         h4(font="bold" text="md") {{ cartItems.length }} {{ $t(`marketplace.cart.items`) }}
-        button(font="bold" text="md" color="ix-ne" @click="onClearCart") {{ $t(`marketplace.cart.clearAll`) }}
+        button(font="bold" text="md" color="ix-ne on-empty:!gray-200" :disabled="isCartEmpty" @click="onClearCart" :empty="isCartEmpty") {{ $t(`marketplace.cart.clearAll`) }}
 
     VList(flex-grow="1" space-y="3")
       TransitionGroup(name="cart")
@@ -37,6 +37,14 @@ const { getTokenKey } = useTokens()
 const onClearCart = () => {
   clearCart()
 }
+
+const isCartEmpty = computed(() => {
+  if (cartItems.value.length < 1)
+    return true
+  return false
+})
+
+
 </script>
 
 <style>

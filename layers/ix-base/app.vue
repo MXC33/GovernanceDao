@@ -5,6 +5,9 @@ HList()
 
 <script setup lang="ts">
 
+const {execute: fetchHeaderData } = useHeaderData()
+
+await fetchHeaderData()
 
 
 onMounted(async () => {
