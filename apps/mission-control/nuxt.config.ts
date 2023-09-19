@@ -28,10 +28,18 @@ export default defineNuxtConfig({
   //@ts-ignore
   transpile: ['vue3-carousel'],
 
+  i18n: {
+    langDir: './lang',
+    locales: [
+      {
+        code: 'en', file: 'en-US.json'
+      }
+    ],
+  },
+
   css: [
     '@/assets/styles/fonts.css',
     '@/assets/styles/colors.css',
-    '@/assets/styles/corners.css',
     '@/assets/styles/transitions.css',
     '@/assets/styles/corporations.css',
     '@unocss/reset/tailwind.css',

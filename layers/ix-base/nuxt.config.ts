@@ -49,6 +49,24 @@ export default defineNuxtConfig({
     ]
   },
 
+
+  i18n: {
+    lazy: true,
+    strategy: 'no_prefix',
+    langDir: './lang',
+    defaultLocale: 'en',
+    compilation: {
+      strictMessage: false,
+    },
+    locales: [
+      {
+        code: 'en',
+        file: 'en-US.json',
+        name: 'English'
+      }
+    ],
+  },
+
   device: {
     refreshOnResize: true
   },
