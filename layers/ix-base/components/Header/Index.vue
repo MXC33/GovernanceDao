@@ -33,10 +33,10 @@ VList(pos="sticky top-0" translate-y="$header-offset" z="99" w="full" @mouseente
 import CrossIcon from '~/assets/images/header/cross.svg'
 import PlanetIXNew from '~/assets/images/header/planetix-new.svg'
 import SettingsIcon from '~/assets/images/header/hamburger.svg'
-import { useGlobalWindowScroll } from '@ix/marketplace/composables/useWindowScroll';
+import { useGlobalWindowScroll } from '~/composables/useWindowScroll';
 
 const { isMobile } = useDevice()
-const {data: headerData} = useHeaderData()
+const { data: headerData } = useHeaderData()
 //const {data} = useHeaderData()
 
 const { state: swapVisible } = useIXTSwapVisible()
