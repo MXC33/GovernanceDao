@@ -13,10 +13,16 @@ VList(pos="sticky top-0" translate-y="$header-offset" z="99" w="full" @mouseente
           HList(rounded="full" b="1 $mc-mint" px="4" py="1" bg="hover:$mc-mint-40" uppercase="~" tracking="0.65" font="bold" items="center" justify="center")
             span(translate-x="0.5") airdrop
 
-    HList(space-x="6" px="0")
+    HList(items="center" space-x="6" px="0")
       //-button(btn="menu" display="lt-lg:none") help
       //-HeaderLanguage(language="EN")
+      slot(name="menu")
+
+      slot(name="settings")
+
+      slot(name="sound")
       HeaderAccountButton()
+
 
 
       button(v-if="isMobile" btn="menu" @click="toggleMenu" ml="2")

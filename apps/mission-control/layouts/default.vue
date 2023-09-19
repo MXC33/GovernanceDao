@@ -1,7 +1,13 @@
 <template lang="pug">
 main(w="full" h="full" flex="~ col grow" min-h="0")
   Header()
-  //-LayoutHeader()
+    template(#settings)
+      button(@click="toggleSettings")
+        Settings(wh="6" fill="white" ) 
+    template(#sound)
+      button(@click="toggleSound" wh="6")
+        SoundOn(v-if="isSoundEnabled" fill="white" )
+        SoundOff(v-else fill="white")
 
   //- Used for teleports
   div(id="overlays" select="none")
@@ -10,4 +16,34 @@ main(w="full" h="full" flex="~ col grow" min-h="0")
 </template>
 
 <script lang="ts" setup>
+import Settings from '~/assets/images/ui/settings.svg'
+import SoundOff from '~/assets/images/ui/icon-sound-off.svg'
+import SoundOn from '~/assets/images/ui/icon-sound-on.svg'
+
+const settingsOpen = useSiteSettings()
+const isMobile = useMobileBreakpoint('lg')
+const gameMenu = useGameMenu()
+
+const { isSoundEnabled } = useSoundSettings()
+
+const toggleSound = () => {
+  isSoundEnabled.value = !isSoundEnabled.value
+}
+
+const toggleSettings = () => {
+  if (settingsOpen.value) {
+    settingsOpen.value = false
+    if (isMobile.value)
+      gameMenu.value = null
+  } else {
+    settingsOpen.value = true
+    if (isMobile.value) {
+      console.log("inside toggle settings else")
+      gameMenu.value = null
+      gameMenu.value = 'mc-settings'
+    }
+    else
+      gameMenu.value = null
+  }
+}
 </script>

@@ -16,6 +16,15 @@ export default defineNuxtConfig({
     'v-lazy-show/nuxt',
   ],
 
+  i18n: {
+    langDir: './lang',
+    locales: [
+      {
+        code: 'en', file: 'en-US.json'
+      }
+    ],
+  },
+
   css: [
     '@/assets/styles/fonts.css'
   ],

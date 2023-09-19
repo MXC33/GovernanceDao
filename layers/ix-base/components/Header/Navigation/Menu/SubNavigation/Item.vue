@@ -9,7 +9,7 @@ NuxtLink(:to="item.absolute_url" cursor="pointer" @click="onClick")
         div(color="gray-200 group-hover:ix-orange" text="sm" ) {{ item.description}} 
       VList(v-else)
         div(color="gray" uppercase="~") {{ item.name}} 
-        div(color="ix-orange" text="sm" ) {{ $t(`marketplace.navigation.soon`)}}
+        div(color="ix-orange" text="sm" ) {{ $t(`general.navigation.soon`)}}
 </template>
   
 <script lang="ts" setup>
@@ -17,16 +17,16 @@ import type { HeaderMenuSubNavigationItem } from '~/composables/useSiteHeader'
 
 const { enable: enableSwap } = useIXTSwapVisible()
 
-const { item} = defineProps<{
+const { item } = defineProps<{
   item: HeaderMenuSubNavigationItem
 }>()
 
-const isSwap = computed(() => 
+const isSwap = computed(() =>
   item.modal_type?.toLowerCase() == 'swap'
 )
 
 const onClick = () => {
-  if(isSwap.value)
+  if (isSwap.value)
     enableSwap()
 }
 
