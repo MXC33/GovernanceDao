@@ -62,7 +62,7 @@ watch(weeksDraw, (state) => {
   }
   size.value = {
     name: lastDrawnLottery.type_name,
-    is_winner: lastDrawnLottery.winning_pools?.includes(7) || false
+    is_winner: lastDrawnLottery.winning_pools?.includes(8) || false
   }
 
   showClaimButton.value = !lastDrawnLottery.winning_pools ? false : lastDrawnLottery.winning_pools.length > 0 && !lastDrawnLottery.claimed
