@@ -1,7 +1,7 @@
 <template lang="pug">
 VList(flex-grow="1" w="full")
   VList(v-for="header in headerData")
-    CollectionFilterDrawer(bg="black")
+    Drawer(bg="black")
       template(#header) 
         div {{ header.name }}
 
@@ -10,5 +10,5 @@ VList(flex-grow="1" w="full")
 </template>
 
 <script lang="ts" setup>
-const {data: headerData} = useHeaderData()
+const { data: headerData } = useHeaderData()
 </script>

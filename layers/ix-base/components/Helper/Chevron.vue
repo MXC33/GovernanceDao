@@ -3,8 +3,8 @@ component(:is="icon" w="5" fill="white hover:(white opacity-80)" :up="up" rotate
 </template>
   
 <script lang="ts" setup>
-import ChevronIcon from '~/assets/icons/chevron-thin.svg'
-import ChevronIconThick from '~/assets/icons/chevron-thick.svg'
+import ChevronIcon from '~/assets/images/icons/chevron-thin.svg'
+import ChevronIconThick from '~/assets/images/icons/chevron-thick.svg'
 
 const icon = computed(() => thick ? ChevronIconThick : ChevronIcon)
 
