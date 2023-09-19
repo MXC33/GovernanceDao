@@ -3,7 +3,7 @@ import { TokenTypeTier } from "./useTokenInfo"
 export const useGravityGradePackContentData = (token: TokenTypeTier) => {
   const key = `${token.type}-${token.tier}`
 
-  return useAsyncState(`gg-pack-info-data-${key}`, async () => {
+  return useAsyncDataState(`gg-pack-info-data-${key}`, async () => {
 
     try {
       return await GqlGGPackContent({ token })

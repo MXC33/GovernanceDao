@@ -5,7 +5,7 @@ import { Corporation } from './corporations/useCorporations'
 
 
 export const useAvatarBurnedData = (corporation: string) =>
-  useAsyncState(`avatar-burned-${corporation}`, async () => {
+  useAsyncDataState(`avatar-burned-${corporation}`, async () => {
     const credentials = useGraphqlCredentials()
     const data = await GqlBurnedAvatar({ credentials, corporation })
     return data.burnedAvatars

@@ -1,5 +1,5 @@
 import { ethers } from "ethers";
-import { enterLuckyCatRaffleAddress } from "../NFTs/walletAddresses";
+import { enterLuckyCatRaffleAddress } from "@ix/base/composables/Contract/WalletAddresses";
 import { ContractContext as PixCatRaffleContract } from '../ABIs/PIXCatRaffle'
 import PixCatRaffleABI from '../ABIs/PIXCatRaffle.json'
 import { CorporationRaffleItem } from "~/composables/corporations/useCorporationRaffle";
@@ -116,7 +116,7 @@ export const useLuckyCatContracts = () => {
 }
 
 export const useLuckyCatRaffleData = () =>
-  useAsyncState('raffle-info', async () => {
+  useAsyncDataState('raffle-info', async () => {
     const credentials = useGraphqlCredentials()
     const data = await GqlLuckyCatRaffle({ credentials })
     return {

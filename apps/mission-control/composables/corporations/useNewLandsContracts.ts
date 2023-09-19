@@ -1,5 +1,5 @@
 import { BigNumber, ethers } from "ethers";
-import { newLandsAddress } from "../NFTs/walletAddresses";
+import { newLandsAddress } from "@ix/base/composables/Contract/WalletAddresses";
 import { ContractContext as NewlandsContract } from '../ABIs/FacilityStore'
 import FacilityStoreABI from '../ABIs/FacilityStore.json'
 import { OrderData } from '~/composables/corporations/order/useCorporationOrders'
@@ -36,7 +36,7 @@ export const useNewlandsCraft = () => {
 
 
 export const useNewlandsData = () =>
-  useAsyncState('newlands-data', async (): Promise<OrderData> => {
+  useAsyncDataState('newlands-data', async (): Promise<OrderData> => {
     const credentials = useGraphqlCredentials()
 
     const [{ newlandsOrderInfo }, { newlandsOrderCosts }] = await Promise.all([GqlNewLandsOrderInfo({ credentials }), GqlNewLandsOrderCosts()])

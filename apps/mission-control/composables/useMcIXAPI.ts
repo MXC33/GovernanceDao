@@ -23,7 +23,7 @@ export const useMcIXAPI = () => {
   const { fetchIXAPI } = useIXAPI()
 
   const ixBlogs = () =>
-    useAsyncState('ix-blogs', () => fetchIXAPI('blog/0/1?order=DESC'), {
+    useAsyncDataState('ix-blogs', () => fetchIXAPI('blog/0/1?order=DESC'), {
       transform: (response: any) => {
         console.log("RESPONSE", response)
         return response.data.blogs.map((blog) => ({

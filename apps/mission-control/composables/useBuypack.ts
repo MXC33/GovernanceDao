@@ -1,5 +1,5 @@
 import { ethers } from "ethers";
-import { gravityGradeAddress, IXTAddress, USDTManagerAddress, maxCoinAddress } from "./NFTs/walletAddresses";
+import { gravityGradeAddress, IXTAddress, USDTManagerAddress, maxCoinAddress } from "@ix/base/composables/Contract/WalletAddresses";
 import { ContractContext as GravityGradeContract } from "./ABIs/GravityGrade";
 
 import GravityGradeABI from './ABIs/GravityGrade.json'

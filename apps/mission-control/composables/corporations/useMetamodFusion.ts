@@ -6,7 +6,7 @@ import { OrderData } from "./order/useCorporationOrders"
 
 
 export const useMetamodFusionData = () =>
-  useAsyncState('metamod-fusion-data', async (): Promise<OrderData> => {
+  useAsyncDataState('metamod-fusion-data', async (): Promise<OrderData> => {
     const credentials = useGraphqlCredentials()
 
     const [{ metamodFusionOrderInfo }, { metamodFusionOrderCosts }] = await Promise.all([GqlMetamodFusionOrderInfo({ credentials }), GqlMetamodFusionOrderCosts()])

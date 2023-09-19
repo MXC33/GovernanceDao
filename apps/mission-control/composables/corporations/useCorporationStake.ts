@@ -73,14 +73,14 @@ export const useStakedDataBalance = (type: string, tier: string) => {
 
 
 export const useStakeMCNFTData = () =>
-  useAsyncState('stake-mc-nft-data', async () => {
+  useAsyncDataState('stake-mc-nft-data', async () => {
     const credentials = useGraphqlCredentials()
     const stakedData = await GqlStakedMCNFT({ credentials })
     return stakedData.stakedMCNFTs
   })
 
 export const useStakeGenesisNFTData = () =>
-  useAsyncState('stake-genesis-nft-data', async () => {
+  useAsyncDataState('stake-genesis-nft-data', async () => {
     const credentials = useGraphqlCredentials()
     const stakedData = await GqlStakedGenesisNFT({ credentials })
     return stakedData.stakedGenesisNFTs
@@ -88,7 +88,7 @@ export const useStakeGenesisNFTData = () =>
 
 
 export const useStakeGenesisNFTEthData = () =>
-  useAsyncState('stake-genesis-eth-nft-data', async () => {
+  useAsyncDataState('stake-genesis-eth-nft-data', async () => {
     const credentials = useGraphqlCredentials()
     const stakedData = await GqlStakedGenesisNFTEth({ credentials })
     return stakedData.stakedGenesisNFTsEth

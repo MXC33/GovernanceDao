@@ -1,13 +1,13 @@
 // Can delete this file when everyone has updated to the new MissionControl v2.
 import { ethers } from "ethers";
-import { oldPlaceNFTAdress } from "./NFTs/walletAddresses";
+import { oldPlaceNFTAdress } from "@ix/base/composables/Contract/WalletAddresses";
 import { ContractContext as MissionControlContractOld } from './ABIs/missionControl'
 
 
 import MissionControlABI from './ABIs/MissionControl.json'
 
 export const useOldStakedOnTileData = () =>
-  useAsyncState('old-staked-on-tile-data', async () => {
+  useAsyncDataState('old-staked-on-tile-data', async () => {
     const credentials = useGraphqlCredentials()
     const stakedData = await GqlOldStakedOnTile({ credentials })
     return stakedData

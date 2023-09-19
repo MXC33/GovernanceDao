@@ -107,7 +107,7 @@ const useNotificationHandler = (type: 'notification' | 'messages') => {
     await fetchIXAPI('notifications/markAllAsRead', "PUT")
   }
 
-  const asyncData = useAsyncState('notification-data-' + type, async () => {
+  const asyncData = useAsyncDataState('notification-data-' + type, async () => {
     const uri = "notifications/" + type + "/" + notificationCount.value + "?unread=" + showUnreadNotifications.value
     return (await fetchIXAPI(uri)) as NotificationRequest
   }, {

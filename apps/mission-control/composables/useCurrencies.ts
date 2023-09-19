@@ -5,7 +5,7 @@ const IXT_KEY = 'user-ixt-balance'
 export const useCurrencyData = () => {
   const { data: mcNFTs, execute: fetchTokenData } = useTokenData()
 
-  const asyncState = useAsyncState(IXT_KEY, () => {
+  const asyncState = useAsyncDataState(IXT_KEY, () => {
     const credentials = useGraphqlCredentials()
     return GqlCurrencies({ credentials })
   }, {

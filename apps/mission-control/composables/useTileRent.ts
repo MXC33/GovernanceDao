@@ -11,7 +11,7 @@ import IMintableSuperToken from "./ABIs/IMintableSuperToken.json"
 import { ContractContext as MintableSuperTokenContract } from './ABIs/IMintableSuperToken'
 
 import { Tile, TileAsset, TileGroup } from "./useTiles"
-import { contractFlowAgreementAddress, mintableSuperTokenAddress, missionControlStreamAddress, superFluidAddress, superTokenAddress } from "./NFTs/walletAddresses"
+import { contractFlowAgreementAddress, mintableSuperTokenAddress, missionControlStreamAddress, superFluidAddress, superTokenAddress } from "@ix/base/composables/Contract/WalletAddresses"
 import { NftFragment } from "#gql"
 
 interface ProposedRent {

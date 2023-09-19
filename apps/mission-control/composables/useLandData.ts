@@ -26,7 +26,7 @@ export const useSearchPix = () => {
 }
 
 export const useLandData = () =>
-  useAsyncState('land-data', async () => {
+  useAsyncDataState('land-data', async () => {
     const chain = useActiveChain()
     const credentials = useGraphqlCredentials()
     const { landAmount } = await GqlLand({ credentials, chain })

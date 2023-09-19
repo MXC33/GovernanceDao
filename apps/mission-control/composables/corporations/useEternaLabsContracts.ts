@@ -1,10 +1,10 @@
 import { BigNumber, ethers, utils } from "ethers";
-import { eternaLabsAddress } from "../NFTs/walletAddresses";
+import { eternaLabsAddress } from "@ix/base/composables/Contract/WalletAddresses";
 import { ContractContext as EternaLabsContract } from '../ABIs/Prospecting'
 import IProspectorABI from '../ABIs/Prospecting.json'
 
 export const useEternalabData = () =>
-  useAsyncState('eternalab-info', async () => {
+  useAsyncDataState('eternalab-info', async () => {
     const credentials = useGraphqlCredentials()
 
     if (!credentials)

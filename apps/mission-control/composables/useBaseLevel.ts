@@ -3,7 +3,7 @@ import { Corporation } from "./corporations/useCorporations"
 
 export const useBaseLevelCapacityData = () => {
 
-  const asyncState = useAsyncState('base-level-capacity', async () => {
+  const asyncState = useAsyncDataState('base-level-capacity', async () => {
     const { playerBaseLevel } = useUserData()
 
     const level = playerBaseLevel.value

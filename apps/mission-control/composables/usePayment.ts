@@ -1,5 +1,5 @@
 import { BigNumber, BigNumberish, ContractTransaction, ethers } from "ethers";
-import { tetherAddress, gravityGradeAddress, oracleManagerAddress, IXTAddress, USDTManagerAddress, maxCoinAddress, wrappedEthAddress } from "./NFTs/walletAddresses";
+import { tetherAddress, gravityGradeAddress, oracleManagerAddress, IXTAddress, USDTManagerAddress, maxCoinAddress, wrappedEthAddress } from "@ix/base/composables/Contract/WalletAddresses";
 import { ContractContext as TetherContract } from './ABIs/tether'
 import { ContractContext as OracleContract } from "./ABIs/OracleManager";
 import { ContractContext as GravityGradeContract } from "./ABIs/GravityGrade";

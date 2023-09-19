@@ -1,11 +1,11 @@
 import { BigNumber, ethers } from 'ethers'
 import GenericBurnPixAssetsABI from "./ABIs/PixAssetsGenericBurn.json"
 import { ContractContext as GenericBurnPixAssetsContract } from './ABIs/PixAssetsGenericBurn'
-import { genericBurnPixAssetsAddress } from './NFTs/walletAddresses'
+import { genericBurnPixAssetsAddress } from '@ix/base/composables/Contract/WalletAddresses'
 import { ContractInterface, CreateContractOptions } from './defineMCContract'
 import { NftFragment } from '#gql'
 
-export const useCanClaimAvatarData = () => useAsyncState('can-claim-avatar', async () => {
+export const useCanClaimAvatarData = () => useAsyncDataState('can-claim-avatar', async () => {
   const { canClaimAvatar } = useGenericBurnPixAssetsContract()
   const canClaim = await canClaimAvatar()
   return canClaim

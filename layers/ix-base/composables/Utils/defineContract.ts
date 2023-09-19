@@ -22,8 +22,8 @@ export interface CreateContractOptions<T> {
   createContract: SetupContractFn<T | undefined>,
   listeners?: Record<string, (...args: Array<any>) => void>
   notifications?: ContractNotificationSettings,
-  onEverySuccess: (tx?: TransactionOptions) => void,
-  onEveryFail: (tx?: TransactionOptions, error?: any) => void,
+  onEverySuccess?: (tx?: TransactionOptions) => void,
+  onEveryFail?: (tx?: TransactionOptions, error?: any) => void,
 }
 
 // all<T extends readonly unknown[] | []>(values: T): Promise<{ -readonly [P in keyof T]: Awaited<T[P]> }>;
@@ -144,7 +144,8 @@ export const defineContract = <T extends ContractInterface<T> | object>(key: str
 
     resetTransactionState()
 
-    options.on
+    if (options.onEverySuccess)
+      options.onEverySuccess(txOptions)
   }
 
   const transactionFailed = async (error?: string, txOptions?: TransactionOptions) => {
@@ -158,6 +159,8 @@ export const defineContract = <T extends ContractInterface<T> | object>(key: str
     //   addError(txOptions.getTransactionError(error?.message))
     // }
 
+    if (options.onEveryFail)
+      options.onEveryFail(txOptions, error)
     throw new Error(error)
   }
 

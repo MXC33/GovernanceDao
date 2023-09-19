@@ -1,6 +1,6 @@
 //@ts-ignore
 import { BigNumberish, ethers } from "ethers";
-import { placeNFTAdress, pixStakableAdress, pixAdress, assetStakableAdress, assetsAddress } from "./NFTs/walletAddresses";
+import { placeNFTAdress, pixStakableAdress, pixAdress, assetStakableAdress, assetsAddress } from "@ix/base/composables/Contract/WalletAddresses";
 import { ContractContext as MissionControlContract, OrderRequest, PlaceNFTsRequest, RemoveNFTsRequest } from './ABIs/MissionControlv2'
 import { ContractContext as AssetsERC1155Contract } from './ABIs/IERC1155Upgradeable'
 import AssetERC1155ABI from './ABIs/IERC1155Upgradeable.json'

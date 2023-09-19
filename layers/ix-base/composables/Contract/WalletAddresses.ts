@@ -2,6 +2,27 @@ import type { Chain } from "./useWallet"
 
 type ContractAddress = Partial<Record<Chain, string>>
 
+export const genericBurnGravityGradeV2Address: ContractAddress = {
+  mumbai: "0x4d605e5b2D0F49d782568E26c6D170Ab34aC8958",
+  polygon: "0xEAA88a8A4570D176D6e0E496fF0fcb3496Bf904B"
+}
+export const gravityGradeV2WrapperAddress: ContractAddress = {
+  mumbai: "0xbeDA5D0B9b7CddE69D54493298698488C8752F98",
+  polygon: "0x5A330dE8322aA11CF34e6E042e8eB617006397cf"
+}
+export const voucherAddress: ContractAddress = {
+  mumbai: '0x9b11e38299f2e2094793640b67b5e29678792ab4',
+  polygon: '0xBa60120b7C5c4159FF259D5f75Ae76a84B13256e',
+}
+export const assetsConverterAddress: ContractAddress = {
+  mumbai: '0x7198952c218c1507aeD566307A45CE8539E82dA3',
+  polygon: '0xfe37791340Ee7Ff305dB8DB2B4FFb861b9927b5A',
+}
+export const metaModFusionAddress: ContractAddress = {
+  mumbai: '0xbDE445F7a7c08389cB3F1041788ccdD70F74e17F',
+  polygon: '0xB714a0aa1211867cE2D3a41cd17b05046f76828A',
+}
+
 export const landmarkAddress: ContractAddress = {
   mumbai: "0xF3Ee20DEFd518F43696d16Cf4Cdc16B08c38e6F1",
   polygon: "0x24CfF55d808fD10A1E730B86037760E57eCAF549"
@@ -20,7 +41,7 @@ export const stakedMissionControlNFTAddress: ContractAddress = {
 }
 
 export const generic1155StoreAddress: ContractAddress = {
-  mumbai: "0x0c32c2d96E3EBD470f4b78f095d9175c074f9DcD",
+  mumbai: "0xbd54DcA0D7AFd2D076D1425b25049d4B6e2f48Ce",
   polygon: "0x70012D84A1044454CfB2973d5968fA451F94f5CC"
 }
 
@@ -131,7 +152,7 @@ export const newLandsAddress: ContractAddress = {
 
 export const enterLuckyCatRaffleAddress: ContractAddress = {
   mumbai: "0x8555b3258989b3C8F28017939C10C63159E18C70",
-  polygon: "0x1E68A27080f928D97D631337A6cD0690B42Fd482"
+  polygon: "0x1f1045a8C9e957D698ED09786d21FC596a483105"
 }
 
 export const placeNFTAdress: ContractAddress = {
@@ -196,8 +217,7 @@ export const burnGravityGradeAdress: ContractAddress = {
 
 export const facilityUpgradeAdress: ContractAddress = {
   mumbai: "0x58D91c5e85B280Dabd4D8b9708Ed590937B3410E",
-  polygon: "0x58D91c5e85B280Dabd4D8b9708Ed590937B3410E",
-  // polygon needs update
+  polygon: "0x8623396298769Bf14EDAa709262c6733538aB298",
 }
 
 export const conduitAdress: ContractAddress = {

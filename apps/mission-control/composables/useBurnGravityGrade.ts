@@ -1,5 +1,5 @@
 import { ethers } from "ethers";
-import { burnGravityGradeAdress } from "./NFTs/walletAddresses";
+import { burnGravityGradeAdress } from "@ix/base/composables/Contract/WalletAddresses";
 import { ContractContext as GravityGradeBurnContract } from './ABIs/GravityGradeBurn'
 import GravityGradeBurnABI from './ABIs/GravityGradeBurn.json'
 import { NftFragment } from "#gql";

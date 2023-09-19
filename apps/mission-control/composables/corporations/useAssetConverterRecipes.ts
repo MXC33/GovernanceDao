@@ -2,11 +2,11 @@ import { AssetConverterRecipeFragment } from "#gql"
 import { ethers } from 'ethers'
 import { ContractContext as AssetConverterContract } from '../ABIs/AssetConverter'
 import AssetConverterABI from "../ABIs/AssetConverter.json"
-import { assetsConverterAddress } from '../NFTs/walletAddresses'
+import { assetsConverterAddress } from '@ix/base/composables/Contract/WalletAddresses'
 import { CorporationShopItem } from "./useCorporationShop"
 
 export const useAssetConverterRecipesData = () =>
-  useAsyncState('asset-converter-data', async (): Promise<AssetConverterRecipeFragment[]> => {
+  useAsyncDataState('asset-converter-data', async (): Promise<AssetConverterRecipeFragment[]> => {
 
     const recipes = await GqlAssetConverterRecipes()
 

@@ -2,7 +2,7 @@ import { ethers } from 'ethers'
 import { ContractContext as I1155StoreGenericContract } from './ABIs/I1155StoreGeneric'
 import I1155StoreGenericABI from "./ABIs/I1155StoreGeneric.json"
 import { CorporationShopItem, Currency } from './corporations/useCorporationShop'
-import { generic1155StoreAddress, USDTManagerAddress, wrappedEthAddress } from './NFTs/walletAddresses'
+import { generic1155StoreAddress, USDTManagerAddress, wrappedEthAddress } from '@ix/base/composables/Contract/WalletAddresses'
 
 export const useBuyNFTs = () => {
   const activeChain = useActiveChain()

@@ -1,5 +1,5 @@
 import { BigNumber, ethers } from "ethers";
-import { lootChestAdress } from "./NFTs/walletAddresses";
+import { lootChestAdress } from "@ix/base/composables/Contract/WalletAddresses";
 import { ContractContext as LootChestContractNew } from './ABIs/LootCrate'
 import LootChestABINew from './ABIs/LootCrate.json'
 

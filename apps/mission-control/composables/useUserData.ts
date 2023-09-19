@@ -5,7 +5,7 @@ const TOKENS_KEY = 'user-nft-tokens'
 export type UserResource = 'astro-credit' | 'ixt' | 'drone' | 'waste' | 'power' | 'energy' | 'gas-price' | 'astro-gold' | 'astro-gold-lite' | 'mc-level'
 
 const useLandmarkData = () =>
-  useAsyncState('landmarks-data', async () => {
+  useAsyncDataState('landmarks-data', async () => {
     const credentials = useGraphqlCredentials()
     const landmark = await GqlLandmarks({ credentials })
     return landmark.landmarks
@@ -13,7 +13,7 @@ const useLandmarkData = () =>
 
 
 export const useTokenData = () =>
-  useAsyncState(TOKENS_KEY, async () => {
+  useAsyncDataState(TOKENS_KEY, async () => {
     const credentials = useGraphqlCredentials()
     const tokens = await GqlTokens({ credentials })
     return tokens.missionControlTokens
@@ -21,14 +21,14 @@ export const useTokenData = () =>
 
 
 export const useRoverData = () =>
-  useAsyncState('rover-data', async () => {
+  useAsyncDataState('rover-data', async () => {
     const credentials = useGraphqlCredentials()
     const rovers = await GqlRovers({ credentials })
     return rovers.rover
   })
 
 // export const useCurrencyData = () =>
-//   useAsyncState(IXT_KEY, async () => {
+//   useAsyncDataState(IXT_KEY, async () => {
 //     const credentials = useGraphqlCredentials()
 //     const currencies = await GqlCurrencies({ credentials })
 //     console.log("currencies", currencies.currencies)
@@ -49,7 +49,7 @@ export const useRoverData = () =>
 export const useAsyncGasPrice = () => {
   const { provider } = useWallet()
 
-  return useAsyncState('gas-price', async () => {
+  return useAsyncDataState('gas-price', async () => {
     try {
       const gasPriceWei = await provider.value?.getGasPrice()
       const gasPriceGwei = ethers.utils.formatUnits(gasPriceWei, 'gwei').substring(0, 7)
@@ -74,14 +74,14 @@ export const useAsyncGasPrice = () => {
 }
 
 export const useAvatarNFTData = () =>
-  useAsyncState('avatar-nft-data', async () => {
+  useAsyncDataState('avatar-nft-data', async () => {
     const credentials = useGraphqlCredentials()
     const avatars = await GqlAvatarNFT({ credentials })
     return avatars.avatarNFT
   })
 
 export const useEthNFTData = () =>
-  useAsyncState('eth-nft-data', async () => {
+  useAsyncDataState('eth-nft-data', async () => {
     const credentials = useGraphqlCredentials()
     const ethNFTs = await GqlEthNFTs({ credentials })
     return ethNFTs.ethNFTs
@@ -89,14 +89,14 @@ export const useEthNFTData = () =>
 
 
 const useBadgeNFTData = () =>
-  useAsyncState('badge-nft-data', async () => {
+  useAsyncDataState('badge-nft-data', async () => {
     const credentials = useGraphqlCredentials()
     const badge = await GqlBadgeNFT({ credentials })
     return badge.badgeNFT
   })
 
 export const useGravityGradeData = () =>
-  useAsyncState('gravity-grade', async () => {
+  useAsyncDataState('gravity-grade', async () => {
     const credentials = useGraphqlCredentials()
     if (!credentials)
       return
@@ -109,7 +109,7 @@ export const useGravityGradeData = () =>
 
 
 export const usePlayerBaseLevelData = () => {
-  return useAsyncState('player-base-level-data', async () => {
+  return useAsyncDataState('player-base-level-data', async () => {
     const credentials = useGraphqlCredentials()
     const data = await GqlPlayerBaseLevel({ credentials })
     console.log("Fetching base level", data.playerBaseLevel)

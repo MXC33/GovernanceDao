@@ -1,14 +1,14 @@
 import { BigNumber, ethers } from "ethers"
 import { ContractContext as FacilityUpgradeContract } from '../ABIs/FacilityUpgrade'
 import FacilityUpgradeABI from '../ABIs/FacilityUpgrade.json'
-import { facilityUpgradeAdress } from "../NFTs/walletAddresses"
+import { facilityUpgradeAdress } from "@ix/base/composables/Contract/WalletAddresses"
 import { OrderData } from "./order/useCorporationOrders"
 import { NftFragment } from "#gql"
 import { CorporationAdjustableToken } from "./useCorporations"
 
 
 export const useFacilityCooldownTimeleftData = () =>
-  useAsyncState('facility-cooldown-data', async (): Promise<number> => {
+  useAsyncDataState('facility-cooldown-data', async (): Promise<number> => {
     const credentials = useGraphqlCredentials()
 
     const facility = await GqlFacilityUpgradeCooldown({ credentials })
@@ -17,7 +17,7 @@ export const useFacilityCooldownTimeleftData = () =>
   })
 
 export const useFacilityUpgradeData = () =>
-  useAsyncState('facility-upgrade-data', async (): Promise<OrderData> => {
+  useAsyncDataState('facility-upgrade-data', async (): Promise<OrderData> => {
     const credentials = useGraphqlCredentials()
 
     const [{ facilityUpgradeOrderInfo }, { facilityUpgradeOrderCosts }] = await Promise.all([GqlFacilityUpgradeOrderInfo({ credentials }), GqlFacilityUpgradeOrderCosts()])

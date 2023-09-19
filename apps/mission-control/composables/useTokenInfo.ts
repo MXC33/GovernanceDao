@@ -23,7 +23,7 @@ export interface TokenTypeTier {
 export const useTokenInfoTypeTier = (tokens: TokenTypeTier[], address = assetsAddress.polygon) => {
   const keyMap = tokens.map((token) => `${token.type}-${token.tier}`).join('-')
 
-  return useAsyncState(`token-info-data-${keyMap}`, async () => {
+  return useAsyncDataState(`token-info-data-${keyMap}`, async () => {
     try {
       const contractAddress = address.toLowerCase()
       return await GqlTokenInfoTypeTier({ tokens, contractAddress })
@@ -47,7 +47,7 @@ export const useTokensInfo = (tokenIds: number[], contractAddress: string = asse
 
   const keyMap = tokenIds.map((tokenId) => getNftTokenKey({ tokenId, contract })).join('-')
 
-  return useAsyncState(`token-info-data-${keyMap}`, async () => {
+  return useAsyncDataState(`token-info-data-${keyMap}`, async () => {
     try {
       return (await fetchTokenInfo()) ?? []
     } catch (error) {
@@ -71,7 +71,7 @@ export const useTokenInfo = (tokenId: number, contractAddress: string = assetsAd
 
   const key = `token-info-data-${getNftTokenKey({ tokenId, contract: contractAddress })},`
 
-  return useAsyncState(key, async () => {
+  return useAsyncDataState(key, async () => {
     try {
       const result = await fetchTokenInfo()
       return result && result[0] ? result[0] : null;

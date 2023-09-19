@@ -1,12 +1,12 @@
 import { BigNumber, ethers } from "ethers";
-import { globalWasteSystemAddress } from "../NFTs/walletAddresses";
+import { globalWasteSystemAddress } from "@ix/base/composables/Contract/WalletAddresses";
 import { ContractContext as GlobalWasteSystemContract } from '../ABIs/WasteTrader'
 
 import WasteTraderABI from '../ABIs/WasteTrader.json'
 import { OrderData } from "~/composables/corporations/order/useCorporationOrders";
 
 export const useGWSData = () =>
-  useAsyncState('gws-data', async (): Promise<OrderData> => {
+  useAsyncDataState('gws-data', async (): Promise<OrderData> => {
     const credentials = useGraphqlCredentials()
 
     const [

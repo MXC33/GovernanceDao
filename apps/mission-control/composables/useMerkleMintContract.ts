@@ -1,5 +1,5 @@
 import { ethers } from "ethers";
-import { merkleMinterAddress, pixAdress, pixStakableAdress, assetStakableAdress } from "./NFTs/walletAddresses";
+import { merkleMinterAddress, pixAdress, pixStakableAdress, assetStakableAdress } from "@ix/base/composables/Contract/WalletAddresses";
 import { ContractContext as PixMerkleMinterContract } from './ABIs/PIXMerkleMinter'
 
 import type { MintByProofRequest } from './ABIs/PIXMerkleMinter'
