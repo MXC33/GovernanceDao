@@ -38,7 +38,6 @@ VList(:class="className" pos="sticky top-0" translate-y="$header-offset" z="99" 
 import CrossIcon from '~/assets/images/header/cross.svg'
 import PlanetIXNew from '~/assets/images/header/planetix-new.svg'
 import SettingsIcon from '~/assets/images/header/hamburger.svg'
-import { useGlobalWindowScroll } from '@ix/marketplace/composables/useWindowScroll';
 
 const { className } = defineProps<{
   className?: string
@@ -46,9 +45,7 @@ const { className } = defineProps<{
 
 const { isMobile } = useDevice()
 const { data: headerData } = useHeaderData()
-//const {data} = useHeaderData()
 
-const { data: headerData } = useHeaderData()
 const { state: swapVisible } = useIXTSwapVisible()
 
 const activeMenuIndex = useHeaderIndex()
