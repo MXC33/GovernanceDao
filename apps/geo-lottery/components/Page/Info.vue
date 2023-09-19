@@ -33,7 +33,7 @@ HList(flex="~ col lg:row wrap" items="center" justify="between" gap-y="10")
       template(#title) COMMON PRIZE
       template(#subtitle) COUNTRY <br> + TIER <br> + Size
       template(#content)
-        TireSizeIcon(tier="Outlier" size="Zone")
+        TireSizeIcon(tier="Rare" size="Zone")
 
   div(basis="100%" color="ix-white" font="bold" text="base sm:lg" space-y="2 md:6" order="2 lg:3")
     p() The prize amount depends on the number of tickets played and not on the Tier or Territory Size. You can enter despite your territory being staked on ix.foundation or Mission Control. If you acquire more territories during the week your chance of winning increases. If there is not a winner in a certain category the prize pool is pushed to the following week.Purchase your tickets, start your stream, sit back and hope to win!
