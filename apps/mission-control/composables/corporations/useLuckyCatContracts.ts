@@ -15,7 +15,7 @@ export const useLuckyCatContracts = () => {
   const { walletAdress } = useWallet()
 
 
-  const { createTransaction, ...contractSpec } = defineContract<PixCatRaffleContract>('lucky-cat-contract', {
+  const { createTransaction, ...contractSpec } = defineMCContract<PixCatRaffleContract>('lucky-cat-contract', {
     contractAddress: luckyCatRaffleAddress,
     notifications: {
       sender: 'seina',

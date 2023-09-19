@@ -39,7 +39,7 @@ export const useStakeMCNFT = () => {
   const { refresh: refreshTokens } = useTokenData()
   const { refresh: refreshStakedMCNFT } = useStakeMCNFTData()
 
-  const { createTransaction, ...contractSpec } = defineContract<StakedMissionControlNFTContract>('genesis-stake-contract', {
+  const { createTransaction, ...contractSpec } = defineMCContract<StakedMissionControlNFTContract>('genesis-stake-contract', {
     contractAddress: stakeMCNFTAddress,
     notifications: {
       sender: 'jeremiah',
@@ -81,7 +81,7 @@ export const useStakeMCGenesisNFT = () => {
 
   const { approveContract } = usePayment()
 
-  const { createTransaction, setupContract, contract } = defineContract<StakedMissionControlNFTContract>('stake-contract', {
+  const { createTransaction, setupContract, contract } = defineMCContract<StakedMissionControlNFTContract>('stake-contract', {
     contractAddress: stakeMCNFTAddress,
     ethereum: true,
     notifications: {

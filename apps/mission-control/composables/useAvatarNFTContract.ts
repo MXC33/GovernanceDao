@@ -16,7 +16,7 @@ export const useAvatarNFTContract = () => {
   const avatarAddress = avatarNFTAddress[activeChain]
   const { refresh: refreshAvatar } = useAvatarNFTData()
   const { getSender } = useSender()
-  const { createTransaction, ...contractSpec } = defineContract<AvatarNFTContract>('avatar-nft-contract', {
+  const { createTransaction, ...contractSpec } = defineMCContract<AvatarNFTContract>('avatar-nft-contract', {
     contractAddress: avatarAddress,
     notifications: {
       sender: 'proxy-of-change',

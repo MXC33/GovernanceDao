@@ -1,5 +1,5 @@
 import { ethers } from "ethers";
-import { ContractInterface, CreateContractOptions } from "~~/composables/defineContract";
+import { ContractInterface, CreateContractOptions } from "~~/composables/defineMCContract";
 import { Corporation } from "../useCorporations"
 import { NftFragment } from "#gql";
 
@@ -46,7 +46,7 @@ export const useCorporationOrderId = () => {
 export const defineOrderContract = <T extends ContractInterface<T>>(corporationId: CorporationOrderId, options: OrderContractOptions<T>) => {
   const { getOrderKey } = useCorporationOrderId()
   const corporationOrderKey = getOrderKey(corporationId)
-  const definedContract = defineContract(corporationOrderKey, options)
+  const definedContract = defineMCContract(corporationOrderKey, options)
   const { contractAddress, contract, createTransaction } = definedContract
   const { refreshOrderData, activeSpeedupOrder } = useCorporationOrders()
   const { refresh: refreshCurrencies } = useCurrencyData()
