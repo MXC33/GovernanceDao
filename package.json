@@ -14,7 +14,9 @@
     "dev:ix-mp": "yarn workspace @ix/marketplace dev",
     "dev:ix-base": "yarn workspace @ix/base dev",
     "build": "yarn build:mp",
+    "build_go": "yarn build:go",
     "build:mp": "yarn prepare:base && yarn workspace @ix/marketplace build",
+    "build:go": "yarn prepare:base && yarn workspace @ix/geo-lottery build",
     "build:base": "yarn workspace @ix/base dev",
     "prepare:base": "yarn workspace @ix/base prepare",
     "kill": "npx kill-port 3000 3333 8001 8002",
@@ -34,5 +36,8 @@
   },
   "dependencies": {
     "@metamask/sdk": "^0.3.2"
+  },
+  "resolutions": {
+    "unimport": "3.2.0"
   }
 }

@@ -1,8 +1,10 @@
 <template lang="pug">
-VList(pos="sticky top-0" translate-y="$header-offset" z="99" w="full" @mouseenter="isSelected = true" @mouseleave="isSelected = false" ref="menuElement" transition="all")
+VList(:class="className" pos="sticky top-0" translate-y="$header-offset" z="99" w="full" @mouseenter="isSelected = true" @mouseleave="isSelected = false" ref="menuElement" transition="all")
   HList(items="center" justify="between" bg="ix-black" px="4 md:7.5" h="$header-height-mobile md:$header-height-desktop" space-x="6")
     NuxtLink(to="https://www.planetix.com")
-      PlanetIXNew(w="42.25")
+      template(v-if="$slots.logo")
+        slot(name="logo")
+      PlanetIXNew(v-else w="42.25")
 
     HList(v-if="!isMobile" justify="start" flex-grow="1" overflow-x="hidden" space-x="4")
       button(v-for="(header, index) in headerData" @click="openMenu(index)" btn="menu" color = "s-default:white s-selected:ix-orange" :state="selected(index)") {{ header.name }}
@@ -10,22 +12,22 @@ VList(pos="sticky top-0" translate-y="$header-offset" z="99" w="full" @mouseente
 
       HList(flex-grow="1" justify="end" display="lt-md:none")
         NuxtLink(to="https://planetix.com/airdrop")
-          HList(rounded="full" b="1 $mc-mint" px="4" py="1" bg="hover:$mc-mint-40" uppercase="~" tracking="0.65" font="bold" items="center" justify="center")
+          HList(rounded="full" b="1 $mc-mint" px="4" py="1" bg="hover:$mc-mint-40" uppercase="~" tracking="0.65" font="bold" items="center" justify="center" class="border-white-ixt")
             span(translate-x="0.5") airdrop
 
     HList(space-x="6" px="0")
       //-button(btn="menu" display="lt-lg:none") help
       //-HeaderLanguage(language="EN")
-      HeaderAccountButton()
+      HeaderAccountButton(class="border-white-ixt")
 
 
-      button(v-if="isMobile" btn="menu" @click="toggleMenu" ml="2")
+      button(v-if="isMobile" btn="menu" @click="toggleMenu" ml="2" class="hamburger-menu")
         Transition(name="fade" mode="out-in")
           SettingsIcon(v-if="activeMenuIndex == null" w="6" )
           CrossIcon(v-else w="6" )
 
   Transition(name="slide-top" mode="out-in")
-    HeaderNavigation(v-if="activeMenuIndex != null && headerData != null"  :key="activeMenuIndex" :header="headerData[activeMenuIndex]")
+    HeaderNavigation(:class="className + '-header'" v-if="activeMenuIndex != null && headerData != null"  :key="activeMenuIndex" :header="headerData[activeMenuIndex]")
 
 </template>
 
@@ -34,6 +36,10 @@ import CrossIcon from '~/assets/images/header/cross.svg'
 import PlanetIXNew from '~/assets/images/header/planetix-new.svg'
 import SettingsIcon from '~/assets/images/header/hamburger.svg'
 import { useGlobalWindowScroll } from '@ix/marketplace/composables/useWindowScroll';
+
+const { className } = defineProps<{
+  className?: string
+}>()
 
 const { isMobile } = useDevice()
 const {data: headerData} = useHeaderData()
@@ -94,6 +100,7 @@ onClickOutside(menuElement, () => {
 
 
 </script>
+
 
 <style>
 :root {
