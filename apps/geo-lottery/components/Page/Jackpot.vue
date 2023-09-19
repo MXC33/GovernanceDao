@@ -12,25 +12,65 @@ VList(space-y="8 md:17")
       HList(gap="x-7" flex="~ row wrap md:nowrap" justify="center md:start" text="center sm:left")
         VList(space-y="1")
           h3(color="ix-pink" text="xl" font="bold" uppercase="~") Longitude
-          h4(color="ix-white" text="2xl" font="bdrA3mik") -
-          //h4(color="ix-white" text="2xl" font="bdrA3mik") 64°30’13°S
+          h4(color="ix-white" text="2xl" font="bdrA3mik" v-if="!isLoaded") -
+          h4(color="ix-white" text="2xl" font="bdrA3mik" v-else) {{convertDDToDMS(lon, false).toString}}
         VList()
           h3(color="ix-pink" text="xl" font="bold" uppercase="~") Latitude
-          h4(color="ix-white" text="2xl" font="bdrA3mik") -
-          //h4(color="ix-white" text="2xl" font="bdrA3mik") 77°12’21°W
+          h4(color="ix-white" text="2xl" font="bdrA3mik" v-if="!isLoaded") -
+          h4(color="ix-white" text="2xl" font="bdrA3mik" v-else) {{convertDDToDMS(lat, true).toString}}
         VList()
           h3(color="ix-pink" text="xl" font="bold" uppercase="~") Territory
-          h4(color="ix-white" text="2xl" font="bdrA3mik") -
-          //h4(color="ix-white" text="2xl" font="bdrA3mik") NO
+          h4(color="ix-white" text="2xl" font="bdrA3mik" v-if="!isLoaded") -
+          h4(color="ix-white" text="2xl" font="bdrA3mik" v-else) {{hasWinner ? 'YES' : 'NO'}}
       VList()
-        h2(color="ix-pink" text="4xl md:5xl xl:7xl" uppercase="~" font="bdrA3mik") WAITING.
-        //h2(color="ix-pink" text="4xl md:5xl xl:7xl" uppercase="~" font="bdrA3mik") NO DICE.
-        //h2(color="ix-yellow" text="4xl md:5xl xl:7xl" uppercase="~" font="bdrA3mik") JACKPOT!
+        h2(color="ix-pink" text="4xl md:5xl xl:7xl" uppercase="~" font="bdrA3mik" v-if="!isLoaded") WAITING.
+        template(v-else)
+          h2(color="ix-pink" text="4xl md:5xl xl:7xl" uppercase="~" font="bdrA3mik" v-if="!hasWinner") NO DICE.
+          h2(color="ix-yellow" text="4xl md:5xl xl:7xl" uppercase="~" font="bdrA3mik" v-else) JACKPOT!
     div(col="span-1" flex="~" items="start" justify="center xl:end" h="full")
       div()
         img(src="~/assets/images/jackpot_map.png")
 </template>
 <script lang="ts" setup>
+import {useLottery} from "~/composables/useLottery";
+
+const { weeksDraw } = useLottery()
+
+const isLoaded = ref<boolean>(false)
+const hasWinner = ref<boolean>(false)
+const lat = ref<number>(0)
+const lon = ref<number>(0)
+const player_id = ref<number|null>(null)
+
+watch(weeksDraw, (state) => {
+  if (!state.jackpot)
+    return
+
+  const jackpot = state.jackpot
+
+  hasWinner.value = jackpot.has_winner
+  lat.value = jackpot.lat
+  lon.value = jackpot.lon
+  player_id.value = jackpot.player_id
+
+  isLoaded.value = true
+})
+
+const convertDDToDMS = (D: number, lng: boolean) => {
+  const deg = 0 | (D < 0 ? (D = -D) : D)
+  const min = 0 | (((D += 1e-9) % 1) * 60)
+  const sec = (0 | (((D * 60) % 1) * 6000)) / 100
+  const dir = D < 0 ? (lng ? "W" : "S") : lng ? "E" : "N"
+  const toString = deg +'°'+ min +'’'+ sec +'°'+ dir
+
+  return {
+    dir,
+    deg,
+    min,
+    sec,
+    toString
+  };
+}
 </script>
 <style>
 </style>

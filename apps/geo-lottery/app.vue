@@ -86,6 +86,8 @@ onMounted(async () => {
   }
 })
 
+const {isLotteryActive} = useLottery()
+
 watch(walletState, (state) => {
   if (state != 'connected')
     return
@@ -95,10 +97,20 @@ watch(walletState, (state) => {
     refreshIXTBalance()
     refreshAstroGoldBalance()
     setActiveCurrency('aGold')
-    getEnteredTickets()
-    getWeeksDraw()
+
+    if (isLotteryActive.value) {
+      getEnteredTickets()
+      getWeeksDraw()
+    }
   }, 1200)
 }, { immediate: true })
+
+watch(isLotteryActive, (state) => {
+  if (!state)
+    return
+
+  getWeeksDraw()
+})
 
 const { x: xpos, y: ypos } = useMouse()
 
