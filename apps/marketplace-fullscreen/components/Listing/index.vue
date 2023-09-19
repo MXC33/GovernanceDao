@@ -6,7 +6,7 @@ Popup()
   template(#header) {{ $t(`marketplace.list.title`) }}
 
   template(#default)
-    VList(space-y="6")
+    VList()
       TransactionIXTBalance()
 
       TransactionApplyToAll(v-model="activeListItems")
@@ -47,7 +47,5 @@ const { items } = defineProps<{
 }>()
 
 createListItems(items)
-
-console.log(isItemInvalid(activeListItems.value, true), 'active')
 
 </script>

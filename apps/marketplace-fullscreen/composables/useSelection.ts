@@ -3,8 +3,6 @@ import { AdjustableNumber } from "@ix/base/composables/Utils/useAdjustableNumber
 
 
 export const useSelection = () => {
-
-
   interface SelectedItem extends IXToken { }
   const selectedItems = useState<SelectedItem[]>('selected-items', () => [])
   const viewingSelectedItems = useState('selected-items-visible', () => false)
@@ -47,6 +45,7 @@ export const useSelection = () => {
   const clearSelectedItems = () => {
     selectedItems.value = []
   }
+
   return {
     selectedItems,
     viewingSelectedItems,

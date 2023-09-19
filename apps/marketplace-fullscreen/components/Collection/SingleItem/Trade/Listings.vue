@@ -1,5 +1,5 @@
 <template lang="pug">
-ContentDrawer(:start-open="!isMobile" :is-neutral="true" bg="gray-900" mx="lt-md:-4" :disable="!hasDrawer")
+ContentDrawer(:start-open="!isMobile" :is-neutral="true" bg="gray-900" mx="lt-md:-4" :disable="!hasDrawer" :is-table="true")
   template(#titleicon)
     TitleWithIcon(icon="listing") {{ $t(`marketplace.singleItem.listings`) }}
 
@@ -7,7 +7,7 @@ ContentDrawer(:start-open="!isMobile" :is-neutral="true" bg="gray-900" mx="lt-md
 
     Table(v-if="item.sales && item.sales.length > 0" :columns="saleColumns" :rows="item.sales" id="single-item")
 
-    CollectionSingleItemTradeDetail(v-else) {{ $t(`marketplace.singleItem.noItemsFound`) }}
+    CollectionSingleItemTradeDetail(v-else :item="item") {{ $t(`marketplace.singleItem.noItemsFound`) }}
 
 
 </template>
@@ -15,8 +15,6 @@ ContentDrawer(:start-open="!isMobile" :is-neutral="true" bg="gray-900" mx="lt-md
 <script lang="ts" setup>
 import type { Sale, SingleItemData } from '@ix/base/composables/Token/useIXToken';
 import type { TableColumn } from '~/composables/useTable';
-
-const [DefineTemplate, ReuseTemplate] = createReusableTemplate()
 
 const { isMobile } = useDevice()
 
@@ -30,7 +28,7 @@ const { walletAdress } = useWallet()
 
 const saleColumns: TableColumn<Sale>[] = [
   { label: "Unit Price", type: "ixt", rowKey: "price", sortable: true },
-  { label: "USD Price", type: "usd", rowKey: "price", sortable: true },
+  { label: "USD Price", type: "usd", rowKey: "price", sortable: true, hideMobile: true },
   { label: "Quanitity", rowKey: "quantity", sortable: true },
   { label: "Expiration", type: "date", rowKey: "endtime", sortable: true },
   {
@@ -70,12 +68,13 @@ const addSaleToCart = (sale: Sale) => {
 const cancelListingOnClick = async (sale: Sale) => {
   displayPopup({
     type: 'unlist-item',
-    item: {
+    items: [{
       ...item,
       sale
-    }
+    }]
   })
 }
+
 
 const { displayPopup } = usePopups()
 

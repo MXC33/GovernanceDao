@@ -17,8 +17,11 @@ export interface APIAuthResponse {
 type LoginStatus = 'logged-in' | 'logged-out' | 'connecting' | 'checking'
 type LoginFailState = 'no-user'
 
-export const useAuthUserData = () => useCookieState<APIAuthResponse | null>('auth-data', () => null)
-export const useAuthTokenExpirationTime = () => useCookieState<number | null>('auth-token-expiration', () => 0)
+export const useAuthUserData = () =>
+  useCookieState<APIAuthResponse | null>('auth-data', () => null)
+
+export const useAuthTokenExpirationTime = () =>
+  useCookieState<number | null>('auth-token-expiration', () => 0)
 
 export const useLoginRedirect = () => useState<string | null>('login-redirect', () => null)
 
@@ -35,10 +38,14 @@ export const useLogin = () => {
   const timeGap = 5 * 60 * 1000
   let tryingToRefresh = 0
 
+  const strategyType = useCookieState<string | null>('auth.strategy', () => 'local')
+  const bearerToken = useCookieState<string | null>('auth._token.local')
   const loginStatus = useState<LoginStatus>('user-status', () => 'logged-in')
   const loginFailType = useState<LoginFailState | null>('fail-state', () => null)
 
-  const isLoggedInAndConnected = computed(() => user.value && user.value.id && isWalletConnected.value)
+  const isLoggedInAndConnected = computed(() =>
+    user.value && user.value.id && isWalletConnected.value
+  )
 
   const loginFailed = (reason?: string) => {
     loginStatus.value = 'logged-out'
@@ -79,20 +86,6 @@ export const useLogin = () => {
     loginFailType.value = null
   }
 
-  const createAuthCookies = (token: string, web3Token: string) => {
-    const web3AccountType = useCookieState<string | null>('web3AccountType', () => '')
-    web3AccountType.value = 'metamask'
-
-    const authStrategy = useCookieState<string | null>('auth.strategy', () => '')
-    authStrategy.value = 'local'
-
-    const authTokenLocal = useCookieState<string | null>('auth._token.local', () => '')
-    authTokenLocal.value = 'Bearer ' + token
-
-    const web3TokenCookie = useCookieState<string | null>('web3Token', () => '')
-    web3TokenCookie.value = web3Token
-  }
-
   const loginUser = async (connector: WalletConnector) => {
     resetState()
 
@@ -108,11 +101,10 @@ export const useLogin = () => {
     if (!didSign)
       return loginFailed()
 
-    const newUser = await getIXUser()
+    const ixUser = await getIXUser()
 
-    if (newUser) {
-      if (currentConnector.value == 'injected' && authUser.value?.access_token && walletSigningToken.value)
-        createAuthCookies(authUser.value?.access_token, walletSigningToken.value)
+    if (ixUser) {
+      bearerToken.value = 'Bearer: ' + authUser.value?.access_token
 
       return loginSuccess()
     }

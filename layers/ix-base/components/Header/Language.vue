@@ -13,7 +13,7 @@ VList(pos="relative" z="1" justify="center" ref="element")
 </template>
 
 <script lang="ts" setup>
-import type { LocaleObject } from '@nuxtjs/i18n/dist/runtime/composables';
+import { useI18n, type LocaleObject } from '@nuxtjs/i18n/dist/runtime/composables';
 import GLOBE from '~/assets/images/header/language-globe.svg'
 
 const showMenu = ref(false)

@@ -12,26 +12,31 @@ VList()
     template(#ixt) {{averagePricePerItem}} IXT
     template(#percentage) {{aboveFloorPrice}}% {{ $t(`marketplace.trade.aboveFloorPrice`) }}
 
-  TradeModuleSubstitute(v-model="isSubstituteListing")
-    template(#title) {{ $t(`marketplace.trade.maxPriceList`) }}
-    template(#substituteTitle) 
-    template(#substituteInput) 
-      InputText(v-model="maxPrice" :class="{highlighted: showIncreaseMaxPrice}" :is-module="true")
-        template(#suffix) IXT
+  //- TradeModuleSubstitute(v-model="isSubstituteListing")
+  //-   template(#title) {{ $t(`marketplace.trade.maxPriceList`) }}
+  //-   template(#substituteTitle) 
+  //-   template(#substituteInput) 
+  //-     InputText(v-model="maxPrice" :class="{highlighted: showIncreaseMaxPrice}" :is-module="true")
+  //-       template(#suffix) IXT
 
-  div(grid="~ cols-2 on-one-col:cols-1" :one-col="isSubstituteListing")
+  div(grid="~ cols-1 md:cols-2 on-one-col:cols-1" :one-col="isSubstituteListing")
     ButtonInteractive(btn="~ secondary" font="bold" @click="onClickOffer" text="Make offer" v-if="!isSubstituteListing")
 
-    ButtonInteractive(btn="~ primary" font="bold" @click="buyItems" v-if="!isDisabled" :text="`Buy ${shares?.value} item`" :loading="isBuyLoading")
+    HList(v-if="!isDisabled" pos="relative")
+      ButtonInteractive(btn="~ primary" font="bold" @click="buyItems" :text="`Buy ${shares?.value} item`" :loading="isBuyLoading" pl="lt-md:20")
+      HList(v-if="!isSubstituteListing" w="20" justify="center" cursor="pointer" @click="onClickCart" bg="ix-primary hover:(ix-ne)" b="l-1 gray-900")
+        CartIcon(w="6")
 
     ButtonInteractive(btn="~ primary" bg="on-disabled:gray-700" color="on-disabled:gray-400" cursor="default" font="bold" :disabled="isDisabled" text="There is no sales" v-else)
 
 </template>
 
 <script lang="ts" setup>
-import type { SingleItemData } from '@ix/base/composables/Token/useIXToken';
-import { useBuyContract, useBuyItems } from "~/composables/useBuy";
-import { NFTType } from "~/composables/useAssetContracts";
+import type { SingleItemData } from '@ix/base/composables/Token/useIXToken'
+import { useBuyContract, useBuyItems } from "~/composables/useBuy"
+import { NFTType } from "~/composables/useAssetContracts"
+import CartIcon from '~/assets/icons/cart.svg'
+
 
 const { displayPopup } = usePopups()
 
@@ -66,6 +71,16 @@ const {
   showIncreaseMaxPrice
 } = useBuyItems(item)
 
+const { addToCart } = useCart()
+
+const onClickCart = () => {
+  const specificSale = item.sales.reduce((minSale, currentSale) => {
+    return currentSale.price < minSale.price ? currentSale : minSale
+  }, item.sales[0])
+
+  addToCart(item, specificSale)
+}
+
 const { buySingleItem } = useBuyContract()
 
 const buy = async () => {
@@ -89,14 +104,12 @@ const buy = async () => {
       }]
     })
 
-  console.log('checkoutSales', sale)
 }
 
-console.log(aboveFloorPrice.value)
 </script>
 
 <style scoped >
 .highlighted {
-  box-shadow: 0px 0px 8px 1px rgba(246, 186, 30, 0.75);
+  box-shadow: 0px 0px 8px 1px rgba(249, 249, 249, 0.25);
 }
 </style>

@@ -1,5 +1,5 @@
 <template lang="pug">
-ContentDrawer(frame="none" mb="4" b="t-1 b-1 gray-600" :is-neutral="true" mx="-4 md:-4")
+ContentDrawer(frame="none" mb="4" b="t-1 b-1 gray-600" :is-neutral="true" mx="-6")
   template(#header) {{ $t(`marketplace.transactions.applyToAll`) }}
   template(#default)
     VList(p="6" space-y="6")
@@ -34,7 +34,6 @@ const allSetToFloor = computed(() => {
   const prices = items.value?.map((item) =>
     item.ixtPrice == item.token.sale_price
   )
-  console.log("PRICES", prices)
   return allElementsEqual(prices)
 })
 

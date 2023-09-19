@@ -6,7 +6,7 @@ HList(items="center" space-x="2" font="bold" cursor="pointer" w="full")
     HList(v-if="!hideName" space-x="2" min-w="0")
       TokenName(:token="token" capitalize="~" :key="getTokenKey(token)")
 
-      slot
+      slot()
     div(w="0" v-else)
 
 </template>

@@ -124,7 +124,7 @@ export default defineNuxtConfig({
     ],
     server: {
       hmr: {
-        port: 8001,
+        port: 8003,
       },
     },
   },

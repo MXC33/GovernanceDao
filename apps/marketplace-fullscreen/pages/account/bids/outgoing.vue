@@ -31,7 +31,7 @@ const columns: TableColumn<IXToken>[] = [
   {
     label: "Offer price", rowKey: "bid.price", type: 'ixt', sortable: true
   },
-  { label: "USD price", rowKey: "bid.price", type: 'usd', sortable: true },
+  { label: "USD price", rowKey: "bid.price", type: 'usd', sortable: true, hideMobile: true },
   {
     label: "Floor Difference", rowKey: "floor", getValue(row) {
       if (row.lowest_sale?.price)
@@ -40,7 +40,7 @@ const columns: TableColumn<IXToken>[] = [
     }, type: 'text'
   },
   {
-    label: "Quantity", rowKey: "bid.quantity", type: 'text', width: 'auto'
+    label: "Quantity", rowKey: "bid.quantity", type: 'text'
   },
   {
     label: "Expiration", rowKey: "bid.due_date", type: 'date', sortable: true
