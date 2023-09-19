@@ -27,7 +27,7 @@ HList(flex="~ col lg:row" items="center" gap="12 lg:32")
       template(#title) COMMON PRIZE
       template(#subtitle) COUNTRY <br> + TIER <br> + Size
       template(#content)
-        TireSizeIcon(tier="Outlier" size="Domain")
+        TireSizeIcon(tier="Outlier" size="Zone")
 </template>
 <script lang="ts" setup>
 const goToNetempire = ( ) => {
