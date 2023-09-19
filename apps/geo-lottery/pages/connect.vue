@@ -8,7 +8,7 @@ VList(flex-grow="1" pos="relative" min-h="0" justify="center" p="3" items="cente
 <script lang="ts" setup>
 
 useHead({
-  title: "Connect | Geo Lottery | PlanetIX"
+  title: "Connect | Territory Lottery | PlanetIX"
 })
 
 const { isLoggedInAndConnected } = useLogin()
