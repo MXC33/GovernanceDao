@@ -93,7 +93,7 @@ export const usePlayerAPI = () => {
             "entered_stream": 0,
             "active_rate": 0
           },
-          "nft_link": "https://api.planetix.app/api/v1/geo/lottery/token/2/animation_url",
+          "nft_link": "https://api.planetix.com/api/v1/geo/lottery/token/2/animation_url",
           "winning_pools": [
             6
           ]
@@ -115,7 +115,7 @@ export const usePlayerAPI = () => {
             "your_tickets": 3,
             "prize": 2.507142857142857,
             "claimed": false,
-            "nft_link": "https://api.planetix.app/api/v1/geo/lottery/token/2/animation_url",
+            "nft_link": "https://api.planetix.com/api/v1/geo/lottery/token/2/animation_url",
             "winning_pools": [
               6
             ]
