@@ -25,7 +25,7 @@ export const useAssetConverter = () => {
 
   const { refresh: refreshTokens } = useTokenData()
 
-  const { createTransaction, ...contract } = defineContract<AssetConverterContract>('asset-converter-contract', {
+  const { createTransaction, ...contract } = defineMCContract<AssetConverterContract>('asset-converter-contract', {
 
     createContract: (provider) =>
       new ethers.Contract(assetConverterRecipeAddress, AssetConverterABI.abi, provider.getSigner()) as unknown as AssetConverterContract,

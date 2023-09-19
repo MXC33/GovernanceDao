@@ -2,7 +2,7 @@ import { BigNumber, ethers } from 'ethers'
 import GenericBurnPixAssetsABI from "./ABIs/PixAssetsGenericBurn.json"
 import { ContractContext as GenericBurnPixAssetsContract } from './ABIs/PixAssetsGenericBurn'
 import { genericBurnPixAssetsAddress } from './NFTs/walletAddresses'
-import { ContractInterface, CreateContractOptions } from './defineContract'
+import { ContractInterface, CreateContractOptions } from './defineMCContract'
 import { NftFragment } from '#gql'
 
 export const useCanClaimAvatarData = () => useAsyncState('can-claim-avatar', async () => {
@@ -14,7 +14,7 @@ export const useCanClaimAvatarData = () => useAsyncState('can-claim-avatar', asy
 
 export const definePackContract = <T extends ContractInterface<T>>(key: string, options: CreateContractOptions<T>) => {
   const { refreshPacks, refreshUserInventory } = useUserData()
-  const definedContract = defineContract(key, {
+  const definedContract = defineMCContract(key, {
     notifications: {
       sender: 'proxy-of-change',
       failMessage: 'Error opening pack.'

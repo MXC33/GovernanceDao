@@ -18,7 +18,7 @@ export const useYSpaceContracts = () => {
   const { refreshAllTiles } = useTileData()
   const { assetsContract } = useStakeNFTContracts()
 
-  const { createTransaction, ...contractSpec } = defineContract<RoverContract>('rover-contract', {
+  const { createTransaction, ...contractSpec } = defineMCContract<RoverContract>('rover-contract', {
     contractAddress: roverContractAddress,
     notifications: {
       sender: 'proxy-of-change',

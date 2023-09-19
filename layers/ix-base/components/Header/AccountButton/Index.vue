@@ -3,7 +3,7 @@ VList(pos="relative" display="lt-md:none"  ref="menuElement")
   button(btn-soft="s-connected:ix-mint ix-orange" @click="toggleMenu" :state="walletState") 
     Transition(name="fade-slow" mode="out-in")
       span(v-if="walletState == 'disconnected'") {{ $t(`marketplace.navigation.menu.connectWallet`)}}
-      //-span(v-else-if="!ixtPending && ixtBalance != undefined && walletState == 'connected'" w="25") {{ roundToDecimals(ixtBalance, 2) }} IXT
+      span(v-else-if="!ixtPending && ixtBalance != undefined && walletState == 'connected'" w="25") {{ roundToDecimals(ixtBalance, 2) }} IXT
       HelperLoader(v-else fill="ix-mint on-wallet:ix-orange" w="4" :wallet="walletState != 'connected'")
 
   HeaderSubmenuWrapper(v-if="menuOpen" :align-right="true") 
@@ -21,7 +21,7 @@ VList(pos="relative" display="lt-md:none"  ref="menuElement")
     
 <script lang="ts" setup>
 const { walletState } = useWallet()
-//const { ixtBalance, ixtPending } = useIXTContract()
+const { ixtBalance, ixtPending } = useIXTContract()
 const menuOpen = ref(false)
 const menuElement = ref()
 const { enable: showIXTSwap } = useIXTSwapVisible()

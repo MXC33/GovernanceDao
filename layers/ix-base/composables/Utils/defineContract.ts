@@ -22,6 +22,8 @@ export interface CreateContractOptions<T> {
   createContract: SetupContractFn<T | undefined>,
   listeners?: Record<string, (...args: Array<any>) => void>
   notifications?: ContractNotificationSettings,
+  onEverySuccess: (tx?: TransactionOptions) => void,
+  onEveryFail: (tx?: TransactionOptions, error?: any) => void,
 }
 
 // all<T extends readonly unknown[] | []>(values: T): Promise<{ -readonly [P in keyof T]: Awaited<T[P]> }>;
@@ -71,15 +73,8 @@ export const defineContract = <T extends ContractInterface<T> | object>(key: str
   }
 
   const { setTransactionState, resetTransactionState } = useTransactions()
-  const { addError } = useContractErrors()
   const { onTransactionResolved, ensureCorrectChain } = useWallet()
   const { contractAddress } = options
-
-  const notifications: ContractNotificationSettings = {
-    failMessage: options.notifications?.failMessage ?? 'Error processing your transactions',
-    // successMessage: options.notifications?.successMessage
-  }
-
   const { contractSenderSameAsUser } = useWallet()
 
   const setupContract = (provider: ethers.providers.Web3Provider) => {
@@ -139,8 +134,6 @@ export const defineContract = <T extends ContractInterface<T> | object>(key: str
 
 
   const transactionSuccess = async (txOptions?: TransactionOptions) => {
-    // const { successMessage } = notifications
-
     if (txOptions?.onSuccess) {
       if (txOptions?.onSuccessAfterMs) {
         await useWait(txOptions?.onSuccessAfterMs ?? 0)
@@ -151,9 +144,7 @@ export const defineContract = <T extends ContractInterface<T> | object>(key: str
 
     resetTransactionState()
 
-    // const message = txOptions?.successMessage ?? successMessage
-    // if (message)
-    //   addNotification(message)
+    options.on
   }
 
   const transactionFailed = async (error?: string, txOptions?: TransactionOptions) => {

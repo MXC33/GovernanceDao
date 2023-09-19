@@ -15,7 +15,7 @@ export const useBuyNFTs = () => {
 
   const { refresh: refreshTokens } = useTokenData()
 
-  const { createTransaction, ...contract } = defineContract<I1155StoreGenericContract>('shop-contract', {
+  const { createTransaction, ...contract } = defineMCContract<I1155StoreGenericContract>('shop-contract', {
 
     createContract: (provider) =>
       new ethers.Contract(buyNFTStoreAddress, I1155StoreGenericABI.abi, provider.getSigner()) as unknown as I1155StoreGenericContract,

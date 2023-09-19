@@ -48,7 +48,7 @@ const useSuperAppContract = () => {
 
   const contractAddress = missionControlStreamAddress[activeChain]
 
-  const ctx = defineContract('super-app-contract', {
+  const ctx = defineMCContract('super-app-contract', {
     contractAddress,
     createContract: (provider) => new ethers.Contract(contractAddress, MissionControlStreamABI.abi, provider.getSigner()) as unknown as SuperAppContract,
     notifications: {
@@ -91,7 +91,7 @@ const useSuperFlowContract = () => {
   const activeChain = useActiveChain()
   const contractAddress = contractFlowAgreementAddress[activeChain]
   const { walletAdress } = useWallet()
-  const ctx = defineContract<ConstantFlowAgreementV1Contract>('super-flow-address', {
+  const ctx = defineMCContract<ConstantFlowAgreementV1Contract>('super-flow-address', {
     contractAddress,
     createContract: (provider) => new ethers.Contract(contractAddress, IConstantFlowAgreementV1.abi, provider.getSigner()) as unknown as ConstantFlowAgreementV1Contract
   })
@@ -151,7 +151,7 @@ export const useAGOLDContract = () => {
   const swapFailed = async () => false
 
 
-  const ctx = defineContract('agold-contract', {
+  const ctx = defineMCContract('agold-contract', {
     contractAddress,
     createContract: (provider) => new ethers.Contract(contractAddress, ISuperToken.abi, provider.getSigner()) as unknown as SuperTokenContract
   })
@@ -186,7 +186,7 @@ export const useAGOLDLiteContract = () => {
   const activeChain = useActiveChain()
   const contractAddress = mintableSuperTokenAddress[activeChain]
 
-  const ctx = defineContract('agold-lite-contract', {
+  const ctx = defineMCContract('agold-lite-contract', {
     contractAddress,
     createContract: (provider) => new ethers.Contract(contractAddress, IMintableSuperToken.abi, provider.getSigner()) as unknown as MintableSuperTokenContract
   })
@@ -215,7 +215,7 @@ export const useTileRent = () => {
   const { contractAddress: AGOLDAddress } = useAGOLDContract()
   const { contractAddress: AGOLDLITEAddress } = useAGOLDLiteContract()
 
-  const ctx = defineContract('super-fluid-contract', {
+  const ctx = defineMCContract('super-fluid-contract', {
     contractAddress,
     createContract: (provider) => new ethers.Contract(contractAddress, ISuperfluid.abi, provider.getSigner()) as unknown as SuperFluidContract
   })
