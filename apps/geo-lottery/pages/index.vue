@@ -36,7 +36,7 @@ const lotteryActiveInterval = setInterval(() => {
 }, 1000)
 
 useHead({
-  title: "Home | Geo Lottery | PlanetIX"
+  title: "Home | Territory Lottery | PlanetIX"
 })
 
 import Background from "~/components/Background.vue";
