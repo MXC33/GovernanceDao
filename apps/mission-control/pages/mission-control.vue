@@ -9,7 +9,6 @@ const { isClaimAndUnstakeOpen } = useClaimAndUnstakeAll()
 
 definePageMeta({
   middleware: 'auth',
-  layout: "mission-control"
 })
 
 const { fetchGameAssets } = useUserData()
