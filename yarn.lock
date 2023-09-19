@@ -2949,6 +2949,7 @@ __metadata:
     nuxt: ^3.5.3
     nuxt-graphql-client: ^0.2.27
     pug: ^3.0.2
+    socket.io-client: ^4.7.2
     typescript: ^4.9.3
     unocss: ^0.53.1
     unocss-preset-scrollbar: ^0.2.1
@@ -17197,7 +17198,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"socket.io-client@npm:^4.5.1":
+"socket.io-client@npm:^4.5.1, socket.io-client@npm:^4.7.2":
   version: 4.7.2
   resolution: "socket.io-client@npm:4.7.2"
   dependencies:
