@@ -85,9 +85,8 @@ export const wrappedEthAddress: ContractAddress = {
   polygon: "0xE06Bd4F5aAc8D0aA337D13eC88dB6defC6eAEefE"
 }*/
 export const IXTAddress: ContractAddress = {
-  //0x078D8492250B5931913cfE70dBCE90464178886E
-  mumbai: "0x12168dD03349fa6B3dae6ac8c552b6C86810Bf55", // emilCoin
-  polygon: "0x12168dD03349fa6B3dae6ac8c552b6C86810Bf55"
+  mumbai: "0x078D8492250B5931913cfE70dBCE90464178886E", // emilCoin
+  polygon: "0x078D8492250B5931913cfE70dBCE90464178886E"
 }
 
 export const oracleManagerAddress: ContractAddress = {
@@ -227,8 +226,8 @@ export const luckyCatGeoLotteryAdress: ContractAddress = {
 }
 
 export const astroGoldAdress: ContractAddress = {
-  mumbai: "0x3CAD7147c15C0864B8cF0EcCca43f98735e6e782", //to be updated
-  polygon: "0x3CAD7147c15C0864B8cF0EcCca43f98735e6e782",
+  mumbai: "0x3CAD7147c15C0864B8cF0EcCca43f98735e6e782",
+  polygon: "0xFAc83774854237b6E31c4B051b91015e403956d3"
 }
 
 export const luckyCatGeoLotterySuperAppAdress: ContractAddress = {
