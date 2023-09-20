@@ -10,6 +10,7 @@
   --mc-blue: #0E84D9;
   --mc-gray: #1E1E1E;
   --mc-red: #E52424;
+  --mc-full-red: #ff0000;
   --mc-gray_light: #f9f9f999;
   --mc-finegreen: #14C75C;
   --mc-whitenew: #f9f9f9;
@@ -25,6 +26,7 @@
   --mc-gray-800: #1A1A1A;
   --mc-gray-900: #141414;
   --mc-pink: #FF1E6E;
+  --mc-error: #f31930ad;
   --mc-pink-blur: rgba(255, 30, 110, 0.10);
   --mc-pink-blur2: rgba(200, 10, 110, 1);
   --mc-pink-60: rgba(255, 30, 110, 0.60);
