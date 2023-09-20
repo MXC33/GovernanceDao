@@ -10,7 +10,7 @@ VList(class="background-holder" pos="relative" overflow="hidden" z="0" min-h="60
         img(src="~/assets/images/LC-Territory-logot.png")
       h3( class="title-stroke " color="white" font="bdrA3mik" text="3xl center stroke-$mc-pink"  mb-4 v-if="!livepage") COMING SOON
       div()
-        h1(text="4xl md:7xl lg:8xl center" font="bdrA3mik" mb-2 v-if="livepage") 2,050,080 IXT
+        h1(text="4xl md:7xl lg:8xl center" font="bdrA3mik" mb-2 v-if="livepage") 50,000 IXT
         p(font="bold" text="base sm:lg center" mb-4 v-if="livepage") Every week, new Territories from around the world are <br> randomly selected. Join today and have the chance to win!
       div(flex="~ col sm:row" justify="center" m="t-6" items-center)
         ButtonItem(:value="'pink'" :text="'JOIN NOW'"  min-w="300px md:255px" mb="3 sm:0" mr="0 sm:3" @click="openPurchaseTickets" v-if="livepage")
