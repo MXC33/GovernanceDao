@@ -2,7 +2,7 @@
 HList(items="center" space-x="1 lg:2" font="bold" )
 
   HList(cursor="pointer" font="bold" gap="2")
-    div(uppercase="~" color="mc-gray_light") IXT:
+    div(uppercase="~" color="gray_light") IXT:
 
     HelperIncrementingNumber(:value="value", :decimals="decimalCount" items="center" :color="resourceTextColor" :text-shadow="resourceTextColor")
 

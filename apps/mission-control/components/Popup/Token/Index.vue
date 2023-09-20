@@ -1,5 +1,5 @@
 <template lang="pug">
-VList(flex-grow="lt-md:1" space-y="2" max-w="180" mx="auto" w="full" color="mc-gray_50" overflow-y="auto" )
+VList(flex-grow="lt-md:1" space-y="2" max-w="180" mx="auto" w="full" color="gray_50" overflow-y="auto" )
 
   VList(bg="$mc-accent-60" cut="top-right" p="x-2 y-1" font="bold" pos="sticky top-0")
     TitleWithIcon(icon="pointer") {{ popup.title }}

@@ -2,7 +2,7 @@
 ClientOnly
   CorporationItemsAndDetail(list-title="Rovers" v-model="activeRenameItem" :list="availableItems" detail-title="")
     template(#noItems v-if="availableItems?.length == 0")
-      HelperWarning(bg="mc-gray") No RVR's in inventory
+      HelperWarning(bg="gray-800") No RVR's in inventory
 
     template(#list v-else)
       CorporationYSpaceRenameItem(v-for="item in availableItems" :item="item" v-model="activeRenameItem" :is-selected="isSelected(item)")

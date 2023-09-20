@@ -1,5 +1,5 @@
 <template lang="pug">
-InfoTableRow(text="mc-gray_50 xs left")
+InfoTableRow(text="gray_50 xs left")
   InfoTableColumn() 
     TokenName(:token="props.token.token")
 

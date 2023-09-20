@@ -5,7 +5,7 @@ VList(v-if="isMobile" pos="fixed  right-0 left-0 top-12" bg="black" h="[calc(100
   HeaderNavigationMenu()
   HeaderNavigationButtonDisconnect(pos="sticky bottom-0" z="1")
 //-Display this when in landscape mode
-div(m="!l-0" p="6 t-3" grid="~ cols-5" w="full" bg="black" pos="absolute top-16" z="99" v-else)
+div(p="6 t-3" grid="~ cols-5" w="full" bg="black" pos="absolute top-full left-0 right-0" z="99" v-else)
   HeaderNavigationMenuSubNavigation(grid="col-span-1 s-increased:col-span-2" v-for="(navigation, index) in header.subNavigations" items="center" grow="" :navigation="navigation" :state="columnSize[index]")
 </template>
 

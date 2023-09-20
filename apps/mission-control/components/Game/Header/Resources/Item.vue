@@ -4,16 +4,17 @@ HList(items="center" space-x="1 lg:2" font="bold" :class="['is-' + type]")
   HList(cursor="pointer" font="bold" @mouseenter="mouseEnter" @mouseleave="mouseLeave" gap="2")
     component(:is="iconPath" w="5" h="5")
 
-    HelperIncrementingNumber(v-if="type != 'gas-price'" :value="balance", :decimals="decimalCount" items="center" :color="resourceTextColor" :text-shadow="resourceTextColor")
+    HelperIncrementingNumber(v-if="type != 'gas-price'" :value="Number(balance)", :decimals="decimalCount" items="center" :color="resourceTextColor" :text-shadow="resourceTextColor")
+
     VList(v-else-if="type == 'gas-price'" items="center" align="center" justify="center")
       component(:is="gasPriceIcon" w="3")
 
-    HList(v-if="isHovered == true" opacity="on-active:100 0 on-hover:100" transition="opacity" :hover="isHovered" pos="absolute top-6" bg="mc-gray" cursor="default" z="9999")
+    HList(v-if="isHovered == true" opacity="on-active:100 0 on-hover:100" transition="opacity" :hover="isHovered" pos="absolute top-6" bg="gray-800" cursor="default" z="9999")
 
       Teleport(to="#infobox")
-        HList
-          div.info-box(font="bold" text="xs" bg="mc-gray" p="2" :color="resourceTextColor" z="9999" :position="[`absolute top-${y} left-${x}`]")
-            span  {{ mouseOver }}
+        .info-box(font="bold" text="xs" bg="gray-800" p="2" translate-y="6" :color="resourceTextColor" z="9999" :position="[`absolute top-${y} left-${x}`]" whitespace="nowrap") 
+          div {{ detailedText }}
+          div {{ balance }}
 
 </template>
 
@@ -138,9 +139,6 @@ const detailedText = computed(() => {
   }
 })
 
-const mouseOver = computed(() => {
-  return `${detailedText.value}: ${balance.value}`
-})
 
 </script>
 

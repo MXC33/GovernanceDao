@@ -36,7 +36,7 @@ const roverColor = computed(() => {
     case 'damaged':
       return 'mc-red'
     case 'wrecked':
-      return 'mc-gray_light'
+      return 'gray_light'
   }
 })
 
@@ -47,7 +47,7 @@ const stateColors = computed(() => {
     case 'active':
       return '$mc-accent'
     case 'disabled':
-      return 'mc-gray_light'
+      return 'gray_light'
     case 'accent':
       return '$mc-accent'
     case 'success':

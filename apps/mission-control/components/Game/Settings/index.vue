@@ -2,7 +2,7 @@
 div(pointer-events="auto")
   Teleport(to="#navigation-bottom")
     Transition(name="fade")
-      GameSettingsDesktop(display="lt-md:none" v-if="showMenu")
+      GameSettingsDesktop(display="lt-md:none" v-if="showMenu" ref="desktop")
 
   GameSettingsMobile(display="md:none")
 </template>
@@ -10,4 +10,8 @@ div(pointer-events="auto")
 
 <script lang="ts" setup>
 const showMenu = useSiteSettings()
+const desktop = ref()
+onClickOutside(desktop, () => {
+  showMenu.value = false
+}, { ignore: ["#settings-menu"] })
 </script>

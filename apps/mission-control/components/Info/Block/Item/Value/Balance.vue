@@ -1,5 +1,5 @@
 <template lang="pug">
-span(color="s-active:$mc-accent s-disable:mc-gray_light" :state="state") {{ balance }}
+span(color="s-active:$mc-accent s-disable:gray_light" :state="state") {{ balance }}
 
 </template>
 

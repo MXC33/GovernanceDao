@@ -1,5 +1,5 @@
 <template lang="pug">
-div.hazard(:class="className" bg="mc-gray" :justify="alignment" items="center" pos="relative" display="none md:flex" uppercase="~" text="xs lg:sm" p="x-2 md:x-4 y-2" font="bold")
+div.hazard(:class="className" bg="gray-800" :justify="alignment" items="center" pos="relative" display="none md:flex" uppercase="~" text="xs lg:sm" p="x-2 md:x-4 y-2" font="bold")
   slot
 </template>
 

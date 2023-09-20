@@ -61,10 +61,10 @@ const facilityColor = computed(() => {
 
 <style>
 .roundPlus {
-  stroke: var(--mc-gray_light)
+  stroke: var(--gray_light)
 }
 
 .roundPlus circle {
-  stroke: var(--mc-gray_light)
+  stroke: var(--gray_light)
 }
 </style>

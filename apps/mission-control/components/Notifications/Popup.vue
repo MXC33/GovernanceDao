@@ -1,6 +1,6 @@
 <template lang="pug">
 VList(pos="absolute right-4 md:top-4 lt-md:(bottom-0 left-0 right-0)" w="md:80" z="9999" b="t-1 mc-mint md:(1 mc-mint_40)" bg="black" pointer-events="auto")
-  div(bg="mc-gray" p="x-2 t-2")
+  div(bg="gray-800" p="x-2 t-2")
     SenderVideo(:sender="notification.sender" type="wide")
 
   VList(bg="black opacity-60" b="t-1 mc-mint md:mc-mint_40" text="sm")

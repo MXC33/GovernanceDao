@@ -69,7 +69,7 @@ const colors = computed(() => {
     case 'damaged':
       return 'mc-red'
     case 'wrecked':
-      return 'mc-gray_light'
+      return 'gray_light'
   }
 })
 

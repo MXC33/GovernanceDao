@@ -26,8 +26,8 @@ export default defineConfig({
       'mc-ygreen': '0px 0px 6px rgba(95, 190, 135, 0.5)',
       'mc-red': '0px 0px 6px rgba(229, 36, 36, 0.5)',
       'mc-success': '0px 0px 6px rgba(20, 199, 92, 0.5)',
-      'mc-gray_light': '0px 0px 6px rgba(249, 249, 249, 0.5)',
-      'mc-gray': '0px 0px 6px rgba(249, 249, 249, 0.5)',
+      'gray_light': '0px 0px 6px rgba(249, 249, 249, 0.5)',
+      'gray': '0px 0px 6px rgba(249, 249, 249, 0.5)',
       'mc-black': '0px 0px 6px rgba(12, 12, 12, 0.5)',
       'mc-whitenew': '0px 0px 6px rgba(249, 249, 249, 0.5)',
       'mc-warning': '0px 0px 6px rgba(246, 186, 30, 0.5)',
@@ -237,7 +237,7 @@ export default defineConfig({
   rules: [
     ...cutRules,
     ['listitem', {
-      '--listitem-base-color': 'var(--mc-gray-200)',
+      '--listitem-base-color': 'var(--gray-200)',
       '--listitem-select-color': 'var(--mc-mint)',
     }],
     ['listitem-selected', {

@@ -1,7 +1,7 @@
 <template lang="pug">
 VList(pos="sticky top-0" w="full md:110" z="9999" b="md:1 mc-mint_40" bg="black")
   HList(justify="end")
-    div(bg="mc-gray" cut="bottom-right b-mc-mint_40" mx="-1px" mt="-1px")
+    div(bg="gray-800" cut="bottom-right b-mc-mint_40" mx="-1px" mt="-1px")
       SenderVideo(:sender="'proxy-of-change'" type="wide")
 
   div(bg="black opacity-60" text="sm" p="b-10 md:b-0")

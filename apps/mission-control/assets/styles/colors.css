@@ -8,21 +8,21 @@
   --mc-yellow-rgb: 246, 186, 30;
   --mc-ygreen-rgb: 95, 190, 135;
   --mc-blue: #0E84D9;
-  --mc-gray: #1E1E1E;
+  --gray: #1E1E1E;
   --mc-red: #E52424;
-  --mc-gray_light: #f9f9f999;
+  --gray_light: #f9f9f999;
   --mc-success: #14C75C;
   --mc-whitenew: #f9f9f9;
   --mc-warning: #F6BA1E;
-  --mc-gray-50: #d9d9d9;
-  --mc-gray-100: #C4C4C4;
-  --mc-gray-200: #A8A8A8;
-  --mc-gray-300: #858585;
-  --mc-gray-400: #636363;
-  --mc-gray-500: #474747;
-  --mc-gray-600: #333333;
-  --mc-gray-700: #242424;
-  --mc-gray-800: #1A1A1A;
+  --gray-50: #d9d9d9;
+  --gray-100: #C4C4C4;
+  --gray-200: #A8A8A8;
+  --gray-300: #858585;
+  --gray-400: #636363;
+  --gray-500: #474747;
+  --gray-600: #333333;
+  --gray-700: #242424;
+  --gray-800: #1A1A1A;
   --mc-arcade-rgb: 189, 255, 0;
   --mc-gravity-grade-rgb: 255, 65, 0;
   --mc-menu-button-rgb: 249, 249, 249;
@@ -95,7 +95,7 @@
   --mc-secondary_40: rgba(var(--mc-secondary-rgb), 0.4);
   --mc-secondary_60: rgba(var(--mc-secondary-rgb), 0.6);
 
-  --listitem-base-color: var(--mc-gray-400);
+  --listitem-base-color: var(--gray-400);
   --listitem-select-color: var(--mc-mint-80);
   --listitem-hover-color: var(--mc-mint-60);
 

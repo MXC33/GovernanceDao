@@ -1,6 +1,6 @@
 <template lang="pug">
 VList(:class="className" pos="sticky top-0" translate-y="$header-offset" z="99" w="full" @mouseenter="isSelected = true" @mouseleave="isSelected = false" ref="menuElement" transition="all" bg="ix-black" px="4 md:7.5")
-  HList(items="center" justify="between" h="$header-height-mobile md:$header-height-desktop" space-x="3")
+  HList(items="center" justify="between" h="$header-height-mobile md:$header-height-desktop" space-x="3" z="100" pos="relative")
     NuxtLink(to="https://www.planetix.com")
       template(v-if="$slots.logo")
         slot(name="logo")

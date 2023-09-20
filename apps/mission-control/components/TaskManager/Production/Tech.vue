@@ -64,6 +64,6 @@ const outputTile = computed(() => {
 }
 
 .yspace-wrecked {
-  color: var(--mc-gray-400)
+  color: var(--gray-400)
 }
 </style>

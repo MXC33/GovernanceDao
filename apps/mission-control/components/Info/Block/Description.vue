@@ -39,6 +39,6 @@ defineProps<{
 }
 
 .info-description-span .d-gray {
-  color: var(--mc-gray-400)
+  color: var(--gray-400)
 }
 </style>

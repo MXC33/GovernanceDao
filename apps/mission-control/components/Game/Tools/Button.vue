@@ -1,5 +1,5 @@
 <template lang="pug">
-ButtonSound(btn="~ accent" p="2" bg="!black !opacity-100" flex-center="col" space-y="2" aspect="lg:square" pos="relative" overflow="hidden" max-w="28" sound="md")
+ButtonSound(btn="~" p="2" bg="black" color="mc-orange" b="1 mc-orange opacity-40 hover:opacity-60" flex-center="col" space-y="2" aspect="lg:square" pos="relative" overflow="hidden" max-w="28" sound="md")
   CircuitBackground(w="100" h="100" pos="absolute" inset="0")
 
   GameToolsIcon(:icon="tabId" w="6 lg:12")
