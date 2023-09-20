@@ -3,7 +3,8 @@ import { ethers } from "ethers";
 import {
   EnteredTickets,
   usePlayerAPI,
-  WeeksDraw
+  WeeksDraw,
+  ActiveRewards
 } from "~/composables/api/get/usePlayerAPI";
 export const weeklyFlowRateConst = 1 / (3600 * 24 * 7)
 
@@ -126,6 +127,29 @@ export const useLottery = () => {
     }
   }
 
+  const activeRewards = useState<ActiveRewards>('lottery-active-rewards', () => ({
+    rewards: 0,
+    jackpot: 0
+  }))
+  const getActiveRewards = async () => {
+    const { getActiveRewards } = usePlayerAPI()
+
+    try {
+      const activeRewardsResponse = await getActiveRewards()
+      if (!activeRewardsResponse.data)
+        throw new Error("There are no data!")
+
+      activeRewards.value = activeRewardsResponse.data
+      return activeRewards.value
+    } catch (e) {
+      activeRewards.value = {
+        rewards: 0,
+        jackpot: 0
+      }
+      throw new Error(CustomErrors.unknownError)
+    }
+  }
+
   return {
     lotteryStartDate,
     isLotteryActive,
@@ -140,6 +164,9 @@ export const useLottery = () => {
 
     weeksDraw,
     getWeeksDraw,
+
+    activeRewards,
+    getActiveRewards,
 
     claimReward
   };
