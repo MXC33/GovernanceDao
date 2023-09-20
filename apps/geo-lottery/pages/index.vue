@@ -21,7 +21,6 @@ div(class="body-main")
         //Price & Pool Distribution
         PageDistribution()
 
-
 </template>
 <script lang="ts" setup>
 import {useLottery} from "~/composables/useLottery";
