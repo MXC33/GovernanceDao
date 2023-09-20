@@ -20,6 +20,7 @@ div(class="body-main")
         PagePrizeCheck()
         //Price & Pool Distribution
         PageDistribution()
+        PopupTypeError(v-if="true" :error="'activeError'" )
 
 
 </template>
