@@ -27,5 +27,6 @@ div(flex="~ row" :w="isMobile ? 'full' : '1/2'")
 
 <script setup lang="ts">
 const { profileObj: user } = useUserData()
+const { useMobileBreakpoint } = useDevice()
 const isMobile = useMobileBreakpoint()
 </script>

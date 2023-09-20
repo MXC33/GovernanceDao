@@ -14,6 +14,7 @@ const { nfts } = defineProps<{
   nfts: NftFragment[]
 }>()
 
+const { useMobileBreakpoint } = useDevice()
 const isMobile = useMobileBreakpoint('md')
 
 watch(() => nfts, (nfts) => {

@@ -3,6 +3,7 @@ Tabs(:items="inventoryTabs", :active-item="activeInventoryTab" @select="clickTab
 </template>
 
 <script setup lang="ts">
+const { useMobileBreakpoint } = useDevice()
 const isMobile = useMobileBreakpoint()
 const { inventoryTabs, activeInventoryTab } = useInventory()
 const clickTab = (item) => activeInventoryTab.value = item

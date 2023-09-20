@@ -12,7 +12,6 @@ HList.border-white.pink-btn(p="6" bg="ix-black" b="b-1 gray-600")
 
         //-NuxtLink(to="/account" color="ix-orange") Account
 
-
       HList(flex-grow="1" items="center")
         HList(b="r-1 ix-orange opacity-40" p="2" flex-grow="1" h="full" items="center" space-x="1" font="bold")
           div(text="gray" class="pink-text") IXT:
@@ -24,10 +23,9 @@ HList.border-white.pink-btn(p="6" bg="ix-black" b="b-1 gray-600")
 const emit = defineEmits(['close'])
 import AOCIcon from '~/assets/images/icons/aocbadge.svg'
 
-
 const { enable: showIXTSwap } = useIXTSwapVisible()
 const { walletState } = useWallet()
-const { ixtBalance } = useUserData()
+const { ixtBalance } = useIXTContract()
 const { user } = useUser()
 
 const userId = computed(() => user.value?.username || null)

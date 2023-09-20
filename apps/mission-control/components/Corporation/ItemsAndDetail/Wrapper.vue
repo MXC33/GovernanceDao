@@ -52,6 +52,7 @@ CorporationPage(@click-back="goBack")
 </template>
 
 <script lang="ts" setup>
+const { useMobileBreakpoint } = useDevice()
 import type { TokenWithInfoBlocks } from '~~/composables/useInfoBlocks';
 
 const isMobile = useMobileBreakpoint('md')

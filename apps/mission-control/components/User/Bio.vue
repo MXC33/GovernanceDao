@@ -17,5 +17,6 @@ PopupFullscreen(@close="activePopup = null")
 <script setup lang="ts">
 import UserHeader from '~/assets/images/ui/user/user-header.svg'
 const activePopup = usePopups()
+const { useMobileBreakpoint } = useDevice()
 const isMobile = useMobileBreakpoint()
 </script>

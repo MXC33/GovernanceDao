@@ -9,6 +9,7 @@ div(p="5" pos="sticky bottom-0" bg="black opacity-90" b="t-1 mc-orange_40" v-if=
 const { selectedNFT } = useInventory()
 
 const isViewable = computed(() => selectedNFT.value?.tokenInfo.type == 'landmark')
+const { useMobileBreakpoint } = useDevice()
 const isMobile = useMobileBreakpoint()
 
 const clickViewLandmark = () => {

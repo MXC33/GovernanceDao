@@ -6,7 +6,7 @@ VList(:class="className" pos="sticky top-0" translate-y="$header-offset" z="99" 
         slot(name="logo")
       PlanetIXNew(v-else w="42.25")
 
-    HList(display="lt-lg:none" justify="start" flex-grow="1" overflow-x="hidden" space-x="4")
+    HList(v-if="!isMobile" justify="start" flex-grow="1" overflow-x="hidden" space-x="4")
       button(v-for="(header, index) in headerData" @mouseenter="hoverMenu(index)" @click="openMenu(index)" btn="menu" color = "s-default:white s-selected:ix-orange" :state="selected(index)") {{ header.name }}
 
       HList(flex-grow="1" justify="end" display="lt-md:none")
@@ -48,7 +48,8 @@ const { className } = defineProps<{
   className?: string
 }>()
 
-const { isMobile } = useDevice()
+const { useMobileBreakpoint } = useDevice()
+const isMobile = useMobileBreakpoint()
 const { data: headerData } = useHeaderData()
 
 const { state: swapVisible } = useIXTSwapVisible()
@@ -94,6 +95,7 @@ const selected = (index: number) => {
 
 const hoverMenu = (index: number) => {
   activeMenuIndex.value = index
+  //console.log('hoverMenu', index)
 }
 
 const openMenu = (index: number) => {

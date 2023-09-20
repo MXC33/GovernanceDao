@@ -12,6 +12,7 @@ InventoryInfoContainer(text="white opacity-80 left")
 <script setup lang="ts">
 import type { NftFragment } from '#gql'
 
+const { useMobileBreakpoint } = useDevice()
 const isMobile = useMobileBreakpoint('md')
 
 const { activeInventoryTab } = useInventory()

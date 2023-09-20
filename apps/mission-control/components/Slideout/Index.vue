@@ -24,6 +24,7 @@ div(pos="absolute" inset="0" z="5" ref="containerElement" m="!0" pointer-events=
 <script lang="ts" setup>
 const headerElement = ref()
 const containerElement = ref()
+const { useMobileBreakpoint } = useDevice()
 const isMobile = useMobileBreakpoint('md')
 const { height: containerHeight } = useElementBounding(containerElement, { windowScroll: true })
 

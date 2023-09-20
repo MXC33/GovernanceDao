@@ -21,6 +21,7 @@
 </template>
 
 <script setup lang="ts">
+const { useMobileBreakpoint } = useDevice()
 const isMobile = useMobileBreakpoint()
 defineEmits(["close"])
 </script>

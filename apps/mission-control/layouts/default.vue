@@ -21,6 +21,7 @@ import SoundOff from '~/assets/images/ui/icon-sound-off.svg'
 import SoundOn from '~/assets/images/ui/icon-sound-on.svg'
 
 const settingsOpen = useSiteSettings()
+const { useMobileBreakpoint } = useDevice()
 const isMobile = useMobileBreakpoint('lg')
 const gameMenu = useGameMenu()
 

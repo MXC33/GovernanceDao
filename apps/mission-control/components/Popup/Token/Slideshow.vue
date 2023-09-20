@@ -11,7 +11,7 @@ VList(cursor="pointer" bg="white opacity-20" py="4" corners="~ lg")
 import { Carousel, Slide } from 'vue3-carousel'
 
 import type { NftFragment } from '#gql'
-
+const { useMobileBreakpoint } = useDevice()
 const isMobile = useMobileBreakpoint()
 const slideIndex = ref(0)
 const isCarousel = computed(() => props.items.length > (isMobile.value ? 2 : 3))

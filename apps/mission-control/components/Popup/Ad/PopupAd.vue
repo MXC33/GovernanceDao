@@ -16,6 +16,7 @@ import closeBtn from '~~/assets/images/ui/ads/close-btn.svg'
 import adMobile from '~~/assets/images/ui/ads/ad-mobile.png'
 import adDesktop from '~~/assets/images/ui/ads/ad-desktop.png'
 
+const { useMobileBreakpoint } = useDevice()
 const isMobile = useMobileBreakpoint('md')
 
 const { showAdPopup } = useAds()

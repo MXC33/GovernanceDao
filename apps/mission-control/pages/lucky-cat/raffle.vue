@@ -57,6 +57,7 @@ const { execute: fetchRaffles, data: raffleData } = useLuckyCatRaffleData()
 const { execute: fetchTokens } = useTokenData()
 const { balanceOfToken } = useUserData()
 const { hasWonRaffle, entriesLeft, canClaimRaffle, canEnterRaffle, ticketBalanceForRaffle, raffleIsFull, ticketType, } = useLuckyCatRaffle(activeRaffleItem)
+const { useMobileBreakpoint } = useDevice()
 const isMobile = useMobileBreakpoint()
 const { walletAdress } = useWallet()
 

@@ -8,6 +8,7 @@ div(pt="0 md:0 lg:10" pl="0 md:0 lg:10" pos="absolute top-14 left-0 lg:top-12 le
 </template>
 
 <script lang="ts" setup>
+const { useMobileBreakpoint } = useDevice()
 const isMobile = useMobileBreakpoint('lg')
 
 </script>
