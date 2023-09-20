@@ -52,7 +52,7 @@ const outputTile = computed(() => {
 
 <style>
 .yspace-pristine {
-  color: var(--mc-finegreen)
+  color: var(--mc-success)
 }
 
 .yspace-worn {

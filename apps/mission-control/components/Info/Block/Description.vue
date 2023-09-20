@@ -27,7 +27,7 @@ defineProps<{
 }
 
 .info-description-span .d-green {
-  color: var(--mc-finegreen)
+  color: var(--mc-success)
 }
 
 .info-description-span .d-yellow {
