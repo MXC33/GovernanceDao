@@ -1,5 +1,5 @@
-import {useLuckyCatGeoLotteryContract} from "~/composables/useLuckyCatGeoLotteryContract";
-import {ethers} from "ethers";
+import { useLuckyCatGeoLotteryContract } from "~/composables/useLuckyCatGeoLotteryContract";
+import { ethers } from "ethers";
 import {
   EnteredTickets,
   usePlayerAPI,
@@ -7,6 +7,8 @@ import {
 } from "~/composables/api/get/usePlayerAPI";
 export const weeklyFlowRateConst = 1 / (3600 * 24 * 7)
 export const useLottery = () => {
+  const { getWeeksDraw: fetchWeeksDraw, getEnteredTickets: fetchEnteredTickets, getMerkleProofs: fetchMerkleProofs } = usePlayerAPI()
+
   const {
     lotteryID,
     lotteryStartedAt: lotteryStartedAtContract,
@@ -47,11 +49,10 @@ export const useLottery = () => {
     entered_weekly_tickets: 0
   }))
   const getEnteredTickets = async (id?: number) => {
-    const { getEnteredTickets } = usePlayerAPI()
 
     try {
       const currentLotteryID = await lotteryID()
-      const enteredTicketsResponse = id ? await getEnteredTickets(id) : await getEnteredTickets(currentLotteryID)
+      const enteredTicketsResponse = id ? await fetchEnteredTickets(id) : await fetchEnteredTickets(currentLotteryID)
       if (!enteredTicketsResponse.data)
         throw new Error("There are no entered tickets!")
 
@@ -79,10 +80,9 @@ export const useLottery = () => {
   }
 
   const getMerkleProofs = async (id: number) => {
-    const { getMerkleProofs } = usePlayerAPI()
 
     try {
-      const merkleProofs = await getMerkleProofs(id)
+      const merkleProofs = await fetchMerkleProofs(id)
       if (!merkleProofs.data)
         throw new Error("There are no merkle proofs!")
 
@@ -103,11 +103,11 @@ export const useLottery = () => {
     jackpot: null,
     rounds: []
   }))
+
   const getWeeksDraw = async () => {
-    const { getWeeksDraw } = usePlayerAPI()
 
     try {
-      const weeksDrawResponse = await getWeeksDraw()
+      const weeksDrawResponse = await fetchWeeksDraw()
       if (!weeksDrawResponse.data)
         throw new Error("There are no data!")
 
