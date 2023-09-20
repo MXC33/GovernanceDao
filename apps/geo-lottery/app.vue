@@ -50,7 +50,7 @@ router.onError((err) => {
 const { state: isSwapVisible } = useIXTSwapVisible()
 
 const { y } = useWindowScroll()
-const { connectWallet, walletState } = useWallet()
+const { connectWallet, walletState, isWalletConnected} = useWallet()
 const { setupIXTPrice } = useIXTPrice()
 const { refreshIXTBalance } = useIXTContract()
 const { refreshAstroGoldBalance } = useAstroGoldContract()
@@ -112,7 +112,8 @@ watch(isLotteryActive, (state) => {
   if (!state)
     return
 
-  getWeeksDraw()
+  if (isWalletConnected.value)
+    getWeeksDraw()
 })
 
 const { x: xpos, y: ypos } = useMouse()
