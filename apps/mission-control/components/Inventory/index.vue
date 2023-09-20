@@ -26,6 +26,7 @@ VList(flex-grow="1" min-h="0" pos="relative" bg="black" overflow="hidden" )
 </template>
 
 <script setup lang="ts">
+const { useMobileBreakpoint } = useDevice()
 const isMobile = useMobileBreakpoint('md')
 const { tabNFTs, isTabNFTsPending, slideoutPosition, activeInventoryTab } = useInventory()
 const { selectedNFT } = useInventory()

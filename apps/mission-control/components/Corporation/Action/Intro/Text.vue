@@ -11,6 +11,7 @@ HList(b="1 $mc-accent" scrollbar="md:(~ mc)" items="start" min-h="md:0")
 </template>
 
 <script lang="ts" setup>
+const { useMobileBreakpoint } = useDevice()
 const id = useActiveCorporation()
 const { corporationRouteI18n } = useCorporationRoute()
 const isMobile = useMobileBreakpoint()

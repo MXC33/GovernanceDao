@@ -6,6 +6,7 @@ Transition(:name="isMobile ? 'slide-bottom' : 'slide-right'")
 
 <script setup lang="ts">
 const { activeNotification } = useNotifications()
+const { useMobileBreakpoint } = useDevice()
 const isMobile = useMobileBreakpoint('md')
 const route = useRoute()
 

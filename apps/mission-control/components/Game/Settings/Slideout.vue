@@ -19,6 +19,7 @@ div(pos="absolute" inset="0" z="5" ref="containerElement" m="!0" pointer-events=
 </template>
 
 <script lang="ts" setup>
+const { useMobileBreakpoint } = useDevice()
 const headerElement = ref()
 const containerElement = ref()
 const isMobile = useMobileBreakpoint('md')

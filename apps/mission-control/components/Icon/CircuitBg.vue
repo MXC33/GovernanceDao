@@ -5,7 +5,7 @@ component.circuit-background(:is="component" :min-w="isSmall ? '50' : '100'" :mi
 <script setup lang="ts">
 import CircuitBackground from '~/assets/images/ui/circuit.svg'
 import CircuitBackgroundSmall from '~/assets/images/ui/circuit-small.svg'
-
+const { useMobileBreakpoint } = useDevice()
 const isMobile = useMobileBreakpoint()
 
 const props = defineProps<{

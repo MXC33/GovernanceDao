@@ -18,6 +18,7 @@ VList(flex-grow="1" h="full" pos="relative" pointer-events="none")
 </template>
 
 <script lang="ts" setup>
+const { useMobileBreakpoint } = useDevice()
 const { setupTileListeners } = useTiles()
 const { isClaimAndUnstakeOpen } = useClaimAndUnstakeAll()
 

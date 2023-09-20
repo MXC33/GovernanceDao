@@ -6,6 +6,7 @@ div(flex-center="col")
 </template>
 
 <script setup lang="ts">
+const { useMobileBreakpoint } = useDevice()
 const isMobile = useMobileBreakpoint()
 </script>
 

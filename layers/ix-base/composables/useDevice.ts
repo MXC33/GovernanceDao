@@ -25,6 +25,10 @@ export const useDevice = () => {
     return '4k'
   })
 
+  const useMobileBreakpoint = (breakpoint: Breakpoint = 'lg') => {
+    return computed(() => mounted.value && width.value < getBreakPoint(breakpoint))
+  }
+
   const isMobile = computed(() => device.value == 'mobile')
   const isTablet = computed(() => device.value == 'tablet')
   const isDesktop = computed(() => device.value == 'desktop')
@@ -35,6 +39,7 @@ export const useDevice = () => {
     isTablet,
     isDesktop,
     is4K,
-    device
+    device,
+    useMobileBreakpoint
   }
 }

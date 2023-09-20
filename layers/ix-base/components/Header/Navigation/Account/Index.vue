@@ -24,7 +24,6 @@ HList.border-white.pink-btn(p="6" bg="ix-black" b="b-1 gray-600")
 const emit = defineEmits(['close'])
 import AOCIcon from '~/assets/images/icons/aocbadge.svg'
 
-
 const { enable: showIXTSwap } = useIXTSwapVisible()
 const { walletState } = useWallet()
 const { ixtBalance } = useUserData()
