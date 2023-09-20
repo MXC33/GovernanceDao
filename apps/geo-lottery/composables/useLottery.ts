@@ -15,8 +15,8 @@ export const useLottery = () => {
     userLotteryRate: userLotteryRateContract,
   } = useLuckyCatGeoLotteryContract()
 
-  //const lotteryStartDate = useState<Date>('lottery-start-date', () => new Date(1694782800000))
-  const lotteryStartDate = useState<Date>('lottery-start-date', () => new Date(1695214800000))
+  // const lotteryStartDate = useState<Date>('lottery-start-date', () => new Date(1694782800000))
+  const lotteryStartDate = useState<Date>('lottery-start-date', () => new Date(1695211200000))
   const isLotteryActive = useState<boolean>('lottery-active', () => false)
   const checkLotteryActive = () => {
     const now = new Date()
