@@ -20,17 +20,17 @@ HList(flex="~ col lg:row wrap" items="center" justify="between" gap-y="10")
 
   VList(flex="~ col" grow="0" shrink="0" basis="100% lg:45%" space-y="6" items="center" justify="center" w="full" order="3 lg:2")
     FramePinkWithImg()
-      template(#title) COMMON PRIZE
+      template(#title) WIN
       template(#subtitle) COUNTRY
       template(#content)
         img(src="~/assets/images/country-img-line.png")
     FramePinkWithImg()
-      template(#title) RARE PRIZE
+      template(#title) DOUBLE WIN
       template(#subtitle) COUNTRY <br> + TIER
       template(#content)
         TireHexagonColor(tier="Rare")
     FramePinkWithImg()
-      template(#title) LEGENDARY PRIZE
+      template(#title) TRIPPLE WIN
       template(#subtitle) COUNTRY <br> + TIER <br> + Size
       template(#content)
         TireSizeIcon(tier="Rare" size="Zone")

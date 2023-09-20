@@ -232,5 +232,5 @@ export const astroGoldAdress: ContractAddress = {
 
 export const luckyCatGeoLotterySuperAppAdress: ContractAddress = {
   mumbai: "0x6e488C8A7F7afcF4FfDbAd628d4ef9b312Bb11E1", //to be updated
-  polygon: "0x6e488C8A7F7afcF4FfDbAd628d4ef9b312Bb11E1",
+  polygon: "0xb3574e674A7847AAFca45Efb49DB17Ab6d6C9834",
 }
