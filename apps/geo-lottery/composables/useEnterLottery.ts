@@ -1,23 +1,31 @@
-import {AdjustableNumber} from "@ix/base/composables/Utils/useAdjustableNumber";
-import {MerkleProofsResponse, usePlayerAPI} from "~/composables/api/get/usePlayerAPI";
-import {useLuckyCatGeoLotteryContract} from "~/composables/useLuckyCatGeoLotteryContract";
-import {useAstroGoldContract} from "@ix/base/composables/Contract/useAstroGoldContract";
-import {useLottery} from "~/composables/useLottery";
+import { AdjustableNumber } from "@ix/base/composables/Utils/useAdjustableNumber";
+import { MerkleProofsResponse, usePlayerAPI } from "~/composables/api/get/usePlayerAPI";
+import { useLuckyCatGeoLotteryContract } from "~/composables/useLuckyCatGeoLotteryContract";
+import { useAstroGoldContract } from "@ix/base/composables/Contract/useAstroGoldContract";
+import { useLottery } from "~/composables/useLottery";
 
 export const useEnterLottery = () => {
+  const { hasTerritories: hasTerritoriesData } = usePlayerAPI()
+  const { allowanceCheck } = useAstroGoldContract()
+
   const maxOneTimeEntries = useState<number>('max-one-time-entries', () => 20)
   const setMaxOneTimeEntries = (entries: number) => {
     maxOneTimeEntries.value = entries
   }
 
   const { enteredTickets } = useLottery()
+
+  const maxLotteryEntries = computed(() => maxOneTimeEntries.value - enteredTickets.value?.entered_tickets ?? 0)
+
   const oneTimeLotteryEntries = useState<AdjustableNumber>('lottery-entries', () => ({
     value: 1,
     min: 1,
-    max: computed<number>(() => {
-      return maxOneTimeEntries.value - enteredTickets.value.entered_tickets
-    })
+    max: maxLotteryEntries.value
   }))
+
+  watch([maxOneTimeEntries, enteredTickets], () => {
+    oneTimeLotteryEntries.value.max = maxLotteryEntries.value
+  })
 
   const {
     enterLottery: enterLotteryContract
@@ -26,10 +34,8 @@ export const useEnterLottery = () => {
   const { getTicketPrice } = useLottery()
 
   const hasTerritories = async () => {
-    const { hasTerritories } = usePlayerAPI()
-
     try {
-      const hasTerritory = await hasTerritories()
+      const hasTerritory = await hasTerritoriesData()
       if (!hasTerritory.data)
         throw new Error("You don't have territory!")
     } catch (e) {
@@ -38,7 +44,6 @@ export const useEnterLottery = () => {
   }
 
   const enterLottery = async (entries: number) => {
-    const { allowanceCheck } = useAstroGoldContract()
 
     await hasTerritories()
     const ticketPrice = await getTicketPrice()

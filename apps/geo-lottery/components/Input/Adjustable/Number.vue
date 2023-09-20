@@ -11,16 +11,12 @@ input(
 <script lang="ts" setup>
 import type { AdjustableNumber } from "@ix/base/composables/Utils/useAdjustableNumber";
 
-const props = defineProps<{
-  modelValue: AdjustableNumber
-}>()
 
-const emit = defineEmits(["update:modelValue"])
-
-const data = useVModel(props, 'modelValue', emit)
+const data = defineModel<AdjustableNumber>()
 
 const updateAmount = (e: any) => setValue(e.target.value)
 
+//@ts-ignore
 const { invalidNumber, setValue } = useAdjustableNumber(data)
 
 </script>

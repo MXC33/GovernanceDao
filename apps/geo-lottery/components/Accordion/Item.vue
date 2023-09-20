@@ -63,10 +63,10 @@ VList()
 
 <script lang="ts" setup>
 import { Collapse } from 'vue-collapsed'
-import Checked  from '~/assets/icons/checked.svg'
-import Decline  from '~/assets/icons/decline.svg'
-import type {Round} from "~/composables/api/get/usePlayerAPI";
-import {useLottery} from "~/composables/useLottery";
+import Checked from '~/assets/icons/checked.svg'
+import Decline from '~/assets/icons/decline.svg'
+import type { Round } from "~/composables/api/get/usePlayerAPI";
+import { useLottery } from "~/composables/useLottery";
 const { displayPopup } = usePopups()
 
 const { startOpen, round } = defineProps<{
@@ -80,9 +80,7 @@ const { startOpen, round } = defineProps<{
 const isOpen = shallowRef(startOpen)
 const dropDrawer = () => { isOpen.value = !isOpen.value }
 
-const {
-  claimReward
-} = useLottery()
+const { claimReward } = useLottery()
 const { loading: isLoading, execute: claimRewardRequest } = useContractRequest(() =>
   claimReward(round.id)
 )

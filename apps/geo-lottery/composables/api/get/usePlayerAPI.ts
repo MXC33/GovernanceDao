@@ -1,3 +1,5 @@
+import { useLotteryID } from "~/composables/useLottery"
+
 export interface ObjectResponse {
   success: boolean,
   status: number,
@@ -85,17 +87,29 @@ export const usePlayerAPI = () => {
   const { fetchIXAPI } = useIXAPI()
 
   const hasTerritories = () => fetchIXAPI('territories/has') as Promise<HasTerritoriesResponse>
-  const getMerkleProofs = (id: number) => fetchIXAPI('geo/lottery/claim/data/' + id) as Promise<MerkleProofsResponse>
-  const getEnteredTickets = (id: number) => fetchIXAPI('geo/lottery/ticket/entries/' + id) as Promise<EnteredTicketsResponse>
-  const getWeeksDraw = () => fetchIXAPI('geo/lottery/details/table') as Promise<WeeksDrawResponse>
-  const getActiveRewards = () => fetchIXAPI('geo/lottery/active/rewards') as Promise<ActiveRewardsResponse>
 
+  const fetchMerkleProof = (id: number) =>
+    fetchIXAPI('geo/lottery/claim/data/' + id) as Promise<MerkleProofsResponse>
+
+  const useEnteredTicketData = () => {
+    const { data: lotteryID } = useLotteryID()
+
+    return useAsyncDataState(`lottery-entered-tickets`, () =>
+      fetchIXAPI('geo/lottery/ticket/entries/' + lotteryID.value) as Promise<EnteredTicketsResponse>
+    )
+  }
+
+
+  const useWeeksDrawData = () => useAsyncDataState('weeks-draw', () =>
+    fetchIXAPI('geo/lottery/details/table') as Promise<WeeksDrawResponse>
+  )
+  const getActiveRewards = () => fetchIXAPI('geo/lottery/active/rewards') as Promise<ActiveRewardsResponse>
 
   return {
     hasTerritories,
-    getMerkleProofs,
-    getEnteredTickets,
-    getWeeksDraw,
-    getActiveRewards
+    useWeeksDrawData,
+    getActiveRewards,
+    fetchMerkleProof,
+    useEnteredTicketData
   }
 }
