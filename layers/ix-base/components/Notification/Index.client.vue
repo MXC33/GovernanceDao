@@ -11,8 +11,12 @@ VList(pos="relative" ref="container")
 </template>
 
 <script lang="ts" setup>
-import BellFilled from '~/assets/images/ui/notifications/bellFilled.svg'
-import BellEmpty from '~/assets/images/ui/notifications/bellEmpty.svg'
+// import BellFilled from '~/assets/images/ui/notifications/bellFilled.svg'
+// import BellEmpty from '~/assets/images/ui/notifications/bellEmpty.svg'
+
+import BellFilled from '~/assets/images/icons/bellFilled.svg'
+import BellEmpty from '~/assets/images/icons/bellEmpty.svg'
+
 import type { Notification } from '~/composables/useNeNotificationsAndMessages';
 const showNotification = ref(false)
 

@@ -1,5 +1,6 @@
 import { differenceInMilliseconds } from 'date-fns';
 import { intervalToDuration } from "date-fns"
+import { CredentialsInput } from "#gql"
 // import { TokenIdentifierExtended } from "./useTokens"
 
 export const IPFSURL = "https://nftstorage.link/ipfs/"
@@ -174,8 +175,6 @@ export const scrollParentToChild = (parent: HTMLElement, child: HTMLElement) => 
   }
 }
 
-
-
 export const useStateBoolean = (key: string, initialValue: boolean) => {
   const state = useState(key, () => initialValue)
 
@@ -190,7 +189,6 @@ export const useStateBoolean = (key: string, initialValue: boolean) => {
     disable
   }
 }
-
 
 export const useRunOnce = (id: string, fn: () => void) => {
   const hasRun = useState(`use-once-${id}-run`, () => false)
@@ -240,4 +238,17 @@ export const useRouteQueryOptions = <T extends string>(key: string, defaultVal: 
   })
 
   return state
+}
+
+export const useGraphqlCredentials = (): CredentialsInput | null => {
+  const { walletAdress } = useWallet()
+  const { user } = useUser()
+  const userId = user.value?.id
+  if (!walletAdress.value) {
+    return
+  }
+  return {
+    playerId: userId,
+    walletAddress: walletAdress.value
+  }
 }
