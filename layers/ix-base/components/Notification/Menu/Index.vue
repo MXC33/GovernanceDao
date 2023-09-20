@@ -1,5 +1,5 @@
 <template lang="pug">
-VList(pos="absolute lt-lg:left-0 right-0 top-full" bg="gray-800"  max-h="lg:150" z="200" min-w="100" frame="~" p="3" min-h="0" )
+VList(pos="absolute right-0 lt:lg:right-4 lt-lg:left-0 top-full" bg="gray-800" frame="~" max-h="lg:150" h="100vh" z="200" min-w="lg:100" p="3" min-h="0" )
   h3(text="xl") Inbox 
 
   div(grid="cols-2 ~")
@@ -30,6 +30,8 @@ VList(pos="absolute lt-lg:left-0 right-0 top-full" bg="gray-800"  max-h="lg:150"
 </template>
 
 <script lang="ts" setup>
+// VList(pos="absolute lt-lg:left-0 right-0 top-full" bg="gray-800"  max-h="lg:150" z="200" min-w="100" frame="~" p="3" min-h="0" )
+
 const { data: messagesData, refresh: refreshMessages, pending: isMessagesPending } = useNeMessages()
 const { data: notificationData, refresh: refreshNotifications, markAllAsRead: markNotificationsRead, pending: isNotificationPending } = useNeNotifications()
 const { showUnreadNotifications } = useNotificationSettings()
