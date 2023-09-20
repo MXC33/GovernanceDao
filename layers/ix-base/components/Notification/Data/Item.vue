@@ -1,21 +1,25 @@
 <template lang ="pug">
-//-cut="bottom-right b-ix-primary b-opacity-60 s-lg"
 VList.notification(w="full" @click="onClick" cursor="on-link:pointer" :link="!!link")
   HList(items="center")
     VList(items="left" p="1 r-3")
       h4(font="bold") {{ message.notification.title }} 
+
       div(v-html="message.notification.message" color="gray-200")
       div(v-if="message.notification.price != null" text="ix-mint") {{ message.notification.price }} IXT
+
     div(grow="~")
+
     div(p="1")
       div(v-if="message.is_read == 0"  bg="ix-mint" wh="1" rounded="full")
+      
 </template>
 
 <script lang="ts" setup>
-import type { Notification } from '~/composables/useNeNotificationsAndMessages';
-const { readMessagesItem } = useNeMessages()
-const { readNotificationItem } = useNeNotifications()
+import type { NotificationData, Notification } from '~/composables/useNeNotificationsAndMessages';
+
 const { emitStatusUpdate } = useSocket()
+const { readItem: readNotificationItem } = useNeNotifications()
+const { readItem: readMessagesItem } = useNeMessages()
 
 const { message } = defineProps<{
   message: Notification
@@ -37,14 +41,13 @@ const onClick = () => {
   if (message.is_read == 0) {
     emitStatusUpdate(message)
     //This is ugly, Idealy we would want a function in useNeNotificationsAndMessages to handle the mutation of the notification 
-    if(message.notification.type == 2){
+    if (message.notification.type == 2) {
       readNotificationItem(message)
-    }else{
+    } else {
       readMessagesItem(message)
     }
   }
 }
-
 </script>
 
 <style>

@@ -1,12 +1,14 @@
 export default defineNuxtRouteMiddleware(async (to, from) => {
-
+  console.log("WALLLET")
   if (to.path == '/connect')
     return true
 
   const { isWalletConnected, walletSigningToken, logoutWallet } = useWallet()
   const { user, removeUser } = useUser()
 
-  if (!isWalletConnected.value || !user.value) {
+  console.log("WALLET", !isWalletConnected.value, !user.value)
+
+  if (!walletSigningToken.value || !user.value) {
     logoutWallet()
     removeUser()
 

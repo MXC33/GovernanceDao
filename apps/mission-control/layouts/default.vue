@@ -2,11 +2,12 @@
 main(w="full" h="full" flex="~ col grow" min-h="0")
   Header()
     template(#contentRight)
-      button(@click="toggleSettings")
-        Settings(wh="6" fill="white" ) 
-      button(@click="toggleSound" wh="6")
-        SoundOn(v-if="isSoundEnabled" fill="white")
-        SoundOff(v-else fill="white")    
+      button(@click="toggleSettings" opacity="hover:80" transition="opacity" wh="6")
+        Settings(wh="6" fill="white")
+
+      //- button(@click="toggleSound" wh="6" opacity="hover:80" transition="opacity")
+      //-   SoundOn(v-if="isSoundEnabled" fill="white")
+      //-   SoundOff(v-else fill="white")    
 
   //- Used for teleports
   div(id="overlays" select="none")

@@ -1,6 +1,6 @@
 <template lang="pug">
-VList(:class="className" pos="sticky top-0" translate-y="$header-offset" z="99" w="full" @mouseenter="isSelected = true" @mouseleave="isSelected = false" ref="menuElement" transition="all")
-  HList(items="center" justify="between" bg="ix-black" px="4 md:7.5" h="$header-height-mobile md:$header-height-desktop" space-x="6")
+VList(:class="className" pos="sticky top-0" translate-y="$header-offset" z="99" w="full" @mouseenter="isSelected = true" @mouseleave="isSelected = false" ref="menuElement" transition="all" bg="ix-black" px="4 md:7.5")
+  HList(items="center" justify="between" h="$header-height-mobile md:$header-height-desktop" space-x="3")
     NuxtLink(to="https://www.planetix.com")
       template(v-if="$slots.logo")
         slot(name="logo")
@@ -13,13 +13,14 @@ VList(:class="className" pos="sticky top-0" translate-y="$header-offset" z="99" 
         NuxtLink(to="https://planetix.com/airdrop")
           HList(rounded="full" b="1 $mc-mint" px="4" py="1" bg="hover:$mc-mint-40" uppercase="~" tracking="0.65" font="bold" items="center" justify="center" class="border-white-ixt")
             span(translate-x="0.5") airdrop
-    div(display="lt-lg:none")
-      Notification()    
 
-    HList(items="center" space-x="6" px="0")
+
+    HList(items="center" space-x="3" px="0")
       //-button(btn="menu" display="lt-lg:none") help
       //-HeaderLanguage(language="EN")
       slot(name="contentRight")
+
+      Notification(display="lt-lg:none")
 
       HeaderAccountButton(class="border-white-ixt")
 
@@ -27,8 +28,11 @@ VList(:class="className" pos="sticky top-0" translate-y="$header-offset" z="99" 
         Notification()
 
       button.hamburger-menu(v-if="isMobile" btn="menu" @click="toggleMenu" ml="2")
-        SettingsIcon(v-if="activeMenuIndex == null" w="6" )
+        SettingsIcon(v-if="activeMenuIndex == null" w="6")
         CrossIcon(v-else w="6" )
+
+  //For teleports
+  div(id="navigation-bottom" pos="relative")
 
   Transition(name="slide-top" mode="out-in")
     HeaderNavigation(:class="className + '-header'" v-if="activeMenuIndex != null && headerData != null"  :key="activeMenuIndex" :header="headerData[activeMenuIndex]")

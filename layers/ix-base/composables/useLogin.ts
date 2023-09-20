@@ -144,6 +144,7 @@ export const useLogin = () => {
         } else {
           logoutWallet()
           removeUser()
+          console.log("UNAUTH")
           return await navigateTo(`/connect`)
         }
       }

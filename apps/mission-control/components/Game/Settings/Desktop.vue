@@ -1,6 +1,6 @@
 <template lang="pug">
-VList(pos="fixed md:right-4 top-16 s-adBanner:top-24" z="10" :state="getBannerStatues" text="sm")
-  VList(v-if="showMenu" w="md:70" inset="lt-md:0" m="!l-0" z="1" space-y="1")
+VList(z="10" :state="getBannerStatues" text="sm" pos="absolute right-0")
+  VList(w="md:70" inset="lt-md:0" m="!l-0" z="1" space-y="1")
 
     HList(items="center" fill="white" justify="between" cut="bottom-right s-md b-gray-400" bg="mc-black opacity-60" py="2.5" px="4" backdrop="blur-md")
       TitleWithIcon(color="mc-orange" font="bold" text-shadow="mc-orange" fill="mc-orange" icon="pointer")

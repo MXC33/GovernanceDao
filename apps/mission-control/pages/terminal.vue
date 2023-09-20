@@ -1,7 +1,7 @@
 <template lang="pug">
 div(flex="~ col grow" min-h="0" pos="relative")
-  Terminal
-  Overlays
+  Terminal()
+  
 </template>
 
 

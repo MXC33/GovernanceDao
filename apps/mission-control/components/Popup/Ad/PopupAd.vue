@@ -1,12 +1,13 @@
 <template lang="pug">
-PopupWrapper
-  VList(items="center" space-y="4")
-    HList(space-x="2" items="end" align="right" justify="end" w="70 md:30%")
+PopupWrapper()
+  VList(items="center" space-y="4" min-h="0" justify="center" p="3")
+    HList(space-x="2" items="end" align="right" justify="end" self="end")
       span(color="white") CLOSE AD
       closeBtn(w="5" h="5" cursor="pointer" @click="closeAd")
-    IconFrameWithCorner(p="2" w="70% md:30%")
-      img(:src="adDesktop" v-if="!isMobile")
-      img(:src="adMobile"  v-else)
+
+    VList(max-w="150" min-h="0" min-w="0" frame="~" items="center" p="3" )
+      img(:src="adDesktop" v-if="!isMobile" max-h="full" max-w="full" min-w="0")
+      img(:src="adMobile"  v-else  max-h="full" max-w="full" min-w="0" frame="~")
 
 </template>
 

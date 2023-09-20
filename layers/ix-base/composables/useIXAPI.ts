@@ -39,6 +39,8 @@ export const useIXAPI = () => {
     await callWithNuxt(app, () => {
       logoutWallet()
 
+      console.log("UNAUTHORIZED")
+
       return navigateTo({
         path: '/connect',
         query: {

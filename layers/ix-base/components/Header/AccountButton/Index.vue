@@ -1,12 +1,9 @@
 <template lang="pug">
-VList(pos="relative" display="lt-md:none"  ref="menuElement")
+VList(pos="relative" display="lt-md:none" ref="menuElement")
   button(btn-soft="s-connected:ix-mint ix-orange" whitespace="nowrap" @click="toggleMenu" :state="walletState")
     Transition(name="fade-slow" mode="out-in")
       span(v-if="walletState == 'disconnected'") {{ $t(`general.navigation.menu.connectWallet`)}}
       span(v-else-if="!ixtPending && ixtBalance != undefined && walletState == 'connected'" w="25") {{ roundToDecimals(ixtBalance, 2) }} IXT
-
-      //span(v-else-if="activeCurrency == 'IXT' && !ixtPending && ixtBalance != undefined && walletState == 'connected'" w="25") {{ roundToDecimals(ixtBalance, 2) }} IXT
-      //span(v-else-if="activeCurrency == 'aGold' && !astroGoldPending && astroGoldBalance != undefined && walletState == 'connected'" w="25") {{ roundToDecimals(astroGoldBalance, 2) }} AGOLD
 
       HelperLoader(v-else fill="ix-mint on-wallet:ix-orange" w="4" :wallet="walletState != 'connected'")
 
