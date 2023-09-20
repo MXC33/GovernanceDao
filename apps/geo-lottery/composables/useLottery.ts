@@ -3,7 +3,8 @@ import {ethers} from "ethers";
 import {
   EnteredTickets,
   usePlayerAPI,
-  WeeksDraw
+  WeeksDraw,
+  ActiveRewards
 } from "~/composables/api/get/usePlayerAPI";
 export const weeklyFlowRateConst = 1 / (3600 * 24 * 7)
 export const useLottery = () => {
@@ -15,8 +16,8 @@ export const useLottery = () => {
     userLotteryRate: userLotteryRateContract,
   } = useLuckyCatGeoLotteryContract()
 
-  //const lotteryStartDate = useState<Date>('lottery-start-date', () => new Date(1694782800000))
-  const lotteryStartDate = useState<Date>('lottery-start-date', () => new Date(1695214800000))
+  // const lotteryStartDate = useState<Date>('lottery-start-date', () => new Date(1694782800000))
+  const lotteryStartDate = useState<Date>('lottery-start-date', () => new Date(1695211200000))
   const isLotteryActive = useState<boolean>('lottery-active', () => false)
   const checkLotteryActive = () => {
     const now = new Date()
@@ -56,12 +57,13 @@ export const useLottery = () => {
         throw new Error("There are no entered tickets!")
 
       const userLotteryRate = Number(ethers.utils.formatUnits(await userLotteryRateContract(currentLotteryID)))
+      const ticketPrice = await getTicketPrice()
 
       enteredTickets.value = {
         ...enteredTicketsResponse.data,
         active_rate_live: userLotteryRate,
-        entered_weekly_tickets: Math.round((userLotteryRate / weeklyFlowRateConst) / 6),
-        entered_weekly_tickets_backend: Math.round((enteredTicketsResponse.data.active_rate / weeklyFlowRateConst) / 6)
+        entered_weekly_tickets: Math.round((userLotteryRate / weeklyFlowRateConst) / ticketPrice),
+        entered_weekly_tickets_backend: Math.round((enteredTicketsResponse.data.active_rate / weeklyFlowRateConst) / ticketPrice)
       }
       return enteredTickets.value
     } catch (e) {
@@ -122,6 +124,29 @@ export const useLottery = () => {
     }
   }
 
+  const activeRewards = useState<ActiveRewards>('lottery-active-rewards', () => ({
+    rewards: 0,
+    jackpot: 0
+  }))
+  const getActiveRewards = async () => {
+    const { getActiveRewards } = usePlayerAPI()
+
+    try {
+      const activeRewardsResponse = await getActiveRewards()
+      if (!activeRewardsResponse.data)
+        throw new Error("There are no data!")
+
+      activeRewards.value = activeRewardsResponse.data
+      return activeRewards.value
+    } catch (e) {
+      activeRewards.value = {
+        rewards: 0,
+        jackpot: 0
+      }
+      throw new Error(CustomErrors.unknownError)
+    }
+  }
+
   return {
     lotteryStartDate,
     isLotteryActive,
@@ -136,6 +161,9 @@ export const useLottery = () => {
 
     weeksDraw,
     getWeeksDraw,
+
+    activeRewards,
+    getActiveRewards,
 
     claimReward
   };
