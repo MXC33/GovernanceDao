@@ -138,7 +138,7 @@
 		if (dateElement && daysElement && hoursElement && minutesElement && secondsElement && prizeAmountElement) {
 			setInterval(function() {
 				countDown(dateElement, daysElement, hoursElement, minutesElement, secondsElement, prizeAmountElement);
-			}, 10);
+			}, 100);
 		}
 		//]]>
     </script>
