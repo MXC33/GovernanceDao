@@ -1,5 +1,6 @@
+import { add } from "date-fns"
 import { useLuckyCatGeoLotteryContract } from "~/composables/useLuckyCatGeoLotteryContract";
-import { ethers } from "ethers";
+import { ethers, BigNumber } from "ethers";
 import {
   EnteredTickets,
   usePlayerAPI,
@@ -8,12 +9,23 @@ import {
 } from "~/composables/api/get/usePlayerAPI";
 export const weeklyFlowRateConst = 1 / (3600 * 24 * 7)
 
+export const useLotteryID = () => {
+  const { lotteryID } = useLuckyCatGeoLotteryContract()
+
+  return useAsyncDataState(`lottery-id`, () =>
+    lotteryID()
+  )
+}
+
 export const useLottery = () => {
-  const { useWeeksDrawData, getEnteredTickets: fetchEnteredTickets, getMerkleProofs: fetchMerkleProofs } = usePlayerAPI()
+
+  const { useWeeksDrawData, useEnteredTicketData, fetchMerkleProof } = usePlayerAPI()
   const { execute: fetchWeeksDrawData, data: weeksDrawData } = useWeeksDrawData()
 
+  const { data: currentLotteryID, execute: fetchLotteryID } = useLotteryID()
+  const { data: ticketData, execute: fetchTicketData } = useEnteredTicketData()
+
   const {
-    lotteryID,
     lotteryStartedAt: lotteryStartedAtContract,
     ticketPrice: ticketPriceContract,
     claimReward: claimRewardContract,
@@ -22,19 +34,25 @@ export const useLottery = () => {
 
   // const lotteryStartDate = useState<Date>('lottery-start-date', () => new Date(1694782800000))
   const lotteryStartDate = useState<Date>('lottery-start-date', () => new Date(1695211200000))
-  const isLotteryActive = useState<boolean>('lottery-active', () => false)
-  const checkLotteryActive = () => {
+
+  const { data: lotterStartedAt, refresh: updateStartedState } = useAsyncDataState('current-started-at', async () => {
+    const started = await lotteryStartedAtContract(currentLotteryID.value)
+    const startedAt = Number(started)
+    return new Date(startedAt * 1000)
+  })
+
+  const isLotteryActive = computed(() => {
     const now = new Date()
     const diff = lotteryStartDate.value.getTime() - now.getTime()
-    isLotteryActive.value = diff < 0
-  }
-
-  const lotteryStartedAtDate = async () => {
-    const startedAt = Number(await lotteryStartedAtContract(await lotteryID()))
-    return new Date(startedAt * 1000)
-  }
+    return diff < 0
+  })
 
   const ticketPrice = useState<number>('lottery-ticket-price', () => 0)
+
+  const lotteryEndsAt = computed(() =>
+    lotterStartedAt.value && add(lotterStartedAt.value, { days: 7 }).getTime()
+  )
+
   const getTicketPrice = async () => {
     try {
       ticketPrice.value = Number(ethers.utils.formatUnits(await ticketPriceContract()))
@@ -51,15 +69,16 @@ export const useLottery = () => {
     active_rate: 0,
     entered_weekly_tickets: 0
   }))
-  const getEnteredTickets = async (id?: number) => {
+
+  const getEnteredTickets = async () => {
 
     try {
-      const currentLotteryID = await lotteryID()
-      const enteredTicketsResponse = id ? await fetchEnteredTickets(id) : await fetchEnteredTickets(currentLotteryID)
-      if (!enteredTicketsResponse.data)
+      const enteredTicketsResponse = ticketData.value
+      if (!enteredTicketsResponse?.data)
         throw new Error("There are no entered tickets!")
 
-      const userLotteryRate = Number(ethers.utils.formatUnits(await userLotteryRateContract(currentLotteryID)))
+      const userLotteryRate = Number(ethers.utils.formatUnits(await userLotteryRateContract(currentLotteryID.value)))
+
       const ticketPrice = await getTicketPrice()
 
       enteredTickets.value = {
@@ -70,6 +89,7 @@ export const useLottery = () => {
       }
       return enteredTickets.value
     } catch (e) {
+      console.log("ERR", e)
       enteredTickets.value = {
         entered_tickets: 0,
         entered_stream: 0,
@@ -83,9 +103,8 @@ export const useLottery = () => {
   }
 
   const getMerkleProofs = async (id: number) => {
-
     try {
-      const merkleProofs = await fetchMerkleProofs(id)
+      const merkleProofs = await fetchMerkleProof(id)
       if (!merkleProofs.data)
         throw new Error("There are no merkle proofs!")
 
@@ -106,6 +125,14 @@ export const useLottery = () => {
     jackpot: null,
     rounds: []
   }))
+
+  const fetchActiveLottery = async () => {
+    await fetchLotteryID()
+    // console.log("FETCH TICKET", currentLotteryID.value.toNumber())
+    await Promise.all([updateStartedState(), fetchTicketData()])
+
+    return Promise.all([getWeeksDraw(), getEnteredTickets()])
+  }
 
   const getWeeksDraw = async () => {
 
@@ -152,10 +179,12 @@ export const useLottery = () => {
 
   return {
     lotteryStartDate,
-    isLotteryActive,
-    checkLotteryActive,
 
-    lotteryStartedAtDate,
+    isLotteryActive,
+
+    lotterStartedAt,
+    lotteryEndsAt,
+
     enteredTickets,
     getEnteredTickets,
 
@@ -167,6 +196,8 @@ export const useLottery = () => {
 
     activeRewards,
     getActiveRewards,
+
+    fetchActiveLottery,
 
     claimReward
   };

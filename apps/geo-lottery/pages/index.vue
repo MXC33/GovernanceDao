@@ -9,8 +9,8 @@ div(class="body-main")
       div(container mx-3 lg:px-10 xl:px-30 space-y-14 md:space-y-18 lg:space-y-32 m="y-14 sm:y-22 md:y-32")
         //How to Play Section
         PageInfo()
-        PageWeekDraw(v-if="isLotteryActive && !weeksDraw.last_drawn_lottery")
-        PageWeekDrawWinners(v-if="weeksDraw.last_drawn_lottery && weeksDraw.last_drawn_lottery.id")
+        PageWeekDraw(v-show="isLotteryActive && !weeksDraw.last_drawn_lottery")
+        PageWeekDrawWinners(v-show="weeksDraw.last_drawn_lottery && weeksDraw.last_drawn_lottery.id")
         //The Jackpot
         PageJackpot()
 
@@ -24,16 +24,10 @@ div(class="body-main")
 
 </template>
 <script lang="ts" setup>
-import {useLottery} from "~/composables/useLottery";
+import { useLottery } from "~/composables/useLottery";
 
-const {isLotteryActive, checkLotteryActive} = useLottery()
+const { isLotteryActive } = useLottery()
 const { weeksDraw } = useLottery()
-
-const lotteryActiveInterval = setInterval(() => {
-  checkLotteryActive()
-  if (isLotteryActive.value)
-    clearInterval(lotteryActiveInterval)
-}, 1000)
 
 useHead({
   title: "Home | Territory Lottery | PlanetIX"
@@ -43,7 +37,7 @@ import Background from "~/components/Background.vue";
 
 </script>
 <style>
-.body-main{
+.body-main {
   background-image: linear-gradient(#1f1016, #580623);
 }
 </style>

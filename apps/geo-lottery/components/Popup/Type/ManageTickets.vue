@@ -8,12 +8,14 @@ Popup()
         p( mb-1) Your one-time entries
         div(flex="~" ml="0")
           CirclePlusIcon(w="5" mr-3 cursor="pointer" @click="onOneTimeEntries()")
-          p(font="bold" text="lg") {{enteredTickets.entered_tickets}} tickets
+          p(font="bold" text="lg" v-if="enteredTickets") {{enteredTickets?.entered_tickets}} tickets
+          p(v-else) Loading ...
+
       HList( pos="relative" flex="~ col" mb-7)
         p( mb-1) Your subscription entries
         div(flex="~" ml="0")
           CirclePlusIcon(w="5" mr-3 cursor="pointer" @click="onSubscribe()")
-          p(font="bold" text="lg") {{enteredTickets.entered_weekly_tickets || 0}} tickets
+          p(font="bold" text="lg") {{enteredTickets?.entered_weekly_tickets || 0}} tickets
       HList( pos="relative" flex="~ col" mb-7)
         p( mb-1) Your one-time entries
         div(flex="~" ml="0" items-center)
@@ -30,28 +32,23 @@ Popup()
 </template>
 <script lang="ts" setup>
 import CirclePlusIcon from '~/assets/icons/circle-plus.svg'
-import {useLottery} from "~/composables/useLottery";
-import {useManageTickets} from "~/composables/useManageTickets";
-import {useContractRequest} from "~/composables/useContractRequest";
-import {useSubscription} from "~/composables/useSubscription";
-import {useLuckyCatGeoLotteryContract} from "~/composables/useLuckyCatGeoLotteryContract";
+import { useLottery } from "~/composables/useLottery";
+import { useManageTickets } from "~/composables/useManageTickets";
+import { useContractRequest } from "~/composables/useContractRequest";
+import { useSubscription } from "~/composables/useSubscription";
+import { useLuckyCatGeoLotteryContract } from "~/composables/useLuckyCatGeoLotteryContract";
 
-const { displayPopup, closeActivePopup } = usePopups()
-const { walletState, isWalletConnected } = useWallet()
-const { switchModel, setupSwitchModal, userFlowActive, showContinueButton } = useManageTickets()
+const { displayPopup } = usePopups()
+const { walletState } = useWallet()
+const { switchModel, setupSwitchModal, showContinueButton } = useManageTickets()
+const { isLoggedInAndConnected } = useLogin()
+const { enteredTickets } = useLottery()
 
-const { getEnteredTickets, enteredTickets } = useLottery()
-
-const loadChainInfo = async () => {
-  await getEnteredTickets()
-  await setupSwitchModal()
-}
-
-watch(walletState, async (state) => {
-  if (state != 'connected')
+watch(isLoggedInAndConnected, async (loggedIn) => {
+  if (!loggedIn)
     return
 
-  await loadChainInfo()
+  await setupSwitchModal()
 }, { immediate: true })
 
 const { removeLotteryFlow } = useSubscription()

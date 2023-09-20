@@ -11,10 +11,10 @@ Popup()
 
       InputRadio(v-model="purchaseTypeModel" :value="'popup-type-one-time-entry'")
         template(#default) One-time entry
-        template(#info) {{enteredTickets.entered_tickets}} entries out of {{maxOneTimeEntries}}
+        template(#info) {{enteredTickets?.entered_tickets}} entries out of {{maxOneTimeEntries}}
       InputRadio(v-model="purchaseTypeModel" :value="'popup-type-subscribe'")
         template(#default) Subscription
-        template(#info) {{enteredTickets.entered_weekly_tickets || 0}} entries out of {{maxSubscriptionEntries}}
+        template(#info) {{enteredTickets?.entered_weekly_tickets || 0}} entries out of {{maxSubscriptionEntries}}
 
 
   template(#footer)
@@ -24,11 +24,10 @@ Popup()
 </template>
 <script lang="ts" setup>
 import InfoIcon from '~/assets/icons/info.svg'
-import {useEnterLottery} from "~/composables/useEnterLottery";
-import {useSubscription} from "~/composables/useSubscription";
-import {useLottery} from "~/composables/useLottery";
-const { displayPopup, closeActivePopup } = usePopups()
-const { walletState, isWalletConnected } = useWallet()
+import { useEnterLottery } from "~/composables/useEnterLottery";
+import { useSubscription } from "~/composables/useSubscription";
+import { useLottery } from "~/composables/useLottery";
+const { displayPopup } = usePopups()
 
 const purchaseTypeModel = ref<'popup-type-one-time-entry' | 'popup-type-subscribe'>('popup-type-one-time-entry')
 
@@ -42,17 +41,6 @@ const onContinue = () => {
 const { maxOneTimeEntries } = useEnterLottery()
 const { maxSubscriptionEntries } = useSubscription()
 
-const { getEnteredTickets, enteredTickets } = useLottery()
-
-const loadChainInfo = async () => {
-  await getEnteredTickets()
-}
-
-watch(walletState, async (state) => {
-  if (state != 'connected')
-    return
-
-  await loadChainInfo()
-}, { immediate: true })
+const { enteredTickets } = useLottery()
 
 </script>

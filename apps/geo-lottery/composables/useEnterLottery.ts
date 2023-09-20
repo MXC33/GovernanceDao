@@ -14,13 +14,18 @@ export const useEnterLottery = () => {
   }
 
   const { enteredTickets } = useLottery()
+
+  const maxLotteryEntries = computed(() => maxOneTimeEntries.value - enteredTickets.value?.entered_tickets ?? 0)
+
   const oneTimeLotteryEntries = useState<AdjustableNumber>('lottery-entries', () => ({
     value: 1,
     min: 1,
-    max: computed<number>(() => {
-      return maxOneTimeEntries.value - enteredTickets.value.entered_tickets
-    })
+    max: maxLotteryEntries.value
   }))
+
+  watch([maxOneTimeEntries, enteredTickets], () => {
+    oneTimeLotteryEntries.value.max = maxLotteryEntries.value
+  })
 
   const {
     enterLottery: enterLotteryContract
