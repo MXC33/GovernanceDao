@@ -9,7 +9,7 @@ Popup(:hideCloseButton="true" :isError="true" )
       VList( v-if="error.description") {{ error.description }}
 
       VList(v-else)
-        div(p="3" ) You have failed
+        div(p="3" )
           div(color="semantic-warning" max-h="34" overflow-y="auto") {{ errorParsed }}
 
   template(#footer)
