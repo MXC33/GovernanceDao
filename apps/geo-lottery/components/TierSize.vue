@@ -4,19 +4,19 @@ div(class="tier_size")
     div( flex="~ col" justify="center" align="center" pb="4"  border-color="$mc-pink" border="b-2")
       p(color="white opacity-40" text="sm md:xl" font="extrabold" mb="1" uppercase="~") ID
 
-      div(:color="id.is_winner ? '$mc-finegreen' : '$mc-red'" :class="!id.is_winner ? 'line-through' : ''" text="lg md:2xl lg:4xl" font="extrabold" uppercase="~" v-if="id && id.name") {{id.name}}
+      div(:color="id.is_winner ? '$mc-success' : '$mc-red'" :class="!id.is_winner ? 'line-through' : ''" text="lg md:2xl lg:4xl" font="extrabold" uppercase="~" v-if="id && id.name") {{id.name}}
       div(color="white" text="lg md:2xl lg:4xl" font="extrabold" uppercase="~"  v-else) -
 
     div( flex="~ col" justify="center" align="center" pb="4" border-color="$mc-pink" border="b-2")
       p(color="white opacity-40" text="sm md:xl" font="extrabold" mb="1" uppercase="~") TIER
 
-      div(:color="tier.is_winner ? '$mc-finegreen' : '$mc-red'" :class="!tier.is_winner ? 'line-through' : ''" text="lg md:2xl lg:4xl" font="extrabold" uppercase="~" v-if="tier && tier.name") {{tier.name}}
+      div(:color="tier.is_winner ? '$mc-success' : '$mc-red'" :class="!tier.is_winner ? 'line-through' : ''" text="lg md:2xl lg:4xl" font="extrabold" uppercase="~" v-if="tier && tier.name") {{tier.name}}
       div(color="white" text="lg md:2xl lg:4xl" font="extrabold" uppercase="~"  v-else) -
 
     div( flex="~ col" justify="center" align="center" pb="4" border-color="$mc-pink" border="b-2")
       p(color="white opacity-40" text="sm md:xl" font="extrabold" mb="1" uppercase="~") SIZE
 
-      div(:color="size.is_winner ? '$mc-finegreen' : '$mc-red'" :class="!size.is_winner ? 'line-through' : ''" text="lg md:2xl lg:4xl" font="extrabold" uppercase="~" v-if="size && size.name") {{size.name}}
+      div(:color="size.is_winner ? '$mc-success' : '$mc-red'" :class="!size.is_winner ? 'line-through' : ''" text="lg md:2xl lg:4xl" font="extrabold" uppercase="~" v-if="size && size.name") {{size.name}}
       div(color="white" text="lg md:2xl lg:4xl" font="extrabold" uppercase="~"  v-else) -
 </template>
 

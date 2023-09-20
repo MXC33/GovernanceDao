@@ -28,19 +28,19 @@ VList()
               div(flex="~ col" mb="6")
                 p(color="$mc-whitenew" text="xs sm:base"  uppercase="~") ID
                 p(font="bold" text="base sm:xl"  uppercase="~"
-                  :color="round.winning_pools && round.winning_pools.includes(6) ? '$mc-finegreen' : '$mc-red'"
+                  :color="round.winning_pools && round.winning_pools.includes(6) ? '$mc-success' : '$mc-red'"
                   :class="round.winning_pools && !round.winning_pools.includes(6) ? 'line-through' : ''"
                 ) {{round.country_code}}
               div(flex="~ col"  mb="6")
                 p(color="$mc-whitenew" text="xs sm:base"  uppercase="~") TIER
                 p(font="bold" text="base sm:xl"  uppercase="~"
-                  :color="round.winning_pools && round.winning_pools.includes(7) ? '$mc-finegreen' : '$mc-red'"
+                  :color="round.winning_pools && round.winning_pools.includes(7) ? '$mc-success' : '$mc-red'"
                   :class="round.winning_pools && !round.winning_pools.includes(7) ? 'line-through' : ''"
                 ) {{round.tier_name}}
               div(flex="~ col")
                 p(color="$mc-whitenew" text="xs sm:base"  uppercase="~") TERRITORY
                 p(text="base sm:xl" font="bold"  uppercase="~"
-                  :color="round.winning_pools && round.winning_pools.includes(8) ? '$mc-finegreen' : '$mc-red'"
+                  :color="round.winning_pools && round.winning_pools.includes(8) ? '$mc-success' : '$mc-red'"
                   :class="round.winning_pools && !round.winning_pools.includes(8) ? 'line-through' : ''"
                 ) {{round.type_name}}
 
@@ -63,10 +63,10 @@ VList()
 
 <script lang="ts" setup>
 import { Collapse } from 'vue-collapsed'
-import Checked  from '~/assets/icons/checked.svg'
-import Decline  from '~/assets/icons/decline.svg'
-import type {Round} from "~/composables/api/get/usePlayerAPI";
-import {useLottery} from "~/composables/useLottery";
+import Checked from '~/assets/icons/checked.svg'
+import Decline from '~/assets/icons/decline.svg'
+import type { Round } from "~/composables/api/get/usePlayerAPI";
+import { useLottery } from "~/composables/useLottery";
 const { displayPopup } = usePopups()
 
 const { startOpen, round } = defineProps<{

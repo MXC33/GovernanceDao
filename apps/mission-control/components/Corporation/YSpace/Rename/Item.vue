@@ -12,7 +12,7 @@ ListItemOutline(:accented="true" :is-large="true" text="normal" :item="item.toke
         div(color="mc-white") {{ item.token.tokenInfo?.title }}
         STAR(w="3" fill="mc-white" translate-y="-7%" v-if="isCustom")
 
-      TitleWithIcon(icon="cut-corner" fill="mc-finegreen on-custom:mc-white" :custom="isCustom" color="mc-finegreen on-custom:mc-white") {{ isCustom ? 'CUSTOMIZED' : 'DEFAULT'}}
+      TitleWithIcon(icon="cut-corner" fill="mc-success on-custom:mc-white" :custom="isCustom" color="mc-success on-custom:mc-white") {{ isCustom ? 'CUSTOMIZED' : 'DEFAULT'}}
 
 </template>
 

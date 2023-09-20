@@ -70,12 +70,16 @@ export default definePreset({
       },
 
       'semantic': {
-        'finegreen': '#14C75C',
+        'success': '#14C75C',
         'warning': '#F6BA1E',
         'red': '#E52424',
       },
     },
   },
+
+  // Searching in all files for style implementation by using:
+  // btn="[^"]*center[^"]*" 
+
   shortcuts: [
     // general shortcuts
     {

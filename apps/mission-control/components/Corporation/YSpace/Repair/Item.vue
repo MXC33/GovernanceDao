@@ -63,7 +63,7 @@ const { toggleRepairItem, itemIsAdded, activeRepairItem, payToken } = useCorpora
 const colors = computed(() => {
   switch (props.item.token.tokenInfo.status) {
     case 'pristine':
-      return 'mc-finegreen'
+      return 'mc-success'
     case 'worn':
       return 'mc-warning'
     case 'damaged':

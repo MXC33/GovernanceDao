@@ -30,7 +30,7 @@ const roverColor = computed(() => {
 
   switch (textValue) {
     case 'pristine':
-      return 'mc-finegreen'
+      return 'mc-success'
     case 'worn':
       return 'mc-yellow'
     case 'damaged':
@@ -51,7 +51,7 @@ const stateColors = computed(() => {
     case 'accent':
       return '$mc-accent'
     case 'success':
-      return 'mc-finegreen'
+      return 'mc-success'
     case 'error':
       return 'mc-red'
     default: 'white'
