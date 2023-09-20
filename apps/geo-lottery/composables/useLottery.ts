@@ -12,6 +12,8 @@ export const weeklyFlowRateConst = 1 / (3600 * 24 * 7)
 export const useLotteryID = () => {
   const { lotteryID } = useLuckyCatGeoLotteryContract()
 
+  return useAsyncDataState(`lottery-id`, () =>
+    lotteryID()
   )
 }
 
