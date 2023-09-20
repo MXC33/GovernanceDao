@@ -1,7 +1,7 @@
 <template lang="pug">
 VList(space-y="8 md:17")
   div(space-y="3 md:4" color="ix-white" font="bold" text="lg")
-    h2(color="ix-white" text="3xl md:4xl xl:5xl" uppercase="~" font="bdrA3mik") The Jackpot
+    h2(color="ix-white" text="3xl md:4xl xl:5xl" uppercase="~" font="bdrA3mik normal") The Jackpot
     p() On top of the three prizes drawn every round, there is also a weekly chance to bring home the jackpot! For each round a random longitude and latitude is selected. This position correlates to one specific PIX out of the 1.7 billion that make up Planet IX. If you are the owner of that PIX, have built a territory in that position and hold a lottery ticket, the jackpot is yours!
 
   div(grid="~ cols-1 xl:cols-4" gap="y-8 xl:0" w="full" bg="black" b="1 ix-pink" rounded="2xl" items="center" min-h="65")

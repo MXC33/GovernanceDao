@@ -10,7 +10,7 @@ import type { TableColumn } from "~/composables/useTable";
 import type { IXToken } from "@ix/base/composables/Token/useIXToken";
 
 useHead({
-  title: "My Assets | Geo Lottery | PlanetIX"
+  title: "My Assets | Territory Lottery | PlanetIX"
 })
 const { myAssetsURL } = useCollectionsURL()
 

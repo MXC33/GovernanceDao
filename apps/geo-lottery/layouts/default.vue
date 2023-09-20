@@ -49,6 +49,7 @@ import PlanetIXLogo from '~/assets/images/logo.svg'
 }
 
 .geo-lottery-header [btn~="menu"] {
+  color: black;
   font-size: 16px;
 }
 
