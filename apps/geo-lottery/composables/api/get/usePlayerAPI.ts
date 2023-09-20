@@ -78,7 +78,11 @@ export const usePlayerAPI = () => {
   const hasTerritories = () => fetchIXAPI('territories/has') as Promise<HasTerritoriesResponse>
   const getMerkleProofs = (id: number) => fetchIXAPI('geo/lottery/claim/data/' + id) as Promise<MerkleProofsResponse>
   const getEnteredTickets = (id: number) => fetchIXAPI('geo/lottery/ticket/entries/' + id) as Promise<EnteredTicketsResponse>
-  const getWeeksDraw = () => fetchIXAPI('geo/lottery/details/table') as Promise<WeeksDrawResponse>
+
+  const useWeeksDrawData = () => useAsyncDataState('weeks-draw', () =>
+    fetchIXAPI('geo/lottery/details/table') as Promise<WeeksDrawResponse>
+  )
+
   /*const getWeeksDraw = () => {
     return {
       data: {
@@ -129,6 +133,6 @@ export const usePlayerAPI = () => {
     hasTerritories,
     getMerkleProofs,
     getEnteredTickets,
-    getWeeksDraw
+    useWeeksDrawData
   }
 }

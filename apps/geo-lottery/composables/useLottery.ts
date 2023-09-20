@@ -6,8 +6,10 @@ import {
   WeeksDraw
 } from "~/composables/api/get/usePlayerAPI";
 export const weeklyFlowRateConst = 1 / (3600 * 24 * 7)
+
 export const useLottery = () => {
-  const { getWeeksDraw: fetchWeeksDraw, getEnteredTickets: fetchEnteredTickets, getMerkleProofs: fetchMerkleProofs } = usePlayerAPI()
+  const { useWeeksDrawData, getEnteredTickets: fetchEnteredTickets, getMerkleProofs: fetchMerkleProofs } = usePlayerAPI()
+  const { execute: fetchWeeksDrawData, data: weeksDrawData } = useWeeksDrawData()
 
   const {
     lotteryID,
@@ -107,11 +109,12 @@ export const useLottery = () => {
   const getWeeksDraw = async () => {
 
     try {
-      const weeksDrawResponse = await fetchWeeksDraw()
-      if (!weeksDrawResponse.data)
+      await fetchWeeksDrawData()
+
+      if (!weeksDrawData.value?.data)
         throw new Error("There are no data!")
 
-      weeksDraw.value = weeksDrawResponse.data
+      weeksDraw.value = weeksDrawData.value.data
       return weeksDraw.value
     } catch (e) {
       weeksDraw.value = {
