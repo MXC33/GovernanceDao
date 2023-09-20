@@ -9,8 +9,8 @@ Popup(:hideCloseButton="true" :isError="true" )
       VList( v-if="error.description") {{ error.description }}
 
       VList(v-else)
-        div(p="3" color="white")
-          div(color="semantic-warning" max-h="34" overflow-y="auto" ) {{ errorParsed }}
+        div(p="3")
+          div(color="semantic-warning" color="white" max-h="34" overflow-y="auto" ) {{ errorParsed }}
 
   template(#footer)
     ButtonItem(:value="'white'" color="$mc-full-red" bg="white opacity-80" border-color="transparent" min-w="300px md:350px"  :text="'CLOSE'" @click="onClose")
