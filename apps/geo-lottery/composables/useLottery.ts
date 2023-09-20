@@ -12,12 +12,11 @@ export const weeklyFlowRateConst = 1 / (3600 * 24 * 7)
 export const useLotteryID = () => {
   const { lotteryID } = useLuckyCatGeoLotteryContract()
 
-  return useAsyncDataState(`lottery-id`, () =>
-    lotteryID()
   )
 }
 
 export const useLottery = () => {
+  const { getActiveRewards: fetchActiveRewards } = usePlayerAPI()
 
   const { useWeeksDrawData, useEnteredTicketData, fetchMerkleProof } = usePlayerAPI()
   const { execute: fetchWeeksDrawData, data: weeksDrawData } = useWeeksDrawData()
@@ -159,10 +158,9 @@ export const useLottery = () => {
     jackpot: 0
   }))
   const getActiveRewards = async () => {
-    const { getActiveRewards } = usePlayerAPI()
 
     try {
-      const activeRewardsResponse = await getActiveRewards()
+      const activeRewardsResponse = await fetchActiveRewards()
       if (!activeRewardsResponse.data)
         throw new Error("There are no data!")
 
