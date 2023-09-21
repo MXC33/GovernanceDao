@@ -6,10 +6,10 @@ VList()
       img(src="~/assets/images/collection/general.png" v-if="context == 'collection'")
       img(src="~/assets/images/collection/my-assets.png" v-else)
 
-  div(pos="absolute right-0 top-0" m="t-0" v-if="!isClosed")
+  div(pos="absolute right-0 top-0" m="t-0" v-if="!isClosed" w="50 md:auto" )
     a(href="https://territorylottery.planetix.com/")
       img(src="~/assets/images/collection/territory-win.png" )
-    Close(pos="absolute right-4 top-10" w="3" cursor="pointer" @click="isClosed = true")
+    Close(pos="absolute right-4 top-6 md:top-10" w="2 md:3" cursor="pointer" @click="isClosed = true")
 
 
   HList(items="center" space-x="2" space-y="4 md:8")
