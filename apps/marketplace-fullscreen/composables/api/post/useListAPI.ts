@@ -22,7 +22,7 @@ export const useListEndpoints = () => {
 
   const headers = useIXHeaders()
 
-  const listAssets = async (body: ListingsBody[]) => await $fetch(BASE_API_ENDPOINT_URL + '/web3/sale', {
+  const listAssets = async (body: ListingsBody[]) => await $fetch(BASE_API_ENDPOINT_URL() + '/web3/sale', {
     method: 'POST',
     headers: {
       ...headers.value
@@ -30,7 +30,7 @@ export const useListEndpoints = () => {
     body: JSON.stringify(body)
   })
 
-  const updateListAssets = async () => await $fetch(BASE_API_ENDPOINT_URL + '/web3/sale/update', {
+  const updateListAssets = async () => await $fetch(BASE_API_ENDPOINT_URL() + '/web3/sale/update', {
     method: 'POST',
     headers: {
       ...headers.value
