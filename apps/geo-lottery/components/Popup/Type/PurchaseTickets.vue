@@ -24,12 +24,14 @@ Popup()
 </template>
 <script lang="ts" setup>
 import InfoIcon from '~/assets/icons/info.svg'
-import { useEnterLottery } from "~/composables/useEnterLottery";
-import { useSubscription } from "~/composables/useSubscription";
-import { useLottery } from "~/composables/useLottery";
 const { displayPopup } = usePopups()
+const { maxOneTimeEntries } = useEnterLottery()
+const { maxSubscriptionEntries } = useSubscription()
+const { enteredTickets, getEnteredTickets } = useLottery()
 
 const purchaseTypeModel = ref<'popup-type-one-time-entry' | 'popup-type-subscribe'>('popup-type-one-time-entry')
+
+await getEnteredTickets()
 
 const onContinue = () => {
   displayPopup({
@@ -38,9 +40,5 @@ const onContinue = () => {
   })
 }
 
-const { maxOneTimeEntries } = useEnterLottery()
-const { maxSubscriptionEntries } = useSubscription()
-
-const { enteredTickets } = useLottery()
 
 </script>

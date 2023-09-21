@@ -94,9 +94,12 @@ export const usePlayerAPI = () => {
   const useEnteredTicketData = () => {
     const { data: lotteryID } = useLotteryID()
 
-    return useAsyncDataState(`lottery-entered-tickets`, () =>
-      fetchIXAPI('geo/lottery/ticket/entries/' + lotteryID.value) as Promise<EnteredTickets>
-    )
+    return useAsyncDataState(`lottery-entered-tickets`, () => {
+      const data = fetchIXAPI('geo/lottery/ticket/entries/' + lotteryID.value) as Promise<EnteredTicketsResponse>
+      return data
+    }, {
+      transform: (data) => data.data
+    })
   }
 
 
