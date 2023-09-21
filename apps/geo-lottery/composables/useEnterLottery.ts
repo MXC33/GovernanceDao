@@ -34,13 +34,17 @@ export const useEnterLottery = () => {
   const { getTicketPrice } = useLottery()
 
   const hasTerritories = async () => {
+    let hasError: string | boolean = false
     try {
       const hasTerritory = await hasTerritoriesData()
       if (!hasTerritory.data)
-        throw new Error("You don't have territory!")
+        hasError = 'You don\'t have territory!'
     } catch (e) {
-      throw new Error(CustomErrors.unknownError)
+      hasError = CustomErrors.unknownError
     }
+
+    if (hasError)
+      throw new Error(hasError)
   }
 
   const enterLottery = async (entries: number) => {
