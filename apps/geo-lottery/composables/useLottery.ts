@@ -75,7 +75,7 @@ export const useLottery = () => {
 
     try {
       const enteredTicketsResponse = ticketData.value
-      if (!enteredTicketsResponse?.data)
+      if (!enteredTicketsResponse)
         throw new Error("There are no entered tickets!")
 
       const userLotteryRate = Number(ethers.utils.formatUnits(await userLotteryRateContract(currentLotteryID.value)))
@@ -83,10 +83,10 @@ export const useLottery = () => {
       const ticketPrice = await getTicketPrice()
 
       enteredTickets.value = {
-        ...enteredTicketsResponse.data,
+        ...enteredTicketsResponse,
         active_rate_live: userLotteryRate,
         entered_weekly_tickets: Math.round((userLotteryRate / weeklyFlowRateConst) / ticketPrice),
-        entered_weekly_tickets_backend: Math.round((enteredTicketsResponse.data.active_rate / weeklyFlowRateConst) / ticketPrice)
+        entered_weekly_tickets_backend: Math.round((enteredTicketsResponse.active_rate / weeklyFlowRateConst) / ticketPrice)
       }
       return enteredTickets.value
     } catch (e) {
