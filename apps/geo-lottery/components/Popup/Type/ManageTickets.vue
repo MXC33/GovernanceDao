@@ -17,7 +17,7 @@ Popup()
           CirclePlusIcon(w="5" mr-3 cursor="pointer" @click="onSubscribe()")
           p(font="bold" text="lg") {{enteredTickets?.entered_weekly_tickets || 0}} tickets
       HList( pos="relative" flex="~ col" mb-7)
-        p( mb-1) Your one-time entries
+        p( mb-1) Your subscription status
         div(flex="~" ml="0" items-center)
           InputSwitch(v-model="switchModel")
           p(font="bold" text="lg" )

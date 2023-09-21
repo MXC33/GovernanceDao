@@ -124,7 +124,7 @@ export const useLogin = () => {
       clearTimeout(authTokenExpirationTimeout)
 
       try {
-        const { data, status }: { data: { access_token: string }, status: number } = await $fetch(BASE_API_ENDPOINT_URL + '/auth/refresh', {
+        const { data, status }: { data: { access_token: string }, status: number } = await $fetch(BASE_API_ENDPOINT_URL() + '/auth/refresh', {
           method: 'POST',
           headers: {
             ...headers.value

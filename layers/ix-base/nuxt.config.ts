@@ -5,6 +5,8 @@ import { nodePolyfills } from 'vite-plugin-node-polyfills'
 
 const API_DEV_ENDPOINT = 'https://mission-control-api-dev-s7ito.ondigitalocean.app'
 const API_PROD_ENDPOINT = 'https://api-mc.planetix.com'
+const API_DEV_BASE_URL = 'https://api.planetix.app/api/v1'
+const API_PROD_BASE_URL = 'https://api.planetix.com/api/v1'
 
 const GQL_DEV_ENDPOINT = `${API_DEV_ENDPOINT}/graphql`
 const GQL_PROD_ENDPOINT = `${API_PROD_ENDPOINT}/graphql`
@@ -63,6 +65,7 @@ export default defineNuxtConfig({
     public: {
       MC_API: process.env.CHAIN_NET == 'test' ? API_DEV_ENDPOINT : API_PROD_ENDPOINT,
       CHAIN_NET: process.env.CHAIN_NET,
+      API_BASE_URL: process.env.API_BASE_URL || (process.env.CHAIN_NET === 'test' ? API_DEV_BASE_URL : API_PROD_BASE_URL),
       s3: (process.env.PUBLIC_ASSETS ?? '/s3'),
       'graphql-client': {
         clients: {
