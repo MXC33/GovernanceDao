@@ -28,10 +28,14 @@ const { displayPopup } = usePopups()
 const { maxOneTimeEntries } = useEnterLottery()
 const { maxSubscriptionEntries } = useSubscription()
 const { enteredTickets, getEnteredTickets } = useLottery()
+const { useEnteredTicketData } = usePlayerAPI()
+const { refresh: refreshTicketData } = useEnteredTicketData()
 
 const purchaseTypeModel = ref<'popup-type-one-time-entry' | 'popup-type-subscribe'>('popup-type-one-time-entry')
 
-await getEnteredTickets()
+refreshTicketData().then(() => {
+  getEnteredTickets()
+})
 
 const onContinue = () => {
   displayPopup({

@@ -42,13 +42,18 @@ const { displayPopup } = usePopups()
 const { walletState } = useWallet()
 const { switchModel, setupSwitchModal, showContinueButton } = useManageTickets()
 const { isLoggedInAndConnected } = useLogin()
-const { enteredTickets } = useLottery()
+const { enteredTickets, getEnteredTickets } = useLottery()
+const { useEnteredTicketData } = usePlayerAPI()
+const { refresh: refreshTicketData } = useEnteredTicketData()
 
 watch(isLoggedInAndConnected, async (loggedIn) => {
   if (!loggedIn)
     return
 
   await setupSwitchModal()
+  refreshTicketData().then(() => {
+    getEnteredTickets()
+  })
 }, { immediate: true })
 
 const { removeLotteryFlow } = useSubscription()
