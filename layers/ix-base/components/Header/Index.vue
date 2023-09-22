@@ -37,6 +37,7 @@ VList(:class="className" pos="sticky left-0 top-0" translate-y="$header-offset" 
   Transition(name="slide-top" mode="out-in")
     HeaderNavigation(:class="className + '-header'" v-if="activeMenuIndex != null && headerData != null"  :key="activeMenuIndex" :header="headerData[activeMenuIndex]")
 
+  slot(name="contentBottom")
 </template> 
 
 <script lang="ts" setup>

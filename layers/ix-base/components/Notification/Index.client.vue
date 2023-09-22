@@ -1,8 +1,9 @@
 <template lang ="pug">
 VList(pos="relative" ref="container")
-  div(@click.prevent.stop="toggleNotification" bg="s-unread:ix-orange" rounded="full" :state="isUnread" wh="6" translate-y="-0.5" cursor="pointer" opacity="hover:80" transition="opacity")
+  div(@click.prevent.stop="toggleNotification" wh="6" translate-y="-0.5" cursor="pointer" opacity="hover:80" transition="opacity")
     BellFilled(v-if="!showNotification")
     BellEmpty(v-else)
+    div(pos="absolute bottom-4" wh="2" bg="s-unread:ix-orange" rounded="full" :state="isUnread")
 
   Teleport(to="#navigation-bottom")
     Transition(name="fade-slow")
