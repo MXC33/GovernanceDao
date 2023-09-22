@@ -171,7 +171,8 @@ export const useLottery = () => {
     } catch (e) {
       activeRewards.value = {
         rewards: 0,
-        jackpot: 0
+        jackpot: 0,
+        incomingFlowRate: -1
       }
       throw new Error(CustomErrors.unknownError)
     }

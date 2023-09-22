@@ -76,7 +76,8 @@ export interface WeeksDrawResponse extends ObjectResponse {
 
 export interface ActiveRewards {
   rewards: number,
-  jackpot: number
+  jackpot: number,
+  incomingFlowRate?: number,
 }
 
 export interface ActiveRewardsResponse extends ObjectResponse {
