@@ -10,9 +10,7 @@ VList(class="background-holder" pos="relative" overflow="hidden" z="0" min-h="60
         img(src="~/assets/images/LC-Territory-logot.png")
       h3( class="title-stroke " color="white" font="bdrA3mik" text="3xl center stroke-$mc-pink"  mb-4 v-if="!livepage") COMING SOON
       div()
-        h1(text="4xl md:7xl lg:8xl center" font="bdrA3mik" mb-2 v-if="livepage && activeRewards.rewards")
-          span() {{rewardToDisplay}}
-          span() AGOLD
+        h1(text="4xl md:7xl lg:8xl center" font="bdrA3mik" mb-2 v-if="livepage && activeRewards.rewards") {{rewardToDisplay}} AGOLD
         p(font="bold" text="base sm:lg center" mb-4 v-if="livepage") Every week, new Territories from around the world are <br> randomly selected. Join today and have the chance to win!
       div(flex="~ col sm:row" justify="center" m="t-6" items-center)
         template(v-if="livepage")
@@ -30,14 +28,12 @@ const { checkIsAuth } = useHelperMethods()
 const rewardToCounter = ref(0)
 const rewardToDisplay = ref('0')
 await getActiveRewards()
-console.log('activeRewards', activeRewards.value)
 rewardToCounter.value = activeRewards.value.rewards
 
 const activeRewardsInterval = setInterval(async () => {
   if(activeRewards.value.incomingFlowRate && activeRewards.value.incomingFlowRate > 0){
-    rewardToCounter.value = rewardToCounter.value + activeRewards.value.incomingFlowRate
-    rewardToDisplay.value = Number(rewardToCounter.value.toFixed(3)).toLocaleString()
-    console.log('rewardToDisplay', rewardToDisplay.value)
+    rewardToCounter.value += (activeRewards.value.incomingFlowRate / 2) / 10
+    rewardToDisplay.value = rewardToCounter.value.toFixed((3)).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
   }
 }, 100)
 
