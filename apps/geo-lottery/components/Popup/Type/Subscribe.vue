@@ -21,11 +21,9 @@ Popup()
 
 </template>
 <script lang="ts" setup>
-import {useLottery} from "~/composables/useLottery";
-import {useSubscription} from "~/composables/useSubscription";
+import { useLottery } from "~/composables/useLottery";
+import { useSubscription } from "~/composables/useSubscription";
 
-const { walletState, isWalletConnected } = useWallet()
-const { getEnteredTickets, enteredTickets } = useLottery()
 const { displayPopup, popup } = usePopups()
 
 const {
@@ -34,22 +32,10 @@ const {
   updateLotteryFlow
 } = useSubscription()
 
-const { ticketPrice, getTicketPrice } = useLottery()
-
-const loadChainInfo = async () => {
-  await getTicketPrice()
-  await getEnteredTickets()
-}
-
-watch(walletState, async (state) => {
-  if (state != 'connected')
-    return
-
-  await loadChainInfo()
-}, { immediate: true })
+const { ticketPrice } = useLottery()
 
 import { useContractRequest } from "~/composables/useContractRequest";
-import {useLuckyCatGeoLotteryContract} from "~/composables/useLuckyCatGeoLotteryContract";
+import { useLuckyCatGeoLotteryContract } from "~/composables/useLuckyCatGeoLotteryContract";
 
 const { userFlowActive } = useLuckyCatGeoLotteryContract()
 const { loading: isLoading, execute: subscriptionRequest } = useContractRequest(async () => {

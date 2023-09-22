@@ -4,14 +4,22 @@ interface PriceResponse {
 
 export const useIXTPrice = () => {
   const config = useRuntimeConfig().public
+  const { isWalletConnected } = useWallet()
 
-  const { data: ixtPrice, refresh: refreshIXTPrice, execute: fetchPrice } = useAsyncDataState('ixt-price', () =>
-    $fetch(config.MC_API + '/ixt-price', { mode: 'cors' }) as Promise<PriceResponse>, {
+  const { data: ixtPrice, refresh: refreshIXTPrice, execute: fetchPrice } = useAsyncDataState('ixt-price', async () => {
+    if (!isWalletConnected.value)
+      return 0
+
+    return $fetch(config.MC_API + '/ixt-price', { mode: 'cors' }) as Promise<PriceResponse>
+  }, {
     transform: (data) => Number(data)
   })
 
   const setupIXTPrice = () => {
-    useIntervalFn(() => { refreshIXTPrice() }, 1000 * 60)
+    useIntervalFn(() => {
+      refreshIXTPrice()
+    }, 1000 * 60)
+
     return fetchPrice()
   }
 

@@ -2,20 +2,21 @@ import { BigNumberish, ethers } from "ethers"
 import { ContractInterface } from "../Utils/defineContract"
 import { ContractContext as IXTokenContract } from '@ix/base/composables/Contract/Abis/IXToken'
 import IXToken from '@ix/base/composables/Contract/Abis/IXToken.json'
+import {useActiveChain} from "~/composables/Contract/useWallet";
 
 
 export const useIXTContract = <T extends ContractInterface<T> & IXTokenContract>() => {
 
-  const spenderAddress = conduitAdress.polygon as string
+  const spenderAddress = conduitAdress[useActiveChain()] as string
   const { walletAdress } = useWallet()
 
   const { viewAsyncState, withContract, createTransaction, ...contractSpec } = defineContract<T>('IXToken-contract', {
-    contractAddress: IXTAddress.polygon as string,
+    contractAddress: IXTAddress[useActiveChain()] as string,
     notifications: {
       failMessage: 'Error allowance IXToken'
     },
     createContract(provider) {
-      return new ethers.Contract(IXTAddress.polygon as string, IXToken.abi, provider.getSigner()) as unknown as T
+      return new ethers.Contract(IXTAddress[useActiveChain()] as string, IXToken.abi, provider.getSigner()) as unknown as T
     }
   })
 

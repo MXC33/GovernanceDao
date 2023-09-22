@@ -1,3 +1,5 @@
+import { useLotteryID } from "~/composables/useLottery"
+
 export interface ObjectResponse {
   success: boolean,
   status: number,
@@ -72,63 +74,45 @@ export interface WeeksDrawResponse extends ObjectResponse {
   data: WeeksDraw
 }
 
+export interface ActiveRewards {
+  rewards: number,
+  jackpot: number
+}
+
+export interface ActiveRewardsResponse extends ObjectResponse {
+  data: ActiveRewards
+}
+
 export const usePlayerAPI = () => {
   const { fetchIXAPI } = useIXAPI()
 
   const hasTerritories = () => fetchIXAPI('territories/has') as Promise<HasTerritoriesResponse>
-  const getMerkleProofs = (id: number) => fetchIXAPI('geo/lottery/claim/data/' + id) as Promise<MerkleProofsResponse>
-  const getEnteredTickets = (id: number) => fetchIXAPI('geo/lottery/ticket/entries/' + id) as Promise<EnteredTicketsResponse>
-  const getWeeksDraw = () => fetchIXAPI('geo/lottery/details/table') as Promise<WeeksDrawResponse>
-  /*const getWeeksDraw = () => {
-    return {
-      data: {
-        "last_drawn_lottery": {
-          "id": 1,
-          "country_code": "AG",
-          "tier_name": "Rare",
-          "type_name": "AREA",
-          "claimed": false,
-          "entries": {
-            "entered_tickets": 0,
-            "entered_stream": 0,
-            "active_rate": 0
-          },
-          "nft_link": "https://api.planetix.com/api/v1/geo/lottery/token/2/animation_url",
-          "winning_pools": [
-            6
-          ]
-        },
-        "jackpot": {
-          "lon": 16.78510171155365,
-          "lat": 21.314579407145388,
-          "has_winner": false,
-          "player_id": null
-        },
-        "rounds": [
-          {
-            "id": 1,
-            "country_code": "AG",
-            "tier_name": "Rare",
-            "type_name": "AREA",
-            "winners": 2,
-            "total_tickets": 7,
-            "your_tickets": 3,
-            "prize": 2.507142857142857,
-            "claimed": false,
-            "nft_link": "https://api.planetix.com/api/v1/geo/lottery/token/2/animation_url",
-            "winning_pools": [
-              6
-            ]
-          }
-        ]
-      }
-    }
-  }*/
+
+  const fetchMerkleProof = (id: number) =>
+    fetchIXAPI('geo/lottery/claim/data/' + id) as Promise<MerkleProofsResponse>
+
+  const useEnteredTicketData = () => {
+    const { data: lotteryID } = useLotteryID()
+
+    return useAsyncDataState(`lottery-entered-tickets`, () => {
+      const data = fetchIXAPI('geo/lottery/ticket/entries/' + lotteryID.value) as Promise<EnteredTicketsResponse>
+      return data
+    }, {
+      transform: (data) => data.data
+    })
+  }
+
+
+  const useWeeksDrawData = () => useAsyncDataState('weeks-draw', () =>
+    fetchIXAPI('geo/lottery/details/table') as Promise<WeeksDrawResponse>
+  )
+  const getActiveRewards = () => fetchIXAPI('geo/lottery/active/rewards') as Promise<ActiveRewardsResponse>
 
   return {
     hasTerritories,
-    getMerkleProofs,
-    getEnteredTickets,
-    getWeeksDraw
+    useWeeksDrawData,
+    getActiveRewards,
+    fetchMerkleProof,
+    useEnteredTicketData
   }
 }

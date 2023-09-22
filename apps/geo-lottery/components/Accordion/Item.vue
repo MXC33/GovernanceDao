@@ -80,9 +80,7 @@ const { startOpen, round } = defineProps<{
 const isOpen = shallowRef(startOpen)
 const dropDrawer = () => { isOpen.value = !isOpen.value }
 
-const {
-  claimReward
-} = useLottery()
+const { claimReward } = useLottery()
 const { loading: isLoading, execute: claimRewardRequest } = useContractRequest(() =>
   claimReward(round.id)
 )

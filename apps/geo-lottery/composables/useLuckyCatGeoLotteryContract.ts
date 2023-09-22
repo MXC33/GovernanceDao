@@ -7,7 +7,7 @@ import {
   luckyCatGeoLotteryAdress,
   luckyCatGeoLotterySuperAppAdress
 } from "@ix/base/composables/Contract/WalletAddresses";
-import {useChainInfo} from "@ix/base/composables/Contract/useWallet";
+import {useActiveChain, useChainInfo} from "@ix/base/composables/Contract/useWallet";
 import { Framework } from "@superfluid-finance/sdk-core";
 import { weeklyFlowRateConst } from "~/composables/useLottery";
 
@@ -21,12 +21,12 @@ export const useLuckyCatGeoLotteryContract = <T extends ContractInterface<T> & L
     createTransaction,
     ...contractSpec
   } = defineContract<T>('LuckyCatGeoLottery-contract', {
-    contractAddress: luckyCatGeoLotteryAdress.polygon as string,
+    contractAddress: luckyCatGeoLotteryAdress[useActiveChain()] as string,
     notifications: {
       failMessage: 'Error'
     },
     createContract(provider) {
-      return new ethers.Contract(luckyCatGeoLotteryAdress.polygon as string, LuckyCatGeoLottery.abi, provider.getSigner()) as unknown as T
+      return new ethers.Contract(luckyCatGeoLotteryAdress[useActiveChain()] as string, LuckyCatGeoLottery.abi, provider.getSigner()) as unknown as T
     }
   })
 
@@ -64,7 +64,7 @@ export const useLuckyCatGeoLotteryContract = <T extends ContractInterface<T> & L
       });
 
       const superSigner = sf.createSigner({ signer: signer });
-      const superToken = await sf.loadSuperToken(astroGoldAdress.polygon as string);
+      const superToken = await sf.loadSuperToken(astroGoldAdress[useActiveChain()] as string);
 
       return {
         superSigner: superSigner ?? null,
@@ -82,7 +82,7 @@ export const useLuckyCatGeoLotteryContract = <T extends ContractInterface<T> & L
     try {
       const createFlowOperation = superToken.createFlow({
         sender: await superSigner.getAddress(),
-        receiver: luckyCatGeoLotterySuperAppAdress.polygon as string,
+        receiver: luckyCatGeoLotterySuperAppAdress[useActiveChain()] as string,
         flowRate: calculateFlowRate(amount)
         // userData?: string
       });
@@ -103,7 +103,7 @@ export const useLuckyCatGeoLotteryContract = <T extends ContractInterface<T> & L
     try {
       const updateFlowOperation = superToken.updateFlow({
         sender: await superSigner.getAddress(),
-        receiver: luckyCatGeoLotterySuperAppAdress.polygon as string,
+        receiver: luckyCatGeoLotterySuperAppAdress[useActiveChain()] as string,
         flowRate: calculateFlowRate(amount)
         // userData?: string
       });
@@ -124,7 +124,7 @@ export const useLuckyCatGeoLotteryContract = <T extends ContractInterface<T> & L
     try {
       const deleteFlowOperation = superToken.deleteFlow({
         sender: await superSigner.getAddress(),
-        receiver: luckyCatGeoLotterySuperAppAdress.polygon as string
+        receiver: luckyCatGeoLotterySuperAppAdress[useActiveChain()] as string
         // userData?: string
       });
 

@@ -10,7 +10,7 @@ Popup()
         p() Hope the luck be with you!
       VList()
         p() Winners will be drawn in:
-        HelperCountDown(:endTimestamp="endDate")
+        HelperCountDown(:endTimestamp="lotteryEndsAt" v-if="lotteryEndsAt")
 
   template(#footer)
     ButtonItem(:value="'pink'" :text="'CLOSE'" @click="onClose()")
@@ -25,9 +25,7 @@ const onClose = (() => {
 })
 
 import { useLottery } from "~/composables/useLottery";
-const { lotteryStartedAtDate } = useLottery()
-const startDate = await lotteryStartedAtDate()
-const endDate = startDate.setDate(startDate.getDate() + 7)
+const { lotteryEndsAt } = useLottery()
 
 onUnmounted(() => {
   subscriptionEntries.value.value = 1

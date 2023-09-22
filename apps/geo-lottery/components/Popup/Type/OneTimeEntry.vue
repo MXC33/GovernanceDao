@@ -21,11 +21,9 @@ Popup()
 
 </template>
 <script lang="ts" setup>
-import {useLottery} from "~/composables/useLottery";
-import {useEnterLottery} from "~/composables/useEnterLottery";
+import { useLottery } from "~/composables/useLottery";
+import { useEnterLottery } from "~/composables/useEnterLottery";
 
-const { walletState, isWalletConnected } = useWallet()
-const { getEnteredTickets } = useLottery()
 const { displayPopup, popup } = usePopups()
 
 const {
@@ -33,19 +31,7 @@ const {
   enterLottery
 } = useEnterLottery()
 
-const { ticketPrice, getTicketPrice } = useLottery()
-
-const loadChainInfo = async () => {
-  await getTicketPrice()
-  await getEnteredTickets()
-}
-
-watch(walletState, async (state) => {
-  if (state != 'connected')
-    return
-
-  await loadChainInfo()
-}, { immediate: true })
+const { ticketPrice } = useLottery()
 
 import { useContractRequest } from "~/composables/useContractRequest";
 const { loading: isLoading, execute: oneTimeEntryRequest } = useContractRequest(() =>
