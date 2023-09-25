@@ -73,12 +73,13 @@ watch(weeksDraw, (state) => {
   streamTickets.value = lastDrawnLottery.entries.entered_tickets
   nft_link.value = lastDrawnLottery.nft_link || ''
 
-  if (showClaimButton.value)
+  /** Open You Won Popup **/
+  /*if (showClaimButton.value)
     displayPopup({
       type: 'popup-type-you-win',
       nft_link: nft_link.value,
       lottery_id: roundID.value
-    })
+    })*/
 }, { immediate: true })
 
 const {
