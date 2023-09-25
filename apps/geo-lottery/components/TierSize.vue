@@ -2,7 +2,7 @@
 div(class="tier_size")
   div(grid grid-cols="3" gap="2 md:4" p="x-3 md:x-10 2xl:x-23")
     div( flex="~ col" justify="center" align="center" pb="4"  border-color="$mc-pink" border="b-2")
-      p(color="white opacity-40" text="sm md:xl" font="extrabold" mb="1" uppercase="~") ID
+      p(color="white opacity-40" text="sm md:xl" font="extrabold" mb="1" uppercase="~") country
 
       div(:color="id.is_winner ? '$mc-finegreen' : '$mc-red'" :class="!id.is_winner ? 'line-through' : ''" text="lg md:2xl lg:4xl" font="extrabold" uppercase="~" v-if="id && id.name") {{id.name}}
       div(color="white" text="lg md:2xl lg:4xl" font="extrabold" uppercase="~"  v-else) -

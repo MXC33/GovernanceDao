@@ -1,7 +1,7 @@
 <template lang="pug">
 HList(items="center")
-  div(v-for="(item, index) in itemSize"  max-w="80px" scale="100 on-selected:100" :selected="selected(item)" b="3 transparent on-selected:ix-pink" rounded="2" p="y-1")
-    img(:src="'/s3/nft/images/'+item.toLowerCase()+'/icon-'+tier.toLowerCase()+'.png'")
+  div(v-for="(item, index) in itemSize" h="full on-selected:full" :selected="selected(item)" mx="1" rounded="2" scale="on-selected:120")
+    img(:src="'/s3/nft/images/'+item.toLowerCase()+'/icon-'+tier.toLowerCase()+'.png'" w="full" h="20")
 </template>
 <script lang="ts" setup>
 const itemSize = ['area', 'sector', 'zone', 'domain']
