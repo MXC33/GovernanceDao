@@ -82,18 +82,25 @@ const dropDrawer = () => { isOpen.value = !isOpen.value }
 
 const { claimReward } = useLottery()
 const { loading: isLoading, execute: claimRewardRequest } = useContractRequest(() =>
-  claimReward(round.id), { returnResponse: true }
+  claimReward(round.id)
 )
 
 const onClaimReward = async () => {
   const claimReward = await claimRewardRequest()
-  console.log('CLAIM REWARD', claimReward)
 
-  if (claimReward)
-    displayPopup({
-      type: 'popup-type-you-claimed',
-      nft_link: round.nft_link
-    })
+  if (claimReward)  {
+    if (round.prize < 100) {
+      displayPopup({
+        type: 'popup-type-you-claimed-without-nft',
+        prize: round.prize
+      })
+    } else {
+      displayPopup({
+        type: 'popup-type-you-claimed',
+        nft_link: round.nft_link
+      })
+    }
+  }
 }
 
 </script>
