@@ -4,7 +4,8 @@ import { useSnackNotifications } from "~/composables/useNotifications";
 
 interface RequestOptions {
   error?: () => ContractError,
-  onError?: () => void
+  onError?: () => void,
+  returnResponse?: boolean,
 }
 
 export const useContractRequest = (fn: () => Promise<any>, options: RequestOptions = {}) => {
@@ -15,7 +16,8 @@ export const useContractRequest = (fn: () => Promise<any>, options: RequestOptio
   const loading = ref(false)
   const {
     onError,
-    error
+    error,
+    returnResponse
   } = options
 
   const displayInsufficientFunds = () => {
@@ -44,8 +46,13 @@ export const useContractRequest = (fn: () => Promise<any>, options: RequestOptio
 
   const execute = async () => {
     loading.value = true
+    let response = true
     try {
-      await fn()
+      if (returnResponse)
+        response = await fn()
+      else {
+        await fn()
+      }
     } catch (error) {
       //@ts-ignore
       const message: string = error?.message
@@ -59,7 +66,7 @@ export const useContractRequest = (fn: () => Promise<any>, options: RequestOptio
     }
 
     loading.value = false
-    return true
+    return response
   }
 
   return {

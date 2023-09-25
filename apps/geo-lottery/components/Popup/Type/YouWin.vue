@@ -29,12 +29,13 @@ const {
   claimReward
 } = useLottery()
 const { loading: isLoading, execute: claimRewardRequest } = useContractRequest(() =>
-  claimReward((popup.value as PopupTypeYouWin)?.lottery_id)
+  claimReward((popup.value as PopupTypeYouWin)?.lottery_id), { returnResponse: true }
 )
 
 const onClaimReward = async () => {
   if (!popup.value) return
   const claimReward = await claimRewardRequest()
+  console.log('CLAIM REWARD', claimReward)
 
   if (claimReward)
     displayPopup({

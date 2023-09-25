@@ -82,11 +82,12 @@ const dropDrawer = () => { isOpen.value = !isOpen.value }
 
 const { claimReward } = useLottery()
 const { loading: isLoading, execute: claimRewardRequest } = useContractRequest(() =>
-  claimReward(round.id)
+  claimReward(round.id), { returnResponse: true }
 )
 
 const onClaimReward = async () => {
   const claimReward = await claimRewardRequest()
+  console.log('CLAIM REWARD', claimReward)
 
   if (claimReward)
     displayPopup({

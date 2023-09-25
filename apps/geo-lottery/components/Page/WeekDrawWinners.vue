@@ -86,11 +86,12 @@ const {
   claimReward
 } = useLottery()
 const { loading: isLoading, execute: claimRewardRequest } = useContractRequest(() =>
-  claimReward(roundID.value)
+  claimReward(roundID.value), { returnResponse: true }
 )
 
 const onClaimReward = async () => {
   const claimReward = await claimRewardRequest()
+  console.log('CLAIM REWARD', claimReward)
 
   if (claimReward)
     displayPopup({
