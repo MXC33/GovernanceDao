@@ -1,5 +1,5 @@
 <template lang="pug">
-div(pos="fixed right-0 top-0 bottom-0" overflow-y="auto" bg="black" p="5" w="80 md:120" max-w="80%" z="200" color="white" space-y="5" b="l-1 white opacity-20")
+div(pos="absolute right-0 top-0 bottom-0" overflow-y="auto" bg="black" p="5" w="80 md:120" max-w="80%" z="200" color="white" space-y="5" b="l-1 white opacity-20")
 
   //- UserHeaderProfile(w="full" h="20" bg="transparent" ring="0" @click="$router.push('/connect')")
 
