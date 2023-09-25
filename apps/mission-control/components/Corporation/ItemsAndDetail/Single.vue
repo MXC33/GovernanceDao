@@ -7,7 +7,7 @@ CorporationBorderBox(title="Details" cut="none md:top-right s-lg b-$mc-accent" v
     CorporationCartWrapper()
       slot()
 
-CorporationBorderBox(title="Details" cut="none md:top-right s-lg b-$mc-accent" v-else-if="!item")
+CorporationBorderBox(title="Details" cut="none md:top-right s-lg b-white" v-else-if="!item")
   VList(color="$corporation-text-color" justify="center" items="center" flex-grow="1" uppercase="~") {{ $t(`general.not-available`) }}
 
 

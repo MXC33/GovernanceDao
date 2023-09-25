@@ -13,7 +13,7 @@ VList(space-y="4" flex-grow="1")
       BuildContractDetailsTile(:tile-group="initialState[index]" :index="index" v-model="adjustedState[index]", v-for="(item, index) in adjustedState" :is-free="isFree")
 
   VList(p="4" pos="sticky bottom-0" bg="black opacity-60" backdrop="blur-md")
-    button(btn="~ secondary on-disable:disable" @click="confirmRent" v-if="!isFree" :disable="!hasChanges") {{ $t(`general.confirm`) }}
+    button(btn="~ primary-outline on-disable:disable" @click="confirmRent" v-if="!isFree" :disable="!hasChanges") {{ $t(`general.confirm`) }}
       
 </template>
 

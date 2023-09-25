@@ -141,6 +141,8 @@ div(offscreen="~")
   div(b="tier-green")
   div(b="tier-white")
 
+  div(cut="b-$mc-accent")
+
   //-for creating white outlines to svg's
   svg(xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" width="0" height="0")
     filter(id="white-outline")

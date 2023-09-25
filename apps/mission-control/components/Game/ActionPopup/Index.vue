@@ -7,9 +7,9 @@ div(pos="absolute lt-md:(right-0 bottom-0 left-0) md:(bottom-4 right-4)"  w="ful
     slot
 
   div(grid="~ cols-2 gap-3" p="4")
-    ButtonSound(btn="~ white" sound="md-x" @click="$emit('cancel')" uppercase="~") {{ cancelText ?? $t(`general.cancel`) }} 
+    ButtonSound(btn="~ secondary" sound="md-x" @click="$emit('cancel')" uppercase="~") {{ cancelText ?? $t(`general.cancel`) }} 
 
-    ButtonSound(btn="~ secondary" sound="md" @click="$emit('confirm')" pointer-events="on-inactive:none" opacity="on-inactive:50" uppercase="~" :inactive="disableConfirm") {{ confirmText ?? $t(`general.enter`)}}
+    ButtonSound(btn="~ primary-outline" sound="md" @click="$emit('confirm')" pointer-events="on-inactive:none" opacity="on-inactive:50" uppercase="~" :inactive="disableConfirm") {{ confirmText ?? $t(`general.enter`)}}
 
 </template>
 

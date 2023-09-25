@@ -1,6 +1,6 @@
 <template lang="pug">
 VList(w="full" bg="mc-black opacity-80" pos="sticky bottom-0" backdrop="blur-md")
-  ButtonSound(v-if="canClaim" @click="onClickClaim" btn="~ primary on-not-claimable:disable" sound="sm" uppercase="~" w="full") {{ $t(`taskManager.claimAll`) }}
+  ButtonSound(v-if="canClaim" @click="onClickClaim" btn="~ primary-outline lg on-not-claimable:disable" sound="sm" uppercase="~" w="full") {{ $t(`taskManager.claimAll`) }}
 
 
 </template>

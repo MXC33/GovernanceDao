@@ -1,17 +1,13 @@
 import { defineConfig } from 'unocss'
 
-import { cutRules } from './cuts.uno'
-
 import baseLayer from '@ix/base/unocss.config';
 
 export default defineConfig({
   presets: [baseLayer],
-  // variants: [
-  //   stateOnMatcher,
-  //   stateMatcher,
-  //   parentClassMatcher
-  // ],
+
   theme: {
+    //@ts-ignore
+    ...baseLayer.theme.colors,
     fontFamily: {
       apercu: ['Apercu Mono', 'sans-serif'],
       druk: ['Druk Wide', 'sans-serif'],
@@ -182,6 +178,8 @@ export default defineConfig({
   // Adjust to needs.
 
   shortcuts: [
+    //@ts-ignore
+    ...baseLayer.shortcuts,
     {
       'text-ellipsis': 'text-ellipsis w-[100%] overflow-hidden',
       'inset-0': 'left-0 top-0 right-0 bottom-0',
@@ -235,7 +233,8 @@ export default defineConfig({
   ],
 
   rules: [
-    ...cutRules,
+    //@ts-ignore
+    ...baseLayer.rules,
     ['listitem', {
       '--listitem-base-color': 'var(--gray-200)',
       '--listitem-select-color': 'var(--mc-mint)',

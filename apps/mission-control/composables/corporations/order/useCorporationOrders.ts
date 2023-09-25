@@ -222,7 +222,6 @@ export const useCorporationOrders = () => {
       ...(additionalRecipeItem ?? []),
       ...dataState.value?.originalRecipe
     ].filter(Boolean)
-    console.log("SET corpo", dataState.value?.originalRecipe, additionalRecipeItem, activeRecipe.value)
     completion.resetComplete()
   }
 

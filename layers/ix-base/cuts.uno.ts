@@ -154,22 +154,29 @@ export const cutRules: Rule<Theme>[] = [
     const { theme } = ruleContext
     const [_, body] = arr
 
+    console.log("BODEY", body)
+
     if (!body)
       return
 
     const data = parseColor(body, theme)
+    console.log("DATA", data)
     if (!data)
       return
 
-    const { cssColor } = data
+    const { cssColor, color } = data
 
-    if (!cssColor)
+    if (!cssColor && !color)
       return
 
-    const colorString = colorToString(cssColor, 'var(--cut-opacity)')
+    const colorString = cssColor ? colorToString(cssColor, 'var(--cut-opacity)') : color
+
+    console.log("GOT COLOR", colorString)
 
     const { mediaSelector, attributedSelector } = getSelector(ruleContext)
     const mediaEndBracket = mediaSelector == "" ? "" : "}"
+
+    console.log("MEdia selector", mediaSelector, attributedSelector)
 
     return `
       ${mediaSelector}

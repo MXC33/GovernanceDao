@@ -17,7 +17,7 @@ ButtonSound(flex="~ col" justify="start" cursor="on-no-select:default" pos="rela
       slot
 
   VList(v-if="$slots.button" w="full" pos="relative" bg="black" mt="-1px" cursor="on-blocked:default" :blocked="isButtonDisabled")
-    ButtonSound(btn="~ card on-blocked:disable" sound="sm" flex="~ row" uppercase="~" w="full" space-x="2" @click="$emit('clickAction')" b="on-selected:mc-mint" :selected="isSelected" :blocked="isButtonDisabled")
+    ButtonSound(btn="~ primary-outline-opaque on-blocked:disable sm" sound="sm" flex="~ row" uppercase="~" w="full" space-x="2" @click="$emit('clickAction')" b="on-selected:mc-mint" :selected="isSelected" :blocked="isButtonDisabled")
       slot(name="button")
 
 </template>
