@@ -6,7 +6,7 @@ Popup(:hideCloseButton="true")
 
     VList(flex-grow="1" items="center" justify="center" text="md center" font="normal" space-y="6")
       VList()
-        p() You claimed your reward successfully!
+        p() You claimed your reward ({{popup.prize.toFixed(3)}} AGOLD) successfully!
 
   template(#footer)
     ButtonItem(:value="'pink'" :text="'CLOSE'" @click="onClose()")

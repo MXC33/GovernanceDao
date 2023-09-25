@@ -29,18 +29,26 @@ const {
   claimReward
 } = useLottery()
 const { loading: isLoading, execute: claimRewardRequest } = useContractRequest(() =>
-  claimReward((popup.value as PopupTypeYouWin)?.lottery_id), { returnResponse: true }
+  claimReward((popup.value as PopupTypeYouWin)?.lottery_id)
 )
 
 const onClaimReward = async () => {
   if (!popup.value) return
   const claimReward = await claimRewardRequest()
-  console.log('CLAIM REWARD', claimReward)
 
-  if (claimReward)
-    displayPopup({
-      type: 'popup-type-you-claimed',
-      nft_link: (popup.value as PopupTypeYouWin)?.nft_link
-    })
+  const prize = (popup.value as PopupTypeYouWin).prize
+  if (claimReward)  {
+    if (prize < 100) {
+      displayPopup({
+        type: 'popup-type-you-claimed-without-nft',
+        prize: prize
+      })
+    } else {
+      displayPopup({
+        type: 'popup-type-you-claimed',
+        nft_link: (popup.value as PopupTypeYouWin)?.nft_link
+      })
+    }
+  }
 }
 </script>

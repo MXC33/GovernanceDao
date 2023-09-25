@@ -12,7 +12,8 @@ export interface PopupTypeInsufficientFunds extends PopupBase {
 export interface PopupTypeYouWin extends PopupBase {
   type: 'popup-type-you-win',
   nft_link: string,
-  lottery_id: number
+  lottery_id: number,
+  prize: number
 }
 
 export interface PopupTypeYouClaimed extends PopupBase {
@@ -21,7 +22,8 @@ export interface PopupTypeYouClaimed extends PopupBase {
 }
 
 export interface PopupTypeYouClaimedWithoutNFT extends PopupBase {
-  type: 'popup-type-you-claimed-without-nft'
+  type: 'popup-type-you-claimed-without-nft',
+  prize: number
 }
 
 export interface PopupTypePurchaseTickets extends PopupBase {
