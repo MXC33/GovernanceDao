@@ -6,6 +6,34 @@ import { CredentialsInput } from "#gql"
 export const IPFSURL = "https://nftstorage.link/ipfs/"
 export const IPFSURLVideo = "https://nftstorage.link/ipfs/"
 
+export const useHelpers = () => {
+
+  return {
+    throttle
+  }
+}
+
+function throttle(func, limit) {
+  let lastFunc
+  let lastRan
+  return function () {
+    const context = this
+    const args = arguments
+    if (!lastRan) {
+      func.apply(context, args)
+      lastRan = Date.now()
+    } else {
+      clearTimeout(lastFunc)
+      lastFunc = setTimeout(() => {
+        if ((Date.now() - lastRan) >= limit) {
+          func.apply(context, args)
+          lastRan = Date.now()
+        }
+      }, limit - (Date.now() - lastRan))
+    }
+  }
+}
+
 export const clamp = (min: number, max: number, amount: number) =>
   Math.max(min, Math.min(max, amount))
 
@@ -245,7 +273,7 @@ export const useGraphqlCredentials = (): CredentialsInput | null => {
   const { user } = useUser()
   const userId = user.value?.id
   if (!walletAdress.value) {
-    return
+    return null
   }
   return {
     playerId: userId,
