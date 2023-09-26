@@ -91,11 +91,13 @@ onMounted(async () => {
   }
 })
 
-const { isLotteryActive } = useLottery()
+const { isLotteryActive, getActiveLotteryData } = useLottery()
 
 watch([isLotteryActive, isLoggedInAndConnected], ([state, loggedIn]) => {
-  if (!state || !loggedIn)
+  if (!state || !loggedIn) {
+    getActiveLotteryData()
     return
+  }
 
   setupIXTPrice()
   refreshIXTBalance()

@@ -88,11 +88,19 @@ const { loading: isLoading, execute: claimRewardRequest } = useContractRequest((
 const onClaimReward = async () => {
   const claimReward = await claimRewardRequest()
 
-  if (claimReward)
-    displayPopup({
-      type: 'popup-type-you-claimed',
-      nft_link: round.nft_link
-    })
+  if (claimReward)  {
+    if (round.prize < 100) {
+      displayPopup({
+        type: 'popup-type-you-claimed-without-nft',
+        prize: round.prize
+      })
+    } else {
+      displayPopup({
+        type: 'popup-type-you-claimed',
+        nft_link: round.nft_link
+      })
+    }
+  }
 }
 
 </script>

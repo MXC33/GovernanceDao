@@ -38,6 +38,8 @@ div#popups()
 
     PopupTypeYouClaimed(v-else-if="popup.type == 'popup-type-you-claimed'")
 
+    PopupTypeYouClaimedWithoutNFT(v-else-if="popup.type == 'popup-type-you-claimed-without-nft'")
+
     PopupTypePurchaseTickets(v-else-if="popup.type == 'popup-type-purchase-tickets'")
 
     PopupTypeOneTimeEntry(v-else-if="popup.type == 'popup-type-one-time-entry'")
