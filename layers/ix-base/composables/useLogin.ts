@@ -47,11 +47,6 @@ export const useLogin = () => {
     user.value && user.value.id && isWalletConnected.value
   )
 
-  const removeSyncAuthCookies = () => {
-    strategyType.value = null
-    bearerToken.value = null
-  }
-
   const loginFailed = (reason?: string) => {
     loginStatus.value = 'logged-out'
     failedConnection(reason)
@@ -158,7 +153,6 @@ export const useLogin = () => {
 
   return {
     loginUser,
-    removeSyncAuthCookies,
     loginFailType,
     loginStatus,
     isLoggedInAndConnected,
