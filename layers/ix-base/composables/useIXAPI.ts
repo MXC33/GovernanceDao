@@ -20,7 +20,6 @@ export const useIXHeaders = () => {
 
 export const useIXAPI = () => {
   const { logoutWallet } = useWallet()
-  const { removeUser } = useUser()
   const headers = useIXHeaders()
   const app = useNuxtApp()
   const route = useRoute()
@@ -37,7 +36,6 @@ export const useIXAPI = () => {
   const onUnauthorized = async () => {
     await callWithNuxt(app, () => {
       logoutWallet()
-      removeUser()
 
       return navigateTo({
         path: '/connect',
