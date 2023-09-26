@@ -13,7 +13,7 @@ template(v-else)
       div(color="$mc-accent") {{ totalPrice }}
 
   CorporationCartRow()
-    Adjustable(v-if="canAdjust" v-model="item.payment" font="bold" text="sm" space-x="0" )
+    Adjustable(v-if="canAdjust" v-model="item.payment" font="bold" text="sm" space-x="0" color="$mc-accent" fill="$mc-accent")
     div(v-else flex="~ col" justify="center" color="$mc-accent" items="center" uppercase="~")
       template(v-if="totalBalance > 0") {{ $t(`general.owned`) }} {{ totalBalance }}
       template(v-else) {{  $t('general.notOwned') }}
@@ -25,6 +25,7 @@ template(v-else)
 </template>
 
 <script lang="ts" setup>
+import type { NftFragment } from '#gql';
 import type { CorporationShopItem } from '~~/composables/corporations/useCorporationShop';
 
 const props = defineProps<{
@@ -81,7 +82,7 @@ const canBuy = computed(() => {
     return stakedCount == 0 && balanceCount == 0
 
   if (payment.fromUser)
-    return balanceCount >= payment.value * payment.payment.price
+    return balanceCount >= payment.value * (payment.token as NftFragment)?.payment.price
 
   return true
 })
