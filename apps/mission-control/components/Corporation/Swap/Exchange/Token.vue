@@ -9,7 +9,7 @@ VList(b="1 $mc-accent-40" bg="white opacity-20" cut="bottom-right s-lg")
       HList(items="center" justify="between" my="6" text="lg" flex-grow="1")
         TokenName(:token="data.token" color="$mc-accent" flex-shrink="0" w="auto")
 
-        HelperAdjustableNumber(v-model="data", v-if="direction == 'from'" min-w="25%")
+        AdjustableNumber(v-model="data", v-if="direction == 'from'" min-w="25%")
 
         HelperIncrementingNumber(:value="outputValue", :decimals="2" min-w="25%" text="center" cursor="default" :duration="1" v-else)
 

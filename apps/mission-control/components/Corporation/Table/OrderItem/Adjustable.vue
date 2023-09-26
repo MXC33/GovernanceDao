@@ -1,6 +1,6 @@
 <template lang="pug">
 HList(flex-grow="1" space-x="1" w="full" min-h="8")
-  HelperAdjustable(v-model="data")
+  Adjustable(v-model="data")
 
 </template>
 

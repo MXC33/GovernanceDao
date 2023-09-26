@@ -2,7 +2,7 @@
 VList(justify="md:end" pt="lt-md:6" space-y="3" w="full lt-md:full" flex-grow="1")
 
   HList(justify="end")
-    Adjustable(v-model="value" h="full" w="full md:50%" :is-neutral="true" :has-frame="true")
+    Adjustable(v-model="value" w="full md:50%" look="frame")
 
   HList(w="full" justify="end" v-if="$slots.error")
     span(color="gray-200")

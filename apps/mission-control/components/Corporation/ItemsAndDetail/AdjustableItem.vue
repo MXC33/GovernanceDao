@@ -25,7 +25,7 @@ CorporationItemsAndDetailListItem(:item="item.token" :no-select="true" :img-obje
           slot
 
 
-      HelperAdjustable(v-model="item" h="10" flex-grow="1" :inline="true" :hide-max="true" bg="$mc-accent-20" b="$mc-accent 1 l-0" :is-locked="disabled")
+      Adjustable(v-model="item" h="10" flex-grow="1" :inline="true" :hide-max="true" bg="$mc-accent-20" b="$mc-accent 1 l-0" :is-locked="disabled")
 
 </template>
 

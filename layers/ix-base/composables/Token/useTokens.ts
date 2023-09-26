@@ -18,3 +18,10 @@ export const getTokenKey = (token: AnyToken) => {
   }
   return token.tokenId ?? "" + token.contract
 }
+
+export const getTokenBalance = (token: AnyToken) => {
+  if (isIXToken(token)) {
+    return token.my_shares
+  }
+  return token.balance
+}

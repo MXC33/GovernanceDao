@@ -8,7 +8,7 @@ VList(bg="gray-800" p="6" space-y="5" max-w="150" w="full" frame="~")
     VList(v-else space-y="3") 
       div {{ $t('general.wallet.welcomeMessage') }}
 
-      HList(v-if="!!walletError" color="semantic-success" space-x="1") 
+      HList(v-if="!!walletError" color="semantic-warning" space-x="1") 
         span(font="bold") {{$t(`general.errorConnecting`)}}:
         span {{ walletError }}
 

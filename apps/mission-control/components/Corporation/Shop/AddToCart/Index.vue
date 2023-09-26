@@ -13,7 +13,7 @@ template(v-else)
       div(color="$mc-accent") {{ totalPrice }}
 
   CorporationCartRow()
-    HelperAdjustable(v-if="canAdjust" v-model="item.payment" font="bold" text="sm" space-x="0" )
+    Adjustable(v-if="canAdjust" v-model="item.payment" font="bold" text="sm" space-x="0" )
     div(v-else flex="~ col" justify="center" color="$mc-accent" items="center" uppercase="~")
       template(v-if="totalBalance > 0") {{ $t(`general.owned`) }} {{ totalBalance }}
       template(v-else) {{  $t('general.notOwned') }}

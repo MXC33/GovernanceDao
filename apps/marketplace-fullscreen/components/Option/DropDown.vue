@@ -1,7 +1,7 @@
 <template lang="pug">
 VList(pos="relative" ref="element" w="lt-md:full")
   HList(font="bold" frame="~ gray-400 hover:gray-300" color="white" h="10 on-large:12" px="3" justify="between" items="center" cursor="pointer" space-x="3" @click="isOpen = !isOpen" :large="large")
-    div(capitalize="~" select="none" whitespace="nowrap")
+    HList(capitalize="~" select="none" whitespace="nowrap" space-x="3")
       slot(name="selectedName")
 
     Transition(name="fade" mode="out-in")

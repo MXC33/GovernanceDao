@@ -21,8 +21,7 @@ ClientOnly
             template(#right) {{ entriesLeft }}
 
         CorporationCartRow()
-          HelperAdjustable(v-model="adjustAmount" font="bold" text="sm" space-x="0")
-
+          Adjustable(v-model="adjustAmount" font="bold" text="sm" space-x="0")
 
           ButtonSound(grid="col-span-1" sound="sm" btn="~ accent-filled on-disable:disable" :disable="!canEnterRaffle" @click="onClickEnterRaffle(adjustAmount)" ) {{ enterCopy }}
       VList(v-else-if="activeRaffleItem.state == 'past' || activeRaffleItem.state == 'my'")

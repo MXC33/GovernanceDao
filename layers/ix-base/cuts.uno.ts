@@ -11,10 +11,12 @@ const sizeMap: Record<string, string> = {
 }
 
 export const frameRules: Rule[] = [
-  [/^frame(?:-(.+))?$/, ([, d], { rawSelector }) => {
-    const selector = e(rawSelector)
+  [/^frame(?:-(.+))?$/, ([, d], ruleContext) => {
     const px = sizeMap['md']
     const pixSize = h.bracket.global.px(px)
+    const { wrappedMediaSelector, attributedSelector } = getSelector(ruleContext)
+
+    console.log("SELECTER", attributedSelector)
 
     const pseudoBase = `
       height: var(--un-frame-gap);
@@ -26,27 +28,30 @@ export const frameRules: Rule[] = [
       left: 0;
       right: 0;`
 
-    return `
-    ${selector} {
-      --un-frame-gap: ${pixSize};
-      --un-frame-color: #636363;
-      --un-frame-width: 1px;
-      position: relative;
-    }
+    return wrappedMediaSelector(`
+      ${attributedSelector} {
+        --un-frame-gap: ${pixSize};
+        --un-frame-color: #636363;
+        --un-frame-width: 1px;
+        position: relative;
+      }
 
-    ${selector}:before {
-      ${pseudoBase}
-      border: 1px solid var(--un-frame-color);
-      border-bottom: 0;
-      top: 0;
-    }
+      ${attributedSelector}:before {
+        ${pseudoBase}
+        border: 1px solid var(--un-frame-color);
+        border-bottom: 0;
+        top: 0;
+        transition: 200ms all;
+      }
 
-    ${selector}:after {
-      ${pseudoBase}
-      border: 1px solid var(--un-frame-color);
-      border-top: 0;
-      bottom: 0;
-    }`
+      ${attributedSelector}:after {
+        ${pseudoBase}
+        border: 1px solid var(--un-frame-color);
+        border-top: 0;
+        bottom: 0;
+        transition: 200ms all;
+      }`
+    )
   }],
 
   [/^frame-(.+)$/, colorResolver('--un-frame-color', 'frame-color'), { autocomplete: 'frame-$colors' }],
@@ -110,7 +115,7 @@ const getCut = (position: Position, size: Size = 'md') => {
   }
 }
 
-const getSelector = ({ constructCSS }: RuleContext<Theme>) => {
+const getSelector = ({ constructCSS, variantHandlers, variantMatch }: RuleContext<Theme>) => {
   const defaultSelector = constructCSS({})
   const selectors = defaultSelector.split("{")
   const mediaParameterIndex = selectors.findIndex((item) => item.includes("@media"))
@@ -122,11 +127,23 @@ const getSelector = ({ constructCSS }: RuleContext<Theme>) => {
       mediaSelector = selector + " {"
   }
 
+  const mediaEndSelector = mediaSelector == "" ? "" : "}"
+
   const attributedSelector = selectors.shift()
+
+  console.log("DEFAULT SELECTOR", defaultSelector, variantHandlers, variantMatch)
+
+  // Unfortunately this doesn't handle variantMatches right now for some weird reason...
+
+  const wrappedMediaSelector = (style: string) => `
+    ${mediaSelector}
+      ${style}
+    ${mediaEndSelector}
+  `
 
   return {
     attributedSelector,
-    mediaSelector
+    wrappedMediaSelector
   }
 
 }
@@ -141,26 +158,21 @@ export const cutRules: Rule<Theme>[] = [
     }
   }],
   [/^cut$/, (_, ruleContext) => {
-    const { mediaSelector, attributedSelector } = getSelector(ruleContext)
+    const { wrappedMediaSelector, attributedSelector } = getSelector(ruleContext)
 
-    return `
-      ${mediaSelector}
+    return wrappedMediaSelector(`
         .is-paint-supported ${attributedSelector} {
           clip-path: polygon(var(--cut-path));
-        }
-      `
+        }`)
   }],
   [/^cut-b-(.+)$/, (arr, ruleContext) => {
     const { theme } = ruleContext
     const [_, body] = arr
 
-    console.log("BODEY", body)
-
     if (!body)
       return
 
     const data = parseColor(body, theme)
-    console.log("DATA", data)
     if (!data)
       return
 
@@ -171,18 +183,12 @@ export const cutRules: Rule<Theme>[] = [
 
     const colorString = cssColor ? colorToString(cssColor, 'var(--cut-opacity)') : color
 
-    console.log("GOT COLOR", colorString)
+    const { wrappedMediaSelector, attributedSelector } = getSelector(ruleContext)
 
-    const { mediaSelector, attributedSelector } = getSelector(ruleContext)
-    const mediaEndBracket = mediaSelector == "" ? "" : "}"
-
-    console.log("MEdia selector", mediaSelector, attributedSelector)
-
-    return `
-      ${mediaSelector}
-        .is-not-paint-supported ${attributedSelector} {
-          border: 1px solid ${colorString} !important;
-        }
+    return wrappedMediaSelector(`
+      .is-not-paint-supported ${attributedSelector} {
+        border: 1px solid ${colorString} !important;
+      }
 
       .is-paint-supported ${attributedSelector} {
         --cut-border: 1px;
@@ -200,7 +206,6 @@ export const cutRules: Rule<Theme>[] = [
         transition: background 150ms;
         background: ${colorString};
       }
-      ${mediaEndBracket}
-    `
+    `)
   }],
 ]

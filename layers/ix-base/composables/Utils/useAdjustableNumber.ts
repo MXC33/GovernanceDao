@@ -1,7 +1,6 @@
 import { Ref } from 'vue'
-import { TokenIdentifier } from '../Token/useTokens'
-import { CorporationAdjustableToken } from '../useCorporations'
 import { get } from '@vueuse/core'
+import { AnyToken, getTokenBalance } from '../Token/useTokens'
 export interface AdjustableNumber {
   multiplier?: number,
   skipMultiplierSnap?: boolean
@@ -10,7 +9,10 @@ export interface AdjustableNumber {
   value: number,
 }
 
-export interface AdjustableToken extends AdjustableNumber, TokenIdentifier {
+export type AdjustableNumberStyle = 'frame' | 'solid' | 'inline' | 'border'
+
+export interface AdjustableToken extends AdjustableNumber {
+  token: AnyToken,
   fromUser?: boolean
 }
 
@@ -22,7 +24,7 @@ interface AdjustableTokenOptions {
   multiplier?: number,
 }
 
-export const addAdjustableToToken = (token: TokenIdentifier, options: AdjustableTokenOptions = {}): AdjustableToken => {
+export const addAdjustableToToken = (token: AnyToken, options: AdjustableTokenOptions = {}): AdjustableToken => {
   const {
     fromUser = true,
     min = 0,
@@ -32,7 +34,7 @@ export const addAdjustableToToken = (token: TokenIdentifier, options: Adjustable
   } = options
 
   return {
-    ...token,
+    token,
     fromUser,
     value: startValue ?? min,
     multiplier,
@@ -41,38 +43,26 @@ export const addAdjustableToToken = (token: TokenIdentifier, options: Adjustable
   }
 }
 
-export const addStaticPaymentToken = (token: TokenIdentifier, min: number = 1): CorporationAdjustableToken => {
-  return {
-    ...token,
-    fromUser: true,
-    value: min,
-    min,
-    adjustable: false
-  }
-}
 
-
-
-export const useAdjustableNumber = (data: Ref<AdjustableNumber | AdjustableToken>) => {
-  const { balanceOfToken } = useUserData()
-
+export const useAdjustableNumber = (data: Ref<AdjustableNumber | AdjustableToken | undefined>) => {
   const max = computed(() => {
-    const staticMax = get(data.value.max ?? Infinity)
+    const staticMax = get(data.value?.max ?? Infinity)
 
     const model = data.value as AdjustableToken
     if (model.fromUser) {
-      return Math.min(staticMax, balanceOfToken(model))
+      const balance = getTokenBalance(model.token)
+      return Math.min(staticMax, balance ?? staticMax)
     } else {
       return staticMax
     }
   })
 
   const min = computed(() =>
-    Math.max(0, data.value.min ?? 0)
+    Math.max(0, data.value?.min ?? 0)
   )
 
   const isDecreasable = computed(() => {
-    if (data.value.skipMultiplierSnap)
+    if (data.value?.skipMultiplierSnap)
       return currentValue.value >= min.value
 
     return currentValue.value - multiplier.value >= min.value
@@ -81,14 +71,14 @@ export const useAdjustableNumber = (data: Ref<AdjustableNumber | AdjustableToken
   const currentValue = computed(() => Number(data.value?.value ?? 0))
 
   const isIncreasable = computed(() => {
-    if (data.value.skipMultiplierSnap)
+    if (data.value?.skipMultiplierSnap)
       return currentValue.value <= max.value
 
 
     return currentValue.value + multiplier.value <= max.value
   })
 
-  const multiplier = computed(() => data.value.multiplier ?? 1)
+  const multiplier = computed(() => data.value?.multiplier ?? 1)
 
   const invalidNumber = computed(() =>
     currentValue.value > max.value || currentValue.value < min.value
@@ -101,21 +91,26 @@ export const useAdjustableNumber = (data: Ref<AdjustableNumber | AdjustableToken
     const amount = clamp(min.value, max.value, convertToNumber(input))
     const roundedAmount = Math.floor(amount * 10) / 10
 
-    if (data.value.skipMultiplierSnap)
+    if (data.value?.skipMultiplierSnap)
       return roundedAmount
 
     return Math.floor(roundedAmount / multiplier.value) * multiplier.value
   }
 
   const setValue = (value: number) => {
-    data.value.value = validateNumber(value)
+    if (data.value)
+      data.value.value = validateNumber(value)
   }
 
-  const increaseAmount = () =>
-    data.value.value = validateNumber(data.value.value + multiplier.value)
+  const increaseAmount = () => {
+    if (data.value)
+      data.value.value = validateNumber(data.value.value + multiplier.value)
+  }
 
-  const decreaseAmount = () =>
-    data.value.value = validateNumber(data.value.value - multiplier.value)
+  const decreaseAmount = () => {
+    if (data.value)
+      data.value.value = validateNumber(data.value.value - multiplier.value)
+  }
 
   return {
     max,
