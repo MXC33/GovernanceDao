@@ -8,7 +8,7 @@ import { CorporationOrderId } from '~/composables/corporations/order/defineOrder
 import { SelectedPurchase } from '../useSpeedup'
 import { NftFragment } from '#gql'
 import { ProbabilityWeightFragment } from '#gql'
-import { Currency } from '../useCorporationShop'
+import { get } from '@vueuse/core'
 
 export interface CorporationProbabilityItem {
   token: NftFragment,
@@ -274,7 +274,7 @@ export const useCorporationOrders = () => {
   const activeState = computed(() => getOrderState(activeCorporationOrderId.value))
 
   const activeRecipeValid = computed(() =>
-    activeRecipe.value.filter((item) => item.value < item.min || item.value > item.max).length == 0
+    activeRecipe.value.filter((item) => item.value < item.min || get(item.value) > get(item.max)).length == 0
   )
 
   const hasMinimumReqRecipeItems = computed(() =>

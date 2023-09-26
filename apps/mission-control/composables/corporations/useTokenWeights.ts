@@ -7,10 +7,6 @@ interface TokenWeightsBase {
   calculation: TokenWeightCalculation
 }
 
-interface TokenWeightBase {
-  token: NftFragment,
-}
-
 export type TokenWeightedOutput = TokenWeightLinear | TokenWeightsDiff | TokenWeightNLExponential
 
 

@@ -9,7 +9,7 @@ VList()
       CorporationSpeedupSelectToken(:is-active="isSameNFT(payment.token, selectedToken)" v-for="payment in payments" @click="selectToken(payment.token)" w="full" :token="payment.token")
 
     div(font="bold" uppercase="~") {{$t(`general.timeCost.hours`)}}
-    HelperAdjustable(v-model="speedup")
+    Adjustable(v-model="speedup")
 
     HelperProgressBar(:progress="progress")
 

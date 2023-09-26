@@ -1,6 +1,6 @@
 import { MaybeRef, get } from '@vueuse/core';
-import type { AdjustableNumber } from '~~/composables/useAdjustableNumber';
-import { NftFragment } from '../useNFTs';
+import { NftFragment } from '#gql';
+import { AdjustableNumber } from '@ix/base/composables/Utils/useAdjustableNumber';
 
 export interface PaymentOption {
   token: NftFragment,

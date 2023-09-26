@@ -10,8 +10,8 @@ VList(pos="sticky bottom-0" color="white" bg="mc-black opacity-90" b="t-1 mc-ora
 </template> 
 
 <script setup lang="ts">
-import type { AdjustableToken } from '~~/composables/useAdjustableNumber';
 import type { NftFragment } from '#gql'
+import type { AdjustableToken } from '@ix/base/composables/Utils/useAdjustableNumber';
 
 const adjustAmount = ref<AdjustableToken>(null)
 

@@ -1,4 +1,4 @@
-import type { AdjustableToken } from '../useAdjustableNumber'
+import { AdjustableToken } from '@ix/base/composables/Utils/useAdjustableNumber'
 import { TokenWeightedOutput } from './useTokenWeights'
 
 export type Corporation = 'gws' | 'new-lands' | 'eternalab' | 'lucky-cat' | 'y-space' | 'mc' | 'net-empire' | 'gravity-grade' | 'astro-cap' | 'haveblue' | 'arcade'

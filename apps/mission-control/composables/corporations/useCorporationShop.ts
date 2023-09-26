@@ -1,7 +1,7 @@
 import { Corporation, CorporationAdjustableToken } from './useCorporations'
 import { TokenWithInfoBlocks } from '../useInfoBlocks'
 import { NftFragment, GenericStoreSaleInfoFragment } from '#gql'
-import { AdjustableToken } from '../useAdjustableNumber'
+import { AdjustableToken } from '@ix/base/composables/Utils/useAdjustableNumber'
 
 export type Currency = 'ixt' | 'usdt' | 'usdc' | 'matic' | 'weth' | 'usd' | 'visa' | 'astro-credit' | 'waste' | 'energy'
 

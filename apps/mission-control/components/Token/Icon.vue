@@ -3,14 +3,15 @@ Icon(:filter="outline ? 'url(#white-outline)' : ''")
 </template>
 
 <script lang="ts" setup>
-import type { TokenIdentifier } from '~/composables/Token/useTokens';
+import type { NftFragment } from '#gql'
+const { getTokenTier } = useNFTs()
 
-
-const svgPath = computed(() => getTokenKey(props.token))
+const svgPath = computed(() => getTokenTier(props.token))
+console.log("PATH", svgPath.value)
 const Icon = await import(`../../assets/images/ui/token/${svgPath.value}.svg?component`).catch(() => '<div></div>')
 
 const props = defineProps<{
-  token: TokenIdentifier,
+  token: NftFragment,
   outline?: boolean
 }>()
 

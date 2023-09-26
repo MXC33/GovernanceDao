@@ -21,8 +21,7 @@ ClientOnly
             template(#right) {{ entriesLeft }}
 
         CorporationCartRow()
-          HelperAdjustable(v-model="adjustAmount" font="bold" text="sm" space-x="0")
-
+          Adjustable(v-model="adjustAmount" font="bold" text="sm" space-x="0")
 
           ButtonSound(grid="col-span-1" sound="sm" btn="~ accent-filled on-disable:disable" :disable="!canEnterRaffle" @click="onClickEnterRaffle(adjustAmount)" ) {{ enterCopy }}
       VList(v-else-if="activeRaffleItem.state == 'past' || activeRaffleItem.state == 'my'")
@@ -39,13 +38,12 @@ ClientOnly
 <script lang="ts" setup>
 import type { CorporationRaffleItem } from '~~/composables/corporations/useCorporationRaffle';
 import type { InfoBlockSlideshowHeader, InfoBlockTable } from '~~/composables/useInfoBlocks';
-import type { AdjustableToken } from '~~/composables/useAdjustableNumber';
 import type { NftFragment } from '#gql';
 import type { CorporationPaymentToken } from '~~/composables/corporations/useCorporations';
+import type { AdjustableToken } from '@ix/base/composables/Utils/useAdjustableNumber';
 import { format } from 'date-fns';
 
 definePageMeta({
-  middleware: 'auth',
   layout: 'corporation'
 })
 

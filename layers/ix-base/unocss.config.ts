@@ -98,13 +98,11 @@ export default definePreset({
       'btn': 'transition-all transition-duration-150 flex flex-col text-center justify-center items-center leading-none cursor-pointer font-bold uppercase btn-md px-4',
       'btn-primary': 'bg-ix-primary hover:bg-ix-primary color-white',
       'btn-secondary': 'bg-gray-600 color-white hover:bg-gray-400',
-      'btn-secondary-detail': 'btn-md bg-gray-500 hover:bg-gray-400 cut-bottom-right cut-sm btn-center',
       'btn-tertriary': 'b-1 b-gray-400 hover:b-gray-300',
       'btn-select': 'cut-bottom-right cut-b-gray-400 hover:cut-b-gray-300',
       'btn-select-active': 'bg-gray-500 cut-b-gray-300',
-      'btn-form': 'font-400 py-3 px-1 btn-select',
-      'btn-form-active': 'bg-gray-600',
-      'btn-accent': 'btn-primary',
+      'btn-form': 'font-400 py-3 px-1 btn-select btn-sm',
+      'btn-form-active': 'bg-gray-600'
     },
 
     // Special button

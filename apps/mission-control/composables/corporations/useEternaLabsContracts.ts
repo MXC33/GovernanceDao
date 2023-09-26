@@ -14,8 +14,6 @@ export const useEternalabData = () =>
     const orderCosts = GqlEternaLabsOrderCosts()
     const [{ eternalLabsOrderInfo }, { eternalLabsOrderCosts }] = await Promise.all([orderInfo, orderCosts])
 
-    console.log("Data", eternalLabsOrderInfo)
-
     return { orders: eternalLabsOrderInfo, orderData: eternalLabsOrderCosts }
   })
 
