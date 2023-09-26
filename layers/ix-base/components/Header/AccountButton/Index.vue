@@ -1,6 +1,6 @@
 <template lang="pug">
 VList(pos="relative" display="lt-md:none" ref="menuElement")
-  button(btn="~ s-connected:primary-outline ix-orange sm" whitespace="nowrap" @click="toggleMenu" :state="walletState")
+  button(btn="~ s-connected:primary-outline orange-outline sm" whitespace="nowrap" @click="toggleMenu" :state="walletState")
     Transition(name="fade-slow" mode="out-in")
       span(v-if="walletState == 'disconnected'") {{ $t(`general.navigation.menu.connectWallet`)}}
       span(v-else-if="!ixtPending && ixtBalance != undefined && walletState == 'connected'" w="25") {{ roundToDecimals(ixtBalance, 2) }} IXT

@@ -40,7 +40,7 @@ export interface NavigationMedia {
 
 export const useHeaderData = () =>
   useAsyncDataState('site-header-menu', async () => {
-    const request = (await $fetch(BASE_API_ENDPOINT_URL() +'/navigation')) as HeaderRequest
+    const request = (await $fetch(BASE_API_ENDPOINT_URL() + '/navigation')) as HeaderRequest
 
     return request?.data ?? []
   });
@@ -54,8 +54,11 @@ export const useSiteHeader = () => {
     activeCurrency.value = currency
   }
 
+  const headerHeight = useState<number>('header-height', () => 24)
+
   return {
     activeCurrency,
-    setActiveCurrency
+    setActiveCurrency,
+    headerHeight
   }
 };

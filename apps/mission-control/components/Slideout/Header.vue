@@ -24,7 +24,7 @@ header(pos="sticky top-0" bg="black opacity-40" backdrop="~ blur-sm" b="lt-md:(t
 
 <script setup lang="ts">
 import ChevronLeftIcon from '~/assets/images/ui/icon-chevron-left.svg?component'
-import CloseIcon from '~/assets/images/ui/close.svg?component'
+import CloseIcon from '~/assets/images/ui/close.svg'
 import type { TierId } from '~~/composables/NFTs/tiers';
 
 const { buildSelectionGroup } = useBuildTools()

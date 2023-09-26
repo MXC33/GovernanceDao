@@ -1,5 +1,5 @@
 <template lang="pug">
-div(flex="~ row grow" w="full" items="center" justify="center" bg="#FF1E6E" pos="relative")
+div(flex="~ row grow" items="center" justify="center" bg="#FF1E6E" pos="relative")
   HList(p="0 md:1" text="xs md:sm" w="full" v-if="isBannerActive")
 
     HList(flex-grow="1" font="bdrA3mik" items="center" justify="center" space-x="2"  tracking-wide )
@@ -8,17 +8,15 @@ div(flex="~ row grow" w="full" items="center" justify="center" bg="#FF1E6E" pos=
       div(color="black") Territory Lottery
       div(color="white") is LIVE
 
-
       NuxtLink(to="https://territorylottery.planetix.com" )
         span.lucky-cat-text(uppercase="~" text="lt-md:center" p="lt-md:1") - Click Here
 
     HList(justify="end" items="center" pr="2" z="999")
-      CloseIcon(w="2.5 md:4" fill="mc-orange hover:mc-orange_40" cursor="pointer" @click="toggleBanner")
+      CloseIcon(w="2.5 md:4" fill="black hover:black" cursor="pointer" @click="toggleBanner")
 </template>
 
 <script lang="ts" setup>
-import Eterna from '~/assets/images/ui/wallet/payments/ixt-logo-box.svg'
-import CloseIcon from '~/assets/images/ui/close.svg'
+import CloseIcon from '~/assets/images/icons/close.svg'
 import LuckyCatIcon from '~/assets/images/splash/lucky-cat-golden.svg'
 
 

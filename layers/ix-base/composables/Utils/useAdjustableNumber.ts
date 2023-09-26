@@ -51,7 +51,6 @@ export const addAdjustableToToken = (token: AnyToken, options: AdjustableTokenOp
 }
 
 export const useAdjustableNumber = (data: Ref<AdjustableNumber | AdjustableToken>) => {
-  const { balanceOfToken } = useUserData()
   const { getCurrencyToken } = useCurrencyData()
 
   const max = computed(() => {
@@ -61,7 +60,9 @@ export const useAdjustableNumber = (data: Ref<AdjustableNumber | AdjustableToken
     if (model.fromUser) {
       const paymentToken = getCurrencyToken(model.payment?.paymentMethod)
       const balanceToken = Boolean(model.payment) ? paymentToken : model.token
-      return Math.min(staticMax, balanceOfToken(balanceToken))
+      const maxValue = get(staticMax)
+      const maximum = balanceToken ? getTokenBalance(balanceToken) : maxValue
+      return Math.min(maxValue, maximum ?? 0)
     } else {
       return staticMax
     }

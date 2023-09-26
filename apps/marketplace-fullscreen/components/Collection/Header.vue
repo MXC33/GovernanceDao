@@ -29,7 +29,7 @@ import Close from '~/assets/icons/close.svg'
 
 
 defineProps<{
-  closeTerritory: boolean
+  context: CollectionContext
 }>()
 const isClosed = ref(false)
 

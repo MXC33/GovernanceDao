@@ -35,6 +35,7 @@ export default definePreset({
   theme: {
     fontFamily: {
       foundry: ['Foundry Gridnik', 'sans-serif'],
+      bdrA3mik: ['BDRA3MiK-Regular'],
     },
     colors: {
       ix: {
@@ -117,6 +118,7 @@ export default definePreset({
       'btn-disabled': 'bg-gray-700 color-gray-400',
       'btn-center': 'flex justify-center items-center',
       'btn-primary-outline': 'btn-primary bg-opacity-20 hover:bg-opacity-40 b-0.5 b-ix-primary',
+      'btn-orange-outline': 'bg-ix-orange bg-opacity-20 hover:bg-opacity-40 b-0.5 b-ix-primary',
       'btn-primary-outline-opaque': 'btn-primary-outline bg-opacity-40 hover:bg-opacity-60',
       'btn-lg': 'min-h-14',
       'btn-md': 'min-h-12',

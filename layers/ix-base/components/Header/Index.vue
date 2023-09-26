@@ -1,6 +1,8 @@
 <template lang="pug">
-VList(:class="className" pos="sticky left-0 top-0" translate-y="$header-offset" z="99" w="full" @mouseleave="onMouseLeave" ref="menuElement" transition="all" bg="ix-black" px="4 md:7.5")
-  HList(items="center" justify="between" h="$header-height-mobile md:$header-height-desktop" space-x="3")
+VList(:class="className" pos="sticky left-0 top-0" translate-y="$header-offset" z="99" w="full" @mouseleave="onMouseLeave" ref="menuElement" transition="all" bg="ix-black" px="4 md:7.5" )
+  HeaderAdBanner(mx="-4 md:-7.5" ref="bannerEl")
+
+  HList(items="center" justify="between" h="16" space-x="3" ref="menuEl")
     NuxtLink(to="https://www.planetix.com")
       template(v-if="$slots.logo")
         slot(name="logo")
@@ -38,6 +40,8 @@ VList(:class="className" pos="sticky left-0 top-0" translate-y="$header-offset" 
     HeaderNavigation(:class="className + '-header'" v-if="activeMenuIndex != null && headerData != null"  :key="activeMenuIndex" :header="headerData[activeMenuIndex]")
 
   slot(name="contentBottom")
+
+  component(is="style") :root { --header-height: {{ headerHeight }}px; }
 </template> 
 
 <script lang="ts" setup>
@@ -49,6 +53,8 @@ const { className } = defineProps<{
   className?: string
 }>()
 
+const bannerEl = ref()
+const menuEl = ref()
 const { useMobileBreakpoint } = useDevice()
 const isMobile = useMobileBreakpoint()
 const { data: headerData } = useHeaderData()
@@ -59,7 +65,18 @@ const onMouseLeave = () => {
   console.log("LEAVE")
 }
 const activeMenuIndex = useHeaderIndex()
+const { headerHeight } = useSiteHeader()
 const menuElement = shallowRef()
+
+const { height: bannerHeight } = useElementBounding(bannerEl)
+const { height: menuHeight } = useElementBounding(menuEl)
+
+effect(() => {
+  const newHeight = Math.round(bannerHeight.value + menuHeight.value)
+  console.log("Header", newHeight, bannerHeight.value, menuHeight.value)
+  if (newHeight != headerHeight.value)
+    headerHeight.value = newHeight
+})
 
 const route = useRoute()
 const scollingDown = shallowRef(false)
@@ -124,11 +141,3 @@ onClickOutside(menuElement, () => {
 
 
 </script>
-
-
-<style>
-:root {
-  --header-height-mobile: 3rem;
-  --header-height-desktop: 4rem;
-}
-</style>
