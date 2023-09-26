@@ -85,6 +85,14 @@ export interface ActiveRewardsResponse extends ObjectResponse {
   data: ActiveRewards
 }
 
+export interface ActiveLotteryData {
+  id: number,
+  start_timestamp: number
+}
+export interface ActiveLotteryDataResponse extends ObjectResponse {
+  data: ActiveLotteryData
+}
+
 export const usePlayerAPI = () => {
   const { fetchIXAPI } = useIXAPI()
 
@@ -135,12 +143,19 @@ export const usePlayerAPI = () => {
     }
   )
   const getActiveRewards = () => fetchIXAPI('geo/lottery/active/rewards') as Promise<ActiveRewardsResponse>
+  const useActiveLotteryData = () => {
+    return useAsyncDataState(`lottery-active-data`, () => {
+      const data = fetchIXAPI('geo/lottery/active/data') as Promise<ActiveLotteryDataResponse>
+      return data
+    })
+  }
 
   return {
     hasTerritories,
     useWeeksDrawData,
     getActiveRewards,
     fetchMerkleProof,
-    useEnteredTicketData
+    useEnteredTicketData,
+    useActiveLotteryData
   }
 }

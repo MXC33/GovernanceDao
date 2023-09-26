@@ -11,7 +11,7 @@ div()
 
     div(flex="~" justify="center" font="bold" uppercase="~" text="base md:xl" m="y-6 md:y-10" flex-wrap)
       span YOUR ENTRIES:
-      span(color="$mc-pink" m="x-1") {{enteredTickets?.entered_tickets}}
+      span(color="$mc-pink" m="x-1") {{enteredTickets?.entered_tickets || 0}}
       span() ONE-TIME TICKET &
       span(  color="$mc-pink" m="x-1") {{enteredTickets?.entered_weekly_tickets || 0}}
       span() Subscription TICKETS
