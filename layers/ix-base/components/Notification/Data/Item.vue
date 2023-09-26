@@ -1,17 +1,16 @@
 <template lang ="pug">
-VList.notification(w="full" @click="onClick" cursor="on-link:pointer" :link="!!link")
-  HList(items="center")
-    VList(items="left" p="1 r-3")
-      h4(font="bold") {{ message.notification.title }} 
-
+VList.notification(w="full" @click="onClick" cursor="on-link:pointer" :link="!!link" opacity="on-link:hover:80" transition="all")
+  VList(items="left" p="1 r-3")
+    h4(font="bold") {{ message.notification.title }} 
+    HList(space-x="1")
       div(v-html="message.notification.message" color="gray-200")
       div(v-if="message.notification.price != null" text="ix-mint") {{ message.notification.price }} IXT
 
-    div(grow="~")
+  div(grow="~")
 
-    div(p="1")
-      div(v-if="message.is_read == 0"  bg="ix-mint" wh="1" rounded="full")
-      
+  div(p="1")
+    div(v-if="message.is_read == 0"  bg="ix-mint" wh="1" rounded="full")
+    
 </template>
 
 <script lang="ts" setup>

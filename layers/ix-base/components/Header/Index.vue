@@ -73,7 +73,6 @@ const { height: menuHeight } = useElementBounding(menuEl)
 
 effect(() => {
   const newHeight = Math.round(bannerHeight.value + menuHeight.value)
-  console.log("Header", newHeight, bannerHeight.value, menuHeight.value)
   if (newHeight != headerHeight.value)
     headerHeight.value = newHeight
 })

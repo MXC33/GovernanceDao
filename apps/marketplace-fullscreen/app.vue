@@ -1,26 +1,25 @@
 <template lang="pug">
 #app.antialiased(font="foundry" text="base" bg="ix-black" color="white" ref="app" overscroll="none" flex="~ col grow")
   NuxtLayout()
-    VList()
-      NuxtLoadingIndicator(color="rgb(255, 102, 71)")
+    NuxtLoadingIndicator(color="rgb(255, 102, 71)")
 
-      NuxtPage()
+    NuxtPage()
 
-      PopupList()
+    PopupList()
 
-      div#infobox(:style="values" z="400" pos="absolute")
+    div#infobox(:style="values" z="400" pos="absolute")
 
-      div#takeover
+    div#takeover
 
-      SnackbarList()
+    SnackbarList()
 
-      CookieBot(:id="cookieBotId")
+    CookieBot(:id="cookieBotId")
 
-      Popup(v-if="isSwapVisible" @close="isSwapVisible = false" :disable-default-close="true")
-        template(#header) {{ $t(`marketplace.navigation.buy.swap.title`)}}
-        template(#default)
-          VList(w="full" justify="center" items="center" )
-            iframe(src="https://ix.foundation/lefi" w="full" h="full" min-h="118")
+    Popup(v-if="isSwapVisible" @close="isSwapVisible = false" :disable-default-close="true")
+      template(#header) {{ $t(`marketplace.navigation.buy.swap.title`)}}
+      template(#default)
+        VList(w="full" justify="center" items="center" )
+          iframe(src="https://ix.foundation/lefi" w="full" h="full" min-h="118")
 
 
 

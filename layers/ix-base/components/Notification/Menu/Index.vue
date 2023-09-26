@@ -8,13 +8,13 @@ VList(pos="absolute right-0 lt:lg:right-4 lt-lg:left-0 top-full" bg="ix-black" m
 
     HList(items="center" mt="6")
       div(grid="~ cols-2")
-        button(btn="~ form md on-selected:form-active" p="x-3 y-0"  @click="showUnreadNotifications = false" :selected="showUnread(false)") All
+        button(btn="~ form sm on-selected:form-active" p="x-3 y-0"  @click="showUnreadNotifications = false" :selected="showUnread(false)") All
 
-        button(btn="~ form md on-selected:form-active" p="x-3 y-0" @click="showUnreadNotifications = true" :selected="showUnread(true)") Unread
+        button(btn="~ form sm on-selected:form-active" p="x-3 y-0" @click="showUnreadNotifications = true" :selected="showUnread(true)") Unread
 
       div(grow="~")
 
-      button(btn="~ tertriary md" px="2" @click="readAll") Mark All As Read
+      button(btn="~ tertriary sm" px="2" @click="readAll") Mark All As Read
 
     VList(pos="relative" p="t-6 b-3" min-h="0")
       VList(disable="on-pending:active" :pending="isPending" min-h="0")
