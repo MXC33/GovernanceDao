@@ -16,6 +16,15 @@
 }
 
 
+@font-face {
+  font-family: 'BDRA3MiK-Regular';
+  src: url('../fonts/BDRA3MiK-Regular.otf') format('opentype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+
 @media (max-width: 767.9px) {
   :root {
     --font-size-xs: 0.75rem;

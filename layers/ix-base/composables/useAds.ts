@@ -8,8 +8,13 @@ export const useAds = () => {
 
   const showAdPopup = useCookieState<boolean>('show-ad-popup', () => true, { consentLevel: 'preferences' })
 
+  const isMCAdActive = useCookieState('mc-banner-active', () => true, { maxAge: aDay, consentLevel: 'preferences' })
+
+
+
   return {
     showAdPopup,
-    isBannerActive
+    isBannerActive,
+    isMCAdActive
   }
 }

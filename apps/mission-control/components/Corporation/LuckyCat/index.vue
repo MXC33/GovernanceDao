@@ -6,6 +6,7 @@ CorporationPage(@click-back="onExit")
 
   template(#default)
     CorporationOverview()
+      CorporationButton(page="territoryLottery" external-link="https://territorylottery.planetix.com/")
       CorporationButton(page="shop")
       CorporationButton(page="raffle")
 
