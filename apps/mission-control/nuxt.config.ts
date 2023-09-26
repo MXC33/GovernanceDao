@@ -42,7 +42,6 @@ export default defineNuxtConfig({
     '@/assets/styles/colors.css',
     '@/assets/styles/transitions.css',
     '@/assets/styles/corporations.css',
-    '@unocss/reset/tailwind.css',
     'vue3-carousel/dist/carousel.css'
   ],
 
