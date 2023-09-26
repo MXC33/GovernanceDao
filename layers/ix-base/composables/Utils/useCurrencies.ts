@@ -1,7 +1,11 @@
-import { Currency } from "./corporations/useCorporationShop"
-
 const IXT_KEY = 'user-ixt-balance'
 
+export type Currency = 'ixt' | 'usdt' | 'usdc' | 'matic' | 'weth' | 'usd' | 'visa' | 'astro-credit' | 'waste' | 'energy'
+
+export interface Payment {
+  paymentMethod: Currency,
+  price: number
+}
 export const useCurrencyData = () => {
   const { data: mcNFTs, execute: fetchTokenData } = useTokenData()
 

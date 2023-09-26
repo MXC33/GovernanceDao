@@ -31,7 +31,6 @@ export const useNotifications = () => {
 
 
   const addNotification = (description?: string, opts: NotificationOption = {}) => {
-    console.log("ADD NOTE", description)
     if (!description)
       return
 
