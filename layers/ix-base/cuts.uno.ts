@@ -191,7 +191,8 @@ export const cutRules: Rule<Theme>[] = [
       }
 
       .is-paint-supported ${attributedSelector} {
-        --cut-border: 1px;
+        --cut-border: 1.5px;
+        border: 0;
         clip-path: polygon(var(--cut-path));
         position: relative;
       }

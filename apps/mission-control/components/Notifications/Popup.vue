@@ -29,10 +29,9 @@ VList(pos="absolute right-4 md:top-4 lt-md:(bottom-0 left-0 right-0)" w="md:80" 
 </template>
 
 <script setup lang="ts">
-import type { Notification } from '~~/composables/useNotifications';
 import WarningIcon from '~/assets/images/ui/icon-warning.svg'
 import { spaceCaseIt } from 'case-it'
-
+import type { Notification } from '@ix/base/composables/useNeNotificationsAndMessages';
 
 const { markCurrentNotificationRead } = useNotifications()
 

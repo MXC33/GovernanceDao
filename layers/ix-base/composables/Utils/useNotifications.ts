@@ -11,9 +11,15 @@ export interface Notification {
   errorCode?: string,
   isRead: boolean,
   id: string,
+  sender?: string,
   link?: NotificationLink,
 }
 
+export interface NotificationOption {
+  errorCode?: string,
+  sender?: string,
+  link?: NotificationLink
+}
 
 export const useNotifications = () => {
   const notifications = useState<Notification[]>('notifications', () => [])
@@ -24,15 +30,23 @@ export const useNotifications = () => {
   });
 
 
-  const addNotification = (description?: string, errorCode?: string, link?: NotificationLink) => {
+  const addNotification = (description?: string, opts: NotificationOption = {}) => {
+    console.log("ADD NOTE", description)
     if (!description)
       return
+
+    const {
+      errorCode,
+      link,
+      sender,
+    } = opts
 
     notifications.value.push({
       description,
       isRead: false,
       errorCode,
       link,
+      sender,
       id: uuid()
     })
   }

@@ -12,14 +12,8 @@ div(flex="~ col grow" justify="center" color="opacity-80 on-not-enough:red-500" 
 import type { CorporationPaymentToken } from '~~/composables/corporations/useCorporations';
 const { balanceOfToken } = useUserData()
 
-const props = defineProps<{
-  modelValue: CorporationPaymentToken,
-}>()
-const emit = defineEmits<{ (e: 'update:modelValue', value: CorporationPaymentToken): void }>()
-const data = useVModel(props, 'modelValue', emit)
+const data = defineModel<CorporationPaymentToken>()
 
-const isNotEnough = computed(() => balanceOfToken(props.modelValue) < props.modelValue.value)
-
-console.log("Balance?", balanceOfToken(props.modelValue), props.modelValue.value, isNotEnough.value)
+const isNotEnough = computed(() => balanceOfToken(data.value.token) < data.value.value)
 
 </script>

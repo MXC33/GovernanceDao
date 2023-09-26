@@ -41,7 +41,13 @@ export const useClaimAndUnstakeAll = () => {
     await onTransactionResolved(transaction.hash)
     resetTransactionState()
 
-    addNotification("The reboot was successful, agent. You must now go to Newlands LLC and obtain the Apollo Contract to use your tiles. You can also pick up the Artemis Contract to obtain additional tiles", 'proxy-of-change', null, { link: '/new-lands', title: 'Newlands' })
+    addNotification("The reboot was successful, agent. You must now go to Newlands LLC and obtain the Apollo Contract to use your tiles. You can also pick up the Artemis Contract to obtain additional tiles", {
+      sender: 'proxy-of-change',
+      link: {
+        link: '/new-lands',
+        title: 'Newlands'
+      }
+    })
 
     await refreshOldStakedOnTileData()
     await refreshUserInventory()

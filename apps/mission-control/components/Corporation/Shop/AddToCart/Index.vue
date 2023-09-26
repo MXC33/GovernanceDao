@@ -25,8 +25,6 @@ template(v-else)
 </template>
 
 <script lang="ts" setup>
-import type { ContractTier } from '~/composables/useTileRings';
-import type { AdjustableToken } from '~/composables/useAdjustableNumber';
 import type { CorporationShopItem } from '~~/composables/corporations/useCorporationShop';
 
 const props = defineProps<{

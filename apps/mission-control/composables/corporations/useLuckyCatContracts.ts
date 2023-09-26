@@ -29,7 +29,7 @@ export const useLuckyCatContracts = () => {
     const { addNotification } = useNotifications()
 
     if (msg)
-      addNotification('Yabai! You’re unlucky and couldn’t enter the raffle-osu!', 'seina', msg)
+      addNotification('Yabai! You’re unlucky and couldn’t enter the raffle-osu!', { sender: 'seina', errorCode: msg })
 
 
     console.error("[Raffle] Enter Raffle Failed", msg)
@@ -43,7 +43,7 @@ export const useLuckyCatContracts = () => {
 
     await Promise.all([refreshRaffleData(), refreshTickets()])
 
-    addNotification("You´ve entered the raffle-osu!", 'seina')
+    addNotification("You´ve entered the raffle-osu!", { sender: 'seina' })
     return true
   }
 
@@ -54,7 +54,7 @@ export const useLuckyCatContracts = () => {
 
     await Promise.all([refreshRaffleData(), refreshUserInventory()])
 
-    addNotification("The meaning of luck is just to be alive, and your adventure has rewarded you!", 'seina')
+    addNotification("The meaning of luck is just to be alive, and your adventure has rewarded you!", { sender: 'seina' })
 
     return true
   }

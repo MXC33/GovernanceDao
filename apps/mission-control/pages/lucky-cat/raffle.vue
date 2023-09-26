@@ -38,13 +38,12 @@ ClientOnly
 <script lang="ts" setup>
 import type { CorporationRaffleItem } from '~~/composables/corporations/useCorporationRaffle';
 import type { InfoBlockSlideshowHeader, InfoBlockTable } from '~~/composables/useInfoBlocks';
-import type { AdjustableToken } from '~~/composables/useAdjustableNumber';
 import type { NftFragment } from '#gql';
 import type { CorporationPaymentToken } from '~~/composables/corporations/useCorporations';
+import type { AdjustableToken } from '@ix/base/composables/Utils/useAdjustableNumber';
 import { format } from 'date-fns';
 
 definePageMeta({
-  middleware: 'auth',
   layout: 'corporation'
 })
 

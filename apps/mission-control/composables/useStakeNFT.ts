@@ -177,9 +177,12 @@ export const useStakeNFTContracts = () => {
   const stakeFailed = (msg?: string, merkleError: boolean = false) => {
     const { addNotification } = useNotifications()
     if (merkleError && msg) {
-      addNotification(msg, 'proxy-of-change')
+      addNotification(msg, { sender: 'proxy-of-change' })
     } else if (msg) {
-      addNotification("Staking malfunction detected, agent. Quick Response Unit deployed.", 'proxy-of-change', msg)
+      addNotification("Staking malfunction detected, agent. Quick Response Unit deployed.", {
+        sender: 'proxy-of-change',
+        errorCode: msg
+      })
     }
 
     console.error("[Stake] Failed", msg)
@@ -194,7 +197,7 @@ export const useStakeNFTContracts = () => {
 
     clearStaking()
 
-    addNotification("Object secured, agent.", 'proxy-of-change')
+    addNotification("Object secured, agent.", { sender: 'proxy-of-change' })
 
     await refreshTiles(tiles)
     console.log("[Corporations] Collecting Success")
@@ -209,7 +212,7 @@ export const useStakeNFTContracts = () => {
     currentNonce.value = null
 
     if (msg)
-      addNotification("Error occurred, agent. But your claim is legitimate. We’re solving it right away.", 'proxy-of-change', msg)
+      addNotification("Error occurred, agent. But your claim is legitimate. We’re solving it right away.", { sender: 'proxy-of-change', errorCode: msg })
 
 
     console.error("[Corporations] Collecting Failed", msg)

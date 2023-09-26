@@ -1,6 +1,6 @@
 import { ethers } from "ethers";
 import { Sender } from './useSender';
-import { ContractInterface, CreateContractOptions, TransactionOptions } from "@ix/base/composables/Utils/defineMCContract";
+import { ContractInterface, CreateContractOptions, TransactionOptions } from "@ix/base/composables/Utils/defineContract";
 
 interface ContractNotificationSettings {
   sender?: Sender,
@@ -33,13 +33,17 @@ export const defineMCContract = <T extends ContractInterface<T>>(key: string, op
 
     const message = txOptions?.successMessage ?? successMessage
     if (message)
-      addNotification(message, sender)
+      addNotification(message, { sender })
   }
 
   const onEveryFail = (txOptions?: MCTransactionOptions, error?: string) => {
     const { sender, failMessage } = notifications
+    console.log("ON FAIL")
 
-    addNotification(txOptions?.failMessage ?? failMessage, txOptions?.sender ?? sender, error)
+    addNotification(txOptions?.failMessage ?? failMessage, {
+      sender: txOptions?.sender ?? sender,
+      errorCode: error
+    })
   }
 
   const mcOptions: CreateContractOptions<T> = {
