@@ -144,7 +144,9 @@ export const useLuckyCatGeoLotteryContract = <T extends ContractInterface<T> & L
         return undefined
 
       return contract.claimReward(lotteryID, merkleProofs)
-    })
+    }, {onTxApproved : async (txResponse) => {
+        console.log('txResponse', txResponse)
+      }})
 
   /** END Write **/
 

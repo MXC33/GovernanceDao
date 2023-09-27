@@ -31,7 +31,7 @@ export interface TransactionOptions {
   approve?: () => Promise<unknown>,
   onSuccess?: () => Promise<any>,
   onFail?: (error?: any) => Promise<any>,
-  onTxApproved?: () => Promise<any>,
+  onTxApproved?: (txResponse: any) => Promise<any>,
   onSuccessAfterMs?: number,
   successOnEventKey?: string | string[],
   // getTransactionError?: (errorCode?: string) => ContractError
@@ -229,7 +229,7 @@ export const defineContract = <T extends ContractInterface<T> | object>(key: str
         throw new Error("Transaction failed. Try increasing the gas manually.")
 
       if (txOptions?.onTxApproved)
-        await txOptions?.onTxApproved()
+        await txOptions?.onTxApproved(resolvedTransaction)
 
       if (!pendingTxEvent.value)
         await transactionSuccess(txOptions)
