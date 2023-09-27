@@ -86,6 +86,13 @@ const useBadgeNFTData = () =>
     return badge.badgeNFT
   })
 
+const useGeoLotteryNFTData = () =>
+  useAsyncDataState('geolottery-nft-data', async () => {
+    const credentials = useGraphqlCredentials()
+    const geoLottery = await GqlGeoLotteryNFT({ credentials })
+    return geoLottery.geoLotteryNFT
+  })
+
 export const useGravityGradeData = () =>
   useAsyncDataState('gravity-grade', async () => {
     const credentials = useGraphqlCredentials()
@@ -138,6 +145,7 @@ export const useUserData = () => {
 
   const { execute: fetchAOCBadges, data: aocbadges, refresh: refreshAOCBadges } = useBadgeNFTData()
 
+  const { execute: fetchGeoLottery, data: geoLottery, refresh: refreshGeoLottery } = useGeoLotteryNFTData()
 
 
   const fetchCommonData = () =>
@@ -147,10 +155,10 @@ export const useUserData = () => {
     Promise.all([initialFetchAllTiles(), fetchCommonData(), fetchStakedMCNFT(), fetchPlayerBaseLevel(), fetchStakedGenesis(), fetchStakedGenesisEth()].flat())
 
   const fetchUserInventory = () =>
-    Promise.all([fetchLandmarks(), fetchGravityGrade(), fetchCommonData(), fetchEthNFTs(), fetchAvatars(), fetchAOCBadges()].flat())
+    Promise.all([fetchLandmarks(), fetchGravityGrade(), fetchCommonData(), fetchEthNFTs(), fetchAvatars(), fetchAOCBadges(), fetchGeoLottery()].flat())
 
   const refreshUserInventory = () =>
-    Promise.all([refreshLandmarks(), refreshGravityGrade(), refreshLandData(), refreshTokens(), refreshEthNFTs(), refreshRover(), refreshAvatars(), refreshAOCBadges()])
+    Promise.all([refreshLandmarks(), refreshGravityGrade(), refreshLandData(), refreshTokens(), refreshEthNFTs(), refreshRover(), refreshAvatars(), refreshAOCBadges(), refreshGeoLottery()])
 
   const refreshPacks = () =>
     Promise.all([refreshGravityGrade(), refreshTokens()])
@@ -163,7 +171,8 @@ export const useUserData = () => {
     landData.value as NftFragment,
     rovers.value as NftFragment,
     avatars.value as NftFragment,
-    aocbadges.value as NftFragment
+    aocbadges.value as NftFragment,
+    geoLottery.value as NftFragment
   ])
 
 
@@ -197,6 +206,7 @@ export const useUserData = () => {
     rovers,
     avatars,
     aocbadges,
+    geoLottery,
     balanceOfToken,
     fetchUserInventory,
     fetchGameAssets,

@@ -22,6 +22,12 @@ query AvatarNFT($credentials: CredentialsInput!) {
   }
 }
 
+query GeoLotteryNFT($credentials: CredentialsInput!) {
+  geoLotteryNFT(credentials: $credentials) {
+    ...NFT
+  }
+}
+
 query TokenInfo($tokenIds: [Int!]!, $contractAddress: String!) {
   tokenInfo(tokenIds: $tokenIds, contractAddress: $contractAddress) {
     ...NFT
