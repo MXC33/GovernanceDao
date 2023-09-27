@@ -60,6 +60,11 @@ export const mintableSuperTokenAddress: ContractAddress = {
   polygon: "0x9308A7116106269eB11834dF494eFd00d244cF8e"
 }
 
+export const geoLotteryRewardAddress: ContractAddress = {
+  mumbai: "0x4a21Be7F3b7c845400ea2eE27A15b7C843d7f3e6",
+  polygon: "0x30FFD41ed89cAC7ec314b65F0178Afb8A3651d44"
+}
+
 export const superFluidAddress: ContractAddress = {
   mumbai: "0xEB796bdb90fFA0f28255275e16936D25d3418603",
   polygon: "0x3E14dC1b13c488a8d5D310918780c983bD5982E7"

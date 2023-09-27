@@ -36,7 +36,7 @@ div#popups()
 
     PopupTypeYouWin(v-else-if="popup.type == 'popup-type-you-win'")
 
-    PopupTypeYouClaimed(v-else-if="popup.type == 'popup-type-you-claimed'")
+    PopupTypeYouClaimed(v-else-if="popup.type == 'popup-type-you-claimed'" :lottery-id="popup.lottery_id", :token-id="popup.token_id")
 
     PopupTypeYouClaimedWithoutNFT(v-else-if="popup.type == 'popup-type-you-claimed-without-nft'")
 
