@@ -16,9 +16,10 @@ VList(pos="relative" display="lt-md:none" ref="menuElement" frame="~ gray-400 ho
   HeaderSubmenuWrapper(v-if="menuOpen" :align-right="true")
 
     VList(b="gray-400")
-      HeaderSubmenuButton(@click="showIXTSwap") {{ $t(`general.navigation.menu.addFunds`)}}
+      slot(name="dropdown")
+      //-HeaderSubmenuButton(@click="showIXTSwap") {{ $t(`general.navigation.menu.addFunds`)}}
 
-      NuxtLink(to="/account")
+      //-NuxtLink(to="/account")
         HeaderSubmenuButton(b="t-1 b-1 gray-400") {{ $t(`general.navigation.menu.account`)}}
 
       NuxtLink(to="/connect" @click="toggleMenu")

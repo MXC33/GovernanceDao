@@ -25,6 +25,8 @@ VList(:class="className" pos="sticky left-0 top-0" translate-y="$header-offset" 
       Notification(display="lt-lg:none")
 
       HeaderAccountButton(class="border-white-ixt")
+        template(#dropdown)
+          slot(name="dropdown")
 
       div(display="lg:none")
         Notification()
