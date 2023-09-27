@@ -20,11 +20,18 @@ VList(:class="className" pos="sticky left-0 top-0" translate-y="$header-offset" 
     HList(items="center" space-x="3" px="0")
       //-button(btn="menu" display="lt-lg:none") help
       //-HeaderLanguage(language="EN")
+      //- div(display="lg:none" flex="~ row" justify="center" items="center" frame="~")
+      //-   div(p="2")
+      //-     span(v-if="walletState == 'disconnected'") {{ $t(`general.navigation.menu.connectWallet`)}}
+
+      //-     span(v-else-if="ixtBalance != undefined" w="25" text="ix-mint") {{ roundToDecimals(ixtBalance, 2) }}IXT
+
+      //-     HelperLoader(v-else fill="ix-mint on-wallet:ix-orange" w="4" :wallet="walletState != 'connected'")
       slot(name="contentRight")
 
       Notification(display="lt-lg:none")
-
-      HeaderAccountButton(class="border-white-ixt")
+      //-class="border-white-ixt"
+      HeaderAccountButton()
         template(#dropdown)
           slot(name="dropdown")
 
@@ -77,6 +84,9 @@ const menuElement = shallowRef()
 
 const { height: bannerHeight } = useElementBounding(bannerEl)
 const { height: menuHeight } = useElementBounding(menuEl)
+
+const { walletState } = useWallet()
+const { ixtBalance, ixtPending } = useIXTContract()
 
 effect(() => {
   const newHeight = Math.round(bannerHeight.value + menuHeight.value)
