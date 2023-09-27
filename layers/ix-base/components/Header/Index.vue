@@ -54,6 +54,9 @@ autoHideActive.value = autoClose
 const { height: bannerHeight } = useElementBounding(bannerEl)
 const { height: menuHeight } = useElementBounding(menuEl)
 
+const { walletState } = useWallet()
+const { ixtBalance, ixtPending } = useIXTContract()
+
 effect(() => {
   const newHeight = Math.round(bannerHeight.value + menuHeight.value)
   console.log("Heights", bannerHeight.value, menuHeight.value, newHeight, process.client)

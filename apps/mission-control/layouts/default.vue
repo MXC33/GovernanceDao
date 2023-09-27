@@ -4,6 +4,9 @@ main(w="full" h="full" flex="~ col grow" min-h="0")
     template(#contentRight)
       HeaderButton#settings-menu(@click="toggleSettings" wh="6")
         Settings(wh="6" fill="white")
+    template(#dropdown)
+      NuxtLink(to="/terminal")
+        HeaderSubmenuButton(b="t-1 b-1 gray-400") {{ $t(`layouts.headers.terminal`)}}
 
       //- button(@click="toggleSound" wh="6" opacity="hover:80" transition="opacity")
       //-   SoundOn(v-if="isSoundEnabled" fill="white")
