@@ -34,6 +34,7 @@ export interface LastDrawLottery {
   tier_name: string,
   type_name: string,
   claimed: boolean,
+  prize: number,
   entries: {
     entered_tickets: number,
     entered_stream: number,
@@ -58,7 +59,7 @@ export interface Round {
   winners: number,
   your_tickets: number,
   total_tickets: number,
-  prize: number
+  prize: number,
   claimed: boolean,
   nft_link: string,
   winning_pools?: number[]
@@ -76,11 +77,20 @@ export interface WeeksDrawResponse extends ObjectResponse {
 
 export interface ActiveRewards {
   rewards: number,
-  jackpot: number
+  jackpot: number,
+  incomingFlowRate?: number,
 }
 
 export interface ActiveRewardsResponse extends ObjectResponse {
   data: ActiveRewards
+}
+
+export interface ActiveLotteryData {
+  id: number,
+  start_timestamp: number
+}
+export interface ActiveLotteryDataResponse extends ObjectResponse {
+  data: ActiveLotteryData
 }
 
 export const usePlayerAPI = () => {
@@ -104,15 +114,48 @@ export const usePlayerAPI = () => {
 
 
   const useWeeksDrawData = () => useAsyncDataState('weeks-draw', () =>
-    fetchIXAPI('geo/lottery/details/table') as Promise<WeeksDrawResponse>
+    fetchIXAPI('geo/lottery/details/table') as Promise<WeeksDrawResponse>, {
+      transform: (response) => {
+        if (
+          response.data &&
+          response.data.last_drawn_lottery &&
+          response.data.last_drawn_lottery.id &&
+          response.data.rounds &&
+          response.data.rounds.findIndex(round => round.id === response.data.last_drawn_lottery?.id) != -1
+        ) {
+          const modifiedLastDrawnLottery = response.data.last_drawn_lottery
+          const round = response.data.rounds.find(round => round.id === response.data.last_drawn_lottery?.id)
+          if (round) {
+            modifiedLastDrawnLottery.prize = round.prize
+
+            return {
+              ...response,
+              data: {
+                ... response.data,
+                last_drawn_lottery: modifiedLastDrawnLottery
+              }
+            }
+          }
+        }
+
+        return response
+      }
+    }
   )
   const getActiveRewards = () => fetchIXAPI('geo/lottery/active/rewards') as Promise<ActiveRewardsResponse>
+  const useActiveLotteryData = () => {
+    return useAsyncDataState(`lottery-active-data`, () => {
+      const data = fetchIXAPI('geo/lottery/active/data') as Promise<ActiveLotteryDataResponse>
+      return data
+    })
+  }
 
   return {
     hasTerritories,
     useWeeksDrawData,
     getActiveRewards,
     fetchMerkleProof,
-    useEnteredTicketData
+    useEnteredTicketData,
+    useActiveLotteryData
   }
 }

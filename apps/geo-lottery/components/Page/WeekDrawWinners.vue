@@ -3,7 +3,7 @@ div()
   h2(mb-7 text="3xl md:4xl xl:5xl" font="bdrA3mik") THIS WEEK’S DRAW
   div(bg="black" rounded="4" b="1 $mc-pink" py-16)
     div(mb="18")
-      p(text="xl center" font="extrabold" m="b-4 md:b-8" ) ROUND {{'#' + roundID}}
+      p(text="xl center" font="extrabold" m="b-4 md:b-8" ) ROUND {{'#' + (roundID +1)}}
       HelperCountDown(:endTimestamp="0" :type="'large'")
 
     TierSize(:id="id" :tier="tier" :size="size")
@@ -41,6 +41,7 @@ const size = ref<TierSize>(({
 }))
 const showClaimButton = ref<boolean>(false)
 const roundID = ref<number>(0)
+const prize = ref<number>(0)
 
 const enteredOneTimeTickets = ref<number>(0)
 const streamTickets = ref<number>(0)
@@ -68,17 +69,20 @@ watch(weeksDraw, (state) => {
   showClaimButton.value = !lastDrawnLottery.winning_pools ? false : lastDrawnLottery.winning_pools.length > 0 && !lastDrawnLottery.claimed
 
   roundID.value = lastDrawnLottery.id
+  prize.value = lastDrawnLottery.prize
 
   enteredOneTimeTickets.value = lastDrawnLottery.entries.entered_tickets
   streamTickets.value = lastDrawnLottery.entries.entered_tickets
   nft_link.value = lastDrawnLottery.nft_link || ''
 
-  if (showClaimButton.value)
+  /** Open You Won Popup **/
+  /*if (showClaimButton.value)
     displayPopup({
       type: 'popup-type-you-win',
       nft_link: nft_link.value,
-      lottery_id: roundID.value
-    })
+      lottery_id: roundID.value,
+      prize: prize.value
+    })*/
 }, { immediate: true })
 
 const {
@@ -91,11 +95,20 @@ const { loading: isLoading, execute: claimRewardRequest } = useContractRequest((
 const onClaimReward = async () => {
   const claimReward = await claimRewardRequest()
 
-  if (claimReward)
-    displayPopup({
-      type: 'popup-type-you-claimed',
-      nft_link: nft_link.value
-    })
+  if (claimReward)  {
+    if (prize.value < 100) {
+      displayPopup({
+        type: 'popup-type-you-claimed-without-nft',
+        prize: prize.value
+      })
+    } else {
+      displayPopup({
+        type: 'popup-type-you-claimed',
+        nft_link: nft_link.value
+      })
+    }
+  }
+
 }
 
 </script>

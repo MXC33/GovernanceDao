@@ -8,7 +8,7 @@ VList()
         Checked(v-if="status == 'accept'")
         Decline(v-if="status == 'decline'")
       div(flex="~ col sm:row" items-start sm:items-center)
-        div(color="white" text="md sm:lg" mr="1 sm:3" font="bold" uppercase="~") ROUND {{'#'+round.id}}
+        div(color="white" text="md sm:lg" mr="1 sm:3" font="bold" uppercase="~") ROUND {{'#'+ (round.id +1)}}
         template(v-if="round.winning_pools && round.winning_pools.length")
           div(color="white opacity-40" text="sm sm:lg" font="bold" uppercase="~" v-if="round.claimed") CLAIMED
           div(color="$mc-pink opacity-40" text="xs sm:lg" font="bold" uppercase="~" v-else) CLAIM YOUR PRIZE
@@ -88,11 +88,19 @@ const { loading: isLoading, execute: claimRewardRequest } = useContractRequest((
 const onClaimReward = async () => {
   const claimReward = await claimRewardRequest()
 
-  if (claimReward)
-    displayPopup({
-      type: 'popup-type-you-claimed',
-      nft_link: round.nft_link
-    })
+  if (claimReward)  {
+    if (round.prize < 100) {
+      displayPopup({
+        type: 'popup-type-you-claimed-without-nft',
+        prize: round.prize
+      })
+    } else {
+      displayPopup({
+        type: 'popup-type-you-claimed',
+        nft_link: round.nft_link
+      })
+    }
+  }
 }
 
 </script>
