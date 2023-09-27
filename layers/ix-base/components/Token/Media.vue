@@ -1,6 +1,6 @@
 <template lang="pug">
 TokenImage(v-if="displayStillImage" :token="token" :is-large="(!icon && isLarge) || image" :key="componentKey")
-TokenVideo(v-else :token="token" :is-large="isLarge" h="full" inset="0" :key="componentKey + 'video'")
+TokenVideo(v-else :token="token" :is-large="isLarge" h="full" inset="0" :key="componentKey + 'video'" :fill="contain ? 'contain' : 'cover'")
 </template>
 
 <script lang="ts" setup>
@@ -9,7 +9,8 @@ import type { AnyToken } from '~/composables/Token/useTokens';
 const props = defineProps<{
   token: AnyToken,
   isLarge?: boolean,
-  icon?: boolean
+  icon?: boolean,
+  contain?: boolean,
   image?: boolean
 }>()
 

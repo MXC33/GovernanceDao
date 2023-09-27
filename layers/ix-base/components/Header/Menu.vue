@@ -7,7 +7,7 @@ HList(items="center" justify="between" h="16" space-x="3" ref="menuEl")
     PlanetIXNew(v-else w="42.25")
 
   HList(v-if="!isMobile" justify="start" flex-grow="1" overflow-x="hidden" space-x="4")
-    button(v-for="(header, index) in headerData" @mouseenter="hoverMenu(index)" @click="openMenu(index)" btn="menu" color = "s-default:$header-text s-selected:$header-text-active" :state="selected(index)") {{ adjustedTitle(header.name) }}
+    button(v-for="(header, index) in headerData" @mouseenter="hoverMenu(index)" @click="openMenu(index)" btn="menu" color = "s-default:white s-selected:ix-orange" :state="selected(index)") {{ header.name }}
 
     HList(flex-grow="1" justify="end" display="lt-md:none")
       NuxtLink(to="https://planetix.com/airdrop")
@@ -16,13 +16,12 @@ HList(items="center" justify="between" h="16" space-x="3" ref="menuEl")
 
 
   HList(items="center" space-x="3" px="0")
-    //-button(btn="menu" display="lt-lg:none") help
-    //-HeaderLanguage(language="EN")
+
     slot(name="contentRight")
 
     Notification(display="lt-lg:none")
-
-    HeaderAccountButton(class="border-white-ixt")
+    //-class="border-white-ixt"
+    HeaderAccountButton()
       template(#dropdown)
         slot(name="dropdown")
 
@@ -32,6 +31,7 @@ HList(items="center" justify="between" h="16" space-x="3" ref="menuEl")
     button.hamburger-menu(v-if="isMobile" btn="menu" @click="toggleMenu" ml="2")
       SettingsIcon(v-if="activeHeaderIndex == null" w="6")
       CrossIcon(v-else w="6" )
+
 </template> 
 
 <script lang="ts" setup>
