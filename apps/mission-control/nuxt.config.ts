@@ -53,7 +53,7 @@ export default defineNuxtConfig({
       'graphql-client': {
         clients: {
           default: {
-            schema: './schema.graphql',
+            schema: '../../layers/ix-base/schema.graphql',
 
             host: process.env.GQL_HOST || (process.env.CHAIN_NET === 'test' ? GQL_DEV_ENDPOINT : GQL_PROD_ENDPOINT),
           }
