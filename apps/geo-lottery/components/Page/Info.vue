@@ -1,6 +1,6 @@
 <template lang="pug">
-HList(flex="~ col lg:row wrap" items="center" justify="between" gap-y="10")
-  div(flex="~" grow="0" shrink="0" basis="100% lg:45%" items="center" order="1")
+VList(flex="~ col lg:row wrap" items="center" justify="between" gap-y="10")
+  HList( grid grid-cols-7	 flex="~" basis="100% lg:40%" items="center" order="1")
     div(space-y="3 md:4")
       div(color="ix-white" text="3xl md:4xl xl:5xl" uppercase="~" font="bdrA3mik") How to play
       div(color="ix-white" font="bold" text="base sm:lg" space-y="2 md:6")
@@ -18,19 +18,19 @@ HList(flex="~ col lg:row wrap" items="center" justify="between" gap-y="10")
           span(font="normal")  - Greenland + Rare + Zone <br/>
           span() Win by Country + Tier + Size - shared by players that have a territory located in the randomly selected country, territory tier and size.
 
-  VList(flex="~ col" grow="0" shrink="0" basis="100% lg:45%" space-y="6" items="center" justify="center" w="full" order="3 lg:2")
+  HList(grid-cols-5	 flex="~ col" basis="100% lg:53%" space-y="6" items="center" justify="center" w="full" order="3 lg:2")
     FramePinkWithImg()
-      template(#title) COMMON PRIZE
+      template(#title) WIN
       template(#subtitle) COUNTRY
       template(#content)
         img(src="~/assets/images/country-img-line.png")
     FramePinkWithImg()
-      template(#title) RARE PRIZE
+      template(#title) DOUBLE WIN
       template(#subtitle) COUNTRY <br> + TIER
       template(#content)
         TireHexagonColor(tier="Rare")
     FramePinkWithImg()
-      template(#title) COMMON PRIZE
+      template(#title) TRIPPLE WIN
       template(#subtitle) COUNTRY <br> + TIER <br> + Size
       template(#content)
         TireSizeIcon(tier="Rare" size="Zone")

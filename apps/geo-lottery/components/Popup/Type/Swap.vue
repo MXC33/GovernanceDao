@@ -2,7 +2,11 @@
 Popup()
   template(#content)
     VList(flex-grow="1" p="4" text="md" font="normal")
-      SwapToken(m-y="2" :order="tokenSwapOrder === 'IXT-AGOLD' ? '1' : '3'" v-model="ixtValue" :disabledValue="tokenSwapOrder !== 'IXT-AGOLD' ? aGoldValue.value : null")
+      SwapToken(m-y="2" :order="tokenSwapOrder === 'IXT-AGOLD' ? '1' : '3'"
+        v-model="ixtValue"
+        :disabledValue="tokenSwapOrder !== 'IXT-AGOLD' ? aGoldValue.value : null"
+        :bg="tokenSwapOrder !== 'IXT-AGOLD' ? 'ix-white opacity-0' : 'ix-white opacity-20'"
+      )
         template(#icon)
           IxtCircleBlackIcon(w="10")
         template(#title) Ix Token
@@ -12,7 +16,11 @@ Popup()
         div(flex="~" justify="center" items="center" w="12" h="12" cursor="pointer" bg="ix-pink hover:opacity-80" rounded="full" @click="swapTokenOrder")
           SortArrowsIcon.ease-in.duration-200(w="5" :rotate="tokenSwapOrder === 'IXT-AGOLD' ? '0' : '180'")
 
-      SwapToken(m-y="2" :order="tokenSwapOrder === 'IXT-AGOLD' ? '3' : '1'" v-model="aGoldValue" :disabledValue="tokenSwapOrder === 'IXT-AGOLD' ? ixtValue.value : null")
+      SwapToken(m-y="2" :order="tokenSwapOrder === 'IXT-AGOLD' ? '3' : '1'"
+        v-model="aGoldValue"
+        :disabledValue="tokenSwapOrder === 'IXT-AGOLD' ? ixtValue.value : null"
+        :bg="tokenSwapOrder === 'IXT-AGOLD' ? 'ix-white opacity-0' : 'ix-white opacity-20'"
+      )
         template(#icon)
           AstroGoldCircleYellowIcon(w="10")
         template(#title) Astro Gold

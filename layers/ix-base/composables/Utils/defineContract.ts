@@ -1,6 +1,7 @@
 import { EventFilter, Listener } from "@ethersproject/abstract-provider";
 import { ethers } from "ethers";
 import { useTransactions } from "./useTransaction";
+import { TransactionReceipt } from "ethereum-abi-types-generator";
 
 export const ZERO_ADRESS = "0x0000000000000000000000000000000000000000" as const
 export const ZERO_ADRESS_LONG = "0x0000000000000000000000000000000000000000000000000000000000000000" as const
@@ -31,7 +32,7 @@ export interface TransactionOptions {
   approve?: () => Promise<unknown>,
   onSuccess?: () => Promise<any>,
   onFail?: (error?: any) => Promise<any>,
-  onTxApproved?: () => Promise<any>,
+  onTxApproved?: (txResponse: TransactionReceipt) => Promise<any>,
   onSuccessAfterMs?: number,
   successOnEventKey?: string | string[],
   // getTransactionError?: (errorCode?: string) => ContractError
@@ -221,7 +222,7 @@ export const defineContract = <T extends ContractInterface<T> | object>(key: str
       if (!hash)
         return transactionFailed("No transaction hash", txOptions)
 
-      const resolvedTransaction = await onTransactionResolved(hash)
+      const resolvedTransaction = await onTransactionResolved(hash) as TransactionReceipt
       console.log("Resolved", resolvedTransaction)
 
       //@ts-ignore
@@ -229,7 +230,7 @@ export const defineContract = <T extends ContractInterface<T> | object>(key: str
         throw new Error("Transaction failed. Try increasing the gas manually.")
 
       if (txOptions?.onTxApproved)
-        await txOptions?.onTxApproved()
+        await txOptions?.onTxApproved(resolvedTransaction)
 
       if (!pendingTxEvent.value)
         await transactionSuccess(txOptions)

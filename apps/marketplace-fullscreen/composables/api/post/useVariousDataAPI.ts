@@ -4,7 +4,7 @@ import { BASE_API_ENDPOINT_URL } from "../api"
 export const useVariousDataEndpoints = () => {
 
 
-  const addExtraSaleInfo = async (index: string, referenceId: number, saleId?: number, saleBundleLength?: number, type?: number) => await $fetch(BASE_API_ENDPOINT_URL + '/web3/asset/info', {
+  const addExtraSaleInfo = async (index: string, referenceId: number, saleId?: number, saleBundleLength?: number, type?: number) => await $fetch(BASE_API_ENDPOINT_URL() + '/web3/asset/info', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'

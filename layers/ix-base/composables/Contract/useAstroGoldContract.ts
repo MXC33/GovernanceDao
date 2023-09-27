@@ -3,20 +3,21 @@ import { ContractInterface } from "@ix/base/composables/Utils/defineContract"
 import { ContractContext as AstroGoldTokenContract } from '@ix/base/composables/Contract/Abis/AstroGold'
 import AstroGoldToken from '@ix/base/composables/Contract/Abis/AstroGold.json'
 import { astroGoldAdress, luckyCatGeoLotteryAdress } from "@ix/base/composables/Contract/WalletAddresses";
+import {useActiveChain} from "~/composables/Contract/useWallet";
 
 
 export const useAstroGoldContract = <T extends ContractInterface<T> & AstroGoldTokenContract>() => {
 
-  const spenderAddress = luckyCatGeoLotteryAdress.polygon as string
+  const spenderAddress = luckyCatGeoLotteryAdress[useActiveChain()] as string
   const { walletAdress } = useWallet()
 
   const { viewAsyncState, withContract, createTransaction, ...contractSpec } = defineContract<T>('AstroGoldToken-contract', {
-    contractAddress: astroGoldAdress.polygon as string,
+    contractAddress: astroGoldAdress[useActiveChain()] as string,
     notifications: {
       failMessage: 'Error allowance Astro Gold Token'
     },
     createContract(provider) {
-      return new ethers.Contract(astroGoldAdress.polygon as string, AstroGoldToken.abi, provider.getSigner()) as unknown as T
+      return new ethers.Contract(astroGoldAdress[useActiveChain()] as string, AstroGoldToken.abi, provider.getSigner()) as unknown as T
     }
   })
 

@@ -40,7 +40,7 @@ export interface NavigationMedia {
 
 export const useHeaderData = () =>
   useAsyncDataState('site-header-menu', async () => {
-    const request = (await $fetch('https://api.planetix.app/api/v1/navigation')) as HeaderRequest
+    const request = (await $fetch(BASE_API_ENDPOINT_URL() +'/navigation')) as HeaderRequest
 
     return request?.data ?? []
   });

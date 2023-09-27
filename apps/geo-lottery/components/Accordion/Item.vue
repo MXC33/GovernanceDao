@@ -8,7 +8,7 @@ VList()
         Checked(v-if="status == 'accept'")
         Decline(v-if="status == 'decline'")
       div(flex="~ col sm:row" items-start sm:items-center)
-        div(color="white" text="md sm:lg" mr="1 sm:3" font="bold" uppercase="~") ROUND {{'#'+round.id}}
+        div(color="white" text="md sm:lg" mr="1 sm:3" font="bold" uppercase="~") ROUND {{'#'+ (round.id +1)}}
         template(v-if="round.winning_pools && round.winning_pools.length")
           div(color="white opacity-40" text="sm sm:lg" font="bold" uppercase="~" v-if="round.claimed") CLAIMED
           div(color="$mc-pink opacity-40" text="xs sm:lg" font="bold" uppercase="~" v-else) CLAIM YOUR PRIZE
@@ -16,7 +16,7 @@ VList()
         div(@click.stop="")
           ButtonItem(:value="'pink'"  min-w="180px sm:190px" h="10" :text="'Claim now'" flex="~" items-center justify-center
             v-if="round.winning_pools && round.winning_pools.length && !round.claimed"
-            @click="onClaimReward()"
+            @click="claimRewardRequest()"
             :loading="isLoading"
           )
         IconChevron(w="4" :up="isOpen")
@@ -63,10 +63,10 @@ VList()
 
 <script lang="ts" setup>
 import { Collapse } from 'vue-collapsed'
-import Checked  from '~/assets/icons/checked.svg'
-import Decline  from '~/assets/icons/decline.svg'
-import type {Round} from "~/composables/api/get/usePlayerAPI";
-import {useLottery} from "~/composables/useLottery";
+import Checked from '~/assets/icons/checked.svg'
+import Decline from '~/assets/icons/decline.svg'
+import type { Round } from "~/composables/api/get/usePlayerAPI";
+import { useLottery } from "~/composables/useLottery";
 const { displayPopup } = usePopups()
 
 const { startOpen, round } = defineProps<{
@@ -79,23 +79,40 @@ const { startOpen, round } = defineProps<{
 
 const isOpen = shallowRef(startOpen)
 const dropDrawer = () => { isOpen.value = !isOpen.value }
+const { claimReward } = useLottery()
+const { getChain } = useWallet()
+const { loading: isLoading, execute: claimRewardRequest } = useContractRequest(async () => {
+  const response = await claimReward(round.id)
 
-const {
-  claimReward
-} = useLottery()
-const { loading: isLoading, execute: claimRewardRequest } = useContractRequest(() =>
-  claimReward(round.id)
-)
+  if (!response)
+    return
 
-const onClaimReward = async () => {
-  const claimReward = await claimRewardRequest()
+  const logData = response.logs.filter(item =>
+    item.address == geoLotteryRewardAddress[getChain('polygon')]
+  ).map((item) => item.data)
 
-  if (claimReward)
+  const firstItem = logData[1]
+  if (!firstItem)
+    return
+
+  const tokenId = parseInt(firstItem.slice(-64))
+
+  // contract.value?.interface.decodeEventLog()
+
+  if (round.prize < 100) {
+    displayPopup({
+      type: 'popup-type-you-claimed-without-nft',
+      prize: round.prize
+    })
+  } else {
     displayPopup({
       type: 'popup-type-you-claimed',
-      nft_link: round.nft_link
+      token_id: tokenId,
+      lottery_id: round.id
     })
-}
+  }
+})
+
 
 </script>
 

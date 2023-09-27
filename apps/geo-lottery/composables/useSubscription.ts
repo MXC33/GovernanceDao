@@ -1,9 +1,11 @@
 import {AdjustableNumber} from "@ix/base/composables/Utils/useAdjustableNumber";
-import {MerkleProofsResponse, usePlayerAPI} from "~/composables/api/get/usePlayerAPI";
+import {usePlayerAPI} from "~/composables/api/get/usePlayerAPI";
 import {useLuckyCatGeoLotteryContract} from "~/composables/useLuckyCatGeoLotteryContract";
 import {useLottery} from "~/composables/useLottery";
 
 export const useSubscription = () => {
+  const { hasTerritories: hasTerritoriesData } = usePlayerAPI()
+
   const maxSubscriptionEntries = useState<number>('max-subscription-entries', () => 30)
   const setMaxSubscriptionEntries = (entries: number) => {
     maxSubscriptionEntries.value = entries
@@ -27,15 +29,17 @@ export const useSubscription = () => {
   const { getTicketPrice } = useLottery()
 
   const hasTerritories = async () => {
-    const { hasTerritories } = usePlayerAPI()
-
+    let hasError: string | boolean = false
     try {
-      const hasTerritory = await hasTerritories()
+      const hasTerritory = await hasTerritoriesData()
       if (!hasTerritory.data)
-        throw new Error("You don't have territory!")
+        hasError = 'You don\'t have territory!'
     } catch (e) {
-      throw new Error(CustomErrors.unknownError)
+      hasError = CustomErrors.unknownError
     }
+
+    if (hasError)
+      throw new Error(hasError)
   }
 
   const enterLotteryFlow = async (entries: number) => {

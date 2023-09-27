@@ -32,7 +32,7 @@ import { useLottery } from "~/composables/useLottery";
 const { execute: fetchHeaderData } = useHeaderData()
 
 useHead({
-  title: "Geo Lottery | PlanetIX",
+  title: "Territory Lottery | PlanetIX",
   script: [
     { src: '/global.js' },
   ]
@@ -51,16 +51,18 @@ const { state: isSwapVisible } = useIXTSwapVisible()
 
 const { y } = useWindowScroll()
 const { connectWallet, walletState } = useWallet()
+const { isLoggedInAndConnected } = useLogin()
 const { setupIXTPrice } = useIXTPrice()
 const { refreshIXTBalance } = useIXTContract()
 const { refreshAstroGoldBalance } = useAstroGoldContract()
 const { setActiveCurrency } = useSiteHeader()
-const { getEnteredTickets, getWeeksDraw } = useLottery()
+const { fetchActiveLottery } = useLottery()
 
 const { setRefreshToken } = useLogin()
 const { user } = useUser()
 
 watch(y, (pos) => globalY.value = pos)
+
 
 onMounted(async () => {
   //@ts-ignore
@@ -89,31 +91,20 @@ onMounted(async () => {
   }
 })
 
-const { isLotteryActive } = useLottery()
+const { isLotteryActive, getActiveLotteryData } = useLottery()
 
-watch(walletState, (state) => {
-  if (state != 'connected')
+watch([isLotteryActive, isLoggedInAndConnected], ([state, loggedIn]) => {
+  if (!state || !loggedIn) {
+    getActiveLotteryData()
     return
+  }
 
-  setTimeout(async () => {
-    setupIXTPrice()
-    refreshIXTBalance()
-    refreshAstroGoldBalance()
-    setActiveCurrency('aGold')
-
-    if (isLotteryActive.value) {
-      getEnteredTickets()
-      getWeeksDraw()
-    }
-  }, 1200)
+  setupIXTPrice()
+  refreshIXTBalance()
+  refreshAstroGoldBalance()
+  setActiveCurrency('aGold')
+  fetchActiveLottery()
 }, { immediate: true })
-
-watch(isLotteryActive, (state) => {
-  if (!state)
-    return
-
-  getWeeksDraw()
-})
 
 const { x: xpos, y: ypos } = useMouse()
 

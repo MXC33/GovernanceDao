@@ -12,12 +12,19 @@ export interface PopupTypeInsufficientFunds extends PopupBase {
 export interface PopupTypeYouWin extends PopupBase {
   type: 'popup-type-you-win',
   nft_link: string,
-  lottery_id: number
+  lottery_id: number,
+  prize: number
 }
 
 export interface PopupTypeYouClaimed extends PopupBase {
   type: 'popup-type-you-claimed',
-  nft_link: string
+  token_id: number,
+  lottery_id: number,
+}
+
+export interface PopupTypeYouClaimedWithoutNFT extends PopupBase {
+  type: 'popup-type-you-claimed-without-nft',
+  prize: number
 }
 
 export interface PopupTypePurchaseTickets extends PopupBase {
@@ -52,8 +59,8 @@ export interface PopupTypeUnsubscribeSuccess extends PopupBase {
   type: 'popup-type-unsubscribe-success'
 }
 
-type Popup = PopupTypeInsufficientFunds | PopupTypeYouWin | PopupTypeYouClaimed | PopupTypePurchaseTickets | PopupTypeOneTimeEntry | PopupTypeOneTimeEntrySuccess | PopupTypeSubscribe | PopupTypeSubscribeSuccess | PopupTypeSwap
- | PopupTypeManageTickets | PopupTypeSwapSuccess | PopupTypeUnsubscribeSuccess
+type Popup = PopupTypeInsufficientFunds | PopupTypeYouWin | PopupTypeYouClaimed | PopupTypeYouClaimedWithoutNFT | PopupTypePurchaseTickets | PopupTypeOneTimeEntry | PopupTypeOneTimeEntrySuccess | PopupTypeSubscribe | PopupTypeSubscribeSuccess | PopupTypeSwap
+  | PopupTypeManageTickets | PopupTypeSwapSuccess | PopupTypeUnsubscribeSuccess
 export const usePopups = () => {
   const popup = useState<Popup | null>('active-popup', () => null)
 

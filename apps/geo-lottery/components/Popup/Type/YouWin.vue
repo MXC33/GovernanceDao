@@ -36,10 +36,19 @@ const onClaimReward = async () => {
   if (!popup.value) return
   const claimReward = await claimRewardRequest()
 
-  if (claimReward)
-    displayPopup({
-      type: 'popup-type-you-claimed',
-      nft_link: (popup.value as PopupTypeYouWin)?.nft_link
-    })
+  const prize = (popup.value as PopupTypeYouWin).prize
+  if (claimReward)  {
+    if (prize < 100) {
+      displayPopup({
+        type: 'popup-type-you-claimed-without-nft',
+        prize: prize
+      })
+    } else {
+      displayPopup({
+        type: 'popup-type-you-claimed',
+        nft_link: (popup.value as PopupTypeYouWin)?.nft_link
+      })
+    }
+  }
 }
 </script>

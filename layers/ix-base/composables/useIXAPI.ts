@@ -2,7 +2,10 @@ import { PixInfoFragment } from '#gql'
 import { callWithNuxt } from 'nuxt/app'
 // import type { RaffleUpcomingResponse, RafflePastResponse, ActiveRaffleResponse } from './IX-API/types'
 
-export const BASE_API_ENDPOINT_URL = 'https://api.planetix.com/api/v1'
+export const BASE_API_ENDPOINT_URL = () => {
+  const { API_BASE_URL } = useRuntimeConfig().public
+  return API_BASE_URL
+}
 
 export const useIXHeaders = () => {
   const { walletSigningToken } = useWallet()
@@ -15,16 +18,14 @@ export const useIXHeaders = () => {
   }))
 }
 
-
-
 export const useIXAPI = () => {
   const { logoutWallet } = useWallet()
+  const { removeUser } = useUser()
   const headers = useIXHeaders()
   const app = useNuxtApp()
   const route = useRoute()
-  const baseURL = "https://api.planetix.com/api/v1"
-  const loginURL = `${baseURL}/auth/login`
-  const usernameFromWalletAddressURL = `${baseURL}/mission-controll/username/wallet`
+  const loginURL = `${BASE_API_ENDPOINT_URL()}/auth/login`
+  const usernameFromWalletAddressURL = `${BASE_API_ENDPOINT_URL()}/mission-controll/username/wallet`
 
   const handleAPIError = (error: any) => {
     if (error.response && error.response._data && error.response._data.message)
@@ -39,6 +40,7 @@ export const useIXAPI = () => {
 
     await callWithNuxt(app, () => {
       logoutWallet()
+      removeUser()
 
       return navigateTo({
         path: '/connect',
@@ -51,7 +53,7 @@ export const useIXAPI = () => {
 
   const fetchIXAPI = async (path: string, method: 'GET' | 'POST' = 'GET', body?: object) => {
     try {
-      const data = await $fetch(BASE_API_ENDPOINT_URL + '/' + path, {
+      const data = await $fetch(BASE_API_ENDPOINT_URL() + '/' + path, {
         method: method,
         body: body,
         headers: {
