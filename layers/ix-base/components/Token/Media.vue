@@ -13,9 +13,6 @@ const props = defineProps<{
   image?: boolean
 }>()
 
-console.log("TOKEN", props.token)
-
-
 const getTokenAttribute = (item: AnyToken, attribute: string) => {
   if (isIXToken(item))
     return item?.attributes?.find((attr) =>
