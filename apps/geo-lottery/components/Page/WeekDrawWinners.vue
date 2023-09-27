@@ -15,7 +15,7 @@ div()
       span(  color="$mc-pink" m="x-1") {{streamTickets}}
       span() Subscription TICKETS
     div(flex="~ col md:row" justify="center" items-center )
-      ButtonItem(:value="'pink'" :text="'Claim'" min-w="300px md:265px" v-if="showClaimButton" @click="onClaimReward()" :loading="isLoading")
+      ButtonItem(:value="'pink'" :text="'Claim'" min-w="300px md:265px" v-if="showClaimButton" @click="claimRewardRequest()" :loading="isLoading")
 </template>
 
 <script lang="ts" setup>
@@ -85,30 +85,39 @@ watch(weeksDraw, (state) => {
     })*/
 }, { immediate: true })
 
-const {
-  claimReward
-} = useLottery()
-const { loading: isLoading, execute: claimRewardRequest } = useContractRequest(() =>
-  claimReward(roundID.value)
-)
+const { claimReward } = useLottery()
+const { getChain } = useWallet()
 
-const onClaimReward = async () => {
-  const claimReward = await claimRewardRequest()
+const { loading: isLoading, execute: claimRewardRequest } = useContractRequest(async () => {
+  const response = await claimReward(roundID.value)
 
-  if (claimReward)  {
-    if (prize.value < 100) {
-      displayPopup({
-        type: 'popup-type-you-claimed-without-nft',
-        prize: prize.value
-      })
-    } else {
-      displayPopup({
-        type: 'popup-type-you-claimed',
-        nft_link: nft_link.value
-      })
-    }
+  if (!response)
+    return
+
+  const logData = response.logs.filter(item =>
+    item.address == geoLotteryRewardAddress[getChain('polygon')]
+  ).map((item) => item.data)
+
+  const firstItem = logData[1]
+  if (!firstItem)
+    return
+
+  const tokenId = parseInt(firstItem.slice(-64))
+
+  // contract.value?.interface.decodeEventLog()
+
+  if (prize.value < 100) {
+    displayPopup({
+      type: 'popup-type-you-claimed-without-nft',
+      prize: prize.value
+    })
+  } else {
+    displayPopup({
+      type: 'popup-type-you-claimed',
+      token_id: tokenId,
+      lottery_id: roundID.value
+    })
   }
-
-}
+})
 
 </script>
