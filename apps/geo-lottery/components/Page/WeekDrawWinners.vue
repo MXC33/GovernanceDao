@@ -72,7 +72,7 @@ watch(weeksDraw, (state) => {
   prize.value = lastDrawnLottery.prize
 
   enteredOneTimeTickets.value = lastDrawnLottery.entries.entered_tickets
-  streamTickets.value = lastDrawnLottery.entries.entered_tickets
+  streamTickets.value = lastDrawnLottery.entries.entered_stream
   nft_link.value = lastDrawnLottery.nft_link || ''
 
   /** Open You Won Popup **/
