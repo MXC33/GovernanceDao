@@ -12,7 +12,7 @@ PopupBlank()
             frameborder="0"
             sandbox="allow-scripts"
             w="full" h="full")
-        ButtonItem(:value="'pink'" w="auto sm:390px" :text="'Claim Now'" @click="onClaimReward()" :loading="isLoading")
+        ButtonItem(:value="'pink'" w="auto sm:390px" :text="'Claim Now'" @click="claimRewardRequest()" :loading="isLoading")
         button(color="white" text="lg" @click="onClose" underline="~ offset-2") I’ll do this later
 
 </template>
@@ -25,30 +25,41 @@ const onClose = () => {
   closeActivePopup()
 }
 
-const {
-  claimReward
-} = useLottery()
-const { loading: isLoading, execute: claimRewardRequest } = useContractRequest(() =>
-  claimReward((popup.value as PopupTypeYouWin)?.lottery_id)
-)
-
-const onClaimReward = async () => {
-  if (!popup.value) return
-  const claimReward = await claimRewardRequest()
-
+const { claimReward } = useLottery()
+const { getChain } = useWallet()
+const { loading: isLoading, execute: claimRewardRequest } = useContractRequest(async () => {
   const prize = (popup.value as PopupTypeYouWin).prize
-  if (claimReward)  {
-    if (prize < 100) {
-      displayPopup({
-        type: 'popup-type-you-claimed-without-nft',
-        prize: prize
-      })
-    } else {
-      displayPopup({
-        type: 'popup-type-you-claimed',
-        nft_link: (popup.value as PopupTypeYouWin)?.nft_link
-      })
-    }
+  const lotteryId = (popup.value as PopupTypeYouWin)?.lottery_id
+
+  const response = await claimReward(lotteryId)
+
+  if (!response)
+    return
+
+  const logData = response.logs.filter(item =>
+    item.address == geoLotteryRewardAddress[getChain('polygon')]
+  ).map((item) => item.data)
+
+  const firstItem = logData[1]
+  if (!firstItem)
+    return
+
+  const tokenId = parseInt(firstItem.slice(-64))
+
+  // contract.value?.interface.decodeEventLog()
+
+
+  if (prize < 100) {
+    displayPopup({
+      type: 'popup-type-you-claimed-without-nft',
+      prize: prize
+    })
+  } else {
+    displayPopup({
+      type: 'popup-type-you-claimed',
+      token_id: tokenId,
+      lottery_id: lotteryId
+    })
   }
-}
+})
 </script>
