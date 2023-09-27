@@ -91,7 +91,7 @@ const { loading: isLoading, execute: claimRewardRequest } = useContractRequest(a
     item.address == geoLotteryRewardAddress[getChain('polygon')]
   ).map((item) => item.data)
 
-  const firstItem = logData[0]
+  const firstItem = logData[1]
   if (!firstItem)
     return
 
