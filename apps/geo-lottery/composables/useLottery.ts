@@ -22,6 +22,7 @@ export const useLottery = () => {
 
   const { useWeeksDrawData, useEnteredTicketData, fetchMerkleProof, useActiveLotteryData } = usePlayerAPI()
   const { execute: fetchWeeksDrawData, data: weeksDrawData } = useWeeksDrawData()
+  const { data: activeLotteryData, execute: fetchActiveLotteryData } = useActiveLotteryData()
 
   const { data: currentLotteryID, execute: fetchLotteryID } = useLotteryID()
   const { data: ticketData, execute: fetchTicketData } = useEnteredTicketData()
@@ -178,10 +179,8 @@ export const useLottery = () => {
     }
   }
   const getActiveLotteryData = async () => {
-    const { data: activeLotteryData, execute: fetchActiveLotteryData } = useActiveLotteryData()
     await fetchActiveLotteryData()
 
-    const { data: currentLotteryID } = useLotteryID()
     currentLotteryID.value = activeLotteryData.value?.data.id || 0
     lotterStartedAt.value = activeLotteryData.value?.data.start_timestamp ? new Date(activeLotteryData.value?.data.start_timestamp * 1000) : null
   }
