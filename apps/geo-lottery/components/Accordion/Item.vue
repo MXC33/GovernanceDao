@@ -97,7 +97,7 @@ const onClaimReward = async () => {
     } else {
       displayPopup({
         type: 'popup-type-you-claimed',
-        nft_link: round.nft_link
+        token_id: round.nft_link
       })
     }
   }

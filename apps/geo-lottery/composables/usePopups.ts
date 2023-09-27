@@ -18,7 +18,7 @@ export interface PopupTypeYouWin extends PopupBase {
 
 export interface PopupTypeYouClaimed extends PopupBase {
   type: 'popup-type-you-claimed',
-  nft_link: string
+  token_id: number
 }
 
 export interface PopupTypeYouClaimedWithoutNFT extends PopupBase {
