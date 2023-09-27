@@ -10,15 +10,16 @@ VList(pos="relative" display="lt-md:none" ref="menuElement" frame="~ gray-400 ho
 
         HelperLoader(v-else fill="ix-mint on-wallet:ix-orange" w="4" :wallet="walletState != 'connected'")
 
-    button(v-if="ixtBalance != undefined" bg="hover:gray-600 gray-700" @click="showIXTSwap"  flex="~ row" justify="center" items="center" aspect="square" wh="10")
+    button(v-if="ixtBalance != undefined" bg="hover:gray-600 gray-700" @click="showIXTSwap" flex="~ row" justify="center" items="center" aspect="square" wh="10")
       PlusIcon(wh="4" fill="white")
 
   HeaderSubmenuWrapper(v-if="menuOpen" :align-right="true")
 
     VList(b="gray-400")
-      HeaderSubmenuButton(@click="showIXTSwap") {{ $t(`general.navigation.menu.addFunds`)}}
+      slot(name="dropdown")
+      //-HeaderSubmenuButton(@click="showIXTSwap") {{ $t(`general.navigation.menu.addFunds`)}}
 
-      NuxtLink(to="/account")
+      //-NuxtLink(to="/account")
         HeaderSubmenuButton(b="t-1 b-1 gray-400") {{ $t(`general.navigation.menu.account`)}}
 
       NuxtLink(to="/connect" @click="toggleMenu")
