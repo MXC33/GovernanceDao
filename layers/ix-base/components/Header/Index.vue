@@ -30,18 +30,23 @@ VList(:class="className" pos="sticky left-0 top-0" translate-y="$header-offset" 
         Notification()
 
       button.hamburger-menu(v-if="isMobile" btn="menu" @click="toggleMenu" ml="2")
-        SettingsIcon(v-if="activeMenuIndex == null" w="6")
+        SettingsIcon(v-if="activeHeaderIndex == null" w="6")
         CrossIcon(v-else w="6" )
 
   //For teleports
   div(id="navigation-bottom" pos="relative")
 
   Transition(name="slide-top" mode="out-in")
-    HeaderNavigation(:class="className + '-header'" v-if="activeMenuIndex != null && headerData != null"  :key="activeMenuIndex" :header="headerData[activeMenuIndex]")
+    HeaderNavigation(:class="className + '-header'" v-if="activeHeaderIndex != null && headerData != null"  :key="activeHeaderIndex" :header="headerData[activeHeaderIndex]")
 
   slot(name="contentBottom")
 
-  component(is="style") :root { --header-height: {{ headerHeight }}px; }
+  component(is="style").
+    :root { 
+      --site-header-offset: {{ siteHeaderOffset }}px;
+      --header-offset: {{ siteHeaderScrollOffset }}px;
+      --header-height: {{ headerHeight }}px;
+    }
 </template> 
 
 <script lang="ts" setup>
@@ -61,10 +66,9 @@ const { data: headerData } = useHeaderData()
 
 const { state: swapVisible } = useIXTSwapVisible()
 const onMouseLeave = () => {
-  activeMenuIndex.value = null
+  activeHeaderIndex.value = null
 }
-const activeMenuIndex = useHeaderIndex()
-const { headerHeight } = useSiteHeader()
+const { headerHeight, activeHeaderIndex, siteHeaderOffset, siteHeaderScrollOffset, isScrollingDown } = useSiteHeader()
 const menuElement = shallowRef()
 
 const { height: bannerHeight } = useElementBounding(bannerEl)
@@ -77,7 +81,6 @@ effect(() => {
 })
 
 const route = useRoute()
-const scollingDown = shallowRef(false)
 
 const { refreshIXTBalance } = useIXTContract()
 const windowY = useGlobalWindowScroll()
@@ -91,10 +94,10 @@ watch(isWalletConnected, (connected) => {
 
 
 watch(windowY, (newValue, oldValue) =>
-  scollingDown.value = (newValue > oldValue)
+  isScrollingDown.value = (newValue > oldValue)
 )
 
-watch(scollingDown, (active) => {
+watch(isScrollingDown, (active) => {
   document.body.classList.toggle('is-scrolling-down', active)
 })
 
@@ -104,7 +107,7 @@ watch([swapVisible, route], ([visible]) => {
 })
 
 const selected = (index: number) => {
-  if (activeMenuIndex.value == index) {
+  if (activeHeaderIndex.value == index) {
     return 'selected'
   }
 
@@ -112,26 +115,26 @@ const selected = (index: number) => {
 }
 
 const hoverMenu = (index: number) => {
-  activeMenuIndex.value = index
+  activeHeaderIndex.value = index
   //console.log('hoverMenu', index)
 }
 
 const openMenu = (index: number) => {
-  if (activeMenuIndex.value == index)
-    return activeMenuIndex.value = null
+  if (activeHeaderIndex.value == index)
+    return activeHeaderIndex.value = null
 
-  activeMenuIndex.value = index
+  activeHeaderIndex.value = index
 }
 
 const toggleMenu = () => {
-  if (activeMenuIndex.value == null)
-    return activeMenuIndex.value = 1
+  if (activeHeaderIndex.value == null)
+    return activeHeaderIndex.value = 1
 
   closeMenu()
 }
 
 const closeMenu = () =>
-  activeMenuIndex.value = null;
+  activeHeaderIndex.value = null;
 
 onClickOutside(menuElement, () => {
   closeMenu()

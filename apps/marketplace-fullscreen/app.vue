@@ -22,6 +22,11 @@
           iframe(src="https://ix.foundation/lefi" w="full" h="full" min-h="118")
 
 
+  component(is="style").
+    :root { 
+      --page-header-offset: {{ pageHeaderOffset }}px;
+      --filter-header-offset: {{ filterHeaderOffset }}px;
+    }
 
 </template>
 
@@ -49,6 +54,7 @@ const { execute: fetchHeaderData } = useHeaderData()
 const { execute: fetchMessageData, data: messageData } = useNeMessages()
 const { execute: fetchNotificationData, data: notificationData } = useNeNotifications()
 
+const { pageHeaderOffset, filterHeaderOffset } = useStickyOffsets()
 
 await fetchHeaderData()
 
@@ -57,7 +63,7 @@ const { connectWallet, walletState } = useWallet()
 const { setupIXTPrice } = useIXTPrice()
 const { refreshIXTBalance } = useIXTContract()
 
-const { setRefreshToken, isLoggedinAndConnected } = useLogin()
+const { setRefreshToken, isLoggedInAndConnected } = useLogin()
 const { user } = useUser()
 
 watch(y, (pos) => globalY.value = pos)
@@ -90,7 +96,7 @@ onMounted(async () => {
 })
 
 
-watch(isLoggedinAndConnected, (loggedIn) => {
+watch(isLoggedInAndConnected, (loggedIn) => {
   if (!loggedIn)
     return
 

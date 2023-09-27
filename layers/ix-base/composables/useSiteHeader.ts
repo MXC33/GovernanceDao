@@ -45,20 +45,26 @@ export const useHeaderData = () =>
     return request?.data ?? []
   });
 
-export const useHeaderIndex = () => shallowRef<number | null>(null)
 
 export const useSiteHeader = () => {
-  type Currency = 'IXT' | 'aGold'
-  const activeCurrency = useState<Currency>('active-currency', () => 'IXT')
-  const setActiveCurrency = (currency: Currency) => {
-    activeCurrency.value = currency
-  }
+  const activeHeaderIndex = useState<number | null>('header-active-index', () => null)
 
-  const headerHeight = useState<number>('header-height', () => 24)
+  const headerHeight = useState<number>('header-height', () => 0)
+  const isScrollingDown = useState<boolean>('header-is-scrolling-down', () => false)
+
+  const siteHeaderScrollOffset = computed(() =>
+    isScrollingDown.value ? -headerHeight.value : 0
+  )
+
+  const siteHeaderOffset = computed(() =>
+    headerHeight.value
+  )
 
   return {
-    activeCurrency,
-    setActiveCurrency,
+    activeHeaderIndex,
+    isScrollingDown,
+    siteHeaderScrollOffset,
+    siteHeaderOffset,
     headerHeight
   }
 };

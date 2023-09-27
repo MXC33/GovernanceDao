@@ -55,7 +55,6 @@ const { isLoggedInAndConnected } = useLogin()
 const { setupIXTPrice } = useIXTPrice()
 const { refreshIXTBalance } = useIXTContract()
 const { refreshAstroGoldBalance } = useAstroGoldContract()
-const { setActiveCurrency } = useSiteHeader()
 const { fetchActiveLottery } = useLottery()
 
 const { setRefreshToken } = useLogin()
@@ -102,7 +101,6 @@ watch([isLotteryActive, isLoggedInAndConnected], ([state, loggedIn]) => {
   setupIXTPrice()
   refreshIXTBalance()
   refreshAstroGoldBalance()
-  setActiveCurrency('aGold')
   fetchActiveLottery()
 }, { immediate: true })
 

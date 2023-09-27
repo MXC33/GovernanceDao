@@ -1,5 +1,5 @@
 <template lang="pug">
-HList(pos="sticky top-[calc(var(--page-header-height)+var(--header-height)+var(--header-offset))]" z="8" b="on-scrolling:t-1 gray-600" ml="-4 md:(-8)" mr="-4 md:(-8)" :scrolling="isScrolling" transition="all")
+HList(pos="sticky top-$page-header-offset" z="8" b="on-scrolling:t-1 gray-600" ml="-4 md:(-8)" mr="-4 md:(-8)" :scrolling="isScrolling" transition="all" ref="element")
   div(flex="~ row" w="full" bg="ix-black" gap="4 md:3" p="l-4 r-4 t-4 b-4 md:(l-8 r-8 t-4 b-4)" :justify="justifyOrder")
 
     CollectionFilterToggleFilter(@click="onOpenFilter")
@@ -19,7 +19,11 @@ import type { IXToken } from '@ix/base/composables/Token/useIXToken'
 import type { CollectionContext, CollectionData } from '~/composables/useCollection'
 
 const showMobileFilter = ref(false)
+const element = ref()
+
 const { isMobile } = useDevice()
+const { height } = useElementBounding(element)
+const { filterHeaderHeight } = useStickyOffsets()
 
 const onOpenFilter = () => {
   if (isMobile.value)
@@ -27,6 +31,12 @@ const onOpenFilter = () => {
   else
     emit('toggleFilter')
 }
+
+effect(() => {
+  const newHeight = Math.round(height.value);
+  if (newHeight != filterHeaderHeight.value)
+    filterHeaderHeight.value = newHeight
+})
 
 const { context } = defineProps<{
   data?: CollectionData

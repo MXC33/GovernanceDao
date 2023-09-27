@@ -1,6 +1,6 @@
 <template lang="pug">
-VList()
-  CollectionFilterButtonContainer(:is-open="isOpen" pos="sticky top-[calc(12rem+var(--header-offset))] md:top-[calc(13rem+var(--header-offset))]")
+VList#whereami()
+  CollectionFilterButtonContainer(:is-open="isOpen")
 
   div.grid(grid="~ cols-2 md:(cols-3 on-open:cols-1) xl:(cols-4 on-open:cols-3) 2xl:(cols-5 on-open:cols-4)" :open="isOpen" :state="gridState" w="md:full")
     slot
