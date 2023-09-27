@@ -39,6 +39,8 @@ VList(:class="className" pos="sticky left-0 top-0" translate-y="$header-offset" 
   Transition(name="slide-top" mode="out-in")
     HeaderNavigation(:class="className + '-header'" v-if="activeHeaderIndex != null && headerData != null"  :key="activeHeaderIndex" :header="headerData[activeHeaderIndex]")
 
+HeaderLifiWidget(v-if="swapVisible" @close="swapVisible = false")
+
   slot(name="contentBottom")
 
   component(is="style").

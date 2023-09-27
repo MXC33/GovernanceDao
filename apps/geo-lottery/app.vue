@@ -20,8 +20,6 @@
           VList(w="full" justify="center" items="center" )
             iframe(src="https://ix.foundation/lefi" w="full" h="full" min-h="118")
 
-
-
 </template>
 
 <script setup lang="ts">

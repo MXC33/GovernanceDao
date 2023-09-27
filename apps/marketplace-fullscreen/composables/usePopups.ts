@@ -89,21 +89,11 @@ export interface PopupInsufficientFunds extends PopupBase {
 
 type Popup = PopupOnList | PopupOnBid | PopupTransfer | PopupListItem | PopupUnlistItem | PopupBidItem | PopupUnbidItem | PopupTransferSuccess | PopupBuyItemSuccess | PopupAcceptItems | PopupAcceptItemsSuccess | PopupInsufficientFunds | PopupUnlistItemSuccess | PopupUnbidSuccess | PopupRejectItemsSuccess | PopupRejectItems
 
-export const usePopups = () => {
-  const popup = useState<Popup | null>('active-popup', () => null)
+export const usePopups = () =>
+  definePopups<Popup>()
 
-  const displayPopup = (newPopup: Popup) => {
-    popup.value = newPopup
-  }
 
-  const closeActivePopup = () => popup.value = null
 
-  return {
-    closeActivePopup,
-    displayPopup,
-    popup
-  };
-};
 
 
 
