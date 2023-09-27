@@ -20,7 +20,7 @@ div()
 <script lang="ts" setup>
 import type { HeaderMenuSubNavigation } from '~/composables/useSiteHeader';
 
-const {navigation} = defineProps<{
+const { navigation } = defineProps<{
   navigation: HeaderMenuSubNavigation
 }>()
 

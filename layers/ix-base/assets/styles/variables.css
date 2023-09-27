@@ -1,10 +1,10 @@
 :root {
-  --header-offset: 0rem;
+  /* --header-offset: 0rem; */
 }
-
+/* 
 body.is-scrolling-down {
-  --header-offset: calc(-1 * var(--header-height-desktop));
-}
+  --header-offset: calc(-1 * var(--header-height));
+} */
 
 body.is-scroll-locked {
   overflow: hidden;
@@ -13,9 +13,9 @@ body.is-scroll-locked {
 body.is-scroll-locked.is-scrolling-down {
   --header-offset: 0 !important;
 }
-
+/* 
 @media (max-width: 767.9px) {
   body.is-scrolling-down {
-    --header-offset: calc(-1 * var(--header-height-mobile));
+    --header-offset: calc(-1 * var(--header-height));
   }
-}
+} */

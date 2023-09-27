@@ -1,6 +1,6 @@
 <template lang="pug">
 Transition(name="slide-left")
-  HList(v-if="numberOfSelected" flex-wrap="~" gap="3" p="l-4 on-active:(b-4 md:b-3)" w="md:full" bg="ix-black" whitespace="nowrap" :open="isOpen" :active="isFilterActive")
+  HList(v-if="numberOfSelected" flex-wrap="~" gap="3" p="l-4 on-active:(b-4 md:b-3)" w="md:full" bg="ix-black" z="3" whitespace="nowrap" :open="isOpen" :active="isFilterActive" transition="all")
     template(v-for="(item, filterIndex) in selectedFilters")
       template(v-for="(option, index) in item.value")
         CollectionFilterButton(v-if="option.selected" @clear="clearFilter(filterIndex, index)")

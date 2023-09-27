@@ -34,7 +34,6 @@ export default defineNuxtConfig({
     resolve('./assets/styles/corners.css'),
     resolve('./assets/styles/cuts.css'),
     resolve('./assets/styles/transitions.css'),
-    resolve('./assets/styles/corporations.css'),
     resolve('./assets/styles/variables.css'),
     'vue3-carousel/dist/carousel.css',
     '@unocss/reset/tailwind.css',
@@ -43,12 +42,30 @@ export default defineNuxtConfig({
     'nuxt-graphql-client',
     '@unocss/nuxt',
     '@vueuse/nuxt',
-
+    '@nuxtjs/i18n'
   ],
   imports: {
     dirs: [
       'composables/**'
     ]
+  },
+
+
+  i18n: {
+    lazy: true,
+    strategy: 'no_prefix',
+    langDir: './lang',
+    defaultLocale: 'en',
+    compilation: {
+      strictMessage: false,
+    },
+    locales: [
+      {
+        code: 'en',
+        file: 'en-US.json',
+        name: 'English'
+      }
+    ],
   },
 
   device: {

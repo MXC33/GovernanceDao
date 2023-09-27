@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="50px" height="47px" viewBox="0 0 50 47" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>inventory</title>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="inventory" transform="translate(1.699219, -0.000000)" stroke="#FF6647" stroke-width="2">
+            <path d="M0,46.601 C0,37.2661 23.301681,32.6357 23.301681,23.3008" id="Path"></path>
+            <path d="M11.650381,46.601 C11.650381,37.2661 23.301881,32.6357 23.301881,23.3008" id="Path"></path>
+            <line x1="23.300781" y1="46.601" x2="23.300781" y2="23.3008" id="Path"></line>
+            <path d="M34.950881,46.601 C34.950881,37.2661 23.300781,32.6357 23.300781,23.3008" id="Path"></path>
+            <path d="M46.601081,46.601 C46.601081,37.2661 23.300781,32.6357 23.300781,23.3008" id="Path"></path>
+            <path d="M46.602081,0 C46.602081,9.33493 23.301781,13.9667 23.301781,23.3017" id="Path"></path>
+            <path d="M34.951881,0 C34.951881,9.33493 23.301781,13.9667 23.301781,23.3017" id="Path"></path>
+            <line x1="23.301781" y1="0" x2="23.301781" y2="23.3017" id="Path"></line>
+            <path d="M11.650381,0 C11.650381,9.33493 23.301881,13.9667 23.301881,23.3017" id="Path"></path>
+            <path d="M0,0 C0,9.33493 23.301681,13.9667 23.301681,23.3017" id="Path"></path>
+        </g>
+    </g>
+</svg>

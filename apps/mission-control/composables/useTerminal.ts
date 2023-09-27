@@ -1,0 +1,1 @@
+export type TerminalId = 'drops' | 'raffles' | 'waste-system' | 'y-company' | 'new-lands' | 'etern-lab'

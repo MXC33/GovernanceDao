@@ -15,8 +15,8 @@ Teleport(to="#takeover")
 
       template(#buttons)
         div(grid="~ cols-2" display="md:none")
-          button(btn="secondary on-disabled:disabled" :disabled="lessThanOneSelected" @click="clearFilters") clear all
-          button(btn="primary on-disabled:disabled" @click="isOpen = false" :disabled="lessThanOneSelected") apply filter
+          button(btn="~ secondary on-disabled:disabled" :disabled="lessThanOneSelected" @click="clearFilters") clear all
+          button(btn="~ primary on-disabled:disabled" @click="isOpen = false" :disabled="lessThanOneSelected") apply filter
 
 </template>
 

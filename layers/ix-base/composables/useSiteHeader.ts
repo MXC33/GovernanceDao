@@ -40,22 +40,38 @@ export interface NavigationMedia {
 
 export const useHeaderData = () =>
   useAsyncDataState('site-header-menu', async () => {
-    const request = (await $fetch(BASE_API_ENDPOINT_URL() +'/navigation')) as HeaderRequest
+    const request = (await $fetch(BASE_API_ENDPOINT_URL() + '/navigation')) as HeaderRequest
 
     return request?.data ?? []
   });
 
-export const useHeaderIndex = () => shallowRef<number | null>(null)
 
 export const useSiteHeader = () => {
-  type Currency = 'IXT' | 'aGold'
-  const activeCurrency = useState<Currency>('active-currency', () => 'IXT')
-  const setActiveCurrency = (currency: Currency) => {
-    activeCurrency.value = currency
-  }
+  const activeHeaderIndex = useState<number | null>('header-active-index', () => null)
+
+  const headerHeight = useState<number>('site-header-height', () => 0)
+  const isScrollingDown = useState<boolean>('header-is-scrolling-down', () => false)
+
+  const autoHideActive = useState<boolean>('header-auto-hide', () => false)
+
+  const siteHeaderScrollOffset = computed(() =>
+    (isScrollingDown.value && autoHideActive.value) ? -headerHeight.value : 0
+  )
+
+  watch(headerHeight, (hi) => {
+    console.log("DERP", hi)
+  })
+
+  const siteHeaderOffset = computed(() =>
+    headerHeight.value
+  )
 
   return {
-    activeCurrency,
-    setActiveCurrency
+    activeHeaderIndex,
+    autoHideActive,
+    isScrollingDown,
+    siteHeaderScrollOffset,
+    siteHeaderOffset,
+    headerHeight
   }
 };

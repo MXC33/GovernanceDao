@@ -1,11 +1,9 @@
 <template lang="pug">
-VList(flex-grow="1" pos="relative" min-h="0" justify="center" p="3" items="center")
-  WalletConnector()
+Wallet.test()
 </template>
 
 
 <script lang="ts" setup>
-
 useHead({
   title: "Connect | Marketplace | PlanetIX"
 })
@@ -24,12 +22,19 @@ watch(isLoggedInAndConnected, (connected) => {
 
   const redirectQuery = route.query.redirectUrl
 
-
   if (redirectQuery) {
     const path = decodeURIComponent(String(redirectQuery))
+
+    if (path.includes('connect'))
+      return
+
     const ensureRelativeQuery = /^[^\/]+\/[^\/].*$|^\/[^\/].*$/gmi
-    if (path.match(ensureRelativeQuery))
+
+    if (path.match(ensureRelativeQuery)) {
       return navigateTo(path)
+    } else {
+      return navigateTo('/')
+    }
   } else {
     return navigateTo('/')
   }

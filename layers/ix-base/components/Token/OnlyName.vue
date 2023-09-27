@@ -4,7 +4,7 @@ div(uppercase="~") {{ name }}
 
 <script lang="ts" setup>
 import type { TokenIdentifier } from '~/composables/Token/useTokens';
-const { getTokenName } = useTokens()
+
 
 const props = defineProps<{
   token: TokenIdentifier,

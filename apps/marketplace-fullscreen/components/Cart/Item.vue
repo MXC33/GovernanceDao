@@ -21,7 +21,7 @@ VList(bg="gray-900" v-if="item")
         button(@click="removeFromCart(item)")
           TrashIcon(w="6")
 
-      Adjustable(v-model="item.shares" :has-frame="false" :is-solid="true")
+      Adjustable(v-model="item.shares" look="frame")
     
 </template>
 
