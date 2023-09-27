@@ -62,7 +62,6 @@ const { data: headerData } = useHeaderData()
 const { state: swapVisible } = useIXTSwapVisible()
 const onMouseLeave = () => {
   activeMenuIndex.value = null
-  console.log("LEAVE")
 }
 const activeMenuIndex = useHeaderIndex()
 const { headerHeight } = useSiteHeader()

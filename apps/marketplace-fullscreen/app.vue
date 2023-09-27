@@ -57,7 +57,7 @@ const { connectWallet, walletState } = useWallet()
 const { setupIXTPrice } = useIXTPrice()
 const { refreshIXTBalance } = useIXTContract()
 
-const { setRefreshToken, loginStatus } = useLogin()
+const { setRefreshToken, isLoggedinAndConnected } = useLogin()
 const { user } = useUser()
 
 watch(y, (pos) => globalY.value = pos)
@@ -90,8 +90,8 @@ onMounted(async () => {
 })
 
 
-watch(loginStatus, (state) => {
-  if (state != 'logged-in')
+watch(isLoggedinAndConnected, (loggedIn) => {
+  if (!loggedIn)
     return
 
   fetchMessageData()
