@@ -7,11 +7,8 @@ PopupBlank()
         h1(text="3xl md:5xl lg:6xl center" font="bdrA3mik" whitespace="pre-wrap") You Claimed
         div( w="450px" h="450px" mb="2")
           //iframe(:src="popup.nft_link"
-          iframe(:src="iframeURL"
-            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-            frameborder="0"
-            sandbox="allow-scripts"
-            w="full" h="full")
+
+        ClaimIframe(:url="iframeURL" w="full" h="full")
         Button(:value="'pink'" w="100% sm:390px"  @click="onClose" ) Close
 
 </template>
