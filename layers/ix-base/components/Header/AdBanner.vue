@@ -11,8 +11,8 @@ div(flex="~ row grow" items="center" justify="center" bg="#FF1E6E" pos="relative
       NuxtLink(to="https://territorylottery.planetix.com" )
         span.lucky-cat-text(uppercase="~" text="lt-md:center" p="lt-md:1") - Click Here
 
-    HList(justify="end" items="center" pr="2" z="999")
-      CloseIcon(w="2.5 md:4" fill="black hover:black" cursor="pointer" @click="toggleBanner")
+    HList(justify="end" items="center" pr="2" z="999" fill="black hover:black" cursor="pointer" @click="toggleBanner" opacity="hover:40" transition="opacity")
+      CloseIcon(w="2.5 md:4" )
 </template>
 
 <script lang="ts" setup>

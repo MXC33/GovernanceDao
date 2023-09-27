@@ -131,8 +131,6 @@ const getSelector = ({ constructCSS, variantHandlers, variantMatch }: RuleContex
 
   const attributedSelector = selectors.shift()
 
-  console.log("DEFAULT SELECTOR", defaultSelector, variantHandlers, variantMatch)
-
   // Unfortunately this doesn't handle variantMatches right now for some weird reason...
 
   const wrappedMediaSelector = (style: string) => `

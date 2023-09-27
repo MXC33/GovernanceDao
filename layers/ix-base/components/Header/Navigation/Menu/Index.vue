@@ -3,7 +3,7 @@ VList(flex-grow="1" w="full")
   VList(v-for="header in headerData")
     Drawer(bg="black")
       template(#header) 
-        div {{ header.name }}
+        div {{ adjustedTitle(header.name) }}
 
       template(#default)
         HeaderNavigationMenuSubNavigation(:navigation="navigation" v-for="navigation in header.subNavigations")
@@ -11,4 +11,12 @@ VList(flex-grow="1" w="full")
 
 <script lang="ts" setup>
 const { data: headerData } = useHeaderData()
+
+const adjustedTitle = (title: string) => {
+  if (title == "COMMUINTY")
+    return "COMMUNITY"
+
+  return title
+}
+
 </script>

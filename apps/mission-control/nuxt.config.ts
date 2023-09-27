@@ -40,7 +40,6 @@ export default defineNuxtConfig({
   css: [
     '@/assets/styles/fonts.css',
     '@/assets/styles/colors.css',
-    '@/assets/styles/transitions.css',
     '@/assets/styles/corporations.css',
     'vue3-carousel/dist/carousel.css'
   ],

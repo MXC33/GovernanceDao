@@ -49,12 +49,18 @@ export const useHeaderData = () =>
 export const useSiteHeader = () => {
   const activeHeaderIndex = useState<number | null>('header-active-index', () => null)
 
-  const headerHeight = useState<number>('header-height', () => 0)
+  const headerHeight = useState<number>('site-header-height', () => 0)
   const isScrollingDown = useState<boolean>('header-is-scrolling-down', () => false)
 
+  const autoHideActive = useState<boolean>('header-auto-hide', () => false)
+
   const siteHeaderScrollOffset = computed(() =>
-    isScrollingDown.value ? -headerHeight.value : 0
+    (isScrollingDown.value && autoHideActive.value) ? -headerHeight.value : 0
   )
+
+  watch(headerHeight, (hi) => {
+    console.log("DERP", hi)
+  })
 
   const siteHeaderOffset = computed(() =>
     headerHeight.value
@@ -62,6 +68,7 @@ export const useSiteHeader = () => {
 
   return {
     activeHeaderIndex,
+    autoHideActive,
     isScrollingDown,
     siteHeaderScrollOffset,
     siteHeaderOffset,

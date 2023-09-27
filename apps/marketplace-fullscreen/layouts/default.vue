@@ -1,6 +1,6 @@
 <template lang="pug">
 main(w="full" h="full" flex="~ col grow" min-h="100vh")
-  Header()
+  Header(:auto-close="true")
     template(#dropdown)
       NuxtLink(to="/account")
         HeaderSubmenuButton(b="t-1 b-1 gray-400") {{ $t(`general.navigation.menu.account`)}}

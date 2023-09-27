@@ -1,5 +1,5 @@
 <template lang="pug">
-#app.antialiased(font="foundry" text="base" bg="ix-black" color="white" ref="app" overscroll="none" flex="~ col grow" min-h="100vh")
+#app.antialiased.geo-lottery(font="foundry" text="base" bg="ix-black" color="white" ref="app" overscroll="none" flex="~ col grow" min-h="100vh")
   NuxtLayout()
     VList(flex-grow="1")
       NuxtLoadingIndicator(color="rgb(255, 102, 71)")
@@ -121,5 +121,11 @@ const values = computed(() => {
 body,
 html {
   background: #000;
+}
+
+#app {
+  --header-background: var(--mc-pink);
+  --header-text-active: white;
+  --header-text: var(--ix-black);
 }
 </style>

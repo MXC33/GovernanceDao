@@ -1,5 +1,5 @@
 <template lang="pug">
-HList.border-white.pink-btn(p="6" bg="ix-black" b="b-1 gray-600")
+HList(p="6" bg="ix-black" b="b-1 gray-600")
   NuxtLink(v-if="walletState !== 'connected'" to="/connect" @click="$emit('close')" btn="soft-ix-orange lg" w="full" color="white") {{ $t(`general.navigation.menu.connectWallet`)}}
 
   HList(v-else flex-grow="1" cut="bottom-right s-sm b-ix-orange opacity-60" bg="ix-orange opacity-20")

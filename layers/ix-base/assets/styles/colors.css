@@ -35,11 +35,11 @@
   --mc-accent-light: var(--mc-accent);
 
   --ix-black: rgb(var(--ix-black-rgb));
-  --ix-black: rgba(var(--ix-black-rgb), 0.1);
-  --ix-black: rgba(var(--ix-black-rgb), 0.2);
-  --ix-black: rgba(var(--ix-black-rgb), 0.4);
-  --ix-black: rgba(var(--ix-black-rgb), 0.6);
-  --ix-black: rgba(var(--ix-black-rgb), 0.8);
+  --ix-black_10: rgba(var(--ix-black-rgb), 0.1);
+  --ix-black_20: rgba(var(--ix-black-rgb), 0.2);
+  --ix-black_40: rgba(var(--ix-black-rgb), 0.4);
+  --ix-black_60: rgba(var(--ix-black-rgb), 0.6);
+  --ix-black_80: rgba(var(--ix-black-rgb), 0.8);
 
 
   --mc-arcade: rgb(var(--mc-arcade-rgb));
@@ -109,4 +109,9 @@
   --mc-secondary_40: rgba(var(--mc-secondary-rgb), 0.4);
   --mc-secondary_60: rgba(var(--mc-secondary-rgb), 0.6);
 
+
+  --header-background: var(--ix-black);
+  --header-subnav-background: var(--ix-black);
+  --header-text-active: var(--ix-black);
+  --header-text: var(--ix-black);
 }
