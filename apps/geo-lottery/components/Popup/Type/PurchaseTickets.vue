@@ -11,11 +11,12 @@ Popup()
 
       InputRadio(v-model="purchaseTypeModel" :value="'popup-type-one-time-entry'")
         template(#default) One-time entry
-        template(#info) {{enteredTickets?.entered_tickets}} entries out of {{maxOneTimeEntries}}
+        //template(#info) {{enteredTickets?.entered_tickets || 0}} entries out of {{maxOneTimeEntries}}
       InputRadio(v-model="purchaseTypeModel" :value="'popup-type-subscribe'")
-        template(#default) Subscription
-        template(#info) {{enteredTickets?.entered_weekly_tickets || 0}} entries out of {{maxSubscriptionEntries}}
+        template(#default) Subscription stream
+        //template(#info) {{enteredTickets?.entered_weekly_tickets || 0}} entries out of {{maxSubscriptionEntries}}
 
+      p(text="xs" p="x-4" m="-b-2" v-if="purchaseTypeModel === 'popup-type-subscribe'" ) <strong>Disclaimer:</strong> to get one ticket at the end of the streaming period you need to have streamed 10 AGOLD. For each 10 AGOLD you have steamed you will get one ticket and each ticket takes one week to stream in full. The next streaming period starts after each draw. If you enter later than at the start of the stream period your requested ticket amount will not be fully completed and the remainder of AGOLD will be lost.
 
   template(#footer)
     VList()

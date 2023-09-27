@@ -1,16 +1,13 @@
 <template lang="pug">
-Popup()
+Popup(:hideCloseButton="true")
   template(#default)
     HList(items="center" justify="center" text="2xl" pt="6" font="bold" uppercase="~")
-      h3() Congratulations!
+      img(src="~/assets/images/LC-Territory-logot.png" width="226" m="t-9")
 
     VList(flex-grow="1" items="center" justify="center" text="md center" font="normal" space-y="6")
       VList()
-        p() Subscription activated and {{ popup.entries }} ticket added!
-        p() Hope the luck be with you!
-      VList()
-        p() Winners will be drawn in:
-        HelperCountDown(:endTimestamp="lotteryEndsAt" v-if="lotteryEndsAt")
+        p(v-if="popup.entries > 1") Subscription stream activated for ({{ popup.entries }}) tickets on a weekly basis.
+        p(v-else) {{ popup.entries }} Subscription stream activated for ({{ popup.entries }}) ticket on a weekly basis.
 
   template(#footer)
     ButtonItem(:value="'pink'" :text="'CLOSE'" @click="onClose()")
@@ -23,9 +20,6 @@ const { subscriptionEntries } = useSubscription()
 const onClose = (() => {
   closeActivePopup()
 })
-
-import { useLottery } from "~/composables/useLottery";
-const { lotteryEndsAt } = useLottery()
 
 onUnmounted(() => {
   subscriptionEntries.value.value = 1
