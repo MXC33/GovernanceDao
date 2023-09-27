@@ -18,7 +18,8 @@ export interface PopupTypeYouWin extends PopupBase {
 
 export interface PopupTypeYouClaimed extends PopupBase {
   type: 'popup-type-you-claimed',
-  token_id: number
+  token_id: number,
+  lottery_id: number,
 }
 
 export interface PopupTypeYouClaimedWithoutNFT extends PopupBase {
@@ -59,7 +60,7 @@ export interface PopupTypeUnsubscribeSuccess extends PopupBase {
 }
 
 type Popup = PopupTypeInsufficientFunds | PopupTypeYouWin | PopupTypeYouClaimed | PopupTypeYouClaimedWithoutNFT | PopupTypePurchaseTickets | PopupTypeOneTimeEntry | PopupTypeOneTimeEntrySuccess | PopupTypeSubscribe | PopupTypeSubscribeSuccess | PopupTypeSwap
- | PopupTypeManageTickets | PopupTypeSwapSuccess | PopupTypeUnsubscribeSuccess
+  | PopupTypeManageTickets | PopupTypeSwapSuccess | PopupTypeUnsubscribeSuccess
 export const usePopups = () => {
   const popup = useState<Popup | null>('active-popup', () => null)
 
