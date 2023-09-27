@@ -2,12 +2,10 @@
 Popup(:hideCloseButton="true")
   template(#default)
     HList(items="center" justify="center" text="2xl" pt="6" font="bold" uppercase="~")
-      h3() Congratulations!
+      h3() TRANSACTION SUCCESSFUL
 
     VList(flex-grow="1" items="center" justify="center" text="md center" font="normal" space-y="6")
-      VList(items="center" text="center")
-        p(max-w="sm:80%") Your account has been credited with the requested funds. Hope the luck be with you!
-      HList(justify="center" items="center")
+      HList(justify="center" items="center" b="1 ix-white opacity-40" rounded="lg" p="x-4 y-4" min-w="65%" m="b-2")
         HList(m-x="3" space-x="2" items="center" :order="popup.tokenSwapOrder === 'IXT-AGOLD' ? '1' : '3'")
           IxtCircleBlackIcon(w="8")
           span() {{popup.value}} IXT
@@ -18,6 +16,9 @@ Popup(:hideCloseButton="true")
         HList(m-x="3" space-x="2" justify="center" items="center" :order="popup.tokenSwapOrder === 'IXT-AGOLD' ? '3' : '1'")
           AstroGoldCircleYellowIcon(w="8")
           span() {{popup.value}} AGOLD
+
+      VList(items="center" text="center")
+        p() Your account has been credited with the requested funds.
 
   template(#footer)
     ButtonItem(:value="'pink'" :text="'Back To Purchase Tickets'" @click="onBack()" v-if="popup.backModal" )
