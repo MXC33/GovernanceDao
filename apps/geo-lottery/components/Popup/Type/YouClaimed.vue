@@ -7,7 +7,7 @@ PopupBlank()
         h1(text="3xl md:5xl lg:6xl center" font="bdrA3mik" whitespace="pre-wrap") You Claimed
         div( w="450px" h="450px" mb="2")
           //iframe(:src="popup.nft_link"
-          iframe(:src="'/lottery-ticket.svg'"
+          iframe(:src="iframeURL"
             allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
             frameborder="0"
             sandbox="allow-scripts"
@@ -21,4 +21,16 @@ const { closeActivePopup, popup } = usePopups()
 const onClose = () => {
   closeActivePopup()
 }
+
+const { lotteryId, tokenId } = defineProps<{
+  lotteryId: number,
+  tokenId: number
+}>()
+
+const baseURI = BASE_API_ENDPOINT_URL()
+
+const iframeURL = computed(() =>
+  `${baseURI}/geo/lottery/token/${tokenId}/claimed/${lotteryId}`
+)
+
 </script>

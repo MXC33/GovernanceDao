@@ -16,7 +16,7 @@ VList()
         div(@click.stop="")
           ButtonItem(:value="'pink'"  min-w="180px sm:190px" h="10" :text="'Claim now'" flex="~" items-center justify-center
             v-if="round.winning_pools && round.winning_pools.length && !round.claimed"
-            @click="onClaimReward()"
+            @click="claimRewardRequest()"
             :loading="isLoading"
           )
         IconChevron(w="4" :up="isOpen")
@@ -79,29 +79,40 @@ const { startOpen, round } = defineProps<{
 
 const isOpen = shallowRef(startOpen)
 const dropDrawer = () => { isOpen.value = !isOpen.value }
-
 const { claimReward } = useLottery()
-const { loading: isLoading, execute: claimRewardRequest } = useContractRequest(() =>
-  claimReward(round.id)
-)
+const { getChain } = useWallet()
+const { loading: isLoading, execute: claimRewardRequest } = useContractRequest(async () => {
+  const response = await claimReward(round.id)
 
-const onClaimReward = async () => {
-  const claimReward = await claimRewardRequest()
+  if (!response)
+    return
 
-  if (claimReward)  {
-    if (round.prize < 100) {
-      displayPopup({
-        type: 'popup-type-you-claimed-without-nft',
-        prize: round.prize
-      })
-    } else {
-      displayPopup({
-        type: 'popup-type-you-claimed',
-        nft_link: round.nft_link
-      })
-    }
+  const logData = response.logs.filter(item =>
+    item.address == geoLotteryRewardAddress[getChain('polygon')]
+  ).map((item) => item.data)
+
+  const firstItem = logData[0]
+  if (!firstItem)
+    return
+
+  const tokenId = parseInt(firstItem.slice(-64))
+
+  // contract.value?.interface.decodeEventLog()
+
+  if (round.prize < 100) {
+    displayPopup({
+      type: 'popup-type-you-claimed-without-nft',
+      prize: round.prize
+    })
+  } else {
+    displayPopup({
+      type: 'popup-type-you-claimed',
+      token_id: tokenId,
+      lottery_id: round.id
+    })
   }
-}
+})
+
 
 </script>
 
