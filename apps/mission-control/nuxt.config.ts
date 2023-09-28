@@ -1,4 +1,3 @@
-require('dotenv').config()
 import { nodePolyfills } from 'vite-plugin-node-polyfills'
 import svgLoader from 'vite-svg-loader'
 
