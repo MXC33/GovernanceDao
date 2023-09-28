@@ -28,7 +28,7 @@ import Close from '~/assets/icons/close.svg'
 const { isCoockieActive } = useCookies()
 
 defineProps<{
-  closeTerritory: boolean
+  context: CollectionContext
 }>()
 const isClosed = () => {
   isCoockieActive.value = false

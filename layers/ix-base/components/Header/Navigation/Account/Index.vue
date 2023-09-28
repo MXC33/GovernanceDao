@@ -1,17 +1,16 @@
 <template lang="pug">
-HList(p="6" bg="ix-black" b="b-1 gray-600" class="border-white")
-  NuxtLink(v-if="walletState !== 'connected'" to="/connect" @click="$emit('close')" btn="soft-ix-orange lg" w="full" class="pink-btn" color="white") {{ $t(`marketplace.navigation.menu.connectWallet`)}}
+HList(p="6" bg="ix-black" b="b-1 gray-600")
+  NuxtLink(v-if="walletState !== 'connected'" to="/connect" @click="$emit('close')" btn="soft-ix-orange lg" w="full" color="white") {{ $t(`general.navigation.menu.connectWallet`)}}
 
   HList(v-else flex-grow="1" cut="bottom-right s-sm b-ix-orange opacity-60" bg="ix-orange opacity-20")
     AOCIcon(w="25" p="3")
 
     VList(b="l-1 ix-orange opacity-40" flex-grow="1" class="border-white")
       VList(p="2" b="b-1 ix-orange opacity-40" v-if="userId")
-        div(text="white") {{userId}}
-        div(color="ix-orange" class="pink-text") {{ $t(`marketplace.navigation.menu.account`)}}
+        div(text="white") {{userId}} 
+        div.pink-text(color="ix-orange") {{ $t(`general.navigation.menu.account`)}}
 
         //-NuxtLink(to="/account" color="ix-orange") Account
-
 
       HList(flex-grow="1" items="center")
         HList(b="r-1 ix-orange opacity-40" p="2" flex-grow="1" h="full" items="center" space-x="1" font="bold")
@@ -24,10 +23,9 @@ HList(p="6" bg="ix-black" b="b-1 gray-600" class="border-white")
 const emit = defineEmits(['close'])
 import AOCIcon from '~/assets/images/icons/aocbadge.svg'
 
-
 const { enable: showIXTSwap } = useIXTSwapVisible()
 const { walletState } = useWallet()
-const { ixtBalance } = useUserData()
+const { ixtBalance } = useIXTContract()
 const { user } = useUser()
 
 const userId = computed(() => user.value?.username || null)

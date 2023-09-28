@@ -38,7 +38,7 @@ const { token, context } = defineProps<{
 }>()
 
 const is1155 = computed(() => ERC1155Addresses.includes(token.collection))
-const { getTokenKey } = useTokens()
+
 const { formatAmount } = useFormatNumber()
 const { ixtToUSD } = useIXTPrice()
 const { ixtBalance } = useIXTContract()

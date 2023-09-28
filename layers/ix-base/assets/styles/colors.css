@@ -8,25 +8,23 @@
   --mc-yellow-rgb: 246, 186, 30;
   --mc-ygreen-rgb: 95, 190, 135;
   --mc-blue: #0E84D9;
-  --mc-gray: #1E1E1E;
+  --gray: #1E1E1E;
   --mc-red: #E52424;
-  --mc-full-red: #ff0000;
-  --mc-gray_light: #f9f9f999;
-  --mc-finegreen: #14C75C;
+  --gray_light: #f9f9f999;
+  --mc-success: #14C75C;
   --mc-whitenew: #f9f9f9;
   --mc-warning: #F6BA1E;
-  --mc-gray-50: #d9d9d9;
-  --mc-gray-100: #C4C4C4;
-  --mc-gray-200: #A8A8A8;
-  --mc-gray-300: #858585;
-  --mc-gray-400: #636363;
-  --mc-gray-500: #474747;
-  --mc-gray-600: #580623;
-  --mc-gray-700: #242424;
-  --mc-gray-800: #1A1A1A;
-  --mc-gray-900: #141414;
+  --gray-50: #d9d9d9;
+  --gray-100: #C4C4C4;
+  --gray-200: #A8A8A8;
+  --gray-300: #858585;
+  --gray-400: #636363;
+  --gray-500: #474747;
+  --gray-600: #580623;
+  --gray-700: #242424;
+  --gray-800: #1A1A1A;
+  --gray-900: #141414;
   --mc-pink: #FF1E6E;
-  --mc-error: #f31930ad;
   --mc-pink-blur: rgba(255, 30, 110, 0.10);
   --mc-pink-blur2: rgba(200, 10, 110, 1);
   --mc-pink-60: rgba(255, 30, 110, 0.60);
@@ -37,11 +35,11 @@
   --mc-accent-light: var(--mc-accent);
 
   --ix-black: rgb(var(--ix-black-rgb));
-  --ix-black: rgba(var(--ix-black-rgb), 0.1);
-  --ix-black: rgba(var(--ix-black-rgb), 0.2);
-  --ix-black: rgba(var(--ix-black-rgb), 0.4);
-  --ix-black: rgba(var(--ix-black-rgb), 0.6);
-  --ix-black: rgba(var(--ix-black-rgb), 0.8);
+  --ix-black_10: rgba(var(--ix-black-rgb), 0.1);
+  --ix-black_20: rgba(var(--ix-black-rgb), 0.2);
+  --ix-black_40: rgba(var(--ix-black-rgb), 0.4);
+  --ix-black_60: rgba(var(--ix-black-rgb), 0.6);
+  --ix-black_80: rgba(var(--ix-black-rgb), 0.8);
 
 
   --mc-arcade: rgb(var(--mc-arcade-rgb));
@@ -111,4 +109,9 @@
   --mc-secondary_40: rgba(var(--mc-secondary-rgb), 0.4);
   --mc-secondary_60: rgba(var(--mc-secondary-rgb), 0.6);
 
+
+  --header-background: var(--ix-black);
+  --header-subnav-background: var(--ix-black);
+  --header-text-active: var(--ix-black);
+  --header-text: var(--ix-black);
 }

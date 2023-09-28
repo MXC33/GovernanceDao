@@ -2,7 +2,7 @@
 export type TransactionState = 'accepting' | 'approving' | 'minting-pix' | 'signing' | 'minting' | 'extracting' | 'nonce' | 'second-transaction' | 'unclaimed-avatar'
 
 export const useTransactions = () => {
-  const transactionState = useState<TransactionState | null>(() => null)
+  const transactionState = useState<TransactionState | null>('active-transaction', () => null)
 
   const resetTransactionState = () =>
     transactionState.value = null

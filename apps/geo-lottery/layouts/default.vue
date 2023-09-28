@@ -48,18 +48,6 @@ import PlanetIXLogo from '~/assets/images/logo.svg'
   background-color: rgba(132, 212, 188, 0.1);
 }
 
-.geo-lottery-header [btn~="menu"] {
-  color: black;
-  font-size: 16px;
-}
-
-.geo-lottery-header [btn~="menu"]:hover {
-  color: black;
-}
-
-.geo-lottery-header-mobile>div>div {
-  background-color: rgba(255, 30, 110, 0.10);
-}
 
 .geo-lottery-header-mobile>div>div::before {
   background-color: white !important;

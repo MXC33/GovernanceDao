@@ -1,6 +1,6 @@
 <template lang="pug">
-VList(ml="-4 md:(-8)" mr="-4 md:(-3)" pos="md:sticky top-[calc(12.5rem+var(--header-offset))]" overflow-y="scroll" w="md:100" h="md:273")
-  CollectionFilterDrawer(v-for="(item, filterIndex) in activeFilters" :is-small="true")
+VList(ml="-4 md:(-8)" mr="-4 md:(-3)" pos="md:sticky top-$filter-header-offset"  overflow-y="scroll" w="md:100" h="md:273" transition="all")
+  Drawer(v-for="(item, filterIndex) in activeFilters" :is-small="true")
 
     template(#header) {{item.trait_type}}
     template(#default)

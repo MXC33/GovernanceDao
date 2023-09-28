@@ -33,6 +33,10 @@ export default definePreset({
     stateMatcher
   ],
   theme: {
+    fontFamily: {
+      foundry: ['Foundry Gridnik', 'sans-serif'],
+      bdrA3mik: ['BDRA3MiK-Regular'],
+    },
     colors: {
       ix: {
         primary: '#C3000F',
@@ -67,12 +71,16 @@ export default definePreset({
       },
 
       'semantic': {
-        'finegreen': '#14C75C',
+        'success': '#14C75C',
         'warning': '#F6BA1E',
         'red': '#E52424',
       },
     },
   },
+
+  // Searching in all files for style implementation by using:
+  // btn="[^"]*center[^"]*" 
+
   shortcuts: [
     // general shortcuts
     {
@@ -86,22 +94,36 @@ export default definePreset({
       'flex-fold-col': 's-md:lt-md:flex-col s-lg:lt-md:flex-col',
     },
 
+    // Base button styles
     {
-      'btn': 'transition-all transition-duration-100 flex flex-col text-center justify-center items-center leading-none cursor-pointer font-bold uppercase',
-      'btn-lg': 'min-h-14',
-      'btn-md': 'min-h-10',
-      'btn-center': 'flex justify-center items-center',
-      'btn-solid': 'btn btn-lg px-4 lg:px-8',
-      'btn-accent': 'btn-primary btn-solid',
-      'btn-primary': 'btn-solid bg-ix-primary hover:bg-ix-ne color-white',
-      'btn-disabled': 'btn-solid bg-gray-700 color-gray-400',
+      'btn': 'transition-all transition-duration-150 flex flex-col text-center justify-center items-center leading-none cursor-pointer font-bold uppercase btn-md px-4',
+      'btn-primary': 'bg-ix-primary hover:bg-ix-primary color-white',
+      'btn-secondary': 'bg-gray-600 color-white hover:bg-gray-400',
+      'btn-tertriary': 'b-1 b-gray-400 hover:b-gray-300',
+      'btn-select': 'cut-bottom-right cut-b-gray-400 hover:cut-b-gray-300',
+      'btn-select-active': 'bg-gray-500 cut-b-gray-300',
+      'btn-form': 'font-400 py-3 px-1 btn-select btn-sm',
+      'btn-form-active': 'bg-gray-600'
+    },
+
+    // Special button
+    {
       'btn-soft': 'btn px-4 btn-md bg-opacity-20 hover:bg-opacity-40 b-0.5',
-      'btn-secondary': 'btn-solid bg-gray-600 color-white hover:bg-gray-400',
-      'btn-secondary-detail': 'btn-solid btn-md bg-gray-500 hover:bg-gray-400 cut-bottom-right cut-sm btn-center',
-      'btn-form': 'font-400 py-3 px-1 cut-bottom-right cut-b-gray-400 hover:cut-b-gray-300',
-      'btn-form-active': 'bg-gray-600',
       'btn-table': 'font-bold uppercase px-4 lg:px-6 py-3',
-      'btn-menu': 'opacity-100 hover:opacity-80 transition-opacity font-bold uppercase whitespace-nowrap p-1'
+      'btn-menu': 'opacity-100 hover:opacity-80 transition-opacity font-bold uppercase whitespace-nowrap p-1',
+    },
+
+    // Button modifiers
+    {
+      'btn-disabled': 'bg-gray-700 color-gray-400',
+      'btn-center': 'flex justify-center items-center',
+      'btn-primary-outline': 'btn-primary bg-opacity-20 hover:bg-opacity-40 b-0.5 b-ix-primary',
+      'btn-orange-outline': 'bg-ix-orange bg-opacity-20 hover:bg-opacity-40 b-0.5 b-ix-primary',
+      'btn-primary-outline-opaque': 'btn-primary-outline bg-opacity-40 hover:bg-opacity-60',
+      'btn-lg': 'min-h-14',
+      'btn-md': 'min-h-12',
+      'btn-sm': 'min-h-10',
+      'btn-xs': 'min-h-8',
     },
 
     {

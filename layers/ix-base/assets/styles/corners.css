@@ -45,7 +45,7 @@
 }
 
 [corners~="gray"] {
-  --corner-color: var(--mc-gray_light)
+  --corner-color: var(--gray_light)
 }
 
 [corners~="mc-orange"] {

@@ -22,8 +22,28 @@ query AvatarNFT($credentials: CredentialsInput!) {
   }
 }
 
+query GeoLotteryNFT($credentials: CredentialsInput!) {
+  geoLotteryNFT(credentials: $credentials) {
+    ...NFT
+  }
+}
+
 query TokenInfo($tokenIds: [Int!]!, $contractAddress: String!) {
   tokenInfo(tokenIds: $tokenIds, contractAddress: $contractAddress) {
+    ...NFT
+  }
+}
+
+query TokenInfoTypeTier(
+  $tokens: [TokenInput!]!
+  $contractAddress: String!
+  $chain: String
+) {
+  tokenInfoTypeTier(
+    tokens: $tokens
+    contractAddress: $contractAddress
+    chain: $chain
+  ) {
     ...NFT
   }
 }
@@ -37,24 +57,59 @@ query badgeNFT($credentials: CredentialsInput!) {
 fragment NFT on Token {
   contract
   tokenType
-  name
-  tokenId
-  description
   external_url
-  media {
-    animation_url
-    image
-  }
-  mcMedia {
-    icon
-    image
-    video
-  }
-  attributes {
-    value
-    traitType
-  }
+  tokenId
   balance
-  totalShares
+  tokenInfo {
+    ...TokenInfo
+  }
+  media {
+    ...Media
+  }
+  network
+  mintInfo {
+    ...MintInfo
+  }
+}
+
+fragment TokenInfo on TokenInfo {
+  title
+  tier
+  type
+  status
+  description
+  attributes {
+    ...Attribute
+  }
   staked
+  minted
+  inspectorLink
+  level
+  openable
+}
+
+fragment Attribute on Attribute {
+  value
+  traitType
+}
+
+fragment Media on Media {
+  animation_url
+  image
+  mcIcon
+  mcImage
+  mcVideo
+  alchemyThumbnail
+  alchemy
+}
+
+fragment MintInfo on MintInfo {
+  pix_id
+  category_id
+  merkle_index
+}
+
+input TokenInput {
+  type: String!
+  tier: String
 }

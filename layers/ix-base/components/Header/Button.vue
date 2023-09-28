@@ -1,6 +1,7 @@
 <template lang="pug">
-ButtonSound(font="druk" sound="md" display="block" uppercase="~" :color="isActive ? 'mc-orange' : ''" cursor="pointer" opacity="hover:80" transition="all" text="lg") 
+ButtonSound(font="druk" sound="md" display="block" uppercase="~" color="on-active:ix-orange" cursor="pointer" opacity="hover:80" transition="all" text="lg" :active="isActive") 
   slot
+  
 </template>
 
 
@@ -10,6 +11,4 @@ defineProps<{
 }>()
 </script>
 
-<style>
-
-</style>
+<style></style>

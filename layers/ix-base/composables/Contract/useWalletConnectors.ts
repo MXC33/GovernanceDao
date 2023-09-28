@@ -4,7 +4,6 @@ import { EthereumProvider } from "@walletconnect/ethereum-provider";
 import MetaMaskSDK from "@metamask/sdk"
 import { DeFiWeb3Connector } from '@deficonnect/web3-connector'
 import { useChainInfo } from "./useWallet";
-import { useSnackNotifications } from "@ix/marketplace/composables/useNotifications";
 
 type InjectedProviderFlags = {
   isBraveWallet?: true
@@ -104,7 +103,6 @@ const createWalletConnectProvider = async () => {
     return provider
   } catch (error) {
     console.log("ERROR",)
-    displaySnack('user-rejected')
     return false
   }
 }

@@ -1,9 +1,36 @@
 import { differenceInMilliseconds } from 'date-fns';
 import { intervalToDuration } from "date-fns"
-// import { TokenIdentifierExtended } from "./useTokens"
+import { CredentialsInput } from "#gql"
 
 export const IPFSURL = "https://nftstorage.link/ipfs/"
 export const IPFSURLVideo = "https://nftstorage.link/ipfs/"
+
+// export const useHelpers = () => {
+//   return {
+//     throttle
+//   }
+// }
+
+// function throttle(func, limit) {
+//   let lastFunc
+//   let lastRan
+//   return function () {
+//     const context = this
+//     const args = arguments
+//     if (!lastRan) {
+//       func.apply(context, args)
+//       lastRan = Date.now()
+//     } else {
+//       clearTimeout(lastFunc)
+//       lastFunc = setTimeout(() => {
+//         if ((Date.now() - lastRan) >= limit) {
+//           func.apply(context, args)
+//           lastRan = Date.now()
+//         }
+//       }, limit - (Date.now() - lastRan))
+//     }
+//   }
+// }
 
 export const clamp = (min: number, max: number, amount: number) =>
   Math.max(min, Math.min(max, amount))
@@ -174,8 +201,6 @@ export const scrollParentToChild = (parent: HTMLElement, child: HTMLElement) => 
   }
 }
 
-
-
 export const useStateBoolean = (key: string, initialValue: boolean) => {
   const state = useState(key, () => initialValue)
 
@@ -190,7 +215,6 @@ export const useStateBoolean = (key: string, initialValue: boolean) => {
     disable
   }
 }
-
 
 export const useRunOnce = (id: string, fn: () => void) => {
   const hasRun = useState(`use-once-${id}-run`, () => false)
@@ -240,4 +264,17 @@ export const useRouteQueryOptions = <T extends string>(key: string, defaultVal: 
   })
 
   return state
+}
+
+export const useGraphqlCredentials = (): CredentialsInput | null => {
+  const { walletAdress } = useWallet()
+  const { user } = useUser()
+  const userId = user.value?.id
+  if (!walletAdress.value) {
+    return null
+  }
+  return {
+    playerId: userId,
+    walletAddress: walletAdress.value
+  }
 }

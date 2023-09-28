@@ -1,5 +1,11 @@
-import { PixInfoFragment } from '#gql'
 import { callWithNuxt } from 'nuxt/app'
+// import type { RaffleUpcomingResponse, RafflePastResponse, ActiveRaffleResponse } from './IX-API/types'
+
+
+// import type { RaffleUpcomingResponse, RafflePastResponse, ActiveRaffleResponse } from './IX-API/types' import { PixInfoFragment } from '#gql'
+// export const BASE_API_ENDPOINT_URL = 'https://api.planetix.com/api/v1'
+// export const BASE_API_DEV_ENDPOINT_URL = 'https://api.planetix.app/api/v1'
+
 // import type { RaffleUpcomingResponse, RafflePastResponse, ActiveRaffleResponse } from './IX-API/types'
 
 export const BASE_API_ENDPOINT_URL = () => {
@@ -35,9 +41,14 @@ export const useIXAPI = () => {
   }
 
   const onUnauthorized = async () => {
+    if (route.path.includes('connect'))
+      return
+
     await callWithNuxt(app, () => {
       logoutWallet()
       removeUser()
+
+      console.log("UNAUTHORIZED")
 
       return navigateTo({
         path: '/connect',
@@ -48,7 +59,7 @@ export const useIXAPI = () => {
     })
   }
 
-  const fetchIXAPI = async (path: string, method: 'GET' | 'POST' = 'GET', body?: object) => {
+  const fetchIXAPI = async (path: string, method: 'GET' | 'POST' | "PUT" = 'GET', body?: object) => {
     try {
       const data = await $fetch(BASE_API_ENDPOINT_URL() + '/' + path, {
         method: method,
@@ -59,8 +70,8 @@ export const useIXAPI = () => {
       })
       return data
     } catch (err) {
-      // if (err.message.includes("403"))
-      await onUnauthorized()
+      if (err.message.includes("403"))
+        await onUnauthorized()
       return null
     }
   }

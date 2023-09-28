@@ -81,7 +81,7 @@
 .slide-left-leave-active,
 .slide-right-enter-active,
 .slide-right-leave-active {
-  transition: all 350ms ease;
+  transition: all 100ms ease-out;
 }
 
 .slide-shift-down-enter-from,
