@@ -109,6 +109,11 @@ export default defineNuxtConfig({
         propsDestructure: true
       }
     },
+    build: {
+      commonjsOptions: {
+        transformMixedEsModules: true,
+      },
+    },
     plugins: [
       nodePolyfills({
         exclude: [
