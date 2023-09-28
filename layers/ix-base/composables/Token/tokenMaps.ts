@@ -9,7 +9,6 @@ import { LandMarkId } from "./Types/Landmark"
 import { MetaShareId } from "./Types/Metashare"
 import { TicketId } from "./Types/Ticket"
 import { TierId } from "./Types/Tier"
-import { TokenIdentifier } from "./useTokens"
 
 
 export const M3taModId = 0
@@ -221,22 +220,4 @@ export const getTokenTier = (tokenId: TokenId): TierId | null => {
 }
 
 
-export const parseNftFragment = (nft: NftFragment | null): TokenIdentifier | null => {
-  if (!nft)
-    return null
-
-  const tokenId: TokenId = Number(nft.tokenId) as TokenId
-
-  const type = getTokenType(tokenId)
-  const tier = getTokenTier(tokenId)
-
-  if (!type)
-    return null
-
-  return {
-    tokenId,
-    type,
-    tier: tier ?? undefined
-  }
-}
 

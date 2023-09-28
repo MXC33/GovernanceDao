@@ -1,7 +1,6 @@
 import { differenceInMilliseconds } from 'date-fns';
 import { intervalToDuration } from "date-fns"
 import { CredentialsInput } from "#gql"
-// import { TokenIdentifierExtended } from "./useTokens"
 
 export const IPFSURL = "https://nftstorage.link/ipfs/"
 export const IPFSURLVideo = "https://nftstorage.link/ipfs/"
