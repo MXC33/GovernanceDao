@@ -10,8 +10,8 @@ HList(items="center" justify="between" h="16" space-x="3" ref="menuEl")
     button(v-for="(header, index) in headerData" @mouseenter="hoverMenu(index)" @click="openMenu(index)" btn="menu" color = "s-default:white s-selected:ix-orange" :state="selected(index)") {{ header.name }}
 
     HList(flex-grow="1" justify="end" display="lt-md:none")
-      NuxtLink(to="https://planetix.com/airdrop")
-        HList(rounded="full" b="1 $mc-mint" px="4" py="1" bg="hover:$mc-mint-40" uppercase="~" tracking="0.65" font="bold" items="center" justify="center" class="border-white-ixt")
+      a(href="https://planetix.com/airdrop")
+        span(rounded="full" b="1 $mc-mint" px="4" py="1" bg="hover:$mc-mint-40" uppercase="~" tracking="0.65" font="bold" items="center" justify="center" class="border-white-ixt" flex="~")
           span(translate-x="0.5") airdrop
 
 
@@ -39,23 +39,14 @@ import CrossIcon from '~/assets/images/header/cross.svg'
 import PlanetIXNew from '~/assets/images/header/planetix-new.svg'
 import SettingsIcon from '~/assets/images/header/hamburger.svg'
 
-const bannerEl = ref()
 const menuEl = ref()
 const { useMobileBreakpoint } = useDevice()
 const isMobile = useMobileBreakpoint()
 const { data: headerData } = useHeaderData()
 
 
-const adjustedTitle = (title: string) => {
-  if (title == "COMMUINTY")
-    return "COMMUNITY"
-
-  return title
-}
-
 
 const { refreshIXTBalance } = useIXTContract()
-const windowY = useGlobalWindowScroll()
 const { isWalletConnected } = useWallet()
 const { activeHeaderIndex } = useSiteHeader()
 

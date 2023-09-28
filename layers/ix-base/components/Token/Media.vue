@@ -24,6 +24,9 @@ const getTokenAttribute = (item: AnyToken, attribute: string) => {
 const imageTokens = ['pix', 'anniversary-pack', 'loot-crate', 'starter-pack', 'coinbase', 'gg', 'arcade', 'tile-contract', 'cargo-drop', 'avatar', 'aoc-badge', 'voucher', 'gg2', 'rover-key', 'gg-energy', 'gg2-energy', 'gg3-energy', 'gg4-energy', 'landmark']
 
 const displayStillImage = computed(() => {
+  if (props.image)
+    return true
+
   const tokenType = getTokenAttribute(props.token, 'type') ?? ""
 
   return imageTokens.includes(tokenType) || !tokenHasVideo(props.token)
