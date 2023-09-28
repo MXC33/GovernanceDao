@@ -46,5 +46,4 @@ defineProps<{
 const hasBalance = computed(() => balanceOfToken(item.value.token) >= item.value.min)
 
 const item = defineModel<CorporationPaymentToken>()
-console.log("Item", item.value.token)
 </script>
