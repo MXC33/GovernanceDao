@@ -1945,6 +1945,34 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@ethersproject/providers@npm:5.7.1":
+  version: 5.7.1
+  resolution: "@ethersproject/providers@npm:5.7.1"
+  dependencies:
+    "@ethersproject/abstract-provider": ^5.7.0
+    "@ethersproject/abstract-signer": ^5.7.0
+    "@ethersproject/address": ^5.7.0
+    "@ethersproject/base64": ^5.7.0
+    "@ethersproject/basex": ^5.7.0
+    "@ethersproject/bignumber": ^5.7.0
+    "@ethersproject/bytes": ^5.7.0
+    "@ethersproject/constants": ^5.7.0
+    "@ethersproject/hash": ^5.7.0
+    "@ethersproject/logger": ^5.7.0
+    "@ethersproject/networks": ^5.7.0
+    "@ethersproject/properties": ^5.7.0
+    "@ethersproject/random": ^5.7.0
+    "@ethersproject/rlp": ^5.7.0
+    "@ethersproject/sha2": ^5.7.0
+    "@ethersproject/strings": ^5.7.0
+    "@ethersproject/transactions": ^5.7.0
+    "@ethersproject/web": ^5.7.0
+    bech32: 1.1.4
+    ws: 7.4.6
+  checksum: 673745e967e7215b46b7d3024f5ee02be975d6cf66b605f87a0e5beaa349d6d30c987165f98eceddaf7996f64a1ec414f0715f25fc3458aead6eea4c4820c399
+  languageName: node
+  linkType: hard
+
 "@ethersproject/providers@npm:5.7.2":
   version: 5.7.2
   resolution: "@ethersproject/providers@npm:5.7.2"
@@ -3099,11 +3127,11 @@ __metadata:
     date-fns: ^2.30.0
     eslint: ^8.28.0
     ethereum-abi-types-generator: ^1.3.2
-    ethers: 5
+    ethers: 5.7.1
     get-graphql-schema: ^2.1.2
     histoire: ^0.16.1
-    nuxt: ^3.5.3
-    nuxt-graphql-client: ^0.2.30
+    nuxt: ^3.6.5
+    nuxt-graphql-client: ^0.2.25
     pug: ^3.0.2
     socket.io-client: ^4.7.2
     typescript: ^4.9.3
@@ -3147,7 +3175,7 @@ __metadata:
     "@types/node": ^18
     "@vueuse/router": ^10.1.2
     fuzzyjs: ^5.0.1
-    nuxt: ^3.5.3
+    nuxt: 3.7.0
     v-lazy-show: ^0.2.3
     vue-router: 4
     vue3-easy-data-table: ^1.5.42
@@ -3681,6 +3709,32 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@nuxt/kit@npm:3.7.0":
+  version: 3.7.0
+  resolution: "@nuxt/kit@npm:3.7.0"
+  dependencies:
+    "@nuxt/schema": 3.7.0
+    c12: ^1.4.2
+    consola: ^3.2.3
+    defu: ^6.1.2
+    globby: ^13.2.2
+    hash-sum: ^2.0.0
+    ignore: ^5.2.4
+    jiti: ^1.19.3
+    knitwork: ^1.0.0
+    mlly: ^1.4.1
+    pathe: ^1.1.1
+    pkg-types: ^1.0.3
+    scule: ^1.0.0
+    semver: ^7.5.4
+    ufo: ^1.3.0
+    unctx: ^2.3.1
+    unimport: ^3.2.0
+    untyped: ^1.4.0
+  checksum: 1414b82242e5b26762cfb9ab05a09bbdde5367a81e52b21b1f870dff346c1fdf68ead148acd8844ad8c3aa8df81c6a7870a6076f5ed7276f875db9ac9d38a84b
+  languageName: node
+  linkType: hard
+
 "@nuxt/kit@npm:3.7.3, @nuxt/kit@npm:^3.6.1, @nuxt/kit@npm:^3.6.3, @nuxt/kit@npm:^3.6.5, @nuxt/kit@npm:^3.7.0, @nuxt/kit@npm:^3.7.3":
   version: 3.7.3
   resolution: "@nuxt/kit@npm:3.7.3"
@@ -3747,6 +3801,24 @@ __metadata:
     unimport: ^3.0.14
     untyped: ^1.3.2
   checksum: bc3a83066fc704e0ec01d2514ae9c0f129bbbeb16c64787c26941a4e779900bd5666c805af41070546b63ed35a5ebb4935f4c6780e943a8e03079a2eba0bf05c
+  languageName: node
+  linkType: hard
+
+"@nuxt/schema@npm:3.7.0":
+  version: 3.7.0
+  resolution: "@nuxt/schema@npm:3.7.0"
+  dependencies:
+    "@nuxt/ui-templates": ^1.3.1
+    defu: ^6.1.2
+    hookable: ^5.5.3
+    pathe: ^1.1.1
+    pkg-types: ^1.0.3
+    postcss-import-resolver: ^2.0.0
+    std-env: ^3.4.3
+    ufo: ^1.3.0
+    unimport: ^3.2.0
+    untyped: ^1.4.0
+  checksum: b8b421fb44d81ea1d1ff9c7dc35a86302ec2929460f605d530b8e748aedd430e36d20b822ae7375b8c209588b64015e8981967b82993f40dc6d66e73ad27f53d
   languageName: node
   linkType: hard
 
@@ -3866,6 +3938,51 @@ __metadata:
   peerDependencies:
     vue: ^3.3.4
   checksum: 5e02a1d0d37b2509814d90ce181ce2e70f5c2d3cb9f9537a47fc1f5ec65205bf417e5b4c217ebbbae5f05e2d9035eeb4d46cb9348f2aaf832e124e72dd688ae9
+  languageName: node
+  linkType: hard
+
+"@nuxt/vite-builder@npm:3.7.0":
+  version: 3.7.0
+  resolution: "@nuxt/vite-builder@npm:3.7.0"
+  dependencies:
+    "@nuxt/kit": 3.7.0
+    "@rollup/plugin-replace": ^5.0.2
+    "@vitejs/plugin-vue": ^4.3.3
+    "@vitejs/plugin-vue-jsx": ^3.0.2
+    autoprefixer: ^10.4.15
+    clear: ^0.1.0
+    consola: ^3.2.3
+    cssnano: ^6.0.1
+    defu: ^6.1.2
+    esbuild: ^0.19.2
+    escape-string-regexp: ^5.0.0
+    estree-walker: ^3.0.3
+    externality: ^1.0.2
+    fs-extra: ^11.1.1
+    get-port-please: ^3.0.1
+    h3: ^1.8.0
+    knitwork: ^1.0.0
+    magic-string: ^0.30.3
+    mlly: ^1.4.1
+    ohash: ^1.1.3
+    pathe: ^1.1.1
+    perfect-debounce: ^1.0.0
+    pkg-types: ^1.0.3
+    postcss: ^8.4.28
+    postcss-import: ^15.1.0
+    postcss-url: ^10.1.3
+    rollup-plugin-visualizer: ^5.9.2
+    std-env: ^3.4.3
+    strip-literal: ^1.3.0
+    ufo: ^1.3.0
+    unplugin: ^1.4.0
+    vite: ^4.4.9
+    vite-node: ^0.33.0
+    vite-plugin-checker: ^0.6.2
+    vue-bundle-renderer: ^2.0.0
+  peerDependencies:
+    vue: ^3.3.4
+  checksum: 83c8546c931361cf7f60421cd76409e55460d5ef7d51ab11d19808207311bbe8f88c5c9cb86ca3eae4c8e5a97c616b24b6f3a7779c5447ba8a578ca91f6a28a2
   languageName: node
   linkType: hard
 
@@ -5202,7 +5319,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@unhead/dom@npm:1.7.4, @unhead/dom@npm:^1.7.2":
+"@unhead/dom@npm:1.7.4, @unhead/dom@npm:^1.3.7, @unhead/dom@npm:^1.7.2":
   version: 1.7.4
   resolution: "@unhead/dom@npm:1.7.4"
   dependencies:
@@ -5231,7 +5348,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@unhead/ssr@npm:^1.1.30, @unhead/ssr@npm:^1.7.2":
+"@unhead/ssr@npm:^1.1.30, @unhead/ssr@npm:^1.3.7, @unhead/ssr@npm:^1.7.2":
   version: 1.7.4
   resolution: "@unhead/ssr@npm:1.7.4"
   dependencies:
@@ -5241,7 +5358,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@unhead/vue@npm:^1.1.30, @unhead/vue@npm:^1.7.2":
+"@unhead/vue@npm:^1.1.30, @unhead/vue@npm:^1.3.7, @unhead/vue@npm:^1.7.2":
   version: 1.7.4
   resolution: "@unhead/vue@npm:1.7.4"
   dependencies:
@@ -5605,7 +5722,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@vitejs/plugin-vue@npm:^4.2.3, @vitejs/plugin-vue@npm:^4.3.4":
+"@vitejs/plugin-vue@npm:^4.2.3, @vitejs/plugin-vue@npm:^4.3.3, @vitejs/plugin-vue@npm:^4.3.4":
   version: 4.3.4
   resolution: "@vitejs/plugin-vue@npm:4.3.4"
   peerDependencies:
@@ -10898,7 +11015,62 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ethers@npm:5, ethers@npm:^5.0.13, ethersv5@npm:ethers@^5.0.32":
+"ethers@npm:5.7.1":
+  version: 5.7.1
+  resolution: "ethers@npm:5.7.1"
+  dependencies:
+    "@ethersproject/abi": 5.7.0
+    "@ethersproject/abstract-provider": 5.7.0
+    "@ethersproject/abstract-signer": 5.7.0
+    "@ethersproject/address": 5.7.0
+    "@ethersproject/base64": 5.7.0
+    "@ethersproject/basex": 5.7.0
+    "@ethersproject/bignumber": 5.7.0
+    "@ethersproject/bytes": 5.7.0
+    "@ethersproject/constants": 5.7.0
+    "@ethersproject/contracts": 5.7.0
+    "@ethersproject/hash": 5.7.0
+    "@ethersproject/hdnode": 5.7.0
+    "@ethersproject/json-wallets": 5.7.0
+    "@ethersproject/keccak256": 5.7.0
+    "@ethersproject/logger": 5.7.0
+    "@ethersproject/networks": 5.7.1
+    "@ethersproject/pbkdf2": 5.7.0
+    "@ethersproject/properties": 5.7.0
+    "@ethersproject/providers": 5.7.1
+    "@ethersproject/random": 5.7.0
+    "@ethersproject/rlp": 5.7.0
+    "@ethersproject/sha2": 5.7.0
+    "@ethersproject/signing-key": 5.7.0
+    "@ethersproject/solidity": 5.7.0
+    "@ethersproject/strings": 5.7.0
+    "@ethersproject/transactions": 5.7.0
+    "@ethersproject/units": 5.7.0
+    "@ethersproject/wallet": 5.7.0
+    "@ethersproject/web": 5.7.1
+    "@ethersproject/wordlists": 5.7.0
+  checksum: 7a61b7a105c41f9fec327887414f1950dc27bfa2d12fe29a068419eaaa3d415e6a12275685c87f700abd88c3b639ae79c09a2f90edea1e69edc8126cb0dce708
+  languageName: node
+  linkType: hard
+
+"ethers@npm:^4.0.32, ethers@npm:^4.0.47":
+  version: 4.0.49
+  resolution: "ethers@npm:4.0.49"
+  dependencies:
+    aes-js: 3.0.0
+    bn.js: ^4.11.9
+    elliptic: 6.5.4
+    hash.js: 1.1.3
+    js-sha3: 0.5.7
+    scrypt-js: 2.0.4
+    setimmediate: 1.0.4
+    uuid: 2.0.1
+    xmlhttprequest: 1.8.0
+  checksum: 357115348a5f1484c7745fae1d852876788216c7d94c072c80132192f1800c4d388433ea2456750856641d6d4eed8a3b41847eb44f5e1c42139963864e3bcc38
+  languageName: node
+  linkType: hard
+
+"ethers@npm:^5.0.13, ethersv5@npm:ethers@^5.0.32":
   version: 5.7.2
   resolution: "ethers@npm:5.7.2"
   dependencies:
@@ -10933,23 +11105,6 @@ __metadata:
     "@ethersproject/web": 5.7.1
     "@ethersproject/wordlists": 5.7.0
   checksum: b7c08cf3e257185a7946117dbbf764433b7ba0e77c27298dec6088b3bc871aff711462b0621930c56880ff0a7ceb8b1d3a361ffa259f93377b48e34107f62553
-  languageName: node
-  linkType: hard
-
-"ethers@npm:^4.0.32, ethers@npm:^4.0.47":
-  version: 4.0.49
-  resolution: "ethers@npm:4.0.49"
-  dependencies:
-    aes-js: 3.0.0
-    bn.js: ^4.11.9
-    elliptic: 6.5.4
-    hash.js: 1.1.3
-    js-sha3: 0.5.7
-    scrypt-js: 2.0.4
-    setimmediate: 1.0.4
-    uuid: 2.0.1
-    xmlhttprequest: 1.8.0
-  checksum: 357115348a5f1484c7745fae1d852876788216c7d94c072c80132192f1800c4d388433ea2456750856641d6d4eed8a3b41847eb44f5e1c42139963864e3bcc38
   languageName: node
   linkType: hard
 
@@ -12184,6 +12339,22 @@ __metadata:
   languageName: node
   linkType: hard
 
+"h3@npm:^1.8.0":
+  version: 1.8.2
+  resolution: "h3@npm:1.8.2"
+  dependencies:
+    cookie-es: ^1.0.0
+    defu: ^6.1.2
+    destr: ^2.0.1
+    iron-webcrypto: ^0.10.1
+    radix3: ^1.1.0
+    ufo: ^1.3.0
+    uncrypto: ^0.1.3
+    unenv: ^1.7.4
+  checksum: 9e57860d54b17d48439242992b9cc5b7f2cf220c2a9d22cabec8ef3e17a5bfef1ffa9bf681891dbcabbef40a35143965908cb01eb51b760705b3dfbae9366abf
+  languageName: node
+  linkType: hard
+
 "har-schema@npm:^2.0.0":
   version: 2.0.0
   resolution: "har-schema@npm:2.0.0"
@@ -12910,6 +13081,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"iron-webcrypto@npm:^0.10.1":
+  version: 0.10.1
+  resolution: "iron-webcrypto@npm:0.10.1"
+  checksum: a473820d5ab5cb1dfbf00ee06f9b3a48b99fb2bb3058485ab13b153e7cd71dd63af74e6df6a5a4fb6b09d6041d049583913e4c6fff3bd5301087472ea78372ce
+  languageName: node
+  linkType: hard
+
 "iron-webcrypto@npm:^0.8.0":
   version: 0.8.2
   resolution: "iron-webcrypto@npm:0.8.2"
@@ -13410,7 +13588,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"jiti@npm:^1.17.1, jiti@npm:^1.18.2, jiti@npm:^1.19.1, jiti@npm:^1.20.0":
+"jiti@npm:^1.17.1, jiti@npm:^1.18.2, jiti@npm:^1.19.1, jiti@npm:^1.19.3, jiti@npm:^1.20.0":
   version: 1.20.0
   resolution: "jiti@npm:1.20.0"
   bin:
@@ -14781,7 +14959,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"mlly@npm:^1.1.0, mlly@npm:^1.2.0, mlly@npm:^1.3.0, mlly@npm:^1.4.0, mlly@npm:^1.4.2":
+"mlly@npm:^1.1.0, mlly@npm:^1.2.0, mlly@npm:^1.3.0, mlly@npm:^1.4.0, mlly@npm:^1.4.1, mlly@npm:^1.4.2":
   version: 1.4.2
   resolution: "mlly@npm:1.4.2"
   dependencies:
@@ -15019,7 +15197,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"nitropack@npm:^2.5.2, nitropack@npm:^2.6.3":
+"nitropack@npm:^2.5.2, nitropack@npm:^2.6.1, nitropack@npm:^2.6.3":
   version: 2.6.3
   resolution: "nitropack@npm:2.6.3"
   dependencies:
@@ -15440,6 +15618,23 @@ __metadata:
   languageName: node
   linkType: hard
 
+"nuxi@npm:^3.7.0":
+  version: 3.9.0
+  resolution: "nuxi@npm:3.9.0"
+  dependencies:
+    fsevents: ~2.3.3
+  dependenciesMeta:
+    fsevents:
+      optional: true
+  bin:
+    nuxi: bin/nuxi.mjs
+    nuxi-ng: bin/nuxi.mjs
+    nuxt: bin/nuxi.mjs
+    nuxt-cli: bin/nuxi.mjs
+  checksum: 12e36bd4ecca7198d4b7104078697917b7c326bb66e8e99f0ca549c2c96fb19ba08b225b197392d37bca09387f25a80f94a861be0307b5dd9c579f762591e081
+  languageName: node
+  linkType: hard
+
 "nuxi@npm:^3.8.3":
   version: 3.8.4
   resolution: "nuxi@npm:3.8.4"
@@ -15457,7 +15652,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"nuxt-graphql-client@npm:^0.2.30":
+"nuxt-graphql-client@npm:^0.2.25":
   version: 0.2.30
   resolution: "nuxt-graphql-client@npm:0.2.30"
   dependencies:
@@ -15542,6 +15737,79 @@ __metadata:
     nuxi: bin/nuxt.mjs
     nuxt: bin/nuxt.mjs
   checksum: f787ee28bc9ba4227fdc23bcd2c66e05056b60d632934485390d2c3cb070218ec681d5c12f45cf27b4ea3119d59de6e3be5860872f6e9b1b2e68190b217677c2
+  languageName: node
+  linkType: hard
+
+"nuxt@npm:3.7.0":
+  version: 3.7.0
+  resolution: "nuxt@npm:3.7.0"
+  dependencies:
+    "@nuxt/devalue": ^2.0.2
+    "@nuxt/kit": 3.7.0
+    "@nuxt/schema": 3.7.0
+    "@nuxt/telemetry": ^2.4.1
+    "@nuxt/ui-templates": ^1.3.1
+    "@nuxt/vite-builder": 3.7.0
+    "@unhead/dom": ^1.3.7
+    "@unhead/ssr": ^1.3.7
+    "@unhead/vue": ^1.3.7
+    "@vue/shared": ^3.3.4
+    acorn: 8.10.0
+    c12: ^1.4.2
+    chokidar: ^3.5.3
+    cookie-es: ^1.0.0
+    defu: ^6.1.2
+    destr: ^2.0.1
+    devalue: ^4.3.2
+    esbuild: ^0.19.2
+    escape-string-regexp: ^5.0.0
+    estree-walker: ^3.0.3
+    fs-extra: ^11.1.1
+    globby: ^13.2.2
+    h3: ^1.8.0
+    hookable: ^5.5.3
+    jiti: ^1.19.3
+    klona: ^2.0.6
+    knitwork: ^1.0.0
+    magic-string: ^0.30.3
+    mlly: ^1.4.1
+    nitropack: ^2.6.1
+    nuxi: ^3.7.0
+    nypm: ^0.3.1
+    ofetch: ^1.3.3
+    ohash: ^1.1.3
+    pathe: ^1.1.1
+    perfect-debounce: ^1.0.0
+    pkg-types: ^1.0.3
+    prompts: ^2.4.2
+    scule: ^1.0.0
+    std-env: ^3.4.3
+    strip-literal: ^1.3.0
+    ufo: ^1.3.0
+    ultrahtml: ^1.3.0
+    uncrypto: ^0.1.3
+    unctx: ^2.3.1
+    unenv: ^1.7.3
+    unimport: ^3.2.0
+    unplugin: ^1.4.0
+    unplugin-vue-router: ^0.6.4
+    untyped: ^1.4.0
+    vue: ^3.3.4
+    vue-bundle-renderer: ^2.0.0
+    vue-devtools-stub: ^0.1.0
+    vue-router: ^4.2.4
+  peerDependencies:
+    "@parcel/watcher": ^2.1.0
+    "@types/node": ^14.18.0 || >=16.10.0
+  peerDependenciesMeta:
+    "@parcel/watcher":
+      optional: true
+    "@types/node":
+      optional: true
+  bin:
+    nuxi: bin/nuxt.mjs
+    nuxt: bin/nuxt.mjs
+  checksum: 112f261199444499501f247223b53cf96c67498f79f6b47e586a97b96b5d1ed83a5f99ce64330d543b6c63fb784843e2b478a0aba0da10d253f559a9e1912b2b
   languageName: node
   linkType: hard
 
@@ -15634,7 +15902,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"nypm@npm:^0.3.3":
+"nypm@npm:^0.3.1, nypm@npm:^0.3.3":
   version: 0.3.3
   resolution: "nypm@npm:0.3.3"
   dependencies:
@@ -16786,7 +17054,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"postcss@npm:^8.4.23, postcss@npm:^8.4.24":
+"postcss@npm:^8.4.23, postcss@npm:^8.4.24, postcss@npm:^8.4.28":
   version: 8.4.30
   resolution: "postcss@npm:8.4.30"
   dependencies:
@@ -19701,7 +19969,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ultrahtml@npm:^1.2.0, ultrahtml@npm:^1.5.2":
+"ultrahtml@npm:^1.2.0, ultrahtml@npm:^1.3.0, ultrahtml@npm:^1.5.2":
   version: 1.5.2
   resolution: "ultrahtml@npm:1.5.2"
   checksum: f3df055d684a9ef4b62765faa1973b93fa0d45cc0cb3b642bf3c60d5bda1ad34b6fedfb686dad4c21c9109d799e1da9f50f31170b9b92330409530c3162e31f3
@@ -19786,7 +20054,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"unenv@npm:^1.5.1, unenv@npm:^1.7.1, unenv@npm:^1.7.4":
+"unenv@npm:^1.5.1, unenv@npm:^1.7.1, unenv@npm:^1.7.3, unenv@npm:^1.7.4":
   version: 1.7.4
   resolution: "unenv@npm:1.7.4"
   dependencies:
