@@ -45,10 +45,10 @@ const route = useRoute()
 
 const onClickButton = () => {
   console.log("route", route.path)
-  if(props.externalLink)
-    window.location.href = props.externalLink
+  if (props.externalLink)
+    return window.location.href = props.externalLink
 
-  if(!props.page)
+  if (!props.page)
     return
 
   const path = route.path.replace(/\/$/, '');
