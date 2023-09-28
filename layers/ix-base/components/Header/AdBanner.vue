@@ -3,7 +3,8 @@ div(flex="~ row grow" items="center" justify="center" bg="#FF1E6E" pos="relative
   HList(p="0 md:1" text="xs md:sm" w="full" v-if="isBannerActive")
 
     HList(flex-grow="1" font="bdrA3mik" items="center" justify="center" space-x="2"  tracking-wide )
-      LuckyCatIcon(w="6 md:6" p="1")
+      ClientOnly()  
+        LuckyCatIcon(w="6 md:6" p="1")
 
       div(color="black") Territory Lottery
       div(color="white") is LIVE
