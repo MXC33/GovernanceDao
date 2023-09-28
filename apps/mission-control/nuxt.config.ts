@@ -29,7 +29,8 @@ export default defineNuxtConfig({
   transpile: ['vue3-carousel',
     '@walletconnect/modal',
     '@walletconnect/ethereum-provider',
-    '@coinbase/wallet-sdk'
+    '@coinbase/wallet-sdk',
+    'uuid'
   ],
 
   i18n: {
