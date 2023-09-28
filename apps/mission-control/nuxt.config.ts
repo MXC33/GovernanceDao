@@ -30,6 +30,7 @@ export default defineNuxtConfig({
     '@walletconnect/ethereum-provider',
     '@coinbase/wallet-sdk',
     'uuid',
+    '@metamask/sdk',
     'web3-token'
   ],
 
