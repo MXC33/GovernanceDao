@@ -1,4 +1,6 @@
 import { BigNumberish, ethers } from "ethers"
+import { TransactionReceipt } from "ethereum-abi-types-generator";
+
 import { ContractInterface } from "@ix/base/composables/Utils/defineContract"
 import { ContractContext as LuckyCatGeoLotteryContract } from '@ix/base/composables/Contract/Abis/LuckyCatGeoLottery'
 import LuckyCatGeoLottery from '@ix/base/composables/Contract/Abis/LuckyCatGeoLottery.json'
@@ -7,7 +9,7 @@ import {
   luckyCatGeoLotteryAdress,
   luckyCatGeoLotterySuperAppAdress
 } from "@ix/base/composables/Contract/WalletAddresses";
-import {useActiveChain, useChainInfo} from "@ix/base/composables/Contract/useWallet";
+import { useActiveChain, useChainInfo } from "@ix/base/composables/Contract/useWallet";
 import { Framework } from "@superfluid-finance/sdk-core";
 import { weeklyFlowRateConst } from "~/composables/useLottery";
 
@@ -77,7 +79,7 @@ export const useLuckyCatGeoLotteryContract = <T extends ContractInterface<T> & L
 
   const enterLotteryFlow = async (amount: number) => {
 
-    const {superSigner, superToken} = await initSuperApp()
+    const { superSigner, superToken } = await initSuperApp()
 
     try {
       const createFlowOperation = superToken.createFlow({
@@ -98,7 +100,7 @@ export const useLuckyCatGeoLotteryContract = <T extends ContractInterface<T> & L
 
   const updateLotteryFlow = async (amount: number) => {
 
-    const {superSigner, superToken} = await initSuperApp()
+    const { superSigner, superToken } = await initSuperApp()
 
     try {
       const updateFlowOperation = superToken.updateFlow({
@@ -119,7 +121,7 @@ export const useLuckyCatGeoLotteryContract = <T extends ContractInterface<T> & L
 
   const removeLotteryFlow = async () => {
 
-    const {superSigner, superToken} = await initSuperApp()
+    const { superSigner, superToken } = await initSuperApp()
 
     try {
       const deleteFlowOperation = superToken.deleteFlow({
@@ -138,13 +140,23 @@ export const useLuckyCatGeoLotteryContract = <T extends ContractInterface<T> & L
   }
 
   const claimReward = (lotteryID: number, merkleProofs: string[][]) =>
-    createTransaction((contract) => {
-      const address = walletAdress.value
-      if (!address)
-        return undefined
+    new Promise((resolve, reject) => {
+      createTransaction((contract) => {
+        const address = walletAdress.value
+        if (!address)
+          return undefined
 
-      return contract.claimReward(lotteryID, merkleProofs)
-    })
+        return contract.claimReward(lotteryID, merkleProofs)
+      }, {
+        onTxApproved: async (txResponse) => {
+          console.log('txResponse', txResponse)
+          resolve(txResponse)
+        },
+        onFail: async (err) => {
+          reject(err)
+        }
+      })
+    }) as Promise<TransactionReceipt>
 
   /** END Write **/
 

@@ -10,7 +10,7 @@ div(class="body-main")
         //How to Play Section
         PageInfo()
         PageWeekDraw(v-show="isLotteryActive && !weeksDraw.last_drawn_lottery")
-        PageWeekDrawWinners(v-show="weeksDraw.last_drawn_lottery && weeksDraw.last_drawn_lottery.id")
+        PageWeekDrawWinners(v-show="weeksDraw.last_drawn_lottery && weeksDraw.last_drawn_lottery.country_code")
         //The Jackpot
         PageJackpot()
 
