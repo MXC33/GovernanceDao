@@ -1,6 +1,6 @@
 <template lang="pug">
 CorporationComplete(v-if="isComplete")
-CorporationOrders(v-else :output-token="{type: 'm3ta-mod'}" :blocks="blocks")
+CorporationOrders(v-else :output-token="data" :blocks="blocks")
 </template>
   
 <script lang="ts" setup>
@@ -19,10 +19,12 @@ const craftModel = useMetamodFusion()
 
 const { execute: fetchMetaModFusionData } = useMetamodFusionData()
 const { execute: fetchTokens } = useTokenData()
+const { execute: fetchMetaMod, data } = useTokenInfo(0)
 
 await Promise.all([
   fetchMetaModFusionData(),
-  fetchTokens()
+  fetchTokens(),
+  fetchMetaMod()
 ])
 const orderSummary = useCorporationOrderInfoBlocks()
 
