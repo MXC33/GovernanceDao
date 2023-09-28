@@ -59,7 +59,6 @@ const { ixtBalance, ixtPending } = useIXTContract()
 
 effect(() => {
   const newHeight = Math.round(bannerHeight.value + menuHeight.value)
-  console.log("Heights", bannerHeight.value, menuHeight.value, newHeight, process.client)
 
   headerHeight.value = newHeight
 

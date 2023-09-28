@@ -27,11 +27,15 @@ Transition(name="fade" appear)
 
 <script setup lang="ts">
 import CloseIcon from '~/assets/images/icons/close.svg'
-
-const emit = defineEmits(["close"])
+const { closeActivePopup } = definePopups()
 
 const onClose = () => {
-  emit("close")
+  if (!disableDefaultClose)
+    closeActivePopup()
 }
+
+const { disableDefaultClose } = defineProps<{
+  disableDefaultClose?: boolean
+}>()
 
 </script>
