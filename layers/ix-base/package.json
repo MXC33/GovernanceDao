@@ -42,7 +42,7 @@
     "ethers": "5",
     "get-graphql-schema": "^2.1.2",
     "histoire": "^0.16.1",
-    "nuxt": "3.7.0",
+    "nuxt": "^3.5.3",
     "nuxt-graphql-client": "^0.2.30",
     "pug": "^3.0.2",
     "socket.io-client": "^4.7.2",
