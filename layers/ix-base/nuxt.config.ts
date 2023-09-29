@@ -23,12 +23,7 @@ export default defineNuxtConfig({
   //@ts-ignore
   transpile: [
     'vue3-carousel',
-    '@walletconnect/modal',
-    '@walletconnect/ethereum-provider',
-    '@coinbase/wallet-sdk',
-    '@metamask/sdk',
-    'uuid',
-    'web3-token'
+    '@metamask/sdk'
   ],
 
   css: [
@@ -109,11 +104,6 @@ export default defineNuxtConfig({
         defineModel: true,
         propsDestructure: true
       }
-    },
-    build: {
-      commonjsOptions: {
-        transformMixedEsModules: true,
-      },
     },
     plugins: [
       nodePolyfills({
