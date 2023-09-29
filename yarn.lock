@@ -691,12 +691,21 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/runtime@npm:^7.0.0, @babel/runtime@npm:^7.12.5, @babel/runtime@npm:^7.17.2, @babel/runtime@npm:^7.18.3, @babel/runtime@npm:^7.21.0, @babel/runtime@npm:^7.22.6, @babel/runtime@npm:^7.4.4":
+"@babel/runtime@npm:^7.0.0, @babel/runtime@npm:^7.17.2, @babel/runtime@npm:^7.21.0, @babel/runtime@npm:^7.22.6, @babel/runtime@npm:^7.4.4":
   version: 7.22.15
   resolution: "@babel/runtime@npm:7.22.15"
   dependencies:
     regenerator-runtime: ^0.14.0
   checksum: 793296df1e41599a935a3d77ec01eb6088410d3fd4dbe4e92f06c6b7bb2f8355024e6d78621a3a35f44e0e23b0b59107f23d585384df4f3123256a1e1492040e
+  languageName: node
+  linkType: hard
+
+"@babel/runtime@npm:^7.12.5, @babel/runtime@npm:^7.18.3":
+  version: 7.23.1
+  resolution: "@babel/runtime@npm:7.23.1"
+  dependencies:
+    regenerator-runtime: ^0.14.0
+  checksum: 0cd0d43e6e7dc7f9152fda8c8312b08321cda2f56ef53d6c22ebdd773abdc6f5d0a69008de90aa41908d00e2c1facb24715ff121274e689305c858355ff02c70
   languageName: node
   linkType: hard
 
@@ -2926,6 +2935,7 @@ __metadata:
     "@esbuild-plugins/node-modules-polyfill": ^0.2.2
     "@histoire/plugin-nuxt": ^0.16.1
     "@histoire/plugin-vue": ^0.16.1
+    "@metamask/sdk": ^0.7.1
     "@nuxt/eslint-config": ^0.1.1
     "@nuxtjs/html-validator": ^1.5.2
     "@nuxtjs/i18n": next
@@ -3208,9 +3218,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@metamask/sdk-communication-layer@npm:0.3.3":
-  version: 0.3.3
-  resolution: "@metamask/sdk-communication-layer@npm:0.3.3"
+"@metamask/sdk-communication-layer@npm:0.7.1":
+  version: 0.7.1
+  resolution: "@metamask/sdk-communication-layer@npm:0.7.1"
   dependencies:
     cross-fetch: ^3.1.5
     date-fns: ^2.29.3
@@ -3218,35 +3228,36 @@ __metadata:
     eventemitter2: ^6.4.5
     socket.io-client: ^4.5.1
     uuid: ^8.3.2
-  checksum: e1ea17efaf6136e91f5aaea22d947fa9349d3962ff522e8aae6d4f445fd2cd97e9db373870ddd0405a3d5a012050cfdd3886349ae37a2522dabf8e82a70f2d9a
+  checksum: ed84790008553d5ba0e2d28386015a57acbfa9eb55f342be5e803945e7f2f6545f1437102f5b24ada07d444793d9f827ffe4a391dddc9bf8ab0688da406d27d5
   languageName: node
   linkType: hard
 
-"@metamask/sdk-install-modal-web@npm:0.3.3":
-  version: 0.3.3
-  resolution: "@metamask/sdk-install-modal-web@npm:0.3.3"
+"@metamask/sdk-install-modal-web@npm:0.7.0":
+  version: 0.7.0
+  resolution: "@metamask/sdk-install-modal-web@npm:0.7.0"
   dependencies:
     "@emotion/react": ^11.10.6
     "@emotion/styled": ^11.10.6
     qr-code-styling: ^1.6.0-rc.1
     react: ^18.2.0
     react-dom: ^18.2.0
-  checksum: 340129c1c80c2edca2118e37260a621252459503d7529893e4b37960b710ed9802bcbc2706aee1e149cf81bd0bc9960c4c1fd9ae0db8570bf37b554a804b470b
+  checksum: 2c6d4a9168206ea06d829e11c09acf2d6a600e6c9371f5758b27855411c7182dd67f0a6424f512628f916392a8bee8e7f9987e4cfd2658b5dcfa1c03e887bd7f
   languageName: node
   linkType: hard
 
-"@metamask/sdk@npm:^0.3.2":
-  version: 0.3.3
-  resolution: "@metamask/sdk@npm:0.3.3"
+"@metamask/sdk@npm:^0.7.1":
+  version: 0.7.1
+  resolution: "@metamask/sdk@npm:0.7.1"
   dependencies:
     "@metamask/onboarding": ^1.0.1
     "@metamask/post-message-stream": ^6.1.0
     "@metamask/providers": ^10.2.1
-    "@metamask/sdk-communication-layer": 0.3.3
-    "@metamask/sdk-install-modal-web": 0.3.3
+    "@metamask/sdk-communication-layer": 0.7.1
+    "@metamask/sdk-install-modal-web": 0.7.0
     "@react-native-async-storage/async-storage": ^1.17.11
     "@types/dom-screen-wake-lock": ^1.0.0
     bowser: ^2.9.0
+    cross-fetch: ^4.0.0
     eciesjs: ^0.3.15
     eth-rpc-errors: ^4.0.3
     eventemitter2: ^6.4.7
@@ -3261,8 +3272,8 @@ __metadata:
     uuid: ^8.3.2
   peerDependencies:
     react: ^18.2.0
-    react-native: ^0.71.1
-  checksum: 686b49bc3582e967e0884bb12caae4fee359eac53c6fc28db1c6240fb4b24ab5bbb8f72873d6b3a8d9d0d02720b5eddca5be5800c2bd2ce45e1621ff0f015e66
+    react-native: "*"
+  checksum: b94a45f4e7f84cdc2738659195f10f0b66b14a13bf858092f90e19d66d1861fe29225dd9ac6cb6cd579fc05629effb197f746d3cf720eb02c467a5062f16a802
   languageName: node
   linkType: hard
 
@@ -4874,12 +4885,21 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/secp256k1@npm:^4.0.1, @types/secp256k1@npm:^4.0.3":
+"@types/secp256k1@npm:^4.0.1":
   version: 4.0.3
   resolution: "@types/secp256k1@npm:4.0.3"
   dependencies:
     "@types/node": "*"
   checksum: 1bd10b9afa724084b655dc81b7b315def3d2d0e272014ef16009fa76e17537411c07c0695fdea412bc7b36d2a02687f5fea33522d55b8ef29eda42992f812913
+  languageName: node
+  linkType: hard
+
+"@types/secp256k1@npm:^4.0.3":
+  version: 4.0.4
+  resolution: "@types/secp256k1@npm:4.0.4"
+  dependencies:
+    "@types/node": "*"
+  checksum: 6f521a08486a98e71c8529f5c3119f99e610196a47243cc6052c6160b216dff2c85dc50a8f3208ed47028dbb470bbb6fdee47a3fdc064687e46021d5a712767c
   languageName: node
   linkType: hard
 
@@ -9029,6 +9049,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"cross-fetch@npm:^4.0.0":
+  version: 4.0.0
+  resolution: "cross-fetch@npm:4.0.0"
+  dependencies:
+    node-fetch: ^2.6.12
+  checksum: ecca4f37ffa0e8283e7a8a590926b66713a7ef7892757aa36c2d20ffa27b0ac5c60dcf453119c809abe5923fc0bae3702a4d896bfb406ef1077b0d0018213e24
+  languageName: node
+  linkType: hard
+
 "cross-spawn@npm:^7.0.0, cross-spawn@npm:^7.0.2, cross-spawn@npm:^7.0.3":
   version: 7.0.3
   resolution: "cross-spawn@npm:7.0.3"
@@ -13092,7 +13121,6 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "ix-apps@workspace:."
   dependencies:
-    "@metamask/sdk": ^0.3.2
     concurrently: ^8.2.0
   languageName: unknown
   linkType: soft
@@ -13302,12 +13330,13 @@ __metadata:
   linkType: hard
 
 "json-rpc-middleware-stream@npm:^4.2.1":
-  version: 4.2.2
-  resolution: "json-rpc-middleware-stream@npm:4.2.2"
+  version: 4.2.3
+  resolution: "json-rpc-middleware-stream@npm:4.2.3"
   dependencies:
     "@metamask/safe-event-emitter": ^3.0.0
+    json-rpc-engine: ^6.1.0
     readable-stream: ^2.3.3
-  checksum: 01ff3a23b501fde5c2abb8c3b4d100c4fd430b41cf5e7750235f860a02d5823f8a43b0e81150c1d3bb196737f2273af1c7a50ff179e95e3d59fb7fe172249de3
+  checksum: 0907d34935a8b58c3c67626e344272758f684c13175b2e7de2bac37309c3211fca7a129bce042d50faed605615f51fbba01e173bdc2ae6c14d95aefb9bfb4e09
   languageName: node
   linkType: hard
 

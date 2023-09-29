@@ -20,6 +20,7 @@
     "@esbuild-plugins/node-modules-polyfill": "^0.2.2",
     "@histoire/plugin-nuxt": "^0.16.1",
     "@histoire/plugin-vue": "^0.16.1",
+    "@metamask/sdk": "^0.7.1",
     "@nuxt/eslint-config": "^0.1.1",
     "@nuxtjs/html-validator": "^1.5.2",
     "@nuxtjs/i18n": "next",
