@@ -265,16 +265,3 @@ export const useRouteQueryOptions = <T extends string>(key: string, defaultVal: 
 
   return state
 }
-
-export const useGraphqlCredentials = (): CredentialsInput | null => {
-  const { walletAdress } = useWallet()
-  const { user } = useUser()
-  const userId = user.value?.id
-  if (!walletAdress.value) {
-    return null
-  }
-  return {
-    playerId: userId,
-    walletAddress: walletAdress.value
-  }
-}
