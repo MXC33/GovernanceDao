@@ -1,6 +1,7 @@
 import type { ExternalProvider } from "@ethersproject/providers";
 //@ts-ignore
 import { EthereumProvider } from "@walletconnect/ethereum-provider";
+import MetaMaskSDK from "@metamask/sdk"
 import { DeFiWeb3Connector } from '@deficonnect/web3-connector'
 import { useChainInfo } from "./useWallet";
 
