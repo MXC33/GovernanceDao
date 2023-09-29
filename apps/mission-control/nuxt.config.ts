@@ -26,14 +26,7 @@ export default defineNuxtConfig({
   },
   //@ts-ignore
   transpile: [
-    'interactive-shader-format',
-    'vue3-carousel',
-    '@walletconnect/modal',
-    '@walletconnect/ethereum-provider',
-    '@coinbase/wallet-sdk',
-    'uuid',
-    '@metamask/sdk',
-    'web3-token'
+    'interactive-shader-format'
   ],
 
   i18n: {
