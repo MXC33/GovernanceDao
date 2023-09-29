@@ -12,10 +12,10 @@ FoldList(from="col" b="1 on-active:mc-mint white opacity-20" cursor="pointer" ju
 </template>
 
 <script lang="ts" setup>
-import type { TokenIdentifier } from '~/composables/Token/useTokens';
+import type { NftFragment } from '#gql'
 
 const displayVideo = computed(() => {
-  switch (props.token.type) {
+  switch (props.token.tokenInfo.type) {
     case 'pix':
     case 'astro-gold':
     case 'astro-gold-lite':
@@ -26,7 +26,7 @@ const displayVideo = computed(() => {
 })
 
 const props = defineProps<{
-  token: TokenIdentifier,
+  token: NftFragment,
   isInvalid?: boolean,
   isActive?: boolean,
 }>()

@@ -15,7 +15,7 @@
 
     CookieBot(:id="cookieBotId")
 
-    //- Popup(v-if="isSwapVisible" @close="isSwapVisible = false" :disable-default-close="true")
+    //- PopupBase(v-if="isSwapVisible" @close="isSwapVisible = false" :disable-default-close="true")
     //-   template(#header) {{ $t(`marketplace.navigation.buy.swap.title`)}}
     //-   template(#default)
     //-     VList(w="full" justify="center" items="center" )

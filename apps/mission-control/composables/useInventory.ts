@@ -7,7 +7,7 @@ export type InventoryListId = 'pix' | 'territories' | 'drone'
 export const useInventory = () => {
   const { data: gravityGradePackData } = useGravityGradeData()
   const { data: landData, pending: fetchingLand } = useLandData()
-  const { nfts, landmarks, ethNFTs, rovers, avatars, aocbadges } = useUserData()
+  const { nfts, landmarks, ethNFTs, rovers, avatars, aocbadges, geoLottery } = useUserData()
 
 
 
@@ -31,7 +31,7 @@ export const useInventory = () => {
     if (activeInventoryTab.value == 'land')
       return [...(landData.value ?? []), ...(landmarks.value ?? [])]
 
-    const allNFTs = (nfts.value?.concat(ethNFTs.value, rovers.value, avatars.value, aocbadges.value).filter(item => tabNFTType.value.includes(item?.tokenInfo.type))) ?? []
+    const allNFTs = (nfts.value?.concat(ethNFTs.value, rovers.value, avatars.value, aocbadges.value, geoLottery.value).filter(item => tabNFTType.value.includes(item?.tokenInfo.type))) ?? []
 
     if (activeInventoryTab.value == 'cargo')
       return [gravityGradePackData.value, allNFTs].flat().filter((item) => item && item.tokenId != 0 && item.balance != 0)
@@ -47,7 +47,7 @@ export const useInventory = () => {
       case 'industry': return ['facility', 'tile-contract']
       case 'resources': return ['biomod', 'astro-credit', 'waste', 'energy', 'raffle-ticket', 'blueprint', 'm3ta-mod']
       case 'cargo': return ['loot-crate', 'avatar-card-pack', 'aoc-badge-pack', 'rover-key']
-      case 'collectables': return ['badge', 'metashare', 'genesis', 'aoc-badge', 'avatar']
+      case 'collectables': return ['badge', 'metashare', 'genesis', 'aoc-badge', 'avatar', 'geolottery']
       default: return []
     }
   })

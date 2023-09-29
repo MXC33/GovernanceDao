@@ -58,9 +58,6 @@ export const useSiteHeader = () => {
     (isScrollingDown.value && autoHideActive.value) ? -headerHeight.value : 0
   )
 
-  watch(headerHeight, (hi) => {
-    console.log("DERP", hi)
-  })
 
   const siteHeaderOffset = computed(() =>
     headerHeight.value

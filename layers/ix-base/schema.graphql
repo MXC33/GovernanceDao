@@ -229,6 +229,7 @@ type Query {
   rover(credentials: CredentialsInput): [Token]
   avatarNFT(credentials: CredentialsInput): [Token]
   badgeNFT(credentials: CredentialsInput): [Token]
+  geoLotteryNFT(credentials: CredentialsInput): [Token]
   tokenInfo(tokenIds: [Int!]!, contractAddress: String!): [Token]
   tokenInfoTypeTier(tokens: [TokenInput!]!, contractAddress: String!, chain: String = "polygon"): [Token]
   burnedAvatars(credentials: CredentialsInput, corporation: String!): Boolean

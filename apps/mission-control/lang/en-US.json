@@ -414,6 +414,10 @@
           "shop": {
             "title": "Lucky shop",
             "description": "Increase your luck by buying some. Raffle Tickets equal great karma. This is our wisdom-osu!"
+          },
+          "territoryLottery": {
+            "title": "Territory Lottery",
+            "description": "Lucky Cat x NetEmpire raffles"
           }
         }
       },
