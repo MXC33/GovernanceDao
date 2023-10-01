@@ -24,6 +24,11 @@ export const useIXHeaders = () => {
   }))
 }
 
+
+const deleteCookie = (name: string) => {
+  document.cookie = name + '=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+}
+
 export const useIXAPI = () => {
   const { logoutWallet } = useWallet()
   const { removeUser } = useUser()
@@ -44,11 +49,16 @@ export const useIXAPI = () => {
     if (route.path.includes('connect'))
       return
 
-    await callWithNuxt(app, () => {
-      logoutWallet()
-      removeUser()
+    //TODO: Break this to a separate method
 
-      console.log("UNAUTHORIZED")
+    logoutWallet()
+    removeUser()
+
+    await callWithNuxt(app, () => {
+      const token = useCookie('web3Token')
+      token.value = null
+      const acc = useCookie("wallet-accounts")
+      acc.value = null
 
       return navigateTo({
         path: '/connect',
