@@ -12,9 +12,9 @@ VList(pos="relative" display="lt-md:none" ref="menuElement" frame="~ gray-400 ho
 
     button(v-if="ixtBalance != undefined" bg="hover:gray-600 gray-700" @click="showIXTSwap" flex="~ row" justify="center" items="center" aspect="square" wh="10")
       PlusIcon(wh="4" fill="white")
+  //-HeaderAccountButtonNumber(:state="walletState" :balance="ixtBalance")
 
   HeaderSubmenuWrapper(v-if="menuOpen" :align-right="true")
-
     VList(b="gray-400")
       slot(name="dropdown")
       //-HeaderSubmenuButton(@click="showIXTSwap") {{ $t(`general.navigation.menu.addFunds`)}}

@@ -8,11 +8,10 @@ PopupBase(@close="onClose")
     VList(w="full" justify="center" items="center" display="md:none")
       iframe(src="https://ix.foundation/lefi" w="full" h="100")
 
-
-
 </template>
 
 <script lang="ts" setup>
+
 const emit = defineEmits(['close'])
 
 const onClose = () => {
