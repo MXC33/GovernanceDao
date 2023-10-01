@@ -142,10 +142,7 @@ export const useLogin = () => {
           setRefreshToken(0)
           tryingToRefresh++
         } else {
-          logoutWallet()
-          removeUser()
-          console.log("UNAUTH")
-          return await navigateTo(`/connect`)
+          return await navigateTo(`/logout`)
         }
       }
     }, time)
