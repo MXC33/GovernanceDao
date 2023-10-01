@@ -70,7 +70,7 @@ export const useIXAPI = () => {
       })
       return data
     } catch (err) {
-      if (err.message.includes("403"))
+      if (err.message.includes("403") || err.message.includes("401"))
         await onUnauthorized()
       return null
     }
