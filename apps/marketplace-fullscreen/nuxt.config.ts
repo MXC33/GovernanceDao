@@ -25,10 +25,6 @@ export default defineNuxtConfig({
     ],
   },
 
-  css: [
-    '@/assets/styles/fonts.css'
-  ],
-
   watch: ['./unocss.config.ts', '@ix/base/unocss.config'],
 
   imports: {

@@ -125,7 +125,8 @@ html {
 
 #app {
   --header-background: var(--mc-pink);
-  --header-text-active: white;
+  --header-orange: white;
+  --header-mint: white;
   --header-text: var(--ix-black);
 }
 </style>

@@ -1,5 +1,5 @@
 <template lang="pug">
-#app.antialiased(font="apercu" bg="mc-black" text="sm lg:md" ref="app" color="white" pos="absolute" inset="0" min-h="0" overscroll="none" overflow="hidden" flex="~ col grow")
+#app.antialiased(font="apercu" bg="mc-black" text="base" ref="app" color="white" pos="absolute" inset="0" min-h="0" overscroll="none" overflow="hidden" flex="~ col grow")
   PlaycanvasGame()
 
   NuxtLayout()

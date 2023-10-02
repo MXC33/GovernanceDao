@@ -1,6 +1,6 @@
 <template lang="pug"> 
 VList(bg="gray-800" p="6" space-y="5" max-w="150" w="full" frame="~")
-  h2(text="xl white" uppercase="~" font="gridnik bold" @click="debugWalletClick") {{ $t('general.wallet.title') }}
+  h2(text="xl white" uppercase="~" font="bold" @click="debugWalletClick") {{ $t('general.wallet.title') }}
 
   VList(text="white left")
     WalletStatus(v-if="isWalletConnected")
@@ -19,7 +19,7 @@ VList(bg="gray-800" p="6" space-y="5" max-w="150" w="full" frame="~")
   div(flex="~ col" space-y="3" v-else)
     WalletButtonConnect(v-for="connector in connectors" :connector="connector")
 
-  ButtonSound(sound="lg" btn="~ secondary lg" cut="bottom-right" v-if="walletState == 'connecting' || walletState == 'signing'" @click="logoutWallet") {{$t(`general.cancel`)}}
+  ButtonSound(sound="lg" btn="~ secondary lg" cut="~ bottom-right s-md" v-if="walletState == 'connecting' || walletState == 'signing'" @click="logoutWallet") {{$t(`general.cancel`)}}
 
 
 </template>
