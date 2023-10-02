@@ -1,0 +1,491 @@
+{
+  "general": {
+    "accelerate": "Pabilisin",
+    "accelerateTask": "Pabilisin ang Gawain",
+    "back": "Ibalik",
+    "cancel": "Kanselahin",
+    "close": "Isara",
+    "claim": "Angkinin",
+    "confirm": "Kumpirmahin",
+    "continue": "Ipagpatuloy",
+    "disconnect": "Idiskonekta",
+    "errorConnecting": "MALI SA PAGKUNEKTA",
+    "goToInventory": "Pumunta sa imbentaryo",
+    "enter": "Pumasok",
+    "incoming": "Natanggap ang mensahe",
+    "open": "Bukas",
+    "loading": "Pagkarga",
+    "nrgProd": "Paglabas ng Enerhiya bawat",
+    "total": "kabuuan",
+    "visit": "Bumisita sa Korporasyon",
+    "recommended": "Inirekomenda",
+    "visitor": "Pakipasok ang password",
+    "amount": {
+      "max": "Max",
+      "min": "Min"
+    },
+    "transactions": {
+      "mintTransfer": "Mint at ilipat",
+      "confirm": "Kumpirmahin ang transaksyon sa iyong nakakonektang wallet",
+      "descriptions": {
+        "processing": "Ang pagpoproseso ng transaksyon ay magtatagal ng ilang sandali. Kung gusto mong kanselahin ang pagpapatakbong ito, mangyaring tanggihan ang transaksyon sa iyong wallet app."
+      }
+    },
+    "collected": {
+      "waste": "Basura",
+      "collectedWaste": "Nakolektang Basura",
+      "left": "Kaliwa",
+      "youMust": "Kailangan mong ganap na linisin ang isang TILE mula sa BASURA para makuha ito."
+    },
+    "avatars": {
+      "proxy": "Proxy ng Pagbabago",
+      "seina": "Seina",
+      "jeremiah": "Jeremiah",
+      "evePryde": "Eve-Pryde",
+      "buck": "Buck"
+    },
+    "noItemsFound": {
+      "no": "Hindi",
+      "itemsFound": "Nahanap na mga bagay",
+      "noFull": "Hindi matagpuan ang bagay"
+    },
+    "navigation": {
+      "terminal": "Terminal",
+      "inventory": "Imbentaryo",
+      "missionCtrl": "Mission Control",
+      "netEmpire": "Netempire",
+      "taskMng": "Tagapangasiwa ng Gawain",
+      "manager": "Tagapamahala",
+      "build": "bumuo",
+      "starterPack": "Panimulang pakete",
+      "payments": "Mga pagbabayad"
+    },
+    "timeCost": {
+      "hours": "Oras",
+      "cost": "Gastos"
+    },
+    "build": {
+      "overview": "Pangkalahatang-ideya",
+      "build": "Bumuo"
+    },
+    "search": {
+      "example": "Halimbawa: SE LE#329801"
+    }
+  },
+  "treasureChest": {
+    "itemsInTotal": "Mga bagay sa kabuuan",
+    "anyQuestions": "Kung mayroon kang anumang mga tanong, huwag mag-atubiling makipag-ugnayan sa amin",
+    "discord": "hindi pagkakasundo"
+  },
+  "inventory": {
+    "title": "Imbentaryo",
+    "tabs": {
+      "land": "Lupa",
+      "tech": "Tech",
+      "industry": "Industriya",
+      "resources": "Mga mapagkukunan",
+      "cargo": "Kargo",
+      "collectables": "Mga nakolekta",
+      "postmaster": "Postmaster"
+    },
+    "treasureChest": {
+      "pixDisclaimer": "Ang PIX sa pakete na ito ay hindi lalabas sa iyong imbentaryo hanggang sa maproseso ang mga ito ng server. Ang kaganapang ito ay nagaganap tuwing Lunes."
+    },
+    "info": {
+      "landTierReq": "Kinakailangan ang baitang ng lupa",
+      "energyOutCycle": "Ikot ng paglabas ng enerhiya",
+      "mcFeatures": "Mga tampok na kontrol ng misyon",
+      "facilityComp": "Pagkakatugma ng pasilidad",
+      "prodMulti": "Produksyon nagpaparami",
+      "properties": "Ari-arian",
+      "noItemSelected": "Walang napiling bagay",
+      "status": "Katayuan",
+      "active": "Aktibo",
+      "landmarkInspector": "Inspektor ng Landmark",
+      "postmaster": {
+        "title": "Postmaster",
+        "inventoryStructures": "Imbentaryo para sa istraktura"
+      },
+      "soSorry": {
+        "sorry": "Paumanhin, wala kahit ano",
+        "sorryNoItem": "mga bagay pa"
+      }
+    }
+  },
+  "build": {
+    "selectPix": {
+      "title": "Tukuyin ang Pix",
+      "subTitle": "ADS:A2\\90"
+    },
+    "confirm": {
+      "place": {
+        "facility": "Ang iyong pasilidad ay ilalagay kaagad, ahente. Ito ba ang gusto mong iposisyon?",
+        "drone": "Tuturuan ba namin ang iyong drone na hanapin at panatilihin ang tile ng lupa na ito, ahente?",
+        "pix": "Ahente, sigurado ka bang gusto mong ilagay ang iyong PIX sa partikular na tile ng lupa na ito? ",
+        "territory": "Ang isang angkop na tile ng lupa para sa iyong teritoryo, ahente. Nais mo bang magpatuloy?"
+      },
+      "reset": {
+        "pix": "Ahente, maging mapagmasid Ang iyong kasalukuyang produksyon ay wa-wakasan sa pamamagitan ng pag-lagay muli ng iyong tile ng lupa. Nais mo bang magpatuloy?",
+        "territory": "Ahente, maging mapagmasid Ang iyong kasalukuyang produksyon ay wa-wakasan sa pamamagitan ng pag-lagay muli ng iyong tile ng lupa. Nais mo bang magpatuloy?",
+        "drone": "Ahente, ang pag-lagay muli ng drone ay magwawakas sa iyong kasalukuyang produksyon. Nais mo bang magpatuloy?",
+        "facility": "Ahente, ang pag-alis ng iyong pasilidad ay magwawakas sa iyong kasalukuyang produksyon ng enerhiya. Gusto mo ba talagang magpatuloy?"
+      },
+      "claim": {
+        "waste": "Pagpupugay sa Ahente, matagumpay mong nakolekta ang iyong basura.",
+        "energy": "Ahente, matagumpay mong nakolekta ang iyong lakas. Saludo ang isang kinatawan sa iyong pagsusumikap."
+      },
+      "claimed": {
+        "waste": "Ahente, ang iyong basura ay kinuha at minted na ngayon. Iminumungkahi ng isang kinatawan na ikalakal ito sa Eternalab o Pandaigdigang mga Sistema ng Basura.",
+        "energy": "Ahente, nagantimpalaan ang iyong katapatan sa anyo ng nakuha at minted na enerhiya. Isang mahalagang mapagkukunan para sa mga tech upgrade."
+      }
+    },
+    "unstaked": {
+      "pix": "Ahente, ang iyong tile sa lupa ay wala nang laman. Muling buuin kaagad, o ang A.M.E ay hindi masisiyahan sa iyong pag-unlad.",
+      "territory": "Ahente, ang iyong tile sa lupa ay wala nang laman. Muling buuin kaagad, o ang A.M.E ay hindi masisiyahan sa iyong pag-unlad.",
+      "drone": "Ahente, ang lahat ng aktibidad ng drone sa iyong tile sa lupa ay winakasan na ngayon. Humina ang iyong imperyo.",
+      "facility": "Ahente, tinanggal na ang iyong pasilidad. Maaari kang magtayo muli kung kinakailangan."
+    },
+    "staked": {
+      "pix": "Ahente, matagumpay mong nailagay ang iyong PIX. Ang iyong mga pagsusumikap ay magpapatuloy sa pagpapanumbalik, at ang A.M.E ay masisiyahan.",
+      "territory": "Ang iyong teritoryo ay nakalagay na at ang iyong koleksyon ng basura ay tataas. Pagpupugay sa ahente, lumalawak na ang iyong imperyo.",
+      "facility": "Pagpupugay sa ahente Ang iyong pasilidad ay gumagana na ngayon. Tumitig nang buong pagmamalaki sa iyong pag-unlad.",
+      "drone": "Ang aming pinakamahusay na pagbati, ahente. Pinapanatili na ngayon ng iyong drone ang iyong mga lupain. Sa pamamagitan nito, madadagdagan ang iyong koleksyon ng basura."
+    }
+  },
+  "corporations": {
+    "overview": {
+      "inactiveMenu": "nasa progreso. Natitirang oras:",
+      "accelerate": "mapabilis ang iyong (mga) order"
+    },
+    "order": {
+      "mcSpeedup": "Pabilisin ang iyong gawain sa Mga Kredito sa Astro. <strong>{outputType}</strong>ay <strong>nagkakahalaga ng {cost} AC </strong>sa isang oras.",
+      "mcSpeedupCost": "{gastos} Mga Kredito sa Astro",
+      "cart": {
+        "input": {
+          "title": "Mga Kinakailangang Materyales",
+          "ownedMaterialTitle": "Mga Materyales na Pagmamay-ari",
+          "amount": "Halaga"
+        },
+        "output": {
+          "probability": {
+            "title": "Probabilidad na kinalabasan"
+          },
+          "fixed": {
+            "title": "Kinalabasan"
+          }
+        },
+        "itemType": {
+          "tier": {
+            "itemTitle": "Tier"
+          },
+          "items": {
+            "itemTitle": "Mga Aytem"
+          }
+        },
+        "outputType": {
+          "chance": {
+            "itemTitle": "Pagkakataon"
+          },
+          "amount": {
+            "itemTitle": "Halaga"
+          }
+        }
+      }
+    },
+    "lucky-cat": {
+      "mcIntro": "Subukan mo ang iyong suwerte sa Lucky Cat.",
+      "overview": {
+        "header": "Youkoso kay Lucky Cat",
+        "intro": "Arigato gozaimasu, para sa pagbisita sa Lucky Cat! Ang kasawian ay maaring magdulot ng malaking kapalaran. Ang aming 24/7 na serbisyo ay ginagarantiyahan ang iyong paglalaan.",
+        "buttons": {
+          "raffle": {
+            "title": "Maswerteng mga raffle",
+            "description": "Catharsis o kapahamakan. Magkaroon ng kayamanan o vacuum sa iyong pitaka. Lahat ng ito ay tungkol sa suwerte, meow."
+          },
+          "shop": {
+            "title": "Maswerteng tindahan",
+            "description": "Dagdagan ang iyong swerte sa pamamagitan ng pagbili ng ilan. Mga kagandahan at nagpapalakas ng katumbas na dakilang karma. Ito ang ating karunungan-osu!"
+          }
+        }
+      },
+      "raffles": {
+        "myTicket": "ang aking mga tiket",
+        "futureTicket": "paparating na raffles",
+        "pastTicket": "mga nakaraang raffle",
+        "currentTicket": "live na raffle #",
+        "liveRaffle": "live na raffle",
+        "invalid": "Paumanhin, dapat kang pumasok sa pagitan",
+        "noFutureTickets": "Mas marami pang raffle ang paparating",
+        "usedAll": "Nagamit mo na ang lahat ng mga tiket! Bumili ng bumili ng masuwerteng swerte, meow.",
+        "noActive": "Walang aktibong raffle",
+        "loadMore": "Mag-load pa",
+        "landmark": "Landmark",
+        "totalEntries": "Kabuuang mga Entry",
+        "winners": "Mga nanalo",
+        "date": "Petsa",
+        "loadingRaffle": "Naglo-load ng Raffle",
+        "viewMore": "Tingnan ang Higit Pa",
+        "stars": "Mga bituin",
+        "getMore": "Kumuha ng mas maraming raffle tiket",
+        "raffleDetails": "Mga Detalye sa Raffle",
+        "raffleAttributes": "Mga Katangian",
+        "tickets": "Mga Ticket"
+      },
+      "viewPast": {
+        "winnersOf": "mga nanalo sa live raffle #",
+        "winners": "mga nanalo",
+        "enteredWith": "pumasok kasama",
+        "sharesWon": "Nanalo ang mga Shares"
+      },
+      "checkout": {
+        "title": "Raffle ng Lucky Cat",
+        "message": "Ang swerte ay ang pagmamahal sa iyong sarili–desu! Nais mong subukan ang iyong pag-ibig"
+      },
+      "claim": {
+        "message": "Ang kahulugan ng swerte ay ang mabuhay lamang, at ang iyong pakikipagsapalaran ay nagbigay ng gantimpala sa iyo ng {landmarkName}. Omedetō gozaimasu!"
+      }
+    },
+    "new-lands": {
+      "mcIntro": "Magtayo ng mga pasilidad sa Newlands.",
+      "overview": {
+        "productionTime": "oras ng pamumuno ng produksyon",
+        "header": "Maligayang pagdating sa Newlands LLC",
+        "intro": "Lumang isport! Isa akong masayang magaling na arkitekto sa Newlands, at sobrang nasasabik na ibahagi sa iyo ang aming mahuhusay na mga disenyo. Nag-aalok kami ng ilang mga gusali, lahat ay may mga resultang tunay na maaasahan mo!",
+        "buttons": {
+          "craft": {
+            "title": "magtayo ng pasilidad",
+            "description": "Ano ang lupang walang konstruksyon, eh? Masamang anyo! Kaya't buuin natin ang ilan at anihin ang mga gantimpala."
+          },
+          "shop": {
+            "title": "upgrade na pasilidad",
+            "description": "Sabi ko, ang pag-upgrade ay napakahusay! Ito ay magpapataas sa iyong pang-araw-araw na produksyon."
+          }
+        }
+      },
+      "craft": {
+        "previewOutcome": "Mga Pasilidad",
+        "inProgress": "Oras na natitira sa pagtatayo ng Pasilidad",
+        "cartInfo": "magtayo",
+        "description": "Mabilis kaming gumawa ng mga bagay. Ito ay tumatagal ng {oras} <strong>8 ORAS </strong>upang makumpleto ang isang gusali, at maaari mong subaybayan ang proseso ng pagtatayo <strong>sa iyong TASK MANAGER</strong>. Napakahusay, eh? <br/><br/> At ito ay kung paano ito nagpapatakbo. <br/><br/>Ang aming iba't ibang mga pasilidad ay maaari lamang ilagay sa isang kaukulang teritoryo o pix. Kung mas maraming materyales ang mayroon kami, mas malamang na makagawa kami ng isang bagay na tunay na kamangha-manghang para sa iyo. Tulad ng isang Nagliliwanag na mga Hardin isang Fusion Core!<br/><br/>Kapag handa na ang pasilidad at maayos na inilagay sa lugar. Ang produksyon ng enerhiya ay maaaring magsimula, at maaari kang mag taya ng enerhiya para makakuha ng IXT o bagong teknolohiya.<br/><br/>Maaari mo ring ibenta ang iyong pasilidad sa NetEmpire marketplace o pagbutihin ito sa isang pasilidad na mas produktibo! Tat-ta!",
+        "descriptionMobile": "Mabilis kaming gumawa ng mga bagay. Tumatagal ito <strong>ng 8 ORAS</strong>. upang kumpletuhin ang isang gusali, at maaari mong subaybayan ang proseso ng pagtatayo sa iyong <strong>TASK MANAGER</strong>. <br/><br/> Ang aming iba't ibang mga pasilidad ay maaari lamang ilagay sa isang kaukulang teritoryo o pix. Kung mas maraming materyales ang mayroon kami, mas malamang na makagawa kami ng isang bagay na tunay na kamangha-manghang para sa iyo."
+      },
+      "summaryTime": "Handa na ang Disenyo. Handa na ang Disenyo. takdang panahon ",
+      "complete": "Hindi kapani-paniwala! Ang iyong pasilidad ay itatayo sa NewLands lugar ng konstraksiyon, at sa loob <strong>ng 8 ORAS</strong>ipapadala namin ito sa iyong imbentaryo. Ang sabi ko, matutuwa ka kapag nakita mo ito! <br/><br/> Kung nagmamadali ka, alam ko ang ilang mga chaps na maaaring mapabilis ang proseso. Sabihin, <strong>50% </strong>mas mabilis para sa <strong>100 MGA KREDIT </strong>NG ASTRO lang. Mukhang maganda? Ipaalam sa akin ahente! Pip-pip!"
+    },
+    "eternalab": {
+      "mcIntro": "Pinuhin ang basura para maging mahahalagang mapagkukunan sa Eternalab.",
+      "overview": {
+        "header": "Magsaya ka sa Eternalab",
+        "intro": "Mahal, isang magandang proseso ang sining ng paglikha. Sa Eternalab, ginagawa natin ang uniberso mismo. Ang lahat ng ito ay para sa higit na ikabubuti, at mga kamangha-manghang pagsisimula. Ano ang gusto mo?",
+        "buttons": {
+          "craft": {
+            "title": "Magbenta ng basura",
+            "description": "Basura, bakas ng nakaraan aah. Ang sayaw ng patuloy na dumaraming entropy. Aalisin ng ating pagbabago ang iyong mithiin, mahal.."
+          }
+        }
+      },
+      "craft": {
+        "previewOutcome": "Magbenta ng Basura",
+        "inProgress": "Kasalukuyang nagaganap ang pagbebenta ng basura",
+        "cartInfo": "pinuhin",
+        "description": "Mahal, ang halaga ng isang bagay ay hindi isang pag-aari ng bagay na nag-iisa: ito ay isang pag-aari ng bagay na may kaugnayan sa isa pang bagay. At ang kahalagahan ng basura? Ito ang mga alaala, ang kumbinasyon ng MetaMaterials, ng lupa kung saan kinolekta ang mga basura. <br/><br/> Sa pamamagitan ng pagkolekta ng basura sa isang partikular na tier ng lupa, magkakaroon ka ng mas mataas na posibilidad na makakuha ng Bio-M0ds ng parehong tier na iyon. <br/><br/> Ang bio-M0ds ay isang pagsasama-sama ng halaga ng basura. Iyan ang lohika ng entropy. Ngunit ang aming mga eksperimento ay hindi eksaktong agham. Masyadong kumplikado ang temporal na istraktura ng mundo, mahal.<br/><br/>Kaya, ang iyong nakolektang basura ay maaaring gantimpalaan ka ng isang Blueprint o Legendary Bio-M0d, ngunit maaari rin itong magresulta sa wala sa lahat. Minsan, ang basura ay basura lamang.",
+        "descriptionMobile": "Ang bio-M0ds ay isang pinagsama-samang halaga. Ang kumbinasyon ng MetaMaterials, ng lupa kung saan nakolekta ang basura.<br/><br/>Sa pamamagitan ng pagkolekta ng basura sa isang partikular na baitang, magkakaroon ka ng mas mataas na posibilidad na makakuha ng Bio-M0ds ng baitang iyon. Iyan ang lohika ng ating siyensiya."
+      },
+      "summaryTime": "Expt handa na. takdang panahon ",
+      "complete": "Aah, upang makita ang mundo nang direkta, sa kabila ng oras. Ang entropy ng planetang ito, ang iyong <strong>BASURA</strong>, ay sana ay maging BIO<strong>-M0DS </strong>sa loob ng <strong>8 ORAS</strong>. <br/><br/>Ang aming mga eksperimento sa Eternalab ay kumpidensyal, ngunit maaari mong sundin ang pag-unlad sa iyong <strong>TASK MANAGER.</strong>"
+    },
+    "gws": {
+      "mcIntro": "Magbenta ng basura para sa Astro Credits sa Pandaigdigang mga Sistema ng Basura.",
+      "overview": {
+        "header": "Ito ay ang pandaigdigang Sistema ng Basura",
+        "intro": "Basura. Ganyan ang ginagawa namin. Ang lahat ay naghuhukay at walang inumin. Sabi ng board ginagawa kong ginto ang tae. Buweno, napakahusay niyan. kahit ano pa man.",
+        "buttons": {
+          "craft": {
+            "title": "magbenta ng basura",
+            "description": "Ibigay sa amin ang iyong basura at makakatanggap ka ng Astro Credits bilang kapalit. Yun lang."
+          }
+        }
+      },
+      "order": {
+        "previewOutcome": "Magbenta ng Basura",
+        "cartInfo": "magbenta",
+        "inProgress": "Kasalukuyang nagaganap ang pagbebenta ng basura",
+        "descriptions": [
+          "Kaya gusto ng board na idetalyado ko. Sige. Shit.<br></br>Ang <strong>BASURA </strong>mula sa iyong mga teritoryo at mga pix ay may halaga nang tama. Ngunit ang basura ay kailangang pinuhin upang makakuha ng tamang halaga.<br><br></strong>Aayusin namin iyon para sa iyo, at pagkatapos ay bibigyan ka namin <strong>ng ASTRO CREDITS Sige? Kung hindi mo gusto, pumunta at harapin ang madugong EternaLab o anuman."
+        ],
+        "descriptionMobile": [
+          "Ang BASURA mula sa iyong mga teritoryo at pix ay may halaga. Ngunit ang basura ay kailangang pinuhin upang makakuha ng tamang halaga. <br><br>Aayusin namin iyon para sa iyo, at bibigyan ka namin ng mga ASTRO CREDITS. Sige? Kung hindi mo gusto ito, pumunta at harapin ang madugong Eternalab. Masama ito."
+        ]
+      },
+      "summaryTime": "Nakolekta ang basura. Handa na ang Disenyo. takdang panahon ",
+      "complete": "Ayan tuloy tayo. Ang sabi ng board ay 100 basura, 100 astro credits. Pero sabi ko, 100 basura, uhm 95 astro credits. kailangan mo ng baon para sa lahat ng problema, alam mo. Ngayon iwanan mo ako sa aking bourbon."
+    },
+    "net-empire": {
+      "mcIntro": "Ipagpalit ang lupa at mga ari-arian sa NetEmpire."
+    },
+    "y-space": {
+      "mcIntro": "Bumili, ayusin at ipasadya ang tech sa Y.."
+    }
+  },
+  "minting": {
+    "descriptions": {
+      "openingAssets": "Ang pagbubukas at pag-minting ng mga nilalaman ng ari-arian na ito ay maaaring tumagal ng ilang oras. maaari mong iwanan ang screen na ito at ipagpatuloy ang iyong misyon. Mahahanap ang iyong mga gantimpala sa iyong imbentaryo sa ilang sandali."
+    },
+    "extractingAssets": "NAG-EXTRACTING NG MGA ARI-ARI...",
+    "extractingChest": "Ang pagbubukas at pag-minting ng mga nilalaman ng asset na ito ay maaaring tumagal ng ilang oras. maaari mong iwanan ang screen na ito at ipagpatuloy ang iyong misyon. Mahahanap ang iyong mga gantimpala sa iyong imbentaryo sa ilang sandali."
+  },
+  "wallet": {
+    "title": "Ikonekta ang Wallet",
+    "welcomeMessage": "Kumonekta sa isa sa aming mga magagamit na tagapagtustos ng wallet",
+    "signing": {
+      "title": "KUMPIRMAHIN ANG TRANSAKSIYON SA IYONG KONEKTADO NA WALLET",
+      "description": "Ang pagpoproseso ng transaksyon ay magtatagal ng ilang sandali. Kung gusto mong kanselahin ang pagpapatakbong ito, mangyaring tanggihan ang transaksyon sa iyong wallet app."
+    },
+    "minting": {
+      "title": "PAGSULAT SA KASULATAN",
+      "description": "Kumapit ka. Mapapatunayan ang iyong transaksyon sa lalong madaling panahon."
+    },
+    "approving": {
+      "title": "NAGPAPATIBAY",
+      "description": "Ang pag-apruba sa iyong ari-arian na itataya. Kung gusto mong kanselahin ang pagpapatakbong ito, mangyaring tanggihan ang transaksyon sa iyong wallet app."
+    },
+    "minting-pix": {
+      "title": "MINTING IYONG PIX",
+      "description": "Pag-minting ng iyong mga pix sa Chain."
+    },
+    "playerProfile": {
+      "notLoggedIn": "Ang profile ng manlalaro ay hindi naka-log in",
+      "playerConnecting": "Profile ng manlalaro (kumokonekta)",
+      "loggedInAs": "Naka-log in bilang"
+    },
+    "payments": {
+      "chooseMethod": "Pumili ng Paraan ng Pagbabayad",
+      "matic": "matic",
+      "usdt": "usdt",
+      "ixt": "ixt"
+    }
+  },
+  "taskManager": {
+    "claim": "Angkinin",
+    "noTasks": "Walang aktibong gawain",
+    "noOrders": "Walang aktibong mga order",
+    "harvesting": "Nakolekta",
+    "eta": "umalis",
+    "loadingItems": "Naglo-load ng mga aytem ng gawain...",
+    "order": {
+      "eternalab": {
+        "title": "PINAGPINIINIS ANG MGA BASURA",
+        "progress": "POSIBLENG RESULTA: BIOMOD"
+      },
+      "gws": {
+        "title": "PINAGPINIINIS ANG MGA BASURA",
+        "progress": "KINABUKASAN: {halaga} ASTRO CREDITS"
+      },
+      "new-lands": {
+        "title": "PASILIDAD NG PAGBUO",
+        "progress": "KINABASAAN: 1 PASILIDAD"
+      }
+    },
+    "orderClaim": {
+      "description": "GM ser, natapos na ang iyong order ng inaasam-asam at pinoproseso namin ang gantimpala mo habang nagsasalita kami. Iha-highlight sa ibaba ang iyong resulta sa loob ng ilang sandali. Mag mag-abang po kayo.",
+      "nothing": "Wala",
+      "buttons": {
+        "goTo": "Pumunta sa Imbentaryo",
+        "prospectTask": "Inaasam-asam na Gawain"
+      },
+      "success": {
+        "eternalab": "Aah, tumagal kami ng daan-daang taon. Ngunit sa lalong madaling panahon maaari nating makita ang higit sa natural na mundo. Narito ang iyong kabayaran, mahal.",
+        "gws": "Okay naman. Narito ang iyong mga madugong Astro Credits.",
+        "new-lands": "Hoy matandang bean! Ang iyong pasilidad ay sobrang husay at ipinadala na ngayon sa iyong mga lupain. Maaari ko bang imungkahi, ilagay ito sa isang tile ng lupa at gumawa ng ilan sa oh napakasarap na enerhiya!",
+        "y-drone": "Siguraduhin ang basura, ahente. Nalalapit na ang muling pag-aayos ng drone."
+      },
+      "failure": {
+        "eternalab": {
+          "title": "Nabigong eksperimento",
+          "description": "Ang basura. Kakaibang entropy. Nagbunga ito ng.. wala. Ngayon ay nakikita na natin kung bakit natutulog ang mga mundo sa isang estado ng thermal ekwilibriyo.",
+          "buttonTry": "Bumalik sa lab"
+        }
+      }
+    }
+  },
+  "notifications": {
+    "beginnerOffer": {
+      "title": "Alok ng Baguhan",
+      "description": "Magandang gising, ahente. o 48 oras na maaari kang bumili ng lupa sa Planet IX sa isang may diskwentong presyo. Isa itong magandang paraan para simulan ang iyong misyon.",
+      "expressM": "Expressmedium <br/>na pakete</br>111 pix",
+      "expressS": "Expressmaliit <br/>na pakete</br>11 pix",
+      "price": {
+        "medium": {
+          "normal": "$65",
+          "sale": "32.5"
+        },
+        "small": {
+          "normal": "$10",
+          "sale": "$5"
+        }
+      },
+      "buttons": {
+        "confirm": "Bumili",
+        "cancel": "Kanselahin"
+      },
+      "proxyChange": {
+        "incoming": "Natanggap ang mensahe",
+        "title": "Kinatawan ng Pagbabago",
+        "message": "Ang aming pagbati, ahente. Naka-secure ka ng sapat na PIX para buuin ang lahat ng tile mo sa lupa. Sa paglipas ng panahon, lilitaw ang basura."
+      }
+    }
+  },
+  "game": {
+    "greetingTitle": "GM SER,",
+    "header": {
+      "place": "Lugar",
+      "onEmpty": "Sa walang laman na tile"
+    },
+    "terminal": {
+      "entry": {
+        "cSoon": "Malapit na"
+      },
+      "descriptions": {
+        "inInventory": "Sa Imbentaryo, maaaring pangasiwaan ng mga ahente ang lahat ng kanilang mga ari-arian.",
+        "explore": "Galugarin ang planeta at makipagkalakalan sa NetEmpire marketplace.",
+        "inMissionCtrl": "Sa Mission Control, maaaring gamitin ng mga ahente ang kanilang mga ari-arian."
+      }
+    },
+    "helper": {
+      "loadingUser": "Mangyaring maghintay. Nilo-load ang iyong user...",
+      "loadingAssets": "NAGLO-LOAD NG MGA ARI-ARIAN..",
+      "fetchingUser": "Kinukuha ang user",
+      "fetchingYourItems": "Kinukuha ang iyong mga aytem",
+      "timeDays": {
+        "days": "D",
+        "hours": "H",
+        "minutes": "MIN"
+      }
+    }
+  },
+  "layouts": {
+    "headers": {
+      "accountBalance": "Balanse sa account:",
+      "ixt": "IXT:",
+      "terminal": "TERMINAL",
+      "dashboard": "IX Foundation",
+      "inventory": "Imbentaryo",
+      "missionControl": "Mission Control",
+      "game": "Laro",
+      "planetIX": "Planet IX",
+      "automatedTrans": "Mga Awtomatikong Pagpapadala"
+    }
+  },
+  "cosmetics": {
+    "chooseCosmetics": "Pumili ng Mga Kosmetiko",
+    "chooseNFT": "Pumili ng Mga Kosmetiko",
+    "userInfo": {
+      "aoc": "Ahente ng pagbabago",
+      "memberSince": "Miyembro mula noong",
+      "status": "Katayuan",
+      "social": "Sosyal",
+      "pm": "Personal na Mensahe",
+      "showcase": "Eskaparate"
+    }
+  }
+}

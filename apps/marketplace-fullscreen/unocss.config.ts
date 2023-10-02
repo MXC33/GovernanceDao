@@ -37,7 +37,9 @@ export default defineConfig({
       //@ts-ignore
       ...baseLayer.shortcuts,
       {
-        'pos-absolute-center': 'pos-absolute left-50% top-50%'
+        'pos-absolute-center': 'pos-absolute left-50% top-50%',
+        'btn-secondary-detail': 'btn-md bg-gray-500 hover:bg-gray-400 cut-bottom-right cut-sm btn-center',
+
       }
     ]
   }

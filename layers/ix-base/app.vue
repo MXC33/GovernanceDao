@@ -1,32 +1,64 @@
 <template lang="pug">
-HList()
-  div(bg="ix-primary opacity-30" btn="~" font="foundry" cut="bottom-right b-red-400") IX UI
+#app.antialiased(font="foundry" text="base" bg="ix-black" color="white" ref="app" overscroll="none" flex="~ col grow" min-h="100vh")
+
+  NuxtLayout()
+    NuxtLoadingIndicator(color="rgb(255, 102, 71)")
+    NuxtPage()
+
 </template>
 
 <script setup lang="ts">
 
-const {execute: fetchHeaderData } = useHeaderData()
-
+const { execute: fetchHeaderData } = useHeaderData()
 await fetchHeaderData()
+const { setupPaintWorker } = useAppSetup()
 
-
-onMounted(async () => {
-  //@ts-ignore
-  const isPaintSupported = !!CSS.paintWorklet
-
-  if (isPaintSupported) {
-    //@ts-ignore
-    CSS.paintWorklet.addModule('/paint/border.js');
-  }
-  document.body.classList.toggle('is-paint-supported', isPaintSupported)
-  document.body.classList.toggle('is-not-paint-supported', !isPaintSupported)
+onMounted(() => {
+  setupPaintWorker()
 })
 
+useHead({
+  title: "Mission Control",
+  meta: [
+    {
+      name: "X-UA-Compatible",
+      content: "IE=Edge"
+    },
+    {
+      name: "viewport",
+      content: "width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
+    },
+    {
+      name: "apple-mobile-web-app-capable",
+      content: "yes"
+    }
+  ],
 
-</script>
+  link: [
+    { rel: "icon", href: "/IX-icon.png" }
+  ]
+});
 
+</script>  
 <style>
-:root {
-  --content-drawer-bg-color: var(--ix-black)
+html {
+  background: var(--ix-black);
+}
+
+body {
+  font-variant-ligatures: no-common-ligatures;
+}
+
+body.is-fixed-height {
+  overflow: hidden;
+  height: 100%;
+}
+
+.no-scrollbar {
+  scrollbar-width: none
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none
 }
 </style>

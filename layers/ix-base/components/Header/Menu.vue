@@ -1,41 +1,85 @@
 <template lang="pug">
-div(pos="fixed right-0 top-0 bottom-0" overflow-y="auto" bg="black" p="5" w="80 md:120" max-w="80%" z="200" color="white" space-y="5" b="l-1 white opacity-20")
+HList(items="center" justify="between" h="16" space-x="3" ref="menuEl")
+  NuxtLink(to="https://www.planetix.com")
+    template(v-if="$slots.logo")
+      slot(name="logo")
 
-  //- UserHeaderProfile(w="full" h="20" bg="transparent" ring="0" @click="$router.push('/connect')")
+    PlanetIXNew(v-else w="42.25")
 
-  div(space-y="3")
-    div(color="white opacity-50") {{$t(`layouts.headers.accountBalance`)}}
-    div(bg="warm-gray-900" rounded="10" b="1 white opacity-50" p="3")
-      span(color="white opacity-50") {{$t(`layouts.headers.ixt`)}} 
-      span(color="mc-mint") {{ roundToDecimals(ixtBalance ?? 0, 2) }}
+  HList(v-if="!isMobile" justify="start" flex-grow="1" overflow-x="hidden" space-x="4")
+    button(v-for="(header, index) in headerData" @mouseenter="hoverMenu(index)" @click="openMenu(index)" btn="menu" color = "s-default:white s-selected:ix-orange" :state="selected(index)") {{ header.name }}
 
-  HeaderButton(@click="gotoMCPage('/terminal')") {{$t(`layouts.headers.terminal`)}}
-  HeaderButton(@click="gotoMCPage('/')") {{$t(`layouts.headers.inventory`)}}
-  HeaderButton(@click="gotoMCPage('/mission-control')") {{$t(`layouts.headers.missionControl`)}}
-  HeaderButton(@click="gotoIXPage('game')") {{$t(`layouts.headers.game`)}}
-  HeaderButton(@click="gotoIXPage('ix-foundation')") {{$t(`layouts.headers.dashboard`)}}
-  HeaderButton(@click="gotoIXPage('index')") {{$t(`layouts.headers.planetIX`)}}
+    HList(flex-grow="1" justify="end" display="lt-md:none")
+      a(href="https://planetix.com/airdrop")
+        span(rounded="full" b="1 $mc-mint" px="4" py="1" bg="hover:$mc-mint-40" uppercase="~" tracking="0.65" font="bold" items="center" justify="center" class="border-white-ixt" flex="~")
+          span(translate-x="0.5") airdrop
 
-  div(b="t-1 white opacity-50" py="4")
-    ButtonSound(btn="~ white on-enabled:secondary" sound="md" @click="toggleSound" :enabled="isSoundEnabled") Sound {{ isSoundEnabled ? 'enabled' : 'disabled'}}
 
-</template>
+  HList(items="center" space-x="3" px="0")
 
+    slot(name="contentRight")
+
+    Notification(display="lt-lg:none")
+    //-class="border-white-ixt"
+    HeaderAccountButton()
+      template(#dropdown)
+        slot(name="dropdown")
+
+    div(display="lg:none")
+      Notification()
+
+    button.hamburger-menu(v-if="isMobile" btn="menu" @click="toggleMenu" ml="2")
+      SettingsIcon(v-if="activeHeaderIndex == null" w="6")
+      CrossIcon(v-else w="6" )
+
+</template> 
 
 <script lang="ts" setup>
-import { useIXTContract } from "@ix/base/composables/Contract/useIXTContract";
+import CrossIcon from '~/assets/images/header/cross.svg'
+import PlanetIXNew from '~/assets/images/header/planetix-new.svg'
+import SettingsIcon from '~/assets/images/header/hamburger.svg'
 
-const { ixtBalance, fetchIXT } = useIXTContract()
-const menuOpen = ref(false)
-const router = useRouter()
-const { gotoIXPage } = useIXLinks()
-const { isSoundEnabled } = useSoundSettings()
-const toggleSound = () => { isSoundEnabled.value = !isSoundEnabled.value }
+const menuEl = ref()
+const { useMobileBreakpoint } = useDevice()
+const isMobile = useMobileBreakpoint()
+const { data: headerData } = useHeaderData()
 
-const gotoMCPage = (page: string) => {
-  menuOpen.value = false
-  router.push(page)
+
+
+const { refreshIXTBalance } = useIXTContract()
+const { isWalletConnected } = useWallet()
+const { activeHeaderIndex } = useSiteHeader()
+
+watch(isWalletConnected, (connected) => {
+  if (connected)
+    setTimeout(() => refreshIXTBalance(), 10)
+}, { immediate: true })
+
+
+const selected = (index: number) => {
+  if (activeHeaderIndex.value == index) {
+    return 'selected'
+  }
+
+  return 'default'
 }
-</script>
 
-<style></style>
+const hoverMenu = (index: number) => {
+  activeHeaderIndex.value = index
+}
+
+const openMenu = (index: number) => {
+  if (activeHeaderIndex.value == index)
+    return activeHeaderIndex.value = null
+
+  activeHeaderIndex.value = index
+}
+
+const toggleMenu = () => {
+  if (activeHeaderIndex.value == null)
+    return activeHeaderIndex.value = 1
+
+  activeHeaderIndex.value = null
+}
+
+</script>

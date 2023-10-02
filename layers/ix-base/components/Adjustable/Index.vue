@@ -1,23 +1,24 @@
 <template lang="pug">
-HList(w="full" frame="~ gray-400 hover:gray-300 on-frameless:none" :frameless="!hasFrame" group)
-  HList(bg="hover:gray-800 on-frameless:hover:gray-400 on-solid:gray-600" :frameless="!hasFrame" :solid="isSolid" w="on-solid:45%" justify="on-solid:center")
-    AdjustableButton(type="minus" @click="decreaseAmount" :is-adjustable="isDecreasable" :inline="inline")
+HList(min-w="0" frame="none on-has-frame:(~ gray-400 hover:gray-300)" :has-frame="look == 'frame'" group fill="white" color="white" min-h="10")
+  AdjustableButton(type="minus" @click="decreaseAmount" :is-adjustable="isDecreasable" :look="look")
 
-  HList(items="center" justify="center" b="on-frameless:(l-1 r-1 gray-900)" :frameless="!hasFrame" w="full")
-    AdjustableNumber(v-model="data" :is-neutral="isNeutral" :is-solid="isSolid")
+  HList(flex-grow="1" w="full" justify="center" b="0 inherit" items="center" pos="relative" :look="look")
+    AdjustableNumber(v-model="data" :look="look")
 
-  HList(bg="hover:gray-800 on-frameless:hover:gray-400 on-solid:gray-600" :frameless="!hasFrame" :solid="isSolid" w="on-solid:45%" justify="on-solid:center")
-    AdjustableButton(type="plus" @click="increaseAmount" :is-adjustable="isIncreasable" :inline="inline")
+  AdjustableButton(type="plus" @click="increaseAmount" :is-adjustable="isIncreasable" :look="look")
 
 </template>
 
 <script lang="ts" setup>
-import type { AdjustableNumber, AdjustableToken } from '~/composables/Utils/useAdjustableNumber';
+import type { AdjustableNumber, AdjustableNumberStyle, AdjustableToken } from '~/composables/Utils/useAdjustableNumber';
+
+
 
 const props = defineProps<{
   modelValue: AdjustableNumber | AdjustableToken,
   inline?: boolean
   hideMax?: boolean
+  look?: AdjustableNumberStyle,
   isNeutral?: boolean
   hasFrame?: boolean
   isSolid?: boolean

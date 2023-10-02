@@ -23,7 +23,7 @@ watch(isLoggedInAndConnected, (connected) => {
   if (!process.client || !connected)
     return
 
-  const redirectQuery = route.query.redirectUrl
+  const redirectQuery = route.query.origin
 
 
   if (redirectQuery) {

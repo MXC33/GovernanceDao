@@ -6,6 +6,12 @@ directive @specifiedBy(
   url: String!
 ) on SCALAR
 
+type AssetConverterRecipe {
+  recipeId: Int!
+  recipe: [Token]!
+  outcome: [Token]!
+}
+
 type Attribute {
   value: String
   traitType: String
@@ -27,11 +33,11 @@ type CorporationCapacity {
 
 input CredentialsInput {
   playerId: Int!
-  walletAddress: String!
+  walletAddress: String
 }
 
 type DailyTickets {
-  ticketId: Int!
+  ticket: Token!
   minEntriesPerWallet: Int!
   maxEntriesPerWallet: Int!
   maxTotalEntries: Int!
@@ -39,14 +45,19 @@ type DailyTickets {
   duration: Int!
 }
 
-type GravityGradeSaleInfo {
+type GenericStoreSaleInfo {
   saleId: Int
-  tokenId: Int
-  salePrice: Int
-  totalSupply: Int
-  userCap: Int
-  defaultCurrency: String
-  profitState: Boolean
+  token: Token!
+  totalSupply: Float!
+  price: Int!
+  userCap: Float!
+  sold: Int
+  inStock: Boolean!
+  unique: Boolean!
+  displayPrice: String!
+  paymentMethod: [String]
+  amount: Int!
+  supplyText: String
 }
 
 type LandCount {
@@ -80,15 +91,14 @@ type LuckyCatRaffle {
   myRaffles: [RaffleInfo]!
 }
 
-type MCMedia {
-  icon: String
-  image: String
-  video: String
-}
-
 type Media {
   animation_url: String
   image: String
+  mcIcon: String
+  mcImage: String
+  mcVideo: String
+  alchemyThumbnail: String
+  alchemy: String
 }
 
 type MintInfo {
@@ -110,8 +120,7 @@ type Order {
 }
 
 type OrderCost {
-  tier: String
-  type: String!
+  token: Token
   min: Int
   max: Int
   multiplier: Int
@@ -128,6 +137,7 @@ type OrderData {
   cooldownSpeedupTime: Int
   tax: Tax
   weight: [ProbabilityWeights]
+  boostedWeight: [ProbabilityWeights]
 }
 
 type PageKey {
@@ -145,19 +155,8 @@ type PayType {
   balance: Float
 }
 
-type PixInfo {
-  title: String
-  tokenId: String
-  tier: PixTier!
-  type: LandType!
-  staked: Boolean
-  minted: Boolean
-  mintInfo: MintInfo
-  inspectorLink: String
-}
-
 type PixResults {
-  items: [PixInfo]
+  items: [Token]
   pageKeys: PageKey
 }
 
@@ -177,62 +176,65 @@ type Prize {
 }
 
 type PrizeItem {
-  id: Int!
-  type: String!
+  token: Token!
   amount: Int!
 }
 
 type ProbabilityWeights {
-  type: String!
-  tier: String
+  token: Token
   value: Int!
 }
 
 type Query {
-  missionControlTokens(credentials: CredentialsInput!, tokenId: String = ""): [Token]
-  landmarks(credentials: CredentialsInput!): [Token]
-  stakedLandmarks(credentials: CredentialsInput!): [Token]
-  landAmount(credentials: CredentialsInput!, chain: String = "polygon"): LandCount
+  missionControlTokens(credentials: CredentialsInput): [Token]
+  landmarks(credentials: CredentialsInput): [Token]
+  stakedLandmarks(credentials: CredentialsInput): [Token]
+  landAmount(credentials: CredentialsInput!, chain: String = "polygon"): [Token]
   territoriesAmount(credentials: CredentialsInput!, tier: String!, type: String!, chain: String = "polygon"): Int
-  currencies(credentials: CredentialsInput!): [PayType]
-  allUniqueTerritories(credentials: CredentialsInput!): [PixInfo]
-  uniqueTerritoriesByTierAndSize(credentials: CredentialsInput!, tier: String!, type: String!, chain: String = "polygon"): [PixInfo]
+  currencies(credentials: CredentialsInput): [Token]
+  allUniqueTerritories(credentials: CredentialsInput!): [Token]
   uniqueLand(credentials: CredentialsInput!, tier: String!, type: String!, pageKeys: PageKeyInput, chain: String = "polygon"): PixResults
-  pixByName(credentials: CredentialsInput!, pixId: String!): [PixInfo]
-  stakedTerritories(credentials: CredentialsInput!): [PixInfo]
-  uniquePixFromWallet(credentials: CredentialsInput!, tier: String!): [PixInfo]
+  pixByName(credentials: CredentialsInput!, pixId: String!): [Token]
+  stakedTerritories(credentials: CredentialsInput): [Token]
+  uniquePixFromWallet(credentials: CredentialsInput, tier: String!): [Token]
   gravityGradeNFTUri(tokenId: Int!): String
-  gravityGradeNFTBalance(credentials: CredentialsInput!): [TokenWithBalance]
-  stakedOnTile(credentials: CredentialsInput!, tiles: [TileInput!]!): [StakedNFT]
-  oldStakedOnTile(credentials: CredentialsInput!): [StakedNFT]
-  searchPixId(credentials: CredentialsInput!, pixId: String!, chain: String = "polygon"): [PixInfo]
-  luckyCatRaffleInfo(credentials: CredentialsInput!): LuckyCatRaffle
-  unclaimedFacilityOrders(credentials: CredentialsInput!): [Order]
-  globalWasteSystemOrderInfo(credentials: CredentialsInput!): [Order]
-  eternalLabsOrderInfo(credentials: CredentialsInput!): [Order]
-  newlandsOrderInfo(credentials: CredentialsInput!): [Order]
-  facilityUpgradeOrderInfo(credentials: CredentialsInput!): [Order]
+  gravityGradeNFTBalance(credentials: CredentialsInput): [Token]
+  gravityGradePackContent(token: TokenInput!): [TokenProbability]
+  stakedOnTile(credentials: CredentialsInput, tiles: [TileInput!]!): [StakedNFT]
+  oldStakedOnTile(credentials: CredentialsInput): [StakedNFT]
+  searchPixId(credentials: CredentialsInput, pixId: String!, chain: String = "polygon"): [Token]
+  luckyCatRaffleInfo(credentials: CredentialsInput): LuckyCatRaffle
+  unclaimedFacilityOrders(credentials: CredentialsInput): [Order]
+  globalWasteSystemOrderInfo(credentials: CredentialsInput): [Order]
+  eternalLabsOrderInfo(credentials: CredentialsInput): [Order]
+  newlandsOrderInfo(credentials: CredentialsInput): [Order]
+  facilityUpgradeOrderInfo(credentials: CredentialsInput): [Order]
+  metamodFusionOrderInfo(credentials: CredentialsInput): [Order]
   globalWasteSystemOrderCosts: OrderData
   eternalLabsOrderCosts: OrderData
   newlandsOrderCosts: OrderData
   facilityUpgradeOrderCosts: OrderData
-  isEligible(credentials: CredentialsInput!, packId: Int!): Boolean
-  ggSaleInfo(saleId: Int): GravityGradeSaleInfo
-  wasteNonce(credentials: CredentialsInput!): Int
-  oldWasteNonce(credentials: CredentialsInput!): Int
-  ethNFTs(credentials: CredentialsInput!): [Token]
-  stakedMCNFTs(credentials: CredentialsInput!): [StakedMCNFTInfo]
-  stakedGenesisNFTs(credentials: CredentialsInput!): [StakedMCNFTInfo]
-  stakedGenesisNFTsEth(credentials: CredentialsInput!): [StakedMCNFTInfo]
-  relayerFee(credentials: CredentialsInput!): String
+  metamodFusionOrderCosts: OrderData
+  isEligible(credentials: CredentialsInput, packId: Int!): Boolean
+  saleInfo(shopId: String!): [GenericStoreSaleInfo]
+  wasteNonce(credentials: CredentialsInput): Int
+  oldWasteNonce(credentials: CredentialsInput): Int
+  ethNFTs(credentials: CredentialsInput): [Token]
+  stakedMCNFTs(credentials: CredentialsInput): [StakedMCNFTInfo]
+  stakedGenesisNFTs(credentials: CredentialsInput): [StakedMCNFTInfo]
+  stakedGenesisNFTsEth(credentials: CredentialsInput): [StakedMCNFTInfo]
+  relayerFee(credentials: CredentialsInput): String
   baseLevelCapacities(level: Int!): [CorporationCapacity]
-  playerBaseLevel(credentials: CredentialsInput!): Int
-  rover(credentials: CredentialsInput!): [Token]
-  avatarNFT(credentials: CredentialsInput!): [Token]
-  badgeNFT(credentials: CredentialsInput!): [Token]
+  playerBaseLevel(credentials: CredentialsInput): Int
+  rover(credentials: CredentialsInput): [Token]
+  avatarNFT(credentials: CredentialsInput): [Token]
+  badgeNFT(credentials: CredentialsInput): [Token]
+  geoLotteryNFT(credentials: CredentialsInput): [Token]
   tokenInfo(tokenIds: [Int!]!, contractAddress: String!): [Token]
-  burnedAvatars(credentials: CredentialsInput!, corporation: String!): Boolean
-  cooldownFacilityUpgrade(credentials: CredentialsInput!): Int
+  tokenInfoTypeTier(tokens: [TokenInput!]!, contractAddress: String!, chain: String = "polygon"): [Token]
+  burnedAvatars(credentials: CredentialsInput, corporation: String!): Boolean
+  cooldownFacilityUpgrade(credentials: CredentialsInput): Int
+  assetConverterRecipes: [AssetConverterRecipe]
 }
 
 type RaffleInfo {
@@ -243,6 +245,8 @@ type RaffleInfo {
   entriesByWallet: Int
   totalEntries: Int
   isDrawn: Boolean
+  hasClaimed: Boolean
+  isWinner: Boolean
 }
 
 type RawMetadata {
@@ -254,13 +258,8 @@ type RawMetadata {
   attributes: [Attribute]
 }
 
-type Resource {
-  tokenId: Int
-  balance: Int
-}
-
 type StakedMCNFTInfo {
-  tokenId: Int!
+  token: Token!
   amount: Int!
   lockedAt: Int!
 }
@@ -272,22 +271,28 @@ type StakedNFT {
   isRented: Boolean!
   rentalToken: String!
   rentPrice: String
+  tileName: String
+  ring: String
 }
 
 type StakedPixInfo {
   stakedAddress: String
-  land: PixInfo
+  land: Token
   nonce: Int
-  resource: Resource
+  resource: Token
 }
 
 type StakedTopAssetInfo {
   stakedAddress: String
-  token: TokenInfo
+  token: Token
   nonce: Int
   timeLeft: Int
-  resource: Resource
+  resource: Token
   index: Int
+  resourceAmount: Int
+  progress: Float
+  finishTime: String
+  cap: Int
 }
 
 type Tax {
@@ -325,24 +330,37 @@ input TileInput {
 type Token {
   contract: String
   tokenType: String
-  name: String!
-  tokenId: String!
-  description: String!
   external_url: String
-  media: Media!
-  mcMedia: MCMedia
-  attributes: [Attribute]!
-  balance: Int
-  totalShares: String
-  staked: Boolean
+  tokenId: Int
+  balance: Float
+  tokenInfo: TokenInfo
+  media: Media
+  network: String
+  mintInfo: MintInfo
 }
 
 type TokenInfo {
   title: String
-  tokenId: String!
-  tier: String!
+  tier: String
   type: String!
   status: String
+  description: String
+  attributes: [Attribute]
+  staked: Boolean
+  minted: Boolean
+  inspectorLink: String
+  level: Int
+  openable: Boolean
+}
+
+input TokenInput {
+  type: String!
+  tier: String
+}
+
+type TokenProbability {
+  token: Token!
+  probability: Float
 }
 
 type TokenUri {
@@ -350,18 +368,10 @@ type TokenUri {
   gateway: String
 }
 
-type TokenWithBalance {
-  tokenId: Int
-  tier: String
-  type: String
-  balance: Int
-}
-
 type Winnings {
   walletAddress: String!
   enteredWith: Int!
   amount: Int!
   prizeIds: [Int]!
-  hasClaimed: Boolean!
 }
 

@@ -1,5 +1,11 @@
-import { PixInfoFragment } from '#gql'
 import { callWithNuxt } from 'nuxt/app'
+// import type { RaffleUpcomingResponse, RafflePastResponse, ActiveRaffleResponse } from './IX-API/types'
+
+
+// import type { RaffleUpcomingResponse, RafflePastResponse, ActiveRaffleResponse } from './IX-API/types' import { PixInfoFragment } from '#gql'
+// export const BASE_API_ENDPOINT_URL = 'https://api.planetix.com/api/v1'
+// export const BASE_API_DEV_ENDPOINT_URL = 'https://api.planetix.app/api/v1'
+
 // import type { RaffleUpcomingResponse, RafflePastResponse, ActiveRaffleResponse } from './IX-API/types'
 
 export const BASE_API_ENDPOINT_URL = () => {
@@ -18,9 +24,12 @@ export const useIXHeaders = () => {
   }))
 }
 
+
+const deleteCookie = (name: string) => {
+  document.cookie = name + '=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+}
+
 export const useIXAPI = () => {
-  const { logoutWallet } = useWallet()
-  const { removeUser } = useUser()
   const headers = useIXHeaders()
   const app = useNuxtApp()
   const route = useRoute()
@@ -35,20 +44,20 @@ export const useIXAPI = () => {
   }
 
   const onUnauthorized = async () => {
-    await callWithNuxt(app, () => {
-      logoutWallet()
-      removeUser()
+    if (route.path.includes('connect') || route.path.includes('logout'))
+      return
 
+    await callWithNuxt(app, () => {
       return navigateTo({
-        path: '/connect',
+        path: '/logout',
         query: {
-          redirectUrl: encodeURIComponent(route.path)
+          origin: encodeURIComponent(route.path)
         }
       })
     })
   }
 
-  const fetchIXAPI = async (path: string, method: 'GET' | 'POST' = 'GET', body?: object) => {
+  const fetchIXAPI = async (path: string, method: 'GET' | 'POST' | "PUT" = 'GET', body?: object) => {
     try {
       const data = await $fetch(BASE_API_ENDPOINT_URL() + '/' + path, {
         method: method,
@@ -59,8 +68,8 @@ export const useIXAPI = () => {
       })
       return data
     } catch (err) {
-      // if (err.message.includes("403"))
-      await onUnauthorized()
+      if (err.message.includes("403") || err.message.includes("401"))
+        await onUnauthorized()
       return null
     }
   }

@@ -1,5 +1,5 @@
 <template lang="pug">
-VList(pos="fixed top-[calc(7.5rem+var(--header-offset))] right-8 md:top-[calc(8.5rem+var(--header-offset))] right-8" z="999" space-y="3")
+VList(pos="fixed top-$page-header-offset right-8" z="999" space-y="3" transition="all")
   TransitionGroup(name="snack")
     Snackbar(:notification="snack" v-for="snack in snackNotifications" :key="snack.timeout")
   

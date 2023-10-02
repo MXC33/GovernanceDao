@@ -1,6 +1,6 @@
-import type { Corporation } from '~/composables/corporations/useCorporations'
+import type { Corporation } from '~/composables/useCorporations'
 
-type IXPage = 'index' | 'game' | 'raffles' | 'drops' | 'ix-foundation'
+type IXPage = 'index' | 'game' | 'raffles' | 'drops' | 'ix-foundation' | 'marketplace' | 'airdrop'
 
 export const useIXLinks = () => {
 
@@ -28,6 +28,11 @@ export const useIXLinks = () => {
     if (page == 'drops')
       return window.location.href = 'https://planetix.com/drops'
 
+    if (page == 'marketplace')
+      return window.location.href = 'https://marketplace.planetix.com/'
+
+    if (page == 'airdrop')
+      return window.location.href = 'https://planetix.com/airdrop'
     if (walletSigningToken.value && withAuth)
       window.location.href = `https://planetix.com/auth?token=${walletSigningToken.value}${authedSuffix}`
     else

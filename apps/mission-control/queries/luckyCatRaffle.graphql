@@ -1,0 +1,72 @@
+query LuckyCatRaffle($credentials: CredentialsInput!) {
+  luckyCatRaffleInfo(credentials: $credentials) {
+    ...LuckyCatRaffle
+  }
+}
+
+fragment LuckyCatRaffle on LuckyCatRaffle {
+  activeRaffles {
+    ...RaffleInfo
+  }
+  pastRaffles {
+    ...RaffleInfo
+  }
+  upcomingRaffles {
+    ...RaffleInfo
+  }
+  myRaffles {
+    ...RaffleInfo
+  }
+}
+
+fragment RaffleInfo on RaffleInfo {
+  id
+  dailyTickets {
+    ...DailyTickets
+  }
+  winnings {
+    ...Winnings
+  }
+  prize {
+    ...Prize
+  }
+  entriesByWallet
+  totalEntries
+  isDrawn
+  hasClaimed
+  isWinner
+}
+
+fragment Winnings on Winnings {
+  walletAddress
+  enteredWith
+  amount
+  prizeIds
+}
+
+fragment DailyTickets on DailyTickets {
+  ticket {
+    ...NFT
+  }
+  minEntriesPerWallet
+  maxEntriesPerWallet
+  maxTotalEntries
+  startTime
+  duration
+}
+
+fragment Prize on Prize {
+  prizeAddress
+  prizeType
+  items {
+    ...PrizeItem
+  }
+  totalPrizes
+}
+
+fragment PrizeItem on PrizeItem {
+  token {
+    ...NFT
+  }
+  amount
+}

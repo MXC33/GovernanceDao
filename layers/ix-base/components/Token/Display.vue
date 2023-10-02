@@ -9,17 +9,16 @@ VList(justify="center" items="center" aspect="4/5" w="50%" bg="black opacity-40"
   VList(justify="center" w="full" flex-grow="1" font="bold" items="center" bg="mc-mint on-invalid:(mc-orange opacity-40) opacity-40" :invalid="isInvalid")
     slot(v-if="$slots.default")
     TokenNameWithQuantity(:token="token" :quantity="quantity" v-else)
-
+    
 </template>
-
+  
 <script lang="ts" setup>
-import type { TokenIdentifier } from '~/composables/Token/useTokens';
-
-const { getTokenKey } = useTokens()
+import type { NftFragment } from '#gql'
 
 
 const displayVideo = computed(() => {
-  switch (props.token.type) {
+
+  switch (props.token?.tokenInfo?.type) {
     case 'pix':
     case 'astro-gold':
     case 'astro-gold-lite':
@@ -36,7 +35,7 @@ const displayVideo = computed(() => {
 })
 
 const props = defineProps<{
-  token: TokenIdentifier,
+  token: NftFragment,
   quantity?: number,
   isInvalid?: boolean,
   isActive?: boolean,

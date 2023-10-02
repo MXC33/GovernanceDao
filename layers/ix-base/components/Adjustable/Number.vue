@@ -1,15 +1,12 @@
 <template lang="pug">
-HList(@focus="isFocused = true" @blur="isFocused = false" bg="gray-800 on-neutral:(gray-900 hover:gray-800) on-solid:(gray-600 hover:gray-400) on-focused:(!gray-800 on-solid:!gray-400)" w="full" h="full" py="2" :focused="isFocused" :solid="isSolid" :neutral="isNeutral" ref="inputElement")
-  input(outline="none" appearance="none" v-model="data.value" w="full" color="white" placeholder="0" b="none" font="bold" bg="transparent" :neutral="isNeutral" text="center" @click="setInput" @keyup.enter="updateAmount" @focusout="updateAmount" :invalid="invalidNumber" :growing="!tight")
+input(outline="none" appearance="none" v-model="data.value" placeholder="0" b="none" bg="white opacity-0" w="4" min-w="full" @keyup.enter="updateAmount" @focusout="updateAmount" text="center on-invalid:red-500"  v-if="data" color="inherit" :invalid="invalidNumber" :growing="!tight")
 </template>
 
-<!-- add on-solid:gray-something -->
 <script lang="ts" setup>
 import { setSeconds } from 'date-fns';
 import type { AdjustableNumber, AdjustableToken } from '~/composables/Utils/useAdjustableNumber';
 
-const props = defineProps<{
-  modelValue: AdjustableNumber | AdjustableToken,
+defineProps<{
   tight?: boolean
   isNeutral?: boolean
   isSolid?: boolean
@@ -24,9 +21,7 @@ const setInput = () => {
 
 onClickOutside(inputElement, () => isFocused.value = false)
 
-const emit = defineEmits(["update:modelValue"])
-
-const data = useVModel(props, 'modelValue', emit)
+const data = defineModel<AdjustableNumber | AdjustableToken>()
 
 const updateAmount = (e: any) => setValue(e.target.value)
 

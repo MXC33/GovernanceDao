@@ -100,7 +100,7 @@ export const useWallet = () => {
   const walletAdress = useCookieState<string | null>('wallet-accounts', () => null, { consentLevel: 'necessary' })
 
   const walletAccountType = useCookieState<string | null>('web3AccountType', () => 'metamask')
-  const walletSigningToken = useCookieState<string | null>('web3Token')
+  const walletSigningToken = useCookieState<string | null>('web3Token', () => null, { consentLevel: 'necessary' })
 
   const walletError = useState<string | null>('wallet-error', () => null)
   const walletState = useState<WalletState>('wallet-state', () => 'disconnected')
@@ -171,6 +171,8 @@ export const useWallet = () => {
     })
 
   const ensureCorrectChain = async (isEthereum?: boolean) => {
+    if (process.server)
+      return
     const currentChain = getChain(isEthereum ? 'ethereum' : 'polygon')
     const { chainId } = getChainInfo(currentChain)
     const network = provider.value?.network

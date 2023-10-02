@@ -1,5 +1,5 @@
 <template lang="pug">
-div(p="y-6 x-7" bg="$mc-gray-900" )
+div(p="y-6 x-7" bg="$gray-900" )
   div(text="base" m="b-5")
     slot(name="content")
 

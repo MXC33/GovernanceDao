@@ -1,0 +1,1699 @@
+{
+  "_format": "hh-sol-artifact-1",
+  "contractName": "PIXCatRaffle",
+  "sourceName": "contracts/staking/PIXCatRaffle.sol",
+  "abi": [
+    {
+      "inputs": [],
+      "name": "ICatRaffle_3_0__AlreadyClaimed",
+      "type": "error"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "_raffleId",
+          "type": "uint256"
+        }
+      ],
+      "name": "ICatRaffle_3_0__InvalidId",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "ICatRaffle_3_0__InvalidInputs",
+      "type": "error"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "_raffleId",
+          "type": "uint256"
+        }
+      ],
+      "name": "ICatRaffle_3_0__InvalidRaffle",
+      "type": "error"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "_invalidStart",
+          "type": "uint256"
+        }
+      ],
+      "name": "ICatRaffle_3_0__InvalidStartTime",
+      "type": "error"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "ticketId",
+          "type": "uint256"
+        }
+      ],
+      "name": "ICatRaffle_3_0__InvalidTicketId",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "ICatRaffle_3_0__InvalidUserEntries",
+      "type": "error"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "userMinEntries",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "userMaxEntries",
+          "type": "uint256"
+        }
+      ],
+      "name": "ICatRaffle_3_0__InvalidUserEntryLimits",
+      "type": "error"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "_raffleId",
+          "type": "uint256"
+        }
+      ],
+      "name": "ICatRaffle_3_0__IsDrawn",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "ICatRaffle_3_0__MaxEntriesPerUserExceeded",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "ICatRaffle_3_0__MismatchedPrizeLengths",
+      "type": "error"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "_address",
+          "type": "address"
+        }
+      ],
+      "name": "ICatRaffle_3_0__NoRewards",
+      "type": "error"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "_raffleId",
+          "type": "uint256"
+        }
+      ],
+      "name": "ICatRaffle_3_0__NotDrawable",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "ICatRaffle_3_0__NotEnoughEntries",
+      "type": "error"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "_raffleId",
+          "type": "uint256"
+        }
+      ],
+      "name": "ICatRaffle_3_0__NotPausable",
+      "type": "error"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "_raffleId",
+          "type": "uint256"
+        }
+      ],
+      "name": "ICatRaffle_3_0__Paused",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "ICatRaffle_3_0__RaffleNotDrawn",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "ICatRaffle_3_0__RaffleNotStartedYet",
+      "type": "error"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "_ticket",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "_totalEntries",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "_totalPrizes",
+          "type": "uint256"
+        }
+      ],
+      "name": "ICatRaffle_3_0__TicketNotFound",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "ICatRaffle_3_0__TotalEntriesExceeded",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "ICatRaffle_3_0__Unauthorized",
+      "type": "error"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "userMaxEntries",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "totalEntries",
+          "type": "uint256"
+        }
+      ],
+      "name": "ICatRaffle_3_0__UserMaxExceedsTotal",
+      "type": "error"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "userMinEntries",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "totalEntries",
+          "type": "uint256"
+        }
+      ],
+      "name": "ICatRaffle_3_0__UserMinExceedsTotal",
+      "type": "error"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "string",
+          "name": "_message",
+          "type": "string"
+        }
+      ],
+      "name": "ICatRaffle_3_0__ValueError",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "ICatRaffle_3_0__ZeroEntries",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "ICatRaffle_3_0__ZeroTotalEntries",
+      "type": "error"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "userMinEntries",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "userMaxEntries",
+          "type": "uint256"
+        }
+      ],
+      "name": "ICatRaffle_3_0__ZeroUserEntries",
+      "type": "error"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "have",
+          "type": "address"
+        },
+        {
+          "internalType": "address",
+          "name": "want",
+          "type": "address"
+        }
+      ],
+      "name": "OnlyCoordinatorCanFulfill",
+      "type": "error"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "previousOwner",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "newOwner",
+          "type": "address"
+        }
+      ],
+      "name": "OwnershipTransferred",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "address",
+          "name": "account",
+          "type": "address"
+        }
+      ],
+      "name": "Paused",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "address",
+          "name": "_player",
+          "type": "address"
+        }
+      ],
+      "name": "RaffleClaimed",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "_raffleId",
+          "type": "uint256"
+        }
+      ],
+      "name": "RaffleDeleted",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "_raffleId",
+          "type": "uint256"
+        }
+      ],
+      "name": "RaffleDrawn",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "_raffleId",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "address",
+          "name": "_player",
+          "type": "address"
+        }
+      ],
+      "name": "RaffleEntered",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "_raffleId",
+          "type": "uint256"
+        }
+      ],
+      "name": "RaffleRegistered",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "_raffleId",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "bool",
+          "name": "_isPaused",
+          "type": "bool"
+        }
+      ],
+      "name": "RaffleSetPaused",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "_raffleId",
+          "type": "uint256"
+        }
+      ],
+      "name": "RaffleUpdated",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "address",
+          "name": "account",
+          "type": "address"
+        }
+      ],
+      "name": "Unpaused",
+      "type": "event"
+    },
+    {
+      "inputs": [],
+      "name": "COORDINATOR",
+      "outputs": [
+        {
+          "internalType": "contract VRFCoordinatorV2Interface",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "callbackGasLimit",
+      "outputs": [
+        {
+          "internalType": "uint32",
+          "name": "",
+          "type": "uint32"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "_raffleId",
+          "type": "uint256"
+        }
+      ],
+      "name": "canDraw",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "_canDraw",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "_raffleId",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256[]",
+          "name": "_prizeIds",
+          "type": "uint256[]"
+        }
+      ],
+      "name": "claimRewards",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "name": "claimed",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "name": "cumulativeEntries",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "_raffleId",
+          "type": "uint256"
+        }
+      ],
+      "name": "deleteRaffle",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "_raffleId",
+          "type": "uint256"
+        }
+      ],
+      "name": "drawWinners",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "_requestId",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "_raffleId",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "_numTickets",
+          "type": "uint256"
+        }
+      ],
+      "name": "enterRaffle",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "erc1155Treasury",
+      "outputs": [
+        {
+          "internalType": "contract IRaffleTreasury",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "erc721Treasury",
+      "outputs": [
+        {
+          "internalType": "contract IRaffleTreasury",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "a",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "b",
+          "type": "uint256"
+        }
+      ],
+      "name": "gcd",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "pure",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "getActiveRaffles",
+      "outputs": [
+        {
+          "components": [
+            {
+              "internalType": "uint256",
+              "name": "ticketId",
+              "type": "uint256"
+            },
+            {
+              "internalType": "address",
+              "name": "prizeAddress",
+              "type": "address"
+            },
+            {
+              "internalType": "enum ICatRaffle_3_0.PrizeType",
+              "name": "prizeType",
+              "type": "uint8"
+            },
+            {
+              "internalType": "uint256[]",
+              "name": "prizeIds",
+              "type": "uint256[]"
+            },
+            {
+              "internalType": "uint256[]",
+              "name": "prizeAmounts",
+              "type": "uint256[]"
+            },
+            {
+              "internalType": "uint256",
+              "name": "totalPrizes",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "totalEntries",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "userMinEntries",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "userMaxEntries",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "startTime",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "duration",
+              "type": "uint256"
+            },
+            {
+              "internalType": "address",
+              "name": "raffleTreasury",
+              "type": "address"
+            },
+            {
+              "internalType": "bool",
+              "name": "paused",
+              "type": "bool"
+            },
+            {
+              "internalType": "bool",
+              "name": "isDrawn",
+              "type": "bool"
+            },
+            {
+              "internalType": "uint256",
+              "name": "raffleId",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "entries",
+              "type": "uint256"
+            }
+          ],
+          "internalType": "struct ICatRaffle_3_0.Raffle[]",
+          "name": "_activeRaffles",
+          "type": "tuple[]"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "_raffleId",
+          "type": "uint256"
+        }
+      ],
+      "name": "getAllWinningAddresses",
+      "outputs": [
+        {
+          "internalType": "address[]",
+          "name": "",
+          "type": "address[]"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "_raffleId",
+          "type": "uint256"
+        }
+      ],
+      "name": "getCumulativeEntries",
+      "outputs": [
+        {
+          "internalType": "uint256[]",
+          "name": "",
+          "type": "uint256[]"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "getPastRaffles",
+      "outputs": [
+        {
+          "components": [
+            {
+              "internalType": "uint256",
+              "name": "ticketId",
+              "type": "uint256"
+            },
+            {
+              "internalType": "address",
+              "name": "prizeAddress",
+              "type": "address"
+            },
+            {
+              "internalType": "enum ICatRaffle_3_0.PrizeType",
+              "name": "prizeType",
+              "type": "uint8"
+            },
+            {
+              "internalType": "uint256[]",
+              "name": "prizeIds",
+              "type": "uint256[]"
+            },
+            {
+              "internalType": "uint256[]",
+              "name": "prizeAmounts",
+              "type": "uint256[]"
+            },
+            {
+              "internalType": "uint256",
+              "name": "totalPrizes",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "totalEntries",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "userMinEntries",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "userMaxEntries",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "startTime",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "duration",
+              "type": "uint256"
+            },
+            {
+              "internalType": "address",
+              "name": "raffleTreasury",
+              "type": "address"
+            },
+            {
+              "internalType": "bool",
+              "name": "paused",
+              "type": "bool"
+            },
+            {
+              "internalType": "bool",
+              "name": "isDrawn",
+              "type": "bool"
+            },
+            {
+              "internalType": "uint256",
+              "name": "raffleId",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "entries",
+              "type": "uint256"
+            }
+          ],
+          "internalType": "struct ICatRaffle_3_0.Raffle[]",
+          "name": "_pastRaffles",
+          "type": "tuple[]"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "_raffleId",
+          "type": "uint256"
+        }
+      ],
+      "name": "getRaffle",
+      "outputs": [
+        {
+          "components": [
+            {
+              "internalType": "uint256",
+              "name": "ticketId",
+              "type": "uint256"
+            },
+            {
+              "internalType": "address",
+              "name": "prizeAddress",
+              "type": "address"
+            },
+            {
+              "internalType": "enum ICatRaffle_3_0.PrizeType",
+              "name": "prizeType",
+              "type": "uint8"
+            },
+            {
+              "internalType": "uint256[]",
+              "name": "prizeIds",
+              "type": "uint256[]"
+            },
+            {
+              "internalType": "uint256[]",
+              "name": "prizeAmounts",
+              "type": "uint256[]"
+            },
+            {
+              "internalType": "uint256",
+              "name": "totalPrizes",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "totalEntries",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "userMinEntries",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "userMaxEntries",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "startTime",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "duration",
+              "type": "uint256"
+            },
+            {
+              "internalType": "address",
+              "name": "raffleTreasury",
+              "type": "address"
+            },
+            {
+              "internalType": "bool",
+              "name": "paused",
+              "type": "bool"
+            },
+            {
+              "internalType": "bool",
+              "name": "isDrawn",
+              "type": "bool"
+            },
+            {
+              "internalType": "uint256",
+              "name": "raffleId",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "entries",
+              "type": "uint256"
+            }
+          ],
+          "internalType": "struct ICatRaffle_3_0.Raffle",
+          "name": "raffle",
+          "type": "tuple"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "getUpcomingRaffles",
+      "outputs": [
+        {
+          "components": [
+            {
+              "internalType": "uint256",
+              "name": "ticketId",
+              "type": "uint256"
+            },
+            {
+              "internalType": "address",
+              "name": "prizeAddress",
+              "type": "address"
+            },
+            {
+              "internalType": "enum ICatRaffle_3_0.PrizeType",
+              "name": "prizeType",
+              "type": "uint8"
+            },
+            {
+              "internalType": "uint256[]",
+              "name": "prizeIds",
+              "type": "uint256[]"
+            },
+            {
+              "internalType": "uint256[]",
+              "name": "prizeAmounts",
+              "type": "uint256[]"
+            },
+            {
+              "internalType": "uint256",
+              "name": "totalPrizes",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "totalEntries",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "userMinEntries",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "userMaxEntries",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "startTime",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "duration",
+              "type": "uint256"
+            },
+            {
+              "internalType": "address",
+              "name": "raffleTreasury",
+              "type": "address"
+            },
+            {
+              "internalType": "bool",
+              "name": "paused",
+              "type": "bool"
+            },
+            {
+              "internalType": "bool",
+              "name": "isDrawn",
+              "type": "bool"
+            },
+            {
+              "internalType": "uint256",
+              "name": "raffleId",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "entries",
+              "type": "uint256"
+            }
+          ],
+          "internalType": "struct ICatRaffle_3_0.Raffle[]",
+          "name": "_upcomingRaffles",
+          "type": "tuple[]"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "_raffleId",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "_prizeId",
+          "type": "uint256"
+        }
+      ],
+      "name": "getWinningAddress",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "_landmark",
+          "type": "address"
+        },
+        {
+          "internalType": "address",
+          "name": "_ticket",
+          "type": "address"
+        },
+        {
+          "internalType": "address",
+          "name": "_vrfCoordinator",
+          "type": "address"
+        },
+        {
+          "internalType": "bytes32",
+          "name": "_keyHash",
+          "type": "bytes32"
+        },
+        {
+          "internalType": "uint64",
+          "name": "_subscriptionId",
+          "type": "uint64"
+        }
+      ],
+      "name": "initialize",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "keyHash",
+      "outputs": [
+        {
+          "internalType": "bytes32",
+          "name": "",
+          "type": "bytes32"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "landmark",
+      "outputs": [
+        {
+          "internalType": "contract IERC1155",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "name": "moderators",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "name": "multiplier",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "owner",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "paused",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "name": "raffleDrawn",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "raffleId",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "name": "raffleSeed",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "name": "raffles",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "ticketId",
+          "type": "uint256"
+        },
+        {
+          "internalType": "address",
+          "name": "prizeAddress",
+          "type": "address"
+        },
+        {
+          "internalType": "enum ICatRaffle_3_0.PrizeType",
+          "name": "prizeType",
+          "type": "uint8"
+        },
+        {
+          "internalType": "uint256",
+          "name": "totalPrizes",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "totalEntries",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "userMinEntries",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "userMaxEntries",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "startTime",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "duration",
+          "type": "uint256"
+        },
+        {
+          "internalType": "address",
+          "name": "raffleTreasury",
+          "type": "address"
+        },
+        {
+          "internalType": "bool",
+          "name": "paused",
+          "type": "bool"
+        },
+        {
+          "internalType": "bool",
+          "name": "isDrawn",
+          "type": "bool"
+        },
+        {
+          "internalType": "uint256",
+          "name": "raffleId",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "entries",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "requestId",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256[]",
+          "name": "randomWords",
+          "type": "uint256[]"
+        }
+      ],
+      "name": "rawFulfillRandomWords",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "components": [
+            {
+              "internalType": "uint256",
+              "name": "ticketId",
+              "type": "uint256"
+            },
+            {
+              "internalType": "address",
+              "name": "prizeAddress",
+              "type": "address"
+            },
+            {
+              "internalType": "enum ICatRaffle_3_0.PrizeType",
+              "name": "prizeType",
+              "type": "uint8"
+            },
+            {
+              "internalType": "uint256[]",
+              "name": "prizeIds",
+              "type": "uint256[]"
+            },
+            {
+              "internalType": "uint256[]",
+              "name": "prizeAmounts",
+              "type": "uint256[]"
+            },
+            {
+              "internalType": "uint256",
+              "name": "totalPrizes",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "totalEntries",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "userMinEntries",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "userMaxEntries",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "startTime",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "duration",
+              "type": "uint256"
+            },
+            {
+              "internalType": "address",
+              "name": "raffleTreasury",
+              "type": "address"
+            }
+          ],
+          "internalType": "struct ICatRaffle_3_0.RaffleInput",
+          "name": "r",
+          "type": "tuple"
+        }
+      ],
+      "name": "registerRaffle",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "_raffleId",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "renounceOwnership",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "requestConfirmations",
+      "outputs": [
+        {
+          "internalType": "uint16",
+          "name": "",
+          "type": "uint16"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "_treasury",
+          "type": "address"
+        }
+      ],
+      "name": "setERC1155Treasury",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "_treasury",
+          "type": "address"
+        }
+      ],
+      "name": "setERC721Treasury",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "_mod",
+          "type": "address"
+        },
+        {
+          "internalType": "bool",
+          "name": "_isMod",
+          "type": "bool"
+        }
+      ],
+      "name": "setModerator",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "_raffleId",
+          "type": "uint256"
+        },
+        {
+          "internalType": "bool",
+          "name": "_isPaused",
+          "type": "bool"
+        }
+      ],
+      "name": "setPaused",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "_ticket",
+          "type": "address"
+        }
+      ],
+      "name": "setTicket",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "name": "shifter",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "subscriptionId",
+      "outputs": [
+        {
+          "internalType": "uint64",
+          "name": "",
+          "type": "uint64"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "ticket",
+      "outputs": [
+        {
+          "internalType": "contract IERC1155",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "newOwner",
+          "type": "address"
+        }
+      ],
+      "name": "transferOwnership",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "_raffleId",
+          "type": "uint256"
+        },
+        {
+          "components": [
+            {
+              "internalType": "uint256",
+              "name": "ticketId",
+              "type": "uint256"
+            },
+            {
+              "internalType": "address",
+              "name": "prizeAddress",
+              "type": "address"
+            },
+            {
+              "internalType": "enum ICatRaffle_3_0.PrizeType",
+              "name": "prizeType",
+              "type": "uint8"
+            },
+            {
+              "internalType": "uint256[]",
+              "name": "prizeIds",
+              "type": "uint256[]"
+            },
+            {
+              "internalType": "uint256[]",
+              "name": "prizeAmounts",
+              "type": "uint256[]"
+            },
+            {
+              "internalType": "uint256",
+              "name": "totalPrizes",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "totalEntries",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "userMinEntries",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "userMaxEntries",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "startTime",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "duration",
+              "type": "uint256"
+            },
+            {
+              "internalType": "address",
+              "name": "raffleTreasury",
+              "type": "address"
+            }
+          ],
+          "internalType": "struct ICatRaffle_3_0.RaffleInput",
+          "name": "r",
+          "type": "tuple"
+        }
+      ],
+      "name": "updateRaffle",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "name": "userRaffleEntries",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    }
+  ]
+}

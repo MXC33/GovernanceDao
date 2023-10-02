@@ -1,42 +1,46 @@
 <template lang="pug">
-VList(pos="relative" display="lt-md:none"  ref="menuElement")
-  button(btn-soft="s-connected:ix-mint ix-orange" @click="toggleMenu" :state="walletState")
-    Transition(name="fade-slow" mode="out-in")
-      span(v-if="walletState == 'disconnected'") {{ $t(`marketplace.navigation.menu.connectWallet`)}}
-      span(v-else-if="!ixtPending && ixtBalance != undefined && walletState == 'connected'" w="25") {{ roundToDecimals(ixtBalance, 2) }} IXT
+VList(pos="relative" display="lt-md:none" ref="menuElement" frame="~ gray-400 hover:gray-300")
+  HList()
 
-      //span(v-else-if="activeCurrency == 'IXT' && !ixtPending && ixtBalance != undefined && walletState == 'connected'" w="25") {{ roundToDecimals(ixtBalance, 2) }} IXT
-      //span(v-else-if="activeCurrency == 'aGold' && !astroGoldPending && astroGoldBalance != undefined && walletState == 'connected'" w="25") {{ roundToDecimals(astroGoldBalance, 2) }} AGOLD
+    button(p="2" @click="toggleMenu" whitespace="nowrap")
+      Transition(name="fade-slow" mode="out-in")
+        span(v-if="walletState == 'disconnected'") {{ $t(`general.navigation.menu.connectWallet`)}}
 
-      HelperLoader(v-else fill="ix-mint on-wallet:ix-orange" w="4" :wallet="walletState != 'connected'")
+        span(v-else-if="ixtBalance != undefined" w="25" text="ix-mint") {{ roundToDecimals(ixtBalance, 2) }} IXT
+
+        HelperLoader(v-else fill="ix-mint on-wallet:ix-orange" w="4" :wallet="walletState != 'connected'")
+
+    button(v-if="ixtBalance != undefined" bg="hover:gray-600 gray-700" @click="showIXTSwap" flex="~ row" justify="center" items="center" aspect="square" wh="10")
+      PlusIcon(wh="4" fill="white")
 
   HeaderSubmenuWrapper(v-if="menuOpen" :align-right="true")
 
     VList(b="gray-400")
-      HeaderSubmenuButton(@click="showIXTSwap") {{ $t(`marketplace.navigation.menu.addFunds`)}}
+      slot(name="dropdown")
+      //-HeaderSubmenuButton(@click="showIXTSwap") {{ $t(`general.navigation.menu.addFunds`)}}
 
-      NuxtLink(to="/account")
-        HeaderSubmenuButton(b="t-1 b-1 gray-400") {{ $t(`marketplace.navigation.menu.account`)}}
+      //-NuxtLink(to="/account")
+        HeaderSubmenuButton(b="t-1 b-1 gray-400") {{ $t(`general.navigation.menu.account`)}}
 
       NuxtLink(to="/connect" @click="toggleMenu")
-        HeaderSubmenuButton() {{ $t(`marketplace.navigation.menu.logout`)}}
+        HeaderSubmenuButton() {{ $t(`general.navigation.menu.logout`)}}
 
 </template>
 
 <script lang="ts" setup>
 import { useIXTContract } from "@ix/base/composables/Contract/useIXTContract";
-import { useAstroGoldContract } from "@ix/base/composables/Contract/useAstroGoldContract";
-import { useSiteHeader} from "@ix/base/composables/useSiteHeader";
+//SVG
+import PlusIcon from "~/assets/images/icons/plus.svg";
 
 const { walletState } = useWallet()
 const menuOpen = ref(false)
 const menuElement = ref()
 const { enable: showIXTSwap } = useIXTSwapVisible()
 const route = useRoute()
-
-//const { activeCurrency } = useSiteHeader()
 const { ixtBalance, ixtPending } = useIXTContract()
-//const { astroGoldBalance, astroGoldPending } = useAstroGoldContract()
+watch([ixtBalance, ixtPending], () => {
+  console.log("BALANCE", ixtBalance.value, ixtPending.value)
+})
 
 const toggleMenu = () => {
   if (walletState.value !== 'connected') {
@@ -44,7 +48,7 @@ const toggleMenu = () => {
     navigateTo({
       path: '/connect',
       query: {
-        redirectUrl: encodeURIComponent(toRoute)
+        origin: encodeURIComponent(toRoute)
       }
     })
 
