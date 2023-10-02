@@ -2,22 +2,22 @@
 NuxtLink(:to="item.absolute_url" cursor="pointer" @click="onClick")
   HList(group p="3" space-x="3" pos="right-0" text="left")
     //-Display this image/svg when in Landscape mode
-    HeaderNavigationMenuSubNavigationIcon(w="8" fill="white group-hover:ix-pink" flex-shrink="0" :item="item.icon" display="lt-lg:none")
+    HeaderNavigationMenuSubNavigationIcon(w="8" fill="white group-hover:ix-orange" flex-shrink="0" :item="item.icon" display="lt-lg:none")
     div()
       VList(v-if="item.absolute_url || isSwap")
-        div(color="white group-hover:ix-pink" uppercase ="~") {{ item.name}}
-        div(color="gray-200 group-hover:ix-pink" text="sm" ) {{ item.description}}
+        div(color="white group-hover:ix-orange" uppercase ="~") {{ item.name}} 
+        div(color="gray-200 group-hover:ix-orange" text="sm" ) {{ item.description}} 
       VList(v-else)
-        div(color="gray" uppercase="~") {{ item.name}}
-        div(color="ix-pink" text="sm" ) {{ $t(`marketplace.navigation.soon`)}}
+        div(color="gray" uppercase="~") {{ item.name}} 
+        div(color="ix-orange" text="sm" ) {{ $t(`general.navigation.soon`)}}
 </template>
-
+  
 <script lang="ts" setup>
 import type { HeaderMenuSubNavigationItem } from '~/composables/useSiteHeader'
 
 const { enable: enableSwap } = useIXTSwapVisible()
 
-const { item} = defineProps<{
+const { item } = defineProps<{
   item: HeaderMenuSubNavigationItem
 }>()
 
@@ -26,7 +26,7 @@ const isSwap = computed(() =>
 )
 
 const onClick = () => {
-  if(isSwap.value)
+  if (isSwap.value)
     enableSwap()
 }
 

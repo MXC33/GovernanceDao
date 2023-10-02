@@ -1,5 +1,5 @@
 <template lang="pug">
-#app.antialiased(font="foundry" text="base" bg="ix-black" color="white" ref="app" overscroll="none" flex="~ col grow" min-h="100vh")
+#app.antialiased.geo-lottery(font="foundry" text="base" bg="ix-black" color="white" ref="app" overscroll="none" flex="~ col grow" min-h="100vh")
   NuxtLayout()
     VList(flex-grow="1")
       NuxtLoadingIndicator(color="rgb(255, 102, 71)")
@@ -19,8 +19,6 @@
         template(#default)
           VList(w="full" justify="center" items="center" )
             iframe(src="https://ix.foundation/lefi" w="full" h="full" min-h="118")
-
-
 
 </template>
 
@@ -55,7 +53,6 @@ const { isLoggedInAndConnected } = useLogin()
 const { setupIXTPrice } = useIXTPrice()
 const { refreshIXTBalance } = useIXTContract()
 const { refreshAstroGoldBalance } = useAstroGoldContract()
-const { setActiveCurrency } = useSiteHeader()
 const { fetchActiveLottery } = useLottery()
 
 const { setRefreshToken } = useLogin()
@@ -102,7 +99,6 @@ watch([isLotteryActive, isLoggedInAndConnected], ([state, loggedIn]) => {
   setupIXTPrice()
   refreshIXTBalance()
   refreshAstroGoldBalance()
-  setActiveCurrency('aGold')
   fetchActiveLottery()
 }, { immediate: true })
 
@@ -125,5 +121,11 @@ const values = computed(() => {
 body,
 html {
   background: #000;
+}
+
+#app {
+  --header-background: var(--mc-pink);
+  --header-text-active: white;
+  --header-text: var(--ix-black);
 }
 </style>

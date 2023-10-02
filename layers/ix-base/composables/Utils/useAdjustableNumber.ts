@@ -1,7 +1,9 @@
 import { Ref } from 'vue'
-import { TokenIdentifier } from '../Token/useTokens'
-import { CorporationAdjustableToken } from '../useCorporations'
 import { get } from '@vueuse/core'
+import { NftFragment } from '#gql'
+import { AnyToken, getTokenBalance } from '../Token/useTokens'
+import { Payment } from './useCurrency'
+
 export interface AdjustableNumber {
   multiplier?: number,
   skipMultiplierSnap?: boolean
@@ -10,7 +12,11 @@ export interface AdjustableNumber {
   value: number,
 }
 
-export interface AdjustableToken extends AdjustableNumber, TokenIdentifier {
+export type AdjustableNumberStyle = 'frame' | 'solid' | 'inline' | 'border'
+
+export interface AdjustableToken extends AdjustableNumber {
+  token: NftFragment,
+  payment?: Payment,
   fromUser?: boolean
 }
 
@@ -18,50 +24,45 @@ interface AdjustableTokenOptions {
   fromUser?: boolean,
   min?: number,
   max?: number,
+  payment?: Payment,
   startValue?: number,
   multiplier?: number,
 }
 
-export const addAdjustableToToken = (token: TokenIdentifier, options: AdjustableTokenOptions = {}): AdjustableToken => {
+export const addAdjustableToToken = (token: AnyToken, options: AdjustableTokenOptions = {}): AdjustableToken => {
   const {
     fromUser = true,
     min = 0,
     max = Infinity,
+    payment,
     startValue = min,
-    multiplier,
+    multiplier = 1,
   } = options
 
   return {
-    ...token,
+    token,
     fromUser,
+    payment,
     value: startValue ?? min,
-    multiplier,
+    multiplier: Math.max(1, multiplier),
     min,
     max,
   }
 }
 
-export const addStaticPaymentToken = (token: TokenIdentifier, min: number = 1): CorporationAdjustableToken => {
-  return {
-    ...token,
-    fromUser: true,
-    value: min,
-    min,
-    adjustable: false
-  }
-}
-
-
-
 export const useAdjustableNumber = (data: Ref<AdjustableNumber | AdjustableToken>) => {
-  const { balanceOfToken } = useUserData()
+  const { getCurrencyToken } = useCurrencyData()
 
   const max = computed(() => {
-    const staticMax = get(data.value.max ?? Infinity)
+    const staticMax = data.value.max ?? Infinity
 
     const model = data.value as AdjustableToken
     if (model.fromUser) {
-      return Math.min(staticMax, balanceOfToken(model))
+      const paymentToken = getCurrencyToken(model.payment?.paymentMethod)
+      const balanceToken = Boolean(model.payment) ? paymentToken : model.token
+      const maxValue = get(staticMax)
+      const maximum = balanceToken ? getTokenBalance(balanceToken) : maxValue
+      return Math.min(maxValue, maximum ?? 0)
     } else {
       return staticMax
     }
@@ -82,23 +83,23 @@ export const useAdjustableNumber = (data: Ref<AdjustableNumber | AdjustableToken
 
   const isIncreasable = computed(() => {
     if (data.value.skipMultiplierSnap)
-      return currentValue.value <= max.value
+      return currentValue.value <= get(max.value)
 
 
-    return currentValue.value + multiplier.value <= max.value
+    return currentValue.value + multiplier.value <= get(max.value)
   })
 
   const multiplier = computed(() => data.value.multiplier ?? 1)
 
   const invalidNumber = computed(() =>
-    currentValue.value > max.value || currentValue.value < min.value
+    currentValue.value > get(max.value) || currentValue.value < min.value
   )
 
   const convertToNumber = (input: number | string) =>
     isNaN(Number(input)) ? 0 : Number(input)
 
   const validateNumber = (input: number) => {
-    const amount = clamp(min.value, max.value, convertToNumber(input))
+    const amount = clamp(min.value, get(max.value), convertToNumber(input))
     const roundedAmount = Math.floor(amount * 10) / 10
 
     if (data.value.skipMultiplierSnap)

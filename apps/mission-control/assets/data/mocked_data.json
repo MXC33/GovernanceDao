@@ -1,0 +1,187 @@
+{
+  "player_id": 80,
+  "profile": {
+    "image": "url",
+    "level": 21,
+    "name": "all-in",
+    "reginster_date": "May 12 2022",
+    "status": "online",
+    "social_media": {
+      "facebook": "url",
+      "twitter": "url"
+    }
+  },
+  "statistics": {
+    "pix_traded": 37464,
+    "territories_created": 563635,
+    "loot_crates_found": 65874
+  },
+  "pix": {
+    "territories": [
+      {
+        "tier": "legendary",
+        "type": "area",
+        "territory": 2,
+        "quantity": 1,
+        "id": "adsf0osef9i2",
+        "activeNumber": 257
+      },
+      {
+        "tier": "uncommon",
+        "type": "area",
+        "territory": 2,
+        "quantity": 9,
+        "id": "adsf0xxosef9i2",
+        "activeNumber": 193
+      },
+      {
+        "tier": "common",
+        "type": "area",
+        "territory": 2,
+        "id": "adsf0osesdff9i2",
+        "quantity": 45,
+        "activeNumber": 50
+      },
+      {
+        "tier": "outlier",
+        "type": "area",
+        "territory": 2,
+        "id": "adsf0osesdff9i2",
+        "quantity": 19,
+        "activeNumber": 50
+      },
+      {
+        "tier": "rare",
+        "type": "area",
+        "territory": 2,
+        "id": "adsf0osesdff9i2",
+        "quantity": 345,
+        "activeNumber": 50
+      }
+
+    ],
+    "pix": [
+      {
+        "tier": "legendary",
+        "type": "pix",
+        "territory": 1,
+        "quantity": 1,
+        "activeNumber": 85,
+        "id": "adsf0osehf9i2"
+      },
+      {
+        "tier": "rare",
+        "type": "pix",
+        "territory": 1,
+        "quantity": 340,
+        "activeNumber": 24,
+        "id": "adsf0osef9i2"
+      },
+      {
+        "tier": "uncommon",
+        "type": "pix",
+        "territory": 1,
+        "quantity": 600,
+        "activeNumber": 4042,
+        "id": "adsf0os2efe9i2"
+      },
+      {
+        "tier": "common",
+        "type": "pix",
+        "territory": 1,
+        "quantity": 1,
+        "activeNumber": 123,
+        "id": "adsf0osxef9i2"
+      },
+      {
+        "tier": "outlier",
+        "type": "pix",
+        "territory": 1,
+        "quantity": 239,
+        "activeNumber": 334,
+        "id": "adsf0ssosef9i2"
+      }
+    ]
+  },
+  "inventory": {
+    "land": {
+      "legendary": [],
+      "rare": [],
+      "uncommon": [],
+      "common": [],
+      "outlier": []
+    },
+    "tech": {
+      "drones": [
+        {
+          "name": "drone1",
+          "id": "SE LE#6345746",
+          "territory": 1,
+          "quantity": 1,
+          "activeNumber": 1
+        },
+        {
+          "name": "drone2",
+          "id": "CN LE#480964262",
+          "territory": 2,
+          "quantity": 1,
+          "activeNumber": 1
+        },
+        {
+          "name": "drone3",
+          "id": "CN LE#48096462",
+          "territory": 3,
+          "quantity": 1,
+          "activeNumber": 1
+        }
+      ]
+    },
+    "structures": {},
+    "resources": {
+      "nft": 1279.00,
+      "sek": 8987.50,
+      "drones": 295,
+      "waste": 289,
+      "power": 45
+    },
+    "misc": [],
+    "postmaster": []
+  },
+  "tasks": {
+    "nl": [
+      {
+        "name": "radient garden",
+        "level": 1,
+        "state": "GENERATING ENERGY",
+        "progress": 44,
+        "eta": "02H 49MIN 38S"
+      }
+    ],
+    "el": [
+      {
+        "name": "radient garden",
+        "level": 1,
+        "state": "upgrading",
+        "progress": 44,
+        "eta": "02H 49MIN 38S"
+      },
+      {
+        "name": "radient garden2",
+        "level": 3,
+        "state": "upgrading",
+        "progress": 79,
+        "eta": "02H 49MIN 38S"
+      }
+    ],
+    "gws": [
+      {
+        "name": "radient garden",
+        "level": 1,
+        "state": "upgrading",
+        "progress": 20,
+        "eta": "02H 49MIN 38S"
+      }
+    ],
+    "y": []
+  }
+}

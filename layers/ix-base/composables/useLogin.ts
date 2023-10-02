@@ -18,10 +18,10 @@ type LoginStatus = 'logged-in' | 'logged-out' | 'connecting' | 'checking'
 type LoginFailState = 'no-user'
 
 export const useAuthUserData = () =>
-  useCookieState<APIAuthResponse | null>('auth-data', () => null)
+  useCookieState<APIAuthResponse | null>('auth-data', () => null, { consentLevel: 'necessary' })
 
 export const useAuthTokenExpirationTime = () =>
-  useCookieState<number | null>('auth-token-expiration', () => 0)
+  useCookieState<number | null>('auth-token-expiration', () => 0, { consentLevel: 'necessary' })
 
 export const useLoginRedirect = () => useState<string | null>('login-redirect', () => null)
 
@@ -142,9 +142,7 @@ export const useLogin = () => {
           setRefreshToken(0)
           tryingToRefresh++
         } else {
-          logoutWallet()
-          removeUser()
-          return await navigateTo(`/connect`)
+          return await navigateTo(`/logout`)
         }
       }
     }, time)

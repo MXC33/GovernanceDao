@@ -1,10 +1,10 @@
 <template lang="pug">
-VList(flex-grow="1" px="0 md:6" pos="relative")
-  .gradient-bg(pos="fixed left-0 right-0 top-12 md:top-16" h="50vh" :style="gradientStyle" v-if="!onSingleItem && !onAccountPage")
-  .gradient-bg-account(pos="fixed left-0 right-0 top-12 md:top-16" h="50vh" :style="gradientStyle" v-if="!onSingleItem && onAccountPage")
+VList(flex-grow="1" px="0 md:6" pos="relative" v-if="!onSingleItem")
+  .gradient-bg(pos="fixed left-0 right-0 top-12 md:top-16" h="50vh" :style="gradientStyle" v-if="!onAccountPage")
+  .gradient-bg-account(pos="fixed left-0 right-0 top-12 md:top-16" h="50vh" :style="gradientStyle" v-else)
 
 Transition(name="fade-slow")
-  HList(w="full" items="center" justify="between" pos="sticky top-12 md:top-16" z="10" bg="on-locked:ix-black" space-x="3" p="x-4 y-4 md:(y-4 x-8)" translate-y="$header-offset" transition="all" :locked="isScrolling")
+  HList(w="full" items="center" justify="between" pos="sticky top-$site-header-offset" z="10" bg="on-locked:ix-black" space-x="3" p="x-4 y-4 md:(y-4 x-8)" translate-y="$header-offset" transition="all" :locked="isScrolling" ref="element")
     NuxtLink(:to="'/'" w="full")
       NetEmpireLogo(w="35 md:45" )
 
@@ -31,12 +31,22 @@ import UserIcon from '~/assets/icons/user.svg'
 import CartIcon from '~/assets/icons/cart.svg'
 import GlobeIcon from '~/assets/icons/globe.svg'
 
-const { context } = defineProps<{
+defineProps<{
   context?: CollectionContext
 }>()
 
+const element = ref()
+const { height } = useElementBounding(element)
 const { viewingCart } = useCart()
 const y = useGlobalWindowScroll()
+
+const { pageHeaderHeight } = useStickyOffsets()
+
+effect(() => {
+  const newHeight = Math.round(height.value);
+  if (newHeight != pageHeaderHeight.value)
+    pageHeaderHeight.value = newHeight
+})
 
 const route = useRoute()
 

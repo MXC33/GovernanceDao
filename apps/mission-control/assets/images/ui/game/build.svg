@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="50px" height="50px" viewBox="0 0 50 50" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>build</title>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="build" transform="translate(1.699220, 1.699220)" stroke="#FF6647" stroke-width="2">
+            <polyline id="Path" points="0 15.53408 0 0 15.53408 0"></polyline>
+            <line x1="15.53408" y1="15.53408" x2="0" y2="0" id="Path"></line>
+            <polyline id="Path" points="15.53408 46.60238 0 46.60238 0 31.06838"></polyline>
+            <line x1="15.53408" y1="31.06838" x2="0" y2="46.60238" id="Path"></line>
+            <polyline id="Path" points="46.60238 31.06838 46.60238 46.60238 31.06838 46.60238"></polyline>
+            <line x1="31.06838" y1="31.06838" x2="46.60238" y2="46.60238" id="Path"></line>
+            <polyline id="Path" points="31.06738 0 46.60138 0 46.60138 15.53408"></polyline>
+            <line x1="31.06738" y1="15.53408" x2="46.60138" y2="0" id="Path"></line>
+        </g>
+    </g>
+</svg>

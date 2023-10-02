@@ -1,32 +1,38 @@
 <template lang="pug">
 #app.antialiased(font="foundry" text="base" bg="ix-black" color="white" ref="app" overscroll="none" flex="~ col grow")
   NuxtLayout()
-    VList()
-      NuxtLoadingIndicator(color="rgb(255, 102, 71)")
+    NuxtLoadingIndicator(color="rgb(255, 102, 71)")
 
-      NuxtPage()
+    NuxtPage()
 
-      PopupList()
+    PopupList()
 
-      div#infobox(:style="values" z="400" pos="absolute")
+    div#infobox(:style="values" z="400" pos="absolute")
 
-      div#takeover
+    div#takeover
 
-      SnackbarList()
+    SnackbarList()
 
-      CookieBot(:id="cookieBotId")
+    CookieBot(:id="cookieBotId")
 
-      Popup(v-if="isSwapVisible" @close="isSwapVisible = false" :disable-default-close="true")
-        template(#header) {{ $t(`marketplace.navigation.buy.swap.title`)}}
-        template(#default)
-          VList(w="full" justify="center" items="center" )
-            iframe(src="https://ix.foundation/lefi" w="full" h="full" min-h="118")
+    //- PopupBase(v-if="isSwapVisible" @close="isSwapVisible = false" :disable-default-close="true")
+    //-   template(#header) {{ $t(`marketplace.navigation.buy.swap.title`)}}
+    //-   template(#default)
+    //-     VList(w="full" justify="center" items="center" )
+    //-       iframe(src="https://ix.foundation/lefi" w="full" h="full" min-h="118")
 
 
+  component(is="style").
+    :root { 
+      --page-header-offset: {{ pageHeaderOffset }}px;
+      --filter-header-offset: {{ filterHeaderOffset }}px;
+    }
 
 </template>
 
 <script setup lang="ts">
+//import { useNeMessages, useNeNotifications } from 'composables/useNeNotificationsAndMessages';
+
 useHead({
   title: "Marketplace | PlanetIX",
   script: [
@@ -45,6 +51,10 @@ router.onError((err) => {
 const { state: isSwapVisible } = useIXTSwapVisible()
 
 const { execute: fetchHeaderData } = useHeaderData()
+const { execute: fetchMessageData, data: messageData } = useNeMessages()
+const { execute: fetchNotificationData, data: notificationData } = useNeNotifications()
+
+const { pageHeaderOffset, filterHeaderOffset } = useStickyOffsets()
 
 await fetchHeaderData()
 
@@ -53,7 +63,7 @@ const { connectWallet, walletState } = useWallet()
 const { setupIXTPrice } = useIXTPrice()
 const { refreshIXTBalance } = useIXTContract()
 
-const { setRefreshToken } = useLogin()
+const { setRefreshToken, isLoggedInAndConnected } = useLogin()
 const { user } = useUser()
 
 watch(y, (pos) => globalY.value = pos)
@@ -86,9 +96,12 @@ onMounted(async () => {
 })
 
 
-watch(walletState, (state) => {
-  if (state != 'connected')
+watch(isLoggedInAndConnected, (loggedIn) => {
+  if (!loggedIn)
     return
+
+  fetchMessageData()
+  fetchNotificationData()
 
   setupIXTPrice()
   refreshIXTBalance()

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="48px" height="51px" viewBox="0 0 48 51" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>task-manager</title>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="task-manager" transform="translate(0.000000, 1.220700)" stroke="#FF6647" stroke-width="2">
+            <polyline id="Path" points="0 0.5 9.6006 0.5 19.1997 12.4996 28.8003 12.4996 38.4009 0.5 48 0.5"></polyline>
+            <polyline id="Path" points="0 12.4981 9.6006 12.4981 19.1997 24.4991 28.8003 24.4991 38.4009 12.4981 48 12.4981"></polyline>
+            <polyline id="Path" points="0 24.5 9.6006 24.5 19.1997 36.4997 28.8003 36.4997 38.4009 24.5 48 24.5"></polyline>
+            <polyline id="Path" points="0 36.5 9.6006 36.5 19.1997 48.4996 28.8003 48.4996 38.4009 36.5 48 36.5"></polyline>
+            <line x1="9.6006" y1="48.5" x2="0" y2="48.5" id="Path"></line>
+            <line x1="38.4004" y1="48.5" x2="47.9995" y2="48.5" id="Path"></line>
+            <line x1="19.1992" y1="0.5" x2="28.7998" y2="0.5" id="Path"></line>
+        </g>
+    </g>
+</svg>

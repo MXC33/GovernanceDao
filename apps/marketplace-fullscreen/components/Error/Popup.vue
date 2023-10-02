@@ -1,5 +1,5 @@
 <template lang="pug">
-Popup(@close="onClose" :disable-default-close="true")
+PopupBase(@close="onClose" :disable-default-close="true")
   template(#icon)
     WarningIcon(w="6" h="6")
 

@@ -4,6 +4,8 @@ import { ConsiderationItem, NFTType } from "@ix/marketplace/composables/useAsset
 export interface IXTokenAttribute {
   value: string
   trait_type: string
+  value_search?: string,
+  key?: string
 }
 
 export interface IXTokenParent {

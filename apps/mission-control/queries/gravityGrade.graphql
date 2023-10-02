@@ -1,0 +1,47 @@
+query GravityGradeNFTBalance($credentials: CredentialsInput!) {
+  gravityGradeNFTBalance(credentials: $credentials) {
+    ...NFT
+  }
+}
+
+query IsGGEligible($credentials: CredentialsInput!, $packId: Int!) {
+  isEligible(credentials: $credentials, packId: $packId)
+}
+
+
+query GGPackContent($token: TokenInput!) {
+  gravityGradePackContent(token: $token) {
+    ...TokenProbability
+  }
+}
+
+query SaleInfo($shopId: String!) {
+  saleInfo(shopId: $shopId) {
+    ...GenericStoreSaleInfo
+  }
+}
+
+
+fragment GenericStoreSaleInfo on GenericStoreSaleInfo {
+    saleId
+    totalSupply
+    price
+    userCap
+    sold
+    inStock
+    unique
+    paymentMethod
+    displayPrice
+    amount
+    supplyText
+    token {
+      ...NFT
+    }
+}
+
+fragment TokenProbability on TokenProbability {
+  token {
+    ...NFT
+  }
+  probability
+}

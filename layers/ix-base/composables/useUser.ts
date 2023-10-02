@@ -2,7 +2,7 @@ import { CredentialsInput } from '#gql'
 import type { APIUser, APIAuthResponse } from './useLogin'
 
 export const useUser = () => {
-  const authUser = useCookieState<APIAuthResponse | null>('auth-data', () => null, { consentLevel: 'necessary' })
+  const authUser = useAuthUserData()
 
   const hasUser = computed(() => user.value != null)
   const user = computed(() => (authUser.value?.player as APIUser) ?? null)

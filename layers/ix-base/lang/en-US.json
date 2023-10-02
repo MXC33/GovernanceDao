@@ -1,0 +1,58 @@
+{
+  "general": {
+    "previous": "Previous",
+    "back": "Back",
+    "cancel": "Cancel",
+    "close": "Close",
+    "claim": "Claim",
+    "confirm": "Confirm",
+    "continue": "Continue",
+    "next": "Next",
+    "disconnect": "Disconnect",
+    "errorConnecting": "Error connecting",
+    "exit": "Exit",
+    "upgrade": "Upgrade",
+    "enter": "Enter",
+    "navigation": {
+      "terminal": "Terminal",
+      "inventory": "Inventory",
+      "missionCtrl": "Mission Control",
+      "netEmpire": "Netempire",
+      "marketPlace": "Marketplace",
+      "airdrop": "Airdrop",
+      "taskMng": "Task Manager",
+      "manager": "Manager",
+      "build": "build",
+      "overview": "Overview",
+      "starterPack": "Starter pack",
+      "payments": "Payments",
+      "soon": "Coming Soon",
+      "loadMore": "Load More",
+      "sound": "Sound",
+      "swap": "Swap",
+      "settings": {
+        "title": "Settings",
+        "sound": "SOUND ON/OFF",
+        "graphics-Settings": "GRAPHICS SETTINGS",
+        "low": "LOW",
+        "medium": "MEDIUM",
+        "high": "HIGH",
+        "back": "Back"
+      },
+      "menu": {
+        "addFunds": "Add Funds",
+        "account": "Account",
+        "logout": "Log out",
+        "connectWallet": "Connect Wallet"
+      }
+    },
+    "wallet": {
+      "title": "Connect Wallet",
+      "welcomeMessage": "Connect with one of our available wallet providers",
+      "signing": {
+        "title": "CONFIRM TRANSACTION IN YOUR CONNECTED WALLET",
+        "description": "Processing the transaction will take a short while. If you want to cancel this operation, please decline the transaction in your wallet app."
+      }
+    }
+  }
+}

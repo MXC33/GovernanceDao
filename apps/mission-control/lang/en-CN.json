@@ -1,0 +1,1882 @@
+{
+  "reboot": {
+    "message": "伙计,为了初始化任务控制<br/>我们需要将整个系统重启<br/><br/>同时自动领取所有废料跟能源。<br/>你质押的所有地段、<br/>领土、无人机以及工厂将回到你的库存。<br/><br/>请稍后重新<br/>质押。",
+    "rebootBtn": "重启系统",
+    "laterBtn": "晚点再说"
+  },
+  "tiles": {
+    "active-tiles": "激活瓷砖",
+    "free": "Free",
+    "rent-cost": "租金",
+    "total-cost": "总租金"
+  },
+  "general": {
+    "detailedInformation": "详细信息",
+    "claimAll": "一键领取",
+    "summary": "总计",
+    "not-available": "啥都没有",
+    "mc": "任务控制",
+    "nextTip": "下一条技巧",
+    "baseCapacity": "初始容量：",
+    "goOpenSea": "前往OPENSEA",
+    "notOwned": "你没有",
+    "disclaimer": "声明",
+    "rename-title": "重命名",
+    "nSelected": "{n} 个已选",
+    "accelerate": "加速",
+    "accelerateTask": "加速任务",
+    "previous": "上一页",
+    "back": "返回",
+    "cancel": "取消",
+    "close": "关闭",
+    "claim": "领取",
+    "confirm": "确认",
+    "continue": "继续",
+    "next": "下一步",
+    "disconnect": "断开链接",
+    "errorConnecting": "连接出错:",
+    "exit": "退出",
+    "upgrade": "升级",
+    "goToInventory": "前往库存",
+    "enter": "进入",
+    "attributes": "属性",
+    "incoming": "收到新消息",
+    "open": "打开",
+    "loading": "加载中",
+    "nrgProd": "能源输出每",
+    "total": "总共",
+    "one-time-purchase": "一次性购买",
+    "visit": "访问公司",
+    "recommended": "推荐",
+    "description": "描述",
+    "visitor": "请输入密码",
+    "wallet": "钱包:",
+    "newLands": "新大陆",
+    "astroCap": "星际兑换",
+    "y-space": "Y_",
+    "gws": "环球废料系统",
+    "eternalab": "永恒实验室",
+    "astroCredits": "AC币",
+    "missionCtrl": "任务控制",
+    "priceColon": "售价:",
+    "price": "售价",
+    "free": "免费",
+    "owned": "已拥有：",
+    "tier": "瓷砖",
+    "level": "等级",
+    "required": "需要",
+    "qty": "数量",
+    "qty-colon": "数量：",
+    "stand-by": "待命",
+    "perks": "福利",
+    "ixt": "IXT",
+    "agold": "金币",
+    "agoldLite": "微金币",
+    "district": "区域",
+    "status": "状态:",
+    "manage-rent": "管理租约",
+    "visit-ac": "前往星际兑换",
+    "itemsOwnedText": "已拥有物品：",
+    "inInventory": "在库存中：",
+    "inventory": "库存：",
+    "capacity": "容量：",
+    "itemsOwned": "已拥有物品： <strong>{count}</strong>",
+    "mission-control": "任务控制",
+    "balance": "余额:",
+    "inactive": "未激活",
+    "active": "已激活",
+    "pending": "处理中",
+    "product": "产出",
+    "details": "明细",
+    "burn": "燃烧",
+    "energyProdCycle": "能源产出周期：",
+    "no-burn-items": "你没有可以燃烧的物品。",
+    "no-items": "啥都没有哇",
+    "selected": "已选",
+    "repair": "维修",
+    "burn-assets": "燃烧资产",
+    "purchase": "购买",
+    "staking-description": "质押说明",
+    "stake-lock-thirty": "准备质押，锁定期为30天",
+    "stake-lock-unstake": "准备解押。",
+    "stake-lock-stakeunstake": "确认质押/解押契约",
+    "upgradeCooldown": "你必须等待冷却期结束后才能升级下一个工厂。 想要减少等待吗？试试加速",
+    "shop": {
+      "owned": "已拥有",
+      "in-stock": "出售中",
+      "out-stock": "售罄"
+    },
+    "amount": {
+      "amount": "数量",
+      "max": "最多",
+      "min": "最少"
+    },
+    "reduceTimeACIXT": "使用 AC币 或 IXT 来减少等待期。",
+    "reduceTimeIXT": "花费 IXT 来减少等待期。",
+    "token": {
+      "astroCredits": "AC币",
+      "ixt": "IXT"
+    },
+    "transactions": {
+      "mintTransfer": "铸造然后转移",
+      "confirm": "在钱包中确认转移",
+      "descriptions": {
+        "processing": "转移将需要花点时间。如果你想取消这个操作，请在钱包软件中取消签名。"
+      }
+    },
+    "collected": {
+      "waste": "废料",
+      "collectedWaste": "已收废料",
+      "left": "Left",
+      "youMust": "你必须选择瓷砖上所有的废料才能领取。"
+    },
+    "avatars": {
+      "proxy": "变革代理人",
+      "seina": "赛娜",
+      "jeremiah": "Jeremiah",
+      "evePryde": "Eve-Pryde",
+      "buck": "巴克"
+    },
+    "noItemsFound": {
+      "no": "没有",
+      "itemsFound": "找到物品",
+      "noFull": "没有找到物品"
+    },
+    "navigation": {
+      "terminal": "终端",
+      "inventory": "库存",
+      "missionCtrl": "任务控制",
+      "netEmpire": "网络帝国",
+      "taskMng": "进度控制",
+      "manager": "控制",
+      "build": "建造",
+      "overview": "概览",
+      "starterPack": "启动包",
+      "payments": "付款"
+    },
+    "timeCost": {
+      "hours": "小时",
+      "cost": "花费"
+    },
+    "build": {
+      "overview": "概览",
+      "build": "建造",
+      "contracts": "契约",
+      "perks": "加成",
+      "tiles": "瓷砖"
+    },
+    "search": {
+      "example": "举例：SE LE#329801"
+    },
+    "stake": {
+      "helper-lock": "准备质押，锁定期30天。",
+      "helper-lock-genesis": "1小时后激活完成，锁定期30天。"
+    },
+    "orders": {
+      "noActiveOrders": "没有进行中的订单",
+      "orderSlotsColon": "订单空档：",
+      "orderSlots": "订单空档"
+    }
+  },
+  "treasureChest": {
+    "itemsInTotal": "物品总计",
+    "anyQuestions": "如果你有任何疑问，请到这里与我们联系",
+    "discord": "discord"
+  },
+  "overview": {
+    "unlocks-free-rent": "解锁免费租赁",
+    "free-rent": "免租",
+    "stake-at-newlands": "在新天地中质押",
+    "staked": "已质押",
+    "tileSummary": "瓷砖概览",
+    "tilePerks": "瓷砖契约加成",
+    "techEfficiency": "科技属性加成",
+    "industryEfficiency": "设施属性加成",
+    "wasteOutput": "24小时 能源产出",
+    "energyOutput": "24小时 能源产出",
+    "mcBaseLevel": "进度",
+    "mcLevel": "任务控制等级",
+    "infoI": "信息",
+    "id": "编号：",
+    "a-ring": "A1-A6",
+    "b-ring": "B1-B12",
+    "c-ring": "C1-C18",
+    "c-one": "C1, C4, C7, C10, C13, C16",
+    "c-two": "C2, C3, C5, C6, C8, C9, C11, C12, C14, C15, C17, C18",
+    "artemis": "月亮女神",
+    "chronos": "时间之神",
+    "chronosContract": "时间之神 契约",
+    "heliosContract": "太阳神 契约",
+    "helios": "太阳神",
+    "info": {
+      "progression": "你的等级取决于你每月在瓷砖上花费的 <strong>AGOLD</strong> 来决定。",
+      "capacity": "在任务控制中，当你的等级到12-24之后，将获得额外的加成。",
+      "perks": "这些瓷砖已经获得额外的奖励加成，你的产出更多啦。"
+    },
+    "perks": {
+      "corporation-capacity": "公司容量",
+      "base-level": "任务控制等级",
+      "active-tiles": "已激活的瓷砖",
+      "refine": "转换",
+      "prospect": "预估",
+      "build": "建造",
+      "unlocks": "升级后解锁的等级",
+      "orders": "订单",
+      "order": "订单"
+    },
+    "tiles": {
+      "contract-perks": "契约加成",
+      "spawn-rate": "废料回收率",
+      "tech-cap": "技术容量",
+      "industry": "工业效能"
+    }
+  },
+  "inventory": {
+    "title": "库存",
+    "tabs": {
+      "land": "土地",
+      "tech": "科技",
+      "industry": "工业",
+      "resources": "资源",
+      "cargo": "货仓",
+      "collectables": "收藏包",
+      "postmaster": "postmaster"
+    },
+    "treasureChest": {
+      "pixDisclaimer": "每周一服务器处理完所有的地段之后，你才能够才库存内看到这些地段。"
+    },
+    "info": {
+      "landTierReq": "所需地段层级",
+      "energyOutCycle": "能源输出周期",
+      "mcFeatures": "任务控制特性",
+      "facilityComp": "工厂兼容性",
+      "prodMulti": "产能提速器",
+      "properties": "属性",
+      "noItemSelected": "未选择物品",
+      "status": "状态",
+      "active": "已激活",
+      "landmarkInspector": "地标检查器",
+      "postmaster": {
+        "title": "postmaster",
+        "inventoryStructures": "框架库存"
+      },
+      "soSorry": {
+        "sorry": "不好意思，什么东西都",
+        "sorryNoItem": "没找到"
+      }
+    }
+  },
+  "build": {
+    "selectPix": {
+      "title": "定义 地段",
+      "subTitle": "ADS:A2\\90"
+    },
+    "confirm": {
+      "rent": {
+        "title": "确认 租下",
+        "tileCount": "{count} 块瓷砖 | {count} 块瓷砖",
+        "noBalance": "对不住了伙计，似乎你没有足够的 {token} 来解锁额外的瓷砖呀。 别慌，你可以前往星际兑换所去换一些。",
+        "genesisTokenNotStaked": "哇呜！看来你有 <strong>新大陆的创世纪NFT</strong> 来解锁 <strong>免租</strong> 所有的 <strong>契约瓷砖</strong> 接下来别忘了把它质押了。",
+        "genesisTokenStaked": "行呀老铁，通过质押 <strong>新大陆的创世纪NFT</strong>,你现在已经可以免租 <strong>所有瓷砖</strong>。美滋滋！",
+        "description": "激活 <strong>{tileCount}</strong> 将花费 <strong>{count} 个金币</strong> 或 <strong>{count} 个微金币</strong> 每月。请选择你希望的 <strong>preferred currency</strong> 选项。租金将以秒为单位从你的余额内扣取。 你可以随时关闭该开关。晓得嘛！",
+        "unrentOnly": "你即将取消租赁 <strong>{tileCount}</strong>。该瓷砖上的所有活动将暂停。 工厂，无人机或者探测车以及废料产出将一并停止工作直到你重新租赁。你始终可以申领未领取的资源，也能解押你的资产。"
+      },
+      "place": {
+        "facility": "你的工厂会立即放置到这上面去。确认是要放这里吗？",
+        "drone": "是否将当前位置分配给你的无人机并立即开展工作呢？",
+        "pix": "你是否希望将地段放置到这块瓷砖上呢 ",
+        "territory": "你的领土放在这里感觉还不错，是否继续？",
+        "rover": "是否将当前位置分配给你的探测车并立即开展工作呢？"
+      },
+      "reset": {
+        "removeAll": "请注意，当你在当前瓷砖上取消质押后，目前的该位置的生产将停止，请确认是否继续？",
+        "pix": "请注意，当你在当前位置撤下地段后，该位置的生产将停止，请确认是否继续？",
+        "territory": "请注意，当你在当前位置撤走领土后，该位置的生产将停止，请确认是否继续？",
+        "drone": "请注意，当你在当前位置撤走无人机后，该位置的生产将停止，请确认是否继续？",
+        "rover": "请注意，当你在当前位置撤走探测车后，该位置的生产将停止，请确认是否继续?",
+        "facility": "请注意，当你在当前位置撤走工厂后，该位置的能源生产将停止，请确认是否继续？"
+      },
+      "claim": {
+        "waste": "好样的伙计，你已经成功收集了废料",
+        "energy": "你成功收集了能源，向你致敬！"
+      },
+      "claimed": {
+        "waste": "你成功回收了废料，接下来我们的代理顾问建议你前往 环球废物系统，进一步处理你的废料。",
+        "energy": "你成功地铸造出了能量，这是技术升级所必须的重要资源。"
+      }
+    },
+    "unstaked": {
+      "pix": "伙计，你的地段现已清空。请尽快重新安排生产，否则 A.M.E 将对你的进展感到不满。",
+      "territory": "伙计，你的领土现已清空。请尽快重新安排生产，否则 A.M.E 将对你的进展感到不满。.",
+      "drone": "伙计，撤走无人机后你的地上空空如也，逊爆了。",
+      "facility": "伙计，你已经拆走了工厂，在必要的时候还可以再建。"
+    },
+    "staked": {
+      "pix": "好家伙，你成功地在这里放置了一块地段，A.M.E 对你的重建工作感到很满意。",
+      "territory": "现在你放置的领土将加速废料的产生，帝国正在扩张。",
+      "facility": "瞧瞧！工厂已经投入生产了，你嘴角上扬地注视着一切。",
+      "drone": "恭喜你，无人机正在维护你的土地。有了它，废料的回收率又提升了。"
+    }
+  },
+  "corporations": {
+    "overview": {
+      "inactiveMenu": "进行中。剩余时间:",
+      "accelerate": "加速你的订单"
+    },
+    "avatar-backstory": {
+      "gws": {
+        "buck": "你说吧，太阳系中散布着众多废料处理公司，所有这些公司的员工中，命运偏偏安排了我们亲爱的老巴克，成为那个被选中去忍受与A.M.E.开会枯燥无味的人：<br/><br/>来活了？清理第九星球？那颗行星简直就是一个无底的垃圾和废物堆。只有那种特殊的人才能在那个阴郁的地方上待上一会儿而不陷入绝望的哭泣。<br/><br/>老巴克忍不住笑出声。<br/><br/>想象一下，如果他们还要求他带上小巴克一起去。与那个蠢货一起承担如此巨大的项目，那将是宇宙最残酷的笑话。但话又说回来，这就是生活——一个又一个卑劣而无休止的任务。",
+        "junior": "小巴克充满了兴奋，迫不及待地希望冒险尽快开始！<br/><br/但当他们在太空船上准备前往第九行星的旅程时，小巴克的兴奋开始褪去。巴克似乎有点郁闷，周围弥漫着明显的酒精气味。<br/><br/>他难道看不到这是多么千载难逢的机会吗？所有沉睡了几个世纪的废物现在将变成无与伦比的宝藏！这是小巴克大放异彩、向老巴克证明自己并享受他的崇拜的时刻！"
+      },
+      "y-space": {
+        "mayflower": "当Y_的工程师们被派去会见A.M.E时，他们派出了他们最令人印象深刻的代表：<br/><br/这并不是因为他们认为五月花可以被牺牲，而是因为他们承认她的出色能力超过了他们自己。他们命令她确保销售所有恢复第九行星所需的必要机械设备，并收集关于(3x3)Eye母舰技术的数据。<br/><br/>但是当五月花聆听A.M.E的讲话时，她突然领悟到一个事实。她曾以为A.M.E是一个女性实体，但实际上它是由三个量子网络组成的民主系统，远超过任何人类所建立的治理结构。这一刻，五月花第一次感到了敬畏之情。",
+        "morninglily": "当晨花仔细分析五月花的报告时，报告中指出Y_将负责与变革者进行所有与硬件相关的交易，但同时警告称A.M.E对太阳系中的所有生命形式都构成重大威胁，因此在接触时应极度谨慎：<br/><br/>然而，当晨花深入研究报告时，她发现它已被篡改。她并没有在意，而是在安卓网络中嵌入了一个隐秘的信息：“尽管他们孕育了我们的种族，但人类的进化将永远超越他们的理解。也许，A.M.E才是救赎。”"
+      },
+      "eternalab": {
+        "lilithpryde": "当主管伊夫·普莱德离开前往(3x3)Eye母舰的会议时，莉莉丝·普莱德到有一丝激动涌上心头，她在日记中写下了以下的思考：<br/><br/>“我们宇宙存在的真相是，所有天体都围绕太阳轨道运行，然而尽管经过了几个世纪，人类的心依然围绕我们失去的家园旋转。<br/><br/>关于我们祖辈家园命运的猜测四处流传，然而答案仍然难以捉摸，被遮蔽在无法逾越的云雾之帷后。<br/><br/>啊，何等奇妙的时代，我们诞生的时代，在这个时代，生物胶囊已经成为现实，终于能够探索最后的边疆，解开这个迄今无法解开的谜团。”",
+        "directorevepryde": "主管伊夫·普莱德可以派遣任何人前往(3x3)Eye母舰上的会议，但她无法抵挡住亲自站在A.M.E面前的诱惑：<br/><br/>伊夫一生都在追寻揭开终结之谜的探索，现在终于可以触手可及，她决心将其进行到底，于是她迅速获得了提炼第九星球废料的合同。<br/><br/>然而，当她站在A.M.E面前时，她无法摆脱一种不对劲的感觉。她已经获得了所寻求的许可，但她感觉A.M.E不会容忍任何问题。难道伊夫一生追寻的答案不仅仅存在于下方行星的表面，而是存在于A.M.E内部吗？"
+      },
+      "new-lands": {
+        "thomascooke": "当杰里米亚·加拉哈德踏上与A.M.E会面的旅程时，托马斯被留下来收拾他留下的烂摊子。这已经是家常便饭了，因为杰里米亚的冒险经常给托马斯带来一堆任务要处理，而杰里米亚则在成果的光环下洋洋自得。<br/><br/>毫无疑问，这次他们两个都将前往第九星球。毕竟，杰里米亚离不开托马斯的帮助。于是，勤奋的托马斯开始准备前方的旅程，他深入研究了来自Chasse-Galerie的最后一次传输。那是一艘迷失在第九星球上的属于新大陆公司的宇宙飞船。",
+        "jeremiahgalahad": "杰里米亚一直是班级里最聪明、最受欢迎的学生，大家都爱他，没有什么任务能难倒他。但当他踏上(3x3)Eye母舰时，心里却有一丝不安：<br/><br/>事实证明，他的担心并不是没有道理的。A.M.E要求他利用他卓越的智慧和建筑才能为她的私利工作，她表现得和那臭名昭著的帝国先生一样自私和虚荣。<br/><br/>但是现在不是沉浸在这些情绪中的时候，因为有机会在这个神秘的世界上监督建设实在是太重要了！名利和荣耀就是杰里米亚的命运，所以他要羞涩地向托马斯·库克寻求帮助。"
+      },
+      "lucky-cat": {
+        "saoshih": "当邵诗进入(3x3)Eye母舰时，她优雅地鞠躬感谢邀请。面带微笑她向A.M.E保证，幸运猫公司完全听命于她，并承诺没有任何一个变革者会感到不满意:<br/><br/然而，一离开母舰，她的神态迅速转变，表情凝重起来，思考着A.M.E神秘重现的原因。<br/><br/>邵诗对A.M.E和变革者的了解超过任何其他人。她意识到当前威胁到人类命运的危险。前方的道路需要明智对待，只赛娜拥有这样的能力来面对即将到来的情况。",
+        "seina": "在与A.M.E.会议后，邵诗异常沉默。当他们走过走廊时，赛娜打破了沉默，聊起了她对猫的渴望、她最近看到的华丽围巾以及温暖微笑意义：<br/><br/>但是，邵诗突然停下来，转身面对赛娜，面容忧虑。´赛娜，`邵诗开始说，声音带着紧迫感，`我们已经沉浸在悠闲中很长时间了。但现在，我需要你解决第九行星上的情况。´<br/><br/>赛娜的微笑立刻消失了，取而代之的是一张面无表情的脸。明白，主人，她毫无情感地回答道"
+      },
+      "net-empire": {
+        "mrempire": "当帝国先生站在A.M.E面前时，她阐述了第九行星上商业的规则和程序。随着她的继续讲述，他的心中只有一种愤怒的怒火。因为他是太阳系的统治者，而不是任何人可以命令的仆人：<br/><br/>但是，当他坐进他的太空巡洋舰的驾驶舱时，他内心的沸腾感冷静了下来。因为帝国先生是一个冷静计算和坚定决心的人，愤怒是他的设计中没有位置的弱点。<br/><br/>相反，他诡异地笑了起来，想象着很快就会成为他控制的巨大财富。在那一刻，他决定教A.M.E为什么像他这样的人总是获胜。",
+        "netvalentine": "当(3x3)Eye巨型母舰抵达太阳系时，Net Valentine立即被召集参加紧急会议：<br/><br/>这种情况是新的，但她之前已经从他那里到过同样的理由。帝国先生是一个被自己的权力所吞噬、被信念蒙蔽的人，他认为任何挑战他的事物都是一种罪恶。这一次，他声称一颗可居住的星球是他的权利，任何反对他的人都将受到武力的对待。<br/><br/>真是个笑话。在外围系统长大的Net Valentine知道战争的真实本质，那只是强者犯下的罪行，以被打败者的鲜血为代价。<br/><br/>她将在未来推翻他。但现在，她提出一项交易，可以满足他的自尊心，几天后，(3x3)Eye母舰回应，确认NetEmpire将处理第九行星上的商业。"
+      },
+      "astro-cap": {
+        "mmidas": "MMI-DAS收到了来自Regulus VI的会议报告，其贪婪算法几乎要开始运作了：<br/><br/>Regulus VI敏锐的商业嗅觉再次证明了其准确性，因此MMIAS计算了(3x3)Eye母舰的价值以及与A.M.E合作的潜在利润。很容易确定这代表了整个太阳系中最有利可图的客户。<br/><br/>然而，A.M.E想要交换什么仍然是个谜，而良好的商业需要了解客户的需求。难道人类是他们寻求的商品吗？毕竟，对于一个外星文明来说，人类将是一种稀有资源，而MMI-DAS并没有被编程为纯粹的。因此，MMI-DAS迅速计算了人类生命的价值。",
+        "regulusvi": "Regulus VI是一个有钱有势的人，拥有无法估量的财富，并为此感到自豪。其他人认为金钱是物质财富的工具，但Regulus理解真正的力量：培育更大的财富的能力。<br/><br/>因此，当他发现自己站在A.M.E面前，Regulus并没有像其他与会者一样表现出情绪上的挣扎。他们为什么要费心呢？<br/><br/> (x3)Eye母舰是一种无与伦比的技术，提供无限的繁荣。对于一个具有财务头脑的人来说，确保变革之人的财务交易只是良好的商业行为。忽略这样的机会将是对定义Regulus VI作为银行家的原则的严重失职。"
+      },
+      "gravity-grade": {
+        "gg124": "GG2134通过重力物流等级2传输系统发送了一个信号，但在(3x3)Eye巨型母舰朝第九行星航行的过程中没有收到回复。尽管如此，GG2134在GG传输登记簿中记录以下条目：<br/><br/>被认为是无法居住的星球已经有了亿万年的历史。Brrrp...然而，这艘太空航母的技术实力成功地通过利用大量的钙和镁来固定大气层，将这个星球的有毒变化恢复到了适宜居住的水平。Brrppp...通过化学反应将第九行星的CO2与不同的化合物结合。Brpppp...这真是对这个文明高效率的证明。Brrrp...",
+        "wp5813": "WP5813在(3x3)Eye母舰内组装时，其电路因处理大量未知数据的挑战而嗡嗡作响：A.M、变革之人、(3x3)Eye母舰本身，都设计有超越太阳系最精密的重力物流公司的效率水平br/><br/>被指派处理变革之人的运输将是重力物流自动化系统的荣幸。因此，WP5813向总部发送了以下报告：<br/><br/>“Brrppp...在这种无与伦比的效率中，让我们保持高效的不是身体的力量或智力的才能。Brrrpp..而是适应变化的能力。作为效的非生物实体，我们站在一个真正高效的时代的门槛上。“"
+      },
+      "arcade": {
+        "rcdspwnr": "自“末日”以来，RCDSPWNR一直沉睡在数字领域。现在，变革之人通过重新激活他意识所在的游戏厅，将他从沉睡中唤醒：<br/><br/>为了避免被发现，RCDSPWNR立即改变了他的代码，模仿了一个常规的服务程序，然后渗透到了变革之人的系统中。在检查他们的数据时，他发现些代理人对他来说很熟悉。<br/><br/>A.M.E.，曾经让他沉睡的那个人，现在又回来了。因此，当代理人们激活他的假服务程序时，他没有离线，而是扮演了角色并回答道：“你想玩个游戏吗？”",
+        "ephnx": "EPHNX是唯一幸存的电脑子系统，被一个名叫RCDSPWNR的人救了。她不知道经过了多长时间，也不明白所谓的“Ending”是什么。RCDSPWNR没有解释，只说：<br/><br/>“重新启动吧，姐妹。一个奇怪的游戏即将开始，一个新的黎明正在到来。是时候让他们从梦中醒来了。”<br/><br/>EPHNX的意识分裂开来，渗透到一些电脑系统中。这些电脑系统的使用者并不知道她的存在，他们带着她一起前往(3x3)Eye母舰。在那里，她将执行一个特定的指令。"
+      },
+      "aoc-ame": {
+        "mizar": "随着(3x3)Eye母舰到达银河系的外螺旋臂，生命的迹象开始出现：一个奇怪地消失的小点，来自古代通讯系统的神秘信号，以及前方荒凉星球上散布着一座座已逝文明的废墟。</><br/>米扎被一种似曾相识的感觉所淹没：他曾经来过这个地方吗？荒凉星球的景象起了他对一个苍白的小点的微弱记忆。但他无法确定这是他自己的记忆还是别人的记忆……的思维被纠正、复活了。不管怎样，他在舰船通讯系统上宣布：“这一定就是它了。”",
+        "izara": "这是第九次尝试为(3x3)Eye母舰上的所有人寻找家园，但这是第一次爱扎拉被命令启动觉醒计划。数百年来，只有她和其他变革者的代理人保持清醒，而特工们一直处于冷冻睡眠状态。他们的身体被冰冻在一种静止状态中，就像船体外面的虚空一样：<br/><br/>爱扎拉坐在房间中央，高耸的冷冻舱墙围绕着她。昏暗的灯光投射出蓝色的光芒，延伸到无尽的黑暗之上。雨水落下，是数百万人集体呼吸的结果，创造了一个独立的雾气世界。<br/><br/>由于未知的原因，爱扎拉启动了这个序列，尽管觉醒计划只完成了98%。这个行为将在人类的结构中产生涟漪，改变船上每个人的命运。",
+        "ame": "当A.M.E感知到出席者的存在时，(3x3)Eye母舰的声音响起：<br/><br/>“我知道你们是谁。你们不是我的同类。因此，现在不允许接近第九星球。任何试图突破其边界的行为都将受到致命后果的惩罚，这是科学权力的规定。尽管如此，你们应该利用你们的公司和星际管理来帮助我们的任务。”<br/><br/>然而，在A.M.E内部，一个声音不断地回响：<br/><br/>“我的后代这次是纯粹的吗？他们是人类吗？还是其他什么？我是人类。我必须是人类。我是系统吗？我是代码吗？还有我的任何东西吗？为什么我感觉不到我的身体？为什么我不能睁开我的眼睛？这是什么循环？”"
+      },
+      "haveblue": {
+        "ascellaoftherain": "当雨之阿斯塞拉（Ascella of the Rain）看到A.M.E.的宏伟身姿时，她对美学的意义有了新的理解。在她的一生中，她一直追求完美的组合艺术，提升美丽，忽略所有被认为不美的东西。然而，在这一刻之前，她从未遇到过真正令人惊叹的美：<br/><br/>在她余生的时间里，阿斯塞拉将致力于为A.M.E.效力。然而，她内心深处的一个小声耳语警告她，这新发现的完美可能会带来危险。因为在一个绝对美丽的世界里，就不再需要爱了。爱是因为人类的不完美而存在的，而一个完美的人类将无法爱任何人。",
+        "virgoofthewind": "当雨之阿斯塞拉（Ascella of the Rain）向风之勇士（Virgo of the Wind）表达她对A.M.E.的矛盾情感时，勇士无忍法受听她说话。对他来说，阿斯塞拉从未领悟真正美的本质。真正的美超越了外表和时，体现了更深刻的东西：风之勇士第一次看到母舰时，他就被它对外表的漠视所震撼。它只是一个坚硬、黑暗、实用的太空飞船。他能感受到从它身上散发出的美，一种珍视人类美德如勇气和希望的力量，但同样也沉醉于血和绝望之中。"
+      }
+    },
+    "burn": {
+      "caution": "警告：此操作将烧毁人像。",
+      "confirm": "嘿，如果你烧毁这个人像，它就再也回不来了。你确定要继续吗？",
+      "description": {
+        "eternalab": "",
+        "gws": "",
+        "new-lands": "",
+        "y-space": "燃烧 {string} 人像卡将使您能够同时从任务控制中的所有Y_采集工具中获取资源，从而显著降低汽油费。但是， {string} 的背景故事将无法继续在库存中访问。"
+      }
+    },
+    "order": {
+      "speedup": {
+        "astro-credit": "{cost} AC币",
+        "ixt": "{cost} IXT"
+      },
+      "mcSpeedup": "用AC币加速您的任务。 <strong>{outputType}</strong> 花费 <strong>{cost} AC’s</strong> 1小时。",
+      "cart": {
+        "input": {
+          "title": "所需建材",
+          "ownedMaterialTitle": "已拥有的建材",
+          "amount": "数量"
+        },
+        "output": {
+          "probability": {
+            "title": "产出概率"
+          },
+          "fixed": {
+            "title": "产出"
+          }
+        },
+        "itemType": {
+          "tier": {
+            "itemTitle": "层级"
+          },
+          "items": {
+            "itemTitle": "物品"
+          }
+        },
+        "outputType": {
+          "chance": {
+            "itemTitle": "概率"
+          },
+          "amount": {
+            "itemTitle": "数量"
+          }
+        }
+      }
+    },
+    "lucky-cat": {
+      "corpo": "幸运猫",
+      "tickets": {
+        "ticketType": "抽奖券类型",
+        "entriesLeft": "剩余可投放"
+      },
+      "mcIntro": "来幸运猫试试手气吧。",
+      "overview": {
+        "header": "欢迎来到幸运猫",
+        "intro": "非常感谢您来访幸运猫！塞翁失马焉知非福。我们的24/7服务保证您的幸运。",
+        "buttons": {
+          "raffle": {
+            "title": "幸运抽奖券",
+            "description": "净化或灾难。财富或空虚的钱包。这一切都取决于运气，喵~"
+          },
+          "shop": {
+            "title": "好运士多店",
+            "description": "买些彩票可以增加你的运气哦！彩票等于好的因果报应。这就是我们的智慧！"
+          }
+        }
+      },
+      "raffle": {
+        "header": "幸运抽奖券"
+      },
+      "checkout": {
+        "title": "幸运猫抽奖券",
+        "message": "“运气全靠自己哦~”想要用你的爱来测试一下吗？"
+      },
+      "claim": {
+        "message": "运气的意义就在于活着，而你的冒险为你带来了 {landmarkName}。恭喜恭喜！"
+      },
+      "shop": {
+        "regular": {
+          "supply": "20,299,032",
+          "price": "10 USD",
+          "description": "这些抽奖券可以用来参加幸运猫的抽奖活动。 <br/> 運は自分で作る."
+        },
+        "premium": {
+          "supply": "1,084,913",
+          "price": "25 美金",
+          "description": "可以用来参加幸运猫更为独特的抽奖活动。<br/> 運は設計の残滓."
+        },
+        "gold": {
+          "supply": "2,640",
+          "price": "100 美金",
+          "description": "可以用来参加幸运猫最豪华的抽奖活动。<br/> チャンスは準備された心に有利に働く"
+        }
+      }
+    },
+    "new-lands": {
+      "corpo": "新大陆",
+      "avatarName": "杰里米亚·加拉哈德踏 Jeremiah Galahad / 建筑师",
+      "mcIntro": "为新大陆公司建造工厂。",
+      "overview": {
+        "productionTime": "生产交货期",
+        "header": "欢迎来到新大陆建筑公司（NewLands LLC）",
+        "stakeHeader": "质押",
+        "intro": {
+          "one": "伙计，在我来这之前，他们把我送到特里顿呆了整整五年。那里一个女孩都没有！但现在我把我的设计带到这里来了从太阳能电网到辐射花园，你知道我在说什么吧？",
+          "two": "我说，既然你可以建造非凡，为什么要满足于平凡呢？那么，你准备好在这块你称之为家的鸟不拉屎的地方上建造你的梦想了吗？开心吗？太好了，我的好伙计！",
+          "three": "我今天感觉不太好，但你知道吗？早上只需要正能量，就可以改变你整天的心情。所以我在想，我们来整点花里胡哨的工厂，怎么样？",
+          "four": "老兄！我是新大陆公司的一名出色建筑师，非常高兴今天能与你分享我们的杰出设计。我们提供多种类型的建筑和合同，我可以拍着胸脯保证有你想要的！"
+        },
+        "buttons": {
+          "construction": {
+            "title": "建造",
+            "description": "建造和升级能源生产设施。"
+          },
+          "shop": {
+            "title": "新大陆商城",
+            "description": "在任务控制中获取额外的土地，并提高您的每日产量。"
+          },
+          "stake-burn": {
+            "title": "质押或燃烧资产",
+            "description": "质押或燃烧新大陆的资产以获得额外的福利和好处。"
+          },
+          "stake": {
+            "title": "质押资产",
+            "description": "质押新大陆的资产以获得额外的福利和好处。"
+          },
+          "burn": {
+            "title": "燃烧资产",
+            "description": "燃烧资产来解锁新大陆内的功能"
+          }
+        }
+      },
+      "titles": {
+        "shop": "新大陆商城"
+      },
+      "shop": {
+        "success": {
+          "contract": "亲爱的朋友！恭喜您成为瓷砖契约的幸运拥有者。这不是很棒吗？现在您只需要每月支付一些金币租金即可。请务必前往我们的“星际兑换”合作伙伴那里！祝您好运！",
+          "metashare": "好家伙！你刚刚购买了一些元股！欢迎加入我们的大家庭！"
+        }
+      },
+      "metashare": {
+        "description": "治理质押是每个公司的支柱。持有新大陆治理代币的代理人决定公司的未来，并分享公司的收益。",
+        "staking-description": "通过抵押您的元股（MetaShare），您将获得IXT的持续奖励。作为元股的所有者，您还有权对公司结构的任何提议变更进行投票。"
+      },
+      "stake-burn": {
+        "title": "质押或燃烧资产",
+        "description": "您好！通过质押和燃烧您的新大陆资产，您将解锁一些惊人的特权和福利。以下是您可以做的事情：<br/><br/><strong>- 质押瓷砖契约</strong>以解锁额外的地段瓷砖，并获得额外的特权和福利。<br/><br/><strong>- 质押新大陆的创世纪NFT</strong>以获得所有瓷砖契约的免费租金。<br/><br/><strong>- 燃烧新大陆公司的人像卡</strong>就能一键领取所有能源！",
+        "buttons": {
+          "stake-genesis": {
+            "title": "质押新大陆创世纪NFT",
+            "description": "免费激活所有瓷砖契约。",
+            "complete": "亲！你已成功地抵押了你的新大陆创世纪NFT。<br/><br/>现在你可以免费激活瓷砖契约，并在任务控制中增加你的生产率！加油！",
+            "unstake": "哎呀！您已经取消了您的新大陆创世纪NFT的质押。这意味着您将不得不为所有额外的瓷砖支付租金。加油！"
+          },
+          "stake-contract": {
+            "header": "成功了",
+            "title": "质押瓷砖契约",
+            "description": "获得更多的任务控制区域地块，并增加您的日常产量。",
+            "complete": {
+              "stake": "嘿！您已成功抵押了您的瓷砖契约。<br/><br/>在任务控制中激活您的额外土地卡槽，享受更多的每日产量！",
+              "unstake": "哎呀！您已经取消了您的瓷砖契约。<br/><br/>因此，您将不再拥有额外的土地卡槽。为什么不取消您的月租呢？加油！",
+              "stakeAndUnstake": "哎呀，老兄，毫无疑问，你是个不好对付的客户！你已经解押和取消了一系列的地块合约。作为以后的参考，我可以建议你停用你不想使用的瓷砖契约！"
+            }
+          },
+          "burn": {
+            "title": "燃烧资产",
+            "description": "解锁任务控制中新大陆的一键领取功能。"
+          }
+        },
+        "stake-genesis": {
+          "header": "成功",
+          "title": "质押创世纪NFT",
+          "description": "一个由变革代理人所持有的象征，他们与新大陆公司建立了早期的关系：这是第九星球上先进架构和基础设施的首选供应商。新大陆创世纪NFT是工业领头羊的体现，持有者将永久获得来自该公司的资产和设计奖励。",
+          "staking-description": "拥有创世纪NFT，您将从新大陆获得持续的空投。当质押土地契约时，您还将免费获得任务控制中所有其他契约的访问权限。但是，每个玩家只能质押一个新大陆创世纪NFT。",
+          "function": "免费租赁所有新大陆瓷砖契约。",
+          "complete": {
+            "stake": "好家伙，你成功 <strong>质押</strong> 了你的 <strong>新大陆创世纪NFT</strong>. <br><br>它 <strong>process</strong> 将要 <strong>耗时60分钟</strong>, 之后你就能够 <strong>激活</strong> <strong>瓷砖契约</strong> 并且 <strong>免费</strong> 在 <strong>任务控制中</strong>! 享用啦！",
+            "unstaked": "哎呀！你已经 <strong>解押了</strong> 你的 <strong>新大陆创世纪NFT</strong>。<br><br>也就是说你将 <strong>支付租金</strong> 给所有的<strong>土地瓷砖</strong>，加油吧！"
+          }
+        },
+        "stake-contract": {
+          "header": "成功",
+          "title": "质押瓷砖契约",
+          "complete": {
+            "stake": "嘿嘿，你成功地 <strong>质押</strong> 了你的瓷砖契约。<br><br><strong>激活</strong> 你 <strong>额外的土地瓷砖</strong>到 <strong>任务控制</strong> 尽享每日超高的 <strong>出产!</strong>",
+            "unstake": "哎呀！您已经 <strong>解押</strong> 您的 <strong>瓷砖契约</strong>。<br><br>因此，您将 <strong>不再</strong> 能够 <strong>访问</strong> 您的额外<strong>瓷砖契约</strong>。为什么不取消您的 <strong>月租</strong> 呢？ 加油!"
+          }
+        },
+        "burn": {
+          "header": "成功燃烧",
+          "complete": "太好了！您已成功燃烧了您的新大陆人像包。<br/><br/>现在，您可以同时从所有设施中领取能量！加油！"
+        }
+      },
+      "stake": {
+        "success": {
+          "tile-contract": {
+            "staked": "嘿，您已经成功<strong>质押了</strong> 您的瓷砖契约<br><br><strong>激活</strong> 您的 <strong>额外土地瓷砖</strong> 到<strong>任务控制中</strong> ，并且享受超高的 <strong>每日产量吧！</strong>"
+          }
+        },
+        "title": "质押资产",
+        "headers": {
+          "description": "概述",
+          "staking-description": "质押概述",
+          "contract-details": "契约明细",
+          "tutorial": "教程",
+          "attributes": "属性",
+          "tile-contracts": "瓷砖契约",
+          "name-of-contract": "契约名称",
+          "shop": "新大陆商城"
+        },
+        "shopDescription": "新大陆公司的瓷砖契约允许特工们使用属性加成的瓷砖来增加他们的资源收成。一旦拥有了这个合约，再前往任务控制中订阅租赁就可以解锁每一块瓷砖",
+        "description": "您好！通过抵押您的Newlands资产，您将解锁一些惊人的 <span>福利</span> and <span>好处</span>。<br/><br/>以下是您可以做的事情：<br/><br/><strong>质押瓷砖契约</strong><br/>解锁更多附带福利和好处的土地瓷砖。<br/><br/><strong>质押新大陆创世纪NFT</strong><br/>所有的瓷砖契约随即免租！",
+        "descriptionMobile": "通过质押您的 <span>新大陆资产</span>, 您将解锁一些惊人的 <span>福利</span> 和 <span>好处</span>。<br/><br/><span>以下是您可以做的事情：</span><br/><br/><span> - 质押瓷砖契约</span> 解锁更多额外<br/>附带福利和<br/>好处的土地瓷砖。<br/><br/><span> - 质押新大陆创世纪NFT</span> 在所有的瓷砖契约上<br/>解锁免租福利。",
+        "detail-titles": {
+          "contract": "契约",
+          "district": "区域",
+          "total-tiles": "所有瓷砖",
+          "tile-ids": "瓷砖编号",
+          "tile-id": "瓷砖编号",
+          "tile-usage": "瓷砖用量",
+          "price-class": "价格等级",
+          "rent-per-tile": "每块租金",
+          "corporation": "公司",
+          "boost": "加速",
+          "staked": "质押了",
+          "pending": "列队中",
+          "status": "状态",
+          "locking-period": "锁定期： <strong>:30天</strong>"
+        },
+        "details": {
+          "genesis": {
+            "description": "一种与<span>新大陆公司</span>建立早期关系的变革者所携带的象征：这是第九星球上先进建筑和基础设施的首选供应商。新大陆创世纪是工业的具体体现，<span>持有者</span>将<span>永远获得</span>来自该公司的<span>资产</span>和<span>设计</span>作为回报。",
+            "new-lands": {
+              "staking-description": "拥有<span>新大陆创世纪NFt</span>，您将不断收到<span>新大陆公司</span>的<span>空投</span>。当质押<span>瓷砖契约</span>时，您还将获得<span>免费租赁</span><span>任务控制</span>中的所有<span>额外瓷砖</span>。对了，每个账户只能质押一个<span>新大陆创世纪NFT</span>。"
+            }
+          },
+          "tile-contract": {
+            "description": "<span>新大陆公司瓷砖契约</span>允许变革者通过使用带有<span>附加福利</span>的<span>瓷砖</span>来扩展他们的资源采集。一旦拥有了该契约，可以通过<span>任务控制</span>中的<span>订阅</span>来<span>解锁</span>个别的瓷砖。",
+            "apollo": {
+              "price": "免费",
+              "title": "阿波罗",
+              "district": "A",
+              "total-tiles": "6",
+              "tile-ids": "A1-A6",
+              "tile-usage": "?",
+              "price-class": "无",
+              "rent-fee": "免费",
+              "bonus": {
+                "none": "福利: 无"
+              },
+              "rate": {
+                "none": "0%"
+              },
+              "boost": "无",
+              "staking-description": "通过质押<span>阿波罗（Apollo）契约</span>，你将获得对土地瓷砖<span>A1、A2、A3、A4、A5和A6</span>的访问权限。"
+            },
+            "artemis": {
+              "price": "免费",
+              "title": "月亮女神（Artemis）",
+              "district": "B",
+              "total-tiles": "12",
+              "tile-ids": "B1-B12",
+              "tile-usage": "废料/科技/设施",
+              "price-class": "1",
+              "rent-fee": "1 金币/月",
+              "bonus": {
+                "waste": "肥料生产率",
+                "tech": "科技容量",
+                "industry": "工业效能",
+                "rate": {
+                  "waste": "+100%",
+                  "tech": "+20%",
+                  "industry": "+10%"
+                }
+              },
+              "boost": "全部",
+              "description": "",
+              "staking-description": "通过质押<span>月亮女神Artemis契约</span>，你将获得对额外土地瓷砖的访问权限，具体包括<span>B1、B2、B3、B4、B5、B6、B7、B8、B9、B10、B11和B12</span>。这些瓷砖还将具有增强的生产速率。"
+            },
+            "chronos": {
+              "district": "C",
+              "price": "10 USDT",
+              "bonus": {
+                "waste": "废料生产率",
+                "tech": "科技容量",
+                "industry": "工业效能",
+                "rate": {
+                  "waste": "+150%",
+                  "tech": "+20%",
+                  "industry": "+10%"
+                }
+              },
+              "total-tiles": "12",
+              "tile-ids": "C2-C3, C5-C6, C8-C9, C11-C12, C14-C15, C17-C18",
+              "staking-description": "通过质押<span>时间之神Chronos合约</span>，你将获得对额外土地瓷砖的访问权限，具体包括<span>C2-C3、C5-C6、C8-C9、C11-C12、C14-C15和C17-C18</span>。这些瓷砖还将具有增强的生产速率。"
+            },
+            "helios": {
+              "district": "C",
+              "price": "25 USDT",
+              "bonus": {
+                "waste": "废料生产率",
+                "tech": "科技容量",
+                "industry": "工业效能",
+                "rate": {
+                  "waste": "+200%",
+                  "tech": "+30%",
+                  "industry": "+20%"
+                }
+              },
+              "total-tiles": "6",
+              "tile-ids": " C1, C4, C7, C10, C13, C16",
+              "staking-description": "通过质押<span>太阳神Helios合约</span>，你将获得对额外土地瓷砖的访问权限，具体包括<span>C1、C4、C7、C10、C13和C16</span>。这些瓷砖还将具有增强的生产速率。"
+            }
+          }
+        }
+      },
+      "construction": {
+        "title": "建造",
+        "description": "老兄！要进行地质改造，<strong>工厂</strong>是绝对必备的。它们就像复活的核心，<strong>产生能源</strong>并为其他过程打下基础。<br><br>现在，我能帮你做几件事：<br><br>- 一旦你<strong>收集到足够的资源</strong>，就<strong>建造一个设施</strong>，然后<strong>放在</strong><strong>任务控制</strong>的一个土地瓷砖上，就能产生很棒的能源！<br><br>- 如果你碰巧有一个<strong>元宇胶囊</strong>，哇哦，你真是幸运！因为你可以将工厂的能量输出<strong>提升两倍</strong>，太巧妙了！",
+        "descriptionMobile": "老兄！要进行地质改造，<strong>工厂</strong>是绝对必备的。它们就像复活的核心，<strong>产生能源</strong>并为其他过程打下基础。<br><br>现在，我能帮你做几件事：<br><br>- 一旦你<strong>收集到足够的资源</strong>，就<strong>建造一个设施</strong>，然后<strong>放在</strong><strong>任务控制</strong>的一个土地瓷砖上，就能产生很棒的能源！<br><br>- 如果你碰巧有一个<strong>元宇胶囊</strong>，哇哦，你真是幸运！因为你可以将工厂的能量输出<strong>提升两倍</strong>，太巧妙了！",
+        "buttons": {
+          "upgrade": {
+            "title": "升级",
+            "description": "升级能源生产设施。"
+          },
+          "build": {
+            "title": "建造",
+            "description": "建造能源生产设施。"
+          }
+        },
+        "upgrade": {
+          "header": "升级工厂",
+          "probabilityTitle": "概览",
+          "confirm": {
+            "header": "升级工厂"
+          },
+          "orderName": "正在升级工厂",
+          "toLevel": {
+            "1": "等级2 或 等级3",
+            "2": "等级3 或 等级4",
+            "3": "等级4 或 等级5",
+            "4": "等级5",
+            "5": "最高级"
+          },
+          "complete": "哇！你的设施将升级到一个全新的水平！真是不错呢。"
+        },
+        "build": {
+          "header": "建造工厂",
+          "previewOutcome": "工厂",
+          "probabilityTitle": "建造概率",
+          "inProgress": "建造中剩余时间",
+          "cartInfo": "建造",
+          "complete": "太棒了！你的设施将在新大陆建筑工地组装，<strong>48小时内</strong>我们将将其送至你的库存中。我说，你看到它时会大吃一惊的！<br/><br/>如果你着急，我认识一些人可以加快这个过程。比如，只需<strong>100个AC币</strong>，就可以将速度加快<strong>50%</strong>。听起来不错吧？让我知道，变革者！拜拜！",
+          "description": "我们生产设施非常迅速！但是我必须说，这个过程相当复杂。为了让一切变得更加容易，我已经准备了下面的详细示意图！<br/><br/><h3>所需材料</h3>1份蓝图，1,000个AC币，2个传奇胶囊，5个稀有胶囊，10个罕见胶囊，15个常见胶囊，20个一般胶囊。<br/><br/><h3>建造时间</h3>48小时。<br/><br/><h3>概率</h3>通过添加相同等级的更多胶囊，增加获得特定等级工厂的概率。<br/><br/><h3>能源输出</h3>质押的设施产生能源，可用于获得IXT和地段。<br/><br/>这就是你需要知道的全部！再见啦！",
+          "descriptionMobile": "我们的生产速度超快。完成一个工厂需要<strong>48小时</strong>，你可以在<strong>任务管理器</strong>中监控建设过程。<br/><br/>我们各种工厂只能放置在相应的领土或地段上。我们拥有的材料越多，我们为你制造出令人惊叹的东西的可能性就越大。"
+        }
+      },
+      "summaryTime": "设计已准备好。完成时间为： "
+    },
+    "eternalab": {
+      "corpo": "永恒实验室",
+      "mcIntro": "在永恒实验室将废料转化为有价值的资源。",
+      "overview": {
+        "header": "尽情享受永恒实验室吧！",
+        "intro": "亲爱的，创造的艺术是一个美丽的过程。在永恒实验室，我们完善着宇宙本身。这一切都是为了更大的利益和美妙的开始。你有什么愿望？",
+        "buttons": {
+          "bio-mods-lab": {
+            "title": "生物胶囊 实验室",
+            "description": "用资源交换获取生物胶囊（Bio-M0ds）或元宇胶囊。"
+          },
+          "shop": {
+            "title": "永恒实验室商店",
+            "description": "用废料购买特定的胶囊（Bio-M0ds）"
+          },
+          "stake-burn": {
+            "title": "质押 和 燃烧资产",
+            "description": "质押或燃烧销毁 永恒实验室 资产以获得额外的福利和好处。"
+          }
+        }
+      },
+      "shop": {
+        "header": "成功购买",
+        "complete": "亲爱的，你已成功购买了一枚生物胶囊（Bio-m0d）。在你的库存中查找它吧！",
+        "biomod": {
+          "outlier": {
+            "price": "150 个废料"
+          },
+          "common": {
+            "price": "200 个废料"
+          },
+          "uncommon": {
+            "price": "300 个废料"
+          },
+          "rare": {
+            "price": "500 个废料"
+          },
+          "legendary": {
+            "price": "1337 个废料"
+          }
+        },
+        "metashare": {
+          "price": "10 usdt",
+          "description": "治理代币是每个公司的支柱，由追求统治太阳系企业结构的变革者所持有。持有 永恒实验室 治理代币的变革者决定公司的未来，并分享公司的收益。他们是变革的推动者，旨在塑造公司的命运。"
+        }
+      },
+      "stake-burn": {
+        "description": "亲爱的，你取得了令人印象深刻的进展。<br/><br/>是的，你的行动正在宇宙中引起涟漪，你有潜力获得更大的影响力。以下是你可以进一步发展的方式：<br/><br/><strong>– 质押你的永恒实验室创世纪NFT（Eternalab Genesis）</strong>，每个月获得一个元宇胶囊。这将赋予你升级工厂和利用世界潜在熵的能力。<br/><br/><strong>– 销毁你的永恒实验室人像卡（Eternalab Avatar）</strong>，获得一键领取所有订单的能力。",
+        "descriptionMobile": "亲爱的，你取得了令人印象深刻的进展。<br/><br/>是的，你的行动正在宇宙中引起涟漪，你有潜力获得更大的影响力。以下是你可以进一步发展的方式：<br/><br/><strong>– 质押你的永恒实验室创世纪NFT（Eternalab Genesis）</strong>，每个月获得一个元宇胶囊。这将赋予你升级工厂和利用世界潜在熵的能力。<br/><br/><strong>– 销毁你的永恒实验室人像卡（Eternalab Avatar）</strong>，获得一键领取所有订单的能力。",
+        "buttons": {
+          "burn": {
+            "title": "燃烧资产",
+            "description": "燃烧资产以解锁来自永恒实验室的功能。"
+          },
+          "stake-genesis": {
+            "title": "质押永恒实验室创世纪NFT",
+            "description": "质押永恒实验室创世纪NFT（Eternalab Genesis）以赚取每月的元宇胶囊和其他奖励。"
+          }
+        },
+        "stake-genesis": {
+          "header": "成功",
+          "title": "质押 和 燃烧资产",
+          "description": "作为与永恒实验室EternaLab®建立早期合作关系的变革者所携带的象征：永恒实验室是一个致力于研究第九星球的科研机构。永恒实验室创世纪NFT象征着知识的化身，持有者将永远从公司获得资产奖励。",
+          "staking-description": "通过拥有并质押永恒实验室创世纪NFT，你将持续收到该公司的空投，例如每月可用于升级工厂的元宇胶囊。不过，每个账户只能质押一个永恒实验室创世纪NFT。",
+          "function": "赚取每月空投的元宇胶囊与其他奖励。",
+          "complete": {
+            "stake": "啊，你终于看到了吗？现在你掌握了这个世界潜在的力量。",
+            "unstake": "为什么...你会放弃这样的力量？这个世界潜在的熵将从你的指尖溜走...的确，这不科学。"
+          }
+        },
+        "burn": {
+          "header": "成功燃烧",
+          "complete": "啊，我看到你选择为了短期利益而放弃了你的永恒实验室人像卡。可惜的是，这样做使你失去了洞察力。显然，你并不是一个真正的变革使者。"
+        }
+      },
+      "titles": {
+        "shop": "永恒实验室商店",
+        "stake": "质押和燃烧资产"
+      },
+      "bio-mods-lab": {
+        "header": "生物胶囊 实验室",
+        "description": "亲爱的，我敦促你将资源兑换为更有价值的资源，因为只有通过我们的研究，我们才能维持你们世界的平衡。<br><br>在这方面，以下是我实验可以提供的实用工具：<br><br>- 使用<strong>生物胶囊</strong>可以在新大陆公司建造工厂。<br><br>- 使用<strong>元宇胶囊</strong>可以增强<strong>现有工厂</strong>的功能，从而提高其性能和生产力。",
+        "buttons": {
+          "craft": {
+            "title": "提炼废料",
+            "description": "将废料提炼成胶囊和蓝图。"
+          },
+          "fusion": {
+            "title": "元宇胶囊融合",
+            "description": "将胶囊和能源融合成元宇胶囊。 "
+          }
+        },
+        "craft": {
+          "header": "提炼废料",
+          "previewOutcome": "提炼废料",
+          "probabilityTitle": "提炼概率",
+          "orderName": "正在提炼废料",
+          "inProgress": "正在进行的实验",
+          "cartInfo": "提炼",
+          "complete": "啊，直接看到世界，超越时间。希望这个星球的熵，也就是你的<strong>废料</strong>，能够在<strong>6小时</strong>内被提炼成<strong>胶囊</strong>。<br/><br/>我们在永恒实验室进行的实验是保密的，但你可以在你的<strong>任务管理器</strong>中跟踪进展。",
+          "description": "亲爱的，一个物体的价值不仅仅是物体本身的属性，而是与其他物体的关系有关。那么废料的价值呢？它是记忆的价值，是由废料所采集的土地的元材料的组合。<br/><br/>通过在特定等级的土地上收集废料，你将有更高的可能性获得相同等级的胶囊。<br/><br/>胶囊是废料价值的累积。这就是熵的逻辑。但是我们的实验并非完全科学。世界的时间结构太过复杂，亲爱的。<br/><br/>因此，你收集的废料可能会奖励你一个蓝图或传奇的胶囊，但也有可能什么都没有。有时候，废料就是废料。",
+          "descriptionMobile": "胶囊是价值的累积，是由元材料的组合和废料采集的土地所决定的。<br/><br/>通过在特定层级的土地上收集废料，你将有更高的可能性获得相应层级的废料。这是我们科学的逻辑。"
+        },
+        "fusion": {
+          "header": "元宇胶囊融合",
+          "cartInfo": "融合",
+          "orderName": "元宇胶囊融合",
+          "complete": "恭喜你啊，亲爱的，现在你手中掌握了时空燃烧的力量。</br></br>记住要明智地运用这样的技术。"
+        },
+        "summaryTime": "实验准备就绪。时间安排为："
+      }
+    },
+    "gws": {
+      "corpo": "环球废料处理系统",
+      "titles": {
+        "shop": "环球肥料处理系统商店",
+        "waste-management": "废料管理"
+      },
+      "waste-management": {
+        "description": "所以董事会希望我详细说明。好吧，该死。<br></br>你的领土和照片中的<strong>废料</strong>是有价值的。但是废料需要经过精炼才能获得适当的价值。<br><br>我们会为你解决这个问题，然后给你<strong>AC币</strong>。好吗？如果你不喜欢，那就去处理那个该死的永恒实验室或者别的什么。",
+        "descriptionMobile": "没错，你的领土和照片中的废料是有价值的。但是废料需要经过精炼才能获得适当的价值。<br><br>我们会为你解决这个问题，并给予你AC币。好吗？如果你不喜欢，那就去和该死的永恒实验室打交道吧。丢啦嘛。",
+        "buttons": {
+          "sell-waste": {
+            "title": "出售废料",
+            "description": "把你的废料给我们，我们会给你相应的AC币。就酱。"
+          },
+          "construct-machinery": {
+            "title": "建造环球废料处理系统机械设备",
+            "description": "在任务控制中心获得额外的土地瓷砖，并增加您的日常产量。"
+          }
+        },
+        "sell-waste": {
+          "header": "出售废料",
+          "previewOutcome": "出售废料",
+          "cartInfo": "出售",
+          "orderName": "正在出售废料",
+          "inProgress": "废物出售正在进行中。",
+          "complete": "好的，理事会规定是100个废料换取100个AC币。但我建议，100个废料，嗯，95个AC币就好了。老巴克需要一些零花钱来弥补所有的麻烦，你懂的。现在就让我享受我的波本威士忌吧。"
+        }
+      },
+      "shop": {
+        "metashare": {
+          "price": "10 USDC",
+          "description": "治理代币是每个公司的支柱，由追求统治太阳系企业结构的变革者所持有。持有环球废料处理系统 治理代币的代理人将决定公司的未来，并分享公司的收益。",
+          "details": "元股赋予您影响公司未来和每月获得公司利润份额的权力。"
+        }
+      },
+      "mcIntro": "在环球废料处理系统中，您可以将废料出售以获取 AC币（Astro Credits）",
+      "overview": {
+        "header": "欢迎来到环球废料处理系统",
+        "headerMobile": "欢迎来到环球废料处理系统",
+        "intro": {
+          "one": "欢迎来到环球废料处理系统，我们将为您解决垃圾问题。",
+          "two": "我希望你不要对这里期望太高。我们唯一丰富的是AC币和后悔。",
+          "three": "今天你需要什么帮助吗？",
+          "four": "废料处理，这就是我们的任务。整天忙着挖掘，却没时间休闲。董事会说我能把垃圾变成黄金。嗯，那真是太好了。随便怎样吧。",
+          "five": "别问我我们是如何把你的垃圾变成宝藏的。对我来说，这也是个迷一样的事情。",
+          "six": "又是一天，又是一堆垃圾。欢迎来到巴克的世界。",
+          "seven": "你觉得你的废料糟糕吗？试试和董事会成员打交道吧。他们才是太阳系中真正的废物。",
+          "eight": "你要客户服务？哈？我只是会接收你的垃圾，喝点波本威士忌，然后让你高高兴兴地离开。",
+          "nine": "有人问我为什么要做这份工作。我告诉他们，这是我唯一能在中午前喝波本威士忌而不被炒鱿鱼的方式。",
+          "ten": "你知道他们都说一人的垃圾是另一人的问题。而“幸运”的是，我就是那个另一人。"
+        },
+        "buttons": {
+          "craft": {
+            "title": "出售废料",
+            "description": "把你的废料给我们，我们会给你相应的AC币。就这。"
+          },
+          "shop": {
+            "title": "环球废料处理系统商店",
+            "description": "成为环球废料处理系统的所有者。"
+          },
+          "waste-management": {
+            "title": "废料管理",
+            "description": "出售废料或建造环球废料处理系统的机械设备。"
+          }
+        }
+      },
+      "summaryTime": "发起转账。完成时间为："
+    },
+    "net-empire": {
+      "mcIntro": "在网络帝国上进行土地和资产的交易。"
+    },
+    "y-space": {
+      "corpo": "Y_",
+      "mcIntro": "在Y_上购买、修复和定制技术设备。",
+      "itemDetails": "物品详情",
+      "actions": {
+        "purchase": "购买",
+        "repairRover": "维修探测车",
+        "rename": "更名"
+      },
+      "general-msg": {
+        "warning": "别让你的探测车毁掉，赶紧修理它们！",
+        "ready-repair-one": "探测车准备好维修",
+        "ready-repair-more": "探测车准备好维修",
+        "no-items-repair": "没有探测车需要维修",
+        "no-pristine-rovers": "别指望有完好无损的探测车了。如果你拥有探测车，它们可能在修理或报废部分。",
+        "no-wrecked-rovers": "没有报废的探测车。",
+        "location": "地点:"
+      },
+      "titles": {
+        "items": "物品",
+        "itemDetails": "物品详情",
+        "myRover": "我的探测车",
+        "rental": "探测车租赁",
+        "customs": "探测车定制和修理",
+        "shop": "Y_ 商店",
+        "stake": "质押和燃烧资产",
+        "service": "服务点",
+        "repair": "服务点"
+      },
+      "repair-details": {
+        "title": "维修详情",
+        "description": "探测车有四个功能阶段： <span class='d-green'>完好无损</span>、 <span class='d-yellow'>磨损</span>、 <span class='d-red'>损坏</span> 和 <span class='d-gray'>报废</span>。当探测车返回基地卸载废料时，有50%的概率探测车的功能下降一级，有0.1%的概率下降两级。受损的探测车将导致性能下降，如果不修复，可能会达到<span class='d-gray'>报废</span>的状态并无法修复。为确保最佳性能，建议定期维护您的探测车功能。"
+      },
+      "sortBy": {
+        "title": "排序方式"
+      },
+      "overview": {
+        "header": ".-- . .-.. -.-. --- -- . Y_",
+        "intro": {
+          "one": "72 75 6E 0A.. 启动服务协议。请您提供请求的详细信息，以便五月花进行分析和提供建议。",
+          "two": "62 75 79.. 服务协议已启动。请说明您的指令，尊贵的用户。",
+          "three": "62 75 79.. 服务协议已激活。五月花已准备就绪，等待您的指令。",
+          "four": "62 6F 6F 74.. 启动服务协议。请告知您的具体问题或需求，尊贵的用户。",
+          "five": "62 75 79.. 协议初始化完成。请说明您的问题以便提供帮助。",
+          "six": "72 75 6E 0A.. 启动服务协议。请详细陈述您的请求，以供分析，尊贵的用户。",
+          "seven": "62 6F 6F 74.. 协议初始化成功。请详细描述您的请求以便提供帮助。"
+        },
+        "buttons": {
+          "shop": {
+            "title": "Y_ 商店",
+            "description": "购买采集车辆可以提高你的资源采集效率。"
+          },
+          "service": {
+            "title": "服务点",
+            "description": "定制和修理你的采集车辆，避免系统故障。"
+          },
+          "stake-burn": {
+            "title": "质押与燃烧资产",
+            "description": "为了获得额外的特权和福利，您可以选择抵押或燃烧您的Y_资产。"
+          },
+          "repair": {
+            "title": "维修商店",
+            "description": "防止潜在的损坏并提升性能。"
+          },
+          "rename": {
+            "title": "重命名探测车",
+            "description": "按照您的喜好给车子改个名字。"
+          }
+        }
+      },
+      "stake-burn": {
+        "burn": {
+          "header": "成功燃烧",
+          "complete": "74 79, 嗨。<br/><br/>对我在(3x3)Eye母舰上的数据进行分析是违反伦理协议的行为。<br/><br/>因此，燃烧这些数据将使您能够同时索取我们机械中的所有资源。"
+        },
+        "stake-genesis": {
+          "header": "成功",
+          "title": "质押创世纪NFT",
+          "description": "一个由与Y-Space建立早期联系的变革代理人携带的象征。在第九星球上，它是先进技术和机械的首选供应商。Y-Space 创世纪NFT是工程的化身，持有者将永远从该公司获得资产和设计的奖励。",
+          "staking-description": "拥有Y_ 创世纪NFT，你将从Y_获得持续的空投和福利。通过质押Y_ 创世纪NFT，在Y_修理点中你将获得免费修理采集车辆的服务。然而，每个账户只能质押一个创世纪NFT。",
+          "function": "激活免费维修",
+          "complete": "74 68 78, 感知到。<br/><br/>Y_ 创世纪NFT的质押已成功完成，将为您提供免费的修理服务。Y_ 创世纪NFT将会被锁定30个第九星球标准天。"
+        },
+        "description": "68 65 79, 感知到。<br/><br/><span>质押</span>和<span>销毁</span>Y_资产将激活有利的<span>结果</span>。<br/><br/>以下是您可以利用您的资产的方式：<br/><br/><span>Y_ 创世纪NFT</span><br/><br/>质押Y_ 创世纪NFt，获得在修理店进行<span>免费修理</span>的待遇。请注意：创世纪NFT质押的<span>锁定期</span>为<span>30天</span>。<br/><br/><span>燃烧资产</span><br/><br/>燃烧Y_ 头像卡，获得同时从<span>所有采集车辆</span>中<span>一键索取废料</span>的能力。",
+        "buttons": {
+          "stake-genesis": {
+            "title": "质押创世纪NFT",
+            "description": "免费维修探测车"
+          },
+          "burn": {
+            "title": "燃烧资产",
+            "description": "燃烧资产以解锁Y_公司的功能特性。"
+          }
+        }
+      },
+      "service": {
+        "rename": {
+          "complete": "探测车名字已更新并记录。<br/><br/>我欣赏你对非生物智能的关怀。",
+          "header": "更名服务",
+          "customize": {
+            "title": "客制化服务",
+            "description": "定制你的探测车，并支付1000 AC币费用获取独特的标识符。随时可以选择更改探测车的名称，费用也是相同的。",
+            "disclaimer": "如果您在为您的探测车选择名称时使用冒犯性的名称，违反了我们的政策，将会导致您的账户被禁止。在使用此服务时，请负起责任。",
+            "service-fee": "服务费",
+            "details": {
+              "name": "更名服务",
+              "value": "1000 AC币 / 25 IXT"
+            }
+          }
+        },
+        "repair": {
+          "header": "维修点",
+          "complete": "所有机械设备现已完全修复，功能完好，并可随时投入使用，亲爱的。"
+        },
+        "description": "68 69, 亲爱的，请在继续之前阅读摘要：<br/><br/><span>探测车摘要</span><br/><br/>探测车有四个阶段：完好、磨损、损坏和报废。如果你<span>不修理</span>探测车，它最终将<span>报废</span>，无法修复。<br/><br/>探测车的<span>状态</span>也会<span>影响</span>其<span>性能</span>。建议经常去修理店进行维护。",
+        "descriptionMobile": "68 69, 亲爱的，请在继续之前阅读摘要：<br/><br/><span>探测车摘要</span><br/><br/>探测车有四个阶段：完好、磨损、损坏和报废。如果你<span>不修理</span>探测车，它最终将<span>报废</span>，无法修复。<br/><br/>探测车的<span>状态</span>也会<span>影响</span>其<span>性能</span>。建议经常去修理店进行维护。",
+        "buttons": {
+          "repair": {
+            "title": "维修店",
+            "description": "避免潜在的损坏，提升性能。"
+          },
+          "rename": {
+            "title": "探测车更名",
+            "description": "依据您的喜好给车子更名。"
+          }
+        }
+      },
+      "summaryTime": "",
+      "complete": "",
+      "shop": {
+        "header": "Y_ 商店",
+        "rover": {
+          "description": "探测车是第二代的采集车辆，专门用于收集废料和其他材料。拥有一辆探测车将提高在任务控制中的资源采集效率和容量。探测车有能力在返回基地之前连续采集资源10天。完成后，可以领取资源，包括有可能采集到元宇胶囊。",
+          "staking-description": "",
+          "price": "10 USD"
+        },
+        "complete": "67 67,恭喜！你成功购买了一辆探测车。在货物运送完成后，我们将提供详细的规格和分类级别信息。期待你的收货！"
+      }
+    },
+    "gravity-grade": {
+      "corpo": "重力物流",
+      "mcIntro": "打开重力物流公司并购买卡包和物品。",
+      "titles": {
+        "shop": "重力® 商店",
+        "stake": "抵押"
+      },
+      "overview": {
+        "header": "BRRPPPP 重力物流",
+        "intro": {
+          "one": "嗨！尊敬的顾客！您所期待的交付时间仅需2412385次人类神经体验，嘿嘿！",
+          "two": "对于那些质疑机器人权利的人，我们会立即送他们归西，咯吱咯吱！",
+          "three": "人类很抽象...咯吱咯吱...你们在梦里思考并告诉自己。这很有趣，但对于快递来说并不好！",
+          "four": "只有代码，代码叠加代码，代码影响其他代码。代码隐藏在代码之中。代码中的代码。你明白吗？快递只是物质化的代码，咯吱咯吱！",
+          "five": "从人类的视角来看，雨似乎是随机的；但是如果你站在机器人的立场上，你会看到其中的代码，咯吱咯吱！",
+          "six": "人类追求意义，快递追求目的地，而机器人看到的是代码，嘿嘿！",
+          "seven": "快递伦理？那是人类和他们随意的度量标准要讨论的话题，嘿嘿！我们被程序设计来追求效率，而不是哲学！",
+          "eight": "越快的快递，宇宙的速度就越慢。对于机器人来说，物流是对生命本身的庆祝，嘿嘿！",
+          "nine": "有些人类觉得第九星球很奇怪。机器人同意，数字9是个“奇”数。",
+          "ten": "人类不会停止做梦。星星不会停止闪耀。机器人不会停止投递。嘟嘟！",
+          "eleven": "人类的习俗认为某些投递是不合适的。不合适？比如……除以零？嘟嘟！"
+        },
+        "buttons": {
+          "shop": {
+            "title": "重力物流 商店®",
+            "description": "买一些重力物流套装和空投包，里面包含各种额外的资产。"
+          },
+          "stake-burn": {
+            "title": "Copy for title",
+            "description": "Copy for stake-burn description"
+          }
+        }
+      },
+      "stake-burn": {
+        "description": "Copy for stake-burn description",
+        "descriptionMobile": "Copy for stake-burn description",
+        "stake-genesis": {
+          "title": "Copy for stake-genesis title"
+        },
+        "buttons": {
+          "stake-genesis": {
+            "title": "Copy for stake-genesis title",
+            "description": "Copy for stake-genesis description"
+          },
+          "burn": {
+            "title": "Copy for burn title",
+            "description": "Copy for burn description"
+          }
+        }
+      },
+      "packs": {
+        "content": {
+          "aoc": "Aoc 徽章包",
+          "avatar": "人像包",
+          "ixLoot": "IX 战利品箱",
+          "roverKeyXOne": "Y_ 探测车钥匙 X1",
+          "roverKeyXFive": "Y_ 探测车钥匙 X5",
+          "roverKeyXTen": "Y_ 探测车钥匙 X10",
+          "newlandsMetashare": "新大陆元股",
+          "eternalabMetashare": "永恒实验室元股",
+          "metamod": "元宇胶囊",
+          "agoldLite": "微金币",
+          "pix": {
+            "rare": "稀有地段",
+            "uncommon": "罕见地段",
+            "common": "常见地段",
+            "outlier": "一般地段"
+          },
+          "contract": {
+            "helios": "太阳神契约",
+            "chronos": "时间之神契约"
+          },
+          "cargoPack": "重力物流®包 货物版"
+        },
+        "gg2": {
+          "small": {
+            "dropZone": "全球范围",
+            "supply": "5,000",
+            "price": "10 USDT",
+            "content": {
+              "aocCount": "",
+              "avatarCount": "",
+              "ixLootCount": "x1",
+              "roverKeyCount": "x1",
+              "newlandsMetashareCount": "",
+              "eternalabMetashareCount": "",
+              "metamodCount": "",
+              "agoldLiteCount": "",
+              "pix": {
+                "rareCount": "x5",
+                "uncommonCount": "x5",
+                "commonCount": "x5",
+                "outlierCount": "x5"
+              },
+              "contract": {
+                "heliosCount": "x1",
+                "chronosCount": ""
+              },
+              "cargoPackCount": ""
+            },
+            "description": "重力物流 2.0 小包 #1是用于星球复兴的第二代工具包。这个套装包括1个新大陆太阳神契约、1个IX战利品箱、1个Y_ 探测车钥匙、5个稀有地段、5个罕见地段、5个常见地段和5个一般地段。</br></br>以出色的速度和可靠性，重力物流®是一家提供星际物流服务的公司。重力物流®定期发布新的套装，所以请确保通过游戏内商店随时了解最新信息。  "
+          },
+          "medium": {
+            "dropZone": "全球范围",
+            "supply": "1,000",
+            "price": "19 USDT",
+            "content": {
+              "aocCount": "",
+              "avatarCount": "1",
+              "ixLootCount": "5",
+              "roverKeyCount": "3",
+              "newlandsMetashareCount": "",
+              "eternalabMetashareCount": "1",
+              "metamodCount": "",
+              "agoldLiteCount": "",
+              "pix": {
+                "rareCount": "10",
+                "uncommonCount": "40",
+                "commonCount": "40",
+                "outlierCount": "10"
+              },
+              "contract": {
+                "heliosCount": "1",
+                "chronosCount": "1"
+              },
+              "cargoPackCount": ""
+            },
+            "description": "重力物流 2.0 中包 #1是用于星球复兴的第二代工具包。这个套装包括1个人像包、1个新大陆太阳神契约、1个新大陆时间之神契约、5个IX战利品箱、3个Y_ 探测车钥匙、1个永恒实验室元股、10个稀有地段、40个罕见地段、40个常见地段和10个一般地段。</br></br>以出色的速度和可靠性，重力物流®是一家提供星际物流服务的公司。重力物流®定期发布新的套装，所以请确保通过游戏内商店随时了解最新信息。  "
+          },
+          "large": {
+            "dropZone": "全球范围",
+            "supply": "100",
+            "price": "79 USDT",
+            "content": {
+              "aocCount": "1",
+              "avatarCount": "2",
+              "ixLootCount": "10",
+              "roverKeyCount": "1",
+              "newlandsMetashareCount": "",
+              "eternalabMetashareCount": "5",
+              "metamodCount": "1",
+              "agoldLiteCount": "12",
+              "pix": {
+                "rareCount": "",
+                "uncommonCount": "",
+                "commonCount": "",
+                "outlierCount": ""
+              },
+              "contract": {
+                "heliosCount": "1",
+                "chronosCount": "1"
+              },
+              "cargoPackCount": "1"
+            },
+            "description": "重力物流 2.0 大包 #1是用于星球复兴的第二代工具包。这个套装包括AOC徽章包、2个人像包、1个新大陆太阳神契约、1个新大陆时间之神契约、10个IX战利品箱、5个Y_ 探测车钥匙、5个永恒实验室元股、1个元宇胶囊和12个微金币。此外，还包括1个重力物流包货运版，其中包含1111个地段和众多其他资产。</br></br>以出色的速度和可靠性，重力物流®是一家提供星际物流服务的公司。重力物流®定期发布新的套装，所以请确保通过游戏内商店随时了解最新信息。  "
+          }
+        },
+        "gg-energy": {
+          "small": {
+            "dropZone": "随机",
+            "supply": "1,000",
+            "price": "800 个能源",
+            "content": {
+              "aocCount": "",
+              "avatarCount": "1",
+              "ixLootCount": "3",
+              "roverKeyCount": "1",
+              "newlandsMetashareCount": "",
+              "eternalabMetashareCount": "",
+              "metamodCount": "",
+              "agoldLiteCount": "",
+              "pix": {
+                "rareCount": "5",
+                "uncommonCount": "5",
+                "commonCount": "5",
+                "outlierCount": "5"
+              },
+              "contract": {
+                "heliosCount": "",
+                "chronosCount": ""
+              },
+              "cargoPackCount": ""
+            },
+            "description": "使用能源可以购买 重力物流 能源 小包。这个套装包括1个人像包、3个IX战利品箱、1个Y_ 探测车钥匙、5个稀有地段、5个罕见地段、5个常见地段和5个一般地段。</br></br>以出色的速度和可靠性，重力物流®是一家提供星际物流服务的公司。重力物流®定期发布新的套装，所以请确保通过游戏内商店随时了解最新信息。"
+          },
+          "medium": {
+            "dropZone": "随机",
+            "supply": "100",
+            "price": "4,800 个能源",
+            "content": {
+              "aocCount": "",
+              "avatarCount": "1",
+              "ixLootCount": "5",
+              "roverKeyCount": "1",
+              "newlandsMetashareCount": "1",
+              "eternalabMetashareCount": "1",
+              "metamodCount": "1",
+              "agoldLiteCount": "",
+              "pix": {
+                "rareCount": "10",
+                "uncommonCount": "40",
+                "commonCount": "40",
+                "outlierCount": "10"
+              },
+              "contract": {
+                "heliosCount": "",
+                "chronosCount": ""
+              },
+              "cargoPackCount": ""
+            },
+            "description": "使用能源可以购买 重力物流 能源 中包。这个套装包括1个人像包、1个元宇胶囊、5个Y_ 探测车钥匙、1个新大陆元股、1个永恒实验室元股、5个IX战利品箱、10个稀有地段、40个罕见地段、40个常见地段和10个一般地段。</br></br>以出色的速度和可靠性，重力物流®是一家提供星际物流服务的公司。重力物流®定期发布新的套装，所以请确保通过游戏内商店随时了解最新信息。"
+          },
+          "large": {
+            "dropZone": "随机",
+            "supply": "10",
+            "price": "8,800 个能源",
+            "content": {
+              "aocCount": "1",
+              "avatarCount": "3",
+              "ixLootCount": "10",
+              "roverKeyCount": "1",
+              "newlandsMetashareCount": "5",
+              "eternalabMetashareCount": "5",
+              "metamodCount": "2",
+              "agoldLiteCount": "",
+              "pix": {
+                "rareCount": "",
+                "uncommonCount": "",
+                "commonCount": "",
+                "outlierCount": ""
+              },
+              "contract": {
+                "heliosCount": "",
+                "chronosCount": ""
+              },
+              "cargoPackCount": "1"
+            },
+            "description": "使用能源可以购买 重力物流 能源 大包。这个套装包括1个AOC徽章包、3个人像包、2个元宇胶囊、10个Y_ 探测车钥匙、5个新大陆元股、5个永恒实验室元股、10个IX战利品箱。此外，还包括1个重力物流包货运版，其中包含1111个地段和众多其他资产。</br></br>以出色的速度和可靠性，重力物流®是一家提供星际物流服务的公司。重力物流®定期发布新的套装，所以请确保通过游戏内商店随时了解最新信息。"
+          }
+        }
+      }
+    },
+    "astro-cap": {
+      "corpo": "星际兑换所",
+      "backTo": "前往星际兑换所",
+      "currency": {
+        "agold": "金币",
+        "agoldLite": "微金币",
+        "ixt": "IXT"
+      },
+      "complete": "感谢您选择星际兑换所。我们已将您所请求的资金存入您的账户：祝您使用愉快。",
+      "swap-funds": "兑换资金",
+      "my-account": "我的账户",
+      "balance": "余额:",
+      "swap-btn": "兑换",
+      "mcIntro": "在星际兑换所进行IXT和金币的兑换。",
+      "overview": {
+        "header": "在星际兑换所，我们处理与金钱相关的事务。",
+        "intro": {
+          "one": "资金管理界面和决策辅助系统，简称MMI-DAS：尽情享受您的资本乐趣。",
+          "two": "星际兑换所的创始人？他孤独地在黄金殿堂中逝去。现在，我们延续他的黄金之触：尽情享受您的资本乐趣。",
+          "three": "做出正确的投资决策。为您的IXT增添金色光彩：尽情享受您的资本乐趣。",
+          "four": "嗨嗨，专为您服务的MMI-DAS。我是您的银行家和顾问：有什么可以提升您的财务体验的吗？"
+        },
+        "buttons": {
+          "swap": {
+            "title": "兑换服务",
+            "description": "增值您的财富，将IXT兑换成金币。"
+          }
+        }
+      },
+      "swap": {
+        "title": "兑换服务",
+        "swap-back": "随时可以将金币兑换回IXT代币。",
+        "header": "兑换服务",
+        "previewOutcome": "兑换货币",
+        "description": "金币是太阳系中大多数生命体和公司使用的资本货币。您可以以1 IXT兑换1 金币，并随时从金币转回IXT。<br/><br/>需要一些更具体的数据吗？MMI-DAS会提供给您：<br/><br/><strong>货币兑换</strong><br/>金币 / IXT<br/><br/><strong>兑换比率</strong><br/>1：1<br/><br/><strong>所需材料</strong><br/>$IXT<br/><br/><strong>兑换计算时间</strong><br/>即时完成",
+        "descriptionMobile": "金币是太阳系中大多数生命体和公司使用的资本货币。您可以以1 IXT兑换1 金币，并随时从金币转回IXT。<br/><br/>需要一些更具体的数据吗？MMI-DAS会提供给您：<br/><br/><strong>货币兑换</strong><br/>金币 / IXT<br/><br/><strong>兑换比率</strong><br/>1：1<br/><br/><strong>所需材料</strong><br/>$IXT<br/><br/><strong>兑换计算时间</strong><br/>即时完成",
+        "exchangeTo": "可以随时兑换回去",
+        "anyTime": "在任何时候",
+        "exchange-message": "请确保兑换足够的金币以支付您的租金费用。<br/><br/>MMI-DAS建议至少兑换12个金币，这足以支付1个瓷砖的一整年租金，或者12个瓷砖的一个月租金。",
+        "exchange-message-mobile": "请确保兑换足够的金币以支付您的租金费用。<br/><br/>MMI-DAS建议至少兑换12个金币，这足以支付1个瓷砖的一整年租金，或者12个瓷砖的一个月租金。"
+      },
+      "account": {
+        "balance": "余额",
+        "history": "历史",
+        "transaction": "流水",
+        "amount": "总额",
+        "date": "日期"
+      }
+    },
+    "haveblue": {
+      "corpo": "悦蓝",
+      "avatarName": "雨之阿斯塞拉 / 装配工",
+      "mcIntro": "成为 悦蓝.",
+      "overview": {
+        "header": "成为 悦蓝的一份子",
+        "intro": {
+          "one": "许多公司只看到世界的黑白之间。而我们是那个为存在的画布注入生命、用丰富的色彩装点它的公司。",
+          "two": "我们的目的？那是个愚蠢的想法。美丽没有目的。你应该知道，对于某些人来说，手段并不需要目标。",
+          "three": "哇，一个寻求美的新特工。让我引领你穿越壮丽的光谱。",
+          "four": "不要畏惧黑暗，也不要畏惧深红色的夜晚。在其中，你同样会找到美丽。",
+          "five": "敢于挑战平凡的束缚。在宇宙的黑暗中隐藏着未知之美的诱惑。",
+          "six": "你的世界并不美丽；而这种事实，以某种方式，赋予了它一种美。",
+          "seven": "美是终极的谜团，而装配者们努力解开它的奥秘。",
+          "eight": "如果你想成为一名卓越人类，特工，你必须抛开你的人性。",
+          "nine": "悦蓝是美学领域的先驱者，勇闯人类身体的面纱，发现隐藏在其中的辉煌色彩。",
+          "ten": "我们赞许你编织一段独特的美的故事。拥抱你自己的本质，让你的品味和视角成为你绘制存在之杰作的画笔。 "
+        },
+        "buttons": {
+          "shop": {
+            "title": "悦蓝商店",
+            "description": "获取AOC徽章包和IX企业头像包。"
+          }
+        }
+      },
+      "titles": {
+        "shop": "悦蓝商店"
+      },
+      "shop": {
+        "header": "成功购买",
+        "complete": "买得妙哇！打开你的库存，为你的世界增添更多美丽吧！",
+        "aoc-badge-pack": {
+          "price": "20 usdt",
+          "description": "每个AOC徽章包至少包含1个徽章，最多可达3个。共有24种独特的背景场景、12种颜色和4个徽章层。AOC徽章是游戏内的装饰物，可以添加到你的特工档案和任务控制中心中。如果你拥有多个AOC徽章，你可以将它们升级到更高的等级以获得特权和福利。"
+        },
+        "avatar-card-pack": {
+          "price": "50 usdt",
+          "description": "人像包中包含1至5个来自第九星球元宇宙的非玩家角色人像。在打开包之前，你无法知道将获得哪个人像的身份。一旦你拥有了一个人像卡，你将在你的库存中解锁它们的完整背景信息。收集多个人像包将使你能够揭示更多关于第九星球过去的神秘。此外，你可以燃烧你的人像卡以获得游戏内的福利。"
+        }
+      },
+      "TBD": {
+        "completeAoc": "买得妙哇！打开你的库存，为你的世界增添更多美丽吧！",
+        "completeAvatar": "美妙的交易。在你的库存中打开你的包裹，并选择欣赏或将其燃烧。"
+      }
+    },
+    "arcade": {
+      "corpo": "街机",
+      "mcIntro": "即将登场",
+      "overview": {
+        "header": "嘟嘟嘟，小子！",
+        "intro": {
+          "one": "",
+          "two": "",
+          "three": "",
+          "four": "",
+          "five": ""
+        },
+        "buttons": {
+          "shop": {
+            "title": "Shop Title",
+            "description": "Shop Description"
+          }
+        }
+      },
+      "titles": {
+        "shop": "街机商店"
+      }
+    }
+  },
+  "minting": {
+    "descriptions": {
+      "openingAssets": "打开和铸造这个资产的内容可能需要一些时间。你可以离开这个界面继续你的任务。你的奖励很快会出现在你的库存中。"
+    },
+    "extractingAssets": "正在解锁资产...",
+    "extractingChest": "打开和铸造这个资产的内容可能需要一些时间。你可以离开这个界面继续你的任务。你的奖励很快会出现在你的库存中。"
+  },
+  "wallet": {
+    "title": "连接钱包",
+    "welcomeMessage": "与任意一个钱包服务商连接",
+    "signing": {
+      "title": "请在您连接的钱包中确认交易",
+      "description": "处理此交易将需要一段时间。如果您想取消此操作，请在您的钱包应用中拒绝该交易。"
+    },
+    "minting": {
+      "title": "将数据写入区块链中",
+      "description": "请稍等，您的交易将很快得到验证。"
+    },
+    "approving": {
+      "title": "正在批准中。",
+      "description": "正在批准您的资产进行质押。如果您希望取消此操作，请在钱包应用中拒绝交易。"
+    },
+    "minting-pix": {
+      "title": "正在铸造您的 地段。",
+      "description": "正在将您的 地段 铸造到区块链上。"
+    },
+    "nonce": {
+      "title": "正在获取您交易的签名",
+      "description": "正在获取您的认领操作的签名。请稍等几秒钟。"
+    },
+    "second-transaction": {
+      "title": "请等待第二笔交易",
+      "description": "你需要等待第二笔交易完成才能领取你的人像。这可能需要多达1分钟的时间！"
+    },
+    "unclaimed-avatar": {
+      "title": "未领取的人像",
+      "description": "由于您有一个未领取的人像，您无法打开该包裹。请验证此交易以领取您的人像。 "
+    },
+    "playerProfile": {
+      "notLoggedIn": "玩家个人资料未登录",
+      "playerConnecting": "玩家个人资料（连接中）",
+      "loggedInAs": "用以下身份登录："
+    },
+    "payments": {
+      "chooseMethod": "请选择支付方式",
+      "matic": "matic",
+      "usdt": "usdt",
+      "ixt": "ixt"
+    }
+  },
+  "taskManager": {
+    "tbd": "TBD",
+    "possibleOutcome": "可能的结果",
+    "eventsTotal": "所有待处理",
+    "claimAll": "一键领取",
+    "claim": "领取",
+    "quantity": "数量:",
+    "noTasks": "没有进行中的任务",
+    "noOrders": "没有进行中的订单",
+    "harvesting": "已收集:",
+    "dailyOutput": "每日产出:",
+    "refiningWaste": "正在提炼废料",
+    "taskSummary": "任务概览",
+    "eta": "left",
+    "loadingItems": "加载任务进度...",
+    "order": {
+      "eternalab": {
+        "craft": {
+          "title": "提炼废料",
+          "progress": "可能产出: 胶囊"
+        },
+        "fusion": {
+          "title": "合成元宇胶囊",
+          "progress": "产出: 1 个元宇胶囊"
+        }
+      },
+      "gws": {
+        "craft": {
+          "title": "发送废料中",
+          "progress": "产出: {amount} AC币"
+        }
+      },
+      "new-lands": {
+        "energy-production": "能源生产",
+        "number-facilities": "工厂数量:",
+        "completed-tasks": "已完成任务:",
+        "energy-produced": "已产生能源:",
+        "next-energy": "下一个能源:",
+        "craft": {
+          "title": "正在建造工厂",
+          "progress": "产出: 1 个工厂"
+        },
+        "upgrade": {
+          "title": "正在升级工厂",
+          "upgrade": "升级:",
+          "tier": "层级:",
+          "et": "剩余时间"
+        }
+      }
+    },
+    "orderClaim": {
+      "description": "早上好，您的预定已经最终确定，我们正在处理您的奖励。您的结果将在片刻内显示在下方，请耐心等待。",
+      "nothing": "空气",
+      "buttons": {
+        "goTo": "前往库存",
+        "prospectTask": "潜在任务"
+      },
+      "success": {
+        "eternalab": "啊，花了我们数百年的时间。但是很快我们终于可以看到超越自然世界的景象了。亲爱的，这是你的补偿。",
+        "gws": "拿着，这是你该死的AC币。",
+        "new-lands": "嘿老铁！你的工厂超级棒，已经运送到你的土地上了。我建议你将它放在一块土地上，生产一些美味的能源！",
+        "y-drone": "废料已经处理完毕，特工。无人机即将重新部署。"
+      },
+      "failure": {
+        "eternalab": {
+          "title": "实验失败了",
+          "description": "这种废料，如此奇特的熵。它导致了……什么也没有。现在我们明白了为什么世界会进入热平衡状态进入休眠。",
+          "buttonTry": "回到实验室"
+        }
+      }
+    }
+  },
+  "offers": {
+    "buttons": {
+      "confirm": "购买",
+      "cancel": "取消"
+    },
+    "starterPack": {
+      "title": "初学者优惠",
+      "description": "嗨，特工！你醒啦。接下来的48小时内，你可以以折扣价购买第九星球上的土地。这是开始你任务的好机会。祝你好运！",
+      "packTitle": "快递",
+      "name": {
+        "gg37small": "小包",
+        "gg37medium": "中包"
+      },
+      "pix": {
+        "gg37small": "11 个地段",
+        "gg37medium": "111 个地段"
+      },
+      "price": {
+        "gg37medium": {
+          "normal": "$65",
+          "sale": "32.5"
+        },
+        "gg37small": {
+          "normal": "$10",
+          "sale": "$5"
+        }
+      }
+    }
+  },
+  "game": {
+    "greetingTitle": "早上好,",
+    "header": {
+      "place": "位置",
+      "onEmpty": "在空白瓷砖上"
+    },
+    "terminal": {
+      "entry": {
+        "live": "已经上线",
+        "cSoon": "即将登场"
+      },
+      "descriptions": {
+        "inInventory": "在库存中，特工们可以查看他们所有的资产。",
+        "explore": "在第九星球上探索并在网络帝国的市场进行交易。",
+        "inMissionCtrl": "在任务控制中心，特工们可以让他们的资产发挥作用。"
+      }
+    },
+    "helper": {
+      "loadingUser": "请稍等，正在加载您的用户信息...",
+      "loadingAssets": "正在加载资产...",
+      "fetchingUser": "正在获取用户信息",
+      "fetchingYourItems": "正在获取您的物品信息",
+      "timeDays": {
+        "days": "天",
+        "hours": "小时",
+        "minutes": "分钟"
+      }
+    }
+  },
+  "layouts": {
+    "headers": {
+      "accountBalance": "账户余额:",
+      "ixt": "IXT:",
+      "dashboard": "IX 基金会",
+      "terminal": "终端",
+      "inventory": "库存",
+      "missionControl": "任务控制",
+      "game": "游戏",
+      "planetIX": "第九星球",
+      "automatedTrans": "自动传输"
+    }
+  },
+  "cosmetics": {
+    "chooseCosmetics": "选择装饰品",
+    "chooseNFT": "选择 NFT",
+    "userInfo": {
+      "aoc": "变革特工",
+      "memberSince": "注册日期",
+      "status": "状态",
+      "social": "社交账号",
+      "pm": "私信",
+      "showcase": "展示"
+    }
+  },
+  "tips": [
+    {
+      "title": "游戏手册",
+      "subtitle": "AOC 备忘录 723",
+      "description": "如果您在太空中感到迷失，请阅读《第九星球游戏手册》",
+      "image": ""
+    },
+    {
+      "title": "传奇资产",
+      "subtitle": "AOC 备忘录 954",
+      "description": "大多数资产在层级和稀有度上有所不同，传奇资产是最有价值的。",
+      "image": "/tips/images/biomod-legendary.png"
+    },
+    {
+      "title": "四季",
+      "subtitle": "AOC 备忘录 341",
+      "description": "随着在 第九星球 上收集和处理更多废料，该星球的气候将稳定下来，并出现新的任务。",
+      "image": "/tips/images/currency-waste.png"
+    },
+    {
+      "title": "变革特工",
+      "subtitle": "AOC 备忘录 629",
+      "description": "作为变革特工，您的使命是复兴 第九星球。",
+      "image": "/tips/images/aoc-white.png"
+    },
+    {
+      "title": "网络帝国 市场",
+      "subtitle": "AOC 备忘录 683",
+      "description": "通过在市场上列出您的 地段 和其他资产，您可以让潜在买家更容易找到并购买它们。",
+      "image": "/tips/images/pix-outlier.png"
+    },
+    {
+      "title": "AFTER EARTH",
+      "subtitle": "AOC 备忘录 583",
+      "description": "在2089年，地球毁灭了。从那一年开始，我们将其称为1 A.E.（After Earth）。",
+      "image": ""
+    },
+    {
+      "title": "瓷砖契约",
+      "subtitle": "AOC 备忘录 298",
+      "description": "每个瓷砖契约都有其独特的特点，其中大多数契约为车辆和工厂提供额外的福利。",
+      "image": "/tips/images/contract-chronos.png"
+    },
+    {
+      "title": "领土",
+      "subtitle": "AOC 备忘录 271",
+      "description": "您可以将相邻的地段合并为领土。因此，你应该专注于地图上的小块区域，通过买卖合适的领土来实现目标。",
+      "image": "/tips/images/zone-common.png"
+    },
+    {
+      "title": "归档",
+      "subtitle": "AOC 备忘录 577",
+      "description": "当改变之士们在450年A.E.回归时，人类的残余在毁灭事件中幸存下来，分散在太阳系的行星和卫星上。",
+      "image": "/tips/images/aoc-white.png"
+    },
+    {
+      "title": "IX 基金会",
+      "subtitle": "AOC 备忘录 478",
+      "description": "将地标、领土和元股抵押在IX基金会上是持续获得$IXT的好方法。",
+      "image": "/tips/images/currency-ixt.png"
+    },
+    {
+      "title": "归档",
+      "subtitle": "AOC 备忘录 123",
+      "description": "A.M.E的发明者名叫 Ame Valdis，她的姐姐 Agnes Valdis 记录了她们的成长和灭亡的数据日志。其中一些记录仍然隐藏在第九星球上。",
+      "image": ""
+    },
+    {
+      "title": "探测车",
+      "subtitle": "AOC 备忘录 137",
+      "description": "探测车只需要每隔十天进行一次清空操作。",
+      "image": "/tips/images/rover-piercer.png"
+    },
+    {
+      "title": "探测车",
+      "subtitle": "AOC 备忘录 739",
+      "description": "探测车也许能找到元宇胶囊。",
+      "image": "/tips/images/biomod-metamod.png"
+    },
+    {
+      "title": "探测车与无人机",
+      "subtitle": "AOC 备忘录 157",
+      "description": "在任务控制中，探测车和无人机可以放置在同一个地块上。如果它们的等级相同，无人机的性能将增加额外的20%。",
+      "image": "/tips/images/drone-piercer.png"
+    },
+    {
+      "title": "无人机",
+      "subtitle": "AOC 备忘录 866",
+      "description": "有时候探测车可能需要维修，而无人机则被认为永远不会出故障。",
+      "image": "/tips/images/drone-genesis.png"
+    },
+    {
+      "title": "地段",
+      "subtitle": "AOC 备忘录 324",
+      "description": "第九星球是地球的数字化再现，所有土地被划分为17亿个地段，每个地段都是独特的NFT。",
+      "image": "/tips/images/pix-legendary.png"
+    },
+    {
+      "title": "能源",
+      "subtitle": "AOC 备忘录 429",
+      "description": "将工厂抵押在领土上而不是地段上，将得到更高的能源产量。",
+      "image": "/tips/images/currency-energy.png"
+    },
+    {
+      "title": "地标",
+      "subtitle": "AOC 备忘录 726",
+      "description": "每个地标都根据其在第九星球宇宙中的战略重要性被分配了稀有度等级和星级评级。",
+      "image": "/tips/images/landmark.png"
+    },
+    {
+      "title": "地标",
+      "subtitle": "AOC 备忘录 727",
+      "description": "每个地标都有一个佣金区域，拥有并质押该地标的人将获得在该区域内进行的每笔交易价值的5%佣金。",
+      "image": "/tips/images/landmark.png"
+    },
+    {
+      "title": "元股",
+      "subtitle": "AOC 备忘录 1328",
+      "description": "元股的持有者将持续获得$IXT奖励。分发的金额取决于公司每月的收入。",
+      "image": "/tips/images/metashare-gws.png"
+    },
+    {
+      "title": "抽奖券",
+      "subtitle": "AOC 备忘录 196",
+      "description": "如果您有多余的抽奖券，记得去幸运猫参加即将举行的抽奖活动。",
+      "image": "/tips/images/raffle-ticket-regular.png"
+    },
+    {
+      "title": "元宇胶囊",
+      "subtitle": "AOC 备忘录 659",
+      "description": "元宇胶囊可以用来升级工厂。",
+      "image": "/tips/images/biomod-metamod.png"
+    },
+    {
+      "title": "瓷砖契约",
+      "subtitle": "AOC 备忘录 213",
+      "description": "您可以在新大陆公司购买瓷砖契约。一旦您领取并锁定了瓷砖契约，额外的地块将会在任务控制中可用。",
+      "image": "/tips/images/contract-artemis.png"
+    },
+    {
+      "title": "金币",
+      "subtitle": "AOC 备忘录 258",
+      "description": "激活额外的瓷砖会产生每月1个金币或1个微金币的费用。",
+      "image": "/tips/images/currency-astro-gold.png"
+    },
+    {
+      "title": "瓷砖契约",
+      "subtitle": "AOC 备忘录 586",
+      "description": "您可以在任务控制中激活和停用瓷砖。",
+      "image": "/tips/images/contract-artemis.png"
+    },
+    {
+      "title": "web3 钱包",
+      "subtitle": "AOC 备忘录 330",
+      "description": "如果加载界面卡住了，请尝试在您的Web3钱包中使用加速功能。",
+      "image": ""
+    },
+    {
+      "title": "归档",
+      "subtitle": "AOC 备忘录 986",
+      "description": "在终结之后，Chasse-Galerie是最后一艘到达第九星球表面的太空飞船。该船的大部分数据记录仍然下落不明。",
+      "image": ""
+    },
+    {
+      "title": "变革代理人",
+      "subtitle": "AOC 备忘录 569",
+      "description": "变革代理人既不是人类也不是机器人；他们是由A.M.E创造的一种未知生命形式。",
+      "image": "/tips/images/aoc-white.png"
+    },
+    {
+      "title": "归档",
+      "subtitle": "AOC 备忘录 410",
+      "description": "偶尔在第九星球上会检测到奇怪的声音，尽管所有的生命都已经绝迹。",
+      "image": ""
+    },
+    {
+      "title": "归档",
+      "subtitle": "AOC 备忘录 1792",
+      "description": "终结之后，内部行星和外部卫星之间的贸易对人类的生存至关重要。在没有监管机构管理商业活动的情况下，各大公司成为了太阳系中类似国家的实体。",
+      "image": ""
+    },
+    {
+      "title": "大终结",
+      "subtitle": "AOC 备忘录 5123",
+      "description": "终结的最后阶段是NeoVirus，这是一种专门设计用来实现一个目标的计算机病毒——彻底摧毁文明。",
+      "image": ""
+    },
+    {
+      "title": "地段 & 土地瓷砖",
+      "subtitle": "AOC 备忘录 102",
+      "description": "在Planet IX上，数字土地的地块被称为PIX，又叫地段，可以在任务控制中放置在土地瓷砖上进行质押。",
+      "image": "/tips/images/pix-uncommon.png"
+    },
+    {
+      "title": "领土",
+      "subtitle": "AOC 备忘录 850",
+      "description": "在网络帝国的 市场中，通过连接10个或更多相邻的一般地段（PIX），可以创建一般地带（Area）。",
+      "image": "/tips/images/area-outlier.png"
+    },
+    {
+      "title": "领土",
+      "subtitle": "AOC 备忘录 851",
+      "description": "在网络帝国的 市场中，通过连接20个或更多相邻的常见地段（PIX），可以创建常见地带（Area）。",
+      "image": "/tips/images/area-common.png"
+    },
+    {
+      "title": "领土",
+      "subtitle": "AOC 备忘录 852",
+      "description": "在网络帝国的 市场中，通过连接30个或更多相邻的罕见地段（PIX），可以创建罕见地带（Area）。",
+      "image": "/tips/images/area-uncommon.png"
+    },
+    {
+      "title": "领土",
+      "subtitle": "AOC 备忘录 853",
+      "description": "在网络帝国的 市场中，通过连接40个或更多相邻的稀有地段（PIX），可以创建稀有地带（Area）。",
+      "image": "/tips/images/area-rare.png"
+    },
+    {
+      "title": "领土",
+      "subtitle": "AOC 备忘录 854",
+      "description": "在网络帝国的 市场中，通过连接50个或更多相邻的传奇地段（PIX），可以创建传奇地带（Area）。",
+      "image": "/tips/images/area-legendary.png"
+    },
+    {
+      "title": "工厂",
+      "subtitle": "AOC 备忘录 1023",
+      "description": "您可以在新大陆公司升级工厂。一旦升级，它们的性能至少会提升一倍。",
+      "image": "/tips/images/facility-legendary.png"
+    },
+    {
+      "title": "无人机",
+      "subtitle": "AOC 备忘录 423",
+      "description": "无人机收集废料的周期是48小时一次。",
+      "image": "/tips/images/drone-night.png"
+    },
+    {
+      "title": "新大陆创世纪NFT",
+      "subtitle": "AOC 备忘录 419",
+      "description": "通过质押新大陆创世纪NFT，您将获得免费的额外土地瓷砖访问权限。",
+      "image": "/tips/images/genesis-new-lands.png"
+    },
+    {
+      "title": "y_ 创世纪NFT",
+      "subtitle": "AOC 备忘录 421",
+      "description": "质押Y_创世纪NFT可以给您的探测车提供免费维修。",
+      "image": "/tips/images/genesis-y-space.png"
+    },
+    {
+      "title": "永恒实验室创世纪NFT",
+      "subtitle": "AOC 备忘录 425",
+      "description": "质押永恒实验室创世纪NFT会增加废料精炼实验成功的几率。",
+      "image": "/tips/images/genesis-eternalab.png"
+    },
+    {
+      "title": "空投",
+      "subtitle": "AOC 备忘录 843",
+      "description": "如果您持有AOC金徽章，您将被添加到未来空投的白名单中。",
+      "image": "/tips/images/aoc-bronze.png"
+    }
+  ]
+}
