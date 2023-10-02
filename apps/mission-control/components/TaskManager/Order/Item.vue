@@ -68,7 +68,7 @@ import ARROW from '~/assets/images/ui/icons/arrow-regular.svg'
 
 const { activeSpeedupOrder, orderFinishTime, orderIdToListId, orderAmountTaxed } = useCorporationOrders()
 const { claimOrder } = useOrderContracts()
-
+const { astroCreditToken } = useCurrencyData()
 const props = defineProps<{
   order: OrderFragment,
   corporationOrderId: CorporationOrderId
@@ -89,7 +89,11 @@ const onClickClaim = () => {
 }
 
 const onClickSpeedup = () => {
-  activeSpeedupOrder.value = { order: props.order, corporation: props.corporationOrderId, payToken: 'astro-credit' }
+  activeSpeedupOrder.value = {
+    order: props.order,
+    corporation: props.corporationOrderId,
+    payToken: astroCreditToken.value
+  }
 }
 
 const corporation = computed(() => props.corporationOrderId.type)

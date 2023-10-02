@@ -1,21 +1,22 @@
 <template lang="pug">
-TaskManagerCorporationSection() 
-  template(#title) {{$t(`taskManager.refiningWaste`)}}
+VList(pb="6")
+  TaskManagerCorporationSection() 
+    template(#title) {{$t(`taskManager.refiningWaste`)}}
 
-  template(#speedup)
-    TaskManagerCorporationSpeedupAll()
+    template(#speedup)
+      TaskManagerCorporationSpeedupAll()
 
-  template(#default)
-    TaskManagerOrderList(:corporation-order-id="craftId")
+    template(#default)
+      TaskManagerOrderList(:corporation-order-id="craftId")
 
-  template(#buttons)
-    TaskManagerCorporationClaimAll(type="orders", :order-id="craftId")
+    template(#buttons)
+      TaskManagerCorporationClaimAll(type="orders", :order-id="craftId")
 
-TaskManagerCorporationSection() 
-  template(#title) M3ta-m0d Fusion
+  TaskManagerCorporationSection() 
+    template(#title) M3ta-m0d Fusion
 
-  template(#default)
-    TaskManagerOrderList(:corporation-order-id="fusionId")
+    template(#default)
+      TaskManagerOrderList(:corporation-order-id="fusionId")
 
 </template>
 
