@@ -8,6 +8,7 @@ Popup()
       p() Choose ticket amount
       VList(h="14")
         InputAdjustable(v-model="oneTimeLotteryEntries")
+        p(text="sm right" color="ix-white opacity-60") {{oneTimeLotteryEntries.max}} entries out of {{maxOneTimeEntries}}
 
   template(#footer)
     HList(items="center" justify="between")
@@ -24,6 +25,7 @@ Popup()
 import { useLottery } from "~/composables/useLottery";
 import { useEnterLottery } from "~/composables/useEnterLottery";
 
+const { maxOneTimeEntries } = useEnterLottery()
 const { displayPopup, popup } = usePopups()
 
 const {

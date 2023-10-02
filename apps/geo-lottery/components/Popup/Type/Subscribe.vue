@@ -8,6 +8,7 @@ Popup()
       p() Choose ticket amount
       VList(h="14")
         InputAdjustable(v-model="subscriptionEntries")
+        p(text="sm right" color="ix-white opacity-60") {{subscriptionEntries.max}} entries out of {{maxSubscriptionEntries}}
 
   template(#footer)
     HList(items="center" justify="between")
@@ -24,6 +25,7 @@ Popup()
 import { useLottery } from "~/composables/useLottery";
 import { useSubscription } from "~/composables/useSubscription";
 
+const { maxSubscriptionEntries } = useSubscription()
 const { displayPopup, popup } = usePopups()
 
 const {
@@ -51,7 +53,7 @@ const onSubscribe = async () => {
   if (subscription)
     displayPopup({
       type: 'popup-type-subscribe-success',
-      entries: subscriptionEntries.value.value,
+      entries: subscriptionEntries.value.value
     })
 }
 

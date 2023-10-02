@@ -12,13 +12,18 @@ export const useSubscription = () => {
   }
 
   const { enteredTickets } = useLottery()
+
+  const maxSubscriptionLotteryEntries = computed(() => maxSubscriptionEntries.value - (enteredTickets.value?.entered_weekly_tickets ?? 0))
+
   const subscriptionEntries = useState<AdjustableNumber>('subscription-entries', () => ({
     value: 1,
     min: 1,
-    max: computed<number>(() => {
-      return maxSubscriptionEntries.value - (enteredTickets.value.entered_weekly_tickets || 0)
-    })
+    max: maxSubscriptionLotteryEntries.value
   }))
+
+  watch([maxSubscriptionEntries, enteredTickets], () => {
+    subscriptionEntries.value.max = maxSubscriptionLotteryEntries.value
+  })
 
   const {
     enterLotteryFlow: enterLotteryFlowContract,
