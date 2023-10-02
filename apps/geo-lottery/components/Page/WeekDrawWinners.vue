@@ -3,8 +3,9 @@ div()
   h2(mb-7 text="3xl md:4xl xl:5xl" font="bdrA3mik") THIS WEEK’S DRAW
   div(bg="black" rounded="4" b="1 $mc-pink" py-16)
     div(mb="18")
-      p(text="xl center" font="extrabold" m="b-4 md:b-8" ) ROUND {{'#' + (roundID +1)}}
-      HelperCountDown(:endTimestamp="0" :type="'large'")
+      ClientOnly
+        p(text="xl center" font="extrabold" m="b-4 md:b-8" ) ROUND {{'#' + (roundID +1)}}
+        HelperCountDown(:endTimestamp="0" :type="'large'")
 
     TierSize(:id="id" :tier="tier" :size="size")
 
