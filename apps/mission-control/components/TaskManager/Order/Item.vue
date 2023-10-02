@@ -133,7 +133,15 @@ const getOrderTokenIds = () => {
   if (props.corporationOrderId.task == 'fusion')
     return [0] // m3ta-mod
 
-  return getNextLevelTokenIds(props.order?.orderTokenId, FacilityTierMap[props.order?.orderTokenId])
+  if (!props.order?.orderTokenId)
+    return []
+
+  const facilityTier = FacilityTierMap[props.order.orderTokenId]
+
+  if (!facilityTier)
+    return []
+
+  return getNextLevelTokenIds(props.order?.orderTokenId, facilityTier)
 }
 
 const orderTokens = getOrderTokenIds()
