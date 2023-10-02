@@ -1,6 +1,6 @@
 <template lang="pug">
 ClientOnly
-  ListItem(:id="orderId" :no-select="true" :is-selected="isSelected" :corporation="corporationOrderId.type" @click-action="onClickAction" :tokens="tokens" :token="token")
+  ListItem(:id="orderId" :no-select="true" :is-selected="isSelected" :corporation="corporationOrderId.type" @click-action="onClickAction" :tokens="tokens")
     template(#progressbar)
       HelperProgressBarBig(:progress="progress")
 
@@ -63,11 +63,12 @@ ClientOnly
 <script setup lang="ts">
 import type { OrderFragment } from '#gql';
 import type { CorporationOrderId } from '~/composables/corporations/order/defineOrderContract';
-import type { NftFragment } from '#gql';
 import ARROW from '~/assets/images/ui/icons/arrow-regular.svg'
 
 const { activeSpeedupOrder, orderFinishTime, orderIdToListId, orderAmountTaxed } = useCorporationOrders()
+const { getProgress } = useTaskManager()
 const { claimOrder } = useOrderContracts()
+
 const { astroCreditToken } = useCurrencyData()
 const props = defineProps<{
   order: OrderFragment,
@@ -98,7 +99,7 @@ const onClickSpeedup = () => {
 
 const corporation = computed(() => props.corporationOrderId.type)
 const task = computed(() => props.corporationOrderId.task)
-
+const progress = computed(() => getProgress(props.order, currentTime.value))
 
 const isSelected = computed(() => activeSpeedupOrder.value?.order?.orderId == props.order.orderId)
 
@@ -107,17 +108,6 @@ const orderId = computed(() => orderIdToListId(props.order))
 const finishTime = computed(() => orderFinishTime(props.order))
 
 const currentTime = useTimestamp({ interval: 1000 })
-
-const progress = computed(() => {
-  const { creationTime, defaultOrderTime, totalOrderTime } = props.order
-  const defaultDuration = defaultOrderTime * 1000
-  const adjustedOrderTime = totalOrderTime * 1000
-  const timeDiff = defaultDuration - adjustedOrderTime
-  const currentPosition = currentTime.value - (creationTime * 1000)
-
-  const progress = (currentPosition + timeDiff) / (defaultDuration)
-  return Math.min(100, progress * 100)
-})
 
 const timeLeft = computed(() => {
   if (isDone.value)
@@ -139,15 +129,18 @@ const levels = computed(() => {
   }
 })
 
-const nextLevelTokenIds = computed(() => {
-  if (props.order.orderTokenId)
-    return getNextLevelTokenIds(props.order?.orderTokenId, FacilityTierMap[props.order?.orderTokenId])
-  return null
-})
+const getOrderTokenIds = () => {
+  if (props.corporationOrderId.task == 'fusion')
+    return [0] // m3ta-mod
 
-const tokens: NftFragment[] = nextLevelTokenIds.value?.map(id => ({ type: 'facility', tokenId: id })) ?? null
+  return getNextLevelTokenIds(props.order?.orderTokenId, FacilityTierMap[props.order?.orderTokenId])
+}
 
-const token: NftFragment = props.corporationOrderId.task == 'fusion' ? { tokenInfo: { type: 'm3ta-mod' } } : null
+const orderTokens = getOrderTokenIds()
+const { data: tokens, execute: fetchTokens } = useTokensInfo(orderTokens)
+
+if (orderTokens.length > 0)
+  await fetchTokens()
 
 const facilityTier = computed(() => FacilityTierMap[props.order.orderTokenId])
 
