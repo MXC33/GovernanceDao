@@ -119,7 +119,7 @@ export const usePlayerAPI = () => {
       if (
         response.data &&
         response.data.last_drawn_lottery &&
-        response.data.last_drawn_lottery.id &&
+        !isNaN(Number(response.data.last_drawn_lottery.id)) &&
         response.data.rounds &&
         response.data.rounds.findIndex(round => round.id === response.data.last_drawn_lottery?.id) != -1
       ) {

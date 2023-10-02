@@ -17,7 +17,7 @@ CorporationItemsAndDetailListItem(:item="item.token" :no-select="true" :img-obje
     HList(items="center" mt="-1px")
       HList(b="1 $mc-accent" items="center" h="10" flex-grow="1")
 
-        TokenSlideshow(:tokens="outputTokens" :icon="true"  flex-shrink="0" h="8" w="8" v-if="outputTokens?.length > 1 && !disableSlideshow")
+        TokenSlideshow(:tokens="outputTokens" :icon="true"  flex-shrink="0" h="8" w="8" v-if="outputTokens?.length > 1 && !disableSlideshow" :image="true")
         TokenImage(:token="outputTokens[0]" h="8" w="8" flex-shrink="0" v-else)
 
 

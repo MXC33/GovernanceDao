@@ -24,9 +24,12 @@ export const useIXHeaders = () => {
   }))
 }
 
+
+const deleteCookie = (name: string) => {
+  document.cookie = name + '=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+}
+
 export const useIXAPI = () => {
-  const { logoutWallet } = useWallet()
-  const { removeUser } = useUser()
   const headers = useIXHeaders()
   const app = useNuxtApp()
   const route = useRoute()
@@ -41,19 +44,14 @@ export const useIXAPI = () => {
   }
 
   const onUnauthorized = async () => {
-    if (route.path.includes('connect'))
+    if (route.path.includes('connect') || route.path.includes('logout'))
       return
 
     await callWithNuxt(app, () => {
-      logoutWallet()
-      removeUser()
-
-      console.log("UNAUTHORIZED")
-
       return navigateTo({
-        path: '/connect',
+        path: '/logout',
         query: {
-          redirectUrl: encodeURIComponent(route.path)
+          origin: encodeURIComponent(route.path)
         }
       })
     })
@@ -70,7 +68,7 @@ export const useIXAPI = () => {
       })
       return data
     } catch (err) {
-      if (err.message.includes("403"))
+      if (err.message.includes("403") || err.message.includes("401"))
         await onUnauthorized()
       return null
     }

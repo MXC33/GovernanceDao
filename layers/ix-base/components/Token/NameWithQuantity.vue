@@ -9,13 +9,14 @@ HList(items="center" justify="center" uppercase="~" w="full" space-x="2" px="2")
 </template>
 
 <script setup lang="ts">
-import type { TokenIdentifier } from '~/composables/Token/useTokens';
+import type { NftFragment } from '#gql';
+
 
 const props = defineProps<{
-  token: TokenIdentifier,
+  token: NftFragment,
   quantity?: number,
 }>()
 
-const isNothing = computed(() => props.token.type == 'nothing')
-const pluralize = usePlural(props.quantity ?? 0, props.token.type)
+const isNothing = computed(() => props.token.tokenInfo?.type == 'nothing')
+const pluralize = usePlural(props.quantity, props.token.tokenInfo?.type)
 </script>

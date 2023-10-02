@@ -91,21 +91,6 @@ export const useRunOnce = (id: string, fn: () => void) => {
   fn()
 }
 
-export const useGraphqlCredentials = (): CredentialsInput | null => {
-  const { walletAdress } = useWallet()
-  const { user } = useUser()
-  const userId = user.value?.id
-
-  if (!walletAdress.value) {
-    return
-  }
-
-  return {
-    playerId: userId,
-    walletAddress: walletAdress.value
-  }
-}
-
 export const useGlobalTimestamp = () => {
   const currentTime = useState('global-timestamp', () => new Date().getTime())
 
