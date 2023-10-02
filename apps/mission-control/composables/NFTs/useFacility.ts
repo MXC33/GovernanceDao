@@ -160,9 +160,18 @@ export const FacilityTierMap: Record<number, FacilityTier> = {
 
 
 export const getNextLevelTokenIds = (facilityId: number, facilityTier: FacilityTier): number[] => {
-  const currentLevel = Object.values(FacilityTokenIdMap[facilityTier]).indexOf(facilityId);
-  if (currentLevel === -1 || currentLevel >= 4) {
-    return [Object.values(FacilityTokenIdMap[facilityTier])[currentLevel] + 5]
+  const index = Object.values(FacilityTokenIdMap[facilityTier]).indexOf(facilityId)
+
+
+  if (index == -1)
+    return []
+
+  const currentLevel = index + 1
+
+  if (currentLevel == 4) {
+    return [FacilityTokenIdMap[facilityTier][index + 1]]
   }
-  return Object.values(FacilityTokenIdMap[facilityTier]).slice(currentLevel + 1, currentLevel + 5);
+  const tokenIds = Object.values(FacilityTokenIdMap[facilityTier]).slice(index + 1, index + 3);
+
+  return tokenIds
 }
