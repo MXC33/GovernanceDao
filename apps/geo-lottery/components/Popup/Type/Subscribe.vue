@@ -8,7 +8,7 @@ Popup()
       p() Choose ticket amount
       VList(h="14")
         InputAdjustable(v-model="subscriptionEntries")
-        p(text="sm right" color="ix-white opacity-60") {{subscriptionEntries.max}} entries out of {{maxSubscriptionEntries}}
+        p(text="sm right" color="ix-white opacity-60") Available {{subscriptionEntries.max}} tickets out of {{maxSubscriptionEntries}}
 
   template(#footer)
     HList(items="center" justify="between")
