@@ -1,5 +1,5 @@
 <template lang="pug">
-VList(flex-grow="1" pos="relative" min-h="0" justify="center" p="3" items="center" font="gridnik")
+VList(flex-grow="1" pos="relative" min-h="0" justify="center" p="3" items="center" font="gridnik" text="base")
   WalletConnector()
   
 </template>

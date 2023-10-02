@@ -1,5 +1,5 @@
 <template lang="pug">
-VList(:class="className" pos="sticky left-0 top-0" translate-y="$header-offset" font="gridnik" z="99" w="full" @mouseleave="onMouseLeave" ref="menuElement" transition="all")
+VList(:class="className" pos="sticky left-0 top-0" translate-y="$header-offset" font="gridnik" text="base" z="99" w="full" @mouseleave="onMouseLeave" ref="menuElement" transition="all")
   VList(pos="relative" z="2" bg="$header-background" px="4 md:7.5" )
     HeaderAdBanner(mx="-4 md:-7.5" ref="bannerEl")
     HeaderMenu(ref="menuEl")
