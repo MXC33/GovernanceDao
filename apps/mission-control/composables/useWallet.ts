@@ -162,7 +162,7 @@ export const useWallet = () => {
   const ensureCorrectChain = async (isEthereum?: true) => {
     const currentChain = getChain(isEthereum ? 'ethereum' : 'polygon')
     const { chainId } = getChainInfo(currentChain)
-    const network = provider.value.network
+    const network = provider.value?.network
 
     if (network?.chainId != chainId)
       await changeNetworkChain(currentChain)
@@ -264,11 +264,11 @@ export const useWallet = () => {
     const { chainId, chainName, nativeCurrency, rpcUrl, chainHexId } = getChainInfo(chain)
 
     try {
-      await provider.value.send("wallet_switchEthereumChain", [{ chainId: chainHexId }])
+      await provider.value?.send("wallet_switchEthereumChain", [{ chainId: chainHexId }])
     } catch (err) {
       // missing wallet in provider
       if (err && (err.code === 4902 || err.code === -32603)) {
-        await provider.value.send("wallet_addEthereumChain", [{
+        await provider.value?.send("wallet_addEthereumChain", [{
           chainId,
           chainName,
           nativeCurrency,

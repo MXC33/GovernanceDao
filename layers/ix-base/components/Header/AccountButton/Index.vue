@@ -37,10 +37,7 @@ const menuOpen = ref(false)
 const menuElement = ref()
 const { enable: showIXTSwap } = useIXTSwapVisible()
 const route = useRoute()
-const { ixtBalance, ixtPending } = useIXTContract()
-watch([ixtBalance, ixtPending], () => {
-  console.log("BALANCE", ixtBalance.value, ixtPending.value)
-})
+const { ixtBalance } = useIXTContract()
 
 const toggleMenu = () => {
   if (walletState.value !== 'connected') {

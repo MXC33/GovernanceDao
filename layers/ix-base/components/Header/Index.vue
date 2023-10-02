@@ -12,7 +12,6 @@ VList(:class="className" pos="sticky left-0 top-0" translate-y="$header-offset" 
   Transition(name="slide-top" mode="out-in")
     HeaderNavigation(v-if="activeHeaderIndex != null && headerData != null"  :key="activeHeaderIndex" :header="headerData[activeHeaderIndex]" @close="activeHeaderIndex = null")
 
-
   slot(name="contentBottom")
 
 
@@ -54,8 +53,6 @@ autoHideActive.value = autoClose
 const { height: bannerHeight } = useElementBounding(bannerEl)
 const { height: menuHeight } = useElementBounding(menuEl)
 
-const { walletState } = useWallet()
-const { ixtBalance, ixtPending } = useIXTContract()
 
 effect(() => {
   const newHeight = Math.round(bannerHeight.value + menuHeight.value)
@@ -68,14 +65,16 @@ const route = useRoute()
 
 const { refreshIXTBalance } = useIXTContract()
 const windowY = useGlobalWindowScroll()
-const { isWalletConnected } = useWallet()
+const { isLoggedInAndConnected } = useLogin()
+const mounted = useMounted()
 
-watch(isWalletConnected, (connected) => {
-  // Adds a timeout because sometimes it seems to be a race condition with contract being setup
-  if (connected)
-    setTimeout(() => refreshIXTBalance(), 10)
+watch([isLoggedInAndConnected, mounted], ([loggedIn, mounted]) => {
+  if (loggedIn || !mounted) {
+    return
+  }
+
+  refreshIXTBalance()
 }, { immediate: true })
-
 
 watch(windowY, (newValue, oldValue) =>
   isScrollingDown.value = (newValue > oldValue)
