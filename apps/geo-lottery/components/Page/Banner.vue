@@ -25,7 +25,7 @@ VList(class="banner" pos="relative" overflow="hidden" z="0" min-h="650px")
       div(class="agold_title" w-full)
         h1.banner-title(text="4xl md:5xl lg:6xl xl:7xl 2xl:8xl center" font="bdrA3mik" mb-1 v-if="livepage && activeRewards.rewards" flex="~ col md:row" justify="between"
           p-x="sm:5 md:23 lg:27 xl:21 2xl:17")
-          span() {{rewardToDisplay}}
+          span( v-if="rewardToDisplay.length > 1" ) {{rewardToDisplay}}
           span() AGOLD
         h3(text="lg xl:2xl center" font="bdrA3mik" mb-2) Total Prize Pool
         p(font="bold" text="base sm:lg center" mb-4 v-if="livepage") Every week, new Territories from around the world are <br> randomly selected. Join today and have the chance to win!
@@ -45,16 +45,25 @@ const { checkIsAuth } = useHelperMethods()
 const { isLoggedInAndConnected } = useLogin()
 
 const rewardToCounter = ref(0)
+const currentReward = ref(0)
 const rewardToDisplay = ref('0')
+  console.log('currentReward', currentReward.value)
 await getActiveRewards()
-rewardToCounter.value = activeRewards.value.rewards
+currentReward.value = activeRewards.value.rewards - 5000
+  console.log('currentReward', currentReward.value)
 
 const activeRewardsInterval = setInterval(async () => {
-  if(activeRewards.value.incomingFlowRate && activeRewards.value.incomingFlowRate > 0){
-    rewardToCounter.value += (activeRewards.value.incomingFlowRate / 2) / 10
-    rewardToDisplay.value = rewardToCounter.value.toFixed((3)).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  if(currentReward.value > 0 && activeRewards.value.incomingFlowRate && activeRewards.value.incomingFlowRate > 0){
+    if(currentReward.value < activeRewards.value.rewards){
+      currentReward.value += Number(5000 / 180)
+    }
+    else{
+      currentReward.value += (activeRewards.value.incomingFlowRate / 2) / 5
+    }
+    rewardToDisplay.value = currentReward.value.toFixed((3)).replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
   }
-}, 100)
+
+}, 200)
 
 const topInfo = computed(() => {
   let totalTickets = 0
@@ -103,6 +112,8 @@ const goToYoutubeLink = ( ) => {
   //return window.location.href = 'https://www.youtube.com/watch?v=nr8_gWSexg0&ab_channel=PLANETIX'
   return window.open('https://www.youtube.com/watch?v=nr8_gWSexg0&ab_channel=PLANETIX')
 }
+
+
 </script>
 <style>
 .banner {
