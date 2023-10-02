@@ -4,18 +4,18 @@ VList(class="banner" pos="relative" overflow="hidden" z="0" min-h="650px")
     template(#image-source)
       img(src="~/assets/images/banner-map.png" inset="0" object="cover" h="full" w="full" pos="absolute" z="-1" opacity="50")
   div(w="full" flex="~" justify="center" h="full" items-center pos="absolute")
-    //div(w="full" flex="~" justify="center" top="0" pos="absolute")
+    div(w="full" flex="~" justify="center" top="0" pos="absolute" v-if="isLoggedInAndConnected" )
       div(container mx-3 lg:px-10 xl:px-30 )
         div.banner-top(flex="~ col sm:row" w="full" p="y-2 x-0 sm:x-10 " gap="x-4 xl:x-7" justify="center" text="center sm:left")
           div(text="sm" font="bold" uppercase="~" space-x="2 xl:4")
             span() Complete tickets for next round
-            span(color="ix-pink" font="medium") 12
-          div(text="sm" font="bold" uppercase="~" space-x="2 xl:4")
-            span() Subscription
-            span(color="ix-pink" font="medium") Streaming (12% until ticket)
-          div(text="sm" font="bold" uppercase="~" space-x="2 xl:4")
-            span() AGOLD funds last until
-            span(color="ix-pink" font="medium" ) 11-14-2023
+            span(color="ix-pink" font="medium") {{topInfo.totalTickets}}
+          div(text="sm" font="bold" uppercase="~" v-if="topInfo.fundsLastUntil" )
+            span(m="r-2 xl:r-4") Subscription
+            span(color="ix-pink" font="medium" display="inline-block") Streaming ({{topInfo.nextTicketPercentage.toFixed(2)}}% until ticket)
+          div(text="sm" font="bold" uppercase="~" v-if="topInfo.fundsLastUntil" )
+            span(m="r-2 xl:r-4") AGOLD funds last until
+            span(color="ix-pink" font="medium" display="inline-block") {{topInfo.fundsLastUntil}}
 
     div(container mx-3 lg:px-10 xl:px-30 h="full" flex=" ~ col" justify="center" items-center p="t-25 b-1 sm:t-24 sm:b-28")
       h3( class="title-stroke " color="white" font="bdrA3mik" text="lg center stroke-$mc-pink" mb-5 v-if="livepage") OWN TERRITORIES | BUY TICKETS | WIN BIG
@@ -37,10 +37,12 @@ VList(class="banner" pos="relative" overflow="hidden" z="0" min-h="650px")
 </template>
 
 <script lang="ts" setup>
+import { format } from "date-fns"
 import {useLottery} from "~/composables/useLottery";
-const { isLotteryActive, getActiveRewards, activeRewards } = useLottery()
+const { isLotteryActive, getActiveRewards, activeRewards, enteredTickets } = useLottery()
 const { displayPopup } = usePopups()
 const { checkIsAuth } = useHelperMethods()
+const { isLoggedInAndConnected } = useLogin()
 
 const rewardToCounter = ref(0)
 const rewardToDisplay = ref('0')
@@ -53,6 +55,26 @@ const activeRewardsInterval = setInterval(async () => {
     rewardToDisplay.value = rewardToCounter.value.toFixed((3)).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
   }
 }, 100)
+
+const topInfo = computed(() => {
+  let totalTickets = 0
+  if (enteredTickets.value)
+    totalTickets = enteredTickets.value.entered_tickets + enteredTickets.value.entered_stream
+
+  let nextTicketPercentage = 0
+  if (enteredTickets.value && enteredTickets.value.next_ticket_percentage)
+    nextTicketPercentage = enteredTickets.value.next_ticket_percentage
+
+  let fundsLastUntil = ''
+  if (enteredTickets.value && enteredTickets.value.funds_last_until && enteredTickets.value.funds_last_until.getTime() > new Date().getTime())
+    fundsLastUntil = format(enteredTickets.value.funds_last_until, 'dd-MM-yyyy')
+
+  return {
+    totalTickets,
+    nextTicketPercentage,
+    fundsLastUntil
+  }
+})
 
 onUnmounted(() => {
   clearInterval(activeRewardsInterval)

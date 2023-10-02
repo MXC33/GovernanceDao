@@ -7,7 +7,9 @@ import {
   WeeksDraw,
   ActiveRewards
 } from "~/composables/api/get/usePlayerAPI";
+import {useAstroGoldContract} from "@ix/base/composables/Contract/useAstroGoldContract";
 export const weeklyFlowRateConst = 1 / (3600 * 24 * 7)
+export const dailyFlowRateConst = 1 / (3600 * 24)
 
 export const useLotteryID = () => {
   const { lotteryID } = useLuckyCatGeoLotteryContract()
@@ -26,6 +28,7 @@ export const useLottery = () => {
 
   const { data: currentLotteryID, execute: fetchLotteryID } = useLotteryID()
   const { data: ticketData, execute: fetchTicketData } = useEnteredTicketData()
+  const { astroGoldBalance, refreshAstroGoldBalance } = useAstroGoldContract()
 
   const {
     lotteryStartedAt: lotteryStartedAtContract,
@@ -69,7 +72,11 @@ export const useLottery = () => {
     entered_tickets: 0,
     entered_stream: 0,
     active_rate: 0,
-    entered_weekly_tickets: 0
+    active_rate_live: 0,
+    entered_weekly_tickets: 0,
+    entered_weekly_tickets_backend: 0,
+    next_ticket_percentage: 0,
+    funds_last_until: new Date()
   }))
 
   const getEnteredTickets = async () => {
@@ -83,11 +90,14 @@ export const useLottery = () => {
 
       const ticketPrice = await getTicketPrice()
 
+      await refreshAstroGoldBalance()
+
       enteredTickets.value = {
         ...enteredTicketsResponse,
         active_rate_live: userLotteryRate,
         entered_weekly_tickets: Math.round((userLotteryRate / weeklyFlowRateConst) / ticketPrice),
-        entered_weekly_tickets_backend: Math.round((enteredTicketsResponse.active_rate / weeklyFlowRateConst) / ticketPrice)
+        entered_weekly_tickets_backend: Math.round((enteredTicketsResponse.active_rate / weeklyFlowRateConst) / ticketPrice),
+        funds_last_until: add(new Date(), { days: Math.round((astroGoldBalance.value || 0) / (userLotteryRate / dailyFlowRateConst)) })
       }
       return enteredTickets.value
     } catch (e) {
@@ -98,7 +108,9 @@ export const useLottery = () => {
         active_rate: 0,
         active_rate_live: 0,
         entered_weekly_tickets: 0,
-        entered_weekly_tickets_backend: 0
+        entered_weekly_tickets_backend: 0,
+        next_ticket_percentage: 0,
+        funds_last_until: new Date()
       }
       throw new Error(CustomErrors.unknownError)
     }
