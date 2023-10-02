@@ -47,10 +47,8 @@ const { isLoggedInAndConnected } = useLogin()
 const rewardToCounter = ref(0)
 const currentReward = ref(0)
 const rewardToDisplay = ref('0')
-  console.log('currentReward', currentReward.value)
 await getActiveRewards()
 currentReward.value = activeRewards.value.rewards - 5000
-  console.log('currentReward', currentReward.value)
 
 const activeRewardsInterval = setInterval(async () => {
   if(currentReward.value > 0 && activeRewards.value.incomingFlowRate && activeRewards.value.incomingFlowRate > 0){
