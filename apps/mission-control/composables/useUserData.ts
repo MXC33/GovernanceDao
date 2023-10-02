@@ -163,28 +163,36 @@ export const useUserData = () => {
   const refreshPacks = () =>
     Promise.all([refreshGravityGrade(), refreshTokens()])
 
-  const balanceOfToken = useTokenBalance([
-    ethNFTs.value as NftFragment,
-    nfts.value as NftFragment,
-    packs.value as NftFragment,
-    currencyData.value as NftFragment,
-    landData.value as NftFragment,
-    rovers.value as NftFragment,
-    avatars.value as NftFragment,
-    aocbadges.value as NftFragment,
-    geoLottery.value as NftFragment
-  ])
+  const balanceOfToken = (token: NftFragment, decimalCount?: number) => {
+    return useTokenBalance([
+      ethNFTs.value as NftFragment,
+      nfts.value as NftFragment,
+      packs.value as NftFragment,
+      currencyData.value as NftFragment,
+      landData.value as NftFragment,
+      rovers.value as NftFragment,
+      avatars.value as NftFragment,
+      aocbadges.value as NftFragment,
+      geoLottery.value as NftFragment
+    ])(token, decimalCount)
+  }
 
 
   const mcLevel = computed(() => playerBaseLevel.value ?? 0)
 
 
   const userResources = computed(() => {
+    const waste = balanceOfToken(nfts.value.find(item =>
+      item.tokenInfo.type == 'waste')
+    )
 
+    const astroCredits = balanceOfToken(nfts.value.find(item =>
+      item.tokenInfo.type == 'astro-credit')
+    )
 
-    const waste = balanceOfToken(nfts.value.find(item => item.tokenInfo.type == 'waste'))
-    const astroCredits = balanceOfToken(nfts.value.find(item => item.tokenInfo.type == 'astro-credit'))
-    const energy = balanceOfToken(nfts.value.find(item => item.tokenInfo.type == 'energy'))
+    const energy = balanceOfToken(nfts.value.find(item =>
+      item.tokenInfo.type == 'energy')
+    )
 
     return {
       astroCredits,

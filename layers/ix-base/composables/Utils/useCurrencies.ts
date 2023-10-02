@@ -20,10 +20,10 @@ export const useCurrencyData = () => {
     await Promise.all([fetchTokenData(), asyncState.execute()])
 
   const currencyToken = (type: string) =>
-    asyncState.data.value?.find(item => item.tokenInfo.type == type)
+    asyncState.data.value?.find(item => item?.tokenInfo?.type == type)
 
   const mcToken = (type: string) =>
-    mcNFTs.value?.find(item => item.tokenInfo.type == type)
+    mcNFTs.value?.find(item => item?.tokenInfo?.type == type)
 
   const ixtToken = computed(() => currencyToken('ixt'))
 
