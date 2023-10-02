@@ -1,21 +1,18 @@
 export default defineNuxtRouteMiddleware(async (to, from) => {
-  console.log("WALLLET")
-  if (to.path == '/connect')
+  console.log("MIDDLEWARE", to.path)
+  if (to.path == '/connect' || to.path == '/logout')
     return true
 
-  const { isWalletConnected, walletSigningToken, logoutWallet } = useWallet()
-  const { user, removeUser } = useUser()
+  const { isWalletConnected, walletSigningToken } = useWallet()
+  const { user } = useUser()
 
-  console.log("WALLET", !isWalletConnected.value, !user.value)
+  console.log("WALLET", !isWalletConnected.value, !user.value, encodeURIComponent(to.path))
 
   if (!walletSigningToken.value || !user.value) {
-    logoutWallet()
-    removeUser()
-
     return navigateTo({
-      path: '/connect',
+      path: '/logout',
       query: {
-        redirectUrl: encodeURIComponent(to.path)
+        origin: encodeURIComponent(to.path)
       }
     })
   }

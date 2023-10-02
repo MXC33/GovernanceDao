@@ -1,5 +1,5 @@
 <template lang="pug">
-Popup()
+PopupBase()
   template(#icon)
     BiddingIcon()
 

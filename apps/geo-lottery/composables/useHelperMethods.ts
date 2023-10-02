@@ -10,7 +10,7 @@ export const useHelperMethods = () => {
       navigateTo({
         path: '/connect',
         query: {
-          redirectUrl: encodeURIComponent(toRoute)
+          origin: encodeURIComponent(toRoute)
         }
       })
       return false

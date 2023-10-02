@@ -1,5 +1,5 @@
 <template lang="pug">
-Popup(@close="$emit('close')")
+PopupBase()
   template(#icon)
     TransferIcon()
 

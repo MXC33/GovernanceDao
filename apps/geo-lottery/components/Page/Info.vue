@@ -6,15 +6,15 @@ VList(flex="~ col lg:row wrap" items="center" justify="between" gap-y="10")
       div(color="ix-white" font="bold" text="base sm:lg" space-y="2 md:6")
         p() To enter the Territory Lottery you need to own a Territory and purchase tickets. Every week, a Country, a Tier and a Territory Size are randomly drawn. To win you firstly need a territory in the drawn country, see Common Prize below. If you also have the drawn tier (ie, Outlier, Common, Uncommon, Rare & Legendary) your winnings will increase. If you, on top of Country and Tier, also hold the Territory size (Area, Sector, Zone, Domain) drawn your winnings increase even more.
         p()
-          span(underline  decoration="1") Common Prize
+          span(underline  decoration="1") Win
           span(font="normal")  - Greenland <br/>
           span() Win by Country - shared by players that have a territory located in the randomly selected country.
         p()
-          span(underline  decoration="1") Rare Prize
+          span(underline  decoration="1") Double win
           span(font="normal")  - Greenland + Rare <br/>
           span() Win by Country + Tier - shared by players that have a territory located in the randomly selected country and tier type.
         p()
-          span(underline  decoration="1") Legendary Prize
+          span(underline  decoration="1") Triple win
           span(font="normal")  - Greenland + Rare + Zone <br/>
           span() Win by Country + Tier + Size - shared by players that have a territory located in the randomly selected country, territory tier and size.
 
@@ -30,7 +30,7 @@ VList(flex="~ col lg:row wrap" items="center" justify="between" gap-y="10")
       template(#content)
         TireHexagonColor(tier="Rare")
     FramePinkWithImg()
-      template(#title) TRIPPLE WIN
+      template(#title) TRIPLE WIN
       template(#subtitle) COUNTRY <br> + TIER <br> + Size
       template(#content)
         TireSizeIcon(tier="Rare" size="Zone")

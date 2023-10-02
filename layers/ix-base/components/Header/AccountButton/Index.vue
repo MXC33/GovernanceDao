@@ -38,6 +38,9 @@ const menuElement = ref()
 const { enable: showIXTSwap } = useIXTSwapVisible()
 const route = useRoute()
 const { ixtBalance, ixtPending } = useIXTContract()
+watch([ixtBalance, ixtPending], () => {
+  console.log("BALANCE", ixtBalance.value, ixtPending.value)
+})
 
 const toggleMenu = () => {
   if (walletState.value !== 'connected') {
@@ -45,7 +48,7 @@ const toggleMenu = () => {
     navigateTo({
       path: '/connect',
       query: {
-        redirectUrl: encodeURIComponent(toRoute)
+        origin: encodeURIComponent(toRoute)
       }
     })
 

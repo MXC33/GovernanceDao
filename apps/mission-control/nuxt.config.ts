@@ -1,4 +1,3 @@
-require('dotenv').config()
 import { nodePolyfills } from 'vite-plugin-node-polyfills'
 import svgLoader from 'vite-svg-loader'
 
@@ -26,7 +25,9 @@ export default defineNuxtConfig({
     ]
   },
   //@ts-ignore
-  transpile: ['vue3-carousel'],
+  transpile: [
+    'interactive-shader-format'
+  ],
 
   i18n: {
     langDir: './lang',

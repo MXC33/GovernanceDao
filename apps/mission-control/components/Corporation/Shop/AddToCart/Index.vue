@@ -82,7 +82,7 @@ const canBuy = computed(() => {
     return stakedCount == 0 && balanceCount == 0
 
   if (payment.fromUser)
-    return balanceCount >= payment.value * (payment.token as NftFragment)?.payment.price
+    return balanceCount >= payment.value * payment.payment.price
 
   return true
 })

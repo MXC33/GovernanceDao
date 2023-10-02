@@ -13,9 +13,9 @@ VList(flex-grow="lt-md:1" space-y="2" max-w="180" mx="auto" w="full" color="gray
 
   div(grid="md:~ cols-3 gap-4" b="lt-md:t-1 mc-mint" items="end" justify="md:end" p="md:y-2" pos="sticky bottom-0")
 
-    PopupTokenButton(grid="md:col-start-2" btn="~ primary-outline" @click="onClickSecondary" v-if="popup.secondaryLink") {{ popup.secondaryLink.text }}
+    PopupTokenButton(grid="md:col-start-2" btn="~ secondary-outline" @click="onClickSecondary" v-if="popup.secondaryLink") {{ popup.secondaryLink.text }}
 
-    PopupTokenButton(grid="md:col-start-3" w="lt-md:full" @click="onClickPrimary" v-if="popup.primaryLink")
+    PopupTokenButton(grid="md:col-start-3" w="lt-md:full" btn="~ primary-outline" @click="onClickPrimary" v-if="popup.primaryLink")
       | {{ popup.primaryLink.text }}
     
 </template>

@@ -1,7 +1,6 @@
 import { differenceInMilliseconds } from 'date-fns';
 import { intervalToDuration } from "date-fns"
 import { CredentialsInput } from "#gql"
-// import { TokenIdentifierExtended } from "./useTokens"
 
 export const IPFSURL = "https://nftstorage.link/ipfs/"
 export const IPFSURLVideo = "https://nftstorage.link/ipfs/"
@@ -265,17 +264,4 @@ export const useRouteQueryOptions = <T extends string>(key: string, defaultVal: 
   })
 
   return state
-}
-
-export const useGraphqlCredentials = (): CredentialsInput | null => {
-  const { walletAdress } = useWallet()
-  const { user } = useUser()
-  const userId = user.value?.id
-  if (!walletAdress.value) {
-    return null
-  }
-  return {
-    playerId: userId,
-    walletAddress: walletAdress.value
-  }
 }
