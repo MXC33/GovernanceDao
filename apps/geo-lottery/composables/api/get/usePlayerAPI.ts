@@ -21,7 +21,9 @@ export interface EnteredTickets {
   active_rate: number,
   active_rate_live?: number,
   entered_weekly_tickets?: number
-  entered_weekly_tickets_backend?: number
+  entered_weekly_tickets_backend?: number,
+  next_ticket_percentage?: number,
+  funds_last_until?: Date
 }
 
 export interface EnteredTicketsResponse extends ObjectResponse {
