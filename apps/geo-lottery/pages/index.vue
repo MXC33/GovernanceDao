@@ -1,8 +1,8 @@
 <template lang="pug">
 div(class="body-main")
   PageBanner(:livepage="true")
-  VList(class="background-holder"  pos="relative" overflow="hidden" z="0")
-    Background()
+  VList(pos="relative" overflow="hidden" z="0")
+    //Background()
       template(#image-source)
         img(src="~/assets/images/points.png" inset="0"  z="-1" object="contain top" h="auto" w="full" pos="absolute")
     div(w="full" flex="~" justify="center")
@@ -38,6 +38,7 @@ import Background from "~/components/Background.vue";
 </script>
 <style>
 .body-main {
-  background-image: linear-gradient(#1f1016, #580623);
+  /*background-image: linear-gradient(#1f1016, #580623);*/
+  background: linear-gradient(180deg, #211217 21.29%, #580724 96.08%);
 }
 </style>
