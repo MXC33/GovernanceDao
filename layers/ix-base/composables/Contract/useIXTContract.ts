@@ -2,7 +2,7 @@ import { BigNumberish, ethers } from "ethers"
 import { ContractInterface } from "../Utils/defineContract"
 import { ContractContext as IXTokenContract } from '@ix/base/composables/Contract/Abis/IXToken'
 import IXToken from '@ix/base/composables/Contract/Abis/IXToken.json'
-import {useActiveChain} from "~/composables/Contract/useWallet";
+import { useActiveChain } from "~/composables/Contract/useWallet";
 
 
 export const useIXTContract = <T extends ContractInterface<T> & IXTokenContract>() => {

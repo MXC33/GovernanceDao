@@ -199,8 +199,8 @@ export const useStakeNFTContracts = () => {
 
     addNotification("Object secured, agent.", { sender: 'proxy-of-change' })
 
-    await refreshTiles(tiles)
-    console.log("[Corporations] Collecting Success")
+    await Promise.all([refreshTiles(tiles), refreshTokens()])
+    console.log("[Corporations] Collecting Success on collect!")
     return true
   }
 
@@ -254,7 +254,7 @@ export const useStakeNFTContracts = () => {
 
       console.log("[Stake] Resource transaction mined", tx)
 
-      await fetchAssetsOnNFTPlace('resources')
+      await Promise.all([fetchAssetsOnNFTPlace('resources'), refreshTokens()])
 
       // const message = pickType == 'waste' ? 'Waste secured, agent.' : 'Energy secured, agent.'
       const tilesCollected: Tile[] = tiles.map((tile) => ({ q: tile.x, r: tile.y, s: tile.z }))
