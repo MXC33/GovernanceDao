@@ -8,7 +8,7 @@ HList(items="center" justify="between" h="16" space-x="3" ref="menuEl")
 
   HList(v-if="!isMobile" justify="start" flex-grow="1" overflow-x="hidden" space-x="4")
     button(v-for="(header, index) in headerData" @mouseenter="hoverMenu(index)" @click="openMenu(index)" btn="menu" color = "s-default:white s-selected:ix-orange" :state="selected(index)") {{ header.name }}
-    
+
     HList(flex-grow="1" justify="end" display="lt-md:none")
       NuxtLink(to="https://planetix.com/airdrop")
         HList(rounded="full" b="1 $mc-mint" px="4" py="1" bg="hover:$mc-mint-40" uppercase="~" tracking="0.65" font="bold" items="center" justify="center" class="border-white-ixt")
@@ -16,9 +16,9 @@ HList(items="center" justify="between" h="16" space-x="3" ref="menuEl")
 
 
   HList(items="center" space-x="3" px="0")
-  
+
     slot(name="contentRight")
-    button(p="2" @click="toggleMenu" whitespace="nowrap" frame="~")
+    button(v-if="isMobile" p="2" @click="toggleMenu" whitespace="nowrap" frame="~")
       Transition(name="fade-slow" mode="out-in")
         span(v-if="walletState == 'disconnected'") {{ $t(`general.navigation.menu.connectWallet`)}}
 
