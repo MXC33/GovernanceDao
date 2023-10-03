@@ -2,7 +2,7 @@
 VList(pos="relative" ref="menuElement" frame="~ gray-400 hover:gray-300"  min-w="on-connected:25" items="center" :connected="isLoggedInAndConnected" transitino="all")
   HList(flex-grow="1" w="full")
 
-    button(p="2" @click="toggleMenu" whitespace="nowrap" flex-grow="1" text="center" flex="~ row" justify="center")
+    button(p="2" @click="toggleMenu" whitespace="nowrap" flex-grow="1" text="center" flex="~ row" justify="center" items="center")
       Transition(name="fade-slow" mode="out-in")
         span(v-if="walletState == 'disconnected'") {{ $t(`general.navigation.menu.connectWallet`)}}
 
@@ -15,20 +15,7 @@ VList(pos="relative" ref="menuElement" frame="~ gray-400 hover:gray-300"  min-w=
   //-HeaderAccountButtonNumber(:state="walletState" :balance="ixtBalance")
 
   Transition(name="slide-top")
-    HeaderSubmenuWrapper(v-if="menuOpen" :align-right="true")
-      VList(b="gray-400" divide-y="1")
-        slot(name="dropdown")
-        //-HeaderSubmenuButton(@click="showIXTSwap") {{ $t(`general.navigation.menu.addFunds`)}}
-
-        //-NuxtLink(to="/account")
-          HeaderSubmenuButton(b="t-1 b-1 gray-400") {{ $t(`general.navigation.menu.account`)}}
-
-        HeaderSubmenuButton(v-if="ixtBalance != undefined" b="gray-400")
-          HList(space-x="1" items="center")
-            div(font="bold") ADD IXT
-
-        NuxtLink(to="/connect" @click="toggleMenu" b="gray-400")
-          HeaderSubmenuButton() {{ $t(`general.navigation.menu.logout`)}}
+    HeaderAccountButtonMenu(v-if="menuOpen" ref="menuElement" @click="menuOpen = false")
 
 </template>
 
@@ -53,12 +40,12 @@ const toggleMenu = () => {
         origin: encodeURIComponent(toRoute)
       }
     })
-
     return
   }
 
   menuOpen.value = !menuOpen.value
 }
+
 
 onClickOutside(menuElement, () => {
   menuOpen.value = false;

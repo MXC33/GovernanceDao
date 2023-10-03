@@ -11,7 +11,6 @@ PopupBase(@close="onClose")
 </template>
 
 <script lang="ts" setup>
-
 const emit = defineEmits(['close'])
 
 const onClose = () => {

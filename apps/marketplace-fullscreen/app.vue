@@ -44,7 +44,7 @@ const cookieBotId = "2f5a2e80-772d-413d-9cc6-1edcc72e0de8"
 
 const { pageHeaderOffset, filterHeaderOffset } = useStickyOffsets()
 
-onBeforeMount(() => {
+onMounted(() => {
   setupOnMounted()
 })
 const { x: xpos, y: ypos } = useMouse()

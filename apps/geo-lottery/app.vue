@@ -45,7 +45,7 @@ watch([isLotteryActive], ([state]) => {
 }, { immediate: true })
 
 
-onBeforeMount(() => {
+onMounted(() => {
   setupOnMounted(() => {
     fetchActiveLottery()
   })

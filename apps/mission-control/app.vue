@@ -35,7 +35,7 @@ const { setupOldStakingContract } = useClaimAndUnstakeAll()
 const { setupOnMounted } = useAppSetup()
 const { setupAllContracts } = useDefinedContractSetups()
 
-onBeforeMount(() => {
+onMounted(() => {
   setupOnMounted()
   setupTimerListener()
 })
