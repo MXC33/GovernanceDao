@@ -5,14 +5,14 @@ VList()
     span(font="bold" color="ix-mint") {{ walletAdress }}
 
   div(mt="3" color="white")
-    div(v-if="loginStatus == 'logged-out'") {{$t(`wallet.playerProfile.notLoggedIn`)}}
+    div(v-if="loginStatus == 'logged-out'") {{$t(`general.wallet.playerProfile.notLoggedIn`)}}
 
     HList(v-else-if="loginStatus == 'connecting'" font="bold" items="center" space-x="2")
       HelperLoader()
-      div {{$t(`wallet.playerProfile.playerConnecting`)}}...
+      div {{$t(`general.wallet.playerProfile.playerConnecting`)}}...
 
     div(v-else-if="loginStatus == 'logged-in'" space-x="2") 
-      span {{$t(`wallet.playerProfile.loggedInAs`)}}
+      span {{$t(`general.wallet.playerProfile.loggedInAs`)}}
       span(color="ix-orange" font="bold") {{ user?.username }}
       
 </template>

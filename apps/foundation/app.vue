@@ -11,7 +11,7 @@
 </template>
 
 <script setup lang="ts">
-const { setupOnCreated, setupOnMounted } = useAppSetup()
+const { setupOnMounted } = useAppSetup()
 
 useHead({
   title: "Foundation | PlanetIX",
@@ -19,8 +19,6 @@ useHead({
     { src: '/global.js' },
   ]
 })
-
-setupOnCreated()
 
 onMounted(() => {
   setupOnMounted()

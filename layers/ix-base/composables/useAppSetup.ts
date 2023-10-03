@@ -8,17 +8,13 @@ export const useAppSetup = () => {
   const { setRefreshToken, isLoggedInAndConnected } = useLogin()
   const { user } = useUser()
 
-  const { execute: fetchHeaderData } = useHeaderData()
   const { execute: fetchMessageData } = useNeMessages()
   const { execute: fetchNotificationData } = useNeNotifications()
 
-  const setupOnCreated = async () => {
-    await fetchHeaderData()
-    watch(y, (pos) => globalY.value = pos)
-  }
-
-  const setupOnMounted = async () => {
+  const setupOnMounted = async (onLoggedIn?: () => void) => {
     setupPaintWorker()
+
+    watch(y, (pos) => globalY.value = pos)
 
     try {
       const connected = await connectWallet()
@@ -37,9 +33,12 @@ export const useAppSetup = () => {
 
       fetchMessageData()
       fetchNotificationData()
-
       setupIXTPrice()
       refreshIXTBalance()
+
+      if (onLoggedIn)
+        onLoggedIn()
+
     }, { immediate: true })
   }
 
@@ -58,7 +57,6 @@ export const useAppSetup = () => {
 
   return {
     setupPaintWorker,
-    setupOnMounted,
-    setupOnCreated
+    setupOnMounted
   }
 }

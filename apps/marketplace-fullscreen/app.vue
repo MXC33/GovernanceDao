@@ -31,7 +31,6 @@
 </template>
 
 <script setup lang="ts">
-//import { useNeMessages, useNeNotifications } from 'composables/useNeNotificationsAndMessages';
 
 useHead({
   title: "Marketplace | PlanetIX",
@@ -40,72 +39,14 @@ useHead({
   ]
 })
 
-const globalY = useGlobalWindowScroll()
-const router = useRouter()
+const { setupOnMounted } = useAppSetup()
 const cookieBotId = "2f5a2e80-772d-413d-9cc6-1edcc72e0de8"
-
-router.onError((err) => {
-  console.log("#ERRRR", err)
-})
-
-
-const { execute: fetchHeaderData } = useHeaderData()
-const { execute: fetchMessageData } = useNeMessages()
-const { execute: fetchNotificationData } = useNeNotifications()
 
 const { pageHeaderOffset, filterHeaderOffset } = useStickyOffsets()
 
-await fetchHeaderData()
-
-const { y } = useWindowScroll()
-const { connectWallet, walletState } = useWallet()
-const { setupIXTPrice } = useIXTPrice()
-const { refreshIXTBalance } = useIXTContract()
-
-const { setRefreshToken, isLoggedInAndConnected } = useLogin()
-const { user } = useUser()
-
-watch(y, (pos) => globalY.value = pos)
-
-onMounted(async () => {
-  //@ts-ignore
-  const isPaintSupported = !!CSS.paintWorklet
-
-  if (isPaintSupported) {
-    //@ts-ignore
-    CSS.paintWorklet.addModule('/paint/border.js');
-  }
-
-  document.body.classList.toggle('is-paint-supported', isPaintSupported)
-  document.body.classList.toggle('is-not-paint-supported', !isPaintSupported)
-
-  try {
-    const connected = await connectWallet()
-    if (connected)
-      walletState.value = 'connected'
-
-    if (user.value) {
-      setRefreshToken(0)
-
-    }
-
-  } catch (err) {
-    console.error("Error mounting app", err)
-  }
+onBeforeMount(() => {
+  setupOnMounted()
 })
-
-
-watch(isLoggedInAndConnected, (loggedIn) => {
-  if (!loggedIn)
-    return
-
-  fetchMessageData()
-  fetchNotificationData()
-
-  setupIXTPrice()
-  refreshIXTBalance()
-}, { immediate: true })
-
 const { x: xpos, y: ypos } = useMouse()
 
 const values = computed(() => {

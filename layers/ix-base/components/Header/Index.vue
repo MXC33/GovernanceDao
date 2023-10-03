@@ -30,6 +30,9 @@ component(is="style").
 </template> 
 
 <script lang="ts" setup>
+const { useMobileBreakpoint } = useDevice()
+const { state: swapVisible } = useIXTSwapVisible()
+const { data: headerData, execute: fetchHeaderData } = useHeaderData()
 
 const { className, autoClose } = defineProps<{
   className?: string,
@@ -38,16 +41,18 @@ const { className, autoClose } = defineProps<{
 
 const bannerEl = ref()
 const menuEl = ref()
-const { data: headerData } = useHeaderData()
-const { useMobileBreakpoint } = useDevice()
+
 const isMobile = useMobileBreakpoint('lg')
-const { state: swapVisible } = useIXTSwapVisible()
+
+await fetchHeaderData()
+
 const onMouseLeave = () => {
   if (isMobile.value)
     return
 
   activeHeaderIndex.value = null
 }
+
 const { headerHeight, activeHeaderIndex, siteHeaderOffset, siteHeaderScrollOffset, isScrollingDown, autoHideActive } = useSiteHeader()
 const menuElement = shallowRef()
 
@@ -65,19 +70,7 @@ effect(() => {
 })
 
 const route = useRoute()
-
-const { refreshIXTBalance } = useIXTContract()
 const windowY = useGlobalWindowScroll()
-const { isLoggedInAndConnected } = useLogin()
-const mounted = useMounted()
-
-watch([isLoggedInAndConnected, mounted], ([loggedIn, mounted]) => {
-  if (loggedIn || !mounted) {
-    return
-  }
-
-  refreshIXTBalance()
-}, { immediate: true })
 
 watch(windowY, (newValue, oldValue) =>
   isScrollingDown.value = (newValue > oldValue)
@@ -98,6 +91,5 @@ const closeMenu = () =>
 onClickOutside(menuElement, () => {
   closeMenu()
 })
-
 
 </script>

@@ -12,7 +12,7 @@ export const useIXTPrice = () => {
 
   const setupIXTPrice = () => {
     useIntervalFn(() => { refreshIXTPrice() }, 1000 * 60)
-    return fetchPrice()
+    return refreshIXTPrice()
   }
 
   const ixtToUSD = (ixt: number) =>

@@ -8,7 +8,7 @@
 
       PopupList()
 
-      div#infobox(:style="values" z="901" pos="absolute")
+      //- div#infobox(:style="values" z="901" pos="absolute")
 
       div#takeover
 
@@ -23,11 +23,10 @@
 </template>
 
 <script setup lang="ts">
-import { useGlobalWindowScroll } from "@ix/base/composables/useWindowScroll";
-import { useAstroGoldContract } from "@ix/base/composables/Contract/useAstroGoldContract";
-import { useSiteHeader } from "@ix/base/composables/useSiteHeader";
-import { useLottery } from "~/composables/useLottery";
-const { execute: fetchHeaderData } = useHeaderData()
+const { fetchActiveLottery } = useLottery()
+const { isLotteryActive, getActiveLotteryData } = useLottery()
+const { setupOnMounted } = useAppSetup()
+const { state: isSwapVisible } = useIXTSwapVisible()
 
 useHead({
   title: "Territory Lottery | PlanetIX",
@@ -36,84 +35,22 @@ useHead({
   ]
 })
 
-await fetchHeaderData()
 
-const globalY = useGlobalWindowScroll()
-const router = useRouter()
-
-router.onError((err) => {
-  console.log("#ERRRR", err)
-})
-
-const { state: isSwapVisible } = useIXTSwapVisible()
-
-const { y } = useWindowScroll()
-const { connectWallet, walletState } = useWallet()
-const { isLoggedInAndConnected } = useLogin()
-const { setupIXTPrice } = useIXTPrice()
-const { refreshIXTBalance } = useIXTContract()
-const { refreshAstroGoldBalance } = useAstroGoldContract()
-const { fetchActiveLottery } = useLottery()
-
-const { setRefreshToken } = useLogin()
-const { user } = useUser()
-
-watch(y, (pos) => globalY.value = pos)
-
-
-onMounted(async () => {
-  //@ts-ignore
-  const isPaintSupported = !!CSS.paintWorklet
-
-  if (isPaintSupported) {
-    //@ts-ignore
-    CSS.paintWorklet.addModule('/paint/border.js');
-  }
-
-  document.body.classList.toggle('is-paint-supported', isPaintSupported)
-  document.body.classList.toggle('is-not-paint-supported', !isPaintSupported)
-
-  try {
-    const connected = await connectWallet()
-    if (connected)
-      walletState.value = 'connected'
-
-    if (user.value) {
-      setRefreshToken(0)
-
-    }
-
-  } catch (err) {
-    console.error("Error mounting app", err)
-  }
-})
-
-const { isLotteryActive, getActiveLotteryData } = useLottery()
-
-watch([isLotteryActive, isLoggedInAndConnected], ([state, loggedIn]) => {
-  if (!state || !loggedIn) {
+watch([isLotteryActive], ([state]) => {
+  if (!state) {
     getActiveLotteryData()
     return
   }
-
-  setupIXTPrice()
-  refreshIXTBalance()
-  refreshAstroGoldBalance()
   fetchActiveLottery()
 }, { immediate: true })
 
-const { x: xpos, y: ypos } = useMouse()
 
-const values = computed(() => {
-
-  const xPos = xpos.value - 38
-  const yPos = ypos.value - 60
-
-  return {
-    top: `${yPos}px`,
-    left: `${xPos}px`
-  }
+onBeforeMount(() => {
+  setupOnMounted(() => {
+    fetchActiveLottery()
+  })
 })
+
 
 </script>
 

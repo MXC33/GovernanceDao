@@ -4,7 +4,7 @@ HList(items="center" justify="between" h="16" space-x="3" ref="menuEl")
     template(v-if="$slots.logo")
       slot(name="logo")
 
-    PlanetIXNew(v-else w="42.25")
+    PlanetIXNew(v-else max-w="42.25" min-w="30" w="full")
 
   HList(v-if="!isMobile" justify="start" flex-grow="1" overflow-x="hidden" space-x="4")
     button(v-for="(header, index) in headerData" @mouseenter="hoverMenu(index)" @click="openMenu(index)" btn="menu" color = "s-default:$header-text s-selected:$header-orange" :state="selected(index)") {{ header.name }}
@@ -18,11 +18,12 @@ HList(items="center" justify="between" h="16" space-x="3" ref="menuEl")
   HList(items="center" space-x="3" px="0")
 
     slot(name="contentRight")
-    button(v-if="isMobile" p="2" @click="toggleMenu" whitespace="nowrap" frame="~")
-      Transition(name="fade-slow" mode="out-in")
-        span(v-if="walletState == 'disconnected'") {{ $t(`general.navigation.menu.connectWallet`)}}
+    //- button(v-if="isMobile" p="2" @click="toggleMenu" whitespace="nowrap" frame="~")
+    //-   Transition(name="fade-slow" mode="out-in")
+    //-     span(v-if="walletState == 'disconnected'") {{ $t(`general.navigation.menu.connectWallet`)}}
 
-        span(v-else-if="ixtBalance != undefined" w="25" text="ix-mint") {{ roundToDecimals(ixtBalance, 2) }} IXT
+    //-     span(v-else-if="ixtBalance != undefined" w="25" text="ix-mint") {{ roundToDecimals(ixtBalance, 2) }} IXT
+
     Notification(display="lt-lg:none")
 
     //-class="border-white-ixt"
