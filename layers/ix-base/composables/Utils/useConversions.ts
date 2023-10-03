@@ -8,7 +8,7 @@ export const useIXTPrice = () => {
   const config = useRuntimeConfig().public
   const { isWalletConnected } = useWallet()
 
-  const { data: ixtPrice, refresh: refreshIXTPrice, execute: fetchPrice } = useAsyncData('ixt-price', () =>
+  const { data: ixtPrice, refresh: refreshIXTPrice, execute: fetchPrice } = useAsyncDataState('ixt-price', () =>
     $fetch(config.MC_API + '/ixt-price', { mode: 'cors' }) as Promise<PriceResponse>, {
     transform: (data) => Number(data)
   })
