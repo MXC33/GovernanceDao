@@ -13,7 +13,7 @@ const { token } = defineProps<{
 }>()
 
 const { balanceOfToken } = useUserData()
-
+const { ixtPrice } = useIXTPrice()
 const balance = computed(() => {
   if (!token)
     return 0

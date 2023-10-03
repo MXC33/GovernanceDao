@@ -25,7 +25,7 @@ export interface SwapHistoryItem {
 
 export const useCorporationShop = () => {
   const activeShopItem = useState<CorporationShopItem | null>('corporation-selected-shop', () => null)
-  const chosenCurrency = useState<Currency>('chosen-currency', () => 'energy')
+  const chosenCurrency = useState<Currency>('chosen-currency', () => 'usdt')
   const availableItems = useState<CorporationShopItem[]>('corporation-available-shop-items', () => null)
 
   const currenciesWithoutCap: Currency[] = ['usd', 'usdc', 'usdt', 'visa', 'ixt']

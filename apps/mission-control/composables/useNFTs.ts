@@ -61,14 +61,6 @@ export const useNFTs = () => {
       attr.traitType?.toLowerCase() == attribute.toLowerCase()
     )?.value
 
-  const isSameCurrency = (itemA?: Currency, itemB?: Currency) => {
-    if (!itemA || !itemB)
-      return false
-
-    const isSameCurrency = itemA == itemB
-
-    return isSameCurrency
-  }
 
   return {
     getTokenTier,
@@ -76,6 +68,5 @@ export const useNFTs = () => {
     getTierColor,
     getTokenAttribute,
     isSameNFT,
-    isSameCurrency,
   }
 }

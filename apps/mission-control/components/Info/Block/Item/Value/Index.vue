@@ -2,11 +2,11 @@
 InfoBlockItemValueText(v-if="textBlock" :item="textBlock" :token="token")
 InfoBlockItemValueBalance(v-else-if="item.valueType == 'tokenBalance'" :item="item" :token="token")
 InfoBlockItemValueTimeLeft(v-else-if="item.valueType == 'timeLeft'" :item="item" :token="token")
-
+InfoBlockItemValueCurrency(v-else-if="item.valueType == 'currency'" :item="item" :token="token")
 </template>
 
 <script lang="ts" setup>
-import type { InfoBlockItem, InfoBlockItemText } from '~~/composables/useInfoBlocks';
+import type { InfoBlockItem, InfoBlockItemText, InfoBlockItemBalance } from '~~/composables/useInfoBlocks';
 import type { NftFragment } from '#gql'
 
 const props = defineProps<{
