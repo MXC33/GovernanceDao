@@ -27,11 +27,6 @@ export const useStateBoolean = (key: string, initialValue: boolean) => {
 export const clamp = (min: number, max: number, amount: number) =>
   Math.max(min, Math.min(max, amount))
 
-export const roundToDecimals = (num: number, decimalPlaces: number) => {
-  const number = Math.round(Number(num + "e" + decimalPlaces))
-  return Number(number + "e" + -decimalPlaces);
-}
-
 export const useHoursLeft = (start: number, end: number) =>
   (end - start) / (1000 * 60 * 60)
 

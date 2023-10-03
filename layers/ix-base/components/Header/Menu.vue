@@ -18,7 +18,11 @@ HList(items="center" justify="between" h="16" space-x="3" ref="menuEl")
   HList(items="center" space-x="3" px="0")
 
     slot(name="contentRight")
+    button(v-if="isMobile" p="2" @click="toggleMenu" whitespace="nowrap" frame="~")
+      Transition(name="fade-slow" mode="out-in")
+        span(v-if="walletState == 'disconnected'") {{ $t(`general.navigation.menu.connectWallet`)}}
 
+        span(v-else-if="ixtBalance != undefined" w="25" text="ix-mint") {{ roundToDecimals(ixtBalance, 2) }} IXT
     Notification(display="lt-lg:none")
 
     //-class="border-white-ixt"
@@ -45,6 +49,8 @@ const { useMobileBreakpoint } = useDevice()
 const isMobile = useMobileBreakpoint()
 const { data: headerData } = useHeaderData()
 
+const { ixtBalance, ixtPending } = useIXTContract()
+const { walletState } = useWallet()
 
 
 const { refreshIXTBalance } = useIXTContract()
