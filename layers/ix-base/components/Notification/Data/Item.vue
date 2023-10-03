@@ -14,7 +14,7 @@ VList.notification(w="full" @click="onClick" cursor="on-link:pointer" :link="!!l
 </template>
 
 <script lang="ts" setup>
-import type { NotificationData, Notification } from '~/composables/useNeNotificationsAndMessages';
+import type { Notification } from '~/composables/useNeNotificationsAndMessages';
 
 const { emitStatusUpdate } = useSocket()
 const { readItem: readNotificationItem } = useNeNotifications()
