@@ -1,5 +1,5 @@
 <template lang="pug">
-VList(flex-grow="1" pos="relative" min-h="0" justify="center" p="3" items="center")
+VList(flex-grow="1" pos="relative" min-h="0" justify="center" p="3" items="center" font="gridnik" text="base")
   WalletConnector()
   
 </template>
@@ -12,7 +12,7 @@ const props = defineProps<{
 }>()
 
 useHead({
-  title: props.title ?? "Connect | PlanetIX"
+  title: "Connect | PlanetIX"
 })
 
 const { isLoggedInAndConnected } = useLogin()

@@ -233,7 +233,7 @@ export const useBuildTools = () => {
       case PixState.NoContract:
         return navigateTo('/new-lands/shop')
       case PixState.NotStaked:
-        return navigateTo('/new-lands/stake/tile-contract')
+        return navigateTo('/new-lands/stake-burn/stake-contract')
 
       case PixState.InActive:
         return activateContractsMenu()

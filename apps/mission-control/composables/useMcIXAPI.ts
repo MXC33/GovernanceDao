@@ -1,6 +1,5 @@
 
 import { NftFragment } from '#gql'
-import type { RaffleUpcomingResponse, RafflePastResponse, ActiveRaffleResponse } from './IX-API/types'
 interface MerkleResponse {
   data: {
     infos: (string | number)[][]
@@ -34,18 +33,6 @@ export const useMcIXAPI = () => {
       }
     })
 
-  // Fetch Active Raffles: Dev API
-  const fetchActiveRaffle = async () =>
-    await fetchIXAPI(`${raffleURL}active/1`) as ActiveRaffleResponse
-
-  // Fetch Past Raffles: Live API
-  const fetchPastRaffles = async (page: number) =>
-    await fetchIXAPI(`${raffleURL}/past/${page}`) as RafflePastResponse
-  // Fetch Upcoming Raffles: Dev API
-
-  const fetchUpcomingRaffles = async (page: number) =>
-    await fetchIXAPI(`${raffleURL}/upcoming/${page}`) as RaffleUpcomingResponse
-
   const fetchUsernameFromWalletAddress = async (walletAddresses: string[]) =>
     await fetchIXAPI(usernameFromWalletAddressURL, 'POST', walletAddresses)
 
@@ -76,9 +63,6 @@ export const useMcIXAPI = () => {
 
   return {
     ixBlogs,
-    fetchActiveRaffle,
-    fetchPastRaffles,
-    fetchUpcomingRaffles,
     fetchUsernameFromWalletAddress,
     fetchHashForCollectFromTile,
     fetchMerkleData

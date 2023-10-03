@@ -3,8 +3,8 @@ import { callWithNuxt } from 'nuxt/app'
 
 
 // import type { RaffleUpcomingResponse, RafflePastResponse, ActiveRaffleResponse } from './IX-API/types' import { PixInfoFragment } from '#gql'
-// export const BASE_API_ENDPOINT_URL = 'https://api.planetix.com/api/v1'
-// export const BASE_API_DEV_ENDPOINT_URL = 'https://api.planetix.app/api/v1'
+const API_PROD_URI = 'https://api.planetix.com/api/v1'
+const API_DEV_URI = 'https://api.planetix.app/api/v1'
 
 // import type { RaffleUpcomingResponse, RafflePastResponse, ActiveRaffleResponse } from './IX-API/types'
 
@@ -57,9 +57,14 @@ export const useIXAPI = () => {
     })
   }
 
-  const fetchIXAPI = async (path: string, method: 'GET' | 'POST' | "PUT" = 'GET', body?: object) => {
+  const fetchIXAPI = async (path: string, method: 'GET' | 'POST' | "PUT" = 'GET', body?: object, environment?: 'prod' | 'dev') => {
+    let URI = BASE_API_ENDPOINT_URL()
+    if (environment != undefined) {
+      URI = environment == 'prod' ? API_PROD_URI : API_DEV_URI
+    }
+
     try {
-      const data = await $fetch(BASE_API_ENDPOINT_URL() + '/' + path, {
+      const data = await $fetch(URI + '/' + path, {
         method: method,
         body: body,
         headers: {

@@ -109,9 +109,18 @@
   --mc-secondary_40: rgba(var(--mc-secondary-rgb), 0.4);
   --mc-secondary_60: rgba(var(--mc-secondary-rgb), 0.6);
 
+  --ix-primary: #C3000F;
+  --ix-white: #F9F9F9;
+  --ix-ne: #FF0014;
+  --ix-orange: #FF6647;
+  --ix-mint: #84D4BC;
+  --ix-pink: #FF1E6E;
+  --ix-yellow: #FFF61E;
 
   --header-background: var(--ix-black);
   --header-subnav-background: var(--ix-black);
-  --header-text-active: var(--ix-black);
-  --header-text: var(--ix-black);
+  --header-text: var(--ix-white);
+  --header-orange: var(--ix-orange);
+  --header-white: var(--ix-white);
+  --header-mint: var(--ix-mint);
 }

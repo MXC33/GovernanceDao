@@ -1,5 +1,4 @@
 <template lang="pug">
-//- CorporationUpgradeConfirm(:item="selectedUpgrade" v-if="selectedUpgrade" header="Upgrade Facility" hazard="UPGRADE READY. TIMEFRAME 7 DAYS.")
 CorporationOrders(:media-block="slideshowBlock" :blocks="blocks" :output-token="{type: 'facility', tier}" v-if="!isComplete")
   template(#confirmButton) {{ $t('general.confirm') }}
 
@@ -13,7 +12,6 @@ import type { InfoBlock, InfoBlockItemState, InfoBlockSlideshow } from '~/compos
 import type { NftFragment } from '#gql';
 
 definePageMeta({
-  middleware: 'auth',
   layout: 'corporation'
 })
 
@@ -93,6 +91,8 @@ await Promise.all([
   fetchTokens(),
   fetchBaseLevelCapacity()
 ])
+
+console.log("TOKEN", token.value)
 
 selectUpgradeFacility(token.value)
 

@@ -1,5 +1,5 @@
 <template lang="pug">
-HList(min-w="0" frame="none on-has-frame:(~ gray-400 hover:gray-300)" :has-frame="look == 'frame'" group fill="white" color="white" min-h="10")
+HList(min-w="0" frame="none on-has-frame:(~ gray-400 hover:gray-300)" :has-frame="look == 'frame'" b="s-border:(1 ix-primary opacity-40)" :state="look" group fill="white" color="white" min-h="10")
   AdjustableButton(type="minus" @click="decreaseAmount" :is-adjustable="isDecreasable" :look="look")
 
   HList(flex-grow="1" w="full" justify="center" b="0 inherit" items="center" pos="relative" :look="look")

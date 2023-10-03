@@ -1,5 +1,5 @@
 <template lang="pug">
-#app.antialiased(font="foundry" text="base" bg="ix-black" color="white" ref="app" overscroll="none" flex="~ col grow")
+#app.antialiased(font="gridnik" text="base" bg="ix-black" color="white" ref="app" overscroll="none" flex="~ col grow")
   NuxtLayout()
     NuxtLoadingIndicator(color="rgb(255, 102, 71)")
 
@@ -126,7 +126,6 @@ const values = computed(() => {
 body,
 html {
   background: #0C0C0C;
-  --apply: font-foundry;
 }
 
 /* Scroll bar stylings */
