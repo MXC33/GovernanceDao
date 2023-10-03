@@ -20,6 +20,7 @@ HList(items="center" justify="between" h="16" space-x="3" ref="menuEl")
     slot(name="contentRight")
 
     Notification(display="lt-lg:none")
+
     //-class="border-white-ixt"
     HeaderAccountButton()
       template(#dropdown)
@@ -48,7 +49,7 @@ const { data: headerData } = useHeaderData()
 
 const { refreshIXTBalance } = useIXTContract()
 const { isWalletConnected } = useWallet()
-const { activeHeaderIndex } = useSiteHeader()
+const { activeHeaderIndex, closeHeaderMenu } = useSiteHeader()
 
 watch(isWalletConnected, (connected) => {
   if (connected)
@@ -70,7 +71,7 @@ const hoverMenu = (index: number) => {
 
 const openMenu = (index: number) => {
   if (activeHeaderIndex.value == index)
-    return activeHeaderIndex.value = null
+    return closeHeaderMenu()
 
   activeHeaderIndex.value = index
 }
@@ -79,7 +80,7 @@ const toggleMenu = () => {
   if (activeHeaderIndex.value == null)
     return activeHeaderIndex.value = 1
 
-  activeHeaderIndex.value = null
+  closeHeaderMenu()
 }
 
 </script>
