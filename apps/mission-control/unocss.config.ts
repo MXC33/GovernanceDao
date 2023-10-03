@@ -5,6 +5,9 @@ import baseLayer from '@ix/base/unocss.config';
 export default defineConfig({
   presets: [baseLayer],
 
+  //@ts-ignore
+  variants: baseLayer.theme.variants,
+
   theme: {
     //@ts-ignore
 
@@ -34,6 +37,7 @@ export default defineConfig({
       'mc-gravity-grade': '0px 0px 6px rgba(255, 65, 0, 0.5)'
     },
     colors: {
+      //@ts-ignore
       ...baseLayer.theme.colors,
       ix: {
         primary: '#84D4BC',

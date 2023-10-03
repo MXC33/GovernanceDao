@@ -24,6 +24,7 @@ HList(items="center" justify="between" h="16" space-x="3" ref="menuEl")
 
         span(v-else-if="ixtBalance != undefined" w="25" text="ix-mint") {{ roundToDecimals(ixtBalance, 2) }} IXT
     Notification(display="lt-lg:none")
+
     //-class="border-white-ixt"
     HeaderAccountButton()
       template(#dropdown)
@@ -54,7 +55,7 @@ const { walletState } = useWallet()
 
 const { refreshIXTBalance } = useIXTContract()
 const { isWalletConnected } = useWallet()
-const { activeHeaderIndex } = useSiteHeader()
+const { activeHeaderIndex, closeHeaderMenu } = useSiteHeader()
 
 watch(isWalletConnected, (connected) => {
   if (connected)
@@ -76,7 +77,7 @@ const hoverMenu = (index: number) => {
 
 const openMenu = (index: number) => {
   if (activeHeaderIndex.value == index)
-    return activeHeaderIndex.value = null
+    return closeHeaderMenu()
 
   activeHeaderIndex.value = index
 }
@@ -85,7 +86,7 @@ const toggleMenu = () => {
   if (activeHeaderIndex.value == null)
     return activeHeaderIndex.value = 1
 
-  activeHeaderIndex.value = null
+  closeHeaderMenu()
 }
 
 </script>

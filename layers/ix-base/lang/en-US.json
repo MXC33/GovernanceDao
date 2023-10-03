@@ -32,7 +32,7 @@
       "swap": "Swap",
       "settings": {
         "title": "Settings",
-        "sound": "SOUND ON/OFF",
+        "sound": "SOUND OFF/ON",
         "graphics-Settings": "GRAPHICS SETTINGS",
         "low": "LOW",
         "medium": "MEDIUM",

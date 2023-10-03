@@ -63,7 +63,12 @@ export const useSiteHeader = () => {
     headerHeight.value
   )
 
+  const closeHeaderMenu = () => {
+    activeHeaderIndex.value = null
+  }
+
   return {
+    closeHeaderMenu,
     activeHeaderIndex,
     autoHideActive,
     isScrollingDown,

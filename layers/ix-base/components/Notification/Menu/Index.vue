@@ -1,5 +1,5 @@
 <template lang="pug">
-VList(pos="absolute right-0 lt:lg:right-4 lt-lg:left-0 top-full" bg="ix-black" max-h="lg:150" h="100vh" w="lg:100" overflow-y="auto" b="~ gray-700" text="white")
+VList(pos="absolute right-8 lt-lg:(right-0 left-0) top-full" bg="ix-black" max-h="lg:150" h="100vh" w="lg:100" overflow-y="auto" b="~ gray-700" text="white")
   VList(p="3")
     h3(text="xl") Inbox 
 
