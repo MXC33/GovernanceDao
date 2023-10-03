@@ -9,7 +9,7 @@ import type { NftFragment } from '#gql';
 import type { Currency } from '~/composables/corporations/useCorporationShop';
 import type { InfoBlockItemCurrency } from '~~/composables/useInfoBlocks';
 
-const { usdToIXT, ixtToUSD } = useIXTPrice()
+const { usdToIXT, ixtToUSD } = useCurrencyConversion()
 
 const { chosenCurrency } = useCorporationShop()
 
@@ -19,7 +19,7 @@ const { item } = defineProps<{
 }>()
 
 const priceInSelectedCurrency = computed(() => {
-  const ignoredCurrencies: Currency[] = ['matic', 'weth']
+  const ignoredCurrencies: Currency[] = []
   const isIgnored = ignoredCurrencies.includes(chosenCurrency.value)
   const isSame = item.type == chosenCurrency.value
   const amount = Number(item.amount)

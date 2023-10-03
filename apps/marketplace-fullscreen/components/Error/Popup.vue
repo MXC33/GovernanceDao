@@ -36,7 +36,7 @@ import WarningIcon from '~/assets/icons/warning.svg'
 import type { ContractError } from '@ix/base/composables/Utils/useContractErrors'
 import { get } from '@vueuse/core'
 const { markAllNotificationsRead } = useContractErrors()
-const { ixtToUSD } = useIXTPrice()
+const { ixtToUSD } = useCurrencyConversion()
 const { error } = defineProps<{
   error: ContractError
 }>()
