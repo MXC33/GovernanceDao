@@ -1,11 +1,14 @@
+import { Currency } from "./useCurrencies"
+
 interface PriceResponse {
   price: number
 }
 
 export const useIXTPrice = () => {
   const config = useRuntimeConfig().public
+  const { isWalletConnected } = useWallet()
 
-  const { data: ixtPrice, refresh: refreshIXTPrice, execute: fetchPrice } = useAsyncDataState('ixt-price', () =>
+  const { data: ixtPrice, refresh: refreshIXTPrice, execute: fetchPrice } = useAsyncData('ixt-price', () =>
     $fetch(config.MC_API + '/ixt-price', { mode: 'cors' }) as Promise<PriceResponse>, {
     transform: (data) => Number(data)
   })
@@ -17,11 +20,16 @@ export const useIXTPrice = () => {
 
   const ixtToUSD = (ixt: number) =>
     roundToDecimals(Number(ixt) * (ixtPrice?.value ?? 0), 5)
+  const usdToIXT = (usd: number) =>
+    roundToDecimals(Number(usd) / (ixtPrice?.value ?? 0), 5)
 
   return {
     ixtPrice,
     ixtToUSD,
+    usdToIXT,
     setupIXTPrice
   }
 
 }
+
+export const selectedCurrency = () => useState<Currency>()
