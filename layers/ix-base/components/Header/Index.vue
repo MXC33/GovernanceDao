@@ -6,6 +6,9 @@ VList(:class="className" pos="sticky left-0 top-0" translate-y="$header-offset" 
       template(#logo v-if="$slots.logo")
         slot(name="logo")
 
+      template(#contentRight v-if="$slots.contentRight")
+        slot(name="contentRight")
+
   //For teleports
   div(id="navigation-bottom" pos="relative" px="4 md:7.5" )
 

@@ -1,5 +1,5 @@
 <template lang="pug">
-VList(z="10" :state="getBannerStatues" text="sm" pos="absolute right-0" w="md:70" space-y="1")
+VList(z="10" :state="getBannerStatues" text="sm" pos="absolute right-8" w="md:70" space-y="1")
 
   HList(items="center" fill="white" justify="between" cut="bottom-right s-md b-gray-400" bg="gray-800" py="2.5" px="4")
     TitleWithIcon(color="mc-orange" font="bold" text-shadow="mc-orange" fill="mc-orange" icon="pointer")
