@@ -37,17 +37,11 @@ useHead({
 
 
 watch([isLotteryActive], ([state]) => {
-  if (!state) {
-    getActiveLotteryData()
-    return
-  }
-  fetchActiveLottery()
 }, { immediate: true })
 
 
 onMounted(() => {
   setupOnMounted(() => {
-    fetchActiveLottery()
   })
 })
 

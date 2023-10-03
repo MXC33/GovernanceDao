@@ -11,6 +11,9 @@ export const useCurrencyData = () => {
 
   const asyncState = useAsyncDataState(IXT_KEY, () => {
     const credentials = useGraphqlCredentials()
+    console.log("Fetch currencies", credentials)
+    //@ts-ignore
+
     return GqlCurrencies({ credentials })
   }, {
     transform: (data) => data.currencies

@@ -1,5 +1,5 @@
 <template lang="pug">
-HeaderSubmenuWrapper(:align-right="true")
+HeaderSubmenuWrapper(:align-right="true" min-w="25")
   VList(b="gray-400" divide-y="1")
     slot(name="dropdown")
     HeaderSubmenuButton(v-if="ixtBalance != undefined" b="gray-400" @click="showIXTSwap")

@@ -49,19 +49,7 @@ const menuEl = ref()
 const { useMobileBreakpoint } = useDevice()
 const isMobile = useMobileBreakpoint()
 const { data: headerData } = useHeaderData()
-
-const { ixtBalance, ixtPending } = useIXTContract()
-const { walletState } = useWallet()
-
-
-const { refreshIXTBalance } = useIXTContract()
-const { isWalletConnected } = useWallet()
 const { activeHeaderIndex, closeHeaderMenu } = useSiteHeader()
-
-watch(isWalletConnected, (connected) => {
-  if (connected)
-    setTimeout(() => refreshIXTBalance(), 10)
-}, { immediate: true })
 
 
 const selected = (index: number) => {

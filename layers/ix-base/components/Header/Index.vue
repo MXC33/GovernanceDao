@@ -64,9 +64,7 @@ const { height: menuHeight } = useElementBounding(menuEl)
 
 effect(() => {
   const newHeight = Math.round(bannerHeight.value + menuHeight.value)
-
   headerHeight.value = newHeight
-
 })
 
 const route = useRoute()

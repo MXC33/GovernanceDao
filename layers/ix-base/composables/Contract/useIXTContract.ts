@@ -22,11 +22,13 @@ export const useIXTContract = <T extends ContractInterface<T> & IXTokenContract>
 
 
   const { execute: fetchIXT, data: ixtBalance, refresh: refreshIXTBalance, pending: ixtPending } = viewAsyncState('ixt-balance', async (contract) => {
+    console.log("WALLET", walletAdress.value, contract)
     const address = walletAdress.value
     if (!address)
       return 0
 
     const balance = await contract.balanceOf(address)
+    console.log("GET BALANCE", balance)
     return Number(ethers.utils.formatUnits(balance))
   })
 

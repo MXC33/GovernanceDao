@@ -7,7 +7,7 @@
 
     PopupList()
 
-    div#infobox(:style="values" z="400" pos="absolute")
+    div#infobox(:style="values" z="400" pos="fixed" translate-x="-10" translate-y="-12")
 
     div#takeover
 
@@ -15,7 +15,7 @@
 
     CookieBot(:id="cookieBotId")
 
-    //- PopupBase(v-if="isSwapVisible" @close="isSwapVisible = false" :disable-default-close="true")
+    //- Popup(v-if="isSwapVisible" @close="isSwapVisible = false" :disable-default-close="true")
     //-   template(#header) {{ $t(`marketplace.navigation.buy.swap.title`)}}
     //-   template(#default)
     //-     VList(w="full" justify="center" items="center" )
@@ -47,12 +47,13 @@ const { pageHeaderOffset, filterHeaderOffset } = useStickyOffsets()
 onMounted(() => {
   setupOnMounted()
 })
-const { x: xpos, y: ypos } = useMouse()
+
+const { x, y } = useMouse()
 
 const values = computed(() => {
 
-  const xPos = xpos.value - 38
-  const yPos = ypos.value - 190
+  const xPos = x.value
+  const yPos = y.value
 
   return {
     top: `${yPos}px`,

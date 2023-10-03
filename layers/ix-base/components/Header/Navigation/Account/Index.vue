@@ -25,7 +25,7 @@ import AOCIcon from '~/assets/images/icons/aocbadge.svg'
 
 const { enable: showIXTSwap } = useIXTSwapVisible()
 const { walletState } = useWallet()
-const { ixtBalance } = useIXTContract()
+const { ixtBalance } = useCurrencyData()
 const { user } = useUser()
 
 const userId = computed(() => user.value?.username || null)

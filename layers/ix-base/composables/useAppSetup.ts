@@ -2,12 +2,11 @@ export const useAppSetup = () => {
   const globalY = useGlobalWindowScroll()
 
   const { y } = useWindowScroll()
-  const { connectWallet, walletState } = useWallet()
+  const { connectWallet, walletState, walletSigningToken } = useWallet()
   const { setupIXTPrice } = useIXTPrice()
-  const { refreshIXTBalance } = useIXTContract()
   const { setRefreshToken, isLoggedInAndConnected } = useLogin()
   const { user } = useUser()
-
+  const { refresh: fetchCurrencyData } = useCurrencyData()
   const { execute: fetchMessageData } = useNeMessages()
   const { execute: fetchNotificationData } = useNeNotifications()
 
@@ -31,13 +30,20 @@ export const useAppSetup = () => {
       if (!loggedIn)
         return
 
-      fetchMessageData()
-      fetchNotificationData()
+      const walletHeaders = {
+        'X-Wallet': user.value.wallet_address ?? "",
+        'X-Signing-Token': walletSigningToken.value ?? ""
+      }
+
+      useGqlHeaders(walletHeaders)
       setupIXTPrice()
-      refreshIXTBalance()
+      fetchCurrencyData()
 
       if (onLoggedIn)
         onLoggedIn()
+
+      fetchMessageData()
+      fetchNotificationData()
 
     }, { immediate: true })
   }
