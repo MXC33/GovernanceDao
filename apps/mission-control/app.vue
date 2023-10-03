@@ -27,6 +27,7 @@ const menuOpen = useSiteMenuOpen()
 const cookieBotId = "2f5a2e80-772d-413d-9cc6-1edcc72e0de8"
 const { connectWallet, walletState } = useWallet()
 const { setupTimerListener } = useGlobalTimestamp()
+const { setupIXTPrice } = useIXTPrice()
 
 const { loginStatus } = useLogin()
 
@@ -50,6 +51,7 @@ watch(loginStatus, (state) => {
   if (state != 'logged-in')
     return
 
+  setupIXTPrice()
   fetchMessageData()
   fetchNotificationData()
 }, { immediate: true })
