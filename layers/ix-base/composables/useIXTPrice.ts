@@ -23,5 +23,4 @@ export const useIXTPrice = () => {
     ixtToUSD,
     setupIXTPrice
   }
-
 }

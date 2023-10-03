@@ -1,7 +1,7 @@
 <template lang="pug">
 #app.antialiased(font="gridnik" text="base" bg="ix-black" color="white" ref="app" overscroll="none" flex="~ col grow")
   NuxtLayout()
-    NuxtLoadingIndicator(color="rgb(255, 102, 71)")
+    NuxtLoadingIndicator(color="#84D4BC")
 
     NuxtPage()
 
@@ -48,11 +48,10 @@ router.onError((err) => {
   console.log("#ERRRR", err)
 })
 
-const { state: isSwapVisible } = useIXTSwapVisible()
 
 const { execute: fetchHeaderData } = useHeaderData()
-const { execute: fetchMessageData, data: messageData } = useNeMessages()
-const { execute: fetchNotificationData, data: notificationData } = useNeNotifications()
+const { execute: fetchMessageData } = useNeMessages()
+const { execute: fetchNotificationData } = useNeNotifications()
 
 const { pageHeaderOffset, filterHeaderOffset } = useStickyOffsets()
 

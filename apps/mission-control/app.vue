@@ -3,7 +3,7 @@
   PlaycanvasGame()
 
   NuxtLayout()
-    NuxtLoadingIndicator(color="rgb(255, 102, 71)")
+    NuxtLoadingIndicator(color="#84D4BC")
     NuxtPage()
 
   Overlays()
