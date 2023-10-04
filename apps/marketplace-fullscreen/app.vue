@@ -7,7 +7,7 @@
 
     PopupList()
 
-    div#infobox(:style="values" z="400" pos="fixed" translate-x="-10" translate-y="-12")
+    HoverInfoBox()
 
     div#takeover
 
@@ -46,19 +46,6 @@ const { pageHeaderOffset, filterHeaderOffset } = useStickyOffsets()
 
 onMounted(() => {
   setupOnMounted()
-})
-
-const { x, y } = useMouse()
-
-const values = computed(() => {
-
-  const xPos = x.value
-  const yPos = y.value
-
-  return {
-    top: `${yPos}px`,
-    left: `${xPos}px`
-  }
 })
 
 </script>
