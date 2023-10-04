@@ -1,8 +1,8 @@
 <template lang="pug">
 VList(:class="className" pos="sticky left-0 top-0" translate-y="$header-offset" font="gridnik" text="base" z="99" w="full" @mouseleave="onMouseLeave" ref="menuElement" transition="all")
-  VList(pos="relative" z="2" bg="$header-background" px="4 md:7.5" )
-    HeaderAdBanner(mx="-4 md:-7.5" ref="bannerEl")
-    HeaderMenu(ref="menuEl")
+  VList(pos="relative" z="2" bg="$header-background")
+    SplashBanner(ref="bannerEl" v-if="bannerAdActive")
+    HeaderMenu(ref="menuEl"  px="4 md:7.5" )
       template(#logo v-if="$slots.logo")
         slot(name="logo")
 
@@ -33,6 +33,8 @@ component(is="style").
 const { useMobileBreakpoint } = useDevice()
 const { state: swapVisible } = useIXTSwapVisible()
 const { data: headerData, execute: fetchHeaderData } = useHeaderData()
+const { bannerAdActive } = useAds()
+
 
 const { className, autoClose } = defineProps<{
   className?: string,
