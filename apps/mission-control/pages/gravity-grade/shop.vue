@@ -1,5 +1,5 @@
 <template lang="pug">
-CorporationShop(:header-title="$t(`corporations.gravity-grade.titles.shop`)" :item-name="$t(`general.product`)" v-if="!isComplete")
+CorporationShop(:header-title="$t(`corporations.gravity-grade.titles.shop`)" :item-name="$t(`general.product`)" v-if="!isComplete" currency="energy")
 CorporationCompletePage(v-else)
 </template>
 
