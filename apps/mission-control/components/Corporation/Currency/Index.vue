@@ -1,5 +1,5 @@
 <template lang="pug">
-HList(pos="relative" ref="menuElement" frame="~ $mc-accent " items="center" transition="all" h="10" justify="center" color="$corporation-text") 
+HList(pos="relative" ref="menuElement" frame="~ $mc-accent " items="center" transition="all" h="10" justify="center" color="$corporation-text" display="lt-md:none")  
   HList(px="3" space-x="2" min-w="40")
     div {{ balance }}
     div(uppercase="~") {{  currency }}
