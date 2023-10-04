@@ -2,7 +2,7 @@
 ClientOnly
 
   div(flex="~ col grow" p="x-2" min-h="0")
-    PopupAd(v-if="showAdPopup")
+    SplashPopup(v-if="showAdPopup")
 
     img(w="full" h="full" src="~/assets/images/terminal/background.png" object="contain" pos="absolute" inset="0")
 

@@ -1,7 +1,7 @@
 <template lang ="pug">
 VList(pos="relative")
 
-  VList(b="gray-400")
+  VList(b="gray-400" space-y="3")
     NotificationDataList(v-if="isValidData(data.today)" :notifications="data.today") Today
     NotificationDataList(v-if="isValidData(data.yesterday)" :notifications="data.yesterday") Yesterday
     NotificationDataList(v-if="isValidData(data.old)" :notifications="data.old") Old
