@@ -42,9 +42,7 @@ const props = defineProps<{
 const activeItem = defineModel<TokenWithInfoBlocks>()
 
 watch(() => props.list, (list) => {
-  if (!activeItem.value && list?.length > 0)
-    activeItem.value = list[0]
-
+  activeItem.value = list[0]
 }, { immediate: true })
 
 
