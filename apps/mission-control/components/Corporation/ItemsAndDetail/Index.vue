@@ -1,5 +1,5 @@
 <template lang="pug">
-CorporationItemsAndDetailWrapper(:header="header" :listTitle="listTitle" :detailTitle="detailTitle" :list="list" :active-item="activeItem" @close="activeItem = null")
+CorporationItemsAndDetailWrapper(v-bind="props" :active-item="activeItem" @close="activeItem = null")
   template(#tabs v-if="$slots.tabs")
     slot(name="tabs")
 
@@ -28,13 +28,15 @@ CorporationItemsAndDetailWrapper(:header="header" :listTitle="listTitle" :detail
 </template>
   
 <script lang="ts" setup>
+import type { Currency } from '@ix/base/composables/Utils/useCurrencies';
 import type { TokenWithInfoBlocks } from '~~/composables/useInfoBlocks';
 
 const props = defineProps<{
   header?: string,
   listTitle?: string,
   detailTitle: string,
-  list?: TokenWithInfoBlocks[]
+  list?: TokenWithInfoBlocks[],
+  currency?: Currency
 }>()
 
 const activeItem = defineModel<TokenWithInfoBlocks>()
