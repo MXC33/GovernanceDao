@@ -44,9 +44,10 @@ watch(isLotteryActive, (state) => {
 
 onMounted(() => {
   setupOnMounted(async () => {
+    getActiveRewards()
+
     await getActiveLotteryData()
     await fetchActiveLottery()
-    await getActiveRewards()
 
   })
 })
