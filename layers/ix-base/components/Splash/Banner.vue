@@ -6,7 +6,8 @@ div(flex="~ row grow" items="center" justify="center" pos="relative" bg="#FF1E6E
 
 
   HList(justify="end" items="center" pr="2" z="999" fill="black hover:black" cursor="pointer" @click.stop="toggleBanner" opacity="hover:40" transition="opacity" pos="absolute right-6 top-50%" translate-y="-50%")
-    CloseIcon(w="2.5 md:4" )
+    ClientOnly()
+      CloseIcon(w="2.5 md:4" )
 </template>
 
 <script lang="ts" setup>
