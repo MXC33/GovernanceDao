@@ -14,7 +14,6 @@ const { resetShopItem } = useCorporationShop()
 resetShopItem()
 
 definePageMeta({
-  middleware: 'auth',
   layout: 'corporation'
 })
 

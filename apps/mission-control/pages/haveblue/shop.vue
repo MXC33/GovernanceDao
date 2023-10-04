@@ -8,7 +8,6 @@ import type { CorporationShopItem } from '~~/composables/corporations/useCorpora
 import type { InfoBlock } from '~~/composables/useInfoBlocks';
 import type { GenericStoreSaleInfoFragment, NftFragment } from '#gql'
 definePageMeta({
-  middleware: 'auth',
   layout: 'corporation'
 })
 
