@@ -7,7 +7,7 @@ import {
   WeeksDraw,
   ActiveRewards
 } from "~/composables/api/get/usePlayerAPI";
-import {useAstroGoldContract} from "@ix/base/composables/Contract/useAstroGoldContract";
+import { useAstroGoldContract } from "@ix/base/composables/Contract/useAstroGoldContract";
 export const weeklyFlowRateConst = 1 / (3600 * 24 * 7)
 export const dailyFlowRateConst = 1 / (3600 * 24)
 

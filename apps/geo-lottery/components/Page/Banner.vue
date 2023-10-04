@@ -39,15 +39,17 @@ VList(class="banner" pos="relative" overflow="hidden" z="0" min-h="650px")
 <script lang="ts" setup>
 import { format } from "date-fns"
 import { useLottery } from "~/composables/useLottery";
-const { isLotteryActive, getActiveRewards, activeRewards, enteredTickets } = useLottery()
+const { isLotteryActive, activeRewards, enteredTickets } = useLottery()
 const { displayPopup } = usePopups()
 const { checkIsAuth } = useHelperMethods()
 const { isLoggedInAndConnected } = useLogin()
 
-const rewardToCounter = ref(0)
 const currentReward = ref(0)
 const rewardToDisplay = ref('0')
-currentReward.value = activeRewards.value.rewards - 5000
+
+watch(activeRewards, () => {
+  currentReward.value = activeRewards.value.rewards - 5000
+}, { immediate: true })
 
 const activeRewardsInterval = setInterval(async () => {
   if (currentReward.value > 0 && activeRewards.value.incomingFlowRate && activeRewards.value.incomingFlowRate > 0) {
