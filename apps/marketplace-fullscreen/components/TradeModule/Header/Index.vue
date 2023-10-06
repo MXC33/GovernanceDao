@@ -17,7 +17,7 @@ div(flex="~ col md:row" px="4 md:6" pt="6 md:8" pb="6" items="start")
 </template>
 
 <script lang="ts" setup>
-const { ixtToUSD } = useIXTPrice()
+const { ixtToUSD } = useCurrencyConversion()
 const { ixt } = defineProps<{
   ixt?: number,
 }>()

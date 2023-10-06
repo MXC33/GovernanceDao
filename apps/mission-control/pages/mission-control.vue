@@ -8,7 +8,6 @@ VList(bg="black opacity-50" pos="absolute" inset="0" backdrop="~ blur-lg" justif
 const { isClaimAndUnstakeOpen } = useClaimAndUnstakeAll()
 
 definePageMeta({
-  middleware: 'auth',
 })
 
 const { fetchGameAssets } = useUserData()

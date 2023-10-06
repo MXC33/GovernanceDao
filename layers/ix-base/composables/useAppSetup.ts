@@ -3,7 +3,7 @@ export const useAppSetup = () => {
 
   const { y } = useWindowScroll()
   const { connectWallet, walletState, walletSigningToken } = useWallet()
-  const { setupIXTPrice } = useIXTPrice()
+  const { setupCurrencyPrice } = useCurrencyConversion()
   const { setRefreshToken, isLoggedInAndConnected } = useLogin()
   const { user } = useUser()
   const { refresh: fetchCurrencyData } = useCurrencyData()
@@ -36,7 +36,7 @@ export const useAppSetup = () => {
       }
 
       useGqlHeaders(walletHeaders)
-      setupIXTPrice()
+      setupCurrencyPrice()
       fetchCurrencyData()
 
       if (onLoggedIn)

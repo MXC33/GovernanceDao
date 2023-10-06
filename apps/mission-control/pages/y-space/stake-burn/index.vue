@@ -19,7 +19,6 @@ const pages = ['stake-genesis', 'burn']
 const { goBack } = useCorporationRoute()
 
 definePageMeta({
-  middleware: 'auth',
   layout: 'corporation'
 })
 </script>

@@ -26,7 +26,7 @@ VList()
 import type { ListingItem } from "~/composables/useListing";
 
 const { priceRenderString, getTotalIXTPrice, MP_FEE } = useTransactions()
-const { ixtToUSD } = useIXTPrice()
+const { ixtToUSD } = useCurrencyConversion()
 
 const totalIXTPrice = computed(() => getTotalIXTPrice(items, true))
 

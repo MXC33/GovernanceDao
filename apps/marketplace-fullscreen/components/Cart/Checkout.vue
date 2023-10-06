@@ -12,7 +12,7 @@ footer(pos="sticky bottom-0" bg="ix-black" z="lt-md:201")
 
 <script lang="ts" setup>
 import type { CartItem } from '~/composables/useCart';
-const { ixtToUSD } = useIXTPrice()
+const { ixtToUSD } = useCurrencyConversion()
 const { displayPopup } = usePopups()
 
 const { viewingCart, cartItems, cartFailedSales, checkoutItems, removeFailedItemsFromCart } = useCart()
