@@ -10,7 +10,7 @@ VList(class="banner" pos="relative" overflow="hidden" z="0" min-h="650px")
           div(text="sm" font="bold" uppercase="~" space-x="2 xl:4")
             span() Complete tickets for next round
             span(color="ix-pink" font="medium") {{topInfo.totalTickets}}
-          div(text="sm" font="bold" uppercase="~" v-if="topInfo.fundsLastUntil" )
+          div(text="sm" font="bold" uppercase="~" v-if="topInfo.nextTicketPercentage" )
             span(m="r-2 xl:r-4") Subscription
             span(color="ix-pink" font="medium" display="inline-block") Streaming ({{topInfo.nextTicketPercentage.toFixed(2)}}% until ticket)
           div(text="sm" font="bold" uppercase="~" v-if="topInfo.fundsLastUntil" )
