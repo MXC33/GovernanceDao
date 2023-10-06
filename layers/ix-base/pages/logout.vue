@@ -1,5 +1,7 @@
 <template lang="pug">
-div 
+VList(items="center" justify="center" flex-grow="1")
+  HelperLoader(fill="ix-orange")
+  
 </template>
 
 

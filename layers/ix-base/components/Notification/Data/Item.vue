@@ -1,5 +1,5 @@
 <template lang ="pug">
-VList.notification(w="full" @click="onClick" cursor="on-link:pointer" :link="!!link" opacity="on-link:hover:80" transition="all")
+HList.notification(w="full" @click="onClick" cursor="on-link:pointer" :link="!!link" opacity="on-link:hover:80" transition="all" items="center")
   VList(items="left" p="1 r-3")
     h4(font="bold") {{ message.notification.title }} 
     HList(space-x="1")
@@ -14,7 +14,7 @@ VList.notification(w="full" @click="onClick" cursor="on-link:pointer" :link="!!l
 </template>
 
 <script lang="ts" setup>
-import type { NotificationData, Notification } from '~/composables/useNeNotificationsAndMessages';
+import type { Notification } from '~/composables/useNeNotificationsAndMessages';
 
 const { emitStatusUpdate } = useSocket()
 const { readItem: readNotificationItem } = useNeNotifications()

@@ -87,7 +87,6 @@ const contractItems = computed<CorporationStakeItem[]>(() => {
 
 
 definePageMeta({
-  middleware: 'auth',
   layout: 'corporation'
 })
 </script>

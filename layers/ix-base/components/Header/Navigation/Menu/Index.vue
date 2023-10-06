@@ -6,7 +6,7 @@ VList(flex-grow="1" w="full")
         div {{ adjustedTitle(header.name) }}
 
       template(#default)
-        HeaderNavigationMenuSubNavigation(:navigation="navigation" v-for="navigation in header.subNavigations")
+        HeaderNavigationMenuSubNavigationMobile(:navigation="navigation" v-for="navigation in header.subNavigations")
 </template>
 
 <script lang="ts" setup>

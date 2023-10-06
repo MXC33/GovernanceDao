@@ -25,16 +25,22 @@ import type { Corporation } from '~/composables/corporations/useCorporations';
 const { getSpeedupAllInfo, getNotCompletedOrders } = useTaskManager()
 
 const { speedupAllOrders } = useOrderContracts()
+const currentTime = useTimestamp({ interval: 1000 })
+
 const { ixtToken, astroCreditToken } = useCurrencyData()
 const eternalabCorpo: Corporation = 'eternalab'
 
-const ixtPrice = getSpeedupAllInfo(eternalabCorpo)?.ixtCost
-const acPrice = getSpeedupAllInfo(eternalabCorpo)?.astroCreditCost
+const speedupAllInfo = computed(() => getSpeedupAllInfo(eternalabCorpo, currentTime.value))
 
-const hasUncompletedOrders = computed(() => getNotCompletedOrders('eternalab').length > 0)
+const ixtPrice = computed(() => speedupAllInfo.value.ixtCost)
+const acPrice = computed(() => speedupAllInfo.value.astroCreditCost)
+
+const hasUncompletedOrders = computed(() =>
+  getNotCompletedOrders('eternalab', currentTime.value).length > 0
+)
 
 const onClickSpeedup = async (token: NftFragment) => {
-  const info = getSpeedupAllInfo(eternalabCorpo)
+  const info = getSpeedupAllInfo(eternalabCorpo, currentTime.value)
   return await speedupAllOrders({ task: 'craft', type: 'eternalab' }, { token, amount: info.numberOfSpeedups, price: Number(info.ixtCost) })
 }
 

@@ -6,8 +6,8 @@ Popup()
     VList(space-Y="4" pos="relative")
       HList(space-x="3" pos="relative")
         p() Choose method
-        HelperHover(tooltip-id="Choose method Info tooltip")
-          InfoIcon(w="5")
+        //- HelperHover(tooltip-id="Choose method Info tooltip")
+        //-   InfoIcon(w="5")
 
       InputRadio(v-model="purchaseTypeModel" :value="'popup-type-one-time-entry'")
         template(#default) One-time entry
@@ -26,18 +26,17 @@ Popup()
 <script lang="ts" setup>
 import InfoIcon from '~/assets/icons/info.svg'
 const { displayPopup } = usePopups()
-const { maxOneTimeEntries } = useEnterLottery()
-const { maxSubscriptionEntries } = useSubscription()
-const { enteredTickets, getEnteredTickets } = useLottery()
+const { getEnteredTickets } = useLottery()
 const { useEnteredTicketData } = usePlayerAPI()
 const { refresh: refreshTicketData } = useEnteredTicketData()
+
+
 
 const purchaseTypeModel = ref<'popup-type-one-time-entry' | 'popup-type-subscribe'>('popup-type-one-time-entry')
 
 refreshTicketData().then(() => {
   getEnteredTickets()
 })
-
 const onContinue = () => {
   displayPopup({
     type: purchaseTypeModel.value,

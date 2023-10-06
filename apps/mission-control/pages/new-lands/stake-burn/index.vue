@@ -34,7 +34,6 @@ const allContracts = computed(() => stakedMCNFTData.value.filter((item) => allow
 await Promise.all([fetchStakedGenesisNFTData()])
 
 definePageMeta({
-  middleware: 'auth',
   layout: 'corporation'
 })
 

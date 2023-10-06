@@ -14,22 +14,16 @@ CorporationTableRowContainer
 import type { CorporationPaymentToken } from '~~/composables/corporations/useCorporations';
 const { balanceOfToken } = useUserData()
 
-const props = defineProps<{
-  modelValue: CorporationPaymentToken
-}>()
-
-
+const data = defineModel<CorporationPaymentToken>()
 const name = computed(() => {
-  const { tier, type } = props.modelValue
-  const balance = balanceOfToken(props.modelValue)
+  const token = data.value?.token
+  if (!token)
+    return ""
+  const { tier, type } = token?.tokenInfo
+  const balance = balanceOfToken(token)
 
   return `${tier ?? ''} ${type} [${balance}]`
 })
 
-const emit = defineEmits<{
-  (e: 'update:modelValue', value: CorporationPaymentToken): void
-}>()
-
-const data = useVModel(props, 'modelValue', emit)
 
 </script>

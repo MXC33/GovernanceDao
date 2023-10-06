@@ -54,22 +54,21 @@ export const useTaskManager = () => {
     return tasks + claimableOrders(corporation, currentTime)?.length
   }
 
-  const getProgress = (order: OrderFragment) => {
-    const currentTime = useTimestamp({ interval: 1000 })
+  const getProgress = (order: OrderFragment, currentTime: number) => {
 
     const { creationTime, defaultOrderTime, totalOrderTime } = order
     const defaultDuration = defaultOrderTime * 1000
     const adjustedOrderTime = totalOrderTime * 1000
     const timeDiff = defaultDuration - adjustedOrderTime
-    const currentPosition = currentTime.value - (creationTime * 1000)
+    const currentPosition = currentTime - (creationTime * 1000)
 
     const progress = (currentPosition + timeDiff) / (defaultDuration)
     return Math.min(100, progress * 100)
   }
 
-  const getNotCompletedOrders = (corporation: Corporation) => {
+  const getNotCompletedOrders = (corporation: Corporation, currentTime: number) => {
     const orders = getAllOrdersInCorporationId(corporation, true)
-    return orders.filter(order => getProgress(order) < 100)
+    return orders.filter(order => getProgress(order, currentTime) < 100)
   }
 
   const getOrderFurthestAwayFromFinish = (orders: OrderFragment[]) => {
@@ -85,9 +84,9 @@ export const useTaskManager = () => {
     return totalOrderTime - elapsedTime
   }
 
-  const getSpeedupAllInfo = (corporation: Corporation) => {
+  const getSpeedupAllInfo = (corporation: Corporation, currentTime: number) => {
     const craft = useEternalabCraft()
-    const notCompletedOrders = getNotCompletedOrders(corporation)
+    const notCompletedOrders = getNotCompletedOrders(corporation, currentTime)
     const amountOfOrders = notCompletedOrders.length
 
     if (amountOfOrders == 0)
@@ -223,6 +222,7 @@ export const useTaskManager = () => {
     getSpeedupAllInfo,
     canClaimAllProduction,
     canClaimResourceTask,
+    getProgress,
     canClaimAllOrders,
     activeTab,
     tabs,

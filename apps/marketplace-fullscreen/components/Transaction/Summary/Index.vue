@@ -19,14 +19,14 @@ VList()
 <script lang="ts" setup>
 import type { ListingItem } from "~/composables/useListing";
 
-const { getTotalIXTPrice } = useTransactions()
+const { getTotalIXTPrice, MP_FEE } = useTransactions()
 
 const totalPrice = computed(() => String(invalidPrice.value ?? roundToDecimals(totalIXTPrice.value, 4)))
 
 const totalIXTPrice = computed(() => getTotalIXTPrice(items))
 
 const totalPotentialEarning = computed(() =>
-  String(invalidPrice.value ?? roundToDecimals(totalIXTPrice.value * (1 - 0.025), 4))
+  String(invalidPrice.value ?? roundToDecimals(totalIXTPrice.value * (1 - MP_FEE), 4))
 )
 
 const invalidPrice = computed(() => {

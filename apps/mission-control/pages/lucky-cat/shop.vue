@@ -1,5 +1,5 @@
 <template lang="pug">
-CorporationShop(:header-title="$t(`corporations.lucky-cat.titles.shop`)" :item-name="$t(`general.product`)" v-if="!isComplete")
+CorporationShop(:header-title="$t(`corporations.lucky-cat.titles.shop`)" :item-name="$t(`general.product`)" v-if="!isComplete" currency="energy")
 CorporationCompletePage(v-else)
 </template>
 
@@ -8,7 +8,6 @@ import type { CorporationShopItem } from '~~/composables/corporations/useCorpora
 import type { InfoBlock } from '~~/composables/useInfoBlocks';
 import type { GenericStoreSaleInfoFragment } from '#gql'
 definePageMeta({
-  middleware: 'auth',
   layout: 'corporation'
 })
 

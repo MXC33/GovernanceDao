@@ -1,9 +1,9 @@
 <template lang="pug">
-#app.antialiased(font="apercu" bg="mc-black" text="sm lg:md" ref="app" color="white" pos="absolute" inset="0" min-h="0" overscroll="none" overflow="hidden" flex="~ col grow")
+#app.antialiased(font="apercu" bg="mc-black" text="sm lt-md:base" ref="app" color="white" pos="absolute" inset="0" min-h="0" overscroll="none" overflow="hidden" flex="~ col grow")
   PlaycanvasGame()
 
   NuxtLayout()
-    NuxtLoadingIndicator(color="rgb(255, 102, 71)")
+    NuxtLoadingIndicator(color="#84D4BC")
     NuxtPage()
 
   Overlays()
@@ -25,34 +25,20 @@ const { provider } = useWallet()
 const { activeSpeedupOrder } = useCorporationOrders()
 const menuOpen = useSiteMenuOpen()
 const cookieBotId = "2f5a2e80-772d-413d-9cc6-1edcc72e0de8"
-const { connectWallet, walletState } = useWallet()
 const { setupTimerListener } = useGlobalTimestamp()
-
-const { loginStatus } = useLogin()
-
-const { execute: fetchHeaderData } = useHeaderData()
-const { execute: fetchMessageData } = useNeMessages()
-const { execute: fetchNotificationData } = useNeNotifications()
 
 const { setupMerkleMintContract } = useMerkleMintContract()
 const { setupGravityGradeContract } = useBuyPacks()
 const { setupTetherContract, setupOracleManagerContract, setupPixTokenContract, setupMaxCoinContract, setupUSDTManagerContract, setupUSDCManagerContract, setupWrappedEthContract } = usePayment()
 const { setupStakingContract } = useStakeNFTContracts()
 const { setupOldStakingContract } = useClaimAndUnstakeAll()
+const { setupOnMounted } = useAppSetup()
+const { setupAllContracts } = useDefinedContractSetups()
 
-await fetchHeaderData()
-
-onBeforeMount(() => {
+onMounted(() => {
+  setupOnMounted()
   setupTimerListener()
 })
-
-watch(loginStatus, (state) => {
-  if (state != 'logged-in')
-    return
-
-  fetchMessageData()
-  fetchNotificationData()
-}, { immediate: true })
 
 // Reset states on route change
 watch(route, () => {
@@ -61,6 +47,7 @@ watch(route, () => {
   if (process.client)
     toggleFixedHeight()
 })
+
 const resetPageStates = () => {
   markAllNotificationsRead()
 
@@ -72,37 +59,18 @@ const resetPageStates = () => {
     gameMenu.value = null
   }
 }
+
 const toggleFixedHeight = () => {
   const route = useRoute()
   const isTerminal = route.name.toString().includes("terminal")
   const isFixed = !isTerminal
   document.body.classList.toggle('is-fixed-height', isFixed)
 }
-onMounted(async () => {
-
-  toggleFixedHeight()
-
-  //@ts-ignore
-  const isPaintSupported = !!CSS.paintWorklet
-
-  if (isPaintSupported) {
-    //@ts-ignore
-    CSS.paintWorklet.addModule('/paint/border.js');
-  }
-  document.body.classList.toggle('is-paint-supported', isPaintSupported)
-  document.body.classList.toggle('is-not-paint-supported', !isPaintSupported)
-
-  const connected = await connectWallet()
-  if (connected)
-    walletState.value = 'connected'
-
-})
 
 if (process.client) {
   (window as any).pc = pc
 }
 
-const { setupAllContracts, allContracts } = useDefinedContractSetups()
 
 watch(provider, (provider) => {
   if (!provider)
@@ -124,7 +92,6 @@ watch(provider, (provider) => {
   setupOldStakingContract(provider) // remove after v2 is fully live.
   setupUSDCManagerContract(provider)
   setupWrappedEthContract(provider)
-
 })
 
 useHead({

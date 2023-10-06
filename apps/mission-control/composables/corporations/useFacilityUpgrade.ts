@@ -31,10 +31,10 @@ export const useFacilityUpgrade = () => {
   const { data } = useFacilityUpgradeData()
   const { nlCapacity: capacity } = useBaseLevelCapacityData()
   const selectedUpgrade = useState<CorporationAdjustableToken>('corporation-upgrade-selected-item', () => null)
-  const selectedToken = useState<NftFragment>('corporation-upgrade-selected-token', () => null)
 
 
-  const selectUpgradeFacility = (token: NftFragment) => selectedToken.value = token
+  const selectUpgradeFacility = (token: NftFragment) =>
+    selectedUpgrade.value = addAdjustableToToken(token)
 
   const defaultOutcomeToken = useState<NftFragment>('facility-upgrade-default-outcome-token', () => null)
   const possibleOutcomeToken = useState<NftFragment>('facility-upgrade-possible-outcome-token', () => null)
@@ -61,7 +61,6 @@ export const useFacilityUpgrade = () => {
     selectUpgradeFacility,
     setOutcomeTokens,
     selectedUpgrade,
-    selectedToken,
     orderData,
   }
 }
@@ -75,7 +74,7 @@ export const useFacilityUpgradeContracts = () => {
   const { refresh: updateCooldownTime } = useFacilityCooldownTimeleftData()
 
   const { failMessage, successMessage, onClaimedOrder } = useCorporationNotifications()
-
+  const { addNotification } = useNotifications()
 
   const facilityContract = defineOrderContract<FacilityUpgradeContract>({ type: 'new-lands', task: 'upgrade' }, {
     contractAddress,
@@ -120,12 +119,12 @@ export const useFacilityUpgradeContracts = () => {
     }
   })
 
-  const speedupCooldown = (numberOfSpeedups: number, price: number) => facilityContract.createTransaction((contract) => contract.speedUpCooldown(numberOfSpeedups), {
-    successMessage: successMessage('speedup-cooldown'),
-    failMessage: failMessage('new-lands', 'speedup'),
-    approve: () => approveMoreTokens(Math.ceil(numberOfSpeedups * price), pixTokenContract, facilityContract.contractAddress),
-    onSuccess: () => updateCooldownTime()
-  })
+  const speedupCooldown = (numberOfSpeedups: number, price: number) =>
+    //@ts-ignore
+    facilityContract.createTransaction((contract) => contract.speedUpCooldown(numberOfSpeedups), {
+      approve: () => approveMoreTokens(Math.ceil(numberOfSpeedups * price), pixTokenContract, facilityContract.contractAddress),
+      onSuccess: () => updateCooldownTime()
+    })
 
   return {
     ...facilityContract,

@@ -2,7 +2,7 @@ import { Ref } from 'vue'
 import { get } from '@vueuse/core'
 import { NftFragment } from '#gql'
 import { AnyToken, getTokenBalance } from '../Token/useTokens'
-import { Payment } from './useCurrency'
+import { Payment } from './useCurrencies'
 
 export interface AdjustableNumber {
   multiplier?: number,

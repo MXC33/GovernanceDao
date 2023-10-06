@@ -62,7 +62,6 @@ const addInfoBlock = (token: NftFragment): TokenWithInfoBlocks => ({
 availableItems.value = rovers.value.map(addInfoBlock)
 
 definePageMeta({
-  middleware: 'auth',
   layout: 'corporation'
 })
 

@@ -11,6 +11,9 @@ export const useCurrencyData = () => {
 
   const asyncState = useAsyncDataState(IXT_KEY, () => {
     const credentials = useGraphqlCredentials()
+    console.log("Fetch currencies", credentials)
+    //@ts-ignore
+
     return GqlCurrencies({ credentials })
   }, {
     transform: (data) => data.currencies
@@ -20,10 +23,10 @@ export const useCurrencyData = () => {
     await Promise.all([fetchTokenData(), asyncState.execute()])
 
   const currencyToken = (type: string) =>
-    asyncState.data.value?.find(item => item.tokenInfo.type == type)
+    asyncState.data.value?.find(item => item?.tokenInfo?.type == type)
 
   const mcToken = (type: string) =>
-    mcNFTs.value?.find(item => item.tokenInfo.type == type)
+    mcNFTs.value?.find(item => item?.tokenInfo?.type == type)
 
   const ixtToken = computed(() => currencyToken('ixt'))
 
@@ -65,6 +68,20 @@ export const useCurrencyData = () => {
     roundToDecimals(ixtToken.value?.balance ?? 0, 2)
   )
 
+  const getCurrencyBalance = (currency: Currency) => {
+    switch (currency) {
+      case 'astro-credit':
+        return astroCreditBalance.value
+      case 'ixt':
+        return ixtBalance.value
+      case 'waste':
+        return wasteBalance.value
+      case 'energy':
+        return energyBalance.value
+    }
+
+  }
+
   const getCurrencyToken = (currency: Currency) => {
     switch (currency) {
       case 'astro-credit':
@@ -89,6 +106,9 @@ export const useCurrencyData = () => {
     astroGoldBalance,
     astroGoldLiteToken,
     astroGoldLiteBalance,
+    energyBalance,
+    wasteBalance,
+    getCurrencyBalance,
     getCurrencyToken,
     fetchAllCurrencies
   }

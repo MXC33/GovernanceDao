@@ -3156,6 +3156,16 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@ix/foundation@workspace:apps/foundation":
+  version: 0.0.0-use.local
+  resolution: "@ix/foundation@workspace:apps/foundation"
+  dependencies:
+    "@ix/base": "*"
+    "@types/node": ^18
+    nuxt: 3.6.5
+  languageName: unknown
+  linkType: soft
+
 "@ix/geo-lottery@workspace:apps/geo-lottery":
   version: 0.0.0-use.local
   resolution: "@ix/geo-lottery@workspace:apps/geo-lottery"

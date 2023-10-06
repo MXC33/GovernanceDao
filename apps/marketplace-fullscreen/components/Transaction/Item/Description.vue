@@ -20,7 +20,7 @@ import type { TransactionItem } from '~/composables/useTransactions'
 
 const { item } = defineProps<{ item: TransactionItem }>()
 const { formattedDays, itemIsInvalid } = useTransactions()
-const { ixtToUSD } = useIXTPrice()
+const { ixtToUSD } = useCurrencyConversion()
 
 const isInvalid = computed(() => itemIsInvalid(item))
 

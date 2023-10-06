@@ -95,9 +95,8 @@ watch(maxEntries, (max) => {
     max,
     fromUser: true,
     token: {
-      tokenInfo: {
-        type: 'raffle-ticket'
-      }
+      ...activeRaffleItem.value?.dailyTickets?.ticket,
+      balance: ticketBalanceForRaffle.value
     }
   }
 }, { immediate: true })

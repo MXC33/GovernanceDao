@@ -1,5 +1,5 @@
 <template lang="pug">
-CorporationShop(:header-title="$t(`corporations.eternalab.titles.shop`)" :item-name="$t(`general.product`)" v-if="!isComplete")
+CorporationShop(:header-title="$t(`corporations.eternalab.titles.shop`)" :item-name="$t(`general.product`)" v-if="!isComplete" currency="waste")
 CorporationCompletePage(v-else)
 </template>
 
@@ -18,7 +18,6 @@ await Promise.all([
 
 
 definePageMeta({
-  middleware: 'auth',
   layout: 'corporation'
 })
 

@@ -51,7 +51,6 @@ type Tab = 'repair' | 'pristine' | 'wrecked'
 const tabs: Tab[] = ['repair', 'pristine', 'wrecked']
 
 definePageMeta({
-  middleware: 'auth',
   layout: 'corporation'
 })
 

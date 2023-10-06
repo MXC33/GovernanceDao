@@ -16,7 +16,6 @@ CorporationPage(@click-back="onExit")
 
 <script lang="ts" setup>
 definePageMeta({
-  middleware: 'auth',
   layout: 'corporation'
 })
 
