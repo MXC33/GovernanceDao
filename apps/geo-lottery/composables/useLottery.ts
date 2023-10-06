@@ -97,7 +97,7 @@ export const useLottery = () => {
         active_rate_live: userLotteryRate,
         entered_weekly_tickets: Math.round((userLotteryRate / weeklyFlowRateConst) / ticketPrice),
         entered_weekly_tickets_backend: Math.round((enteredTicketsResponse.active_rate / weeklyFlowRateConst) / ticketPrice),
-        funds_last_until: add(new Date(), { days: Math.round((astroGoldBalance.value || 0) / (userLotteryRate / dailyFlowRateConst)) })
+        funds_last_until: add(new Date(), { days: Math.round((astroGoldBalance.value || 0) / (enteredTicketsResponse.active_rate / dailyFlowRateConst)) })
       }
       return enteredTickets.value
     } catch (e) {
