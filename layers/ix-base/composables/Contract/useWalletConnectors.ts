@@ -89,7 +89,6 @@ const createMetamaskProvider = async () => {
 
 const createWalletConnectProvider = async () => {
   const { chainIds } = useChainInfo()
-  const { displaySnack } = useSnackNotifications()
 
   try {
     const provider = await EthereumProvider.init({
