@@ -14,7 +14,7 @@
     "@types/node": "^18",
     "@vueuse/router": "^10.1.2",
     "fuzzyjs": "^5.0.1",
-    "nuxt": "3.6.5",
+    "nuxt": "^3.7.4",
     "v-lazy-show": "^0.2.3",
     "vue-router": "4",
     "vue3-easy-data-table": "^1.5.42",

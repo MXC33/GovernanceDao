@@ -1,7 +1,11 @@
 import { createResolver } from '@nuxt/kit'
 const { resolve } = createResolver(import.meta.url)
 import svgLoader from 'vite-svg-loader'
+import { NodeModulesPolyfillPlugin } from '@esbuild-plugins/node-modules-polyfill'
+import rollupNodePolyFill from 'rollup-plugin-node-polyfills'
+import { NodeGlobalsPolyfillPlugin } from '@esbuild-plugins/node-globals-polyfill'
 import { nodePolyfills } from 'vite-plugin-node-polyfills'
+
 
 const API_DEV_ENDPOINT = 'https://mission-control-api-dev-s7ito.ondigitalocean.app'
 const API_PROD_ENDPOINT = 'https://api-mc.planetix.com'
@@ -93,11 +97,13 @@ export default defineNuxtConfig({
     }
   },
   vite: {
+    // commonjsOptions: { transformMixedEsModules: true, exclude: [ 'node_modules/lodash-es/**', 'node_modules/@types/lodash-es/**', ] } 
     server: {
       hmr: {
         port: 8002,
       },
     },
+
     vue: {
       script: {
         defineModel: true,
@@ -105,18 +111,20 @@ export default defineNuxtConfig({
       }
     },
     plugins: [
-      nodePolyfills({
-        exclude: [
-          'fs', // Excludes the polyfill for `fs` and `node:fs`.
-        ],
-        globals: {
-          Buffer: true, // can also be 'build', 'dev', or false
-          global: true,
-          process: true,
-        },
-        // Whether to polyfill `node:` protocol imports.
-        protocolImports: true,
-      }),
+      // nodePolyfills({
+      //   exclude: [
+      //     'fs', // Excludes the polyfill for `fs` and `node:fs`.
+      //   ],
+      //   globals: {
+      //     Buffer: true, // can also be 'build', 'dev', or false
+      //     global: true,
+      //     process: false,
+      //   },
+      //   // Whether to polyfill `node:` protocol imports.
+      //   protocolImports: true,
+      // }),
+
+      // nodePolyfills(),
       svgLoader({
         svgoConfig: {
           multipass: true,
