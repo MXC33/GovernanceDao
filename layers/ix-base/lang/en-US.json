@@ -16,6 +16,7 @@
     "navigation": {
       "terminal": "Terminal",
       "inventory": "Inventory",
+      "net-empire": "NetEmpire",
       "missionCtrl": "Mission Control",
       "netEmpire": "Netempire",
       "marketPlace": "Marketplace",

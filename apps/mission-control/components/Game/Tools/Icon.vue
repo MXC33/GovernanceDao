@@ -1,4 +1,5 @@
 <template lang="pug">
+img(:src="NetEmpireIcon" v-if="tabImage" h="15" translate-y="-2px")
 component.svg-shadow-orange(:is="tabIcon")
 </template>
 
@@ -9,6 +10,8 @@ import TaskManagerIcon from '~/assets/images/ui/game/task-manager.svg'
 import InventoryIcon from '~/assets/images/ui/game/inventory.svg'
 import RaidIcon from '~/assets/images/ui/game/raid.svg'
 import StarterIcon from '~/assets/images/ui/game/starter-pack.svg'
+import NetEmpireIcon from '~/assets/images/ui/game/net-empire.png'
+
 import type { GameMenuId } from '~/composables/types'
 
 const tabIcon = computed(() => {
@@ -19,6 +22,12 @@ const tabIcon = computed(() => {
     case 'raid': return RaidIcon
     case 'starter-pack': return StarterIcon
     case 'overview': return OverviewIcon
+  }
+})
+
+const tabImage = computed(() => {
+  switch (props.icon) {
+    case 'net-empire': return NetEmpireIcon
   }
 })
 const props = defineProps<{
