@@ -1,35 +1,35 @@
 <template lang="pug">
 HList()
-  ul(v-for="listItem, index in lists" :key="index")
-    li {{listItem.title}}
-    li {{ listItem.items }}
+  ul(v-for="listItem, index in lists" :key="index" p=6)
+    li(text="xs") {{ listItem.title }}
+    li(text="xs") {{ listItem.items }}
+button(btn="secondary") STAKE
+button(btn="secondary") WITHDRAW
 
 </template>
-
-
 <script lang="ts" setup>
 
 
 interface ListItem {
   title: string,
-  items: number
+  items: string
 }
 
 const lists: ListItem[] = [{
   title: "Shares owned",
-  items: 1 // <-- ERSÄTT MED API DATA
+  items: "[Dyn Value]" // <-- ERSÄTT MED API DATA
 },
 {
   title: "Shares staked",
-  items: 2.5
+  items: "[Dyn Value]"
 },
 {
   title: "Daily yield",
-  items: 5
+  items: "[Dyn Value]"
 },
 {
   title: "TVL",
-  items: 10
+  items: "[Dyn Value]"
 }
 ]
 
