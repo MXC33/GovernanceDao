@@ -1,3 +1,7 @@
-<template lang="pug"> 
-HeaderTitle() Hej
+<template lang="pug">
+CorporationBox()
 </template>
+
+<script lang="ts" setup>
+
+</script>

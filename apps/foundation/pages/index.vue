@@ -34,21 +34,11 @@ Vlist(p="12" space-y="6")
   div(grid="~ cols-2 gap-6" )
     StakingWrapper()
 
-
   div(grid="~ cols-2 gap-6" )
     StakingWrapper()
 
-
   div(grid="~ cols-2 gap-6" )
     StakingWrapper()
-
-
-
-
-
-
-     
-
 
 
 </template>
