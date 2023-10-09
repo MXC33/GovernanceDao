@@ -1,5 +1,7 @@
 <template lang="pug">
 Vlist(p="12" space-y="6")
+  Stake()
+
   header(space-y="3")
     h2(text="3xl" font="bold") EARNING MULTIPLIERS
     p Earn greater rewards for staking for longer periods
