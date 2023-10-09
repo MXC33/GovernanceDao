@@ -1,11 +1,13 @@
 <template lang="pug">
-HList()
-  ul(v-for="listItem, index in lists" :key="index" p=6)
-    li(text="xs") {{ listItem.title }}
-    li(text="xs") {{ listItem.items }}
-button(btn="secondary") STAKE
-button(btn="secondary") WITHDRAW
-
+CardSection(title="Staking")
+  HList(space-x="3")
+    TitleDetail(v-for="listItem, index in lists" :key="index")
+      template(#detail) {{ listItem.title }}
+      template(#default) {{ listItem.items }}
+  template(#buttons)
+    div(grid="~ cols-2" space-x="3")
+      button(btn="~ primary-outline" disable="active") STAKE
+      button(btn="~ primary-outline" disable="active") WITHDRAW
 </template>
 <script lang="ts" setup>
 

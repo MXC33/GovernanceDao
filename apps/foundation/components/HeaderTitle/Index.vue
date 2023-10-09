@@ -1,8 +1,7 @@
 <template lang="pug">
-Vlist(p="12" space-y="6")
-  header(space-y="3")
-    h2(text="3xl" font="bold") {{ selectedHeader.title }}
-    p {{ selectedHeader.paragraph }}
+header(space-y="3")
+  h2(text="3xl" font="bold") {{ selectedHeader.title }}
+  p {{ selectedHeader.paragraph }}
 </template>
 
 <script lang="ts" setup>

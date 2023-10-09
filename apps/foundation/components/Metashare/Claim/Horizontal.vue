@@ -1,11 +1,8 @@
-
-import { VList } from '.nuxt/components';
-
 <template lang="pug">
-VList(b="solid blue 1")
+HList()
   h4(text="3xl") Claim rewards
   p Rewards: [dynamic value]
-  button(btn="secondary") CLAIM REWARDS
+  button(btn="~ primary-outline" disable="active") CLAIM REWARDS
 </template>
 
 <script lang="ts" setup>

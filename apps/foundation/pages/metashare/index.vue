@@ -1,12 +1,11 @@
 <template lang="pug">
-div()
-
+VList(space-y="6")
   HeaderTitle(:index="9")
-div(class="DIVENSMORSA")
-  CorporationBox()
-  CorporationBox()
-  CorporationBox()
-  CorporationBox()
+  div(grid="~ cols-2 gap-6")
+    MetashareCorporation()
+    MetashareCorporation()
+    MetashareCorporation()
+    MetashareCorporation()
 
 
 </template>

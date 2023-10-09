@@ -1,21 +1,20 @@
 <template lang="pug">
-div(grid grid-cols-2)
-  div(v-for="box in boxes" :key="box.monthValue")
-    VList(bg="gray-800" w="xl" p="6" flex-center="~" b="0.5 white opacity-20" p-6 border rounded shadow-lg)
-      div
-        h3(text-2xl font-bold) {{ box.monthValue }} Months
-        p Lock period
-      div(grid grid-cols-4)
-        div APY
-        div 10%
-        div Your Stake
-        div 0
-        div Pool Size
-        div 0
-        div Cooldown
-        div 0
-      VList
-        Claim
+div(grid="~ cols-2 gap-3")
+  Card(v-for="box in boxes" :key="box.monthValue")
+    div
+      h3(text-2xl font-bold) {{ box.monthValue }} Months
+      p Lock period
+    div(grid grid-cols-4)
+      div APY
+      div 10%
+      div Your Stake
+      div 0
+      div Pool Size
+      div 0
+      div Cooldown
+      div 0
+    VList
+      Claim
   </template>
   
 
