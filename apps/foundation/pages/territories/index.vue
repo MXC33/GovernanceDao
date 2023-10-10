@@ -1,25 +1,30 @@
 <template lang="pug">
 Page()
-  PageSection(section="earnStaking")
-div()
-  HeaderTitle(:index="11")
-HList()
-  button(btn="~ secondary" grid="~" p="6") AREA
-  button(btn="secondary" grid="~" p="6") SECTOR
-  button(btn="secondary" grid="~" p="6") ZONE
-  button(btn="secondary" grid="~" p="6") DOMAIN
-div(class="wrapper")
-  Territory(category="Legendary")
-  Territory(category="Rare")
-  Territory(category="Uncommon")
-  Territory(category="Common")
-  Territory(category="Outliners")
+  HList(grid="~ gap-6")
+    router-link(to="/" tag="button" btn="~ secondary") Home
+    router-link(to="/metashare" tag="button" btn="~ secondary") Metashare Staking
+    router-link(to="/energy" tag="button" btn="~ secondary") Energy Staking
+    router-link(to="/landmarks" tag="button" btn="~ secondary") Landmarks Staking
+    router-link(to="/governance" tag="button" btn="~ secondary") Governance 
+  PageSection(section="yourTerritories")
+  PageSection(section="territoryStaking")
+  HList()
+    button(btn="~ secondary" grid="~" p="6") AREA
+    button(btn="~ secondary" grid="~" p="6") SECTOR
+    button(btn="~ secondary" grid="~" p="6") ZONE
+    button(btn="~ secondary" grid="~" p="6") DOMAIN
+  div()
+    Territory(category="Legendary")
+    Territory(category="Rare")
+    Territory(category="Uncommon")
+    Territory(category="Common")
+    Territory(category="Outliners")
 
-div()
-  HeaderTitle(m="10" :index="3")
-HList()
-  MetashareClaimHorizontal()
-Card()
+  div()
+    PageSection(section="yourTerritories")
+  HList()
+    MetashareClaimHorizontal()
+  Card()
 
   
   

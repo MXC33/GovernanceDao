@@ -82,6 +82,10 @@
       "title": "YOUR TERRITORIES",
       "description": "Search and select from the territories you own."
     },
+    "territoryStaking": {
+      "title": "YOUR TERRITORIES",
+      "description": "Explore your territory NFTs and their total payout amounts"
+    },
     "area": {
       "title": "AREA",
       "description": "Collect PIX and form Clusters. Group your Clusters into Areas. Areas start with groups of 10 PIX in the Outliers, 20 in Common, 30 in Uncommon, 40 in Rare and 50 in Legendary Territories. This you can accomplish by trading PIX on planetix.com. Stake your Area to earn IXT staking rewards."
