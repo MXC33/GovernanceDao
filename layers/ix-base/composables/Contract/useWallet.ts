@@ -137,6 +137,8 @@ export const useWallet = () => {
   const logoutWallet = () => {
     if (process.client) {
       localStorage?.removeItem('walletconnect');
+      localStorage?.removeItem('providerType')
+
     }
 
     walletAdress.value = null
@@ -288,7 +290,6 @@ export const useWallet = () => {
         }]);
       } else {
         console.log("ERR", err)
-        throw new Error(err.message)
       }
     }
   }

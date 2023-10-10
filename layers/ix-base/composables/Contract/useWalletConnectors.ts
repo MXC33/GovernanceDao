@@ -82,7 +82,9 @@ const createMetamaskProvider = async () => {
       url: 'https://missioncontrol.planetix.com/IX-icon.png'
     }
   })
+  await sdk.init()
 
+  await sdk.connect()
   return sdk.getProvider()
 }
 
@@ -127,7 +129,7 @@ export const useConnectors = () => {
       return ['coinbase', ...defaultProviders]
 
     if (!injectedProvider || (injectedProvider?.isMetaMask && !injectedProvider.isBraveWallet))
-      return ['injected', 'coinbase', ...defaultProviders]
+      return ['metamask', 'coinbase', ...defaultProviders]
 
     return ['injected', 'coinbase', ...defaultProviders]
   }
