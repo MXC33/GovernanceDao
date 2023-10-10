@@ -64,9 +64,27 @@
     }
   },
   "metashare": {
-    "metashareStaking": {
+    "Staking": {
       "title": "METASHARE STAKING",
       "description": "Each corporation’s treasury acts as a staking pool for MetaShares and the reward is $IXT."
+    },
+    "corporation": {
+      "title": "CORPORATIONS METASHARE",
+      "description": "MetaShares grant you the authority to influence the corporation's future and to earn a monthly portion of the corporation's profits."
+    },
+    "corpPerformance": {
+      "title": "CORPORATIONS' PERFORMANCE",
+      "description": "Rewards earned from staking MetaShares in the last 24 hours and 30 days."
+    }
+  },
+  "territories": {
+    "yourTerritories": {
+      "title": "YOUR TERRITORIES",
+      "description": "Search and select from the territories you own."
+    },
+    "area": {
+      "title": "AREA",
+      "description": "Collect PIX and form Clusters. Group your Clusters into Areas. Areas start with groups of 10 PIX in the Outliers, 20 in Common, 30 in Uncommon, 40 in Rare and 50 in Legendary Territories. This you can accomplish by trading PIX on planetix.com. Stake your Area to earn IXT staking rewards."
     }
   }
 }
