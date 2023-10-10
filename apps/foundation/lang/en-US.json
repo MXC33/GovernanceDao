@@ -64,7 +64,7 @@
     }
   },
   "metashare": {
-    "Staking": {
+    "staking": {
       "title": "METASHARE STAKING",
       "description": "Each corporation’s treasury acts as a staking pool for MetaShares and the reward is $IXT."
     },
@@ -85,6 +85,79 @@
     "area": {
       "title": "AREA",
       "description": "Collect PIX and form Clusters. Group your Clusters into Areas. Areas start with groups of 10 PIX in the Outliers, 20 in Common, 30 in Uncommon, 40 in Rare and 50 in Legendary Territories. This you can accomplish by trading PIX on planetix.com. Stake your Area to earn IXT staking rewards."
+    }
+  },
+  "ixtCatRaf": {
+    "catRaff": {
+      "title": "IXT CAT RAFF",
+      "description": "Earn more with the IXT Cat Raff! Each week a randomized raffle selects five players to share 2,500 IXT rewards in winnings. In order to participate, players stake IXT in exchange for raffle tickets. To roll over from one week to the next, add your tickets from the previous week. A one-week lock period applies, where players can only withdraw their tokens once the next draw is completed."
+    },
+    "stakingContract": {
+      "title": "New IXT CAT RAFF Staking Contract",
+      "description": "Stake your IXT to our new, updated and improved Cat Raff staking contract. The new Cat Raff fetches randomized winners from the Chainlink VRF algorithm, which ensures verifiable randomness. By implementing Chainlink VRF’s verifiable randomness, IXT Cat Raff users will be able to verify that each winner is selected with an unbiased source of randomness. In addition to being more secure, it also ensures our architecture is operating in a provably secure and verifiably random manner, free of manipulation or interference. To participate in the raffles, players stake their IXT to our new Cat Raff staking Contract and receive Tickets in exchange. Each week, five winning tickets will be selected to share 2,500 IXT rewards in winnings.In order to participate, players have to stake IXT in exchange for raffle tickets. To roll over from one week to the next, add your tickets from the previous week. A one-week lock period applies, where players can only withdraw their tokens once the next draw is completed."
+    },
+    "pastWinnings": {
+      "title": "PAST WEEK WINNINGS",
+      "description": "Details of past winning tickets can be seen below. The randomness of these tickets is verifiable on chain. To increase your odds of winning, stake more IXT above and roll your tickets over consistently week by week."
+    },
+    "treasuryPool": {
+      "title": "TREASURY & IXT POOL"
+    },
+    "pastPrizes": {
+      "title": "PAST PRIZES"
+    },
+    "accounts": {
+      "title": "ACCOUNTS"
+    }
+  },
+  "landmarks": {
+    "rewards": {
+      "title": "REWARDS",
+      "description": "Claim all your rewards"
+    },
+    "myLandmarks": {
+      "title": "MY LANDMARKS",
+      "description": "Search and select from the landmarks you own"
+    },
+    "explore": {
+      "title": "EXPLORE LANDMARKS",
+      "description": "Search and select from the landmarks"
+    }
+  },
+  "energy": {
+    "staking": {
+      "title": "ENERGY STAKING",
+      "description": "Stake Energy Tokens to recieve IXT or Gravity Grade Packs with PIX Contents. You can also stake Energy in the sustainability pool to donate a percentage of your yield to the Amelia Foundation."
+    },
+    "pool": {
+      "title": "CHOOSE YOUR POOL",
+      "description": "Stake Energy and IXT in 30 days epochs to claim rewards"
+    },
+    "earn": {
+      "title": "Earn IXT",
+      "description": "Stake your Energy together with IXT in a 1-1 ratio to earn IXT rewards from the Play 2 Earn pool. Every epoch is 30 days and when the 30 days is over your energy will be burned. The IXT stays locked until you claim it."
+    },
+    "earnGive": {
+      "title": "Earn and Give",
+      "description": "Stake Energy in the Sustainability Pool and give part of your earnings to the Amelia Foundation. You decide on the specific percentage given from your IXT Rewards."
+    },
+    "forItx": {
+      "title": "ENERGY FOR IXT",
+      "description": "Stake your Energy together with IXT at a 1-to-1 ratio and earn rewards from the Play-to-Earn pool"
+    },
+    "ameliaFoundation": {
+      "title": "AMELIA FOUNDATION",
+      "description": "Stake your Energy together with IXT at a 1-to-1 ratio and earn a bit less rewards, and contribute to saving the planet earth"
+    },
+    "ameliaFoundationBox": {
+      "title": "Earn IXT for contributing to charity, liquidity and safety.",
+      "description": "Energy staked is burned upon staking."
+    }
+  },
+  "lendCapital": {
+    "assetPool": {
+      "title": "ASSET POOL",
+      "description": "Let your holdings shine with the Midas Touch. From an individual DeFi user to a Dao or Treasury, users can take advantage of Midas to earn yield, borrow against, or lend their favorite tokens."
     }
   }
 }
