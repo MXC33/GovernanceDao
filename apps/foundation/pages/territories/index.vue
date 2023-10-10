@@ -1,6 +1,6 @@
 <template lang="pug">
-div()
-  HeaderTitle(:index="0")
+Page()
+  PageSection(section="earnStaking")
 div()
   HeaderTitle(:index="11")
 HList()

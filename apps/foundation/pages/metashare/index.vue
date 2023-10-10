@@ -1,11 +1,12 @@
 <template lang="pug">
 Page()
-  PageSection(section="metashareStaking")
-    div(grid="~ cols-2 gap-6")
-      MetashareCorporation()
-      MetashareCorporation()
-      MetashareCorporation()
-      MetashareCorporation()
+  TitleDetail()
+    PageSection(section="Staking")
+      div(grid="~ cols-2 gap-6")
+        MetashareCorporation()
+        MetashareCorporation()
+        MetashareCorporation()
+        MetashareCorporation()
 
 
 </template>
