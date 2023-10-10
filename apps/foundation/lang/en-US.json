@@ -1,12 +1,66 @@
 {
   "index": {
-    "territoryStaking": {
-      "title": "TERRITORY STAKING",
-      "description": "Explore your territory NFTs and their total payout amounts"
+    "dashboardStaking": {
+      "title": "STAKING DASHBOARD",
+      "description": "DEFI Dashboard for your assets."
     },
     "earnStaking": {
       "title": "EARN BY STAKING",
       "description": "Earn rewards for contributing to liquidity and safety."
+    },
+    "ixtStakingInfo": {
+      "title": "Stake IXT",
+      "description": "Stake your IXT holdings to earn more IXT. The longer you stake, the more you yield. Lock up your tokens and maximize earnings by stabilizing the liquidity. Accumulate more IXT, so you can increase your governance in the future Planet IX DAO."
+    },
+    "lpStakingInfo": {
+      "title": "Stake LP",
+      "description": "Provide liquidity for the ecosystem and stake your LP tokens to earn more IXT. By providing liquidity, you secure the network, demonstrate ownership of the game, and ensure stable exchanges. Engagement is rewarded with regular payouts to all stakers."
+    },
+    "ixtStaking": {
+      "title": "IXT STAKING",
+      "description": "Earn rewards for contributing to liquidity and safety."
+    },
+    "lpStaking": {
+      "title": "LP STAKING",
+      "description": "Earn rewards for contributing to liquidity and safety."
+    },
+    "territoryStaking": {
+      "title": "YOUR TERRITORIES",
+      "description": "Explore your territory NFTs and their total payout amounts"
+    },
+    "energyStaking": {
+      "title": "ENERGY STAKING",
+      "description": "Stake Energy Tokens to recieve IXT or Gravity Grade Packs with PIX Contents. You can also stake Energy in the sustainability pool to donate a percentage of your yield to the Amelia Foundation."
+    },
+    "landmarkStaking": {
+      "title": "LANDMARKS",
+      "description": "Explore your landmarks and discover the commission amounts paid out to your account."
+    },
+    "metashareStaking": {
+      "title": "METASHARE STAKING",
+      "description": "Each corporation’s treasury acts as a staking pool for MetaShares and the reward is $IXT."
+    },
+    "governance": {
+      "title": "GOVERNANCE",
+      "description": "Track proposal statuses and vote on changes."
+    },
+    "assetStaking": {
+      "territoryBox": {
+        "title": "TERRITORY NFT STAKING",
+        "description": "Stake your Area, Sector, Zone and Domain NFTs to earn IXT staking rewards from the pool"
+      },
+      "energyBox": {
+        "title": "ENERGY STAKING",
+        "description": "Energy staked is burned upon staking."
+      },
+      "landmarkBox": {
+        "title": "LANDMARK NFT STAKING",
+        "description": "Stake your Landmark NFTs to earn IXT marketplace fees."
+      },
+      "metashareBox": {
+        "title": "METASHARE STAKING",
+        "description": "Each corporation’s treasury acts as a staking pool for MetaShares and the reward is $IXT."
+      }
     }
   },
   "metashare": {
