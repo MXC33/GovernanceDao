@@ -3,7 +3,7 @@ VList()
   h6(v-if="$slots.detail" text="xs" color="gray-300")
     slot(name="detail")
 
-  h3
+  h3(text="lg" font="bold")
     slot
   </template>
   

@@ -1,11 +1,11 @@
 <template lang="pug">
-VList(space-y="6")
-  HeaderTitle(:index="9")
-  div(grid="~ cols-2 gap-6")
-    MetashareCorporation()
-    MetashareCorporation()
-    MetashareCorporation()
-    MetashareCorporation()
+Page()
+  PageSection(section="metashareStaking")
+    div(grid="~ cols-2 gap-6")
+      MetashareCorporation()
+      MetashareCorporation()
+      MetashareCorporation()
+      MetashareCorporation()
 
 
 </template>

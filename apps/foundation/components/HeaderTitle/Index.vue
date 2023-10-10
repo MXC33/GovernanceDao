@@ -1,7 +1,7 @@
 <template lang="pug">
 header(space-y="3")
-  h2(text="3xl" font="bold") {{ selectedHeader.title }}
-  p {{ selectedHeader.paragraph }}
+  h2(text="3xl" font="bold") {{ $t("dashboard.territoryStaking.title") }}
+  p {{ $t("dashboard.territoryStaking.description") }}
 </template>
 
 <script lang="ts" setup>

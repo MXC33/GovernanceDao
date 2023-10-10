@@ -1,1 +1,18 @@
-{}
+{
+  "index": {
+    "territoryStaking": {
+      "title": "TERRITORY STAKING",
+      "description": "Explore your territory NFTs and their total payout amounts"
+    },
+    "earnStaking": {
+      "title": "EARN BY STAKING",
+      "description": "Earn rewards for contributing to liquidity and safety."
+    }
+  },
+  "metashare": {
+    "metashareStaking": {
+      "title": "METASHARE STAKING",
+      "description": "Each corporation’s treasury acts as a staking pool for MetaShares and the reward is $IXT."
+    }
+  }
+}
