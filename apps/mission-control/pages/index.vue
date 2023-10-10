@@ -5,4 +5,7 @@ div(flex="~ col grow" min-h="0" pos="relative")
 
 
 <script lang="ts" setup>
+definePageMeta({
+  middleware: 'auth'
+})
 </script>

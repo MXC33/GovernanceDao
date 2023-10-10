@@ -12,6 +12,6 @@
   "devDependencies": {
     "@ix/base": "*",
     "@types/node": "^18",
-    "nuxt": "^3.7.4"
+    "nuxt": "3.6.5"
   }
 }

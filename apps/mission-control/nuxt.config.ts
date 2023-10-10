@@ -1,3 +1,4 @@
+import { nodePolyfills } from 'vite-plugin-node-polyfills'
 import svgLoader from 'vite-svg-loader'
 
 const API_DEV_ENDPOINT = 'https://mission-control-api-dev-s7ito.ondigitalocean.app'
@@ -5,8 +6,6 @@ const API_PROD_ENDPOINT = 'https://api-mc.planetix.com'
 
 const GQL_DEV_ENDPOINT = `${API_DEV_ENDPOINT}/graphql`
 const GQL_PROD_ENDPOINT = `${API_PROD_ENDPOINT}/graphql`
-import { nodePolyfills } from 'vite-plugin-node-polyfills'
-import inject from '@rollup/plugin-inject'
 
 // https://v3.nuxtjs.org/api/configuration/nuxt.config
 export default defineNuxtConfig({
@@ -82,6 +81,10 @@ export default defineNuxtConfig({
     }
   },
 
+  alias: {
+    util: 'rollup-plugin-node-polyfills/polyfills/util'
+  },
+
   vue: {
     compilerOptions: {
       isCustomElement: tag => ['slide', 'carousel'].includes(tag)
@@ -101,15 +104,23 @@ export default defineNuxtConfig({
       }
     },
     build: {
+      commonjsOptions: {
+        transformMixedEsModules: true,
+      },
     },
     plugins: [
-      {
-        ...inject({
-          global: [require.resolve('node-stdlib-browser/helpers/esbuild/shim'), 'global'],
-          Buffer: [require.resolve('node-stdlib-browser/helpers/esbuild/shim'), 'Buffer'],
-        }),
-        enforce: 'post',
-      },
+      nodePolyfills({
+        exclude: [
+          'fs', // Excludes the polyfill for `fs` and `node:fs`.
+        ],
+        globals: {
+          Buffer: true, // can also be 'build', 'dev', or false
+          global: true,
+          process: true,
+        },
+        // Whether to polyfill `node:` protocol imports.
+        protocolImports: true,
+      }),
       svgLoader({
         defaultImport: 'component',
         svgoConfig: {
