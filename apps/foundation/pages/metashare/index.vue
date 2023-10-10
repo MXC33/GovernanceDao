@@ -6,13 +6,20 @@ Page()
     router-link(to="/energy" tag="button" btn="~ secondary") Energy Staking
     router-link(to="/landmarks" tag="button" btn="~ secondary") Landmarks Staking
     router-link(to="/governance" tag="button" btn="~ secondary") Governance 
-  TitleDetail()
-    PageSection(section="staking" :primary="true")
-      div(grid="~ cols-2 gap-6")
-        MetashareCorporation()
-        MetashareCorporation()
-        MetashareCorporation()
-        MetashareCorporation()
+  PageSection(section="staking" :primary="true")
+    Card()
+      Table()
+      MetashareClaimHorizontal()
+
+  PageSection(section="corporation")
+    div(grid="~ cols-2 gap-6")
+      MetashareCorporation()
+      MetashareCorporation()
+      MetashareCorporation()
+      MetashareCorporation()
+  PageSection(section="corpPerformance")
+    Table()
+  
 
 
 </template>
