@@ -19,20 +19,16 @@ VList(pos="absolute right-8 lt-lg:(right-0 left-0) top-full" bg="ix-black" max-h
     VList(pos="relative" p="t-6 b-3" min-h="0")
       VList(disable="on-pending:active" :pending="isPending" min-h="0")
 
-        Transition(name="fade" mode="out-in")
+        NotificationMessage.no-scrollbar(v-if="notifications" :data="notifications" )
 
-          NotificationData.no-scrollbar(overflow="auto" h="full" v-if="notifications" :data="notifications" )
+        div(v-show="!notifications" opacity="80" text="center") No {{ activeType }} With Current Filter
 
-          div(v-else opacity="80" text="center") No {{ activeType }} With Current Filter
-
-      HelperLoader(mx="auto" wh="6" pos="absolute top-50% left-50%" translate-x="-50%" translate-y="-50%" fill="ix-orange" v-if="isPending")
+      HelperLoader(mx="auto" w="6" pos="absolute top-50% left-50%" translate-x="-50%" translate-y="-50%" fill="ix-orange" v-if="isPending")
 
   
 </template>
 
 <script lang="ts" setup>
-// VList(pos="absolute lt-lg:left-0 right-0 top-full" bg="gray-800"  max-h="lg:150" z="200" min-w="100" frame="~" p="3" min-h="0" )
-
 const { data: messagesData, refresh: refreshMessages, pending: isMessagesPending } = useNeMessages()
 const { data: notificationData, refresh: refreshNotifications, markAllAsRead: markNotificationsRead, pending: isNotificationPending } = useNeNotifications()
 const { showUnreadNotifications } = useNotificationSettings()
