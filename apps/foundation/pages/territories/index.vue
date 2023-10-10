@@ -4,19 +4,23 @@ div()
 div()
   HeaderTitle(:index="11")
 HList()
-  button(btn="secondary" grid="~" p="6") AREA
+  button(btn="~ secondary" grid="~" p="6") AREA
   button(btn="secondary" grid="~" p="6") SECTOR
   button(btn="secondary" grid="~" p="6") ZONE
   button(btn="secondary" grid="~" p="6") DOMAIN
 div(class="wrapper")
-  TerritoryBox(category="Legendary")
-  TerritoryBox(category="Rare")
-  TerritoryBox(category="Uncommon")
-  TerritoryBox(category="Common")
-  TerritoryBox(category="Outliners")
+  Territory(category="Legendary")
+  Territory(category="Rare")
+  Territory(category="Uncommon")
+  Territory(category="Common")
+  Territory(category="Outliners")
 
 div()
-  HeaderTitle(:index="3")
+  HeaderTitle(m="10" :index="3")
+HList()
+  MetashareClaimHorizontal()
+Card()
+
   
   
 </template>

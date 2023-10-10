@@ -1,8 +1,9 @@
 <template lang="pug">
-HList( bg="gray-800" p="6" rounded="xl" b="0.5 white opacity-20")
-  ul(v-for="territory, index in territories" :key="index" p=6)
-    li(text="s") {{ territory.title }}
-    li(text="s") {{ territory.data }}
+Card()
+  HList()
+    ul(v-for="territory, index in territories" :key="index" p=6)
+      li(text="s") {{ territory.title }}
+      li(text="s") {{ territory.data }}
 </template>
   
 <script lang="ts" setup>
