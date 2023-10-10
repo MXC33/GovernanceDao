@@ -1,6 +1,6 @@
 <template lang="pug">
-img(:src="NetEmpireIcon" v-if="tabImage" h="15" translate-y="-2px")
-component.svg-shadow-orange(:is="tabIcon")
+img(:src="tabIcon" v-if="icon == 'net-empire'" translate-y="-2px")
+component.svg-shadow-orange(:is="tabIcon" v-else)
 </template>
 
 <script lang="ts" setup>
@@ -22,14 +22,10 @@ const tabIcon = computed(() => {
     case 'raid': return RaidIcon
     case 'starter-pack': return StarterIcon
     case 'overview': return OverviewIcon
-  }
-})
-
-const tabImage = computed(() => {
-  switch (props.icon) {
     case 'net-empire': return NetEmpireIcon
   }
 })
+
 const props = defineProps<{
   icon: GameMenuId
 }>()
