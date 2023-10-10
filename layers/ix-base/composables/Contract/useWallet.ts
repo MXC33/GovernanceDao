@@ -142,6 +142,7 @@ export const useWallet = () => {
     walletAdress.value = null
     walletSigningToken.value = null
     walletState.value = 'disconnected'
+    provider.value = null
     clearConnector()
     return true
   }
