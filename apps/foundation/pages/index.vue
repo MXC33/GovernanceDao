@@ -1,14 +1,22 @@
 <template lang="pug">
 Page()
+  PageSection(section="dashboardStaking" primary=true)
   Stake()
-  PageSection(section="territoryStaking")
+  PageSection(section="earnStaking")
+  HList()
+    Card(w="fit")
+      TitleDetail()
+        PageSection(section="ixtStakingInfo")
+    Card(w="fit")
+      TitleDetail()
+        PageSection(section="lpStakingInfo")
+  PageSection(section="ixtStaking")
     div(grid="~ cols-4 gap-6")
       Card(v-for="item in list" )
         div(grid="~ cols-2 gap-6")
           TitleDetail()
             template(#detail) Locking Period 
-            template(#default) {{ item.lockingPeriod }} months 
-
+            template(#default) {{ item.lockingPeriod }} months
           TitleDetail()
             template(#detail) Multiplier
             template(#default) {{ item.multiplier }} x
@@ -24,18 +32,27 @@ Page()
       button(btn="~ primary") CONNECT WALLET TO STAKE
 
   PageSection(section="territoryStaking")
-
-    div(grid="~ cols-2")
+  Card()
+    HList()
+      PageSection( section="assetStaking.territoryBox")
+      StakingWrapper()
+  PageSection(section="energyStaking")
+  Card()
+    HList()
+      PageSection(section="assetStaking.energyBox")
+      StakingWrapper()
+  PageSection(section="landmarkStaking")
+  Card()
+    HList()
+      PageSection(section="assetStaking.landmarkBox")
+      StakingWrapper()
+  PageSection(section="metashareStaking")
+  Card()
+    HList()
+      PageSection(section="assetStaking.metashareBox")
       StakingWrapper()
 
-    div(grid="~ cols-2 gap-6" )
-      StakingWrapper()
 
-    div(grid="~ cols-2 gap-6" )
-      StakingWrapper()
-
-    div(grid="~ cols-2 gap-6" )
-      StakingWrapper()
 
 
 </template>

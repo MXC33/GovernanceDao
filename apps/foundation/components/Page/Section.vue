@@ -1,10 +1,10 @@
 <template lang="pug">
 VList(space-y="6")
   header(space-y="3")
-    h1(v-if="primary" text="4xl" font="bold") {{ $t(`${route.name}.${section}.title`) }}
-    h2(v-else text="3xl" font="bold") {{ $t(`${route.name}.${section}.title`) }}
+    h1(v-if="primary" text="4xl" font="bold") {{$t(`${route.name}.${section}.title`) }}
+    h2(v-else text="3xl" font="bold") {{$t(`${route.name}.${section}.title`) }}
 
-    p {{ $t(`${route.name}.${section}.description`) }}
+    p(text="s") {{$t(`${route.name}.${section}.description`) }}
 
   slot
 </template>
