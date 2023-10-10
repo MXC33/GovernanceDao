@@ -3,7 +3,7 @@ VList(pos="relative" ref="container")
   div(@click.prevent.stop="toggleNotification" wh="6" translate-y="-0.5" cursor="pointer" opacity="hover:80" transition="opacity")
     BellFilled(v-if="!showNotification")
     BellEmpty(v-else)
-    div(pos="absolute bottom-4" wh="2" bg="s-unread:ix-orange" rounded="full" :state="isUnread")
+    div(pos="absolute bottom-4" wh="2" bg="ix-orange" rounded="full" v-if="isUnread")
 
   Teleport(to="#navigation-bottom")
     Transition(name="fade-slow")
@@ -44,7 +44,7 @@ const isUnread = computed(() => {
   const oldMessagesUnread = messagesData.value?.old && isUnreadInNotifications(messagesData.value.old)
 
   if (todayMessagesUnread || yesterdayMessagesUnread || oldMessagesUnread)
-    return 'unread'
+    return true
 
   //Notification
   const todayNotificationUnread = notificationData.value?.today && isUnreadInNotifications(notificationData.value.today)
@@ -52,7 +52,9 @@ const isUnread = computed(() => {
   const oldNotificationUnread = notificationData.value?.old && isUnreadInNotifications(notificationData.value.old)
 
   if (todayNotificationUnread || yesterdayNotificationUnread || oldNotificationUnread)
-    return 'unread'
+    return true
+
+  return false
 })
 
 const isUnreadInNotifications = (notifications: Notification[]) => {

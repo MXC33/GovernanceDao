@@ -1,5 +1,5 @@
 <template lang ="pug">
-HList.notification(w="full" @click="onClick" cursor="on-link:pointer" :link="!!link" opacity="on-link:hover:80" transition="all" items="center")
+HList.notification(w="full" @click="onClick" cursor="pointer on-nolink:default" :nolink="!link" opacity="hover:80 on-nolink:!100" transition="all" items="center" pos="relative")
   VList(items="left" p="1 r-3")
     h4(font="bold") {{ message.notification.title }} 
     HList(space-x="1")
@@ -8,8 +8,7 @@ HList.notification(w="full" @click="onClick" cursor="on-link:pointer" :link="!!l
 
   div(grow="~")
 
-  div(p="1")
-    div(v-if="message.is_read == 0"  bg="ix-mint" wh="1" rounded="full")
+  div(v-if="message.is_read == 0" bg="ix-mint" w="1" h="1" pos="absolute right-3 top-50%" translate-y="-50%" rounded="full")
     
 </template>
 
