@@ -1,6 +1,6 @@
 <template lang="pug">
 Page()
-  PageSection(section="dashboardStaking" primary=true)
+  PageSection(section="dashboardStaking" :primary="true")
   Stake()
   PageSection(section="earnStaking")
   HList()
