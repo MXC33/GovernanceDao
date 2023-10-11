@@ -1,10 +1,11 @@
 <template lang="pug">
 Card()
   HList()
-    ul(v-for="territory, index in territories" :key="index" p=6)
-      li(text="s") {{ territory.title }}
-      li(text="s") {{ territory.data }}
+    ul(v-for="territory, index in territories" :key="index" p=6 class="list-none pl-0")
+      li(text="m" mb="2" color="gray-300") {{ territory.title }}
+      li(text="2xl" font="bold") {{ territory.data }}
 </template>
+  
   
 <script lang="ts" setup>
 import { defineProps } from 'vue';

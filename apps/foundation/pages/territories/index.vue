@@ -13,12 +13,13 @@ Page()
     button(btn="~ secondary" grid="~" p="6") SECTOR
     button(btn="~ secondary" grid="~" p="6") ZONE
     button(btn="~ secondary" grid="~" p="6") DOMAIN
-  div()
-    Territory(category="Legendary")
-    Territory(category="Rare")
-    Territory(category="Uncommon")
-    Territory(category="Common")
-    Territory(category="Outliners")
+  HList(w="fit")
+    div(grid="~ cols-2 gap-4")
+      Territory(category="Legendary")
+      Territory(category="Rare")
+      Territory(category="Uncommon")
+      Territory(category="Common")
+      Territory(category="Outliners")
 
   div()
     PageSection(section="yourTerritories")
