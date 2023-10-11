@@ -128,7 +128,7 @@ export const useConnectors = () => {
     if (injectedProvider?.isCoinbaseWallet)
       return ['coinbase', ...defaultProviders]
 
-    if (!injectedProvider || (injectedProvider?.isMetaMask && !injectedProvider.isBraveWallet))
+    if (!injectedProvider || (injectedProvider?.isMetaMask && !injectedProvider.isBraveWallet && !injectedProvider.isBitKeep && !injectedProvider.isWombat))
       return ['metamask', 'coinbase', ...defaultProviders]
 
     return ['injected', 'coinbase', ...defaultProviders]
