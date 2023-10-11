@@ -1,9 +1,9 @@
 <template lang="pug">
-Page(b="solid red 1")
+Page()
   PageSection(section="rewards")
-  HList(grid="~ gap-4 ")
-    MetashareClaimHorizontal()
-    MetashareClaimHorizontal()
+    HList(grid="~ gap-4 ")
+      MetashareClaimHorizontal()
+      MetashareClaimHorizontal()
   PageSection(section="myLandmarks")
   card()
     p No landmarks available
@@ -12,6 +12,7 @@ Page(b="solid red 1")
       InputsSearchbar()
       InputsDropdown(:options="filterOptions" v-model="selectedFilter" label="Filter by")
       InputsDropdown(:options="sortOptions" v-model="selectedSort" label="Sort by")
+  CardLandmark()
 </template>
 
 <script lang="ts" setup>
