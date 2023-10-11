@@ -27,7 +27,7 @@ VList()
       HList(v-if="!isSubstituteListing" w="20" justify="center" cursor="pointer" @click="onClickCart" bg="ix-primary hover:(ix-ne)" b="l-1 gray-900")
         CartIcon(w="6")
 
-    ButtonInteractive(btn="~ primary" bg="on-disabled:gray-700" color="on-disabled:gray-400" cursor="default" font="bold" :disabled="isDisabled" text="There is no sales" v-else)
+    ButtonInteractive(btn="~ primary" bg="on-disabled:gray-700" color="on-disabled:gray-400" cursor="default" font="bold" :disabled="isDisabled" text="There are no sales" v-else)
 
 </template>
 
