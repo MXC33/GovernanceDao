@@ -55,4 +55,10 @@ onMounted(() => {
 #CybotCookiebotDialogBodyUnderlay * {
   font-family: 'Foundry Gridnik' !important;
 }
+
+@media only screen and (max-width: 600px) {
+  .CookiebotWidget-logo {
+    display: none !important;
+  }
+}
 </style>
