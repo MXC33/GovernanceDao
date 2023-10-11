@@ -1,32 +1,31 @@
 <template lang="pug">
-Page()
-  PageSection(section="rewards" :primary="true")
-  HList()
-    Card()
+Page(b="solid red 1")
+  PageSection(section="rewards")
+  HList(grid="~ gap-4 ")
+    MetashareClaimHorizontal()
     MetashareClaimHorizontal()
   PageSection(section="myLandmarks")
   card()
     p No landmarks available
   PageSection(section="explore")
-    div.input-container
-      input(type="text" v-model="searchQuery" placeholder="Search...")
-      select(v-model="filterOption")
-        option(value="" disabled selected) Filter by...
-        option(value="option1") Option 1
-        option(value="option2") Option 2
-        option(value="option3") Option 3
-      select(v-model="sortOption")
-        option(value="" disabled selected) Sort by...
-        option(value="asc") Ascending
-        option(value="desc") Descending
-  </template>
+    HList()
+      InputsSearchbar()
+      InputsDropdown(:options="filterOptions" v-model="selectedFilter" label="Filter by")
+      InputsDropdown(:options="sortOptions" v-model="selectedSort" label="Sort by")
+</template>
 
 <script lang="ts" setup>
 import { ref } from 'vue';
 
-const searchQuery = ref('');
-const filterOption = ref('');
-const sortOption = ref('');
-
-
+const filterOptions = ['Option 1', 'Option 2', 'Option 3'];
+const sortOptions = ['Ascending', 'Descending'];
+const selectedFilter = ref('');
+const selectedSort = ref('');
 </script>
+
+<style scoped>
+.input-container {
+  display: flex;
+  gap: 10px;
+}
+</style>
