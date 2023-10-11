@@ -1,8 +1,8 @@
 <template lang="pug">
 div.dropdown-container
   label(v-if="label" :for="label") {{ label }}
-  select(v-model="selectedOption" class="select")
-    option(v-for="(option, index) in options" :key="index" :value="option") {{ option }}
+    select(v-model="selectedOption" class="select")
+      option(v-for="(option, index) in options" :key="index" :value="option") {{ option }}
 </template>
   
 <script lang="ts" setup>
@@ -30,6 +30,7 @@ watch(selectedOption, (newVal) => {
 .dropdown-container {
   position: relative;
   margin-bottom: 15px;
+  border: solid yellow 1px;
 }
 
 label {
