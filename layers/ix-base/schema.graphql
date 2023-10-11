@@ -32,7 +32,7 @@ type CorporationCapacity {
 }
 
 input CredentialsInput {
-  playerId: Int!
+  playerId: Int
   walletAddress: String
 }
 
@@ -168,6 +168,28 @@ enum PixTier {
   outlier
 }
 
+type PolygonScanTransactions {
+  blockNumber: String
+  timeStamp: String
+  hash: String
+  nonce: String
+  blockHash: String
+  from: String
+  contractAddress: String
+  to: String
+  value: String
+  tokenName: String
+  tokenSymbol: String
+  tokenDecimal: String
+  transactionIndex: String
+  gas: String
+  gasPrice: String
+  gasUsed: String
+  cumulativeGasUsed: String
+  input: String
+  confirmations: String
+}
+
 type Prize {
   prizeAddress: String!
   prizeType: Int!
@@ -235,6 +257,9 @@ type Query {
   burnedAvatars(credentials: CredentialsInput, corporation: String!): Boolean
   cooldownFacilityUpgrade(credentials: CredentialsInput): Int
   assetConverterRecipes: [AssetConverterRecipe]
+  stakingData(credentials: CredentialsInput, id: StakingId!): StakingData
+  stakingsData(credentials: CredentialsInput, ids: [StakingId]): [StakingData]
+  catRaffData(credentials: CredentialsInput): StakingData
 }
 
 type RaffleInfo {
@@ -295,6 +320,46 @@ type StakedTopAssetInfo {
   cap: Int
 }
 
+type StakingData {
+  epochEndtime: Float
+  currentEpochPool: Float
+  nextEpochPool: Float
+  totalStakedAmount: Float
+  lockPeriod: Float
+  userSpecificStakingData: UserSpecificStakingData
+  prizeAmount: Int
+  transactions: [PolygonScanTransactions]
+  stakingItems: [StakingItem]
+}
+
+enum StakingId {
+  ixtOneMonth
+  ixtThreeMonths
+  ixtSixMonths
+  ixtTwelveMonths
+  landmark
+  metashare
+  energy
+  energyAmelia
+  territories
+  territoriesUser
+  catRaff
+}
+
+type StakingItem {
+  token: Token
+  rewardPerDay: Float
+  rewardPerThirtyDays: Float
+  rewardRate: Float
+  totalStaked: Float
+  userStakingData: TokenSpecificUserStakingData
+  odds: Float
+}
+
+input StakingTypes {
+  type: PixTier
+}
+
 type Tax {
   value: Int
   basisPoints: Int
@@ -333,6 +398,7 @@ type Token {
   external_url: String
   tokenId: Int
   balance: Float
+  totalSupply: Int
   tokenInfo: TokenInfo
   media: Media
   network: String
@@ -363,9 +429,24 @@ type TokenProbability {
   probability: Float
 }
 
+type TokenSpecificUserStakingData {
+  amountStaked: Float
+  totalReward: Float
+  userRewardPerDay: Float
+  userRewardPerThirtyDays: Float
+  balanceOfToken: Float
+  stakedAt: Int
+}
+
 type TokenUri {
   raw: String
   gateway: String
+}
+
+type UserSpecificStakingData {
+  totalUserReward: Float
+  totalUserRewardPerDay: Float
+  totalUserRewardPerThirtyDays: Float
 }
 
 type Winnings {

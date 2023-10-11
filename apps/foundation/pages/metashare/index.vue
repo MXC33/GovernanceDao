@@ -13,10 +13,7 @@ Page()
 
   PageSection(section="corporation")
     div(grid="~ cols-2 gap-6")
-      MetashareCorporation()
-      MetashareCorporation()
-      MetashareCorporation()
-      MetashareCorporation()
+      MetashareCorporation(v-for="stakingItem in data?.stakingItems" :staking-data="stakingItem")
   PageSection(section="corpPerformance")
     Table()
   
@@ -25,6 +22,14 @@ Page()
 </template>
 
 <script lang="ts" setup>
+
+import { StakingId } from '../../.nuxt/gql/default'
+
+const { execute: fetchStakingData, data } = useStakingData(StakingId.Metashare)
+
+await fetchStakingData()
+console.log("data", data.value?.stakingItems)
+
 
 </script>
 
