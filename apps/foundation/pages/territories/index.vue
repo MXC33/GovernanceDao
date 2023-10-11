@@ -7,25 +7,31 @@ Page()
     router-link(to="/landmarks" tag="button" btn="~ secondary") Landmarks Staking
     router-link(to="/governance" tag="button" btn="~ secondary") Governance 
   PageSection(section="yourTerritories")
-  PageSection(section="territoryStaking")
-  HList()
-    button(btn="~ secondary" grid="~" p="6") AREA
-    button(btn="~ secondary" grid="~" p="6") SECTOR
-    button(btn="~ secondary" grid="~" p="6") ZONE
-    button(btn="~ secondary" grid="~" p="6") DOMAIN
+  HList(space-x="12")
+    button(btn="~ form" p="6") AREA
+    button(btn="~ form" p="6") SECTOR
+    button(btn="~ form" p="6") ZONE
+    button(btn="~ form" p="6") DOMAIN
   HList(w="fit")
-    div(grid="~ cols-2 gap-4")
+    div(grid="~ cols-2 gap-6")
       Territory(category="Legendary")
       Territory(category="Rare")
       Territory(category="Uncommon")
       Territory(category="Common")
       Territory(category="Outliners")
-
-  div()
+  div(space-y="12")
     PageSection(section="yourTerritories")
-  HList()
-    MetashareClaimHorizontal()
-  Card()
+    HList()
+      Card()
+        p() earnings per day 
+        p() earnings 7 days
+      MetashareClaimHorizontal()
+  HList(space-x="12")
+    button(btn="~ form" p="6") AREA
+    button(btn="~ form" p="6") SECTOR
+    button(btn="~ form" p="6") ZONE
+    button(btn="~ form" p="6") DOMAIN
+    
 
   
   
