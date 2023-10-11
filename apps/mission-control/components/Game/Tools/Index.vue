@@ -1,5 +1,5 @@
 <template lang="pug">
-.game-tools(pos="sticky md:(absolute top-50%) bottom-0 left-0" p="2 lg:4"  translate-y="md:-50%" flex="~ col" justify="end md:center" items="start" self="start" pointer-events="auto" overflow-x="auto")
+.game-tools(pos="sticky md:(absolute top-50%) bottom-0 left-0" p="2 lg:4"  translate-y="md:-50%" flex="~ col" justify="end md:center" items="start" self="start" pointer-events="auto")
   Transition(name="slide-left")
     div(grid="~ lt-md:cols-5 auto-rows-fr gap-1 md:gap-2" justify="center" v-if="displayTools") 
 
