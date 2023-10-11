@@ -1,5 +1,5 @@
 <template lang="pug">
-PopupBase()
+Popup()
   template(#icon)
     CheckboxIcon(w="6" h="6")
 

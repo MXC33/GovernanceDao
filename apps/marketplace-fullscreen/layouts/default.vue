@@ -20,5 +20,5 @@ main(w="full" h="full" flex="~ col grow" min-h="100vh")
 
 <script lang="ts" setup>
 const route = useRoute()
-const onLogin = computed(() => route.name == "connect")
+const onLogin = computed(() => route.name == "connect" || route.name == "logout")
 </script>

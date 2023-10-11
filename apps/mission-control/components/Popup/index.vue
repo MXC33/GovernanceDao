@@ -15,11 +15,11 @@ VList(flex-grow="lt-md:1" space-y="4" max-w="150" mx="auto" w="full" )
       slot(name="images")
 
   HList(justify="md:end between" space-x="2 md:4" p="x-2 y-4 md:0")
-    ButtonSound(btn="~ tertriary uppercase" @click="$emit('cancel')" w="lt-md:full" sound="sm-x" v-if="!useSecondary") {{$t(`general.cancel`)}}
+    ButtonSound(btn="~ white uppercase" @click="$emit('cancel')" w="lt-md:full" sound="sm-x" v-if="!useSecondary") {{$t(`general.cancel`)}}
 
-    ButtonSound(btn="~ primary-outline uppercase" @click="$emit('secondary')" w="lt-md:full" sound="sm" v-else) {{ secondaryText ?? $t(`general.continue`)}}
+    ButtonSound(btn="~ secondary-outline uppercase" @click="$emit('secondary')" w="lt-md:full" sound="sm" v-else) {{ secondaryText ?? $t(`general.continue`)}}
 
-    ButtonSound(btn="~ primary-outline uppercase" @click="$emit('confirm')" w="lt-md:full" sound="sm") {{confirmText ?? $t(`general.confirm`)}}
+    ButtonSound(btn="~ secondary uppercase" @click="$emit('confirm')" w="lt-md:full" sound="sm") {{confirmText ?? $t(`general.confirm`)}}
 </template>
 
 <script setup lang="ts">

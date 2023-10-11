@@ -16,8 +16,6 @@ export const frameRules: Rule[] = [
     const pixSize = h.bracket.global.px(px)
     const { wrappedMediaSelector, attributedSelector } = getSelector(ruleContext)
 
-    console.log("SELECTER", attributedSelector)
-
     const pseudoBase = `
       height: var(--un-frame-gap);
       content: '';

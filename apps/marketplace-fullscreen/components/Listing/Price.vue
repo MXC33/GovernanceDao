@@ -25,13 +25,13 @@ VList()
 <script lang="ts" setup>
 import type { ListingItem } from "~/composables/useListing";
 
-const { priceRenderString, getTotalIXTPrice } = useTransactions()
-const { ixtToUSD } = useIXTPrice()
+const { priceRenderString, getTotalIXTPrice, MP_FEE } = useTransactions()
+const { ixtToUSD } = useCurrencyConversion()
 
 const totalIXTPrice = computed(() => getTotalIXTPrice(items, true))
 
 const totalPotentialEarning = computed(() =>
-  priceRenderString(totalIXTPrice.value * (1 - 0.025))
+  priceRenderString(totalIXTPrice.value * (1 - MP_FEE))
 )
 
 const usdBalanceRounded = computed(() => {
@@ -61,5 +61,6 @@ const spacingUsd = computed(() => {
 const { items } = defineProps<{
   items: ListingItem[],
 }>()
+
 
 </script>

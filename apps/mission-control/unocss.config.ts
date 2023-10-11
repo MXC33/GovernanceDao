@@ -5,13 +5,19 @@ import baseLayer from '@ix/base/unocss.config';
 export default defineConfig({
   presets: [baseLayer],
 
+  //@ts-ignore
+  variants: baseLayer.theme.variants,
+
   theme: {
     //@ts-ignore
-    ...baseLayer.theme.colors,
+
+    ...baseLayer.theme,
+
     fontFamily: {
       apercu: ['Apercu Mono', 'sans-serif'],
       druk: ['Druk Wide', 'sans-serif'],
     },
+
 
     textShadow: {
       'white': '0px 0px 6px rgba(255, 255, 255, 0.33)',
@@ -31,6 +37,8 @@ export default defineConfig({
       'mc-gravity-grade': '0px 0px 6px rgba(255, 65, 0, 0.5)'
     },
     colors: {
+      //@ts-ignore
+      ...baseLayer.theme.colors,
       ix: {
         primary: '#84D4BC',
         white: '#F9F9F9',

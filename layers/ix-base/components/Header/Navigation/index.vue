@@ -7,7 +7,7 @@ VList(v-if="isMobile" pos="absolute left-0 right-0 top-$header-height" bg="black
 
 //-Display this when in landscape mode
 div(m="!l-0" p="6 t-3" grid="~ cols-5" w="full" bg="black" pos="absolute top-full right-0 left-0" z="1" v-else)
-  HeaderNavigationMenuSubNavigation(grid="col-span-1 s-increased:col-span-2" v-for="(navigation, index) in header.subNavigations" items="center" grow="" :navigation="navigation" :state="columnSize[index]")
+  HeaderNavigationMenuSubNavigationDesktop(grid="col-span-1 s-increased:col-span-2" v-for="(navigation, index) in header.subNavigations" grow="" :navigation="navigation" :state="columnSize[index]")
 
 </template>
 

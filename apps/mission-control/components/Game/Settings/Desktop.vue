@@ -1,7 +1,7 @@
 <template lang="pug">
-VList(z="10" :state="getBannerStatues" text="sm" pos="absolute right-0" w="md:70" space-y="1")
+VList(z="10" text="sm" pos="absolute right-8 lt-lg:right-4" w="md:70" space-y="1")
 
-  HList(items="center" fill="white" justify="between" cut="bottom-right s-md b-gray-400" bg="gray-800" py="2.5" px="4")
+  HList(items="center" fill="white" justify="between" cut="bottom-right s-md b-gray-500" bg="gray-900" py="2.5" px="4")
     TitleWithIcon(color="mc-orange" font="bold" text-shadow="mc-orange" fill="mc-orange" icon="pointer")
       GlitchText(:text="$t(`general.navigation.settings.title`)")
 
@@ -13,7 +13,7 @@ VList(z="10" :state="getBannerStatues" text="sm" pos="absolute right-0" w="md:70
         ButtonSound(color="white hover:opacity-60" sound="sm" uppercase="~" @click="backToSettings")
           GlitchText(:text="$t(`general.navigation.settings.back`)")
 
-  VList(b="1 gray-400" bg="gray-800")
+  VList(b="1 gray-500" bg="gray-900")
     VList(v-if="!inGraphicsSettings" px="4")
       GameSettingsSound()
 
@@ -34,14 +34,6 @@ const inGraphicsSettings = ref(false)
 const toggleMenu = () => {
   inGraphicsSettings.value = !inGraphicsSettings.value
 }
-
-const { isBannerActive } = useAds()
-const getBannerStatues = computed(() => {
-  if (isBannerActive.value)
-    return 'adBanner'
-
-  return ''
-})
 
 const backToSettings = () => {
   inGraphicsSettings.value = false

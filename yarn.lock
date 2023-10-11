@@ -3117,7 +3117,7 @@ __metadata:
     "@esbuild-plugins/node-modules-polyfill": ^0.2.2
     "@histoire/plugin-nuxt": ^0.16.1
     "@histoire/plugin-vue": ^0.16.1
-    "@metamask/sdk": ^0.7.1
+    "@metamask/sdk": ^0.8.0
     "@nuxt/eslint-config": ^0.1.1
     "@nuxtjs/html-validator": ^1.5.2
     "@nuxtjs/i18n": next
@@ -3153,6 +3153,16 @@ __metadata:
     vue-collapsed: ^1.1.3
     vue3-carousel: ^0.3.1
     web3-token: ^1.0.6
+  languageName: unknown
+  linkType: soft
+
+"@ix/foundation@workspace:apps/foundation":
+  version: 0.0.0-use.local
+  resolution: "@ix/foundation@workspace:apps/foundation"
+  dependencies:
+    "@ix/base": "*"
+    "@types/node": ^18
+    nuxt: 3.6.5
   languageName: unknown
   linkType: soft
 
@@ -3400,9 +3410,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@metamask/sdk-communication-layer@npm:0.7.1":
-  version: 0.7.1
-  resolution: "@metamask/sdk-communication-layer@npm:0.7.1"
+"@metamask/sdk-communication-layer@npm:0.8.0":
+  version: 0.8.0
+  resolution: "@metamask/sdk-communication-layer@npm:0.8.0"
   dependencies:
     cross-fetch: ^3.1.5
     date-fns: ^2.29.3
@@ -3410,7 +3420,7 @@ __metadata:
     eventemitter2: ^6.4.5
     socket.io-client: ^4.5.1
     uuid: ^8.3.2
-  checksum: ed84790008553d5ba0e2d28386015a57acbfa9eb55f342be5e803945e7f2f6545f1437102f5b24ada07d444793d9f827ffe4a391dddc9bf8ab0688da406d27d5
+  checksum: c0743f29e44f0c4319f3e6548154b144a8c9f55b1abdf79ac11ac23781ec85796faf60b7d7d30fc1c92cc54567070c375846a98bc1701a96cbd4e81e5f318ae0
   languageName: node
   linkType: hard
 
@@ -3427,14 +3437,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@metamask/sdk@npm:^0.7.1":
-  version: 0.7.1
-  resolution: "@metamask/sdk@npm:0.7.1"
+"@metamask/sdk@npm:^0.8.0":
+  version: 0.8.0
+  resolution: "@metamask/sdk@npm:0.8.0"
   dependencies:
     "@metamask/onboarding": ^1.0.1
     "@metamask/post-message-stream": ^6.1.0
     "@metamask/providers": ^10.2.1
-    "@metamask/sdk-communication-layer": 0.7.1
+    "@metamask/sdk-communication-layer": 0.8.0
     "@metamask/sdk-install-modal-web": 0.7.0
     "@react-native-async-storage/async-storage": ^1.17.11
     "@types/dom-screen-wake-lock": ^1.0.0
@@ -3455,7 +3465,12 @@ __metadata:
   peerDependencies:
     react: ^18.2.0
     react-native: "*"
-  checksum: b94a45f4e7f84cdc2738659195f10f0b66b14a13bf858092f90e19d66d1861fe29225dd9ac6cb6cd579fc05629effb197f746d3cf720eb02c467a5062f16a802
+  peerDependenciesMeta:
+    react:
+      optional: true
+    react-native:
+      optional: true
+  checksum: 45ecce55373076e35451aca26a5c046adacd863774e80e1f25263bb337b097741aad0071471e3926c6a056c48537e80125e758417778a94d24d061652c1c7a61
   languageName: node
   linkType: hard
 

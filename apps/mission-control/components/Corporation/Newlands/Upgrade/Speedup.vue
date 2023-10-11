@@ -10,17 +10,17 @@ CorporationCartRow(p="3" gap="3")
 
 <script lang="ts" setup>
 import type { PaymentOption, SelectedPurchase } from '~/composables/corporations/useSpeedup';
-const { execute: fetchCurrency, ixtBalance } = useCurrencyData()
+const { execute: fetchCurrency, ixtBalance, ixtToken } = useCurrencyData()
 await fetchCurrency()
 
 const selectedPurchase = ref<SelectedPurchase>()
+
 const speedupPayments = computed<PaymentOption[]>(() => [{
-  token: { type: 'ixt' },
+  token: ixtToken.value,
   cost: speedupUpgrade.value.cost
 }])
 
 definePageMeta({
-  middleware: 'auth',
   layout: 'corporation'
 })
 

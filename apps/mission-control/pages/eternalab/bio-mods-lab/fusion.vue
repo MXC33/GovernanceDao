@@ -7,7 +7,6 @@ CorporationOrders(v-else :output-token="data" :blocks="blocks")
 import type { InfoBlock } from '~/composables/useInfoBlocks';
 
 definePageMeta({
-  middleware: 'auth',
   layout: 'corporation'
 })
 

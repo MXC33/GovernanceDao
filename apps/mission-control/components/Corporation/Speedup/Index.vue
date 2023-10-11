@@ -9,7 +9,7 @@ VList()
       CorporationSpeedupSelectToken(:is-active="isSameNFT(payment.token, selectedToken)" v-for="payment in payments" @click="selectToken(payment.token)" w="full" :token="payment.token")
 
     div(font="bold" uppercase="~") {{$t(`general.timeCost.hours`)}}
-    Adjustable(v-model="speedup")
+    Adjustable(v-model="speedup" h="10" look="border")
 
     HelperProgressBar(:progress="progress")
 
@@ -31,7 +31,6 @@ const props = defineProps<{
   finishTime: number,
   totalTime: number,
   payments: PaymentOption[],
-  modelValue: SelectedPurchase,
   maxCost?: number,
   multiplier?: number
   accented?: boolean,
@@ -51,9 +50,7 @@ const state = computed(() => {
 
 const astroCreditAndIXTCopy = props.payments.length > 1 ? t(`general.reduceTimeACIXT`) : t(`general.reduceTimeIXT`)
 
-const emit = defineEmits(["update:modelValue"])
-
-const data = useVModel(props, 'modelValue', emit)
+const data = defineModel<SelectedPurchase>()
 
 watch([selectedToken, speedup], () => {
   data.value = {

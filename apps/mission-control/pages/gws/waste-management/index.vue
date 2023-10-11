@@ -20,7 +20,6 @@ const onClickBack = () => {
 }
 
 definePageMeta({
-  middleware: 'auth',
   layout: 'corporation'
 })
 

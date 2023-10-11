@@ -39,6 +39,8 @@ export const useTransactionContract = () => {
 export const useTransactions = () => {
   const { t } = useI18n()
 
+  const MP_FEE = 0.05
+
   const formattedDays = (days: number) => {
     const daysAsMonths = Math.floor(days / 30)
     const daysAsWeek = Math.floor(days / 7)
@@ -63,10 +65,11 @@ export const useTransactions = () => {
   }
 
   const getTotalIXTPrice = (items: TransactionItem[], userPrice?: boolean) => {
-    if (items.length == 1)
-      return items[0].ixtPrice ?? 0
+    const getPrice = (item: TransactionItem) =>
+      getItemPrice(item, userPrice) * item.shares.value
+
     return items.reduce((prev, item) =>
-      prev + (getItemPrice(item, userPrice) * item.shares.value)
+      prev + getPrice(item)
       , 0)
   }
   const getItemPrice = (item: TransactionItem, userPrice?: boolean) => {
@@ -98,6 +101,7 @@ export const useTransactions = () => {
   }
 
   return {
+    MP_FEE,
     priceRenderString,
     itemsInvalid,
     itemIsInvalid,

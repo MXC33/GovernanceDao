@@ -4,7 +4,6 @@ CorporationBurn(:available-tokens="allAvatars")
 
 <script lang="ts" setup>
 definePageMeta({
-  middleware: 'auth',
   layout: 'corporation'
 })
 

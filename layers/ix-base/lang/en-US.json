@@ -16,6 +16,7 @@
     "navigation": {
       "terminal": "Terminal",
       "inventory": "Inventory",
+      "net-empire": "NetEmpire",
       "missionCtrl": "Mission Control",
       "netEmpire": "Netempire",
       "marketPlace": "Marketplace",
@@ -32,7 +33,7 @@
       "swap": "Swap",
       "settings": {
         "title": "Settings",
-        "sound": "SOUND ON/OFF",
+        "sound": "SOUND OFF/ON",
         "graphics-Settings": "GRAPHICS SETTINGS",
         "low": "LOW",
         "medium": "MEDIUM",
@@ -52,6 +53,41 @@
       "signing": {
         "title": "CONFIRM TRANSACTION IN YOUR CONNECTED WALLET",
         "description": "Processing the transaction will take a short while. If you want to cancel this operation, please decline the transaction in your wallet app."
+      },
+      "minting": {
+        "title": "WRITING TO CHAIN",
+        "description": "Hold on. Your transaction will be validated shortly."
+      },
+      "approving": {
+        "title": "APPROVING",
+        "description": "Approving your asset to be staked. If you want to cancel this operation, please decline the transaction in your wallet app."
+      },
+      "minting-pix": {
+        "title": "MINTING YOUR PIX",
+        "description": "Minting your pix to Chain."
+      },
+      "nonce": {
+        "title": "FETCHING SIGNATURE",
+        "description": "Fetching signature for your claim. Please wait a few seconds."
+      },
+      "second-transaction": {
+        "title": "WAIT FOR SECOND TRANSACTION",
+        "description": "You need to wait for the second transaction to claim your Avatar. This can take up to 1 minute!"
+      },
+      "unclaimed-avatar": {
+        "title": "UNCLAIMED AVATAR",
+        "description": "You cannot open this pack because you have an unclaimed Avatar. Verify this transaction to claim your Avatar. "
+      },
+      "playerProfile": {
+        "notLoggedIn": "Player profile not logged in",
+        "playerConnecting": "Player profile (connecting)",
+        "loggedInAs": "Logged in as"
+      },
+      "payments": {
+        "chooseMethod": "Choose Payment Method",
+        "matic": "matic",
+        "usdt": "usdt",
+        "ixt": "ixt"
       }
     }
   }

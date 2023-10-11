@@ -1,5 +1,5 @@
 <template lang="pug">
-PopupBase()
+Popup()
   template(#icon)
     WarningIcon(w="6" h="6")
 

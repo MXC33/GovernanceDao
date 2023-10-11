@@ -15,7 +15,6 @@ CorporationPage(@click-back="goBack()")
 const { goBack } = useCorporationRoute()
 
 definePageMeta({
-  middleware: 'auth',
   layout: 'corporation'
 })
 

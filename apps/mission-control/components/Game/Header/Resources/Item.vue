@@ -19,7 +19,6 @@ HList(items="center" space-x="1 lg:2" font="bold" :class="['is-' + type]")
 </template>
 
 <script setup lang="ts">
-import type { NftFragment } from '#gql'
 import type { UserResource } from '~~/composables/useUserData';
 import IXTIcon from '~/assets/images/ui/resources/ixt-icon.svg'
 import AstroGoldIcon from '~/assets/images/ui/resources/astro-gold-icon.svg'

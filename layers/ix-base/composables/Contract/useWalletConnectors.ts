@@ -82,14 +82,15 @@ const createMetamaskProvider = async () => {
       url: 'https://missioncontrol.planetix.com/IX-icon.png'
     }
   })
+  await sdk.init()
 
+  await sdk.connect()
   return sdk.getProvider()
 }
 
 
 const createWalletConnectProvider = async () => {
   const { chainIds } = useChainInfo()
-  const { displaySnack } = useSnackNotifications()
 
   try {
     const provider = await EthereumProvider.init({
@@ -127,8 +128,8 @@ export const useConnectors = () => {
     if (injectedProvider?.isCoinbaseWallet)
       return ['coinbase', ...defaultProviders]
 
-    if (!injectedProvider || (injectedProvider?.isMetaMask && !injectedProvider.isBraveWallet))
-      return ['injected', 'coinbase', ...defaultProviders]
+    if (!injectedProvider || (injectedProvider?.isMetaMask && !injectedProvider.isBraveWallet && !injectedProvider.isBitKeep && !injectedProvider.isWombat))
+      return ['metamask', 'coinbase', ...defaultProviders]
 
     return ['injected', 'coinbase', ...defaultProviders]
   }

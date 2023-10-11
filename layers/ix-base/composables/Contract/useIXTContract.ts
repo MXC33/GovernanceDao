@@ -2,7 +2,7 @@ import { BigNumberish, ethers } from "ethers"
 import { ContractInterface } from "../Utils/defineContract"
 import { ContractContext as IXTokenContract } from '@ix/base/composables/Contract/Abis/IXToken'
 import IXToken from '@ix/base/composables/Contract/Abis/IXToken.json'
-import {useActiveChain} from "~/composables/Contract/useWallet";
+import { useActiveChain } from "~/composables/Contract/useWallet";
 
 
 export const useIXTContract = <T extends ContractInterface<T> & IXTokenContract>() => {
@@ -22,11 +22,13 @@ export const useIXTContract = <T extends ContractInterface<T> & IXTokenContract>
 
 
   const { execute: fetchIXT, data: ixtBalance, refresh: refreshIXTBalance, pending: ixtPending } = viewAsyncState('ixt-balance', async (contract) => {
+    console.log("WALLET", walletAdress.value, contract)
     const address = walletAdress.value
     if (!address)
       return 0
 
     const balance = await contract.balanceOf(address)
+    console.log("GET BALANCE", balance)
     return Number(ethers.utils.formatUnits(balance))
   })
 

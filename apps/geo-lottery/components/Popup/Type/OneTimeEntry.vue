@@ -18,13 +18,10 @@ Popup()
       span() Total price
       span() {{oneTimeLotteryEntries.value * ticketPrice}} AGOLD
 
-    ButtonItem(:value="'pink'" w="full" mt="5" :text="'Purcahse'" @click="onPurchase()" :loading="isLoading")
+    ButtonItem(:value="'pink'" w="full" mt="5" :text="'Purchase'" @click="onPurchase()" :loading="isLoading")
 
 </template>
 <script lang="ts" setup>
-import { useLottery } from "~/composables/useLottery";
-import { useEnterLottery } from "~/composables/useEnterLottery";
-
 const { maxOneTimeEntries } = useEnterLottery()
 const { displayPopup, popup } = usePopups()
 
@@ -35,7 +32,6 @@ const {
 
 const { ticketPrice } = useLottery()
 
-import { useContractRequest } from "~/composables/useContractRequest";
 const { loading: isLoading, execute: oneTimeEntryRequest } = useContractRequest(() =>
   enterLottery(oneTimeLotteryEntries.value.value)
 )

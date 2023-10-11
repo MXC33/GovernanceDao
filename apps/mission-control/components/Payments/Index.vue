@@ -10,7 +10,7 @@ PopupWrapper()
       VList(px="4" py="4" gap="2")
 
         PaymentsButton(v-for="item in activePaymentItems" :token-type="item" @click="chosenPaymentCurrency(item)" :is-selected="isSelected(item)")
-          template(#price) {{ item }}
+          template(#price) {{ convertToCurrency(item) }}
 
     div(grid="~ cols-2" w="full" gap="2")
       ButtonSound(grid="~ col-span-1" btn="~ accent-outline" sound="sm" cut="bottom-right b-$mc-accent" @click="activePopup = null") {{ $t(`general.cancel`) }}
@@ -29,16 +29,35 @@ const activePopup = usePopups()
 const { corporation } = useCorporations()
 const { buyNFT } = useBuyNFTs()
 const { activeShopItem, gotoCompleted, chosenCurrency, activePaymentItems, setChosenCurrencyToDefault } = useCorporationShop()
-
+const { usdToIXT, usdToETH, usdToMatic } = useCurrencyConversion()
 const { purchaseRover } = useYSpaceContracts()
 
 const chosenPaymentCurrency = (item: Currency) => chosenCurrency.value = item
-
+const amount = activeShopItem.value.price
 const isSelected = (item: Currency) => chosenCurrency.value == item
 
 onBeforeMount(() => {
   setChosenCurrencyToDefault()
 })
+
+const formatPrice = (amount: number, type: Currency) => amount + ' ' + type
+
+const convertToCurrency = (selectedCurrency: Currency) => {
+  const ignoredCurrencies: Currency[] = ['astro-credit', 'waste', 'energy']
+
+  if (ignoredCurrencies.includes(selectedCurrency))
+    return formatPrice((amount), selectedCurrency)
+  else if (selectedCurrency == 'usdt')
+    return formatPrice((amount), 'usdt')
+  else if (selectedCurrency == 'ixt')
+    return formatPrice(usdToIXT(amount), 'ixt')
+  else if (selectedCurrency == 'weth')
+    return formatPrice(usdToETH(amount), 'weth')
+  else if (selectedCurrency == 'matic')
+    return formatPrice(usdToMatic(amount), 'matic')
+  else
+    return selectedCurrency
+}
 
 const onPurchaseRover = async () => {
   const didBuy = await purchaseRover(activeShopItem.value, chosenCurrency.value)
@@ -61,5 +80,7 @@ const onPurchase = async () => {
   if (didBuy)
     return gotoCompleted()
 }
+
+
 
 </script>

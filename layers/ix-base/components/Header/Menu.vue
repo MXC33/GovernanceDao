@@ -4,14 +4,14 @@ HList(items="center" justify="between" h="16" space-x="3" ref="menuEl")
     template(v-if="$slots.logo")
       slot(name="logo")
 
-    PlanetIXNew(v-else w="42.25")
+    PlanetIXNew(v-else max-w="42.25" min-w="30" w="full")
 
   HList(v-if="!isMobile" justify="start" flex-grow="1" overflow-x="hidden" space-x="4")
-    button(v-for="(header, index) in headerData" @mouseenter="hoverMenu(index)" @click="openMenu(index)" btn="menu" color = "s-default:white s-selected:ix-orange" :state="selected(index)") {{ header.name }}
+    button(v-for="(header, index) in headerData" @mouseenter="hoverMenu(index)" @click="openMenu(index)" btn="menu" color="s-default:$header-text s-selected:$header-orange" :state="selected(index)") {{ header.name }}
 
     HList(flex-grow="1" justify="end" display="lt-md:none")
       a(href="https://planetix.com/airdrop")
-        span(rounded="full" b="1 $mc-mint" px="4" py="1" bg="hover:$mc-mint-40" uppercase="~" tracking="0.65" font="bold" items="center" justify="center" class="border-white-ixt" flex="~")
+        span(rounded="full" b="1 $header-mint" px="4" py="1" bg="hover:(ix-white opacity-20)" transition="all" uppercase="~" tracking="0.65" font="bold" items="center" justify="center" flex="~")
           span(translate-x="0.5") airdrop
 
 
@@ -19,14 +19,12 @@ HList(items="center" justify="between" h="16" space-x="3" ref="menuEl")
 
     slot(name="contentRight")
 
-    Notification(display="lt-lg:none")
+    Notification()
+
     //-class="border-white-ixt"
     HeaderAccountButton()
       template(#dropdown)
         slot(name="dropdown")
-
-    div(display="lg:none")
-      Notification()
 
     button.hamburger-menu(v-if="isMobile" btn="menu" @click="toggleMenu" ml="2")
       SettingsIcon(v-if="activeHeaderIndex == null" w="6")
@@ -43,17 +41,7 @@ const menuEl = ref()
 const { useMobileBreakpoint } = useDevice()
 const isMobile = useMobileBreakpoint()
 const { data: headerData } = useHeaderData()
-
-
-
-const { refreshIXTBalance } = useIXTContract()
-const { isWalletConnected } = useWallet()
-const { activeHeaderIndex } = useSiteHeader()
-
-watch(isWalletConnected, (connected) => {
-  if (connected)
-    setTimeout(() => refreshIXTBalance(), 10)
-}, { immediate: true })
+const { activeHeaderIndex, closeHeaderMenu } = useSiteHeader()
 
 
 const selected = (index: number) => {
@@ -70,7 +58,7 @@ const hoverMenu = (index: number) => {
 
 const openMenu = (index: number) => {
   if (activeHeaderIndex.value == index)
-    return activeHeaderIndex.value = null
+    return closeHeaderMenu()
 
   activeHeaderIndex.value = index
 }
@@ -79,7 +67,7 @@ const toggleMenu = () => {
   if (activeHeaderIndex.value == null)
     return activeHeaderIndex.value = 1
 
-  activeHeaderIndex.value = null
+  closeHeaderMenu()
 }
 
 </script>

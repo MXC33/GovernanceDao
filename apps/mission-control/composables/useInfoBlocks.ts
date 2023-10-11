@@ -1,4 +1,5 @@
 import { NftFragment } from "#gql"
+import { Currency } from "@ix/base/composables/Utils/useCurrencies"
 
 const InfoBlockTypes = ['description', 'table', 'details', 'attributes', 'header', 'image', 'sectionHeader', 'sheet', 'tabs', 'slideshow', 'slideshowHeader'] as const
 
@@ -73,7 +74,7 @@ export interface InfoBlockDescription extends InfoBlockBase {
   metaInfo?: InfoBlockTable
 }
 
-export type InfoBlockItemDynamicValue = 'tokenBalance' | 'timeLeft' | 'text'
+export type InfoBlockItemDynamicValue = 'tokenBalance' | 'timeLeft' | 'text' | 'currency'
 
 export type InfoBlockItemState = 'active' | 'disabled' | 'accent' | 'success' | 'error'
 
@@ -108,7 +109,13 @@ export interface InfoBlockItemBalance extends InfoBlockItemBase {
   valueType: 'tokenBalance'
 }
 
-export type InfoBlockItem = InfoBlockItemText | InfoBlockItemTimeLeft | InfoBlockItemBalance
+export interface InfoBlockItemCurrency extends InfoBlockItemBase {
+  valueType: 'currency',
+  amount: number,
+  type: Currency
+}
+
+export type InfoBlockItem = InfoBlockItemText | InfoBlockItemTimeLeft | InfoBlockItemBalance | InfoBlockItemCurrency
 
 export interface InfoBlockTable extends InfoBlockBase {
   blockType: 'table',

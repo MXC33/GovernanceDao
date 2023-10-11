@@ -10,7 +10,7 @@ Popup()
         template(#icon)
           IxtCircleBlackIcon(w="10")
         template(#title) Ix Token
-        template(#balance) BALANACE: {{ roundToDecimals(ixtBalance, 2) }} IXT
+        template(#balance) BALANCE: {{ roundToDecimals(ixtBalance, 2) }} IXT
 
       VList(justify="center" items="center" m-y="2" order="2")
         div(flex="~" justify="center" items="center" w="12" h="12" cursor="pointer" bg="ix-pink hover:opacity-80" rounded="full" @click="swapTokenOrder")
@@ -24,7 +24,7 @@ Popup()
         template(#icon)
           AstroGoldCircleYellowIcon(w="10")
         template(#title) Astro Gold
-        template(#balance) BALANACE: {{ roundToDecimals(astroGoldBalance, 2) }} AGOLD
+        template(#balance) BALANCE: {{ roundToDecimals(astroGoldBalance, 2) }} AGOLD
 
   template(#footer)
     ButtonItem(:value="'pink'" :text="'Swap'" @click="onSwap()" :loading="isLoading")
@@ -48,7 +48,7 @@ refreshIXTBalance()
 refreshAstroGoldBalance()
 
 const { ixtValue, aGoldValue, tokenSwapOrder, swapTokenOrder, swapIXTtoAGOLD, swapAGOLDtoIXT } = useSwapTokens()
-const { loading: isLoading, execute: swapRequest } = useContractRequest(() =>{
+const { loading: isLoading, execute: swapRequest } = useContractRequest(() => {
   if (tokenSwapOrder.value === 'IXT-AGOLD')
     return swapIXTtoAGOLD(ixtValue.value.value)
   else

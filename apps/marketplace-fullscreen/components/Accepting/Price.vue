@@ -19,11 +19,11 @@ VList()
 <script lang="ts" setup>
 import type { TransactionItem } from "~/composables/useTransactions";
 
-const { priceRenderString, getTotalIXTPrice } = useTransactions()
+const { priceRenderString, getTotalIXTPrice, MP_FEE } = useTransactions()
 const totalIXTPrice = computed(() => getTotalIXTPrice(items, true))
 
 const totalPotentialEarning = computed(() =>
-  priceRenderString(totalIXTPrice.value * (1 - 0.025))
+  priceRenderString(totalIXTPrice.value * (1 - MP_FEE))
 )
 
 const { items } = defineProps<{

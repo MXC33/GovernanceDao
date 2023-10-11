@@ -1,5 +1,5 @@
 <template lang="pug">
-#app.antialiased(font="foundry" text="base" bg="ix-black" color="white" ref="app" overscroll="none" flex="~ col grow" min-h="100vh")
+#app.antialiased(font="gridnik" text="base" bg="ix-black" color="white" ref="app" overscroll="none" flex="~ col grow" min-h="100vh")
 
   NuxtLayout()
     NuxtLoadingIndicator(color="rgb(255, 102, 71)")

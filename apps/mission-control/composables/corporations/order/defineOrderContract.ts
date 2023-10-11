@@ -1,7 +1,8 @@
 import { ethers } from "ethers";
-import { ContractInterface, CreateContractOptions } from "~~/composables/defineMCContract";
 import { Corporation } from "../useCorporations"
 import { NftFragment } from "#gql";
+import { CreateMCContractOptions } from "composables/defineContract";
+import { ContractInterface } from "@ix/base/composables/Utils/defineContract";
 
 export interface SpeedupTransaction {
   orderId?: number,
@@ -17,7 +18,7 @@ export interface CraftContractSpeedupConfig<T> {
   astroAll?: (contract: T, speedup: SpeedupTransaction) => Promise<ethers.ContractTransaction>
 }
 
-interface OrderContractOptions<T> extends CreateContractOptions<T> {
+interface OrderContractOptions<T> extends CreateMCContractOptions<T> {
   speedup: CraftContractSpeedupConfig<T>,
   claimSuccessEvent: string,
   claim: (contract: T, orderId: number) => Promise<ethers.ContractTransaction>
@@ -51,30 +52,28 @@ export const defineOrderContract = <T extends ContractInterface<T>>(corporationI
   const { refreshOrderData, activeSpeedupOrder } = useCorporationOrders()
   const { refresh: refreshCurrencies } = useCurrencyData()
   const { refresh: refreshTokens } = useTokenData()
-  const { failMessage, successMessage } = useCorporationNotifications()
 
   const { pixTokenContract } = usePayment()
 
   const speedupOrder = (transaction: SpeedupTransaction) =>
     createTransaction(() => speedup(transaction), {
       approve: () => approveSpeedup(transaction),
-      onSuccess: () => {
+      onSuccess: async () => {
         activeSpeedupOrder.value = null
-        return Promise.all([refreshOrderData(corporationId), refreshCurrencies()])
+
+        await Promise.all([refreshOrderData(corporationId), refreshCurrencies()])
+
+        return true
       },
-      successMessage: successMessage('speedup'),
-      failMessage: failMessage(corporationId.type, 'speedup')
     })
 
   const speedupAllOrders = (transaction: SpeedupTransaction) =>
     createTransaction(() => speedupAll(transaction), {
       approve: () => approveAllSpeedups(transaction),
-      onSuccess: () => {
+      onSuccess: async () => {
         activeSpeedupOrder.value = null
-        return Promise.all([refreshOrderData(corporationId), refreshCurrencies()])
+        await Promise.all([refreshOrderData(corporationId), refreshCurrencies()])
       },
-      successMessage: successMessage('speedup'),
-      failMessage: failMessage(corporationId.type, 'speedup')
     })
 
   const approveSpeedup = async (transaction: SpeedupTransaction): Promise<any> => {
@@ -116,13 +115,11 @@ export const defineOrderContract = <T extends ContractInterface<T>>(corporationI
       onSuccess: async () => {
         return Promise.all([refreshOrderData(corporationId), refreshTokens()])
       },
-      failMessage: failMessage(corporationId.type, 'craft')
     })
 
   const claimOrder = async (orderId: number) =>
     createTransaction(() => options.claim(contract.value, orderId), {
       successOnEventKey: options.claimSuccessEvent,
-      failMessage: failMessage(corporationId.type, 'claim'),
       onTxApproved: () => refreshOrderData(corporationId),
       onSuccess: async () => {
         return refreshTokens()
@@ -132,7 +129,6 @@ export const defineOrderContract = <T extends ContractInterface<T>>(corporationI
   const claimBatchOrder = async () =>
     createTransaction(() => options.claimAll(contract.value), {
       successOnEventKey: options.claimSuccessEvent,
-      failMessage: failMessage(corporationId.type, 'claim'),
       onTxApproved: () => refreshOrderData(corporationId),
       onSuccess: async () => {
         return refreshTokens()

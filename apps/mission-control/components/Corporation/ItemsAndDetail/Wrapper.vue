@@ -6,6 +6,9 @@ CorporationPage(@click-back="goBack")
 
       template(#default v-else) {{ header }}
 
+  template(#header v-if="currency")
+    CorporationCurrency(:currency="currency")
+
   VList(min-h="md:0" flex-grow="1")
     div(grid="~ cols-1 md:cols-2 gap-6" mb="-1px")
 
@@ -53,6 +56,7 @@ CorporationPage(@click-back="goBack")
 
 <script lang="ts" setup>
 const { useMobileBreakpoint } = useDevice()
+import type { Currency } from '@ix/base/composables/Utils/useCurrencies';
 import type { TokenWithInfoBlocks } from '~~/composables/useInfoBlocks';
 
 const isMobile = useMobileBreakpoint('md')
@@ -66,6 +70,7 @@ defineProps<{
   detailTitle: string,
   activeItem?: TokenWithInfoBlocks,
   list?: TokenWithInfoBlocks[],
+  currency?: Currency
 }>()
 
 </script>

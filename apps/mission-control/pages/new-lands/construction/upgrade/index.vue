@@ -12,7 +12,6 @@ import type { InfoBlock } from '~~/composables/useInfoBlocks';
 
 
 definePageMeta({
-  middleware: 'auth',
   layout: 'corporation'
 })
 
@@ -39,8 +38,6 @@ await Promise.all([
 const hasCooldown = computed(() => upgradeFinishTime.value * 1000 > currentTime.value)
 
 const { nfts } = useUserData()
-
-
 
 const getBlock = (item: NftFragment, level: number): InfoBlock[] => {
   const currentLevel = item.tokenInfo?.level
