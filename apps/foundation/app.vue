@@ -11,7 +11,20 @@
 </template>
 
 <script setup lang="ts">
+import { StakingId } from '.nuxt/gql/default';
+
 const { setupOnMounted } = useAppSetup()
+
+
+const { execute: fetchTerritoryData } = useStakingData(StakingId.Territories)
+const { execute: fetchMetashareData } = useStakingData(StakingId.Metashare)
+const { execute: fetchEnergyData } = useStakingData(StakingId.Energy)
+const { execute: fetchEnergyAmeliaData } = useStakingData(StakingId.EnergyAmelia)
+const { execute: fetchIXTOneMonthData } = useStakingData(StakingId.IxtOneMonth)
+const { execute: fetchIXTThreeMonthData } = useStakingData(StakingId.IxtThreeMonths)
+const { execute: fetchIXTSixMonthData } = useStakingData(StakingId.IxtSixMonths)
+const { execute: fetchIXTTwelveMonthData } = useStakingData(StakingId.IxtTwelveMonths)
+const { execute: fetchLandmarkData } = useStakingData(StakingId.Landmark)
 
 useHead({
   title: "Foundation | PlanetIX",
@@ -21,7 +34,19 @@ useHead({
 })
 
 onMounted(() => {
-  setupOnMounted()
+  setupOnMounted(async () => {
+    await Promise.all([
+      fetchTerritoryData(),
+      fetchMetashareData(),
+      fetchEnergyData(),
+      fetchEnergyAmeliaData(),
+      fetchIXTOneMonthData(),
+      fetchIXTThreeMonthData(),
+      fetchIXTSixMonthData(),
+      fetchIXTTwelveMonthData(),
+      fetchLandmarkData()
+    ])
+  })
 })
 
 

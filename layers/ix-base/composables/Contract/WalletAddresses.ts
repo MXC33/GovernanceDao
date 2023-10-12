@@ -19,7 +19,7 @@ export const oneMonthIXTStakingAddress: ContractAddress = {
 
 export const threeMonthIXTStakingAddress: ContractAddress = {
   mumbai: 'does not exist',
-  polygon: '0x4f0eE43495f36e7665716B4d8d8701bC232E462b',
+  polygon: '0x08971219534e1F8B6e4Afb2bf4A5Cf3929A141b1',
 }
 
 export const sixMonthIXTStakingAddress: ContractAddress = {
