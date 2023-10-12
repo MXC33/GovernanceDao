@@ -2,7 +2,7 @@
 Page()
   PageSection(section="rewards")
     HList(grid="~ gap-4 ")
-      MetashareClaimHorizontal()
+      CardEarnings()
       MetashareClaimHorizontal()
   PageSection(section="myLandmarks")
   card()
