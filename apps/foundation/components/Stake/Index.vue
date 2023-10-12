@@ -5,19 +5,21 @@ div(grid="~ cols-2 gap-3")
       h3(text-2xl font-bold) {{ box.monthValue }} Months
       p Lock period
     HList(space-x="10")
-      div APY
-        div {{ box.apy }} %
-      div Your Stake
-        div {{ box.userStake ?? 0 }}
-      IXTIcon(w="5" translate-y="-3" translate-x="-7")
-
-      div Pool Size
-        div {{ box.poolSize }}
-      IXTIcon(w="5" translate-y="-3" translate-x="-7")
-        
-
+      div 
+        div APY
+        div(style="display: flex; align-items: center;")
+          span {{ box.apy }} %
+      div 
+        div Your Stake
+        div(style="display: flex; align-items: center;")
+          span {{ box.userStake ?? 0 }}
+          IXTIcon(w="5" class="ml-2")
+      div 
+        div Pool Size
+        div(style="display: flex; align-items: center;")
+          span {{ box.poolSize }}
+          IXTIcon(w="5" class="ml-2")
   </template>
-  
 
 
 <script lang="ts" setup>
