@@ -1,10 +1,10 @@
 <template lang ="pug">
-VList(pos="relative")
+VList(pos="relative" overflow="auto" h="full" )
 
-  VList(b="gray-400" space-y="3")
-    NotificationDataList(v-if="isValidData(data.today)" :notifications="data.today") Today
-    NotificationDataList(v-if="isValidData(data.yesterday)" :notifications="data.yesterday") Yesterday
-    NotificationDataList(v-if="isValidData(data.old)" :notifications="data.old") Old
+  VList(b="gray-400" space-y="3" v-if="data")
+    NotificationMessageList(v-if="isValidData(data.today)" :notifications="data.today") Today
+    NotificationMessageList(v-if="isValidData(data.yesterday)" :notifications="data.yesterday") Yesterday
+    NotificationMessageList(v-if="isValidData(data.old)" :notifications="data.old") Old
 
     Transition(name="fade")
       button(p="3" text="center hover:ix-orange" @click="loadMore(data)") Load More
@@ -18,7 +18,7 @@ const { loadMore: loadMoreMessages } = useNeMessages()
 const { loadMore: loadMoreNotifications } = useNeNotifications()
 
 const { data } = defineProps<{
-  data: NotificationData
+  data?: NotificationData
 }>()
 
 const loadMore = (data: NotificationData) => {
@@ -29,6 +29,9 @@ const loadMore = (data: NotificationData) => {
 }
 
 const isNotifications = (data: NotificationData) => {
+  if (!data)
+    return false
+
   const message = getValidData(data)
   if (message == null)
     return false

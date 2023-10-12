@@ -1,5 +1,5 @@
 <template lang="pug">
-VList(z="10" :state="getBannerStatues" text="sm" pos="absolute right-8 lt-lg:right-4" w="md:70" space-y="1")
+VList(z="10" text="sm" pos="absolute right-8 lt-lg:right-4" w="md:70" space-y="1")
 
   HList(items="center" fill="white" justify="between" cut="bottom-right s-md b-gray-500" bg="gray-900" py="2.5" px="4")
     TitleWithIcon(color="mc-orange" font="bold" text-shadow="mc-orange" fill="mc-orange" icon="pointer")
@@ -34,14 +34,6 @@ const inGraphicsSettings = ref(false)
 const toggleMenu = () => {
   inGraphicsSettings.value = !inGraphicsSettings.value
 }
-
-const { isBannerActive } = useAds()
-const getBannerStatues = computed(() => {
-  if (isBannerActive.value)
-    return 'adBanner'
-
-  return ''
-})
 
 const backToSettings = () => {
   inGraphicsSettings.value = false
