@@ -6,9 +6,9 @@ div(grid="~ cols-2 gap-3")
       p Lock period
     div(grid grid-cols-3)
       div APY
-        div {{ box.apy }}
+        div {{ box.apy }} %
       div Your Stake
-        div {{ box.userStake }}
+        div {{ box.userStake ?? 0 }}
       div Pool Size
         div {{ box.poolSize }}
     VList
@@ -19,6 +19,7 @@ div(grid="~ cols-2 gap-3")
 
 <script lang="ts" setup>
 
+import { formatNumber } from '@ix/base/composables/Utils/useHelpers';
 import { StakingId } from '../../.nuxt/gql/default';
 
 const { execute: fetchIXTOneMonthData, data: IXTOneMonthData } = useStakingData(StakingId.IxtOneMonth)
@@ -31,30 +32,35 @@ interface BoxData {
   monthValue: number;
   apy: number | null | undefined
   userStake: number | null | undefined
-  poolSize: number | null | undefined
+  poolSize: string | null | undefined
+}
+
+const getAPY = (rewardRate: number, totalSupply: number) => {
+  const APR = (rewardRate * 86400 * 365) / totalSupply;
+  return roundToDecimals(((1 + APR / 365) ** 365 - 1) * 100, 2)
 }
 
 const boxes = computed<BoxData[]>(() => [
   {
     monthValue: 12,
-    apy: 0,
+    apy: getAPY(IXTTwelveMonthData.value?.stakingItems[0].rewardRate, IXTTwelveMonthData.value?.totalStakedAmount),
     userStake: IXTTwelveMonthData.value?.stakingItems[0]?.userStakingData?.amountStaked,
-    poolSize: IXTTwelveMonthData.value?.totalStakedAmount
+    poolSize: IXTTwelveMonthData.value?.totalStakedAmount ? formatNumber(IXTTwelveMonthData.value?.totalStakedAmount) : "0"
   },
   {
     monthValue: 6,
-    apy: 0,
-    userStake: IXTSixMonthData.value?.stakingItems[0]?.userStakingData?.amountStaked, poolSize: IXTSixMonthData.value?.totalStakedAmount
+    apy: getAPY(IXTSixMonthData.value?.stakingItems[0].rewardRate, IXTSixMonthData.value?.totalStakedAmount),
+    userStake: IXTSixMonthData.value?.stakingItems[0]?.userStakingData?.amountStaked, poolSize: IXTSixMonthData.value?.totalStakedAmount ? formatNumber(IXTSixMonthData.value?.totalStakedAmount) : "0"
   },
   {
     monthValue: 3,
-    apy: 0,
-    userStake: IXTThreeMonthData.value?.stakingItems[0]?.userStakingData?.amountStaked, poolSize: IXTThreeMonthData.value?.totalStakedAmount
+    apy: getAPY(IXTThreeMonthData.value?.stakingItems[0].rewardRate, IXTThreeMonthData.value?.totalStakedAmount),
+    userStake: IXTThreeMonthData.value?.stakingItems[0]?.userStakingData?.amountStaked, poolSize: IXTThreeMonthData.value?.totalStakedAmount ? formatNumber(IXTThreeMonthData.value?.totalStakedAmount) : "0"
   },
   {
     monthValue: 1,
-    apy: 0,
-    userStake: IXTOneMonthData.value?.stakingItems[0]?.userStakingData?.amountStaked, poolSize: IXTOneMonthData.value?.totalStakedAmount
+    apy: getAPY(IXTOneMonthData.value?.stakingItems[0].rewardRate, IXTOneMonthData.value?.totalStakedAmount),
+    userStake: IXTOneMonthData.value?.stakingItems[0]?.userStakingData?.amountStaked, poolSize: IXTOneMonthData.value?.totalStakedAmount ? formatNumber(IXTOneMonthData.value?.totalStakedAmount) : "0"
   },
 ])
 
