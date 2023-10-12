@@ -38,30 +38,28 @@ Page()
       button(btn="~ primary") CONNECT WALLET TO STAKE
 
   PageSection(section="territoryStaking")
-  Card()
+  Card(p=0)
     HList()
-      PageSection( section="assetStaking.territoryBox")
-      StakingWrapper()
+      PageSection( section="assetStaking.territoryBox" w="50%" p=6)
+      StakingWrapper(w="50%")
   PageSection(section="energyStaking")
-  Card()
+  Card(p=0)
     HList()
-      PageSection(section="assetStaking.energyBox")
-      StakingWrapper()
+      PageSection(section="assetStaking.energyBox" w="50%" p=6)
+      StakingWrapper(w="50%")
   PageSection(section="landmarkStaking")
-  Card()
+  Card(p=0)
     HList()
-      PageSection(section="assetStaking.landmarkBox")
-      StakingWrapper()
+      PageSection(section="assetStaking.landmarkBox" w="50%" p=6)
+      StakingWrapper(w="50%")
   PageSection(section="metashareStaking")
-  Card()
+  Card(p=0)
     HList()
-      PageSection(section="assetStaking.metashareBox")
-      StakingWrapper()
-
-
-
-
+      PageSection(section="assetStaking.metashareBox" w="50%" p=6)
+      StakingWrapper(w="50%")
 </template>
+
+<style></style>
 
 
 <script lang="ts" setup>
