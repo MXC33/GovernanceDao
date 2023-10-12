@@ -4,15 +4,13 @@ div(grid="~ cols-2 gap-3")
     div
       h3(text-2xl font-bold) {{ box.monthValue }} Months
       p Lock period
-    div(grid grid-cols-4)
+    div(grid grid-cols-3)
       div APY
-      div 10%
+        div {{ box.apy }}
       div Your Stake
-      div 0
+        div {{ box.userStake }}
       div Pool Size
-      div 0
-      div Cooldown
-      div 0
+        div {{ box.poolSize }}
     VList
       Claim
   </template>
@@ -21,17 +19,44 @@ div(grid="~ cols-2 gap-3")
 
 <script lang="ts" setup>
 
+import { StakingId } from '../../.nuxt/gql/default';
+
+const { execute: fetchIXTOneMonthData, data: IXTOneMonthData } = useStakingData(StakingId.IxtOneMonth)
+const { execute: fetchIXTThreeMonthData, data: IXTThreeMonthData } = useStakingData(StakingId.IxtThreeMonths)
+const { execute: fetchIXTSixMonthData, data: IXTSixMonthData } = useStakingData(StakingId.IxtSixMonths)
+const { execute: fetchIXTTwelveMonthData, data: IXTTwelveMonthData } = useStakingData(StakingId.IxtTwelveMonths)
+
+
 interface BoxData {
   monthValue: number;
-  // You can add more properties here if needed
+  apy: number | null | undefined
+  userStake: number | null | undefined
+  poolSize: number | null | undefined
 }
 
-const boxes: BoxData[] = [
-  { monthValue: 12 },
-  { monthValue: 6 },
-  { monthValue: 3 },
-  { monthValue: 1 }
-];
+const boxes = computed<BoxData[]>(() => [
+  {
+    monthValue: 12,
+    apy: 0,
+    userStake: IXTTwelveMonthData.value?.stakingItems[0]?.userStakingData?.amountStaked,
+    poolSize: IXTTwelveMonthData.value?.totalStakedAmount
+  },
+  {
+    monthValue: 6,
+    apy: 0,
+    userStake: IXTSixMonthData.value?.stakingItems[0]?.userStakingData?.amountStaked, poolSize: IXTSixMonthData.value?.totalStakedAmount
+  },
+  {
+    monthValue: 3,
+    apy: 0,
+    userStake: IXTThreeMonthData.value?.stakingItems[0]?.userStakingData?.amountStaked, poolSize: IXTThreeMonthData.value?.totalStakedAmount
+  },
+  {
+    monthValue: 1,
+    apy: 0,
+    userStake: IXTOneMonthData.value?.stakingItems[0]?.userStakingData?.amountStaked, poolSize: IXTOneMonthData.value?.totalStakedAmount
+  },
+])
 
 
 
