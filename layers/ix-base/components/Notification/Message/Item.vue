@@ -1,5 +1,5 @@
 <template lang ="pug">
-HList.notification(w="full" @click="onClick" cursor="on-link:pointer" :link="!!link" opacity="on-link:hover:80" transition="all" items="center")
+HList.notification-item(:class="[isLink ? 'is-link' : '']" w="full" @click="onClick" transition="all" items="center" pos="relative" b="b-1 gray-400" p="3")
   VList(items="left" p="1 r-3")
     h4(font="bold") {{ message.notification.title }} 
     HList(space-x="1")
@@ -8,8 +8,7 @@ HList.notification(w="full" @click="onClick" cursor="on-link:pointer" :link="!!l
 
   div(grow="~")
 
-  div(p="1")
-    div(v-if="message.is_read == 0"  bg="ix-mint" wh="1" rounded="full")
+  NotificationIconUnreadMessage(v-if="message.is_read == 0")
     
 </template>
 
@@ -33,6 +32,8 @@ const link = computed(() => {
   }
 })
 
+const isLink = computed(() => !!link.value)
+
 
 const onClick = () => {
   if (link.value)
@@ -50,7 +51,15 @@ const onClick = () => {
 </script>
 
 <style>
-.notification a {
+.notification-item a {
   color: #FF6647;
+}
+
+.notification-item.is-link:hover {
+  opacity: 50%;
+}
+
+.notification-item.is-link {
+  cursor: pointer;
 }
 </style>

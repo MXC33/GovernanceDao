@@ -10,7 +10,7 @@ import type { WalletConnector } from '~/composables/Contract/useWalletConnectors
 
 const MetamaskLogo = await import('../../../assets/images/wallet/metamask.svg')
 const WombatLogo = await import('../../../assets/images/wallet/wombat.svg')
-const BitKeepLogo = await import('../../../assets/images/wallet/bitkeep.svg')
+const BitKeepLogo = await import('../../../assets/images/wallet/bitget.svg')
 const CoinBaseLogo = await import('../../../assets/images/wallet/coinbase.svg')
 const WalletConnectLogo = await import('../../../assets/images/wallet/walletconnect.svg')
 const CryptoDefiLogo = await import('../../../assets/images/wallet/crypto-defi.svg')
@@ -28,7 +28,7 @@ const logo = computed(() => {
     case 'Wombat':
       return WombatLogo
 
-    case 'BitKeep':
+    case 'Bitget':
       return BitKeepLogo
 
     case 'Coinbase Wallet':

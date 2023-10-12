@@ -7,7 +7,7 @@ HList(items="center" justify="between" h="16" space-x="3" ref="menuEl")
     PlanetIXNew(v-else max-w="42.25" min-w="30" w="full")
 
   HList(v-if="!isMobile" justify="start" flex-grow="1" overflow-x="hidden" space-x="4")
-    button(v-for="(header, index) in headerData" @mouseenter="hoverMenu(index)" @click="openMenu(index)" btn="menu" color = "s-default:$header-text s-selected:$header-orange" :state="selected(index)") {{ header.name }}
+    button(v-for="(header, index) in headerData" @mouseenter="hoverMenu(index)" @click="openMenu(index)" btn="menu" color="s-default:$header-text s-selected:$header-orange" :state="selected(index)") {{ header.name }}
 
     HList(flex-grow="1" justify="end" display="lt-md:none")
       a(href="https://planetix.com/airdrop")
@@ -18,21 +18,13 @@ HList(items="center" justify="between" h="16" space-x="3" ref="menuEl")
   HList(items="center" space-x="3" px="0")
 
     slot(name="contentRight")
-    //- button(v-if="isMobile" p="2" @click="toggleMenu" whitespace="nowrap" frame="~")
-    //-   Transition(name="fade-slow" mode="out-in")
-    //-     span(v-if="walletState == 'disconnected'") {{ $t(`general.navigation.menu.connectWallet`)}}
 
-    //-     span(v-else-if="ixtBalance != undefined" w="25" text="ix-mint") {{ roundToDecimals(ixtBalance, 2) }} IXT
-
-    Notification(display="lt-lg:none")
+    Notification()
 
     //-class="border-white-ixt"
     HeaderAccountButton()
       template(#dropdown)
         slot(name="dropdown")
-
-    div(display="lg:none")
-      Notification()
 
     button.hamburger-menu(v-if="isMobile" btn="menu" @click="toggleMenu" ml="2")
       SettingsIcon(v-if="activeHeaderIndex == null" w="6")

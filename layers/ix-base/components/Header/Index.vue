@@ -17,6 +17,12 @@ VList(:class="className" pos="sticky left-0 top-0" translate-y="$header-offset" 
 
   slot(name="contentBottom")
 
+  div(display="none")
+    div(wh="6")
+    div(wh="4")
+    div(wh="10")
+    NotificationIconUnreadMessage()
+    NotificationIconUnread()
 
 HeaderLifiWidget(v-if="swapVisible" @close="swapVisible = false")
 

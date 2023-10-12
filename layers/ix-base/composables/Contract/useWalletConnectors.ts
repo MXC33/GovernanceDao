@@ -19,14 +19,14 @@ type InjectedProviderFlags = {
   isTokenary?: true
   isTrust?: true
   isWombat?: true
-  isBitKeep?: true
+  isBitKeep?: true // Has changed name to Bitget but still returns isBitKeep
 }
 
 type InjectedProvider = ExternalProvider & InjectedProviderFlags
 
 const getProviderName = (provider: InjectedProvider) => {
   if (provider.isWombat) return 'Wombat'
-  if (provider.isBitKeep) return 'BitKeep'
+  if (provider.isBitKeep) return 'Bitget'
   if (provider.isBraveWallet) return 'Brave Wallet'
   if (provider.isCoinbaseWallet) return 'Coinbase Wallet'
   if (provider.isExodus) return 'Exodus'
@@ -82,14 +82,15 @@ const createMetamaskProvider = async () => {
       url: 'https://missioncontrol.planetix.com/IX-icon.png'
     }
   })
+  await sdk.init()
 
+  await sdk.connect()
   return sdk.getProvider()
 }
 
 
 const createWalletConnectProvider = async () => {
   const { chainIds } = useChainInfo()
-  const { displaySnack } = useSnackNotifications()
 
   try {
     const provider = await EthereumProvider.init({
@@ -127,8 +128,8 @@ export const useConnectors = () => {
     if (injectedProvider?.isCoinbaseWallet)
       return ['coinbase', ...defaultProviders]
 
-    if (!injectedProvider || (injectedProvider?.isMetaMask && !injectedProvider.isBraveWallet))
-      return ['injected', 'coinbase', ...defaultProviders]
+    if (!injectedProvider || (injectedProvider?.isMetaMask && !injectedProvider.isBraveWallet && !injectedProvider.isBitKeep && !injectedProvider.isWombat))
+      return ['metamask', 'coinbase', ...defaultProviders]
 
     return ['injected', 'coinbase', ...defaultProviders]
   }
