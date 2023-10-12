@@ -9,13 +9,17 @@ Page()
   PageSection(section="dashboardStaking" :primary="true")
   Stake()
   PageSection(section="earnStaking")
-  HList()
+  HList(grid="~ gap-6")
     Card(w="fit")
       TitleDetail()
         PageSection(section="ixtStakingInfo")
-    Card(w="fit")
+    Card(bg="black" rounded="bl br" flex-grow)
+      IXTIcon(w="25" class="ml-2")
+    Card(w="fit" rounded="br tr")
       TitleDetail()
         PageSection(section="lpStakingInfo")
+    Card(bg="black" rounded="br tr" flex-grow)
+      IXTIcon(w="25" class="ml-2")
   PageSection(section="ixtStaking")
     div(grid="~ cols-4 gap-6")
       Card(v-for="item in list" )
@@ -64,6 +68,7 @@ Page()
 
 <script lang="ts" setup>
 import { StakingId } from '../.nuxt/gql/default';
+import IXTIcon from '../public/assets/svg/tokenBG.svg'
 
 
 const { data: territoriesUserData } = useStakingData(StakingId.TerritoriesUser)
