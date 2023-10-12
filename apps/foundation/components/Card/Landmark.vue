@@ -3,10 +3,10 @@ div(grid="~ cols-3 gap-6" flex-grow)
   VList(v-for="item in titlar" :key="item.title" h="full")
     Card(rounded="tl tr")
       h1(text="5xl") IMAGE
-    Card(bg="black" rounded="bl br" flex-grow)
-      VList(flex-grow )
-        TitleDetail()
-          template(#default ) {{ item.title }}
+    Card(bg="black" rounded="bl br" flex-grow) 
+      VList(flex-grow)
+        TitleDetail(mb="auto")
+          template(#default) {{ item.title }}
         HList()
           TitleDetail()
             template(#detail) 
@@ -20,7 +20,7 @@ div(grid="~ cols-3 gap-6" flex-grow)
                   li() 0
                   li() NA
                   li() 100
-      button(btn="~ primary-outline") iew
+      button(btn="~ primary-outline") view
 </template>
   
 <script lang="ts" setup>
