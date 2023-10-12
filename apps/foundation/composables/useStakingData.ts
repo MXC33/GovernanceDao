@@ -1,4 +1,6 @@
 import { NftFragment, StakingDataFragment, StakingId } from ".nuxt/gql/default"
+import { MaybeRef } from "@vueuse/core";
+import { get } from '@vueuse/core'
 
 export type UserStakingItem = {
   token: NftFragment
@@ -13,7 +15,7 @@ export const useStakingData = (id: StakingId) => {
     return stakingData.stakingData
   }
 
-  const key = `staking-nft-data-${id},`
+  const key = `staking-data-${id},`
 
   return useAsyncDataState(key, async () => {
     const result = await fetchStakingData()

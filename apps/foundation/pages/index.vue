@@ -38,31 +38,38 @@ Page()
       button(btn="~ primary") CONNECT WALLET TO STAKE
 
   PageSection(section="territoryStaking")
-  Card(p=0)
+  Card(p=0 )
     HList()
       PageSection( section="assetStaking.territoryBox" w="50%" p=6)
-      StakingWrapper(w="50%" id="territory")
+      StakingWrapper(w="50%" id="territory" :data="territoriesUserData")
   PageSection(section="energyStaking")
   Card(p=0)
     HList()
       PageSection(section="assetStaking.energyBox" w="50%" p=6)
-      StakingWrapper(w="50%" id="energy")
+      StakingWrapper(w="50%" id="energy" :data="energyData")
   PageSection(section="landmarkStaking")
   Card(p=0)
     HList()
       PageSection(section="assetStaking.landmarkBox" w="50%" p=6)
-      StakingWrapper(w="50%" id="landmark")
+      StakingWrapper(w="50%" id="landmark" :data="landmarkData")
   PageSection(section="metashareStaking")
   Card(p=0)
     HList()
       PageSection(section="assetStaking.metashareBox" w="50%" p=6)
-      StakingWrapper(w="50%" id="metashare")
+      StakingWrapper(w="50%" id="metashare" :data="metashareData")
 </template>
 
 <style></style>
 
 
 <script lang="ts" setup>
+import { StakingId } from '../.nuxt/gql/default';
+
+
+const { data: territoriesUserData } = useStakingData(StakingId.TerritoriesUser)
+const { data: metashareData } = useStakingData(StakingId.Metashare)
+const { data: energyData } = useStakingData(StakingId.Energy)
+const { data: landmarkData } = useStakingData(StakingId.Landmark)
 
 interface StakingInfo {
   lockingPeriod: number,

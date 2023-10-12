@@ -1,26 +1,39 @@
 <template lang="pug">
-VList(bg="black" flex="~ cols-3 space-x-10 items-center space-around")
+VList(flex="~ cols-3 space-x-10 items-center space-around" p="4")
   div(flex="~ cols-2 gap-12")     
+    TitleDetail(px="5")
+      template(#detail)
+        ul(flex="~ col space-x-4")
+          li(text="md") Your Stake:
+          li(text="xl" color="white" font="bold") {{ userStaked}}
     TitleDetail()
       template(#detail)
         ul(flex="~ col space-x-4")
-          li(text="xl") Total Staked:
-          li(text="xl" color="white" font="bold") 0
-    TitleDetail()
-      template(#detail)
-        ul(flex="~ col space-x-4")
-          li(text="xl") Your Reward:
-          li(text="xl" color="white" font="bold") 0
-    button(@click="onClick" btn="~ primary-outline" ) Go to {{ id }} staking
+          li(text="md") Your Reward:
+          li(text="xl" color="white" font="bold") {{ userReward }}
+    button(@click="onClick" btn="~ primary-outline") Go to {{ id }} staking
 
 </template>
 
 <script lang="ts" setup>
+import type { StakingDataFragment } from '#gql';
 
 
-const { id } = defineProps<{
-  id: string
+
+const { id, data } = defineProps<{
+  id: string,
+  data: StakingDataFragment | null
 }>()
+
+console.log("data", data)
+
+const userReward = computed(() => {
+  return data?.userSpecificStakingData?.totalUserReward?.toFixed(2)
+})
+
+const userStaked = computed(() => {
+  return data?.stakingItems?.map(item => item?.userStakingData?.amountStaked ?? 0).reduce((a, b) => a + b, 0)
+})
 
 const url = computed(() => {
 

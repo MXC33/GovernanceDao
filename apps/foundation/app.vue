@@ -17,6 +17,7 @@ const { setupOnMounted } = useAppSetup()
 
 
 const { execute: fetchTerritoryData } = useStakingData(StakingId.Territories)
+const { execute: fetchTerritoryUserData } = useStakingData(StakingId.TerritoriesUser)
 const { execute: fetchMetashareData } = useStakingData(StakingId.Metashare)
 const { execute: fetchEnergyData } = useStakingData(StakingId.Energy)
 const { execute: fetchEnergyAmeliaData } = useStakingData(StakingId.EnergyAmelia)
@@ -37,6 +38,7 @@ onMounted(() => {
   setupOnMounted(async () => {
     await Promise.all([
       fetchTerritoryData(),
+      fetchTerritoryUserData(),
       fetchMetashareData(),
       fetchEnergyData(),
       fetchEnergyAmeliaData(),
