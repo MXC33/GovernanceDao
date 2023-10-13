@@ -8,16 +8,24 @@ Page()
     router-link(to="/metashare" tag="button" btn="~ secondary") MetaShare Staking
     router-link(to="/governance" tag="button" btn="~ secondary") Governance  
 
-  VList(flex="0" grid="~ cols-2 gap-6" b="solid 1 red")
-    div(space-x-6)
+  HList(grid="~ cols-2" b="solid 1 red")
+    VList(space-x-6 b="solid 1 purple")
       h3(color="gray" text="xl") Stake IXT, earn up to
       h1(text="bold 5xl" color="#84D4BC") 18,88% APY
       button(color="gray" text="xl") Buy IXT 
       button(color="gray" text="xl") Add IXT to wallet 
-
-    TableDashboard(w="xl")
-    CardChart()
-
+      CardChart()
+    VList(grid="~" space-y="12" b="solid 1 yellow" flex-direction-row) 
+      TableDashboard(w="xl")
+      HList()
+        Card(w="xs") 
+          TitleDetail()
+            h3() Circulating Supply
+            h4(color="orange") See on coinGecko
+        Card(w="xs")
+          TitleDetail()
+            h3() Distribution today
+            h4() 36,936.63 (ICON) 
   Stake()
 
 
