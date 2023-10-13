@@ -36,6 +36,8 @@ export default definePreset({
     fontFamily: {
       gridnik: ['Foundry Gridnik', 'sans-serif'],
       bdrA3mik: ['BDRA3MiK-Regular'],
+      druk: ['Druk Wide Medium, sans-serif'],
+      joyride: "Joyride W05 STD"
     },
     fontSize: {
       'xs': ['var(--font-size-xs)', '1rem'],

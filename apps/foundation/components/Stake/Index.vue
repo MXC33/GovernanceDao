@@ -19,6 +19,9 @@ div(grid="~ cols-2 gap-3")
         div(style="display: flex; align-items: center;")
           span {{ box.poolSize }}
           IXTIcon(w="5" class="ml-2")
+    HList(gap-6)
+      button(btn="~ primary-outline") Withdraw 
+      button(btn="~ primary-outline") Deposit
   </template>
 
 
