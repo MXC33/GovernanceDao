@@ -8,14 +8,14 @@ Page()
     router-link(to="/metashare" tag="button" btn="~ secondary") MetaShare Staking
     router-link(to="/governance" tag="button" btn="~ secondary") Governance  
 
-  HList(grid="~ cols-2" b="solid 1 red")
-    VList(space-x-6 b="solid 1 purple")
+  HList(grid="~ cols-2")
+    VList(space-x-6)
       h3(color="gray" text="xl") Stake IXT, earn up to
       h1(text="bold 5xl" color="#84D4BC") 18,88% APY
       button(color="gray" text="xl") Buy IXT 
       button(color="gray" text="xl") Add IXT to wallet 
       CardChart()
-    VList(grid="~" space-y="12" b="solid 1 yellow" flex-direction-row) 
+    VList(grid="~" space-y="12" flex-direction-row) 
       TableDashboard(w="xl")
       HList()
         Card(w="xs") 
