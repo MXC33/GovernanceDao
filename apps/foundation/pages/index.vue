@@ -1,16 +1,27 @@
 <template lang="pug">
 Page()
+  PageSection(section="dashboardStaking" :primary="true")
   HList(grid="~ gap-6")
     router-link(to="/territories" tag="button" btn="~ secondary") Territories Staking
     router-link(to="/energy" tag="button" btn="~ secondary") Energy Staking
     router-link(to="/landmarks" tag="button" btn="~ secondary") Landmarks Staking
     router-link(to="/metashare" tag="button" btn="~ secondary") MetaShare Staking
-    router-link(to="/governance" tag="button" btn="~ secondary") Governance 
+    router-link(to="/governance" tag="button" btn="~ secondary") Governance  
 
-  VList(grid="~ cols-2 gap-6" b="solid 1 red")
+  VList(flex="0" grid="~ cols-2 gap-6" b="solid 1 red")
+    div(space-x-6)
+      h3(color="gray" text="xl") Stake IXT, earn up to
+      h1(text="bold 5xl" color="#84D4BC") 18,88% APY
+      button(color="gray" text="xl") Buy IXT 
+      button(color="gray" text="xl") Add IXT to wallet 
+
     TableDashboard(w="xl")
-  PageSection(section="dashboardStaking" :primary="true")
+    CardChart()
+
   Stake()
+
+
+
   PageSection(section="earnStaking")
   HList(grid="~ gap-6")
     Card(w="fit")
@@ -23,6 +34,8 @@ Page()
         PageSection(section="lpStakingInfo")
     Card(bg="black" rounded="br tr" flex-grow)
       IXTIcon(w="25" class="ml-2")
+
+
   PageSection(section="ixtStaking")
     div(grid="~ cols-4 gap-6")
       Card(v-for="item in list" )
