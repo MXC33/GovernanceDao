@@ -4,6 +4,44 @@
       "title": "STAKING DASHBOARD",
       "description": "DEFI Dashboard for your assets."
     },
+    "stakeIXTSection": {
+      "title": "Stake IXT, earn up to"
+    },
+    "buyIXTButton": {
+      "title": "Buy IXT"
+    },
+    "addToWalletButton": {
+      "title": "Add to Wallet"
+    },
+    "walletPortfolioSection": {
+      "title": "Wallet portfolio",
+      "description": "Track balances"
+    },
+    "walletDetails": {
+      "wallet": "Wallet",
+      "staked": "Staked",
+      "withdrawable": "Withdrawable"
+    },
+    "earningOverview": {
+      "title": "Earning overview"
+    },
+    "assetTimeFrame": {
+      "myAssets": "My assets",
+      "oneDay": "1 day(s)",
+      "thirtyDays": "30 day(s)"
+    },
+    "totalEarnings": {
+      "title": "Total"
+    },
+    "circulatingSupplySection": {
+      "title": "Circulating Supply"
+    },
+    "CoingeckoLink": {
+      "title": "See on Coingecko"
+    },
+    "distributionToday": {
+      "title": "Distribution Today"
+    },
     "earnStaking": {
       "title": "EARN BY STAKING",
       "description": "Earn rewards for contributing to liquidity and safety."
@@ -20,9 +58,59 @@
       "title": "IXT STAKING",
       "description": "Earn rewards for contributing to liquidity and safety."
     },
+    "lockPeriodTwelve": {
+      "title": "12 months",
+      "subtitle": "Lock Period"
+    },
+    "lockPeriodThree": {
+      "title": "3 months"
+    },
+    "lockPeriodSix": {
+      "title": "6 months"
+    },
+    "lockPeriodOne": {
+      "title": "1 months"
+    },
+    "apy": {
+      "title": "APY"
+    },
+    "yourStake": {
+      "title": "Your Stake"
+    },
+    "poolSize": {
+      "title": "Pool size"
+    },
+    "withdrawBtn": {
+      "title": "WITHDRAW"
+    },
+    "depositBtn": {
+      "title": "DEPOSIT"
+    },
+    "reward": {
+      "title": "Your rewards"
+    },
+    "claimBtn": {
+      "title": "CLAIM"
+    },
     "lpStaking": {
       "title": "LP STAKING",
       "description": "Earn rewards for contributing to liquidity and safety."
+    },
+    "usdtIxtStaking": {
+      "title": "USDT/IXT LP Staking",
+      "description": "Provide liquidity on DEX and Stake LP"
+    },
+    "totalLiquidity": {
+      "title": "Total liquidity"
+    },
+    "fiveDayRoi": {
+      "title": "Your 5-day Roi%"
+    },
+    "lpTokens": {
+      "title": "LP Tokens"
+    },
+    "maticIxtStaking": {
+      "title": "MATIC/IXT LP Staking"
     },
     "territoryStaking": {
       "title": "YOUR TERRITORIES",
@@ -40,27 +128,51 @@
       "title": "METASHARE STAKING",
       "description": "Each corporation’s treasury acts as a staking pool for MetaShares and the reward is $IXT."
     },
+    "assetStaking": {
+      "territoryBox": {
+        "title": "TERRITORY NFT STAKING",
+        "description": "Stake your Area, Sector, Zone and Domain NFTs to earn IXT staking rewards from the pool",
+        "button": "GO TO TERRITORIES"
+      },
+      "energyBox": {
+        "title": "ENERGY STAKING",
+        "description": "Energy staked is burned upon staking.",
+        "button": "GO TO ENERGY STAKING"
+      },
+      "landmarkBox": {
+        "title": "LANDMARK NFT STAKING",
+        "description": "Stake your Landmark NFTs to earn IXT marketplace fees.",
+        "button": "GO TO LANDMARK"
+      },
+      "metashareBox": {
+        "title": "METASHARE STAKING",
+        "description": "Each corporation’s treasury acts as a staking pool for MetaShares and the reward is $IXT.",
+        "button": "GO TO METASHARE"
+      }
+    },
     "governance": {
       "title": "GOVERNANCE",
       "description": "Track proposal statuses and vote on changes."
     },
-    "assetStaking": {
-      "territoryBox": {
-        "title": "TERRITORY NFT STAKING",
-        "description": "Stake your Area, Sector, Zone and Domain NFTs to earn IXT staking rewards from the pool"
-      },
-      "energyBox": {
-        "title": "ENERGY STAKING",
-        "description": "Energy staked is burned upon staking."
-      },
-      "landmarkBox": {
-        "title": "LANDMARK NFT STAKING",
-        "description": "Stake your Landmark NFTs to earn IXT marketplace fees."
-      },
-      "metashareBox": {
-        "title": "METASHARE STAKING",
-        "description": "Each corporation’s treasury acts as a staking pool for MetaShares and the reward is $IXT."
-      }
+    "GovDiscussion": {
+      "title": "DISCUSSION",
+      "description": "Latest Discussion"
+    },
+    "GovProposal": {
+      "title": "PROPOSAL",
+      "description": "Latest Proposal"
+    },
+    "TotalDiscussion": {
+      "title": "Total Discussion"
+    },
+    "TotalProposal": {
+      "title": "Total Proposal"
+    },
+    "DiscussionBtn": {
+      "title": "VIEW DISCUSSION"
+    },
+    "ProposalBtn": {
+      "title": "VIEW PROPOSAL"
     }
   },
   "metashare": {
@@ -68,9 +180,65 @@
       "title": "METASHARE STAKING",
       "description": "Each corporation’s treasury acts as a staking pool for MetaShares and the reward is $IXT."
     },
+    "earningOverview": {
+      "title": "Earning overview"
+    },
+    "gravityGrade": {
+      "title": "Gravity Grade"
+    },
+    "astroCap": {
+      "title": "Astro Cap"
+    },
+    "netEmpire": {
+      "title": "NetEmpire"
+    },
+    "eternaLab": {
+      "title": "EternaLab"
+    },
+    "newlandsLlc": {
+      "title": "Newlands LLC"
+    },
+    "luckyCat": {
+      "title": "Lucky Cat"
+    },
+    "placeholderY": {
+      "title": "Y_"
+    },
+    "globalWasteSystems": {
+      "title": "Global Waste Systems"
+    },
+    "total": {
+      "title": "Total"
+    },
+    "totalRewards": {
+      "title": "Total Rewards"
+    },
+    "claimAll": {
+      "title": "CLAIM ALL"
+    },
     "corporation": {
       "title": "CORPORATIONS METASHARE",
       "description": "MetaShares grant you the authority to influence the corporation's future and to earn a monthly portion of the corporation's profits."
+    },
+    "trade": {
+      "title": "Trade",
+      "shares": "Shares",
+      "ixtPerShare30Days": "IXT per share 30 days",
+      "viewOnMarketplace": "VIEW ON MARKETPLACE"
+    },
+    "corpStaking": {
+      "title": "Staking",
+      "sharesOwned": "Shares owned",
+      "sharesStaked": "Shares staked",
+      "dailyYield": "Daily Yield",
+      "tvl": "TVL",
+      "stakeButton": "STAKE",
+      "withdrawButton": "WITHDRAW"
+    },
+    "claimRewards": {
+      "title": "Claim rewards",
+      "rewards": "Rewards",
+      "claimButton": "CLAIM"
     },
     "corpPerformance": {
       "title": "CORPORATIONS' PERFORMANCE",
@@ -78,90 +246,223 @@
     }
   },
   "territories": {
+    "territoryStaking": {
+      "title": "TERRITORY STAKING",
+      "description": "Explore your territory NFTs and their total payout amounts",
+      "filters": {
+        "area": "Area",
+        "sector": "Sector",
+        "zone": "Zone",
+        "domain": "Domain"
+      },
+      "commonHeaders": {
+        "category": "Category",
+        "staked": "Staked",
+        "TVL": "TVL",
+        "dailyIXTShare": "Daily IXT/Share"
+      }
+    },
     "yourTerritories": {
       "title": "YOUR TERRITORIES",
-      "description": "Search and select from the territories you own."
+      "description": "Search and select from the territories you own.",
+      "filters": {
+        "area": "Area",
+        "sector": "Sector",
+        "zone": "Zone",
+        "domain": "Domain"
+      },
+      "content": {
+        "area": {
+          "title": "AREA",
+          "description": "Collect PIX and form Clusters. Group your Clusters into Areas. Areas start with groups of 10 PIX in the Outliers, 20 in Common, 30 in Uncommon, 40 in Rare and 50 in Legendary Territories. This you can accomplish by trading PIX on planetix.com. Stake your Area to earn IXT staking rewards."
+        },
+        "sector": {
+          "title": "SECTOR",
+          "description": "Collect PIX and form Clusters. Group your Clusters into Sectors. Sectors start with groups of 50 PIX in the Outliers, 100 in Common, 150 in Uncommon, 200 in Rare and 250 in Legendary Territories. This you can accomplish by trading PIX on planetix.com. Stake your Sector to earn IXT staking rewards."
+        },
+        "zone": {
+          "title": "ZONE",
+          "description": "Collect PIX and form Clusters. Group your Clusters into Zones. Zones start with groups of 100 PIX in the Outliers, 200 in Common, 300 in Uncommon, 400 in Rare and 500 in Legendary Territories. This you can accomplish by trading PIX on planetix.com. Stake your Zone to earn IXT staking rewards."
+        },
+        "domain": {
+          "title": "DOMAIN",
+          "description": "Collect PIX and form Clusters. Group your Clusters into Domains. Domains start with groups of 200 PIX in the Outliers, 400 in Common, 600 in Uncommon, 800 in Rare and 1000 in Legendary Territories. This you can accomplish by trading PIX on planetix.com. Stake your Domain to earn IXT staking rewards."
+        }
+      },
+      "tiers": {
+        "all": "All",
+        "staked": "Staked"
+      },
+      "stakedInfo": {
+        "area": "0 out of 0 Areas Staked",
+        "sector": "0 out of 0 Sectors Staked",
+        "zone": "0 out of 0 Zones Staked",
+        "domain": "0 out of 0 Domains Staked"
+      },
+      "noContentCreated": {
+        "area": "No area created",
+        "sector": "No sector created",
+        "zone": "No zone created",
+        "domain": "No domain created"
+      }
     },
-    "territoryStaking": {
-      "title": "YOUR TERRITORIES",
-      "description": "Explore your territory NFTs and their total payout amounts"
-    },
-    "area": {
-      "title": "AREA",
-      "description": "Collect PIX and form Clusters. Group your Clusters into Areas. Areas start with groups of 10 PIX in the Outliers, 20 in Common, 30 in Uncommon, 40 in Rare and 50 in Legendary Territories. This you can accomplish by trading PIX on planetix.com. Stake your Area to earn IXT staking rewards."
-    }
-  },
-  "ixtCatRaf": {
-    "catRaff": {
-      "title": "IXT CAT RAFF",
-      "description": "Earn more with the IXT Cat Raff! Each week a randomized raffle selects five players to share 2,500 IXT rewards in winnings. In order to participate, players stake IXT in exchange for raffle tickets. To roll over from one week to the next, add your tickets from the previous week. A one-week lock period applies, where players can only withdraw their tokens once the next draw is completed."
-    },
-    "stakingContract": {
-      "title": "New IXT CAT RAFF Staking Contract",
-      "description": "Stake your IXT to our new, updated and improved Cat Raff staking contract. The new Cat Raff fetches randomized winners from the Chainlink VRF algorithm, which ensures verifiable randomness. By implementing Chainlink VRF’s verifiable randomness, IXT Cat Raff users will be able to verify that each winner is selected with an unbiased source of randomness. In addition to being more secure, it also ensures our architecture is operating in a provably secure and verifiably random manner, free of manipulation or interference. To participate in the raffles, players stake their IXT to our new Cat Raff staking Contract and receive Tickets in exchange. Each week, five winning tickets will be selected to share 2,500 IXT rewards in winnings.In order to participate, players have to stake IXT in exchange for raffle tickets. To roll over from one week to the next, add your tickets from the previous week. A one-week lock period applies, where players can only withdraw their tokens once the next draw is completed."
-    },
-    "pastWinnings": {
-      "title": "PAST WEEK WINNINGS",
-      "description": "Details of past winning tickets can be seen below. The randomness of these tickets is verifiable on chain. To increase your odds of winning, stake more IXT above and roll your tickets over consistently week by week."
-    },
-    "treasuryPool": {
-      "title": "TREASURY & IXT POOL"
-    },
-    "pastPrizes": {
-      "title": "PAST PRIZES"
-    },
-    "accounts": {
-      "title": "ACCOUNTS"
-    }
-  },
-  "landmarks": {
-    "rewards": {
-      "title": "REWARDS",
-      "description": "Claim all your rewards"
-    },
-    "myLandmarks": {
-      "title": "MY LANDMARKS",
-      "description": "Search and select from the landmarks you own"
-    },
-    "explore": {
-      "title": "EXPLORE LANDMARKS",
-      "description": "Search and select from the landmarks"
-    }
-  },
-  "energy": {
-    "staking": {
-      "title": "ENERGY STAKING",
-      "description": "Stake Energy Tokens to recieve IXT or Gravity Grade Packs with PIX Contents. You can also stake Energy in the sustainability pool to donate a percentage of your yield to the Amelia Foundation."
-    },
-    "pool": {
-      "title": "CHOOSE YOUR POOL",
-      "description": "Stake Energy and IXT in 30 days epochs to claim rewards"
-    },
-    "earn": {
-      "title": "Earn IXT",
-      "description": "Stake your Energy together with IXT in a 1-1 ratio to earn IXT rewards from the Play 2 Earn pool. Every epoch is 30 days and when the 30 days is over your energy will be burned. The IXT stays locked until you claim it."
-    },
-    "earnGive": {
-      "title": "Earn and Give",
-      "description": "Stake Energy in the Sustainability Pool and give part of your earnings to the Amelia Foundation. You decide on the specific percentage given from your IXT Rewards."
-    },
-    "forItx": {
-      "title": "ENERGY FOR IXT",
-      "description": "Stake your Energy together with IXT at a 1-to-1 ratio and earn rewards from the Play-to-Earn pool"
-    },
-    "ameliaFoundation": {
-      "title": "AMELIA FOUNDATION",
-      "description": "Stake your Energy together with IXT at a 1-to-1 ratio and earn a bit less rewards, and contribute to saving the planet earth"
-    },
-    "ameliaFoundationBox": {
-      "title": "Earn IXT for contributing to charity, liquidity and safety.",
-      "description": "Energy staked is burned upon staking."
-    }
-  },
-  "lendCapital": {
-    "assetPool": {
-      "title": "ASSET POOL",
-      "description": "Let your holdings shine with the Midas Touch. From an individual DeFi user to a Dao or Treasury, users can take advantage of Midas to earn yield, borrow against, or lend their favorite tokens."
+    "ixtCatRaf": {
+      "catRaff": {
+        "title": "IXT CAT RAFF",
+        "description": "Earn more with the IXT Cat Raff! Each week a randomized raffle selects five players to share 2,500 IXT rewards in winnings. In order to participate, players stake IXT in exchange for raffle tickets. To roll over from one week to the next, add your tickets from the previous week. A one-week lock period applies, where players can only withdraw their tokens once the next draw is completed."
+      },
+      "prizePortfolio": {
+        "title": "Prize Portfolio",
+        "subtitle": "Track balances",
+        "description": "Prize Portfolio shows the balance tracking related to the IXT CAT RAFF. This might include the total deposits, weekly odds, weekly prize, and the next draw timing.",
+        "fields": {
+          "totalDeposits": {
+            "label": "Total deposits"
+          },
+          "weeklyOdds": {
+            "label": "Weekly odds"
+          },
+          "weeklyPrize": {
+            "label": "Weekly prize"
+          },
+          "nextDraw": {
+            "label": "Next draw"
+          }
+        },
+        "priceIndicator": {
+          "label": "Price"
+        },
+        "stakingContract": {
+          "title": "New IXT CAT RAFF Staking Contract",
+          "description": "Stake your IXT to our new, updated and improved Cat Raff staking contract. The new Cat Raff fetches randomized winners from the Chainlink VRF algorithm, which ensures verifiable randomness. By implementing Chainlink VRF’s verifiable randomness, IXT Cat Raff users will be able to verify that each winner is selected with an unbiased source of randomness. In addition to being more secure, it also ensures our architecture is operating in a provably secure and verifiably random manner, free of manipulation or interference. To participate in the raffles, players stake their IXT to our new Cat Raff staking Contract and receive Tickets in exchange. Each week, five winning tickets will be selected to share 2,500 IXT rewards in winnings.In order to participate, players have to stake IXT in exchange for raffle tickets. To roll over from one week to the next, add your tickets from the previous week. A one-week lock period applies, where players can only withdraw their tokens once the next draw is completed."
+        },
+        "actions": {
+          "stakeToReceiveTickets": {
+            "title": "Stake your IXT to receive Tickets",
+            "description": "1 Ticket is 1 IXT",
+            "fields": {
+              "availableAmount": "Available:",
+              "inputPlaceholder": "Enter Amount",
+              "stakeButton": "STAKE IXT"
+            }
+          },
+          "addPreviousWeekTickets": {
+            "title": "Add tickets from previous week",
+            "description": "Roll-over your Tickets from week to week to be included in the next raffle",
+            "fields": {
+              "availableTickets": "Available TX:",
+              "inputPlaceholder": "Enter Amount",
+              "addButton": "ADD TICKETS"
+            }
+          },
+          "withdrawIXT": {
+            "title": "Withdraw your IXT",
+            "description": "If you withdraw your IXT you will no longer be participating in the Cat Raffles",
+            "fields": {
+              "availableAmount": "Available:",
+              "inputPlaceholder": "Your deposit amount",
+              "withdrawButton": "WITHDRAW"
+            }
+          },
+          "claimIXTReward": {
+            "title": "Claim IXT Reward",
+            "description": "Claim and withdraw your winnings!",
+            "fields": {
+              "availableAmount": "Available:",
+              "rewardAmount": "Rewards",
+              "claimButton": "CLAIM"
+            },
+            "pastWinnings": {
+              "title": "PAST WEEK WINNINGS",
+              "description": "Details of past winning tickets can be seen below. The randomness of these tickets is verifiable on chain. To increase your odds of winning, stake more IXT above and roll your tickets over consistently week by week."
+            },
+            "WeekWinnings": {
+              "title": "Total Tickets",
+              "description": "Your Tickets"
+            },
+            "treasuryPool": {
+              "title": "TREASURY & IXT POOL",
+              "treasuryBalance": {
+                "title": "Treasury Balance",
+                "currency": "IXT"
+              },
+              "poolPrice": {
+                "title": "Pool Price",
+                "description": "Total Deposits in Pool"
+              },
+              "poolStats": {
+                "title": "Pool Stats",
+                "currentWeekDeposits": {
+                  "title": "Your Current Week Deposits",
+                  "currency": "IXT"
+                },
+                "totalWeekDeposits": {
+                  "title": "Current Week Total Deposits",
+                  "currency": "IXT"
+                },
+                "pastPrizes": {
+                  "title": "PAST PRIZES",
+                  "description": "Adress",
+                  "Prize": "Prize"
+                },
+                "accounts": {
+                  "title": "ACCOUNTS"
+                }
+              },
+              "landmarks": {
+                "rewards": {
+                  "title": "REWARDS",
+                  "description": "Claim all your rewards"
+                },
+                "myLandmarks": {
+                  "title": "MY LANDMARKS",
+                  "description": "Search and select from the landmarks you own"
+                },
+                "explore": {
+                  "title": "EXPLORE LANDMARKS",
+                  "description": "Search and select from the landmarks"
+                }
+              },
+              "energy": {
+                "staking": {
+                  "title": "ENERGY STAKING",
+                  "description": "Stake Energy Tokens to recieve IXT or Gravity Grade Packs with PIX Contents. You can also stake Energy in the sustainability pool to donate a percentage of your yield to the Amelia Foundation."
+                },
+                "pool": {
+                  "title": "CHOOSE YOUR POOL",
+                  "description": "Stake Energy and IXT in 30 days epochs to claim rewards"
+                },
+                "earn": {
+                  "title": "Earn IXT",
+                  "description": "Stake your Energy together with IXT in a 1-1 ratio to earn IXT rewards from the Play 2 Earn pool. Every epoch is 30 days and when the 30 days is over your energy will be burned. The IXT stays locked until you claim it."
+                },
+                "earnGive": {
+                  "title": "Earn and Give",
+                  "description": "Stake Energy in the Sustainability Pool and give part of your earnings to the Amelia Foundation. You decide on the specific percentage given from your IXT Rewards."
+                },
+                "forItx": {
+                  "title": "ENERGY FOR IXT",
+                  "description": "Stake your Energy together with IXT at a 1-to-1 ratio and earn rewards from the Play-to-Earn pool"
+                },
+                "ameliaFoundation": {
+                  "title": "AMELIA FOUNDATION",
+                  "description": "Stake your Energy together with IXT at a 1-to-1 ratio and earn a bit less rewards, and contribute to saving the planet earth"
+                },
+                "ameliaFoundationBox": {
+                  "title": "Earn IXT for contributing to charity, liquidity and safety.",
+                  "description": "Energy staked is burned upon staking."
+                }
+              },
+              "lendCapital": {
+                "assetPool": {
+                  "title": "ASSET POOL",
+                  "description": "Let your holdings shine with the Midas Touch. From an individual DeFi user to a Dao or Treasury, users can take advantage of Midas to earn yield, borrow against, or lend their favorite tokens."
+                }
+              }
+            }
+          }
+        }
+      }
     }
   }
 }

@@ -63,6 +63,9 @@ Page()
       StakingWrapper(w="50%" id="metashare" :data="metashareData")
 </template>
 
+
+
+
 <style></style>
 
 
@@ -99,28 +102,5 @@ const list: StakingInfo[] = [{
 }
 ]
 
-interface YourTerritories {
-  territory: string,
-  staked: string,
-  amount: number
-}
-
-const territories: YourTerritories[] = [{
-  territory: "TERRITORY NFT STAKING",
-  staked: "Total Staked",
-  amount: 0
-},
-{
-  territory: "ENERGY STAKING",
-  staked: "Total Staked:",
-  amount: 0
-},
-{
-  territory: "LANDMARK NFT STAKING",
-  staked: "Total Staked:",
-  amount: 0
-
-}
-]
 
 </script>

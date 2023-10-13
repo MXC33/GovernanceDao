@@ -31,17 +31,15 @@ Page()
     button(btn="~ form" p="6") SECTOR
     button(btn="~ form" p="6") ZONE
     button(btn="~ form" p="6") DOMAIN
-    
-
-  
+  Card(bg="default" b="none") 
   
 </template>
-  
+    
 <script lang="ts" setup>
 
 </script>
-
   
+    
 <style>
 .wrapper {
   display: flex;
