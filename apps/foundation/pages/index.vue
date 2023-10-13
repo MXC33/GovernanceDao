@@ -1,5 +1,7 @@
 <template lang="pug">
 Page()
+  VList()
+    TableDashboard()
   HList(grid="~ gap-6")
     router-link(to="/territories" tag="button" btn="~ secondary") Territories Staking
     router-link(to="/energy" tag="button" btn="~ secondary") Energy Staking
