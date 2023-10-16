@@ -22,7 +22,6 @@ const onClickBack = () => {
 const pages = ['repair', 'rename']
 
 definePageMeta({
-  middleware: 'auth',
   layout: 'corporation'
 })
 

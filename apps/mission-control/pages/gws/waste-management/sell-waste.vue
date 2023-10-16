@@ -9,7 +9,6 @@ import type { InfoBlock } from '~/composables/useInfoBlocks';
 
 
 definePageMeta({
-  middleware: 'auth',
   layout: 'corporation'
 })
 

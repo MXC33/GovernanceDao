@@ -9,7 +9,7 @@ VList(flex-grow="1" min-h="0" bg="$corporation-bg-color")
           slot(name="title")
             TitleWithPointer {{ $t(`corporations.${corporationRouteI18n}.title`) }}
 
-        div(self="end" flex-shrink="0")
+        div(align-self="end" flex-shrink="0")
           slot(name="header")
 
         CorporationNavigationButton(@click="$emit('click-back')" v-if="$slots.buttonBack" :is-filled="fillBackButton" cut="bottom-right s-xs" display="md:none" py="1.5")
@@ -25,6 +25,7 @@ VList(flex-grow="1" min-h="0" bg="$corporation-bg-color")
       slot(name="beforeNavigation")
 
     template(#default)
+
       CorporationNavigationButton(@click="$emit('click-back')" v-if="$slots.buttonBack" :is-filled="fillBackButton" cut="bottom-right b-$mc-accent" display="lt-md:none")
         slot(name="buttonBack")
 

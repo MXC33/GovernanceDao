@@ -8,7 +8,6 @@ import type { InfoBlockSlideshow } from '~/composables/useInfoBlocks';
 import type { TokenTypeTier } from '~/composables/useTokenInfo';
 
 definePageMeta({
-  middleware: 'auth',
   layout: 'corporation'
 })
 

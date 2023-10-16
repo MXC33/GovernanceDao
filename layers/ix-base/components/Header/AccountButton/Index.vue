@@ -1,8 +1,8 @@
 <template lang="pug">
-VList(pos="relative" ref="menuElement" frame="~ gray-400 hover:gray-300"  items="center" :connected="isAccountActive" transitino="all")
+VList(pos="relative" ref="menuElement" frame="~ gray-400 hover:gray-300"  items="center" :connected="isAccountActive" transition="all")
   HList(flex-grow="1" w="full")
 
-    button(p="2" @click="toggleMenu" whitespace="nowrap" flex-grow="1" text="center" flex="~ row" justify="center" items="center")
+    button(p="2" @click="toggleMenu" whitespace="nowrap" flex-grow="1" text="center" flex="~ row" justify="center" items="center" ref="openMenuElement")
       Transition(name="fade-slow" mode="out-in")
         span(v-if="walletState == 'disconnected'") {{ $t(`general.navigation.menu.connectWallet`)}}
 
@@ -24,7 +24,10 @@ import PlusIcon from "~/assets/images/icons/plus.svg";
 
 const { walletState } = useWallet()
 const menuOpen = ref(false)
+
+const openMenuElement = ref()
 const menuElement = ref()
+
 const { enable: showIXTSwap } = useIXTSwapVisible()
 const route = useRoute()
 const { ixtBalance } = useCurrencyData()
@@ -52,6 +55,6 @@ const toggleMenu = () => {
 
 onClickOutside(menuElement, () => {
   menuOpen.value = false;
-})
+}, { ignore: [openMenuElement] })
 
 </script>

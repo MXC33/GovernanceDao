@@ -10,7 +10,7 @@ VList(class="banner" pos="relative" overflow="hidden" z="0" min-h="650px")
           div(text="sm" font="bold" uppercase="~" space-x="2 xl:4")
             span() Complete tickets for next round
             span(color="ix-pink" font="medium") {{topInfo.totalTickets}}
-          div(text="sm" font="bold" uppercase="~" v-if="topInfo.fundsLastUntil" )
+          div(text="sm" font="bold" uppercase="~" v-if="topInfo.nextTicketPercentage" )
             span(m="r-2 xl:r-4") Subscription
             span(color="ix-pink" font="medium" display="inline-block") Streaming ({{topInfo.nextTicketPercentage.toFixed(2)}}% until ticket)
           div(text="sm" font="bold" uppercase="~" v-if="topInfo.fundsLastUntil" )
@@ -25,7 +25,7 @@ VList(class="banner" pos="relative" overflow="hidden" z="0" min-h="650px")
       div(class="agold_title" w-full)
         h1.banner-title(text="4xl md:5xl lg:6xl xl:7xl 2xl:8xl center" font="bdrA3mik" mb-1 v-if="livepage && activeRewards.rewards" flex="~ col md:row" justify="between"
           p-x="sm:5 md:23 lg:27 xl:21 2xl:17")
-          span() {{rewardToDisplay}}
+          span( v-if="rewardToDisplay.length > 1" ) {{rewardToDisplay}}
           span() AGOLD
         h3(text="lg xl:2xl center" font="bdrA3mik" mb-2) Total Prize Pool
         p(font="bold" text="base sm:lg center" mb-4 v-if="livepage") Every week, new Territories from around the world are <br> randomly selected. Join today and have the chance to win!
@@ -38,23 +38,31 @@ VList(class="banner" pos="relative" overflow="hidden" z="0" min-h="650px")
 
 <script lang="ts" setup>
 import { format } from "date-fns"
-import {useLottery} from "~/composables/useLottery";
-const { isLotteryActive, getActiveRewards, activeRewards, enteredTickets } = useLottery()
+import { useLottery } from "~/composables/useLottery";
+const { isLotteryActive, activeRewards, enteredTickets } = useLottery()
 const { displayPopup } = usePopups()
 const { checkIsAuth } = useHelperMethods()
 const { isLoggedInAndConnected } = useLogin()
 
-const rewardToCounter = ref(0)
+const currentReward = ref(0)
 const rewardToDisplay = ref('0')
-await getActiveRewards()
-rewardToCounter.value = activeRewards.value.rewards
+
+watch(activeRewards, () => {
+  currentReward.value = activeRewards.value.rewards - 5000
+}, { immediate: true })
 
 const activeRewardsInterval = setInterval(async () => {
-  if(activeRewards.value.incomingFlowRate && activeRewards.value.incomingFlowRate > 0){
-    rewardToCounter.value += (activeRewards.value.incomingFlowRate / 2) / 10
-    rewardToDisplay.value = rewardToCounter.value.toFixed((3)).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  if (currentReward.value > 0 && activeRewards.value.incomingFlowRate && activeRewards.value.incomingFlowRate > 0) {
+    if (currentReward.value < activeRewards.value.rewards) {
+      currentReward.value += Number(5000 / 180)
+    }
+    else {
+      currentReward.value += (activeRewards.value.incomingFlowRate / 2) / 5
+    }
+    rewardToDisplay.value = currentReward.value.toFixed((3)).replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
   }
-}, 100)
+
+}, 200)
 
 const topInfo = computed(() => {
   let totalTickets = 0
@@ -99,15 +107,18 @@ const openSwap = () => {
     type: 'popup-type-swap'
   })
 }
-const goToYoutubeLink = ( ) => {
+const goToYoutubeLink = () => {
   //return window.location.href = 'https://www.youtube.com/watch?v=nr8_gWSexg0&ab_channel=PLANETIX'
   return window.open('https://www.youtube.com/watch?v=nr8_gWSexg0&ab_channel=PLANETIX')
 }
+
+
 </script>
 <style>
 .banner {
   background: linear-gradient(180deg, #FF1E6E 0%, rgba(34, 18, 24, 0) 100%);
 }
+
 .banner-top {
   background-image:
     linear-gradient(to left bottom, #000 0 50%, transparent 50% 100%),
@@ -120,15 +131,18 @@ const goToYoutubeLink = ( ) => {
   background-repeat: no-repeat;
 
 }
+
 @media only screen and (min-width: 0px) and (max-width: 460px) {
   .banner-top {
     background: transparent;
   }
 }
+
 .title-stroke {
   /*-webkit-text-stroke: 1px #FF1E6E;*/
   -webkit-text-stroke-width: 1px;
 }
+
 .banner-title {
   /*background: linear-gradient(#F9F9F9, #FF1E6E);*/
   background: #F9F9F9;
@@ -137,14 +151,16 @@ const goToYoutubeLink = ( ) => {
   text-stroke: 3px #FF1E6E;
   -webkit-text-stroke: 3px #FF1E6E;
 }
+
 /* to  be delated after Teaser */
-.watch_teaser{
+.watch_teaser {
   position: relative;
   padding-left: 45px;
   padding-right: 25px;
   font-size: 21px;
 }
-.watch_teaser:after{
+
+.watch_teaser:after {
   position: absolute;
   left: 40px;
   top: 0;
@@ -154,27 +170,31 @@ const goToYoutubeLink = ( ) => {
   height: 25px;
   width: 25px;
 }
+
 /* END to  be delated after Teaser */
 
 @media only screen and (min-width: 1536px) and (max-width: 1560px) {
-  .agold_title h1{
+  .agold_title h1 {
     font-size: 95px;
     padding-left: 61px !important;
     padding-right: 61px !important;
   }
 }
+
 @media only screen and (min-width: 1280px) and (max-width: 1298px) {
-  .agold_title h1{
+  .agold_title h1 {
     font-size: 70px;
   }
 }
+
 @media only screen and (min-width: 1024px) and (max-width: 1047px) {
-  .agold_title h1{
+  .agold_title h1 {
     font-size: 58px;
   }
 }
+
 @media only screen and (min-width: 768px) and (max-width: 790px) {
-  .agold_title h1{
+  .agold_title h1 {
     font-size: 47px;
     padding-left: 88px !important;
     padding-right: 88px !important;

@@ -29,7 +29,7 @@ const activePopup = usePopups()
 const { corporation } = useCorporations()
 const { buyNFT } = useBuyNFTs()
 const { activeShopItem, gotoCompleted, chosenCurrency, activePaymentItems, setChosenCurrencyToDefault } = useCorporationShop()
-const { usdToIXT, ixtToUSD } = useIXTPrice()
+const { usdToIXT, usdToETH, usdToMatic } = useCurrencyConversion()
 const { purchaseRover } = useYSpaceContracts()
 
 const chosenPaymentCurrency = (item: Currency) => chosenCurrency.value = item
@@ -51,6 +51,10 @@ const convertToCurrency = (selectedCurrency: Currency) => {
     return formatPrice((amount), 'usdt')
   else if (selectedCurrency == 'ixt')
     return formatPrice(usdToIXT(amount), 'ixt')
+  else if (selectedCurrency == 'weth')
+    return formatPrice(usdToETH(amount), 'weth')
+  else if (selectedCurrency == 'matic')
+    return formatPrice(usdToMatic(amount), 'matic')
   else
     return selectedCurrency
 }

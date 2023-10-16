@@ -68,6 +68,20 @@ export const useCurrencyData = () => {
     roundToDecimals(ixtToken.value?.balance ?? 0, 2)
   )
 
+  const getCurrencyBalance = (currency: Currency) => {
+    switch (currency) {
+      case 'astro-credit':
+        return astroCreditBalance.value
+      case 'ixt':
+        return ixtBalance.value
+      case 'waste':
+        return wasteBalance.value
+      case 'energy':
+        return energyBalance.value
+    }
+
+  }
+
   const getCurrencyToken = (currency: Currency) => {
     switch (currency) {
       case 'astro-credit':
@@ -92,6 +106,9 @@ export const useCurrencyData = () => {
     astroGoldBalance,
     astroGoldLiteToken,
     astroGoldLiteBalance,
+    energyBalance,
+    wasteBalance,
+    getCurrencyBalance,
     getCurrencyToken,
     fetchAllCurrencies
   }

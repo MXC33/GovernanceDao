@@ -8,7 +8,7 @@
 
       PopupList()
 
-      //- div#infobox(:style="values" z="901" pos="absolute")
+      HoverInfoBox()
 
       div#takeover
 
@@ -24,7 +24,8 @@
 
 <script setup lang="ts">
 const { fetchActiveLottery } = useLottery()
-const { isLotteryActive, getActiveLotteryData } = useLottery()
+const { isLotteryActive, getActiveLotteryData, getActiveRewards } = useLottery()
+
 const { setupOnMounted } = useAppSetup()
 const { state: isSwapVisible } = useIXTSwapVisible()
 
@@ -36,12 +37,17 @@ useHead({
 })
 
 
-watch([isLotteryActive], ([state]) => {
+watch(isLotteryActive, (state) => {
+  console.log("Lottery active", state)
 }, { immediate: true })
 
 
 onMounted(() => {
-  setupOnMounted(() => {
+  getActiveRewards()
+  setupOnMounted(async () => {
+    await getActiveLotteryData()
+    await fetchActiveLottery()
+
   })
 })
 

@@ -24,7 +24,6 @@ await Promise.all([
 ])
 
 definePageMeta({
-  middleware: 'auth',
   layout: 'corporation'
 })
 

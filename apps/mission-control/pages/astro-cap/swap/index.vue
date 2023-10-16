@@ -18,7 +18,6 @@ const { corporationRouteI18n, goForward, goBack } = useCorporationRoute()
 const tokens: NftFragment[] = [{ tokenInfo: { type: 'astro-gold-ixt' } }]
 
 definePageMeta({
-  middleware: 'auth',
   layout: "corporation"
 })
 </script>

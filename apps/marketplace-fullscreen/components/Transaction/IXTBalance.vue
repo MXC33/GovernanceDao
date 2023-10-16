@@ -14,7 +14,7 @@ VList()
 
 <script lang="ts" setup>
 import { useIXTContract } from "@ix/base/composables/Contract/useIXTContract";
-const { ixtToUSD } = useIXTPrice()
+const { ixtToUSD } = useCurrencyConversion()
 const { ixtBalance } = useIXTContract()
 
 const ixtBalanceRounded = computed(() => roundToDecimals(ixtBalance.value ?? 0, 2))

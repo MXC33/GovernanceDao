@@ -32,7 +32,7 @@ const { column, row } = defineProps<{
 
 
 const { getValue } = useTable()
-const { ixtToUSD } = useIXTPrice()
+const { ixtToUSD } = useCurrencyConversion()
 const { isMobile } = useDevice()
 
 const value = computed(() => getValue(column, row))

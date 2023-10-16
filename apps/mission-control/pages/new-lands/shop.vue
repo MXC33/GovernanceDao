@@ -9,7 +9,6 @@ import type { InfoBlock, InfoBlockTable } from '~~/composables/useInfoBlocks';
 import type { GenericStoreSaleInfoFragment, NftFragment } from '#gql'
 
 definePageMeta({
-  middleware: 'auth',
   layout: "corporation"
 })
 
