@@ -1,5 +1,5 @@
 <template lang="pug">
-Card(w="xl")
+Card()
   VList()
     div()
       TitleDetail(flex-col-reverse)

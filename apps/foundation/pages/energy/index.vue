@@ -1,9 +1,9 @@
 <template lang="pug">
 Page()
-  HList(grid="~ cols-2" gap="20")
+  HList(grid="~ cols-2")
     VList(space-x-6)
-      PageSection(section="pool" :primary="true")
-        Card(w="xl")
+      PageSection(section="staking" :primary="true")
+        Card()
           VList()
             TitleDetail()
               h3() Energy Pool: 400 000 IXT / month
@@ -22,12 +22,12 @@ Page()
                     li() 0
                     li() 0
                     li() 0
-          MetashareClaimHorizontal()
+          button(btn="~ primary-outline") CHOOSE STAKING POOL
 
     VList(grid="~" space-y="12" flex-direction-row) 
-      CardChart(w="xl")
+      CardChart()
       HList(gap="6")
-        Card(w="xs") 
+        Card() 
           TitleDetail()
             h3() IXT Pool next epoch
             h4(color="orange") Estimated
@@ -35,7 +35,7 @@ Page()
               h4(text="xl") Total pool next epoch 
             h4() 422,681
               IXTIcon(w="6")
-        Card(w="xs")
+        Card()
           TitleDetail()
             h3() Next epoch release
             h4(color="orange") Based on facilities minted
@@ -44,25 +44,35 @@ Page()
             h4() 422,431.531
               IXTIcon(w="6")
 
-  PageSection(section="earnStaking")
-  HList(grid="~ gap-6" b="red solid 1px")
-    Card(w="fit" b="blue solid 1px")
+  PageSection(section="pool")
+  HList(grid="~ gap-6")
+    Card(w="fit")
+      div(class="imgBox" w="stretch" bg="black" p=6)
+        IXTIcon(w="25")
       TitleDetail()
-        PageSection(section="ixtStakingInfo")
-        IXTIcon(w="25" class="ml-2" b="blue solid 1px")
-    Card(w="fit" rounded="br tr")
-      TitleDetail()
-        PageSection(section="lpStakingInfo")
-    Card(bg="black" rounded="br tr" flex-grow)
-      IXTIcon(w="25" class="ml-2")
+        PageSection(section="pool.options.earnIXT")
 
-  PageSection(section="something")
-    Stake()
-  PageSection(section="amelia")
-    Stake()
+    Card(w="fit")
+      div(class="imgBox" w="stretch" bg="black" p=6)
+        IXTIcon(w="25" class="ml-2")
+      TitleDetail()
+        PageSection(section="pool.options.earnAndGive")
+
+
+  PageSection(section="forIxt")
+    StakeEnergy()
+  PageSection(section="ameliaFoundation")
+    Card() MASSA INFO
 </template>
 
 <script lang="ts" setup>
 import IXTIcon from '../../public/assets/svg/token.svg'
 
 </script>
+
+<style>
+.imgBox {
+  flex: display;
+  align-items: center;
+}
+</style>

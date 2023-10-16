@@ -1,8 +1,8 @@
 <template lang="pug">
 VList(space-y="6")
   header(space-y="3")
-    h1(v-if="primary" text="5xl" font="bold druk-medium") {{$t(`${String(route.name)}.${section}.title`) }}
-    h2(v-else text="3xl" font="bold") {{$t(`${String(route.name)}.${section}.title`) }}
+    h1(v-if="primary" text="5xl" font="druk-medium bold") {{$t(`${String(route.name)}.${section}.title`) }}
+    h2(v-else text="4xl" font="bold druk") {{$t(`${String(route.name)}.${section}.title`) }}
 
     p(text="md") {{$t(`${String(route.name)}.${section}.description`) }}
 
