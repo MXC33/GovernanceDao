@@ -11,7 +11,18 @@
 </template>
 
 <script setup lang="ts">
+import { StakingId } from '.nuxt/gql/default';
+
+
 const { setupOnMounted } = useAppSetup()
+const { execute: fetchIXTOneMonthData } = useStakingData(StakingId.IxtOneMonth)
+const { execute: fetchIXTThreeMonthData } = useStakingData(StakingId.IxtOneMonth)
+const { execute: fetchIXTSixMonthData } = useStakingData(StakingId.IxtOneMonth)
+const { execute: fetchIXTTwelveMonthData } = useStakingData(StakingId.IxtOneMonth)
+const { execute: fetchMetashareData } = useStakingData(StakingId.Metashare)
+const { execute: fetchVoucherTokens } = useVoucherData()
+
+
 
 useHead({
   title: "Fluencer | PlanetIX",
@@ -21,7 +32,16 @@ useHead({
 })
 
 onMounted(() => {
-  setupOnMounted()
+  setupOnMounted(async () => {
+    await Promise.all([
+      fetchVoucherTokens(),
+      fetchIXTOneMonthData(),
+      fetchIXTThreeMonthData(),
+      fetchIXTSixMonthData(),
+      fetchIXTTwelveMonthData(),
+      fetchMetashareData(),
+    ])
+  })
 })
 
 
