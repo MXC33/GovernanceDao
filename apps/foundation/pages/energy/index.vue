@@ -1,32 +1,28 @@
 <template lang="pug">
 Page()
-PageSection(section="staking" :primary="true")
   HList(grid="~ cols-2" gap="20")
     VList(space-x-6)
-      h3(color="gray" text="xl") Stake IXT, earn up to
-      h1(text="bold 5xl" color="#84D4BC") 18,88% APY
-      button(color="gray" text="xl") Buy IXT 
-      button(color="gray" text="xl") Add IXT to wallet 
-      Card(w="xl")
-        VList()
-          TitleDetail()
-            h3() Energy Pool: 400 000 IXT / month
-            h4(color="") Epoch ends in 21D 6H 0M
-              TitleDetail()
-                template(#detail)
+      PageSection(section="pool" :primary="true")
+        Card(w="xl")
+          VList()
+            TitleDetail()
+              h3() Energy Pool: 400 000 IXT / month
+              h4(color="") Epoch ends in 21D 6H 0M
+                TitleDetail()
+                  template(#detail)
+                    ul() 
+                      li() Daily IXT per Energy
+                      li() TVL 
+                      li() IXT unlocked this epoch
+                      li() Your Stake 
+                      li() Claimable rewards
                   ul() 
-                    li() Daily IXT per Energy
-                    li() TVL 
-                    li() IXT unlocked this epoch
-                    li() Your Stake 
-                    li() Claimable rewards
-                ul() 
-                  li() 0
-                  li() 0 
-                  li() 0
-                  li() 0
-                  li() 0
-        MetashareClaimHorizontal()
+                    li() 0
+                    li() 0 
+                    li() 0
+                    li() 0
+                    li() 0
+          MetashareClaimHorizontal()
 
     VList(grid="~" space-y="12" flex-direction-row) 
       CardChart(w="xl")
