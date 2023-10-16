@@ -28,10 +28,8 @@ Page()
           TitleDetail()
             h3() Distribution today
             h4() 36,936.63 (ICON) 
+
   Stake()
-
-
-
   PageSection(section="earnStaking")
     div(grid="~ cols-2" gap="6")
       Card()
