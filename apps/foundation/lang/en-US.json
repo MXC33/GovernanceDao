@@ -402,61 +402,155 @@
                 },
                 "pastPrizes": {
                   "title": "PAST PRIZES",
-                  "description": "Adress",
-                  "Prize": "Prize"
+                  "label": "Prize Draws",
+                  "addressLabel": "Address",
+                  "prizeLabel": "Prize"
+                },
+                "prizeDraws": {
+                  "title": "Prize Draws (Your Past Draws)",
+                  "notification": "You have not won any prizes yet! Stake more IXT and receive more tickets to increase your odds of winning."
                 },
                 "accounts": {
-                  "title": "ACCOUNTS"
+                  "title": "ACCOUNTS",
+                  "label": "Cat Raff Players",
+                  "balanceLabel": "Balance",
+                  "secondLabel": "Old Contract Users"
                 }
               },
               "landmarks": {
                 "rewards": {
                   "title": "REWARDS",
-                  "description": "Claim all your rewards"
+                  "description": "Claim all your rewards",
+                  "labels": {
+                    "earningsPerDay": "Earnings per day",
+                    "earnings7Days": "Earnings 7 days",
+                    "totalRewards": "Total Rewards",
+                    "claimButton": "CLAIM"
+                  }
                 },
                 "myLandmarks": {
                   "title": "MY LANDMARKS",
-                  "description": "Search and select from the landmarks you own"
+                  "description": "Search and select from the landmarks you own",
+                  "placeholder": "No landmarks available"
                 },
                 "explore": {
                   "title": "EXPLORE LANDMARKS",
-                  "description": "Search and select from the landmarks"
+                  "description": "Search and select from the landmarks",
+                  "searchPlaceholder": "Search landmark (name or country)",
+                  "filter": {
+                    "label": "Filter",
+                    "defaultOption": "All"
+                  },
+                  "sortBy": {
+                    "label": "Sort By",
+                    "defaultOption": "Shares - Low to High"
+                  },
+                  "card": {
+                    "sharesLabel": "Shares",
+                    "ownersLabel": "Owners",
+                    "earningDiameterLabel": "Earning Diameter",
+                    "viewButton": "VIEW"
+                  }
                 }
               },
               "energy": {
                 "staking": {
                   "title": "ENERGY STAKING",
-                  "description": "Stake Energy Tokens to recieve IXT or Gravity Grade Packs with PIX Contents. You can also stake Energy in the sustainability pool to donate a percentage of your yield to the Amelia Foundation."
+                  "description": "Stake Energy Tokens to receive IXT or Gravity Grade Packs with PIX Contents. You can also stake Energy in the sustainability pool to donate a percentage of your yield to the Amelia Foundation.",
+                  "energyPool": "Energy Pool: IXT / month",
+                  "epochEnds": "Epoch ends in",
+                  "dailyIXT": "Daily IXT per Energy",
+                  "TVL": "TVL",
+                  "IXTUnlocked": "IXT Unlocked this epoch",
+                  "yourStake": "Your Stake",
+                  "claimableRewards": "Claimable Rewards",
+                  "chooseStakingPoolButton": "CHOOSE STAKING POOL"
+                },
+                "stakingPoolDistribution": {
+                  "title": "Staking Pool Distribution",
+                  "percentageOfEnergyPoolMinted": "Percentage of Energy pool minted",
+                  "facilitiesMinted": "Facilities Minted",
+                  "snapshotTaken": "Snapshot Taken",
+                  "current": "Current"
+                },
+                "IXTPoolNextEpoch": {
+                  "title": "IXT Pool next epoch",
+                  "description": "Estimated",
+                  "totalPoolNextEpoch": "Total Pool next epoch"
+                },
+                "nextEpochRelease": {
+                  "title": "Next epoch release",
+                  "description": "Based on facilities minted"
                 },
                 "pool": {
                   "title": "CHOOSE YOUR POOL",
-                  "description": "Stake Energy and IXT in 30 days epochs to claim rewards"
-                },
-                "earn": {
-                  "title": "Earn IXT",
-                  "description": "Stake your Energy together with IXT in a 1-1 ratio to earn IXT rewards from the Play 2 Earn pool. Every epoch is 30 days and when the 30 days is over your energy will be burned. The IXT stays locked until you claim it."
-                },
-                "earnGive": {
-                  "title": "Earn and Give",
-                  "description": "Stake Energy in the Sustainability Pool and give part of your earnings to the Amelia Foundation. You decide on the specific percentage given from your IXT Rewards."
+                  "description": "Stake Energy and IXT in 30 days epochs to claim rewards",
+                  "options": {
+                    "earnIXT": {
+                      "title": "Earn IXT",
+                      "description": "Stake your Energy together with IXT in a 1-1 ratio to earn IXT rewards from the Play 2 Earn pool. Every epoch is 30 days and when the 30 days is over your energy will be burned. The IXT stays locked until you claim it."
+                    },
+                    "earnAndGive": {
+                      "title": "Earn and Give",
+                      "description": "Stake Energy in the Sustainability Pool and give part of your earnings to the Amelia Foundation. You decide on the specific percentage given from your IXT Rewards."
+                    }
+                  }
                 },
                 "forItx": {
                   "title": "ENERGY FOR IXT",
-                  "description": "Stake your Energy together with IXT at a 1-to-1 ratio and earn rewards from the Play-to-Earn pool"
+                  "description": "Stake your Energy together with IXT at a 1-to-1 ratio and earn rewards from the Play-to-Earn pool",
+                  "details": {
+                    "lockingPeriod": "1 month",
+                    "yourStake": "Your Stake",
+                    "dailyRewards": "Daily Rewards"
+                  },
+                  "actions": {
+                    "unstake": "UNSTAKE",
+                    "stake": "STAKE",
+                    "claimRewards": "CLAIM",
+                    "ameliaRewards": "CLAIM"
+                  },
+                  "sideInfo": {
+                    "contributeLiquidity": "Earn IXT for contributing to liquidity and safety.",
+                    "burnedUponStaking": "Energy staked is burned upon staking."
+                  }
                 },
                 "ameliaFoundation": {
                   "title": "AMELIA FOUNDATION",
-                  "description": "Stake your Energy together with IXT at a 1-to-1 ratio and earn a bit less rewards, and contribute to saving the planet earth"
+                  "description": "Stake your Energy together with IXT at a 1-to-1 ratio and earn a bit less rewards, and contribute to saving the planet earth",
+                  "details": {
+                    "lockingPeriod": "1 month",
+                    "yourStake": "Your Stake",
+                    "dailyRewards": "Daily Rewards"
+                  }
                 },
-                "ameliaFoundationBox": {
-                  "title": "Earn IXT for contributing to charity, liquidity and safety.",
-                  "description": "Energy staked is burned upon staking."
+                "actions": {
+                  "unstake": "UNSTAKE",
+                  "stake": "STAKE",
+                  "claimRewards": "CLAIM",
+                  "ameliaRewards": "CLAIM"
                 }
+              },
+              "ameliaFoundation": {
+                "title": "AMELIA FOUNDATION",
+                "description": "Stake your Energy together with IXT at a 1-to-1 ratio and earn a bit less rewards, and contribute to saving the planet earth"
               },
               "lendCapital": {
                 "assetPool": {
                   "title": "ASSET POOL",
-                  "description": "Let your holdings shine with the Midas Touch. From an individual DeFi user to a Dao or Treasury, users can take advantage of Midas to earn yield, borrow against, or lend their favorite tokens."
+                  "description": "Let your holdings shine with the Midas Touch. From an individual DeFi user to a DAO or Treasury, users can take advantage of Midas to earn yield, borrow against, or lend their favorite tokens.",
+                  "tableHeaders": [
+                    "Chain",
+                    "Assets",
+                    "Supplied Asset",
+                    "Available Liquidity",
+                    "Total Borrowed",
+                    "Supply APY",
+                    "Borrow APY"
+                  ],
+                  "totalSupplyBox": {
+                    "title": "TOTAL SUPPLY"
+                  }
                 }
               }
             }
