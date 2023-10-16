@@ -40,10 +40,15 @@ div(b="0.5 white opacity-20 rounded-xl")
         td.center 0.00
         td.center 0.00
       tr
-        td.center.flex.flex-ros.items-center 
-          div Total 
+        td.center.flex.flex-row.items-center
+          TitleDetail()
+            template(#detail)
+              div Total 
         td.center 0
+          IXTIcon(w="5" class="ml-2")
         td.center 0
+          IXTIcon(w="5" class="ml-2")
+
   </template>
   
   
