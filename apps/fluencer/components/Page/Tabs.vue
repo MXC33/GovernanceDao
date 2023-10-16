@@ -1,6 +1,6 @@
 <template lang="pug">
 TabList()
-  TabItem(v-for="tab in tabs" :is-active="tab == activeTab" @click="navigateTo(`/${tab}`)" :notifications="notificationCount(tab)") {{ $t('fluencer.tab.' + tab) }}
+  TabItem(v-for="tab in tabs" :is-active="tab == activeTab" @click="navigateTo(getURL(tab))" :key="tab" :notifications="notificationCount(tab)") {{ $t('fluencer.tab.' + tab) }}
 
 </template>
 
@@ -10,6 +10,16 @@ const tabs = ["open", "stake-metashares", "stake-ixt", "history"] as const
 type Tab = typeof tabs[number]
 
 const route = useRoute()
+
+const getURL = (tab: Tab) => {
+  switch (tab) {
+    case "open":
+      return "/"
+
+    default:
+      return `/${tab}`
+  }
+}
 
 const notificationCount = (tab: Tab) => {
   switch (tab) {
@@ -22,7 +32,7 @@ const notificationCount = (tab: Tab) => {
 }
 
 const activeTab = computed(() => {
-  if (route.name)
+  if (route.name == 'index')
     return 'open'
   return route.name
 })

@@ -1,7 +1,7 @@
 <template lang="pug">
-VList(bg="gray-800" p="6" rounded="xl" b="0.5 white opacity-20") 
+div(p="x-6 b-4")
   slot
-
+  
 </template>
 
 <script lang="ts" setup>
