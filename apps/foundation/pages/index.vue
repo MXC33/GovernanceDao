@@ -17,7 +17,7 @@ Page()
           button(color="gray") Buy IXT 
           button(color="gray") Add IXT to wallet 
       CardChart()
-    VList(space-y="12") 
+    VList(space-y="20") 
       TableDashboard()
       div(grid="~ cols-2 gap-6")
         Card() 

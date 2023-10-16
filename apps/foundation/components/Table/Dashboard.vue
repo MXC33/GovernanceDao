@@ -1,43 +1,51 @@
 <template lang="pug">
-table()
-  tr(bg="gray-800" p="6" rounded="xl" b="0.5 white opacity-20" space-y="6") 
-    th
-      h3.flex Earning overview
-      h4.flex My Assets
-    th 24h
-    th 30 days
-  tbody
-    tr(b="0.5 white opacity-20")
-      td.flex.flex-row.items-center
-        IXTIcon(w="10")
-        div(text="xl") IXT
-      td 0.00
-      td 0.00
-    tr(b="0.5 white opacity-20")
-      td.flex.flex-row.items-center
-        EnergyIcon(w="10")
-        div(text="xl") Energy
-      td 0.00
-      td 0.00
-    tr(b="0.5 white opacity-20")
-      td.flex.flex-row.items-center
-        ErrorIcon(w="10")
-        div(text="xl") Landmark
-      td 0.00
-      td 0.00
-    tr(b="0.5 white opacity-20")
-      td.flex.flex-row.items-center
-        ErrorIcon(w="10")
-        div(text="xl") Territory
-      td 0.00
-      td 0.00
-    tr(b="0.5 white opacity-20")
-      td.flex.flex-row.items-center
-        ErrorIcon(w="10")
-        div(text="xl") Metashare
-      td 0.00
-      td 0.00
-</template>
+div(b="0.5 white opacity-20 rounded-xl")
+  table()
+    thead
+      tr(class="bg-gray-800 p-6") 
+        th
+          h3.flex Earning overview
+          h4.flex My Assets
+        th 24h
+        th 30 days
+    tbody
+      tr
+        td.flex.flex-row.items-center
+          IXTIcon(class="icon")
+          div IXT
+        td.center 0.00
+        td.center 0.00
+      tr
+        td.center.flex.flex-row.items-center
+          EnergyIcon(class="icon")
+          div Energy
+        td.center 0.00
+        td.center 0.00
+      tr
+        td.center.flex.flex-row.items-center
+          ErrorIcon(class="icon")
+          div Landmark
+        td.center 0.00
+        td.center 0.00
+      tr
+        td.center.flex.flex-row.items-center
+          ErrorIcon(class="icon")
+          div Territory
+        td.center 0.00
+        td.center 0.00
+      tr
+        td.center.flex.flex-row.items-center
+          ErrorIcon(class="icon")
+          div Metashare
+        td.center 0.00
+        td.center 0.00
+      tr
+        td.center.flex.flex-ros.items-center 
+          div Total 
+        td.center 0
+        td.center 0
+  </template>
+  
   
 <script lang="ts" setup>
 import IXTIcon from '../../public/assets/svg/tokenBG.svg'
@@ -46,3 +54,50 @@ import LandmarkIcon from '../../public/assets/svg/landmark.svg'
 import ErrorIcon from '../../public/assets/svg/error.svg'
 import MetashareIcon from '../../public/assets/png/newlands.png'
 </script>
+
+<style>
+/* styles.css */
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  color: #fff;
+  background-color: #00000050;
+  /* assuming the background color from your image */
+  border-radius: 16px;
+  overflow: hidden;
+  table-layout: fixed;
+  border: 0.5 solid rgba(255, 255, 255, 0.2)
+    /* This will ensure the border radius applies to all child elements */
+}
+
+th,
+td {
+  padding: 12px 16px;
+  /* adjust as needed */
+  border-bottom: 0.5px solid rgba(255, 255, 255, 0.2);
+  /* this creates the slight white border in between rows */
+}
+
+td.center {
+  text-align: center;
+}
+
+
+th {
+  font-weight: bold;
+}
+
+/* Icons' styles */
+.icon {
+  width: 40px;
+  /* adjust as needed */
+  height: 40px;
+  margin-right: 12px;
+}
+
+/* Last row's bottom border removal */
+tbody tr:last-child td {
+  border-bottom: none;
+}
+</style>
