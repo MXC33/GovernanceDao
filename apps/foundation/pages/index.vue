@@ -29,6 +29,7 @@ Page()
             h3() Distribution today
             h4() 36,936.63 (ICON) 
 
+  PageSection(section="ixtStaking")
   Stake()
   PageSection(section="earnStaking")
     div(grid="~ cols-2" gap="6")
@@ -43,26 +44,26 @@ Page()
           IXTIcon(w="25" class="ml-2")
 
 
-  PageSection(section="ixtStaking")
-    div(grid="~ cols-4 gap-6")
-      Card(v-for="item in list" )
-        div(grid="~ cols-2 gap-6")
-          TitleDetail()
-            template(#detail) Locking Period 
-            template(#default) {{ item.lockingPeriod }} months
-          TitleDetail()
-            template(#detail) Multiplier
-            template(#default) {{ item.multiplier }} x
+  //- PageSection(section="ixtStaking")
+  //-   div(grid="~ cols-4 gap-6")
+  //-     Card(v-for="item in list" )
+  //-       div(grid="~ cols-2 gap-6")
+  //-         TitleDetail()
+  //-           template(#detail) Locking Period 
+  //-           template(#default) {{ item.lockingPeriod }} months
+  //-         TitleDetail()
+  //-           template(#detail) Multiplier
+  //-           template(#default) {{ item.multiplier }} x
 
-      Card(grid="col-span-2")
-        h3 Reward Pool
+  //-     Card(grid="col-span-2")
+  //-       h3 Reward Pool
 
-      CardDotted(grid="col-span-2")
-        h3 Coming Soon 
-        HList()
-          button(btn="~ secondary") LEARN MORE
+  //-     CardDotted(grid="col-span-2")
+  //-       h3 Coming Soon 
+  //-       HList()
+  //-         button(btn="~ secondary") LEARN MORE
 
-      button(btn="~ primary") CONNECT WALLET TO STAKE
+  //-     button(btn="~ primary") CONNECT WALLET TO STAKE
 
   PageSection(section="territoryStaking")
   Card(p=0 )
