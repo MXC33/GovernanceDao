@@ -24,8 +24,8 @@ Page()
             template(#description)
               VList(text="lg")
                 div(color="white" font="bold") 
-                  span 4000 IXT 
-                  span(font="400" color="gray-200") 200 usd
+                  span {{ixtBalanceRounded}} IXT 
+                  span(font="400" color="gray-200") ${{usdBalanceRounded}}
 
 
     
@@ -33,4 +33,9 @@ Page()
 
 
 <script lang="ts" setup>
+const { ixtToUSD } = useCurrencyConversion()
+const { ixtBalance } = useCurrencyData()
+const ixtBalanceRounded = computed(() => roundToDecimals(ixtBalance.value ?? 0, 2))
+const usdBalanceRounded = computed(() => roundToDecimals(ixtToUSD(ixtBalance.value ?? 0), 2))
+
 </script>
