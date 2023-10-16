@@ -12,6 +12,7 @@
   "devDependencies": {
     "@ix/base": "*",
     "@types/node": "^18",
+    "interactive-shader-format": "^2.8.1",
     "nuxt": "3.6.5"
   }
 }

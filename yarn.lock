@@ -3142,6 +3142,7 @@ __metadata:
     histoire: ^0.16.1
     nuxt: 3.6.5
     nuxt-graphql-client: ^0.2.25
+    polychrome: ^4.1.2
     pug: ^3.0.2
     socket.io-client: ^4.7.2
     typescript: ^4.9.3
@@ -3162,6 +3163,7 @@ __metadata:
   dependencies:
     "@ix/base": "*"
     "@types/node": ^18
+    interactive-shader-format: ^2.8.1
     nuxt: 3.6.5
   languageName: unknown
   linkType: soft
