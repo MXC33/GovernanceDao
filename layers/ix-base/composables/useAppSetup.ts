@@ -1,3 +1,10 @@
+import { AppConfigInput } from "nuxt/schema"
+
+export interface IXAppConfig extends AppConfigInput {
+  ixApp: string,
+  connectWithoutIXUser?: boolean
+}
+
 export const useAppSetup = () => {
   const globalY = useGlobalWindowScroll()
 
