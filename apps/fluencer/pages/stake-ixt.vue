@@ -11,17 +11,21 @@ Page()
 
     DrawerContent(:start-open="true" :is-neutral="true" bg="gray-900")
       template(#header)
-        div My bundles
+        div Stake your IXT
 
       template(#default)
         DrawerContentBody()
           ListItem()
             template(#image)
-              img(src="~/assets/images/bundle-cover.png")
-            template(#title) Planet Bundle Large
+              img(src="~/assets/images/ixt-coin.png")
+            template(#title)
+              span(color="gray-200" text="md") My balance
+
             template(#description)
-              p Date of purchase: 07102023
-              p Date of purchase: 07102023
+              VList(text="lg")
+                div(color="white" font="bold") 
+                  span 4000 IXT 
+                  span(font="400" color="gray-200") 200 usd
 
 
     
