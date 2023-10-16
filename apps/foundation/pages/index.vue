@@ -17,18 +17,23 @@ Page()
           button(color="gray") Buy IXT 
           button(color="gray") Add IXT to wallet 
       CardChart()
-    VList(space-y="20") 
+    VList(space-y="15") 
       TableDashboard()
       div(grid="~ cols-2 gap-6")
         Card() 
-          TitleDetail()
+          TitleDetail(flex-col-reverse)
             h3() Circulating Supply
             h4(color="orange") See on coinGecko
+            template(#detail)
+              h4() Total pool next epoch
+            h4() 422,681
         Card()
-          TitleDetail()
+          TitleDetail(flex-col-reverse)
             h3() Distribution today
             h4() 36,936.63 (ICON) 
-
+            template(#detail)
+              h4() 99.94%
+            h4() 422,342.148
   Stake()
   PageSection(section="earnStaking")
     div(grid="~ cols-2" gap="6")
