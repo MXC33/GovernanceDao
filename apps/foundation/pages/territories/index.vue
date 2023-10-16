@@ -25,7 +25,7 @@ Page()
       Card()
         p() earnings per day 
         p() earnings 7 days
-      MetashareClaimHorizontal()
+      ClaimHorizontal()
   HList(space-x="12")
     button(btn="~ form" p="6") AREA
     button(btn="~ form" p="6") SECTOR

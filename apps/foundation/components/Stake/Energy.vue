@@ -24,7 +24,7 @@ div(grid="~ cols-2 gap-3")
     HList(gap-6)
       button(btn="~ primary-outline disabled") Unstake 
       button(btn="~ primary-outline") Stake
-    MetashareClaimHorizontal(bg="black")
+    ClaimHorizontal(bg="black")
   </template>
 
 

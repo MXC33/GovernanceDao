@@ -22,7 +22,8 @@ div(grid="~ cols-2 gap-3")
     HList(gap-6)
       button(btn="~ primary-outline") Withdraw 
       button(btn="~ primary-outline") Deposit
-    MetashareClaimHorizontal(bg="black")
+    template(#detailBottom)
+      ClaimHorizontal()
   </template>
 
 

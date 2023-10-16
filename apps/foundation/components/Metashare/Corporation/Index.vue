@@ -2,7 +2,7 @@
 Card()
   MetashareTrade(:staking-item="stakingData")
   MetashareStake()
-  MetashareClaim()
+  Claim()
 </template>
 
 <script lang="ts" setup>

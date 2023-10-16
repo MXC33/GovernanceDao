@@ -3,7 +3,7 @@ Page()
   PageSection(section="rewards")
     HList(grid="~ gap-4 ")
       CardEarnings()
-      MetashareClaimHorizontal()
+      ClaimHorizontal()
   PageSection(section="myLandmarks")
   card()
     p No landmarks available

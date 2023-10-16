@@ -9,7 +9,7 @@ Page()
   PageSection(section="staking" :primary="true")
     Card()
       Table()
-      MetashareClaimHorizontal()
+      ClaimHorizontal()
 
   PageSection(section="corporation")
     div(grid="~ cols-2 gap-6")
