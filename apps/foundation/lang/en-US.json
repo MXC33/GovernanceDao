@@ -305,257 +305,253 @@
         "zone": "No zone created",
         "domain": "No domain created"
       }
+    }
+  },
+  "ixtCatRaf": {
+    "catRaff": {
+      "title": "IXT CAT RAFF",
+      "description": "Earn more with the IXT Cat Raff! Each week a randomized raffle selects five players to share 2,500 IXT rewards in winnings. In order to participate, players stake IXT in exchange for raffle tickets. To roll over from one week to the next, add your tickets from the previous week. A one-week lock period applies, where players can only withdraw their tokens once the next draw is completed."
     },
-    "ixtCatRaf": {
-      "catRaff": {
-        "title": "IXT CAT RAFF",
-        "description": "Earn more with the IXT Cat Raff! Each week a randomized raffle selects five players to share 2,500 IXT rewards in winnings. In order to participate, players stake IXT in exchange for raffle tickets. To roll over from one week to the next, add your tickets from the previous week. A one-week lock period applies, where players can only withdraw their tokens once the next draw is completed."
+    "prizePortfolio": {
+      "title": "Prize Portfolio",
+      "subtitle": "Track balances",
+      "description": "Prize Portfolio shows the balance tracking related to the IXT CAT RAFF. This might include the total deposits, weekly odds, weekly prize, and the next draw timing.",
+      "fields": {
+        "totalDeposits": {
+          "label": "Total deposits"
+        },
+        "weeklyOdds": {
+          "label": "Weekly odds"
+        },
+        "weeklyPrize": {
+          "label": "Weekly prize"
+        },
+        "nextDraw": {
+          "label": "Next draw"
+        }
       },
-      "prizePortfolio": {
-        "title": "Prize Portfolio",
-        "subtitle": "Track balances",
-        "description": "Prize Portfolio shows the balance tracking related to the IXT CAT RAFF. This might include the total deposits, weekly odds, weekly prize, and the next draw timing.",
-        "fields": {
-          "totalDeposits": {
-            "label": "Total deposits"
-          },
-          "weeklyOdds": {
-            "label": "Weekly odds"
-          },
-          "weeklyPrize": {
-            "label": "Weekly prize"
-          },
-          "nextDraw": {
-            "label": "Next draw"
+      "priceIndicator": {
+        "label": "Price"
+      },
+      "stakingContract": {
+        "title": "New IXT CAT RAFF Staking Contract",
+        "description": "Stake your IXT to our new, updated and improved Cat Raff staking contract. The new Cat Raff fetches randomized winners from the Chainlink VRF algorithm, which ensures verifiable randomness. By implementing Chainlink VRF’s verifiable randomness, IXT Cat Raff users will be able to verify that each winner is selected with an unbiased source of randomness. In addition to being more secure, it also ensures our architecture is operating in a provably secure and verifiably random manner, free of manipulation or interference. To participate in the raffles, players stake their IXT to our new Cat Raff staking Contract and receive Tickets in exchange. Each week, five winning tickets will be selected to share 2,500 IXT rewards in winnings.In order to participate, players have to stake IXT in exchange for raffle tickets. To roll over from one week to the next, add your tickets from the previous week. A one-week lock period applies, where players can only withdraw their tokens once the next draw is completed."
+      },
+      "actions": {
+        "stakeToReceiveTickets": {
+          "title": "Stake your IXT to receive Tickets",
+          "description": "1 Ticket is 1 IXT",
+          "fields": {
+            "availableAmount": "Available:",
+            "inputPlaceholder": "Enter Amount",
+            "stakeButton": "STAKE IXT"
           }
         },
-        "priceIndicator": {
-          "label": "Price"
+        "addPreviousWeekTickets": {
+          "title": "Add tickets from previous week",
+          "description": "Roll-over your Tickets from week to week to be included in the next raffle",
+          "fields": {
+            "availableTickets": "Available TX:",
+            "inputPlaceholder": "Enter Amount",
+            "addButton": "ADD TICKETS"
+          }
         },
-        "stakingContract": {
-          "title": "New IXT CAT RAFF Staking Contract",
-          "description": "Stake your IXT to our new, updated and improved Cat Raff staking contract. The new Cat Raff fetches randomized winners from the Chainlink VRF algorithm, which ensures verifiable randomness. By implementing Chainlink VRF’s verifiable randomness, IXT Cat Raff users will be able to verify that each winner is selected with an unbiased source of randomness. In addition to being more secure, it also ensures our architecture is operating in a provably secure and verifiably random manner, free of manipulation or interference. To participate in the raffles, players stake their IXT to our new Cat Raff staking Contract and receive Tickets in exchange. Each week, five winning tickets will be selected to share 2,500 IXT rewards in winnings.In order to participate, players have to stake IXT in exchange for raffle tickets. To roll over from one week to the next, add your tickets from the previous week. A one-week lock period applies, where players can only withdraw their tokens once the next draw is completed."
+        "withdrawIXT": {
+          "title": "Withdraw your IXT",
+          "description": "If you withdraw your IXT you will no longer be participating in the Cat Raffles",
+          "fields": {
+            "availableAmount": "Available:",
+            "inputPlaceholder": "Your deposit amount",
+            "withdrawButton": "WITHDRAW"
+          }
         },
-        "actions": {
-          "stakeToReceiveTickets": {
-            "title": "Stake your IXT to receive Tickets",
-            "description": "1 Ticket is 1 IXT",
-            "fields": {
-              "availableAmount": "Available:",
-              "inputPlaceholder": "Enter Amount",
-              "stakeButton": "STAKE IXT"
-            }
+        "claimIXTReward": {
+          "title": "Claim IXT Reward",
+          "description": "Claim and withdraw your winnings!",
+          "fields": {
+            "availableAmount": "Available:",
+            "rewardAmount": "Rewards",
+            "claimButton": "CLAIM"
           },
-          "addPreviousWeekTickets": {
-            "title": "Add tickets from previous week",
-            "description": "Roll-over your Tickets from week to week to be included in the next raffle",
-            "fields": {
-              "availableTickets": "Available TX:",
-              "inputPlaceholder": "Enter Amount",
-              "addButton": "ADD TICKETS"
-            }
+          "pastWinnings": {
+            "title": "PAST WEEK WINNINGS",
+            "description": "Details of past winning tickets can be seen below. The randomness of these tickets is verifiable on chain. To increase your odds of winning, stake more IXT above and roll your tickets over consistently week by week."
           },
-          "withdrawIXT": {
-            "title": "Withdraw your IXT",
-            "description": "If you withdraw your IXT you will no longer be participating in the Cat Raffles",
-            "fields": {
-              "availableAmount": "Available:",
-              "inputPlaceholder": "Your deposit amount",
-              "withdrawButton": "WITHDRAW"
-            }
+          "WeekWinnings": {
+            "title": "Total Tickets",
+            "description": "Your Tickets"
           },
-          "claimIXTReward": {
-            "title": "Claim IXT Reward",
-            "description": "Claim and withdraw your winnings!",
-            "fields": {
-              "availableAmount": "Available:",
-              "rewardAmount": "Rewards",
-              "claimButton": "CLAIM"
+          "treasuryPool": {
+            "title": "TREASURY & IXT POOL",
+            "treasuryBalance": {
+              "title": "Treasury Balance",
+              "currency": "IXT"
             },
-            "pastWinnings": {
-              "title": "PAST WEEK WINNINGS",
-              "description": "Details of past winning tickets can be seen below. The randomness of these tickets is verifiable on chain. To increase your odds of winning, stake more IXT above and roll your tickets over consistently week by week."
+            "poolPrice": {
+              "title": "Pool Price",
+              "description": "Total Deposits in Pool"
             },
-            "WeekWinnings": {
-              "title": "Total Tickets",
-              "description": "Your Tickets"
-            },
-            "treasuryPool": {
-              "title": "TREASURY & IXT POOL",
-              "treasuryBalance": {
-                "title": "Treasury Balance",
+            "poolStats": {
+              "title": "Pool Stats",
+              "currentWeekDeposits": {
+                "title": "Your Current Week Deposits",
                 "currency": "IXT"
               },
-              "poolPrice": {
-                "title": "Pool Price",
-                "description": "Total Deposits in Pool"
+              "totalWeekDeposits": {
+                "title": "Current Week Total Deposits",
+                "currency": "IXT"
               },
-              "poolStats": {
-                "title": "Pool Stats",
-                "currentWeekDeposits": {
-                  "title": "Your Current Week Deposits",
-                  "currency": "IXT"
-                },
-                "totalWeekDeposits": {
-                  "title": "Current Week Total Deposits",
-                  "currency": "IXT"
-                },
-                "pastPrizes": {
-                  "title": "PAST PRIZES",
-                  "label": "Prize Draws",
-                  "addressLabel": "Address",
-                  "prizeLabel": "Prize"
-                },
-                "prizeDraws": {
-                  "title": "Prize Draws (Your Past Draws)",
-                  "notification": "You have not won any prizes yet! Stake more IXT and receive more tickets to increase your odds of winning."
-                },
-                "accounts": {
-                  "title": "ACCOUNTS",
-                  "label": "Cat Raff Players",
-                  "balanceLabel": "Balance",
-                  "secondLabel": "Old Contract Users"
-                }
+              "pastPrizes": {
+                "title": "PAST PRIZES",
+                "label": "Prize Draws",
+                "addressLabel": "Address",
+                "prizeLabel": "Prize"
               },
-              "landmarks": {
-                "rewards": {
-                  "title": "REWARDS",
-                  "description": "Claim all your rewards",
-                  "labels": {
-                    "earningsPerDay": "Earnings per day",
-                    "earnings7Days": "Earnings 7 days",
-                    "totalRewards": "Total Rewards",
-                    "claimButton": "CLAIM"
-                  }
-                },
-                "myLandmarks": {
-                  "title": "MY LANDMARKS",
-                  "description": "Search and select from the landmarks you own",
-                  "placeholder": "No landmarks available"
-                },
-                "explore": {
-                  "title": "EXPLORE LANDMARKS",
-                  "description": "Search and select from the landmarks",
-                  "searchPlaceholder": "Search landmark (name or country)",
-                  "filter": {
-                    "label": "Filter",
-                    "defaultOption": "All"
-                  },
-                  "sortBy": {
-                    "label": "Sort By",
-                    "defaultOption": "Shares - Low to High"
-                  },
-                  "card": {
-                    "sharesLabel": "Shares",
-                    "ownersLabel": "Owners",
-                    "earningDiameterLabel": "Earning Diameter",
-                    "viewButton": "VIEW"
-                  }
-                }
+              "prizeDraws": {
+                "title": "Prize Draws (Your Past Draws)",
+                "notification": "You have not won any prizes yet! Stake more IXT and receive more tickets to increase your odds of winning."
               },
-              "energy": {
-                "staking": {
-                  "title": "ENERGY STAKING",
-                  "description": "Stake Energy Tokens to receive IXT or Gravity Grade Packs with PIX Contents. You can also stake Energy in the sustainability pool to donate a percentage of your yield to the Amelia Foundation.",
-                  "energyPool": "Energy Pool: IXT / month",
-                  "epochEnds": "Epoch ends in",
-                  "dailyIXT": "Daily IXT per Energy",
-                  "TVL": "TVL",
-                  "IXTUnlocked": "IXT Unlocked this epoch",
-                  "yourStake": "Your Stake",
-                  "claimableRewards": "Claimable Rewards",
-                  "chooseStakingPoolButton": "CHOOSE STAKING POOL"
-                },
-                "stakingPoolDistribution": {
-                  "title": "Staking Pool Distribution",
-                  "percentageOfEnergyPoolMinted": "Percentage of Energy pool minted",
-                  "facilitiesMinted": "Facilities Minted",
-                  "snapshotTaken": "Snapshot Taken",
-                  "current": "Current"
-                },
-                "IXTPoolNextEpoch": {
-                  "title": "IXT Pool next epoch",
-                  "description": "Estimated",
-                  "totalPoolNextEpoch": "Total Pool next epoch"
-                },
-                "nextEpochRelease": {
-                  "title": "Next epoch release",
-                  "description": "Based on facilities minted"
-                },
-                "pool": {
-                  "title": "CHOOSE YOUR POOL",
-                  "description": "Stake Energy and IXT in 30 days epochs to claim rewards",
-                  "options": {
-                    "earnIXT": {
-                      "title": "Earn IXT",
-                      "description": "Stake your Energy together with IXT in a 1-1 ratio to earn IXT rewards from the Play 2 Earn pool. Every epoch is 30 days and when the 30 days is over your energy will be burned. The IXT stays locked until you claim it."
-                    },
-                    "earnAndGive": {
-                      "title": "Earn and Give",
-                      "description": "Stake Energy in the Sustainability Pool and give part of your earnings to the Amelia Foundation. You decide on the specific percentage given from your IXT Rewards."
-                    }
-                  }
-                },
-                "forItx": {
-                  "title": "ENERGY FOR IXT",
-                  "description": "Stake your Energy together with IXT at a 1-to-1 ratio and earn rewards from the Play-to-Earn pool",
-                  "details": {
-                    "lockingPeriod": "1 month",
-                    "yourStake": "Your Stake",
-                    "dailyRewards": "Daily Rewards"
-                  },
-                  "actions": {
-                    "unstake": "UNSTAKE",
-                    "stake": "STAKE",
-                    "claimRewards": "CLAIM",
-                    "ameliaRewards": "CLAIM"
-                  },
-                  "sideInfo": {
-                    "contributeLiquidity": "Earn IXT for contributing to liquidity and safety.",
-                    "burnedUponStaking": "Energy staked is burned upon staking."
-                  }
-                },
-                "ameliaFoundation": {
-                  "title": "AMELIA FOUNDATION",
-                  "description": "Stake your Energy together with IXT at a 1-to-1 ratio and earn a bit less rewards, and contribute to saving the planet earth",
-                  "details": {
-                    "lockingPeriod": "1 month",
-                    "yourStake": "Your Stake",
-                    "dailyRewards": "Daily Rewards"
-                  }
-                },
-                "actions": {
-                  "unstake": "UNSTAKE",
-                  "stake": "STAKE",
-                  "claimRewards": "CLAIM",
-                  "ameliaRewards": "CLAIM"
-                }
-              },
-              "ameliaFoundation": {
-                "title": "AMELIA FOUNDATION",
-                "description": "Stake your Energy together with IXT at a 1-to-1 ratio and earn a bit less rewards, and contribute to saving the planet earth"
-              },
-              "lendCapital": {
-                "assetPool": {
-                  "title": "ASSET POOL",
-                  "description": "Let your holdings shine with the Midas Touch. From an individual DeFi user to a DAO or Treasury, users can take advantage of Midas to earn yield, borrow against, or lend their favorite tokens.",
-                  "tableHeaders": [
-                    "Chain",
-                    "Assets",
-                    "Supplied Asset",
-                    "Available Liquidity",
-                    "Total Borrowed",
-                    "Supply APY",
-                    "Borrow APY"
-                  ],
-                  "totalSupplyBox": {
-                    "title": "TOTAL SUPPLY"
-                  }
-                }
+              "accounts": {
+                "title": "ACCOUNTS",
+                "label": "Cat Raff Players",
+                "balanceLabel": "Balance",
+                "secondLabel": "Old Contract Users"
               }
             }
           }
         }
+      }
+    }
+  },
+  "landmarks": {
+    "rewards": {
+      "title": "REWARDS",
+      "description": "Claim all your rewards",
+      "labels": {
+        "earningsPerDay": "Earnings per day",
+        "earnings7Days": "Earnings 7 days",
+        "totalRewards": "Total Rewards",
+        "claimButton": "CLAIM"
+      }
+    },
+    "myLandmarks": {
+      "title": "MY LANDMARKS",
+      "description": "Search and select from the landmarks you own",
+      "placeholder": "No landmarks available"
+    },
+    "explore": {
+      "title": "EXPLORE LANDMARKS",
+      "description": "Search and select from the landmarks",
+      "searchPlaceholder": "Search landmark (name or country)",
+      "filter": {
+        "label": "Filter",
+        "defaultOption": "All"
+      },
+      "sortBy": {
+        "label": "Sort By",
+        "defaultOption": "Shares - Low to High"
+      },
+      "card": {
+        "sharesLabel": "Shares",
+        "ownersLabel": "Owners",
+        "earningDiameterLabel": "Earning Diameter",
+        "viewButton": "VIEW"
+      }
+    }
+  },
+  "energy": {
+    "staking": {
+      "title": "ENERGY STAKING",
+      "description": "Stake Energy Tokens to receive IXT or Gravity Grade Packs with PIX Contents. You can also stake Energy in the sustainability pool to donate a percentage of your yield to the Amelia Foundation.",
+      "energyPool": "Energy Pool: IXT / month",
+      "epochEnds": "Epoch ends in",
+      "dailyIXT": "Daily IXT per Energy",
+      "TVL": "TVL",
+      "IXTUnlocked": "IXT Unlocked this epoch",
+      "yourStake": "Your Stake",
+      "claimableRewards": "Claimable Rewards",
+      "chooseStakingPoolButton": "CHOOSE STAKING POOL"
+    },
+    "stakingPoolDistribution": {
+      "title": "Staking Pool Distribution",
+      "percentageOfEnergyPoolMinted": "Percentage of Energy pool minted",
+      "facilitiesMinted": "Facilities Minted",
+      "snapshotTaken": "Snapshot Taken",
+      "current": "Current"
+    },
+    "IXTPoolNextEpoch": {
+      "title": "IXT Pool next epoch",
+      "description": "Estimated",
+      "totalPoolNextEpoch": "Total Pool next epoch"
+    },
+    "nextEpochRelease": {
+      "title": "Next epoch release",
+      "description": "Based on facilities minted"
+    },
+    "pool": {
+      "title": "CHOOSE YOUR POOL",
+      "description": "Stake Energy and IXT in 30 days epochs to claim rewards",
+      "options": {
+        "earnIXT": {
+          "title": "Earn IXT",
+          "description": "Stake your Energy together with IXT in a 1-1 ratio to earn IXT rewards from the Play 2 Earn pool. Every epoch is 30 days and when the 30 days is over your energy will be burned. The IXT stays locked until you claim it."
+        },
+        "earnAndGive": {
+          "title": "Earn and Give",
+          "description": "Stake Energy in the Sustainability Pool and give part of your earnings to the Amelia Foundation. You decide on the specific percentage given from your IXT Rewards."
+        }
+      }
+    },
+    "forItx": {
+      "title": "ENERGY FOR IXT",
+      "description": "Stake your Energy together with IXT at a 1-to-1 ratio and earn rewards from the Play-to-Earn pool",
+      "details": {
+        "lockingPeriod": "1 month",
+        "yourStake": "Your Stake",
+        "dailyRewards": "Daily Rewards"
+      },
+      "actions": {
+        "unstake": "UNSTAKE",
+        "stake": "STAKE",
+        "claimRewards": "CLAIM",
+        "ameliaRewards": "CLAIM"
+      },
+      "sideInfo": {
+        "contributeLiquidity": "Earn IXT for contributing to liquidity and safety.",
+        "burnedUponStaking": "Energy staked is burned upon staking."
+      }
+    },
+    "ameliaFoundation": {
+      "title": "AMELIA FOUNDATION",
+      "description": "Stake your Energy together with IXT at a 1-to-1 ratio and earn a bit less rewards, and contribute to saving the planet earth",
+      "details": {
+        "lockingPeriod": "1 month",
+        "yourStake": "Your Stake",
+        "dailyRewards": "Daily Rewards"
+      }
+    },
+    "actions": {
+      "unstake": "UNSTAKE",
+      "stake": "STAKE",
+      "claimRewards": "CLAIM",
+      "ameliaRewards": "CLAIM"
+    }
+  },
+  "lendCapital": {
+    "assetPool": {
+      "title": "ASSET POOL",
+      "description": "Let your holdings shine with the Midas Touch. From an individual DeFi user to a DAO or Treasury, users can take advantage of Midas to earn yield, borrow against, or lend their favorite tokens.",
+      "tableHeaders": [
+        "Chain",
+        "Assets",
+        "Supplied Asset",
+        "Available Liquidity",
+        "Total Borrowed",
+        "Supply APY",
+        "Borrow APY"
+      ],
+      "totalSupplyBox": {
+        "title": "TOTAL SUPPLY"
       }
     }
   }
