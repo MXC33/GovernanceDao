@@ -1,1 +1,10 @@
-{}
+{
+  "fluencer": {
+    "tab": {
+      "open": "OPEN BUNDLES",
+      "stake-metashares": "STAKE METASHARES",
+      "stake-ixt": "STAKE IXT",
+      "history": "HISTORY"
+    }
+  }
+}

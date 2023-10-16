@@ -1,16 +1,16 @@
 <template lang="pug">
-VList(p="12" space-y="6")
-  header(space-y="3")
-    h2(text="3xl" font="bold") Open Pack
-    p Earn greater rewards for staking for longer periods.
+Page()
+  template(#header)
+    PageHeader()
+      template(#icon): img(src="~/assets/images/bundle-cover.png")
+      template(#title) CONGRATULATIONS ON YOUR PURCHASE
+      template(#description) In order for you to start yielding rewards, you need to stake your purchased assets at IX Foundation. Open your bundle by clicking “Open bundle” and confirming in your wallet provider. Once your assets are unpacked stake them one at a time at their individual tab.
 
-    HList()
-      button(btn="~ secondary") Learn more
-
+  template(#default)
+    PageTabs()
+    
 </template>
 
 
 <script lang="ts" setup>
-
-
 </script>
