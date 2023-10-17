@@ -37,7 +37,7 @@ Card()
 </template>
 
 <script lang="ts" setup>
-import ChartIcon from '../../public/assets/svg/Mask_group.svg'
+import ChartIcon from '~/assets/images/Mask_group.svg'
 
 
 //Details for Chart 

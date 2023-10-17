@@ -32,8 +32,8 @@ div(grid="~ cols-2 gap-3")
 
 import { formatNumber } from '@ix/base/composables/Utils/useHelpers';
 
-import EnergyIcon from '../../public/assets/svg/energy_icon.svg'
-import IXTIcon from '../../public/assets/svg/token.svg'
+import EnergyIcon from '~/assets/images/energy_icon.svg'
+import IXTIcon from '~/assets/images/token.svg'
 import { StakingId } from '../../.nuxt/gql/default';
 
 const { data: IXTOneMonthData } = useStakingData(StakingId.IxtOneMonth)
