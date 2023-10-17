@@ -12,14 +12,17 @@ div(grid="~ cols-2 gap-6")
     TableDashboard()
     div(grid="~ cols-2 gap-6")
       Card() 
-        TitleDetail(flex-col-reverse)
-          h3() Circulating Supply
-          h4(color="orange") See on coinGecko
-          template(#detail)
+        VList()
+          div(text="subheading")
+            div() Circulating Supply
+            div(color="ix-orange") See on coinGecko
+            div() 422,681
+
+          div(text="detail")
             h4() Total pool next epoch
-          h4() 422,681
+
       Card()
-        TitleDetail(flex-col-reverse)
+        div(text="subheading")
           h3() Distribution today
           h4() 36,936.63 (ICON) 
 </template>

@@ -5,15 +5,16 @@ PageSection(section="earnStaking")
       TitleDetail()
         template(#normal)
           PageSection(section="ixtStakingInfo")
-      template(#detailRight)
-        IXTIcon(w="25" class="ml-2")
+        template(#detailRight)
+          IXTIcon(w="25" class="ml-2")
+
     Card()
       TitleDetail()
         template(#normal)
           PageSection(section="lpStakingInfo")
-      template(#detailRight )
-        UsdtIXT_Icon(w="25" class="ml-2")
-        MaticIXT_Icon(w="25" class="ml-2")
+        template(#detailRight )
+          UsdtIXT_Icon(w="25" class="ml-2")
+          MaticIXT_Icon(w="25" class="ml-2")
 </template>
 
 <script lang="ts" setup>
