@@ -24,17 +24,8 @@ Page()
         div Staked Metashares
 
       template(#default)
-        DrawerContentBody()
-          ListItem(v-for="data in stakedData" v-if="stakedData")
-            template(#image)
-              TokenMedia(:token="data?.token")
-            template(#title) {{ data?.token?.tokenInfo?.title }}
-            template(#description)
-              p Staked: {{ data?.userStakingData?.amountStaked }}
-            template(#info)
-              HList(space-x="2")
-                div 30 day reward: 
-                div(font="bold") {{ data?.userStakingData?.userRewardPerThirtyDays?.toFixed(2) }} IXT
+        DrawerContentBody(p="0")
+          StakeMetashareUserStaked(:staked-tokens="stakedData" v-if="stakedData")
     
 </template>
 

@@ -1,7 +1,7 @@
 <template lang="pug">
 VList(pos="relative")
   HList(font="bold" px="0" py="3" uppercase="~" cursor="pointer" items="center" space-x="2")
-    span(color="white on-inactive:opacity-50" :inactive="!isActive" transition="all")
+    span(color="white on-inactive:(opacity-50 hover:opacity-75)" :inactive="!isActive" transition="all")
       slot
 
     HList(pos="relative" w="5" h="5" bg="ix-primary" items="center" justify="center" rounded="full" v-if="notifications")

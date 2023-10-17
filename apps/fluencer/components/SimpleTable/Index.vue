@@ -6,10 +6,10 @@ div.tableish.no-scrollbar(flex-grow="1" bg="gray-900")
   Divider()
 
   VList(p="x-6")
-    template(v-for="row in rows" )
+    template(v-for="row, rowIndex in rows" )
       div(grid="~ row-gap-0 gap-x-3" py="3" :style="gridStyles") 
         VList(v-for="col, colIndex in columns" justify="center") 
-          slot(v-if="col.id && $slots['row-' + col.id]" :row="row.items[colIndex]" :name="'row-' + col.id")
+          slot(v-if="col.id && $slots['row-' + col.id]" :row="row.items[colIndex]" :index="rowIndex" :name="'row-' + col.id")
 
           template(v-else) {{ row.items[colIndex] }}
 
