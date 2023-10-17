@@ -1,3 +1,4 @@
+import { NftFragment } from "#gql"
 
 
 export interface TokenTypeTier {
@@ -12,7 +13,7 @@ export const useVoucherData = () =>
       return
 
     const gravityGradeNFTBalance = await GqlGravityGradeNFTBalance({ credentials })
-    return gravityGradeNFTBalance.gravityGradeNFTBalance?.filter(item => item?.tokenInfo?.type == 'voucher')
+    return gravityGradeNFTBalance.gravityGradeNFTBalance?.filter(item => item?.tokenInfo?.type == 'voucher') as NftFragment[]
   })
 
 

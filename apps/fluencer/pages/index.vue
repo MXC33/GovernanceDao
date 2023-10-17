@@ -15,7 +15,7 @@ Page()
 
       template(#default)
         DrawerContentBody()
-          ListItem(v-for="token in vouchers" v-if="vouchers")
+          ListItem(v-for="token in tokens" v-if="tokens")
             template(#image)
               TokenImage(:token="token")
             template(#title) {{ token?.tokenInfo?.title }}
@@ -34,7 +34,8 @@ Page()
 import type { NftFragment } from '.nuxt/gql/default';
 
 const { displaySnack } = useSnackNotifications()
-const { data: vouchers } = useVoucherData()
+const { data: tokens } = useVoucherData()
+
 const { openPack } = useOpenPacks()
 const { loading: isLoading, execute: claimRewardRequest } = useContractRequest(async (token: NftFragment) => {
   const response = await openPack(token, 1)

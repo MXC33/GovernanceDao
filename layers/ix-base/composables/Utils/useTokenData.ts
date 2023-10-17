@@ -1,3 +1,5 @@
+import type { NftFragment } from "#gql"
+
 const TOKENS_KEY = 'user-nft-tokens'
 
 export const useTokenData = () =>
@@ -7,6 +9,6 @@ export const useTokenData = () =>
       return
 
     const tokens = await GqlTokens({ credentials })
-    return tokens.missionControlTokens
+    return tokens.missionControlTokens as NftFragment[]
   })
 
