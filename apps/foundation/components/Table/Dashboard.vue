@@ -4,8 +4,9 @@ div(b="0.5 white opacity-20 rounded-xl")
     thead
       tr(class="bg-gray-800 p-6") 
         th
-          h3.flex Earning overview
-          h4.flex My Assets
+          TitleDetail() 
+            template(#default) Earning overview
+            template(#detailBottom) My Assets
         th 24h
         th 30 days
     tbody
@@ -39,7 +40,7 @@ div(b="0.5 white opacity-20 rounded-xl")
           div Metashare
         td.center 0.00
         td.center 0.00
-      tr
+      tr(class="bg-gray-800 p-6")
         td.center.flex.flex-row.items-center
           TitleDetail()
             template(#detail)
