@@ -11,31 +11,32 @@ div(b="0.5 white opacity-20 rounded-xl")
     tbody
       tr
         td.flex.flex-row.items-center
-          IXTIcon(class="icon")
+          IXTIcon.icon()
           div IXT
         td.center 0.00
         td.center 0.00
       tr
         td.center.flex.flex-row.items-center
-          EnergyIcon(class="icon")
+          EnergyIcon.icon()
           div Energy
         td.center 0.00
         td.center 0.00
       tr
         td.center.flex.flex-row.items-center
-          LandmarkIcon(class="icon")
+          LandmarkIcon.icon(key="landmark")
           div Landmark
-        td.center 0.00
+
+        td.center 0.002
         td.center 0.00
       tr
         td.center.flex.flex-row.items-center
-          TerritoryIcon(class="icon")
+          TerritoryIcon.icon()
           div Territory
         td.center 0.00
         td.center 0.00
       tr
         td.center.flex.flex-row.items-center
-          MetashareIcon(class="icon")
+          MetashareIcon.icon()
           div Metashare
         td.center 0.00
         td.center 0.00

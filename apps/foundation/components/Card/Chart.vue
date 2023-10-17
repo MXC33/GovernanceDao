@@ -2,37 +2,24 @@
 Card()
   VList()
     div()
-      TitleDetail(flex-col-reverse)
-        template(#default) 
-          h3() Wallet portfolio
-        template(#detail)
-          h4() Track balances
+      TitleDetail()
+        template(#default) Wallet portfolio
+        template(#detailBottom) Track balances
+
     div()
       ChartIcon(w="lg")
   div.flex.gap-20(b="0.5 white opacity-20") 
-    TitleDetail(flex-col-reverse)
-      template(#default)
-        ul()
-          li() Wallet
-      template(#detail)
-        ul()
-          li() 0
+    TitleDetail()
+      template(#default) Wallet
+      template(#detailBottom) 0
 
-    TitleDetail(flex-col-reverse)
-      template(#default)
-        ul()
-          li() Staked
-      template(#detail)
-        ul()
-          li() 0
+    TitleDetail()
+      template(#default) Staked
+      template(#detailBottom) 0
 
-    TitleDetail(flex-col-reverse)
-      template(#default)
-        ul()
-          li() Withdrawable
-      template(#detail)
-        ul()
-          li() 0
+    TitleDetail()
+      template(#default) Withdrawable
+      template(#detailBottom) 0
 
 </template>
 
