@@ -54,12 +54,8 @@ export const useLottery = () => {
 
   const ticketPrice = useState<number>('lottery-ticket-price', () => 0)
 
-  /*const lotteryEndsAt = computed(() =>
-    lotterStartedAt.value && add(lotterStartedAt.value, { days: 7 }).getTime()
-  )*/
-
   const lotteryEndsAt = computed(() =>
-    lotterStartedAt.value && add(new Date(1697029350000), { days: 7 }).getTime()
+    lotterStartedAt.value && add(lotterStartedAt.value, { days: 7 }).getTime()
   )
 
   const getTicketPrice = async () => {
