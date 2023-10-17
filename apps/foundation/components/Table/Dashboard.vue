@@ -23,19 +23,19 @@ div(b="0.5 white opacity-20 rounded-xl")
         td.center 0.00
       tr
         td.center.flex.flex-row.items-center
-          ErrorIcon(class="icon")
+          LandmarkIcon(class="icon")
           div Landmark
         td.center 0.00
         td.center 0.00
       tr
         td.center.flex.flex-row.items-center
-          ErrorIcon(class="icon")
+          TerritoryIcon(class="icon")
           div Territory
         td.center 0.00
         td.center 0.00
       tr
         td.center.flex.flex-row.items-center
-          ErrorIcon(class="icon")
+          MetashareIcon(class="icon")
           div Metashare
         td.center 0.00
         td.center 0.00
@@ -53,11 +53,12 @@ div(b="0.5 white opacity-20 rounded-xl")
   
   
 <script lang="ts" setup>
-/* import IXTIcon from '../../public/assets/svg/tokenBG.svg'
-import EnergyIcon from '../../public/assets/svg/EnergySmall.svg'
-import LandmarkIcon from '../../public/assets/svg/landmark.svg'
+import IXTIcon from '~/assets/images/tokenBG.svg'
+import EnergyIcon from '~/assets/images/EnergySmall.svg'
+import LandmarkIcon from '~/assets/images/landmarkSmall1.svg'
+import TerritoryIcon from '~/assets/images/mocked-area-img.svg'
+import MetashareIcon from '~/assets/images/newlands1.svg'
 import ErrorIcon from '../../public/assets/svg/error.svg'
-import MetashareIcon from '../../public/assets/png/newlands.png' */
 </script>
 
 <style>
