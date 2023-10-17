@@ -11,6 +11,7 @@ HList(frame="~" bg="gray-800")
       slot(name="description" )
 
   VList(justify="center" pr="6")
+    slot(name="info")
     slot(name="button")
 
 </template>
