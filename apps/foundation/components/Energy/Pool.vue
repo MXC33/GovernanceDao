@@ -1,17 +1,18 @@
 <template lang="pug">
 PageSection(section="pool")
-  HList(grid="~ gap-6")
-    Card(w="fit")
-      div(class="imgBox" w="stretch" bg="black" p=6)
-        IXTIcon(w="25")
+  div(grid="~ cols-2" gap="6")
+    Card()
       TitleDetail()
-        PageSection(section="pool.options.earnIXT")
-
-    Card(w="fit")
-      div(class="imgBox" w="stretch" bg="black" p=6)
+        template(#normal)
+          PageSection(section="pool.options.earnIXT")
+      template(#detailRight)
+        IXTIcon(w="25" class="ml-2")
+    Card()
+      TitleDetail()
+        template(#normal)
+          PageSection(section="pool.options.earnAndGive")
+      template(#detailRight )
         NeedIcon(w="25" class="ml-2")
-      TitleDetail()
-        PageSection(section="pool.options.earnAndGive")
 </template>
 
 <script lang="ts" setup>

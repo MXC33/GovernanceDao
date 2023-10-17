@@ -23,8 +23,9 @@ div(grid="~ cols-2 gap-3")
           IXTIcon(w="5" class="ml-2")
     HList(gap-6)
       button(btn="~ primary-outline disabled") Unstake 
-      button(btn="~ primary-outline") Stake
-    ClaimHorizontal(bg="black")
+      button(btn="~ primary-outline") Stake 
+    template(#detailBottom)
+      ClaimHorizontal()
   </template>
 
 
