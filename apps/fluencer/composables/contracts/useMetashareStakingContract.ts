@@ -4,7 +4,7 @@ import MetashareStakingABI from "../ABIs/MetashareStaking.json"
 import { metashareStakingAddress } from '@ix/base/composables/Contract/WalletAddresses'
 import { ContractInterface } from '@ix/base/composables/Utils/defineContract'
 import { UserStakingItem } from 'composables/useStakingData'
-import { StakingId } from '.nuxt/gql/default'
+import { StakingId } from '../../.nuxt/gql/default'
 
 
 export const useMetashareStakingContract = <T extends ContractInterface<T> & MetashareStakingContract>() => {

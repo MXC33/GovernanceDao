@@ -21,6 +21,8 @@ Page()
             template(#title) {{ token?.tokenInfo?.title }}
             template(#description)
               p Balance: {{ token?.balance }}
+            template(#button)
+              button(btn="~ primary" @click="onClickStake(token)" cut="~ bottom-right sm" v-if="token") Stake
 
 
     
@@ -28,9 +30,18 @@ Page()
 
 
 <script lang="ts" setup>
+import type { NftFragment } from '#gql';
+
+const { stakeMetashare } = useMetashareStakingContract()
 
 
 const { data: tokens } = useTokenData()
 
-const metashares = tokens.value?.filter(item => item?.tokenInfo?.type === 'metashare')
+const metashares = tokens.value?.filter(item => item?.tokenInfo?.type === 'metashare' && (item?.tokenInfo.tier == 'eternalab' || item?.tokenInfo?.tier == 'new-lands'))
+
+const onClickStake = (token: NftFragment) => {
+  if (token.balance)
+    return stakeMetashare({ token, amount: token.balance })
+  console.log("No balance of this token", token)
+}
 </script>
