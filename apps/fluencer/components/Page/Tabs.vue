@@ -6,7 +6,7 @@ TabList()
 
 <script lang="ts" setup>
 
-const tabs = ["open", "stake-metashares", "stake-ixt", "history"] as const
+const tabs = ["open", "stake-metashares", "stake-ixt"] as const
 type Tab = typeof tabs[number]
 
 const route = useRoute()
