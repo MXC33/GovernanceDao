@@ -1,6 +1,8 @@
 
+export type SimpleTableRowContent = string | undefined | number | null
+
 export interface SimpleTableRow {
-  items: string[]
+  items: SimpleTableRowContent[]
 }
 
 export interface SimpleTableColumn {

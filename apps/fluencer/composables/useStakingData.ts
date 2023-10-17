@@ -5,6 +5,23 @@ export type UserStakingItem = {
   amount?: number
 }
 
+export const useStakingHelper = () => {
+
+  const formattedMonths = (months: number) => {
+    if (months == 12)
+      return "1 Year"
+
+    if (months == 1)
+      return "1 Month"
+
+    return `${months} Months`
+  }
+
+  return {
+    formattedMonths
+  }
+}
+
 export const useStakingData = (id: StakingId) => {
   const credentials = useGraphqlCredentials()
 
