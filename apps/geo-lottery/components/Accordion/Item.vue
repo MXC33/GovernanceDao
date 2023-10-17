@@ -8,7 +8,7 @@ VList()
         Checked(v-if="status == 'accept'")
         Decline(v-if="status == 'decline'")
       div(flex="~ col sm:row" items-start sm:items-center)
-        div(color="white" text="md sm:lg" mr="1 sm:3" font="bold" uppercase="~") ROUND {{'#'+ (round.id)}}
+        div(color="white" text="md sm:lg" mr="1 sm:3" font="bold" uppercase="~") ROUND {{'#'+ (round.id +1)}}
         template(v-if="round.winning_pools && round.winning_pools.length")
           div(color="white opacity-40" text="sm sm:lg" font="bold" uppercase="~" v-if="round.claimed") CLAIMED
           div(color="$mc-pink opacity-40" text="xs sm:lg" font="bold" uppercase="~" v-else) CLAIM YOUR PRIZE
