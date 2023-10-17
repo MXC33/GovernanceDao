@@ -1,6 +1,4 @@
-import { CredentialsInput, NftFragment, StakingDataFragment, StakingId } from ".nuxt/gql/default"
-import { MaybeRef } from "@vueuse/core";
-import { get } from '@vueuse/core'
+import { NftFragment, StakingDataFragment, StakingId } from ".nuxt/gql/default"
 
 export type UserStakingItem = {
   token: NftFragment

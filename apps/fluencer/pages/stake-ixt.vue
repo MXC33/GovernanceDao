@@ -68,6 +68,11 @@ Page()
             template(#right)
               ButtonInteractive(:loading="isLoading" @click="onClickStake"  text="STAKE YOUR IXT NOW" min-w="60" cut="~ bottom-right sm")
 
+    SimpleTable(:columns="cols" :rows="rows")
+      template(#row-asset) 
+        HList(items="center" space-x="3") 
+          img(src="~/assets/images/ixt-coin.png" aspect="square" min-w="0" max-w="12")
+          div(text="subheading") IXT
 
     DrawerContent(:start-open="true" :is-neutral="true" bg="gray-900")
       template(#header)
@@ -90,7 +95,8 @@ Page()
 
 
 <script lang="ts" setup>
-import { type StakingDataFragment, StakingId } from '../.nuxt/gql/default';
+import type { SimpleTableColumn, SimpleTableRow } from 'composables/useSimpleTable';
+import { type StakingDataFragment, StakingId } from '~/.nuxt/gql/default';
 const { displaySnack } = useSnackNotifications()
 
 const { data: ixtOneMonthData } = useStakingData(StakingId.IxtOneMonth)
@@ -98,6 +104,22 @@ const { data: ixtThreeMonthData } = useStakingData(StakingId.IxtThreeMonths)
 const { data: ixtSixMonthData } = useStakingData(StakingId.IxtSixMonths)
 const { data: ixtTwelveMonthData } = useStakingData(StakingId.IxtTwelveMonths)
 
+const rows: SimpleTableRow[] = [
+  {
+    items: ["IXT", "5000", "3 Months", "50 IXT", "1500 IXT"]
+  },
+  {
+    items: ["IXT", "5000", "6 Months", "50 IXT", "1500 IXT"]
+  }
+]
+
+const cols: SimpleTableColumn[] = [
+  { title: "Asset", id: "asset" },
+  { title: "Staked amount" },
+  { title: "Staking period" },
+  { title: "24h yield" },
+  { title: "30 days yield" },
+]
 
 interface StakePeriod {
   months: number
