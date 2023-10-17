@@ -32,8 +32,6 @@ Page()
             h3() Distribution today
             h4() 36,936.63 (ICON) 
 
-  PageSection(section="ixtStaking")
-  Stake()
   PageSection(section="earnStaking")
     div(grid="~ cols-2" gap="6")
       Card()
@@ -49,6 +47,10 @@ Page()
         template(#detailRight )
           UsdtIXT_Icon(w="25" class="ml-2")
           MaticIXT_Icon(w="25" class="ml-2")
+
+
+  PageSection(section="ixtStaking")
+  Stake()
 
 
   //- PageSection(section="ixtStaking")
@@ -73,23 +75,27 @@ Page()
   //-     button(btn="~ primary") CONNECT WALLET TO STAKE
 
   PageSection(section="territoryStaking")
-  Card(p=0 )
+  Card()
     HList()
-      PageSection( section="assetStaking.territoryBox" w="50%" p=6)
+      // TerritoryICON(w="20" class="ml2")
+      PageSection( section="assetStaking.territoryBox" w="50%")
       StakingWrapper(w="50%" id="territory" :data="territoriesUserData" bg="black")
   PageSection(section="energyStaking")
-  Card(p=0)
+  Card()
     HList()
-      PageSection(section="assetStaking.energyBox" w="50%" p=6)
+      // EnergyIcon(w="20" class="ml2")
+      PageSection(section="assetStaking.energyBox" w="50%")
       StakingWrapper(w="50%" id="energy" :data="energyData")
   PageSection(section="landmarkStaking")
-  Card(p=0)
+  Card()
     HList()
+      // LandmarkIcon(w="20" class="ml2")
       PageSection(section="assetStaking.landmarkBox" w="50%" p=6)
       StakingWrapper(w="50%" id="landmark" :data="landmarkData")
   PageSection(section="metashareStaking")
-  Card(p=0)
+  Card()
     HList()
+      // NewlandsIcon(w="20" class="ml2")
       PageSection(section="assetStaking.metashareBox" w="50%" p=6)
       StakingWrapper(w="50%" id="metashare" :data="metashareData")
 </template>
@@ -105,7 +111,10 @@ import { StakingId } from '../.nuxt/gql/default';
 import IXTIcon from '../public/assets/svg/tokenBG.svg'
 import MaticIXT_Icon from '../public/assets/svg/matic_ix.svg'
 import UsdtIXT_Icon from '../public/assets/svg/usdt_ix.svg'
-
+import TerritoryICON from '../public/assets/png/mocked-area-img.png'
+import LandmarkIcon from '../public/assets/landmarkSmall.png'
+import NewlandsIcon from '../public/assets/png/newlands.png'
+import EnergyIcon from '../public/assets/svg/EnergySmall.svg'
 
 const { data: territoriesUserData } = useStakingData(StakingId.TerritoriesUser)
 const { data: metashareData } = useStakingData(StakingId.Metashare)
