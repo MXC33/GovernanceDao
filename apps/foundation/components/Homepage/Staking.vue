@@ -18,4 +18,8 @@ PageSection(section="earnStaking")
 
 <script lang="ts" setup>
 
+import IXTIcon from '~/assets/images/token.svg'
+import UsdtIXT_Icon from '~/assets/images/usdt_ix.svg'
+import MaticIXT_Icon from '~/assets/images/matic_ix.svg'
+
 </script>
