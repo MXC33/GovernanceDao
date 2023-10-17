@@ -8,96 +8,12 @@ Page()
     router-link(to="/metashare" tag="button" btn="~ secondary") MetaShare Staking
     router-link(to="/governance" tag="button" btn="~ secondary") Governance  
 
-  div(grid="~ cols-2 gap-6")
-    VList(gap-50)
-      VList(text="xl left")
-        h3(color="gray") Stake IXT, earn up to
-        h1(text="bold 5xl" color="#84D4BC") 18,88% APY
-        HList(gap-6)
-          button(color="gray") Buy IXT 
-          button(color="gray") Add IXT to wallet 
-      CardChart()
-    VList(space-y="15") 
-      TableDashboard()
-      div(grid="~ cols-2 gap-6")
-        Card() 
-          TitleDetail(flex-col-reverse)
-            h3() Circulating Supply
-            h4(color="orange") See on coinGecko
-            template(#detail)
-              h4() Total pool next epoch
-            h4() 422,681
-        Card()
-          TitleDetail(flex-col-reverse)
-            h3() Distribution today
-            h4() 36,936.63 (ICON) 
-
-  PageSection(section="earnStaking")
-    div(grid="~ cols-2" gap="6")
-      Card()
-        TitleDetail()
-          template(#normal)
-            PageSection(section="ixtStakingInfo")
-        template(#detailRight)
-          IXTIcon(w="25" class="ml-2")
-      Card()
-        TitleDetail()
-          template(#normal)
-            PageSection(section="lpStakingInfo")
-        template(#detailRight )
-          UsdtIXT_Icon(w="25" class="ml-2")
-          MaticIXT_Icon(w="25" class="ml-2")
-
-
+  HomepageDashboard()
+  HomepageStaking()
   PageSection(section="ixtStaking")
   Stake()
+  HomepageTerritories()
 
-
-  //- PageSection(section="ixtStaking")
-  //-   div(grid="~ cols-4 gap-6")
-  //-     Card(v-for="item in list" )
-  //-       div(grid="~ cols-2 gap-6")
-  //-         TitleDetail()
-  //-           template(#detail) Locking Period 
-  //-           template(#default) {{ item.lockingPeriod }} months
-  //-         TitleDetail()
-  //-           template(#detail) Multiplier
-  //-           template(#default) {{ item.multiplier }} x
-
-  //-     Card(grid="col-span-2")
-  //-       h3 Reward Pool
-
-  //-     CardDotted(grid="col-span-2")
-  //-       h3 Coming Soon 
-  //-       HList()
-  //-         button(btn="~ secondary") LEARN MORE
-
-  //-     button(btn="~ primary") CONNECT WALLET TO STAKE
-
-  PageSection(section="territoryStaking")
-  CardTerritory()
-    HList()
-      TerritoryIcon(w="20" class="ml2")
-      PageSection( section="assetStaking.territoryBox" w="50%" p=6)
-      StakingWrapper(w="50%" id="territory" :data="territoriesUserData")
-  PageSection(section="energyStaking")
-  CardTerritory()
-    HList()
-      EnergyIcon(w="20" class="ml2")
-      PageSection(section="assetStaking.energyBox" w="50%" p=6)
-      StakingWrapper(w="50%" id="energy" :data="energyData")
-  PageSection(section="landmarkStaking")
-  CardTerritory()
-    HList()
-      LandmarkIcon(w="20" class="ml2")
-      PageSection(section="assetStaking.landmarkBox" w="50%" p=6)
-      StakingWrapper(w="50%" id="landmark" :data="landmarkData")
-  PageSection(section="metashareStaking")
-  CardTerritory()
-    HList()
-      NewlandsIcon(w="20")
-      PageSection(section="assetStaking.metashareBox" w="50%" p=6)
-      StakingWrapper(w="50%" id="metashare" :data="metashareData")
 </template>
 
 
@@ -107,20 +23,6 @@ Page()
 
 
 <script lang="ts" setup>
-import { StakingId } from '../.nuxt/gql/default';
-import IXTIcon from '~/assets/images/tokenBG.svg'
-import MaticIXT_Icon from '~/assets/images/matic_ix.svg'
-import UsdtIXT_Icon from '~/assets/images/usdt_ix.svg'
-import TerritoryIcon from '~/assets/images/mocked-area-img.svg'
-import LandmarkIcon from '~/assets/images/landmarkSmall.png'
-import NewlandsIcon from '~/assets/images/NL_1.svg'
-
-import EnergyIcon from '~/assets/EnergySmall.svg'
-
-const { data: territoriesUserData } = useStakingData(StakingId.TerritoriesUser)
-const { data: metashareData } = useStakingData(StakingId.Metashare)
-const { data: energyData } = useStakingData(StakingId.Energy)
-const { data: landmarkData } = useStakingData(StakingId.Landmark)
 
 interface StakingInfo {
   lockingPeriod: number,
