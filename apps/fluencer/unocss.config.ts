@@ -14,5 +14,14 @@ export default defineConfig({
         primary: "#FF6647"
       }
     },
-  }
+  },
+  shortcuts: [
+    //@ts-ignore
+    ...baseLayer.shortcuts,
+    {
+      "text-detail": "color-gray-200 text-sm",
+      "text-detail-value": "color-white text-sm font-bold",
+      "text-subheading": "color-white text-lg font-bold",
+    }
+  ]
 })

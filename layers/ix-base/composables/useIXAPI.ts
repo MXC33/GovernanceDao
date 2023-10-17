@@ -32,7 +32,6 @@ const deleteCookie = (name: string) => {
 export const useIXAPI = () => {
   const headers = useIXHeaders()
   const app = useNuxtApp()
-  const route = useRoute()
   const loginURL = `${BASE_API_ENDPOINT_URL()}/auth/login`
   const usernameFromWalletAddressURL = `${BASE_API_ENDPOINT_URL()}/mission-controll/username/wallet`
 
@@ -44,6 +43,8 @@ export const useIXAPI = () => {
   }
 
   const onUnauthorized = async () => {
+    const route = useRoute()
+
     if (route.path.includes('connect') || route.path.includes('logout'))
       return
 
