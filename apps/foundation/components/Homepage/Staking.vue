@@ -1,0 +1,21 @@
+<template lang="pug">
+PageSection(section="earnStaking")
+  div(grid="~ cols-2" gap="6")
+    Card()
+      TitleDetail()
+        template(#normal)
+          PageSection(section="ixtStakingInfo")
+      template(#detailRight)
+        IXTIcon(w="25" class="ml-2")
+    Card()
+      TitleDetail()
+        template(#normal)
+          PageSection(section="lpStakingInfo")
+      template(#detailRight )
+        UsdtIXT_Icon(w="25" class="ml-2")
+        MaticIXT_Icon(w="25" class="ml-2")
+</template>
+
+<script lang="ts" setup>
+
+</script>
