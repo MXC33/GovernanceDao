@@ -19,14 +19,14 @@ type InjectedProviderFlags = {
   isTokenary?: true
   isTrust?: true
   isWombat?: true
-  isBitKeep?: true
+  isBitKeep?: true // Has changed name to Bitget but still returns isBitKeep
 }
 
 type InjectedProvider = ExternalProvider & InjectedProviderFlags
 
 const getProviderName = (provider: InjectedProvider) => {
   if (provider.isWombat) return 'Wombat'
-  if (provider.isBitKeep) return 'BitKeep'
+  if (provider.isBitKeep) return 'Bitget'
   if (provider.isBraveWallet) return 'Brave Wallet'
   if (provider.isCoinbaseWallet) return 'Coinbase Wallet'
   if (provider.isExodus) return 'Exodus'
