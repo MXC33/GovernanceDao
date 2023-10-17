@@ -1,11 +1,11 @@
 <template lang="pug">
 Page()
   PageSection(section="rewards")
-    HList(grid="~ gap-4 ")
+    HList(grid="~ gap-5")
       CardEarnings()
-      ClaimHorizontal()
+      ClaimTotalReward()
   PageSection(section="myLandmarks")
-  card()
+  card(text-center)
     p No landmarks available
   PageSection(section="explore")
     HList()
