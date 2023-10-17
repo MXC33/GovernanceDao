@@ -13,7 +13,7 @@ export const useOpenPacks = <T extends ContractInterface<T> & GenericBurnGravity
   const voucherNFTAddress = voucherAddress[activeChain]
 
   const contractAddress = ggGradeBurnV2Address as string
-  const { refresh: refreshTokens } = useTokenData()
+  const { refresh: refreshTokens } = useVoucherData()
 
   const { createTransaction, withContract, ...contractSpec } = defineContract<T>('voucher-contract-', {
     contractAddress,

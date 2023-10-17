@@ -15,21 +15,30 @@ Page()
 
       template(#default)
         DrawerContentBody()
-          ListItem()
+          ListItem(v-for="token in vouchers")
             template(#image)
-              img(src="~/assets/images/bundle-cover.png")
-            template(#title) Planet Bundle Large
+              TokenImage(:token="token")
+            template(#title) {{ token?.tokenInfo?.title }}
             template(#description)
-              p Date of purchase: 07102023
-              p Date of purchase: 07102023
+              p Balance: {{ token?.balance }}
 
             template(#button)
-              button(btn="~ primary" cut="~ bottom-right sm") Open Pack
-
+              button(btn="~ primary" @click="onClickOpen(token)" cut="~ bottom-right sm" v-if="token") Open
 
     
 </template>
 
 
+
 <script lang="ts" setup>
+import type { NftFragment } from '.nuxt/gql/default';
+
+
+const { data: vouchers } = useVoucherData()
+const { openPack } = useOpenPacks()
+
+const onClickOpen = (token: NftFragment) => {
+  return openPack(token, 1)
+}
+
 </script>
