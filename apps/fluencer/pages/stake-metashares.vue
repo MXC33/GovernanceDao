@@ -22,7 +22,7 @@ Page()
             template(#description)
               p Balance: {{ token?.balance }}
             template(#button)
-              button(btn="~ primary" @click="onClickStake(token)" cut="~ bottom-right sm" v-if="token") Stake
+              ButtonInteractive(@click="onClickStake(token)"  v-if="token" text="Stake") 
 
 
     

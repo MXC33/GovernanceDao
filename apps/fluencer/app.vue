@@ -8,11 +8,12 @@
     div#takeover
 
     //- CookieBot(:id="cookieBotId")
+    SnackNotifications(:notifications="snackNotifications")
+    
 </template>
 
 <script setup lang="ts">
 import { StakingId } from '.nuxt/gql/default';
-
 
 const { setupOnMounted } = useAppSetup()
 const { execute: fetchIXTOneMonthData } = useStakingData(StakingId.IxtOneMonth)
@@ -23,7 +24,7 @@ const { execute: fetchMetashareData } = useStakingData(StakingId.Metashare)
 const { execute: fetchVoucherTokens } = useVoucherData()
 const { execute: fetchTokens } = useTokenData()
 
-
+const { snackNotifications } = useSnackNotifications()
 
 useHead({
   title: "Fluencer | PlanetIX",

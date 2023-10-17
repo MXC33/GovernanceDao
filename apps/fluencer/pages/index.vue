@@ -23,7 +23,7 @@ Page()
               p Balance: {{ token?.balance }}
 
             template(#button)
-              button(btn="~ primary" @click="onClickOpen(token)" cut="~ bottom-right sm" v-if="token") Open
+              ButtonInteractive(@click="onClickOpen(token)"  v-if="token" text="Open" min-w="35" cut="~ bottom-right sm" :loading="isLoading") 
 
     
 </template>
@@ -33,12 +33,17 @@ Page()
 <script lang="ts" setup>
 import type { NftFragment } from '.nuxt/gql/default';
 
-
+const { displaySnack } = useSnackNotifications()
 const { data: vouchers } = useVoucherData()
 const { openPack } = useOpenPacks()
+const { loading: isLoading, execute: claimRewardRequest } = useContractRequest(async (token: NftFragment) => {
+  const response = await openPack(token, 1)
+  console.log("Got it", response)
+  displaySnack("stake-success", "success")
+})
 
 const onClickOpen = (token: NftFragment) => {
-  return openPack(token, 1)
+  return claimRewardRequest(token)
 }
 
 </script>
