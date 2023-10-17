@@ -1,6 +1,6 @@
 <template lang="pug">
 Card()
-  MetashareCorporationImages(:src="imageSrc")
+  MetashareCorporationImages()
   MetashareTrade(:staking-item="stakingData")
   MetashareStake()
   Claim()
