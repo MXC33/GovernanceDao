@@ -53,11 +53,11 @@ div(b="0.5 white opacity-20 rounded-xl")
   
   
 <script lang="ts" setup>
-import IXTIcon from '../../public/assets/svg/tokenBG.svg'
+/* import IXTIcon from '../../public/assets/svg/tokenBG.svg'
 import EnergyIcon from '../../public/assets/svg/EnergySmall.svg'
 import LandmarkIcon from '../../public/assets/svg/landmark.svg'
 import ErrorIcon from '../../public/assets/svg/error.svg'
-import MetashareIcon from '../../public/assets/png/newlands.png'
+import MetashareIcon from '../../public/assets/png/newlands.png' */
 </script>
 
 <style>

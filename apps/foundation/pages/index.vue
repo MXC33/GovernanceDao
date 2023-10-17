@@ -32,8 +32,6 @@ Page()
             h3() Distribution today
             h4() 36,936.63 (ICON) 
 
-  PageSection(section="ixtStaking")
-  Stake()
   PageSection(section="earnStaking")
     div(grid="~ cols-2" gap="6")
       Card()
@@ -49,6 +47,10 @@ Page()
         template(#detailRight )
           UsdtIXT_Icon(w="25" class="ml-2")
           MaticIXT_Icon(w="25" class="ml-2")
+
+
+  PageSection(section="ixtStaking")
+  Stake()
 
 
   //- PageSection(section="ixtStaking")
@@ -73,23 +75,27 @@ Page()
   //-     button(btn="~ primary") CONNECT WALLET TO STAKE
 
   PageSection(section="territoryStaking")
-  Card(p=0 )
+  CardTerritory()
     HList()
+      TerritoryIcon(w="20" class="ml2")
       PageSection( section="assetStaking.territoryBox" w="50%" p=6)
-      StakingWrapper(w="50%" id="territory" :data="territoriesUserData" bg="black")
+      StakingWrapper(w="50%" id="territory" :data="territoriesUserData")
   PageSection(section="energyStaking")
-  Card(p=0)
+  CardTerritory()
     HList()
+      EnergyIcon(w="20" class="ml2")
       PageSection(section="assetStaking.energyBox" w="50%" p=6)
       StakingWrapper(w="50%" id="energy" :data="energyData")
   PageSection(section="landmarkStaking")
-  Card(p=0)
+  CardTerritory()
     HList()
+      LandmarkIcon(w="20" class="ml2")
       PageSection(section="assetStaking.landmarkBox" w="50%" p=6)
       StakingWrapper(w="50%" id="landmark" :data="landmarkData")
   PageSection(section="metashareStaking")
-  Card(p=0)
+  CardTerritory()
     HList()
+      NewlandsIcon(w="20")
       PageSection(section="assetStaking.metashareBox" w="50%" p=6)
       StakingWrapper(w="50%" id="metashare" :data="metashareData")
 </template>
@@ -102,10 +108,14 @@ Page()
 
 <script lang="ts" setup>
 import { StakingId } from '../.nuxt/gql/default';
-import IXTIcon from '../public/assets/svg/tokenBG.svg'
-import MaticIXT_Icon from '../public/assets/svg/matic_ix.svg'
-import UsdtIXT_Icon from '../public/assets/svg/usdt_ix.svg'
+import IXTIcon from '~/assets/images/tokenBG.svg'
+import MaticIXT_Icon from '~/assets/images/matic_ix.svg'
+import UsdtIXT_Icon from '~/assets/images/usdt_ix.svg'
+import TerritoryIcon from '~/assets/images/mocked-area-img.svg'
+import LandmarkIcon from '~/assets/images/landmarkSmall.png'
+import NewlandsIcon from '~/assets/images/NL_1.svg'
 
+import EnergyIcon from '~/assets/EnergySmall.svg'
 
 const { data: territoriesUserData } = useStakingData(StakingId.TerritoriesUser)
 const { data: metashareData } = useStakingData(StakingId.Metashare)
