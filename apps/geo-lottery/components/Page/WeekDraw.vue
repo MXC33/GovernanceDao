@@ -4,7 +4,7 @@ div()
   div(bg="black" rounded="4" b="1 $mc-pink" py-16)
     div(mb="18")
       ClientOnly
-        p(text="xl center" font="extrabold" m="b-4 md:b-8" ) ROUND {{'#' + (Number(lotteryID) +1)}}
+        p(text="xl center" font="extrabold" m="b-4 md:b-8" ) ROUND {{'#' + (Number(lotteryID))}}
         HelperCountDown(:endTimestamp="lotteryEndsAt" :type="'large'" v-if="lotteryEndsAt")
         //HelperCountDown(:endTimestamp="1695819600000" :type="'large'")
 
