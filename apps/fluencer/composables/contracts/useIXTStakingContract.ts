@@ -62,3 +62,8 @@ export const stakeIXT = (stakingId: StakingId, item: UserStakingItem) => {
   const stakingContract = useIXTStakingContract(stakingId)
   return stakingContract.stakeIXT(item)
 }
+
+export const getAPY = (rewardRate: number, totalSupply: number) => {
+  const APR = (rewardRate * 86400 * 365) / totalSupply;
+  return roundToDecimals(((1 + APR / 365) ** 365 - 1) * 100, 2)
+}
