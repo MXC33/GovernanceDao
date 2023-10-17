@@ -3,7 +3,7 @@ HList(frame="~" bg="gray-800")
   div(aspect="square" pos="relative" w="24")
     slot(name="image")
 
-  VList(flex-grow="1" p="3")
+  VList(flex-grow="1" p="3" justify="center")
     h3(font="bold" text="lg") 
       slot(name="title")
 
