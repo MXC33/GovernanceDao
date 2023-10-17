@@ -5,13 +5,19 @@ TabList()
 </template>
 
 <script lang="ts" setup>
+
 const tabs = ["open", "stake-metashares", "stake-ixt", "history"] as const
 type Tab = typeof tabs[number]
 
 const route = useRoute()
 const { ixtBalance } = useCurrencyData()
 const { data: vouchers } = useVoucherData()
-
+const { data: tokens } = useTokenData()
+const metashares = computed(() => {
+  if (!tokens.value)
+    return []
+  return tokens.value.filter(item => filterMetashareType(item))
+})
 const getURL = (tab: Tab) => {
   switch (tab) {
     case "open":
@@ -26,6 +32,8 @@ const notificationCount = (tab: Tab) => {
   switch (tab) {
     case "open":
       return vouchers.value?.length ?? 0
+    case "stake-metashares":
+      return metashares.value?.length ?? 0
 
     case "stake-ixt":
       return ixtBalance.value > 0 ? 1 : 0

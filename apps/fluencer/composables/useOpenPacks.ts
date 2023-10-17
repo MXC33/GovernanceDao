@@ -32,16 +32,16 @@ export const useOpenPacks = <T extends ContractInterface<T> & GenericBurnGravity
     }
   })
 
-  const openPack = (pack: NftFragment, amount: number) => {
+  const openPack = (pack: NftFragment) =>
     createTransaction((contract) => {
-      if (!pack.tokenId || !amount || !voucherNFTAddress)
+      if (!pack.tokenId || !voucherNFTAddress)
         return undefined
 
-      return contract.burnPack(voucherNFTAddress, pack.tokenId, amount, false)
+      // @ts-ignore
+      return contract.burnPack(voucherNFTAddress, pack.tokenId, 1, false)
     }, {
       onSuccess: async () => await refreshTokens()
     })
-  }
 
   return {
     openPack,

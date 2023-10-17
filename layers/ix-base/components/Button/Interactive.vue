@@ -6,7 +6,7 @@ button.button-interactive(btn="~ primary" opacity="s-invalid:50" w="full" font="
 
   Transition(name="slide-shift-down" mode="out-in")
     GlitchText(:text="text" :hover="true" :is-hovered="isHovered" v-if="!loading")
-    span(v-else) {{ $t('general.loading') }}
+    span(v-else) {{ loadingText ?? $t('general.loading') }}
     
 
 </template>
@@ -29,6 +29,7 @@ const { loading, invalid } = defineProps<{
   loading?: boolean,
   invalid?: boolean
   isShared?: boolean
+  loadingText?: string
 }>()
 </script>
   

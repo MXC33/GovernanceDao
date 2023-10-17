@@ -15,14 +15,7 @@ Page()
 
       template(#default)
         DrawerContentBody()
-          ListItem(v-for="token in metashares" v-if="metashares")
-            template(#image)
-              TokenMedia(:token="token")
-            template(#title) {{ token?.tokenInfo?.title }}
-            template(#description)
-              p Balance: {{ token?.balance }}
-            template(#button)
-              ButtonInteractive(@click="onClickStake(token)"  v-if="token" text="Stake") 
+          StakeMetashare(v-for="token in metashares" v-if="metashares && stakedData" :token="token" :staked-tokens="stakedData")
 
     DrawerContent(:start-open="true" :is-neutral="true" bg="gray-900")
       template(#header)
@@ -48,23 +41,14 @@ Page()
 
 
 <script lang="ts" setup>
-import type { NftFragment } from '#gql';
-import { StakingId } from '../.nuxt/gql/default';
-
-const { stakeMetashare } = useMetashareStakingContract()
+import { filterMetashareType } from '~/composables/contracts/useMetashareStakingContract';
+import { StakingId, type StakingItemFragment } from '~/.nuxt/gql/default';
 
 
 const { data: tokens } = useTokenData()
-
 const { data: stakedTokens } = useStakingData(StakingId.Metashare)
 
-const filterMetashareType = (token: NftFragment) => {
-  if (!tokens)
-    return []
-  return token?.tokenInfo?.type === 'metashare' && (token?.tokenInfo.tier == 'eternalab' || token?.tokenInfo?.tier == 'new-lands')
-}
-
-
+const stakedData = computed(() => stakedTokens.value?.stakingItems?.filter(item => filterMetashareType(item?.token)) as StakingItemFragment[])
 
 const metashares = computed(() => {
   if (!tokens.value)
@@ -72,13 +56,5 @@ const metashares = computed(() => {
   return tokens.value.filter(item => filterMetashareType(item))
 })
 
-const stakedData = computed(() => stakedTokens.value?.stakingItems?.filter(item => filterMetashareType(item?.token))
-)
 
-
-const onClickStake = (token: NftFragment) => {
-  if (token.balance)
-    return stakeMetashare({ token, amount: token.balance })
-  console.log("No balance of this token", token)
-}
 </script>

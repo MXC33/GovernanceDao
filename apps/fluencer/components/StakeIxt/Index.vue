@@ -47,7 +47,6 @@ DrawerContent(:start-open="true" :is-neutral="true" bg="gray-900" max-h="auto")
 </template>
 
 <script lang="ts" setup>
-import { useStakingHelper } from 'composables/useStakingData';
 import { type StakingDataFragment, StakingId } from '~/.nuxt/gql/default';
 const { displaySnack } = useSnackNotifications()
 const { formattedMonths } = useStakingHelper()

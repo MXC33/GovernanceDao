@@ -4,7 +4,7 @@ import MetashareStakingABI from "../ABIs/MetashareStaking.json"
 import { metashareStakingAddress } from '@ix/base/composables/Contract/WalletAddresses'
 import { ContractInterface } from '@ix/base/composables/Utils/defineContract'
 import { UserStakingItem } from 'composables/useStakingData'
-import { StakingId } from '../../.nuxt/gql/default'
+import { NftFragment, StakingId } from '../../.nuxt/gql/default'
 
 
 export const useMetashareStakingContract = <T extends ContractInterface<T> & MetashareStakingContract>() => {
@@ -25,7 +25,7 @@ export const useMetashareStakingContract = <T extends ContractInterface<T> & Met
   })
 
 
-  const stakeMetashare = (item: UserStakingItem) => {
+  const stakeMetashare = (item: UserStakingItem) =>
     createTransaction((contract) => {
       const address = walletAdress.value
       if (!address || !item.token.tokenId || !item.amount)
@@ -35,7 +35,7 @@ export const useMetashareStakingContract = <T extends ContractInterface<T> & Met
     }, {
       onSuccess: async () => await Promise.all([refreshStakingData(), refreshTokens()])
     })
-  }
+
 
   const unstakeMetashare = (item: UserStakingItem) => {
     createTransaction((contract) => {
@@ -66,4 +66,10 @@ export const useMetashareStakingContract = <T extends ContractInterface<T> & Met
     unstakeMetashare,
     claimMetashareReward,
   }
+}
+
+export const filterMetashareType = (token: NftFragment) => {
+  if (!token)
+    return null
+  return token?.tokenInfo?.type === 'metashare' && (token?.tokenInfo.tier == 'eternalab' || token?.tokenInfo?.tier == 'new-lands')
 }

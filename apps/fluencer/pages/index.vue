@@ -23,7 +23,7 @@ Page()
               p Balance: {{ token?.balance }}
 
             template(#button)
-              ButtonInteractive(@click="onClickOpen(token)"  v-if="token" text="Open" min-w="35" cut="~ bottom-right sm" :loading="isLoading") 
+              ButtonInteractive(@click="claimRewardRequest(token)"  v-if="token" text="Open" min-w="55" cut="~ bottom-right sm" :loading="isLoading"  :loading-text="'Opening pack...'") 
 
     
 </template>
@@ -38,13 +38,13 @@ const { data: tokens } = useVoucherData()
 
 const { openPack } = useOpenPacks()
 const { loading: isLoading, execute: claimRewardRequest } = useContractRequest(async (token: NftFragment) => {
-  const response = await openPack(token, 1)
-  console.log("Got it", response)
-  displaySnack("stake-success", "success")
+  return onClickOpen(token)
 })
 
-const onClickOpen = (token: NftFragment) => {
-  return claimRewardRequest(token)
+const onClickOpen = async (token: NftFragment) => {
+  const packOpened = await openPack(token)
+  if (packOpened)
+    displaySnack("open-success", "success")
 }
 
 </script>
