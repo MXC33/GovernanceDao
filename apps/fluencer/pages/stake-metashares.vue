@@ -2,7 +2,7 @@
 Page()
   template(#header)
     PageHeader()
-      template(#icon): img(src="~/assets/images/bundle-cover.png")
+      template(#icon): img(src="~/assets/images/metashare-cover.png")
       template(#title) METASHARES
       template(#description) Within Planet IX, Metashares work like any other form of corporate ownership. By staking your shares you ‘activate’ them and directly start to earn rewards from your shares. Without staking your shares you simply hold them in your wallet, without yielding rewards.
 

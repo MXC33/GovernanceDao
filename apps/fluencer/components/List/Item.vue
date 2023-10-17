@@ -10,7 +10,7 @@ HList(frame="~" bg="gray-800")
     div(text="sm gray-200")
       slot(name="description" )
 
-  VList()
+  VList(justify="center" pr="6")
     slot(name="button")
 
 </template>

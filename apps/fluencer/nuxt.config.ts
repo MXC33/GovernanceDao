@@ -7,7 +7,9 @@ export default defineNuxtConfig({
   extends: [
     '@ix/base'
   ],
-
+  experimental: {
+    viewTransition: true
+  },
   typescript: {
     includeWorkspace: true
   },

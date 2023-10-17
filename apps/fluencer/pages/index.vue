@@ -23,6 +23,9 @@ Page()
               p Date of purchase: 07102023
               p Date of purchase: 07102023
 
+            template(#button)
+              button(btn="~ primary" cut="~ bottom-right sm") Open Pack
+
 
     
 </template>
