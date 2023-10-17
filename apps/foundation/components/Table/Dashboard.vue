@@ -58,9 +58,6 @@ import EnergyIcon from '~/assets/images/EnergySmall.svg'
 import LandmarkIcon from '~/assets/images/landmarkSmall1.svg'
 import TerritoryIcon from '~/assets/images/mocked-area-img.svg'
 import MetashareIcon from '~/assets/images/newlands1.svg'
-/* import EnergyIcon from '../../public/assets/svg/EnergySmall.svg'
-import LandmarkIcon from '../../public/assets/svg/landmark.svg'
-import ErrorIcon from '../../public/assets/svg/error.svg'
 </script>
 
 <style>
