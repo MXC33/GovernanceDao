@@ -41,7 +41,7 @@ Page()
           VList()
             PriceRow()
               template(#left): span(text="detail") Quantity
-              template(#right): span(text="detail-value") 2000 IXT
+              template(#right): span(text="detail-value") {{ixtBalanceRounded}} IXT
 
             PriceRow()
               template(#left): span(text="detail") Staking period
@@ -61,8 +61,8 @@ Page()
 
             template(#right) 
               h3(space-x="2")
-                span(text="subheading") 250 IXT
-                span(text="detail") $200
+                span(text="subheading") {{ixtBalanceRounded}}
+                span(text="detail") ${{usdBalanceRounded}}
 
 </template>
 
