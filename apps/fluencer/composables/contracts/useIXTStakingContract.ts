@@ -26,6 +26,7 @@ export const useIXTStakingContract = <T extends ContractInterface<T> & IXTStakin
   const { walletAdress } = useWallet()
   const { refresh: refreshStakingData } = useStakingData(stakingId)
   const { refresh: refreshIXT } = useCurrencyData()
+  const { allowanceCheck } = useIXTContract()
 
   const contractAddress = getContractAddressFromStakingId(stakingId)
 
@@ -40,7 +41,7 @@ export const useIXTStakingContract = <T extends ContractInterface<T> & IXTStakin
   })
 
 
-  const stakeIXT = (amount: number) => {
+  const stakeIXT = (amount: number) =>
     createTransaction((contract) => {
       const address = walletAdress.value
       if (!address || !amount)
@@ -48,9 +49,10 @@ export const useIXTStakingContract = <T extends ContractInterface<T> & IXTStakin
 
       return contract.stake(amount)
     }, {
+      approve: () => allowanceCheck(1, contractAddress),
       onSuccess: async () => await Promise.all([refreshStakingData(), refreshIXT()])
     })
-  }
+
 
 
   return {

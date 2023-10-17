@@ -42,7 +42,7 @@ DrawerContent(:start-open="true" :is-neutral="true" bg="gray-900" max-h="auto")
 
       PriceRow()
         template(#right)
-          ButtonInteractive(:loading="isLoading" @click="onClickStake"  text="STAKE YOUR IXT NOW" min-w="60" cut="~ bottom-right sm")
+          ButtonInteractive(:loading="isLoading" @click="stakeIxtRequest"  text="STAKE YOUR IXT NOW" min-w="60" cut="~ bottom-right sm")
 
 </template>
 
@@ -108,13 +108,13 @@ const stakePeriodToStakingId = (period: StakePeriod) => {
 }
 
 const { loading: isLoading, execute: stakeIxtRequest } = useContractRequest(async () => {
-  const response = await stakeIXT(stakePeriodToStakingId(activePeriod.value), ixtBalance.value)
-  console.log("Got it", response)
-  displaySnack("stake-success", "success")
+  return onClickStake()
 })
 
-const onClickStake = () => {
-  return stakeIxtRequest()
+const onClickStake = async () => {
+  const stakedIXT = await stakeIXT(stakePeriodToStakingId(activePeriod.value), 1)
+  if (stakedIXT)
+    displaySnack("stake-success", "success")
 }
 
 const { ixtToUSD } = useCurrencyConversion()
