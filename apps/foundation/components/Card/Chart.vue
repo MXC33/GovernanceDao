@@ -5,10 +5,8 @@ Card()
       TitleDetail()
         template(#default) Wallet portfolio
         template(#detailBottom) Track balances
-
-    div()
-      ChartIcon(w="lg")
-  div.flex.gap-20(b="0.5 white opacity-20") 
+    ChartBackground()
+  div.flex.space-x-20.items() 
     TitleDetail()
       template(#default) Wallet
       template(#detailBottom) 0
@@ -24,7 +22,7 @@ Card()
 </template>
 
 <script lang="ts" setup>
-import ChartIcon from '~/assets/images/Mask_group.svg'
+import ChartBackground from '~/assets/images/Mask_group.svg'
 
 
 //Details for Chart 
