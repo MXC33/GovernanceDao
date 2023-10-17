@@ -8,9 +8,9 @@ div(grid="~ cols-2 gap-6")
         button(color="gray") Buy IXT 
         button(color="gray") Add IXT to wallet 
     CardChart()
-  VList(space-y="6") 
+  VList(space-y="6" flex-grow="1") 
     TableDashboard()
-    div(grid="~ cols-2 gap-6")
+    div(grid="~ cols-2 gap-6" flex-grow="1")
       Card() 
         VList()
           div(text="subheading")
