@@ -15,6 +15,8 @@ Page()
 
       template(#default)
         DrawerContentBody()
+          div(v-if="metashares.length == 0" text="detail" pt="2") You don't own any metashares 
+
           StakeMetashare(v-for="token in metashares" v-if="metashares && stakedData" :token="token" :staked-tokens="stakedData")
 
     DrawerContent(:start-open="true" :is-neutral="true" bg="gray-900")
@@ -33,9 +35,6 @@ Page()
               HList(space-x="2")
                 div 30 day reward: 
                 div(font="bold") {{ data?.userStakingData?.userRewardPerThirtyDays?.toFixed(2) }} IXT
-
-
-
     
 </template>
 

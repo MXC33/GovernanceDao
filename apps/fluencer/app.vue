@@ -9,7 +9,7 @@
 
     //- CookieBot(:id="cookieBotId")
     SnackNotifications(:notifications="snackNotifications")
-    
+
 </template>
 
 <script setup lang="ts">
@@ -25,6 +25,8 @@ const { execute: fetchVoucherTokens } = useVoucherData()
 const { execute: fetchTokens } = useTokenData()
 
 const { snackNotifications } = useSnackNotifications()
+const route = useRoute()
+const onConnect = computed(() => route.name == 'connect')
 
 useHead({
   title: "Fluencer | PlanetIX",
@@ -45,6 +47,7 @@ onMounted(() => {
       fetchIXTTwelveMonthData(),
       fetchMetashareData(),
     ])
+
   })
 })
 
