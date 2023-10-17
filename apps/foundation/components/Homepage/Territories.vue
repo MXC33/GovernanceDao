@@ -2,7 +2,7 @@
 PageSection(section="territoryStaking")
   CardTerritory()
     HList()
-      TerritoryIcon(w="20" class="ml2")
+      TerritoryIcon(w="20" )
       PageSection( section="assetStaking.territoryBox" w="50%" p=6)
       StakingWrapper(w="50%" id="territory" :data="territoriesUserData")
   PageSection(section="energyStaking")
@@ -20,17 +20,18 @@ PageSection(section="territoryStaking")
     PageSection(section="metashareStaking")
     CardTerritory()
       HList()
-        NewlandsIcon(w="20")
+        NewlandsIcon(w="20" class="ml2")
         PageSection(section="assetStaking.metashareBox" w="50%" p=6)
         StakingWrapper(w="50%" id="metashare" :data="metashareData")
 </template>
 
 <script lang="ts" setup>
 import TerritoryIcon from '~/assets/images/mocked-area-img.svg'
-import LandmarkIcon from '~/assets/images/landmarkSmall.png'
-import NewlandsIcon from '~/assets/images/NL_1.svg'
-
 import EnergyIcon from '~/assets/images/EnergySmall.svg'
+import LandmarkIcon from '~/assets/images/landmarkSmall1.svg'
+import NewlandsIcon from '~/assets/images/newlands1.svg'
+
+
 import { StakingId } from '~/.nuxt/gql/default';
 
 const { data: territoriesUserData } = useStakingData(StakingId.TerritoriesUser)
