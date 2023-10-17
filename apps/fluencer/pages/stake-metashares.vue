@@ -11,17 +11,18 @@ Page()
 
     DrawerContent(:start-open="true" :is-neutral="true" bg="gray-900")
       template(#header)
-        div My bundles
+        div My Metashares
 
       template(#default)
         DrawerContentBody()
-          ListItem()
+          ListItem(v-for="token in metashares" v-if="metashares")
             template(#image)
-              img(src="~/assets/images/bundle-cover.png")
-            template(#title) Planet Bundle Large
+              TokenMedia(:token="token")
+            template(#title) {{ token?.tokenInfo?.title }}
             template(#description)
-              p Date of purchase: 07102023
-              p Date of purchase: 07102023
+              p Balance: {{ token?.balance }}
+            template(#button)
+              button(btn="~ primary" @click="onClickStake(token)" cut="~ bottom-right sm" v-if="token") Stake
 
 
     
@@ -29,4 +30,18 @@ Page()
 
 
 <script lang="ts" setup>
+import type { NftFragment } from '#gql';
+
+const { stakeMetashare } = useMetashareStakingContract()
+
+
+const { data: tokens } = useTokenData()
+
+const metashares = tokens.value?.filter(item => item?.tokenInfo?.type === 'metashare' && (item?.tokenInfo.tier == 'eternalab' || item?.tokenInfo?.tier == 'new-lands'))
+
+const onClickStake = (token: NftFragment) => {
+  if (token.balance)
+    return stakeMetashare({ token, amount: token.balance })
+  console.log("No balance of this token", token)
+}
 </script>

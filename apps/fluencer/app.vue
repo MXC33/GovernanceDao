@@ -21,6 +21,7 @@ const { execute: fetchIXTSixMonthData } = useStakingData(StakingId.IxtSixMonths)
 const { execute: fetchIXTTwelveMonthData } = useStakingData(StakingId.IxtTwelveMonths)
 const { execute: fetchMetashareData } = useStakingData(StakingId.Metashare)
 const { execute: fetchVoucherTokens } = useVoucherData()
+const { execute: fetchTokens } = useTokenData()
 
 
 
@@ -34,6 +35,7 @@ useHead({
 onMounted(() => {
   setupOnMounted(async () => {
     await Promise.all([
+      fetchTokens(),
       fetchVoucherTokens(),
       fetchIXTOneMonthData(),
       fetchIXTThreeMonthData(),
