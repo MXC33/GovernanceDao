@@ -6,7 +6,7 @@ PopupBase(@close="onClose")
       iframe(src="https://ix.foundation/lefi" w="full md:130" h="full md:132.5")
 
     VList(w="full" justify="center" items="center" display="md:none")
-      iframe(src="https://ix.foundation/lefi" w="full" h="100")
+      iframe(src="https://ix.foundation/lefi" w="full" h="132.5")
 
 </template>
 
