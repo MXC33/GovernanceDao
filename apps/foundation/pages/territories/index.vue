@@ -6,13 +6,14 @@ Page()
     router-link(to="/energy" tag="button" btn="~ secondary") Energy Staking
     router-link(to="/landmarks" tag="button" btn="~ secondary") Landmarks Staking
     router-link(to="/governance" tag="button" btn="~ secondary") Governance 
+
   PageSection(section="yourTerritories")
   HList(space-x="12")
     button(btn="~ form" p="6") AREA
     button(btn="~ form" p="6") SECTOR
     button(btn="~ form" p="6") ZONE
     button(btn="~ form" p="6") DOMAIN
-  HList(w="fit")
+  HList()
     div(grid="~ cols-2 gap-6")
       Territory(category="Legendary")
       Territory(category="Rare")
@@ -22,10 +23,9 @@ Page()
   div(space-y="12")
     PageSection(section="yourTerritories")
     HList()
-      Card()
-        p() earnings per day 
-        p() earnings 7 days
-      ClaimHorizontal()
+      CardEarnings()
+      ClaimTotalReward()
+
   HList(space-x="12")
     button(btn="~ form" p="6") AREA
     button(btn="~ form" p="6") SECTOR
