@@ -26,10 +26,10 @@ PageSection(section="territoryStaking")
 </template>
 
 <script lang="ts" setup>
-import TerritoryIcon from '~/assets/images/mocked-area-img.svg'
-import EnergyIcon from '~/assets/images/EnergySmall.svg'
-import LandmarkIcon from '~/assets/images/landmarkSmall1.svg'
-import NewlandsIcon from '~/assets/images/newlands1.svg'
+import TerritoryIcon from '~/assets/png/mocked-area-img.png'
+import EnergyIcon from '~/assets/png/EnergyIcon.png'
+import LandmarkIcon from '~/assets/png/landmarkFinal.png'
+import NewlandsIcon from '~/assets/png/newlands.png'
 
 
 import { StakingId } from '~/.nuxt/gql/default';
