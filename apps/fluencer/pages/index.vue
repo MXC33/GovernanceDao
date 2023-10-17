@@ -15,7 +15,7 @@ Page()
 
       template(#default)
         DrawerContentBody()
-          ListItem(v-for="token in vouchers")
+          ListItem(v-for="token in vouchers" v-if="vouchers")
             template(#image)
               TokenImage(:token="token")
             template(#title) {{ token?.tokenInfo?.title }}

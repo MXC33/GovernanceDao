@@ -11,17 +11,16 @@ Page()
 
     DrawerContent(:start-open="true" :is-neutral="true" bg="gray-900")
       template(#header)
-        div My bundles
+        div My Metashares
 
       template(#default)
         DrawerContentBody()
-          ListItem()
+          ListItem(v-for="token in metashares" v-if="metashares")
             template(#image)
-              img(src="~/assets/images/bundle-cover.png")
-            template(#title) Planet Bundle Large
+              TokenMedia(:token="token")
+            template(#title) {{ token?.tokenInfo?.title }}
             template(#description)
-              p Date of purchase: 07102023
-              p Date of purchase: 07102023
+              p Balance: {{ token?.balance }}
 
 
     
@@ -29,4 +28,9 @@ Page()
 
 
 <script lang="ts" setup>
+
+
+const { data: tokens } = useTokenData()
+
+const metashares = tokens.value?.filter(item => item?.tokenInfo?.type === 'metashare')
 </script>
