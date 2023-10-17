@@ -35,6 +35,7 @@ useHead({
 
 onMounted(() => {
   setupOnMounted(async () => {
+    console.log("FETCHING DATA")
     await Promise.all([
       fetchTokens(),
       fetchVoucherTokens(),

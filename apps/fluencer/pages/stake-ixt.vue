@@ -33,7 +33,7 @@ Page()
 
             div(grid="~ cols-4 gap-3")
               button(btn="~ form on-active:form-active" v-for="period in stakePeriods" capitalize="~" :active="activePeriod.months == period.months" @click="selectPeriod(period)" flex="~ col") 
-                div(font="bold") {{ formattedMonths(period.months) }}
+                div(font="bold") {{ formattedMonths(period?.months) }}
                 div(text="detail") {{ period.apy }}%
 
           Divider(mx="-6")
@@ -47,13 +47,13 @@ Page()
               template(#left): span(text="detail") Staking period
               template(#right)
                 div(text="detail-value")
-                  GlitchText(:text="formattedMonths(activePeriod.months)")
+                  GlitchText(:text="formattedMonths(activePeriod?.months)")
 
             PriceRow()
               template(#left): span(text="detail") APY
               template(#right)
                 div(text="detail-value")
-                  GlitchText(:text="activePeriod.apy + '%'")
+                  GlitchText(:text="activePeriod?.apy + '%'")
 
           PriceRow()
             template(#left)
@@ -63,6 +63,11 @@ Page()
               h3(space-x="2")
                 span(text="subheading") {{projectedIxtBalanceRounded}} IXT
                 span(text="detail") ${{projectedUsdBalanceRounded}}
+          Divider(mx="-6")
+          PriceRow()
+            template(#right)
+              ButtonInteractive(:loading="isLoading" @click="onClickStake"  text="STAKE YOUR IXT NOW" min-w="60" cut="~ bottom-right sm")
+
 
     DrawerContent(:start-open="true" :is-neutral="true" bg="gray-900")
       template(#header)
@@ -85,8 +90,8 @@ Page()
 
 
 <script lang="ts" setup>
-import { StakingId } from '../.nuxt/gql/default';
-
+import { type StakingDataFragment, StakingId } from '../.nuxt/gql/default';
+const { displaySnack } = useSnackNotifications()
 
 const { data: ixtOneMonthData } = useStakingData(StakingId.IxtOneMonth)
 const { data: ixtThreeMonthData } = useStakingData(StakingId.IxtThreeMonths)
@@ -104,39 +109,45 @@ interface UserStakePeriod {
   stakedAmount?: number
   reward?: number
 }
-const stakePeriods: StakePeriod[] = [{
-  months: 1,
-  apy: getAPY(ixtOneMonthData.value?.stakingItems[0]?.rewardRate, ixtOneMonthData.value?.totalStakedAmount)
-}, {
-  months: 3,
-  apy: getAPY(ixtThreeMonthData.value?.stakingItems[0]?.rewardRate, ixtThreeMonthData.value?.totalStakedAmount)
-}, {
-  months: 6,
-  apy: getAPY(ixtSixMonthData.value?.stakingItems[0]?.rewardRate, ixtSixMonthData.value?.totalStakedAmount)
-}, {
-  months: 12,
-  apy: getAPY(ixtTwelveMonthData.value?.stakingItems[0]?.rewardRate, ixtTwelveMonthData.value?.totalStakedAmount)
-}]
 
-const userStakePeriods: UserStakePeriod[] = [{
-  months: 1,
-  stakedAmount: ixtOneMonthData.value?.stakingItems[0]?.userStakingData?.amountStaked ?? 0,
-  reward: ixtOneMonthData.value?.stakingItems[0]?.userStakingData?.totalReward ?? 0
-}, {
-  months: 3,
-  stakedAmount: ixtThreeMonthData.value?.stakingItems[0]?.userStakingData?.amountStaked ?? 0,
-  reward: ixtThreeMonthData.value?.stakingItems[0]?.userStakingData?.totalReward ?? 0
-}, {
-  months: 6,
-  stakedAmount: ixtSixMonthData.value?.stakingItems[0]?.userStakingData?.amountStaked ?? 0,
-  reward: ixtSixMonthData.value?.stakingItems[0]?.userStakingData?.totalReward ?? 0
-}, {
-  months: 12,
-  stakedAmount: ixtTwelveMonthData.value?.stakingItems[0]?.userStakingData?.amountStaked ?? 0,
-  reward: ixtTwelveMonthData.value?.stakingItems[0]?.userStakingData?.totalReward ?? 0
-}]
+const setupStakingPeriod = (stakingData: StakingDataFragment | null, month: number): StakePeriod | null => {
+  if (!stakingData)
+    return null
+  return {
+    months: month,
+    //@ts-ignore
+    apy: getAPY(stakingData?.stakingItems[0]?.rewardRate, stakingData?.totalStakedAmount)
+  }
+}
 
-const activePeriod = ref<StakePeriod>(stakePeriods[0])
+const setupUserStakingPeriod = (stakingData: StakingDataFragment | null, month: number): UserStakePeriod | null => {
+  if (!stakingData)
+    return null
+  return {
+    months: month,
+    //@ts-ignore
+    stakedAmount: stakingData?.stakingItems[0]?.userStakingData?.amountStaked ?? 0,
+    //@ts-ignore
+    reward: stakingData?.stakingItems[0]?.userStakingData?.totalReward ?? 0
+  }
+}
+
+const stakePeriods = computed<StakePeriod[]>(() => [
+  setupStakingPeriod(ixtOneMonthData.value, 1),
+  setupStakingPeriod(ixtThreeMonthData.value, 3),
+  setupStakingPeriod(ixtSixMonthData.value, 6),
+  setupStakingPeriod(ixtTwelveMonthData.value, 12)
+].filter(Boolean) as StakePeriod[])
+
+const userStakePeriods = computed<UserStakePeriod[]>(() => [
+  setupUserStakingPeriod(ixtOneMonthData.value, 1),
+  setupUserStakingPeriod(ixtThreeMonthData.value, 3),
+  setupUserStakingPeriod(ixtSixMonthData.value, 6),
+  setupUserStakingPeriod(ixtTwelveMonthData.value, 12)
+].filter(Boolean) as UserStakePeriod[])
+
+
+const activePeriod = ref<StakePeriod>(stakePeriods.value[0])
 
 const selectPeriod = (active: StakePeriod) => {
   activePeriod.value = active
@@ -149,14 +160,38 @@ const formattedMonths = (months: number) => {
   return `${months} Month`
 }
 
+const stakePeriodToStakingId = (period: StakePeriod) => {
+  switch (period.months) {
+    case 1:
+      return StakingId.IxtOneMonth
+    case 3:
+      return StakingId.IxtThreeMonths
+    case 6:
+      return StakingId.IxtSixMonths
+    case 12:
+      return StakingId.IxtTwelveMonths
+    default:
+      return StakingId.IxtOneMonth
+  }
+}
+
+const { loading: isLoading, execute: stakeIxtRequest } = useContractRequest(async () => {
+  const response = await stakeIXT(stakePeriodToStakingId(activePeriod.value), ixtBalance.value)
+  console.log("Got it", response)
+  displaySnack("stake-success", "success")
+})
+
+const onClickStake = () => {
+  return stakeIxtRequest()
+}
 
 const { ixtToUSD } = useCurrencyConversion()
 const { ixtBalance } = useCurrencyData()
 const ixtBalanceRounded = computed(() => roundToDecimals(ixtBalance.value ?? 0, 2))
 const usdBalanceRounded = computed(() => roundToDecimals(ixtToUSD(ixtBalance.value ?? 0), 2))
 
-const projectedIxtBalanceRounded = computed(() => roundToDecimals(ixtBalanceRounded.value + ixtBalanceRounded.value * activePeriod.value.apy / 100, 2))
+const projectedIxtBalanceRounded = computed(() => roundToDecimals(ixtBalanceRounded.value + ixtBalanceRounded.value * activePeriod.value?.apy / 100, 2))
 
-const projectedUsdBalanceRounded = computed(() => roundToDecimals(usdBalanceRounded.value + usdBalanceRounded.value * activePeriod.value.apy / 100, 2))
+const projectedUsdBalanceRounded = computed(() => roundToDecimals(usdBalanceRounded.value + usdBalanceRounded.value * activePeriod.value?.apy / 100, 2))
 
 </script>

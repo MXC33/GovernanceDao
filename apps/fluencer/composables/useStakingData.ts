@@ -12,7 +12,7 @@ export const useStakingData = (id: StakingId) => {
 
   const fetchStakingData = async () => {
     const stakingData = await GqlStakingData({ credentials, id })
-    return stakingData.stakingData
+    return stakingData.stakingData as StakingDataFragment
   }
 
   const key = `staking-data-${id},`
