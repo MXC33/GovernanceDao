@@ -39,13 +39,17 @@ Page()
     div(grid="~ cols-2" gap="6")
       Card()
         TitleDetail()
-          PageSection(section="ixtStakingInfo")
+          template(#normal)
+            PageSection(section="ixtStakingInfo")
+        template(#detailRight)
           IXTIcon(w="25" class="ml-2")
-      Card( rounded="br tr")
+      Card()
         TitleDetail()
-          PageSection(section="lpStakingInfo")
-        Card(bg="black" rounded="br tr")
-          IXTIcon(w="25" class="ml-2")
+          template(#normal)
+            PageSection(section="lpStakingInfo")
+        template(#detailRight )
+          UsdtIXT_Icon(w="25" class="ml-2")
+          MaticIXT_Icon(w="25" class="ml-2")
 
 
   PageSection(section="ixtStaking")
@@ -73,7 +77,7 @@ Page()
   Card(p=0 )
     HList()
       PageSection( section="assetStaking.territoryBox" w="50%" p=6)
-      StakingWrapper(w="50%" id="territory" :data="territoriesUserData")
+      StakingWrapper(w="50%" id="territory" :data="territoriesUserData" bg="black")
   PageSection(section="energyStaking")
   Card(p=0)
     HList()
@@ -100,6 +104,8 @@ Page()
 <script lang="ts" setup>
 import { StakingId } from '../.nuxt/gql/default';
 import IXTIcon from '../public/assets/svg/tokenBG.svg'
+import MaticIXT_Icon from '../public/assets/svg/matic_ix.svg'
+import UsdtIXT_Icon from '../public/assets/svg/usdt_ix.svg'
 
 
 const { data: territoriesUserData } = useStakingData(StakingId.TerritoriesUser)
