@@ -6,23 +6,23 @@ PageSection(section="territoryStaking")
       PageSection( section="assetStaking.territoryBox" w="50%" p=6)
       StakingWrapper(w="50%" id="territory" :data="territoriesUserData")
   PageSection(section="energyStaking")
-  CardTerritory()
-    HList()
-      EnergyIcon(w="20" class="ml2")
-      PageSection(section="assetStaking.energyBox" w="50%" p=6)
-      StakingWrapper(w="50%" id="energy" :data="energyData")
-  PageSection(section="landmarkStaking")
-  CardTerritory()
-    HList()
-      LandmarkIcon(w="20" class="ml2")
-      PageSection(section="assetStaking.landmarkBox" w="50%" p=6)
-      StakingWrapper(w="50%" id="landmark" :data="landmarkData")
-  PageSection(section="metashareStaking")
-  CardTerritory()
-    HList()
-      NewlandsIcon(w="20")
-      PageSection(section="assetStaking.metashareBox" w="50%" p=6)
-      StakingWrapper(w="50%" id="metashare" :data="metashareData")
+    CardTerritory()
+      HList()
+        EnergyIcon(w="20" class="ml2")
+        PageSection(section="assetStaking.energyBox" w="50%" p=6)
+        StakingWrapper(w="50%" id="energy" :data="energyData")
+    PageSection(section="landmarkStaking")
+    CardTerritory()
+      HList()
+        LandmarkIcon(w="20" class="ml2")
+        PageSection(section="assetStaking.landmarkBox" w="50%" p=6)
+        StakingWrapper(w="50%" id="landmark" :data="landmarkData")
+    PageSection(section="metashareStaking")
+    CardTerritory()
+      HList()
+        NewlandsIcon(w="20")
+        PageSection(section="assetStaking.metashareBox" w="50%" p=6)
+        StakingWrapper(w="50%" id="metashare" :data="metashareData")
 </template>
 
 <script lang="ts" setup>
@@ -30,7 +30,7 @@ import TerritoryIcon from '~/assets/images/mocked-area-img.svg'
 import LandmarkIcon from '~/assets/images/landmarkSmall.png'
 import NewlandsIcon from '~/assets/images/NL_1.svg'
 
-import EnergyIcon from '~/assets/EnergySmall.svg'
+import EnergyIcon from '~/assets/images/EnergySmall.svg'
 import { StakingId } from '~/.nuxt/gql/default';
 
 const { data: territoriesUserData } = useStakingData(StakingId.TerritoriesUser)
