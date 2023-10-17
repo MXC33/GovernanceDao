@@ -1,6 +1,6 @@
 <template lang="pug">
 div(grid="~ cols-2 gap-6")
-  VList(gap-50)
+  VList(gap-47)
     VList(text="xl left")
       h3(color="gray") Stake IXT, earn up to
       h1(text="bold 5xl" color="#84D4BC") 18,88% APY
@@ -8,7 +8,7 @@ div(grid="~ cols-2 gap-6")
         button(color="gray") Buy IXT 
         button(color="gray") Add IXT to wallet 
     CardChart()
-  VList(space-y="15") 
+  VList(space-y="6") 
     TableDashboard()
     div(grid="~ cols-2 gap-6")
       Card() 
