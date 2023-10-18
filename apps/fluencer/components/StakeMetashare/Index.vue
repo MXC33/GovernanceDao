@@ -34,7 +34,7 @@ const onClickStake = async (token: NftFragment) => {
   if (token.balance) {
     const stakedMetashare = await stakeMetashare({ token, amount: token.balance })
     if (stakedMetashare)
-      displaySnack("stake-success", "success")
+      displaySnack("metashare-stake-success", "success")
   }
   return
 }
