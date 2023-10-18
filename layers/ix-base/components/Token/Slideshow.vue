@@ -9,12 +9,11 @@ TokenMedia(:token="tokens[0]" :key="getTokenKey(tokens[0])" :icon="icon" :image=
 </template>
     
 <script lang="ts" setup>
-import type { NftFragment } from '#gql'
-import { getTokenKey } from '@ix/base/composables/Token/useTokens';
+import type { AnyToken } from 'composables/Token/useTokens';
 import { Carousel, Slide } from 'vue3-carousel'
 
 defineProps<{
-  tokens: NftFragment[]
+  tokens: AnyToken[]
   icon?: boolean
   image?: boolean
 }>()
