@@ -4,7 +4,7 @@ main(w="full" h="full" flex="~ col grow" min-h="100vh")
 
   VList(flex-grow="1" justify="top")
 
-    .gradient-bg(pos="fixed left-0 right-0 top-0" h="75vh")
+    .gradient-bg(pos="fixed left-0 right-0 top-0" h="75vh" :style="gradientStyle")
 
     //- Used for teleports
     div(id="overlays" select="none")
@@ -15,6 +15,12 @@ main(w="full" h="full" flex="~ col grow" min-h="100vh")
 </template>
 
 <script lang="ts" setup>
+const y = useGlobalWindowScroll()
+
+const gradientStyle = computed(() => ({
+  opacity: 100 - (y.value / 500) * 100 + '%'
+}))
+
 </script>
 <style>
 .gradient-bg {

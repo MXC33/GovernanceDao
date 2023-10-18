@@ -7,7 +7,6 @@
 
     div#takeover
 
-    //- CookieBot(:id="cookieBotId")
     SnackNotifications(:notifications="snackNotifications")
 
 </template>

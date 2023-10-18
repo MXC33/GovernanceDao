@@ -1,21 +1,23 @@
 <template lang="pug">
 button.button-interactive(btn="~ primary" opacity="s-invalid:50" w="full" font="bold" transition="all" ref="button" pos="relative" pointer-events="s-loading:none s-invalid:none" :state="buttonState")
-  Transition(name="slide-left")
-    span(pos="absolute left-3" v-if="loading")
-      LoadingBars.loading-bars(w="5" h="5")
-
-  Transition(name="slide-shift-down" mode="out-in")
-    GlitchText(:text="text" :hover="true" :is-hovered="isHovered" v-if="!loading")
-    span(v-else) {{ loadingText ?? $t('general.loading') }}
-    
+  GlitchText(:text="renderText" :key="renderText" :hover="true" :is-hovered="isHovered" whitespace="nowrap")
+  
 
 </template>
   
   
 <script lang="ts" setup>
-import LoadingBars from '~/assets/images/icons/loading-bars.svg'
+const { t } = useI18n()
 const button = ref()
 const isHovered = useElementHover(button)
+
+const renderText = computed(() => {
+  if (loading) {
+    return loadingText ?? t('general.loading')
+  }
+
+  return text
+})
 
 const buttonState = computed(() => {
   if (loading)
@@ -24,7 +26,7 @@ const buttonState = computed(() => {
     return 'invalid'
 })
 
-const { loading, invalid } = defineProps<{
+const { loading, invalid, loadingText, text } = defineProps<{
   text: string,
   loading?: boolean,
   invalid?: boolean

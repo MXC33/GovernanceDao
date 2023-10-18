@@ -20,7 +20,7 @@ Page()
             PackOpening(v-for="i in token.balance"  :token="token")
           div(v-else text="detail") You don't own any packs 
 
-    
+PackOpeningComplete()
 </template>
 
 

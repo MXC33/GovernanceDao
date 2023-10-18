@@ -5,7 +5,7 @@ import GenericBurnGravityGradeV2ABI from './ABIs/GravityGradeGenericV2Burn.json'
 import { NftFragment } from "#gql";
 import { ContractInterface } from "@ix/base/composables/Utils/defineContract";
 
-
+export const usePackContent = () => useState<NftFragment[]>('opened-pack-content', () => [])
 
 export const useOpenPacks = <T extends ContractInterface<T> & GenericBurnGravityGradeV2Contract>() => {
   const activeChain = useActiveChain()
