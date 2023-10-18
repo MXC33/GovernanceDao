@@ -1,28 +1,34 @@
 <template lang="pug">
-div(flex="~ row grow" items="center" justify="center" pos="relative" bg="#FF1E6E"  p="0 md:1" text="xs md:sm" w="full"  h="12" cursor="pointer" @click="onClickBanner")
+div.topBanner(
+  v-if="topBannerData && topBannerData.id" flex="~ row grow" items="center" justify="center" pos="relative" p="0 md:1" text="xs md:sm" w="full"  h="12" cursor="pointer" @click="onClickBanner"
+  :style="{ backgroundColor: topBannerData.bgColor, backgroundImage: topBannerData.bgImages ? 'url('+ topBannerData.bgImages +')': 'none'}"
+  )
 
-  img(:src="imageSrc" flex-grow="1" pos="absolute" inset="0" object="cover" h="full" w="full")
-  img(:src="contentSrc" pos="absolute left-0 right-0" mx="auto" top="50%" translate-y="-50%" object="contain" h="60%" max-w="70%")
+  HList(v-if="topBannerData.imagesLeft" items="center" w="6 md:8" pos="absolute left-4 md:left-8 top-50%" translate-y="-50%" h="70%")
+    img(:src="topBannerData.imagesLeft" w="auto" max-h="full")
 
+  HList(v-if="topBannerData.imagesCenter" pos="absolute left-0 right-0" items="center" justify="center" mx="auto" top="50%" translate-y="-50%" object="contain" h="60%" max-w="70%")
+    img(:src="topBannerData.imagesCenter" w="auto" max-h="full")
 
-  HList(justify="end" items="center" pr="2" z="999" fill="black hover:black" cursor="pointer" @click.stop="toggleBanner" opacity="hover:40" transition="opacity" pos="absolute right-6 top-50%" translate-y="-50%")
-    ClientOnly()
-      CloseIcon(w="2.5 md:4" )
+  HList(v-else-if="topBannerData.message" pos="absolute left-0 right-0" items="center" justify="center" mx="auto" top="50%" translate-y="-50%" object="contain" h="60%" max-w="70%")
+    span(v-html="topBannerData.message" font="bold" text="base sm:lg center")
+
+  HList(justify="end" items="center" z="999" fill="black hover:black" cursor="pointer" @click.stop="toggleBanner" opacity="hover:40" transition="opacity" pos="absolute right-4 md:right-8 top-50%" translate-y="-50%")
+    CloseIcon(w="2.5 md:4" )
 </template>
 
 <script lang="ts" setup>
 import CloseIcon from '~/assets/images/icons/close.svg'
 
 
-const { bannerAdActive, activeAd } = useAds()
+const { topBannerAd, bannerAdActive, activeAd } = useAds()
+const topBannerData = await topBannerAd()
+
 
 const onClickBanner = () => {
-  return window.open(activeAd.value.url)
+  if (topBannerData.link)
+    return window.open(topBannerData.link)
 }
-
-const imageSrc = computed(() => `/splash/${activeAd.value.id}/background.png`)
-const contentSrc = computed(() => `/splash/${activeAd.value.id}/content.png`)
-
 
 const toggleBanner = () => {
   bannerAdActive.value = false
@@ -30,6 +36,13 @@ const toggleBanner = () => {
 </script>
 
 <style>
+.topBanner {
+  background-position: center center;
+  background-attachment: inherit;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
 .top-banner {
   background-image: radial-gradient(var(--mc-gray-600) 1px, transparent 0);
   background-size: 9px 9px;
