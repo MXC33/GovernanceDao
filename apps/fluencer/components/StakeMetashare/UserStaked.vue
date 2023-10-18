@@ -22,8 +22,8 @@ const rows = computed<SimpleTableRow[]>(() =>
     items: [
       item.token?.tokenInfo?.title,
       item.userStakingData?.amountStaked,
-      `${item.userStakingData?.userRewardPerDay} IXT`,
-      `${item.userStakingData?.userRewardPerThirtyDays} IXT`
+      `${roundToDecimals(item.userStakingData?.userRewardPerDay, 5)} IXT`,
+      `${roundToDecimals(item.userStakingData?.userRewardPerThirtyDays, 5)} IXT`
     ]
   }))
 )

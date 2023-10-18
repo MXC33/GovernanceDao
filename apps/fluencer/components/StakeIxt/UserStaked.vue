@@ -43,8 +43,8 @@ const rows = computed<SimpleTableRow[]>(() =>
       "IXT",
       amountStaked,
       formattedMonths(months),
-      `${userRewardPerDay} IXT`,
-      `${userRewardPerThirtyDays} IXT`
+      `${roundToDecimals(userRewardPerDay, 5)} IXT`,
+      `${roundToDecimals(userRewardPerThirtyDays, 5)} IXT`
     ]
   }))
 )
