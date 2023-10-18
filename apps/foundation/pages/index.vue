@@ -14,6 +14,7 @@ Page()
   PageSection(section="ixtStaking")
   Stake()
   HomepageTerritories()
+  HomepageGovernance()
 
 </template>
 

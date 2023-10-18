@@ -22,11 +22,12 @@ div(grid="~ cols-2 gap-6")
             h4() Total pool next epoch
 
       Card()
-        div(text="subheading")
+        div(text="subheading" space-y=8)
           h3() Distribution today
-          h4() 36,936.63 (ICON) 
+          h4() 36,936.63 (ICON)
+          //  IXTIcon(w="5")
 </template>
 
 <script lang="ts" setup>
-
+import IXTIcon from '~/assets/images/token.svg'
 </script>
