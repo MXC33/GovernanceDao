@@ -4,7 +4,7 @@ Page()
     PageHeader()
       template(#icon): img(src="~/assets/images/ixt-cover.png")
       template(#title) IXT
-      template(#description) Within Planet IX, Metashares work like any other form of corporate ownership. By staking your shares you ‘activate’ them and directly start to earn rewards from your shares. Without staking your shares you simply hold them in your wallet, without yielding rewards.
+      template(#description) Staking IXT provides holders dual benefits: you earn an annual percentage yield (APY) while enhancing the security and efficiency of the blockchain network. By staking, holders actively participate in the network's consensus mechanism, aiding in transaction validation. Essentially, staking offers financial incentives while promoting a more robust and inclusive blockchain ecosystem. 
 
   template(#default)
     PageTabs()

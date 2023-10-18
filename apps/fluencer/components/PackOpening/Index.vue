@@ -4,7 +4,8 @@ ListItem()
     TokenImage(:token="token")
   template(#title) {{ token?.tokenInfo?.title }}
   template(#description)
-    p Balance: {{ token?.balance }}
+    p Balance: 1 
+    //{{ token?.balance }}
 
   template(#button)
     ButtonInteractive(@click="claimRewardRequest(token)"  v-if="token" text="Open" min-w="55" cut="md:~ bottom-right sm" :loading="isLoading"  :loading-text="'Opening pack...'") 
@@ -14,7 +15,7 @@ ListItem()
 
 
 import type { NftFragment } from '.nuxt/gql/default';
-
+console.log("TOKEN", token)
 const { token } = defineProps<{
   token: NftFragment
 }>()

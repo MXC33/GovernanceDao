@@ -1,5 +1,5 @@
 <template lang="pug">
-VList(p="x-6 b-6" space-y="6")
+VList(p="6" space-y="6")
   slot
   
 </template>

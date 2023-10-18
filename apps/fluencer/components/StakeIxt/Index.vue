@@ -13,9 +13,9 @@ DrawerContent(:start-open="true" :is-neutral="true" bg="gray-900" max-h="auto")
         PageSubTitle() Duration
 
         div(grid="~ md:cols-4 gap-3")
-          button(btn="~ form on-active:form-active" v-for="period in stakePeriods" capitalize="~" :active="activePeriod.months == period.months" @click="selectPeriod(period)" flex="~ col" justify="center") 
+          button(btn="~ form on-active:form-active" h="12" v-for="period in stakePeriods" capitalize="~" :active="activePeriod.months == period.months" @click="selectPeriod(period)" flex="~ col" justify="center") 
             div(font="bold") {{ formattedMonths(period?.months) }}
-            div(text="detail") {{ period.apy }}%
+            div(text="detail" leading="1em") {{ period.apy }}% APY
 
       Divider(mx="-6")
 

@@ -9,15 +9,16 @@ Page()
   template(#default)
     PageTabs()
 
-    DrawerContent(:start-open="true" :is-neutral="true" bg="gray-900")
+    DrawerContent(:start-open="true" :is-neutral="true" bg="gray-900" max-h="auto")
       template(#header)
         div My bundles
 
       template(#default)
         DrawerContentBody()
           ListLoading(v-if="vouchersPending")
-          PackOpening(v-for="token in tokens" v-else-if="tokens && tokens.length > 0" :token="token")
-          div(v-else text="detail" pt="2") You don't own any packs 
+          template(v-for="token in tokens" v-else-if="tokens && tokens.length > 0")
+            PackOpening(v-for="i in token.balance"  :token="token")
+          div(v-else text="detail") You don't own any packs 
 
     
 </template>

@@ -1,6 +1,6 @@
 <template lang="pug">
 VList(max-h="85" frame="~ gray-400 on-frameless:none" :frameless="noFrame"  v-if="!disable")
-  HList(h="12" px="6 on-small:3" bg="ix-black on-neutral:gray-900" b="on-table:b-1 gray-600 on-meta:t-1 gray-600" :meta="isMeta" items="center" justify="between" pos="sticky top-0" flex-shrink="0" z="1" @click.stop="dropDrawer" uppercase="~" cursor="pointer" :neutral="isNeutral" :small="isSmall" :table="isTable")
+  HList(h="12" px="6" bg="gray-900" b="b-1 gray-600" items="center" justify="between" pos="sticky top-0" flex-shrink="0" z="1" @click.stop="dropDrawer" uppercase="~" cursor="pointer")
     div(color="white" text="md" font="bold" v-if="$slots.header")
       slot(name="header")
 
@@ -21,13 +21,11 @@ VList.no-scrollbar(overflow="auto" max-h="85" v-else)
 <script lang="ts" setup>
 import { Collapse } from 'vue-collapsed'
 
-const { startOpen, noFrame = false, isMeta = false } = defineProps<{
+const { startOpen, noFrame = false } = defineProps<{
   startOpen?: boolean
   isSmall?: boolean
   isNeutral?: boolean
   noFrame?: boolean
-  isMeta?: boolean
-  isTable?: boolean
   disable?: boolean
 }>()
 

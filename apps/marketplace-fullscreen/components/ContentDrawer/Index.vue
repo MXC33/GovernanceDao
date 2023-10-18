@@ -7,7 +7,7 @@ VList(max-h="85" frame="~ gray-400 on-frameless:none on-mobile:none" :frameless=
     HList(v-else)
       slot(name="titleicon")
 
-    HelperChevron(w="5" :up="isOpen")
+    HelperChevron(:up="isOpen")
 
   Transition(name="slide-top")
     Collapse(:when="isOpen" class="v-collapse"  overflow-y="auto" )

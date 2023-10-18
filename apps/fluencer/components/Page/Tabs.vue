@@ -31,7 +31,8 @@ const getURL = (tab: Tab) => {
 const notificationCount = (tab: Tab) => {
   switch (tab) {
     case "open":
-      return vouchers.value?.length ?? 0
+      return vouchers.value?.map((token) => token.balance).reduce((prev, current) => (prev ?? 0) + (current ?? 0) ?? 0, 0)
+
     case "stake-metashares":
       return metashares.value?.length ?? 0
 
