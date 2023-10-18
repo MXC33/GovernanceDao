@@ -13,6 +13,8 @@ Page()
   HomepageStaking()
   PageSection(section="ixtStaking")
   Stake()
+  PageSection(section="lpStaking")
+  HomepageLP()
   HomepageTerritories()
   HomepageGovernance()
 
