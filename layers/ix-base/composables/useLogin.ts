@@ -44,9 +44,12 @@ export const useLogin = () => {
   const loginStatus = useState<LoginStatus>('user-status', () => 'logged-in')
   const loginFailType = useState<LoginFailState | null>('fail-state', () => null)
 
-  const isLoggedInAndConnected = computed(() =>
-    user.value && user.value.id && isWalletConnected.value
-  )
+  const isLoggedInAndConnected = computed(() => {
+    const needsUser = !appConfig.connectWithoutIXUser
+    const userValid = needsUser ? user.value && user.value.id : true
+    console.log("Needs user", userValid, needsUser)
+    return userValid && isWalletConnected.value
+  })
 
   const loginFailed = (reason?: string) => {
     loginStatus.value = 'logged-out'

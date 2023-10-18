@@ -10,7 +10,7 @@ export const useAppSetup = () => {
   const appLoaded = useState('app-fully-loaded', () => false)
 
   const { y } = useWindowScroll()
-  const { connectWallet, walletState, walletSigningToken } = useWallet()
+  const { connectWallet, walletState, walletSigningToken, walletAdress } = useWallet()
   const { setupCurrencyPrice } = useCurrencyConversion()
   const { setRefreshToken, isLoggedInAndConnected } = useLogin()
   const { user } = useUser()
@@ -39,7 +39,7 @@ export const useAppSetup = () => {
         return
 
       const walletHeaders = {
-        'X-Wallet': user.value.wallet_address ?? "",
+        'X-Wallet': walletAdress.value ?? "",
         'X-Signing-Token': walletSigningToken.value ?? ""
       }
 

@@ -16,7 +16,8 @@ Page()
       template(#default)
         DrawerContentBody()
           ListLoading(v-if="vouchersPending")
-          PackOpening(v-for="token in tokens" v-else-if="tokens" :token="token")
+          PackOpening(v-for="token in tokens" v-else-if="tokens && tokens.length > 0" :token="token")
+          div(v-else text="detail" pt="2") You don't own any packs 
 
     
 </template>

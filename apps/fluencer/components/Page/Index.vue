@@ -2,7 +2,7 @@
 VList()
   slot(name="header")
 
-  VList(pos="relative" px="8" pb="8" space-y="8" )
+  VList(pos="relative" px="4 md:8" pb="8" space-y="8" )
     slot
 
 

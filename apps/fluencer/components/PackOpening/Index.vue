@@ -7,7 +7,7 @@ ListItem()
     p Balance: {{ token?.balance }}
 
   template(#button)
-    ButtonInteractive(@click="claimRewardRequest(token)"  v-if="token" text="Open" min-w="55" cut="~ bottom-right sm" :loading="isLoading"  :loading-text="'Opening pack...'") 
+    ButtonInteractive(@click="claimRewardRequest(token)"  v-if="token" text="Open" min-w="55" cut="md:~ bottom-right sm" :loading="isLoading"  :loading-text="'Opening pack...'") 
 </template>
     
 <script lang="ts" setup>

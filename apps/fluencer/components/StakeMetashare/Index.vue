@@ -1,7 +1,7 @@
 <template lang="pug">
 ListItem()
   template(#image)
-    TokenMedia(:token="token")
+    TokenMedia(:token="token" flex-shrink="0")
   template(#title) {{ token?.tokenInfo?.title }}
   template(#description)
     p Balance: {{ token?.balance }}

@@ -1,4 +1,5 @@
 import { callWithNuxt } from 'nuxt/app'
+import { IXAppConfig } from './useAppSetup'
 // import type { RaffleUpcomingResponse, RafflePastResponse, ActiveRaffleResponse } from './IX-API/types'
 
 
@@ -32,6 +33,7 @@ const deleteCookie = (name: string) => {
 export const useIXAPI = () => {
   const headers = useIXHeaders()
   const app = useNuxtApp()
+  const config = useAppConfig() as IXAppConfig
   const loginURL = `${BASE_API_ENDPOINT_URL()}/auth/login`
   const usernameFromWalletAddressURL = `${BASE_API_ENDPOINT_URL()}/mission-controll/username/wallet`
 
@@ -44,6 +46,8 @@ export const useIXAPI = () => {
 
   const onUnauthorized = async () => {
     const route = useRoute()
+    if (config.connectWithoutIXUser)
+      return
 
     if (route.path.includes('connect') || route.path.includes('logout'))
       return

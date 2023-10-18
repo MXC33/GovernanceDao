@@ -1,5 +1,5 @@
 <template lang="pug">
-VList(flex-grow="1" pos="relative" min-h="50vh" justify="center" items="center")
+VList(flex-grow="1" pos="relative" min-h="50vh" justify="center" items="center" px="4 md:8")
 
   VList(pos="relative" text="left" justify="center" items="center" space-y="10" max-w="3xl")
     .flu-header-image(w="52" h="35" pos="relative")

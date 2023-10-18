@@ -2,11 +2,9 @@ export default defineNuxtRouteMiddleware(async (to, from) => {
   if (to.path == '/connect' || to.path == '/logout')
     return true
 
-  const { walletSigningToken } = useWallet()
-  const { user } = useUser()
+  const { walletSigningToken, walletAdress } = useWallet()
 
-
-  if (!walletSigningToken.value || !user.value) {
+  if (!walletSigningToken.value || !walletAdress.value) {
     return navigateTo({
       path: '/logout',
       query: {
@@ -16,7 +14,7 @@ export default defineNuxtRouteMiddleware(async (to, from) => {
   }
 
   const walletHeaders = {
-    'X-Wallet': user.value.wallet_address ?? "",
+    'X-Wallet': walletAdress.value ?? "",
     'X-Signing-Token': walletSigningToken.value ?? ""
   }
 
