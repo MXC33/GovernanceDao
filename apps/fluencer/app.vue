@@ -16,13 +16,13 @@
 import { StakingId } from '.nuxt/gql/default';
 
 const { setupOnMounted } = useAppSetup()
-const { execute: fetchIXTOneMonthData } = useStakingData(StakingId.IxtOneMonth)
-const { execute: fetchIXTThreeMonthData } = useStakingData(StakingId.IxtThreeMonths)
-const { execute: fetchIXTSixMonthData } = useStakingData(StakingId.IxtSixMonths)
-const { execute: fetchIXTTwelveMonthData } = useStakingData(StakingId.IxtTwelveMonths)
-const { execute: fetchMetashareData } = useStakingData(StakingId.Metashare)
-const { execute: fetchVoucherTokens } = useVoucherData()
-const { execute: fetchTokens } = useTokenData()
+const { refresh: fetchIXTOneMonthData } = useStakingData(StakingId.IxtOneMonth)
+const { refresh: fetchIXTThreeMonthData } = useStakingData(StakingId.IxtThreeMonths)
+const { refresh: fetchIXTSixMonthData } = useStakingData(StakingId.IxtSixMonths)
+const { refresh: fetchIXTTwelveMonthData } = useStakingData(StakingId.IxtTwelveMonths)
+const { refresh: fetchMetashareData } = useStakingData(StakingId.Metashare)
+const { refresh: fetchVoucherTokens } = useVoucherData()
+const { refresh: fetchTokens } = useTokenData()
 
 const { snackNotifications } = useSnackNotifications()
 const route = useRoute()

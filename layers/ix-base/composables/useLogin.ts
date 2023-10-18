@@ -47,7 +47,6 @@ export const useLogin = () => {
   const isLoggedInAndConnected = computed(() => {
     const needsUser = !appConfig.connectWithoutIXUser
     const userValid = needsUser ? user.value && user.value.id : true
-    console.log("Needs user", userValid, needsUser)
     return userValid && isWalletConnected.value
   })
 
