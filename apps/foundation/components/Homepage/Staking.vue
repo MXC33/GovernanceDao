@@ -10,7 +10,7 @@ PageSection(section="earnStaking")
     Card()
       TitleDetail()
         PageSection(section="lpStakingInfo")
-      template(#detailRight )
+      template(#detailRight)
         UsdtIXT_Icon(w="25" class="ml-2")
         MaticIXT_Icon(w="25" class="ml-2")
 </template>

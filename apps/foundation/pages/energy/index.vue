@@ -1,12 +1,14 @@
 <template lang="pug">
 Page()
   EnergyLanding()
-  EnergyPool()
-  EnergyStake()
+  PageSection(section="forIxt")
+  StakeEnergy()
+  PageSection(section = "ameliaFoundation")
+  EnergyAmelia()
 </template>
 
 <script lang="ts" setup>
-import IXTIcon from '~/assets/images/token.svg'
+
 
 </script>
 

@@ -15,7 +15,7 @@ div(grid="~ cols-2 gap-3")
         div Your Stake
         div(style="display: flex; align-items: center;")
           span 0
-          EnergyIcon(w="5" class="ml-2")
+          img(src="~/assets/png/EnergyIcon.png" w="7" class="ml-2")
       div 
         div Daily rewards
         div(style="display: flex; align-items: center;")
@@ -26,14 +26,13 @@ div(grid="~ cols-2 gap-3")
       button(btn="~ primary-outline") Stake 
     template(#detailBottom)
       ClaimHorizontal()
-  </template>
+  EnergyPool()
+</template>
 
 
 <script lang="ts" setup>
 
 import { formatNumber } from '@ix/base/composables/Utils/useHelpers';
-
-import EnergyIcon from '~/assets/png/EnergyIcon.png'
 import IXTIcon from '~/assets/images/token.svg'
 import { StakingId } from '../../.nuxt/gql/default';
 

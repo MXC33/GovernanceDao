@@ -11,8 +11,9 @@ VList(bg="gray-800"  rounded="xl" b="0.5 white opacity-20"  overflow="hidden")
       slot
 
     // Right detail
-    CardDetail(v-if="$slots.detailRight")
+    CardDetail(v-if="$slots.detailRight" class="flex flex-col justify-center h-full")
       slot(name="detailRight")
+
 
 
   // Bottom detail
