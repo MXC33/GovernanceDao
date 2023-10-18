@@ -114,7 +114,7 @@ const { loading: isLoading, execute: stakeIxtRequest } = useContractRequest(asyn
 const onClickStake = async () => {
   const stakedIXT = await stakeIXT(stakePeriodToStakingId(activePeriod.value), 1)
   if (stakedIXT)
-    displaySnack("stake-success", "success")
+    displaySnack("ixt-stake-success", "success")
 }
 
 const { ixtToUSD } = useCurrencyConversion()
