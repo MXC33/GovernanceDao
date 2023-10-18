@@ -25,8 +25,6 @@ const { refresh: fetchVoucherTokens } = useVoucherData()
 const { refresh: fetchTokens } = useTokenData()
 
 const { snackNotifications } = useSnackNotifications()
-const route = useRoute()
-const onConnect = computed(() => route.name == 'connect')
 
 useHead({
   title: "Fluencer | PlanetIX",

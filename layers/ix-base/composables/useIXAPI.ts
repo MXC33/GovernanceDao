@@ -31,6 +31,7 @@ const deleteCookie = (name: string) => {
 }
 
 export const useIXAPI = () => {
+  const route = useRoute()
   const headers = useIXHeaders()
   const app = useNuxtApp()
   const config = useAppConfig() as IXAppConfig
@@ -45,7 +46,6 @@ export const useIXAPI = () => {
   }
 
   const onUnauthorized = async () => {
-    const route = useRoute()
     if (config.connectWithoutIXUser)
       return
 
