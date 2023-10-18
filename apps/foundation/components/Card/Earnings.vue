@@ -11,3 +11,7 @@ Card(style="padding: 10px; border-radius: 8px;")
         p 0.00
   </template>
   
+<script>
+
+
+</script>

@@ -9,17 +9,13 @@ Page()
 
   PageSection(section="yourTerritories")
   HList(space-x="12")
-    button(btn="~ form" p="6") AREA
-    button(btn="~ form" p="6") SECTOR
-    button(btn="~ form" p="6") ZONE
-    button(btn="~ form" p="6") DOMAIN
-  HList()
-    div(grid="~ cols-2 gap-6")
-      Territory(category="Legendary")
-      Territory(category="Rare")
-      Territory(category="Uncommon")
-      Territory(category="Common")
-      Territory(category="Outliners")
+    // Jag försökte göra denna till unik för att just nu
+    // så ändrar den rendreringen av nedanstående.
+    ButtonTopTerritories(v-for="section in sections" :key="section"  :label="section" @click="activeSectionTop = $event")
+  TerritoryBoxes(v-if="activeSectionTop === 'area'" b="blue solid 0.5")
+  TerritoryBoxes(v-if="activeSectionTop === 'sector'" b="red solid 0.5")
+  TerritoryBoxes(v-if="activeSectionTop === 'zone'" b="yellow solid 0.5")
+  TerritoryBoxes(v-if="activeSectionTop === 'domain'" b="purple solid 0.5")
   div(space-y="12")
     PageSection(section="yourTerritories")
     HList()
@@ -27,21 +23,20 @@ Page()
       ClaimTotalReward()
 
   HList(space-x="12")
-    button(btn="~ form" p="6" @click="activeSection = 'area'") AREA
-    button(btn="~ form" p="6" @click="activeSection = 'sector'") SECTOR
-    button(btn="~ form" p="6" @click="activeSection = 'zone'") ZONE
-    button(btn="~ form" p="6" @click="activeSection = 'domain'") DOMAIN
-
+    ButtonTerritories(v-for="section in sections" :key="section"  :label="section" @click="activeSection = $event")
   PageSection(v-if="activeSection === 'area'" section="yourTerritories.content.area")
   PageSection(v-if="activeSection === 'sector'" section="yourTerritories.content.sector")
   PageSection(v-if="activeSection === 'zone'" section="yourTerritories.content.zone")
   PageSection(v-if="activeSection === 'domain'" section="yourTerritories.content.domain")
+
 </template>
 
 <script lang="ts" setup>
 import { ref } from 'vue';
 
 const activeSection = ref('area');
+const activeSectionTop = ref('area');
+const sections = ['AREA', 'SECTOR', 'ZONE', 'DOMAIN'];
 
 </script>
   
