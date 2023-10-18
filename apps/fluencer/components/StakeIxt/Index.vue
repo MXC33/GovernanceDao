@@ -12,8 +12,8 @@ DrawerContent(:start-open="true" :is-neutral="true" bg="gray-900" max-h="auto")
       VList(space-y="3")
         PageSubTitle() Duration
 
-        div(grid="~ cols-4 gap-3")
-          button(btn="~ form on-active:form-active" v-for="period in stakePeriods" capitalize="~" :active="activePeriod.months == period.months" @click="selectPeriod(period)" flex="~ col") 
+        div(grid="~ md:cols-4 gap-3")
+          button(btn="~ form on-active:form-active" v-for="period in stakePeriods" capitalize="~" :active="activePeriod.months == period.months" @click="selectPeriod(period)" flex="~ col" justify="center") 
             div(font="bold") {{ formattedMonths(period?.months) }}
             div(text="detail") {{ period.apy }}%
 
@@ -40,9 +40,8 @@ DrawerContent(:start-open="true" :is-neutral="true" bg="gray-900" max-h="auto")
 
       Divider(mx="-6")
 
-      PriceRow()
-        template(#right)
-          ButtonInteractive(:loading="isLoading" @click="stakeIxtRequest"  text="STAKE YOUR IXT NOW" min-w="60" cut="~ bottom-right sm")
+      HList(self="end" w="lt-md:full")
+        ButtonInteractive(:loading="isLoading" @click="stakeIxtRequest"  text="STAKE YOUR IXT NOW" min-w="60" cut="md:~ bottom-right sm" w="lt-md:full")
 
 </template>
 

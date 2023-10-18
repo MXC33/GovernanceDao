@@ -5,16 +5,6 @@ SimpleTable(:rows="rows" :columns="columns" pb="3")
       TokenMedia(:token="tokens[index]" w="16" h="16" flex-shrink="0")
       TokenName(:token="tokens[index]" font="bold")
 
-//
-  template(#image)
-    TokenMedia(:token="data?.token")
-  template(#title) {{ data?.token?.tokenInfo?.title }}
-  template(#description)
-    p Staked: {{ data?.userStakingData?.amountStaked }}
-  template(#info)
-    HList(space-x="2")
-      div 30 day reward: 
-      div(font="bold") {{ data?.userStakingData?.userRewardPerThirtyDays?.toFixed(2) }} IXT
 </template>
   
 <script lang="ts" setup>
@@ -38,10 +28,10 @@ const rows = computed<SimpleTableRow[]>(() =>
   }))
 )
 const columns: SimpleTableColumn[] = [
-  { title: "Asset", id: "asset" },
-  { title: "Staked amount" },
-  { title: "24h yield" },
-  { title: "30 days yield" }
+  { title: "Asset", id: "asset", width: 300 },
+  { title: "Staked amount", },
+  { title: "24h yield", },
+  { title: "30 days yield", }
 ]
 
 
