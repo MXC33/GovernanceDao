@@ -1,12 +1,12 @@
-<template>
-  button(btn="~ form" p="6" @click="handleClick") {{ label }}
+<template lang="pug">
+button(btn="~ form" p="6" @click="handleClick") {{ label }}
 </template>
 
 <script lang="ts" setup>
 import { defineProps, defineEmits } from 'vue';
 
 const props = defineProps({
-  label: String | undefined
+  label: String
 });
 
 const emit = defineEmits(['click']);
