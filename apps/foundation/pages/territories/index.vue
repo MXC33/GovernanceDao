@@ -27,15 +27,21 @@ Page()
       ClaimTotalReward()
 
   HList(space-x="12")
-    button(btn="~ form" p="6") AREA
-    button(btn="~ form" p="6") SECTOR
-    button(btn="~ form" p="6") ZONE
-    button(btn="~ form" p="6") DOMAIN
-  Card(bg="default" b="none") 
-  
+    button(btn="~ form" p="6" @click="activeSection = 'area'") AREA
+    button(btn="~ form" p="6" @click="activeSection = 'sector'") SECTOR
+    button(btn="~ form" p="6" @click="activeSection = 'zone'") ZONE
+    button(btn="~ form" p="6" @click="activeSection = 'domain'") DOMAIN
+
+  PageSection(v-if="activeSection === 'area'" section="yourTerritories.content.area")
+  PageSection(v-if="activeSection === 'sector'" section="yourTerritories.content.sector")
+  PageSection(v-if="activeSection === 'zone'" section="yourTerritories.content.zone")
+  PageSection(v-if="activeSection === 'domain'" section="yourTerritories.content.domain")
 </template>
-    
+
 <script lang="ts" setup>
+import { ref } from 'vue';
+
+const activeSection = ref('area');
 
 </script>
   

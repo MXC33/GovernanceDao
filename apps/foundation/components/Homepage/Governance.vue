@@ -3,9 +3,9 @@ PageSection(section="governance")
   HList(gap-6)
     Card()
       PageSection(section="GovDiscussion")
-        template(#detailBottom)
-          div Total Discussion
-          button(btn="~ primary-outline") VIEW DISCUSSION
+      template(#detailBottom)
+        div Total Discussion
+        button(btn="~ primary-outline") VIEW DISCUSSION
     Card()
       PageSection(section="GovProposal")
       template(#detailBottom)

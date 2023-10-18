@@ -13,7 +13,7 @@ Card()
 <script lang="ts" setup>
 import { defineProps } from 'vue';
 import IXTIcon from '~/assets/images/token.svg'
-import TierHexagonColor from './TireHexagonColor.vue';
+// import TierHexagonColor from './TireHexagonColor.vue';
 
 
 interface Territory {
