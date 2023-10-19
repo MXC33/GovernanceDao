@@ -1,4 +1,6 @@
 <template lang="pug">
+Page()
+  ButtonNav()
 
 </template>
 

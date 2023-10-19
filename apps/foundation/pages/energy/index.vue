@@ -1,5 +1,6 @@
 <template lang="pug">
 Page()
+  ButtonNav()
   EnergyLanding()
   PageSection(section="forIxt")
   StakeEnergy()
