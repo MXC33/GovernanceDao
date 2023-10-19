@@ -1,6 +1,7 @@
 <template lang="pug">
 Card(flex-grow="1")
-  Div(grid="~ cols-5 gap-6 ")
+  Div(grid="~ cols-6 gap-6 ")
+    ButtonGlitch(@click="navigateTo('/')" tag="button" btn="~ form" text="Home" font="bold")
     ButtonGlitch(@click="navigateTo('/territories')" tag="button" btn="~ form" text="Territories Staking" font="bold") 
     ButtonGlitch(@click="navigateTo('/energy')" tag="button" btn="~ form" text="Energy Staking" font="bold") 
     ButtonGlitch(@click="navigateTo('/landmarks')" tag="button" btn="~ form" text="Landmark Staking" font="bold") 
