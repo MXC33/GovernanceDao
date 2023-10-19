@@ -4,7 +4,7 @@ VList(space-y="6")
     p(v-if="primary" text="md" font="druk-medium bold") {{$t(`${String(route.name)}.${section}.title`) }}
     p(v-else text="md" font="bold druk") {{$t(`${String(route.name)}.${section}.title`) }}
 
-    p(v-if="description" text="sm" color="gray" font="druk-medium") {{$t(`${String(route.name)}.${description}.description`) }}
+    p(v-if="description" text="s" color="gray" font="druk-medium") {{$t(`${String(route.name)}.${section}.description`) }}
 
   slot
 </template>
