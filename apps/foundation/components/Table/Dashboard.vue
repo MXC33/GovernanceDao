@@ -5,11 +5,15 @@ div(b="0.5 white opacity-20 rounded-xl")
       tr(class="bg-gray-800 p-6") 
         th
           TitleDetail() 
-            template(#default) Earning overview
-            template(#detailBottom) My Assets
-        th 24h
-        th 30 days
-    tbody
+            template(#default)
+              PageParagraphs(section="tableHead")
+            template(#detailBottom) 
+              PageParagraphs(section="tableAssets")
+        th(text="detail xs")
+          PageParagraphs(section="tableDays")
+        th(text="detail xs")
+          PageParagraphs(section="tableMonthly")
+    tbody(bg="black")
       tr
         td.flex.flex-row.items-center
           IXTIcon.iconTable()
@@ -42,9 +46,8 @@ div(b="0.5 white opacity-20 rounded-xl")
         td.center 0.00
       tr(class="bg-gray-800 p-6")
         td.center.flex.flex-row.items-center
-          TitleDetail()
-            template(#detail)
-              div Total 
+          div(text="detail") 
+            PageParagraphs(section="totalEarnings")
         td.center 0
           IXTIcon(w="5" class="ml-2")
         td.center 0

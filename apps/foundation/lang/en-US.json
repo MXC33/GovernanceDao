@@ -22,13 +22,17 @@
       "staked": "Staked",
       "withdrawable": "Withdrawable"
     },
-    "earningOverview": {
+    "tableHead": {
       "title": "Earning overview"
     },
-    "assetTimeFrame": {
-      "myAssets": "My assets",
-      "oneDay": "1 day(s)",
-      "thirtyDays": "30 day(s)"
+    "tableAssets": {
+      "title": "My assets"
+    },
+    "tableDays": {
+      "title": "1 day(s)"
+    },
+    "tableMonthly": {
+      "title": "30 day(s)"
     },
     "totalEarnings": {
       "title": "Total"
