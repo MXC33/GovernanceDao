@@ -3,9 +3,10 @@ Card(style="padding: 10px; border-radius: 8px;")
   HList(flex flex-row justify-between space-x="10")
     TitleDetail()
       template(#detail)
-        p Total Rewards
-      p [dynamic value]
-    button(btn="~ secondary" disable="active") Claim
+        PageParagraphs(section="yourTerritories.totalRewards")
+      p [Api Data]
+    button(btn="~ secondary" disable="active")
+      PageParagraphs(section="claimBtn")
   </template>
   
 
