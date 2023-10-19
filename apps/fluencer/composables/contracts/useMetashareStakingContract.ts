@@ -71,5 +71,5 @@ export const useMetashareStakingContract = <T extends ContractInterface<T> & Met
 export const filterMetashareType = (token: NftFragment) => {
   if (!token)
     return null
-  return token?.tokenInfo?.type === 'metashare' && (token?.tokenInfo.tier == 'eternalab' || token?.tokenInfo?.tier == 'new-lands')
+  return token?.tokenInfo?.type === 'metashare' && (token?.tokenInfo.tier == 'eternalab' || token?.tokenInfo?.tier == 'new-lands' || token?.tokenInfo?.tier == 'gws')
 }
