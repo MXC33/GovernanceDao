@@ -176,6 +176,9 @@
     },
     "ProposalBtn": {
       "title": "VIEW PROPOSAL"
+    },
+    "claimRewards": {
+      "title": "Claim rewards"
     }
   },
   "metashare": {

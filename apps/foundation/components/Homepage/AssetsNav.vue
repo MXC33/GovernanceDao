@@ -4,14 +4,15 @@ VList(flex="~ space-x-10 items-center space-around" p="4" bg="gray-900")
     TitleDetail(px="5")
       template(#detail)
         div(flex="~ col space-x-4")
-          div(text="")
+          div()
             PageParagraphs(section="yourStake")
           div(text="xl" color="white" font="bold") {{ userStaked}}
     TitleDetail()
       template(#detail)
-        ul(flex="~ col space-x-4")
-          li(text="md") Your Reward:
-          li(text="xl" color="white" font="bold") {{ userReward }}
+        div(flex="~ col space-x-4")
+          div()
+            PageParagraphs(section="reward")
+          div(text="xl" color="white" font="bold") {{ userReward }}
     button(@click="onClick" btn="~ primary-outline") Go to {{ id }} staking
 
 </template>
