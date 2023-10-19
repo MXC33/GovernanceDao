@@ -16,7 +16,7 @@ Page()
   Stake()
   PageSection(section="lpStaking")
   HomepageLP()
-  HomepageTerritories()
+  HomepageAssets()
   HomepageGovernance()
 
 </template>

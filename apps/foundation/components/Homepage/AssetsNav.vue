@@ -1,11 +1,12 @@
 <template lang="pug">
-VList(flex="~ cols-3 space-x-10 items-center space-around" p="4" bg="gray-900")
+VList(flex="~ space-x-10 items-center space-around" p="4" bg="gray-900")
   div(flex="~ cols-2 gap-12")     
     TitleDetail(px="5")
       template(#detail)
-        ul(flex="~ col space-x-4")
-          li(text="md") Your Stake:
-          li(text="xl" color="white" font="bold") {{ userStaked}}
+        div(flex="~ col space-x-4")
+          div(text="")
+            PageParagraphs(section="yourStake")
+          div(text="xl" color="white" font="bold") {{ userStaked}}
     TitleDetail()
       template(#detail)
         ul(flex="~ col space-x-4")

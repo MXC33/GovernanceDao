@@ -39,6 +39,9 @@
     "CoingeckoLink": {
       "title": "See on Coingecko"
     },
+    "TotalPool": {
+      "title": "Total Pool next epoch"
+    },
     "distributionToday": {
       "title": "Distribution Today"
     },
