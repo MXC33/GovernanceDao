@@ -1,11 +1,6 @@
 <template lang="pug">
 Page()
-  HList(grid="~ gap-6")
-    router-link(to="/" tag="button" btn="~ secondary") Home
-    router-link(to="/metashare" tag="button" btn="~ secondary") Metashare Staking
-    router-link(to="/energy" tag="button" btn="~ secondary") Energy Staking
-    router-link(to="/landmarks" tag="button" btn="~ secondary") Landmarks Staking
-    router-link(to="/governance" tag="button" btn="~ secondary") Governance 
+  ButtonNav()
 
   PageSection(section="yourTerritories")
   HList(space-x="12")
