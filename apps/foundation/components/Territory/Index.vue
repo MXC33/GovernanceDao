@@ -1,7 +1,7 @@
 <template lang="pug">
 Card()
-  HList()
-    ul(v-for="territory, index in territories" :key="index" p=6 class="list-none pl-0")
+  div(flex="~ cols-4")
+    ul(v-for="territory, index in territories" :key="index" class="list-none pl-0")
       li(text="m" mb="2" color="gray-300") {{ territory.title }}
       li.flex.items-center
         span(text="2xl" font="bold") {{ territory.data }}
@@ -47,3 +47,5 @@ const territories: Territory[] = [
   }
 ];
 </script>
+
+<style></style>

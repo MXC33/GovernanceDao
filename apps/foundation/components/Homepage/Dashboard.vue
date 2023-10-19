@@ -14,8 +14,8 @@ div(grid="~ cols-2 gap-6")
       Card() 
         VList()
           div(text="subheading")
-            div() Circulating Supply
-            div(color="ix-orange") See on coinGecko
+            PageParagraphs(section="circulatingSupplySection")
+            PageParagraphs(section="CoingeckoLink")
             div() 422,681
 
           div(text="detail")

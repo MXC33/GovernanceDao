@@ -1,10 +1,10 @@
 <template lang="pug">
 VList(space-y="6")
   header(space-y="3")
-    h1(v-if="primary" text="5xl" font="druk-medium bold") {{$t(`${String(route.name)}.${section}.title`) }}
-    h2(v-else text="3xl" font="bold druk") {{$t(`${String(route.name)}.${section}.title`) }}
+    p(v-if="primary" text="md" font="druk-medium bold") {{$t(`${String(route.name)}.${section}.title`) }}
+    p(v-else text="md" font="bold druk") {{$t(`${String(route.name)}.${section}.title`) }}
 
-    p(text="md" color="gray" font="druk") {{$t(`${String(route.name)}.${section}.description`) }}
+    p(v-if="description" text="s" color="gray" font="druk-medium") {{$t(`${String(route.name)}.${section}.description`) }}
 
   slot
 </template>
@@ -13,6 +13,7 @@ VList(space-y="6")
 
 defineProps<{
   primary?: boolean,
+  description?: boolean,
   section: string
 }>()
 
