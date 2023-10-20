@@ -10,19 +10,19 @@ div(grid="~ cols-2 gap-3")
       TitleDetail() 
         template(#detail) 
           PageParagraphs(section="totalLiquidity")
-        template(#default) $1
+        template(#default) ${{lpUsdtData?.totalStakedAmount}}
       TitleDetail() 
         template(#detail)
           PageParagraphs(section="yourStake")
-        template(#default) 0.00
+        template(#default) {{lpUsdtData?.stakingItems[0]?.userStakingData?.amountStaked}}
       TitleDetail()
         template(#detail)
           PageParagraphs(section="fiveDayRoi")
-        template(#default) 0
+        template(#default) 
       TitleDetail()
         template(#detail)
           PageParagraphs(section="lpTokens")
-        template(#default) 0.00
+        template(#default) {{lpUsdtData?.stakingItems[0]?.userStakingData?.balanceOfToken}}
       TitleDetail()
         template(#detail)
           PageParagraphs(section="apy")
@@ -44,11 +44,11 @@ div(grid="~ cols-2 gap-3")
       TitleDetail() 
         template(#detail) 
           PageParagraphs(section="totalLiquidity")
-        template(#default) $1
+        template(#default) {{lpMaticData?.totalStakedAmount}}
       TitleDetail() 
         template(#detail)
           PageParagraphs(section="yourStake")
-        template(#default) 0.00
+        template(#default) {{lpMaticData?.stakingItems[0]?.userStakingData?.amountStaked}}
       TitleDetail()
         template(#detail)
           PageParagraphs(section="fiveDayRoi")
@@ -56,7 +56,7 @@ div(grid="~ cols-2 gap-3")
       TitleDetail()
         template(#detail)
           PageParagraphs(section="lpTokens")
-        template(#default) 0.00
+        template(#default) {{lpMaticData?.stakingItems[0]?.userStakingData?.balanceOfToken}}
       TitleDetail()
         template(#detail)
           PageParagraphs(section="apy")
@@ -71,5 +71,13 @@ div(grid="~ cols-2 gap-3")
 </template>
 
 <script lang="ts" setup>
+import { StakingId } from '~/.nuxt/gql/default';
+
+
+
+const { data: lpMaticData } = useStakingData(StakingId.LpMATIC)
+const { data: lpUsdtData } = useStakingData(StakingId.LpUSDT)
+
+
 
 </script>

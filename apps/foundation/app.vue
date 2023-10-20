@@ -26,6 +26,9 @@ const { execute: fetchIXTThreeMonthData } = useStakingData(StakingId.IxtThreeMon
 const { execute: fetchIXTSixMonthData } = useStakingData(StakingId.IxtSixMonths)
 const { execute: fetchIXTTwelveMonthData } = useStakingData(StakingId.IxtTwelveMonths)
 const { execute: fetchLandmarkData } = useStakingData(StakingId.Landmark)
+const { execute: fetchLPMatic } = useStakingData(StakingId.LpMATIC)
+const { execute: fetchLPUsdt } = useStakingData(StakingId.LpUSDT)
+
 
 useHead({
   title: "Foundation | PlanetIX",
@@ -46,7 +49,9 @@ onMounted(() => {
       fetchIXTThreeMonthData(),
       fetchIXTSixMonthData(),
       fetchIXTTwelveMonthData(),
-      fetchLandmarkData()
+      fetchLandmarkData(),
+      fetchLPMatic(),
+      fetchLPUsdt()
     ])
   })
 })
