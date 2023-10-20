@@ -30,7 +30,6 @@ watch(selectedOption, (newVal) => {
 .dropdown-container {
   position: relative;
   margin-bottom: 15px;
-  border: solid yellow 1px;
 }
 
 label {
