@@ -187,10 +187,8 @@
   },
   "metashare": {
     "StakingTitle": {
-      "title": "METASHARE STAKING"
-    },
-    "StakingDesc": {
-      "title": "Each corporation’s treasury acts as a staking pool for MetaShares and the reward is $IXT."
+      "title": "METASHARE STAKING",
+      "description": "Each corporation’s treasury acts as a staking pool for MetaShares and the reward is $IXT."
     },
     "EarningOverview": {
       "title": "Earning overview"
@@ -229,10 +227,8 @@
       "title": "CLAIM ALL"
     },
     "CorporationTitle": {
-      "title": "CORPORATIONS METASHARE"
-    },
-    "CorporationDesc": {
-      "title": "MetaShares grant you the authority to influence the corporation's future and to earn a monthly portion of the corporation's profits."
+      "title": "CORPORATIONS METASHARE",
+      "description": "MetaShares grant you the authority to influence the corporation's future and to earn a monthly portion of the corporation's profits."
     },
     "TradeTitle": {
       "title": "Trade"
