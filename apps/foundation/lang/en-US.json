@@ -66,7 +66,7 @@
       "description": "Earn rewards for contributing to liquidity and safety."
     },
     "lockPeriodTwelve": {
-      "title": "12 months",
+      "title": "months",
       "subtitle": "Lock Period"
     },
     "lockPeriodThree": {
@@ -82,7 +82,7 @@
       "title": "APY"
     },
     "yourStake": {
-      "title": "Your Stake"
+      "title": "Your stake"
     },
     "poolSize": {
       "title": "Pool size"
@@ -104,8 +104,10 @@
       "description": "Earn rewards for contributing to liquidity and safety."
     },
     "usdtIxtStaking": {
-      "title": "USDT/IXT LP Staking",
-      "description": "Provide liquidity on DEX and Stake LP"
+      "title": "USDT/IXT LP Staking"
+    },
+    "provideLiq": {
+      "title": "Provide liquidity on DEX and Stake LP"
     },
     "totalLiquidity": {
       "title": "Total liquidity"
@@ -134,6 +136,12 @@
     "metashareStaking": {
       "title": "METASHARE STAKING",
       "description": "Each corporation’s treasury acts as a staking pool for MetaShares and the reward is $IXT."
+    },
+    "goToBtn": {
+      "title": "GO TO"
+    },
+    "goTo2": {
+      "title": "STAKING"
     },
     "assetStaking": {
       "territoryBox": {

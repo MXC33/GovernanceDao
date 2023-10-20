@@ -2,26 +2,28 @@
 div(grid="~ cols-2 gap-3")
   Card(v-for="box in boxes" :key="box.monthValue")
     div
-      h3(text-2xl font-bold) {{ box.monthValue }} Months
-      p Lock period
+      div(text-2xl font-bold flex gap-2) {{ box.monthValue }} 
+        PageParagraphs(section="lockPeriodTwelve")
     HList(space-x="10")
       div 
-        div APY
+        PageParagraphs(section="apy")
         div(style="display: flex; align-items: center;")
           span {{ box.apy }} %
       div 
-        div Your Stake
+        PageParagraphs(section="yourStake")
         div(style="display: flex; align-items: center;")
           span {{ box.userStake ?? 0 }}
           IXTIcon(w="5" class="ml-2")
       div 
-        div Pool Size
+        PageParagraphs(section="poolSize")
         div(style="display: flex; align-items: center;")
           span {{ box.poolSize }}
           IXTIcon(w="5" class="ml-2")
     HList(gap-6)
-      button(btn="~ primary-outline") Withdraw 
-      button(btn="~ primary-outline") Deposit
+      button(btn="~ primary-outline")
+        PageParagraphs(section="withdrawBtn")
+      button(btn="~ primary-outline")
+        PageParagraphs(section="depositBtn")
     template(#detailBottom)
       ClaimHorizontal()
   </template>
