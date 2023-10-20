@@ -26,6 +26,7 @@ div(grid="~ cols-2 gap-3")
       button(btn="~ primary-outline") Stake 
     template(#detailBottom)
       ClaimHorizontal()
+      ClaimHorizontal()
   EnergyPoolEarn()
 </template>
 

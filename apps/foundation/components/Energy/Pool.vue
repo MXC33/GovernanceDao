@@ -4,7 +4,7 @@ div()
     Card()
       TitleDetail()
         template(#default)
-          PageSection(section="pool.options.earnIXT")
+          PageSection(section="EarnIXT")
       template(#detailRight)
         IXTIcon(w="25" class="ml-2")
 </template>

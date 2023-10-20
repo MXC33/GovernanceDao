@@ -1,27 +1,32 @@
 <template lang="pug">
 div(grid="~ cols-2 gap-6")
   VList()
-    PageSection(section="staking" :primary="true")
+    PageSection(section="Staking" :primary="true")
       EnergyPoolCard()
   VList(grid="~" space-y="12" flex-direction-row) 
     CardChart()
     HList(gap="6")
       Card() 
         TitleDetail()
-          h3() IXT Pool next epoch
-          h4(color="orange") Estimated
+          div()
+            PageParagraphs(section="IXTPoolNextEpoch")
+          div(color="orange")
+            PageParagraphs(section="Estimated")
           TitleDetail(#detail)
-            h4(text="xl") Total pool next epoch 
-          h4() 422,681
-            IXTIcon(w="6")
+            div(text="xl")
+              PageParagraphs(section="TotalPoolNextEpoch")
+          div(flex) 422,681
+            IXTIcon(w="6" class="ml-2")
       Card()
         TitleDetail()
-          h3() Next epoch release
-          h4(color="orange") Based on facilities minted
+          div()
+            PageParagraphs(section="NextEpochRelease")
+          div(color="orange") 
+            PageParagraphs(section="facilitiesMinted")
           TitleDetail(#detail)
-            h4(text="xl") 99.94%
-          h4() 422,431.531
-            IXTIcon(w="6")
+            div(text="xl") 99.94%
+          div(flex) 422,431.531
+            IXTIcon(w="6" class="ml-2")
 </template>
 
 <script lang="ts" setup>

@@ -4,8 +4,8 @@ div(flex-grow="1")
     Card()
       TitleDetail()
         template(#default)
-          PageSection(section="pool.options.earnAndGive")
-      template(#detailRight )
+          PageSection(section="EarnAndGive")
+      template(#detailRight)
         NeedIcon(w="25" class="ml-2")
 </template>
 

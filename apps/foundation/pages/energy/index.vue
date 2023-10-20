@@ -2,9 +2,9 @@
 Page()
   ButtonNav()
   EnergyLanding()
-  PageSection(section="forIxt")
+  PageSection(section="ChooseYourPool")
   StakeEnergy()
-  PageSection(section = "ameliaFoundation")
+  PageSection(section = "AmeliaFoundation")
   EnergyAmelia()
 </template>
 
