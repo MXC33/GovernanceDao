@@ -1,14 +1,14 @@
 <template lang="pug">
 Page()
   ButtonNav()
-  PageSection(section="rewards")
+  PageSection(section="Rewards")
     HList(grid="~ gap-5")
       CardEarnings()
       ClaimTotalReward()
-  PageSection(section="myLandmarks")
+  PageSection(section="MyLandmarks")
   card(text-center)
-    p No landmarks available
-  PageSection(section="explore")
+    PageParagraphs(section="NoLandmarksPlaceholder")
+  PageSection(section="ExploreLandmarks")
     HList()
       InputsSearchbar()
       InputsDropdown(:options="filterOptions" v-model="selectedFilter" label="Filter by")

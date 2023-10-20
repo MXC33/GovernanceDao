@@ -10,16 +10,16 @@ div(grid="~ cols-3 gap-6" flex-grow)
         HList()
           TitleDetail()
             template(#detail) 
-              ul(grid="~ cols-3")
-                li() shares
-                li() owners
-                li() earning diameter
+              div(grid="~ cols-3")
+                PageParagraphs(section="SharesLabel")
+                PageParagraphs(section="OwnersLabel")
+                PageParagraphs(section="EarningDiameterLabel")
             TitleDetail()
               template(#default) 
-                ul(grid="~ cols-3")
-                  li() 0
-                  li() NA
-                  li() 100
+                div(grid="~ cols-3")
+                  div() [API]
+                  div() [API]
+                  div() [API]
       button(btn="~ primary-outline") view
 </template>
   
