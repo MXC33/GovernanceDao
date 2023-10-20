@@ -1,9 +1,9 @@
 <template lang="pug">
 Card()
-  div(flex="~ cols-4")
-    ul(v-for="territory, index in territories" :key="index" class="list-none pl-0")
-      li(text="m" mb="2" color="gray-300") {{ territory.title }}
-      li.flex.items-center
+  div(grid="~ cols-4 gap-6")
+    div(v-for="territory, index in territories" :key="index")
+      div(text="sm" color="gray-300") {{ territory.title }}
+      div.flex.items-center
         span(text="2xl" font="bold") {{ territory.data }}
         IXTIcon(v-if="territory.title === 'Daily IXT/Share'" w="5" class="ml-2")
 </template>
