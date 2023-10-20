@@ -1,15 +1,15 @@
 <template lang="pug">
 Page()
   ButtonNav() 
-  PageSection(section="staking" :primary="true")
+  PageSection(section="StakingTitle" :primary="true")
     Card()
       Table()
       ClaimHorizontal()
 
-  PageSection(section="corporation")
+  PageSection(section="CorporationTitle")
     div(grid="~ cols-2 gap-6")
       MetashareCorporation(v-for="stakingItem in data?.stakingItems" :staking-data="stakingItem")
-  PageSection(section="corpPerformance")
+  PageSection(section="CorpPerformanceTitle")
     Table()
   
 
