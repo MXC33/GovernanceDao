@@ -273,10 +273,8 @@
       "title": "CLAIM"
     },
     "CorpPerformanceTitle": {
-      "title": "CORPORATIONS' PERFORMANCE"
-    },
-    "CorpPerformanceDesc": {
-      "title": "Rewards earned from staking MetaShares in the last 24 hours and 30 days."
+      "title": "CORPORATIONS' PERFORMANCE",
+      "description": "Rewards earned from staking MetaShares in the last 24 hours and 30 days."
     }
   },
   "territories": {
