@@ -285,10 +285,8 @@
   },
   "territories": {
     "StakingTitle": {
-      "title": "TERRITORY STAKING"
-    },
-    "StakingDesc": {
-      "title": "Explore your territory NFTs and their total payout amounts"
+      "title": "TERRITORY STAKING",
+      "description": "Explore your territory NFTs and their total payout amounts"
     },
     "StakingFilterArea": {
       "title": "Area"
@@ -327,10 +325,8 @@
       "title": "CLAIM"
     },
     "TerritoryTitle": {
-      "title": "YOUR TERRITORIES"
-    },
-    "TerritoryDesc": {
-      "title": "Search and select from the territories you own."
+      "title": "YOUR TERRITORIES",
+      "description": "Search and select from the territories you own."
     },
     "FilterArea": {
       "title": "Area"

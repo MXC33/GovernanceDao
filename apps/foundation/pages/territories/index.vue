@@ -2,7 +2,7 @@
 Page()
   ButtonNav()
 
-  PageSection(section="yourTerritories")
+  PageSection(section="StakingTitle")
   HList(space-x="12")
     // Jag försökte göra denna till unik för att just nu
     // så ändrar den rendreringen av nedanstående.
@@ -12,17 +12,17 @@ Page()
   TerritoryBoxes(v-if="activeSectionTop === 'zone'" b="yellow solid 0.5")
   TerritoryBoxes(v-if="activeSectionTop === 'domain'" b="purple solid 0.5")
   div(space-y="12")
-    PageSection(section="yourTerritories")
+    PageSection(section="TerritoryTitle")
     HList()
       CardEarnings()
       ClaimTotalReward()
 
   HList(space-x="12")
     ButtonTerritories(v-for="section in sections" :key="section"  :label="section" @click="activeSection = $event")
-  PageSection(v-if="activeSection === 'area'" section="yourTerritories.content.area")
-  PageSection(v-if="activeSection === 'sector'" section="yourTerritories.content.sector")
-  PageSection(v-if="activeSection === 'zone'" section="yourTerritories.content.zone")
-  PageSection(v-if="activeSection === 'domain'" section="yourTerritories.content.domain")
+  PageSection(v-if="activeSection === 'area'" section="ContentArea")
+  PageSection(v-if="activeSection === 'sector'" section="ContentSector")
+  PageSection(v-if="activeSection === 'zone'" section="ContentZone")
+  PageSection(v-if="activeSection === 'domain'" section="ContentDomain")
 
 </template>
 
