@@ -32,6 +32,7 @@ export default defineNuxtConfig({
     resolve('./assets/styles/cuts.css'),
     resolve('./assets/styles/transitions.css'),
     resolve('./assets/styles/variables.css'),
+    resolve('./assets/styles/global.css'),
     'vue3-carousel/dist/carousel.css',
     '@unocss/reset/tailwind.css',
   ],

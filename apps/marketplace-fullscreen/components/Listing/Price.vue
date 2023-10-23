@@ -16,8 +16,8 @@ VList()
         VList(text="base md:lg")
           GlitchText(:text="totalPotentialEarning" suffix=" IXT")
         //- div(font="normal") ${{ usdBalanceRounded }}
-        GlitchText(:text="usdBalanceRounded" suffix="$ " font="normal" :is-dollar="true" v-if="spacingUsd")
-        GlitchText(:text="usdBalanceRounded" suffix="$" font="normal" :is-dollar="true" v-else)
+        GlitchText(:text="usdBalanceRounded" prefix="$ " font="normal" v-if="spacingUsd")
+        GlitchText(:text="usdBalanceRounded" prefix="$" font="normal" v-else)
 
 
 </template>

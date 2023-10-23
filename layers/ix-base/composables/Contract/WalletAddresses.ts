@@ -2,6 +2,51 @@ import type { Chain } from "./useWallet"
 
 type ContractAddress = Partial<Record<Chain, string>>
 
+export const catRaffStakingAddress: ContractAddress = {
+  mumbai: 'does not exist',
+  polygon: '0x773895915168137Be0C8dCbd6fd7E44e7cc9d3dB',
+}
+
+export const metashareStakingAddress: ContractAddress = {
+  mumbai: 'does not exist',
+  polygon: '0xbEafBE2eCC41152b8CeF4F155A260cA441F61829',
+}
+
+export const oneMonthIXTStakingAddress: ContractAddress = {
+  mumbai: 'does not exist',
+  polygon: '0x7D0495D8a918Fb9aA02feA8D23c970d5933bD793',
+}
+
+export const threeMonthIXTStakingAddress: ContractAddress = {
+  mumbai: 'does not exist',
+  polygon: '0x08971219534e1F8B6e4Afb2bf4A5Cf3929A141b1',
+}
+
+export const sixMonthIXTStakingAddress: ContractAddress = {
+  mumbai: 'does not exist',
+  polygon: '0xcB985163ca943FE6382a4165a762b38809Ea7Ff8',
+}
+
+export const twelveMonthIXTStakingAddress: ContractAddress = {
+  mumbai: 'does not exist',
+  polygon: '0x87277D6676cD567DFB5536E30146Cd54815f0C53',
+}
+
+export const territoryStakingAddress: ContractAddress = {
+  mumbai: '0xd293F859140235834c68DB9c688959467126f126',
+  polygon: '0x5cb9FcD65cfe3EEFDE88a7084caF2625d516BDD0',
+}
+
+export const landmarkStakedAddress: ContractAddress = {
+  mumbai: "0x2E0cd48d90d7793b679A3925cB5727D07209f8ae",
+  polygon: "0xB030dA155b6F3e67921157Ec7793EDF3e407a55B"
+}
+
+export const energyStakingAddress: ContractAddress = {
+  mumbai: 'does not exist',
+  polygon: '0x4f0eE43495f36e7665716B4d8d8701bC232E462b',
+}
+
 export const genericBurnGravityGradeV2Address: ContractAddress = {
   mumbai: "0x4d605e5b2D0F49d782568E26c6D170Ab34aC8958",
   polygon: "0xEAA88a8A4570D176D6e0E496fF0fcb3496Bf904B"

@@ -1,0 +1,18 @@
+{
+  "general": {
+    "loading": "Loading..."
+  },
+  "popupNotification": {
+    "metashare-stake-success": "Metashare successfully staked.",
+    "ixt-stake-success": "IXT successfully staked.",
+    "open-success": "Pack successfully opened."
+  },
+  "fluencer": {
+    "tab": {
+      "open": "OPEN BUNDLES",
+      "stake-metashares": "STAKE METASHARES",
+      "stake-ixt": "STAKE IXT",
+      "history": "HISTORY"
+    }
+  }
+}
