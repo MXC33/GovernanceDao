@@ -12,10 +12,7 @@ HList(min-w="0" frame="none on-has-frame:(~ gray-400 hover:gray-300)" :has-frame
 <script lang="ts" setup>
 import type { AdjustableNumber, AdjustableNumberStyle, AdjustableToken } from '~/composables/Utils/useAdjustableNumber';
 
-
-
-const props = defineProps<{
-  modelValue: AdjustableNumber | AdjustableToken,
+defineProps<{
   inline?: boolean
   hideMax?: boolean
   look?: AdjustableNumberStyle,
@@ -24,9 +21,7 @@ const props = defineProps<{
   isSolid?: boolean
 }>()
 
-const emit = defineEmits(["update:modelValue"])
-
-const data = useVModel(props, 'modelValue', emit)
+const data = defineModel<AdjustableNumber | AdjustableToken>()
 
 const {
   isIncreasable,

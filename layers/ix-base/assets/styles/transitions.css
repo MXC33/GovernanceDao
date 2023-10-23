@@ -148,6 +148,7 @@
   opacity: 0;
 }
 
+
 .list-move,
 .list-enter-active,
 .list-leave-active {
@@ -188,4 +189,15 @@
       animations can be calculated correctly. */
 .snackbar-leave-active {
   transition: all 150ms ease;
+}
+
+
+@keyframes slide-left-right {
+  from {
+    transform: translateX(-20%);
+  }
+
+  to {
+    transform: translateX(100%);
+  }
 }

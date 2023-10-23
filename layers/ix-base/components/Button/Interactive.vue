@@ -1,6 +1,9 @@
 <template lang="pug">
-button.button-interactive(btn="~ primary" opacity="s-invalid:50" w="full" font="bold" transition="all" ref="button" pos="relative" pointer-events="s-loading:none s-invalid:none" :state="buttonState")
-  GlitchText(:text="renderText" :key="renderText" :hover="true" :is-hovered="isHovered" whitespace="nowrap")
+button.button-interactive(btn="~ primary s-loading:loading" opacity="s-invalid:50" w="full" font="bold" transition="all" ref="button" pos="relative" pointer-events="s-loading:none s-invalid:none" :state="buttonState")
+  div.animation.slide-left-right(v-if="loading")
+
+  GlitchText(:text="renderText" :key="renderText" :hover="true" :is-hovered="isHovered" whitespace="nowrap" pos="relative")
+
   
 
 </template>
@@ -20,6 +23,7 @@ const renderText = computed(() => {
 })
 
 const buttonState = computed(() => {
+  // return 'loading'
   if (loading)
     return 'loading'
   if (invalid)
@@ -40,9 +44,28 @@ const { loading, invalid, loadingText, text } = defineProps<{
   --transition-slide-offset: 0.5rem;
 }
 
-.loading-bars {
-  --total-time: 800ms;
-  --delay: 200ms;
+.button-interactive .animation {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  animation-name: slide-left-right;
+  animation-timing-function: ease-out;
+  animation-duration: 1s;
+  animation-fill-mode: alternate;
+  animation-iteration-count: infinite;
+}
+
+.button-interactive .animation:after {
+  content: '';
+  display: block;
+  width: 20%;
+  height: 100%;
+  opacity: 0.5;
+  @apply bg-ix-primary;
 }
 
 .loading-bars path {
@@ -63,6 +86,8 @@ const { loading, invalid, loadingText, text } = defineProps<{
 .loading-bars path:nth-child(3) {
   animation-delay: calc(-1 * (var(--total-time) - (var(--delay))));
 }
+
+
 
 @keyframes fade {
   from {

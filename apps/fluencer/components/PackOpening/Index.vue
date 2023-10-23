@@ -8,7 +8,7 @@ ListItem()
     //{{ token?.balance }}
 
   template(#button)
-    ButtonInteractive(@click="claimRewardRequest(token)"  v-if="token" text="Open" cut="md:~ bottom-right sm" :loading="isLoading"  :loading-text="'Opening pack...'") 
+    ButtonInteractive(@click="claimRewardRequest(token)"  v-if="token" text="Open" cut="md:~ bottom-right sm b-ix-primary" :loading="isLoading"  :loading-text="'Opening pack...'") 
 
 </template>
     
@@ -25,25 +25,8 @@ const { loading: isLoading, execute: claimRewardRequest } = useContractRequest(a
   return onClickOpen(token)
 })
 
-const openedItems = usePackContent()
-
-const useGGPackContent = (type: string, tier: string) => useAsyncData(`gg-pack-content-${type}-${tier}`, () =>
-  GqlGGPackContent({ token: { type, tier } })
-)
-
-const { execute: fetchPackContent, data: ggContent } = useGGPackContent(token.tokenInfo?.type ?? "", token.tokenInfo?.tier ?? "")
-
-const onDidOpen = async () => {
-  await fetchPackContent()
-  const items = ggContent.value?.gravityGradePackContent?.map((item) => item?.token as NftFragment).filter(Boolean) as NftFragment[]
-  console.log("Yo", items)
-  openedItems.value = items
-}
 
 const onClickOpen = async (token: NftFragment) => {
-  const packOpened = await openPack(token)
-
-  if (packOpened)
-    await onDidOpen()
+  await openPack(token)
 }
 </script>
