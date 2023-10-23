@@ -13,11 +13,7 @@ VList(flex="~ space-x-10 items-center space-around" p="4" bg="gray-900")
           div()
             PageParagraphs(section="reward")
           div(text="xl" color="white" font="bold") {{ userReward }}
-    button(@click="onClick" btn="~ primary-outline") 
-      div(flex) 
-        PageParagraphs(section="goToBtn") {{ id }} 
-        PageParagraphs(section="goTo2")
-      
+    button(@click="onClick" btn="~ primary-outline") {{ $t('index.goToBtn.title') }} {{ id }}
 
 </template>
 
