@@ -1,7 +1,7 @@
 <template lang="pug">
 div(grid="~ cols-2 gap-6")
-  VList(gap-47)
-    VList(text="xl left")
+  VList()
+    VList(text="xl left" flex-grow="1")
       div(text="subheading")
         PageParagraphs(section="stakeIXTSection")
       h1(text="bold 5xl" color="#84D4BC") [api data]

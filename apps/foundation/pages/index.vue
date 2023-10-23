@@ -3,12 +3,17 @@ Page()
   ButtonNav()  
 
   PageSection(section="dashboardStaking" :primary="true")
-  HomepageDashboard()
-  HomepageStaking()
+    HomepageDashboard()
+
+  PageSection(section="earnStaking")
+    HomepageStaking()
+
   PageSection(section="ixtStaking")
-  Stake()
+    HomepageStakingIxt()
+
   PageSection(section="lpStaking")
-  HomepageLP()
+    HomepageLP()
+
   HomepageAssets()
   HomepageGovernance()
 

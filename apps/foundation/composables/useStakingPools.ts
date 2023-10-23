@@ -22,10 +22,25 @@ export const useStakingPools = () => {
   const { data: dataLPUsdt } = useStakingData(StakingId.LpUSDT)
 
 
-  const totalIXTRewards = computed(() => {
-    const stakingList = [dataIXTOneMonth.value, dataIXTThreeMonth.value, dataIXTSixMonth.value, dataIXTTwelveMonth.value]
+  const ixtPoolData = computed(() => {
+    return [
+      {
+        month: 1,
+        data: dataIXTOneMonth.value
+      }, {
+        month: 3,
+        data: dataIXTThreeMonth.value
+      }, {
+        month: 6,
+        data: dataIXTSixMonth.value
+      }, {
+        month: 12,
+        data: dataIXTTwelveMonth.value
+      }]
+  })
 
-    const userData = stakingList.map(item => item?.userSpecificStakingData)
+  const totalIXTRewards = computed(() => {
+    const userData = ixtPoolData.value.map(item => item?.data?.userSpecificStakingData)
 
     return {
       totalUserReward: userData.reduce((a, b) => a + (b?.totalUserReward ?? 0), 0),
@@ -61,6 +76,7 @@ export const useStakingPools = () => {
   return {
     totalIXTRewards,
     totalUserRewards,
-    dashboardTableData
+    dashboardTableData,
+    ixtPoolData
   }
 }
