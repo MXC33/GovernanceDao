@@ -14,7 +14,7 @@ export const useOpenPacks = <T extends ContractInterface<T> & GenericBurnGravity
 
   const contractAddress = ggGradeBurnV2Address as string
   const { refresh: refreshTokens } = useVoucherData()
-
+  const { refresh: refreshIXT } = useCurrencyData()
   const { createTransaction, withContract, ...contractSpec } = defineContract<T>('voucher-contract-', {
     contractAddress,
     notifications: {
@@ -40,7 +40,7 @@ export const useOpenPacks = <T extends ContractInterface<T> & GenericBurnGravity
       // @ts-ignore
       return contract.burnPack(voucherNFTAddress, pack.tokenId, 1, false)
     }, {
-      onSuccess: async () => await refreshTokens()
+      onSuccess: async () => await Promise.all([refreshTokens(), refreshIXT()])
     })
 
   return {
