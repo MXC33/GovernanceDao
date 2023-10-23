@@ -5,9 +5,9 @@ PriceRow()
 
   template(#right) 
     h3(space-x="2")
-      span(text="subheading")
+      span(text="subheading" whitespace="nowrap")
         GlitchText(:text="projectedIxt + ' IXT'") 
-      span(text="detail")
+      span(text="detail" whitespace="nowrap")
         GlitchText(:text="'$' + projectedUsd")
 
 </template>

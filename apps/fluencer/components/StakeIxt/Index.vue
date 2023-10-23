@@ -35,13 +35,13 @@ DrawerContent(:start-open="true" :is-neutral="true" bg="gray-900" max-h="auto")
         PriceRow()
           template(#left): span(text="detail") Staking period
           template(#right)
-            div(text="detail-value")
+            div(text="detail-value" whitespace="nowrap")
               GlitchText(:text="formattedMonths(activePeriod?.months)")
 
         PriceRow()
           template(#left): span(text="detail") APY
           template(#right)
-            div(text="detail-value")
+            div(text="detail-value" whitespace="nowrap")
               GlitchText(:text="activePeriod?.apy + '%'")
 
       StakeIxtTotal(:projected-ixt="projectedIxtBalanceRounded" :projected-usd="projectedUsdBalanceRounded")
@@ -49,7 +49,7 @@ DrawerContent(:start-open="true" :is-neutral="true" bg="gray-900" max-h="auto")
       Divider(mx="-6")
 
       HList(self="end" w="lt-md:full")
-        ButtonInteractive(:loading="isLoading" @click="stakeIxtRequest"  text="STAKE YOUR IXT NOW" min-w="60" cut="md:~ bottom-right sm b-ix-primary" w="lt-md:full")
+        ButtonInteractive(:loading="isLoading" :invalid="ixtAmount?.value == 0" @click="stakeIxtRequest"  text="STAKE YOUR IXT NOW" min-w="60" cut="md:~ bottom-right sm b-ix-primary" w="lt-md:full")
 
 </template>
 
@@ -142,15 +142,17 @@ const { loading: isLoading, execute: stakeIxtRequest } = useContractRequest(asyn
 })
 
 const onClickStake = async () => {
-  const stakedIXT = await stakeIXT(stakePeriodToStakingId(activePeriod.value), 1)
+  const stakeAmount = ixtAmount.value?.value
+  if (!stakeAmount)
+    return
+  const stakedIXT = await stakeIXT(stakePeriodToStakingId(activePeriod.value), stakeAmount)
   if (stakedIXT)
     displaySnack("ixt-stake-success", "success")
 }
 
 const { ixtToUSD } = useCurrencyConversion()
-const { ixtBalance } = useCurrencyData()
-const ixtBalanceRounded = computed(() => roundToDecimals(ixtBalance.value ?? 0, 2))
-const usdBalanceRounded = computed(() => roundToDecimals(ixtToUSD(ixtBalance.value ?? 0), 2))
+const ixtBalanceRounded = computed(() => roundToDecimals(ixtAmount.value?.value ?? 0, 2))
+const usdBalanceRounded = computed(() => roundToDecimals(ixtToUSD(ixtAmount.value?.value ?? 0), 2))
 
 const projectedIxtBalanceRounded = computed(() => {
   const factor = 12 / activePeriod.value?.months
