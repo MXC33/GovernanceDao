@@ -1,0 +1,66 @@
+import { CredentialsInput, NftFragment, StakingDataFragment, StakingId, UserSpecificStakingDataFragment } from "~/.nuxt/gql/default"
+import { MaybeRef } from "@vueuse/core";
+import { get } from '@vueuse/core'
+
+export type UserStakingItem = {
+  token: NftFragment
+  amount?: number
+}
+
+export const useStakingPools = () => {
+  const { data: dataTerritory } = useStakingData(StakingId.Territories)
+  const { data: dataTerritoryUser } = useStakingData(StakingId.TerritoriesUser)
+  const { data: dataMetashare } = useStakingData(StakingId.Metashare)
+  const { data: dataEnergy } = useStakingData(StakingId.Energy)
+  const { data: dataEnergyAmelia } = useStakingData(StakingId.EnergyAmelia)
+  const { data: dataIXTOneMonth } = useStakingData(StakingId.IxtOneMonth)
+  const { data: dataIXTThreeMonth } = useStakingData(StakingId.IxtThreeMonths)
+  const { data: dataIXTSixMonth } = useStakingData(StakingId.IxtSixMonths)
+  const { data: dataIXTTwelveMonth } = useStakingData(StakingId.IxtTwelveMonths)
+  const { data: dataLandmark } = useStakingData(StakingId.Landmark)
+  const { data: dataLPMatic } = useStakingData(StakingId.LpMATIC)
+  const { data: dataLPUsdt } = useStakingData(StakingId.LpUSDT)
+
+
+  const totalIXTRewards = computed(() => {
+    const stakingList = [dataIXTOneMonth.value, dataIXTThreeMonth.value, dataIXTSixMonth.value, dataIXTTwelveMonth.value]
+
+    const userData = stakingList.map(item => item?.userSpecificStakingData)
+
+    return {
+      totalUserReward: userData.reduce((a, b) => a + (b?.totalUserReward ?? 0), 0),
+      totalUserRewardPerDay: userData.reduce((a, b) => a + (b?.totalUserRewardPerDay ?? 0), 0),
+      totalUserRewardPerThirtyDays: userData.reduce((a, b) => a + (b?.totalUserRewardPerThirtyDays ?? 0), 0)
+    }
+  })
+
+  const totalUserRewards = computed(() => {
+    const stakingList = [dataTerritoryUser.value, dataMetashare.value, dataEnergy.value, dataLandmark.value]
+
+    return [...stakingList.map(item => item?.userSpecificStakingData).filter(Boolean), totalIXTRewards.value]
+  })
+
+  const getDashboardTableRow = (id: string, data?: UserSpecificStakingDataFragment | null | undefined) => {
+    return {
+      id,
+      daily: data?.totalUserRewardPerDay ?? 0,
+      thirtyDays: data?.totalUserRewardPerThirtyDays ?? 0
+    }
+  }
+
+  const dashboardTableData = computed(() => {
+    return [
+      getDashboardTableRow('energy', dataEnergy.value?.userSpecificStakingData),
+      getDashboardTableRow('landmark', dataLandmark.value?.userSpecificStakingData),
+      getDashboardTableRow('territory', dataTerritoryUser.value?.userSpecificStakingData),
+      getDashboardTableRow('metashare', dataMetashare.value?.userSpecificStakingData),
+      getDashboardTableRow('ixt', totalIXTRewards.value)
+    ]
+  })
+
+  return {
+    totalIXTRewards,
+    totalUserRewards,
+    dashboardTableData
+  }
+}

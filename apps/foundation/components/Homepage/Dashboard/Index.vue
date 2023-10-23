@@ -12,7 +12,7 @@ div(grid="~ cols-2 gap-6")
           PageParagraphs(section="addToWalletButton")
     CardChart()
   VList(space-y="6" flex-grow="1") 
-    TableDashboard()
+    HomepageDashboardTable()
     div(grid="~ cols-2 gap-6" flex-grow="1")
       Card() 
         VList()
@@ -30,5 +30,7 @@ div(grid="~ cols-2 gap-6")
 </template>
 
 <script lang="ts" setup>
+
+
 import IXTIcon from '~/assets/images/token.svg'
 </script>
