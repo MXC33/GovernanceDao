@@ -49,7 +49,7 @@ export const useIXTStakingContract = <T extends ContractInterface<T> & IXTStakin
 
       return contract.stake(amount)
     }, {
-      approve: () => allowanceCheck(1, contractAddress),
+      approve: () => allowanceCheck(amount, contractAddress),
       onSuccess: async () => await Promise.all([refreshStakingData(), refreshIXT()])
     })
 
