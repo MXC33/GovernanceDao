@@ -78,20 +78,6 @@ html {
   background: #636363;
 }
 
-.no-scrollbar {
-  scrollbar-width: none
-}
-
-.no-scrollbar::-webkit-scrollbar,
-.no-scrollbar ::-webkit-scrollbar {
-  display: none
-}
-
-.no-scrollbar::-webkit-scrollbar-thumb,
-.no-scrollbar ::-webkit-scrollbar-thumb {
-  display: none
-}
-
 .no-scroll {
   overflow: hidden;
 }

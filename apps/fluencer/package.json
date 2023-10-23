@@ -1,0 +1,18 @@
+{
+  "name": "@ix/fluencer",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "build": "yarn workspace @ix/base build && nuxt build",
+    "dev": "nuxt dev --port 3060",
+    "prepare": "nuxt prepare",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview"
+  },
+  "devDependencies": {
+    "@ix/base": "*",
+    "@types/node": "^18",
+    "interactive-shader-format": "^2.8.1",
+    "nuxt": "3.6.5"
+  }
+}

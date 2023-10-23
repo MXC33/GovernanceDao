@@ -54,7 +54,7 @@ export const clamp = (min: number, max: number, amount: number) =>
 // }
 
 export const roundToDecimals = (num: number | null | undefined, decimalPlaces: number) => {
-  if (num == null || num == undefined)
+  if (num == undefined || num == null)
     return 0
   const multiplier = Math.pow(10, decimalPlaces)
   const result = Math.floor(num * multiplier) / multiplier

@@ -57,7 +57,7 @@ export const useCollectionData = (url: string, options: CollectionOptions = {}) 
   }))
 
   const isTokenIncluded = (tokenId: number, tokenCollection: string) => {
-    const excludedTokenIds = [9698762, 26, 29, 34]
+    const excludedTokenIds = [9698762, 29, 34]
     const targetCollectionAddress = '0xba6666b118f8303f990f3519df07e160227cce87'
 
     if (tokenCollection === targetCollectionAddress)

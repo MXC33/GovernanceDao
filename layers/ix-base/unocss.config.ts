@@ -3,6 +3,7 @@ import { definePreset } from 'unocss'
 import presetAttributify from "@unocss/preset-attributify";
 import extractorPug from "@unocss/extractor-pug";
 import presetUno from "@unocss/preset-uno"
+import transformerDirectives from '@unocss/transformer-directives'
 
 import { extractorSplit } from "@unocss/core";
 import { presetScrollbar } from 'unocss-preset-scrollbar'
@@ -22,6 +23,7 @@ export default definePreset({
   ],
   //@ts-ignore
   transformers: [
+    transformerDirectives(),
     transformerVariantGroup(),
   ],
   extractors: [
@@ -40,19 +42,19 @@ export default definePreset({
       joyride: "Joyride W05 STD"
     },
     fontSize: {
-      'xs': ['var(--font-size-xs)', '1rem'],
-      'sm': ['var(--font-size-sm)', '1.25rem'],
-      'base': ['var(--font-size-base)', '1.5rem'],
-      'lg': ['var(--font-size-lg)', '1.75rem'],
-      'xl': ['var(--font-size-xl)', '1.75rem'],
-      '2xl': ['var(--font-size-2xl)', '2rem'],
-      '3xl': ['var(--font-size-3xl)', '2.25rem'],
-      '4xl': ['var(--font-size-4xl)', '2.5rem'],
-      '5xl': ['var(--font-size-5xl)', '1'],
-      '6xl': ['var(--font-size-6xl)', '1'],
-      '7xl': ['var(--font-size-7xl)', '1'],
-      '8xl': ['var(--font-size-8xl)', '1'],
-      '9xl': ['var(--font-size-9xl)', '1'],
+      'xs': ['var(--font-size-xs)', '1.5em'],
+      'sm': ['var(--font-size-sm)', '1.5em'],
+      'base': ['var(--font-size-base)', '1.5em'],
+      'lg': ['var(--font-size-lg)', '1.2em'],
+      'xl': ['var(--font-size-xl)', '1.2em'],
+      '2xl': ['var(--font-size-2xl)', '1.2em'],
+      '3xl': ['var(--font-size-3xl)', '1.2em'],
+      '4xl': ['var(--font-size-4xl)', '1.2em'],
+      '5xl': ['var(--font-size-5xl)', '1.2em'],
+      '6xl': ['var(--font-size-6xl)', '1.2em'],
+      '7xl': ['var(--font-size-7xl)', '1.2em'],
+      '8xl': ['var(--font-size-8xl)', '1.2em'],
+      '9xl': ['var(--font-size-9xl)', '1.2em'],
     },
     colors: {
       ix: {
@@ -120,7 +122,8 @@ export default definePreset({
       'btn-select': 'cut-bottom-right cut-b-gray-400 hover:cut-b-gray-300',
       'btn-select-active': 'bg-gray-500 cut-b-gray-300',
       'btn-form': 'font-400 py-3 px-1 btn-select btn-sm',
-      'btn-form-active': 'bg-gray-600'
+      'btn-form-active': 'bg-gray-600',
+      'btn-loading': 'bg-transparent b-1 b-ix-primary'
     },
 
     // Special button
@@ -135,6 +138,7 @@ export default definePreset({
       'btn-disabled': 'bg-gray-700 color-gray-400',
       'btn-center': 'flex justify-center items-center',
       'btn-primary-outline': 'btn-primary bg-opacity-20 hover:bg-opacity-40 b-0.5 b-ix-primary',
+      'btn-secondary-outline': 'btn-secondary bg-opacity-20 hover:bg-opacity-40 b-0.5 b-ix-primary',
       'btn-orange-outline': 'bg-ix-orange bg-opacity-20 hover:bg-opacity-40 b-0.5 b-ix-primary',
       'btn-primary-outline-opaque': 'btn-primary-outline bg-opacity-40 hover:bg-opacity-60',
       'btn-lg': 'min-h-14',

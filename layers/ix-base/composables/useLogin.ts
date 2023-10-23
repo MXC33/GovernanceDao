@@ -1,4 +1,5 @@
 import { WalletConnector } from "./Contract/useWalletConnectors";
+import { IXAppConfig } from "./useAppSetup";
 
 export interface APIUser {
   id: number;
@@ -28,9 +29,10 @@ export const useLoginRedirect = () => useState<string | null>('login-redirect', 
 
 export const useLogin = () => {
   const { loginIX } = useIXAPI()
-  const { authUser, user, removeUser } = useUser()
+  const appConfig = useAppConfig() as IXAppConfig
+  const { authUser, user } = useUser()
   const { addSigningToken, connectWallet, logoutWallet, walletSigningToken, isWalletConnected, failedConnection } = useWallet()
-  const { setConnector, currentConnector } = useConnectors()
+  const { setConnector } = useConnectors()
   const authUserData = useAuthUserData()
   const authTokenExpirationTime = useAuthTokenExpirationTime()
 
@@ -38,14 +40,15 @@ export const useLogin = () => {
   const timeGap = 5 * 60 * 1000
   let tryingToRefresh = 0
 
-  const strategyType = useCookieState<string | null>('auth.strategy', () => 'local')
   const bearerToken = useCookieState<string | null>('auth._token.local')
   const loginStatus = useState<LoginStatus>('user-status', () => 'logged-in')
   const loginFailType = useState<LoginFailState | null>('fail-state', () => null)
 
-  const isLoggedInAndConnected = computed(() =>
-    user.value && user.value.id && isWalletConnected.value
-  )
+  const isLoggedInAndConnected = computed(() => {
+    const needsUser = !appConfig.connectWithoutIXUser
+    const userValid = needsUser ? user.value && user.value.id : true
+    return userValid && isWalletConnected.value
+  })
 
   const loginFailed = (reason?: string) => {
     loginStatus.value = 'logged-out'
@@ -108,8 +111,12 @@ export const useLogin = () => {
 
       return loginSuccess()
     }
-    else
+    else {
+      if (appConfig.connectWithoutIXUser)
+        return loginSuccess()
+
       return loginFailedNoUser()
+    }
   }
 
   const loginFailedNoUser = () => {

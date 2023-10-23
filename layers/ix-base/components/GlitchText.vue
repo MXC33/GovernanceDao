@@ -1,17 +1,17 @@
 <template lang="pug">
-span(v-if="!isDollar" ref="element") {{ glitchedText }}{{ suffix }}
-span(v-else ref="element") {{ suffix }}{{ glitchedText }}
+span(ref="element" pos="relative") 
+  span(pos="absolute") {{ prefix }}{{ glitchedText }}{{ suffix }}
+  span(opacity="0") {{ prefix }}{{ text }}{{ suffix }}
 
 </template>
   
 <script lang="ts" setup>
 const element = ref()
 
-
-
 const { text, isHovered, autoHover } = defineProps<{
   text: string,
   suffix?: string,
+  prefix?: string,
   isHovered?: boolean,
   autoHover?: boolean,
   isDollar?: boolean

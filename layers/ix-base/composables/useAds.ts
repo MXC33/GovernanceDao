@@ -16,8 +16,8 @@ export const useAds = () => {
       url: "https://territorylottery.planetix.com/"
     },
     {
-      id: "gravity-grade-metashare",
-      url: "https://planetix.com/mint/gravity-metashare"
+      id: "gravity-grade-genesis",
+      url: "https://planetix.com/mint/gravity-grade"
     }
   ]
 
