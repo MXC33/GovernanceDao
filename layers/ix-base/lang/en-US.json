@@ -13,6 +13,7 @@
     "exit": "Exit",
     "upgrade": "Upgrade",
     "enter": "Enter",
+    "month": "Month | Months",
     "navigation": {
       "terminal": "Terminal",
       "inventory": "Inventory",

@@ -1,0 +1,22 @@
+<template lang="pug">
+div(grid="~ cols-2 gap-3")
+  HomepageStakingItem()
+    template(#title) {{ $t('index.usdtIxtStaking') }}
+    template(#subtitle) {{ $t('index.provideLiq') }}
+    template(#metadata)
+      HomepageStakingLpMetadata(:item="lpUsdtData" v-if="lpUsdtData")
+
+  HomepageStakingItem()
+    template(#title) {{ $t('index.maticIxtStaking') }}
+    template(#subtitle) {{ $t('index.provideLiq') }}
+    template(#metadata)
+      HomepageStakingLpMetadata(:item="lpMaticData" v-if="lpMaticData")
+</template>
+
+<script lang="ts" setup>
+import { StakingId } from '~/.nuxt/gql/default';
+
+const { data: lpMaticData } = useStakingData(StakingId.LpMATIC)
+const { data: lpUsdtData } = useStakingData(StakingId.LpUSDT)
+
+</script>

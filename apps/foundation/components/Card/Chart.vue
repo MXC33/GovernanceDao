@@ -1,12 +1,13 @@
 <template lang="pug">
 Card()
   VList()
-    div()
-      TitleDetail()
-        template(#default) Wallet portfolio
-        template(#detailBottom) Track balances
+    TitleDetail()
+      template(#default) Wallet portfolio
+      template(#detailBottom) Track balances
+
     ChartBackground()
-  div.flex.space-x-20.items() 
+
+  div(grid="~ cols-3 gap-3") 
     TitleDetail()
       template(#default) Wallet
       template(#detailBottom) 0

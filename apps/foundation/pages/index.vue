@@ -6,13 +6,13 @@ Page()
     HomepageDashboard()
 
   PageSection(section="earnStaking")
-    HomepageStaking()
+    HomepageStakingEarn()
 
   PageSection(section="ixtStaking")
     HomepageStakingIxt()
 
   PageSection(section="lpStaking")
-    HomepageLP()
+    HomepageStakingLp()
 
   HomepageAssets()
   HomepageGovernance()

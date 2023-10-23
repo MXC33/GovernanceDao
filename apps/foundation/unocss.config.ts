@@ -12,6 +12,7 @@ export default defineConfig({
     {
       'text-detail': 'text-xs color-gray-300',
       'text-subheading': 'text-lg font-bold',
+      'text-heading': 'text-3xl font-bold',
     }
   ]
 })

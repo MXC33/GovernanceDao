@@ -4,15 +4,9 @@
       "title": "STAKING DASHBOARD",
       "description": "DEFI Dashboard for your assets."
     },
-    "stakeIXTSection": {
-      "title": "Stake IXT, earn up to"
-    },
-    "buyIXTButton": {
-      "title": "Buy IXT"
-    },
-    "addToWalletButton": {
-      "title": "Add to Wallet"
-    },
+    "stakeIXTSection": "Stake IXT, earn up to",
+    "buyIXTButton": "Buy IXT",
+    "addToWalletButton": "Add to Wallet",
     "walletPortfolioSection": {
       "title": "Wallet portfolio",
       "description": "Track balances"
@@ -37,18 +31,12 @@
     "totalEarnings": {
       "title": "Total"
     },
-    "circulatingSupplySection": {
-      "title": "Circulating Supply"
-    },
-    "CoingeckoLink": {
-      "title": "See on Coingecko"
-    },
+    "circulatingSupplySection": "Circulating Supply",
+    "CoingeckoLink": "See on Coingecko",
     "TotalPool": {
       "title": "Total Pool next epoch"
     },
-    "distributionToday": {
-      "title": "Distribution Today"
-    },
+    "distributionToday": "Distribution Today",
     "earnStaking": {
       "title": "EARN BY STAKING",
       "description": "Earn rewards for contributing to liquidity and safety."
@@ -65,34 +53,13 @@
       "title": "IXT STAKING",
       "description": "Earn rewards for contributing to liquidity and safety."
     },
-    "lockPeriodTwelve": {
-      "title": "months",
-      "subtitle": "Lock Period"
-    },
-    "lockPeriodThree": {
-      "title": "3 months"
-    },
-    "lockPeriodSix": {
-      "title": "6 months"
-    },
-    "lockPeriodOne": {
-      "title": "1 months"
-    },
-    "apy": {
-      "title": "APY"
-    },
-    "yourStake": {
-      "title": "Your stake"
-    },
-    "poolSize": {
-      "title": "Pool size"
-    },
-    "withdrawBtn": {
-      "title": "WITHDRAW"
-    },
-    "depositBtn": {
-      "title": "DEPOSIT"
-    },
+    "months": "months",
+    "lockPeriod": "Lock Period",
+    "apy": "APY",
+    "yourStake": "Your stake",
+    "poolSize": "Pool size",
+    "withdrawBtn": "WITHDRAW",
+    "depositBtn": "DEPOSIT",
     "reward": {
       "title": "Your rewards"
     },
@@ -103,24 +70,12 @@
       "title": "LP STAKING",
       "description": "Earn rewards for contributing to liquidity and safety."
     },
-    "usdtIxtStaking": {
-      "title": "USDT/IXT LP Staking"
-    },
-    "provideLiq": {
-      "title": "Provide liquidity on DEX and Stake LP"
-    },
-    "totalLiquidity": {
-      "title": "Total liquidity"
-    },
-    "fiveDayRoi": {
-      "title": "Your 5-day Roi%"
-    },
-    "lpTokens": {
-      "title": "LP Tokens"
-    },
-    "maticIxtStaking": {
-      "title": "MATIC/IXT LP Staking"
-    },
+    "usdtIxtStaking": "USDT/IXT LP Staking",
+    "provideLiq": "Provide liquidity on DEX and Stake LP",
+    "totalLiquidity": "Total liquidity",
+    "fiveDayRoi": "Your 5-day Roi%",
+    "lpTokens": "LP Tokens",
+    "maticIxtStaking": "MATIC/IXT LP Staking",
     "territoryStaking": {
       "title": "YOUR TERRITORIES",
       "description": "Explore your territory NFTs and their total payout amounts"

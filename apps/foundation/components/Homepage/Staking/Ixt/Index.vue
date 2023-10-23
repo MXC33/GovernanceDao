@@ -8,5 +8,4 @@ div(grid="~ cols-2 gap-3")
 
 <script lang="ts" setup>
 const { ixtPoolData } = useStakingPools()
-console.log("IXT", ixtPoolData.value)
 </script>
