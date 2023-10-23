@@ -7,10 +7,17 @@ import { ContractInterface } from "@ix/base/composables/Utils/defineContract";
 
 export const usePackContent = () => useState<NftFragment[]>('opened-pack-content', () => [])
 
+
+export const useGGPackContent = (type: string, tier: string) => useAsyncData(`gg-pack-content-${type}-${tier}`, () =>
+  GqlGGPackContent({ token: { type, tier } })
+)
+
 export const useOpenPacks = <T extends ContractInterface<T> & GenericBurnGravityGradeV2Contract>() => {
   const activeChain = useActiveChain()
   const ggGradeBurnV2Address = genericBurnGravityGradeV2Address[activeChain]
   const voucherNFTAddress = voucherAddress[activeChain]
+
+  const openPackContent = usePackContent()
 
   const contractAddress = ggGradeBurnV2Address as string
   const { refresh: refreshTokens } = useVoucherData()
@@ -40,7 +47,17 @@ export const useOpenPacks = <T extends ContractInterface<T> & GenericBurnGravity
       // @ts-ignore
       return contract.burnPack(voucherNFTAddress, pack.tokenId, 1, false)
     }, {
-      onSuccess: async () => await refreshTokens()
+      onSuccess: async () => {
+        const { execute: fetchPackContent, data: ggContent } = useGGPackContent(pack.tokenInfo?.type ?? "", pack.tokenInfo?.tier ?? "")
+
+        await fetchPackContent()
+
+        openPackContent.value = ggContent.value?.gravityGradePackContent?.map((item) =>
+          item?.token as NftFragment
+        ).filter(Boolean) as NftFragment[]
+
+        await refreshTokens()
+      }
     })
 
   return {

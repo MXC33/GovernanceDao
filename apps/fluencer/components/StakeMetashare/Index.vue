@@ -7,7 +7,7 @@ ListItem()
     p Balance: {{ token?.balance }}
     p 30 day yield: {{ getStakingDataFromToken(token)?.rewardPerThirtyDays?.toFixed(2) }} IXT
   template(#button)
-    ButtonInteractive(@click="stakeMetashareRequest(token)"  v-if="token" text="Stake" min-w="55" cut="~ bottom-right sm" :loading="isLoading"  :loading-text="'Staking...'") 
+    ButtonInteractive(@click="stakeMetashareRequest(token)"  v-if="token" text="Stake" min-w="55" cut="~ bottom-right sm b-ix-primary" :loading="isLoading"  :loading-text="'Staking...'") 
 </template>
   
 <script lang="ts" setup>

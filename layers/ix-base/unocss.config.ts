@@ -3,6 +3,7 @@ import { definePreset } from 'unocss'
 import presetAttributify from "@unocss/preset-attributify";
 import extractorPug from "@unocss/extractor-pug";
 import presetUno from "@unocss/preset-uno"
+import transformerDirectives from '@unocss/transformer-directives'
 
 import { extractorSplit } from "@unocss/core";
 import { presetScrollbar } from 'unocss-preset-scrollbar'
@@ -22,6 +23,7 @@ export default definePreset({
   ],
   //@ts-ignore
   transformers: [
+    transformerDirectives(),
     transformerVariantGroup(),
   ],
   extractors: [
@@ -118,7 +120,8 @@ export default definePreset({
       'btn-select': 'cut-bottom-right cut-b-gray-400 hover:cut-b-gray-300',
       'btn-select-active': 'bg-gray-500 cut-b-gray-300',
       'btn-form': 'font-400 py-3 px-1 btn-select btn-sm',
-      'btn-form-active': 'bg-gray-600'
+      'btn-form-active': 'bg-gray-600',
+      'btn-loading': 'bg-transparent b-1 b-ix-primary'
     },
 
     // Special button
