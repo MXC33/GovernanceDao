@@ -1,5 +1,5 @@
 <template lang="pug">
-Card()
+Card(:centered="true")
   template(#default)
     HList(items="center" space-x="6")
       VList(w="18" items="center" flex-shrink="0")

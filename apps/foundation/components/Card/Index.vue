@@ -7,7 +7,7 @@ VList(bg="gray-800"  overflow="hidden" frame="~ gray-500")
 
   HList(flex-grow="1")
     // Main Content
-    VList(p="6" space-y="6" flex-grow="1" justify="center")
+    VList(p="6" space-y="6" flex-grow="1" justify="on-center:center" :center="centered")
       slot
 
     // Right detail
@@ -26,5 +26,7 @@ VList(bg="gray-800"  overflow="hidden" frame="~ gray-500")
 </template>
 
 <script lang="ts" setup>
-
+defineProps<{
+  centered?: boolean
+}>()
 </script>
