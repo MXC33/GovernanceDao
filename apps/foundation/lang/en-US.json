@@ -60,6 +60,7 @@
     "poolSize": "Pool size",
     "withdrawBtn": "WITHDRAW",
     "depositBtn": "DEPOSIT",
+    "totalRewards": "Total Rewards",
     "reward": {
       "title": "Your rewards"
     },
@@ -99,22 +100,24 @@
       "title": "STAKING"
     },
     "assetStaking": {
-      "territoryBox": {
+      "title": "Your assets",
+      "description": "Explore your staking capabilities.",
+      "territory": {
         "title": "TERRITORY NFT STAKING",
         "description": "Stake your Area, Sector, Zone and Domain NFTs to earn IXT staking rewards from the pool",
         "button": "GO TO TERRITORIES"
       },
-      "energyBox": {
+      "energy": {
         "title": "ENERGY STAKING",
         "description": "Energy staked is burned upon staking.",
         "button": "GO TO ENERGY STAKING"
       },
-      "landmarkBox": {
+      "landmark": {
         "title": "LANDMARK NFT STAKING",
         "description": "Stake your Landmark NFTs to earn IXT marketplace fees.",
         "button": "GO TO LANDMARK"
       },
-      "metashareBox": {
+      "metashare": {
         "title": "METASHARE STAKING",
         "description": "Each corporation’s treasury acts as a staking pool for MetaShares and the reward is $IXT.",
         "button": "GO TO METASHARE"
@@ -179,12 +182,6 @@
     },
     "GlobalWasteSystems": {
       "title": "Global Waste Systems"
-    },
-    "Total": {
-      "title": "Total"
-    },
-    "TotalRewards": {
-      "title": "Total Rewards"
     },
     "ClaimAll": {
       "title": "CLAIM ALL"

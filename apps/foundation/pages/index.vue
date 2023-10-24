@@ -14,8 +14,7 @@ Page()
   PageSection(section="lpStaking")
     HomepageStakingLp()
 
-  HomepageAssets()
-  HomepageGovernance()
+  HomepageAsset()
 
 </template>
 

@@ -1,5 +1,5 @@
 <template lang="pug">
-VList(bg="gray-800"  rounded="xl" b="0.5 white opacity-20"  overflow="hidden")
+VList(bg="gray-800"  overflow="hidden" frame="~ gray-500")
 
   // Top detail
   CardDetail(v-if="$slots.detailTop")
@@ -7,11 +7,11 @@ VList(bg="gray-800"  rounded="xl" b="0.5 white opacity-20"  overflow="hidden")
 
   HList(flex-grow="1")
     // Main Content
-    VList(p="6" space-y="6" flex-grow="1")
+    VList(p="6" space-y="6" flex-grow="1" justify="center")
       slot
 
     // Right detail
-    CardDetail(v-if="$slots.detailRight" class="flex flex-col justify-center h-full")
+    CardDetail(v-if="$slots.detailRight" flex="~ col" justify="center" items="center" flex-shrink="0" w="33%")
       slot(name="detailRight")
 
 

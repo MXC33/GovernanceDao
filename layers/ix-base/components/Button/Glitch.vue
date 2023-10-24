@@ -1,5 +1,5 @@
 <template lang="pug">
-button(ref="button")
+ButtonAnimated(ref="button" whitespace="nowrap")
   GlitchText(:text="text" :hover="true" :is-hovered="isHovered")
   </template>
     

@@ -1,6 +1,8 @@
 <template lang="pug">
 Card()
-  SimpleTable(:rows="rows" :columns="columns" pb="3")
+  h3(text="subheading") Earning Overview 
+
+  SimpleTable(:rows="rows" :columns="columns" mx="-6" mb="!-6")
     template(#row-asset="{index}") 
       HList(items="center" space-x="3") 
         img(:src="`/assets/staking/${dashboardTableData[index].id}.png`" w="6")

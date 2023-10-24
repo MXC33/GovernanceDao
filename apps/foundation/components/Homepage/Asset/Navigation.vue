@@ -1,26 +1,22 @@
 <template lang="pug">
-VList(flex="~ space-x-10 items-center space-around" p="4" bg="gray-900")
-  div(flex="~ cols-2 gap-12")     
-    TitleDetail(px="5")
-      template(#detail)
-        div(flex="~ col space-x-4")
-          div()
-            PageParagraphs(section="yourStake")
-          div(text="xl" color="white" font="bold") {{ userStaked}}
-    TitleDetail()
-      template(#detail)
-        div(flex="~ col space-x-4")
-          div()
-            PageParagraphs(section="reward")
-          div(text="xl" color="white" font="bold") {{ userReward }}
-    button(@click="onClick" btn="~ primary-outline") {{ $t('index.goToBtn.title') }} {{ id }}
+VList(space-y="3" w="full")
+  div(grid="~ cols-2 gap-3")
+    HList(justify="center" text="center")     
+      TitleDetail()
+        template(#detail) {{ $t('index.yourStake') }}
+        template(#default) {{ userStaked}}
+
+    HList(justify="center" text="center")     
+      TitleDetail()
+        template(#detail) {{ $t('index.totalRewards') }}
+        template(#default) {{ userReward }}
+
+  ButtonGlitch(@click="onClick" btn="~ primary-outline" cut="~ bottom-right b-ix-primary" :text="$t(`index.assetStaking.${id}.button`)")
 
 </template>
 
 <script lang="ts" setup>
 import type { StakingDataFragment } from '#gql';
-
-
 
 const { id, data } = defineProps<{
   id: string,
