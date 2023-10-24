@@ -1,40 +1,40 @@
 <template lang="pug">
-div(grid="~ cols-2 gap-3")
-  Card()
-    HList(space-x="10")
-      div 
-        div Locking period
-        div(style="display: flex; align-items: center;")
-          span 1 month
-      div 
-        div Your Stake
-        div(style="display: flex; align-items: center;")
-          span 0
-          IXTIcon(w="5" class="ml-2")
-      div 
-        div Your Stake
-        div(style="display: flex; align-items: center;")
-          span 0
-          img(src="~/assets/png/EnergyIcon.png" w="7" class="ml-2")
-      div 
-        div Daily rewards
-        div(style="display: flex; align-items: center;")
-          span 0
-          IXTIcon(w="5" class="ml-2")
-    HList(gap-6)
-      button(btn="~ primary-outline disabled") Unstake 
-      button(btn="~ primary-outline") Stake 
-    template(#detailBottom)
-      ClaimHorizontal()
-  EnergyPool()
+Card()
+  HList(space-x="10")
+    TitleDetail() 
+      template(#detail) Locking period
+      template(#default) 1 Month
+    TitleDetail()
+      template(#detail) Your Stake
+      template(#default) 
+        HList(items="center" space-x="1")
+          div 0
+          IXTIcon(w="5")
+    TitleDetail()
+      template(#detail) Your Stake
+      template(#default) 
+        HList(items="center" space-x="1")
+          div 0
+          img(src="~/assets/png/EnergyIcon.png" w="6")
+    TitleDetail()
+      template(#detail) Daily rewards
+      template(#default) 
+        HList(items="center" space-x="1")
+          div 0
+          IXTIcon(w="5")
+  HList(gap-6)
+    button(btn="~ primary-outline disabled") Unstake 
+    button(btn="~ primary-outline") Stake 
+  template(#detailBottom)
+    ClaimHorizontal()
 </template>
-
-
+  
+  
 <script lang="ts" setup>
 
 import { formatNumber } from '@ix/base/composables/Utils/useHelpers';
 import IXTIcon from '~/assets/images/token.svg'
-import { StakingId } from '../../.nuxt/gql/default';
+import { StakingId } from '~/.nuxt/gql/default';
 
 const { data: IXTOneMonthData } = useStakingData(StakingId.IxtOneMonth)
 const { data: IXTThreeMonthData } = useStakingData(StakingId.IxtThreeMonths)

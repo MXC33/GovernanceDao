@@ -64,9 +64,6 @@
     "reward": {
       "title": "Your rewards"
     },
-    "claimBtn": {
-      "title": "CLAIM"
-    },
     "lpStaking": {
       "title": "LP STAKING",
       "description": "Earn rewards for contributing to liquidity and safety."
@@ -530,11 +527,11 @@
       "title": "CHOOSE YOUR POOL",
       "description": "Stake Energy and IXT in 30 days epochs to claim rewards"
     },
-    "EarnIXT": {
+    "energy": {
       "title": "Earn IXT",
       "description": "Stake your Energy together with IXT in a 1-1 ratio to earn IXT rewards from the Play 2 Earn pool. Every epoch is 30 days and when the 30 days is over your energy will be burned. The IXT stays locked until you claim it."
     },
-    "EarnAndGive": {
+    "amelia": {
       "title": "Earn and Give",
       "description": "Stake Energy in the Sustainability Pool and give part of your earnings to the Amelia Foundation. You decide on the specific percentage given from your IXT Rewards."
     },

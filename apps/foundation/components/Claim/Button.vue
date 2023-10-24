@@ -1,5 +1,5 @@
 <template lang="pug">
-HList(flex flex-row justify-between)
+HList()
   TitleDetail()
     template(#detail)
       PageParagraphs(:section="currentSection")

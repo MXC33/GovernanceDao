@@ -5,15 +5,18 @@ Page()
   PageSection(section="Staking" :primary="true")
     EnergyDashboard
 
-  PageSection(section="ChooseYourPool")
-    StakeEnergy()
+  PageSection(section="EnergyForIXT")
+    EnergyStaking(id="energy" :data="energyData" v-if="energyData")
 
   PageSection(section = "AmeliaFoundation")
-    EnergyAmelia()
+    EnergyStaking(id="amelia" :data="ameliaData" v-if="ameliaData")
 </template>
 
 <script lang="ts" setup>
+import { StakingId } from '~/.nuxt/gql/default';
 
+const { data: ameliaData } = useStakingData(StakingId.EnergyAmelia)
+const { data: energyData } = useStakingData(StakingId.Energy)
 
 </script>
 

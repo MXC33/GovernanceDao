@@ -11,8 +11,8 @@ Card()
     slot(name="metadata")
 
     HList(gap="6")
-      ButtonGlitch(btn="~ primary-outline" cut="~ bottom-right b-ix-primary" @click="$emit('withdraw')" :text="$t('index.withdrawBtn')")
-      ButtonGlitch(btn="~ primary-outline" cut="~ bottom-right b-ix-primary" @click="$emit('deposit')" :text="$t('index.depositBtn')")
+      ButtonGlitch(btn="~ primary-outline-cut" @click="$emit('withdraw')" :text="$t('index.withdrawBtn')")
+      ButtonGlitch(btn="~ primary-outline-cut" @click="$emit('deposit')" :text="$t('index.depositBtn')")
 
   template(#detailBottom)
     slot(name="detail")
