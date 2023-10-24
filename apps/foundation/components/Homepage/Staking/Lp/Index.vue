@@ -1,5 +1,5 @@
 <template lang="pug">
-div(grid="~ cols-2 gap-6")
+div(grid="~ md:cols-2 gap-6")
   HomepageStakingItem()
     template(#title) {{ $t('index.usdtIxtStaking') }}
     template(#subtitle) {{ $t('index.provideLiq') }}

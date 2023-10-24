@@ -1,6 +1,6 @@
 <template lang="pug">
-div(grid="~ cols-2 gap-6")
-  VList()
+div(grid="~ lg:cols-2 cols-1 gap-6")
+  VList( space-y="6")
     VList(text="xl left" flex-grow="1")
       div(text="subheading") {{ $t("index.stakeIXTSection") }}
 

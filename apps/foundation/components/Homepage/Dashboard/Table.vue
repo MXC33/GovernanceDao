@@ -12,8 +12,6 @@ Card()
   
   
 <script lang="ts" setup>
-import IXTIcon from '~/assets/images/tokenBG.svg'
-
 import type { SimpleTableRow, SimpleTableColumn } from '@ix/base/composables/useSimpleTable';
 
 const { dashboardTableData } = useStakingPools()
