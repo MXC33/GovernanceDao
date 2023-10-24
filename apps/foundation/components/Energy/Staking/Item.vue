@@ -29,7 +29,7 @@ Card()
     HList(flex-grow="1")
       TitleDetail(flex-grow="1")
         template(#detail) Claim Rewards
-        template(#default) 0
+        template(#default) {{ roundToDecimals(userReward, 4) }}
       ButtonGlitch(btn="~ primary-outline-cut" @click="$emit('withdraw')" :text="$t('general.claim')")
 </template>
   
@@ -57,5 +57,5 @@ const ixtStaked = computed(() => {
 
 const dailyRewards = computed(() => data.userSpecificStakingData?.totalUserRewardPerDay)
 
-
+const userReward = computed(() => data.userSpecificStakingData?.totalUserReward)
 </script>
