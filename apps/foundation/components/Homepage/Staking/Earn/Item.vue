@@ -1,7 +1,7 @@
 <template lang="pug">
 Card()
   VList(space-y="3")
-    h4(text="heading") 
+    CardTitle(:large="true")
       slot(name="title")
 
     div(text="gray-300") 

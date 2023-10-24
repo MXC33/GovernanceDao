@@ -15,17 +15,17 @@ div(grid="~ lg:cols-2 cols-1 gap-6")
     HomepageDashboardTable()
 
     Card() 
-      VList(space-y="3")
-        div()
-          p(text="subheading") {{$t("index.circulatingSupplySection") }}
+      CardTitle() 
+        template(#default) {{$t("index.circulatingSupplySection") }}
+        template(#subtitle)
           a(href="https://www.coingecko.com/en/coins/ix-token" color="ix-orange" ) {{$t("index.CoingeckoLink") }}
 
-        VList(space-y="1")
-          HList(text="detail" space-x="3")
-            div(flex-grow="1" color="white") {{ Math.floor(circulatingSupply).toLocaleString() }}
-            div() {{ totalSupply.toLocaleString() }}
-          div(bg="ix-mint" :style="{width: percentageOfSupply + '%'}" h="1")
-          div(text="detail") {{ percentageOfSupply }} %
+      VList(space-y="1")
+        HList(text="detail" space-x="3")
+          div(flex-grow="1" color="white") {{ Math.floor(circulatingSupply).toLocaleString() }}
+          div() {{ totalSupply.toLocaleString() }}
+        div(bg="ix-mint" :style="{width: percentageOfSupply + '%'}" h="1")
+        div(text="detail") {{ percentageOfSupply }} %
 
 </template>
 

@@ -1,6 +1,6 @@
 <template lang="pug">
 Card()
-  h3(text="subheading") Earning Overview 
+  CardTitle() Earning Overview 
 
   SimpleTable(:rows="rows" :columns="columns" mx="-6" mb="!-6")
     template(#row-asset="{index}") 

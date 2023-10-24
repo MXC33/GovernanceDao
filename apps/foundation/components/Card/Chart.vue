@@ -1,11 +1,10 @@
 <template lang="pug">
 Card()
-  VList()
-    TitleDetail()
-      template(#default) Wallet portfolio
-      template(#detailBottom) Track balances
+  CardTitle()
+    template(#default) Wallet portfolio
+    template(#detail) Track balances
 
-    ChartBackground()
+  ChartBackground()
 
   div(grid="~ cols-3 gap-3") 
     TitleDetail()
