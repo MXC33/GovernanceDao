@@ -10,7 +10,7 @@ div(grid="~ cols-2 gap-6")
       div(text="detail") {{$t("energy.TotalPoolNextEpoch.title") }}
 
       HList()
-        div 422,681
+        div {{data.nextEpochPool?.toLocaleString()}}
         IXTIcon(w="6" class="ml-2")
 
   Card()
@@ -22,13 +22,19 @@ div(grid="~ cols-2 gap-6")
       div(text="detail") 99.94%
 
       HList()
-        div 422,681
+        div {{data.nextEpochPool?.toLocaleString()}}
         IXTIcon(w="6" class="ml-2")
         
 </template>
   
 <script lang="ts" setup>
 
+import type { StakingDataFragment } from '~/.nuxt/gql/default';
 import IXTIcon from '~/assets/images/token.svg'
+
+
+const { data } = defineProps<{
+  data: StakingDataFragment
+}>()
 
 </script>

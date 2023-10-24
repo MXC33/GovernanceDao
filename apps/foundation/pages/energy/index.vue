@@ -3,7 +3,7 @@ Page()
   ButtonNav()
 
   PageSection(section="Staking" :primary="true")
-    EnergyDashboard
+    EnergyDashboard(:data="energyData" v-if="energyData")
 
   PageSection(section="EnergyForIXT")
     EnergyStaking(id="energy" :data="energyData" v-if="energyData")

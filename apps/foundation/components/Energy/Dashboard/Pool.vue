@@ -8,15 +8,20 @@ VList()
       template(#default) {{$t("energy.EnergyPool.title") }}
       template(#subtitle) {{$t("energy.EpochEnds.title") }} 
 
-    EnergyDashboardMetadata()
+    EnergyDashboardMetadata(:data="data")
 
     template(#detailBottom)
-      ButtonGlitch(btn="~ primary-outline" cut="~ bottom-right b-ix-primary" @click="$emit('withdraw')" :text="$t('energy.ChooseStakingPool')")
+      ButtonGlitch(btn="~ primary-outline-cut" @click="$emit('withdraw')" :text="$t('energy.ChooseStakingPool')")
 
 </template>
   
 <script lang="ts" setup>
+import type { StakingDataFragment } from '#gql';
 
-import IXTIcon from '~/assets/images/token.svg'
+
+defineProps<{
+  data: StakingDataFragment
+}>()
+
 
 </script>
