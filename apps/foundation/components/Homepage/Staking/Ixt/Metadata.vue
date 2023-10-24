@@ -26,6 +26,8 @@ HList(space-x="10")
 import type { StakingDataFragment } from '#gql';
 import IXTIcon from '~/assets/images/token.svg'
 
+const { getAPY } = useStakingPools()
+
 const { pool } = defineProps<{
   pool: StakingDataFragment,
 }>()
@@ -33,7 +35,7 @@ const { pool } = defineProps<{
 const stakeItem = computed(() => pool.stakingItems && pool.stakingItems[0])
 
 const poolApy = computed(() =>
-  getAPY(stakeItem.value?.rewardRate ?? 0, pool.totalStakedAmount ?? 0)
+  getAPY(pool)
 )
 
 const amountStaked = computed(() =>
@@ -44,10 +46,7 @@ const poolSize = computed(() =>
   formatNumber(pool.totalStakedAmount ?? 0)
 )
 
-const getAPY = (rewardRate: number, totalSupply: number) => {
-  const APR = (rewardRate * 86400 * 365) / totalSupply;
-  return roundToDecimals(((1 + APR / 365) ** 365 - 1) * 100, 2)
-}
+
 
 
 

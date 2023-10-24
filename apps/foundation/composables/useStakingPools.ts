@@ -8,6 +8,9 @@ export type UserStakingItem = {
 }
 
 export const useStakingPools = () => {
+
+  const { fetchIXAPI } = useIXAPI()
+
   const { data: dataTerritory } = useStakingData(StakingId.Territories)
   const { data: dataTerritoryUser } = useStakingData(StakingId.TerritoriesUser)
   const { data: dataMetashare } = useStakingData(StakingId.Metashare)
@@ -73,10 +76,33 @@ export const useStakingPools = () => {
     ]
   })
 
+
+  const getTotalSupply = async () => {
+    const response = await $fetch("https://api.coingecko.com/api/v3/coins/ix-token")
+    return Number(response.market_data.total_supply)
+  }
+
+  const getCirculatingSupply = async () => {
+    const response = await fetchIXAPI("web3/circulating-supply")
+    return Number(response)
+  }
+
+  const getAPY = (data: StakingDataFragment) => {
+    if (!data.stakingItems)
+      return 0
+    const rewardRate = data.stakingItems[0]?.rewardRate ?? 0
+    const totalSupply = data.totalStakedAmount ?? 1
+    const APR = (rewardRate * 86400 * 365) / totalSupply;
+    return roundToDecimals(((1 + APR / 365) ** 365 - 1) * 100, 2)
+  }
+
   return {
     totalIXTRewards,
     totalUserRewards,
     dashboardTableData,
-    ixtPoolData
+    ixtPoolData,
+    getAPY,
+    getTotalSupply,
+    getCirculatingSupply
   }
 }

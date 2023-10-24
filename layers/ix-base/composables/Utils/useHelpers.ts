@@ -53,7 +53,7 @@ export const clamp = (min: number, max: number, amount: number) =>
 //   return Number(number + "e" + -decimalPlaces);
 // }
 
-export const roundToDecimals = (num: number | null | undefined, decimalPlaces: number) => {
+export const roundToDecimals = (num: number | null | undefined, decimalPlaces: number = 2) => {
   if (num == undefined || num == null)
     return 0
   const multiplier = Math.pow(10, decimalPlaces)
