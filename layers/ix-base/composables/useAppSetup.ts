@@ -1,8 +1,16 @@
+import { AppConfigInput } from "nuxt/schema"
+
+export interface IXAppConfig extends AppConfigInput {
+  ixApp: string,
+  connectWithoutIXUser?: boolean
+}
+
 export const useAppSetup = () => {
   const globalY = useGlobalWindowScroll()
+  const appLoaded = useState('app-fully-loaded', () => false)
 
   const { y } = useWindowScroll()
-  const { connectWallet, walletState, walletSigningToken } = useWallet()
+  const { connectWallet, walletState, walletSigningToken, walletAdress } = useWallet()
   const { setupCurrencyPrice } = useCurrencyConversion()
   const { setRefreshToken, isLoggedInAndConnected } = useLogin()
   const { user } = useUser()
@@ -10,7 +18,7 @@ export const useAppSetup = () => {
   const { execute: fetchMessageData } = useNeMessages()
   const { execute: fetchNotificationData } = useNeNotifications()
 
-  const setupOnMounted = async (onLoggedIn?: () => void) => {
+  const setupOnMounted = async (onLoggedIn?: () => Promise<void>) => {
     setupPaintWorker()
 
     watch(y, (pos) => globalY.value = pos)
@@ -31,16 +39,19 @@ export const useAppSetup = () => {
         return
 
       const walletHeaders = {
-        'X-Wallet': user.value.wallet_address ?? "",
+        'X-Wallet': walletAdress.value ?? "",
         'X-Signing-Token': walletSigningToken.value ?? ""
       }
 
       useGqlHeaders(walletHeaders)
+
       setupCurrencyPrice()
       fetchCurrencyData()
 
       if (onLoggedIn)
-        onLoggedIn()
+        onLoggedIn().then(() => {
+          appLoaded.value = true
+        })
 
       fetchMessageData()
       fetchNotificationData()
@@ -62,6 +73,7 @@ export const useAppSetup = () => {
   }
 
   return {
+    appLoaded,
     setupPaintWorker,
     setupOnMounted
   }

@@ -5,7 +5,4 @@ div(flex="~ col")
 </template>
 
 <script lang="ts" setup>
-defineProps<{
-  fold?: 'md' | 'lg',
-}>()
 </script>

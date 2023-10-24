@@ -73,7 +73,7 @@ export default defineNuxtConfig({
     ],
     server: {
       hmr: {
-        port: 8006,
+        port: 8009,
       },
     },
   },

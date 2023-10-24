@@ -6,7 +6,7 @@ VList(text="sm")
       GlitchText(v-else-if="!item.ixtPrice" text="--" font="bold" suffix=" IXT")
       GlitchText(v-else :text="String(item.ixtPrice)" font="bold" suffix=" IXT")
 
-      GlitchText(:text="usdBalanceRounded" font="normal" suffix="$" :is-dollar="true")
+      GlitchText(:text="usdBalanceRounded" font="normal" prefix="$")
 
 
   div(v-if="item.type != 'accept'" )

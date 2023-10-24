@@ -11,13 +11,17 @@ VList()
       HelperLoader()
       div {{$t(`general.wallet.playerProfile.playerConnecting`)}}...
 
-    div(v-else-if="loginStatus == 'logged-in'" space-x="2") 
+    div(v-else-if="loginStatus == 'logged-in'" space-x="2" v-if="needsIXUser") 
       span {{$t(`general.wallet.playerProfile.loggedInAs`)}}
       span(color="ix-orange" font="bold") {{ user?.username }}
       
 </template>
 
 <script setup lang="ts">
+import type { IXAppConfig } from '~/composables/useAppSetup';
+
+const config = useAppConfig() as IXAppConfig
+const needsIXUser = computed(() => !config.connectWithoutIXUser)
 const { user } = useUser()
 const { walletAdress } = useWallet()
 const { loginStatus } = useLogin()

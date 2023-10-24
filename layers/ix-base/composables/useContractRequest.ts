@@ -1,15 +1,12 @@
-import { ContractError } from "@ix/base/composables/Utils/useContractErrors"
-
+import { ContractError } from "./Utils/useContractErrors"
 
 interface RequestOptions {
   error?: () => ContractError,
-  onError?: () => void
+  onError?: (error?: string) => boolean | void
 }
 
-export const useContractRequest = (fn: () => Promise<any>, options: RequestOptions = {}) => {
+export const useContractRequest = <T extends any[]>(fn: (...args: T) => Promise<any>, options: RequestOptions = {}) => {
   const { addError } = useContractErrors()
-  const { displaySnack } = useSnackNotifications()
-  const { displayPopup } = usePopups()
 
   const loading = ref(false)
   const {
@@ -17,21 +14,16 @@ export const useContractRequest = (fn: () => Promise<any>, options: RequestOptio
     error
   } = options
 
-  const displayInsufficientFunds = () => {
-    displayPopup({ type: 'insufficient-funds' })
-  }
-
   const catchError = (serverError: string) => {
     console.log("Server", serverError)
 
-    if (serverError?.includes('rejected'))
-      return displaySnack('transaction-rejected')
+    if (onError) {
+      const handled = onError()
 
-    if (serverError == CustomErrors.insufficientBalance)
-      return displayInsufficientFunds()
+      if (handled)
+        return
+    }
 
-    if (onError)
-      onError()
 
     const errorData = error ? error() : { title: "Transaction Error" }
 
@@ -41,10 +33,10 @@ export const useContractRequest = (fn: () => Promise<any>, options: RequestOptio
     })
   }
 
-  const execute = async () => {
+  const execute = async (...args: T) => {
     loading.value = true
     try {
-      await fn()
+      await fn(...args)
     } catch (error) {
       //@ts-ignore
       const message: string = error?.message

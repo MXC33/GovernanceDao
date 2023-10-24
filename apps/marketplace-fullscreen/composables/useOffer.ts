@@ -238,7 +238,7 @@ export const useOfferContract = () => {
 
     const order = getOrderBody(message, shares.value)
     // @ts-ignore
-    return await fulfillAdvancedOrder(order, [], conduitKey.polygon, ZERO_ADRESS)
+    return await fulfillAdvancedOrder(order, [], conduitKey.polygon, ZERO_ADRESS, item)
   }
 
   const acceptOffers = async (offerItem: OfferItem, totalOffer: number, quantity: number) => {
@@ -275,9 +275,8 @@ export const useOfferContract = () => {
     }).flat().filter(notNull)
 
     const { offers, considerations } = generateConsiderations(buyOrders)
-
     // @ts-ignore
-    return await fulfillAvailableAdvancedOrders(buyOrders, [], offers, considerations, conduitKey.polygon, ZERO_ADRESS, quantity)
+    return await fulfillAvailableAdvancedOrders(buyOrders, [], offers, considerations, conduitKey.polygon, ZERO_ADRESS, quantity, [], bids)
   }
 
   return {
