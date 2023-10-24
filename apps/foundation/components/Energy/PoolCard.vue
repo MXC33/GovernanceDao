@@ -3,6 +3,7 @@ Card
   div
     div(text-2xl font-bold) 
       PageParagraphs(section="EnergyPool")
+
     div(color="ix-orange" flex gap-1)
       PageParagraphs(section="EpochEnds")
       p 17D 5H 18M

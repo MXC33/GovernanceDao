@@ -15,7 +15,7 @@ Card()
       ButtonGlitch(btn="~ primary-outline" cut="~ bottom-right b-ix-primary" @click="$emit('deposit')" :text="$t('index.depositBtn')")
 
   template(#detailBottom)
-    ClaimHorizontal()
+    slot(name="detail")
 
 </template>
 

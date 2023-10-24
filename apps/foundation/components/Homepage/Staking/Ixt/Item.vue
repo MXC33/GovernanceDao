@@ -1,8 +1,10 @@
 <template lang="pug">
-HomepageStakingItem()
+StakingItem()
   template(#title) {{ month }} {{ $t('general.month', month) }}
   template(#metadata)
     HomepageStakingIxtMetadata(:pool="pool")
+  template(#detail)
+    ClaimHorizontal()
 
 </template>
 
@@ -14,5 +16,7 @@ const { pool } = defineProps<{
   pool: StakingDataFragment,
   month: number
 }>()
+
+
 
 </script>

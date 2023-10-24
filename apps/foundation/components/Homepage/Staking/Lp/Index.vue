@@ -1,16 +1,20 @@
 <template lang="pug">
 div(grid="~ md:cols-2 gap-6")
-  HomepageStakingItem()
+  StakingItem()
     template(#title) {{ $t('index.usdtIxtStaking') }}
     template(#subtitle) {{ $t('index.provideLiq') }}
     template(#metadata)
       HomepageStakingLpMetadata(:item="lpUsdtData" v-if="lpUsdtData")
+    template(#detail)
+      ClaimHorizontal()
 
-  HomepageStakingItem()
+  StakingItem()
     template(#title) {{ $t('index.maticIxtStaking') }}
     template(#subtitle) {{ $t('index.provideLiq') }}
     template(#metadata)
       HomepageStakingLpMetadata(:item="lpMaticData" v-if="lpMaticData")
+    template(#detail)
+      ClaimHorizontal()
 </template>
 
 <script lang="ts" setup>

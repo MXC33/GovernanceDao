@@ -1,11 +1,15 @@
 <template lang="pug">
 Page()
   ButtonNav()
-  EnergyLanding()
+
+  PageSection(section="Staking" :primary="true")
+    EnergyDashboard
+
   PageSection(section="ChooseYourPool")
-  StakeEnergy()
+    StakeEnergy()
+
   PageSection(section = "AmeliaFoundation")
-  EnergyAmelia()
+    EnergyAmelia()
 </template>
 
 <script lang="ts" setup>

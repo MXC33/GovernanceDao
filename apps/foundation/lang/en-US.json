@@ -493,9 +493,7 @@
     "ClaimableRewards": {
       "title": "Claimable Rewards"
     },
-    "ChooseStakingPool": {
-      "title": "CHOOSE STAKING POOL"
-    },
+    "ChooseStakingPool": "CHOOSE STAKING POOL",
     "StakingPoolDistribution": {
       "title": "Staking Pool Distribution",
       "description": "Details about the distribution of the staking pool."
