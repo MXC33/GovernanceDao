@@ -1,3 +1,20 @@
+export interface Banner {
+  id: string,
+  message: string,
+  background_color: string,
+  backgroundImage: string,
+  leftImage: string,
+  image: string,
+  link: string,
+  active_time: number
+}
+export interface BannerResponse {
+  success: boolean,
+  status: number,
+  message: string,
+  data: Banner
+}
+
 export const useAds = () => {
   const oneHour = 3600
   const fourHours = 14400
@@ -21,6 +38,27 @@ export const useAds = () => {
     }
   ]
 
+  const topBannerAd = async () => {
+    const { fetchIXAPI } = useIXAPI()
+    let bannerData: Banner = {
+      id: '',
+      message: '',
+      background_color: '',
+      backgroundImage: '',
+      leftImage: '',
+      image: '',
+      link: '',
+      active_time: 0
+    };
+
+    try {
+      const { data } = await fetchIXAPI('banner') as BannerResponse
+      bannerData = data
+    } catch (e) {}
+
+    return bannerData
+  }
+
   const bannerAdActive = useCookieState(`ad-banner-${config.ixApp}`, () => true, { maxAge: aDay, consentLevel: 'preferences' })
 
   const showAdPopup = useCookieState<boolean>('show-ad-popup', () => true, { consentLevel: 'preferences' })
@@ -31,10 +69,9 @@ export const useAds = () => {
 
   const activeAd = computed(() => ads[randomSwitchAds.value])
 
-
-
   return {
     showAdPopup,
+    topBannerAd,
     bannerAdActive,
     boxAdActive,
     activeAd
