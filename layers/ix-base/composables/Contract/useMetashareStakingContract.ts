@@ -1,9 +1,9 @@
 import { ethers } from 'ethers'
-import { ContractContext as MetashareStakingContract } from '../ABIs/MetashareStaking'
-import MetashareStakingABI from "../ABIs/MetashareStaking.json"
+import { ContractContext as MetashareStakingContract } from '~/composables/Contract/Abis/MetashareStaking'
+import MetashareStakingABI from "~/composables/Contract/Abis/MetashareStaking.json"
 import { metashareStakingAddress } from '@ix/base/composables/Contract/WalletAddresses'
 import { ContractInterface } from '@ix/base/composables/Utils/defineContract'
-import { UserStakingItem } from 'composables/useStakingData'
+import { UserStakingItem } from './useStakingData'
 import { NftFragment, StakingId } from '../../.nuxt/gql/default'
 
 

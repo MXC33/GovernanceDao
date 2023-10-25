@@ -194,9 +194,7 @@
       "title": "Shares"
     },
     "TradeIXTPerShare30Days": "IXT per share 30 days",
-    "TradeViewOnMarketplace": {
-      "title": "VIEW ON MARKETPLACE"
-    },
+    "TradeViewOnMarketplace": "VIEW ON MARKETPLACE",
     "CorpStakingTitle": {
       "title": "Staking"
     },
@@ -215,15 +213,10 @@
     "CorpStakingStakeButton": {
       "title": "STAKE"
     },
-    "CorpStakingWithdrawButton": {
-      "title": "WITHDRAW"
-    },
-    "ClaimRewardsTitle": {
-      "title": "Claim rewards"
-    },
-    "ClaimRewardsRewards": {
-      "title": "Rewards"
-    },
+    "withdrawButton": "WITHDRAW",
+    "depositButton": "DEPOSIT",
+    "ClaimRewardsTitle": "Claim rewards",
+    "ClaimRewardsRewards": "Rewards",
     "ClaimRewardsClaimButton": {
       "title": "CLAIM"
     },

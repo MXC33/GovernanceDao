@@ -31,7 +31,6 @@ Page()
 
 
 <script lang="ts" setup>
-import { filterMetashareType } from '~/composables/contracts/useMetashareStakingContract';
 import { StakingId, type StakingItemFragment } from '~/.nuxt/gql/default';
 
 
