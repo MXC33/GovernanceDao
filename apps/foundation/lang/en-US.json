@@ -193,9 +193,7 @@
     "TradeShares": {
       "title": "Shares"
     },
-    "TradeIXTPerShare30Days": {
-      "title": "IXT per share 30 days"
-    },
+    "TradeIXTPerShare30Days": "IXT per share 30 days",
     "TradeViewOnMarketplace": {
       "title": "VIEW ON MARKETPLACE"
     },

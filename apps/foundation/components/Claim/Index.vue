@@ -4,7 +4,7 @@ CardSection(title="Claim Rewards")
     TitleDetail()
       p Rewards: [dynamic value]
       template(#buttons)
-  button(btn="~ primary-outline" disable="active")  CLAIM REWARDS
+  button(btn="~ primary-outline-cut" disable="active")  CLAIM REWARDS
 </template>
 
 <script lang="ts" setup>

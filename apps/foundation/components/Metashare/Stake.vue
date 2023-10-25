@@ -6,8 +6,8 @@ CardSection(title="Staking")
       template(#default) {{ listItem.items }}
   template(#buttons)
     div(grid="~ cols-2" space-x="3")
-      button(btn="~ primary-outline" disable="active") STAKE
-      button(btn="~ primary-outline" disable="active") WITHDRAW
+      button(btn="~ primary-outline-cut" disable="active") STAKE
+      button(btn="~ primary-outline-cut" disable="active") WITHDRAW
 </template>
 <script lang="ts" setup>
 

@@ -1,9 +1,9 @@
 <template lang="pug">
 CardSection(title="Trade")
-  p Share: {{stakingItem?.totalStaked}}
-  p IXT per share 30 days: [Dynamic Value]
+  div {{ $t('general.shares') }}: {{stakingItem?.totalStaked}} 
+  div {{ $t('metashare.TradeIXTPerShare30Days') }}: [api data]
   template(#buttons) 
-    button(btn="~ primary-outline") VIEW ON MARKETPLACE
+    button(btn="~ primary-outline-cut") VIEW ON MARKETPLACE
 
 </template>
 <script lang="ts" setup>

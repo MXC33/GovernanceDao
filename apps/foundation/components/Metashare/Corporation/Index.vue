@@ -3,6 +3,7 @@ Card()
   MetashareCorporationImages()
   MetashareTrade(:staking-item="stakingData")
   MetashareStake()
+  template(#detailBottom)
   Claim()
 </template>
 
