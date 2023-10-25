@@ -1,15 +1,15 @@
 <template lang="pug">
 VList()
-  TransactionSummaryRow()
+  InputSummaryRow()
     template(#name) {{ $t(`marketplace.price.title`) }}
     template(#value)
       GlitchText(:text="priceRenderString(totalIXTPrice)" suffix=" IXT")
 
-  TransactionSummaryRow()
+  InputSummaryRow()
     template(#name) {{ $t(`marketplace.price.marketplaceFee`) }}
     template(#value) 5%
 
-  TransactionSummaryRow(:primary="true")
+  InputSummaryRow(:primary="true")
     template(#name) {{ $t(`marketplace.price.totalEarnings`) }}
     template(#value)
       VList(space-y="-1.5" text="sm md:base")

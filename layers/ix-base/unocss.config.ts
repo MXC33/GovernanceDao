@@ -140,6 +140,7 @@ export default definePreset({
       'btn-primary-outline': 'btn-primary bg-opacity-20 hover:bg-opacity-40 b-0.5 b-ix-primary',
       'btn-primary-outline-cut': 'btn-primary-outline cut cut-bottom-right cut-b-ix-primary',
       'btn-secondary-outline': 'btn-secondary bg-opacity-20 hover:bg-opacity-40 b-0.5 b-ix-primary',
+      'btn-secondary-outline-cut': 'btn-secondary-outline cut cut-bottom-right cut-b-gray-400',
       'btn-orange-outline': 'bg-ix-orange bg-opacity-20 hover:bg-opacity-40 b-0.5 b-ix-primary',
       'btn-primary-outline-opaque': 'btn-primary-outline bg-opacity-40 hover:bg-opacity-60',
       'btn-lg': 'min-h-14',

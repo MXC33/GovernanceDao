@@ -12,6 +12,7 @@ Card()
 
     HList(gap="6")
       ButtonGlitch(btn="~ primary-outline-cut" @click="$emit('withdraw')" :text="$t('index.withdrawBtn')")
+
       ButtonGlitch(btn="~ primary-outline-cut" @click="$emit('deposit')" :text="$t('index.depositBtn')")
 
   template(#detailBottom)

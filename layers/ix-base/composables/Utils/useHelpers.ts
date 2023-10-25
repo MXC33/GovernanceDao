@@ -81,6 +81,23 @@ export const useIntervalWithDays = (start: number, end: number) => {
   return { months, days, hours, minutes, seconds }
 }
 
+export const useStakingHelper = () => {
+  const formattedMonths = (months: number) => {
+    if (months == 12)
+      return "1 Year"
+
+    if (months == 1)
+      return "1 Month"
+
+    return `${months} Months`
+  }
+
+  return {
+    formattedMonths
+  }
+}
+
+
 export const isNumeric = (value: string) => {
   return /^-?\d+$/.test(value)
 }

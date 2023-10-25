@@ -17,7 +17,6 @@ VList()
   
 <script lang="ts" setup>
 import type { StakingDataFragment } from '#gql';
-import { formatDistance } from 'date-fns'
 
 const { data } = defineProps<{
   data: StakingDataFragment
