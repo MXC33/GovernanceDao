@@ -190,7 +190,7 @@ export const useOfferItems = (item: SingleItemData) => {
 }
 
 export const useOfferContract = () => {
-  const { generateConsiderations, getOrderMessage, getTransactionContract } = useTransactionHelpers()
+  const { generateConsiderations, getOrderMessage, getTransactionContract, isAdvancedOrder } = useTransactionHelpers()
   const { allowanceCheck } = useIXTContract()
   const { fulfillAvailableAdvancedOrders, fulfillAdvancedOrder } = useSeaportContract()
 
@@ -208,6 +208,35 @@ export const useOfferContract = () => {
     }
 
     return order
+  }
+
+  const createBuyOrder = (bid: Bid, quantity: number, substitute?: boolean) => {
+    const message = getOrderMessage(bid)
+    if (!message?.body?.consideration)
+      return
+
+    delete message.body.counter
+    message.body.totalOriginalConsiderationItems = message.body.consideration.length
+
+    const buyAmount = Math.min(bid.quantity, quantity)
+
+    const getOrder = (amount: number) => ({
+      parameters: message.body,
+      numerator: substitute ? 1: amount,
+      denominator: message.body.consideration[0].endAmount ?? 0,
+      signature: message.signature,
+      extraData: "0x"
+    }) as AdvancedOrder
+
+    const orders: AdvancedOrder[] = []
+
+    if (!substitute)
+      return [getOrder(buyAmount)]
+
+    for (var i = 0; i < buyAmount; i++) {
+      orders.push(getOrder(i))
+    }
+    return orders
   }
 
   const multiAccept = async (item: AcceptingItem[]) => {
@@ -241,11 +270,11 @@ export const useOfferContract = () => {
     return await fulfillAdvancedOrder(order, [], conduitKey.polygon, ZERO_ADRESS, item)
   }
 
-  const acceptOffers = async (offerItem: OfferItem, totalOffer: number, quantity: number) => {
+  const acceptOffers = async (offerItem: OfferItem, totalOffer: number, quantity: number, substitute?: boolean) => {
     const { token, bids } = offerItem
 
     if (!bids || !bids.length)
-      throw new Error("There are no offers")
+      throw new Error(CustomErrors.noOfferItem)
 
     const nftContract = getTransactionContract(token)
     const approveNftCheck = await nftContract.approveNftCheck()
@@ -256,26 +285,12 @@ export const useOfferContract = () => {
     if (!await allowanceCheck(totalOffer))
       throw new Error(CustomErrors.allowanceError)
 
-    const buyOrders = bids.map((bid) => {
-      if (!bid)
-        return null
-
-      const message = getOrderMessage(bid)
-
-      if (!message?.body.consideration)
-        return null
-
-      delete message.body.counter
-
-      message.body.totalOriginalConsiderationItems = message.body.consideration.length
-
-      const offerAmount = bid.quantity < quantity ? bid.quantity : quantity
-
-      return Array.from({ length: offerAmount }, () => getOrderBody(message, 1))
-    }).flat().filter(notNull)
+    const buyOrders = bids.map((bid) =>
+      createBuyOrder(bid, quantity, substitute)
+    ).filter(isAdvancedOrder).flat()
 
     const { offers, considerations } = generateConsiderations(buyOrders)
-    // @ts-ignore
+
     return await fulfillAvailableAdvancedOrders(buyOrders, [], offers, considerations, conduitKey.polygon, ZERO_ADRESS, quantity, [], bids)
   }
 
