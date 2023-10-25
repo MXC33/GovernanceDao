@@ -10,11 +10,18 @@ VList.no-scrollbar(overflow-x="auto" width="100%")
       template(v-for="row, rowIndex in rows" )
         div(grid="~ row-gap-0 gap-x-3" py="3" :style="gridStyles") 
           VList(v-for="col, colIndex in columns" justify="center") 
-            slot(v-if="col.id && $slots['row-' + col.id]" :row="row.items[colIndex]" :index="rowIndex" :name="'row-' + col.id")
+            slot(v-if="col.id && $slots['col-' + col.id]" :row="row.items[colIndex]" :index="rowIndex" :name="'col-' + col.id")
 
             template(v-else) {{ row.items[colIndex] }}
 
         Divider(mx="-6" display="last:none")
+
+    Divider()
+
+    VList(flex-grow="1" bg="gray-900")
+      header(grid="~ row-gap-0 gap-x-3" :style="gridStyles" p="x-6 y-3")
+        VList(v-for="col, colIndex in columns")
+          slot(v-if="col.id && $slots['footer-col-' + col.id]" :index="colIndex" :name="'footer-col-' + col.id")
 
 </template>
 

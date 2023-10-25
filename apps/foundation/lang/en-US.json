@@ -1,4 +1,7 @@
 {
+  "foundation": {
+    "claimRewards": "Claim rewards"
+  },
   "index": {
     "dashboardStaking": {
       "title": "STAKING DASHBOARD",
@@ -147,9 +150,6 @@
     },
     "ProposalBtn": {
       "title": "VIEW PROPOSAL"
-    },
-    "claimRewards": {
-      "title": "Claim rewards"
     }
   },
   "metashare": {
@@ -160,69 +160,23 @@
     "EarningOverview": {
       "title": "Earning overview"
     },
-    "GravityGrade": {
-      "title": "Gravity Grade"
-    },
-    "AstroCap": {
-      "title": "Astro Cap"
-    },
-    "NetEmpire": {
-      "title": "NetEmpire"
-    },
-    "EternaLab": {
-      "title": "EternaLab"
-    },
-    "NewlandsLlc": {
-      "title": "Newlands LLC"
-    },
-    "LuckyCat": {
-      "title": "Lucky Cat"
-    },
-    "PlaceholderY": {
-      "title": "Y_"
-    },
-    "GlobalWasteSystems": {
-      "title": "Global Waste Systems"
-    },
-    "ClaimAll": {
-      "title": "CLAIM ALL"
-    },
+    "ClaimAll": "CLAIM ALL",
     "CorporationTitle": {
       "title": "CORPORATIONS METASHARE",
       "description": "MetaShares grant you the authority to influence the corporation's future and to earn a monthly portion of the corporation's profits."
     },
-    "TradeTitle": {
-      "title": "Trade"
-    },
-    "TradeShares": {
-      "title": "Shares"
-    },
+    "TradeTitle": "Trade",
+    "TradeShares": "Shares",
     "TradeIXTPerShare30Days": "IXT per share 30 days",
     "TradeViewOnMarketplace": "VIEW ON MARKETPLACE",
     "CorpStakingTitle": {
       "title": "Staking"
     },
-    "CorpStakingSharesOwned": {
-      "title": "Shares owned"
-    },
-    "CorpStakingSharesStaked": {
-      "title": "Shares staked"
-    },
-    "CorpStakingDailyYield": {
-      "title": "Daily Yield"
-    },
-    "CorpStakingTVL": {
-      "title": "TVL"
-    },
-    "CorpStakingStakeButton": {
-      "title": "STAKE"
-    },
-    "withdrawButton": "WITHDRAW",
-    "depositButton": "DEPOSIT",
-    "ClaimRewardsTitle": "Claim rewards",
-    "ClaimRewardsRewards": "Rewards",
-    "ClaimRewardsClaimButton": {
-      "title": "CLAIM"
+    "items": {
+      "sharesOwned": "Shares owned",
+      "sharesStaked": "Shares staked",
+      "dailyYield": "Daily Yield",
+      "totalStaked": "TVL"
     },
     "CorpPerformanceTitle": {
       "title": "CORPORATIONS' PERFORMANCE",

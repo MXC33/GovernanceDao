@@ -5,7 +5,7 @@ div(grid="~ cols-3 gap-6")
     template(#detail)  {{ $t('index.totalLiquidity') }}
     template(#default) {{ formatNumber(item.totalStakedAmount ?? 0)}}
 
-  TitleDetail() 
+  TitleDetail(:icon="type == 'matic' ? 'ixtmatic' : 'ixtusdt'") 
     template(#detail) {{ $t('index.yourStake') }}
     template(#default) {{ roundToDecimals(userStakingData?.amountStaked, 2) }}
 
@@ -28,7 +28,8 @@ div(grid="~ cols-3 gap-6")
 import type { StakingDataFragment } from '~/.nuxt/gql/default';
 
 const { item } = defineProps<{
-  item: StakingDataFragment
+  item: StakingDataFragment,
+  type: 'usdt' | 'matic'
 }>()
 
 const userStakingData = computed(() => item.stakingItems && item.stakingItems[0]?.userStakingData)

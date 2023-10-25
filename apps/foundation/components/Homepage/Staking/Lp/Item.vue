@@ -6,7 +6,7 @@ StakingItem(:can-withdraw="stakeBalance > 0" @deposit="depositActive = true" @wi
     UsdtIXT_Icon(w="14" v-if="type == 'usdt'")
     MaticIXT_Icon(w="14" v-else)
   template(#metadata)
-    HomepageStakingLpMetadata(:item="pool" v-if="pool")
+    HomepageStakingLpMetadata(:item="pool" :type="type" v-if="pool")
 
   template(#detail)
     StakingRewards(:pool="pool" v-if="pool")

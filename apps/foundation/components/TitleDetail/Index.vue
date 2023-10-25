@@ -8,8 +8,7 @@ VList()
     h3
       slot
 
-    IXTIcon(w="5" v-if="icon == 'ixt'")
-    img(src="~/assets/png/EnergyIcon.png" w="5" v-else-if="icon == 'energy'")
+    Icon(v-if="icon" :icon="icon")
 
   h6(v-if="$slots.detailBottom" text="detail")
     slot(name="detailBottom")
@@ -17,11 +16,9 @@ VList()
 </template>
   
 <script lang="ts" setup>
-import IXTIcon from '~/assets/images/token.svg'
-
 
 defineProps<{
-  icon?: 'ixt' | 'energy'
+  icon?: 'ixt' | 'energy' | 'ixtmatic' | 'ixtusdt'
 }>()
 
 </script>
