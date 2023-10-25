@@ -1,10 +1,10 @@
 export interface Banner {
   id: string,
   message: string,
-  bgColor: string,
-  bgImages: string,
-  imagesLeft: string,
-  imagesCenter: string,
+  background_color: string,
+  backgroundImage: string,
+  leftImage: string,
+  image: string,
   link: string,
   active_time: number
 }
@@ -43,10 +43,10 @@ export const useAds = () => {
     let bannerData: Banner = {
       id: '',
       message: '',
-      bgColor: '',
-      bgImages: '',
-      imagesLeft: '',
-      imagesCenter: '',
+      background_color: '',
+      backgroundImage: '',
+      leftImage: '',
+      image: '',
       link: '',
       active_time: 0
     };
