@@ -1,19 +1,18 @@
 <template lang="pug">
 div.buttonContainer
-  button.buttonTerritories( @click="handleClick") {{ label }}
+  button.buttonTerritories( @click="handleClick" uppercase="~" font="bold") {{ label }}
 </template>
 
 <script lang="ts" setup>
-import { defineProps, defineEmits } from 'vue';
 
-const props = defineProps({
-  label: String
-});
+const { label } = defineProps<{
+  label: string
+}>()
 
 const emit = defineEmits(['click']);
 
 const handleClick = () => {
-  emit('click', props.label.toLowerCase());
+  emit('click', label.toLowerCase());
 };
 </script>
 
@@ -37,7 +36,7 @@ const handleClick = () => {
 
 .buttonTerritories.active,
 .buttonTerritories:hover {
-  color: orange;
+  @apply color-ix-orange;
   /* Adjust for the desired hover and active text color */
 }
 
@@ -49,7 +48,8 @@ const handleClick = () => {
   right: 0;
   height: 3px;
   /* Adjust for the desired border thickness */
-  background-color: orange;
+  @apply bg-ix-orange;
+
   transform: scaleX(0);
   transform-origin: bottom right;
   transition: transform 0.25s ease-out;

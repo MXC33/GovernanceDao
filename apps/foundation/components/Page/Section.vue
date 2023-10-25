@@ -17,6 +17,5 @@ defineProps<{
 }>()
 
 const route = useRoute()
-console.log(route)
 
 </script>

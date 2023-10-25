@@ -1,51 +1,32 @@
 <template lang="pug">
 Card()
   div(grid="~ cols-4 gap-6")
-    div(v-for="territory, index in territories" :key="index")
-      div(text="sm" color="gray-300") {{ territory.title }}
-      div.flex.items-center
-        span(text="2xl" font="bold") {{ territory.data }}
-        IXTIcon(v-if="territory.title === 'Daily IXT/Share'" w="5" class="ml-2")
+    TitleDetail()
+      template(#detail) Category
+      template(#default)
+        HList(space-x="1")
+          TerritoryTierIcon(w="4" translate-y="-0.5")
+          div(capitalize="~") {{ data.token.tokenInfo.tier }}
+    TitleDetail()
+      template(#detail) Staked
+      template(#default) {{ data.userStakingData?.amountStaked }}
+    TitleDetail()
+      template(#detail) TVL
+      template(#default) {{ data.totalStaked }}
+    TitleDetail(icon="ixt")
+      template(#detail) Daily IXT/Share
+      template(#default) {{ roundToDecimals(data.rewardPerDay) }}
 </template>
   
   
   
 <script lang="ts" setup>
-import { defineProps } from 'vue';
-import IXTIcon from '~/assets/images/token.svg'
-// import TierHexagonColor from './TireHexagonColor.vue';
+import type { StakingItemFragment } from '#gql';
 
+const TerritoryTierIcon = await import(`../../public/assets/svg/${data.token.tokenInfo.tier}-badge.svg?component`).catch(() => '')
 
-interface Territory {
-  title: string;
-  data: string | number;
-}
+const { data } = defineProps<{
+  data: StakingItemFragment
+}>()
 
-const props = defineProps({
-  category: {
-    type: String,
-    required: true
-  }
-});
-
-const territories: Territory[] = [
-  {
-    title: "Category",
-    data: props.category,
-  },
-  {
-    title: "Staked",
-    data: 0,
-  },
-  {
-    title: "TVL",
-    data: 0
-  },
-  {
-    title: "Daily IXT/Share",
-    data: 0
-  }
-];
 </script>
-
-<style></style>
