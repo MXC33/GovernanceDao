@@ -4,42 +4,33 @@ Card()
     TitleDetail() 
       template(#detail) Locking period
       template(#default) {{data.lockPeriod}}
-    TitleDetail()
+
+    TitleDetail(icon="ixt")
       template(#detail) Your Stake
-      template(#default)
-        HList(items="center" space-x="1")
-          div {{ ixtStaked }}
-          IXTIcon(w="5")
-    TitleDetail()
+      template(#default) {{ ixtStaked }}
+
+    TitleDetail(icon="energy")
       template(#detail) Your Stake
-      template(#default) 
-        HList(items="center" space-x="1")
-          div {{ energyStaked }}
-          img(src="~/assets/png/EnergyIcon.png" w="6")
-    TitleDetail()
+      template(#default) {{ energyStaked }}
+
+    TitleDetail(icon="ixt")
       template(#detail) Daily rewards
-      template(#default) 
-        HList(items="center" space-x="1")
-          div {{ dailyRewards }}
-          IXTIcon(w="5")
+      template(#default) {{roundToDecimals(dailyRewards)}}
+
   HList(gap-6)
-    ButtonGlitch(btn="~ primary-outline-cut" @click="$emit('withdraw')" :text="$t('general.unstake')")
-    ButtonGlitch(btn="~ primary-outline-cut" @click="$emit('withdraw')" :text="$t('general.stake')")
+    ButtonGlitch(btn="~ primary-outline-cut" @click="$emit('unstake')" :text="$t('general.unstake')")
+    ButtonGlitch(btn="~ primary-outline-cut" @click="$emit('stake')" :text="$t('general.stake')")
+
   template(#detailBottom)
-    HList(flex-grow="1")
-      TitleDetail(flex-grow="1")
-        template(#detail) Claim Rewards
-        template(#default) {{ roundToDecimals(userReward, 4) }}
-      ButtonGlitch(btn="~ primary-outline-cut" @click="$emit('withdraw')" :text="$t('general.claim')")
+    StakingRewards(:pool="data" v-if="data")
+
 </template>
   
   
 <script lang="ts" setup>
+import { type StakingDataFragment } from '~/.nuxt/gql/default';
 
-import IXTIcon from '~/assets/images/token.svg'
-import { type StakingDataFragment, StakingId } from '~/.nuxt/gql/default';
-
-const { id, data } = defineProps<{
+const { data } = defineProps<{
   id: string,
   data: StakingDataFragment
 }>()

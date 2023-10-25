@@ -5,19 +5,13 @@ HList(space-x="10")
     template(#detail) {{ $t('index.apy') }}
     template(#default) {{ poolApy }} %
 
-  TitleDetail()
+  TitleDetail(icon="ixt")
     template(#detail) {{ $t('index.yourStake') }}
-    template(#default)
-      HList()
-        span {{ amountStaked }}
-        IXTIcon(w="5" class="ml-2")
+    template(#default) {{ amountStaked }}
 
-  TitleDetail()
+  TitleDetail(icon="ixt")
     template(#detail) {{ $t('index.poolSize') }}
-    template(#default)
-      HList()
-        span {{ poolSize }}
-        IXTIcon(w="5" class="ml-2")
+    template(#default) {{ poolSize }}
 
   </template>
 

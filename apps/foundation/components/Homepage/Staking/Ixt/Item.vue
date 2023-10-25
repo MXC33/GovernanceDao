@@ -4,7 +4,7 @@ StakingItem()
   template(#metadata)
     HomepageStakingIxtMetadata(:pool="pool")
   template(#detail)
-    ClaimHorizontal()
+    StakingRewards(:pool="pool")
 
 </template>
 
@@ -16,7 +16,6 @@ const { pool } = defineProps<{
   pool: StakingDataFragment,
   month: number
 }>()
-
 
 
 </script>

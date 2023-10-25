@@ -78,10 +78,6 @@ export const useDaysLeft = (start: number, end: number) =>
 
 export const useIntervalWithDays = (start: number, end: number) => {
   const { months, days, hours, minutes, seconds } = intervalToDuration({ start, end })
-  // const days = Math.floor(useDaysLeft(start, end))
-  // const hours = Math.floor(useHoursLeft(start, end))
-  // const hoursLeft = Math.floor(((hours / 24) % 1) * 24)
-
   return { months, days, hours, minutes, seconds }
 }
 

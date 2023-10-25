@@ -464,15 +464,11 @@
       "title": "ENERGY STAKING",
       "description": "Stake Energy Tokens to receive IXT or Gravity Grade Packs with PIX Contents. You can also stake Energy in the sustainability pool to donate a percentage of your yield to the Amelia Foundation."
     },
-    "EnergyPool": {
-      "title": "Energy Pool: 400 000 IXT / month"
-    },
+    "EnergyPool": "Energy Pool: 400 000 IXT / month",
     "ixtpermonth": {
       "title": "IXT / month"
     },
-    "EpochEnds": {
-      "title": "Epoch ends in: "
-    },
+    "EpochEnds": "Epoch ends in: ",
     "DailyIXT": {
       "title": "Daily IXT per Energy"
     },
@@ -505,22 +501,10 @@
     "Current": {
       "title": "Current"
     },
-    "IXTPoolNextEpoch": {
-      "title": "IXT Pool next epoch",
-      "description": "Estimated"
-    },
-    "Estimated": {
-      "title": "Estimated"
-    },
-    "TotalPoolNextEpoch": {
-      "title": "Total Pool next epoch"
-    },
-    "NextEpochRelease": {
-      "title": "Next epoch release"
-    },
-    "facilitiesMinted": {
-      "title": "Based on facilities minted"
-    },
+    "IXTPoolNextEpoch": "IXT Pool next epoch",
+    "TotalPoolNextEpoch": "Total Pool next epoch",
+    "NextEpochRelease": "Next epoch release",
+    "facilitiesMinted": "Based on facilities minted",
     "ChooseYourPool": {
       "title": "CHOOSE YOUR POOL",
       "description": "Stake Energy and IXT in 30 days epochs to claim rewards"

@@ -30,8 +30,6 @@ div(grid="~ lg:cols-2 cols-1 gap-6")
 </template>
 
 <script lang="ts" setup>
-import IXTIcon from '~/assets/images/token.svg'
-
 const { getCirculatingSupply, getTotalSupply, getAPY, ixtPoolData } = useStakingPools()
 
 const circulatingSupply = await getCirculatingSupply()

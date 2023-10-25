@@ -1,6 +1,6 @@
 <template lang="pug">
 div(grid="~ cols-3 gap-6")
-  TitleDetail() 
+  TitleDetail(icon="ixt") 
     template(#detail)  {{ $t('energy.DailyIXT.title') }}
     template(#default) {{ roundToDecimals(dailyIxt, 4)}}
 
@@ -8,15 +8,15 @@ div(grid="~ cols-3 gap-6")
     template(#detail) {{ $t('energy.TVL.title') }}
     template(#default) {{ data.totalStakedAmount?.toLocaleString() }}
 
-  TitleDetail() 
+  TitleDetail(icon="ixt") 
     template(#detail) {{ $t('energy.IXTUnlocked.title') }}
     template(#default) {{ data.currentEpochPool?.toLocaleString() }}
 
-  TitleDetail()
+  TitleDetail(icon="energy")
     template(#detail) {{ $t('energy.YourStake.title') }}
     template(#default) {{ yourStake }}
 
-  TitleDetail()
+  TitleDetail(icon="ixt")
     template(#detail) {{ $t('energy.ClaimableRewards.title') }}
     template(#default) {{ roundToDecimals(claimableRewards) }}
 
