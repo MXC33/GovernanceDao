@@ -258,9 +258,6 @@ export const useBuyContract = () => {
 
     const { offers, considerations } = generateConsiderations(buyOrders)
 
-    console.log('fisky buyOrders', buyOrders)
-    console.log('fisky offers', offers)
-    console.log('fisky considerations', considerations)
     return await fulfillAvailableAdvancedOrders(buyOrders, [], offers, considerations, conduitKey.polygon, ZERO_ADRESS, quantity)
   }
 
