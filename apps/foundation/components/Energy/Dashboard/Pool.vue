@@ -5,8 +5,8 @@ VList()
 
   Card()
     CardTitle()
-      template(#default) {{$t("energy.EnergyPool.title") }}
-      template(#subtitle) {{$t("energy.EpochEnds.title") }} 
+      template(#default) {{$t("energy.EnergyPool") }}
+      template(#subtitle) {{$t("energy.EpochEnds") }} {{ epochEnds }}
 
     EnergyDashboardMetadata(:data="data")
 
@@ -17,11 +17,22 @@ VList()
   
 <script lang="ts" setup>
 import type { StakingDataFragment } from '#gql';
+import { formatDistance } from 'date-fns'
 
-
-defineProps<{
+const { data } = defineProps<{
   data: StakingDataFragment
 }>()
 
+const currentTime = useTimestamp()
 
+const epochEnds = computed(() => {
+  const endTime = data.epochEndtime
+  if (!endTime)
+    return 0
+
+  const { days, hours, minutes, seconds } = useIntervalWithDays(currentTime.value, endTime * 1000)
+  return `${days}D ${hours}H ${minutes}M ${seconds}S`
+})
+
+console.log("Data", data.epochEndtime)
 </script>

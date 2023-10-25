@@ -1,9 +1,8 @@
 import { ethers } from 'ethers'
-import { ContractContext as IXTStakingContract } from '../ABIs/IXTStaking'
-import IXTStakingABI from "../ABIs/IXTStaking.json"
+import { ContractContext as IXTStakingContract } from '~/composables/Contract/Abis/IXTStaking'
+import IXTStakingABI from "~/composables/Contract/Abis/IXTStaking.json"
 import { oneMonthIXTStakingAddress, threeMonthIXTStakingAddress, sixMonthIXTStakingAddress, twelveMonthIXTStakingAddress } from '@ix/base/composables/Contract/WalletAddresses'
 import { ContractInterface } from '@ix/base/composables/Utils/defineContract'
-import { UserStakingItem } from 'composables/useStakingData'
 import { StakingId } from '.nuxt/gql/default'
 
 

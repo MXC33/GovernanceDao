@@ -1,15 +1,12 @@
 <template lang="pug">
 VList(space-y="3" w="full")
-  div(grid="~ cols-2 gap-3")
-    HList(justify="center" text="center")     
-      TitleDetail()
-        template(#detail) {{ $t('index.yourStake') }}
-        template(#default) {{ userStaked}}
-
-    HList(justify="center" text="center")     
-      TitleDetail()
-        template(#detail) {{ $t('index.totalRewards') }}
-        template(#default) {{ userReward }}
+  HList(space-x="6")
+    TitleDetail()
+      template(#detail) {{ $t('index.yourStake') }}
+      template(#default) {{ userStaked}}
+    TitleDetail()
+      template(#detail) {{ $t('index.totalRewards') }}
+      template(#default) {{ userReward }}
 
   ButtonGlitch(@click="onClick" btn="~ primary-outline" cut="~ bottom-right b-ix-primary" :text="$t(`index.assetStaking.${id}.button`)")
 

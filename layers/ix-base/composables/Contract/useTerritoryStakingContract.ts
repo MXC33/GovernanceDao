@@ -1,11 +1,11 @@
 import { ethers } from 'ethers'
-import { ContractContext as TerritoryStakingContract } from '../ABIs/PIXTerritoryStaking'
-import TerritoryStakingABI from "../ABIs/PIXTerritoryStaking.json"
+import { ContractContext as TerritoryStakingContract } from '~/composables/Contract/Abis/PIXTerritoryStaking'
+import TerritoryStakingABI from "~/composables/Contract/Abis/PIXTerritoryStaking.json"
 import { territoryStakingAddress } from '@ix/base/composables/Contract/WalletAddresses'
 import { ContractInterface } from '@ix/base/composables/Utils/defineContract'
-import { UserStakingItem } from 'composables/useStakingData'
+import { UserStakingItem } from './useStakingData'
 import { StakingId } from '.nuxt/gql/default'
-import { useLandData } from '../../../mission-control/composables/useLandData'
+import { useLandData } from '../../../../apps/mission-control/composables/useLandData'
 
 
 export const useTerritoryStakingContract = <T extends ContractInterface<T> & TerritoryStakingContract>() => {

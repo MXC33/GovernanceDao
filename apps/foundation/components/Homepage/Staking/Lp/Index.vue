@@ -6,11 +6,7 @@ div(grid="~ md:cols-2 gap-6")
     template(#metadata)
       HomepageStakingLpMetadata(:item="lpUsdtData" v-if="lpUsdtData")
     template(#detail)
-      HList(flex-grow="1")
-        TitleDetail(flex-grow="1")
-          template(#detail) Claim Rewards
-          template(#default) 0
-        ButtonGlitch(btn="~ primary-outline-cut" @click="$emit('withdraw')" :text="$t('general.claim')")
+      StakingRewards(:pool="lpUsdtData" v-if="lpUsdtData")
 
   StakingItem()
     template(#title) {{ $t('index.maticIxtStaking') }}
@@ -18,11 +14,8 @@ div(grid="~ md:cols-2 gap-6")
     template(#metadata)
       HomepageStakingLpMetadata(:item="lpMaticData" v-if="lpMaticData")
     template(#detail)
-      HList(flex-grow="1")
-        TitleDetail(flex-grow="1")
-          template(#detail) Claim Rewards
-          template(#default) 0
-        ButtonGlitch(btn="~ primary-outline-cut" @click="$emit('withdraw')" :text="$t('general.claim')")
+      StakingRewards(:pool="lpMaticData" v-if="lpMaticData")
+      
 </template>
 
 <script lang="ts" setup>

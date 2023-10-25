@@ -18,6 +18,7 @@
     "stake": "Stake",
     "unstake": "Unstake",
     "shares": "Shares",
+    "estimated": "Estimated",
     "navigation": {
       "terminal": "Terminal",
       "inventory": "Inventory",

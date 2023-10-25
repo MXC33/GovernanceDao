@@ -2,35 +2,29 @@
 div(grid="~ cols-2 gap-6")
   Card() 
     CardTitle()
-      template(#default) {{$t("energy.IXTPoolNextEpoch.title") }}
-      template(#subtitle) {{$t("energy.Estimated.title") }}
+      template(#default) {{$t("energy.IXTPoolNextEpoch") }}
+      template(#subtitle) {{$t("general.estimated") }}
 
 
     VList()
-      div(text="detail") {{$t("energy.TotalPoolNextEpoch.title") }}
-
-      HList()
-        div {{data.nextEpochPool?.toLocaleString()}}
-        IXTIcon(w="6" class="ml-2")
+      TitleDetail(icon="ixt")
+        template(#detail) {{$t("energy.TotalPoolNextEpoch") }}
+        template(#default) {{data.nextEpochPool?.toLocaleString()}}
 
   Card()
     CardTitle()
-      template(#default) {{$t("energy.NextEpochRelease.title") }}
-      template(#subtitle) {{$t("energy.facilitiesMinted.title") }}
+      template(#default) {{$t("energy.NextEpochRelease") }}
+      template(#subtitle) {{$t("energy.facilitiesMinted") }}
 
-    VList()
-      div(text="detail") 99.94%
-
-      HList()
-        div {{data.nextEpochPool?.toLocaleString()}}
-        IXTIcon(w="6" class="ml-2")
+    TitleDetail(icon="ixt")
+      template(#detail) 99.94%
+      template(#default) {{data.nextEpochPool?.toLocaleString()}}
         
 </template>
   
 <script lang="ts" setup>
 
 import type { StakingDataFragment } from '~/.nuxt/gql/default';
-import IXTIcon from '~/assets/images/token.svg'
 
 
 const { data } = defineProps<{
