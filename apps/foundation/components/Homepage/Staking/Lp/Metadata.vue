@@ -3,7 +3,7 @@
 div(grid="~ cols-3 gap-6")
   TitleDetail() 
     template(#detail)  {{ $t('index.totalLiquidity') }}
-    template(#default) {{ roundToDecimals(item.totalStakedAmount, 2) }}
+    template(#default) {{ formatNumber(item.totalStakedAmount)}}
 
   TitleDetail() 
     template(#detail) {{ $t('index.yourStake') }}
@@ -32,4 +32,18 @@ const { item } = defineProps<{
 }>()
 
 const userStakingData = computed(() => item.stakingItems && item.stakingItems[0]?.userStakingData)
+
+function formatNumber(value: number): string {
+  // If value is 1 million or greater
+  if (value >= 1_000_000) {
+    return `$${(value / 1_000_000).toFixed(2)}M`;
+  }
+  // If value is 1 thousand or greater
+  else if (value >= 1_000) {
+    return `$${(value / 1_000).toFixed(0)}k`;
+  }
+  return `$${value}`;
+}
+
+
 </script>
