@@ -3,7 +3,7 @@
 div(grid="~ cols-3 gap-6")
   TitleDetail() 
     template(#detail)  {{ $t('index.totalLiquidity') }}
-    template(#default) {{ formatNumber(item.totalStakedAmount)}}
+    template(#default) {{ formatNumber(item.totalStakedAmount ?? 0)}}
 
   TitleDetail() 
     template(#detail) {{ $t('index.yourStake') }}
@@ -32,6 +32,7 @@ const { item } = defineProps<{
 }>()
 
 const userStakingData = computed(() => item.stakingItems && item.stakingItems[0]?.userStakingData)
+console.log("USER", item.stakingItems)
 
 function formatNumber(value: number): string {
   // If value is 1 million or greater

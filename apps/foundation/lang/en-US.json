@@ -66,14 +66,18 @@
     },
     "lpStaking": {
       "title": "LP STAKING",
-      "description": "Earn rewards for contributing to liquidity and safety."
+      "description": "Earn rewards for contributing to liquidity and safety.",
+      "usdt": {
+        "title": "USDT/IXT LP Staking"
+      },
+      "matic": {
+        "title": "MATIC/IXT LP Staking"
+      },
+      "provide": "Provide liquidity on DEX and Stake LP"
     },
-    "usdtIxtStaking": "USDT/IXT LP Staking",
-    "provideLiq": "Provide liquidity on DEX and Stake LP",
     "totalLiquidity": "Total liquidity",
     "fiveDayRoi": "Your 5-day Roi%",
     "lpTokens": "LP Tokens",
-    "maticIxtStaking": "MATIC/IXT LP Staking",
     "territoryStaking": {
       "title": "YOUR TERRITORIES",
       "description": "Explore your territory NFTs and their total payout amounts"

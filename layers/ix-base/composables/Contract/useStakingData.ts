@@ -17,7 +17,7 @@ export const useStakingData = (id: StakingId) => {
     return stakingData.stakingData
   }
 
-  const key = `staking-data-${id},`
+  const key = `staking-data-${id}`
 
   return useAsyncDataState(key, async () => {
     const result = await fetchStakingData()

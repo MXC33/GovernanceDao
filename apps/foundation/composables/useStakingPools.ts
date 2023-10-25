@@ -97,6 +97,25 @@ export const useStakingPools = () => {
     return roundToDecimals(((1 + APR / 365) ** 365 - 1) * 100, 2)
   }
 
+  const getUserStakeInPool = (type: string, pool?: StakingDataFragment | null) => {
+    if (!pool)
+      return 0
+
+    const staked = pool.stakingItems?.find(item =>
+      item?.token?.tokenInfo?.type == type
+    )
+
+    return staked?.userStakingData?.amountStaked ?? 0
+  }
+
+  const getFirstUserStakeInPool = (pool?: StakingDataFragment | null) => {
+    if (!pool?.stakingItems || pool.stakingItems.length == 0)
+      return 0
+
+    const staked = pool.stakingItems[0]
+    return staked?.userStakingData?.amountStaked ?? 0
+  }
+
   return {
     totalIXTRewards,
     totalUserRewards,
@@ -104,6 +123,8 @@ export const useStakingPools = () => {
     ixtPoolData,
     getAPY,
     getTotalSupply,
-    getCirculatingSupply
+    getCirculatingSupply,
+    getUserStakeInPool,
+    getFirstUserStakeInPool
   }
 }

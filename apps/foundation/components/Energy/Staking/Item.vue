@@ -35,16 +35,11 @@ const { data } = defineProps<{
   data: StakingDataFragment
 }>()
 
+const { getUserStakeInPool } = useStakingPools()
 
-const energyStaked = computed(() => {
-  const staked = data.stakingItems?.find(item => item?.token?.tokenInfo?.type == 'energy')
-  return staked?.userStakingData?.amountStaked
-})
+const energyStaked = computed(() => getUserStakeInPool('energy', data))
 
-const ixtStaked = computed(() => {
-  const staked = data.stakingItems?.find(item => item?.token?.tokenInfo?.type == 'ixt')
-  return staked?.userStakingData?.amountStaked
-})
+const ixtStaked = computed(() => getUserStakeInPool('ixt', data))
 
 const dailyRewards = computed(() => data.userSpecificStakingData?.totalUserRewardPerDay)
 

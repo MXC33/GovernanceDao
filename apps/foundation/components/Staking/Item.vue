@@ -1,17 +1,21 @@
 <template lang="pug">
 Card()
   template(#default)
-    CardTitle(:large="true")
-      template(#default)
-        slot(name="title")
+    HList()
+      CardTitle(:large="true" flex-grow="1")
+        template(#default)
+          slot(name="title")
 
-      template(#subtitle) 
-        slot(name="subtitle")
+        template(#subtitle) 
+          slot(name="subtitle")
+
+      slot(name="icon")
 
     slot(name="metadata")
 
     HList(gap="6")
-      ButtonGlitch(btn="~ primary-outline-cut" @click="$emit('withdraw')" :text="$t('index.withdrawBtn')")
+      Disabler(:disabled="!canWithdraw")
+        ButtonGlitch(btn="~ primary-outline-cut" @click="$emit('withdraw')" :text="$t('index.withdrawBtn')")
 
       ButtonGlitch(btn="~ primary-outline-cut" @click="$emit('deposit')" :text="$t('index.depositBtn')")
 
@@ -23,4 +27,8 @@ Card()
 
 <script lang="ts" setup>
 defineEmits(['withdraw', 'deposit'])
+
+defineProps<{
+  canWithdraw?: boolean
+}>()
 </script>
