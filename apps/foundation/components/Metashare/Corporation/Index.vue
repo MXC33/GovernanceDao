@@ -3,8 +3,14 @@ Card()
   MetashareCorporationImages()
   MetashareTrade(:staking-item="stakingData")
   MetashareStake()
+
   template(#detailBottom)
-  Claim()
+    VList(space-y="3")
+      div(text="subheading") {{ $t('metashare.ClaimRewardsTitle') }}
+      div(text="detail") {{ $t('metashare.ClaimRewardsRewards') }}
+      div(text="subheading") 0.00
+
+      ButtonGlitch(btn="~ primary-outline-cut" @click="$emit('withdraw')" :text="$t('general.claim')")
 </template>
 
 <script lang="ts" setup>

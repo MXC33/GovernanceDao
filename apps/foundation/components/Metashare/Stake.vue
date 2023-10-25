@@ -6,8 +6,9 @@ CardSection(title="Staking")
       template(#default) {{ listItem.items }}
   template(#buttons)
     div(grid="~ cols-2" space-x="3")
-      button(btn="~ primary-outline-cut" disable="active") STAKE
-      button(btn="~ primary-outline-cut" disable="active") WITHDRAW
+      ButtonGlitch(btn="~ primary-outline-cut" @click="$emit('withdraw')" :text="$t('metashare.depositButton')")
+      ButtonGlitch(btn="~ primary-outline-cut" @click="$emit('withdraw')" :text="$t('metashare.withdrawButton')")
+
 </template>
 <script lang="ts" setup>
 
@@ -19,19 +20,19 @@ interface ListItem {
 
 const lists: ListItem[] = [{
   title: "Shares owned",
-  items: "[Dyn Value]" // <-- ERSÄTT MED API DATA
+  items: "0" // <-- ERSÄTT MED API DATA
 },
 {
   title: "Shares staked",
-  items: "[Dyn Value]"
+  items: "0"
 },
 {
   title: "Daily yield",
-  items: "[Dyn Value]"
+  items: "0"
 },
 {
   title: "TVL",
-  items: "[Dyn Value]"
+  items: "0"
 }
 ]
 
