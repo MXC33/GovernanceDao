@@ -309,8 +309,10 @@
       "description": "Stake your IXT to our new, updated and improved Cat Raff staking contract. The new Cat Raff fetches randomized winners from the Chainlink VRF algorithm, which ensures verifiable randomness. By implementing Chainlink VRF’s verifiable randomness, IXT Cat Raff users will be able to verify that each winner is selected with an unbiased source of randomness. In addition to being more secure, it also ensures our architecture is operating in a provably secure and verifiably random manner, free of manipulation or interference. To participate in the raffles, players stake their IXT to our new Cat Raff staking Contract and receive Tickets in exchange. Each week, five winning tickets will be selected to share 2,500 IXT rewards in winnings. In order to participate, players have to stake IXT in exchange for raffle tickets. To roll over from one week to the next, add your tickets from the previous week. A one-week lock period applies, where players can only withdraw their tokens once the next draw is completed."
     },
     "StakeForTickets": {
-      "title": "Stake your IXT to receive Tickets",
-      "description": "1 Ticket is 1 IXT"
+      "title": "Stake your IXT to receive Tickets"
+    },
+    "StakeTickets": {
+      "title": "1 Ticket is 1 IXT"
     },
     "AddTickets": {
       "title": "Add tickets from previous week",
