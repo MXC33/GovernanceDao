@@ -1,8 +1,8 @@
 <template lang="pug"> 
-div(grid="~ cols-3 gap-6" flex-grow)
+div(grid="~ cols-1 md:cols-3 gap-6" flex-grow)
   VList(v-for="item in data")
     Card()
-      TokenMedia(:token="item")
+      TokenMedia(:token="item" class="w-full md:w-auto h-auto md:h-1/2")
       div(space-y="-3")
         CardTitle(:large="true") {{ item.tokenInfo?.title }}
         Star(w="2" v-for="star in getStars(item)" :key="star" display="inline")
