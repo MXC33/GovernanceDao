@@ -19,8 +19,13 @@ Page()
               template(#default) {{ roundToDecimals(landmarkData?.userSpecificStakingData?.totalUserReward, 4) }}
             ButtonGlitch(btn="~ primary-outline-cut" @click="$emit('claim')" :text="$t('general.claim')")
   PageSection(section="MyLandmarks")
-  card(text-center)
-    PageParagraphs(section="NoLandmarksPlaceholder")
+
+  Card(items="center")
+    template(#default)
+      div(v-if="true") No Landmarks Available
+      div(v-if="false") No Landmarks Available
+
+
   PageSection(section="ExploreLandmarks")
     div(grid="~ cols-2")
       div()
@@ -28,7 +33,7 @@ Page()
       div(grid="~ cols-2")
         InputsDropdown(:options="filterOptions" v-model="selectedFilter" label="Filter by")
         InputsDropdown(:options="sortOptions" v-model="selectedSort" label="Sort by")
-  CardLandmark()
+  LandmarkItem(:data="allLandmarkData")
 </template>
 
 <script lang="ts" setup>
@@ -41,12 +46,9 @@ const sections = ['area', 'sector', 'zone', 'domain'];
 
 const { data: landmarkData } = useStakingData(StakingId.Landmark)
 
+const { execute: fetchAllLandmarks, data: allLandmarkData } = useAllLandmarkData(null, null, null, null)
 
-
-
-const { data } = defineProps<{
-  data: StakingItemFragment
-}>()
+await fetchAllLandmarks()
 
 
 const filterOptions = ['Option 1', 'Option 2', 'Option 3'];

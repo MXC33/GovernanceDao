@@ -1,5 +1,40 @@
 query Landmarks($credentials: CredentialsInput!) {
   landmarks(credentials: $credentials) {
     ...NFT
-    }
+  }
+}
+
+query AllLandmarks(
+  $page: Int
+  $searchWord: String
+  $filter: LandmarkTier
+  $order: LandmarkSort
+) {
+  allLandmarks(
+    page: $page
+    searchWord: $searchWord
+    filter: $filter
+    order: $order
+  ) {
+    ...NFT
+  }
+}
+
+enum LandmarkSort {
+  sharesLowToHigh
+  sharesHighToLow
+  ownersLowToHigh
+  ownersHighToLow
+  earningLowToHigh
+  earningHighToLow
+  starsLowToHigh
+  starsHighToLow
+}
+
+enum LandmarkTier {
+  legendary
+  rare
+  uncommon
+  common
+  outlier
 }
