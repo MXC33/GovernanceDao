@@ -1,6 +1,13 @@
 <template lang="pug">
 Page()
-  ButtonNav()
+  ButtonNav() 
+
+  PageSection(section="CatRaff" :primary="true")
+
+  card()
+    CardChartItem()
+
+  PageSection(section="StakingContract")
 
 </template>
 
