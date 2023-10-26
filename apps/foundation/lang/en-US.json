@@ -240,21 +240,29 @@
     "FilterDomain": {
       "title": "Domain"
     },
-    "ContentArea": {
-      "title": "AREA",
-      "description": "Collect PIX and form Clusters. Group your Clusters into Areas. Areas start with groups of 10 PIX in the Outliers, 20 in Common, 30 in Uncommon, 40 in Rare and 50 in Legendary Territories. This you can accomplish by trading PIX on planetix.com. Stake your Area to earn IXT staking rewards."
+    "content": {
+      "area": {
+        "title": "AREA",
+        "description": "Collect PIX and form Clusters. Group your Clusters into Areas. Areas start with groups of 10 PIX in the Outliers, 20 in Common, 30 in Uncommon, 40 in Rare and 50 in Legendary Territories. This you can accomplish by trading PIX on planetix.com. Stake your Area to earn IXT staking rewards."
+      },
+      "sector": {
+        "title": "SECTOR",
+        "description": "Collect PIX and form Clusters. Group your Clusters into Sectors. Sectors start with groups of 50 PIX in the Outliers, 100 in Common, 150 in Uncommon, 200 in Rare and 250 in Legendary Territories. This you can accomplish by trading PIX on planetix.com. Stake your Sector to earn IXT staking rewards."
+      },
+      "zone": {
+        "title": "ZONE",
+        "description": "Collect PIX and form Clusters. Group your Clusters into Zones. Zones start with groups of 100 PIX in the Outliers, 200 in Common, 300 in Uncommon, 400 in Rare and 500 in Legendary Territories. This you can accomplish by trading PIX on planetix.com. Stake your Zone to earn IXT staking rewards."
+      },
+      "domain": {
+        "title": "DOMAIN",
+        "description": "Collect PIX and form Clusters. Group your Clusters into Domains. Domains start with groups of 200 PIX in the Outliers, 400 in Common, 600 in Uncommon, 800 in Rare and 1000 in Legendary Territories. This you can accomplish by trading PIX on planetix.com. Stake your Domain to earn IXT staking rewards."
+      }
     },
-    "ContentSector": {
-      "title": "SECTOR",
-      "description": "Collect PIX and form Clusters. Group your Clusters into Sectors. Sectors start with groups of 50 PIX in the Outliers, 100 in Common, 150 in Uncommon, 200 in Rare and 250 in Legendary Territories. This you can accomplish by trading PIX on planetix.com. Stake your Sector to earn IXT staking rewards."
-    },
-    "ContentZone": {
-      "title": "ZONE",
-      "description": "Collect PIX and form Clusters. Group your Clusters into Zones. Zones start with groups of 100 PIX in the Outliers, 200 in Common, 300 in Uncommon, 400 in Rare and 500 in Legendary Territories. This you can accomplish by trading PIX on planetix.com. Stake your Zone to earn IXT staking rewards."
-    },
-    "ContentDomain": {
-      "title": "DOMAIN",
-      "description": "Collect PIX and form Clusters. Group your Clusters into Domains. Domains start with groups of 200 PIX in the Outliers, 400 in Common, 600 in Uncommon, 800 in Rare and 1000 in Legendary Territories. This you can accomplish by trading PIX on planetix.com. Stake your Domain to earn IXT staking rewards."
+    "noContent": {
+      "area": "No area created",
+      "sector": "No sector created",
+      "zone": "No zone created",
+      "domain": "No domain created"
     },
     "TierAll": {
       "title": "All"
