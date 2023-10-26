@@ -3,10 +3,12 @@ div(grid="~ cols-3 gap-6" flex-grow)
   VList(v-for="item in data")
     Card()
       TokenMedia(:token="item")
-      CardTitle(:large="true") {{ item.tokenInfo?.title }}
-      div()
+      div(space-y="-3")
+        CardTitle(:large="true") {{ item.tokenInfo?.title }}
         Star(w="2" v-for="star in getStars(item)" :key="star" display="inline")
-      Divider()
+
+      Divider(mx="-6")
+
       HList(space-x="3")
         TitleDetail()
           template(#detail) {{ $t(`landmarks.sharesLabel`) }}
