@@ -11,16 +11,16 @@ div(grid="~ cols-3 gap-6" flex-grow)
           TitleDetail()
             template(#detail) 
               div(grid="~ cols-3")
-                PageParagraphs(section="SharesLabel")
-                PageParagraphs(section="OwnersLabel")
-                PageParagraphs(section="EarningDiameterLabel")
+                div() {{ $t(`landmarks.sharesLabel`) }}
+                div() {{ $t(`landmarks.ownersLabel`) }}
+                div() {{ $t(`landmarks.earningDiameterLabel`) }}
             TitleDetail()
               template(#default) 
                 div(grid="~ cols-3")
                   div() [API]
                   div() [API]
                   div() [API]
-      button(btn="~ primary-outline") view
+      ButtonGlitch(btn="~ primary-outline-cut" @click="$emit('claim')" :text="$t('landmarks.claimButton')")
 </template>
   
 <script lang="ts" setup>
