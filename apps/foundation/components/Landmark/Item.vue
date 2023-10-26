@@ -1,7 +1,7 @@
 <template lang="pug"> 
 div(grid="~ cols-3 gap-6" flex-grow)
   VList(v-for="item in data")
-    Card()
+    Card(flex-grow="1")
       TokenMedia(:token="item")
       div(space-y="-3")
         CardTitle(:large="true") {{ item.tokenInfo?.title }}
