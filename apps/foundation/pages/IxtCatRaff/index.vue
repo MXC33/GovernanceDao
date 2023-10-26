@@ -7,15 +7,18 @@ Page()
     CardChartItem()
 
   PageSection(section="StakingContract")
+    CatRaffStakeContract()
 
   PageSection(section="PastWinnings")
 
   PageSection(section="TreasuryPool")
+    CatRaffStakePool()
 
   PageSection(section="PastPrizes")
+    Card()
 
   PageSection(section="Accounts")
-    
+    Card()
 
 </template>
 
