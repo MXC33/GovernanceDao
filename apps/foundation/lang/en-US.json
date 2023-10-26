@@ -334,7 +334,7 @@
     },
     "TreasuryPool": {
       "title": "TREASURY & IXT POOL",
-      "description": "Details related to the treasury and IXT pool."
+      "description": ""
     },
     "TreasuryBalance": {
       "title": "Treasury Balance"
@@ -355,7 +355,7 @@
     },
     "PastPrizes": {
       "title": "PAST PRIZES",
-      "description": "Details of past prizes."
+      "description": ""
     },
     "PrizeDraws": {
       "title": "Prize Draws (Your Past Draws)",
@@ -363,7 +363,7 @@
     },
     "Accounts": {
       "title": "ACCOUNTS",
-      "description": "Details of accounts associated with Cat Raff."
+      "description": ""
     }
   },
   "landmarks": {
@@ -380,9 +380,7 @@
     "TotalRewards": {
       "title": "Total Rewards"
     },
-    "ClaimButton": {
-      "title": "CLAIM"
-    },
+    "claimButton": "CLAIM",
     "MyLandmarks": {
       "title": "MY LANDMARKS",
       "description": "Search and select from the landmarks you own"
@@ -405,15 +403,9 @@
       "title": "Sort By",
       "description": "Shares - Low to High"
     },
-    "SharesLabel": {
-      "title": "Shares"
-    },
-    "OwnersLabel": {
-      "title": "Owners"
-    },
-    "EarningDiameterLabel": {
-      "title": "Earning Diameter"
-    },
+    "sharesLabel": "Shares",
+    "ownersLabel": "Owners",
+    "earningDiameterLabel": "Earning Diameter",
     "ViewButton": {
       "title": "VIEW"
     }
