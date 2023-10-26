@@ -34,7 +34,7 @@ Page()
 
   PageSection(:section="`content.${activeSection}`")
 
-  HList(z="999")
+  HList(z="999" space-x="6")
     OptionDropDown(:items="sizeList" :left="true")
       template(#selectedName) 
         div() {{sizeSort}}
@@ -87,7 +87,6 @@ const filteredTerritories = computed(() => {
 const filteredUserTerritories = computed(() => {
   if (stakeSort.value == 'staked') {
     const filtered = territoryUserData.value?.stakingItems.filter(item => item?.token?.tokenInfo.type == activeSection.value && sizeSort.value == 'all' ? true : item?.token.tokenInfo.tier == sizeSort.value) as StakingItemFragment[]
-    console.log("filtered", filtered)
     return filtered
   }
   else {
