@@ -11,7 +11,7 @@ HList()
 
 ChartBackground()
 
-div(grid="~ cols-4 gap-3") 
+div(grid="~ cols-4 gap-3")
   TitleDetail()
     template(#detail) Total deposit
     template(#default) 0
