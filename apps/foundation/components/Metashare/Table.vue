@@ -3,7 +3,7 @@ Card()
   SimpleTable(:rows="rows" :columns="columns" mx="-6" mt="-6")
     template(#col-asset="{index}")
       HList(space-x="3" items="center")
-        img(:src="'/assets/metashare/' + data.stakingItems[index]?.token.tokenInfo?.tier + '.svg'" w="12")
+        img(:src="'/assets/metashare/' + data.stakingItems[index]?.token.tokenInfo?.tier + '.svg'" w="12" class="lg:block hidden")
         div {{ data.stakingItems[index]?.token.tokenInfo?.title }}
 
     template(#footer-col-asset) 

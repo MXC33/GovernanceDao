@@ -12,7 +12,7 @@ Page()
   div(space-y="12")
     PageSection(section="TerritoryTitle")
     HList()
-      CardEarnings()
+      CardEarnings(:data="data")
       ClaimTotalReward()
 
   HList(space-x="12")
@@ -32,10 +32,18 @@ const sections = ['area', 'sector', 'zone', 'domain'];
 const { data: territoryData } = useStakingData(StakingId.Territories)
 const { data: territoryUserData } = useStakingData(StakingId.TerritoriesUser)
 
+
+
+const { data } = defineProps<{
+  data: StakingItemFragment
+}>()
+
 const filteredTerritories = computed(() => {
   const filtered = territoryData.value?.stakingItems.filter(item => item?.token?.tokenInfo.type == activeSectionTop.value) as StakingItemFragment[]
   console.log("filtered", filtered)
   return filtered
 })
+
+console.log("territoryData", territoryData)
 
 </script>

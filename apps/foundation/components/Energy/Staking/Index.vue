@@ -1,5 +1,5 @@
 <template lang="pug">
-div(grid="~ cols-2 gap-3")
+div(grid="~ md:cols-2" gap="6")
   EnergyStakingItem(:id="id", :data="data")
   EnergyPool(:id="id")
 </template>
