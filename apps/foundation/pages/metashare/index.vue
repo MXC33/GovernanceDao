@@ -6,7 +6,7 @@ Page()
     MetashareTable(:data="data" v-if="data")
 
   PageSection(section="CorporationTitle")
-    div(grid="~ cols-2 gap-6" v-if="data")
+    div(grid="~ md:cols-2 gap-6" v-if="data")
       template(v-for="item in data.stakingItems")
         MetashareCorporationItem(:data="item" v-if="item")
 

@@ -7,11 +7,15 @@ Card(style="padding: 10px; border-radius: 8px;")
           PageParagraphs(:section="currentSectionDay")
           PageParagraphs(:section="currentSectionWeek")
       div(style="display:flex; justify-content: space-between;")
-        p [Api Data]
+        p  {{ }}
         p [Api Data]
   </template>
   
 <script>
+
+
+
+
 export default {
   computed: {
     currentRoute() {
