@@ -8,7 +8,7 @@ VList(pos="relative" ref="element" w="lt-md:full")
       HelperChevron(w="5" :up="isOpen")
 
   Transition(name="fade")
-    div(frame="~ gray-400" mt="2" v-if="isOpen" pos="!absolute top-full right-0" w="lt-md:full" min-w="80" font="bold")
+    div(frame="~ gray-400" mt="2" v-if="isOpen" pos="!absolute top-full on-left:left-0 right-0" w="lt-md:full" min-w="80" font="bold" :left="left")
       slot(name="beforeItems")
 
       VList( @click="isOpen = false")
@@ -24,6 +24,7 @@ onClickOutside(element, () => isOpen.value = false)
 defineProps<{
   items: T[],
   large?: boolean
+  left?: boolean
 }>()
 
 </script>

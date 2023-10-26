@@ -6,7 +6,7 @@ OptionRow(font="400 on-selected:bold" :selected="selected")
 </template>
 
 <script setup lang="ts">
-import CheckmarkIcon from '~/assets/icons/checkmark.svg'
+import CheckmarkIcon from '~/assets/icon/checkmark.svg'
 
 defineProps<{
   selected?: boolean
