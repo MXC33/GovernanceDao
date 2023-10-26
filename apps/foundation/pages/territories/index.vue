@@ -34,6 +34,22 @@ Page()
 
   PageSection(:section="`content.${activeSection}`")
 
+  HList(z="999")
+    OptionDropDown(:items="sizeList" :left="true")
+      template(#selectedName) 
+        div() {{sizeSort}}
+
+      template(#item="{item}")
+        OptionRowSelect(:selected="sizeSort == item" @click="sizeSort = item" capitalize="~") {{ item }}
+
+    OptionDropDown(:items="stakeList" :left="true")
+      template(#selectedName) 
+        div() {{stakeSort}}
+
+      template(#item="{item}")
+        OptionRowSelect(:selected="stakeSort == item" @click="stakeSort = item" capitalize="~") {{ item }}
+
+
   HList(space-x="6")
     TerritoryItem(v-for="data in filteredUserTerritories" :data="data" v-if="filteredUserTerritories?.length > 0")
     Card(v-else flex-grow="1" items="center" font="bold")
@@ -49,16 +65,17 @@ import { type StakingItemFragment, StakingId } from '@ix/base/.nuxt/gql/default'
 
 const activeSection = ref('area');
 const activeSectionTop = ref('area');
+const sizeSort = ref('all')
+const stakeSort = ref('staked')
+
 const sections = ['area', 'sector', 'zone', 'domain'];
+const stakeList = ['staked', 'unstaked']
+const sizeList = ['all', 'legendary', 'rare', 'uncommon', 'common', 'outlier']
 
 const { data: territoryData } = useStakingData(StakingId.Territories)
 const { data: territoryUserData } = useStakingData(StakingId.TerritoriesUser)
 
 
-
-const { data } = defineProps<{
-  data: StakingItemFragment
-}>()
 
 const filteredTerritories = computed(() => {
   const filtered = territoryData.value?.stakingItems.filter(item => item?.token?.tokenInfo.type == activeSectionTop.value) as StakingItemFragment[]
@@ -68,9 +85,15 @@ const filteredTerritories = computed(() => {
 
 
 const filteredUserTerritories = computed(() => {
-  const filtered = territoryUserData.value?.stakingItems.filter(item => item?.token?.tokenInfo.type == activeSection.value) as StakingItemFragment[]
-  console.log("filtered", filtered)
-  return filtered
+  if (stakeSort.value == 'staked') {
+    const filtered = territoryUserData.value?.stakingItems.filter(item => item?.token?.tokenInfo.type == activeSection.value && sizeSort.value == 'all' ? true : item?.token.tokenInfo.tier == sizeSort.value) as StakingItemFragment[]
+    console.log("filtered", filtered)
+    return filtered
+  }
+  else {
+    // Show unstaked territories. Will create a GQL query for this
+    return []
+  }
 })
 
 </script>
