@@ -5,19 +5,41 @@ Page()
   PageSection(section="StakingTitle")
 
   HList(space-x="12")
-    ButtonTopTerritories(v-for="section in sections" :key="section"  :label="section" @click="activeSectionTop = section")
+    ButtonTerritories(v-for="section in sections" :key="section"  :label="section" @click="activeSectionTop = section")
 
   TerritoryBoxes(:data="filteredTerritories" v-if="filteredTerritories")
 
-  div(space-y="12")
-    PageSection(section="TerritoryTitle")
-    HList()
-      CardEarnings(:data="data")
-      ClaimTotalReward()
+  PageSection(section="TerritoryTitle")
+  div(grid="~ gap-6 lg:cols-2")
+    HList(col="lg:col-span-1" space-x="6") 
+      Card(flex-grow="1")
+        HList(justify="between")
+          TitleDetail(icon="ixt")
+            template(#detail) Earning per day
+            template(#default) {{ roundToDecimals(territoryUserData?.userSpecificStakingData?.totalUserRewardPerDay, 4) }}
+          TitleDetail(icon="ixt")
+            template(#detail) Earning 30 day
+            template(#default) {{ roundToDecimals(territoryUserData?.userSpecificStakingData?.totalUserRewardPerThirtyDays, 4) }}
+      Card(flex-grow="1")
+        HList( justify="between")
+          TitleDetail(icon="ixt")
+            template(#detail) Total Rewards
+            template(#default) {{ roundToDecimals(territoryUserData?.userSpecificStakingData?.totalUserReward, 4) }}
+          ButtonGlitch(btn="~ primary-outline-cut" @click="$emit('claim')" :text="$t('general.claim')")
+
+
 
   HList(space-x="12")
-    ButtonTerritories(v-for="section in sections" :key="section"  :label="section" @click="activeSection = $event")
-  PageSection(v-if="activeSection === 'area'" section="ContentArea")
+    ButtonTerritories(v-for="section in sections" :key="section"  :label="section" @click="activeSection = section")
+
+  PageSection(:section="`content.${activeSection}`")
+
+  HList(space-x="6")
+    TerritoryItem(v-for="data in filteredUserTerritories" :data="data" v-if="filteredUserTerritories?.length > 0")
+    Card(v-else flex-grow="1" items="center" font="bold")
+      template(#default)
+        div() {{ $t(`territories.noContent.${activeSection}`) }}
+
 
 </template>
 
@@ -44,6 +66,11 @@ const filteredTerritories = computed(() => {
   return filtered
 })
 
-console.log("territoryData", territoryData)
+
+const filteredUserTerritories = computed(() => {
+  const filtered = territoryUserData.value?.stakingItems.filter(item => item?.token?.tokenInfo.type == activeSection.value) as StakingItemFragment[]
+  console.log("filtered", filtered)
+  return filtered
+})
 
 </script>
