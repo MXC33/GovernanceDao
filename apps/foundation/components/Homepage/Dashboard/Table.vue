@@ -1,13 +1,11 @@
 <template lang="pug">
 Card()
-  CardTitle() Earning Overview 
-
+  CardTitle() {{ $t(`index.tableHead`) }}
   SimpleTable(:rows="rows" :columns="columns" mx="-6" mb="!-6")
     template(#col-asset="{index}") 
       HList(items="center" space-x="3") 
-        img(:src="`/assets/staking/${dashboardTableData[index].id}.png`" w="6")
-        div(capitalize="~") {{ dashboardTableData[index].id }}
-
+        img(:src="`/assets/staking/${dashboardTableData[index].id}.png`" w="6" class="lg:block hidden")
+        div(capitalize="~" ) {{ dashboardTableData[index].id }}
 </template>
   
   

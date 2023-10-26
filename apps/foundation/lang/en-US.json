@@ -19,9 +19,7 @@
       "staked": "Staked",
       "withdrawable": "Withdrawable"
     },
-    "tableHead": {
-      "title": "Earning overview"
-    },
+    "tableHead": "Earning overview",
     "tableAssets": {
       "title": "My assets"
     },
