@@ -371,6 +371,12 @@
       "title": "REWARDS",
       "description": "Claim all your rewards"
     },
+    "StakeBtn": {
+      "title": "Stake"
+    },
+    "UnstakeBtn": {
+      "title": "Unstake"
+    },
     "earningsPerDay": "Earnings per day",
     "earningsPerMonth": "Earnings 30 days",
     "totalRewards": "Total Rewards",

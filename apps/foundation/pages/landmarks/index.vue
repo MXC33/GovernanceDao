@@ -19,9 +19,9 @@ Page()
               template(#default) {{ roundToDecimals(landmarkData?.userSpecificStakingData?.totalUserReward, 4) }}
             ButtonGlitch(btn="~ primary-outline-cut" @click="$emit('claim')" :text="$t('general.claim')")
 
-  PageSection(section="MyLandmarks")
-    LandmarkUserItem(:data="landmarkStakingItems" v-if="landmarkStakingItems.length > 0")
-    div(v-else) No Landmarks Available
+        PageSection(section="MyLandmarks")
+          LandmarkUserItem(:data="landmarkStakingItems" v-if="landmarkStakingItems.length > 0")
+          div(v-else) No Landmarks Available
 
 
   PageSection(section="ExploreLandmarks")
