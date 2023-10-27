@@ -1,6 +1,8 @@
 <template lang="pug">
-div.buttonContainer
-  button.buttonTerritories( @click="handleClick" uppercase="~" font="bold") {{ label }}
+div()
+  button.buttonTerritories( @click="handleClick" uppercase="~" font="bold" btn="~ form") {{ label }}
+
+
 </template>
 
 <script lang="ts" setup>
