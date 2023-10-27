@@ -3,15 +3,15 @@ Card()
   SimpleTable(:rows="rows" :columns="columns" mx="-6" mt="-6")
     template(#col-asset="{index}")
       HList(space-x="3" items="center")
-        img(:src="'/assets/metashare/' + data.stakingItems[index]?.token.tokenInfo?.tier + '.svg'" w="12" class="lg:block hidden")
-        div {{ data.stakingItems[index]?.token.tokenInfo?.title }}
+        img(:src="'/assets/metashare/' + data.stakingItems[index]?.token.tokenInfo?.tier + '.svg'" w="12")
+        div(class="lg:block hidden") {{ data.stakingItems[index]?.token.tokenInfo?.title }}
 
     template(#footer-col-asset) 
       span( text="gray-300") Total
 
     template(#footer-col-daily) 
       HList(items="center" space-x="1" font="bold")
-        div {{ roundToDecimals(totalDaily) }}
+        div() {{ roundToDecimals(totalDaily) }}
         Icon(icon="ixt")
 
     template(#footer-col-30days) 
