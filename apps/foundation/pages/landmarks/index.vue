@@ -2,20 +2,20 @@
 Page()
   ButtonNav()
   PageSection(section="Rewards")
-    div(grid="~ gap-6 lg:cols-2")
-      HList(col="lg:col-span-1" space-x="6") 
+    div(flex="~ col lg:cols-2 ")
+      HList(flex="~ col lg:col-span-1 gap-6" )
         Card(flex-grow="1")
           HList(justify="between")
             TitleDetail(icon="ixt")
-              template(#detail) Earning per day
+              template(#detail) {{ $t(`landmarks.earningsPerDay`) }}
               template(#default) {{ roundToDecimals(landmarkData?.userSpecificStakingData?.totalUserRewardPerDay, 4) }}
             TitleDetail(icon="ixt")
-              template(#detail) Earning 30 day
+              template(#detail) {{ $t(`landmarks.earningsPerMonth`) }}
               template(#default) {{ roundToDecimals(landmarkData?.userSpecificStakingData?.totalUserRewardPerThirtyDays, 4) }}
         Card(flex-grow="1")
           HList( justify="between")
             TitleDetail(icon="ixt")
-              template(#detail) Total Rewards
+              template(#detail) {{ $t(`landmarks.totalRewards`) }}
               template(#default) {{ roundToDecimals(landmarkData?.userSpecificStakingData?.totalUserReward, 4) }}
             ButtonGlitch(btn="~ primary-outline-cut" @click="$emit('claim')" :text="$t('general.claim')")
   PageSection(section="MyLandmarks")

@@ -371,15 +371,9 @@
       "title": "REWARDS",
       "description": "Claim all your rewards"
     },
-    "EarningsPerDay": {
-      "title": "Earnings per day"
-    },
-    "Earnings7Days": {
-      "title": "Earnings 7 days"
-    },
-    "TotalRewards": {
-      "title": "Total Rewards"
-    },
+    "earningsPerDay": "Earnings per day",
+    "earningsPerMonth": "Earnings 30 days",
+    "totalRewards": "Total Rewards",
     "claimButton": "CLAIM",
     "MyLandmarks": {
       "title": "MY LANDMARKS",
