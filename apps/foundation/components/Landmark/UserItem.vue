@@ -1,49 +1,35 @@
 <template lang="pug"> 
-div(grid="~ cols-3 gap-6" flex-grow)
-  VList(v-for="item in titlar" :key="item.title" h="full")
-    Card(rounded="tl tr")
-      h1(text="5xl") IMAGE
-    Card(bg="black" rounded="bl br" flex-grow) 
-      VList(flex-grow)
-        TitleDetail(mb="auto")
-          template(#default) {{ item.title }}
-        HList()
-          TitleDetail()
-            template(#detail) 
-              div(grid="~ cols-3")
-                div() {{ $t(`landmarks.sharesLabel`) }}
-                div() {{ $t(`landmarks.ownersLabel`) }}
-                div() {{ $t(`landmarks.earningDiameterLabel`) }}
-            TitleDetail()
-              template(#default) 
-                div(grid="~ cols-3")
-                  div() [API]
-                  div() [API]
-                  div() [API]
+HList(v-for="item in data")
+  Card(flex-grow="1")
+    HList()
+      TokenMedia(:token="item.token" w=100)
+      VList(justify="between")
+        CardTitle() {{ item.token.tokenInfo?.title }}
+        TitleDetail()
+          template(#detail) Shares Owned
+          template(#default) {{ sharesOwned(item) }}
+        TitleDetail()
+          template(#detail) Shares Staked
+          template(#default) {{ sharesStaked(item) }}
+
+      TitleDetail()
+        template(#detail) Total Earned
+        timplate(#default) {{ item.userStakingData?.totalReward }}
+
       ButtonGlitch(btn="~ primary-outline-cut" @click="$emit('claim')" :text="$t('landmarks.claimButton')")
 </template>
   
 <script lang="ts" setup>
+import type { StakingItemFragment } from '#gql';
 
-interface Titles {
-  title: string
-}
 
-const titlar: Titles[] = [{
-  title: "Monumental Arch of a Faux-Celestial",
-},
-{
-  title: "Sealed Structure of Communion's Wake",
+const { data } = defineProps<{
+  data: StakingItemFragment[]
+}>()
 
-},
-{
-  title: "Staff of Worship",
-},
-{
-  title: "Staff of Alberto",
-}
-]
+const sharesOwned = (item: StakingItemFragment) => ((item.userStakingData?.amountStaked ?? 0) + (item.userStakingData?.balanceOfToken ?? 0))
 
+const sharesStaked = (item: StakingItemFragment) => (item.userStakingData?.amountStaked ?? 0)
 
 
 </script>

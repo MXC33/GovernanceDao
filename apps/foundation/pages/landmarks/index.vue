@@ -18,12 +18,10 @@ Page()
               template(#detail) {{ $t(`landmarks.totalRewards`) }}
               template(#default) {{ roundToDecimals(landmarkData?.userSpecificStakingData?.totalUserReward, 4) }}
             ButtonGlitch(btn="~ primary-outline-cut" @click="$emit('claim')" :text="$t('general.claim')")
-  PageSection(section="MyLandmarks")
 
-  Card(items="center")
-    template(#default)
-      div(v-if="true") No Landmarks Available
-      div(v-if="false") No Landmarks Available
+  PageSection(section="MyLandmarks")
+    LandmarkUserItem(:data="landmarkStakingItems" v-if="landmarkStakingItems.length > 0")
+    div(v-else) No Landmarks Available
 
 
   PageSection(section="ExploreLandmarks")
@@ -49,6 +47,8 @@ const { data: landmarkData } = useStakingData(StakingId.Landmark)
 const { execute: fetchAllLandmarks, data: allLandmarkData } = useAllLandmarkData(null, null, null, null)
 
 await fetchAllLandmarks()
+
+const landmarkStakingItems = computed(() => landmarkData.value?.stakingItems ?? [])
 
 
 const filterOptions = ['Option 1', 'Option 2', 'Option 3'];
