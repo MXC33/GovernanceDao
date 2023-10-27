@@ -25,12 +25,22 @@ Page()
 
 
   PageSection(section="ExploreLandmarks")
-    div(grid="~ cols-2")
-      div()
-        InputsSearchbar()
-      div(grid="~ cols-2")
-        InputsDropdown(:options="filterOptions" v-model="selectedFilter" label="Filter by")
-        InputsDropdown(:options="sortOptions" v-model="selectedSort" label="Sort by")
+    VList(z="999" space-x="6" gap="6")
+
+      OptionDropDown()
+        template(#selectedName) 
+          div() Test
+
+        template(#item="{item}")
+          OptionRowSelect() {{ item }}
+
+      OptionDropDown()
+        template(#selectedName) 
+          div() test
+
+        template(#item="{item}")
+          OptionRowSelect() {{ item }}
+
   LandmarkItem(:data="allLandmarkData")
 </template>
 
@@ -38,9 +48,8 @@ Page()
 
 import { type StakingItemFragment, StakingId } from '@ix/base/.nuxt/gql/default';
 
-const activeSection = ref('area');
-const activeSectionTop = ref('area');
-const sections = ['area', 'sector', 'zone', 'domain'];
+const sizeList = ['all', 'legendary', 'rare', 'uncommon', 'common', 'outlier']
+
 
 const { data: landmarkData } = useStakingData(StakingId.Landmark)
 
