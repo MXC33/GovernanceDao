@@ -7,7 +7,6 @@ Card(flex-grow="1")
     ButtonGlitch(@click="navigateTo('/landmarks')" tag="button" btn="~ form" text="Landmark Staking" font="bold") 
     ButtonGlitch(@click="navigateTo('/metashare')" tag="button" btn="~ form" text="Metashare Staking" font="bold") 
     ButtonGlitch(@click="navigateTo('/energy')" tag="button" btn="~ form" text="Energy Staking" font="bold") 
-    ButtonGlitch(@click="navigateTo('/Governance')" tag="button" btn="~ form" text="Governance" font="bold")   
     ButtonGlitch(@click="navigateTo('/IxtCatRaff')" tag="button" btn="~ form" text="Cat Raff" font="bold")   
 </template>
 
