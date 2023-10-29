@@ -1,7 +1,32 @@
-query StakingData($credentials: CredentialsInput $id: StakingId!) {
-  stakingData(credentials: $credentials id: $id) {
+query StakingData($credentials: CredentialsInput, $id: StakingId!) {
+  stakingData(credentials: $credentials, id: $id) {
     ...StakingData
   }
+}
+
+query CatRaffAccounts($skip: Int) {
+  catRaffAccounts(skip: $skip) {
+    ...CatRaffTicketInfo
+  }
+}
+
+query CatRaffPastPrizes($skip: Int) {
+  catRaffPastPrizes(skip: $skip) {
+    ...CatRaffTicketInfo
+  }
+}
+query CatRaffWeekly($credentials: CredentialsInput) {
+  catRaffWeekly(credentials: $credentials) {
+    ...CatRaffTicketInfo
+  }
+}
+
+fragment CatRaffTicketInfo on CatRaffTicketInfo {
+  address
+  week
+  totalTickets
+  winAmount
+  userEnteredTicket
 }
 
 enum StakingId {
@@ -51,7 +76,6 @@ fragment TokenSpecificUserStakingData on TokenSpecificUserStakingData {
   stakedAt
 }
 
-
 fragment StakingItem on StakingItem {
   token {
     ...NFT
@@ -65,7 +89,6 @@ fragment StakingItem on StakingItem {
   }
   odds
 }
-
 
 fragment PolygonScanTransactions on PolygonScanTransactions {
   blockNumber

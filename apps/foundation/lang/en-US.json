@@ -293,7 +293,7 @@
       "title": "No domain created"
     }
   },
-  "IxtCatRaff": {
+  "ixtCatRaff": {
     "CatRaff": {
       "title": "IXT CAT RAFF",
       "description": "Earn more with the IXT Cat Raff! Each week a randomized raffle selects five players to share 2,500 IXT rewards in winnings. In order to participate, players stake IXT in exchange for raffle tickets. To roll over from one week to the next, add your tickets from the previous week. A one-week lock period applies, where players can only withdraw their tokens once the next draw is completed."
@@ -309,18 +309,19 @@
     "StakeForTickets": {
       "title": "Stake your IXT to receive Tickets"
     },
-    "StakeTickets": {
-      "title": "1 Ticket is 1 IXT"
+    "stake": {
+      "title": "Stake your IXT to receive Tickets",
+      "description": "1 Ticket is 1 IXT"
     },
-    "AddTickets": {
+    "ticket": {
       "title": "Add tickets from previous week",
       "description": "Roll-over your Tickets from week to week to be included in the next raffle"
     },
-    "WithdrawIXT": {
+    "withdraw": {
       "title": "Withdraw your IXT",
       "description": "If you withdraw your IXT you will no longer be participating in the Cat Raffles"
     },
-    "ClaimIXTReward": {
+    "claim": {
       "title": "Claim IXT Reward",
       "description": "Claim and withdraw your winnings!"
     },
