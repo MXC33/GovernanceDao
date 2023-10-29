@@ -20,55 +20,74 @@ Page()
             ButtonGlitch(btn="~ primary-outline-cut" @click="$emit('claim')" :text="$t('general.claim')")
 
         PageSection(section="MyLandmarks")
-          LandmarkUserItem(:data="landmarkStakingItems" v-if="landmarkStakingItems.length > 0")
+          LandmarkUserItem(:data="landmarkStakingItems" v-if="landmarkStakingItems?.length > 0")
           div(v-else) No Landmarks Available
 
 
   PageSection(section="ExploreLandmarks")
-    VList(z="999" space-x="6" gap="6")
-
-      OptionDropDown()
+    div(grid="~ cols-3 gap-6" z="999")
+      InputsSearchbar( @input="search")
+      OptionDropDown(:items="tierList")
         template(#selectedName) 
-          div() Test
+          div() {{ tier }}
 
         template(#item="{item}")
-          OptionRowSelect() {{ item }}
+          OptionRowSelect(:selected="tier == item" @click="tier = item") {{ item }}
 
-      OptionDropDown()
+      OptionDropDown(:items="sortList")
         template(#selectedName) 
-          div() test
+          div() {{ spaceBetween(sort ?? "") }}
 
         template(#item="{item}")
-          OptionRowSelect() {{ item }}
+          OptionRowSelect(:selected="sort == item" @click="sort = item") {{ item }}
 
-  LandmarkItem(:data="allLandmarkData")
+  LandmarkItem(:data="data")
 </template>
 
 <script lang="ts" setup>
 
-import { type StakingItemFragment, StakingId } from '@ix/base/.nuxt/gql/default';
+import type { NftFragment } from '@ix/base/.nuxt/gql/default';
+import { StakingId, LandmarkSort, LandmarkTier } from '@ix/base/.nuxt/gql/default';
 
-const sizeList = ['all', 'legendary', 'rare', 'uncommon', 'common', 'outlier']
 
+
+const sort = ref<LandmarkSort>(LandmarkSort.EarningHighToLow)
+const tier = ref<LandmarkTier>(LandmarkTier.Legendary)
+const searchText = ref('')
+const page = ref(1)
+
+const { refresh: fetchAllLandmarks, data: allLandmarkData } = useAllLandmarkData(null, searchText.value, tier.value, sort.value)
+
+const data = ref<NftFragment | null>(allLandmarkData.value)
+
+
+const sortList = Object.values(LandmarkSort)
+const tierList = Object.values(LandmarkTier)
+
+const spaceBetween = (text: string) => text.replace(/([A-Z])/g, ' $1').trim()
 
 const { data: landmarkData } = useStakingData(StakingId.Landmark)
 
-const { execute: fetchAllLandmarks, data: allLandmarkData } = useAllLandmarkData(null, null, null, null)
+const search = async (searchText: string) => {
+  const { refresh: fetchAllLandmarks, data: allLandmarkData } = useAllLandmarkData(page.value, searchText, tier.value, sort.value)
+
+  await fetchAllLandmarks()
+
+  data.value = allLandmarkData.value
+}
 
 await fetchAllLandmarks()
+
+watch([page, sort, tier],
+  async ([page, sort, tier]) => {
+    const { refresh: fetchAllLandmarks, data: allLandmarkData } = useAllLandmarkData(page, null, tier, sort)
+
+    await fetchAllLandmarks()
+
+    data.value = allLandmarkData.value
+  })
 
 const landmarkStakingItems = computed(() => landmarkData.value?.stakingItems ?? [])
 
 
-const filterOptions = ['Option 1', 'Option 2', 'Option 3'];
-const sortOptions = ['Ascending', 'Descending'];
-const selectedFilter = ref('');
-const selectedSort = ref('');
 </script>
-
-<style scoped>
-.input-container {
-  display: flex;
-  gap: 10px;
-}
-</style>

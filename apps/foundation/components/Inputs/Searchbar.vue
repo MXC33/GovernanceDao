@@ -1,19 +1,18 @@
 <template lang="pug">
 HList()
-  input(type="text" v-model="searchQuery" :placeholder="searchPlaceholder" class="input")
+  input(type="text" v-model="searchTerm" :placeholder="searchPlaceholder"  @keyup.enter="onChangeSearch" class="input")
   </template>
     
 <script lang="ts" setup>
 import { ref } from 'vue';
 import { useRoute } from 'vue-router';
 import { useI18n } from 'vue-i18n'; // Import the useI18n function
+const emit = defineEmits(["input"])
 
-const searchQuery = ref('');
-
-const filterOptions = ['Option 1', 'Option 2', 'Option 3'];
-const sortOptions = ['Ascending', 'Descending'];
-const selectedFilter = ref('');
-const selectedSort = ref('');
+const searchTerm = ref('')
+const onChangeSearch = () => {
+  emit("input", searchTerm.value)
+}
 
 const route = useRoute();
 

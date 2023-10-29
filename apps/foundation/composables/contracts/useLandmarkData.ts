@@ -1,5 +1,5 @@
 import { CredentialsInput } from "#gql"
-import { LandmarkSort, LandmarkTier } from ".nuxt/gql/default"
+import { LandmarkSort, LandmarkTier, NftFragment } from ".nuxt/gql/default"
 
 export const useLandmarkData = () =>
   useAsyncDataState('landmarks-data', async () => {
@@ -15,7 +15,7 @@ export const useLandmarkData = () =>
 export const useAllLandmarkData = (page: number | null, searchWord: string | null, filter: LandmarkTier | null, order: LandmarkSort | null) => {
   const fetchLandmarks = async () => {
     const landmarks = await GqlAllLandmarks({ page, searchWord, filter, order })
-    return landmarks.allLandmarks
+    return landmarks.allLandmarks as NftFragment
   }
 
   const key = `landmark-data-${page}-${searchWord}-${filter}-${order}`
