@@ -1,21 +1,21 @@
 <template lang="pug">
 .game-tools(pos="sticky md:(absolute top-50%) bottom-0 left-0" p="2 lg:4"  translate-y="md:-50%" flex="~ col" justify="end md:center" items="start" self="start" pointer-events="auto")
   Transition(name="slide-left")
-    div(grid="~ lt-md:cols-5 auto-rows-fr gap-1 md:gap-2" justify="center" v-if="displayTools") 
+    div(grid="~ lt-md:cols-5 gap-1 md:gap-2" justify="center" v-if="displayTools") 
 
       //- Uncomment to show Starter Pack button!
       //-
       //- GameToolsButton.svg-shadow-yellow(:title="$t(`general.navigation.starterPack`)" b="1 mc-yellow_40 hover:mc-yellow" text="mc-yellow" tab-id="starter-pack" @click="activePopup = 'starter-pack'")
 
-      GameToolsButton(:title="$t(`general.navigation.overview`)" tab-id="overview" @click="activateOverviewMenu()")
+      GameToolsButton(:title="$t(`general.navigation.overview`)" tab-id="overview" @click="activateOverviewMenu()" z="999")
 
-      GameToolsButton(:title="$t(`general.navigation.build`)" tab-id="build" @click="activateBuildMenu()")
+      GameToolsButton(:title="$t(`general.navigation.build`)" tab-id="build" @click="activateBuildMenu()" z="999")
 
-      GameToolsButton(:title="$t(`general.navigation.manager`)" tab-id="task-manager" @click="gameMenu = 'task-manager'")
+      GameToolsButton(:title="$t(`general.navigation.manager`)" tab-id="task-manager" @click="gameMenu = 'task-manager'" z="999")
 
-      GameToolsButton(:title="$t(`general.navigation.inventory`)" tab-id="inventory" @click="navigateTo('/')")
+      GameToolsButton(:title="$t(`general.navigation.inventory`)" tab-id="inventory" @click="navigateTo('/')" z="999")
 
-      GameToolsButton(:title="$t(`general.navigation.net-empire`)" tab-id="net-empire" @click="navigateTo('https://planetix.com/netempire', {external:true})")
+      GameToolsButton(:title="$t(`general.navigation.net-empire`)" tab-id="net-empire" @click="navigateTo('https://planetix.com/netempire', {external:true})" z="999")
 
       //- ButtonTab(title="Raid" tab-id="raid" @click="activePopup = 'inventory'")
 </template>
