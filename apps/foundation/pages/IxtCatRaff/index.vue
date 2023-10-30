@@ -26,7 +26,6 @@ Page()
 
 </template>
 
-
 <script lang="ts" setup>
 import { StakingId } from '~/.nuxt/gql/default';
 
@@ -43,8 +42,5 @@ await Promise.all([
   fetchCatRaffPrizes(),
   fetchCatRaffWeekly()
 ])
-
-
-
 
 </script>
