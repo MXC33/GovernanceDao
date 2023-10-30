@@ -29,10 +29,6 @@ export const useAds = () => {
 
   const ads: AdData[] = [
     {
-      id: 'territory-lottery',
-      url: "https://territorylottery.planetix.com/"
-    },
-    {
       id: "gravity-grade-genesis",
       url: "https://planetix.com/mint/gravity-grade"
     }
@@ -54,7 +50,7 @@ export const useAds = () => {
     try {
       const { data } = await fetchIXAPI('banner') as BannerResponse
       bannerData = data
-    } catch (e) {}
+    } catch (e) { }
 
     return bannerData
   }
