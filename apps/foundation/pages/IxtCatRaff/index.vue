@@ -17,7 +17,7 @@ Page()
   PageSection(section="PastWinnings")
 
   PageSection(section="TreasuryPool")
-
+    CatRaffTreasury()
   PageSection(section="PastPrizes")
     Card()
 

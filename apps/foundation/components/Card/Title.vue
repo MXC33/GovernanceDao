@@ -9,6 +9,9 @@ VList()
   div(text="detail" v-if="$slots.detail")
     slot(name="detail")
 
+  div(text="subheading on-large:2xl" font="bold" v-if="$slots.default" :large="large") 
+    slot(name="price")
+
 </template>
 
 <script lang="ts" setup>
