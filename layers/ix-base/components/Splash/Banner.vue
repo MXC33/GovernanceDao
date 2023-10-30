@@ -22,13 +22,12 @@ import CloseIcon from '~/assets/images/icons/close.svg'
 
 
 const { topBannerAd, bannerAdActive, activeAd } = useAds()
-const topBannerData = await topBannerAd()
+const { data: topBannerData } = topBannerAd()
 const config = useRuntimeConfig().public
 
-
 const onClickBanner = () => {
-  if (topBannerData.link)
-    return window.open(topBannerData.link)
+  if (topBannerData.value?.link)
+    return window.open(topBannerData.value.link)
 }
 
 const toggleBanner = () => {
@@ -63,16 +62,19 @@ const toggleBanner = () => {
     margin-top: -8px;
 
   }
+
   h3 {
     font-size: 1.5rem;
     line-height: 2rem;
     margin-top: -6px;
   }
+
   h4 {
     font-size: 1.25rem;
     line-height: 1.75rem;
     margin-top: -4px;
   }
+
   h5 {
     font-size: 1.125rem;
     line-height: 1.75rem;
