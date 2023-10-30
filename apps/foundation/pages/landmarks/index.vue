@@ -17,7 +17,7 @@ Page()
             TitleDetail(icon="ixt")
               template(#detail) {{ $t(`landmarks.totalRewards`) }}
               template(#default) {{ roundToDecimals(landmarkData?.userSpecificStakingData?.totalUserReward, 4) }}
-            ButtonGlitch(btn="~ primary-outline-cut" @click="$emit('claim')" :text="$t('general.claim')")
+            ButtonGlitch(btn="~ primary-outline-cut" @click="claimAllRewards" :text="$t('general.claim')")
 
         PageSection(section="MyLandmarks")
           LandmarkUserItem(:data="landmarkStakingItems" v-if="landmarkStakingItems?.length > 0")
@@ -49,14 +49,15 @@ Page()
 import type { NftFragment } from '@ix/base/.nuxt/gql/default';
 import { StakingId, LandmarkSort, LandmarkTier } from '@ix/base/.nuxt/gql/default';
 
+const { claimAllLandmarkRewards } = useLandmarkStakingContract()
 
 
 const sort = ref<LandmarkSort>(LandmarkSort.EarningHighToLow)
 const tier = ref<LandmarkTier>(LandmarkTier.Legendary)
-const searchText = ref('')
 const page = ref(1)
 
-const { refresh: fetchAllLandmarks, data: allLandmarkData } = useAllLandmarkData(null, searchText.value, tier.value, sort.value)
+const { refresh: fetchAllLandmarks, data: allLandmarkData } = useAllLandmarkData(null, null, tier.value, sort.value)
+await fetchAllLandmarks()
 
 const data = ref<NftFragment | null>(allLandmarkData.value)
 
@@ -76,18 +77,21 @@ const search = async (searchText: string) => {
   data.value = allLandmarkData.value
 }
 
-await fetchAllLandmarks()
 
 watch([page, sort, tier],
   async ([page, sort, tier]) => {
-    const { refresh: fetchAllLandmarks, data: allLandmarkData } = useAllLandmarkData(page, null, tier, sort)
+    const { refresh: refreshAllLandmarks, data: allLandmarkData } = useAllLandmarkData(page, null, tier, sort)
 
-    await fetchAllLandmarks()
+    await refreshAllLandmarks()
 
     data.value = allLandmarkData.value
   })
 
 const landmarkStakingItems = computed(() => landmarkData.value?.stakingItems ?? [])
 
+
+const claimAllRewards = () => {
+  return claimAllLandmarkRewards()
+}
 
 </script>

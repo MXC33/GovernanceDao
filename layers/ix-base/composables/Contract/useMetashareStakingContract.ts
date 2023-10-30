@@ -4,7 +4,7 @@ import MetashareStakingABI from "~/composables/Contract/Abis/MetashareStaking.js
 import { metashareStakingAddress } from '@ix/base/composables/Contract/WalletAddresses'
 import { ContractInterface } from '@ix/base/composables/Utils/defineContract'
 import { UserStakingItem } from './useStakingData'
-import { NftFragment, StakingId } from '../../.nuxt/gql/default'
+import { NftFragment, StakingId, StakingItemFragment } from '../../.nuxt/gql/default'
 
 
 export const useMetashareStakingContract = <T extends ContractInterface<T> & MetashareStakingContract>() => {
@@ -38,7 +38,7 @@ export const useMetashareStakingContract = <T extends ContractInterface<T> & Met
 
 
   const unstakeMetashare = (item: UserStakingItem) => {
-    createTransaction((contract) => {
+    return createTransaction((contract) => {
       const address = walletAdress.value
       if (!address || !item.token.tokenId || !item.amount)
         return undefined
@@ -49,8 +49,8 @@ export const useMetashareStakingContract = <T extends ContractInterface<T> & Met
     })
   }
 
-  const claimMetashareReward = (item: UserStakingItem) => {
-    createTransaction((contract) => {
+  const claimMetashareReward = (item: StakingItemFragment) => {
+    return createTransaction((contract) => {
       const address = walletAdress.value
       if (!address || !item.token.tokenId)
         return undefined
@@ -61,10 +61,23 @@ export const useMetashareStakingContract = <T extends ContractInterface<T> & Met
     })
   }
 
+  const claimAllMetashareReward = () => {
+    createTransaction((contract) => {
+      const address = walletAdress.value
+      if (!address)
+        return undefined
+
+      return contract.claim()
+    }, {
+      onSuccess: async () => await refreshStakingData()
+    })
+  }
+
   return {
     stakeMetashare,
     unstakeMetashare,
     claimMetashareReward,
+    claimAllMetashareReward
   }
 }
 

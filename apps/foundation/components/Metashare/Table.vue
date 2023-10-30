@@ -23,14 +23,15 @@ Card()
     h3(text="subheading" flex-grow="1") Total Rewards
     div(text="subheading") {{ roundToDecimals(data.userSpecificStakingData?.totalUserReward) }}
     Icon(icon="ixt")
-    ButtonGlitch(btn="~ primary-outline-cut" :text="$t('general.claimAll')")
+    ButtonGlitch(btn="~ primary-outline-cut" @click="claimAll" :text="$t('general.claimAll')")
 
 </template>
 
 <script lang="ts" setup>
 import type { StakingDataFragment } from '#gql';
 import type { SimpleTableRow, SimpleTableColumn } from '@ix/base/composables/useSimpleTable';
-import IXTIcon from '~/assets/images/token.svg'
+
+const { claimAllMetashareReward } = useMetashareStakingContract()
 
 const { data } = defineProps<{
   data: StakingDataFragment
@@ -57,5 +58,7 @@ const totalDaily = computed(() => data.userSpecificStakingData?.totalUserRewardP
 
 const totalThirty = computed(() => data.userSpecificStakingData?.totalUserRewardPerThirtyDays)
 
-
+const claimAll = () => {
+  return claimAllMetashareReward()
+}
 </script>

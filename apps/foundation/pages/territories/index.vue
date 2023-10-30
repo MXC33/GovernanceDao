@@ -25,7 +25,7 @@ Page()
           TitleDetail(icon="ixt")
             template(#detail) Total Rewards
             template(#default) {{ roundToDecimals(territoryUserData?.userSpecificStakingData?.totalUserReward, 4) }}
-          ButtonGlitch(btn="~ primary-outline-cut" @click="$emit('claim')" :text="$t('general.claim')")
+          ButtonGlitch(btn="~ primary-outline-cut" @click="claimAllRewards" :text="$t('general.claim')")
 
 
 
@@ -75,7 +75,11 @@ const sizeList = ['all', 'legendary', 'rare', 'uncommon', 'common', 'outlier']
 const { data: territoryData } = useStakingData(StakingId.Territories)
 const { data: territoryUserData } = useStakingData(StakingId.TerritoriesUser)
 
+const { claimAllTerritoryRewards } = useTerritoryStakingContract()
 
+const claimAllRewards = () => {
+  return claimAllTerritoryRewards()
+}
 
 const filteredTerritories = computed(() => {
   const filtered = territoryData.value?.stakingItems.filter(item => item?.token?.tokenInfo.type == activeSectionTop.value) as StakingItemFragment[]

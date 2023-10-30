@@ -12,14 +12,15 @@ HList(v-for="item in data")
             template(#detail) Shares Staked
             template(#default) {{ sharesStaked(item) }}
           HList(space-x="3")
-            ButtonGlitch(btn="~ primary-outline-cut" @click="$emit('')" :text="$t('landmarks.StakeBtn.title')")
-            ButtonGlitch(btn="~ primary-outline-cut" @click="$emit('')" :text="$t('landmarks.UnstakeBtn.title')")
+            ButtonGlitch(btn="~ primary-outline-cut" @click="$emit('deposit')" :text="$t('landmarks.StakeBtn.title')")
+            ButtonGlitch(btn="~ primary-outline-cut" @click="$emit('withdraw')" :text="$t('landmarks.UnstakeBtn.title')")
+
 
     template(#detailRight)
       TitleDetail(space-y="3")
         template(#detail) Total Earned
         template(#default :style="{ fontSize: '24px', marginBottom: '10px' }") {{ item.userStakingData?.totalReward }}
-          ButtonGlitch(btn="~ primary-outline-cut" @click="$emit('claim')" :text="$t('landmarks.claimButton')")
+          ButtonGlitch(btn="~ primary-outline-cut" @click="claimReward(item)" :text="$t('landmarks.claimButton')")
 
 
 </template>
@@ -27,6 +28,7 @@ HList(v-for="item in data")
 <script lang="ts" setup>
 import type { StakingItemFragment } from '#gql';
 
+const { claimLandmarkRewardsById, stakeLandmark, unstakeLandmark } = useLandmarkStakingContract()
 
 const { data } = defineProps<{
   data: StakingItemFragment[]
@@ -36,5 +38,9 @@ const sharesOwned = (item: StakingItemFragment) => ((item.userStakingData?.amoun
 
 const sharesStaked = (item: StakingItemFragment) => (item.userStakingData?.amountStaked ?? 0)
 
+
+const claimReward = (item: StakingItemFragment) => {
+  return claimLandmarkRewardsById(item.token)
+}
 
 </script>

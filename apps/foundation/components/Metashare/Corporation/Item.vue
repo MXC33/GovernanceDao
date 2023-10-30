@@ -19,15 +19,26 @@ Card()
     CardTitle(:large="true") {{ $t('foundation.claimRewards') }}
     TitleDetail(icon="ixt") 
       template(#detail) {{ $t('general.rewards') }}
-      template(#default) 0.00
+      template(#default) {{ roundToDecimals(data.userStakingData?.totalReward) }}
 
-    ButtonGlitch(btn="~ primary-outline-cut" @click="$emit('withdraw')" :text="$t('general.claim')")
+    ButtonInteractive(btn="~ primary-outline-cut" @click="claimRewardRequest(data)"  v-if="data" text="Claim" :loading="isLoading"  :loading-text="'Claiming Reward...'") 
 </template>
 
 <script lang="ts" setup>
 import type { StakingItemFragment } from '#gql'
 
+const { loading: isLoading, execute: claimRewardRequest } = useContractRequest(async (data: StakingItemFragment) => {
+  return claimReward(data)
+})
+
+const { claimMetashareReward } = useMetashareStakingContract()
+
 const { data } = defineProps<{
   data: StakingItemFragment
 }>()
+
+
+const claimReward = async (item: StakingItemFragment) => {
+  await claimMetashareReward(item)
+}
 </script>

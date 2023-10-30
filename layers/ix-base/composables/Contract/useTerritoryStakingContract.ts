@@ -3,8 +3,7 @@ import { ContractContext as TerritoryStakingContract } from '~/composables/Contr
 import TerritoryStakingABI from "~/composables/Contract/Abis/PIXTerritoryStaking.json"
 import { territoryStakingAddress } from '@ix/base/composables/Contract/WalletAddresses'
 import { ContractInterface } from '@ix/base/composables/Utils/defineContract'
-import { UserStakingItem } from './useStakingData'
-import { StakingId } from '.nuxt/gql/default'
+import { NftFragment, StakingId, StakingItemFragment } from '~/.nuxt/gql/default'
 import { useLandData } from '../../../../apps/mission-control/composables/useLandData'
 
 
@@ -28,7 +27,7 @@ export const useTerritoryStakingContract = <T extends ContractInterface<T> & Ter
   })
 
 
-  const stakeTerritory = (item: UserStakingItem) => {
+  const stakeTerritory = (item: StakingItemFragment) => {
     createTransaction((contract) => {
       const address = walletAdress.value
       if (!address || !item.token.tokenId)
@@ -40,7 +39,7 @@ export const useTerritoryStakingContract = <T extends ContractInterface<T> & Ter
     })
   }
 
-  const unstakeTerritory = (item: UserStakingItem) => {
+  const unstakeTerritory = (item: StakingItemFragment) => {
     createTransaction((contract) => {
       const address = walletAdress.value
       if (!address || !item.token.tokenId)
@@ -64,13 +63,13 @@ export const useTerritoryStakingContract = <T extends ContractInterface<T> & Ter
     })
   }
 
-  const claimSpecificTerritoryReward = (item: UserStakingItem) => {
+  const claimSpecificTerritoryReward = (item: NftFragment) => {
     createTransaction((contract) => {
       const address = walletAdress.value
-      if (!address || !item.token.tokenId)
+      if (!address || !item.tokenId)
         return undefined
 
-      return contract.claimBatch([item.token.tokenId])
+      return contract.claimBatch([item.tokenId])
     }, {
       onSuccess: async () => await Promise.all([refreshStakingData(), refreshUserStakingData()])
     })
