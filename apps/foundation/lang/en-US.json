@@ -306,18 +306,25 @@
       "title": "New IXT CAT RAFF Staking Contract",
       "description": "Stake your IXT to our new, updated and improved Cat Raff staking contract. The new Cat Raff fetches randomized winners from the Chainlink VRF algorithm, which ensures verifiable randomness. By implementing Chainlink VRF’s verifiable randomness, IXT Cat Raff users will be able to verify that each winner is selected with an unbiased source of randomness. In addition to being more secure, it also ensures our architecture is operating in a provably secure and verifiably random manner, free of manipulation or interference. To participate in the raffles, players stake their IXT to our new Cat Raff staking Contract and receive Tickets in exchange. Each week, five winning tickets will be selected to share 2,500 IXT rewards in winnings. In order to participate, players have to stake IXT in exchange for raffle tickets. To roll over from one week to the next, add your tickets from the previous week. A one-week lock period applies, where players can only withdraw their tokens once the next draw is completed."
     },
-    "stakeForTickets": "Stake your IXT to receive Tickets" ,
-    "oneTicket":  "1 Ticket is 1 IXT",
-    "AddTickets": "Add tickets from previous week",
-    "weekToWeek": "Roll-over your Tickets from week to week to be included in the next raffle",
-    "WithdrawIXT": "Withdraw your IXT",
-    "noParticipant": "If you withdraw your IXT you will no longer be participating in the Cat Raffles",
-    "ClaimIXTReward": "Claim IXT Reward",
-    "claimCatRaff": "Claim and withdraw your winnings!",
-    "inputText": "Enter Amount",
-    "addTicketBtn": "ADD TICKETS",
-    "stakeIxtBtn": "STAKE IXT",
-
+    "StakeForTickets": {
+      "title": "Stake your IXT to receive Tickets"
+    },
+    "stake": {
+      "title": "Stake your IXT to receive Tickets",
+      "description": "1 Ticket is 1 IXT"
+    },
+    "ticket": {
+      "title": "Add tickets from previous week",
+      "description": "Roll-over your Tickets from week to week to be included in the next raffle"
+    },
+    "withdraw": {
+      "title": "Withdraw your IXT",
+      "description": "If you withdraw your IXT you will no longer be participating in the Cat Raffles"
+    },
+    "claim": {
+      "title": "Claim IXT Reward",
+      "description": "Claim and withdraw your winnings!"
+    },
     "PastWinnings": {
       "title": "PAST WEEK WINNINGS",
       "description": "Details of past winning tickets can be seen below. The randomness of these tickets is verifiable on chain. To increase your odds of winning, stake more IXT above and roll your tickets over consistently week by week."
@@ -359,7 +366,6 @@
       "title": "ACCOUNTS",
       "description": ""
     }
-    
   },
   "landmarks": {
     "Rewards": {
