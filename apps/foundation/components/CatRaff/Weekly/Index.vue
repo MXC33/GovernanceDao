@@ -4,7 +4,7 @@ div(overflow-x="auto" whitespace-nowrap)
     div(v-for="item in items" :key="item.id" w="300px") 
       Card()
         VList()
-          TitleDetail(#default mb="6") Week #69
+          TitleDetail(#default mb="6") Week
           TitleDetail(#detail) Oct 25, 2023
           TitleDetail(#detail) 00:00AM GMT
           TitleDetail(#detail) 2500 IXT
@@ -17,12 +17,20 @@ div(overflow-x="auto" whitespace-nowrap)
               div()
                 TitleDetail(#default) 321823
                 TitleDetail(#detail) Total Tickets
-
-
 </template>
 	
 <script lang="ts" setup>
-// Bara för o test rendrera items
+import { defineProps } from 'vue';
+
+const props = defineProps({
+  weeklyData: {
+    type: Array as () => Array<{ id: number }>,
+    required: false
+  }
+});
+
+
+
 const items = [
   { id: 1, content: 'Item 1' },
   { id: 2, content: 'Item 2' },
@@ -35,27 +43,4 @@ const items = [
   { id: 9, content: 'Item 9' },
 ];
 
-
 </script>
-
-<style>
-.scrollable-container {
-  width: 100%;
-  overflow-x: auto;
-  white-space: nowrap;
-}
-
-.scrollable-content {
-  display: inline-flex;
-}
-
-.grid-item {
-  width: 300px;  /* Increase the width */
-  margin-right: 30px; /* Increase the spacing between items */
-  box-sizing: border-box; /* Ensure padding and border are included in the element's total width and height */
-}
-
-
-
-
-</style>
