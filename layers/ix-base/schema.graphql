@@ -304,6 +304,8 @@ type Query {
   catRaffAccounts(skip: Int): [CatRaffTicketInfo]
   catRaffWeekly(credentials: CredentialsInput): [CatRaffTicketInfo]
   catRaffPastPrizes(skip: Int): [CatRaffTicketInfo]
+  catRaffTransactions: [PolygonScanTransactions]
+  userIxtTransactions(credentials: CredentialsInput!): [PolygonScanTransactions]
   governance(credentials: CredentialsInput): GovernanceData
   allUserTerritories(credentials: CredentialsInput!): [Token]
 }
@@ -374,7 +376,6 @@ type StakingData {
   lockPeriod: Float
   userSpecificStakingData: UserSpecificStakingData
   prizeAmount: Int
-  transactions: [PolygonScanTransactions]
   stakingItems: [StakingItem]!
 }
 
