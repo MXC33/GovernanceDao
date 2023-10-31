@@ -1,4 +1,4 @@
-import { CredentialsInput, NftFragment, StakingId } from ".nuxt/gql/default"
+import { CredentialsInput, NftFragment, StakingDataFragment, StakingId } from ".nuxt/gql/default"
 
 export type UserStakingItem = {
   token: NftFragment
@@ -14,7 +14,7 @@ export const useStakingData = (id: StakingId) => {
 
   const fetchStakingData = async () => {
     const stakingData = await GqlStakingData({ credentials, id })
-    return stakingData.stakingData
+    return stakingData.stakingData as StakingDataFragment
   }
 
   const key = `staking-data-${id}`

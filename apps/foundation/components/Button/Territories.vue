@@ -1,15 +1,17 @@
 <template lang="pug">
 div()
-  button.buttonTerritories( @click="handleClick" uppercase="~" font="bold" btn="~ form") {{ label }}
+  button.buttonTerritories(:class="{ active: isSelected }" @click="handleClick" uppercase="~" font="bold" btn="~ form") {{ label }}
 
 
 </template>
 
 <script lang="ts" setup>
 
-const { label } = defineProps<{
+const { label, isSelected } = defineProps<{
   label: string
+  isSelected: boolean
 }>()
+
 
 const emit = defineEmits(['click']);
 
@@ -36,7 +38,12 @@ const handleClick = () => {
   margin-right: 0;
 }
 
-.buttonTerritories.active,
+.buttonTerritories.active {
+  background-color: bg-ix-orange;
+  color: #ffffff;
+  /* Adjust this for contrast against the orange background, I assumed white might look good. */
+}
+
 .buttonTerritories:hover {
   @apply color-ix-orange;
   /* Adjust for the desired hover and active text color */

@@ -5,7 +5,7 @@ Page()
   PageSection(section="StakingTitle")
 
   HList(space-x="12")
-    ButtonTerritories(v-for="section in sections" :key="section"  :label="section" @click="activeSectionTop = section")
+    ButtonTerritories(v-for="section in sections" :key="section" :isSelected="activeSectionTop == section" :label="section" @click="activeSectionTop = section")
 
   TerritoryBoxes(:data="filteredTerritories" v-if="filteredTerritories")
 
@@ -30,7 +30,7 @@ Page()
 
 
   HList(space-x="12")
-    ButtonTerritories(v-for="section in sections" :key="section"  :label="section" @click="activeSection = section")
+    ButtonTerritories(v-for="section in sections" :key="section"  :label="section" :isSelected="activeSection == section" @click="activeSection = section")
 
   PageSection(:section="`content.${activeSection}`")
 
@@ -50,18 +50,19 @@ Page()
         OptionRowSelect(:selected="stakeSort == item" @click="stakeSort = item" capitalize="~") {{ item }}
 
 
-  HList(space-x="6")
-    TerritoryItem(v-for="data in filteredUserTerritories" :data="data" v-if="filteredUserTerritories?.length > 0")
-    Card(v-else flex-grow="1" items="center" font="bold")
-      template(#default)
-        div() {{ $t(`territories.noContent.${activeSection}`) }}
+  HList()
+    div(grid="~ cols-3 gap-6" flex-grow="1")
+      TerritoryItem(v-for="data in filteredUserTerritories" :data="data" :staked="stakeSort == 'staked'" v-if="filteredUserTerritories?.length > 0")
+      Card(v-else flex-grow="1" items="center" font="bold")
+        template(#default)
+          div() {{ $t(`territories.noContent.${activeSection}`) }}
 
 
 </template>
 
 <script lang="ts" setup>
 
-import { type StakingItemFragment, StakingId } from '@ix/base/.nuxt/gql/default';
+import { type StakingItemFragment, StakingId, type NftFragment } from '@ix/base/.nuxt/gql/default';
 
 const activeSection = ref('area');
 const activeSectionTop = ref('area');
@@ -75,6 +76,10 @@ const sizeList = ['all', 'legendary', 'rare', 'uncommon', 'common', 'outlier']
 const { data: territoryData } = useStakingData(StakingId.Territories)
 const { data: territoryUserData } = useStakingData(StakingId.TerritoriesUser)
 
+const { data: allUserTerritories, execute: fetchAllUserTerritories } = useTerritoryData()
+
+await fetchAllUserTerritories()
+
 const { claimAllTerritoryRewards } = useTerritoryStakingContract()
 
 const claimAllRewards = () => {
@@ -83,19 +88,20 @@ const claimAllRewards = () => {
 
 const filteredTerritories = computed(() => {
   const filtered = territoryData.value?.stakingItems.filter(item => item?.token?.tokenInfo.type == activeSectionTop.value) as StakingItemFragment[]
-  console.log("filtered", filtered)
   return filtered
 })
 
+const filterTokens = (token: NftFragment) => {
+  return token.tokenInfo.type == activeSection.value && sizeSort.value == 'all' ? true : token.tokenInfo.tier == sizeSort.value
+}
 
 const filteredUserTerritories = computed(() => {
   if (stakeSort.value == 'staked') {
-    const filtered = territoryUserData.value?.stakingItems.filter(item => item?.token?.tokenInfo.type == activeSection.value && sizeSort.value == 'all' ? true : item?.token.tokenInfo.tier == sizeSort.value) as StakingItemFragment[]
+    const filtered = territoryUserData.value?.stakingItems.filter(item => filterTokens(item?.token)) as StakingItemFragment[]
     return filtered
   }
   else {
-    // Show unstaked territories. Will create a GQL query for this
-    return []
+    return allUserTerritories.value?.filter(token => filterTokens(token)) as NftFragment[]
   }
 })
 

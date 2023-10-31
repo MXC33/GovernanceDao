@@ -6,8 +6,8 @@ VList(space-y="3")
       template(#default) {{ formattedDate }}
 
   div(grid="~ cols-2" space-x="3")
-    ButtonGlitch(btn="~ primary-outline-cut" @click="stake" :text="$t('general.stake')")
-    ButtonGlitch(btn="~ primary-outline-cut" @click="unstake" :text="$t('general.unstake')")
+    ButtonGlitch(btn="~ primary-outline-cut on-disabled:disabled" @click="stake" :text="$t('general.stake')" :disabled="staked")
+    ButtonGlitch(btn="~ primary-outline-cut on-disabled:disabled" @click="unstake" :text="$t('general.unstake')" :disabled="!staked")
 
 </template>
 <script lang="ts" setup>
@@ -16,12 +16,13 @@ import { format } from 'date-fns'
 
 const { stakeTerritory, unstakeTerritory } = useTerritoryStakingContract()
 
-const { item } = defineProps<{
+const { item, staked } = defineProps<{
+  staked: boolean
   item: StakingItemFragment
 }>()
 
 
-const formattedDate = computed(() => format(item.userStakingData?.stakedAt * 1000 ?? 0, 'dd-MM-yyyy'))
+const formattedDate = computed(() => staked ? format(item.userStakingData?.stakedAt * 1000 ?? 0, 'dd-MM-yyyy') : "-")
 
 
 const stake = () => {
