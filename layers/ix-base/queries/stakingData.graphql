@@ -86,25 +86,3 @@ fragment StakingItem on StakingItem {
   }
   odds
 }
-
-fragment PolygonScanTransactions on PolygonScanTransactions {
-  blockNumber
-  timeStamp
-  hash
-  nonce
-  blockHash
-  from
-  contractAddress
-  to
-  value
-  tokenName
-  tokenSymbol
-  tokenDecimal
-  transactionIndex
-  gas
-  gasPrice
-  gasUsed
-  cumulativeGasUsed
-  input
-  confirmations
-}
