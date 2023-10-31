@@ -19,9 +19,9 @@ HList(v-for="item in data")
     template(#blackDetail)
       TitleDetail(space-y="3" mt="25")
         template(#detail) Total Earned
-        template(#default) 
-          div {{ item.userStakingData?.totalReward }}
-          ButtonGlitch(btn="~ primary-outline-cut" mt="3" @click="claimReward(item)" :text="$t('landmarks.claimButton')")
+      TitleDetail(icon="ixt")
+        template(#default) {{ item.userStakingData?.totalReward }} 
+      ButtonGlitch(btn="~ primary-outline-cut" mt="3" @click="claimReward(item)" :text="$t('landmarks.claimButton')")
 
 
 
