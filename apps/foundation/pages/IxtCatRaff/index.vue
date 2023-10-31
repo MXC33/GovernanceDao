@@ -15,11 +15,11 @@ Page()
 
 
   PageSection(section="PastWinnings")
-
+    CatRaffWeekly()
   PageSection(section="TreasuryPool")
     CatRaffTreasury()
   PageSection(section="PastPrizes")
-    CatRaffPastPrizes()
+
 
   PageSection(section="Accounts")
     Card()
@@ -33,6 +33,12 @@ const { data: stakingData, execute: fetchCatRaffData } = useStakingData(StakingI
 const { data: accountData, execute: fetchCatRaffAccounts } = useCatRaffAccounts()
 const { data: prizeData, execute: fetchCatRaffPrizes } = useCatRaffPrizes()
 const { data: weeklyData, execute: fetchCatRaffWeekly } = useCatRaffWeekly()
+
+console.log('Cat Raff Data:', stakingData.value);
+console.log('Cat Raff Accounts:', accountData.value);
+console.log('Cat Raff Prizes:', prizeData.value);
+console.log('Cat Raff Weekly:', weeklyData.value);
+
 
 
 
