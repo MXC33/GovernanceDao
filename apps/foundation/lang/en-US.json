@@ -321,6 +321,9 @@
       "title": "Withdraw your IXT",
       "description": "If you withdraw your IXT you will no longer be participating in the Cat Raffles"
     },
+    "depositAmount": {
+      "description": "Your deposit amount"
+    },
     "claim": {
       "title": "Claim IXT Reward",
       "description": "Claim and withdraw your winnings!"

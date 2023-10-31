@@ -8,8 +8,9 @@ Card()
       div() Available:
       TitleDetail(:icon="id === 'stake' ? 'ixt' : 'ixt'")
       div() 0.00
+      
   HList(space-x="2")
-    input(type="text" text="bold" :placeholder="id === 'stake' ? 'IXT' : 'TICKETS'" ref="searchElement" bg="gray-900 md:ix-black"  outline="none" px="2" w="full" size="3")
+    input(type="text" text="bold" :placeholder="id === 'stake' ? 'IXT' : 'TICKETS'" ref="searchElement" bg="gray-900 md:ix-black" px="2" w="full")
     ButtonGlitch(btn="~ primary-outline-cut" :text="id === 'stake' ? 'STAKE IXT' : 'ADD TICKETS'")
 </template>
 
