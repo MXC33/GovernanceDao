@@ -6,8 +6,12 @@ div(grid="~ lg:cols-2 cols-1 gap-6")
 
       h1(text="bold 5xl" color="#84D4BC") {{ apy }}%
       HList(gap-6)
-        button(color="gray") {{ $t("index.buyIXTButton") }}
-        button(color="gray") {{ $t("index.addToWalletButton") }}
+        HList(space-x="1" @click="enableSwap")
+          button(color="gray") {{ $t("index.buyIXTButton") }}
+          LaunchIcon(w="5")
+        HList(space-x="1" @click="addIXTToWallet")
+          button(color="gray") {{ $t("index.addToWalletButton") }}
+          LaunchIcon(w="5")
 
     CardChart()
 
@@ -27,9 +31,15 @@ div(grid="~ lg:cols-2 cols-1 gap-6")
         div(bg="ix-mint" :style="{width: percentageOfSupply + '%'}" h="1")
         div(text="detail") {{ percentageOfSupply }} %
 
+HeaderLifiWidget(v-if="swapVisible" @close="swapVisible = false")
+
 </template>
 
 <script lang="ts" setup>
+import LaunchIcon from '~/assets/images/launch-icon.svg'
+const { enable: enableSwap, state: swapVisible } = useIXTSwapVisible()
+const { addIXTToWallet } = useWallet()
+
 const { getCirculatingSupply, getTotalSupply, getAPY, ixtPoolData } = useStakingPools()
 
 const circulatingSupply = await getCirculatingSupply()

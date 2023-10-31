@@ -385,6 +385,31 @@ export const useWallet = () => {
     }
   }
 
+  const addIXTToWallet = async () => {
+    const tokenAddress = '0xE06Bd4F5aAc8D0aA337D13eC88dB6defC6eAEefE';
+    const tokenSymbol = 'IXT';
+    const tokenDecimals = 18;
+    const tokenImage =
+      'https://assets.coingecko.com/coins/images/20927/small/IXT_LOGO_PNG_RGB_200X.png?1657602069';
+    try {
+      await window.ethereum.request({
+        method: 'wallet_watchAsset',
+        params: {
+          type: 'ERC20',
+          options: {
+            address: tokenAddress,
+            symbol: tokenSymbol,
+            decimals: tokenDecimals,
+            image: tokenImage,
+          },
+        },
+      });
+    } catch (error) {
+      console.log(error);
+      return
+    }
+  }
+
   return {
     connectWallet,
     logoutWallet,
@@ -407,6 +432,7 @@ export const useWallet = () => {
     walletSigningToken,
     signTypedData,
     contractErrorParser,
-    getCollectionType
+    getCollectionType,
+    addIXTToWallet
   }
 }
