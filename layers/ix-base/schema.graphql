@@ -1,16 +1,8 @@
-directive @cacheControl(
-  maxAge: Int
-  scope: CacheControlScope
-  inheritMaxAge: Boolean
-) on FIELD_DEFINITION | OBJECT | INTERFACE | UNION
+directive @cacheControl(maxAge: Int, scope: CacheControlScope, inheritMaxAge: Boolean) on FIELD_DEFINITION | OBJECT | INTERFACE | UNION
 
-"""
-Exposes a URL that specifies the behavior of this scalar.
-"""
+"""Exposes a URL that specifies the behavior of this scalar."""
 directive @specifiedBy(
-  """
-  The URL that specifies the behavior of this scalar.
-  """
+  """The URL that specifies the behavior of this scalar."""
   url: String!
 ) on SCALAR
 
@@ -261,21 +253,10 @@ type Query {
   landmarks(credentials: CredentialsInput): [Token]
   stakedLandmarks(credentials: CredentialsInput): [Token]
   landAmount(credentials: CredentialsInput!, chain: String = "polygon"): [Token]
-  territoriesAmount(
-    credentials: CredentialsInput!
-    tier: String!
-    type: String!
-    chain: String = "polygon"
-  ): Int
+  territoriesAmount(credentials: CredentialsInput!, tier: String!, type: String!, chain: String = "polygon"): Int
   currencies(credentials: CredentialsInput): [Token]
   allUniqueTerritories(credentials: CredentialsInput!): [Token]
-  uniqueLand(
-    credentials: CredentialsInput!
-    tier: String!
-    type: String!
-    pageKeys: PageKeyInput
-    chain: String = "polygon"
-  ): PixResults
+  uniqueLand(credentials: CredentialsInput!, tier: String!, type: String!, pageKeys: PageKeyInput, chain: String = "polygon"): PixResults
   pixByName(credentials: CredentialsInput!, pixId: String!): [Token]
   stakedTerritories(credentials: CredentialsInput): [Token]
   uniquePixFromWallet(credentials: CredentialsInput, tier: String!): [Token]
@@ -284,11 +265,7 @@ type Query {
   gravityGradePackContent(token: TokenInput!): [TokenProbability]
   stakedOnTile(credentials: CredentialsInput, tiles: [TileInput!]!): [StakedNFT]
   oldStakedOnTile(credentials: CredentialsInput): [StakedNFT]
-  searchPixId(
-    credentials: CredentialsInput
-    pixId: String!
-    chain: String = "polygon"
-  ): [Token]
+  searchPixId(credentials: CredentialsInput, pixId: String!, chain: String = "polygon"): [Token]
   luckyCatRaffleInfo(credentials: CredentialsInput): LuckyCatRaffle
   unclaimedFacilityOrders(credentials: CredentialsInput): [Order]
   globalWasteSystemOrderInfo(credentials: CredentialsInput): [Order]
@@ -317,26 +294,18 @@ type Query {
   badgeNFT(credentials: CredentialsInput): [Token]
   geoLotteryNFT(credentials: CredentialsInput): [Token]
   tokenInfo(tokenIds: [Int!]!, contractAddress: String!): [Token]
-  tokenInfoTypeTier(
-    tokens: [TokenInput!]!
-    contractAddress: String!
-    chain: String = "polygon"
-  ): [Token]
+  tokenInfoTypeTier(tokens: [TokenInput!]!, contractAddress: String!, chain: String = "polygon"): [Token]
   burnedAvatars(credentials: CredentialsInput, corporation: String!): Boolean
   cooldownFacilityUpgrade(credentials: CredentialsInput): Int
   assetConverterRecipes: [AssetConverterRecipe]
   stakingData(credentials: CredentialsInput, id: StakingId!): StakingData
   stakingsData(credentials: CredentialsInput, ids: [StakingId]): [StakingData]
-  allLandmarks(
-    page: Int
-    searchWord: String
-    filter: LandmarkTier
-    order: LandmarkSort
-  ): [Token]
+  allLandmarks(page: Int, searchWord: String, filter: LandmarkTier, order: LandmarkSort): [Token]
   catRaffAccounts(skip: Int): [CatRaffTicketInfo]
   catRaffWeekly(credentials: CredentialsInput): [CatRaffTicketInfo]
   catRaffPastPrizes(skip: Int): [CatRaffTicketInfo]
   governance(credentials: CredentialsInput): GovernanceData
+  allUserTerritories(credentials: CredentialsInput!): [Token]
 }
 
 type RaffleInfo {
@@ -535,3 +504,4 @@ type Winnings {
   amount: Int!
   prizeIds: [Int]!
 }
+
