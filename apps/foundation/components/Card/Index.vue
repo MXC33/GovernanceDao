@@ -15,12 +15,16 @@ VList(bg="gray-800"  overflow="hidden" frame="~ gray-500")
     CardDetail(v-if="$slots.detailRight" flex="~ col" justify="center" items="center" flex-shrink="0" w="33%")
       slot(name="detailRight")
 
+    // Black Detail
+    CardDetail(v-if="$slots.blackDetail" flex="~ col" flex-shrink="0" w="25%")
+      slot(name="blackDetail")
 
 
   // Bottom detail
   CardDetail(v-if="$slots.detailBottom")
     slot(name="detailBottom")
-    
+
+
   
 
 
