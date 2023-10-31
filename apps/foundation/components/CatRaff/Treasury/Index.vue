@@ -11,7 +11,8 @@ div(grid="~ cols-2" gap-6)
       CardTitle()
         template(#default) {{ $t(`ixtCatRaff.PoolPrice.title`) }}
         template(#detail) {{ $t(`ixtCatRaff.PoolPrice.description`) }}
-        template(#price) $ 51,134.943
+      TitleDetail()
+        template(#default) $ 51,134.943
 
 
   Card(flex-grow)
