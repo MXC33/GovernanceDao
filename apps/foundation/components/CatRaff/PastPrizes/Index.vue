@@ -1,12 +1,22 @@
 <template lang="pug">
-div.scrollable-container
-  div.scrollable-content
-    div.grid-item(v-for="item in items" :key="item.id") 
+div(overflow-x="auto" whitespace-nowrap)
+  div(inline="flex" space-x="6")
+    div(v-for="item in items" :key="item.id" w="300px") 
       Card()
-        TitleDetail(#default) Week #69
-        TitleDetail(#detail) Oct 25, 2023
-        TitleDetail(#detail) 00:00AM GMT
-        TitleDetail(#detail) 2500 IXT
+        VList()
+          TitleDetail(#default mb="6") Week #69
+          TitleDetail(#detail) Oct 25, 2023
+          TitleDetail(#detail) 00:00AM GMT
+          TitleDetail(#detail) 2500 IXT
+        template(#detailBottom)
+          VList()
+            div(grid="~ cols-2")
+              div()
+                TitleDetail(#default) 321823
+                TitleDetail(#detail) Total Tickets
+              div()
+                TitleDetail(#default) 321823
+                TitleDetail(#detail) Total Tickets
 
 
 </template>
@@ -32,18 +42,19 @@ const items = [
 .scrollable-container {
   width: 100%;
   overflow-x: auto;
-  white-space: nowrap; 
+  white-space: nowrap;
 }
 
 .scrollable-content {
-  display: inline-flex; 
+  display: inline-flex;
 }
 
 .grid-item {
-  width: 150px; 
-  height: 100px; 
-  margin-right: 20px; 
+  width: 300px;  /* Increase the width */
+  margin-right: 30px; /* Increase the spacing between items */
+  box-sizing: border-box; /* Ensure padding and border are included in the element's total width and height */
 }
+
 
 
 
