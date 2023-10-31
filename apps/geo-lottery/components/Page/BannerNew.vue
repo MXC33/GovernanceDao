@@ -1,5 +1,5 @@
 <template lang="pug">
-VList(class="banner" pos="relative" overflow="hidden" z="0" min-h="1000px")
+VList(class="banner" pos="relative" overflow="hidden" z="0" min-h="650px sm:1000px")
   Background( inset="0" object="cover center" pos="absolute" )
     template(#image-source)
       img(src="~/assets/images/banner-map.png" inset="0" object="cover" h="full" w="full" pos="absolute" z="-1" opacity="50")
