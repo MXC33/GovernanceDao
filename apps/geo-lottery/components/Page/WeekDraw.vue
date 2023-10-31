@@ -17,8 +17,8 @@ div()
       span(  color="$mc-pink" m="x-1") {{enteredTickets?.entered_weekly_tickets || 0}}
       span() Subscription TICKETS
     div(flex="~ col md:row" justify="center" items-center )
-      ButtonItem(:value="'pink'" mb="3 md:0" mr="0 md:3" min-w="300px md:265px" :text="'PURCHASE TICKETS'" @click="openPurchaseTickets")
-      ButtonItem(:value="'white'" min-w="300px md:265px" :text="'MANAGE TICKETS'" @click="openManageTickets")
+      //ButtonItem(:value="'pink'" mb="3 md:0" mr="0 md:3" min-w="300px md:265px" :text="'PURCHASE TICKETS'" @click="openPurchaseTickets")
+      //ButtonItem(:value="'white'" min-w="300px md:265px" :text="'MANAGE TICKETS'" @click="openManageTickets")
 </template>
 
 <script lang="ts" setup>
