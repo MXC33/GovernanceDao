@@ -5,7 +5,7 @@ Page()
   PageSection(section="StakingTitle")
 
   HList(space-x="12")
-    ButtonTerritories(v-for="section in sections" :key="section"  :label="section" @click="activeSectionTop = section")
+    ButtonTerritories(v-for="section in sections" :key="section" :isSelected="activeSectionTop == section" :label="section" @click="activeSectionTop = section")
 
   TerritoryBoxes(:data="filteredTerritories" v-if="filteredTerritories")
 
@@ -30,7 +30,7 @@ Page()
 
 
   HList(space-x="12")
-    ButtonTerritories(v-for="section in sections" :key="section"  :label="section" @click="activeSection = section")
+    ButtonTerritories(v-for="section in sections" :key="section"  :label="section" :isSelected="activeSection == section" @click="activeSection = section")
 
   PageSection(:section="`content.${activeSection}`")
 
