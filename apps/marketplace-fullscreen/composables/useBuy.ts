@@ -208,7 +208,7 @@ export const useTransactionHelpers = () => {
 
     const getOrder = (amount: number) => ({
       parameters: message.body,
-      numerator: amount,
+      numerator: substitute ? 1: amount,
       denominator: message.body.offer[0].endAmount,
       signature: message.signature,
       extraData: "0x"

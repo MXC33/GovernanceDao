@@ -12,12 +12,12 @@ VList()
     template(#ixt) {{averageOfferPerItem}} IXT
     template(#percentage) {{belowHighestOffer}}% {{ $t(`marketplace.trade.belowHighestOffer`) }}
 
-  //- TradeModuleSubstitute(v-model="isSubstituteOffering")
-  //-   template(#title) {{ $t(`marketplace.trade.lowestOffer`) }}
-  //-   template(#substituteTitle) 
-  //-   template(#substituteInput) 
-  //-     InputText(v-model="minOffer" :class="{highlighted: showDecreaseMinPrice}" :is-module="true")
-  //-       template(#suffix) IXT
+  TradeModuleSubstitute(v-model="isSubstituteOffering")
+    template(#title) {{ $t(`marketplace.trade.lowestOffer`) }}
+    template(#substituteTitle)
+    template(#substituteInput)
+      InputText(v-model="minOffer" :class="{highlighted: showDecreaseMinPrice}" :is-module="true")
+        template(#suffix) IXT
 
   div(grid="~ cols-1 md:cols-2")
     ButtonInteractive(btn="~ secondary " font="bold" @click="acceptItems" v-if="!isDisabled" :text="`Accept ${shares?.value} offer`" :loading="isAcceptLoading")
@@ -68,7 +68,8 @@ const accept = async () => {
   const acceptOffer = await acceptOffers(
     selectedBidsToAccept.value,
     totalOfferPrice,
-    quantity
+    quantity,
+    isSubstituteOffering.value
   )
 
   if (acceptOffer)

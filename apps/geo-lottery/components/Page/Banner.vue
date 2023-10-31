@@ -31,7 +31,7 @@ VList(class="banner" pos="relative" overflow="hidden" z="0" min-h="650px")
         p(font="bold" text="base sm:lg center" mb-4 v-if="livepage") Every week, new Territories from around the world are <br> randomly selected. Join today and have the chance to win!
       div(flex="~ col sm:row" justify="center" m="0 sm:t-6" items-center)
         template(v-if="livepage")
-          ButtonItem(:value="'pink'" :text="'JOIN NOW'"  min-w="300px md:255px" mb="3 sm:0" mr="0 sm:3" @click="openPurchaseTickets" )
+          //ButtonItem(:value="'pink'" :text="'JOIN NOW'"  min-w="300px md:255px" mb="3 sm:0" mr="0 sm:3" @click="openPurchaseTickets" )
           ButtonItem(:value="'white'" :text="'SWAP ASTRO GOLD'" min-w="300px md:255px" @click="openSwap")
         ButtonItem( class="watch_teaser" :value="'pink'" :text="'WATCH TEASER'" h="15" min-w="300px"  @click="goToYoutubeLink" pos="relative" v-else)
 </template>

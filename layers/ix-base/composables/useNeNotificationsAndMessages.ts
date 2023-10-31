@@ -147,3 +147,26 @@ export const useNotificationSettings = () => {
     showUnreadNotifications
   }
 }
+
+export const useNotificationAllowance = () => {
+  const showNotificationLoader = ref<string[]>([])
+
+  const { readItem: readNotificationItem } = useNeNotifications()
+  const { allowanceCheckWithError } = useIXTContract()
+
+  const allowance = async (message) => {
+    showNotificationLoader.value['nt'+message.notification.id] = true
+
+    const { execute: allowanceCheckRequest } = useContractRequest(async () => allowanceCheckWithError(message.notification.price))
+
+    if (await allowanceCheckRequest())
+      readNotificationItem(message)
+
+    showNotificationLoader.value['nt'+message.notification.id] = false
+  }
+
+  return {
+    showNotificationLoader,
+    allowance
+  }
+}

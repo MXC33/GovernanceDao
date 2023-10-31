@@ -36,10 +36,15 @@ component(is="style").
 </template>
 
 <script lang="ts" setup>
+
+const { topBannerAd, bannerAdActive } = useAds()
+const { data: topBannerData, execute: fetchTopBannerData } = topBannerAd()
+await fetchTopBannerData()
+
 const { useMobileBreakpoint } = useDevice()
 const { state: swapVisible } = useIXTSwapVisible()
 const { data: headerData, execute: fetchHeaderData } = useHeaderData()
-const { bannerAdActive } = useAds()
+
 
 
 const { className, autoClose } = defineProps<{
