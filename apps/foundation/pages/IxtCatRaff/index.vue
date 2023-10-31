@@ -15,7 +15,7 @@ Page()
 
 
   PageSection(section="PastWinnings")
-    CatRaffWeekly()
+    CatRaffWeekly(:data="weeklyData")
   PageSection(section="TreasuryPool")
     CatRaffTreasury()
   PageSection(section="PastPrizes")
@@ -37,7 +37,7 @@ const { data: weeklyData, execute: fetchCatRaffWeekly } = useCatRaffWeekly()
 console.log('Cat Raff Data:', stakingData.value);
 console.log('Cat Raff Accounts:', accountData.value);
 console.log('Cat Raff Prizes:', prizeData.value);
-console.log('Cat Raff Weekly:', weeklyData.value);
+
 
 
 
