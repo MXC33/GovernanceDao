@@ -34,9 +34,9 @@ const { data: accountData, execute: fetchCatRaffAccounts } = useCatRaffAccounts(
 const { data: prizeData, execute: fetchCatRaffPrizes } = useCatRaffPrizes()
 const { data: weeklyData, execute: fetchCatRaffWeekly } = useCatRaffWeekly()
 
-console.log('Cat Raff Data:', stakingData.value);
-console.log('Cat Raff Accounts:', accountData.value);
-console.log('Cat Raff Prizes:', prizeData.value);
+// console.log('Cat Raff Data:', stakingData.value);
+// console.log('Cat Raff Accounts:', accountData.value);
+// console.log('Cat Raff Prizes:', prizeData.value);
 
 
 

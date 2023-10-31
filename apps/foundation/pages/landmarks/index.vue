@@ -32,14 +32,14 @@ Page()
           div() {{ tier }}
 
         template(#item="{item}")
-          OptionRowSelect(:selected="tier == item" @click="tier = item") {{ item }}
+          OptionRowSelect(:selected="tier == item" @click="tier = item") {{ spaceBetween(item) }}
 
       OptionDropDown(:items="sortList")
         template(#selectedName) 
           div() {{ spaceBetween(sort ?? "") }}
 
         template(#item="{item}")
-          OptionRowSelect(:selected="sort == item" @click="sort = item") {{ item }}
+          OptionRowSelect(:selected="sort == item" @click="sort = item") {{ spaceBetween(item) }}
 
   LandmarkItem(:data="data")
 </template>
@@ -65,7 +65,17 @@ const data = ref<NftFragment | null>(allLandmarkData.value)
 const sortList = Object.values(LandmarkSort)
 const tierList = Object.values(LandmarkTier)
 
-const spaceBetween = (text: string) => text.replace(/([A-Z])/g, ' $1').trim()
+const capitalizeFirstLetter = (text: string) => text.charAt(0).toUpperCase() + text.slice(1);
+
+const spaceBetween = (text: string) => {
+  const words = text.replace(/([A-Z])/g, ' $1').trim().split(' ');
+  if (words.length > 1) {
+    words[0] = words[0] + ' -';
+  }
+  const spacedText = words.join(' ');
+  return capitalizeFirstLetter(spacedText);
+}
+
 
 const { data: landmarkData } = useStakingData(StakingId.Landmark)
 

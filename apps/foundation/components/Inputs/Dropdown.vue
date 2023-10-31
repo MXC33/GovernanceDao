@@ -1,12 +1,18 @@
 <template lang="pug">
 div.dropdown-container
-  label(v-if="label" :for="label") {{ label }}
-    select(v-model="selectedOption" class="select")
+  label(v-if="label" :for="label")  {{ label }}
+    select(v-model="selectedOption" @change="logSelectedValue" class="select")
       option(v-for="(option, index) in options" :key="index" :value="option") {{ option }}
+  
 </template>
   
 <script lang="ts" setup>
 import { ref, defineProps, watch, defineEmits } from 'vue';
+
+const logSelectedValue = () => {
+  console.log(selectedOption);
+};
+
 
 const props = defineProps({
   options: {
