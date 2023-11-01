@@ -40,6 +40,10 @@ useHead({
   ]
 })
 
+onMounted(() => {
+  setupOnMounted()
+})
+
 const refreshAllData = async () => {
   await Promise.all([
     refreshTerritoryData(),
