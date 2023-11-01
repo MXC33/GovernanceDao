@@ -11,7 +11,7 @@ VList(space-y="3")
       template(#detail) {{ $t('metashare.TradeIXTPerShare30Days') }}
       template(#default) {{roundToDecimals(stakingItem?.rewardPerThirtyDays)}} 
 
-  ButtonGlitch(btn="~ primary-outline-cut" @click="$emit('withdraw')" :text="$t('metashare.TradeViewOnMarketplace')")
+  ButtonGlitch(btn="~ primary-outline-cut" @click="onClickNavigate" :text="$t('metashare.TradeViewOnMarketplace')")
 
 </template>
 <script lang="ts" setup>
@@ -22,6 +22,9 @@ const { stakingItem } = defineProps<{
   stakingItem: StakingItemFragment | undefined
 }>()
 
+const onClickNavigate = () => {
+  window.open(`https://marketplace.planetix.com/assets/polygon/0xba6666b118f8303f990f3519df07e160227cce87/${stakingItem?.token.tokenId}`)
+}
 
 
 </script>
