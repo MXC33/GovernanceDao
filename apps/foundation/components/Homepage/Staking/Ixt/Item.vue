@@ -7,9 +7,9 @@ StakingItem(@deposit="depositActive = true" @withdraw="withdrawActive = true" :c
     StakingRewards(:pool="pool")
 
 Teleport(to="#overlays")
-  StakingActionDeposit(@close="depositActive = false" v-if="depositActive" :month="month" :pool="pool")
+  StakingActionIXTDeposit(@close="depositActive = false" v-if="depositActive" :month="month" :pool="pool")
 
-  StakingActionWithdraw(@close="withdrawActive = false" v-if="withdrawActive" :month="month" :pool="pool")
+  StakingActionIXTWithdraw(@close="withdrawActive = false" v-if="withdrawActive" :month="month" :pool="pool")
 
 </template>
 

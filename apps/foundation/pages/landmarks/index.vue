@@ -1,27 +1,28 @@
 <template lang="pug">
 Page()
   ButtonNav()
-  PageSection(section="Rewards")
-    div(flex="~ col lg:cols-2 ")
-      HList(flex="~ col lg:col-span-1 gap-6" )
-        Card(flex-grow="1")
-          HList(justify="between")
-            TitleDetail(icon="ixt")
-              template(#detail) {{ $t(`landmarks.earningsPerDay`) }}
-              template(#default) {{ roundToDecimals(landmarkData?.userSpecificStakingData?.totalUserRewardPerDay, 4) }}
-            TitleDetail(icon="ixt")
-              template(#detail) {{ $t(`landmarks.earningsPerMonth`) }}
-              template(#default) {{ roundToDecimals(landmarkData?.userSpecificStakingData?.totalUserRewardPerThirtyDays, 4) }}
-        Card(flex-grow="1")
-          HList( justify="between")
-            TitleDetail(icon="ixt")
-              template(#detail) {{ $t(`landmarks.totalRewards`) }}
-              template(#default) {{ roundToDecimals(landmarkData?.userSpecificStakingData?.totalUserReward, 4) }}
-            ButtonGlitch(btn="~ primary-outline-cut" @click="claimAllRewards" :text="$t('general.claim')")
 
-        PageSection(section="MyLandmarks")
-          LandmarkUserItem(:data="landmarkStakingItems" v-if="landmarkStakingItems?.length > 0")
-          div(v-else) No Landmarks Available
+  PageSection(section="Rewards")
+    HList(gap="3")
+      Card()
+        HList(space-x="6")
+          TitleDetail(icon="ixt")
+            template(#detail) {{ $t(`landmarks.earningsPerDay`) }}
+            template(#default) {{ roundToDecimals(landmarkData?.userSpecificStakingData?.totalUserRewardPerDay, 4) }}
+          TitleDetail(icon="ixt")
+            template(#detail) {{ $t(`landmarks.earningsPerMonth`) }}
+            template(#default) {{ roundToDecimals(landmarkData?.userSpecificStakingData?.totalUserRewardPerThirtyDays, 4) }}
+
+      Card()
+        HList( space-x="6")
+          TitleDetail(icon="ixt")
+            template(#detail) {{ $t(`landmarks.totalRewards`) }}
+            template(#default) {{ roundToDecimals(landmarkData?.userSpecificStakingData?.totalUserReward, 4) }}
+          ButtonGlitch(btn="~ primary-outline-cut" @click="claimAllRewards" :text="$t('general.claim')")
+
+  PageSection(section="MyLandmarks")
+    LandmarkUserList(:data="landmarkStakingItems" v-if="landmarkStakingItems?.length > 0")
+    div(v-else) No Landmarks Available
 
 
   PageSection(section="ExploreLandmarks")

@@ -6,7 +6,7 @@ PopupBase(@close="$emit('close')")
       InputGroup()
         template(#header) Stake amount
         template(#default)
-          InputText(v-model.number="stakeAmount" placeholder="Enter amount" type="number")
+          InputText(v-model.number="stakeAmount" placeholder="Enter amount" type="number" :max-amount="ixtBalance")
             template(#suffix) IXT
 
         template(#detail) Total Balance: {{ roundToDecimals(ixtBalance) }}
@@ -24,9 +24,7 @@ PopupBase(@close="$emit('close')")
           VList(space-y="2")
             div(text="semantic-warning") The APY for {{formattedMonths(month)}} could temporarily go lower than the APY for shorter locking periods since it is dynamic based on TVL.
 
-            HList(space-x="4" w="full" justify="start" items="center" bg="gray-800" frame="~ gray-500" p="3")
-              InputCheckbox(v-model="isAgreed")
-                span(color="gray-200") I have read, understand, and agree to the <a href="">Terms of Service.</a>
+            StakingActionAgreement(v-model="isAgreed")
 
   template(#footer)
     VList()
@@ -42,7 +40,7 @@ PopupBase(@close="$emit('close')")
       InputSummaryRow(:primary="true")
         template(#name) Stake amount
         template(#value) 
-          GlitchText(:text="String(String(stakeAmount) == '' ? 0 : stakeAmount)" suffix=" IXT")
+          StakingActionTotalAmount(:amount="stakeAmount" i18n="stake")
 
   template(#buttons)
     Disabler(:disabled="!isAgreed || stakeAmount == 0")
