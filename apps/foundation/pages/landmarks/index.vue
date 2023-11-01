@@ -1,6 +1,5 @@
 <template lang="pug">
 Page()
-  ButtonNav()
   PageSection(section="Rewards")
     div(flex="~ col lg:cols-2 ")
       HList(flex="~ col lg:col-span-1 gap-6" )

@@ -1,7 +1,5 @@
 <template lang="pug">
 Page()
-  ButtonNav() 
-
   PageSection(section="StakingTitle" :primary="true")
     MetashareTable(:data="data" v-if="data")
 

@@ -1,7 +1,5 @@
 <template lang="pug">
 Page()
-  ButtonNav()
-
   PageSection(section="StakingTitle")
 
   HList(space-x="12")
