@@ -56,26 +56,26 @@ const toggleBanner = () => {
 }
 
 @media only screen and (min-width: 1280px) {
-  h2 {
+  .topBanner h2 {
     font-size: 1.875rem;
     line-height: 2.25rem;
     margin-top: -8px;
 
   }
 
-  h3 {
+  .topBanner h3 {
     font-size: 1.5rem;
     line-height: 2rem;
     margin-top: -6px;
   }
 
-  h4 {
+  .topBanner h4 {
     font-size: 1.25rem;
     line-height: 1.75rem;
     margin-top: -4px;
   }
 
-  h5 {
+  .topBanner h5 {
     font-size: 1.125rem;
     line-height: 1.75rem;
     margin-top: -2px;
