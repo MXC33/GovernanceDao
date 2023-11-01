@@ -14,20 +14,23 @@
 import { StakingId } from '.nuxt/gql/default';
 
 const { setupOnMounted } = useAppSetup()
+const { isLoggedInAndConnected } = useLogin()
+const { walletSigningToken, walletAdress } = useWallet()
 
 
-const { execute: fetchTerritoryData } = useStakingData(StakingId.Territories)
-const { execute: fetchTerritoryUserData } = useStakingData(StakingId.TerritoriesUser)
-const { execute: fetchMetashareData } = useStakingData(StakingId.Metashare)
-const { execute: fetchEnergyData } = useStakingData(StakingId.Energy)
-const { execute: fetchEnergyAmeliaData } = useStakingData(StakingId.EnergyAmelia)
-const { execute: fetchIXTOneMonthData } = useStakingData(StakingId.IxtOneMonth)
-const { execute: fetchIXTThreeMonthData } = useStakingData(StakingId.IxtThreeMonths)
-const { execute: fetchIXTSixMonthData } = useStakingData(StakingId.IxtSixMonths)
-const { execute: fetchIXTTwelveMonthData } = useStakingData(StakingId.IxtTwelveMonths)
-const { execute: fetchLandmarkData } = useStakingData(StakingId.Landmark)
-const { execute: fetchLPMatic } = useStakingData(StakingId.LpMATIC)
-const { execute: fetchLPUsdt } = useStakingData(StakingId.LpUSDT)
+
+const { execute: fetchTerritoryData, refresh: refreshTerritoryData } = useStakingData(StakingId.Territories)
+const { execute: fetchTerritoryUserData, refresh: refreshTerritoryUserData } = useStakingData(StakingId.TerritoriesUser)
+const { execute: fetchMetashareData, refresh: refreshMetashareData } = useStakingData(StakingId.Metashare)
+const { execute: fetchEnergyData, refresh: refreshEnergyData } = useStakingData(StakingId.Energy)
+const { execute: fetchEnergyAmeliaData, refresh: refreshEnergyAmeliaData } = useStakingData(StakingId.EnergyAmelia)
+const { execute: fetchIXTOneMonthData, refresh: refreshIXTOneMonthData } = useStakingData(StakingId.IxtOneMonth)
+const { execute: fetchIXTThreeMonthData, refresh: refreshIXTThreeMonthData } = useStakingData(StakingId.IxtThreeMonths)
+const { execute: fetchIXTSixMonthData, refresh: refreshIXTSixMonthData } = useStakingData(StakingId.IxtSixMonths)
+const { execute: fetchIXTTwelveMonthData, refresh: refreshIXTTwelveMonthData } = useStakingData(StakingId.IxtTwelveMonths)
+const { execute: fetchLandmarkData, refresh: refreshLandmarkData } = useStakingData(StakingId.Landmark)
+const { execute: fetchLPMatic, refresh: refreshLPMatic } = useStakingData(StakingId.LpMATIC)
+const { execute: fetchLPUsdt, refresh: refreshLPUsdt } = useStakingData(StakingId.LpUSDT)
 
 
 useHead({
@@ -37,23 +40,49 @@ useHead({
   ]
 })
 
-onMounted(() => {
-  setupOnMounted(async () => {
-    await Promise.all([
-      fetchTerritoryData(),
-      fetchTerritoryUserData(),
-      fetchMetashareData(),
-      fetchEnergyData(),
-      fetchEnergyAmeliaData(),
-      fetchIXTOneMonthData(),
-      fetchIXTThreeMonthData(),
-      fetchIXTSixMonthData(),
-      fetchIXTTwelveMonthData(),
-      fetchLandmarkData(),
-      fetchLPMatic(),
-      fetchLPUsdt()
-    ])
-  })
+const refreshAllData = async () => {
+  await Promise.all([
+    refreshTerritoryData(),
+    refreshTerritoryUserData(),
+    refreshMetashareData(),
+    refreshEnergyData(),
+    refreshEnergyAmeliaData(),
+    refreshIXTOneMonthData(),
+    refreshIXTThreeMonthData(),
+    refreshIXTSixMonthData(),
+    refreshIXTTwelveMonthData(),
+    refreshLandmarkData(),
+    refreshLPMatic(),
+    refreshLPUsdt()
+  ])
+}
+
+await Promise.all([
+  fetchTerritoryData(),
+  fetchTerritoryUserData(),
+  fetchMetashareData(),
+  fetchEnergyData(),
+  fetchEnergyAmeliaData(),
+  fetchIXTOneMonthData(),
+  fetchIXTThreeMonthData(),
+  fetchIXTSixMonthData(),
+  fetchIXTTwelveMonthData(),
+  fetchLandmarkData(),
+  fetchLPMatic(),
+  fetchLPUsdt()
+])
+
+watch(isLoggedInAndConnected, async (loggedIn) => {
+  if (!loggedIn)
+    return
+
+  const walletHeaders = {
+    'X-Wallet': walletAdress.value ?? "",
+    'X-Signing-Token': walletSigningToken.value ?? ""
+  }
+
+  useGqlHeaders(walletHeaders)
+  await refreshAllData()
 })
 
 

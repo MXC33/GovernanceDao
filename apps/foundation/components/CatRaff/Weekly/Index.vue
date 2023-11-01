@@ -28,7 +28,7 @@ const startDate = 1657670400000
 const sevenDaysSeconds = 604800000
 
 
-const calculateEndDate = (index: number) => format(startDate + (sevenDaysSeconds * index+1), 'dd-MM-yyyy')
+const calculateEndDate = (index: number) => format(startDate + (sevenDaysSeconds * index + 1), 'dd-MM-yyyy')
 
 
 defineProps<{
