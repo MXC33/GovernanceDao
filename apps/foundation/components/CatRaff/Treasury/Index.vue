@@ -6,13 +6,14 @@ div(grid="~ cols-2" gap-6)
         template(#default) {{ $t(`ixtCatRaff.TreasuryBalance.title`) }}
         template(#detail) IXT
       TitleDetail(icon="ixt")
-        template(#default) 480,000 
+        template(#default) {{ stakingData.totalStakedAmount}}
     Card()
       CardTitle()
         template(#default) {{ $t(`ixtCatRaff.PoolPrice.title`) }}
         template(#detail) {{ $t(`ixtCatRaff.PoolPrice.description`) }}
       TitleDetail()
-        template(#default) $ 51,134.943
+        template(#default) ${{ ixtToUSD(stakingData.totalStakedAmount ?? 0) }}
+
 
 
   Card(flex-grow)
@@ -22,15 +23,25 @@ div(grid="~ cols-2" gap-6)
       CardTitle(flex="~ row justify-between")
         div()
           TitleDetail(#detail) {{ $t(`ixtCatRaff.CurrentWeekDeposits.title`) }}
-        div()
-          span 0 IXT
-          span ($0)
+        div(space-x="1")
+          span {{ stakingData.userSpecificStakingData?.currentWeekTickets?.amount }} IXT
+          span (${{ ixtToUSD(stakingData.userSpecificStakingData?.currentWeekTickets?.amount ?? 0) }})
     HList(bg="black" flex-grow style="display: flex; align-items: center; justify-content: space-between;")
       CardTitle()
         TitleDetail(#detail) {{ $t(`ixtCatRaff.TotalWeekDeposits.title`) }}
-        div 136779 IXT
+        div {{currentWeekDeposits}} IXT
 </template>
 
 <script lang="ts" setup>
+import type { StakingDataFragment, CatRaffTicketInfoFragment } from '#gql';
+const { ixtToUSD } = useCurrencyConversion()
+
+
+const { stakingData, weeklyData } = defineProps<{
+  stakingData: StakingDataFragment
+  weeklyData: CatRaffTicketInfoFragment[]
+}>()
+
+const currentWeekDeposits = computed(() => weeklyData[weeklyData.length - 1].totalTickets)
 
 </script>

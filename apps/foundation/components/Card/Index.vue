@@ -1,5 +1,5 @@
 <template lang="pug">
-VList(bg="gray-800"  overflow="hidden" frame="~ gray-500")
+VList(bg="gray-800" frame="~ gray-500")
 
   // Top detail
   CardDetail(v-if="$slots.detailTop")

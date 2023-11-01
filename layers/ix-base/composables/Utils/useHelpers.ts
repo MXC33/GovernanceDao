@@ -32,7 +32,12 @@ export const IPFSURLVideo = "https://nftstorage.link/ipfs/"
 //   }
 // }
 
+export const minimizeString = (input: string): string => {
+  const firstFour = input.substring(0, 6);
+  const lastFour = input.substring(input.length - 6);
 
+  return firstFour + '...' + lastFour;
+};
 
 export const formatNumber = (num: number): string => {
   if (Math.abs(num) >= 1_000_000) {
