@@ -2,58 +2,59 @@
 Page()
   PageSection(section="StakingTitle")
 
-  HList(space-x="12")
-    ButtonTerritories(v-for="section in sections" :key="section" :isSelected="activeSectionTop == section" :label="section" @click="activeSectionTop = section")
+    HList(space-x="3")
+      ButtonTerritories(v-for="section in sections" :key="section" :isSelected="activeSectionTop == section" :label="section" @click="activeSectionTop = section")
 
-  TerritoryBoxes(:data="filteredTerritories" v-if="filteredTerritories")
+    TerritoryBoxes(:data="filteredTerritories" v-if="filteredTerritories")
 
   PageSection(section="TerritoryTitle")
-  div(grid="~ gap-6 lg:cols-2")
-    HList(col="lg:col-span-1" space-x="6") 
-      Card(flex-grow="1")
-        HList(justify="between")
-          TitleDetail(icon="ixt")
-            template(#detail) Earning per day
-            template(#default) {{ roundToDecimals(territoryUserData?.userSpecificStakingData?.totalUserRewardPerDay, 4) }}
-          TitleDetail(icon="ixt")
-            template(#detail) Earning 30 day
-            template(#default) {{ roundToDecimals(territoryUserData?.userSpecificStakingData?.totalUserRewardPerThirtyDays, 4) }}
-      Card(flex-grow="1")
-        HList( justify="between")
-          TitleDetail(icon="ixt")
-            template(#detail) Total Rewards
-            template(#default) {{ roundToDecimals(territoryUserData?.userSpecificStakingData?.totalUserReward, 4) }}
-          ButtonGlitch(btn="~ primary-outline-cut" @click="claimAllRewards" :text="$t('general.claim')")
+    div(grid="~ gap-6 lg:cols-2")
+      HList(col="lg:col-span-1" space-x="6") 
+        Card(flex-grow="1")
+          HList(justify="between")
+            TitleDetail(icon="ixt")
+              template(#detail) Earning per day
+              template(#default) {{ roundToDecimals(territoryUserData?.userSpecificStakingData?.totalUserRewardPerDay, 4) }}
+            TitleDetail(icon="ixt")
+              template(#detail) Earning 30 day
+              template(#default) {{ roundToDecimals(territoryUserData?.userSpecificStakingData?.totalUserRewardPerThirtyDays, 4) }}
+
+        Card(flex-grow="1")
+          HList( justify="between")
+            TitleDetail(icon="ixt")
+              template(#detail) Total Rewards
+              template(#default) {{ roundToDecimals(territoryUserData?.userSpecificStakingData?.totalUserReward, 4) }}
+            ButtonGlitch(btn="~ primary-outline-cut" @click="claimAllRewards" :text="$t('general.claim')")
 
 
 
-  HList(space-x="12")
+  HList(space-x="3")
     ButtonTerritories(v-for="section in sections" :key="section"  :label="section" :isSelected="activeSection == section" @click="activeSection = section")
 
   PageSection(:section="`content.${activeSection}`")
 
-  HList(z="999" space-x="6")
-    OptionDropDown(:items="sizeList" :left="true")
-      template(#selectedName) 
-        div() {{sizeSort}}
+    HList(z="999" space-x="6")
+      OptionDropDown(:items="sizeList" :left="true")
+        template(#selectedName) 
+          div() {{sizeSort}}
 
-      template(#item="{item}")
-        OptionRowSelect(:selected="sizeSort == item" @click="sizeSort = item" capitalize="~") {{ item }}
+        template(#item="{item}")
+          OptionRowSelect(:selected="sizeSort == item" @click="sizeSort = item" capitalize="~") {{ item }}
 
-    OptionDropDown(:items="stakeList" :left="true")
-      template(#selectedName) 
-        div() {{stakeSort}}
+      OptionDropDown(:items="stakeList" :left="true")
+        template(#selectedName) 
+          div() {{stakeSort}}
 
-      template(#item="{item}")
-        OptionRowSelect(:selected="stakeSort == item" @click="stakeSort = item" capitalize="~") {{ item }}
+        template(#item="{item}")
+          OptionRowSelect(:selected="stakeSort == item" @click="stakeSort = item" capitalize="~") {{ item }}
 
 
-  HList()
-    div(grid="~ cols-3 gap-6" flex-grow="1")
-      TerritoryItem(v-for="data in filteredUserTerritories" :data="data" :staked="stakeSort == 'staked'" v-if="filteredUserTerritories?.length > 0")
-      Card(v-else flex-grow="1" items="center" font="bold")
-        template(#default)
-          div() {{ $t(`territories.noContent.${activeSection}`) }}
+    HList()
+      div(grid="~ cols-3 gap-6" flex-grow="1")
+        TerritoryItem(v-for="data in filteredUserTerritories" :data="data" :staked="stakeSort == 'staked'" v-if="filteredUserTerritories?.length > 0")
+        Card(v-else flex-grow="1" items="center" font="bold")
+          template(#default)
+            div() {{ $t(`territories.noContent.${activeSection}`) }}
 
 
 </template>

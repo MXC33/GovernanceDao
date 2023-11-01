@@ -1,5 +1,5 @@
 <template lang="pug">
-div(grid="~ cols-6 gap-6 ")
+div(grid="~ cols-6 gap-3" mb="8" px="6")
   ButtonGlitch(@click="navigateTo('/')" btn="~ form" text="Home" font="bold")
   ButtonGlitch(@click="navigateTo('/territories')" btn="~ form" text="Territories Staking" font="bold") 
 
