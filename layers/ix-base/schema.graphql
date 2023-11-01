@@ -497,6 +497,13 @@ type UserSpecificStakingData {
   totalUserReward: Float
   totalUserRewardPerDay: Float
   totalUserRewardPerThirtyDays: Float
+  currentWeekTickets: WeeklyTicketData
+  pastWeekTickets: [WeeklyTicketData]
+}
+
+type WeeklyTicketData {
+  week: Int
+  amount: Int
 }
 
 type Winnings {

@@ -1,6 +1,7 @@
 <template lang="pug">
 main(w="full" h="full" flex="~ col grow" min-h="100vh")
   Header(:auto-close="false")
+  ButtonNav()
 
   VList(flex-grow="1" justify="top")
     //- Used for teleports

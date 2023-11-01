@@ -57,11 +57,21 @@ fragment StakingData on StakingData {
     ...StakingItem
   }
 }
+fragment WeeklyTicketData on WeeklyTicketData {
+  week
+  amount
+}
 
 fragment UserSpecificStakingData on UserSpecificStakingData {
   totalUserReward
   totalUserRewardPerDay
   totalUserRewardPerThirtyDays
+  currentWeekTickets {
+    ...WeeklyTicketData
+  }
+  pastWeekTickets {
+    ...WeeklyTicketData
+  }
 }
 
 fragment TokenSpecificUserStakingData on TokenSpecificUserStakingData {

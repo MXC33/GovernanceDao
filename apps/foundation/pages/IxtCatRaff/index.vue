@@ -1,28 +1,35 @@
 <template lang="pug">
 Page()
-  ButtonNav() 
-
   PageSection(section="CatRaff" :primary="true")
     CardChartItem()
 
   PageSection(section="StakingContract")
-    div(grid="~ cols-2" space-x="6")
-      CatRaffInputItem(id="stake")
-      CatRaffInputItem(id="ticket")
-    div(grid="~ cols-2" space-x="6")
-      CatRaffStakingItem(id="withdraw")
-      CatRaffStakingItem(id="claim")
+    div(grid="~ md:cols-2 gap-6")
+      CatRaffStakeItem()
+      CatRaffOldTickets(:data="stakingData")
+
+    div(grid="~ md:cols-2 gap-6")
+      CatRaffWithdrawItem(:data="stakingData")
+
+      CatRaffClaimItem()
+        template(#detail)
+          div() Available:
+          TitleDetail(:icon="'ixt'")
+          div() {{totalPrize}}
+        template(#box)
+          div() {{totalPrize}}
+          TitleDetail(:icon="'ixt'")
 
 
   PageSection(section="PastWinnings")
     CatRaffWeekly(:data="weeklyData")
   PageSection(section="TreasuryPool")
-    CatRaffTreasury()
+    CatRaffTreasury(:staking-data="stakingData" :weekly-data="weeklyData")
   PageSection(section="PastPrizes")
-
+    CatRaffPastPrizes(:data="prizeData")
 
   PageSection(section="Accounts")
-    Card()
+    CatRaffAccounts(:data="accountData")
 
 </template>
 
@@ -37,9 +44,8 @@ const { data: accountData, execute: fetchCatRaffAccounts } =
 const { data: prizeData, execute: fetchCatRaffPrizes } = useCatRaffPrizes();
 const { data: weeklyData, execute: fetchCatRaffWeekly } = useCatRaffWeekly();
 
-// console.log('Cat Raff Data:', stakingData.value);
-// console.log('Cat Raff Accounts:', accountData.value);
-// console.log('Cat Raff Prizes:', prizeData.value);
+const totalPrize = computed(() => stakingData.value?.stakingItems[0]?.userStakingData?.totalReward)
+const stakedIXT = computed(() => stakingData.value?.stakingItems[0]?.userStakingData?.amountStaked)
 
 await Promise.all([
   fetchCatRaffData(),

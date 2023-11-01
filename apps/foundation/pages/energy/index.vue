@@ -1,7 +1,5 @@
 <template lang="pug">
 Page()
-  ButtonNav()
-
   PageSection(section="Staking" :primary="true")
     EnergyDashboard(:data="energyData" v-if="energyData")
 

@@ -1,7 +1,5 @@
 <template lang="pug">
 Page()
-  ButtonNav()
-
   PageSection(section="Rewards")
     HList(gap="3")
       Card()
