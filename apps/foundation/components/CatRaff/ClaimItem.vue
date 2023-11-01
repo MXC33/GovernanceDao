@@ -7,15 +7,13 @@ Card()
     HList(space-x="1")
       slot(name="detail")
 
-  HList()
-    CardDetail(flex-grow)
-      HList(class="items-center space-x-2" justify="between")
-        VList()
-          CardTitle() 
-            template(#detail) {{ $t(`ixtCatRaff.depositAmount.description`) }}
-          HList()
-            slot(name="box" flex-grow)
-        ButtonGlitch(btn="~ primary-outline-cut" @click="onClick" :text="'Claim'")
+  HList(w="full")
+    CardTitle() 
+      template(#detail) {{ $t(`ixtCatRaff.depositAmount.description`) }}
+    HList(w="full" justify="between")
+      HList()
+        slot(name="box")
+      ButtonGlitch(btn="~ primary-outline-cut" @click="onClick" :text="'Claim'")
 </template>
 
 <script lang="ts" setup>

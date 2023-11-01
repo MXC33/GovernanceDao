@@ -16,20 +16,20 @@ div(grid="~ cols-2" gap-6)
 
 
 
-  Card(flex-grow)
+  Card()
     CardTitle()
       template(#default) {{ $t(`ixtCatRaff.PoolStats.title`) }}
-    div(bg="black" flex-grow style="display: flex; align-items: center; justify-content: space-between;")
-      CardTitle(flex="~ row justify-between")
-        div()
-          TitleDetail(#detail) {{ $t(`ixtCatRaff.CurrentWeekDeposits.title`) }}
+
+    TitleDetail()
+      template(#detail)  {{ $t(`ixtCatRaff.CurrentWeekDeposits.title`) }}
+      template(#default)
         div(space-x="1")
           span {{ stakingData.userSpecificStakingData?.currentWeekTickets?.amount }} IXT
           span (${{ ixtToUSD(stakingData.userSpecificStakingData?.currentWeekTickets?.amount ?? 0) }})
-    HList(bg="black" flex-grow style="display: flex; align-items: center; justify-content: space-between;")
-      CardTitle()
-        TitleDetail(#detail) {{ $t(`ixtCatRaff.TotalWeekDeposits.title`) }}
-        div {{currentWeekDeposits}} IXT
+
+    TitleDetail()
+      template(#detail) {{ $t(`ixtCatRaff.TotalWeekDeposits.title`) }}
+      template(#default) {{currentWeekDeposits}} IXT
 </template>
 
 <script lang="ts" setup>

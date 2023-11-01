@@ -6,19 +6,13 @@ Page()
     CardChartItem()
 
   PageSection(section="StakingContract")
-    div(grid="~ cols-2" space-x="6")
+    div(grid="~ md:cols-2 gap-6")
       CatRaffStakeItem()
       CatRaffOldTickets(:data="stakingData")
 
-    div(grid="~ cols-2" space-x="6")
+    div(grid="~ md:cols-2 gap-6")
       CatRaffWithdrawItem(:data="stakingData")
-        template(#detail)
-          div() Available:
-          TitleDetail(:icon="'ixt'")
-          div() {{stakedIXT}}
-        template(#box)
-          div() {{stakedIXT}}
-          TitleDetail(:icon="'ixt'")
+
       CatRaffClaimItem()
         template(#detail)
           div() Available:
