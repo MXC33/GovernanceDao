@@ -56,7 +56,7 @@ const { ixtBalance } = useCurrencyData()
 const stakeAmount = ref(0)
 const isAgreed = ref(false)
 
-const emit = defineEmits(["close"])
+const emit = defineEmits(["close", "stake"])
 
 defineProps<{
   pool?: StakingDataFragment,
@@ -64,7 +64,7 @@ defineProps<{
 }>()
 
 const onClickStake = () => {
-  emit("close")
+  emit("stake", stakeAmount.value)
 }
 
 

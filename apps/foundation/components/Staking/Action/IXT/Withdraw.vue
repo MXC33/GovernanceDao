@@ -41,14 +41,14 @@ const isAgreed = ref(false)
 
 const userStake = computed(() => getUserStakeInPool('ixt', data))
 
-const emit = defineEmits(["close"])
+const emit = defineEmits(["close", "withdraw"])
 
 const { data } = defineProps<{
   data: StakingDataFragment,
 }>()
 
 const onClickStake = () => {
-  emit("close")
+  emit("withdraw", withdrawAmount.value)
 }
 
 

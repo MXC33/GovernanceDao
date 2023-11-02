@@ -7,7 +7,7 @@ PopupBase(@close="$emit('close')")
         template(#header) Amount
         template(#default)
           InputText(v-model.number="stakeAmount" placeholder="Enter amount" type="number" :maxAmount="sharesStakable")
-            template(#suffix) {{ $t('general.share', stakeAmount)  }} 
+            template(#suffix) {{ $t('general.amount', stakeAmount)  }} 
 
         template(#detail) Total Balance: {{ sharesStakable }}
         template(#action)
@@ -17,6 +17,11 @@ PopupBase(@close="$emit('close')")
         template(#header) Energy
         template(#default) 
           InputReadonly() {{item.token.tokenInfo?.title}}
+
+      InputGroup()
+        template(#header) Amelia Contribution
+        template(#default) 
+          InputReadonly() 10 %
 
       InputGroup()
         template(#header) ToC

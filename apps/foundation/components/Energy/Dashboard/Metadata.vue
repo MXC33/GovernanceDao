@@ -12,7 +12,7 @@ div(grid="~ cols-3 gap-6")
     template(#detail) {{ $t('energy.IXTUnlocked.title') }}
     template(#default) {{ data.currentEpochPool?.toLocaleString() }}
 
-  TitleDetail(icon="energy")
+  TitleDetail(icon="ixt")
     template(#detail) {{ $t('energy.YourStake.title') }}
     template(#default) {{ yourStake }}
 
