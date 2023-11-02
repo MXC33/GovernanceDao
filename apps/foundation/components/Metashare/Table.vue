@@ -1,10 +1,10 @@
 <template lang="pug">
-Card()
-  SimpleTable(:rows="rows" :columns="columns" mx="-6" mt="-6" b="solid red 1px")
+Card(overflow-x="auto")
+  SimpleTable(:rows="rows" :columns="columns" mx="-6" mt="-6" my="-6")
     template(#col-asset="{index}")
       HList(space-x="3" items="center")
         img(:src="'/assets/metashare/' + data.stakingItems[index]?.token.tokenInfo?.tier + '.svg'" w="12")
-        div(class="lg:block hidden") {{ data.stakingItems[index]?.token.tokenInfo?.title }}
+        div() {{ data.stakingItems[index]?.token.tokenInfo?.title }}
 
     template(#footer-col-asset) 
       span( text="gray-300") Total
@@ -19,17 +19,21 @@ Card()
         div {{ roundToDecimals(totalThirty) }}
         Icon(icon="ixt")
 
-  HList(bg="black" p="x-6 y-3" items="center" mx="-6" space-x="3" mb="!-6" mt="!0")
-    h3(text="subheading" flex-grow="1") Total Rewards
-    div(text="subheading") {{ roundToDecimals(data.userSpecificStakingData?.totalUserReward) }}
-    Icon(icon="ixt")
-    ButtonGlitch(btn="~ primary-outline-cut" @click="claimAll" :text="$t('general.claimAll')")
+
+  template(#detailBottom)
+    HList(p="x-6 y-3" items="center" mx="-6" space-x="3" mb="!-6" )
+      h3(text="subheading" flex-grow="1") Total Rewards
+      div(text="subheading") {{ roundToDecimals(data.userSpecificStakingData?.totalUserReward) }}
+      Icon(icon="ixt")
+      ButtonGlitch(btn="~ primary-outline-cut" @click="claimAll" :text="$t('general.claimAll')")
 
 </template>
 
 <script lang="ts" setup>
 import type { StakingDataFragment } from '#gql';
 import type { SimpleTableRow, SimpleTableColumn } from '@ix/base/composables/useSimpleTable';
+
+const { isMobile } = useDevice()
 
 const { claimAllMetashareReward } = useMetashareStakingContract()
 
