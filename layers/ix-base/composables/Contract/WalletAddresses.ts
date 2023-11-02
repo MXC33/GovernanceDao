@@ -2,6 +2,16 @@ import type { Chain } from "./useWallet"
 
 type ContractAddress = Partial<Record<Chain, string>>
 
+export const MATICandIXTStakingAddress: ContractAddress = {
+  mumbai: 'does not exist',
+  polygon: '0xc4c3956732A5d8EdA6C0163C174e413cB1CaD1dc',
+}
+
+export const USDTandIXTStakingAddress: ContractAddress = {
+  mumbai: 'does not exist',
+  polygon: '0x0B8738735c72BE95Fe5f5636B1807CAB8C9DddD8',
+}
+
 export const catRaffStakingAddress: ContractAddress = {
   mumbai: 'does not exist',
   polygon: '0x773895915168137Be0C8dCbd6fd7E44e7cc9d3dB',

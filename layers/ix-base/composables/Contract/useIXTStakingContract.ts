@@ -75,7 +75,17 @@ export const useIXTStakingContract = <T extends ContractInterface<T> & IXTStakin
 
       return contract.withdraw(amount)
     }, {
-      approve: () => allowanceCheck(amount, contractAddress),
+      onSuccess: async () => await Promise.all([refreshStakingData(), refreshIXT()])
+    })
+
+  const claimIXT = () =>
+    createTransaction((contract) => {
+      const address = walletAdress.value
+      if (!address)
+        return undefined
+
+      return contract.getReward()
+    }, {
       onSuccess: async () => await Promise.all([refreshStakingData(), refreshIXT()])
     })
 
@@ -83,7 +93,8 @@ export const useIXTStakingContract = <T extends ContractInterface<T> & IXTStakin
 
   return {
     stakeIXT,
-    unstakeIXT
+    unstakeIXT,
+    claimIXT
   }
 }
 

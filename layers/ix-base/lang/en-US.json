@@ -26,6 +26,8 @@
     "share": "Share | Shares",
     "rewards": "Rewards",
     "estimated": "Estimated",
+    "uniswap-matic": "Uniswap Matic",
+    "uniswap-usdt": "Uniswap Usdt",
     "navigation": {
       "terminal": "Terminal",
       "inventory": "Inventory",

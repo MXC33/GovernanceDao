@@ -24,7 +24,7 @@ ClientOnly()
       ButtonGlitch(btn="~ primary-outline-cut" @click="stakeEnergyActive = true" :text="$t(`energy.stakeEnergy.${id}`)")
 
     template(#detailBottom)
-      StakingRewards(:pool="data" v-if="data" @withdraw="claimReward")
+      StakingRewards(:pool="data" v-if="data" @claim="claimReward")
 
   Teleport(to="#overlays")
     StakingActionEnergyStakeEnergy(@close="stakeEnergyActive = false" v-if="stakeEnergyActive && item[0]" :item="item[0]" :id="id")

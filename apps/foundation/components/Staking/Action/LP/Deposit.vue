@@ -1,17 +1,17 @@
 <template lang="pug">
 PopupBase(@close="$emit('close')")
-  template(#header) Stake IXT
+  template(#header) Stake {{$t(`general.${suffix}`)}}
   template(#default) 
     VList(space-y="6")
       InputGroup()
         template(#header) Stake amount
         template(#default)
-          InputText(v-model.number="stakeAmount" placeholder="Enter amount" type="number" :max-amount="ixtBalance")
-            template(#suffix) IXT
+          InputText(v-model.number="stakeAmount" placeholder="Enter amount" type="number" :max-amount="tokenBalance")
+            template(#suffix) {{$t(`general.${suffix}`)}}
 
-        template(#detail) Total Balance: {{ roundToDecimals(ixtBalance) }}
+        template(#detail) Total Balance: {{ roundToDecimals(tokenBalance) }}
         template(#action)
-          ButtonAnimated(btn="~ secondary-outline-cut sm" cut="s-sm" @click="stakeAmount = ixtBalance") Max
+          ButtonAnimated(btn="~ secondary-outline-cut sm" cut="s-sm" @click="stakeAmount = tokenBalance") Max
 
       InputGroup()
         template(#header) Locking Period
@@ -35,16 +35,16 @@ PopupBase(@close="$emit('close')")
       InputSummaryRow(:primary="true")
         template(#name) Wallet balance
         template(#value) 
-          GlitchText(:text="String(roundToDecimals(ixtBalance - stakeAmount,4))" suffix=" IXT")
+          GlitchText(:text="String(roundToDecimals(tokenBalance - stakeAmount,4))")
 
       InputSummaryRow(:primary="true")
         template(#name) Stake amount
         template(#value) 
-          StakingActionTotalAmount(:amount="stakeAmount" i18n="stake")
+          StakingActionTotalAmount(:amount="stakeAmount" :i18n="suffix")
 
   template(#buttons)
     Disabler(:disabled="!isAgreed || stakeAmount == 0")
-      ButtonInteractive(@click="onClickStake" text="Withdraw")
+      ButtonInteractive(@click="onClickStake" text="Stake")
 
 </template>
 
@@ -52,16 +52,21 @@ PopupBase(@close="$emit('close')")
 import type { StakingDataFragment } from '#gql';
 import { formattedMonths } from '@ix/base/composables/Utils/useHelpers';
 
-const { ixtBalance } = useCurrencyData()
+const { pool } = defineProps<{
+  pool?: StakingDataFragment,
+  month: number
+}>()
+
 const stakeAmount = ref(0)
 const isAgreed = ref(false)
 
 const emit = defineEmits(["close", "stake"])
 
-defineProps<{
-  pool?: StakingDataFragment,
-  month: number
-}>()
+const suffix = computed(() => pool?.stakingItems[0]?.token.tokenInfo?.type ?? "")
+
+const tokenBalance = computed(() => pool?.stakingItems[0]?.userStakingData?.balanceOfToken ?? 0)
+
+
 
 const onClickStake = () => {
   emit("stake", stakeAmount.value)
