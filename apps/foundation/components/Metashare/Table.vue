@@ -1,6 +1,6 @@
 <template lang="pug">
 Card()
-  SimpleTable(:rows="rows" :columns="columns" mx="-6" mt="-6")
+  SimpleTable(:rows="rows" :columns="columns" mx="-6" mt="-6" b="solid red 1px")
     template(#col-asset="{index}")
       HList(space-x="3" items="center")
         img(:src="'/assets/metashare/' + data.stakingItems[index]?.token.tokenInfo?.tier + '.svg'" w="12")

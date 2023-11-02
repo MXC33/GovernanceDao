@@ -1,15 +1,14 @@
 <template lang="pug">
 div(grid="~ cols-2 gap-6")
-  Card() 
-    CardTitle()
+  Card()
+    CardTitle(flex-grow)
       template(#default) {{$t("energy.IXTPoolNextEpoch") }}
       template(#subtitle) {{$t("general.estimated") }}
 
 
-    VList()
-      TitleDetail(icon="ixt")
-        template(#detail) {{$t("energy.TotalPoolNextEpoch") }}
-        template(#default) {{data.nextEpochPool?.toLocaleString()}}
+    TitleDetail(icon="ixt")
+      template(#detail) {{$t("energy.TotalPoolNextEpoch") }}
+      template(#default) {{data.nextEpochPool?.toLocaleString()}}
 
   Card()
     CardTitle()
@@ -19,7 +18,7 @@ div(grid="~ cols-2 gap-6")
     TitleDetail(icon="ixt")
       template(#detail) 99.94%
       template(#default) {{data.nextEpochPool?.toLocaleString()}}
-        
+          
 </template>
   
 <script lang="ts" setup>
