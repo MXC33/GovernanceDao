@@ -121,6 +121,23 @@ export const useStakingPools = () => {
     return staked?.userStakingData?.amountStaked ?? 0
   }
 
+  const timeLeftLockPeriod = (pool: StakingDataFragment) => {
+    if (!pool?.stakingItems || !pool.stakingItems[0])
+      return 0
+
+    return (pool?.lockPeriod ?? 0) + (pool.stakingItems[0]?.userStakingData?.stakedAt ?? 0) * 1000
+  }
+
+  const isUnderLockPeriod = (pool: StakingDataFragment) => {
+    if (!pool?.stakingItems || !pool.stakingItems[0])
+      return false
+
+    const timeLeft = timeLeftLockPeriod(pool)
+    console.log("timeLEft", timeLeft)
+
+    return timeLeft > Date.now()
+  }
+
   return {
     totalIXTRewards,
     totalUserRewards,
@@ -130,6 +147,8 @@ export const useStakingPools = () => {
     getTotalSupply,
     getCirculatingSupply,
     getUserStakeInPool,
-    getFirstUserStakeInPool
+    getFirstUserStakeInPool,
+    isUnderLockPeriod,
+    timeLeftLockPeriod
   }
 }

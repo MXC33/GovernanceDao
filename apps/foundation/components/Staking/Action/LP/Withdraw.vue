@@ -31,6 +31,7 @@ PopupBase(@close="$emit('close')")
 <script lang="ts" setup>
 import type { StakingDataFragment } from '#gql';
 
+
 const withdrawAmount = ref(0)
 
 const userStake = computed(() => pool?.stakingItems[0]?.userStakingData?.amountStaked ?? 0)

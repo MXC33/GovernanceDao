@@ -44,7 +44,7 @@ PopupBase(@close="$emit('close')")
 
   template(#buttons)
     Disabler(:disabled="!isAgreed || stakeAmount == 0")
-      ButtonInteractive(@click="onClickStake" text="Withdraw")
+      ButtonInteractive(@click="onClickStake" text="Stake")
 
 </template>
 

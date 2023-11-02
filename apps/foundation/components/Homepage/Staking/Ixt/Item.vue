@@ -1,6 +1,6 @@
 <template lang="pug">
 ClientOnly()
-  StakingItem(@deposit="depositActive = true" @withdraw="withdrawActive = true" :can-withdraw="userStake > 0" :can-deposit="ixtBalance > 0")
+  StakingItem(@deposit="depositActive = true" @withdraw="withdrawActive = true" :can-withdraw="userStake > 0 && lockPeriod" :can-deposit="ixtBalance > 0")
     template(#title) {{ month }} {{ $t('general.month', month) }}
     template(#metadata)
       HomepageStakingIxtMetadata(:pool="pool")
@@ -29,9 +29,13 @@ const depositActive = ref(false)
 const withdrawActive = ref(false)
 
 const { stakeIXT, unstakeIXT, claimIXT } = useIXTStakingContract(stakePeriodToStakingId(month))
-const { getUserStakeInPool } = useStakingPools()
+const { getUserStakeInPool, isUnderLockPeriod } = useStakingPools()
 const userStake = computed(() => getUserStakeInPool('ixt', pool))
 const { ixtBalance } = useCurrencyData()
+
+const lockPeriod = computed(() =>
+  isUnderLockPeriod(pool)
+)
 
 const onClickStake = (amount: number) => {
   stakeIXT(amount)

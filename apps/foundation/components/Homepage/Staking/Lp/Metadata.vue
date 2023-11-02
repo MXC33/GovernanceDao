@@ -10,16 +10,16 @@ div(grid="~ cols-3 gap-6")
     template(#default) {{ roundToDecimals(userStakingData?.amountStaked, 2) }}
 
   TitleDetail()
-    template(#detail) {{ $t('index.fiveDayRoi') }}
-    template(#default) 
-
-  TitleDetail()
     template(#detail) {{ $t('index.lpTokens') }}
     template(#default) {{ roundToDecimals(userStakingData?.balanceOfToken, 2) }}
 
   TitleDetail()
     template(#detail) {{ $t('index.apy') }}
     template(#default) 26%
+
+  TitleDetail()
+    template(#detail) {{ $t('general.lockPeriodEnds') }}
+    template(#default) {{lockPeriodEnds}}
 
   </template>
 
@@ -31,9 +31,23 @@ const { item } = defineProps<{
   item: StakingDataFragment,
   type: 'usdt' | 'matic'
 }>()
-
 const userStakingData = computed(() => item.stakingItems && item.stakingItems[0]?.userStakingData)
-console.log("USER", item.stakingItems)
+
+const stakedAt = computed(() => item.stakingItems?.[0]?.userStakingData?.stakedAt ?? 0)
+const lockPeriod = computed(() => item.lockPeriod ?? 0)
+const currentTime = useTimestamp()
+
+const lockPeriodEnds = computed(() => {
+  const endTime = lockPeriod.value + stakedAt.value
+
+  if (!endTime)
+    return 0
+
+  const { months, days, hours, minutes, seconds } = useIntervalWithDays(currentTime.value, endTime * 1000)
+  const optMonth = months && months > 0 ? `${months}Mth` : ''
+  return `${optMonth} ${days}D ${hours}H ${minutes}M ${seconds}S`
+})
+
 
 function formatNumber(value: number): string {
   // If value is 1 million or greater

@@ -1,6 +1,6 @@
 <template lang="pug">
 ClientOnly()
-  StakingItem(:can-withdraw="stakeBalance > 0" :can-deposit="tokenBalance > 0" @deposit="depositActive = true" @withdraw="withdrawActive = true")
+  StakingItem(:can-withdraw="stakeBalance > 0 && lockPeriod" :can-deposit="tokenBalance > 0" @deposit="depositActive = true" @withdraw="withdrawActive = true")
     template(#title) {{ $t(`index.lpStaking.${type}.title`) }}
     template(#subtitle) {{ $t(`index.lpStaking.provide`) }}
     template(#icon)
@@ -23,13 +23,17 @@ import { type StakingDataFragment } from '~/.nuxt/gql/default';
 
 import UsdtIXT_Icon from '~/assets/images/usdt_ix.svg'
 import MaticIXT_Icon from '~/assets/images/matic_ix.svg'
-const { getFirstUserStakeInPool } = useStakingPools()
+const { getFirstUserStakeInPool, isUnderLockPeriod } = useStakingPools()
 
 const { claimMaticLPIXT, stakeMaticLPToken, unstakeMaticLPToken } = useMaticLPStakingContract()
 const { claimUsdtLPIXT, stakeUsdtLPToken, unstakeUsdtLPToken } = useUsdtLPStakingContract()
 
 const stakeBalance = computed(() =>
   getFirstUserStakeInPool(pool)
+)
+
+const lockPeriod = computed(() =>
+  isUnderLockPeriod(pool)
 )
 
 const depositActive = ref(false)
