@@ -11,8 +11,6 @@ ClientOnly()
 
       EnergyDashboardMetadata(:data="data")
 
-      template(#detailBottom)
-        ButtonGlitch(btn="~ primary-outline-cut" @click="$emit('withdraw')" :text="$t('energy.ChooseStakingPool')")
 
 </template>
   

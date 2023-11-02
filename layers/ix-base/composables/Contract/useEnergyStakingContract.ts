@@ -73,10 +73,10 @@ export const useEnergyStakingContract = <T extends ContractInterface<T> & Energy
     })
   }
 
-  const claimIXTReward = (item: StakingItemFragment) => {
+  const claimIXTReward = () => {
     return createTransaction((contract) => {
       const address = walletAdress.value
-      if (!address || !item.token.tokenId)
+      if (!address)
         return undefined
 
       return contract.claim(false)

@@ -28,7 +28,7 @@ PopupBase(@close="$emit('close')")
 
   template(#buttons)
     Disabler(:disabled="withdrawAmount == 0")
-      ButtonInteractive(@click="onClickStake" text="Stake")
+      ButtonInteractive(@click="unstakeRequest" text="Unstake" :loading="isLoading")
 
 </template>
 
@@ -38,25 +38,29 @@ import type { UserStakingItem } from '@ix/base/composables/Contract/useStakingDa
 
 const { unstakeIXT } = useEnergyStakingContract()
 
-const withdrawAmount = ref(0)
-const { getUserStakeInPool } = useStakingPools()
-const isAgreed = ref(false)
-
-const userStake = 1
-
-const emit = defineEmits(["close"])
-
 const { item } = defineProps<{
   item: StakingItemFragment,
 }>()
+const { loading: isLoading, execute: unstakeRequest } = useContractRequest(async () => {
+  return onClickUnstake()
+})
 
-const onClickStake = () => {
+const withdrawAmount = ref(0)
+const isAgreed = ref(false)
+
+const userStake = computed(() => item.userStakingData?.amountStaked ?? 0)
+
+const emit = defineEmits(["close"])
+
+
+
+const onClickUnstake = async () => {
   const stakingItem: UserStakingItem = {
     token: item.token,
     amount: withdrawAmount.value
   }
 
-  unstakeIXT(stakingItem)
+  await unstakeIXT(stakingItem)
 }
 
 
