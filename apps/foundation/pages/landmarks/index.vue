@@ -23,8 +23,9 @@ Page()
     div(v-else) No Landmarks Available
 
 
+
   PageSection(section="ExploreLandmarks")
-    div(grid="~ cols-3 gap-6" z="999")
+    div(grid="~ cols-3 gap-6" z="20")
       InputsSearchbar( @input="search")
       OptionDropDown(:items="tierList")
         template(#selectedName) 
@@ -38,7 +39,7 @@ Page()
           div() {{ spaceBetween(sort ?? "") }}
 
         template(#item="{item}")
-          OptionRowSelect(:selected="sort == item" @click="sort = item") {{ spaceBetween(item) }}
+          OptionRowSelect(:selected="sort == item" @click="sort = item" ) {{ spaceBetween(item) }}
 
   LandmarkItem(:data="data")
 </template>
