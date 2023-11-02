@@ -7,7 +7,7 @@ HList(space-x="10")
 
   TitleDetail(icon="ixt")
     template(#detail) {{ $t('index.yourStake') }}
-    template(#default) {{ amountStaked }}
+    template(#default) {{ amountStaked ?? 0}}
 
   TitleDetail(icon="ixt")
     template(#detail) {{ $t('index.poolSize') }}

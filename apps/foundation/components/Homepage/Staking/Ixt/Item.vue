@@ -19,6 +19,8 @@ import type { StakingDataFragment } from '#gql';
 const depositActive = ref(false)
 const withdrawActive = ref(false)
 
+
+
 const { getUserStakeInPool } = useStakingPools()
 const userStake = computed(() => getUserStakeInPool('ixt', pool))
 
