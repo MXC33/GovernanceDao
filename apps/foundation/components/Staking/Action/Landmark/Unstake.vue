@@ -42,6 +42,7 @@ PopupBase(@close="$emit('close')")
 
 <script lang="ts" setup>
 import type { StakingItemFragment } from '#gql';
+import type { UserStakingItem } from '@ix/base/composables/Contract/useStakingData';
 const { unstakeLandmark } = useLandmarkStakingContract()
 
 const unstakeAmount = ref(0)
@@ -55,7 +56,11 @@ const { item } = defineProps<{
 const { sharesStaked } = useStakingHelper(item)
 
 const onClickUnstake = () => {
-  unstakeLandmark(item)
+  const stakingItem: UserStakingItem = {
+    token: item.token,
+    amount: unstakeAmount.value
+  }
+  unstakeLandmark(stakingItem)
 }
 
 

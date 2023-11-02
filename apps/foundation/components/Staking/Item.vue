@@ -17,7 +17,8 @@ Card()
       Disabler(:disabled="!canWithdraw")
         ButtonGlitch(btn="~ primary-outline-cut" @click="$emit('withdraw')" :text="$t('index.withdrawBtn')")
 
-      ButtonGlitch(btn="~ primary-outline-cut" @click="$emit('deposit')" :text="$t('index.depositBtn')")
+      Disabler(:disabled="!canDeposit")
+        ButtonGlitch(btn="~ primary-outline-cut" @click="$emit('deposit')" :text="$t('index.depositBtn')")
 
   template(#detailBottom)
     slot(name="detail")
@@ -30,5 +31,6 @@ defineEmits(['withdraw', 'deposit'])
 
 defineProps<{
   canWithdraw?: boolean
+  canDeposit?: boolean
 }>()
 </script>

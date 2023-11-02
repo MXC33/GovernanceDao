@@ -78,9 +78,14 @@ export const useStakingPools = () => {
 
 
   const getTotalSupply = async () => {
-    const response = await $fetch("https://api.coingecko.com/api/v3/coins/ix-token")
-    //@ts-ignore
-    return Number(response.market_data.total_supply)
+    try {
+      const response = await $fetch("https://api.coingecko.com/api/v3/coins/ix-token")
+      //@ts-ignore
+      return Number(response.market_data.total_supply)
+
+    } catch {
+      return 0
+    }
   }
 
   const getCirculatingSupply = async () => {

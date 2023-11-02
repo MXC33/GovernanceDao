@@ -1,6 +1,6 @@
 <template lang="pug">
 PopupBase(@close="$emit('close')")
-  template(#header) Stake Landmark
+  template(#header) Stake Metashare
   template(#default) 
     VList(space-y="6")
       InputGroup()
@@ -14,7 +14,7 @@ PopupBase(@close="$emit('close')")
           ButtonAnimated(btn="~ secondary-outline-cut sm" cut="s-sm" @click="stakeAmount = sharesStakable") Max
 
       InputGroup()
-        template(#header) Landmark
+        template(#header) Metashare
         template(#default) 
           InputReadonly() {{item.token.tokenInfo?.title}}
 
@@ -26,7 +26,7 @@ PopupBase(@close="$emit('close')")
   template(#footer)
     VList()
       InputSummaryRow()
-        template(#name) Landmark
+        template(#name) Metashare
         template(#value) {{item.token.tokenInfo?.title}}
 
       InputSummaryRow(:primary="true")
@@ -42,13 +42,13 @@ PopupBase(@close="$emit('close')")
 
 <script lang="ts" setup>
 import type { StakingItemFragment } from '#gql';
-import type { UserStakingItem } from '@ix/base/composables/Contract/useStakingData';
+import type { UserStakingItem } from 'composables/useStakingPools';
 
 const stakeAmount = ref(0)
 const isAgreed = ref(false)
 
 const emit = defineEmits(["close"])
-const { stakeLandmark } = useLandmarkStakingContract()
+const { stakeMetashare } = useMetashareStakingContract()
 
 const { item } = defineProps<{
   item: StakingItemFragment
@@ -61,7 +61,7 @@ const onClickStake = () => {
     token: item.token,
     amount: stakeAmount.value
   }
-  stakeLandmark(stakingItem)
+  stakeMetashare(stakingItem)
 }
 
 

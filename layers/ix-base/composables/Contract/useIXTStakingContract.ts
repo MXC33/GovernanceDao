@@ -3,8 +3,23 @@ import { ContractContext as IXTStakingContract } from '~/composables/Contract/Ab
 import IXTStakingABI from "~/composables/Contract/Abis/IXTStaking.json"
 import { oneMonthIXTStakingAddress, threeMonthIXTStakingAddress, sixMonthIXTStakingAddress, twelveMonthIXTStakingAddress } from '@ix/base/composables/Contract/WalletAddresses'
 import { ContractInterface } from '@ix/base/composables/Utils/defineContract'
-import { StakingId } from '.nuxt/gql/default'
+import { StakingId } from '~/.nuxt/gql/default'
 
+
+export const stakePeriodToStakingId = (period: number) => {
+  switch (period) {
+    case 1:
+      return StakingId.IxtOneMonth
+    case 3:
+      return StakingId.IxtThreeMonths
+    case 6:
+      return StakingId.IxtSixMonths
+    case 12:
+      return StakingId.IxtTwelveMonths
+    default:
+      return StakingId.IxtOneMonth
+  }
+}
 
 const getContractAddressFromStakingId = (stakingId: StakingId) => {
   switch (stakingId) {
@@ -52,16 +67,45 @@ export const useIXTStakingContract = <T extends ContractInterface<T> & IXTStakin
       onSuccess: async () => await Promise.all([refreshStakingData(), refreshIXT()])
     })
 
+  const unstakeIXT = (amount: number) =>
+    createTransaction((contract) => {
+      const address = walletAdress.value
+      if (!address || !amount)
+        return undefined
+
+      return contract.withdraw(amount)
+    }, {
+      onSuccess: async () => await Promise.all([refreshStakingData(), refreshIXT()])
+    })
+
+  const claimIXT = () =>
+    createTransaction((contract) => {
+      const address = walletAdress.value
+      if (!address)
+        return undefined
+
+      return contract.getReward()
+    }, {
+      onSuccess: async () => await Promise.all([refreshStakingData(), refreshIXT()])
+    })
+
 
 
   return {
     stakeIXT,
+    unstakeIXT,
+    claimIXT
   }
 }
 
 export const stakeIXT = (stakingId: StakingId, amount: number) => {
   const stakingContract = useIXTStakingContract(stakingId)
   return stakingContract.stakeIXT(amount)
+}
+
+export const unstakeIXT = (stakingId: StakingId, amount: number) => {
+  const stakingContract = useIXTStakingContract(stakingId)
+  return stakingContract.unstakeIXT(amount)
 }
 
 export const getAPY = (rewardRate: number, totalSupply: number) => {

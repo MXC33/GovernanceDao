@@ -1,22 +1,27 @@
 <template lang="pug">
 PopupBase(@close="$emit('close')")
-  template(#header) Stake Landmark
+  template(#header) Stake Energy
   template(#default) 
     VList(space-y="6")
       InputGroup()
         template(#header) Amount
         template(#default)
           InputText(v-model.number="stakeAmount" placeholder="Enter amount" type="number" :maxAmount="sharesStakable")
-            template(#suffix) {{ $t('general.share', stakeAmount)  }} 
+            template(#suffix) {{ $t('general.amount', stakeAmount)  }} 
 
         template(#detail) Total Balance: {{ sharesStakable }}
         template(#action)
           ButtonAnimated(btn="~ secondary-outline-cut sm" cut="s-sm" @click="stakeAmount = sharesStakable") Max
 
       InputGroup()
-        template(#header) Landmark
+        template(#header) Energy
         template(#default) 
           InputReadonly() {{item.token.tokenInfo?.title}}
+
+      InputGroup()
+        template(#header) Amelia Contribution
+        template(#default) 
+          InputReadonly() 10 %
 
       InputGroup()
         template(#header) ToC
@@ -26,7 +31,7 @@ PopupBase(@close="$emit('close')")
   template(#footer)
     VList()
       InputSummaryRow()
-        template(#name) Landmark
+        template(#name) Energy
         template(#value) {{item.token.tokenInfo?.title}}
 
       InputSummaryRow(:primary="true")
@@ -42,16 +47,17 @@ PopupBase(@close="$emit('close')")
 
 <script lang="ts" setup>
 import type { StakingItemFragment } from '#gql';
-import type { UserStakingItem } from '@ix/base/composables/Contract/useStakingData';
+import type { UserStakingItem } from 'composables/useStakingPools';
 
 const stakeAmount = ref(0)
 const isAgreed = ref(false)
 
 const emit = defineEmits(["close"])
-const { stakeLandmark } = useLandmarkStakingContract()
+const { stakeEnergy, stakeAmeliaEnergy } = useEnergyStakingContract()
 
-const { item } = defineProps<{
+const { item, id } = defineProps<{
   item: StakingItemFragment
+  id: string
 }>()
 
 const { sharesStakable } = useStakingHelper(item)
@@ -61,7 +67,12 @@ const onClickStake = () => {
     token: item.token,
     amount: stakeAmount.value
   }
-  stakeLandmark(stakingItem)
+
+  console.log("energy id", id)
+  if (id == 'amelia')
+    stakeAmeliaEnergy(stakingItem)
+  if (id == 'energy')
+    stakeEnergy(stakingItem)
 }
 
 

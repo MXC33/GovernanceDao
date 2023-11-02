@@ -14,6 +14,11 @@ PopupBase(@close="$emit('close')")
         template(#action)
           ButtonAnimated(btn="~ secondary-outline-cut sm" cut="s-sm" @click="withdrawAmount = userStake") Max
 
+      InputGroup()
+        template(#header) ToC 
+        template(#default)
+          StakingActionAgreement(v-model="isAgreed")
+
   template(#footer)
     VList()
       InputSummaryRow(:primary="true")
@@ -23,27 +28,39 @@ PopupBase(@close="$emit('close')")
 
   template(#buttons)
     Disabler(:disabled="withdrawAmount == 0")
-      ButtonInteractive(@click="onClickStake" text="Stake")
+      ButtonInteractive(@click="unstakeRequest" text="Unstake" :loading="isLoading")
 
 </template>
 
 <script lang="ts" setup>
-import type { StakingDataFragment } from '#gql';
+import type { StakingDataFragment, StakingItemFragment } from '#gql';
+import type { UserStakingItem } from '@ix/base/composables/Contract/useStakingData';
+
+const { unstakeIXT } = useEnergyStakingContract()
+
+const { item } = defineProps<{
+  item: StakingItemFragment,
+}>()
+const { loading: isLoading, execute: unstakeRequest } = useContractRequest(async () => {
+  return onClickUnstake()
+})
 
 const withdrawAmount = ref(0)
-const { getUserStakeInPool } = useStakingPools()
 const isAgreed = ref(false)
 
-const userStake = computed(() => getUserStakeInPool('ixt', pool))
+const userStake = computed(() => item.userStakingData?.amountStaked ?? 0)
 
-const emit = defineEmits(["close", "withdraw"])
+const emit = defineEmits(["close"])
 
-const { pool } = defineProps<{
-  pool: StakingDataFragment,
-}>()
 
-const onClickStake = () => {
-  emit("withdraw", withdrawAmount.value)
+
+const onClickUnstake = async () => {
+  const stakingItem: UserStakingItem = {
+    token: item.token,
+    amount: withdrawAmount.value
+  }
+
+  await unstakeIXT(stakingItem)
 }
 
 

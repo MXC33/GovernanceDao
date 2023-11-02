@@ -415,6 +415,12 @@
     }
   },
   "energy": {
+    "stakeIxt": "Stake IXT",
+    "stakeEnergy": {
+      "amelia": "Stake Energy Amelia",
+      "energy": "Stake Energy"
+    },
+    "unstakeIxt": "Unstake IXT",
     "Staking": {
       "title": "ENERGY STAKING",
       "description": "Stake Energy Tokens to receive IXT or Gravity Grade Packs with PIX Contents. You can also stake Energy in the sustainability pool to donate a percentage of your yield to the Amelia Foundation."
@@ -470,7 +476,7 @@
     },
     "amelia": {
       "title": "Earn and Give",
-      "description": "Stake Energy in the Sustainability Pool and give part of your earnings to the Amelia Foundation. You decide on the specific percentage given from your IXT Rewards."
+      "description": "Stake Energy in the Sustainability Pool and give part of your earnings to the Amelia Foundation. 10 percent of your IXT Rewards are sent to contribute to saving Planet Earth."
     },
     "EnergyForIXT": {
       "title": "ENERGY FOR IXT",

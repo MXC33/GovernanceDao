@@ -5,7 +5,7 @@ HList(flex-grow="1")
     template(#default) {{ roundToDecimals(reward, 4) }}
 
   Disabler(:disabled="reward == 0")
-    ButtonGlitch(btn="~ primary-outline-cut" @click="$emit('withdraw')" :text="$t('general.claim')")
+    ButtonGlitch(btn="~ primary-outline-cut" @click="$emit('claim')" :text="$t('general.claim')")
 
 </template>
 
