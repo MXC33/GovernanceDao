@@ -1,7 +1,8 @@
 <template lang="pug">
 div.topBanner(
-  v-if="topBannerData && topBannerData.id && (topBannerData.bannerHide ? !topBannerData.bannerHide.includes(configAPP.ixApp) : true)" flex="~ row grow" items="center" justify="center" pos="relative" p="0 md:1" text="xs md:sm" w="full"  h="12" cursor="pointer" @click="onClickBanner"
-  :style="{ backgroundColor: topBannerData.background_color, backgroundImage: topBannerData.backgroundImage ? 'url(' + config.MEDIA_URL + '/' + topBannerData.backgroundImage.name +')': 'none'}"
+    v-if="topBannerData && topBannerData.id && (topBannerData.bannerHide ? !topBannerData.bannerHide.includes(configAPP.ixApp) : true)"
+    :style="{ backgroundColor: topBannerData.background_color, backgroundImage: topBannerData.backgroundImage ? 'url(' + config.MEDIA_URL + '/' + topBannerData.backgroundImage.name +')': 'none'}"
+    flex="~ row grow" items="center" justify="center" pos="relative" p="0 md:1" text="xs md:sm" w="full" h="12" cursor="pointer" @click="onClickBanner"
   )
 
   HList(v-if="topBannerData.leftImage && topBannerData.leftImage.name" items="center" w="6 md:8" pos="absolute left-4 md:left-8 top-50%" translate-y="-50%" h="70%")
@@ -22,7 +23,7 @@ import CloseIcon from '~/assets/images/icons/close.svg'
 
 
 const { topBannerAd, bannerAdActive, activeAd } = useAds()
-const { data: topBannerData } = topBannerAd()
+const { data: topBannerData } = await topBannerAd()
 const config = useRuntimeConfig().public
 const configAPP = useAppConfig()
 
