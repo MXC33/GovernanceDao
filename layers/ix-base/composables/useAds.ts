@@ -6,6 +6,7 @@ export interface Banner {
   leftImage: string,
   image: string,
   link: string,
+  bannerHide: Array<string>,
   active_time: number
 }
 export interface BannerResponse {
