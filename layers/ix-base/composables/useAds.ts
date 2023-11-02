@@ -30,35 +30,39 @@ export const useAds = () => {
 
   const ads: AdData[] = [
     {
-      id: 'territory-lottery',
-      url: "https://territorylottery.planetix.com/"
-    },
-    {
       id: "gravity-grade-genesis",
       url: "https://planetix.com/mint/gravity-grade"
     }
   ]
 
-  const topBannerAd = async () => {
+  // const topBannerAd = async () => {
+  //   const { fetchIXAPI } = useIXAPI()
+  //   let bannerData: Banner = {
+  //     id: '',
+  //     message: '',
+  //     background_color: '',
+  //     backgroundImage: '',
+  //     leftImage: '',
+  //     image: '',
+  //     link: '',
+  //     active_time: 0
+  //   };
+
+  //   try {
+  //     const { data } = await fetchIXAPI('banner') as BannerResponse
+  //     bannerData = data
+  //   } catch (e) { }
+
+  //   return bannerData
+  // }
+
+  const topBannerAd = () => {
     const { fetchIXAPI } = useIXAPI()
-    let bannerData: Banner = {
-      id: '',
-      message: '',
-      background_color: '',
-      backgroundImage: '',
-      leftImage: '',
-      image: '',
-      link: '',
-      bannerHide: [],
-      active_time: 0
-    };
-
-    try {
-      const { data } = await fetchIXAPI('banner') as BannerResponse
-      bannerData = data
-    } catch (e) {}
-
-    return bannerData
+    return useAsyncDataState('banner-data', () =>
+      fetchIXAPI('banner') as Promise<BannerResponse>, {
+      transform: (item) =>
+        item.data as Banner
+    })
   }
 
   const bannerAdActive = useCookieState(`ad-banner-${config.ixApp}`, () => true, { maxAge: aDay, consentLevel: 'preferences' })

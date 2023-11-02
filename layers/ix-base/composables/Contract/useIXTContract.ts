@@ -73,11 +73,21 @@ export const useIXTContract = <T extends ContractInterface<T> & IXTokenContract>
     }
   }
 
+  const allowanceCheckWithError = async (amount: number, otherSpenderAddress: string = '') => {
+    const allowanceValue = Number(ethers.utils.formatUnits(await allowance(otherSpenderAddress)))
+
+    if (allowanceValue >= amount)
+      return true
+
+    return await approve(ethers.utils.parseUnits(amount.toString()), otherSpenderAddress)
+  }
+
   return {
     ...contractSpec,
     allowance,
     approve,
     allowanceCheck,
+    allowanceCheckWithError,
     ixtPending,
     ixtBalance,
     fetchIXT,
