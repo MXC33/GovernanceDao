@@ -6,6 +6,7 @@ export interface Banner {
   leftImage: string,
   image: string,
   link: string,
+  bannerHide: Array<string>,
   active_time: number
 }
 export interface BannerResponse {
@@ -48,6 +49,7 @@ export const useAds = () => {
       leftImage: '',
       image: '',
       link: '',
+      bannerHide: [],
       active_time: 0
     };
 

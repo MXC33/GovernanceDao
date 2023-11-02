@@ -1,6 +1,6 @@
 <template lang="pug">
 div.topBanner(
-  v-if="topBannerData && topBannerData.id" flex="~ row grow" items="center" justify="center" pos="relative" p="0 md:1" text="xs md:sm" w="full"  h="12" cursor="pointer" @click="onClickBanner"
+  v-if="topBannerData && topBannerData.id && (topBannerData.bannerHide ? !topBannerData.bannerHide.includes(configAPP.ixApp) : true)" flex="~ row grow" items="center" justify="center" pos="relative" p="0 md:1" text="xs md:sm" w="full"  h="12" cursor="pointer" @click="onClickBanner"
   :style="{ backgroundColor: topBannerData.background_color, backgroundImage: topBannerData.backgroundImage ? 'url(' + config.MEDIA_URL + '/' + topBannerData.backgroundImage.name +')': 'none'}"
   )
 
@@ -24,6 +24,7 @@ import CloseIcon from '~/assets/images/icons/close.svg'
 const { topBannerAd, bannerAdActive, activeAd } = useAds()
 const topBannerData = await topBannerAd()
 const config = useRuntimeConfig().public
+const configAPP = useAppConfig()
 
 
 const onClickBanner = () => {
