@@ -18,11 +18,17 @@ Card()
       template(#default) {{roundToDecimals(dailyRewards)}}
 
   HList(gap-6)
-    ButtonGlitch(btn="~ primary-outline-cut" @click="$emit('unstake')" :text="$t('general.unstake')")
-    ButtonGlitch(btn="~ primary-outline-cut" @click="$emit('stake')" :text="$t('general.stake')")
+    ButtonGlitch(btn="~ primary-outline-cut" @click="unstakeActive = true" :text="$t('general.unstake')")
+    ButtonGlitch(btn="~ primary-outline-cut" @click="stakeIxtActive = true" :text="$t('general.stake')")
+    ButtonGlitch(btn="~ primary-outline-cut" @click="stakeEnergyActive = true" :text="$t('general.stake')")
 
   template(#detailBottom)
     StakingRewards(:pool="data" v-if="data")
+
+Teleport(to="#overlays")
+  StakingActionEnergyStakeEnergy(@close="stakeEnergyActive = false" v-if="stakeEnergyActive && item[0]" :item="item[0]" :id="id")
+  StakingActionEnergyStakeIXT(@close="stakeIxtActive = false" v-if="stakeIxtActive && item[1]" :item="item[1]" :month="1")
+  StakingActionEnergyUnstakeIXT(@close="unstakeActive = false" v-if="unstakeActive && item[1]" :item="item[1]")
 
 </template>
   
@@ -34,6 +40,13 @@ const { data } = defineProps<{
   id: string,
   data: StakingDataFragment
 }>()
+
+const item = data.stakingItems
+
+const stakeEnergyActive = ref(false)
+const stakeIxtActive = ref(false)
+
+const unstakeActive = ref(false)
 
 const { getUserStakeInPool } = useStakingPools()
 

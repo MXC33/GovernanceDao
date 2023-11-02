@@ -8,8 +8,15 @@ VList(space-y="3")
       template(#default) {{ listItem.amount }}
 
   div(grid="~ cols-2" space-x="3")
-    ButtonGlitch(btn="~ primary-outline-cut" @click="$emit('withdraw')" :text="$t('general.stake')")
-    ButtonGlitch(btn="~ primary-outline-cut" @click="$emit('withdraw')" :text="$t('general.withdraw')")
+    Disabler(:disabled="!canStake")
+      ButtonGlitch(btn="~ primary-outline-cut" @click="stakeActive = true" :text="$t('general.stake')")
+    Disabler(:disabled="!canUnstake")
+      ButtonGlitch(btn="~ primary-outline-cut" @click="unstakeActive = true" :text="$t('general.withdraw')")
+
+
+Teleport(to="#overlays")
+  StakingActionMetashareUnstake(@close="unstakeActive = false" v-if="unstakeActive" :item="item")
+  StakingActionMetashareStake(@close="stakeActive = false" v-if="stakeActive" :item="item")
 
 </template>
 <script lang="ts" setup>
@@ -18,6 +25,12 @@ import type { StakingItemFragment } from '#gql';
 const { item } = defineProps<{
   item: StakingItemFragment
 }>()
+
+const { canStake, canUnstake, sharesStaked, sharesOwned } = useStakingHelper(item)
+
+
+const stakeActive = ref(false)
+const unstakeActive = ref(false)
 
 interface ListItem {
   id: string,

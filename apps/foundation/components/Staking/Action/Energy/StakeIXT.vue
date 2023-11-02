@@ -49,8 +49,11 @@ PopupBase(@close="$emit('close')")
 </template>
 
 <script lang="ts" setup>
-import type { StakingDataFragment } from '#gql';
+import type { StakingItemFragment } from '#gql';
+import type { UserStakingItem } from '@ix/base/composables/Contract/useStakingData';
 import { formattedMonths } from '@ix/base/composables/Utils/useHelpers';
+
+const { stakeIXT } = useEnergyStakingContract()
 
 const { ixtBalance } = useCurrencyData()
 const stakeAmount = ref(0)
@@ -58,13 +61,19 @@ const isAgreed = ref(false)
 
 const emit = defineEmits(["close"])
 
-defineProps<{
-  pool?: StakingDataFragment,
+const { item } = defineProps<{
+  item: StakingItemFragment,
   month: number
 }>()
 
 const onClickStake = () => {
-  emit("close")
+
+  const stakingItem: UserStakingItem = {
+    token: item.token,
+    amount: stakeAmount.value
+  }
+
+  stakeIXT(stakingItem)
 }
 
 

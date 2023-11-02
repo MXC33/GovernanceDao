@@ -33,22 +33,30 @@ PopupBase(@close="$emit('close')")
 </template>
 
 <script lang="ts" setup>
-import type { StakingDataFragment } from '#gql';
+import type { StakingDataFragment, StakingItemFragment } from '#gql';
+import type { UserStakingItem } from '@ix/base/composables/Contract/useStakingData';
+
+const { unstakeIXT } = useEnergyStakingContract()
 
 const withdrawAmount = ref(0)
 const { getUserStakeInPool } = useStakingPools()
 const isAgreed = ref(false)
 
-const userStake = computed(() => getUserStakeInPool('ixt', data))
+const userStake = 1
 
 const emit = defineEmits(["close"])
 
-const { data } = defineProps<{
-  data: StakingDataFragment,
+const { item } = defineProps<{
+  item: StakingItemFragment,
 }>()
 
 const onClickStake = () => {
-  emit("close")
+  const stakingItem: UserStakingItem = {
+    token: item.token,
+    amount: withdrawAmount.value
+  }
+
+  unstakeIXT(stakingItem)
 }
 
 
