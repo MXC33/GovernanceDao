@@ -1,6 +1,6 @@
 
 <template lang="pug">
-HList(space-x="6+")
+HList(space-x="6")
   TitleDetail()
     template(#detail) {{ $t('index.apy') }}
     template(#default) {{ poolApy }} %
