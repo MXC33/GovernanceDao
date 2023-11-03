@@ -1,9 +1,8 @@
 <template lang="pug">
-div(grid="~ cols-3 gap-6")
-  TitleDetail(icon="ixt") 
-    template(#detail)  {{ $t('energy.DailyIXT.title') }}
-    template(#default) {{ roundToDecimals(dailyIxt, 4)}}
-
+div(grid="~ cols-3 gap-6" items-end)
+  TitleDetail(icon="ixt")
+      template(#detail)  {{ $t('energy.DailyIXT.title') }}
+      template(#default) {{ roundToDecimals(dailyIxt, 4)}}
   TitleDetail() 
     template(#detail) {{ $t('energy.TVL.title') }}
     template(#default) {{ data.totalStakedAmount?.toLocaleString() }}
@@ -14,7 +13,7 @@ div(grid="~ cols-3 gap-6")
 
   TitleDetail(icon="ixt")
     template(#detail) {{ $t('energy.YourStake.title') }}
-    template(#default) {{ yourStake }}
+    template(#default) {{ yourStake ?? 0 }}
 
   TitleDetail(icon="ixt")
     template(#detail) {{ $t('energy.ClaimableRewards.title') }}
