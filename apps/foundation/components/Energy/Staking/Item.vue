@@ -1,8 +1,8 @@
 <template lang="pug">
 ClientOnly()
   Card()
-    HList(space-x="10")
-      TitleDetail() 
+    HList(space-x="10 sm:space-x-20" )
+      TitleDetail( ) 
         template(#detail) Locking period
         template(#default) 1 Month
 
@@ -18,7 +18,7 @@ ClientOnly()
         template(#detail) Daily rewards
         template(#default) {{roundToDecimals(dailyRewards)}}
 
-    HList(gap-6)
+    div(class="flex flex-col sm:flex-row gap-6")
       ButtonGlitch(btn="~ primary-outline-cut" @click="unstakeActive = true" :text="$t('energy.unstakeIxt')")
       ButtonGlitch(btn="~ primary-outline-cut" @click="stakeIxtActive = true" :text="$t('energy.stakeIxt')")
       ButtonGlitch(btn="~ primary-outline-cut" @click="stakeEnergyActive = true" :text="$t(`energy.stakeEnergy.${id}`)")
