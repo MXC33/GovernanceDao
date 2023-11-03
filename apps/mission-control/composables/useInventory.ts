@@ -46,7 +46,7 @@ export const useInventory = () => {
       case 'tech': return ['drone', 'rover']
       case 'industry': return ['facility', 'tile-contract']
       case 'resources': return ['biomod', 'astro-credit', 'waste', 'energy', 'raffle-ticket', 'blueprint', 'm3ta-mod']
-      case 'cargo': return ['loot-crate', 'avatar-card-pack', 'aoc-badge-pack', 'rover-key']
+      case 'cargo': return ['loot-crate', 'avatar-card-pack', 'aoc-badge-pack', 'rover-key', 'avatar-card-pack-crypto']
       case 'collectables': return ['badge', 'metashare', 'genesis', 'aoc-badge', 'avatar', 'geolottery']
       default: return []
     }

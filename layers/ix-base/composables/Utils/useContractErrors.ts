@@ -22,6 +22,7 @@ export const CustomErrors = {
   approvalError: "Approve didn't work",
   invalidIXTPrice: "No IXT price set",
   noPurchaseItem: "Missing item to purchase",
+  noOfferItem: "Missing offer to accept",
   noWallet: "No wallet active",
   unknownError: "Something went wrong",
 

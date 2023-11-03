@@ -27,19 +27,24 @@ VList(:class="className" pos="sticky left-0 top-0" translate-y="$header-offset" 
 HeaderLifiWidget(v-if="swapVisible" @close="swapVisible = false")
 
 component(is="style").
-  :root { 
+  :root {
     --site-header-offset: {{ siteHeaderOffset }}px;
     --header-offset: {{ siteHeaderScrollOffset }}px;
     --header-height: {{ headerHeight }}px;
   }
-  
-</template> 
+
+</template>
 
 <script lang="ts" setup>
+
+const { topBannerAd, bannerAdActive } = useAds()
+const { data: topBannerData, execute: fetchTopBannerData } = topBannerAd()
+await fetchTopBannerData()
+
 const { useMobileBreakpoint } = useDevice()
 const { state: swapVisible } = useIXTSwapVisible()
 const { data: headerData, execute: fetchHeaderData } = useHeaderData()
-const { bannerAdActive } = useAds()
+
 
 
 const { className, autoClose } = defineProps<{

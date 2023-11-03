@@ -51,6 +51,8 @@ const onClickOpen = async () => {
     await openLootCrate(amount)
   else if (type == 'avatar-card-pack')
     await burnAvatarCardPack(32, amount)
+  else if (type == 'avatar-card-pack-crypto')
+    await burnAvatarCardPack(76, amount)
   else if (type == 'aoc-badge-pack')
     await burnAOCBadgePack(51, amount)
   else if (isGGv2Pack)

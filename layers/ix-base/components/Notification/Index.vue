@@ -1,8 +1,8 @@
 <template lang ="pug">
 VList(pos="relative" ref="container")
   div(@click.prevent.stop="toggleNotification" w="6" h="6" translate-y="-0.5" cursor="pointer" opacity="hover:80" transition="opacity")
-    BellFilled(v-show="!showNotification")
-    BellEmpty(v-show="showNotification")
+    BellFilled(v-show="!showNotification" w="6")
+    BellEmpty(v-show="showNotification" w="6")
 
     NotificationIconUnread(v-show="isUnread")
 

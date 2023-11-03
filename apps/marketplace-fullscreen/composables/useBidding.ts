@@ -31,7 +31,7 @@ export const useBiddingItems = () => {
       shares: {
         min: 1,
         value: token.updating ? token.bid.quantity : 1,
-        max: token.shares
+        max: token.shares || 10
       },
       durationInDays: token.updating ? durationInDaysFromTimestamp(token.bid.due_date) : 1,
       ixtPrice: token.updating ? token.bid.price : 0
