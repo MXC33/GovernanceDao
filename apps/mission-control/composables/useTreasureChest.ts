@@ -73,7 +73,7 @@ export const useOpenPacks = () => {
 
   const onAvatarClaim = async (avatar: NftFragment, amount: number) => {
 
-    const { execute: fetchTokenInfo, data } = useTokenInfo(avatar.tokenId, avatar.contract)
+    const { execute: fetchTokenInfo, data } = useTokenInfo(avatar.tokenId, avatarNFTAddress.polygon)
     await fetchTokenInfo()
 
     addPopup({
@@ -97,6 +97,7 @@ export const useOpenPacks = () => {
       case 'gg':
         return `Do not adjust your circuits yet, human! The delivery process is completed and you’ll find the following and potentially even more assets in your inventory, brrpp.`
       case 'avatar-card-pack':
+      case 'avatar-card-pack-crypto':
         return `Despite the analysis of even my most intimate data, I have efficiently delivered the goods. The backstory of each avatar is now available in Inventory, brrpp!`
       case 'aoc-badge-pack':
         return `I, the most finely tuned postbot in the solar system, delivered the following assets without error. Analysis indicate a tip is in order, brrrppp.`
