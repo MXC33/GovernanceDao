@@ -8,24 +8,25 @@ Page()
     TerritoryBoxes(:data="filteredTerritories" v-if="filteredTerritories")
 
   PageSection(section="TerritoryTitle")
-    div(grid="~ gap-6 lg:cols-2")
-      HList(col="lg:col-span-1" space-x="6") 
-        Card(flex-grow="1")
-          HList(justify="between")
-            TitleDetail(icon="ixt")
-              template(#detail) Earning per day
-              template(#default) {{ roundToDecimals(territoryUserData?.userSpecificStakingData?.totalUserRewardPerDay, 4) }}
-            TitleDetail(icon="ixt")
-              template(#detail) Earning 30 day
-              template(#default) {{ roundToDecimals(territoryUserData?.userSpecificStakingData?.totalUserRewardPerThirtyDays, 4) }}
+    div(grid="~ cols-1 lg:cols-4 gap-6")
 
-        Card(flex-grow="1")
-          HList( justify="between")
-            CircleBackground(position="absolute" class="top-0 left-0 w-1/2" h="100%")
-            TitleDetail(icon="ixt")
-              template(#detail) Total Rewards
-              template(#default) {{ roundToDecimals(territoryUserData?.userSpecificStakingData?.totalUserReward, 4) }}
-            ButtonGlitch(btn="~ primary-outline-cut" @click="claimAllRewards" :text="$t('general.claim')")
+      Card(flex-grow="1")
+        HList(justify="between")
+          TitleDetail(icon="ixt")
+            template(#detail) Earning per day
+            template(#default) {{ roundToDecimals(territoryUserData?.userSpecificStakingData?.totalUserRewardPerDay, 4) }}
+          TitleDetail(icon="ixt")
+            template(#detail) Earning 30 day
+            template(#default) {{ roundToDecimals(territoryUserData?.userSpecificStakingData?.totalUserRewardPerThirtyDays, 4) }}
+
+      Card(flex-grow="1")
+        HList(justify="between")
+          CircleBackground(position="absolute" class="top-0 left-0 w-1/2" h="100%")
+          TitleDetail(icon="ixt")
+            template(#detail) Total Rewards
+            template(#default) {{ roundToDecimals(territoryUserData?.userSpecificStakingData?.totalUserReward, 4) }}
+          ButtonGlitch(btn="~ primary-outline-cut" @click="claimAllRewards" :text="$t('general.claim')")
+
 
 
 
