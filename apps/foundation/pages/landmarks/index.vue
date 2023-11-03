@@ -12,11 +12,13 @@ Page()
             template(#default) {{ roundToDecimals(landmarkData?.userSpecificStakingData?.totalUserRewardPerThirtyDays, 4) }}
 
       Card()
-        HList( space-x="6")
+        HList(space-x="6")
+          CircleBackground(position="absolute" class="top-0 left-0 w-1/2" h="100%")
           TitleDetail(icon="ixt")
             template(#detail) {{ $t(`landmarks.totalRewards`) }}
             template(#default) {{ roundToDecimals(landmarkData?.userSpecificStakingData?.totalUserReward, 4) }}
           ButtonGlitch(btn="~ primary-outline-cut" @click="claimAllRewards" :text="$t('general.claim')")
+
 
   PageSection(section="MyLandmarks")
     LandmarkUserList(:data="landmarkStakingItems" v-if="landmarkStakingItems?.length > 0")
@@ -48,6 +50,8 @@ Page()
 
 import type { NftFragment } from '@ix/base/.nuxt/gql/default';
 import { StakingId, LandmarkSort, LandmarkTier } from '@ix/base/.nuxt/gql/default';
+
+import CircleBackground from '~/assets/images/circles.svg'
 
 const { claimAllLandmarkRewards } = useLandmarkStakingContract()
 

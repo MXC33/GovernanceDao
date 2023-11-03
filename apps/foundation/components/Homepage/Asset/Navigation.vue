@@ -42,7 +42,7 @@ const url = computed(() => {
     case "metashare":
       return "/metashare";
     default:
-      return "";  // default URL or error handling if needed
+      return "";
   }
 })
 

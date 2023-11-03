@@ -21,6 +21,7 @@ Page()
 
         Card(flex-grow="1")
           HList( justify="between")
+            CircleBackground(position="absolute" class="top-0 left-0 w-1/2" h="100%")
             TitleDetail(icon="ixt")
               template(#detail) Total Rewards
               template(#default) {{ roundToDecimals(territoryUserData?.userSpecificStakingData?.totalUserReward, 4) }}
@@ -62,6 +63,8 @@ Page()
 <script lang="ts" setup>
 
 import { type StakingItemFragment, StakingId, type NftFragment } from '@ix/base/.nuxt/gql/default';
+
+import CircleBackground from '~/assets/images/circles.svg'
 
 const activeSection = ref('area');
 const activeSectionTop = ref('area');
