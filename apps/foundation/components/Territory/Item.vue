@@ -26,9 +26,9 @@ const { data, staked } = defineProps<{
   data: StakingItemFragment | NftFragment
 }>()
 
-const totalReward = computed(() => staked ? data.userStakingData?.totalReward : 0)
+const totalReward = computed(() => staked ? data?.userStakingData?.totalReward : 0)
 
-const token = computed(() => staked ? data.token : data)
+const token = computed(() => staked ? data?.token : data)
 
 const claimReward = (item: StakingItemFragment) => {
   return claimSpecificTerritoryReward(item.token)

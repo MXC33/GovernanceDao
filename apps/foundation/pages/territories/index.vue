@@ -51,7 +51,7 @@ Page()
 
 
     HList()
-      div(grid="~ cols-3 gap-6" flex-grow="1")
+      div(grid="~ md:cols-3 gap-6" flex-grow="1")
         TerritoryItem(v-for="data in filteredUserTerritories" :data="data" :staked="stakeSort == 'staked'" v-if="filteredUserTerritories?.length > 0")
         Card(v-else flex-grow="1" items="center" font="bold")
           template(#default)
