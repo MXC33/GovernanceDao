@@ -125,7 +125,7 @@ export const useStakingPools = () => {
     if (!pool?.stakingItems || !pool.stakingItems[0])
       return 0
 
-    return (pool?.lockPeriod ?? 0) + (pool.stakingItems[0]?.userStakingData?.stakedAt ?? 0) * 1000
+    return ((pool?.lockPeriod ?? 0) + (pool.stakingItems[0]?.userStakingData?.stakedAt ?? 0)) * 1000
   }
 
   const isUnderLockPeriod = (pool: StakingDataFragment) => {
@@ -133,7 +133,6 @@ export const useStakingPools = () => {
       return false
 
     const timeLeft = timeLeftLockPeriod(pool)
-    console.log("timeLEft", timeLeft)
 
     return timeLeft > Date.now()
   }

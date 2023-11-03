@@ -1,6 +1,6 @@
 <template lang="pug">
 ClientOnly()
-  StakingItem(:can-withdraw="stakeBalance > 0 && lockPeriod" :can-deposit="tokenBalance > 0" @deposit="depositActive = true" @withdraw="withdrawActive = true")
+  StakingItem(:can-withdraw="stakeBalance > 0 && !lockPeriod" :can-deposit="tokenBalance > 0" @deposit="depositActive = true" @withdraw="withdrawActive = true")
     template(#title) {{ $t(`index.lpStaking.${type}.title`) }}
     template(#subtitle) {{ $t(`index.lpStaking.provide`) }}
     template(#icon)

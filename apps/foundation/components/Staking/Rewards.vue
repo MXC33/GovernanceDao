@@ -19,7 +19,6 @@ const { isUnderLockPeriod } = useStakingPools()
 const { pool } = defineProps<{
   pool: StakingDataFragment,
 }>()
-console.log("isUnderLockPeriod", pool.totalStakedAmount, isUnderLockPeriod(pool))
 
 const reward = computed(() => pool.userSpecificStakingData?.totalUserReward ?? 0)
 
