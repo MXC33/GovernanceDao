@@ -4,7 +4,7 @@ Page()
     EnergyDashboard(:data="energyData" v-if="energyData")
 
   PageSection(section="EnergyForIXT")
-    EnergyStaking(id="energy" :data="energyData" v-if="energyData")
+  EnergyStaking(id="energy" :data="energyData" v-if="energyData")
 
   PageSection(section = "AmeliaFoundation")
     EnergyStaking(id="amelia" :data="ameliaData" v-if="ameliaData")

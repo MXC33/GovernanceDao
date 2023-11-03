@@ -27,6 +27,8 @@ div(grid="~ cols-3 gap-6")
 <script lang="ts" setup>
 import type { StakingDataFragment } from '~/.nuxt/gql/default';
 
+
+
 const { item } = defineProps<{
   item: StakingDataFragment,
   type: 'usdt' | 'matic'
