@@ -4,7 +4,7 @@ HList(flex-grow="1")
     template(#detail) Claim Rewards
     template(#default) {{ roundToDecimals(reward, 4) }}
 
-  Disabler(:disabled="reward == 0")
+  Disabler(:disabled="reward == 0 || isUnderLockPeriod(pool) ")
     ButtonGlitch(btn="~ primary-outline-cut" @click="$emit('claim')" :text="$t('general.claim')")
 
 </template>
@@ -13,9 +13,13 @@ HList(flex-grow="1")
 <script lang="ts" setup>
 import type { StakingDataFragment } from '#gql';
 
+const { isUnderLockPeriod } = useStakingPools()
+
+
 const { pool } = defineProps<{
   pool: StakingDataFragment,
 }>()
+console.log("isUnderLockPeriod", pool.totalStakedAmount, isUnderLockPeriod(pool))
 
 const reward = computed(() => pool.userSpecificStakingData?.totalUserReward ?? 0)
 
