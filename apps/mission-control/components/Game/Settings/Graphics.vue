@@ -6,7 +6,7 @@ VList(color="white" items="start" justify="center" w="full")
       div(color="mc-mint group-hover:mc-mint_80") {{ $t(`general.navigation.settings.${settingsQuality[gameQuality]}`)  }}
   //-div(v-if="!showSettings" @click="toggle") Graphics Settings: {{ settingsQuality[getGraphicState()] }}
 
-  VList(v-else pos="lt-md:fixed top-12 left-0" w="full")
+  VList(v-else pos="lt-md:fixed top-30 left-0" w="full")
     span(pl="4" color="white" py="2" uppercase="~" b="b-1 white opacity-40") choose quality settings:
 
     GameSettingsOption(v-for="(text, index) in settingsQuality" :title="$t(`general.navigation.settings.${text}`)" py="2" px="4" :quality="index" @close-menu="toggleMenu")

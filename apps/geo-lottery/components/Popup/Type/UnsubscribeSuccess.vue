@@ -9,7 +9,8 @@ Popup()
         p() Subscription deactivated successfully!
       VList()
         p() Winners will be drawn in:
-        HelperCountDown(:endTimestamp="lotteryEndsAt" v-if="lotteryEndsAt")
+        //HelperCountDown(:endTimestamp="lotteryEndsAt" v-if="lotteryEndsAt")
+        HelperCountDown(:endTimestamp="1698760800000")
 
   template(#footer)
     ButtonItem(:value="'pink'" :text="'CLOSE'" @click="onClose()")

@@ -28,6 +28,7 @@ VList(z="10" text="sm" pos="absolute right-8 lt-lg:right-4" w="md:70" space-y="1
 import CloseIcon from '~/assets/images/ui/close.svg?component'
 
 const showMenu = useSiteSettings()
+const gameMenu = useGameMenu()
 
 const inGraphicsSettings = ref(false)
 
@@ -42,6 +43,8 @@ const backToSettings = () => {
 const closeSettings = () => {
   inGraphicsSettings.value = false
   showMenu.value = false
+  gameMenu.value = null
+
 }
 
 </script>

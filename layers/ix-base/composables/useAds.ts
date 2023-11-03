@@ -1,3 +1,21 @@
+export interface Banner {
+  id: string,
+  message: string,
+  background_color: string,
+  backgroundImage: string,
+  leftImage: string,
+  image: string,
+  link: string,
+  bannerHide: Array<string>,
+  active_time: number
+}
+export interface BannerResponse {
+  success: boolean,
+  status: number,
+  message: string,
+  data: Banner
+}
+
 export const useAds = () => {
   const oneHour = 3600
   const fourHours = 14400
@@ -12,14 +30,40 @@ export const useAds = () => {
 
   const ads: AdData[] = [
     {
-      id: 'territory-lottery',
-      url: "https://territorylottery.planetix.com/"
-    },
-    {
       id: "gravity-grade-genesis",
       url: "https://planetix.com/mint/gravity-grade"
     }
   ]
+
+  // const topBannerAd = async () => {
+  //   const { fetchIXAPI } = useIXAPI()
+  //   let bannerData: Banner = {
+  //     id: '',
+  //     message: '',
+  //     background_color: '',
+  //     backgroundImage: '',
+  //     leftImage: '',
+  //     image: '',
+  //     link: '',
+  //     active_time: 0
+  //   };
+
+  //   try {
+  //     const { data } = await fetchIXAPI('banner') as BannerResponse
+  //     bannerData = data
+  //   } catch (e) { }
+
+  //   return bannerData
+  // }
+
+  const topBannerAd = () => {
+    const { fetchIXAPI } = useIXAPI()
+    return useAsyncDataState('banner-data', () =>
+      fetchIXAPI('banner') as Promise<BannerResponse>, {
+      transform: (item) =>
+        item.data as Banner
+    })
+  }
 
   const bannerAdActive = useCookieState(`ad-banner-${config.ixApp}`, () => true, { maxAge: aDay, consentLevel: 'preferences' })
 
@@ -31,10 +75,9 @@ export const useAds = () => {
 
   const activeAd = computed(() => ads[randomSwitchAds.value])
 
-
-
   return {
     showAdPopup,
+    topBannerAd,
     bannerAdActive,
     boxAdActive,
     activeAd

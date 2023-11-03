@@ -2,8 +2,8 @@ import { BigNumber, ethers } from 'ethers'
 import GenericBurnPixAssetsABI from "./ABIs/PixAssetsGenericBurn.json"
 import { ContractContext as GenericBurnPixAssetsContract } from './ABIs/PixAssetsGenericBurn'
 import { genericBurnPixAssetsAddress } from '@ix/base/composables/Contract/WalletAddresses'
-import { ContractInterface, CreateContractOptions } from './defineMCContract'
 import { NftFragment } from '#gql'
+import { ContractInterface, CreateContractOptions } from '@ix/base/composables/Utils/defineContract'
 
 export const useCanClaimAvatarData = () => useAsyncDataState('can-claim-avatar', async () => {
   const { canClaimAvatar } = useGenericBurnPixAssetsContract()
@@ -97,7 +97,6 @@ export const useGenericBurnPixAssetsContract = () => {
     createTransaction(() => contract.value.claimAvatar(), {
       onSuccessAfterMs: 3000,
       onSuccess: () => Promise.all([refreshCanClaim(), refreshUserInventory()]),
-      successMessage: 'You successfully claimed your Avatar Pack ser. View them under the Collectables Tab.',
       successOnEventKey: 'AvatarClaimed'
     })
 

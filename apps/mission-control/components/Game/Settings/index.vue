@@ -11,7 +11,10 @@ div(pointer-events="auto")
 <script lang="ts" setup>
 const showMenu = useSiteSettings()
 const element = ref()
+const gameMenu = useGameMenu()
+
 onClickOutside(element, () => {
   showMenu.value = false
+  gameMenu.value = null
 }, { ignore: ["#settings-menu"] })
 </script>

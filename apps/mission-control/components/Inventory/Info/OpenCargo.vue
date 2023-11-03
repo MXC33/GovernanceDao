@@ -30,6 +30,8 @@ const maxOpeningAmount = computed(() => {
     return 1
   if (props.pack.tokenInfo?.type == 'avatar-card-pack')
     return 1
+  if (props.pack.tokenInfo?.type == 'avatar-card-pack-crypto')
+    return 1
 })
 
 watch(() => props.pack, () => {

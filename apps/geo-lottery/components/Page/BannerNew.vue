@@ -1,39 +1,18 @@
 <template lang="pug">
-VList(class="banner" pos="relative" overflow="hidden" z="0" min-h="650px")
+VList(class="banner" pos="relative" overflow="hidden" z="0" min-h="650px sm:1000px")
   Background( inset="0" object="cover center" pos="absolute" )
     template(#image-source)
       img(src="~/assets/images/banner-map.png" inset="0" object="cover" h="full" w="full" pos="absolute" z="-1" opacity="50")
   div(w="full" flex="~" justify="center" h="full" items-center pos="absolute")
     div(w="full" flex="~" justify="center" top="0" pos="absolute" v-if="isLoggedInAndConnected" )
-      div(container mx-3 lg:px-10 xl:px-30 )
-        div.banner-top(flex="~ col sm:row" w="full" p="y-2 x-0 sm:x-10 " gap="x-4 xl:x-7" justify="center" text="center sm:left")
-          div(text="sm" font="bold" uppercase="~" space-x="2 xl:4")
-            span() Complete tickets for next round
-            span(color="ix-pink" font="medium") {{topInfo.totalTickets}}
-          div(text="sm" font="bold" uppercase="~" v-if="topInfo.nextTicketPercentage" )
-            span(m="r-2 xl:r-4") Subscription
-            span(color="ix-pink" font="medium" display="inline-block") Streaming ({{topInfo.nextTicketPercentage.toFixed(2)}}% until ticket)
-          div(text="sm" font="bold" uppercase="~" v-if="topInfo.fundsLastUntil" )
-            span(m="r-2 xl:r-4") AGOLD funds last until
-            span(color="ix-pink" font="medium" display="inline-block") {{topInfo.fundsLastUntil}}
-
     div(container mx-3 lg:px-10 xl:px-30 h="full" flex=" ~ col" justify="center" items-center p="t-25 b-1 sm:t-24 sm:b-28")
-      h3( class="title-stroke " color="white" font="bdrA3mik" text="lg center stroke-$mc-pink" mb-5 v-if="livepage") OWN TERRITORIES | BUY TICKETS | WIN BIG
-      div(mb-6 :max-w="livepage ? '270px sm:350px' : '470px'")
-        img(src="~/assets/images/LC-Territory-logot.png")
-      h3( class="title-stroke " color="white" font="bdrA3mik" text="3xl center stroke-$mc-pink"  mb-4 v-if="!livepage") COMING SOON
-      div(class="agold_title" w-full)
-        h1.banner-title(text="4xl md:5xl lg:6xl xl:7xl 2xl:8xl center" font="bdrA3mik" mb-1 v-if="livepage && activeRewards.rewards" flex="~ col md:row" justify="between"
-          p-x="sm:5 md:23 lg:27 xl:21 2xl:17")
-          span( v-if="rewardToDisplay.length > 1" ) {{rewardToDisplay}}
-          span() AGOLD
-        h3(text="lg xl:2xl center" font="bdrA3mik" mb-2) Total Prize Pool
-        p(font="bold" text="base sm:lg center" mb-4 v-if="livepage") Every week, new Territories from around the world are <br> randomly selected. Join today and have the chance to win!
-      div(flex="~ col sm:row" justify="center" m="0 sm:t-6" items-center)
-        template(v-if="livepage")
-          //ButtonItem(:value="'pink'" :text="'JOIN NOW'"  min-w="300px md:255px" mb="3 sm:0" mr="0 sm:3" @click="openPurchaseTickets" )
-          ButtonItem(:value="'white'" :text="'SWAP ASTRO GOLD'" min-w="300px md:255px" @click="openSwap")
-        ButtonItem( class="watch_teaser" :value="'pink'" :text="'WATCH TEASER'" h="15" min-w="300px"  @click="goToYoutubeLink" pos="relative" v-else)
+      div(bg="gray-700" w="350px sm:590px" min-h="500px sm:760px" p="b-6 sm:b-10 l-6 sm:l-10 r-6 sm:r-10" pos="relative")
+        div(w="full" items="center" justify="center" flex="~" pos="absolute" top="-50px" left="0")
+          img(src="/TL_Logo.svg")
+        h2( font="bdrA3mik" text="base sm:5xl" mt="18 sm:24" mb="6") Dear AOC,
+        p(font="foundry bold" text="base sm:xl" mb="4") LOTTERY IS SHUT DOWN
+        p(font="foundry" text="base sm:xl" mb="5") Our heartfelt thanks for being part of our Territory Lottery BETA testing. The testing phase has concluded, and we've been fortunate to gather invaluable insights and feedback from our vibrant community throughout the six Beta rounds.
+        p(font="foundry" text="base sm:xl") As we temporarily shift our focus towards future projects, a round of applause is due for the Lucky Winners!
 </template>
 
 <script lang="ts" setup>

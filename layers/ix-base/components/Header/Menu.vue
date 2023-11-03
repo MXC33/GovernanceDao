@@ -9,7 +9,7 @@ HList(items="center" justify="between" h="16" space-x="3" ref="menuEl")
   HList(v-if="!isMobile" justify="start" flex-grow="1" overflow-x="hidden" space-x="4")
     button(v-for="(header, index) in headerData" @mouseenter="hoverMenu(index)" @click="openMenu(index)" btn="menu" color="s-default:$header-text s-selected:$header-orange" :state="selected(index)") {{ header.name }}
 
-    HList(flex-grow="1" justify="end" display="lt-md:none")
+    HList(v-if="!hideButtons" flex-grow="1" justify="end" display="lt-md:none")
       a(href="https://planetix.com/airdrop")
         span(rounded="full" b="1 $header-mint" px="4" py="1" bg="hover:(ix-white opacity-20)" transition="all" uppercase="~" tracking="0.65" font="bold" items="center" justify="center" flex="~")
           span(translate-x="0.5") airdrop
@@ -19,7 +19,7 @@ HList(items="center" justify="between" h="16" space-x="3" ref="menuEl")
 
     slot(name="contentRight")
 
-    Notification()
+    Notification(v-if="!hideButtons")
 
     //-class="border-white-ixt"
     HeaderAccountButton()
@@ -42,7 +42,9 @@ const { useMobileBreakpoint } = useDevice()
 const isMobile = useMobileBreakpoint()
 const { data: headerData } = useHeaderData()
 const { activeHeaderIndex, closeHeaderMenu } = useSiteHeader()
+const config = useAppConfig()
 
+const hideButtons = computed(() => config.ixApp == 'fluencer' || config.ixApp == 'foundation')
 
 const selected = (index: number) => {
   if (activeHeaderIndex.value == index) {

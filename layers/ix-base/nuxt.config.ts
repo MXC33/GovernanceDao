@@ -11,6 +11,8 @@ const API_PROD_BASE_URL = 'https://api.planetix.com/api/v1'
 const GQL_DEV_ENDPOINT = `${API_DEV_ENDPOINT}/graphql`
 const GQL_PROD_ENDPOINT = `${API_PROD_ENDPOINT}/graphql`
 
+const MEDIA_URL = `https://static.planetix.com`
+
 
 // https://v3.nuxtjs.org/api/configuration/nuxt.config
 export default defineNuxtConfig({
@@ -78,6 +80,7 @@ export default defineNuxtConfig({
 
   runtimeConfig: {
     public: {
+      MEDIA_URL: MEDIA_URL,
       MC_API: process.env.CHAIN_NET == 'test' ? API_DEV_ENDPOINT : API_PROD_ENDPOINT,
       CHAIN_NET: process.env.CHAIN_NET,
       API_BASE_URL: process.env.API_BASE_URL || (process.env.CHAIN_NET === 'test' ? API_DEV_BASE_URL : API_PROD_BASE_URL),
