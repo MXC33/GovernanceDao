@@ -34,11 +34,11 @@ const url = computed(() => {
 
   switch (id) {
     case "territory":
-      return "/territory";
+      return "/territories";
     case "energy":
       return "/energy";
     case "landmark":
-      return "/landmark";
+      return "/landmarks";
     case "metashare":
       return "/metashare";
     default:
