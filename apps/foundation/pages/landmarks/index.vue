@@ -1,9 +1,9 @@
 <template lang="pug">
 Page()
   PageSection(section="Rewards")
-    HList(gap="3")
+    div(grid="~ cols-1 lg:cols-4 gap-6")
       Card()
-        HList(space-x="6")
+        HList(justify="between")
           TitleDetail(icon="ixt")
             template(#detail) {{ $t(`landmarks.earningsPerDay`) }}
             template(#default) {{ roundToDecimals(landmarkData?.userSpecificStakingData?.totalUserRewardPerDay, 4) }}
@@ -12,7 +12,7 @@ Page()
             template(#default) {{ roundToDecimals(landmarkData?.userSpecificStakingData?.totalUserRewardPerThirtyDays, 4) }}
 
       Card()
-        HList(space-x="6")
+        HList(justify="between")
           CircleBackground(position="absolute" class="top-0 left-0 w-1/2" h="100%")
           TitleDetail(icon="ixt")
             template(#detail) {{ $t(`landmarks.totalRewards`) }}

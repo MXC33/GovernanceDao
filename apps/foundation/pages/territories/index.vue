@@ -9,7 +9,6 @@ Page()
 
   PageSection(section="TerritoryTitle")
     div(grid="~ cols-1 lg:cols-4 gap-6")
-
       Card(flex-grow="1")
         HList(justify="between")
           TitleDetail(icon="ixt")
