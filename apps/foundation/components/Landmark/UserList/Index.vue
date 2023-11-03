@@ -1,6 +1,6 @@
 <template lang="pug"> 
 VList(space-y="6")
-  LandmarkUserListItem(flex-grow="1" :item="item" v-for="item in data")
+  LandmarkUserListItem(:item="item" v-for="item in data")
 
 </template>
   

@@ -1,7 +1,7 @@
 <template lang="pug">
 
 HList()
-  CardTitle(flex-grow)
+  CardTitle()
     template(#default) Prize portfolio
     template(#detail) Track balances
 
