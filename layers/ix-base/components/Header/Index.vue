@@ -37,9 +37,8 @@ component(is="style").
 
 <script lang="ts" setup>
 
-const { topBannerAd, bannerAdActive } = useAds()
-const { data: topBannerData, execute: fetchTopBannerData } = topBannerAd()
-await fetchTopBannerData()
+const { execute: fetchTopBannerAd } = useTopBannerData()
+await fetchTopBannerAd()
 
 const { useMobileBreakpoint } = useDevice()
 const { state: swapVisible } = useIXTSwapVisible()

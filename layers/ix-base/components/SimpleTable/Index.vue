@@ -1,6 +1,6 @@
 <template lang="pug">
-VList.no-scrollbar(overflow-x="auto" width="100%")
-  VList(flex-grow="1" bg="gray-900")
+VList.no-scrollbar(overflow-x="auto" width="100%" bg="gray-900")
+  VList(flex-grow="1")
     header(grid="~ row-gap-0 gap-x-3" :style="gridStyles" p="x-6 y-3" text="detail")
       div(v-for="col in columns") {{ col.title ?? col.id }}
 

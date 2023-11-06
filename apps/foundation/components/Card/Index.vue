@@ -7,7 +7,7 @@ VList(bg="gray-800" frame="~ gray-500")
 
   HList(flex-grow="1")
     // Main Content
-    VList(p="6" space-y="6" flex-grow="1" justify="on-center:center" :center="centered")
+    VList(p="6" space-y="6" flex-grow="1" justify="on-center:center" :center="centered" min-w="0")
 
       slot
 
