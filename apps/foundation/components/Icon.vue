@@ -1,7 +1,7 @@
 <template lang="pug">
 div(translate-y="-0.5")
   IXTIcon(w="5" v-if="icon == 'ixt'")
-  img(src="~/assets/png/EnergyIcon.png" w="5" v-else-if="icon == 'energy'")
+  img(src="~/assets/png/EnergyIcon.png" w="7" v-else-if="icon == 'energy'")
   UsdtIXT_Icon(w="6.5" v-else-if="icon == 'ixtusdt'")
   MaticIXT_Icon(w="6.5" v-else-if="icon == 'ixtmatic'")
 
