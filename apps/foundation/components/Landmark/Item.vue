@@ -17,7 +17,7 @@ div(grid="~ cols-1 md:cols-3 gap-6")
         TitleDetail()
           template(#detail) {{ $t(`landmarks.earningDiameterLabel`) }}
           template(#default) {{ getRadius(item) }}
-
+      Divider(mx="-6")
       ButtonGlitch(btn="~ primary-outline-cut" @click="onClickView(item)" :text="$t('general.view')")
 </template>
   

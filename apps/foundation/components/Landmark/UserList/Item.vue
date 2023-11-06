@@ -1,19 +1,19 @@
 <template lang="pug">
 ClientOnly()
   Card(flex-grow="1")
-    div(grid="~ cols-3")
-      TokenMedia(:token="item.token" w="50")
-
-      VList(grid="col-span-2")
+    div(grid="~ cols-1 md:cols-3 gap-6")
+      TokenMedia(:token="item.token")
+      Divider(mx="-6" v-if="isMobile")
+      VList()
         CardTitle() {{ item.token.tokenInfo?.title }}
-          TitleDetail(my="3")
+          TitleDetail(my="3" )
             template(#detail) Shares Owned
             template(#default) {{ sharesOwned }}
           TitleDetail(my="3")
             template(#detail) Shares Staked
             template(#default) {{ sharesStaked }}
-
-          HList(space-x="5" mt="10")
+          Divider(mx="-6" v-if="isMobile")
+          HList(space-x="5" mt="lg:20 sm: 5" justify="between")
             Disabler(:disabled="!canStake")
               ButtonGlitch(btn="~ primary-outline-cut" @click="stakeActive = true" :text="$t('landmarks.StakeBtn.title')")
 
@@ -21,12 +21,21 @@ ClientOnly()
               ButtonGlitch(btn="~ primary-outline-cut" @click="unstakeActive = true" :text="$t('landmarks.UnstakeBtn.title')")
 
 
-    template(#blackDetail)
-      TitleDetail(space-y="3" mt="25")
+    template(#blackDetail v-if="!isMobile")
+      TitleDetail(space-y="3" mt="30")
         template(#detail) Total Earned
       TitleDetail(icon="ixt")
-        template(#default) {{ item.userStakingData?.totalReward }} 
+        template(#default) {{ roundToDecimals(item.userStakingData?.totalReward) }} 
       ButtonGlitch(btn="~ primary-outline-cut" mt="3" @click="claimReward()" :text="$t('landmarks.claimButton')")
+
+    template(#detailBottom v-if="isMobile")
+      TitleDetail(space-y="3")
+        template(#detail) Total Earned
+        TitleDetail(icon="ixt")
+          template(#default) {{ roundToDecimals(item.userStakingData?.totalReward) }} 
+      ButtonGlitch(btn="~ primary-outline-cut" mt="3" @click="claimReward()" :text="$t('landmarks.claimButton')")
+
+
 
 
   Teleport(to="#overlays")
@@ -39,6 +48,8 @@ ClientOnly()
   
 <script lang="ts" setup>
 import type { StakingItemFragment } from '#gql';
+
+const { isMobile } = useDevice()
 
 const { claimLandmarkRewardsById, stakeLandmark, unstakeLandmark } = useLandmarkStakingContract()
 
