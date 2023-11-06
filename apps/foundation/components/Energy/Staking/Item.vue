@@ -1,8 +1,8 @@
 <template lang="pug">
 ClientOnly()
   Card()
-    HList(space-x="10 sm:space-x-20" )
-      TitleDetail( ) 
+    div(grid="~ cols-2 lg:cols-4")
+      TitleDetail() 
         template(#detail) Locking period
         template(#default) 1 Month
 
