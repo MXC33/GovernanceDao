@@ -18,7 +18,7 @@ ClientOnly()
         template(#detail) Daily rewards
         template(#default) {{roundToDecimals(dailyRewards)}}
 
-    div(class="flex flex-col sm:flex-row gap-6")
+    div(class="flex flex-col sm:flex-row gap-6 flex-wrap")
       ButtonGlitch(btn="~ primary-outline-cut" @click="unstakeActive = true" :text="$t('energy.unstakeIxt')")
       ButtonGlitch(btn="~ primary-outline-cut" @click="stakeIxtActive = true" :text="$t('energy.stakeIxt')")
       ButtonGlitch(btn="~ primary-outline-cut" @click="stakeEnergyActive = true" :text="$t(`energy.stakeEnergy.${id}`)")
