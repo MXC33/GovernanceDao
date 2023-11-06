@@ -124,30 +124,31 @@
         "description": "Each corporation’s treasury acts as a staking pool for MetaShares and the reward is $IXT.",
         "button": "GO TO METASHARE"
       }
-    },
-    "governance": {
+    }
+  },
+  "governance": {
+    "overview": {
       "title": "GOVERNANCE",
       "description": "Track proposal statuses and vote on changes."
     },
-    "GovDiscussion": {
-      "title": "DISCUSSION",
-      "description": "Latest Discussion"
+    "no": {
+      "discussion": {
+        "title": "DISCUSSION",
+        "description": "No discussions available"
+      },
+      "proposal": {
+        "title": "PROPOSAL",
+        "description": "No proposals available"
+      }
     },
-    "GovProposal": {
-      "title": "PROPOSAL",
-      "description": "Latest Proposal"
-    },
-    "TotalDiscussion": {
-      "title": "Total Discussion"
-    },
-    "TotalProposal": {
-      "title": "Total Proposal"
-    },
-    "DiscussionBtn": {
-      "title": "VIEW DISCUSSION"
-    },
-    "ProposalBtn": {
-      "title": "VIEW PROPOSAL"
+    "buttons": {
+      "proposal": "Proposal",
+      "newProposal": "New Proposal",
+      "discussion": "Discussions",
+      "newDiscussion": "New Discussion",
+      "votingPower": "Voting Power",
+      "ixtStaking": "IXT Staking",
+      "delegate": "Delegate"
     }
   },
   "metashare": {
