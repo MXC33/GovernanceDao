@@ -18,7 +18,7 @@ div(grid="~ cols-1 md:cols-3 gap-6")
           template(#detail) {{ $t(`landmarks.earningDiameterLabel`) }}
           template(#default) {{ getRadius(item) }}
 
-      ButtonGlitch(btn="~ primary-outline-cut" @click="$emit('claim')" :text="$t('landmarks.claimButton')")
+      ButtonGlitch(btn="~ primary-outline-cut" @click="onClickView(item)" :text="$t('general.view')")
 </template>
   
 <script lang="ts" setup>
@@ -42,6 +42,12 @@ const getRadius = (data: NftFragment) => data.tokenInfo?.attributes?.find(item =
 function extractNumber(string: string) {
   const match = string.match(/\d+/);  // This regex matches one or more digits
   return match ? parseInt(match[0], 10) : null;
+}
+
+const onClickView = (item: NftFragment) => {
+  if (!item.external_url)
+    return
+  window.open(item.external_url)
 }
 
 
