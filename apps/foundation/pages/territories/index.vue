@@ -24,6 +24,7 @@ Page()
           TitleDetail(icon="ixt")
             template(#detail) Total Rewards
             template(#default) {{ roundToDecimals(territoryUserData?.userSpecificStakingData?.totalUserReward, 4) }}
+        Disabler(:disabled="!canClaim")
           ButtonGlitch(btn="~ primary-outline-cut" @click="claimAllRewards" :text="$t('general.claim')")
 
 
@@ -87,6 +88,8 @@ const { claimAllTerritoryRewards } = useTerritoryStakingContract()
 const claimAllRewards = () => {
   return claimAllTerritoryRewards()
 }
+
+const canClaim = computed(() => territoryUserData.value?.userSpecificStakingData?.totalUserReward ?? 0 > 0)
 
 const filteredTerritories = computed(() => {
   const filtered = territoryData.value?.stakingItems.filter(item => item?.token?.tokenInfo.type == activeSectionTop.value) as StakingItemFragment[]
