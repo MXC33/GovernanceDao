@@ -17,6 +17,7 @@ Page()
           TitleDetail(icon="ixt")
             template(#detail) {{ $t(`landmarks.totalRewards`) }}
             template(#default) {{ roundToDecimals(landmarkData?.userSpecificStakingData?.totalUserReward, 4) }}
+        Disabler(:disabled="!canClaim")
           ButtonGlitch(btn="~ primary-outline-cut" @click="claimAllRewards" :text="$t('general.claim')")
 
 
@@ -82,6 +83,8 @@ const spaceBetween = (text: string) => {
 
 
 const { data: landmarkData } = useStakingData(StakingId.Landmark)
+
+const canClaim = computed(() => landmarkData.value?.userSpecificStakingData?.totalUserReward ?? 0 > 0)
 
 const search = async (searchText: string) => {
   const { refresh: fetchAllLandmarks, data: allLandmarkData } = useAllLandmarkData(page.value, searchText, tier.value, sort.value)

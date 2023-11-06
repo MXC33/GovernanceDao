@@ -17,7 +17,7 @@ div(grid="~ cols-3 gap-6")
     template(#detail) {{ $t('index.apy') }}
     template(#default) 26%
 
-  TitleDetail()
+  TitleDetail(v-if="userStakingData")
     template(#detail) {{ $t('general.lockPeriodEnds') }}
     template(#default) {{lockPeriodEnds}}
 

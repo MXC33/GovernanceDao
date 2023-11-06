@@ -20,10 +20,8 @@ const { id, data } = defineProps<{
   data: StakingDataFragment | null
 }>()
 
-console.log("data", data)
-
 const userReward = computed(() => {
-  return data?.userSpecificStakingData?.totalUserReward?.toFixed(2)
+  return data?.userSpecificStakingData?.totalUserReward?.toFixed(2) ?? 0
 })
 
 const userStaked = computed(() => {
