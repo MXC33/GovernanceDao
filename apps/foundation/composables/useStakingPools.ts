@@ -113,6 +113,18 @@ export const useStakingPools = () => {
     return staked?.userStakingData?.amountStaked ?? 0
   }
 
+  const getUserTokenBalance = (type: string, pool?: StakingDataFragment | null) => {
+    if (!pool)
+      return 0
+
+    const staked = pool.stakingItems?.find(item =>
+      item?.token?.tokenInfo?.type == type
+    )
+
+    return staked?.userStakingData?.balanceOfToken ?? 0
+  }
+
+
   const getFirstUserStakeInPool = (pool?: StakingDataFragment | null) => {
     if (!pool?.stakingItems || pool.stakingItems.length == 0)
       return 0
@@ -148,6 +160,7 @@ export const useStakingPools = () => {
     getUserStakeInPool,
     getFirstUserStakeInPool,
     isUnderLockPeriod,
-    timeLeftLockPeriod
+    timeLeftLockPeriod,
+    getUserTokenBalance
   }
 }

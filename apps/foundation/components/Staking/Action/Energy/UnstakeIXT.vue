@@ -6,7 +6,7 @@ PopupBase(@close="$emit('close')")
       InputGroup()
         template(#header) Withdraw amount
         template(#default)
-          InputText(v-model.number="withdrawAmount" placeholder="Enter amount" type="number" :max-amount="userStake")
+          InputText(v-model.number="withdrawAmount" placeholder="Enter amount" type="number" :max-amount="totalUnlockedIXT")
             template(#suffix) IXT
 
         template(#detail) Staked Amount: {{ roundToDecimals(userStake) }}
@@ -15,9 +15,9 @@ PopupBase(@close="$emit('close')")
           ButtonAnimated(btn="~ secondary-outline-cut sm" cut="s-sm" @click="withdrawAmount = userStake") Max
 
       InputGroup()
-        template(#header) ToC 
-        template(#default)
-          StakingActionAgreement(v-model="isAgreed")
+        template(#header) Unlocked IXT
+        template(#default) 
+          InputReadonly() {{ totalUnlockedIXT }}
 
   template(#footer)
     VList()
@@ -46,13 +46,15 @@ const { loading: isLoading, execute: unstakeRequest } = useContractRequest(async
 })
 
 const withdrawAmount = ref(0)
-const isAgreed = ref(false)
 
 const userStake = computed(() => item.userStakingData?.amountStaked ?? 0)
 
 const emit = defineEmits(["close"])
 
 
+const unlockedIXT = computed(() => item.userStakingData?.energyStakedAt?.filter(item => (((item?.timestamp ?? 1) + 2592000) * 1000) < Date.now()))
+
+const totalUnlockedIXT = unlockedIXT.value?.reduce((a, b) => a + (b?.amount ?? 0), 0)
 
 const onClickUnstake = async () => {
   const stakingItem: UserStakingItem = {

@@ -9,7 +9,7 @@ Card()
       TitleDetail(:icon="'ixt'")
       div() {{totalPastTickets}}
 
-  HList(justify="between")
+  HList(justify="between" v-if="pastTickets && week")
     CatRaffDropDownItem(:data="data" v-model="week")
     ButtonGlitch(btn="~ primary-outline-cut" @click="onClick" :text="'withdraw'")
 </template>
@@ -25,7 +25,7 @@ const { data } = defineProps<{
 
 const week = ref<WeeklyTicketDataFragment>()
 
-const totalPastTickets = computed(() => pastTickets.value.reduce((a, b) => a + b.amount, 0))
+const totalPastTickets = computed(() => pastTickets.value ? pastTickets.value.reduce((a, b) => a + (b.amount ?? 0), 0) : 0)
 const pastTickets = computed(() => data.userSpecificStakingData?.pastWeekTickets as WeeklyTicketDataFragment[])
 
 
@@ -36,7 +36,8 @@ const onClick = () => {
 }
 
 watch(pastTickets, () => {
-  console.log(pastTickets.value[0])
+  if (!pastTickets.value)
+    return
   nextTick(() => week.value = pastTickets.value[0])
 }, {
   immediate: true,

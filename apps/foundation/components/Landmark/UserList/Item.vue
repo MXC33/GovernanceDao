@@ -32,8 +32,9 @@ ClientOnly()
       TitleDetail(space-y="3")
         template(#detail) Total Earned
         TitleDetail(icon="ixt")
-          template(#default) {{ roundToDecimals(item.userStakingData?.totalReward) }} 
-      ButtonGlitch(btn="~ primary-outline-cut" mt="3" @click="claimReward()" :text="$t('landmarks.claimButton')")
+          template(#default) {{ roundToDecimals(item.userStakingData?.totalReward) }}
+      Disabler(:disabled="!canClaim")
+        ButtonGlitch(btn="~ primary-outline-cut" mt="3" @click="claimReward()" :text="$t('landmarks.claimButton')")
 
 
 
@@ -59,7 +60,7 @@ const unstakeActive = ref(false)
 const { item } = defineProps<{
   item: StakingItemFragment
 }>()
-const { canStake, canUnstake, sharesStaked, sharesOwned } = useStakingHelper(item)
+const { canStake, canUnstake, sharesStaked, sharesOwned, canClaim } = useStakingHelper(item)
 
 const claimReward = () =>
   claimLandmarkRewardsById(item.token)

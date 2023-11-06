@@ -30,7 +30,7 @@ export const useEnergyStakingContract = <T extends ContractInterface<T> & Energy
   const stakeEnergy = (item: UserStakingItem) =>
     createTransaction((contract) => {
       const address = walletAdress.value
-      if (!address || !item.token.tokenId || !item.amount)
+      if (!address || !item.amount)
         return undefined
 
       return contract.stakeEnergy(item.amount, false)
@@ -41,7 +41,7 @@ export const useEnergyStakingContract = <T extends ContractInterface<T> & Energy
   const stakeAmeliaEnergy = (item: UserStakingItem) =>
     createTransaction((contract) => {
       const address = walletAdress.value
-      if (!address || !item.token.tokenId || !item.amount)
+      if (!address || !item.amount)
         return undefined
 
       return contract.stakeEnergy(item.amount, true)
@@ -52,7 +52,7 @@ export const useEnergyStakingContract = <T extends ContractInterface<T> & Energy
   const stakeIXT = (item: UserStakingItem) => {
     return createTransaction((contract) => {
       const address = walletAdress.value
-      if (!address || !item.token.tokenId || !item.amount)
+      if (!address || !item.amount)
         return undefined
 
       return contract.stakeIXT(item.amount)
@@ -64,7 +64,7 @@ export const useEnergyStakingContract = <T extends ContractInterface<T> & Energy
   const unstakeIXT = (item: UserStakingItem) => {
     return createTransaction((contract) => {
       const address = walletAdress.value
-      if (!address || !item.token.tokenId || !item.amount)
+      if (!address || !item.amount)
         return undefined
 
       return contract.unstakeIXT(item.amount)

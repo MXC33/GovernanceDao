@@ -13,13 +13,23 @@ Card()
     HList(w="full" justify="between")
       HList()
         slot(name="box")
+    Disabler(:disabled="!(claimAmount > 0)")
       ButtonGlitch(btn="~ primary-outline-cut" @click="onClick" :text="'Claim'")
 </template>
 
 <script lang="ts" setup>
+import type { StakingDataFragment } from '#gql';
+
 const { withdrawIXT, claimPrize } = useCatRaffStakingContract()
+
+const { data } = defineProps<{
+  data: StakingDataFragment
+}>()
 
 const onClick = () => {
   return claimPrize()
 }
+
+
+const claimAmount = computed(() => data?.stakingItems[0]?.userStakingData?.totalReward ?? 0)
 </script>

@@ -81,6 +81,9 @@ fragment TokenSpecificUserStakingData on TokenSpecificUserStakingData {
   userRewardPerThirtyDays
   balanceOfToken
   stakedAt
+  energyStakedAt {
+    ...EnergyStakedAt
+  }
 }
 
 fragment StakingItem on StakingItem {
@@ -95,4 +98,9 @@ fragment StakingItem on StakingItem {
     ...TokenSpecificUserStakingData
   }
   odds
+}
+
+fragment EnergyStakedAt on EnergyStakedAt {
+  amount
+  timestamp
 }

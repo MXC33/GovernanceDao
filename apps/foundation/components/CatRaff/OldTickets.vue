@@ -10,7 +10,7 @@ Card()
       div() {{totalPastTickets}}
 
 
-  HList(justify="between")
+  HList(justify="between" v-if="pastTickets && week")
     CatRaffDropDownItem(:data="data" v-model="week")
     ButtonGlitch(btn="~ primary-outline-cut" @click="onClick" :text="'ADD TICKETS'")
 </template>
@@ -25,10 +25,10 @@ const { data } = defineProps<{
 }>()
 
 
-const totalPastTickets = computed(() => pastTickets.value.reduce((a, b) => a + b.amount, 0))
+const totalPastTickets = computed(() => pastTickets.value ? pastTickets.value.reduce((a, b) => a + (b.amount ?? 0), 0) : 0)
 const pastTickets = computed(() => data.userSpecificStakingData?.pastWeekTickets as WeeklyTicketDataFragment[])
 
-const week = ref<WeeklyTicketDataFragment>(pastTickets.value[0])
+const week = ref<WeeklyTicketDataFragment | null>(pastTickets.value ? pastTickets.value[0] : null)
 
 
 const onClick = () => {
@@ -39,7 +39,8 @@ const onClick = () => {
 
 
 watch(pastTickets, () => {
-  console.log(pastTickets.value[0])
+  if (!pastTickets.value)
+    return
   nextTick(() => week.value = pastTickets.value[0])
 }, {
   immediate: true,

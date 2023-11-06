@@ -11,7 +11,7 @@ Page()
     div(grid="~ md:cols-2 gap-6")
       CatRaffWithdrawItem(:data="stakingData")
 
-      CatRaffClaimItem()
+      CatRaffClaimItem(:data="stakingData")
         template(#detail)
           div() Available:
           TitleDetail(:icon="'ixt'")
@@ -46,6 +46,7 @@ const { data: weeklyData, execute: fetchCatRaffWeekly } = useCatRaffWeekly();
 
 const totalPrize = computed(() => stakingData.value?.stakingItems[0]?.userStakingData?.totalReward)
 const stakedIXT = computed(() => stakingData.value?.stakingItems[0]?.userStakingData?.amountStaked)
+
 
 await Promise.all([
   fetchCatRaffData(),

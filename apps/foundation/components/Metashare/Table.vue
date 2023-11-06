@@ -25,15 +25,14 @@ Card()
       h3(text="subheading" flex-grow="1") Total Rewards
       div(text="subheading") {{ roundToDecimals(data.userSpecificStakingData?.totalUserReward) }}
       Icon(icon="ixt")
-      ButtonGlitch(btn="~ primary-outline-cut" @click="claimAll" :text="$t('general.claimAll')")
+      Disabler(:disabled="!canClaim")
+        ButtonGlitch(btn="~ primary-outline-cut" @click="claimAll" :text="$t('general.claimAll')")
 
 </template>
 
 <script lang="ts" setup>
 import type { StakingDataFragment } from '#gql';
 import type { SimpleTableRow, SimpleTableColumn } from '@ix/base/composables/useSimpleTable';
-
-const { isMobile } = useDevice()
 
 const { claimAllMetashareReward } = useMetashareStakingContract()
 
@@ -61,6 +60,8 @@ const columns: SimpleTableColumn[] = [
 const totalDaily = computed(() => data.userSpecificStakingData?.totalUserRewardPerDay)
 
 const totalThirty = computed(() => data.userSpecificStakingData?.totalUserRewardPerThirtyDays)
+
+const canClaim = computed(() => data.userSpecificStakingData?.totalUserReward ? data.userSpecificStakingData?.totalUserReward > 0 : false)
 
 const claimAll = () => {
   return claimAllMetashareReward()

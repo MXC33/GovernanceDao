@@ -18,7 +18,7 @@ PopupBase(@close="$emit('close')")
         template(#default) 
           InputReadonly() {{item.token.tokenInfo?.title}}
 
-      InputGroup()
+      InputGroup(v-if="id == 'amelia'")
         template(#header) Amelia Contribution
         template(#default) 
           InputReadonly() 10 %
@@ -57,7 +57,7 @@ const { stakeEnergy, stakeAmeliaEnergy } = useEnergyStakingContract()
 
 const { item, id } = defineProps<{
   item: StakingItemFragment
-  id: string
+  id: 'amelia' | 'energy'
 }>()
 
 const { sharesStakable } = useStakingHelper(item)
@@ -68,7 +68,6 @@ const onClickStake = () => {
     amount: stakeAmount.value
   }
 
-  console.log("energy id", id)
   if (id == 'amelia')
     stakeAmeliaEnergy(stakingItem)
   if (id == 'energy')

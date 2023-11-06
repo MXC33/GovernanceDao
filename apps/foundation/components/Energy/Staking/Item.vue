@@ -19,9 +19,12 @@ ClientOnly()
         template(#default) {{roundToDecimals(dailyRewards)}}
 
     div(class="flex flex-col sm:flex-row gap-6")
-      ButtonGlitch(btn="~ primary-outline-cut" @click="unstakeActive = true" :text="$t('energy.unstakeIxt')")
-      ButtonGlitch(btn="~ primary-outline-cut" @click="stakeIxtActive = true" :text="$t('energy.stakeIxt')")
-      ButtonGlitch(btn="~ primary-outline-cut" @click="stakeEnergyActive = true" :text="$t(`energy.stakeEnergy.${id}`)")
+      Disabler(:disabled="ixtStaked == 0")
+        ButtonGlitch(btn="~ primary-outline-cut" @click="unstakeActive = true" :text="$t('energy.unstakeIxt')")
+      Disabler(:disabled="ixtBalance == 0")
+        ButtonGlitch(btn="~ primary-outline-cut" @click="stakeIxtActive = true" :text="$t('energy.stakeIxt')")
+      Disabler(:disabled="energyBalance == 0")
+        ButtonGlitch(btn="~ primary-outline-cut" @click="stakeEnergyActive = true" :text="$t(`energy.stakeEnergy.${id}`)")
 
     template(#detailBottom)
       StakingRewards(:pool="data" v-if="data" @claim="claimReward")
@@ -44,14 +47,14 @@ const { data, id } = defineProps<{
   data: StakingDataFragment
 }>()
 
-const item = data.stakingItems
+const item = computed(() => data.stakingItems)
 
 const stakeEnergyActive = ref(false)
 const stakeIxtActive = ref(false)
 
 const unstakeActive = ref(false)
 
-const { getUserStakeInPool } = useStakingPools()
+const { getUserStakeInPool, getUserTokenBalance } = useStakingPools()
 
 const energyStaked = computed(() => getUserStakeInPool('energy', data))
 
@@ -59,7 +62,9 @@ const ixtStaked = computed(() => getUserStakeInPool('ixt', data))
 
 const dailyRewards = computed(() => data.userSpecificStakingData?.totalUserRewardPerDay)
 
-const userReward = computed(() => data.userSpecificStakingData?.totalUserReward)
+const energyBalance = computed(() => getUserTokenBalance('energy', data))
+const ixtBalance = computed(() => getUserTokenBalance('ixt', data))
+
 
 const claimReward = () => {
   if (id == 'amelia')
