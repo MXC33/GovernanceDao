@@ -44,7 +44,7 @@ PopupBase(@close="$emit('close')")
 
   template(#buttons)
     Disabler(:disabled="!isAgreed || stakeAmount == 0")
-      ButtonInteractive(@click="onClickStake" text="Stake")
+      ButtonInteractive(@click="stakeRequest" text="Stake" :loading="isLoading")
 
 </template>
 
@@ -52,7 +52,9 @@ PopupBase(@close="$emit('close')")
 import type { StakingItemFragment } from '#gql';
 import type { UserStakingItem } from '@ix/base/composables/Contract/useStakingData';
 import { formattedMonths } from '@ix/base/composables/Utils/useHelpers';
-
+const { loading: isLoading, execute: stakeRequest } = useContractRequest(async () => {
+  return onClickStake()
+})
 const { stakeIXT } = useEnergyStakingContract()
 
 const { ixtBalance } = useCurrencyData()
@@ -66,14 +68,16 @@ const { item } = defineProps<{
   month: number
 }>()
 
-const onClickStake = () => {
+const onClickStake = async () => {
 
   const stakingItem: UserStakingItem = {
     token: item.token,
     amount: stakeAmount.value
   }
 
-  stakeIXT(stakingItem)
+  const staked = await stakeIXT(stakingItem)
+  if (staked)
+    emit("close")
 }
 
 

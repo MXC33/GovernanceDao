@@ -24,8 +24,8 @@ export const useLandmarkStakingContract = <T extends ContractInterface<T> & Land
   })
 
 
-  const stakeLandmark = (item: UserStakingItem) =>
-    createTransaction((contract) => {
+  const stakeLandmark = (item: UserStakingItem) => {
+    return createTransaction((contract) => {
       const address = walletAdress.value
       if (!address || !item.token.tokenId || !item.amount)
         return undefined
@@ -34,10 +34,10 @@ export const useLandmarkStakingContract = <T extends ContractInterface<T> & Land
     }, {
       onSuccess: async () => await Promise.all([refreshStakingData(), refreshTokens()])
     })
-
+  }
 
   const unstakeLandmark = (item: UserStakingItem) => {
-    createTransaction((contract) => {
+    return createTransaction((contract) => {
       const address = walletAdress.value
       if (!address || !item.token.tokenId || !item.amount)
         return undefined
@@ -49,7 +49,7 @@ export const useLandmarkStakingContract = <T extends ContractInterface<T> & Land
   }
 
   const claimLandmarkRewardsById = (item: NftFragment) => {
-    createTransaction((contract) => {
+    return createTransaction((contract) => {
       const address = walletAdress.value
       if (!address || !item.tokenId)
         return undefined
@@ -61,7 +61,7 @@ export const useLandmarkStakingContract = <T extends ContractInterface<T> & Land
   }
 
   const claimAllLandmarkRewards = () => {
-    createTransaction((contract) => {
+    return createTransaction((contract) => {
       const address = walletAdress.value
       if (!address)
         return undefined

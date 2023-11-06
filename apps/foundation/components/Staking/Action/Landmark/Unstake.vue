@@ -36,13 +36,18 @@ PopupBase(@close="$emit('close')")
 
   template(#buttons)
     Disabler(:disabled="!isAgreed || unstakeAmount == 0")
-      ButtonInteractive(@click="onClickUnstake" text="Unstake")
+      ButtonInteractive(@click="unstakeRequest" text="Unstake" :loading="isLoading")
 
 </template>
 
 <script lang="ts" setup>
 import type { StakingItemFragment } from '#gql';
 import type { UserStakingItem } from '@ix/base/composables/Contract/useStakingData';
+const { loading: isLoading, execute: unstakeRequest } = useContractRequest(async () => {
+  return onClickUnstake()
+})
+
+
 const { unstakeLandmark } = useLandmarkStakingContract()
 
 const unstakeAmount = ref(0)
@@ -55,12 +60,14 @@ const { item } = defineProps<{
 }>()
 const { sharesStaked } = useStakingHelper(item)
 
-const onClickUnstake = () => {
+const onClickUnstake = async () => {
   const stakingItem: UserStakingItem = {
     token: item.token,
     amount: unstakeAmount.value
   }
-  unstakeLandmark(stakingItem)
+  const unstaked = await unstakeLandmark(stakingItem)
+  if (unstaked)
+    emit('close')
 }
 
 

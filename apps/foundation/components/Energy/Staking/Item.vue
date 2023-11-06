@@ -43,7 +43,7 @@ const { claimIXTAmeliaReward, claimIXTReward } = useEnergyStakingContract()
 
 
 const { data, id } = defineProps<{
-  id: string,
+  id: 'amelia' | 'energy',
   data: StakingDataFragment
 }>()
 

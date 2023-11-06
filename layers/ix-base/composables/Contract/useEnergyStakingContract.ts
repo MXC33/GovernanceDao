@@ -15,6 +15,7 @@ export const useEnergyStakingContract = <T extends ContractInterface<T> & Energy
 
   const { refresh: refreshTokens } = useTokenData()
   const { refresh: refreshCurrencies } = useCurrencyData()
+  const { allowanceCheck } = useIXTContract()
 
   const { createTransaction, withContract, ...contractSpec } = defineContract<T>('energy-staking-contract-', {
     contractAddress,
@@ -57,6 +58,7 @@ export const useEnergyStakingContract = <T extends ContractInterface<T> & Energy
 
       return contract.stakeIXT(item.amount)
     }, {
+      approve: async () => await allowanceCheck(item.amount, contractAddress),
       onSuccess: async () => await Promise.all([refreshEnergyStakingData(), refreshEnergyAmeliaStakingData(), refreshCurrencies()])
     })
   }

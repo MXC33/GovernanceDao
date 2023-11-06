@@ -5,7 +5,7 @@ Card()
 
   Divider(mx="-6")
 
-  div(grid="~ cols-2" space-x="3")
+  div(grid="~ md:cols-2" space-x="3")
     TitleDetail(icon="ixt") 
       template(#detail) {{ $t('general.rewards') }}
       template(#default) {{ roundToDecimals(totalReward) }}

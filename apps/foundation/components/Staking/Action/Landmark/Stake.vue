@@ -36,13 +36,16 @@ PopupBase(@close="$emit('close')")
 
   template(#buttons)
     Disabler(:disabled="!isAgreed || stakeAmount == 0")
-      ButtonInteractive(@click="onClickStake" text="Stake")
+      ButtonInteractive(@click="stakeRequest" text="Stake" :loading="isLoading")
 
 </template>
 
 <script lang="ts" setup>
 import type { StakingItemFragment } from '#gql';
 import type { UserStakingItem } from '@ix/base/composables/Contract/useStakingData';
+const { loading: isLoading, execute: stakeRequest } = useContractRequest(async () => {
+  return onClickStake()
+})
 
 const stakeAmount = ref(0)
 const isAgreed = ref(false)
@@ -56,12 +59,14 @@ const { item } = defineProps<{
 
 const { sharesStakable } = useStakingHelper(item)
 
-const onClickStake = () => {
+const onClickStake = async () => {
   const stakingItem: UserStakingItem = {
     token: item.token,
     amount: stakeAmount.value
   }
-  stakeLandmark(stakingItem)
+  const staked = await stakeLandmark(stakingItem)
+  if (staked)
+    emit('close')
 }
 
 

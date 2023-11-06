@@ -41,14 +41,16 @@ PopupBase(@close="$emit('close')")
 
   template(#buttons)
     Disabler(:disabled="!isAgreed || stakeAmount == 0")
-      ButtonInteractive(@click="onClickStake" text="Stake")
+      ButtonInteractive(@click="stakeRequest" text="Stake" :loading="isLoading")
 
 </template>
 
 <script lang="ts" setup>
 import type { StakingItemFragment } from '#gql';
 import type { UserStakingItem } from 'composables/useStakingPools';
-
+const { loading: isLoading, execute: stakeRequest } = useContractRequest(async () => {
+  return onClickStake()
+})
 const stakeAmount = ref(0)
 const isAgreed = ref(false)
 
@@ -62,16 +64,28 @@ const { item, id } = defineProps<{
 
 const { sharesStakable } = useStakingHelper(item)
 
-const onClickStake = () => {
+const onClickStake = async () => {
   const stakingItem: UserStakingItem = {
     token: item.token,
     amount: stakeAmount.value
   }
 
   if (id == 'amelia')
-    stakeAmeliaEnergy(stakingItem)
+    await onStakeAmelia(stakingItem)
   if (id == 'energy')
-    stakeEnergy(stakingItem)
+    await onStakeEnergy(stakingItem)
+}
+
+const onStakeEnergy = async (item: StakingItemFragment) => {
+  const staked = await stakeEnergy(item)
+  if (staked)
+    emit("close")
+}
+
+const onStakeAmelia = async (item: StakingItemFragment) => {
+  const staked = await stakeAmeliaEnergy(item)
+  if (staked)
+    emit("close")
 }
 
 

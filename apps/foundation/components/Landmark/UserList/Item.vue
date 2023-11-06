@@ -26,7 +26,8 @@ ClientOnly()
         template(#detail) Total Earned
       TitleDetail(icon="ixt")
         template(#default) {{ roundToDecimals(item.userStakingData?.totalReward) }} 
-      ButtonGlitch(btn="~ primary-outline-cut" mt="3" @click="claimReward()" :text="$t('landmarks.claimButton')")
+      Disabler(:disabled="!canClaim")
+        ButtonInteractive(btn="~ primary-outline-cut" mt="3" @click="claimRequest" :text="$t('landmarks.claimButton')" :loading="isLoading")
 
     template(#detailBottom v-if="isMobile")
       TitleDetail(space-y="3")
@@ -34,7 +35,7 @@ ClientOnly()
         TitleDetail(icon="ixt")
           template(#default) {{ roundToDecimals(item.userStakingData?.totalReward) }}
       Disabler(:disabled="!canClaim")
-        ButtonGlitch(btn="~ primary-outline-cut" mt="3" @click="claimReward()" :text="$t('landmarks.claimButton')")
+        ButtonInteractive(btn="~ primary-outline-cut" mt="3" @click="claimRequest" :text="$t('landmarks.claimButton')" :loading="isLoading")
 
 
 
@@ -50,9 +51,13 @@ ClientOnly()
 <script lang="ts" setup>
 import type { StakingItemFragment } from '#gql';
 
+const { loading: isLoading, execute: claimRequest } = useContractRequest(async () => {
+  return claimReward()
+})
+
 const { isMobile } = useDevice()
 
-const { claimLandmarkRewardsById, stakeLandmark, unstakeLandmark } = useLandmarkStakingContract()
+const { claimLandmarkRewardsById } = useLandmarkStakingContract()
 
 const stakeActive = ref(false)
 const unstakeActive = ref(false)
@@ -62,7 +67,8 @@ const { item } = defineProps<{
 }>()
 const { canStake, canUnstake, sharesStaked, sharesOwned, canClaim } = useStakingHelper(item)
 
-const claimReward = () =>
-  claimLandmarkRewardsById(item.token)
+const claimReward = async () =>
+  await claimLandmarkRewardsById(item.token)
+
 
 </script>
