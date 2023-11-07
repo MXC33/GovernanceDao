@@ -64,9 +64,7 @@ export const useSiteHeader = () => {
 
   const fetchHeaderData = () =>
     useAsyncDataState('site-header-menu', async () => {
-      const request = (await $fetch('https://api.planetix.com/api/v1/navigation')) as HeaderRequest
-
-      console.log("request", request)
+      const request = (await $fetch(BASE_API_ENDPOINT_URL() + '/navigation')) as HeaderRequest
 
       return request?.data ?? []
     });

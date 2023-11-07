@@ -38,7 +38,7 @@ component(is="style").
 <script lang="ts" setup>
 
 const { fetchHeaderData } = useSiteHeader()
-const { data: headerData, refresh: fetchHeader } = fetchHeaderData()
+const { data: headerData, execute: fetchHeader } = fetchHeaderData()
 await fetchHeader()
 
 const { topBannerAd, bannerAdActive } = useAds()

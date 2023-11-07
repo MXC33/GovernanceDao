@@ -10,7 +10,7 @@
 <script setup lang="ts">
 const { fetchHeaderData } = useSiteHeader()
 
-const { refresh: fetchHeader } = fetchHeaderData()
+const { execute: fetchHeader } = fetchHeaderData()
 await fetchHeader()
 const { setupPaintWorker } = useAppSetup()
 
