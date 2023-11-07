@@ -10,7 +10,9 @@ VList(flex-grow="1" w="full")
 </template>
 
 <script lang="ts" setup>
-const { data: headerData } = useHeaderData()
+const { fetchHeaderData } = useHeaderData()
+const { data: headerData } = fetchHeaderData()
+
 
 const adjustedTitle = (title: string) => {
   if (title == "COMMUINTY")

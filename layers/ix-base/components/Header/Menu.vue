@@ -40,7 +40,9 @@ import SettingsIcon from '~/assets/images/header/hamburger.svg'
 const menuEl = ref()
 const { useMobileBreakpoint } = useDevice()
 const isMobile = useMobileBreakpoint()
-const { data: headerData } = useHeaderData()
+const { fetchHeaderData } = useHeaderData()
+
+const { data: headerData } = fetchHeaderData()
 const { activeHeaderIndex, closeHeaderMenu } = useSiteHeader()
 const config = useAppConfig()
 
