@@ -43,9 +43,7 @@ await fetchTopBannerData()
 
 const { useMobileBreakpoint } = useDevice()
 const { state: swapVisible } = useIXTSwapVisible()
-
-const { fetchHeaderData } = useHeaderData()
-const { data: headerData, execute: fetchData } = fetchHeaderData()
+const { data: headerData, execute: fetchHeaderData } = useHeaderData()
 
 
 
@@ -59,7 +57,7 @@ const menuEl = ref()
 
 const isMobile = useMobileBreakpoint('lg')
 
-await fetchData()
+await fetchHeaderData()
 
 const onMouseLeave = () => {
   if (isMobile.value)

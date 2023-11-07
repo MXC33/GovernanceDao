@@ -38,21 +38,13 @@ export interface NavigationMedia {
   name: string
 }
 
-export const useHeaderData = () => {
+export const useHeaderData = () =>
+  useAsyncDataState('site-header-menu', async () => {
+    const request = (await $fetch(BASE_API_ENDPOINT_URL() + '/navigation')) as HeaderRequest
 
-  const { fetchIXAPI } = useIXAPI()
+    return request?.data ?? []
+  });
 
-  const fetchHeaderData = () =>
-    useAsyncDataState('site-header-menu', async () => {
-      const request = await fetchIXAPI('/navigation') as HeaderRequest
-
-      return request?.data ?? []
-    });
-
-  return {
-    fetchHeaderData
-  }
-}
 
 export const useSiteHeader = () => {
   const activeHeaderIndex = useState<number | null>('header-active-index', () => null)

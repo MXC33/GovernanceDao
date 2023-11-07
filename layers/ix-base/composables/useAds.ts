@@ -61,7 +61,7 @@ export const useAds = () => {
     return useAsyncDataState('banner-data', () =>
       fetchIXAPI('banner') as Promise<BannerResponse>, {
       transform: (item) =>
-        item?.data as Banner ?? null
+        item.data as Banner
     })
   }
 

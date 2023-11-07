@@ -9,10 +9,8 @@
 
 <script setup lang="ts">
 
-const { fetchHeaderData } = useHeaderData()
-const { execute: fetchData } = fetchHeaderData()
-
-await fetchData()
+const { execute: fetchHeaderData } = useHeaderData()
+await fetchHeaderData()
 const { setupPaintWorker } = useAppSetup()
 
 onMounted(() => {
