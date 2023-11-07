@@ -37,13 +37,17 @@ component(is="style").
 
 <script lang="ts" setup>
 
+const { fetchHeaderData } = useSiteHeader()
+const { data: headerData, execute: fetchHeader } = fetchHeaderData()
+await fetchHeader()
+
 const { topBannerAd, bannerAdActive } = useAds()
 const { data: topBannerData, execute: fetchTopBannerData } = topBannerAd()
 await fetchTopBannerData()
 
 const { useMobileBreakpoint } = useDevice()
 const { state: swapVisible } = useIXTSwapVisible()
-const { data: headerData, execute: fetchHeaderData } = useHeaderData()
+
 
 
 
@@ -57,7 +61,6 @@ const menuEl = ref()
 
 const isMobile = useMobileBreakpoint('lg')
 
-await fetchHeaderData()
 
 const onMouseLeave = () => {
   if (isMobile.value)

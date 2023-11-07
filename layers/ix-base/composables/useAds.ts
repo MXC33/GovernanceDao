@@ -17,6 +17,9 @@ export interface BannerResponse {
 }
 
 export const useAds = () => {
+
+  const { fetchIXAPI } = useIXAPI()
+
   const oneHour = 3600
   const fourHours = 14400
   const aDay = 86400
@@ -56,14 +59,13 @@ export const useAds = () => {
   //   return bannerData
   // }
 
-  const topBannerAd = () => {
-    const { fetchIXAPI } = useIXAPI()
-    return useAsyncDataState('banner-data', () =>
+  const topBannerAd = () =>
+    useAsyncDataState('banner-data', () =>
       fetchIXAPI('banner') as Promise<BannerResponse>, {
       transform: (item) =>
         item?.data as Banner
     })
-  }
+
 
   const bannerAdActive = useCookieState(`ad-banner-${config.ixApp}`, () => true, { maxAge: aDay, consentLevel: 'preferences' })
 

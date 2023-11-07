@@ -8,9 +8,10 @@
 </template>
 
 <script setup lang="ts">
+const { fetchHeaderData } = useSiteHeader()
 
-const { execute: fetchHeaderData } = useHeaderData()
-await fetchHeaderData()
+const { execute: fetchHeader } = fetchHeaderData()
+await fetchHeader()
 const { setupPaintWorker } = useAppSetup()
 
 onMounted(() => {
