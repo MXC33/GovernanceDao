@@ -1,5 +1,5 @@
 <template lang="pug">
-div#infobox(:style="values" z="999" pos="fixed" translate-x="-10" translate-y="-12")
+div#infobox(:style="values" z="999" pos="fixed" translate-x="-10" translate-y="-100%" class="-mt-3")
 </template>
 
 <script lang="ts" setup>
