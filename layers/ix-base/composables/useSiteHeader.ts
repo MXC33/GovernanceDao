@@ -38,12 +38,7 @@ export interface NavigationMedia {
   name: string
 }
 
-export const useHeaderData = () =>
-  useAsyncDataState('site-header-menu', async () => {
-    const request = (await $fetch(BASE_API_ENDPOINT_URL() + '/navigation')) as HeaderRequest
 
-    return request?.data ?? []
-  });
 
 
 export const useSiteHeader = () => {
@@ -67,8 +62,16 @@ export const useSiteHeader = () => {
     activeHeaderIndex.value = null
   }
 
+  const fetchHeaderData = () =>
+    useAsyncDataState('site-header-menu', async () => {
+      const request = (await $fetch(BASE_API_ENDPOINT_URL() + '/navigation')) as HeaderRequest
+
+      return request?.data ?? []
+    });
+
   return {
     closeHeaderMenu,
+    fetchHeaderData,
     activeHeaderIndex,
     autoHideActive,
     isScrollingDown,
