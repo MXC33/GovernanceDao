@@ -2,18 +2,18 @@
 VList(:class="className" pos="sticky left-0 top-0" translate-y="$header-offset" font="gridnik" text="base" z="99" w="full" @mouseleave="onMouseLeave" ref="menuElement" transition="all")
   VList(pos="relative" z="2" bg="$header-background")
     //- SplashBanner(ref="bannerEl" v-if="bannerAdActive")
-    HeaderMenu(ref="menuEl"  px="4 md:7.5" )
-      template(#logo v-if="$slots.logo")
-        slot(name="logo")
+    //- HeaderMenu(ref="menuEl"  px="4 md:7.5" )
+    //-   template(#logo v-if="$slots.logo")
+    //-     slot(name="logo")
 
-      template(#contentRight v-if="$slots.contentRight")
-        slot(name="contentRight")
+    //-   template(#contentRight v-if="$slots.contentRight")
+    //-     slot(name="contentRight")
 
   //For teleports
   div(id="navigation-bottom" pos="relative" px="4 md:7.5" )
 
-  Transition(name="slide-top" mode="out-in")
-    HeaderNavigation(v-if="activeHeaderIndex != null && headerData != null"  :key="activeHeaderIndex" :header="headerData[activeHeaderIndex]" @close="activeHeaderIndex = null")
+  //- Transition(name="slide-top" mode="out-in")
+  //-   HeaderNavigation(v-if="activeHeaderIndex != null && headerData != null"  :key="activeHeaderIndex" :header="headerData[activeHeaderIndex]" @close="activeHeaderIndex = null")
 
   slot(name="contentBottom")
 
@@ -37,9 +37,9 @@ component(is="style").
 
 <script lang="ts" setup>
 
-const { fetchHeaderData } = useSiteHeader()
-const { data: headerData, execute: fetchHeader } = fetchHeaderData()
-await fetchHeader()
+// const { fetchHeaderData } = useSiteHeader()
+// const { data: headerData, execute: fetchHeader } = fetchHeaderData()
+// await fetchHeader()
 
 const { topBannerAd, bannerAdActive } = useAds()
 const { data: topBannerData, execute: fetchTopBannerData } = topBannerAd()
