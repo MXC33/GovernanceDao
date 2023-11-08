@@ -15,6 +15,9 @@ VList()
   TradeModuleSubstitute(v-model="isSubstituteListing")
     template(#title) {{ $t(`marketplace.trade.maxPriceList`) }}
     template(#substituteTitle)
+    template(#information)
+      HelperHover(tooltip-id="substituteBuy" :maxWidth="85")
+        InfoIcon(w="4.5" cursor="pointer" fill="gray-200 hover:white")
     template(#substituteInput)
       InputText(v-model="maxPrice" :class="{highlighted: showIncreaseMaxPrice}" :is-module="true")
         template(#suffix) IXT
@@ -36,6 +39,7 @@ import type { SingleItemData } from '@ix/base/composables/Token/useIXToken'
 import { useBuyContract, useBuyItems } from "~/composables/useBuy"
 import { NFTType } from "~/composables/useAssetContracts"
 import CartIcon from '~/assets/icons/cart.svg'
+import InfoIcon from '~/assets/icons/info-icon.svg'
 
 
 const { displayPopup } = usePopups()

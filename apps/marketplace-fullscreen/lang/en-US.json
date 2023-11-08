@@ -96,7 +96,9 @@
     "like": "Add item to favorites",
     "transfer": "Transfer item to another wallet",
     "removeLike": "Remove item from favorites",
-    "chain": "Chain: Polygon"
+    "chain": "Chain: Polygon",
+    "substituteSell": "With this functionality you can accept several offers, selling to the highest offer first. Select how many items you want to sell and the lowest price you want to sell for.",
+    "substituteBuy": "This is called “substitute listing” and refers to when you buy from several listings, from the lowest price first. Select how many items you want to buy and the maximum price you want to pay for each item."
   },
   "collection": {
     "attributes": {
