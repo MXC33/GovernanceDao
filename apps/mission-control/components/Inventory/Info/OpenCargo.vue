@@ -6,20 +6,38 @@ VList(pos="sticky bottom-0" color="white" bg="mc-black opacity-90" b="t-1 mc-ora
       div(opacity="60") MAX: {{ maxOpeningAmount }}
 
 
-  button(btn="~ primary-outline uppercase" @click="clickOpenChest" w="full") {{$t(`general.open`)}}
+  button(btn="~ primary-outline uppercase" @click="clickOpenChest" w="full" v-if="canOpenPack") {{$t(`general.open`)}}
+  InventoryListOpenAvatars(v-else)
 </template> 
 
 <script setup lang="ts">
 import type { NftFragment } from '#gql'
 import type { AdjustableToken } from '@ix/base/composables/Utils/useAdjustableNumber';
 
+const { execute: fetchClaimStatus, data: canClaim } = useCanClaimAvatarData()
+
 const adjustAmount = ref<AdjustableToken>(null)
 
 const { viewPack } = useOpenPacks()
 
+
+const canOpenPack = computed(() => {
+  if (!isAvatarPack.value)
+    return true
+
+  return !canClaim.value
+})
+
 const props = defineProps<{
   pack: NftFragment
 }>()
+
+const isAvatarPack = computed(() =>
+  props.pack.tokenInfo.type == 'avatar-card-pack' ||
+  props.pack.tokenInfo.type == 'avatar-card-pack-crypto'
+)
+
+
 
 const maxOpeningAmount = computed(() => {
   if (props.pack.tokenInfo?.type == 'cargo-drop')

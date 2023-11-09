@@ -1,6 +1,6 @@
 <template lang="pug">
 VList(pos="sticky bottom-0" color="white" bg="mc-black opacity-90" v-if="canClaim")
-  button(btn="~ secondary-outline uppercase" @click="clickOpenAvatars" w="full") Claim Avatar
+  button(btn="~ primary-outline uppercase" @click="clickOpenAvatars" w="full") Claim Avatar
 </template> 
 
 <script setup lang="ts">
