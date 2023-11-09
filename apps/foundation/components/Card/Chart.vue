@@ -6,7 +6,7 @@ Card()
 
   ChartBackground()
 
-  Chart()
+  Chart(:data="chartData")
 
   div(grid="~ cols-3 gap-3") 
     TitleDetail()
@@ -26,7 +26,9 @@ Card()
 <script lang="ts" setup>
 import ChartBackground from '~/assets/images/Mask_group.svg'
 
-
+defineProps<{
+  chartData: number[]
+}>()
 //Details for Chart 
 const details = [
   { title: 'Wallet', value: 0 },
