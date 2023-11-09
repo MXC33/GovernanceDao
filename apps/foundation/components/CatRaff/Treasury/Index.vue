@@ -3,14 +3,14 @@ div(grid="~ cols-2" gap-6)
   VList(gap-6)
     Card(flex-grow)
       CardTitle()
-        template(#default) {{ $t(`ixtCatRaff.TreasuryBalance.title`) }}
+        template(#default) {{ $t(`ixtcatraff.TreasuryBalance.title`) }}
         template(#detail) IXT
       TitleDetail(icon="ixt")
         template(#default) {{ stakingData.totalStakedAmount}}
     Card()
       CardTitle()
-        template(#default) {{ $t(`ixtCatRaff.PoolPrice.title`) }}
-        template(#detail) {{ $t(`ixtCatRaff.PoolPrice.description`) }}
+        template(#default) {{ $t(`ixtcatraff.PoolPrice.title`) }}
+        template(#detail) {{ $t(`ixtcatraff.PoolPrice.description`) }}
       TitleDetail()
         template(#default) ${{ ixtToUSD(stakingData.totalStakedAmount ?? 0) }}
 
@@ -18,17 +18,17 @@ div(grid="~ cols-2" gap-6)
 
   Card()
     CardTitle()
-      template(#default) {{ $t(`ixtCatRaff.PoolStats.title`) }}
+      template(#default) {{ $t(`ixtcatraff.PoolStats.title`) }}
 
     TitleDetail()
-      template(#detail)  {{ $t(`ixtCatRaff.CurrentWeekDeposits.title`) }}
+      template(#detail)  {{ $t(`ixtcatraff.CurrentWeekDeposits.title`) }}
       template(#default)
         div(space-x="1")
           span {{ stakingData.userSpecificStakingData?.currentWeekTickets?.amount }} IXT
           span (${{ ixtToUSD(stakingData.userSpecificStakingData?.currentWeekTickets?.amount ?? 0) }})
 
     TitleDetail()
-      template(#detail) {{ $t(`ixtCatRaff.TotalWeekDeposits.title`) }}
+      template(#detail) {{ $t(`ixtcatraff.TotalWeekDeposits.title`) }}
       template(#default) {{currentWeekDeposits}} IXT
 </template>
 
@@ -42,6 +42,6 @@ const { stakingData, weeklyData } = defineProps<{
   weeklyData: CatRaffTicketInfoFragment[]
 }>()
 
-const currentWeekDeposits = computed(() => weeklyData[weeklyData.length - 1].totalTickets)
+const currentWeekDeposits = computed(() => (weeklyData && weeklyData[weeklyData.length - 1].totalTickets) ?? 0)
 
 </script>

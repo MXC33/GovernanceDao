@@ -2,8 +2,8 @@
 Card()
   HList()
     CardTitle(flex-grow space-y="2") 
-      template(#default) {{ $t(`ixtCatRaff.withdraw.title`) }}
-      template(#detail) {{ $t(`ixtCatRaff.withdraw.description`) }}
+      template(#default) {{ $t(`ixtcatraff.withdraw.title`) }}
+      template(#detail) {{ $t(`ixtcatraff.withdraw.description`) }}
     HList(space-x="1")
       div() Available:
       TitleDetail(:icon="'ixt'")

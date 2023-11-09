@@ -2,8 +2,8 @@
 Card()
   HList()
     CardTitle(flex-grow space-y="2") 
-      template(#default) {{ $t(`ixtCatRaff.ticket.title`) }}
-      template(#detail) {{ $t(`ixtCatRaff.ticket.description`) }}
+      template(#default) {{ $t(`ixtcatraff.ticket.title`) }}
+      template(#detail) {{ $t(`ixtcatraff.ticket.description`) }}
     HList(space-x="1")
       div() Available:
       TitleDetail()
