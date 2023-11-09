@@ -21,24 +21,16 @@ export const useChartData = () => {
       timestamps.push(endOfDayTimestamp - 86400 * i);
     }
 
-    console.log("timestamps", timestamps)
     // Calculate the balance for each timestamp.
     for (let i = 1; i < timestamps.length; i++) {
       const startOfPeriod = timestamps[i];
       const endOfPeriod = startOfPeriod + 86400;
-
-      console.log("start of period   ", startOfPeriod)
-      console.log("endOfPeriod       ", endOfPeriod)
-      console.log("transaction period", transactions[0].timeStamp)
-
       const filteredTransactions = transactions.filter(transaction => {
-
 
         const filter = Number(transaction.timeStamp) && Number(transaction.timeStamp) > startOfPeriod && Number(transaction.timeStamp) <= endOfPeriod
         return filter
       })
 
-      console.log("Filtered transactions", filteredTransactions)
       const balanceChange = filteredTransactions.reduce((total, transaction) => {
         const value = transaction.value ? Number(ethers.utils.formatEther(transaction.value)) : 0;
         if (address && transaction.to && transaction.to.toLowerCase() === address.toLowerCase()) {
@@ -48,12 +40,10 @@ export const useChartData = () => {
         }
       }, 0);
 
-      console.log("balanceChange", balanceChange)
       timestamps[i] = Number(timestamps[i - 1] + balanceChange);
     }
 
-    console.log("returned ", timestamps.map(Number))
-    return timestamps.map(Number);
+    return timestamps.map(Number).toReversed()
   };
 
   return {
