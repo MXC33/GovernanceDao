@@ -19,7 +19,6 @@ HList(overflow-x="auto" whitespace-nowrap space-x="6")
 	
 <script lang="ts" setup>
 import { type CatRaffTicketInfoFragment } from '#gql';
-import { defineProps } from 'vue';
 import { format } from 'date-fns';
 
 const startDate = 1657670400000
