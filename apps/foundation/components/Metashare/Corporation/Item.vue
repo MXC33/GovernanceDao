@@ -5,8 +5,9 @@ ClientOnly()
     div(grid="~ cols-3" mx="-6" mt="-6" bg="black")
       TokenMedia(:token="data.token" h="60" pos="relative")
 
-      VList(grid="col-span-2" items="center" justify="center" ) 
-        img(:src="'/assets/metashare/' + data.token.tokenInfo?.tier + '-title.png'" h="auto" max-w="64")
+      VList(grid="col-span-2" items="center" justify="center" p="6")
+        div(max-w="64") 
+        img(:src="'/assets/metashare/' + data.token.tokenInfo?.tier + '-title.png'" h="auto" max-w="full" min-w="0")
 
     MetashareTrade(:staking-item="data")
 

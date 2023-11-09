@@ -1,17 +1,17 @@
 <template lang="pug">
-Card()
-  HList()
-    CardTitle(flex-grow space-y="2") 
-      template(#default) {{ $t(`ixtcatraff.withdraw.title`) }}
-      template(#detail) {{ $t(`ixtcatraff.withdraw.description`) }}
+CatRaffItem()
+  template(#title) {{ $t(`ixtcatraff.withdraw.title`) }}
+  template(#description) {{ $t(`ixtcatraff.withdraw.description`) }}
+  template(#counter)
     HList(space-x="1")
       div() Available:
       TitleDetail(:icon="'ixt'")
       div() {{totalPastTickets}}
 
-  HList(justify="between" v-if="pastTickets && week")
-    CatRaffDropDownItem(:data="data" v-model="week")
-    ButtonGlitch(btn="~ primary-outline-cut" @click="onClick" :text="'withdraw'")
+  template(#footer)
+    HList(justify="between" v-if="pastTickets && week")
+      CatRaffDropDownItem(:data="data" v-model="week")
+      ButtonGlitch(btn="~ primary-outline-cut" @click="onClick" :text="'withdraw'")
 </template>
 
 <script lang="ts" setup>

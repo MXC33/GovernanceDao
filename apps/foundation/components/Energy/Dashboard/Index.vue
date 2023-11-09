@@ -1,11 +1,10 @@
 <template lang="pug">
-div(grid="~ lg:cols-2 cols-1 gap-6")
+div(grid="~ lg:cols-2 cols-1 gap-4 lg:gap-6")
   EnergyDashboardPool(:data="data")
 
-  VList(space-y="6")
-    CardChart()
+  CardChart()
 
-    EnergyDashboardEpochs(:data="data")
+  EnergyDashboardEpochs(:data="data")
 
 </template>
   

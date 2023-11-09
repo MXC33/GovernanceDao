@@ -1,18 +1,18 @@
 <template lang="pug">
-Card()
-  HList()
-    CardTitle(flex-grow space-y="2") 
-      template(#default) {{ $t(`ixtcatraff.ticket.title`) }}
-      template(#detail) {{ $t(`ixtcatraff.ticket.description`) }}
+CatRaffItem()
+  template(#title) {{ $t(`ixtcatraff.ticket.title`) }}
+  template(#description) {{ $t(`ixtcatraff.ticket.description`) }}
+  template(#counter)
     HList(space-x="1")
       div() Available:
       TitleDetail()
       div() {{totalPastTickets}}
 
 
-  HList(justify="between" v-if="pastTickets && week")
-    CatRaffDropDownItem(:data="data" v-model="week")
-    ButtonGlitch(btn="~ primary-outline-cut" @click="onClick" :text="'ADD TICKETS'")
+  template(#footer)
+    HList(justify="between" v-if="pastTickets && week")
+      CatRaffDropDownItem(:data="data" v-model="week")
+      ButtonGlitch(btn="~ primary-outline-cut" @click="onClick" :text="'ADD TICKETS'")
 </template>
 
 <script lang="ts" setup>

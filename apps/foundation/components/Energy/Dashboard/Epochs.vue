@@ -1,23 +1,22 @@
 <template lang="pug">
-div(grid="~ cols-2 gap-6")
-  Card()
-    CardTitle(flex-grow)
-      template(#default) {{$t("energy.IXTPoolNextEpoch") }}
-      template(#subtitle) {{$t("general.estimated") }}
+Card()
+  CardTitle(flex-grow)
+    template(#default) {{$t("energy.IXTPoolNextEpoch") }}
+    template(#subtitle) {{$t("general.estimated") }}
 
 
-    TitleDetail(icon="ixt")
-      template(#detail) {{$t("energy.TotalPoolNextEpoch") }}
-      template(#default) {{data.nextEpochPool?.toLocaleString()}}
+  TitleDetail(icon="ixt")
+    template(#detail) {{$t("energy.TotalPoolNextEpoch") }}
+    template(#default) {{data.nextEpochPool?.toLocaleString()}}
 
-  Card()
-    CardTitle()
-      template(#default) {{$t("energy.NextEpochRelease") }}
-      template(#subtitle) {{$t("energy.facilitiesMinted") }}
+Card()
+  CardTitle()
+    template(#default) {{$t("energy.NextEpochRelease") }}
+    template(#subtitle) {{$t("energy.facilitiesMinted") }}
 
-    TitleDetail(icon="ixt")
-      template(#detail) 99.94%
-      template(#default) {{data.nextEpochPool?.toLocaleString()}}
+  TitleDetail(icon="ixt")
+    template(#detail) 99.94%
+    template(#default) {{data.nextEpochPool?.toLocaleString()}}
           
 </template>
   

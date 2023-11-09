@@ -4,11 +4,11 @@ Page()
     CardChartItem()
 
   PageSection(section="StakingContract")
-    div(grid="~ md:cols-2 gap-6")
+    div(grid="~ md:cols-2 gap-default")
       CatRaffStakeItem()
       CatRaffOldTickets(:data="stakingData")
 
-    div(grid="~ md:cols-2 gap-6")
+    div(grid="~ md:cols-2 gap-default")
       CatRaffWithdrawItem(:data="stakingData")
 
       CatRaffClaimItem(:data="stakingData")

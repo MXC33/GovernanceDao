@@ -18,13 +18,13 @@ ClientOnly()
         template(#detail) Daily rewards
         template(#default) {{roundToDecimals(dailyRewards)}}
 
-    div(class="flex flex-col sm:flex-row gap-6 flex-wrap")
+    div(flex="~ col md:row" gap="4 lg:6")
       Disabler(:disabled="ixtStaked == 0")
-        ButtonGlitch(btn="~ primary-outline-cut" @click="unstakeActive = true" :text="$t('energy.unstakeIxt')")
+        ButtonGlitch(btn="~ primary-outline-cut lt-md:sm" @click="unstakeActive = true" :text="$t('energy.unstakeIxt')")
       Disabler(:disabled="ixtBalance == 0")
-        ButtonGlitch(btn="~ primary-outline-cut" @click="stakeIxtActive = true" :text="$t('energy.stakeIxt')")
+        ButtonGlitch(btn="~ primary-outline-cut lt-md:sm" @click="stakeIxtActive = true" :text="$t('energy.stakeIxt')")
       Disabler(:disabled="energyBalance == 0")
-        ButtonGlitch(btn="~ primary-outline-cut" @click="stakeEnergyActive = true" :text="$t(`energy.stakeEnergy.${id}`)")
+        ButtonGlitch(btn="~ primary-outline-cut lt-md:sm" @click="stakeEnergyActive = true" :text="$t(`energy.stakeEnergy.${id}`)")
 
     template(#detailBottom)
       StakingRewards(:pool="data" v-if="data" @claim="claimReward")

@@ -1,5 +1,5 @@
 <template lang="pug">
-div(grid="~ md:cols-2 gap-6")
+div(grid="~ md:cols-2 gap-default")
   HomepageStakingLpItem(type="usdt" :pool="lpUsdtData" v-if="lpUsdtData")
   HomepageStakingLpItem(type="matic" :pool="lpMaticData" v-if="lpMaticData")
 

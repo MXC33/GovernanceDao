@@ -1,5 +1,5 @@
 <template lang="pug">
-div(grid="~ md:cols-2 gap-6")
+div(grid="~ md:cols-2 gap-default")
   template(v-for="pool in ixtPoolData")
     HomepageStakingIxtItem( :pool="pool.data" :month="pool.month" v-if="pool.data")
 
