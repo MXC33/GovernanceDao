@@ -1,5 +1,5 @@
 <template lang="pug"> 
-VList(space-y="6")
+VList(space-y="default")
   LandmarkUserListItem(:item="item" v-for="item in data")
 
 </template>

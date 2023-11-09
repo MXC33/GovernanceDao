@@ -1,6 +1,15 @@
 {
   "foundation": {
-    "claimRewards": "Claim rewards"
+    "claimRewards": "Claim rewards",
+    "menu": {
+      "index": "Home",
+      "territories": "Territories",
+      "landmarks": "Landmark",
+      "metashare": "Metashare",
+      "energy": "Energy",
+      "ixtcatraff": "Cat Raff",
+      "governance": "Governance"
+    }
   },
   "index": {
     "dashboardStaking": {

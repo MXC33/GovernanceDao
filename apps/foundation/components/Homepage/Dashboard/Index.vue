@@ -15,7 +15,7 @@ div(grid="~ lg:cols-2 cols-1 gap-6")
 
     CardChart()
 
-  VList(space-y="6" flex-grow="1") 
+  VList(space-y="default" flex-grow="1") 
     HomepageDashboardTable()
 
     Card() 

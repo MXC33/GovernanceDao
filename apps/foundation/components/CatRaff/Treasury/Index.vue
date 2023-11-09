@@ -1,20 +1,21 @@
 <template lang="pug">
-div(grid="~ cols-2" gap-6)
-  VList(gap-6)
+div(grid="~ md:cols-2 gap-default")
+  VList(space-y="default")
     Card(flex-grow)
       CardTitle()
         template(#default) {{ $t(`ixtcatraff.TreasuryBalance.title`) }}
-        template(#detail) IXT
+
       TitleDetail(icon="ixt")
+        template(#detail) IXT
         template(#default) {{ stakingData.totalStakedAmount}}
+
     Card()
       CardTitle()
         template(#default) {{ $t(`ixtcatraff.PoolPrice.title`) }}
-        template(#detail) {{ $t(`ixtcatraff.PoolPrice.description`) }}
+
       TitleDetail()
+        template(#detail) {{ $t(`ixtcatraff.PoolPrice.description`) }}
         template(#default) ${{ ixtToUSD(stakingData.totalStakedAmount ?? 0) }}
-
-
 
   Card()
     CardTitle()

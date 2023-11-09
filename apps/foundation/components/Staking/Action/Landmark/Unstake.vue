@@ -2,7 +2,7 @@
 PopupBase(@close="$emit('close')")
   template(#header) Unstake Landmark
   template(#default) 
-    VList(space-y="6")
+    VList(space-y="default")
       InputGroup()
         template(#header) Amount
         template(#default)
