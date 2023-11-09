@@ -16,8 +16,9 @@ VList()
     template(#title) {{ $t(`marketplace.trade.lowestOffer`) }}
     template(#substituteTitle)
     template(#information)
-      HelperHover(tooltip-id="substituteSell" :maxWidth="85")
-        InfoIcon(w="4.5" cursor="pointer" fill="gray-200 hover:white")
+      ClientOnly
+        HelperHover(tooltip-id="substituteSell" :maxWidth="85")
+          InfoIcon(w="4.5" cursor="pointer" fill="gray-200 hover:white")
     template(#substituteInput)
       InputText(v-model="minOffer" :class="{highlighted: showDecreaseMinPrice}" :is-module="true")
         template(#suffix) IXT

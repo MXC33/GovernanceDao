@@ -16,8 +16,9 @@ VList()
     template(#title) {{ $t(`marketplace.trade.maxPriceList`) }}
     template(#substituteTitle)
     template(#information)
-      HelperHover(tooltip-id="substituteBuy" :maxWidth="85")
-        InfoIcon(w="4.5" cursor="pointer" fill="gray-200 hover:white")
+      ClientOnly
+        HelperHover(tooltip-id="substituteBuy" :maxWidth="85")
+          InfoIcon(w="4.5" cursor="pointer" fill="gray-200 hover:white")
     template(#substituteInput)
       InputText(v-model="maxPrice" :class="{highlighted: showIncreaseMaxPrice}" :is-module="true")
         template(#suffix) IXT
