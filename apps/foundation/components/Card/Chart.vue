@@ -6,6 +6,8 @@ Card()
 
   ChartBackground()
 
+  Chart()
+
   div(grid="~ cols-3 gap-3") 
     TitleDetail()
       template(#default) Wallet

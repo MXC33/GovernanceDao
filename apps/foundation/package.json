@@ -12,6 +12,8 @@
   "devDependencies": {
     "@ix/base": "*",
     "@types/node": "^18",
-    "nuxt": "3.6.5"
+    "chart.js": "^4.4.0",
+    "nuxt": "3.6.5",
+    "vue-chartjs": "^5.2.0"
   }
 }
