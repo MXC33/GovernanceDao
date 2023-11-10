@@ -1,5 +1,7 @@
 <template lang="pug">
 div()
+
+  Banner()
   DefineMenuItems()
     HeaderSubnavigationItem(:path="`/${route}`" v-for="route in routes") 
       | {{ $t(`foundation.menu.${getRoute(route)}`) }}

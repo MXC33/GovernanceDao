@@ -3177,6 +3177,7 @@ __metadata:
     chart.js: ^4.4.0
     nuxt: 3.6.5
     vue-chartjs: ^5.2.0
+    vue3-marquee: ^4.1.0
   languageName: unknown
   linkType: soft
 
@@ -21004,6 +21005,15 @@ __metadata:
   dependencies:
     vue: ^3.2.45
   checksum: 4d3cd53f51ba05dd6f8a357ea6a0be91dc65bf457b43fa062f2c287796d8436eb306387aab211e7ef5d87d88acc44831559e48aa46cf41768f3d3bc150475672
+  languageName: node
+  linkType: hard
+
+"vue3-marquee@npm:^4.1.0":
+  version: 4.1.0
+  resolution: "vue3-marquee@npm:4.1.0"
+  peerDependencies:
+    vue: ^3.2
+  checksum: d50fafe9ea1ec7e2fe4eff421e34429516a4ef93acc685f655d5b45657f64ece64cf944dd91fd9a05208f0078897ccedade67079ee316d87578b1d1d25ec2fdb
   languageName: node
   linkType: hard
 

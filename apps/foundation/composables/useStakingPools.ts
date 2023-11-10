@@ -149,6 +149,16 @@ export const useStakingPools = () => {
     return timeLeft > Date.now()
   }
 
+
+  const territoryRewardPerDay = (size: 'area' | 'sector' | 'zone' | 'domain') => {
+    if (!dataTerritory.value)
+      return []
+    const areas = dataTerritory.value?.stakingItems.filter(item => item?.token?.tokenInfo?.type == size)
+    const rewardPerDay = areas?.map(item => item?.rewardPerDay)
+    return rewardPerDay
+  }
+
+
   return {
     totalIXTRewards,
     totalUserRewards,
@@ -161,6 +171,7 @@ export const useStakingPools = () => {
     getFirstUserStakeInPool,
     isUnderLockPeriod,
     timeLeftLockPeriod,
-    getUserTokenBalance
+    getUserTokenBalance,
+    territoryRewardPerDay
   }
 }
