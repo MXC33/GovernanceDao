@@ -43,7 +43,7 @@ export const useChartData = () => {
       timestamps[i] = Number(timestamps[i - 1] + balanceChange);
     }
 
-    return timestamps.map(Number).toReversed()
+    return timestamps.map(Number).slice(0).toReversed()
   };
 
   return {

@@ -53,9 +53,13 @@ const stakedAmount = computed(() => stakingData.value?.totalStakedAmount)
 
 const stakedIXT = computed(() => stakingData.value?.stakingItems[0]?.userStakingData?.amountStaked)
 
-const chartData = computed(() => createChartData(transactionData.value, stakedAmount.value, catRaffStakingAddress.polygon))
+const chartData = computed(() => {
+  if (!transactionData.value || !stakedAmount.value || !catRaffStakingAddress.polygon)
+    return []
 
-const transactionTimestamps = computed(() => transactionData.value ? transactionData.value.map(item => Number(item.timeStamp)) : [])
+  return createChartData(transactionData.value, stakedAmount.value || 0, catRaffStakingAddress.polygon)
+});
+
 
 await Promise.all([
   fetchCatRaffData(),

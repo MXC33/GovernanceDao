@@ -13,7 +13,7 @@ div(grid="~ lg:cols-2 cols-1 gap-6")
           button(color="gray") {{ $t("index.addToWalletButton") }}
           LaunchIcon(w="5")
 
-    CardChart()
+    CardChart(:chart-data="chartData")
 
   VList(space-y="default" flex-grow="1") 
     HomepageDashboardTable()
@@ -38,9 +38,23 @@ HeaderLifiWidget(v-if="swapVisible" @close="swapVisible = false")
 <script lang="ts" setup>
 import LaunchIcon from '~/assets/images/launch-icon.svg'
 const { enable: enableSwap, state: swapVisible } = useIXTSwapVisible()
-const { addIXTToWallet } = useWallet()
+const { addIXTToWallet, walletAdress } = useWallet()
+const { ixtBalance } = useCurrencyData()
+const { createChartData } = useChartData()
 
 const { getCirculatingSupply, getTotalSupply, getAPY, ixtPoolData } = useStakingPools()
+const { userIxtTransactions } = useChainTransactions()
+
+const { execute: fetchUserIxtTransaction, data: ixtTransactions } = userIxtTransactions()
+
+await fetchUserIxtTransaction()
+
+const chartData = computed(() => {
+  if (!ixtTransactions.value || !ixtBalance.value || !walletAdress.value)
+    return []
+
+  return createChartData(ixtTransactions.value, ixtBalance.value || 0, walletAdress.value)
+});
 
 const circulatingSupply = await getCirculatingSupply()
 const totalSupply = await getTotalSupply()
