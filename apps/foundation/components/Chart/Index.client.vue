@@ -4,6 +4,20 @@ Line(:options="chartOptions" :data="chartData")
 
 <script lang="ts" setup>
 import { Line } from 'vue-chartjs'
+import { subDays, eachDayOfInterval, format } from 'date-fns'
+
+const today = new Date();
+
+// Calculate the date 7 days ago
+const sevenDaysAgo = computed(() => subDays(today, 6))
+
+// Create an array of dates from 7 days ago to today
+const dateInterval = computed(() => eachDayOfInterval({
+  start: sevenDaysAgo.value,
+  end: today
+}))
+
+const formattedDatesArray = computed(() => dateInterval.value.map(date => format(date, 'yyyy-MM-dd')))
 
 import {
   Chart as ChartJS,
@@ -13,7 +27,8 @@ import {
   LineElement,
   Title,
   Tooltip,
-  Legend
+  Legend,
+  type ChartOptions
 } from 'chart.js'
 
 ChartJS.register(
@@ -38,13 +53,18 @@ console.log("chart data", data)
 
 const chartData = computed(() => {
   return {
-    labels: data.map(item => ""),
+    labels: formattedDatesArray.value,
     datasets: [{ data: data }]
   }
 })
 
-const chartOptions = {
-  responsive: true
+const chartOptions: ChartOptions = {
+  responsive: true,
+  plugins: {
+    legend: {
+      display: false
+    }
+  }
 }
 
 </script>

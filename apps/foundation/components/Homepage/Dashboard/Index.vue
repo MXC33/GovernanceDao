@@ -13,7 +13,7 @@ div(grid="~ lg:cols-2 cols-1 gap-6")
           button(color="gray") {{ $t("index.addToWalletButton") }}
           LaunchIcon(w="5")
 
-    CardChart(:chart-data="chartData")
+    CardChart(:data="chartData")
 
   VList(space-y="default" flex-grow="1") 
     HomepageDashboardTable()

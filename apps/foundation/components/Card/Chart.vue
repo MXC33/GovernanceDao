@@ -4,9 +4,8 @@ Card()
     template(#default) Wallet portfolio
     template(#detail) Track balances
 
-  ChartBackground()
 
-  Chart(:data="chartData")
+  Chart(:data="data")
 
   div(grid="~ cols-3 gap-3") 
     TitleDetail()
@@ -27,7 +26,7 @@ Card()
 import ChartBackground from '~/assets/images/Mask_group.svg'
 
 defineProps<{
-  chartData: number[]
+  data: number[]
 }>()
 //Details for Chart 
 const details = [

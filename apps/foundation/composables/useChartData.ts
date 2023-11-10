@@ -8,9 +8,8 @@ import {
 export const useChartData = () => {
 
   const createChartData = (transactions: PolygonScanTransactionsFragment[], initialBalance: number, address: string) => {
-    if (!transactions || initialBalance === undefined) {
-      return null;
-    }
+    if (!transactions || !initialBalance || !address)
+      return []
 
     // Set the starting point for the timestamps, which is the end of the current day.
     const endOfDayTimestamp = getUnixTime(endOfDay(subDays(new Date(), 1)));
@@ -43,7 +42,8 @@ export const useChartData = () => {
       timestamps[i] = Number(timestamps[i - 1] + balanceChange);
     }
 
-    return timestamps.map(Number).slice(0).toReversed()
+    const timestampList = timestamps.map(Number)
+    return timestampList?.reverse()
   };
 
   return {

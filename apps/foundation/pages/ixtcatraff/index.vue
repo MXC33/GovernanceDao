@@ -1,7 +1,7 @@
 <template lang="pug">
 Page()
   PageSection(section="CatRaff" :primary="true")
-    CardChart(:chart-data="chartData")
+    CardChart(:data="chartData")
 
   PageSection(section="StakingContract")
     div(grid="~ md:cols-2 gap-default")
@@ -57,7 +57,7 @@ const chartData = computed(() => {
   if (!transactionData.value || !stakedAmount.value || !catRaffStakingAddress.polygon)
     return []
 
-  return createChartData(transactionData.value, stakedAmount.value || 0, catRaffStakingAddress.polygon)
+  return createChartData(transactionData.value, stakedAmount.value, catRaffStakingAddress.polygon)
 });
 
 
