@@ -308,6 +308,7 @@ type Query {
   userIxtTransactions(credentials: CredentialsInput!): [PolygonScanTransactions]
   governance(credentials: CredentialsInput): GovernanceData
   allUserTerritories(credentials: CredentialsInput!): [Token]
+  totalFacilitiesMinted: Int
 }
 
 type RaffleInfo {

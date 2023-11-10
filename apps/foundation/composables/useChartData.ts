@@ -1,11 +1,19 @@
 import { PolygonScanTransactionsFragment } from '#gql';
-import { endOfDay, subDays, getUnixTime } from 'date-fns';
+import { endOfDay, subDays, getUnixTime, eachDayOfInterval, format } from 'date-fns';
 import {
   ethers,
   BigNumber,
 } from 'ethers';
 
+
+
+export interface ChartInfo {
+  data: number[],
+  labels: string[]
+}
+
 export const useChartData = () => {
+
 
   const createChartData = (transactions: PolygonScanTransactionsFragment[], initialBalance: number, address: string) => {
     if (!transactions || !initialBalance || !address)
@@ -46,7 +54,41 @@ export const useChartData = () => {
     return timestampList?.reverse()
   };
 
+
+  const poolShare = (n: number) => {
+    return 1 - 0.99 * Math.E ** (-(n - 1) / 25000);
+  };
+
+  const facilitiesMintedData = () => {
+    const xData = [];
+    for (let i = 0; i <= 100000; i += 10000) {
+      xData.push(i);
+    }
+    return xData.map((x: number) => {
+      return {
+        x: x,
+        y: poolShare(x) * 100,
+      };
+    });
+  }
+
+  const today = new Date();
+
+  // Calculate the date 7 days ago
+  const sevenDaysAgo = computed(() => subDays(today, 6))
+
+  // Create an array of dates from 7 days ago to today
+  const dateInterval = computed(() => eachDayOfInterval({
+    start: sevenDaysAgo.value,
+    end: today
+  }))
+
+  const formattedDatesArray = computed(() => dateInterval.value.map(date => format(date, 'yyyy-MM-dd')))
+
   return {
-    createChartData
+    createChartData,
+    poolShare,
+    facilitiesMintedData,
+    formattedDatesArray
   }
 }

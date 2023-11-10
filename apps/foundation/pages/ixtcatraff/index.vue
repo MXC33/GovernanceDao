@@ -1,7 +1,24 @@
 <template lang="pug">
 Page()
   PageSection(section="CatRaff" :primary="true")
-    CardChart(:data="chartData")
+    CardChart(:data="chartInfo")
+      template(#title)
+        CardTitle()
+          template(#default) Prize Pool
+          template(#detail) Track balances
+      template(#details)
+        TitleDetail()
+          template(#detail) Total Deposits
+          template(#default) 0
+        TitleDetail()
+          template(#detail) Weekly Odds
+          template(#default) 0
+        TitleDetail()
+          template(#detail) Weekly Prize
+          template(#default) 2500
+        TitleDetail()
+          template(#detail) Next Draw
+          template(#default) 0
 
   PageSection(section="StakingContract")
     div(grid="~ md:cols-2 gap-default")
@@ -34,6 +51,7 @@ Page()
 </template>
 
 <script lang="ts" setup>
+import type { ChartInfo } from "composables/useChartData";
 import { StakingId } from "~/.nuxt/gql/default";
 
 const { data: stakingData, execute: fetchCatRaffData } = useStakingData(
@@ -46,7 +64,7 @@ const { data: weeklyData, execute: fetchCatRaffWeekly } = useCatRaffWeekly();
 const { catRaffTransactions } = useChainTransactions()
 
 const { data: transactionData, execute: fetchTransactionData } = catRaffTransactions()
-const { createChartData } = useChartData()
+const { createChartData, formattedDatesArray } = useChartData()
 
 const totalPrize = computed(() => stakingData.value?.stakingItems[0]?.userStakingData?.totalReward)
 const stakedAmount = computed(() => stakingData.value?.totalStakedAmount)
@@ -59,6 +77,13 @@ const chartData = computed(() => {
 
   return createChartData(transactionData.value, stakedAmount.value, catRaffStakingAddress.polygon)
 });
+
+const chartInfo = computed<ChartInfo>(() => {
+  return {
+    data: chartData.value,
+    labels: formattedDatesArray.value
+  }
+})
 
 
 await Promise.all([

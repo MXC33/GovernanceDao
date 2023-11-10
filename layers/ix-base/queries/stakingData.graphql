@@ -21,6 +21,10 @@ query CatRaffWeekly($credentials: CredentialsInput) {
   }
 }
 
+query TotalFacilitiesMinted {
+  totalFacilitiesMinted
+}
+
 fragment CatRaffTicketInfo on CatRaffTicketInfo {
   address
   week

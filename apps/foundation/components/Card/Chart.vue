@@ -1,38 +1,24 @@
 <template lang="pug">
 Card()
-  CardTitle()
-    template(#default) Wallet portfolio
-    template(#detail) Track balances
+  slot(name="title")
 
 
-  Chart(:data="data")
+  Chart(:data="data" :x-label="xLabel" :y-label="yLabel")
 
-  div(grid="~ cols-3 gap-3") 
-    TitleDetail()
-      template(#default) Wallet
-      template(#detailBottom) 0
-
-    TitleDetail()
-      template(#default) Staked
-      template(#detailBottom) 0
-
-    TitleDetail()
-      template(#default) Withdrawable
-      template(#detailBottom) 0
+  HList(space-x="6")
+    slot(name="details")
 
 </template>
 
 <script lang="ts" setup>
-import ChartBackground from '~/assets/images/Mask_group.svg'
+import type { ChartInfo } from 'composables/useChartData';
+
 
 defineProps<{
-  data: number[]
+  data: ChartInfo
+  xLabel?: string
+  yLabel?: string
 }>()
-//Details for Chart 
-const details = [
-  { title: 'Wallet', value: 0 },
-  { title: 'Staked', value: 0 },
-  { title: 'Withdrawable', value: 0 },
-];
+
 
 </script>

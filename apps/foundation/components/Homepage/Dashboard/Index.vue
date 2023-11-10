@@ -13,7 +13,12 @@ div(grid="~ lg:cols-2 cols-1 gap-6")
           button(color="gray") {{ $t("index.addToWalletButton") }}
           LaunchIcon(w="5")
 
-    CardChart(:data="chartData")
+    CardChart(:data="chartInfo" x-label="Time" y-label="Balance")
+      template(#title)
+        CardTitle()
+          template(#default) IXT Wallet History
+          template(#detail) Track balances
+
 
   VList(space-y="default" flex-grow="1") 
     HomepageDashboardTable()
@@ -37,10 +42,12 @@ HeaderLifiWidget(v-if="swapVisible" @close="swapVisible = false")
 
 <script lang="ts" setup>
 import LaunchIcon from '~/assets/images/launch-icon.svg'
+import type { ChartInfo } from 'composables/useChartData';
+
 const { enable: enableSwap, state: swapVisible } = useIXTSwapVisible()
 const { addIXTToWallet, walletAdress } = useWallet()
 const { ixtBalance } = useCurrencyData()
-const { createChartData } = useChartData()
+const { createChartData, formattedDatesArray } = useChartData()
 
 const { getCirculatingSupply, getTotalSupply, getAPY, ixtPoolData } = useStakingPools()
 const { userIxtTransactions } = useChainTransactions()
@@ -55,6 +62,13 @@ const chartData = computed(() => {
 
   return createChartData(ixtTransactions.value, ixtBalance.value || 0, walletAdress.value)
 });
+
+const chartInfo = computed<ChartInfo>(() => {
+  return {
+    data: chartData.value,
+    labels: formattedDatesArray.value
+  }
+})
 
 const circulatingSupply = await getCirculatingSupply()
 const totalSupply = await getTotalSupply()
