@@ -17,10 +17,10 @@ export const useLandmarkData = () =>
   })
 
 
-export const useAllLandmarkData = (page: number | null, searchWord: string | null, filter: LandmarkTier | null, order: LandmarkSort | null) => {
+export const useAllLandmarkData = (page: number | null, searchWord: string | null, filter: LandmarkTier | null, order: LandmarkSort | null, take?: number | null) => {
   const fetchLandmarks = async () => {
-    const landmarks = await GqlAllLandmarks({ page, searchWord, filter, order })
-    return landmarks.allLandmarks as NftFragment
+    const landmarks = await GqlAllLandmarks({ page, searchWord, filter, order, take })
+    return landmarks.allLandmarks as NftFragment[]
   }
 
   const key = `landmark-data-${page}-${searchWord}-${filter}-${order}`

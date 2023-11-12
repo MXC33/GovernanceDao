@@ -11,7 +11,7 @@
 </template>
 
 <script setup lang="ts">
-import { StakingId } from '.nuxt/gql/default';
+import { StakingId, LandmarkSort } from '.nuxt/gql/default';
 
 const { setupOnMounted } = useAppSetup()
 const { isLoggedInAndConnected } = useLogin()
@@ -31,6 +31,8 @@ const { execute: fetchIXTTwelveMonthData, refresh: refreshIXTTwelveMonthData } =
 const { execute: fetchLandmarkData, refresh: refreshLandmarkData } = useStakingData(StakingId.Landmark)
 const { execute: fetchLPMatic, refresh: refreshLPMatic } = useStakingData(StakingId.LpMATIC)
 const { execute: fetchLPUsdt, refresh: refreshLPUsdt } = useStakingData(StakingId.LpUSDT)
+const { execute: fetchTopLandmarks, refresh: refreshTopLandmarks } = useAllLandmarkData(null, null, null, LandmarkSort.EarningHighToLow, 3)
+
 
 
 useHead({
@@ -57,7 +59,8 @@ const refreshAllData = async () => {
     refreshIXTTwelveMonthData(),
     refreshLandmarkData(),
     refreshLPMatic(),
-    refreshLPUsdt()
+    refreshLPUsdt(),
+    refreshTopLandmarks()
   ])
 }
 
@@ -73,7 +76,8 @@ await Promise.all([
   fetchIXTTwelveMonthData(),
   fetchLandmarkData(),
   fetchLPMatic(),
-  fetchLPUsdt()
+  fetchLPUsdt(),
+  fetchTopLandmarks()
 ])
 
 watch(isLoggedInAndConnected, async (loggedIn) => {

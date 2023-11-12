@@ -9,12 +9,14 @@ query AllLandmarks(
   $searchWord: String
   $filter: LandmarkTier
   $order: LandmarkSort
+  $take: Int
 ) {
   allLandmarks(
     page: $page
     searchWord: $searchWord
     filter: $filter
     order: $order
+    take: $take
   ) {
     ...NFT
   }

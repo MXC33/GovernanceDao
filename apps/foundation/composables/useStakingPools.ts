@@ -42,6 +42,15 @@ export const useStakingPools = () => {
       }]
   })
 
+
+  const metashareStakingItems = computed(() => {
+    return dataMetashare.value?.stakingItems
+  })
+
+  const energyStakingItems = computed(() => {
+    return dataEnergy.value?.stakingItems
+  })
+
   const totalIXTRewards = computed(() => {
     const userData = ixtPoolData.value.map(item => item?.data?.userSpecificStakingData)
 
@@ -150,20 +159,27 @@ export const useStakingPools = () => {
   }
 
 
-  const territoryRewardPerDay = (size: 'area' | 'sector' | 'zone' | 'domain') => {
+  const territoryRewardPer30Day = (size: 'area' | 'sector' | 'zone' | 'domain') => {
     if (!dataTerritory.value)
       return []
     const areas = dataTerritory.value?.stakingItems.filter(item => item?.token?.tokenInfo?.type == size)
-    const rewardPerDay = areas?.map(item => item?.rewardPerDay)
+    const rewardPerDay = areas?.map(item => item?.rewardPerThirtyDays)
     return rewardPerDay
   }
 
+
+  const ixtPoolAPYs = () => {
+    const apys = ixtPoolData.value.map(item => item.data ? getAPY(item.data) : 0)
+    return apys
+  }
 
   return {
     totalIXTRewards,
     totalUserRewards,
     dashboardTableData,
     ixtPoolData,
+    metashareStakingItems,
+    energyStakingItems,
     getAPY,
     getTotalSupply,
     getCirculatingSupply,
@@ -172,6 +188,7 @@ export const useStakingPools = () => {
     isUnderLockPeriod,
     timeLeftLockPeriod,
     getUserTokenBalance,
-    territoryRewardPerDay
+    territoryRewardPer30Day,
+    ixtPoolAPYs
   }
 }

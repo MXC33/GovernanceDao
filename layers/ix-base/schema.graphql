@@ -300,7 +300,7 @@ type Query {
   assetConverterRecipes: [AssetConverterRecipe]
   stakingData(credentials: CredentialsInput, id: StakingId!): StakingData
   stakingsData(credentials: CredentialsInput, ids: [StakingId]): [StakingData]
-  allLandmarks(page: Int, searchWord: String, filter: LandmarkTier, order: LandmarkSort): [Token]
+  allLandmarks(page: Int, searchWord: String, filter: LandmarkTier, order: LandmarkSort, take: Int): [Token]
   catRaffAccounts(skip: Int): [CatRaffTicketInfo]
   catRaffWeekly(credentials: CredentialsInput): [CatRaffTicketInfo]
   catRaffPastPrizes(skip: Int): [CatRaffTicketInfo]
@@ -467,6 +467,7 @@ type TokenInfo {
   inspectorLink: String
   level: Int
   openable: Boolean
+  dailyYield: Float
 }
 
 input TokenInput {
