@@ -23,7 +23,7 @@ div(grid="~ cols-1 md:cols-3 gap-6")
   
 <script lang="ts" setup>
 import type { NftFragment } from '#gql';
-import Star from '../../public/assets/landmark/star-golden.svg'
+import Star from '~/assets/images/star-golden.svg'
 
 const { data } = defineProps<{
   data: NftFragment[]
