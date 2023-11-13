@@ -22,9 +22,8 @@ HList(justify="end" items="center" z="999" fill="black hover:black" cursor="poin
 import CloseIcon from '~/assets/images/icons/close.svg'
 
 
-const { bannerAdActive } = useAds()
-const { data: topBannerData, execute: fetchTopBannerAd } = useTopBannerData()
-await fetchTopBannerAd()
+const { topBannerAd, bannerAdActive, activeAd } = useAds()
+const { data: topBannerData } = await topBannerAd()
 const config = useRuntimeConfig().public
 const configAPP = useAppConfig()
 

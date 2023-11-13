@@ -67,7 +67,12 @@ export const useAds = () => {
 
   //   return bannerData
   // }
-
+  const topBannerAd = () =>
+    useAsyncDataState('banner-data', () =>
+      fetchIXAPI('banner') as Promise<BannerResponse>, {
+      transform: (item) =>
+        item?.data as Banner
+    })
 
 
   const bannerAdActive = useCookieState(`ad-banner-${config.ixApp}`, () => true, { maxAge: aDay, consentLevel: 'preferences' })
@@ -81,6 +86,7 @@ export const useAds = () => {
   const activeAd = computed(() => ads[randomSwitchAds.value])
 
   return {
+    topBannerAd,
     showAdPopup,
     bannerAdActive,
     boxAdActive,
