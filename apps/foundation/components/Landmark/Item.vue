@@ -39,15 +39,20 @@ const getStars = (data: NftFragment) => {
 
 const getRadius = (data: NftFragment) => data.tokenInfo?.attributes?.find(item => item?.traitType == 'Earning Diameter')?.value
 
-function extractNumber(string: string) {
+const extractNumber = (string: string) => {
   const match = string.match(/\d+/);  // This regex matches one or more digits
   return match ? parseInt(match[0], 10) : null;
 }
 
+const replaceGameWithNetempire = (url: string) => {
+  return url.replace("/game/", "/netempire/");
+}
+
+
 const onClickView = (item: NftFragment) => {
   if (!item.external_url)
     return
-  window.open(item.external_url)
+  window.open(replaceGameWithNetempire(item.external_url))
 }
 
 
