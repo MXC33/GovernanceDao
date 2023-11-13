@@ -1,5 +1,6 @@
 <template lang="pug">
-Line(:options="chartOptions" :data="chartData" v-if="chartOptions" ref="chart")
+VList( min-h="70")
+  Line(:options="chartOptions" :data="chartData" v-if="chartOptions" ref="chart" mx="-6px" w="full")
 </template>
 
 <script lang="ts" setup>
@@ -88,11 +89,12 @@ const chartData = computed<ChartData<'line'>>(() => {
 
   }
 })
-
-const chartOptions: ChartOptions<"line"> = {
+const { isMobile } = useDevice()
+const chartOptions = computed<ChartOptions<"line">>(() => ({
   responsive: true,
+  maintainAspectRatio: false,
   layout: {
-    padding: 5
+    padding: currentPosition ? 5 : 0,
   },
   interaction: {
     intersect: false,
@@ -103,12 +105,18 @@ const chartOptions: ChartOptions<"line"> = {
       max: xMax,
       type: data.type == 'xy' ? 'linear' : 'category',
       position: 'bottom',
+      border: {
+        display: false
+      },
       grid: {
         color: Colors.grid
       },
       ticks: {
         color: Colors.ticks,
-        display: true
+        display: true,
+        includeBounds: false,
+        align: 'inner',
+        maxTicksLimit: isMobile.value ? 3 : Infinity
       },
       title: {
         display: !!xLabel,
@@ -118,6 +126,10 @@ const chartOptions: ChartOptions<"line"> = {
     y: {
       type: 'linear',
       max: yMax,
+
+      border: {
+        display: false
+      },
       grid: {
         color: Colors.grid
       },
@@ -168,6 +180,6 @@ const chartOptions: ChartOptions<"line"> = {
     }
 
   }
-}
+}))
 
 </script>

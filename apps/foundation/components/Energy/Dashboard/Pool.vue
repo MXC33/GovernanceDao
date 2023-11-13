@@ -1,8 +1,7 @@
 <template lang="pug">
 ClientOnly()
   VList()
-    VList(flex-grow="1" justify="center" items="center")
-      img(src="~/assets/png/EnergyIcon.png" w="32")
+    div(flex-grow="1")
 
     Card()
       CardTitle()
