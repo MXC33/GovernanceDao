@@ -24,8 +24,8 @@ Page()
           TitleDetail(icon="ixt")
             template(#detail) Total Rewards
             template(#default) {{ roundToDecimals(territoryUserData?.userSpecificStakingData?.totalUserReward, 4) }}
-          Disabler(:disabled="!canClaim")
-            ButtonGlitch(btn="~ primary-outline-cut" @click="claimAllRewards" :text="$t('general.claim')")
+        Disabler(:disabled="!canClaim")
+          ButtonInteractive(btn="~ primary-outline-cut" @click="claimRequest" :text="$t('general.claim')" :loading="isLoading" :loading-text="'Claiming...'")
 
 
 
@@ -85,8 +85,12 @@ await fetchAllUserTerritories()
 
 const { claimAllTerritoryRewards } = useTerritoryStakingContract()
 
-const claimAllRewards = () => {
-  return claimAllTerritoryRewards()
+const { loading: isLoading, execute: claimRequest } = useContractRequest(async () => {
+  return claimAllRewards()
+})
+
+const claimAllRewards = async () => {
+  return await claimAllTerritoryRewards()
 }
 
 const canClaim = computed(() => territoryUserData.value?.userSpecificStakingData?.totalUserReward ?? 0 > 0)
