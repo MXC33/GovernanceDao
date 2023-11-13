@@ -10,7 +10,8 @@ HList(@click="onClickSnack" frame="~ gray-400" p="x-4 y-3" bg="gray-800" space-x
 </template>
 
 <script lang="ts" setup>
-import type { SnackNotification } from '~/composables/useNotifications';
+import type { SnackbarItem } from 'composables/useSnackNotifications';
+
 const { viewingCart } = useCart()
 const { t } = useI18n()
 const { getSnackType, closeNotification } = useSnackNotifications()
@@ -30,7 +31,7 @@ const onClickSnack = () => {
 }
 
 const { notification } = defineProps<{
-  notification: SnackNotification
+  notification: SnackbarItem
 }>()
 
 const message = computed(() => t(`popupNotification.${notification.id}`))

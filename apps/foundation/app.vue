@@ -7,6 +7,8 @@
 
     div#takeover
 
+    SnackNotifications(:notifications="snackNotifications")
+
     //- CookieBot(:id="cookieBotId")
 </template>
 
@@ -17,8 +19,10 @@ const { setupOnMounted } = useAppSetup()
 const { isLoggedInAndConnected } = useLogin()
 const { walletSigningToken, walletAdress } = useWallet()
 
-
-
+const { snackNotifications } = useSnackNotifications()
+watch(snackNotifications, (item) => {
+  console.log("snacka", item)
+})
 const { execute: fetchTerritoryData, refresh: refreshTerritoryData } = useStakingData(StakingId.Territories)
 const { execute: fetchTerritoryUserData, refresh: refreshTerritoryUserData } = useStakingData(StakingId.TerritoriesUser)
 const { execute: fetchMetashareData, refresh: refreshMetashareData } = useStakingData(StakingId.Metashare)

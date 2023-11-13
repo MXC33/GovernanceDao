@@ -108,5 +108,9 @@
         "ixt": "ixt"
       }
     }
+  },
+  "popupNotification": {
+    "stake-success": "Stake successful",
+    "withdraw-success": "Withdraw successful"
   }
 }

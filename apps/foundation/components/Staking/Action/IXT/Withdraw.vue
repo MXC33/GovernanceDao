@@ -23,7 +23,7 @@ PopupBase(@close="$emit('close')")
 
   template(#buttons)
     Disabler(:disabled="withdrawAmount == 0")
-      ButtonInteractive(@click="onClickStake" text="Withdraw" :loading-text="'Unstaking...'")
+      ButtonInteractive(@click="executeUnstake" text="Withdraw" :loading-text="'Unstaking...'" :loading="loading")
 
 </template>
 
@@ -32,19 +32,26 @@ import type { StakingDataFragment } from '#gql';
 
 const withdrawAmount = ref(0)
 const { getUserStakeInPool } = useStakingPools()
-const isAgreed = ref(false)
+const { displaySnack } = useSnackNotifications()
 
 const userStake = computed(() => getUserStakeInPool('ixt', pool))
 
 const emit = defineEmits(["close", "withdraw"])
 
-const { pool } = defineProps<{
+const { pool, month } = defineProps<{
+  month: number,
   pool: StakingDataFragment,
 }>()
 
-const onClickStake = () => {
-  emit("withdraw", withdrawAmount.value)
-}
+const { unstakeIXT } = useIXTStakingContract(stakePeriodToStakingId(month))
+
+const { loading, execute: executeUnstake } = useContractRequest(async () => {
+  await unstakeIXT(withdrawAmount.value)
+  displaySnack("withdraw-success", "success")
+
+  emit("close")
+})
+
 
 
 </script>
