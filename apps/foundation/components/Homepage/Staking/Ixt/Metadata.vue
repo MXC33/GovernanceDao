@@ -1,6 +1,6 @@
 
 <template lang="pug">
-HList(space-x="6")
+div(grid="~ gap-3 md:cols-4 md:gap-6")
   TitleDetail()
     template(#detail) {{ $t('index.apy') }}
     template(#default) {{ poolApy }} %
