@@ -1,7 +1,7 @@
 <template lang="pug">
 Page()
   PageSection(section="CatRaff" :primary="true")
-    CardChart(:data="chartInfo")
+    CardChart(:data="chartInfo" :displaying-ixt="true")
       template(#title)
         CardTitle()
           template(#default) Prize Pool
@@ -68,8 +68,6 @@ const { createChartData, formattedDatesArray } = useChartData()
 
 const totalPrize = computed(() => stakingData.value?.stakingItems[0]?.userStakingData?.totalReward)
 const stakedAmount = computed(() => stakingData.value?.totalStakedAmount)
-
-const stakedIXT = computed(() => stakingData.value?.stakingItems[0]?.userStakingData?.amountStaked)
 
 const chartData = computed(() => {
   if (!transactionData.value || !stakedAmount.value || !catRaffStakingAddress.polygon)
