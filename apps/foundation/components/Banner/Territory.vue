@@ -1,27 +1,31 @@
 <template lang="pug">
-HList(space-x="6" font="bold") TERRITORY 30 DAY YIELD:
-  div
-  HList(text="detail" items="center") AREA 
-  HList(v-for="item in area" space-x="1")
-    TerritoryBadge(:tier="item.tier")
-    div(text="default") {{ item.item }} IXT
+BannerGroup() 
+  div TERRITORY 30 DAY YIELD:
 
-  HList(text="detail" items="center") SECTOR
-  HList(v-for="item in sector" space-x="1")
-    TerritoryBadge(:tier="item.tier")
-    div(text="default") {{ item.item }} IXT
+  HList(items="center" space-x="2")
+    div(text="detail") AREA 
+    BannerGroupItem(v-for="item in area")
+      TerritoryBadge(:tier="item.tier")
+      div(text="default") {{ item.item }} IXT
 
-  HList(text="detail" items="center") ZONE 
-  HList(v-for="item in zone" space-x="1")
-    TerritoryBadge(:tier="item.tier")
-    div(text="default") {{ item.item }} IXT
+  HList(items="center" space-x="2")
+    div(text="detail") SECTOR 
+    BannerGroupItem(v-for="item in sector")
+      TerritoryBadge(:tier="item.tier")
+      div(text="default") {{ item.item }} IXT
 
-  HList(text="detail" items="center") DOMAIN 
-  HList(v-for="item in domain" space-x="1")
-    TerritoryBadge(:tier="item.tier")
-    div(text="default") {{ item.item }} IXT
 
-div(space-x="20")
+  HList(items="center" space-x="2")
+    div(text="detail") ZONE 
+    BannerGroupItem(v-for="item in zone")
+      TerritoryBadge(:tier="item.tier")
+      div(text="default") {{ item.item }} IXT
+
+  HList(items="center" space-x="2")
+    div(text="detail") DOMAIN 
+    BannerGroupItem(v-for="item in domain")
+      TerritoryBadge(:tier="item.tier")
+      div(text="default") {{ item.item }} IXT
 
 </template>
       

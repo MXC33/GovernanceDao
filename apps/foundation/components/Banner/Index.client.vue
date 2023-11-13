@@ -1,11 +1,13 @@
 <template lang="pug">
 div(py="3" text="md")
   Vue3Marquee(:duration="100" :pause-on-hover="true")
-    BannerTerritory()
-    BannerIxt()
-    BannerMetashare()
-    BannerEnergy()
-    BannerLandmark()
+    HList(space-x="12" items="center")
+      div
+      BannerTerritory()
+      BannerIxt()
+      BannerMetashare()
+      BannerEnergy()
+      BannerLandmark()
 </template>
       
 <script lang="ts" setup>
