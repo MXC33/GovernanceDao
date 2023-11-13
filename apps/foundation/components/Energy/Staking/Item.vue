@@ -23,7 +23,7 @@ ClientOnly()
         ButtonGlitch(btn="~ primary-outline-cut lt-md:sm" @click="unstakeActive = true" :text="$t('energy.unstakeIxt')")
       Disabler(:disabled="ixtBalance == 0")
         ButtonGlitch(btn="~ primary-outline-cut lt-md:sm" @click="stakeIxtActive = true" :text="$t('energy.stakeIxt')")
-      Disabler(:disabled="energyBalance == 0")
+      Disabler(:disabled="energyBalance == 0 || totalEnergyStaked >= energyIXTStaked")
         ButtonGlitch(btn="~ primary-outline-cut lt-md:sm" @click="stakeEnergyActive = true" :text="$t(`energy.stakeEnergy.${id}`)")
 
     template(#detailBottom)
@@ -54,7 +54,7 @@ const stakeIxtActive = ref(false)
 
 const unstakeActive = ref(false)
 
-const { getUserStakeInPool, getUserTokenBalance } = useStakingPools()
+const { getUserStakeInPool, getUserTokenBalance, totalEnergyStaked, energyIXTStaked } = useStakingPools()
 
 const energyStaked = computed(() => getUserStakeInPool('energy', data))
 

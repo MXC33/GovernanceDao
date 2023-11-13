@@ -6,7 +6,7 @@ PopupBase(@close="$emit('close')")
       InputGroup()
         template(#header) Amount
         template(#default)
-          InputText(v-model.number="stakeAmount" placeholder="Enter amount" type="number" :maxAmount="sharesStakable")
+          InputText(v-model.number="stakeAmount" placeholder="Enter amount" type="number" :maxAmount="maxEnergyStakable")
             template(#suffix) {{ $t('general.amount', stakeAmount)  }} 
 
         template(#detail) Total Balance: {{ sharesStakable }}
@@ -51,6 +51,7 @@ import type { UserStakingItem } from 'composables/useStakingPools';
 const { loading: isLoading, execute: stakeRequest } = useContractRequest(async () => {
   return onClickStake()
 })
+const { maxEnergyStakable } = useStakingPools()
 const stakeAmount = ref(0)
 const isAgreed = ref(false)
 
@@ -61,6 +62,8 @@ const { item, id } = defineProps<{
   item: StakingItemFragment
   id: 'amelia' | 'energy'
 }>()
+
+console.log("item", item)
 
 const { sharesStakable } = useStakingHelper(computed(() => item))
 

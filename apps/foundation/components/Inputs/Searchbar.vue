@@ -5,9 +5,7 @@ HList(frame="~ gray-400" h="10 md:full")
     </template>
       
 <script lang="ts" setup>
-import { ref } from 'vue';
-import { useRoute } from 'vue-router';
-import { useI18n } from 'vue-i18n'; // Import the useI18n function
+
 const emit = defineEmits(["input"])
 
 const searchTerm = ref('')

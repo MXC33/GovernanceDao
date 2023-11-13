@@ -173,6 +173,20 @@ export const useStakingPools = () => {
     return apys
   }
 
+  const totalEnergyStaked = computed(() => {
+    const stakedEnergyAmelia = dataEnergyAmelia.value?.stakingItems[0]?.userStakingData?.amountStaked
+    const stakedEnergy = dataEnergy.value?.stakingItems[0]?.userStakingData?.amountStaked
+    return (stakedEnergyAmelia ?? 0) + (stakedEnergy ?? 0)
+  })
+
+  const energyIXTStaked = computed(() => {
+    return dataEnergy.value?.stakingItems[1]?.userStakingData?.amountStaked ?? 0
+  })
+
+  const maxEnergyStakable = computed(() => {
+    return energyIXTStaked.value - totalEnergyStaked.value
+  })
+
   return {
     totalIXTRewards,
     totalUserRewards,
@@ -180,6 +194,9 @@ export const useStakingPools = () => {
     ixtPoolData,
     metashareStakingItems,
     energyStakingItems,
+    totalEnergyStaked,
+    energyIXTStaked,
+    maxEnergyStakable,
     getAPY,
     getTotalSupply,
     getCirculatingSupply,
