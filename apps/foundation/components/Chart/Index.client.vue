@@ -18,6 +18,7 @@ import {
   type ChartData,
   type ScriptableContext
 } from 'chart.js'
+import annotationPlugin from 'chartjs-plugin-annotation';
 
 import type { ChartInfo, ChartListData } from 'composables/useChartData';
 const chart = ref()
@@ -30,6 +31,7 @@ ChartJS.register(
   Title,
   Tooltip,
   Filler,
+  annotationPlugin,
   Legend
 )
 
@@ -42,34 +44,43 @@ const Colors = {
   ticks: 'rgba(255,255,255,0.4)'
 }
 
-const { data, xLabel, ylabel } = defineProps<{
+interface CurrentPosition {
+  x: number,
+  y: number,
+}
+
+const { data, xLabel, ylabel, xMax, yMax, currentPosition } = defineProps<{
   data: ChartInfo
+  currentPosition?: CurrentPosition,
   xLabel?: string
   ylabel?: string
+  xMax?: number,
+  yMax?: number
 }>()
 
 const chartData = computed<ChartData<'line'>>(() => {
   return {
     labels: (data as ChartListData)?.labels,
-    datasets: [{
-      data: data.data,
-      fill: true,
-      backgroundColor: (context: ScriptableContext<'line'>) => {
-        const chartArea = context.chart.chartArea;
-        if (!chartArea)
-          return
-        const gradient = context.chart.ctx.createLinearGradient(
-          0,
-          chartArea.bottom,
-          0,
-          chartArea.top
-        );
-        console.log("Got the grad")
-        gradient.addColorStop(1, Colors.backgroundFrom);
-        gradient.addColorStop(0, Colors.backgroundTo);
-        return gradient;
+    datasets: [
+      {
+        data: data.data,
+        fill: true,
+        backgroundColor: (context: ScriptableContext<'line'>) => {
+          const chartArea = context.chart.chartArea;
+          if (!chartArea)
+            return
+          const gradient = context.chart.ctx.createLinearGradient(
+            0,
+            chartArea.bottom,
+            0,
+            chartArea.top
+          );
+          gradient.addColorStop(1, Colors.backgroundFrom);
+          gradient.addColorStop(0, Colors.backgroundTo);
+          return gradient;
+        },
       },
-    }],
+    ],
 
   }
 })
@@ -79,29 +90,33 @@ const chartOptions: ChartOptions<"line"> = {
 
   scales: {
     x: {
+      max: xMax,
       type: data.type == 'xy' ? 'linear' : 'category',
       position: 'bottom',
       grid: {
         color: Colors.grid
       },
       ticks: {
-        color: Colors.ticks
+        color: Colors.ticks,
+        padding: 10,
       },
       title: {
-        display: true,
+        display: !!xLabel,
         text: xLabel
       }
     },
     y: {
       type: 'linear',
+      max: yMax,
       grid: {
         color: Colors.grid
       },
       ticks: {
+        padding: 25,
         color: Colors.ticks
       },
       title: {
-        display: true,
+        display: !!ylabel,
         text: ylabel
       }
     }
@@ -112,7 +127,21 @@ const chartOptions: ChartOptions<"line"> = {
     },
     legend: {
       display: false
+    },
+    annotation: {
+      clip: false,
+      annotations: {
+        currentPosition: currentPosition ? {
+          xValue: currentPosition.x,
+          yValue: currentPosition.y,
+          type: 'point',
+          borderColor: 'clear',
+          radius: 4,
+          backgroundColor: 'rgb(255,102,71)'
+        } : undefined
+      }
     }
+
   }
 }
 
