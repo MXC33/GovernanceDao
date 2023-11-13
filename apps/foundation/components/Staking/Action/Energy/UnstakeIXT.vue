@@ -9,7 +9,7 @@ PopupBase(@close="$emit('close')")
           InputText(v-model.number="withdrawAmount" placeholder="Enter amount" type="number" :max-amount="totalUnlockedIXT")
             template(#suffix) IXT
 
-        template(#detail) Staked Amount: {{ roundToDecimals(userStake) }}
+        template(#detail) Withdrawable amount: {{ roundToDecimals(totalUnlockedIXT) }}
 
         template(#action)
           ButtonAnimated(btn="~ secondary-outline-cut sm" cut="s-sm" @click="withdrawAmount = userStake") Max
@@ -37,6 +37,7 @@ import type { StakingDataFragment, StakingItemFragment } from '#gql';
 import type { UserStakingItem } from '@ix/base/composables/Contract/useStakingData';
 
 const { unstakeIXT } = useEnergyStakingContract()
+const { displaySnack } = useSnackNotifications()
 
 const { item } = defineProps<{
   item: StakingItemFragment,
@@ -63,6 +64,9 @@ const onClickUnstake = async () => {
   }
 
   await unstakeIXT(stakingItem)
+
+  emit("close")
+  displaySnack("withdraw-success")
 }
 
 

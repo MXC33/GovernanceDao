@@ -8,9 +8,9 @@ ClientOnly()
       StakingRewards(:pool="pool" @claim="claimReward")
 
   Teleport(to="#overlays")
-    StakingActionIXTDeposit(@close="depositActive = false" v-if="depositActive" :month="month" :pool="pool" @stake="onClickStake")
+    StakingActionIXTDeposit(@close="depositActive = false" v-if="depositActive" :month="month" :pool="pool")
 
-    StakingActionIXTWithdraw(@close="withdrawActive = false" v-if="withdrawActive"  :pool="pool" @withdraw="onClickUnstake")
+    StakingActionIXTWithdraw(@close="withdrawActive = false" v-if="withdrawActive" :pool="pool" :month="month")
 
 </template>
 
@@ -28,7 +28,7 @@ const { pool, month } = defineProps<{
 const depositActive = ref(false)
 const withdrawActive = ref(false)
 
-const { stakeIXT, unstakeIXT, claimIXT } = useIXTStakingContract(stakePeriodToStakingId(month))
+const { claimIXT } = useIXTStakingContract(stakePeriodToStakingId(month))
 const { getUserStakeInPool, isUnderLockPeriod } = useStakingPools()
 const userStake = computed(() => getUserStakeInPool('ixt', pool))
 const { ixtBalance } = useCurrencyData()
@@ -36,14 +36,6 @@ const { ixtBalance } = useCurrencyData()
 const lockPeriod = computed(() =>
   isUnderLockPeriod(pool)
 )
-
-const onClickStake = (amount: number) => {
-  stakeIXT(amount)
-}
-
-const onClickUnstake = (amount: number) => {
-  unstakeIXT(amount)
-}
 
 const claimReward = () => {
   claimIXT()

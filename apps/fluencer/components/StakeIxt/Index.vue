@@ -57,7 +57,6 @@ DrawerContent(:start-open="true" :is-neutral="true" bg="gray-900" max-h="auto")
 import type { AdjustableToken } from '@ix/base/composables/Utils/useAdjustableNumber';
 import { type StakingDataFragment, StakingId } from '~/.nuxt/gql/default';
 const { displaySnack } = useSnackNotifications()
-const { formattedMonths } = useStakingHelper()
 const { ixtToken } = useCurrencyData()
 
 const { data: ixtOneMonthData } = useStakingData(StakingId.IxtOneMonth)

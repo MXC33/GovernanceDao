@@ -56,6 +56,7 @@ const { loading: isLoading, execute: stakeRequest } = useContractRequest(async (
   return onClickStake()
 })
 const { stakeIXT } = useEnergyStakingContract()
+const { displaySnack } = useSnackNotifications()
 
 const { ixtBalance } = useCurrencyData()
 const stakeAmount = ref(0)
@@ -76,6 +77,7 @@ const onClickStake = async () => {
   }
 
   const staked = await stakeIXT(stakingItem)
+  displaySnack("stake-success")
   if (staked)
     emit("close")
 }

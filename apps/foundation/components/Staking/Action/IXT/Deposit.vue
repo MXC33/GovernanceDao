@@ -44,28 +44,32 @@ PopupBase(@close="$emit('close')")
 
   template(#buttons)
     Disabler(:disabled="!isAgreed || stakeAmount == 0")
-      ButtonInteractive(@click="onClickStake" text="Stake" :loading-text="'Staking...'")
+      ButtonInteractive(@click="executeStake" text="Stake" :loading-text="'Staking...'" :loading="loading")
 
 </template>
 
 <script lang="ts" setup>
 import type { StakingDataFragment } from '#gql';
 import { formattedMonths } from '@ix/base/composables/Utils/useHelpers';
+const { displaySnack } = useSnackNotifications()
 
 const { ixtBalance } = useCurrencyData()
 const stakeAmount = ref(0)
 const isAgreed = ref(false)
 
-const emit = defineEmits(["close", "stake"])
+const emit = defineEmits(["close"])
 
-defineProps<{
+const { month } = defineProps<{
   pool?: StakingDataFragment,
   month: number
 }>()
 
-const onClickStake = () => {
-  emit("stake", stakeAmount.value)
-}
+const { stakeIXT } = useIXTStakingContract(stakePeriodToStakingId(month))
 
+const { loading, execute: executeStake } = useContractRequest(async () => {
+  await stakeIXT(stakeAmount.value)
+  displaySnack("stake-success", "success")
+  emit("close")
+})
 
 </script>
