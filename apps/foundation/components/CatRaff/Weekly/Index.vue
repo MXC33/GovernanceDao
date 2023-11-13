@@ -10,7 +10,7 @@ HList(overflow-x="auto" whitespace-nowrap space-x="6")
       VList()
         div(grid="~ cols-2")
           div()
-            TitleDetail(#default) {{ week.totalTickets }}
+            TitleDetail(#default) {{ week.totalTickets?.toLocaleString() }}
             TitleDetail(#detail) Total Tickets
           div()
             TitleDetail(#default) {{week.userEnteredTicket}}
