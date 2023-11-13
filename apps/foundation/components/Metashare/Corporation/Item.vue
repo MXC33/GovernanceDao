@@ -39,8 +39,8 @@ const { claimMetashareReward } = useMetashareStakingContract()
 const { data } = defineProps<{
   data: StakingItemFragment
 }>()
+const { canClaim } = useStakingHelper(data)
 
-const canClaim = computed(() => data.userStakingData?.totalReward ? data.userStakingData?.totalReward > 0 : false)
 
 const claimReward = async (item: StakingItemFragment) => {
   await claimMetashareReward(item)

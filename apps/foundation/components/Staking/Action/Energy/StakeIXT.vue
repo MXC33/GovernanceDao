@@ -44,7 +44,7 @@ PopupBase(@close="$emit('close')")
 
   template(#buttons)
     Disabler(:disabled="!isAgreed || stakeAmount == 0")
-      ButtonInteractive(@click="stakeRequest" text="Stake" :loading="isLoading")
+      ButtonInteractive(@click="stakeRequest" text="Stake" :loading="isLoading" :loading-text="'Staking...'")
 
 </template>
 

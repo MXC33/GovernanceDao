@@ -7,7 +7,7 @@ div(grid="~ md:cols-2 gap-default")
 
       TitleDetail(icon="ixt")
         template(#detail) IXT
-        template(#default) {{ stakingData.totalStakedAmount}}
+        template(#default) {{ stakingData.totalStakedAmount?.toLocaleString()}}
 
     Card()
       CardTitle()
@@ -15,7 +15,7 @@ div(grid="~ md:cols-2 gap-default")
 
       TitleDetail()
         template(#detail) {{ $t(`ixtcatraff.PoolPrice.description`) }}
-        template(#default) ${{ ixtToUSD(stakingData.totalStakedAmount ?? 0) }}
+        template(#default) ${{ ixtToUSD(stakingData.totalStakedAmount ?? 0)?.toLocaleString() }}
 
   Card()
     CardTitle()
@@ -30,7 +30,7 @@ div(grid="~ md:cols-2 gap-default")
 
     TitleDetail()
       template(#detail) {{ $t(`ixtcatraff.TotalWeekDeposits.title`) }}
-      template(#default) {{currentWeekDeposits}} IXT
+      template(#default) {{currentWeekDeposits?.toLocaleString()}} IXT
 </template>
 
 <script lang="ts" setup>
