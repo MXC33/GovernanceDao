@@ -1,5 +1,5 @@
 <template lang="pug">
-VList( min-h="70")
+VList(min-h="70" ref="containerElement")
   Line(:options="chartOptions" :data="chartData" v-if="chartOptions" ref="chart" mx="-6px" w="full")
 </template>
 
@@ -23,6 +23,15 @@ import annotationPlugin from 'chartjs-plugin-annotation';
 
 import type { ChartInfo, ChartListData } from 'composables/useChartData';
 const chart = ref()
+const containerElement = ref()
+
+const { pressed } = useMousePressed({ target: containerElement })
+watch(pressed, (isPressed) => {
+  if (isPressed)
+    document.documentElement.style.overflow = 'hidden';
+  else
+    document.documentElement.style.overflow = 'auto';
+})
 
 ChartJS.register(
   CategoryScale,
