@@ -3,7 +3,7 @@ div(grid="~ lg:cols-2 cols-1 gap-4 lg:gap-6")
   EnergyDashboardPool(:data="data")
 
   Card()
-    Chart(:data="chartInfo" :facilities="facilities" y-label="Total share of staking pool distributed" x-label="Facilities Minted")
+    Chart(:data="chartInfo" :facilities="facilities" y-label="Total share of staking pool distributed" x-label="Facilities Minted" :x-max="100000" :y-max="100" :current-position="currentPos")
 
 
   EnergyDashboardEpochs(:data="data")
@@ -20,6 +20,9 @@ defineProps<{
 }>()
 
 
+const { poolShare } = useChartData()
+
+
 const { facilitiesMintedData } = useChartData()
 const { totalFacilitiesMinted } = useEnergyData()
 const { execute: fetchData, data: facilitesMinted } = totalFacilitiesMinted()
@@ -27,6 +30,10 @@ await fetchData()
 
 const facilities = computed(() => facilitesMinted.value ?? 0)
 
+const currentPos = computed(() => ({
+  x: 100000,
+  y: poolShare(facilities.value) * 100
+}))
 const chartData = facilitiesMintedData()
 const chartInfo: ChartInfo = { data: chartData, type: 'xy' }
 

@@ -13,7 +13,7 @@ div(grid="~ lg:cols-2 cols-1 gap-6")
           button(color="gray") {{ $t("index.addToWalletButton") }}
           LaunchIcon(w="5")
 
-    CardChart(:data="chartInfo" x-label="Time" y-label="Balance")
+    CardChart(:data="chartInfo")
       template(#title)
         CardTitle()
           template(#default) IXT Wallet History

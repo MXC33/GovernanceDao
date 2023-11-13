@@ -91,7 +91,7 @@ export const useChartData = () => {
     end: today
   }))
 
-  const formattedDatesArray = computed(() => dateInterval.value.map(date => format(date, 'yyyy-MM-dd')))
+  const formattedDatesArray = computed(() => dateInterval.value.map(date => format(date, 'yy-MM-dd')))
 
   return {
     createChartData,
