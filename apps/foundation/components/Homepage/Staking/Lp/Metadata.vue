@@ -1,21 +1,22 @@
 
 <template lang="pug">
-div(grid="~ gap-3 md:cols-3 md:gap-6")
-  TitleDetail() 
-    template(#detail)  {{ $t('index.totalLiquidity') }}
-    template(#default) {{ formatNumber(item.totalStakedAmount ?? 0)}}
+VList(gap="3 md:6")
+  div(grid="~ gap-3 md:cols-4 md:gap-6")
+    TitleDetail() 
+      template(#detail)  {{ $t('index.totalLiquidity') }}
+      template(#default) {{ formatNumber(item.totalStakedAmount ?? 0)}}
 
-  TitleDetail(:icon="type == 'matic' ? 'ixtmatic' : 'ixtusdt'") 
-    template(#detail) {{ $t('index.yourStake') }}
-    template(#default) {{ roundToDecimals(userStakingData?.amountStaked, 10) }}
+    TitleDetail(:icon="type == 'matic' ? 'ixtmatic' : 'ixtusdt'") 
+      template(#detail) {{ $t('index.yourStake') }}
+      template(#default) {{ roundToDecimals(userStakingData?.amountStaked, 10) }}
 
-  TitleDetail()
-    template(#detail) {{ $t('index.lpTokens') }}
-    template(#default) {{ roundToDecimals(userStakingData?.balanceOfToken, 10) }}
+    TitleDetail()
+      template(#detail) {{ $t('index.lpTokens') }}
+      template(#default) {{ roundToDecimals(userStakingData?.balanceOfToken, 10) }}
 
-  TitleDetail()
-    template(#detail) {{ $t('index.apy') }}
-    template(#default) 26%
+    TitleDetail()
+      template(#detail) {{ $t('index.apy') }}
+      template(#default) 26%
 
   TitleDetail(v-if="userStakingData")
     template(#detail) {{ $t('general.lockPeriodEnds') }}

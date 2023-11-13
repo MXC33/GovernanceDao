@@ -1,17 +1,18 @@
 
 <template lang="pug">
-div(grid="~ gap-3 md:cols-4 md:gap-6")
-  TitleDetail()
-    template(#detail) {{ $t('index.apy') }}
-    template(#default) {{ poolApy }} %
+VList(gap="3 md:6")
+  div(grid="~ gap-3 md:cols-4 md:gap-6")
+    TitleDetail()
+      template(#detail) {{ $t('index.apy') }}
+      template(#default) {{ poolApy }} %
 
-  TitleDetail(icon="ixt")
-    template(#detail) {{ $t('index.yourStake') }}
-    template(#default) {{ amountStaked ?? 0}}
+    TitleDetail(icon="ixt")
+      template(#detail) {{ $t('index.yourStake') }}
+      template(#default) {{ amountStaked ?? 0}}
 
-  TitleDetail(icon="ixt")
-    template(#detail) {{ $t('index.poolSize') }}
-    template(#default) {{ poolSize }}
+    TitleDetail(icon="ixt")
+      template(#detail) {{ $t('index.poolSize') }}
+      template(#default) {{ poolSize }}
 
   TitleDetail( v-if="stakedAt")
     template(#detail) {{ $t('general.lockPeriodEnds') }}
