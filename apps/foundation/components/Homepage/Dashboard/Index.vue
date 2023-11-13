@@ -66,7 +66,8 @@ const chartData = computed(() => {
 const chartInfo = computed<ChartInfo>(() => {
   return {
     data: chartData.value,
-    labels: formattedDatesArray.value
+    labels: formattedDatesArray.value,
+    type: 'list'
   }
 })
 

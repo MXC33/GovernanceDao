@@ -7,10 +7,18 @@ import {
 
 
 
-export interface ChartInfo {
-  data: number[],
-  labels: string[]
+export interface ChartXYData {
+  data: { x: number, y: number }[],
+  type: 'xy'
 }
+
+export interface ChartListData {
+  data: number[],
+  labels?: string[]
+  type: 'list'
+}
+
+export type ChartInfo = ChartXYData | ChartListData
 
 export const useChartData = () => {
 
