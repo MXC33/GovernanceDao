@@ -43,6 +43,7 @@
     "apps/*"
   ],
   "devDependencies": {
+    "chartjs-plugin-annotation": "^3.0.1",
     "concurrently": "^8.2.0"
   },
   "resolutions": {
