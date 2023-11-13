@@ -4,7 +4,8 @@ HList(overflow-x="auto" whitespace-nowrap space-x="6")
     VList()
       TitleDetail(#default mb="6") Week # {{week.week}}
       TitleDetail(#detail) Thursday
-      TitleDetail(#detail) {{ calculateEndDate(index) }}
+      TitleDetail(#detail) {{ calculateEndDate(week.week) }}
+      TitleDetail(#detail) 00:00 AM GMT
       TitleDetail(#detail) 2500 IXT
     template(#detailBottom)
       VList()
@@ -19,17 +20,11 @@ HList(overflow-x="auto" whitespace-nowrap space-x="6")
 	
 <script lang="ts" setup>
 import { type CatRaffTicketInfoFragment } from '#gql';
-import { format } from 'date-fns';
-
-const startDate = 1657670400000
-const sevenDaysSeconds = 604800000
-
-const reversedItems = computed(() => [...data].reverse())
-
-const calculateEndDate = (index: number) => format(startDate + (sevenDaysSeconds * index + 1), 'dd-MM-yyyy')
-
 
 const { data } = defineProps<{
   data: CatRaffTicketInfoFragment[]
 }>()
+
+const reversedItems = computed(() => [...data].reverse())
+
 </script>

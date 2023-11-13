@@ -7,18 +7,18 @@ Page()
           template(#default) Prize Pool
           template(#detail) Track balances
       template(#details)
-        TitleDetail()
+        TitleDetail(icon="ixt")
           template(#detail) Total Deposits
-          template(#default) 0
+          template(#default) {{ totalDeposits }}
         TitleDetail()
           template(#detail) Weekly Odds
-          template(#default) 0
-        TitleDetail()
+          template(#default) {{roundToDecimals(odds)}}%
+        TitleDetail(icon="ixt")
           template(#detail) Weekly Prize
           template(#default) 2500
         TitleDetail()
           template(#detail) Next Draw
-          template(#default) 0
+          template(#default) {{nextDrawing}}
 
   PageSection(section="StakingContract")
     div(grid="~ md:cols-2 gap-default")
@@ -83,7 +83,20 @@ const chartInfo = computed<ChartInfo>(() => {
   }
 })
 
+const odds = computed(() => {
+  if (!stakingData.value?.stakingItems[0]?.odds)
+    return 0
+  return stakingData.value.stakingItems[0].odds * 100
+})
 
+const totalDeposits = computed(() => stakingData.value?.totalStakedAmount)
+
+const nextDrawing = computed(() => {
+  if (!weeklyData.value || weeklyData.value.length == 0)
+    return 0
+  const currentWeek = weeklyData.value?.[weeklyData.value?.length - 1]?.week ?? 0
+  return calculateEndDate(currentWeek)
+})
 await Promise.all([
   fetchCatRaffData(),
   fetchCatRaffAccounts(),
