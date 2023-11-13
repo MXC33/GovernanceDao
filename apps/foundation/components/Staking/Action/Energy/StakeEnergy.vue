@@ -56,6 +56,7 @@ const isAgreed = ref(false)
 
 const emit = defineEmits(["close"])
 const { stakeEnergy, stakeAmeliaEnergy } = useEnergyStakingContract()
+const { displaySnack } = useSnackNotifications()
 
 const { item, id } = defineProps<{
   item: StakingItemFragment
@@ -78,12 +79,18 @@ const onClickStake = async () => {
 
 const onStakeEnergy = async (item: StakingItemFragment) => {
   const staked = await stakeEnergy(item)
+
+  displaySnack("stake-success")
+
   if (staked)
     emit("close")
 }
 
 const onStakeAmelia = async (item: StakingItemFragment) => {
   const staked = await stakeAmeliaEnergy(item)
+
+  displaySnack("stake-success")
+
   if (staked)
     emit("close")
 }
