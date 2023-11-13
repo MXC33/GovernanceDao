@@ -23,7 +23,7 @@ export const useStakingHelper = (item: MaybeRef<StakingItemFragment>) => {
     (get(item).userStakingData?.amountStaked ?? 0) > 0
   )
 
-  const canClaim = computed(() => (get(item).userStakingData?.totalReward ?? 0) > 0
+  const canClaim = computed(() => (get(item).userStakingData?.totalReward ?? 0) > 0.01
   )
 
   return {

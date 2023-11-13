@@ -4,7 +4,7 @@ Card(flex-grow="1")
     slot(name="details")
   HList(v-for="item in data" justify="between")
     div() {{ minimizeString(item.address ?? "") }}
-    div() {{ item.winAmount ?? item.totalTickets }}
+    div() {{ item.winAmount ?? item.totalTickets?.toLocaleString() }}
   
   
   

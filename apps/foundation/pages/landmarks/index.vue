@@ -12,13 +12,13 @@ Page()
             template(#default) {{ roundToDecimals(landmarkData?.userSpecificStakingData?.totalUserRewardPerThirtyDays, 4) }}
 
       Card()
-        HList(justify="between")
+        div(grid="~ cols-2 gap-6" justify="between")
           CircleBackground(position="absolute" class="top-0 left-0 w-1/2" h="100%")
           TitleDetail(icon="ixt")
             template(#detail) {{ $t(`landmarks.totalRewards`) }}
             template(#default) {{ roundToDecimals(landmarkData?.userSpecificStakingData?.totalUserReward, 4) }}
-        Disabler(:disabled="!canClaim")
-          ButtonGlitch(btn="~ primary-outline-cut" @click="claimAllRewards" :text="$t('general.claim')")
+          Disabler(:disabled="!canClaim")
+            ButtonGlitch(btn="~ primary-outline-cut" @click="claimAllRewards" :text="$t('general.claim')")
 
 
   PageSection(section="MyLandmarks")
@@ -28,7 +28,7 @@ Page()
 
 
   PageSection(section="ExploreLandmarks")
-    div(grid="~ cols-3 gap-6" z="20")
+    div(grid="~ cols-1 lg:cols-3 gap-6" z="20")
       InputsSearchbar( @input="search")
       OptionDropDown(:items="tierList")
         template(#selectedName) 

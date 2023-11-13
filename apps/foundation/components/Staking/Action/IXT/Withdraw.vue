@@ -23,7 +23,7 @@ PopupBase(@close="$emit('close')")
 
   template(#buttons)
     Disabler(:disabled="withdrawAmount == 0")
-      ButtonInteractive(@click="onClickStake" text="Withdraw")
+      ButtonInteractive(@click="onClickStake" text="Withdraw" :loading-text="'Unstaking...'")
 
 </template>
 

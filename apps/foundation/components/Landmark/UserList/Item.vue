@@ -35,7 +35,7 @@ ClientOnly()
         TitleDetail(icon="ixt")
           template(#default) {{ roundToDecimals(item.userStakingData?.totalReward) }}
       Disabler(:disabled="!canClaim")
-        ButtonInteractive(btn="~ primary-outline-cut" mt="3" @click="claimRequest" :text="$t('landmarks.claimButton')" :loading="isLoading")
+        ButtonInteractive(btn="~ primary-outline-cut" mt="3" @click="claimRequest" :text="$t('landmarks.claimButton')" :loading="isLoading" :loading-text="'Claiming Reward...'")
 
 
 
