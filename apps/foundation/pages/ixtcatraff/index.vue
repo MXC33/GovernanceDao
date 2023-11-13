@@ -9,7 +9,7 @@ Page()
       template(#details)
         TitleDetail(icon="ixt")
           template(#detail) Total Deposits
-          template(#default) {{ totalDeposits }}
+          template(#default) {{ totalDeposits?.toLocaleString() }}
         TitleDetail()
           template(#detail) Weekly Odds
           template(#default) {{roundToDecimals(odds)}}%
