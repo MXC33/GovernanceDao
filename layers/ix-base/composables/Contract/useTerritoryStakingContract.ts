@@ -27,32 +27,33 @@ export const useTerritoryStakingContract = <T extends ContractInterface<T> & Ter
   })
 
 
-  const stakeTerritory = (item: StakingItemFragment) => {
-    createTransaction((contract) => {
+  const stakeTerritory = (token: NftFragment) => {
+    return createTransaction((contract) => {
+      console.log("token",)
       const address = walletAdress.value
-      if (!address || !item.token.tokenId)
+      if (!address || !token.tokenId)
         return undefined
 
-      return contract.stake(item.token.tokenId)
+      return contract.stake(token.tokenId)
     }, {
       onSuccess: async () => await Promise.all([refreshStakingData(), refreshUserStakingData(), refreshTokens()])
     })
   }
 
-  const unstakeTerritory = (item: StakingItemFragment) => {
-    createTransaction((contract) => {
+  const unstakeTerritory = (token: NftFragment) => {
+    return createTransaction((contract) => {
       const address = walletAdress.value
-      if (!address || !item.token.tokenId)
+      if (!address || !token.tokenId)
         return undefined
 
-      return contract.unstake(item.token.tokenId)
+      return contract.unstake(token.tokenId)
     }, {
       onSuccess: async () => await Promise.all([refreshStakingData(), refreshUserStakingData(), refreshTokens()])
     })
   }
 
   const claimAllTerritoryRewards = () => {
-    createTransaction((contract) => {
+    return createTransaction((contract) => {
       const address = walletAdress.value
       if (!address)
         return undefined
@@ -64,7 +65,7 @@ export const useTerritoryStakingContract = <T extends ContractInterface<T> & Ter
   }
 
   const claimSpecificTerritoryReward = (item: NftFragment) => {
-    createTransaction((contract) => {
+    return createTransaction((contract) => {
       const address = walletAdress.value
       if (!address || !item.tokenId)
         return undefined

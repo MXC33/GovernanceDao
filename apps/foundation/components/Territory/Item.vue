@@ -10,7 +10,7 @@ Card()
       template(#detail) {{ $t('general.rewards') }}
       template(#default) {{ roundToDecimals(totalReward) }}
 
-    ButtonGlitch(btn="~ primary-outline-cut on-disabled:disabled" @click="claimReward(data)" :text="$t('general.claim')" :disabled="!staked")
+    ButtonInteractive(btn="~ primary-outline-cut on-disabled:disabled" @click="claimRequest(data)" :text="$t('general.claim')" :disabled="!staked" :loading="isLoading" :loading-text="'Claiming...'")
 
   TerritoryStake(:item="data" :staked="staked")
   
@@ -18,6 +18,9 @@ Card()
 
 <script lang="ts" setup>
 import type { StakingItemFragment, NftFragment } from '#gql'
+const { loading: isLoading, execute: claimRequest } = useContractRequest(async (data: StakingItemFragment) => {
+  return claimReward(data)
+})
 
 const { claimSpecificTerritoryReward } = useTerritoryStakingContract()
 
@@ -30,8 +33,8 @@ const totalReward = computed(() => staked ? data?.userStakingData?.totalReward :
 
 const token = computed(() => staked ? data?.token : data)
 
-const claimReward = (item: StakingItemFragment) => {
-  return claimSpecificTerritoryReward(item.token)
+const claimReward = async (item: StakingItemFragment) => {
+  return await claimSpecificTerritoryReward(item.token)
 }
 
 
