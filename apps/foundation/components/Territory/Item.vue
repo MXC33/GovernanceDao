@@ -1,8 +1,8 @@
 <template lang="pug">
 Card()
 
+  div(font="bold") {{ token.tokenInfo.title }}
   TokenVideo(:token="token" h="60" pos="relative")
-
   Divider(mx="-6")
 
   div(grid="~ md:cols-2" space-x="3")
