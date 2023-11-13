@@ -15,6 +15,10 @@ VList()
   TradeModuleSubstitute(v-model="isSubstituteOffering")
     template(#title) {{ $t(`marketplace.trade.lowestOffer`) }}
     template(#substituteTitle)
+    template(#information)
+      ClientOnly
+        HelperHover(tooltip-id="substituteSell" :maxWidth="85")
+          InfoIcon(w="4.5" cursor="pointer" fill="gray-200 hover:white")
     template(#substituteInput)
       InputText(v-model="minOffer" :class="{highlighted: showDecreaseMinPrice}" :is-module="true")
         template(#suffix) IXT
@@ -33,6 +37,7 @@ VList()
 import type { SingleItemData } from "@ix/base/composables/Token/useIXToken";
 import { useOfferContract, useOfferItems } from "~/composables/useOffer";
 import { NFTType } from "~/composables/useAssetContracts";
+import InfoIcon from '~/assets/icons/info-icon.svg'
 
 const { displayPopup } = usePopups()
 const { item, isDisabled } = defineProps<{

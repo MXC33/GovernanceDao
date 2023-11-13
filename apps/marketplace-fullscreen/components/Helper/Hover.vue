@@ -3,18 +3,19 @@ HList(ref="hoverElement")
   slot()
 
 Teleport(to="#infobox")
-  HList(v-if="isHovered" opacity="on-active:100 0 on-hover:100" transition="opacity" :hover="isHovered" cursor="default" z="400")
+  HList(v-if="isHovered" :style="'max-width: '+ (maxWidth/4) + 'rem'" opacity="on-active:100 0 on-hover:100" transition="opacity" :hover="isHovered" cursor="default" z="400")
     HList(items="center")
       div.info-box(bg="gray-600" px="4" py="2" font="bold" text="sm")  {{ $t('tooltips.' + tooltipId) }}
-    div.triangle(pos="absolute top-7.6 left-8" z="999")
+    div.triangle(pos="absolute top-100% left-8" z="999")
 </template>
 
 <script lang="ts" setup>
 const hoverElement = ref()
 const isHovered = useElementHover(hoverElement)
 
-defineProps<{
-  tooltipId: string
+const { tooltipId, maxWidth } = defineProps<{
+  tooltipId: string,
+  maxWidth?: number
 }>()
 </script>
 
