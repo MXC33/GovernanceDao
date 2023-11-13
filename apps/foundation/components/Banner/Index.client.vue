@@ -3,9 +3,9 @@ div(py="3" text="md")
   Vue3Marquee(:duration="100" :pause-on-hover="true")
     BannerTerritory()
     BannerIxt()
-    //- BannerMetashare()
+    BannerMetashare()
     BannerEnergy()
-    //- BannerLandmark()
+    BannerLandmark()
 </template>
       
 <script lang="ts" setup>
