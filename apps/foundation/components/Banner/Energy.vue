@@ -1,6 +1,8 @@
 <template lang="pug">
-div(font="bold") ENERGY YIELD PER 30 DAYS:
-div() {{ roundToDecimals(energyIxtItem?.rewardPerThirtyDays,4) }}
+HList(font="bold" space-x="6") ENERGY 30 DAY YIELD:
+  div
+  div() {{ roundToDecimals(energyIxtItem?.rewardPerThirtyDays,4) }} IXT
+  div
 </template>
       
 <script lang="ts" setup>

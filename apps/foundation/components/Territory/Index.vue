@@ -5,8 +5,7 @@ Card()
       template(#detail) Category
       template(#default)
         HList(space-x="1")
-          TerritoryTierIcon(w="4" translate-y="-0.5")
-          div(capitalize="~") {{ data?.token?.tokenInfo?.tier }}
+          TerritoryBadge(:tier="data?.token?.tokenInfo?.tier")
     TitleDetail()
       template(#detail) Staked
       template(#default) {{ data.userStakingData?.amountStaked }}
@@ -27,9 +26,5 @@ import type { StakingItemFragment } from '#gql';
 const { data } = defineProps<{
   data: StakingItemFragment
 }>()
-
-const TerritoryTierIcon = await import(`../../public/assets/svg/${data?.token?.tokenInfo?.tier}-badge.svg?component`).catch(() => '')
-
-
 
 </script>
