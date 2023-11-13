@@ -28,7 +28,7 @@ Page()
 
 
   PageSection(section="ExploreLandmarks")
-    div(grid="~ cols-3 gap-6" z="20")
+    div(grid="~ cols-1 lg:cols-3 gap-6" z="20")
       InputsSearchbar( @input="search")
       OptionDropDown(:items="tierList")
         template(#selectedName) 
