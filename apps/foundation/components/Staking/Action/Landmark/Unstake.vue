@@ -58,7 +58,7 @@ const isAgreed = ref(false)
 const { item } = defineProps<{
   item: StakingItemFragment
 }>()
-const { sharesStaked } = useStakingHelper(item)
+const { sharesStaked } = useStakingHelper(computed(() => item))
 
 const onClickUnstake = async () => {
   const stakingItem: UserStakingItem = {

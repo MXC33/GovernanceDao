@@ -56,7 +56,7 @@ const { item } = defineProps<{
   item: StakingItemFragment
 }>()
 
-const { sharesStakable } = useStakingHelper(item)
+const { sharesStakable } = useStakingHelper(computed(() => item))
 
 const onClickStake = async () => {
   const stakingItem: UserStakingItem = {

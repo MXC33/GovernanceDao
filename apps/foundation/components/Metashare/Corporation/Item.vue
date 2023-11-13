@@ -39,7 +39,7 @@ const { claimMetashareReward } = useMetashareStakingContract()
 const { data } = defineProps<{
   data: StakingItemFragment
 }>()
-const { canClaim } = useStakingHelper(data)
+const { canClaim } = useStakingHelper(computed(() => data))
 
 
 const claimReward = async (item: StakingItemFragment) => {

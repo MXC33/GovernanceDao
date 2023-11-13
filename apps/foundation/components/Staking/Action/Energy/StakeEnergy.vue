@@ -62,7 +62,7 @@ const { item, id } = defineProps<{
   id: 'amelia' | 'energy'
 }>()
 
-const { sharesStakable } = useStakingHelper(item)
+const { sharesStakable } = useStakingHelper(computed(() => item))
 
 const onClickStake = async () => {
   const stakingItem: UserStakingItem = {

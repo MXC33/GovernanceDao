@@ -65,7 +65,7 @@ const unstakeActive = ref(false)
 const { item } = defineProps<{
   item: StakingItemFragment
 }>()
-const { canStake, canUnstake, sharesStaked, sharesOwned, canClaim } = useStakingHelper(item)
+const { canStake, canUnstake, sharesStaked, sharesOwned, canClaim } = useStakingHelper(computed(() => item))
 
 const claimReward = async () =>
   await claimLandmarkRewardsById(item.token)

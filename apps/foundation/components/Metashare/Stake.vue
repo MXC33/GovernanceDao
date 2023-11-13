@@ -26,7 +26,7 @@ const { item } = defineProps<{
   item: StakingItemFragment
 }>()
 
-const { canStake, canUnstake, sharesStaked, sharesOwned } = useStakingHelper(item)
+const { canStake, canUnstake } = useStakingHelper(computed(() => item))
 
 
 const stakeActive = ref(false)
