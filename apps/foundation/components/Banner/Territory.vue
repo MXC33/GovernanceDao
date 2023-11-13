@@ -1,32 +1,34 @@
 <template lang="pug">
-div(font="bold") AREA 
-div(v-for="(item, index) in area" px="3")
-  div() {{ item.item }}
+HList(space-x="6" font="bold") TERRITORY 30 DAY YIELD:
+  div
+  HList(text="detail" items="center") AREA 
+  HList(v-for="item in area" space-x="1")
+    TerritoryBadge(:tier="item.tier")
+    div(text="default") {{ item.item }} IXT
 
-div(font="bold") SECTOR 
-div(v-for="(item, index) in sector" px="3")
-  div() {{ item.item }}
+  HList(text="detail" items="center") SECTOR
+  HList(v-for="item in sector" space-x="1")
+    TerritoryBadge(:tier="item.tier")
+    div(text="default") {{ item.item }} IXT
 
-div(font="bold") ZONE 
-div(v-for="(item, index) in zone" px="3")
-  div() {{ item.item }}
+  HList(text="detail" items="center") ZONE 
+  HList(v-for="item in zone" space-x="1")
+    TerritoryBadge(:tier="item.tier")
+    div(text="default") {{ item.item }} IXT
 
-div(font="bold") DOMAIN 
-div(v-for="(item, index) in domain" px="3")
-  div() {{ item.item }}
+  HList(text="detail" items="center") DOMAIN 
+  HList(v-for="item in domain" space-x="1")
+    TerritoryBadge(:tier="item.tier")
+    div(text="default") {{ item.item }} IXT
 
+div(space-x="20")
 
-//- div(v-for="(item, index) in data.items" px="3")
-//-   span() {{ item.text }}
-
-  </template>
+</template>
       
 <script lang="ts" setup>
 const { territoryRewardPer30Day, } = useStakingPools()
 
-
-
-const tiers = ['outlier', 'common', 'uncommon', 'rare', 'legendary']
+const tiers = ['legendary', 'rare', 'uncommon', 'common', 'outlier']
 
 const area = territoryRewardPer30Day('area').map((item, index) => {
   return {

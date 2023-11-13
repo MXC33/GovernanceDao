@@ -1,12 +1,12 @@
 <template lang="pug">
-div(py="3" text="xl" color="white")
-  Vue3Marquee(:duration="30" :pause-on-hover="true")
+div(py="3" text="md")
+  Vue3Marquee(:duration="100" :pause-on-hover="true")
     BannerTerritory()
     BannerIxt()
-    BannerMetashare()
+    //- BannerMetashare()
     BannerEnergy()
-    BannerLandmark()
-  </template>
+    //- BannerLandmark()
+</template>
       
 <script lang="ts" setup>
 import { Vue3Marquee } from 'vue3-marquee'
