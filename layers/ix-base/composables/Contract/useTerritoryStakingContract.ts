@@ -29,7 +29,6 @@ export const useTerritoryStakingContract = <T extends ContractInterface<T> & Ter
 
   const stakeTerritory = (token: NftFragment) => {
     return createTransaction((contract) => {
-      console.log("token",)
       const address = walletAdress.value
       if (!address || !token.tokenId)
         return undefined

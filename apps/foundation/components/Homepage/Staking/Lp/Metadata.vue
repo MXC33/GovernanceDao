@@ -1,17 +1,17 @@
 
 <template lang="pug">
-div(grid="~ cols-3 gap-6")
+div(grid="~ gap-3 md:cols-3 md:gap-6")
   TitleDetail() 
     template(#detail)  {{ $t('index.totalLiquidity') }}
     template(#default) {{ formatNumber(item.totalStakedAmount ?? 0)}}
 
   TitleDetail(:icon="type == 'matic' ? 'ixtmatic' : 'ixtusdt'") 
     template(#detail) {{ $t('index.yourStake') }}
-    template(#default) {{ roundToDecimals(userStakingData?.amountStaked, 2) }}
+    template(#default) {{ roundToDecimals(userStakingData?.amountStaked, 10) }}
 
   TitleDetail()
     template(#detail) {{ $t('index.lpTokens') }}
-    template(#default) {{ roundToDecimals(userStakingData?.balanceOfToken, 2) }}
+    template(#default) {{ roundToDecimals(userStakingData?.balanceOfToken, 10) }}
 
   TitleDetail()
     template(#detail) {{ $t('index.apy') }}

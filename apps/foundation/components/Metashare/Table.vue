@@ -26,13 +26,17 @@ Card()
       div(text="subheading") {{ roundToDecimals(data.userSpecificStakingData?.totalUserReward) }}
       Icon(icon="ixt")
       Disabler(:disabled="!canClaim")
-        ButtonGlitch(btn="~ primary-outline-cut" @click="claimAll" :text="$t('general.claimAll')")
+        ButtonInteractive(btn="~ primary-outline-cut" @click="claimRewardRequest" :text="$t('general.claimAll')" :loading="isLoading" :loading-text="'Claiming...'")
 
 </template>
 
 <script lang="ts" setup>
 import type { StakingDataFragment } from '#gql';
 import type { SimpleTableRow, SimpleTableColumn } from '@ix/base/composables/useSimpleTable';
+
+const { loading: isLoading, execute: claimRewardRequest } = useContractRequest(async () => {
+  return claimAll()
+})
 
 const { claimAllMetashareReward } = useMetashareStakingContract()
 
@@ -63,7 +67,7 @@ const totalThirty = computed(() => data.userSpecificStakingData?.totalUserReward
 
 const canClaim = computed(() => data.userSpecificStakingData?.totalUserReward ? data.userSpecificStakingData?.totalUserReward > 0 : false)
 
-const claimAll = () => {
-  return claimAllMetashareReward()
+const claimAll = async () => {
+  return await claimAllMetashareReward()
 }
 </script>
