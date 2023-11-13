@@ -2,7 +2,8 @@
 ClientOnly()
   StakingItem(:can-withdraw="stakeBalance > 0 && !lockPeriod" :can-deposit="tokenBalance > 0" @deposit="depositActive = true" @withdraw="withdrawActive = true")
     template(#title) {{ $t(`index.lpStaking.${type}.title`) }}
-    template(#subtitle) {{ $t(`index.lpStaking.provide`) }}
+    template(#subtitle) 
+      div(@click="navigateToSwap()" cursor="pointer") {{ $t(`index.lpStaking.provide.${type}`) }}
     template(#icon)
       UsdtIXT_Icon(w="14" v-if="type == 'usdt'")
       MaticIXT_Icon(w="14" v-else)
@@ -65,5 +66,12 @@ const claimReward = () => {
     claimUsdtLPIXT()
   if (type == 'matic')
     claimMaticLPIXT()
+}
+
+const navigateToSwap = () => {
+  if (type == 'usdt')
+    window.open('https://quickswap.exchange/#/add/0xc2132D05D31c914a87C6611C10748AEb04B58e8F/0xE06Bd4F5aAc8D0aA337D13eC88dB6defC6eAEefE/v2')
+  if (type == 'matic')
+    window.open('https://app.sushi.com/legacy/add/ETH/0xE06Bd4F5aAc8D0aA337D13eC88dB6defC6eAEefE?chainId=137')
 }
 </script>

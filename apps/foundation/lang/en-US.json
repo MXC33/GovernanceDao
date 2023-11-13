@@ -83,7 +83,10 @@
       "matic": {
         "title": "MATIC/IXT LP Staking"
       },
-      "provide": "Provide liquidity on DEX and Stake LP"
+      "provide": {
+        "matic": "Provide liquidity on DEX and Stake LP",
+        "usdt": "Provide liquidity on DEX and Stake LP (v2)"
+      }
     },
     "totalLiquidity": "Total liquidity",
     "fiveDayRoi": "Your 5-day Roi%",
