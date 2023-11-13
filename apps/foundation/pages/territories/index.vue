@@ -19,7 +19,7 @@ Page()
             template(#default) {{ roundToDecimals(territoryUserData?.userSpecificStakingData?.totalUserRewardPerThirtyDays, 4) }}
 
       Card(flex-grow="1")
-        HList(justify="between")
+        div(grid="~ cols-2 gap-6" justify="between")
           CircleBackground(position="absolute" class="top-0 left-0 w-1/2" h="100%")
           TitleDetail(icon="ixt")
             template(#detail) Total Rewards

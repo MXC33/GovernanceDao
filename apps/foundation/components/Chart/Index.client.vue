@@ -35,6 +35,7 @@ ChartJS.register(
   Legend
 )
 
+
 ChartJS.defaults.borderColor = '#84D4BC';
 ChartJS.defaults.color = '#fff';
 const Colors = {
@@ -49,9 +50,10 @@ interface CurrentPosition {
   y: number,
 }
 
-const { data, xLabel, ylabel, xMax, yMax, currentPosition } = defineProps<{
+const { data, xLabel, ylabel, xMax, yMax, currentPosition, displayingIxt } = defineProps<{
   data: ChartInfo
   currentPosition?: CurrentPosition,
+  displayingIxt?: boolean,
   xLabel?: string
   ylabel?: string
   xMax?: number,
@@ -65,6 +67,8 @@ const chartData = computed<ChartData<'line'>>(() => {
       {
         data: data.data,
         fill: true,
+        pointRadius: 0,
+        pointHoverRadius: 10,
         backgroundColor: (context: ScriptableContext<'line'>) => {
           const chartArea = context.chart.chartArea;
           if (!chartArea)
@@ -87,7 +91,13 @@ const chartData = computed<ChartData<'line'>>(() => {
 
 const chartOptions: ChartOptions<"line"> = {
   responsive: true,
-
+  layout: {
+    padding: 5
+  },
+  interaction: {
+    intersect: false,
+    mode: 'index',
+  },
   scales: {
     x: {
       max: xMax,
@@ -98,7 +108,7 @@ const chartOptions: ChartOptions<"line"> = {
       },
       ticks: {
         color: Colors.ticks,
-        padding: 10,
+        display: true
       },
       title: {
         display: !!xLabel,
@@ -113,10 +123,11 @@ const chartOptions: ChartOptions<"line"> = {
       },
       ticks: {
         padding: 25,
-        color: Colors.ticks
+        color: Colors.ticks,
+        display: false
       },
       title: {
-        display: !!ylabel,
+        display: false,
         text: ylabel
       }
     }
@@ -124,6 +135,20 @@ const chartOptions: ChartOptions<"line"> = {
   plugins: {
     filler: {
       propagate: true,
+    },
+
+    tooltip: {
+      callbacks: {
+        label: (context) => {
+          const data = String(context.parsed.y)
+
+          if (displayingIxt) {
+            return roundToDecimals(Number(data), 3) + " IXT"
+          }
+
+          return data
+        }
+      }
     },
     legend: {
       display: false

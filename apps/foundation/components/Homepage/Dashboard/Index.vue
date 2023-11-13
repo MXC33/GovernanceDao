@@ -13,12 +13,20 @@ div(grid="~ lg:cols-2 cols-1 gap-6")
           button(color="gray") {{ $t("index.addToWalletButton") }}
           LaunchIcon(w="5")
 
-    CardChart(:data="chartInfo")
+    CardChart(:data="chartInfo" :displaying-ixt="true")
       template(#title)
         CardTitle()
           template(#default) IXT Wallet History
           template(#detail) Track balances
 
+      template(#details)
+        TitleDetail(icon="ixt")
+          template(#default) {{ roundToDecimals(ixtBalance, 2) }}
+          template(#detail) Wallet IXT Balance
+
+        TitleDetail()
+          template(#detail) USD
+          template(#default) ${{ roundToDecimals(ixtToUSD(ixtBalance), 2) }}
 
   VList(space-y="default" flex-grow="1") 
     HomepageDashboardTable()
@@ -47,6 +55,8 @@ import type { ChartInfo } from 'composables/useChartData';
 const { enable: enableSwap, state: swapVisible } = useIXTSwapVisible()
 const { addIXTToWallet, walletAdress } = useWallet()
 const { ixtBalance } = useCurrencyData()
+const { ixtToUSD } = useCurrencyConversion()
+
 const { createChartData, formattedDatesArray } = useChartData()
 
 const { getCirculatingSupply, getTotalSupply, getAPY, ixtPoolData } = useStakingPools()
