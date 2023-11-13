@@ -36,7 +36,7 @@ PopupBase(@close="$emit('close')")
 
   template(#buttons)
     Disabler(:disabled="!isAgreed || unstakeAmount == 0")
-      ButtonInteractive(@click="stakeRequest" text="Unstake" :loading="isLoading")
+      ButtonInteractive(@click="stakeRequest" text="Unstake" :loading="isLoading" :loading-text="'Unstaking...'") 
 
 </template>
 
