@@ -11,7 +11,8 @@ CatRaffItem()
   template(#footer)
     HList(space-x="2")
       input(type="number" text="bold" :placeholder="'IXT'" bg="gray-900 md:ix-black" px="2" w="full" v-model="amount")
-      ButtonGlitch(btn="~ primary-outline-cut" @click="onClick" :text="'STAKE IXT'")
+      Disabler(:disabled="ixtBalance == 0")
+        ButtonGlitch(btn="~ primary-outline-cut" @click="onClick" :text="'STAKE IXT'")
 </template>
 
 <script lang="ts" setup>
