@@ -25,8 +25,8 @@ export const useMetashareStakingContract = <T extends ContractInterface<T> & Met
   })
 
 
-  const stakeMetashare = (item: UserStakingItem) =>
-    createTransaction((contract) => {
+  const stakeMetashare = (item: UserStakingItem) => {
+    return createTransaction((contract) => {
       const address = walletAdress.value
       if (!address || !item.token.tokenId || !item.amount)
         return undefined
@@ -35,6 +35,7 @@ export const useMetashareStakingContract = <T extends ContractInterface<T> & Met
     }, {
       onSuccess: async () => await Promise.all([refreshStakingData(), refreshTokens()])
     })
+  }
 
 
   const unstakeMetashare = (item: UserStakingItem) => {
@@ -62,7 +63,7 @@ export const useMetashareStakingContract = <T extends ContractInterface<T> & Met
   }
 
   const claimAllMetashareReward = () => {
-    createTransaction((contract) => {
+    return createTransaction((contract) => {
       const address = walletAdress.value
       if (!address)
         return undefined
