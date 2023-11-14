@@ -18,9 +18,9 @@ Card()
 
 <script lang="ts" setup>
 import type { StakingItemFragment, NftFragment } from '#gql'
-const { loading: isLoading, execute: claimRequest } = useContractRequest(async (data: StakingItemFragment) => {
+const { loading: isLoading, execute: claimRequest } = useContractRequestFnd(async (data: StakingItemFragment) => {
   return claimReward(data)
-})
+}, 'claim')
 
 const { claimSpecificTerritoryReward } = useTerritoryStakingContract()
 

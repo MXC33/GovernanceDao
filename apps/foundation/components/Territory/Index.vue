@@ -14,7 +14,7 @@ Card()
       template(#default) {{ data.totalStaked }}
     TitleDetail(icon="ixt")
       template(#detail) Daily IXT/Share
-      template(#default) {{ roundToDecimals(data.rewardPerDay) }}
+      template(#default) {{ roundToDecimals(data.rewardPerDay,5) }}
 </template>
   
   

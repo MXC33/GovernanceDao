@@ -48,16 +48,14 @@ PopupBase(@close="$emit('close')")
 <script lang="ts" setup>
 import type { StakingItemFragment } from '#gql';
 import type { UserStakingItem } from 'composables/useStakingPools';
-const { loading: isLoading, execute: stakeRequest } = useContractRequest(async () => {
-  return onClickStake()
-})
+const { loading: isLoading, execute: stakeRequest } = useContractRequestFnd(async () => executeStake(), 'stake')
+
 const { maxEnergyStakable } = useStakingPools()
 const stakeAmount = ref(0)
 const isAgreed = ref(false)
 
 const emit = defineEmits(["close"])
 const { stakeEnergy, stakeAmeliaEnergy } = useEnergyStakingContract()
-const { displaySnack } = useSnackNotifications()
 
 const { item, id } = defineProps<{
   item: StakingItemFragment
@@ -68,7 +66,7 @@ console.log("item", item)
 
 const { sharesStakable } = useStakingHelper(computed(() => item))
 
-const onClickStake = async () => {
+const executeStake = async () => {
   const stakingItem: UserStakingItem = {
     token: item.token,
     amount: stakeAmount.value
@@ -83,16 +81,12 @@ const onClickStake = async () => {
 const onStakeEnergy = async (item: StakingItemFragment) => {
   const staked = await stakeEnergy(item)
 
-  displaySnack("stake-success")
-
   if (staked)
     emit("close")
 }
 
 const onStakeAmelia = async (item: StakingItemFragment) => {
   const staked = await stakeAmeliaEnergy(item)
-
-  displaySnack("stake-success")
 
   if (staked)
     emit("close")

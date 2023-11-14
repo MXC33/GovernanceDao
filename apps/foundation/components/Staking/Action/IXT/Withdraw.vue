@@ -45,12 +45,12 @@ const { pool, month } = defineProps<{
 
 const { unstakeIXT } = useIXTStakingContract(stakePeriodToStakingId(month))
 
-const { loading, execute: executeUnstake } = useContractRequest(async () => {
+const { loading, execute: executeUnstake } = useContractRequestFnd(async () => {
   await unstakeIXT(withdrawAmount.value)
   displaySnack("withdraw-success", "success")
 
   emit("close")
-})
+}, 'withdraw')
 
 
 

@@ -1,5 +1,9 @@
 <template lang="pug">
 Page()
+  PageSection(section="MyLandmarks")
+    LandmarkUserList(:data="landmarkStakingItems" v-if="landmarkStakingItems?.length > 0")
+    Card(items="center" v-else) No Landmarks Available
+
   PageSection(section="Rewards")
     div(grid="~ cols-1 lg:cols-4 gap-default")
       Card()
@@ -20,10 +24,6 @@ Page()
           Disabler(:disabled="!canClaim")
             ButtonInteractive(btn="~ primary-outline-cut" @click="claimRequest" :text="$t('general.claim')" :loading="isLoading" :loading-text="'Claiming...'")
 
-
-  PageSection(section="MyLandmarks")
-    LandmarkUserList(:data="landmarkStakingItems" v-if="landmarkStakingItems?.length > 0")
-    Card(items="center" v-else) No Landmarks Available
 
   PageSection(section="ExploreLandmarks")
     div(grid="~ cols-1 lg:cols-3 gap-default" z="20")

@@ -5,7 +5,8 @@ Card(class="overflow-hidden")
     template(#col-asset="{index}") 
       HList(items="center" space-x="3") 
         img(:src="`/assets/staking/${dashboardTableData[index].id}.png`" w="6" )
-        div(capitalize="~" ) {{ dashboardTableData[index].id }}
+        div(capitalize="~" uppercase="on-last:~" :last="index == dashboardTableData.length - 1") {{ dashboardTableData[index].id }}
+
 
 
     template(#footer-col-asset) 
@@ -13,12 +14,12 @@ Card(class="overflow-hidden")
 
     template(#footer-col-daily) 
       HList(items="center" space-x="1" font="bold")
-        div() {{ roundToDecimals(totalDaily) }}
+        div() {{ roundToDecimals(totalDaily, 5) }}
         Icon(icon="ixt")
 
     template(#footer-col-30days) 
       HList(items="center" space-x="1" font="bold")
-        div {{ roundToDecimals(total30Day) }}
+        div {{ roundToDecimals(total30Day, 5) }}
         Icon(icon="ixt")
 </template>
   

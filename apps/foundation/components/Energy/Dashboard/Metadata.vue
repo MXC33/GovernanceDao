@@ -17,14 +17,13 @@ div(grid="~ cols-3 gap-default" items-end)
 
   TitleDetail(icon="ixt")
     template(#detail) {{ $t('energy.ClaimableRewards.title') }}
-    template(#default) {{ roundToDecimals(totalEnergyIXTReward) }}
+    template(#default) {{ roundToDecimals(totalEnergyIXTReward, 5) }}
 
 
 </template>
 
 <script lang="ts" setup>
 import type { StakingDataFragment } from '~/.nuxt/gql/default';
-
 
 const { data } = defineProps<{
   data: StakingDataFragment

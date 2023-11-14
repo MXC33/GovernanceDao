@@ -12,7 +12,7 @@ export interface SnackNotification<T extends string> extends SnackNotificationBa
   timeout: number
 }
 
-export type DefaultTypes = 'transaction-rejected' | 'success' | 'user-rejected'
+export type DefaultTypes = 'transaction-rejected' | 'success' | 'user-rejected' | 'transaction-failed'
 
 export interface SnackOptions<T> {
   mapTypes?: (type: T) => SnackNotificationType | undefined
@@ -38,7 +38,7 @@ export const defineSnackNotifications = <T extends string>(opts: SnackOptions<T 
 
   const snackNotifications = useState<SnackNotification<NotificationType>[]>('active-notification', () => [])
 
-  const displaySnack = (id: T, type?: SnackNotificationType) => {
+  const displaySnack = (id: NotificationType, type?: SnackNotificationType) => {
     const timeout = addNotificationTimeout()
     snackNotifications.value.push({ id, timeout, type })
   }

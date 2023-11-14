@@ -34,9 +34,7 @@ Card()
 import type { StakingDataFragment } from '#gql';
 import type { SimpleTableRow, SimpleTableColumn } from '@ix/base/composables/useSimpleTable';
 
-const { loading: isLoading, execute: claimRewardRequest } = useContractRequest(async () => {
-  return claimAll()
-})
+const { loading: isLoading, execute: claimRewardRequest } = useContractRequestFnd(() => claimAll(), 'claim')
 
 const { claimAllMetashareReward } = useMetashareStakingContract()
 
