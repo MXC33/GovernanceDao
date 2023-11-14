@@ -2,7 +2,7 @@
 Card()
 
   div(font="bold") {{ token.tokenInfo.title }}
-  TokenVideo(:token="token" h="60" pos="relative")
+  TokenVideo(:token="token" h="60" pos="relative" fill="contain")
   Divider(mx="-6")
 
   div(grid="~ md:cols-2" space-x="3")
