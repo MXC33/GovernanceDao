@@ -1,7 +1,7 @@
 
 <template lang="pug">
 VList(gap="3 md:6")
-  div(grid="~ gap-3 md:cols-4 md:gap-6")
+  div(grid="~ gap-3 md:cols-3 md:gap-6")
     TitleDetail() 
       template(#detail)  {{ $t('index.totalLiquidity') }}
       template(#default) {{ formatNumber(item.totalStakedAmount ?? 0)}}
@@ -14,9 +14,9 @@ VList(gap="3 md:6")
       template(#detail) {{ $t('index.lpTokens') }}
       template(#default) {{ roundToDecimals(userStakingData?.balanceOfToken, 10) }}
 
-    TitleDetail()
-      template(#detail) {{ $t('index.apy') }}
-      template(#default) 26%
+    //- TitleDetail()
+    //-   template(#detail) {{ $t('index.apy') }}
+    //-   template(#default) {{ getAPY(item) }}
 
   TitleDetail(v-if="userStakingData && hasStake")
     template(#detail) {{ $t('general.lockPeriodEnds') }}
@@ -34,10 +34,12 @@ const { item } = defineProps<{
   item: StakingDataFragment,
   type: 'usdt' | 'matic'
 }>()
+
+const { getAPY } = useStakingPools()
+
 const userStakingData = computed(() => item.stakingItems && item.stakingItems[0]?.userStakingData)
 
 
-console.log("stake", item.stakingItems)
 const stakedAt = computed(() => item.stakingItems?.[0]?.userStakingData?.stakedAt ?? 0)
 const lockPeriod = computed(() => item.lockPeriod ?? 0)
 const hasStake = computed(() => (userStakingData.value?.amountStaked ?? 0) > 0)
