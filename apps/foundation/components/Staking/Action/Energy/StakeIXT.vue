@@ -52,9 +52,8 @@ PopupBase(@close="$emit('close')")
 import type { StakingItemFragment } from '#gql';
 import type { UserStakingItem } from '@ix/base/composables/Contract/useStakingData';
 import { formattedMonths } from '@ix/base/composables/Utils/useHelpers';
-const { loading: isLoading, execute: stakeRequest } = useContractRequest(async () => {
-  return onClickStake()
-})
+const { loading: isLoading, execute: stakeRequest } = useContractRequestFnd(() => onClickStake())
+
 const { stakeIXT } = useEnergyStakingContract()
 const { displaySnack } = useSnackNotifications()
 

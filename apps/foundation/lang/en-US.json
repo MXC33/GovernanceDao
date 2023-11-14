@@ -2,8 +2,8 @@
   "foundation": {
     "claimRewards": "Claim rewards",
     "menu": {
-      "index": "Home",
-      "territories": "Territories",
+      "index": "Dashboard",
+      "territories": "Territory",
       "landmarks": "Landmark",
       "metashare": "Metashare",
       "energy": "Energy",
@@ -117,8 +117,8 @@
       "title": "Your assets",
       "description": "Explore your staking capabilities.",
       "territory": {
-        "title": "TERRITORY NFT STAKING",
-        "description": "Stake your Area, Sector, Zone and Domain NFTs to earn IXT staking rewards from the pool",
+        "title": "TERRITORY STAKING",
+        "description": "Stake your Area, Sector, Zone and Domains to earn IXT staking rewards from the pool",
         "button": "GO TO TERRITORIES"
       },
       "energy": {
@@ -127,8 +127,8 @@
         "button": "GO TO ENERGY STAKING"
       },
       "landmark": {
-        "title": "LANDMARK NFT STAKING",
-        "description": "Stake your Landmark NFTs to earn IXT marketplace fees.",
+        "title": "LANDMARK STAKING",
+        "description": "Stake your Landmarks to earn IXT marketplace fees.",
         "button": "GO TO LANDMARK"
       },
       "metashare": {
