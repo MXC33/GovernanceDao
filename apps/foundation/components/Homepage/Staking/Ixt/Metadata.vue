@@ -1,14 +1,14 @@
 
 <template lang="pug">
 VList(gap="3 md:6")
-  div(grid="~ gap-3 md:cols-4 md:gap-6")
+  div(grid="~ gap-3 md:cols-3 md:gap-6")
     TitleDetail()
       template(#detail) {{ $t('index.apy') }}
       template(#default) {{ poolApy }} %
 
     TitleDetail(icon="ixt")
       template(#detail) {{ $t('index.yourStake') }}
-      template(#default) {{ amountStaked ?? 0}}
+      template(#default) {{ roundToDecimals(amountStaked ?? 0, 4)}}
 
     TitleDetail(icon="ixt")
       template(#detail) {{ $t('index.poolSize') }}
