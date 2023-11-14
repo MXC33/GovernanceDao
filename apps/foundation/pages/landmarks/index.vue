@@ -1,7 +1,7 @@
 <template lang="pug">
 Page()
   PageSection(section="Rewards")
-    div(grid="~ cols-1 lg:cols-4 gap-6")
+    div(grid="~ cols-1 lg:cols-4 gap-default")
       Card()
         HList(justify="between")
           TitleDetail(icon="ixt")
@@ -18,18 +18,16 @@ Page()
             template(#detail) {{ $t(`landmarks.totalRewards`) }}
             template(#default) {{ roundToDecimals(landmarkData?.userSpecificStakingData?.totalUserReward, 4) }}
           Disabler(:disabled="!canClaim")
-            ButtonInteractive(btn="~ primary-outline-cut" @click="claimRequest" :text="$t('general.claim')" :loading="isLoading" :loading-text="'Claiming...'")
+            ButtonGlitch(btn="~ primary-outline-cut" @click="claimAllRewards" :text="$t('general.claim')")
 
 
   PageSection(section="MyLandmarks")
     LandmarkUserList(:data="landmarkStakingItems" v-if="landmarkStakingItems?.length > 0")
-    div(v-else) No Landmarks Available
-
-
+    Card(items="center" v-else) No Landmarks Available
 
   PageSection(section="ExploreLandmarks")
-    div(grid="~ md:cols-3 gap-default" z="20")
-      InputsSearchbar(@input="search")
+    div(grid="~ cols-1 lg:cols-3 gap-default" z="20")
+      InputsSearchbar( @input="search")
       OptionDropDown(:items="tierList")
         template(#selectedName) 
           div() {{ tier }}
@@ -56,9 +54,6 @@ import CircleBackground from '~/assets/images/circles.svg'
 
 const { claimAllLandmarkRewards } = useLandmarkStakingContract()
 
-const { loading: isLoading, execute: claimRequest } = useContractRequest(async () => {
-  return claimAllRewards()
-})
 
 const sort = ref<LandmarkSort>(LandmarkSort.EarningHighToLow)
 const tier = ref<LandmarkTier>(LandmarkTier.Legendary)
@@ -110,8 +105,8 @@ watch([page, sort, tier],
 const landmarkStakingItems = computed(() => landmarkData.value?.stakingItems ?? [])
 
 
-const claimAllRewards = async () => {
-  return await claimAllLandmarkRewards()
+const claimAllRewards = () => {
+  return claimAllLandmarkRewards()
 }
 
 </script>

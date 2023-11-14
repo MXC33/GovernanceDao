@@ -1,5 +1,5 @@
 <template lang="pug">
-div(grid="~ lg:cols-2 cols-1 gap-4 lg:gap-6")
+div(grid="~ lg:cols-2 cols-1 gap-default")
   EnergyDashboardPool(:data="data")
 
   Card()

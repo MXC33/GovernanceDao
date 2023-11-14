@@ -1,5 +1,5 @@
 <template lang="pug"> 
-div(grid="~ cols-1 md:cols-3 gap-6")
+div(grid="~ cols-1 md:cols-3 gap-default")
   VList(v-for="item in data")
     Card(flex-grow="1")
       TokenMedia(:token="item")

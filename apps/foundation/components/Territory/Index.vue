@@ -1,6 +1,6 @@
 <template lang="pug">
 Card()
-  div(class="grid grid-cols-2 gap-6 lg:grid-cols-4")
+  div(class="grid grid-cols-2 gap-default lg:grid-cols-4")
     TitleDetail()
       template(#detail) Category
       template(#default)
