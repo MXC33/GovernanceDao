@@ -5,7 +5,10 @@ Card(class="overflow-hidden")
     template(#col-asset="{index}") 
       HList(items="center" space-x="3") 
         img(:src="`/assets/staking/${dashboardTableData[index].id}.png`" w="6" )
-        div(:class="{ 'uppercase': index === dashboardTableData.length - 1 }") {{ dashboardTableData[index].id }}
+        div(v-if="index !== dashboardTableData.length - 1" capitalize="~") {{ dashboardTableData[index].id }}
+        // Render the last item in uppercase
+        div(v-else :style="{ 'text-transform': 'uppercase' }") {{ dashboardTableData[index].id }}
+
 
 
     template(#footer-col-asset) 
