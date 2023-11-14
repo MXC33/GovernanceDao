@@ -25,7 +25,12 @@ const userReward = computed(() => {
 })
 
 const userStaked = computed(() => {
-  return data?.stakingItems?.map(item => item?.userStakingData?.amountStaked ?? 0).reduce((a, b) => a + b, 0)
+  return data?.stakingItems?.map(item => {
+    if (item?.token.tokenInfo?.type == 'energy')
+      return 0
+
+    return item?.userStakingData?.amountStaked ?? 0
+  }).reduce((a, b) => a + b, 0)
 })
 
 const url = computed(() => {
