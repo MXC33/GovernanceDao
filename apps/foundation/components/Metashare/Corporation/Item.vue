@@ -30,7 +30,7 @@ ClientOnly()
 <script lang="ts" setup>
 import type { StakingItemFragment } from '#gql'
 
-const { loading: isLoading, execute: claimRewardRequest } = useContractRequest(async (data: StakingItemFragment) => {
+const { loading: isLoading, execute: claimRewardRequest } = useContractRequestFnd(async (data: StakingItemFragment) => {
   return claimReward(data)
 })
 

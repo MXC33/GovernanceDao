@@ -15,13 +15,10 @@ import type { StakingItemFragment } from '#gql';
 import type { NftFragment } from '#gql';
 import { format } from 'date-fns'
 
-const { loading: isLoadingStake, execute: stakeRequest } = useContractRequest(async () => {
-  return stake()
-})
+const { loading: isLoadingStake, execute: stakeRequest } = useContractRequestFnd(() => stake())
 
-const { loading: isLoadingUnstake, execute: unstakeRequest } = useContractRequest(async () => {
-  return unstake()
-})
+const { loading: isLoadingUnstake, execute: unstakeRequest } = useContractRequestFnd(() => unstake())
+
 const { stakeTerritory, unstakeTerritory } = useTerritoryStakingContract()
 
 const { item, staked } = defineProps<{

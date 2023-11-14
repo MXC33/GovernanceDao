@@ -50,10 +50,9 @@ ClientOnly()
   
 <script lang="ts" setup>
 import type { StakingItemFragment } from '#gql';
+const { maybeShowContractError } = useSnackNotifications()
 
-const { loading: isLoading, execute: claimRequest } = useContractRequest(async () => {
-  return claimReward()
-})
+const { loading: isLoading, execute: claimRequest } = useContractRequestFnd(() => claimReward())
 
 const { isMobile } = useDevice()
 
