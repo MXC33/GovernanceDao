@@ -52,10 +52,9 @@ PopupBase(@close="$emit('close')")
 import type { StakingItemFragment } from '#gql';
 import type { UserStakingItem } from '@ix/base/composables/Contract/useStakingData';
 import { formattedMonths } from '@ix/base/composables/Utils/useHelpers';
-const { loading: isLoading, execute: stakeRequest } = useContractRequestFnd(() => onClickStake(), 'stake')
+const { loading: isLoading, execute: stakeRequest } = useContractRequestFnd(() => executeStake(), 'stake')
 
 const { stakeIXT } = useEnergyStakingContract()
-const { displaySnack } = useSnackNotifications()
 
 const { ixtBalance } = useCurrencyData()
 const stakeAmount = ref(0)
@@ -68,7 +67,7 @@ const { item } = defineProps<{
   month: number
 }>()
 
-const onClickStake = async () => {
+const executeStake = async () => {
 
   const stakingItem: UserStakingItem = {
     token: item.token,
@@ -76,7 +75,7 @@ const onClickStake = async () => {
   }
 
   const staked = await stakeIXT(stakingItem)
-  displaySnack("stake-success")
+
   if (staked)
     emit("close")
 }

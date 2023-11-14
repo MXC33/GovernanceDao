@@ -50,7 +50,7 @@ const listItems = computed<ListItem[]>(() => [
   {
     id: 'dailyYield',
     icon: 'ixt',
-    amount: roundToDecimals(item.userStakingData?.userRewardPerDay)
+    amount: roundToDecimals(item.userStakingData?.userRewardPerDay, 4)
   },
   {
     id: 'totalStaked',
