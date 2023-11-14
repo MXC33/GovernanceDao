@@ -1,6 +1,7 @@
 import { differenceInMilliseconds } from 'date-fns';
 import { intervalToDuration } from "date-fns"
 import { CredentialsInput } from "#gql"
+import { ethers } from 'ethers'
 
 export const IPFSURL = "https://nftstorage.link/ipfs/"
 export const IPFSURLVideo = "https://nftstorage.link/ipfs/"
@@ -47,6 +48,10 @@ export const formatNumber = (num: number): string => {
   } else {
     return num.toFixed(2);
   }
+}
+
+export const toWei = (amount: number) => {
+  return ethers.utils.parseUnits(amount.toString(), 'ether')
 }
 
 export const clamp = (min: number, max: number, amount: number) =>
