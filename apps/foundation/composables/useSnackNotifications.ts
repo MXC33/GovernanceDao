@@ -10,10 +10,10 @@ export const useSnackNotifications = () => {
 
   const maybeShowContractError = (error: string | undefined) => {
     if (error?.includes('rejected'))
-      return notifications.displaySnack('transaction-rejected')
+      return notifications.displaySnack('transaction-rejected', 'error')
 
     if (error?.includes('failed'))
-      return notifications.displaySnack('transaction-failed')
+      return notifications.displaySnack('transaction-failed', 'error')
   }
 
   return {

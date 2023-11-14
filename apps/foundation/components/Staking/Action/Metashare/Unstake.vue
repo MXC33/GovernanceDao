@@ -1,6 +1,6 @@
 <template lang="pug">
 PopupBase(@close="$emit('close')")
-  template(#header) Unstake Metashare
+  template(#header) Withdraw Metashare
   template(#default) 
     VList(space-y="default")
       InputGroup()
@@ -30,13 +30,13 @@ PopupBase(@close="$emit('close')")
         template(#value) {{item.token.tokenInfo?.title}}
 
       InputSummaryRow(:primary="true")
-        template(#name) Unstake amount
+        template(#name) Withdraw amount
         template(#value) 
           StakingActionTotalAmount(:amount="unstakeAmount" i18n="share")
 
   template(#buttons)
     Disabler(:disabled="!isAgreed || unstakeAmount == 0")
-      ButtonInteractive(@click="stakeRequest" text="Unstake" :loading="isLoading" :loading-text="'Unstaking...'") 
+      ButtonInteractive(@click="stakeRequest" text="Withdraw" :loading="isLoading" :loading-text="'Withdrawing...'") 
 
 </template>
 
@@ -45,7 +45,7 @@ import type { StakingItemFragment } from '#gql';
 import type { UserStakingItem } from '@ix/base/composables/Contract/useStakingData';
 const { loading: isLoading, execute: stakeRequest } = useContractRequestFnd(async () => {
   return onClickUnstake()
-})
+}, 'unstake')
 
 const { unstakeMetashare } = useMetashareStakingContract()
 

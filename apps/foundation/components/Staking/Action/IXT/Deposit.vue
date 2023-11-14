@@ -70,6 +70,6 @@ const { loading, execute: executeStake } = useContractRequestFnd(async () => {
   await stakeIXT(stakeAmount.value)
   displaySnack("stake-success", "success")
   emit("close")
-})
+}, 'stake')
 
 </script>

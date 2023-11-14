@@ -45,7 +45,7 @@ import type { StakingItemFragment } from '#gql';
 import type { UserStakingItem } from 'composables/useStakingPools';
 const { loading: isLoading, execute: stakeRequest } = useContractRequestFnd(async () => {
   return onClickStake()
-})
+}, 'stake')
 const stakeAmount = ref(0)
 const isAgreed = ref(false)
 

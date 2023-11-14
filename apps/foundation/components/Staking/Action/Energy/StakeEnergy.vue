@@ -48,7 +48,7 @@ PopupBase(@close="$emit('close')")
 <script lang="ts" setup>
 import type { StakingItemFragment } from '#gql';
 import type { UserStakingItem } from 'composables/useStakingPools';
-const { loading: isLoading, execute: stakeRequest } = useContractRequestFnd(async () => executeStake())
+const { loading: isLoading, execute: stakeRequest } = useContractRequestFnd(async () => executeStake(), 'stake')
 
 const { maxEnergyStakable } = useStakingPools()
 const stakeAmount = ref(0)

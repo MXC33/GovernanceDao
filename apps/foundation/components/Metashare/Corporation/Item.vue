@@ -32,7 +32,7 @@ import type { StakingItemFragment } from '#gql'
 
 const { loading: isLoading, execute: claimRewardRequest } = useContractRequestFnd(async (data: StakingItemFragment) => {
   return claimReward(data)
-})
+}, 'claim')
 
 const { claimMetashareReward } = useMetashareStakingContract()
 

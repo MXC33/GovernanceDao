@@ -50,7 +50,7 @@ const { loading, execute: executeUnstake } = useContractRequestFnd(async () => {
   displaySnack("withdraw-success", "success")
 
   emit("close")
-})
+}, 'withdraw')
 
 
 

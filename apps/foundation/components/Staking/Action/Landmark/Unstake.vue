@@ -45,7 +45,7 @@ import type { StakingItemFragment } from '#gql';
 import type { UserStakingItem } from '@ix/base/composables/Contract/useStakingData';
 const { loading: isLoading, execute: unstakeRequest } = useContractRequestFnd(async () => {
   return onClickUnstake()
-})
+}, 'unstake')
 
 
 const { unstakeLandmark } = useLandmarkStakingContract()

@@ -42,7 +42,7 @@ const { displaySnack } = useSnackNotifications()
 const { item } = defineProps<{
   item: StakingItemFragment,
 }>()
-const { loading: isLoading, execute: unstakeRequest } = useContractRequestFnd(() => onClickUnstake())
+const { loading: isLoading, execute: unstakeRequest } = useContractRequestFnd(() => onClickUnstake(), 'unstake')
 
 const withdrawAmount = ref(0)
 
