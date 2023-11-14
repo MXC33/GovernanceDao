@@ -18,7 +18,7 @@ Page()
             template(#detail) {{ $t(`landmarks.totalRewards`) }}
             template(#default) {{ roundToDecimals(landmarkData?.userSpecificStakingData?.totalUserReward, 4) }}
           Disabler(:disabled="!canClaim")
-            ButtonGlitch(btn="~ primary-outline-cut" @click="claimAllRewards" :text="$t('general.claim')")
+            ButtonInteractive(btn="~ primary-outline-cut" @click="claimRequest" :text="$t('general.claim')" :loading="isLoading" :loading-text="'Claiming...'")
 
 
   PageSection(section="MyLandmarks")
@@ -54,6 +54,9 @@ import CircleBackground from '~/assets/images/circles.svg'
 
 const { claimAllLandmarkRewards } = useLandmarkStakingContract()
 
+const { loading: isLoading, execute: claimRequest } = useContractRequest(async () => {
+  return claimAllRewards()
+})
 
 const sort = ref<LandmarkSort>(LandmarkSort.EarningHighToLow)
 const tier = ref<LandmarkTier>(LandmarkTier.Legendary)
@@ -105,8 +108,8 @@ watch([page, sort, tier],
 const landmarkStakingItems = computed(() => landmarkData.value?.stakingItems ?? [])
 
 
-const claimAllRewards = () => {
-  return claimAllLandmarkRewards()
+const claimAllRewards = async () => {
+  return await claimAllLandmarkRewards()
 }
 
 </script>

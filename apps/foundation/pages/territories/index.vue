@@ -25,7 +25,7 @@ Page()
             template(#detail) Total Rewards
             template(#default) {{ roundToDecimals(territoryUserData?.userSpecificStakingData?.totalUserReward, 4) }}
           Disabler(:disabled="!canClaim")
-            ButtonGlitch(btn="~ primary-outline-cut" @click="claimAllRewards" :text="$t('general.claim')")
+            ButtonInteractive(btn="~ primary-outline-cut" @click="claimRequest" :text="$t('general.claim')" :loading="isLoading" :loading-text="'Claiming...'")
 
 
 
@@ -53,8 +53,9 @@ Page()
 
     HList()
       div(grid="~ md:cols-3 gap-6" flex-grow="1")
-        TerritoryItem(v-for="data in filteredUserTerritories" :data="data" :staked="stakeSort == 'staked'" v-if="filteredUserTerritories?.length > 0")
-        Card(v-else flex-grow="1" items="center" font="bold")
+        TerritoryItem(v-for="data in stakedUserTerritories" :data="data" :staked="true" v-if="hasStakedTerritories")
+        TerritoryItem(v-for="data in unstakedUserTerritories" :data="data" :staked="false" v-if="hasUnstakedTerritories")
+        Card(v-else-if="!hasStakedTerritories && !hasUnstakedTerritories" flex-grow="1" items="center" font="bold")
           template(#default)
             div() {{ $t(`territories.noContent.${activeSection}`) }}
 
@@ -85,29 +86,37 @@ await fetchAllUserTerritories()
 
 const { claimAllTerritoryRewards } = useTerritoryStakingContract()
 
-const claimAllRewards = () => {
-  return claimAllTerritoryRewards()
+const { loading: isLoading, execute: claimRequest } = useContractRequest(async () => {
+  return claimAllRewards()
+})
+
+const claimAllRewards = async () => {
+  return await claimAllTerritoryRewards()
 }
 
 const canClaim = computed(() => territoryUserData.value?.userSpecificStakingData?.totalUserReward ?? 0 > 0)
 
 const filteredTerritories = computed(() => {
-  const filtered = territoryData.value?.stakingItems.filter(item => item?.token?.tokenInfo.type == activeSectionTop.value) as StakingItemFragment[]
+  const filtered = territoryData.value?.stakingItems.filter(item => item?.token?.tokenInfo?.type == activeSectionTop.value) as StakingItemFragment[]
   return filtered
 })
 
 const filterTokens = (token: NftFragment) => {
-  return token.tokenInfo.type == activeSection.value && sizeSort.value == 'all' ? true : token.tokenInfo.tier == sizeSort.value
+  return token?.tokenInfo?.type == activeSection.value && sizeSort.value == 'all' ? true : token.tokenInfo?.tier == sizeSort.value
 }
 
-const filteredUserTerritories = computed(() => {
-  if (stakeSort.value == 'staked') {
-    const filtered = territoryUserData.value?.stakingItems.filter(item => filterTokens(item?.token)) as StakingItemFragment[]
-    return filtered
-  }
-  else {
-    return allUserTerritories.value?.filter(token => filterTokens(token)) as NftFragment[]
-  }
+
+const stakedUserTerritories = computed(() => {
+  const filtered = territoryUserData.value?.stakingItems.filter(item => item?.token && filterTokens(item?.token)) as StakingItemFragment[]
+  return filtered
 })
+
+const hasStakedTerritories = computed(() => stakedUserTerritories.value.length > 0 && stakeSort.value == 'staked')
+
+const unstakedUserTerritories = computed(() => {
+  return allUserTerritories.value?.filter(token => token && filterTokens(token)) as NftFragment[]
+})
+
+const hasUnstakedTerritories = computed(() => unstakedUserTerritories.value.length > 0 && stakeSort.value == 'unstaked')
 
 </script>
