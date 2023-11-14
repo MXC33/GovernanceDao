@@ -111,6 +111,9 @@
   },
   "popupNotification": {
     "stake-success": "Stake successful",
-    "withdraw-success": "Withdraw successful"
+    "withdraw-success": "Withdraw successful",
+    "transaction-failed": "Transaction failed",
+    "transaction-rejected": "User rejected transaction",
+    "user-rejected": "Rejected by user"
   }
 }
