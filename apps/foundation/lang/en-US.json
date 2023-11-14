@@ -2,8 +2,8 @@
   "foundation": {
     "claimRewards": "Claim rewards",
     "menu": {
-      "index": "Home",
-      "territories": "Territories",
+      "index": "Dashboard",
+      "territories": "Territory",
       "landmarks": "Landmark",
       "metashare": "Metashare",
       "energy": "Energy",
