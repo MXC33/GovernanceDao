@@ -1,5 +1,5 @@
-query StakingData($credentials: CredentialsInput $id: StakingId!) {
-  stakingData(credentials: $credentials id: $id) {
+query StakingData($credentials: CredentialsInput, $id: StakingId!) {
+  stakingData(credentials: $credentials, id: $id) {
     ...StakingData
   }
 }
@@ -28,9 +28,6 @@ fragment StakingData on StakingData {
     ...UserSpecificStakingData
   }
   prizeAmount
-  transactions {
-    ...PolygonScanTransactions
-  }
   stakingItems {
     ...StakingItem
   }
@@ -51,7 +48,6 @@ fragment TokenSpecificUserStakingData on TokenSpecificUserStakingData {
   stakedAt
 }
 
-
 fragment StakingItem on StakingItem {
   token {
     ...NFT
@@ -65,7 +61,6 @@ fragment StakingItem on StakingItem {
   }
   odds
 }
-
 
 fragment PolygonScanTransactions on PolygonScanTransactions {
   blockNumber

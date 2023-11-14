@@ -47,7 +47,8 @@ export const useIXTStakingContract = <T extends ContractInterface<T> & IXTStakin
       if (!address || !amount)
         return undefined
 
-      return contract.stake(amount)
+      const weiAmount = ethers.utils.parseUnits(amount.toString(), 'ether')
+      return contract.stake(weiAmount)
     }, {
       approve: () => allowanceCheck(amount, contractAddress),
       onSuccess: async () => await Promise.all([refreshStakingData(), refreshIXT()])
