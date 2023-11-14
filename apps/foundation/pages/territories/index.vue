@@ -102,7 +102,10 @@ const filteredTerritories = computed(() => {
 })
 
 const filterTokens = (token: NftFragment) => {
-  return token?.tokenInfo?.type == activeSection.value && sizeSort.value == 'all' ? true : token.tokenInfo?.tier == sizeSort.value
+  return token?.tokenInfo?.type == activeSection.value &&
+    sizeSort.value == 'all' ? true :
+    token.tokenInfo?.tier == sizeSort.value &&
+    token?.tokenInfo?.type == activeSection.value
 }
 
 
