@@ -17,7 +17,7 @@ div(grid="~ cols-3 gap-default" items-end)
 
   TitleDetail(icon="ixt")
     template(#detail) {{ $t('energy.ClaimableRewards.title') }}
-    template(#default) {{ roundToDecimals(claimableRewards) }}
+    template(#default) {{ roundToDecimals(totalEnergyIXTReward) }}
 
 
 </template>
@@ -30,14 +30,12 @@ const { data } = defineProps<{
   data: StakingDataFragment
 }>()
 
+const { totalEnergyIXTReward } = useStakingPools()
 const stakingDataEnergy = computed(() => data.stakingItems && data.stakingItems[1])
-const stakingDataAmelia = computed(() => data.stakingItems && data.stakingItems[0])
-
 
 const dailyIxt = computed(() => stakingDataEnergy.value?.rewardPerDay)
 
 const yourStake = computed(() => stakingDataEnergy.value?.userStakingData?.amountStaked)
-const claimableRewards = computed(() => (stakingDataEnergy.value?.userStakingData?.totalReward ?? 0) + (stakingDataAmelia.value?.userStakingData?.totalReward ?? 0))
 
 
 </script>
