@@ -1,17 +1,24 @@
 <template lang="pug">
 ClientOnly()
   StakingItem(:can-withdraw="stakeBalance > 0 && !lockPeriod" :can-deposit="tokenBalance > 0" @deposit="depositActive = true" @withdraw="withdrawActive = true")
+
     template(#title) {{ $t(`index.lpStaking.${type}.title`) }}
+
     template(#subtitle) 
       div(@click="navigateToSwap()" cursor="pointer") {{ $t(`index.lpStaking.provide.${type}`) }}
+
     template(#icon)
       UsdtIXT_Icon(w="14" v-if="type == 'usdt'")
       MaticIXT_Icon(w="14" v-else)
+
     template(#metadata)
       HomepageStakingLpMetadata(:item="pool" :type="type" v-if="pool")
 
     template(#detail)
       StakingRewards(:pool="pool" v-if="pool" @claim="claimReward")
+
+    template(#buttons)
+      button(btn="~ primary-outline-cut" @click="navigateToSwap") {{ $t(`index.lpStaking.provideButton`) }}
 
   Teleport(to="#overlays")
     StakingActionLPDeposit(@close="depositActive = false" v-if="depositActive" :month="1" :pool="pool" @stake="onClickStake")

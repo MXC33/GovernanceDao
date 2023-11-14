@@ -20,6 +20,8 @@ Card()
       Disabler(:disabled="!canDeposit")
         ButtonGlitch(btn="~ primary-outline-cut" @click="$emit('deposit')" :text="$t('index.depositBtn')")
 
+      slot(name="buttons")
+
   template(#detailBottom)
     slot(name="detail")
 

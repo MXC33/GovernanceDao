@@ -18,7 +18,7 @@ VList(gap="3 md:6")
       template(#detail) {{ $t('index.apy') }}
       template(#default) 26%
 
-  TitleDetail(v-if="userStakingData")
+  TitleDetail(v-if="userStakingData && hasStake")
     template(#detail) {{ $t('general.lockPeriodEnds') }}
     template(#default) {{lockPeriodEnds}}
 
@@ -36,8 +36,12 @@ const { item } = defineProps<{
 }>()
 const userStakingData = computed(() => item.stakingItems && item.stakingItems[0]?.userStakingData)
 
+
+console.log("stake", item.stakingItems)
 const stakedAt = computed(() => item.stakingItems?.[0]?.userStakingData?.stakedAt ?? 0)
 const lockPeriod = computed(() => item.lockPeriod ?? 0)
+const hasStake = computed(() => (userStakingData.value?.amountStaked ?? 0) > 0)
+
 const currentTime = useTimestamp()
 
 const lockPeriodEnds = computed(() => {
