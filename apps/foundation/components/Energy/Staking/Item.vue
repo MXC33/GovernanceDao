@@ -11,7 +11,7 @@ ClientOnly()
         template(#default) {{ ixtStaked }}
 
       TitleDetail(icon="energy")
-        template(#detail) Your Stake
+        template(#detail) Your unit(s)
         template(#default) {{ energyStaked }}
 
       TitleDetail(icon="ixt")
