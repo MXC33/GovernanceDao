@@ -6,13 +6,11 @@ Collection(:data="data" :columns="columns" context="incoming-bids" :loading="pen
 
 
 <script lang="ts" setup>
-useHead({
-  title: "Incoming bids | Marketplace | PlanetIX"
-})
 import type { TableColumn } from "~/composables/useTable";
 import type { IXToken } from "@ix/base/composables/Token/useIXToken";
 
 const { myAssetsURL } = useCollectionsURL()
+const { t } = useI18n()
 
 const { data: data, execute: fetchCollection, loadNextPage, setupCollectionListeners, pending } = useCollectionData(myAssetsURL('polygon'), {
   filter: {
@@ -24,19 +22,28 @@ const { data: data, execute: fetchCollection, loadNextPage, setupCollectionListe
 await fetchCollection()
 setupCollectionListeners()
 
+const decodeHtmlCharCodes = (str) => {
+  return str.replace(/(&#(\d+);)/g, function(match, capture, charCode) {
+    return String.fromCharCode(charCode);
+  });
+}
+useHead({
+  title: decodeHtmlCharCodes(t('marketplace.pages.account.bid.incoming.meta_title'))
+})
+
 
 const columns: TableColumn<IXToken>[] = [
-  { label: "Asset", type: 'asset', width: 250 },
+  { label: t('marketplace.pages.account.bid.incoming.asset'), type: 'asset', width: 250 },
   {
-    label: "Highest bid", rowKey: "bid.price", type: 'ixt', sortable: true
+    label: t('marketplace.pages.account.bid.incoming.highestBid'), rowKey: "bid.price", type: 'ixt', sortable: true
   },
   {
-    label: "USD price", rowKey: "bid.price", type: 'usd', sortable: true, hideMobile: true
+    label: t('marketplace.pages.account.bid.incoming.usdPrice'), rowKey: "bid.price", type: 'usd', sortable: true, hideMobile: true
   },
   {
-    label: "Floor Difference", rowKey: "price", getValue(row) {
+    label: t('marketplace.pages.account.bid.incoming.floorDifference') , rowKey: "price", getValue(row) {
       if (row.sale_price == 0)
-        return 'No sale exist'
+        return t('marketplace.pages.account.bid.incoming.noSaleExist')
       const difference = roundToDecimals(
         ((row.higher_bid_price * 100) / row.sale_price) - 100
         , 2)
@@ -44,13 +51,13 @@ const columns: TableColumn<IXToken>[] = [
     }, type: 'text'
   },
   {
-    label: "Quantity", rowKey: "bid.quantity", type: 'text'
+    label: t('marketplace.pages.account.bid.incoming.quantity'), rowKey: "bid.quantity", type: 'text'
   },
   {
-    label: "From", rowKey: "bid.bidder_username", type: 'text'
+    label: t('marketplace.pages.account.bid.incoming.from'), rowKey: "bid.bidder_username", type: 'text'
   },
   {
-    label: "Expires", rowKey: "bid.due_date", type: 'date', sortable: true
+    label: t('marketplace.pages.account.bid.incoming.expires'), rowKey: "bid.due_date", type: 'date', sortable: true
   },
   {
     width: 'auto',

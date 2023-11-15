@@ -1,7 +1,7 @@
 <template lang="pug">
 VList(flex-grow="1" min-h="0" pos="relative" p="4 t-4 b-4 md:(8 b-30)" space-y="0 md:6")
-  CollectionHeader(context="activity") 
-    template(#header) 
+  CollectionHeader(context="activity")
+    template(#header)
       slot(name="name") {{ $t(`marketplace.myAssets.title`) }}
 
   slot(name="menu")
@@ -20,33 +20,33 @@ import type { IXToken } from '@ix/base/composables/Token/useIXToken';
 import type { CollectionContext } from '~/composables/useCollection';
 import type { TableColumn } from '~/composables/useTable'
 import type { ActivityDataList, ActivityData } from '~/composables/api/get/useActivityAPI';
+const { t } = useI18n()
 
 
 const defaultColumns: TableColumn<ActivityData>[] = [
 
   {
-    label: "Event", rowKey: "event", getValue(row) {
+    label: t('marketplace.myAssets.event'), rowKey: "event", getValue(row) {
       return row.event
     }, type: 'text', sortable: true
   },
-
   {
-    label: "Asset", rowKey: "nft.name"
+    label: t('marketplace.myAssets.asset'), rowKey: "nft.name"
   },
   {
-    label: "Price", rowKey: "price", type: 'text', sortable: true
+    label: t('marketplace.myAssets.price'), rowKey: "price", type: 'text', sortable: true
   },
   {
-    label: "Quantity", rowKey: "quantity", type: 'text', sortable: true
+    label: t('marketplace.myAssets.quantity'), rowKey: "quantity", type: 'text', sortable: true
   },
   {
-    label: "From", rowKey: "from", type: 'contractAdress'
+    label: t('marketplace.myAssets.from'), rowKey: "from", type: 'contractAdress'
   },
   {
-    label: "To", rowKey: "to", type: 'contractAdress'
+    label: t('marketplace.myAssets.to'), rowKey: "to", type: 'contractAdress'
   },
   {
-    label: "Time", rowKey: "timestamp", type: 'date', sortable: true
+    label: t('marketplace.myAssets.time'), rowKey: "timestamp", type: 'date', sortable: true
   },
 ]
 

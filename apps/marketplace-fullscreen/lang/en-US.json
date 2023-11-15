@@ -211,7 +211,14 @@
       "incomingBids": "Incoming Bids",
       "outgoingBids": "Outgoing Bids",
       "activeListings": "Active Listings",
-      "activity": "Activity"
+      "activity": "Activity",
+      "event": "Event",
+      "asset": "Asset",
+      "price": "Price",
+      "quantity": "Quantity",
+      "from": "From",
+      "to": "To",
+      "time": "Time"
     },
     "filterType": {
       "sales": "Sales",
@@ -763,6 +770,56 @@
         "account": "Account",
         "logout": "Log out",
         "connectWallet": "Connect Wallet"
+      }
+    },
+    "pages": {
+      "account": {
+        "bid": {
+          "incoming": {
+            "meta_title": "Incoming bids &#124; Marketplace &#124; PlanetIX",
+            "asset": "Asset",
+            "highestBid": "Highest bid",
+            "usdPrice": "USD price",
+            "floorDifference": "Floor Difference",
+            "quantity": "Quantity",
+            "from": "From",
+            "expires": "Expires",
+            "noSaleExist": "No sale exist"
+          },
+          "outgoing": {
+            "meta_title": "Outgoing bids &#124; Marketplace &#124; PlanetIX",
+            "asset": "Asset",
+            "offerPrice": "Offer price",
+            "usdPrice": "USD price",
+            "floorDifference": "Floor Difference",
+            "quantity": "Quantity",
+            "expiration": "Expiration",
+            "offerMade": "Offer made"
+          }
+        },
+        "activeListings": {
+          "meta_title": "Active listings &#124; Marketplace &#124; PlanetIX",
+          "asset": "Asset",
+          "unitPrice": "Unit price",
+          "usdPrice": "USD price",
+          "quantity": "Quantity",
+          "floorDifference": "Floor Difference",
+          "expirationDate": "Expiration date"
+        },
+        "meta_title": "My Assets &#124; Marketplace &#124; PlanetIX",
+        "asset": "Asset",
+        "currentPrice": "Current price",
+        "usdPrice": "USD price",
+        "bestOffer": "Best offer"
+      },
+      "assets": {
+        "network": {
+          "contract": {
+            "tokenId": {
+              "meta_title": "Marketplace &#124; PlanetIX"
+            }
+          }
+        }
       }
     }
   }
