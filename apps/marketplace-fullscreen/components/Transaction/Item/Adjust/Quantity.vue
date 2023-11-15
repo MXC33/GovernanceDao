@@ -1,5 +1,5 @@
 <template lang="pug">
-TransactionItemAdjustRow(v-if="item && isERC1155")
+InputGroup(v-if="item && isERC1155")
   template(#header) {{ $t(`marketplace.transactions.quantity`) }}
 
   template(#value)

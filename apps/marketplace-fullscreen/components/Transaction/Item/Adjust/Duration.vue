@@ -1,5 +1,5 @@
 <template lang="pug">
-TransactionItemAdjustRow(v-if="item")
+InputGroup(v-if="item")
   template(#header) {{ item.type }}  {{ $t(`marketplace.transactions.duration`) }}
 
   template(#value)

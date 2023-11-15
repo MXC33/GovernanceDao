@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "build": "nuxt build",
+    "build": "yarn workspace @ix/base build && nuxt build",
     "dev": "nuxt dev --port 3050",
     "prepare": "nuxt prepare",
     "generate": "nuxt generate",
@@ -12,6 +12,9 @@
   "devDependencies": {
     "@ix/base": "*",
     "@types/node": "^18",
-    "nuxt": "3.6.5"
+    "chart.js": "^4.4.0",
+    "nuxt": "3.6.5",
+    "vue-chartjs": "^5.2.0",
+    "vue3-marquee": "^4.1.0"
   }
 }

@@ -5,14 +5,32 @@
     "cancel": "Cancel",
     "close": "Close",
     "claim": "Claim",
+    "claimAll": "Claim all",
     "confirm": "Confirm",
     "continue": "Continue",
     "next": "Next",
     "disconnect": "Disconnect",
     "errorConnecting": "Error connecting",
+    "ixt": "IXT",
     "exit": "Exit",
+    "view": "View",
     "upgrade": "Upgrade",
     "enter": "Enter",
+    "month": "Month | Months",
+    "total": "Total",
+    "stake": "Stake",
+    "loading": "Loading",
+    "withdraw": "Withdraw",
+    "deposit": "Deposit",
+    "unstake": "Unstake",
+    "shares": "Shares",
+    "amount": "Amount",
+    "share": "Share | Shares",
+    "rewards": "Rewards",
+    "estimated": "Estimated",
+    "lockPeriodEnds": "Lock Period Ends",
+    "uniswap-matic": "Uniswap Matic",
+    "uniswap-usdt": "Uniswap Usdt",
     "navigation": {
       "terminal": "Terminal",
       "inventory": "Inventory",
@@ -90,5 +108,14 @@
         "ixt": "ixt"
       }
     }
+  },
+  "popupNotification": {
+    "stake-success": "Stake successful",
+    "unstake-success": "Unstake successful",
+    "withdraw-success": "Withdraw successful",
+    "claim-success": "Claim successful",
+    "transaction-failed": "Transaction failed",
+    "transaction-rejected": "User rejected transaction",
+    "user-rejected": "Rejected by user"
   }
 }

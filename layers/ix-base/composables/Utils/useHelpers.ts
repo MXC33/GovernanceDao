@@ -1,6 +1,7 @@
 import { differenceInMilliseconds } from 'date-fns';
 import { intervalToDuration } from "date-fns"
 import { CredentialsInput } from "#gql"
+import { ethers } from 'ethers'
 
 export const IPFSURL = "https://nftstorage.link/ipfs/"
 export const IPFSURLVideo = "https://nftstorage.link/ipfs/"
@@ -32,6 +33,27 @@ export const IPFSURLVideo = "https://nftstorage.link/ipfs/"
 //   }
 // }
 
+export const minimizeString = (input: string): string => {
+  const firstFour = input.substring(0, 6);
+  const lastFour = input.substring(input.length - 6);
+
+  return firstFour + '...' + lastFour;
+};
+
+export const formatNumber = (num: number): string => {
+  if (Math.abs(num) >= 1_000_000) {
+    return `${(num / 1_000_000).toFixed(2)}M`;
+  } else if (Math.abs(num) >= 1_000) {
+    return `${(num / 1_000).toFixed(2)}K`;
+  } else {
+    return num.toFixed(2);
+  }
+}
+
+export const toWei = (amount: number) => {
+  return ethers.utils.parseUnits(amount.toString(), 'ether')
+}
+
 export const clamp = (min: number, max: number, amount: number) =>
   Math.max(min, Math.min(max, amount))
 
@@ -41,7 +63,7 @@ export const clamp = (min: number, max: number, amount: number) =>
 //   return Number(number + "e" + -decimalPlaces);
 // }
 
-export const roundToDecimals = (num: number | null | undefined, decimalPlaces: number) => {
+export const roundToDecimals = (num: number | null | undefined, decimalPlaces: number = 2) => {
   if (num == undefined || num == null)
     return 0
   const multiplier = Math.pow(10, decimalPlaces)
@@ -66,12 +88,20 @@ export const useDaysLeft = (start: number, end: number) =>
 
 export const useIntervalWithDays = (start: number, end: number) => {
   const { months, days, hours, minutes, seconds } = intervalToDuration({ start, end })
-  // const days = Math.floor(useDaysLeft(start, end))
-  // const hours = Math.floor(useHoursLeft(start, end))
-  // const hoursLeft = Math.floor(((hours / 24) % 1) * 24)
-
   return { months, days, hours, minutes, seconds }
 }
+
+export const formattedMonths = (months: number) => {
+  if (months == 12)
+    return "1 Year"
+
+  if (months == 1)
+    return "1 Month"
+
+  return `${months} Months`
+}
+
+
 
 export const isNumeric = (value: string) => {
   return /^-?\d+$/.test(value)

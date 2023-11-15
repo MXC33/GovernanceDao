@@ -25,7 +25,8 @@ const { startOpen } = defineProps<{
 
 const isOpen = shallowRef(startOpen)
 const dropDrawer = () => { isOpen.value = !isOpen.value }
-
+const close = () => isOpen.value = false
+defineExpose({ close })
 </script>
 
 

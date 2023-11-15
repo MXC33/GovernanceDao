@@ -1,6 +1,6 @@
 <template lang="pug">
 SimpleTable(:rows="rows" :columns="columns" pb="3")
-  template(#row-asset="{index}") 
+  template(#col-asset="{index}") 
     HList(items="center" space-x="3") 
       TokenMedia(:token="tokens[index]" w="16" h="16" flex-shrink="0")
       TokenName(:token="tokens[index]" font="bold")
@@ -9,7 +9,7 @@ SimpleTable(:rows="rows" :columns="columns" pb="3")
   
 <script lang="ts" setup>
 import type { StakingItemFragment } from '.nuxt/gql/default';
-import type { SimpleTableColumn, SimpleTableRow } from 'composables/useSimpleTable';
+import type { SimpleTableColumn, SimpleTableRow } from '@ix/base/composables/useSimpleTable';
 
 const { stakedTokens } = defineProps<{
   stakedTokens: StakingItemFragment[]

@@ -38,6 +38,8 @@ export default definePreset({
     fontFamily: {
       gridnik: ['Foundry Gridnik', 'sans-serif'],
       bdrA3mik: ['BDRA3MiK-Regular'],
+      druk: ['Druk Wide Medium, sans-serif'],
+      joyride: "Joyride W05 STD"
     },
     fontSize: {
       'xs': ['var(--font-size-xs)', '1.5em'],
@@ -136,7 +138,9 @@ export default definePreset({
       'btn-disabled': 'bg-gray-700 color-gray-400',
       'btn-center': 'flex justify-center items-center',
       'btn-primary-outline': 'btn-primary bg-opacity-20 hover:bg-opacity-40 b-0.5 b-ix-primary',
+      'btn-primary-outline-cut': 'btn-primary-outline cut cut-bottom-right cut-b-ix-primary',
       'btn-secondary-outline': 'btn-secondary bg-opacity-20 hover:bg-opacity-40 b-0.5 b-ix-primary',
+      'btn-secondary-outline-cut': 'btn-secondary-outline cut cut-bottom-right cut-b-gray-400',
       'btn-orange-outline': 'bg-ix-orange bg-opacity-20 hover:bg-opacity-40 b-0.5 b-ix-primary',
       'btn-primary-outline-opaque': 'btn-primary-outline bg-opacity-40 hover:bg-opacity-60',
       'btn-lg': 'min-h-14',
