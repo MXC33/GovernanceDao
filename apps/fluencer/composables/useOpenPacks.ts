@@ -20,7 +20,8 @@ export const useOpenPacks = <T extends ContractInterface<T> & GenericBurnGravity
   const openPackContent = usePackContent()
 
   const contractAddress = ggGradeBurnV2Address as string
-  const { refresh: refreshTokens } = useVoucherData()
+  const { refresh: refreshVouchers } = useVoucherData()
+  const { refresh: refreshTokens } = useTokenData()
   const { refresh: refreshIXT } = useCurrencyData()
   const { createTransaction, withContract, ...contractSpec } = defineContract<T>('voucher-contract-', {
     contractAddress,
@@ -32,7 +33,6 @@ export const useOpenPacks = <T extends ContractInterface<T> & GenericBurnGravity
         const tokenId = id.toNumber()
         const amount = _amount.toNumber()
         console.log(`Opened ${amount} amounts of packs with ID: ${tokenId} from contract: ${address}`)
-        await Promise.all([refreshTokens(), refreshIXT()])
       }
     },
     createContract(provider) {
@@ -57,7 +57,7 @@ export const useOpenPacks = <T extends ContractInterface<T> & GenericBurnGravity
           item?.token as NftFragment
         ).filter(Boolean) as NftFragment[]
 
-        await Promise.all([refreshTokens(), refreshIXT()])
+        await Promise.all([refreshVouchers(), refreshIXT(), refreshTokens()])
       }
     })
 
