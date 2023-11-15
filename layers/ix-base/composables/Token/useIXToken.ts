@@ -95,6 +95,11 @@ export interface Sale {
   timestamp: number
 }
 
+export interface PriceHistory {
+  price: number;
+  timestamp: number;
+}
+
 export const ItemType = {
   NATIVE: 0,
   ERC20: 1,

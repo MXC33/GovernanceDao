@@ -1,7 +1,7 @@
 <template lang="pug">
 VList(w="full" px="4" b="b-1 gray-600" )
   HList(items="center" text="md" font="bold" :active="isActive" justify="between" capitalize="~" b="b-1 gray-600" mx="-4" px="4")
-    VList(v-for="(tab, index) in itemTabs" :key="index" color="white" bg="none" cursor="pointer" @click="clickOnTab(tab)" pos="relative" h="12" justify="center") 
+    VList(v-for="(tab, index) in itemTabs" :key="index" color="white" bg="none" cursor="pointer" @click="clickOnTab(tab)" pos="relative" h="12" justify="center")
       div {{ tab }}
 
       Transition(name="fade-slow" mode="in-out")
@@ -17,7 +17,7 @@ VList(w="full" px="4" b="b-1 gray-600" )
 <script lang="ts" setup>
 import type { SingleItemTabType } from '~/composables/useTabs';
 
-const itemTabs: SingleItemTabType[] = ['details', 'offers', 'listings', 'item-activity']
+const itemTabs: SingleItemTabType[] = ['details', 'offers', 'listings', 'price-history', 'item-activity']
 
 const { isActive } = defineProps<{
   isActive?: boolean
