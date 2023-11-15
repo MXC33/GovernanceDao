@@ -1,5 +1,5 @@
 <template lang="pug">
-ListItem()
+ListItem(overflow-x="hidden")
   template(#image)
     TokenImage(:token="token")
   template(#title) {{ token?.tokenInfo?.title }}

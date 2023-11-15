@@ -1,5 +1,5 @@
 <template lang="pug">
-ListItem()
+ListItem(overflow-x="hidden")
   template(#image)
     TokenMedia(:token="token" flex-shrink="0")
   template(#title) {{ token?.tokenInfo?.title }}
