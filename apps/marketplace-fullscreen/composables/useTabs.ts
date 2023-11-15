@@ -1,4 +1,4 @@
-export type SingleItemTabType = 'details' | 'offers' | 'listings' | 'item-activity'
+export type SingleItemTabType = 'details' | 'offers' | 'listings' | 'price-history' | 'item-activity'
 // const singleItemTabs: SingleItemTab[] = ['details', 'offers', 'listings', 'item-activity']
 
 export interface SingleItemTabs {

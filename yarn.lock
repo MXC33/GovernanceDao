@@ -3206,9 +3206,11 @@ __metadata:
     "@ix/base": "*"
     "@types/node": ^18
     "@vueuse/router": ^10.1.2
+    apexcharts: ^3.44.0
     fuzzyjs: ^5.0.1
     nuxt: 3.6.5
     v-lazy-show: ^0.2.3
+    vue-apexcharts: ^1.6.2
     vue-router: 4
     vue3-easy-data-table: ^1.5.42
     vue3-table-lite: ^1.3.7
@@ -6795,6 +6797,21 @@ __metadata:
     svg.resize.js: ^1.4.3
     svg.select.js: ^3.0.1
   checksum: e29ce35d9b8ad8c06fbda6b0350337ee7ccbd540bc08d5edb73dcaa97295340ca00509159a5be70273a25cd0a910e44bf08b71e5d37909ff5d26f0d7c825cbd5
+  languageName: node
+  linkType: hard
+
+"apexcharts@npm:^3.44.0":
+  version: 3.44.0
+  resolution: "apexcharts@npm:3.44.0"
+  dependencies:
+    "@yr/monotone-cubic-spline": ^1.0.3
+    svg.draggable.js: ^2.2.2
+    svg.easing.js: ^2.0.0
+    svg.filter.js: ^2.0.2
+    svg.pathmorphing.js: ^0.1.3
+    svg.resize.js: ^1.4.3
+    svg.select.js: ^3.0.1
+  checksum: a41f310c17081bb8b81361b67bff8da82cfdd8baed8c1a9892dd4c1b4cf63b4b58f28f74fb1a88b463492fed0286123c9fbbd5364a1d1024c8ec43f156961f23
   languageName: node
   linkType: hard
 
@@ -20794,6 +20811,15 @@ __metadata:
   version: 3.0.7
   resolution: "vscode-uri@npm:3.0.7"
   checksum: c899a0334f9f6ba53021328e083f6307978c09b94407d7e5fe86fcd8fcb8f1da0cb344123a335e55769055007a46d51aff83f9ee1dfc0296ee54b78f34ef0e4f
+  languageName: node
+  linkType: hard
+
+"vue-apexcharts@npm:^1.6.2":
+  version: 1.6.2
+  resolution: "vue-apexcharts@npm:1.6.2"
+  peerDependencies:
+    apexcharts: ^3.26.0
+  checksum: 20eac6d523a9c8e416e7ba834e051b5592f30d4dd25c1931bda1ad493ed663b0e43a53004d48dc011c6c49a8e8cb38fe2639303d9441fc020b744351bb7aeade
   languageName: node
   linkType: hard
 
