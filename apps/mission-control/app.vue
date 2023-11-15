@@ -10,7 +10,7 @@
 
   PreBundleUno
 
-  CookieBot(:id="cookieBotId")
+  //- CookieBot(:id="cookieBotId")
 
 </template>
 
