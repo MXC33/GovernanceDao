@@ -6,7 +6,7 @@ DefineOffers(v-slot="{inDrawer}")
   CollectionSingleItemTradeOffers(:item="item" :has-drawer="inDrawer")
 
 DefinePriceHistory(v-slot="{inDrawer}")
-  CollectionSingleItemTradePriceHistory(:item="item" :has-drawer="inDrawer")
+  CollectionSingleItemTradePriceHistory(:has-drawer="inDrawer")
 
 VList(space-y="6")
   CollectionSingleItemHeader(:item="item" mt="4")
