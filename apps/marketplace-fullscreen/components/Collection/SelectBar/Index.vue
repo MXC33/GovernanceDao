@@ -3,32 +3,32 @@ div(v-if="amountSelected != 0" w="full" p="4 md:3" pos="sticky bottom-0" z="2" b
   div(flex="~ col md:row" space-x="md:3" space-y="lt-md:4" items="md:center" justify="between" px="0 md:5" w="full")
 
     HList(font="bold" text="md" space-x="md:8" flex-grow="1" items="center" w="full" justify="lt-md:between")
-      div(v-if="amountSelected == 1" white="white" whitespace="nowrap") {{amountSelected}} Item selected 
-      div(v-else-if="amountSelected >= 1" color="white" whitespace="nowrap") {{amountSelected}} Items selected
-      button(color="ix-ne" capitalize="~" @click="clearSelectedItems" whitespace="nowrap") {{ $t(`marketplace.cart.clearAll`) }}
+      div(v-if="amountSelected == 1" white="white" whitespace="nowrap") {{amountSelected}} {{ $t('collection.selectBar.itemSelected') }}
+      div(v-else-if="amountSelected >= 1" color="white" whitespace="nowrap") {{amountSelected}} {{ $t('collection.selectBar.itemsSelected') }}
+      button(color="ix-ne" capitalize="~" @click="clearSelectedItems" whitespace="nowrap") {{ $t('marketplace.cart.clearAll') }}
 
     HList(w="full" flex-grow="md:1" justify="between md:end" gap="4")
       template(v-if="context=='my-assets'")
-        CollectionSelectBarButton(:secondary="true" @click="onTransferMultiple" disable="on-differentCollection:active" :differentCollection="!selectedItemsIsSameCollection") Transfer {{amountSelected}} 
-        CollectionSelectBarButton(@click="onClickList") List {{amountSelected}} 
+        CollectionSelectBarButton(:secondary="true" @click="onTransferMultiple" disable="on-differentCollection:active" :differentCollection="!selectedItemsIsSameCollection") {{ $t('collection.selectBar.transfer') }} {{amountSelected}}
+        CollectionSelectBarButton(@click="onClickList") {{ $t('collection.selectBar.list') }} {{amountSelected}}
 
       template(v-else-if="context=='collection'")
-        CollectionSelectBarButton(@click="onClickOffer" :secondary="true" v-if="amountSelected == 1") Place {{amountSelected}} bid
-        CollectionSelectBarButton(@click="onClickOffer" :secondary="true" v-else-if="amountSelected >= 1") Place {{amountSelected}} bids
+        CollectionSelectBarButton(@click="onClickOffer" :secondary="true" v-if="amountSelected == 1") {{ $t('collection.selectBar.placeBid', {amountSelected: amountSelected}) }}
+        CollectionSelectBarButton(@click="onClickOffer" :secondary="true" v-else-if="amountSelected >= 1") {{ $t('collection.selectBar.placeBids', {amountSelected: amountSelected}) }}
 
 
-        CollectionSelectBarButton(@click="onAddToCart") Add {{amountSelected}} To Cart 
+        CollectionSelectBarButton(@click="onAddToCart") {{ $t('collection.selectBar.addToCart', {amountSelected: amountSelected}) }}
 
 
       template(v-else-if="context=='incoming-bids'")
         //- Reject Bids button when ready
-        CollectionSelectBarButton(@click="onClickRejectBids") Reject {{amountSelected}} Offers
-        CollectionSelectBarButton(@click="onClickAcceptBids" v-if="amountSelected == 1") Accept {{amountSelected}} Offer
-        CollectionSelectBarButton(@click="onClickAcceptBids" v-else-if="amountSelected >= 1") Accept {{amountSelected}} Offers
+        CollectionSelectBarButton(@click="onClickRejectBids") {{ $t('collection.selectBar.rejectOffers', {amountSelected: amountSelected}) }}
+        CollectionSelectBarButton(@click="onClickAcceptBids" v-if="amountSelected == 1") {{ $t('collection.selectBar.acceptOffer', {amountSelected: amountSelected}) }}
+        CollectionSelectBarButton(@click="onClickAcceptBids" v-else-if="amountSelected >= 1") {{ $t('collection.selectBar.acceptOffers', {amountSelected: amountSelected}) }}
 
       template(v-else-if="context == 'outgoing-bids'")
-        CollectionSelectBarButton(@click="onClickRemoveBids" v-if="amountSelected == 1") Remove {{amountSelected}} Bid
-        CollectionSelectBarButton(@click="onClickRemoveBids" v-else="amountSelected >= 1") Remove {{amountSelected}} Bids
+        CollectionSelectBarButton(@click="onClickRemoveBids" v-if="amountSelected == 1") {{ $t('collection.selectBar.removeBid', {amountSelected: amountSelected}) }}
+        CollectionSelectBarButton(@click="onClickRemoveBids" v-else="amountSelected >= 1") {{ $t('collection.selectBar.removeBids', {amountSelected: amountSelected}) }}
 
 
 

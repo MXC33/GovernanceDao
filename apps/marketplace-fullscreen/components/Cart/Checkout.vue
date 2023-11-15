@@ -14,13 +14,14 @@ footer(pos="sticky bottom-0" bg="ix-black" z="lt-md:201")
 import type { CartItem } from '~/composables/useCart';
 const { ixtToUSD } = useCurrencyConversion()
 const { displayPopup } = usePopups()
+const { t } = useI18n()
 
 const { viewingCart, cartItems, cartFailedSales, checkoutItems, removeFailedItemsFromCart } = useCart()
 
 const { loading: isLoading, execute: buyItems } = useContractRequest(() => checkoutItems(cartItems.value, totalPrice.value), {
   error: () => ({
-    title: "Purchase error",
-    description: "The purchase failed, following sales will be removed from your cart",
+    title: t('marketplace.cart.checkout.error.purchaseTitle'),
+    description: t('marketplace.cart.checkout.error.purchaseDescription'),
     items: cartFailedSales.value
   }),
   onError: () => {
