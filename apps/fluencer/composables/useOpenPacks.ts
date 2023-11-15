@@ -32,6 +32,7 @@ export const useOpenPacks = <T extends ContractInterface<T> & GenericBurnGravity
         const tokenId = id.toNumber()
         const amount = _amount.toNumber()
         console.log(`Opened ${amount} amounts of packs with ID: ${tokenId} from contract: ${address}`)
+        await Promise.all([refreshTokens(), refreshIXT()])
       }
     },
     createContract(provider) {
