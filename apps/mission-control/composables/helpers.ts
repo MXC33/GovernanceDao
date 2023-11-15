@@ -38,11 +38,6 @@ export const usePlural = (n: number, currentString: string = "") => {
   return (n > 1 && !isLetterSTrailing) ? 's' : ''
 }
 
-export const minimizeString = (input: string): string => {
-  const firstFour = input.substring(0, 6);
-  const lastFour = input.substring(input.length - 6);
 
-  return firstFour + '...' + lastFour;
-};
 
 export const useWait = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));

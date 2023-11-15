@@ -1,5 +1,5 @@
 <template lang="pug">
-img(:src="imageURL" w="full" h="full" object="contain center" v-if="imageURL")
+img(:src="imageURL" w="full" h="full" object="contain center on-cover:cover" :cover="cover" v-if="imageURL")
 </template>
   
 <script lang="ts" setup>
@@ -10,7 +10,8 @@ const config = useRuntimeConfig().public
 
 const { isLarge, token } = defineProps<{
   token: AnyToken,
-  isLarge?: boolean
+  isLarge?: boolean,
+  cover?: boolean
 }>()
 
 const { addCacheKey } = useCacheKey()

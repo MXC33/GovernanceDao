@@ -26,7 +26,7 @@ export const useConsentCookie = () => {
     try {
       let obj = {}
 
-      cookie.value.slice(1, -1).split(',').forEach((prop) => {
+      cookie.value?.slice(1, -1).split(',').forEach((prop) => {
         const tup = prop.split(':')
 
         let value: string | boolean = tup[1].replaceAll("'", "")

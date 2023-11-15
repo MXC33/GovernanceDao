@@ -14,7 +14,7 @@ Popup()
       BiddingItem(v-for="(_, index) in bidItems" v-model="bidItems[index]" :is-multiple="bidItems.length > 1")
 
   template(#footer)
-    BiddingPrice(:items="bidItems" v-if="bidItems")
+    BiddingPrice(:items="bidItems" v-if="bidItems" :user-price="true")
 
   template(#buttons)
     ButtonInteractive(btn="~ primary" w="full" @click.prevent="onClickBid" text="Place bid" :invalid="isItemInvalid(bidItems, true)" :loading="isLoading")

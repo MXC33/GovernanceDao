@@ -3,13 +3,13 @@ ContentDrawer(frame="none" mb="4" b="t-1 b-1 gray-600" :is-neutral="true" mx="-6
   template(#header) {{ $t(`marketplace.transactions.applyToAll`) }}
   template(#default)
     VList(p="6" space-y="6")
-      TransactionItemAdjustRow()
+      InputGroup()
         template(#header) {{ $t(`collection.attributes.floorPrice`) }}
         template(#value)
           div(grid="~ cols-4 gap-3")
             button(btn="~ form on-active:form-active" :active="allSetToFloor" capitalize="~" @click="onClickSetToFloor" disable="on-disabled:active" :disabled="floorDisabled" grid="lt-md:col-span-4") {{ $t(`marketplace.transactions.setToFloor`) }}
 
-      TransactionItemAdjustRow()
+      InputGroup()
         template(#header) {{ $t(`marketplace.transactions.duration`) }}
         template(#value)
           div(grid="~ cols-4 gap-3")

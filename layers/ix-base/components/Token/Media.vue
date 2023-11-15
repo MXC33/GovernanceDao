@@ -1,6 +1,6 @@
 <template lang="pug">
 TokenIFrame(v-if="contract==geoLotteryAddress" :token="token")
-TokenImage(v-else-if="displayStillImage" :token="token" :is-large="(!icon && isLarge) || image" :key="componentKey")
+TokenImage(v-else-if="displayStillImage" :token="token" :is-large="(!icon && isLarge) || image" :key="componentKey" :cover="!contain")
 TokenVideo(v-else :token="token" :is-large="isLarge" h="full" inset="0" :key="componentKey + 'video'" :fill="contain ? 'contain' : 'cover'")
 </template>
 

@@ -7,7 +7,7 @@ div(pos="absolute right-0 top-0" m="t-10")
 
 <script lang="ts" setup>
 
-import Close from '../../assets/images/icons/close.svg'
+import Close from '~/assets/images/icons/close.svg'
 
 const { boxAdActive, activeAd } = useAds()
 const onClickClose = () => {

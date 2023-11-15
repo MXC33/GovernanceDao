@@ -1,0 +1,33 @@
+query CatRaffTransactions {
+  catRaffTransactions {
+    ...PolygonScanTransactions
+  }
+}
+
+query UserIxtTransactions($credentials: CredentialsInput!) {
+  userIxtTransactions(credentials: $credentials) {
+    ...PolygonScanTransactions
+  }
+}
+
+fragment PolygonScanTransactions on PolygonScanTransactions {
+  blockNumber
+  timeStamp
+  hash
+  nonce
+  blockHash
+  from
+  contractAddress
+  to
+  value
+  tokenName
+  tokenSymbol
+  tokenDecimal
+  transactionIndex
+  gas
+  gasPrice
+  gasUsed
+  cumulativeGasUsed
+  input
+  confirmations
+}

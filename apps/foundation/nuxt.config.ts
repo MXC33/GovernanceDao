@@ -2,7 +2,11 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 import { nodePolyfills } from 'vite-plugin-node-polyfills'
 import svgLoader from 'vite-svg-loader'
+const API_DEV_ENDPOINT = 'https://mission-control-api-dev-s7ito.ondigitalocean.app'
+const API_PROD_ENDPOINT = 'https://api-mc.planetix.com'
 
+const GQL_DEV_ENDPOINT = `${API_DEV_ENDPOINT}/graphql`
+const GQL_PROD_ENDPOINT = `${API_PROD_ENDPOINT}/graphql`
 export default defineNuxtConfig({
   extends: [
     '@ix/base'
@@ -30,6 +34,31 @@ export default defineNuxtConfig({
         name: 'English'
       }
     ],
+  },
+
+  runtimeConfig: {
+    public: {
+      'graphql-client': {
+        clients: {
+          default: {
+            schema: '../../layers/ix-base/schema.graphql',
+
+            host: process.env.GQL_HOST || (process.env.CHAIN_NET === 'test' ? GQL_DEV_ENDPOINT : GQL_PROD_ENDPOINT),
+          }
+        }
+      },
+      apiEndpoint: process.env.CHAIN_NET === 'test' ? API_DEV_ENDPOINT : API_PROD_ENDPOINT,
+      cacheKey: String(new Date().getTime()),
+      environment: process.env.NODE_ENV,
+      s3: (process.env.PUBLIC_ASSETS ?? '/s3'),
+      INFURA_ID: process.env.INFURA_ID,
+      CHAIN_NET: process.env.CHAIN_NET,
+      disablePlaycanvas: !!process.env.DISABLE_PLAYCANVAS,
+
+      mapboxApiToken:
+        "pk.eyJ1IjoiZG91Z2xhc25pYmlydSIsImEiOiJjbDEwcW10YW0wZWlmM2ptczFqeWR4NGx0In0.DyXm6Qm2Lk4kbvDOwuQVkw",
+
+    }
   },
   watch: [
     './unocss.config.ts',

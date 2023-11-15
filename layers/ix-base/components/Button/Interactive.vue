@@ -1,5 +1,5 @@
 <template lang="pug">
-button.button-interactive(btn="~ primary s-loading:loading" opacity="s-invalid:50" w="full" font="bold" transition="all" ref="button" pos="relative" pointer-events="s-loading:none s-invalid:none" :state="buttonState")
+button.button-interactive(btn="~ primary s-loading:loading" opacity="s-invalid:50" w="full" font="bold" transition="all" ref="button" pos="relative" pointer-events="s-loading:none s-invalid:none" :state="buttonState" overflow="hidden")
   div.animation.slide-left-right(v-if="loading")
 
   GlitchText(:text="renderText" :key="renderText" :hover="true" :is-hovered="isHovered" whitespace="nowrap" pos="relative")

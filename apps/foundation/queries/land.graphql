@@ -1,0 +1,5 @@
+query Land($credentials: CredentialsInput!, $chain: String) {
+  landAmount(credentials: $credentials, chain: $chain) {
+    ...NFT
+  }
+}
