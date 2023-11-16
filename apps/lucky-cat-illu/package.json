@@ -1,0 +1,30 @@
+{
+  "name": "@ix/lucky-cat-illumicati",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "build": "yarn workspace @ix/base build && nuxt build",
+    "dev": "nuxt dev --port 3080",
+    "prepare": "nuxt prepare",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview"
+  },
+  "devDependencies": {
+    "@fontsource-variable/inter": "^5.0.15",
+    "@fontsource/inter": "^5.0.15",
+    "@lifi/widget": "^2.8.0",
+    "@uniswap/widgets": "^2.59.0",
+    "@vueuse/nuxt": "^10.3.0",
+    "fuzzyjs": "^5.0.1",
+    "jsbi": "^3.1.4",
+    "markdown-it": "^13.0.1",
+    "nuxt": "3.6.5",
+    "pug": "^3.0.2",
+    "veaury": "^2.3.12",
+    "vite-plugin-dynamic-import": "^1.5.0",
+    "vite-plugin-pug": "^0.3.2",
+    "volar-service-pug": "^0.0.11",
+    "vue-easy-tooltip": "^1.0.3",
+    "vue3-marquee": "^4.1.0"
+  }
+}

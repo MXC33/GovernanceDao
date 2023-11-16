@@ -1,0 +1,43 @@
+{
+  "general": {
+    "buy": "Buy $MILK"
+  },
+  "header": {
+    "start": "Start",
+    "about": "About",
+    "how": "How to buy",
+    "buy": "Buy"
+  },
+  "intro": {
+    "header": "LIFT-OFF",
+    "description": "Your next potential 1000X coin is finally here!"
+  },
+  "about": {
+    "header": "WHY $MILK",
+    "description": "Cats are Moon bound, the Doge Days are over.<br><br>Join the fortune feline meowment for your shot at a potential 1000X return. The early kitty catches the chip, while the nappers miss the big win.<br><br>Entering is easy: place your bets on $MILK, and prepare to ride the rocket of riches to the Moon, just check the previous cases.<br><br>Are you ready for your slice of luck?<br><br>Meow."
+  },
+  "how": {
+    "title": "HOW TO BUY",
+    "step1": {
+      "title": "1. Create a wallet",
+      "description": "Download and install Metamask or your wallet of choice from your app store or, if you're on desktop, add the Chrome extension from metamask.io."
+    },
+    "step2": {
+      "title": "2. GET SOME ETH",
+      "description": "Make sure you have ETH in your wallet to swap for $MILK. If you don’t have ETH you can purchase it directly in MetaMask or at a Central Exchange. You can also swap on a DEX and/or bridge if you have funds on other chains."
+    },
+    "step3": {
+      "title": "3. CONNECT to UNISWAP",
+      "description": "Connect your wallet to Uniswap by clicking ‘Connect wallet’ in the widget below. If you have toggled between different tokens within the widget paste the $MILK token address found below in the input field. Approve token.  "
+    },
+    "step4": {
+      "title": "4. SWITCH ETH FOR $MILK",
+      "description": "Enter the amount of $MILK token you want to buy with your ETH. Click ‘Swap’ in the widget. When Metamask requests your signature, go ahead and sign. Meow, you have now secured your tokens and moon ticket."
+    }
+  },
+  "buy": {
+    "header": "BUY NOW",
+    "description": "$MILK TOKEN ADDRESS.",
+    "uniswap": "Swap on UNISWAP"
+  }
+}

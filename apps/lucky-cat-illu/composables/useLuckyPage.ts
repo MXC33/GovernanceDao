@@ -1,0 +1,1 @@
+export const useLuckyPage = () => useState('active-page', () => "start")

@@ -11,7 +11,7 @@ export default defineNuxtRouteMiddleware(async (to, from) => {
 
   useGqlHeaders(walletHeaders)
 
-  if (config.ixApp == 'foundation') {
+  if (config.ixApp == 'foundation' || config.ixApp == 'lucky-cat-illumicati') {
     return true
   }
 
