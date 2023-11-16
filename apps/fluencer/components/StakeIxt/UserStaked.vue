@@ -7,7 +7,7 @@ DrawerContent(:start-open="true" :is-neutral="true" bg="gray-900" max-h="auto")
     DrawerContentBody(p="0")
 
       SimpleTable(:columns="cols" :rows="rows")
-        template(#row-asset) 
+        template(#col-asset) 
           HList(items="center" space-x="3") 
             img(src="~/assets/images/ixt-coin.png" aspect="square" min-w="0" max-w="12")
             div(text="subheading") IXT
@@ -17,9 +17,8 @@ DrawerContent(:start-open="true" :is-neutral="true" bg="gray-900" max-h="auto")
 <script lang="ts" setup>
 import { type StakingDataFragment, StakingId } from '~/.nuxt/gql/default';
 
-import type { SimpleTableColumn, SimpleTableRow } from 'composables/useSimpleTable';
 import type { TokenSpecificUserStakingDataFragment } from '#gql';
-const { formattedMonths } = useStakingHelper()
+import type { SimpleTableColumn, SimpleTableRow } from '@ix/base/composables/useSimpleTable';
 const { data: ixtOneMonthData } = useStakingData(StakingId.IxtOneMonth)
 const { data: ixtThreeMonthData } = useStakingData(StakingId.IxtThreeMonths)
 const { data: ixtSixMonthData } = useStakingData(StakingId.IxtSixMonths)

@@ -343,7 +343,8 @@
       "noOffers": "There is no offers for this item",
       "noCurrentBids": "There is no current bids for this item.",
       "accept": "Accept",
-      "cancel": "Cancel"
+      "cancel": "Cancel",
+      "priceHistory": "Price History"
     },
     "offer": {
       "title": "Accept Offer",

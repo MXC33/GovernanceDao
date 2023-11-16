@@ -1,3 +1,4 @@
 export default defineAppConfig({
-  ixApp: 'foundation'
+  ixApp: 'foundation',
+  connectWithoutIXUser: true
 })

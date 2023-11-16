@@ -2,7 +2,8 @@ import { ContractError } from "./Utils/useContractErrors"
 
 interface RequestOptions {
   error?: () => ContractError,
-  onError?: (error?: string) => boolean | void
+  onError?: (error?: string) => boolean | void,
+  onSuccess?: () => void,
 }
 
 export const useContractRequest = <T extends any[]>(fn: (...args: T) => Promise<any>, options: RequestOptions = {}) => {
@@ -11,7 +12,8 @@ export const useContractRequest = <T extends any[]>(fn: (...args: T) => Promise<
   const loading = ref(false)
   const {
     onError,
-    error
+    error,
+    onSuccess
   } = options
 
   const catchError = (serverError: string) => {
@@ -50,6 +52,10 @@ export const useContractRequest = <T extends any[]>(fn: (...args: T) => Promise<
     }
 
     loading.value = false
+
+    if (onSuccess)
+      onSuccess()
+
     return true
   }
 

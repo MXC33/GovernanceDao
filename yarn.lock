@@ -3174,7 +3174,10 @@ __metadata:
   dependencies:
     "@ix/base": "*"
     "@types/node": ^18
+    chart.js: ^4.4.0
     nuxt: 3.6.5
+    vue-chartjs: ^5.2.0
+    vue3-marquee: ^4.1.0
   languageName: unknown
   linkType: soft
 
@@ -3206,9 +3209,11 @@ __metadata:
     "@ix/base": "*"
     "@types/node": ^18
     "@vueuse/router": ^10.1.2
+    apexcharts: ^3.44.0
     fuzzyjs: ^5.0.1
     nuxt: 3.6.5
     v-lazy-show: ^0.2.3
+    vue-apexcharts: ^1.6.2
     vue-router: 4
     vue3-easy-data-table: ^1.5.42
     vue3-table-lite: ^1.3.7
@@ -3285,6 +3290,13 @@ __metadata:
     "@jridgewell/resolve-uri": ^3.1.0
     "@jridgewell/sourcemap-codec": ^1.4.14
   checksum: 956a6f0f6fec060fb48c6bf1f5ec2064e13cd38c8be3873877d4b92b4a27ba58289a34071752671262a3e3c202abcc3fa2aac64d8447b4b0fa1ba3c9047f1c20
+  languageName: node
+  linkType: hard
+
+"@kurkle/color@npm:^0.3.0":
+  version: 0.3.2
+  resolution: "@kurkle/color@npm:0.3.2"
+  checksum: 79e97b31f8f6efb28c69d373f94b0c7480226fe8ec95221f518ac998e156444a496727ce47de6d728eb5c3369288e794cba82cae34253deb0d472d3bfe080e49
   languageName: node
   linkType: hard
 
@@ -6798,6 +6810,21 @@ __metadata:
   languageName: node
   linkType: hard
 
+"apexcharts@npm:^3.44.0":
+  version: 3.44.0
+  resolution: "apexcharts@npm:3.44.0"
+  dependencies:
+    "@yr/monotone-cubic-spline": ^1.0.3
+    svg.draggable.js: ^2.2.2
+    svg.easing.js: ^2.0.0
+    svg.filter.js: ^2.0.2
+    svg.pathmorphing.js: ^0.1.3
+    svg.resize.js: ^1.4.3
+    svg.select.js: ^3.0.1
+  checksum: a41f310c17081bb8b81361b67bff8da82cfdd8baed8c1a9892dd4c1b4cf63b4b58f28f74fb1a88b463492fed0286123c9fbbd5364a1d1024c8ec43f156961f23
+  languageName: node
+  linkType: hard
+
 "aproba@npm:^1.0.3 || ^2.0.0":
   version: 2.0.0
   resolution: "aproba@npm:2.0.0"
@@ -8581,6 +8608,24 @@ __metadata:
   version: 0.7.0
   resolution: "chardet@npm:0.7.0"
   checksum: 6fd5da1f5d18ff5712c1e0aed41da200d7c51c28f11b36ee3c7b483f3696dabc08927fc6b227735eb8f0e1215c9a8abd8154637f3eff8cada5959df7f58b024d
+  languageName: node
+  linkType: hard
+
+"chart.js@npm:^4.4.0":
+  version: 4.4.0
+  resolution: "chart.js@npm:4.4.0"
+  dependencies:
+    "@kurkle/color": ^0.3.0
+  checksum: 5ee2d99b78608025525b5790af17178fdaa5adc3294e082deba2718029b0496109ba124f1b08dd1e4c8a04d6e842be7f384f2cfe9a11df8d1c6fe884acece52b
+  languageName: node
+  linkType: hard
+
+"chartjs-plugin-annotation@npm:^3.0.1":
+  version: 3.0.1
+  resolution: "chartjs-plugin-annotation@npm:3.0.1"
+  peerDependencies:
+    chart.js: ">=4.0.0"
+  checksum: 97dd4868951314b263dc6baa34884fcd1267d597c0981c8d322fa1f1896b4e7b881c474e9c3b46e40ef281ec003917e0bbcbe64c2c3084599146a251f92deca1
   languageName: node
   linkType: hard
 
@@ -13492,6 +13537,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "ix-apps@workspace:."
   dependencies:
+    chartjs-plugin-annotation: ^3.0.1
     concurrently: ^8.2.0
   languageName: unknown
   linkType: soft
@@ -20797,6 +20843,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"vue-apexcharts@npm:^1.6.2":
+  version: 1.6.2
+  resolution: "vue-apexcharts@npm:1.6.2"
+  peerDependencies:
+    apexcharts: ^3.26.0
+  checksum: 20eac6d523a9c8e416e7ba834e051b5592f30d4dd25c1931bda1ad493ed663b0e43a53004d48dc011c6c49a8e8cb38fe2639303d9441fc020b744351bb7aeade
+  languageName: node
+  linkType: hard
+
 "vue-bundle-renderer@npm:^1.0.3":
   version: 1.0.3
   resolution: "vue-bundle-renderer@npm:1.0.3"
@@ -20812,6 +20867,16 @@ __metadata:
   dependencies:
     ufo: ^1.2.0
   checksum: c02c673ac4922d361ed9f8cdfb819674ef52d87087d7f76f428dacf45822359dd3c4e7a1384e3c52a9cb8bb264921d001c4ad6ea268cf63493a9b832d7b95f5a
+  languageName: node
+  linkType: hard
+
+"vue-chartjs@npm:^5.2.0":
+  version: 5.2.0
+  resolution: "vue-chartjs@npm:5.2.0"
+  peerDependencies:
+    chart.js: ^4.1.1
+    vue: ^3.0.0-0 || ^2.7.0
+  checksum: e707bcbe442d85a3ec23825620f6b1ba4f43eba67c68e1bd845ef5536b754c4447dc9a249f4ec92f8a29a479981b07382bd32b6449686676dd22d5e18f366ffa
   languageName: node
   linkType: hard
 
@@ -20976,6 +21041,15 @@ __metadata:
   dependencies:
     vue: ^3.2.45
   checksum: 4d3cd53f51ba05dd6f8a357ea6a0be91dc65bf457b43fa062f2c287796d8436eb306387aab211e7ef5d87d88acc44831559e48aa46cf41768f3d3bc150475672
+  languageName: node
+  linkType: hard
+
+"vue3-marquee@npm:^4.1.0":
+  version: 4.1.0
+  resolution: "vue3-marquee@npm:4.1.0"
+  peerDependencies:
+    vue: ^3.2
+  checksum: d50fafe9ea1ec7e2fe4eff421e34429516a4ef93acc685f655d5b45657f64ece64cf944dd91fd9a05208f0078897ccedade67079ee316d87578b1d1d25ec2fdb
   languageName: node
   linkType: hard
 

@@ -49,8 +49,6 @@ const { useMobileBreakpoint } = useDevice()
 const { state: swapVisible } = useIXTSwapVisible()
 
 
-
-
 const { className, autoClose } = defineProps<{
   className?: string,
   autoClose?: boolean

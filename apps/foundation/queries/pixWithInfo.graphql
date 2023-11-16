@@ -1,0 +1,46 @@
+query UniqueLandWithInfo(
+  $credentials: CredentialsInput!
+  $tier: String!
+  $type: String!
+  $pageKey: PageKeyInput!
+  $chain: String
+) {
+  uniqueLand(
+    credentials: $credentials
+    tier: $tier
+    type: $type
+    pageKeys: $pageKey
+    chain: $chain
+  ) {
+    ...PixResults
+  }
+}
+
+query UniquePixWithInfoFromId(
+  $credentials: CredentialsInput!
+  $pixId: String!
+  $chain: String
+) {
+  searchPixId(credentials: $credentials, pixId: $pixId, chain: $chain) {
+    ...NFT
+  }
+}
+
+input PageKeyInput {
+  elastic: Int
+  chain: String
+}
+
+fragment PixResults on PixResults {
+  items {
+    ...NFT
+  }
+  pageKeys {
+    ...PageKey
+  }
+}
+
+fragment PageKey on PageKey {
+  elastic
+  chain
+}

@@ -30,13 +30,15 @@ export const frameRules: Rule[] = [
       ${attributedSelector} {
         --un-frame-gap: ${pixSize};
         --un-frame-color: #636363;
+        --un-frame-color-t: var(--un-frame-color);
+        --un-frame-color-b: var(--un-frame-color);
         --un-frame-width: 1px;
         position: relative;
       }
 
       ${attributedSelector}:before {
         ${pseudoBase}
-        border: 1px solid var(--un-frame-color);
+        border: 1px solid var(--un-frame-color-t);
         border-bottom: 0;
         top: 0;
         transition: 200ms all;
@@ -44,7 +46,7 @@ export const frameRules: Rule[] = [
 
       ${attributedSelector}:after {
         ${pseudoBase}
-        border: 1px solid var(--un-frame-color);
+        border: 1px solid var(--un-frame-color-b);
         border-top: 0;
         bottom: 0;
         transition: 200ms all;
@@ -56,7 +58,19 @@ export const frameRules: Rule[] = [
 
   [/^frame-none$/, ([]) => {
     return {
-      '--un-frame-color': 'transparent'
+      '--un-frame-color': 'transparent',
+    }
+  }],
+
+  [/^frame-b-none$/, ([]) => {
+    return {
+      '--un-frame-color-b': 'transparent'
+    }
+  }],
+
+  [/^frame-t-none$/, ([]) => {
+    return {
+      '--un-frame-color-t': 'transparent'
     }
   }],
 

@@ -9,7 +9,7 @@ Popup()
     CompleteTokenList(:items="items")
 
   template(#footer)
-    BiddingPrice(:items="items" )
+    BiddingPrice(:items="items" :user-price="true")
 
   template(#buttons)
     HList()

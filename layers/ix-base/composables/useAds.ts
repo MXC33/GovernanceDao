@@ -16,6 +16,15 @@ export interface BannerResponse {
   data: Banner
 }
 
+export const useTopBannerData = () => {
+  const { fetchIXAPI } = useIXAPI()
+  return useAsyncDataState('banner-data', () =>
+    fetchIXAPI('banner') as Promise<BannerResponse>, {
+    transform: (item) =>
+      item.data as Banner
+  })
+}
+
 export const useAds = () => {
 
   const { fetchIXAPI } = useIXAPI()
@@ -33,8 +42,8 @@ export const useAds = () => {
 
   const ads: AdData[] = [
     {
-      id: "gravity-grade-genesis",
-      url: "https://planetix.com/mint/gravity-grade"
+      id: "milk-mexc",
+      url: "https://illumicati.vip"
     }
   ]
 
@@ -58,7 +67,6 @@ export const useAds = () => {
 
   //   return bannerData
   // }
-
   const topBannerAd = () =>
     useAsyncDataState('banner-data', () =>
       fetchIXAPI('banner') as Promise<BannerResponse>, {
@@ -78,8 +86,8 @@ export const useAds = () => {
   const activeAd = computed(() => ads[randomSwitchAds.value])
 
   return {
-    showAdPopup,
     topBannerAd,
+    showAdPopup,
     bannerAdActive,
     boxAdActive,
     activeAd

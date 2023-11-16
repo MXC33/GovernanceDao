@@ -54,6 +54,12 @@ query badgeNFT($credentials: CredentialsInput!) {
   }
 }
 
+query AllUserTerritories($credentials: CredentialsInput!) {
+  allUserTerritories(credentials: $credentials) {
+    ...NFT
+  }
+}
+
 fragment NFT on Token {
   contract
   tokenType
@@ -86,6 +92,7 @@ fragment TokenInfo on TokenInfo {
   inspectorLink
   level
   openable
+  dailyYield
 }
 
 fragment Attribute on Attribute {

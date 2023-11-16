@@ -5,6 +5,9 @@ DefineListing(v-slot="{inDrawer}")
 DefineOffers(v-slot="{inDrawer}")
   CollectionSingleItemTradeOffers(:item="item" :has-drawer="inDrawer")
 
+DefinePriceHistory(v-slot="{inDrawer}")
+  CollectionSingleItemTradePriceHistory(:has-drawer="inDrawer")
+
 VList(space-y="6")
   CollectionSingleItemHeader(:item="item" mt="4")
 
@@ -20,6 +23,8 @@ VList(space-y="6")
 
         ReuseOffers(v-else-if="tab == 'offers'" :in-drawer="false")
 
+        ReusePriceHistory(v-else-if="tab == 'price-history'" :in-drawer="false")
+
         CollectionSingleItemMetaList(:item="item" v-else-if="tab == 'details'")
 
         HList(v-else-if="tab == 'item-activity'" h="10" justify="center" items="center" font="bold italic" w="full")
@@ -28,6 +33,7 @@ VList(space-y="6")
     template(v-else)
       ReuseListing(:in-drawer="true")
       ReuseOffers(:in-drawer="true")
+      ReusePriceHistory(:in-drawer="true")
 
 </template>
 
@@ -36,6 +42,7 @@ import type { SingleItemData } from '@ix/base/composables/Token/useIXToken'
 
 const [DefineListing, ReuseListing] = createReusableTemplate<{ inDrawer: boolean }>()
 const [DefineOffers, ReuseOffers] = createReusableTemplate<{ inDrawer: boolean }>()
+const [DefinePriceHistory, ReusePriceHistory] = createReusableTemplate<{ inDrawer: boolean }>()
 
 const { item } = defineProps<{
   item: SingleItemData

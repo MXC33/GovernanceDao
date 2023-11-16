@@ -1,4 +1,4 @@
-import { defineSnackNotifications } from "@ix/base/composables/useSnackNotifications";
+import { SnackNotification, defineSnackNotifications } from "@ix/base/composables/useSnackNotifications";
 
 
 
@@ -7,6 +7,7 @@ export const SnackNotifications = ['copy-link', 'add-to-cart', 'remove-from-cart
 export type SnackNotificationId = typeof SnackNotifications[number]
 
 // export type SnackNotificationType = 'success' | 'error' | 'warning' | 'purchase' | 'purchase-warning' | 'favorite'
+export type SnackbarItem = SnackNotification<SnackNotificationId>
 
 export const useSnackNotifications = () => {
   return defineSnackNotifications<SnackNotificationId>({
