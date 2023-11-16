@@ -21,7 +21,6 @@ div.topBanner(
 <script lang="ts" setup>
 import CloseIcon from '~/assets/images/icons/close.svg'
 
-
 const { topBannerAd, bannerAdActive, activeAd } = useAds()
 const { data: topBannerData } = await topBannerAd()
 const config = useRuntimeConfig().public
