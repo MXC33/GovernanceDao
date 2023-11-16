@@ -180,7 +180,6 @@ export const useWallet = () => {
     const currentChain = getChain(isEthereum ? 'ethereum' : 'polygon')
     const { chainId } = getChainInfo(currentChain)
     const network = provider.value?.network
-    console.log("network", network, "chain id", chainId)
 
     if (network?.chainId != chainId)
       await changeNetworkChain(currentChain)
@@ -276,7 +275,6 @@ export const useWallet = () => {
   }
 
   const changeNetworkChain = async (chain: Chain) => {
-    console.log("chain", chain)
     const { chainId, chainName, nativeCurrency, rpcUrl, chainHexId } = getChainInfo(chain)
     console.log("CHAIN", chain, chainId, chainName, chainHexId)
 
