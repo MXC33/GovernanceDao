@@ -42,8 +42,8 @@ export const useAds = () => {
 
   const ads: AdData[] = [
     {
-      id: "gravity-grade-genesis",
-      url: "https://planetix.com/mint/gravity-grade"
+      id: "milk-mexc",
+      url: "https://illumicati.vip"
     }
   ]
 
