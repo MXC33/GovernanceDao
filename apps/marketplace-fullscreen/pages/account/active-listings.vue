@@ -7,15 +7,12 @@ Collection(:data="splitSales" :columns="columns" :context="'active-listings'" v-
 
 
 <script lang="ts" setup>
-useHead({
-  title: "Active listings | Marketplace | PlanetIX"
-})
-
 import type { TableColumn } from "~/composables/useTable";
 import type { IXToken } from "@ix/base/composables/Token/useIXToken";
 import type { CollectionData } from "~/composables/useCollection";
 
 const { myAssetsURL } = useCollectionsURL()
+const { t } = useI18n()
 
 const { data: data, execute: fetchCollection, setupCollectionListeners, pending } = useCollectionData(myAssetsURL('polygon'), {
   filter: {
@@ -27,18 +24,27 @@ const { data: data, execute: fetchCollection, setupCollectionListeners, pending 
 await fetchCollection()
 setupCollectionListeners()
 
+const decodeHtmlCharCodes = (str) => {
+  return str.replace(/(&#(\d+);)/g, function(match, capture, charCode) {
+    return String.fromCharCode(charCode);
+  });
+}
+useHead({
+  title: decodeHtmlCharCodes(t('marketplace.pages.account.activeListings.meta_title'))
+})
+
 const columns: TableColumn<IXToken>[] = [
-  { label: "Asset", type: "asset", width: 200 },
+  { label: t('marketplace.pages.account.activeListings.asset'), type: "asset", width: 200 },
 
   {
-    label: "Unit price", rowKey: "sales[0].price", type: 'ixt', sortable: true
+    label: t('marketplace.pages.account.activeListings.unitPrice'), rowKey: "sales[0].price", type: 'ixt', sortable: true
   },
-  { label: "USD price", rowKey: "sales[0].price", type: 'usd', sortable: true },
+  { label: t('marketplace.pages.account.activeListings.usdPrice'), rowKey: "sales[0].price", type: 'usd', sortable: true },
   {
-    label: "Quantity", rowKey: "sales[0].quantity", type: 'text'
+    label: t('marketplace.pages.account.activeListings.quantity'), rowKey: "sales[0].quantity", type: 'text'
   },
   {
-    label: "Floor Difference", rowKey: "floor", getValue(row) {
+    label: t('marketplace.pages.account.activeListings.floorDifference'), rowKey: "floor", getValue(row) {
       if (row.lowest_sale.price == 0)
         return 'No sale exist'
       const difference = roundToDecimals(
@@ -48,7 +54,7 @@ const columns: TableColumn<IXToken>[] = [
     }, type: 'text'
   },
   {
-    label: "Expiration date", rowKey: "sales[0].endtime", type: 'date', sortable: true
+    label: t('marketplace.pages.account.activeListings.expirationDate'), rowKey: "sales[0].endtime", type: 'date', sortable: true
   },
   {
     type: 'buttons',

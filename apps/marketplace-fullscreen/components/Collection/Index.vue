@@ -1,7 +1,7 @@
 <template lang="pug">
 VList(flex-grow="1" min-h="0" pos="relative" p="4 md:(8 b-30)" space-y="0 md:6")
-  CollectionHeader(:context="context") 
-    template(#header) 
+  CollectionHeader(:context="context")
+    template(#header)
       slot(name="name") {{ collectionName }}
 
     template(#cert v-if="data?.name != null")
@@ -21,7 +21,7 @@ VList(flex-grow="1" min-h="0" pos="relative" p="4 md:(8 b-30)" space-y="0 md:6")
     CollectionList(v-if="data" :columns="renderColumns" :items="data?.nfts" :hide-grid="hideGrid" :context="context" :show-filters="showFilters" :loading="loading")
 
   HList(justify="center" w="full" py="2" v-if="loadMoreVisible")
-    ButtonInteractive(btn="~ primary " font="bold" @click="loadNextPage" :text="loading ? 'Loading' : 'Load More'" :loading="loading" w="80" ref="loadMoreButton")
+    ButtonInteractive(btn="~ primary " font="bold" @click="loadNextPage" :text="loading ? $t('general.loading') : $t('general.loadMore')" :loading="loading" w="80" ref="loadMoreButton")
 
 VList(pos="fixed bottom-0" w="full" z="10")
   Transition(name="slide-bottom")
@@ -39,6 +39,7 @@ const { activeFilters } = useCollectionSettings()
 const { getCollectionAttributes } = useDefaultAttributes()
 const { currentTime } = useGlobalTimestamp()
 const { selectedItems } = useSelection()
+const { t } = useI18n()
 
 const loadMoreButton = ref<HTMLElement | null>(null)
 const showFilters = shallowRef(false)
@@ -52,38 +53,38 @@ const attributes = computed(() => data ? getCollectionAttributes(data) : [])
 const renderColumns = computed(() => columns ?? defaultColumns)
 
 const defaultColumns: TableColumn<IXToken>[] = [
-  { label: "Asset", type: 'asset', width: 200 },
+  { label: t('collection.attributes.asset'), type: 'asset', width: 200 },
   {
-    label: "Current price", rowKey: "sale_price", type: 'ixt', align: 'end', sortable: {
+    label: t('collection.attributes.currentPrice'), rowKey: "sale_price", type: 'ixt', align: 'end', sortable: {
       ascKey: 'PRICE_ASC',
       descKey: 'PRICE_DESC'
     }
   },
   {
-    label: "USD price", rowKey: "sale_price", type: 'usd', hideMobile: true, sortable: {
+    label: t('collection.attributes.usdPrice'), rowKey: "sale_price", type: 'usd', hideMobile: true, sortable: {
       ascKey: 'PRICE_ASC',
       descKey: 'PRICE_DESC'
     }
   },
   {
-    label: "Best offer", rowKey: "higher_bid_price", hideMobile: true, type: 'ixt'
+    label: t('collection.attributes.bestOffer'), rowKey: "higher_bid_price", hideMobile: true, type: 'ixt'
   },
   {
-    label: "Total quantity", hideMobile: true, rowKey: "shares", getValue(row) {
+    label: t('collection.attributes.totalQuantity'), hideMobile: true, rowKey: "shares", getValue(row) {
       if (row.shares == 0)
         return '-'
       return row.shares.toString()
     }, type: 'text'
   },
   {
-    label: "Seller", hideMobile: true, rowKey: "lowest_sale.player_username", getValue(row) {
+    label: t('collection.attributes.seller'), hideMobile: true, rowKey: "lowest_sale.player_username", getValue(row) {
       if (!row.lowest_sale)
         return ''
       return row.lowest_sale.player_username
     }, type: 'text'
   },
   {
-    label: "Time listed", hideMobile: true, rowKey: "lowest_sale.endtime", getValue(row) {
+    label: t('collection.attributes.timeListed'), hideMobile: true, rowKey: "lowest_sale.endtime", getValue(row) {
       if (!row.lowest_sale)
         return ''
       const { days, minutes } = useIntervalWithDays((row.lowest_sale.timestamp * 1000), currentTime.value)

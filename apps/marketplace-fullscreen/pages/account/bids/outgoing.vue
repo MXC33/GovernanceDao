@@ -6,15 +6,13 @@ Collection(:data="data" :columns="columns" context="outgoing-bids" v-if="data" :
 
 
 <script lang="ts" setup>
-useHead({
-  title: "Outgoing bids | Marketplace | PlanetIX"
-})
 import type { TableColumn } from "~/composables/useTable";
 import type { IXToken } from "@ix/base/composables/Token/useIXToken";
 
 const { displayPopup } = usePopups()
 
 const { myAssetsURL } = useCollectionsURL()
+const { t } = useI18n()
 
 const { data: data, execute: fetchCollection, loadNextPage, setupCollectionListeners, refresh: refresh, pending } = useCollectionData(myAssetsURL('polygon'), {
   filter: {
@@ -26,27 +24,36 @@ const { data: data, execute: fetchCollection, loadNextPage, setupCollectionListe
 await fetchCollection()
 setupCollectionListeners()
 
+const decodeHtmlCharCodes = (str) => {
+  return str.replace(/(&#(\d+);)/g, function(match, capture, charCode) {
+    return String.fromCharCode(charCode);
+  });
+}
+useHead({
+  title: decodeHtmlCharCodes(t('marketplace.pages.account.bid.outgoing.meta_title'))
+})
+
 const columns: TableColumn<IXToken>[] = [
-  { label: "Asset", type: "asset", width: 200 },
+  { label: t('marketplace.pages.account.bid.outgoing.asset'), type: "asset", width: 200 },
   {
-    label: "Offer price", rowKey: "bid.price", type: 'ixt', sortable: true
+    label: t('marketplace.pages.account.bid.outgoing.offerPrice'), rowKey: "bid.price", type: 'ixt', sortable: true
   },
-  { label: "USD price", rowKey: "bid.price", type: 'usd', sortable: true, hideMobile: true },
+  { label: t('marketplace.pages.account.bid.outgoing.usdPrice'), rowKey: "bid.price", type: 'usd', sortable: true, hideMobile: true },
   {
-    label: "Floor Difference", rowKey: "floor", getValue(row) {
+    label: t('marketplace.pages.account.bid.outgoing.floorDifference'), rowKey: "floor", getValue(row) {
       if (row.lowest_sale?.price)
         return (row.higher_bid_price - row.bid.price).toString().substring(0, 5)
       return row.higher_bid_price.toString()
     }, type: 'text'
   },
   {
-    label: "Quantity", rowKey: "bid.quantity", type: 'text'
+    label: t('marketplace.pages.account.bid.outgoing.quantity'), rowKey: "bid.quantity", type: 'text'
   },
   {
-    label: "Expiration", rowKey: "bid.due_date", type: 'date', sortable: true
+    label: t('marketplace.pages.account.bid.outgoing.expiration'), rowKey: "bid.due_date", type: 'date', sortable: true
   },
   {
-    label: "Offer made", rowKey: "offer_made", getValue(row) {
+    label: t('marketplace.pages.account.bid.outgoing.offerMade'), rowKey: "offer_made", getValue(row) {
       return getStartDateFromMessage(row)
     }, type: 'date', sortable: true
   },

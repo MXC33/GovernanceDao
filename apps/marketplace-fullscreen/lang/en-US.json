@@ -83,7 +83,8 @@
     "purchase": "Purchase",
     "day": "day | days",
     "month": "month | months",
-    "week": "week | weeks"
+    "week": "week | weeks",
+    "loadMore": "Load More"
   },
   "popupNotification": {
     "copy-link": "Link copied to clipboard",
@@ -108,14 +109,42 @@
       "owners": "Owners",
       "unique_owners": "Unique Owners",
       "higher_bid_price": "Best offer",
-      "sale_price": "Lowest Sale"
+      "sale_price": "Lowest Sale",
+      "asset": "Asset",
+      "currentPrice": "Current price",
+      "usdPrice": "USD price",
+      "bestOffer": "Best offer",
+      "totalQuantity": "Total quantity",
+      "seller": "Seller",
+      "timeListed": "Time listed"
     },
     "sort": {
       "PRICE_ASC": "Price low to high",
       "PRICE_DESC": "Price high to low"
     },
     "explore": "Explore Collections",
-    "nothingFound": "Nothing found"
+    "nothingFound": "Nothing found",
+    "filter": {
+      "mobile": {
+        "filter": "Filter",
+        "clearAll": "clear all",
+        "applyFilter": "apply filter"
+      }
+    },
+    "selectBar": {
+      "itemSelected": "Item selected",
+      "itemsSelected": "Items selected",
+      "transfer": "Transfer",
+      "list": "List",
+      "placeBid": "Place {amountSelected} bid",
+      "placeBids": "Place {amountSelected} bids",
+      "addToCart": "Add {amountSelected} To Cart",
+      "rejectOffers": "Reject {amountSelected} Offers",
+      "acceptOffer": "Accept {amountSelected} Offer",
+      "acceptOffers": "Accept {amountSelected} Offers",
+      "removeBid": "Remove {amountSelected} Bid",
+      "removeBids": "Remove {amountSelected} Bids"
+    }
   },
   "wallet": {
     "title": "Connect Wallet",
@@ -182,7 +211,14 @@
       "incomingBids": "Incoming Bids",
       "outgoingBids": "Outgoing Bids",
       "activeListings": "Active Listings",
-      "activity": "Activity"
+      "activity": "Activity",
+      "event": "Event",
+      "asset": "Asset",
+      "price": "Price",
+      "quantity": "Quantity",
+      "from": "From",
+      "to": "To",
+      "time": "Time"
     },
     "filterType": {
       "sales": "Sales",
@@ -240,7 +276,14 @@
     "cart": {
       "title": "My Cart",
       "items": "items",
-      "clearAll": "Clear all"
+      "clearAll": "Clear all",
+      "availableItems": "Available items",
+      "checkout": {
+        "error": {
+          "purchaseTitle": "Purchase error",
+          "purchaseDescription": "The purchase failed, following sales will be removed from your cart"
+        }
+      }
     },
     "price": {
       "title": "Total Price",
@@ -728,6 +771,56 @@
         "account": "Account",
         "logout": "Log out",
         "connectWallet": "Connect Wallet"
+      }
+    },
+    "pages": {
+      "account": {
+        "bid": {
+          "incoming": {
+            "meta_title": "Incoming bids &#124; Marketplace &#124; PlanetIX",
+            "asset": "Asset",
+            "highestBid": "Highest bid",
+            "usdPrice": "USD price",
+            "floorDifference": "Floor Difference",
+            "quantity": "Quantity",
+            "from": "From",
+            "expires": "Expires",
+            "noSaleExist": "No sale exist"
+          },
+          "outgoing": {
+            "meta_title": "Outgoing bids &#124; Marketplace &#124; PlanetIX",
+            "asset": "Asset",
+            "offerPrice": "Offer price",
+            "usdPrice": "USD price",
+            "floorDifference": "Floor Difference",
+            "quantity": "Quantity",
+            "expiration": "Expiration",
+            "offerMade": "Offer made"
+          }
+        },
+        "activeListings": {
+          "meta_title": "Active listings &#124; Marketplace &#124; PlanetIX",
+          "asset": "Asset",
+          "unitPrice": "Unit price",
+          "usdPrice": "USD price",
+          "quantity": "Quantity",
+          "floorDifference": "Floor Difference",
+          "expirationDate": "Expiration date"
+        },
+        "meta_title": "My Assets &#124; Marketplace &#124; PlanetIX",
+        "asset": "Asset",
+        "currentPrice": "Current price",
+        "usdPrice": "USD price",
+        "bestOffer": "Best offer"
+      },
+      "assets": {
+        "network": {
+          "contract": {
+            "tokenId": {
+              "meta_title": "Marketplace &#124; PlanetIX"
+            }
+          }
+        }
       }
     }
   }

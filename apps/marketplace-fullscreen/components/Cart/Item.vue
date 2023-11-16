@@ -15,14 +15,14 @@ VList(bg="gray-900" v-if="item")
           HList(space-x="1.5")
             TokenCollection(:token="item.token")
             CertifiedIcon(w="4" translate-y="-0.3")
-          div(v-if="item.sale") Available items: {{item.sale?.quantity}}
+          div(v-if="item.sale") {{ $t('marketplace.cart.availableItems') }}: {{item.sale?.quantity}}
           div(flex-grow="1")
 
         button(@click="removeFromCart(item)")
           TrashIcon(w="6")
 
       Adjustable(v-model="item.shares" look="frame")
-    
+
 </template>
 
 <script lang="ts" setup>
