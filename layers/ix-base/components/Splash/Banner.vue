@@ -15,7 +15,7 @@ div.topBanner(
     span(v-html="topBannerData.message" font="bold" text="base sm:lg center")
 
   HList(justify="end" items="center" z="999" fill="black hover:black" cursor="pointer" @click.stop="toggleBanner" opacity="hover:40" transition="opacity" pos="absolute right-4 md:right-8 top-50%" translate-y="-50%")
-  CloseIcon(w="2.5 md:4" )
+    CloseIcon(w="2.5 md:4" )
 </template>
 
 <script lang="ts" setup>
