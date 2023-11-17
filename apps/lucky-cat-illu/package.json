@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "build": "yarn workspace @ix/base build && nuxt build",
+    "build": "nuxt build",
     "dev": "nuxt dev --port 3080",
     "prepare": "nuxt prepare",
     "generate": "nuxt generate",
