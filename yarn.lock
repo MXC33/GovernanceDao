@@ -3811,9 +3811,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@ix/lucky-cat-illumicati@workspace:apps/lucky-cat-illu":
+"@ix/luckycatillumicati@workspace:apps/lucky-cat-illu":
   version: 0.0.0-use.local
-  resolution: "@ix/lucky-cat-illumicati@workspace:apps/lucky-cat-illu"
+  resolution: "@ix/luckycatillumicati@workspace:apps/lucky-cat-illu"
   dependencies:
     "@fontsource-variable/inter": ^5.0.15
     "@fontsource/inter": ^5.0.15
