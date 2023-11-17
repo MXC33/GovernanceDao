@@ -10,6 +10,7 @@
   },
   "intro": {
     "header": "LIFT-OFF",
+    "title": "$MILK Coin",
     "description": "Your next potential 1000X coin is finally here!"
   },
   "about": {
@@ -37,7 +38,9 @@
   },
   "buy": {
     "header": "BUY NOW",
-    "description": "$MILK TOKEN ADDRESS.",
-    "uniswap": "Swap on UNISWAP"
+    "description": "$MILK TOKEN ADDRESS",
+    "uniswap": "Swap on UNISWAP",
+    "titleSwap": "Swap",
+    "titleBridge": "Bridge"
   }
 }

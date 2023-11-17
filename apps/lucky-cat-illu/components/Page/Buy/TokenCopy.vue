@@ -3,9 +3,9 @@ VList(space-y="3")
 
   p {{ $t('buy.description') }}
 
-  HList(b="1 pink" rounded="full" p="y-3 x-6" w="full" overflow="auto")  
-    div(flex-grow="1" items="center" text="center lg" font="prime") {{ token }}
-    button.wallet-icon(justify-self="end" @click="onCopy" pos="sticky right-0" opacity="hover:80" transition="all") 
+  HList(b="1 pink" rounded="full" p="y-3 x-6" w="full" )
+    div(flex-grow="1" items="center" text="center lg" font="prime" max-w="100%" overflow="auto") {{ token }}
+    button(justify-self="end" @click="onCopy" pos="sticky right-0" opacity="hover:80" transition="all")
       CopyIcon(w="6" h="6")
 
       Tooltip(v-model="copyToolTipActive") Copied!

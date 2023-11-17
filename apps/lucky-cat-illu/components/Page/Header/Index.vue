@@ -5,15 +5,15 @@ HList(pos="fixed lg:top-6 lt-lg:bottom-6" z="3" w="full" justify="center" space-
 
     a(:href="`#${page}`" v-for="page in pages" color="on-active:white" :active="page == active") {{ $t(`header.${page}`) }}
 
-  PageButton(bg="white" color="black" @click="mobileMenuOpen = !mobileMenuOpen")
+  PageButton(bg="white" display="lg:none" color="black" @click="mobileMenuOpen = !mobileMenuOpen")
     MenuIcon(w="6")
 
   PageHeaderPill()
-    ButtonGlitch(text="SWAP $MILK") 
+    ButtonGlitch(text="SWAP $MILK")
 
   Transition(name="slide-bottom")
     VList(bg="black" pos="absolute left--3 right--3 bottom--6" v-if="mobileMenuOpen" p="6")
-      button(@click="mobileMenuOpen = false" bg="pink" rounded="full" pos="absolute right-6 top-6" w="6" h="6" text="center") 
+      button(@click="mobileMenuOpen = false" bg="pink" rounded="full" pos="absolute right-6 top-6" w="6" h="6" text="center")
         CloseIcon(w="3" pos="absolute-center")
 
       a(:href="`#${page}`" v-for="page in pages" color="on-active:pink" :active="page == active") {{ $t(`header.${page}`) }}
