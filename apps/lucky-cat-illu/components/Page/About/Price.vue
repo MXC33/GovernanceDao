@@ -6,10 +6,10 @@ PageBubble(uppercase="~")
         VList()
           div() Price at launch
           div(text="xl")
-            GlitchText(:text="String(priceAtLaunch)" prefix="$")
+            GlitchText(:text="priceToString" prefix="$")
 
         VList()
-          div() ATH
+          div() ALL TIME HIGH
           div(text="xl")
             GlitchText(:text="String(priceAtPeak)" prefix="$")
 
@@ -33,10 +33,14 @@ const priceAtLaunch = computed(() => prices[0])
 const priceAtPeak = computed(() => prices[prices.length - 1])
 const priceGrowth = computed(() => roundToDecimals(getPercentage(priceAtPeak.value), 2))
 
+const priceToString = computed(() => toPlainString(priceAtLaunch.value))
+
 const getPercentage = (x: number) =>
   (x / priceAtLaunch.value) * 100
 
 const getMaxPercentage = (x: number) =>
   (x / priceAtPeak.value) * 100
+
+
 
 </script>

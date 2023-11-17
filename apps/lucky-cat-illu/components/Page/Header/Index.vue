@@ -9,7 +9,7 @@ HList(pos="fixed lg:top-6 lt-lg:bottom-6" z="3" w="full" justify="center" space-
     MenuIcon(w="6")
 
   PageHeaderPill()
-    ButtonGlitch(text="SWAP $MILK")
+    a(:href="`#${pages[3]}`" color="on-active:white" :active="pages[3] == active") SWAP $MILK
 
   Transition(name="slide-bottom")
     VList(bg="black" pos="absolute left--3 right--3 bottom--6" v-if="mobileMenuOpen" p="6")
@@ -28,4 +28,8 @@ import MenuIcon from '~/assets/images/menu.svg'
 const active = useLuckyPage()
 const pages = ["start", "about", "how", "buy"]
 const mobileMenuOpen = ref(false)
+
+// const onClickSwap = () => {
+//   active.value = 'buy'
+// }
 </script>
