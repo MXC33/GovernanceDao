@@ -5,12 +5,13 @@ PageWrapper(bg="black" page="start")
     div(grid="~ lg:cols-2" pos="relative" mt="12")
       VList(justify="center" items="center" order="lt-lg:1")
         VList(space-y="3" p="6")
-          LogoCoin()
+          //LogoCoin()
+          h1(text="4xl md:6xl pink" font="bdra" v-html="$t('intro.title')")
 
           div(text="xl" font="bold prime" uppercase="~" v-html="$t('intro.description')")
 
           HList()
-            PageButton(:text="$t('general.buy')" mt="6")
+            PageButton(:text="$t('general.buy')" mt="6" whitespace-nowrap)
 
       VList(pos="relative" justify="center" items="center")
         LogoIcon(w="60%" h="auto" pos="relative")

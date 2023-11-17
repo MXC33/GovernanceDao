@@ -4,10 +4,10 @@ VList(space-y="6" items="center")
   div.Uniswap
     UniswapWidget(:theme="darkTheme" defaultInputTokenAddress="NATIVE"   :defaultOutputTokenAddress="token" :tokenList="tokenList" :defaultChainId="0")
 
-  p(color="white" text="center sm" opacity="80") If transaction fails, increase the slippage
+  p(color="white" text="center sm" opacity="80" font="prime") If transaction fails, increase the slippage
 
 </template>
-  
+
 <script lang="ts" setup>
 import '@fontsource-variable/inter';
 //@ts-ignore
