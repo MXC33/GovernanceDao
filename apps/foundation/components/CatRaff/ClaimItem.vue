@@ -15,14 +15,14 @@ CatRaffItem()
           slot(name="box")
 
       Disabler(:disabled="!(claimAmount > 0)")
-        ButtonGlitch(btn="~ primary-outline-cut" @click="onClick" :text="'Claim'")
+        ButtonInteractive(btn="~ primary-outline-cut" @click="claimRequest" :text="'Claim'" :loading="isLoading" :loading-text="'Claiming...'")
 </template>
 
 <script lang="ts" setup>
 import type { StakingDataFragment } from '#gql';
 
 const { withdrawIXT, claimPrize } = useCatRaffStakingContract()
-
+const { loading: isLoading, execute: claimRequest } = useContractRequestFnd(() => onClick(), 'claim')
 const { data } = defineProps<{
   data: StakingDataFragment
 }>()
