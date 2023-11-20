@@ -26,7 +26,7 @@ export const useCatRaffStakingContract = <T extends ContractInterface<T> & CatRa
 
 
   const addTickets = (ixt: number) => {
-    createTransaction((contract) => {
+    return createTransaction((contract) => {
       const address = walletAdress.value
       if (!address)
         return undefined
@@ -39,7 +39,7 @@ export const useCatRaffStakingContract = <T extends ContractInterface<T> & CatRa
   }
 
   const addOldTickets = (week: WeeklyTicketDataFragment) => {
-    createTransaction((contract) => {
+    return createTransaction((contract) => {
       const address = walletAdress.value
       if (!address || !week.week || !week.amount)
         return undefined
@@ -52,7 +52,7 @@ export const useCatRaffStakingContract = <T extends ContractInterface<T> & CatRa
   }
 
   const withdrawIXT = (week: WeeklyTicketDataFragment) => {
-    createTransaction((contract) => {
+    return createTransaction((contract) => {
       const address = walletAdress.value
       if (!address || !week.week || !week.amount)
         return undefined
@@ -64,7 +64,7 @@ export const useCatRaffStakingContract = <T extends ContractInterface<T> & CatRa
   }
 
   const claimPrize = () => {
-    createTransaction((contract) => {
+    return createTransaction((contract) => {
       const address = walletAdress.value
       if (!address)
         return undefined
