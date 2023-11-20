@@ -18,7 +18,7 @@ VList(gap="3 md:6")
     //-   template(#detail) {{ $t('index.apy') }}
     //-   template(#default) {{ getAPY(item) }}
 
-  TitleDetail(v-if="userStakingData && hasStake")
+  TitleDetail(v-if="hasStake && !isPastLockTime")
     template(#detail) {{ $t('general.lockPeriodEnds') }}
     template(#default) {{lockPeriodEnds}}
 
@@ -46,13 +46,20 @@ const hasStake = computed(() => (userStakingData.value?.amountStaked ?? 0) > 0)
 
 const currentTime = useTimestamp()
 
-const lockPeriodEnds = computed(() => {
-  const endTime = lockPeriod.value + stakedAt.value
+const endTime = computed(() =>
+  lockPeriod.value + stakedAt.value
+)
 
-  if (!endTime)
+const isPastLockTime = computed(() => {
+  const now = Math.floor(currentTime.value / 1000)
+  return now > endTime.value
+})
+
+const lockPeriodEnds = computed(() => {
+  if (!endTime.value)
     return 0
 
-  const { months, days, hours, minutes, seconds } = useIntervalWithDays(currentTime.value, endTime * 1000)
+  const { months, days, hours, minutes, seconds } = useIntervalWithDays(currentTime.value, endTime.value * 1000)
   const optMonth = months && months > 0 ? `${months}Mth` : ''
   return `${optMonth} ${days}D ${hours}H ${minutes}M ${seconds}S`
 })
