@@ -1,6 +1,6 @@
 <template lang="pug">
 div(font="bdra" bg="pink" py="3" text="xl" color="black")
-  Vue3Marquee(duration="60")
+  Vue3Marquee(:duration="60")
     span(v-for="word in allTheWords" px="3") {{ word }}
 </template>
 
