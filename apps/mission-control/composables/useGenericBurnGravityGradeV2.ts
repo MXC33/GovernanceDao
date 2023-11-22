@@ -37,7 +37,7 @@ export const useGenericBurnGravityGradeV2Contract = () => {
   }
 
   const getPackInfo = (pack: NftFragment) => {
-    const isGGPack = (pack.tokenInfo.type == 'gg-energy' || pack.tokenInfo.type == 'gg2-energy' || pack.tokenInfo.type == 'gg3-energy' || pack.tokenInfo.type == 'gg4-energy' || pack.tokenInfo.type == 'gg2')
+    const isGGPack = (pack.tokenInfo.type == 'gg-energy' || pack.tokenInfo.type == 'gg2-energy' || pack.tokenInfo.type == 'gg3-energy' || pack.tokenInfo.type == 'gg4-energy' || pack.tokenInfo.type == 'gg5-energy' || pack.tokenInfo.type == 'gg2')
 
     if (isGGPack) {
       return {

@@ -45,7 +45,7 @@ const onClickOpen = async () => {
   const isAnniversaryPack = type == 'anniversary-pack'
   const isStarterPackOne = type == 'starter-pack' && tier == '1'
   const isCargoDrop2 = type == 'cargo-drop' && tier == '2'
-  const isGGv2Pack = type == 'gg-energy' || type == 'gg2' || type == 'voucher' || type == 'rover-key' || type == 'gg2-energy' || type == 'gg3-energy' || type == 'gg4-energy'
+  const isGGv2Pack = type == 'gg-energy' || type == 'gg2' || type == 'voucher' || type == 'rover-key' || type == 'gg2-energy' || type == 'gg3-energy' || type == 'gg4-energy' || type == 'gg5-energy'
 
   if (type == 'loot-crate')
     await openLootCrate(amount)

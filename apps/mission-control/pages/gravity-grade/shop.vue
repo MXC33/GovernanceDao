@@ -27,6 +27,7 @@ const getTypeName = (item: NftFragment) => {
     case 'gg2-energy':
     case 'gg3-energy':
     case 'gg4-energy':
+    case 'gg5-energy':
       return 'GG® ENERGY DROP'
   }
 }
