@@ -18,8 +18,6 @@ import type { TokenProbabilityFragment } from '#gql'
 const defaultAmount = computed(() => {
   switch (props.token.token.tokenInfo.type) {
     case 'anniversary-pack': return 1
-    case 'metashare': return 1
-    case 'loot-crate': return 1
     default: return props.token.token.balance
   }
 })
