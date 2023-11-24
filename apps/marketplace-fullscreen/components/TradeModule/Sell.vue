@@ -36,7 +36,6 @@ VList()
 <script lang="ts" setup>
 import type { SingleItemData } from "@ix/base/composables/Token/useIXToken";
 import { useOfferContract, useOfferItems } from "~/composables/useOffer";
-import { NFTType } from "~/composables/useAssetContracts";
 import InfoIcon from '~/assets/icons/info-icon.svg'
 
 const { displayPopup } = usePopups()

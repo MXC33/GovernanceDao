@@ -1,5 +1,6 @@
 import { seaportAdress } from "~/composables/Contract/WalletAddresses";
-import { ConsiderationItem, NFTType } from "@ix/marketplace/composables/useAssetContracts";
+import { ConsiderationItem } from "@ix/marketplace/composables/useAssetContracts";
+import { NFTType } from "@ix/base/composables/Contract/useApprove";
 
 export interface IXTokenAttribute {
   value: string

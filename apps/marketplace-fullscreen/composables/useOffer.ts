@@ -193,6 +193,7 @@ export const useOfferContract = () => {
   const { generateConsiderations, getOrderMessage, getTransactionContract, isAdvancedOrder } = useTransactionHelpers()
   const { allowanceCheck } = useIXTContract()
   const { fulfillAvailableAdvancedOrders, fulfillAdvancedOrder } = useSeaportContract()
+  const approvalAddress = conduitAdress.polygon as string
 
   const getOrderBody = (message: OrderMessage, amount: number) => {
     delete message.body.counter
@@ -222,7 +223,7 @@ export const useOfferContract = () => {
 
     const getOrder = (amount: number) => ({
       parameters: message.body,
-      numerator: substitute ? 1: amount,
+      numerator: substitute ? 1 : amount,
       denominator: message.body.consideration[0].endAmount ?? 0,
       signature: message.signature,
       extraData: "0x"
@@ -245,6 +246,7 @@ export const useOfferContract = () => {
   }
 
   const acceptOffer = async (item: AcceptingItem) => {
+
     const { token, bid, shares, ixtPrice } = item
 
     if (!bid)
@@ -257,7 +259,7 @@ export const useOfferContract = () => {
       throw new Error("Invalid Body!")
 
     const nftContract = getTransactionContract(token)
-    const approveNftCheck = await nftContract.approveNftCheck()
+    const approveNftCheck = await nftContract.approveNftCheck(approvalAddress)
 
     if (!approveNftCheck)
       throw new Error(CustomErrors.approvalError)
@@ -277,7 +279,7 @@ export const useOfferContract = () => {
       throw new Error(CustomErrors.noOfferItem)
 
     const nftContract = getTransactionContract(token)
-    const approveNftCheck = await nftContract.approveNftCheck()
+    const approveNftCheck = await nftContract.approveNftCheck(approvalAddress)
     if (!approveNftCheck)
       throw new Error(CustomErrors.approvalError)
 

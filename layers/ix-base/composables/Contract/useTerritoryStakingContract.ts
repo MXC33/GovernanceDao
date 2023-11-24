@@ -10,11 +10,15 @@ import { useLandData } from '../../../../apps/mission-control/composables/useLan
 export const useTerritoryStakingContract = <T extends ContractInterface<T> & TerritoryStakingContract>() => {
 
   const contractAddress = territoryStakingAddress.polygon as string
+  const pixAddress = pixAdress.polygon as string
   const { walletAdress } = useWallet()
   const { refresh: refreshStakingData } = useStakingData(StakingId.Territories)
   const { refresh: refreshUserStakingData } = useStakingData(StakingId.TerritoriesUser)
 
   const { refresh: refreshTokens } = useLandData()
+
+  const { approveNftCheck } = get721Contract(pixAddress)
+
 
   const { createTransaction, withContract, ...contractSpec } = defineContract<T>('territory-staking-contract-', {
     contractAddress,
@@ -35,6 +39,7 @@ export const useTerritoryStakingContract = <T extends ContractInterface<T> & Ter
 
       return contract.stake(token.tokenId)
     }, {
+      approve: async () => approveNftCheck(contractAddress),
       onSuccess: async () => await Promise.all([refreshStakingData(), refreshUserStakingData(), refreshTokens()])
     })
   }

@@ -61,9 +61,10 @@ export const useListingContract = () => {
   const createListingMessage = async (item: ListingItem, endTime: number) => {
     const { token: { collection, token_id }, ixtPrice, shares, token } = item
 
+    const approvalAddress = conduitAdress.polygon as string
     const nftContract = getTransactionContract(token)
 
-    const approveNftCheck = await nftContract.approveNftCheck()
+    const approveNftCheck = await nftContract.approveNftCheck(approvalAddress)
     if (!approveNftCheck) {
       throw new Error(CustomErrors.approvalError)
     }

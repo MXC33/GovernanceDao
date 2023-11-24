@@ -7,7 +7,7 @@ import {
   SingleItemData
 } from "@ix/base/composables/Token/useIXToken";
 import { AdjustableNumber } from "@ix/base/composables/Utils/useAdjustableNumber";
-import { NFTType, useSeaportContract } from "~/composables/useAssetContracts";
+import { useSeaportContract } from "~/composables/useAssetContracts";
 import { conduitKey } from "@ix/base/composables/Contract/WalletAddresses";
 import { useIXTContract } from "@ix/base/composables/Contract/useIXTContract";
 import { ZERO_ADRESS } from "@ix/base/composables/Utils/defineContract";
@@ -150,10 +150,11 @@ export interface Consideration {
 
 export const useTransactionHelpers = () => {
   const getTransactionContract = ({ nft_type, collection }: IXToken) => {
+    const spenderAddress = conduitAdress.polygon as string
     if (nft_type === NFTType.ERC1155)
-      return get1155Contract(collection as string)
+      return get1155Contract(collection as string, spenderAddress)
 
-    return get721Contract(collection as string)
+    return get721Contract(collection as string, spenderAddress)
   }
 
   const generateConsiderations = (buyOrders: AdvancedOrder[]) => {
@@ -208,7 +209,7 @@ export const useTransactionHelpers = () => {
 
     const getOrder = (amount: number) => ({
       parameters: message.body,
-      numerator: substitute ? 1: amount,
+      numerator: substitute ? 1 : amount,
       denominator: message.body.offer[0].endAmount,
       signature: message.signature,
       extraData: "0x"

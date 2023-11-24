@@ -1,6 +1,5 @@
 import { IXToken } from "@ix/base/composables/Token/useIXToken"
 import { TransactionItem } from "./useTransactions"
-import { get1155Contract } from "./useAssetContracts";
 
 
 export interface TransferItem extends TransactionItem {

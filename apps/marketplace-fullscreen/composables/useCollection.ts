@@ -1,5 +1,5 @@
 import { IXToken } from "@ix/base/composables/Token/useIXToken"
-import { NFTType } from "~/composables/useAssetContracts";
+import { NFTType } from "@ix/base/composables/Contract/useApprove";
 import { ServerSortKey, TableColumn, TableRow } from "./useTable";
 
 export interface FilterPayload {

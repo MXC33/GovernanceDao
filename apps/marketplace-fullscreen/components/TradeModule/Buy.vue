@@ -38,7 +38,6 @@ VList()
 <script lang="ts" setup>
 import type { SingleItemData } from '@ix/base/composables/Token/useIXToken'
 import { useBuyContract, useBuyItems } from "~/composables/useBuy"
-import { NFTType } from "~/composables/useAssetContracts"
 import CartIcon from '~/assets/icons/cart.svg'
 import InfoIcon from '~/assets/icons/info-icon.svg'
 

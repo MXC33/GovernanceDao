@@ -10,9 +10,11 @@ import { NftFragment, StakingId, StakingItemFragment } from '../../.nuxt/gql/def
 export const useMetashareStakingContract = <T extends ContractInterface<T> & MetashareStakingContract>() => {
 
   const contractAddress = metashareStakingAddress.polygon as string
+  const mcAssetAddress = assetsAddress.polygon as string
   const { walletAdress } = useWallet()
   const { refresh: refreshStakingData } = useStakingData(StakingId.Metashare)
   const { refresh: refreshTokens } = useTokenData()
+  const { approveNftCheck } = get1155Contract(mcAssetAddress)
 
   const { createTransaction, withContract, ...contractSpec } = defineContract<T>('metashare-staking-contract-', {
     contractAddress,
@@ -33,9 +35,11 @@ export const useMetashareStakingContract = <T extends ContractInterface<T> & Met
 
       return contract.stake(item.token.tokenId, item.amount)
     }, {
+      approve: async () => approveNftCheck(contractAddress),
       onSuccess: async () => await Promise.all([refreshStakingData(), refreshTokens()])
     })
   }
+
 
 
   const unstakeMetashare = (item: UserStakingItem) => {

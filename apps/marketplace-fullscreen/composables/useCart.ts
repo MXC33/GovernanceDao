@@ -1,6 +1,6 @@
 import { IXToken, Sale } from "@ix/base/composables/Token/useIXToken"
 import { ZERO_ADRESS } from "@ix/base/composables/Utils/defineContract"
-import { get1155Contract, useSeaportContract } from "~/composables/useAssetContracts";
+import { useSeaportContract } from "~/composables/useAssetContracts";
 import {
 } from "@ix/base/composables/Token/useIXToken"
 import {
