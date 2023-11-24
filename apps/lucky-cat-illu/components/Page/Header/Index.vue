@@ -10,6 +10,8 @@ HList(pos="fixed lg:top-6 lt-lg:bottom-6" z="3" w="full" justify="center" space-
 
   PageHeaderPill(@click="navigateTo('#buy', {external:true})" cursor="pointer") SWAP $MILK
 
+  PageHeaderPill(@click="onClickAddMilk" cursor="pointer") ADD $MILK TO WALLET
+
   Transition(name="slide-bottom")
     VList(bg="black" pos="absolute left--3 right--3 bottom--6" v-if="mobileMenuOpen" p="6")
       button(@click="mobileMenuOpen = false" bg="pink" rounded="full" pos="absolute right-6 top-6" w="6" h="6" text="center")
@@ -25,10 +27,13 @@ import CloseIcon from '~/assets/images/close.svg'
 import LogoIcon from '~/assets/images/lucky-logo.svg'
 import MenuIcon from '~/assets/images/menu.svg'
 const active = useLuckyPage()
+const { addMilkToWallet, switchToEthereum } = useWallet()
 const pages = ["start", "about", "how", "buy"]
 const mobileMenuOpen = ref(false)
 
-// const onClickSwap = () => {
-//   active.value = 'buy'
-// }
+const onClickAddMilk = async () => {
+  await switchToEthereum()
+  return await addMilkToWallet()
+}
+
 </script>

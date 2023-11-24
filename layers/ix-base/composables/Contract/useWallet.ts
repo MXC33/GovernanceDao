@@ -411,6 +411,43 @@ export const useWallet = () => {
     }
   }
 
+  const addMilkToWallet = async () => {
+    const tokenAddress = '0xf538296e7dd856af7044deec949489e2f25705bc';
+    const tokenSymbol = 'MILK';
+    const tokenDecimals = 18;
+    const tokenImage =
+      'https://assets.coingecko.com/coins/images/32829/standard/ILLUMICATI_CG.png?1699585511';
+    try {
+      await window.ethereum.request({
+        method: 'wallet_watchAsset',
+        params: {
+          type: 'ERC20',
+          options: {
+            address: tokenAddress,
+            symbol: tokenSymbol,
+            decimals: tokenDecimals,
+            image: tokenImage,
+          },
+        },
+      });
+    } catch (error) {
+      console.log(error);
+      return
+    }
+  }
+
+  const switchToEthereum = async () => {
+    try {
+      await window.ethereum.request({
+        method: 'wallet_switchEthereumChain',
+        params: [{ chainId: '0x1' }], // chainId must be in hexadecimal numbers
+      });
+    } catch (error) {
+      console.log(error)
+      return
+    }
+  }
+
   return {
     connectWallet,
     logoutWallet,
@@ -434,6 +471,8 @@ export const useWallet = () => {
     signTypedData,
     contractErrorParser,
     getCollectionType,
-    addIXTToWallet
+    addIXTToWallet,
+    addMilkToWallet,
+    switchToEthereum
   }
 }
