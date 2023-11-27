@@ -8,10 +8,11 @@ import type { IXToken } from '~/composables/Token/useIXToken';
 import type { AnyToken } from '~/composables/Token/useTokens';
 const config = useRuntimeConfig().public
 
-const { isLarge, token } = defineProps<{
+const { isLarge, token, skipThumbnail } = defineProps<{
   token: AnyToken,
   isLarge?: boolean,
-  cover?: boolean
+  cover?: boolean,
+  skipThumbnail?: boolean
 }>()
 
 const { addCacheKey } = useCacheKey()
@@ -33,7 +34,7 @@ const getIXImage = (token: IXToken) => {
     return transformedLarge
   if (!missingURL(icon) && !icon.includes("https://ipfs.io"))
     return icon
-  if (!missingURL(thumbnail))
+  if (!missingURL(thumbnail) && !skipThumbnail)
     return thumbnail
   return image
 }

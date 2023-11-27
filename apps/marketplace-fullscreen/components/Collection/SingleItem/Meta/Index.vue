@@ -2,7 +2,8 @@
 VList(gap="6" pt="lt-lg:6")
   VList(frame="~")
     VList(aspect="square" w="full" min-h="0" bg="#000")
-      TokenMedia(:token="item" w="full" :is-large="true" pos="relative" :contain="true")
+      TokenImage(:token="item" v-if="isRover")
+      TokenMedia(:token="item" w="full" :is-large="true" pos="relative" :contain="true" v-else)
     HelperMediaBar(@transfer="onClickTransfer")
 
   CollectionSingleItemMetaList(:item="item" display="lt-lg:none")
@@ -24,5 +25,9 @@ const onClickTransfer = () => {
 const { item } = defineProps<{
   item: SingleItemData
 }>()
+
+const isRover = computed(() =>
+  item?.collection?.toLowerCase() == roverAddress.polygon?.toLowerCase()
+)
 
 </script>

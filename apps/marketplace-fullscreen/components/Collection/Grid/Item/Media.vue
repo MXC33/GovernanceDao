@@ -3,7 +3,8 @@ VList(aspect="square" w="full" pos="relative" overflow="hidden" group)
 
   NuxtLink(:to="getItemLink(token)" rel="noopener")
     slot(name="media")
-      TokenLazyVideo(:token="token" :key="token.collection + token.token_id" :is-hovered="isHovered")
+      TokenImage(:token="token" :key="token.collection + token.token_id + 'rover'" :skip-thumbnail="true" v-if="isRover")
+      TokenLazyVideo(:token="token" :key="token.collection + token.token_id" :is-hovered="isHovered" v-else)
 
   HList(pos="absolute" inset="0" p="3" pointer-events="none")
     slot(name="icon-left")
@@ -35,5 +36,9 @@ const getItemLink = (token: IXToken) => {
   const { network, collection, token_id } = token
   return `/assets/${network}/${collection}/${token_id}`
 }
+
+const isRover = computed(() =>
+  token?.collection?.toLowerCase() == roverAddress.polygon?.toLowerCase()
+)
 
 </script>
