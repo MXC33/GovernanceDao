@@ -102,7 +102,7 @@ const createWalletConnectProvider = async () => {
 
     return provider
   } catch (error) {
-    console.log("ERROR",)
+    console.log("ERROR", error)
     return false
   }
 }
