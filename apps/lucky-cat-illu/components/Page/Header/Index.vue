@@ -8,9 +8,10 @@ HList(pos="fixed lg:top-6 lt-lg:bottom-6" z="3" w="full" justify="center" space-
   PageButton(bg="white" display="lg:none" color="black" @click="mobileMenuOpen = !mobileMenuOpen")
     MenuIcon(w="6")
 
-  PageHeaderPill(@click="navigateTo('#buy', {external:true})" cursor="pointer") SWAP $MILK
+  PageHeaderPill(@click="onClickAddMilk" cursor="pointer" ) ADD $MILK TO WALLET
 
-  PageHeaderPill(@click="onClickAddMilk" cursor="pointer") ADD $MILK TO WALLET
+  PageHeaderPill(@click="navigateTo('#buy', {external:true})" cursor="pointer" bg="#6428BE") SWAP $MILK
+
 
   Transition(name="slide-bottom")
     VList(bg="black" pos="absolute left--3 right--3 bottom--6" v-if="mobileMenuOpen" p="6")
