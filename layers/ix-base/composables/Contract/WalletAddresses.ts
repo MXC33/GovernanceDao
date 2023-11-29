@@ -143,7 +143,7 @@ export const genericBurnGravityGradeAddress: ContractAddress = {
 
 export const genericBurnPixAssetsAddress: ContractAddress = {
   mumbai: "0x2319B0eDf72A935d349cE3002740918451ac12Ce",
-  polygon: "0x6e4070c3da881d53Dee6841B9D4a97274B5B06aC"
+  polygon: "0x6589360009dF5c0b9d9fE71Cc9DcD8A1c5bBB93b"
 }
 
 export const USDTManagerAddress: ContractAddress = {
