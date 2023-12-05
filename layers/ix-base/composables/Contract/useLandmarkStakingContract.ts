@@ -4,14 +4,19 @@ import LandmarkStakingABI from "~/composables/Contract/Abis/PIXLandStaking.json"
 import { ContractInterface } from '@ix/base/composables/Utils/defineContract'
 import { UserStakingItem } from './useStakingData'
 import { NftFragment, StakingId } from '../../.nuxt/gql/default'
+import { landmarkAddress } from './WalletAddresses'
 
 
 export const useLandmarkStakingContract = <T extends ContractInterface<T> & LandmarkStakingContract>() => {
 
   const contractAddress = landmarkStakedAddress.polygon as string
+  const landmarkNftAddress = landmarkAddress.polygon as string
+
   const { walletAdress } = useWallet()
   const { refresh: refreshStakingData } = useStakingData(StakingId.Landmark)
   const { refresh: refreshTokens } = useTokenData()
+  const { approveNftCheck } = get1155Contract(landmarkNftAddress)
+
 
   const { createTransaction, withContract, ...contractSpec } = defineContract<T>('landmark-staking-contract-', {
     contractAddress,
@@ -32,6 +37,7 @@ export const useLandmarkStakingContract = <T extends ContractInterface<T> & Land
 
       return contract.stake(item.token.tokenId, item.amount)
     }, {
+      approve: async () => approveNftCheck(contractAddress),
       onSuccess: async () => await Promise.all([refreshStakingData(), refreshTokens()])
     })
   }
