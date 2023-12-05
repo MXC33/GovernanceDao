@@ -94,7 +94,8 @@ const createWalletConnectProvider = async () => {
   try {
     const provider = await EthereumProvider.init({
       projectId: '861ef743dceed75deb813e6d390dc4a8',
-      chains: [1, 137],
+      // chains: [1, 137],
+      optionalChains: [1, 137],
       showQrModal: true
     })
 
