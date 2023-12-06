@@ -3,17 +3,15 @@ button.selectItem(:class="{ active: isSelected }" @click="handleClick") {{ $t(`g
 </template>
 
 <script lang="ts" setup>
-
 const { id, isSelected } = defineProps<{
-  id: string
-  isSelected: boolean
-}>()
+  id: string;
+  isSelected: boolean;
+}>();
 
-
-const emit = defineEmits(['click']);
+const emit = defineEmits(["click"]);
 
 const handleClick = () => {
-  emit('click', id);
+  emit("click", id);
 };
 </script>
 
@@ -47,7 +45,7 @@ const handleClick = () => {
 }
 
 .selectItem::after {
-  content: '';
+  content: "";
   position: absolute;
   bottom: 0;
   left: 0;

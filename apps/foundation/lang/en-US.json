@@ -144,15 +144,34 @@
       "title": "GOVERNANCE",
       "description": "Track proposal statuses and vote on changes."
     },
-    "no": {
-      "discussion": {
-        "title": "DISCUSSION",
-        "description": "No discussions available"
-      },
-      "proposal": {
-        "title": "PROPOSAL",
-        "description": "No proposals available"
-      }
+    "newProposal": {
+      "title": "NEW PROPOSAL",
+      "description": "You need to have a minimum 1000 IXT in order to submit a proposal"
+    },
+
+    "votingPower": {
+      "title": "VOTING POWER",
+      "description": "Voting power that was delegated to other users can be withdrawn after one week. upon withdrawing player's voting power is increased by the amount that he previously delegated."
+    },
+    "votingBalance": {
+      "title": "Voting power balance",
+      "description": "Available:"
+    },
+    "ixtStaking": {
+      "title": "IXT STAKING",
+      "description": "The governance can be used by all users that have voting power, which can be gained by staking IXT tokens. upon staking tokens will be locked inside governance contract for one week. voting power can be used for voting or delegating to some other user. Everyone that holds more than 1,000 IXT can submit a proposal that others can accept or reject.:"
+    },
+    "delegate": {
+      "title": "DELEGATE",
+      "description": ""
+    },
+    "discussion": {
+      "title": "DISCUSSION",
+      "description": "No discussions available"
+    },
+    "proposal": {
+      "title": "PROPOSALS",
+      "description": "No proposals available"
     },
     "buttons": {
       "proposal": "Proposal",
