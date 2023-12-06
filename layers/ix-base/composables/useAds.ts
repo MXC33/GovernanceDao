@@ -1,10 +1,15 @@
+
+interface BannerImage {
+  name: string
+}
+
 export interface Banner {
   id: string,
   message: string,
   background_color: string,
-  backgroundImage: string,
-  leftImage: string,
-  image: string,
+  backgroundImage: BannerImage,
+  leftImage: BannerImage,
+  image: BannerImage,
   link: string,
   bannerHide: Array<string>,
   active_time: number

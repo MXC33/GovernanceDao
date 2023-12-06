@@ -1,35 +1,58 @@
 <template lang="pug">
-div.topBanner(
-  v-if="topBannerData && topBannerData.id && (topBannerData.bannerHide ? !topBannerData.bannerHide.includes(configAPP.ixApp) : true)"
-  :style="{ backgroundColor: topBannerData.background_color, backgroundImage: topBannerData.backgroundImage ? 'url(' + config.MEDIA_URL + '/' + topBannerData.backgroundImage.name +')': 'none'}"
-  flex="~ row grow" items="center" justify="center" pos="relative" p="0 md:1" text="xs md:sm" w="full" h="12" cursor="pointer" @click="onClickBanner"
-)
+VList()
+  HList.topBanner(v-if="banner && isTopBannerActive" :style="bannerStyle"
+    flex-grow="1" items="center" justify="center" pos="relative" p="0 md:1" text="xs md:sm" w="full" h="12" cursor="pointer" @click="onClickBanner"
+  )
 
-  HList(v-if="topBannerData.leftImage && topBannerData.leftImage.name" items="center" w="6 md:8" pos="absolute left-4 md:left-8 top-50%" translate-y="-50%" h="70%")
-    img(:src="config.MEDIA_URL + '/' + topBannerData.leftImage.name" w="auto" max-h="full")
+    HList(v-if="banner.leftImage && banner.leftImage.name" items="center" w="6 md:8" pos="absolute left-4 md:left-8 top-50%" translate-y="-50%" h="70%")
+      img(:src="config.MEDIA_URL + '/' + banner.leftImage.name" w="auto" max-h="full")
 
-  HList(v-if="topBannerData.image && topBannerData.image.name" pos="absolute left-0 right-0" items="center" justify="center" mx="auto" top="50%" translate-y="-50%" object="contain" h="60%" max-w="70%")
-    img(:src="config.MEDIA_URL + '/' + topBannerData.image.name" w="auto" max-h="full")
+    HList(v-if="banner.image && banner.image.name" pos="absolute left-0 right-0" items="center" justify="center" mx="auto" top="50%" translate-y="-50%" object="contain" h="60%" max-w="70%")
+      img(:src="config.MEDIA_URL + '/' + banner.image.name" w="auto" max-h="full")
 
-  HList(v-else-if="topBannerData.message" pos="absolute left-0 right-0" items="center" justify="center" mx="auto" top="50%" translate-y="-50%" object="contain" h="60%" max-w="70%")
-    span(v-html="topBannerData.message" font="bold" text="base sm:lg center")
+    HList(v-else-if="banner.message" pos="absolute left-0 right-0" items="center" justify="center" mx="auto" top="50%" translate-y="-50%" object="contain" h="60%" max-w="70%")
+      span(v-html="banner.message" font="bold" text="base sm:lg center")
 
-  HList(justify="end" items="center" z="999" fill="black hover:black" cursor="pointer" @click.stop="toggleBanner" opacity="hover:40" transition="opacity" pos="absolute right-4 md:right-8 top-50%" translate-y="-50%")
-    CloseIcon(w="2.5 md:4" )
+    HList(justify="end" items="center" z="999" fill="black hover:black" cursor="pointer" @click.stop="toggleBanner" opacity="hover:40" transition="opacity" pos="absolute right-4 md:right-8 top-50%" translate-y="-50%")
+      CloseIcon(w="2.5 md:4" )
 </template>
 
 <script lang="ts" setup>
 import CloseIcon from '~/assets/images/icons/close.svg'
 
 const { topBannerAd, bannerAdActive, activeAd } = useAds()
-const { data: topBannerData } = await topBannerAd()
+const { data: banner } = await topBannerAd()
 const config = useRuntimeConfig().public
-const configAPP = useAppConfig()
+const appConfig = useAppConfig()
 
 const onClickBanner = () => {
-  if (topBannerData.value?.link)
-    return window.open(topBannerData.value.link)
+  if (banner.value?.link)
+    return window.open(banner.value.link)
 }
+
+const bgImage = computed(() => {
+  const imageName = banner.value?.backgroundImage?.name
+  if (!imageName)
+    return 'none'
+
+  return `url(${config.MEDIA_URL}/${imageName})`
+})
+
+const bannerStyle = computed(() => ({
+  backgroundColor: banner.value?.background_color,
+  backgroundImage: bgImage.value
+}))
+
+const isTopBannerActive = computed(() => {
+  if (!banner.value)
+    return false
+
+  const { id, bannerHide } = banner.value
+
+  const hideForApp = bannerHide?.includes(String(appConfig.ixApp)) == false
+  return id && !hideForApp
+})
+
 
 const toggleBanner = () => {
   bannerAdActive.value = false
