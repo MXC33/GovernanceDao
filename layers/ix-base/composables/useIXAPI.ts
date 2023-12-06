@@ -45,7 +45,7 @@ export const useIXAPI = () => {
     throw new Error(CustomErrors.unknownError)
   }
 
-  const onUnauthorized = async () => {
+  const apiCallUnauthorized = async () => {
     if (config.connectWithoutIXUser)
       return
 
@@ -79,7 +79,7 @@ export const useIXAPI = () => {
       return data
     } catch (err) {
       if (err.message.includes("403") || err.message.includes("401"))
-        await onUnauthorized()
+        await apiCallUnauthorized()
       return null
     }
   }
@@ -113,7 +113,8 @@ export const useIXAPI = () => {
     fetchIXAPI,
     loginIX,
     fetchUsernameFromWalletAddress,
-    handleAPIError
+    handleAPIError,
+    apiCallUnauthorized
     // fetchActiveRaffle,
     // fetchUpcomingRaffles,
     // fetchPastRaffles,

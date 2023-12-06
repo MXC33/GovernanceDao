@@ -28,7 +28,7 @@ export const useLoginRedirect = () => useState<string | null>('login-redirect', 
 
 
 export const useLogin = () => {
-  const { loginIX } = useIXAPI()
+  const { loginIX, apiCallUnauthorized } = useIXAPI()
   const appConfig = useAppConfig() as IXAppConfig
   const { authUser, user } = useUser()
   const { addSigningToken, connectWallet, logoutWallet, walletSigningToken, isWalletConnected, failedConnection } = useWallet()
@@ -149,7 +149,7 @@ export const useLogin = () => {
           setRefreshToken(0)
           tryingToRefresh++
         } else {
-          return await navigateTo(`/logout`)
+          return await apiCallUnauthorized()
         }
       }
     }, time)
