@@ -170,8 +170,8 @@
       "description": "No discussions available"
     },
     "proposal": {
-      "title": "PROPOSALS",
-      "description": "No proposals available"
+      "title": "Active Proposals",
+      "description": "Here you will find active proposals"
     },
     "buttons": {
       "proposal": "Proposal",

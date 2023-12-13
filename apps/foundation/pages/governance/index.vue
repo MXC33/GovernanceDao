@@ -20,10 +20,10 @@ const stakeSort = ref("proposal");
 const selectItems = [
   "proposal",
   "newProposal",
-  "discussion",
-  "newDiscussion",
   "votingPower",
   "ixtStaking",
-  "delegate",
+  // "discussion",
+  // "newDiscussion",
+  // "delegate",
 ];
 </script>
