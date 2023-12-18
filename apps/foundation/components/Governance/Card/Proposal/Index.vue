@@ -8,8 +8,8 @@ Card
 
   // Search and Filters
   HList(justify="between" class="mb-4")
-    Input(type="text" placeholder="Search proposals..." v-model="searchQuery")
-    Select(v-model="currentFilter")
+    input(type="text" placeholder="Search proposals..." v-model="searchQuery")
+    select(v-model="currentFilter")
       option(value="all") All
       option(value="active") Active
       option(value="pending") Pending
@@ -21,8 +21,8 @@ Card
 </template>
 
 <script lang="ts" setup>
-import { ref, computed } from "vue";
-import ProposalCard from "./ProposalCard.vue"; // Import the ProposalCard component
+import { ref, computed, onMounted } from "vue";
+import ProposalCard from "./ProposalCard.vue";
 
 interface Proposal {
   id: number;
@@ -49,151 +49,82 @@ interface Proposal {
   };
 }
 
-// Inside your <script lang="ts" setup> tag in Index.vue
-const proposals = ref<Proposal[]>([
-  {
-    id: 1,
-    title: "Improve In-Game Chat System",
-    description:
-      "This proposal aims to revamp the current in-game chat system to provide a better user experience.",
-    status: "active",
-    result: "pending",
-    replies: 12,
-    power2: 150,
-    power1: 120,
-    isVoted: false,
-    isModerator: false,
-    createdTime: "2023-01-01T12:00:00Z",
-    votes: [
-      {
-        status: "yes",
-        id: 201,
-        amount: 50,
-        account: { id: "0xABC" },
-      },
-      // ... other votes
-    ],
-    creator: { id: "0x123" },
-  },
-  {
-    id: 2,
-    title: "Update Quest Mechanics",
-    description:
-      "Proposal to introduce new mechanics to the quest system that will enhance player engagement.",
-    status: "pending",
-    result: "pending",
-    replies: 5,
-    power2: 80,
-    power1: 75,
-    isVoted: true,
-    isModerator: true,
-    createdTime: "2023-01-02T15:30:00Z",
-    votes: [
-      {
-        status: "no",
-        id: 202,
-        amount: 30,
-        account: { id: "0xDEF" },
-      },
-      // ... other votes
-    ],
-    creator: { id: "0x456" },
-  },
-  {
-    id: 3,
-    title: "New Character Skins",
-    description:
-      "Introducing a range of new skins for characters to increase customization options for players.",
-    status: "completed",
-    result: "success",
-    replies: 22,
-    power2: 200,
-    power1: 180,
-    isVoted: true,
-    isModerator: false,
-    createdTime: "2023-01-03T09:00:00Z",
-    votes: [
-      {
-        status: "yes",
-        id: 203,
-        amount: 100,
-        account: { id: "0xGHI" },
-      },
-      // ... other votes
-    ],
-    creator: { id: "0x789" },
-  },
-  {
-    id: 4,
-    title: "Enhance Security Protocols",
-    description:
-      "This proposal suggests enhancements to the current security protocols to safeguard user data.",
-    status: "active",
-    result: "pending",
-    replies: 8,
-    power2: 60,
-    power1: 58,
-    isVoted: false,
-    isModerator: true,
-    createdTime: "2023-01-04T17:45:00Z",
-    votes: [
-      {
-        status: "yes",
-        id: 204,
-        amount: 75,
-        account: { id: "0xJKL" },
-      },
-      // ... other votes
-    ],
-    creator: { id: "0x012" },
-  },
-  {
-    id: 5,
-    title: "Gameplay Balance Changes",
-    description:
-      "Proposal for a series of balance changes to the gameplay to ensure a fair competitive environment.",
-    status: "pending",
-    result: "pending",
-    replies: 18,
-    power2: 140,
-    power1: 130,
-    isVoted: true,
-    isModerator: false,
-    createdTime: "2023-01-05T11:20:00Z",
-    votes: [
-      {
-        status: "no",
-        id: 205,
-        amount: 45,
-        account: { id: "0xMNO" },
-      },
-      // ... other votes
-    ],
-    creator: { id: "0x345" },
-  },
-]);
-
-const userVotingPower = ref<number>(100); // Set some dummy voting power
+const proposals = ref<Proposal[]>([]);
+const userVotingPower = ref<number>(100); // Replace with actual logic to fetch user's voting power
 
 const searchQuery = ref("");
 const currentFilter = ref("all");
 
+onMounted(async () => {
+  await fetchProposals();
+});
+
+const fetchProposals = async () => {
+  const query = `
+    {
+      proposals(first: 5) {
+        id
+        title
+        description
+        status
+        result
+        replies
+        power2
+        power1
+        isVoted
+        isModerator
+        createdTime
+        votes(first: 1000) {
+          id
+          amount
+          status
+          account {
+            id
+          }
+        }
+        creator {
+          id
+        }
+      }
+    }
+  `;
+  try {
+    const response = await fetch(
+      "https://api.thegraph.com/subgraphs/name/albanny/governance",
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ query }),
+      },
+    );
+    const { data } = await response.json();
+    proposals.value = data.proposals;
+    console.log(proposals.value); // Console log to see fetched proposals
+  } catch (error) {
+    console.error("Error fetching proposals:", error);
+  }
+};
+
 const filteredProposals = computed(() => {
   let result = proposals.value;
   if (currentFilter.value !== "all") {
-    result = result.filter((p) => p.status === currentFilter.value);
+    result = result.filter(
+      (proposal) => proposal.status === currentFilter.value,
+    );
   }
   if (searchQuery.value) {
     result = result.filter(
-      (p) =>
-        p.title.toLowerCase().includes(searchQuery.value.toLowerCase()) ||
-        p.description.toLowerCase().includes(searchQuery.value.toLowerCase()),
+      (proposal) =>
+        proposal.title
+          .toLowerCase()
+          .includes(searchQuery.value.toLowerCase()) ||
+        proposal.description
+          .toLowerCase()
+          .includes(searchQuery.value.toLowerCase()),
     );
   }
   return result;
 });
-
-// ...rest of your script
 </script>
 
 <style scoped>

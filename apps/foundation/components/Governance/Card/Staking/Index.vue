@@ -14,12 +14,9 @@ Card()
     HList(space-x="2")
       input(type="number" text="bold" :placeholder="'IXT'" bg="gray-900 md:ix-black" px="2" w="full" v-model="amount")
       Disabler(:disabled="ixtBalance == 0")
-    HList()
+    HList(space-x="5")
       ButtonGlitch(btn="~ primary-outline-cut" @click="onClick" :text="'STAKE IXT'")
       ButtonGlitch(btn="~ primary-outline-cut" @click="onClick" :text="'WITHDRAW IXT'")
-  HList(border="solid white 1")
-      div() Available:
-        TitleDetail(:icon="'ixt'")
 
 </template>
 
