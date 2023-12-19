@@ -7,9 +7,9 @@ Card
     div Voting Power: {{ userVotingPower }}
 
   // Search and Filters
-  HList(justify="between" class="mb-4")
-    input(type="text" placeholder="Search proposals..." v-model="searchQuery")
-    select(v-model="currentFilter")
+  HList(justify="between" class="mb-4" )
+    input(type="text" placeholder="Search proposals..." v-model="searchQuery" bg="gray-900 md:ix-black")
+    select(v-model="currentFilter" bg="gray-900 md:ix-black")
       option(value="all") All
       option(value="active") Active
       option(value="pending") Pending
@@ -106,7 +106,7 @@ const fetchProposals = async () => {
 };
 
 const filteredProposals = computed(() => {
-  let result = proposals.value;
+  let result = proposals.value.slice(); // Create a copy of the proposals array
   if (currentFilter.value !== "all") {
     result = result.filter(
       (proposal) => proposal.status === currentFilter.value,
@@ -123,6 +123,8 @@ const filteredProposals = computed(() => {
           .includes(searchQuery.value.toLowerCase()),
     );
   }
+  // Sort the proposals by createdTime in descending order
+  result.sort((a, b) => parseInt(b.createdTime) - parseInt(a.createdTime));
   return result;
 });
 </script>
