@@ -3,9 +3,9 @@ Card(class="p-4 bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow 
   h3(class="text-lg text-black-900 font-medium mb-2") {{ proposal.title }}
   p(class="text-sm text-gray-600 mb-4") {{ proposal.description }}
   div(class="flex flex-wrap gap-4 mt-4 text-xs text-gray-400")
-    //- div
-    //-   span(class="font-bold") Status:
-    //-   //- span {{ proposal.status | capitalize }}
+    div
+      span(class="font-bold") Status:
+      span {{ proposal.status === "2" ? 'Completed' : 'Active' }}
     //- div
     //-   span(class="font-bold") Result:
     //-   //- span {{ proposal.result | capitalize }}
@@ -18,8 +18,10 @@ Card(class="p-4 bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow 
     div
       span(class="font-bold") Created At:
       span {{ formatDate(proposal.createdTime) }}
-    div(v-if="proposal.isVoted")
+    div(v-if="hasVoted")
       span You have voted on this proposal.
+    div(v-else)
+      span You have not voted on this proposal.
     div(v-if="proposal.isModerator")
       span(class="font-bold text-green-500") Moderator Proposal
     div
@@ -44,6 +46,7 @@ Card(class="p-4 bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow 
 
 <script lang="ts" setup>
 import { computed, defineProps } from "vue";
+import Web3 from "web3";
 
 const props = defineProps<{
   proposal: {
@@ -80,6 +83,7 @@ const totalVotesAmount = computed(() => {
     }, BigInt(0))
     .toString();
 });
+console.log(`Using Web3 provider: ${Web3}`);
 
 const totalVotesCount = computed(() => {
   return props.proposal.votes.length;
@@ -93,6 +97,27 @@ const yesVotesCount = computed(() => {
 const noVotesCount = computed(() => {
   // Assuming `false` represents a 'No' vote
   return props.proposal.votes.filter((vote) => vote.status === false).length;
+});
+
+// New function to get the current user's Ethereum address
+async function getCurrentUserAddress(): Promise<string | null> {
+  const web3 = new Web3(Web3.givenProvider || "ws://localhost:8545");
+  const accounts = await web3.eth.getAccounts();
+  return accounts[0] || null;
+}
+
+const currentUserAddress = ref<string | null>(null);
+
+getCurrentUserAddress().then((address) => {
+  currentUserAddress.value = address;
+});
+
+// Computed property to check if the current user has voted
+const hasVoted = computed(() => {
+  if (!currentUserAddress.value) return false;
+  return props.proposal.votes.some(
+    (vote) => vote.account.id === currentUserAddress.value,
+  );
 });
 
 const formatDate = (value: string) => {

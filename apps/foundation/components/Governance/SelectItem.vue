@@ -16,13 +16,10 @@ const handleClick = () => {
 </script>
 
 <style>
-/* ButtonTerritories styles */
 .selectItem {
   border: none;
   padding: 10px 15px;
-  /* Adjust as needed */
   margin-right: 20px;
-  /* Adjust for space between buttons */
   cursor: pointer;
   background-color: transparent;
   position: relative;
@@ -36,12 +33,10 @@ const handleClick = () => {
 .selectItem.active {
   background-color: bg-ix-orange;
   color: #ffffff;
-  /* Adjust this for contrast against the orange background, I assumed white might look good. */
 }
 
 .selectItem:hover {
   @apply color-ix-orange;
-  /* Adjust for the desired hover and active text color */
 }
 
 .selectItem::after {
@@ -51,7 +46,6 @@ const handleClick = () => {
   left: 0;
   right: 0;
   height: 3px;
-  /* Adjust for the desired border thickness */
   @apply bg-ix-orange;
 
   transform: scaleX(0);

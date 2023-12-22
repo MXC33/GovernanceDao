@@ -12,7 +12,6 @@ Card
     select(v-model="currentFilter" bg="gray-900 md:ix-black")
       option(value="all") All
       option(value="active") Active
-      option(value="pending") Pending
       option(value="completed") Completed
 
   // Proposal List
@@ -108,9 +107,10 @@ const fetchProposals = async () => {
 const filteredProposals = computed(() => {
   let result = proposals.value.slice(); // Create a copy of the proposals array
   if (currentFilter.value !== "all") {
-    result = result.filter(
-      (proposal) => proposal.status === currentFilter.value,
-    );
+    result = result.filter((proposal) => {
+      const statusCategory = proposal.status === "1" ? "active" : "completed";
+      return currentFilter.value === statusCategory;
+    });
   }
   if (searchQuery.value) {
     result = result.filter(
@@ -128,7 +128,3 @@ const filteredProposals = computed(() => {
   return result;
 });
 </script>
-
-<style scoped>
-/* Add your UnoCSS styles here if needed */
-</style>
