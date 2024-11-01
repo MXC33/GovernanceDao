@@ -1,0 +1,27 @@
+# Node modules
+node_modules/
+
+# Build output
+dist/
+build/
+
+# Logs
+*.log
+
+# Environment variables
+.env
+
+# VS Code settings
+.vscode/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Yarn directories and files
+.yarn/*
+!.yarn/cache  # Keep the cache if using Zero-Installs, otherwise remove this line
+.yarn/build-state.yml
+.yarn/install-state.gz
+.pnp.*
+.yarnrc.yml

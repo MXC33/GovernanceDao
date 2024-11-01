@@ -1,0 +1,59 @@
+{
+  "name": "ix-apps",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "private": true,
+  "engines": {
+    "node": "^18.12.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "concurrently \"yarn:ix:*\" -c \"#C3000F,#84D4BC,green,white\"",
+    "dev:geo": "concurrently \"yarn:ix:geo\" \"yarn:ix:base\" -c \"green,white\"",
+    "dev:flu": "concurrently \"yarn:ix:flu\" \"yarn:ix:base\" -c \"green,white\"",
+    "dev:mp": "concurrently \"yarn:ix:mp\" \"yarn:ix:base\" -c \"green,white\"",
+    "dev:mc": "concurrently \"yarn:ix:mc\" \"yarn:ix:base\" -c \"green,white\"",
+    "dev:fnd": "concurrently \"yarn:ix:fnd\" \"yarn:ix:base\" -c \"green,white\"",
+    "dev:cat": "concurrently \"yarn:ix:cat\" \"yarn:ix:base\" -c \"green,white\"",
+    "ix:geo": "yarn workspace @ix/geo-lottery dev",
+    "ix:flu": "yarn workspace @ix/fluencer dev",
+    "ix:mp": "yarn workspace @ix/marketplace dev",
+    "ix:mc": "yarn workspace @ix/mc dev",
+    "ix:base": "yarn workspace @ix/base dev",
+    "ix:fnd": "yarn workspace @ix/foundation dev",
+    "ix:cat": "yarn workspace @ix/luckycatillumicati dev",
+    "build": "yarn build:mp",
+    "build_go": "yarn build:go",
+    "build_cat": "yarn build:cat",
+    "build_mc": "yarn build:mc",
+    "build:mp": "yarn prepare:base && yarn workspace @ix/marketplace build",
+    "build:go": "yarn prepare:base && yarn workspace @ix/geo-lottery build",
+    "build:fnd": "yarn prepare:base && yarn workspace @ix/foundation build",
+    "build:flu": "yarn prepare:base && yarn workspace @ix/fluencer build",
+    "build:mc": "yarn prepare:base && yarn workspace @ix/mc build",
+    "build:cat": "yarn prepare:base && yarn workspace @ix/luckycatillumicati build",
+    "build:base": "yarn workspace @ix/base dev",
+    "prepare:base": "yarn workspace @ix/base prepare",
+    "kill": "npx kill-port 3000 3333 8001 8002",
+    "killmac": "kill -9 $(lsof -ti:3000,3333,8001,8002)"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "packageManager": "yarn@3.6.0",
+  "workspaces": [
+    "layers/*",
+    "apps/*"
+  ],
+  "devDependencies": {
+    "chartjs-plugin-annotation": "^3.0.1",
+    "concurrently": "^8.2.0"
+  },
+  "resolutions": {
+    "unimport": "3.2.0"
+  },
+  "dependencies": {
+    "ethers": "^6.10.0"
+  }
+}
